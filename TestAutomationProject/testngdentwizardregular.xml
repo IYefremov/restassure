@@ -2,32 +2,22 @@
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="firefox" />
-  <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
+  <parameter name="ios.bundleid" value="automobiletechnologies.reconpro" />
   <parameter name="backoffice.url" value="http://dentwizard.cyberianconcepts.com/Admin/Devices.aspx"  />
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
   <parameter name="user.psw" value="test12345"  />
   <parameter name="ios.build" value="ReconPro_HD_0429.app.zip"  />
   <listeners>
-		<listener class-name="com.cyberiansoft.test.ios_client.utils.SuperListener"/>
+		<listener class-name="com.cyberiansoft.test.ios_client.utils.RegularSuperListener"/>
   </listeners>
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
-      <class name="com.cyberiansoft.test.ios_client.testcases.DentWizartestCases">
+      <class name="com.cyberiansoft.test.ios_client.testcases.DentWizardRegularVersionTestCases">
         <methods>
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />   -->
-          <include name="testValidVINCheck" /> 
+          <include name="testValidVINCheck" />
           <include name="testTopCustomersSetting" />
-          <include name="testQuickQuoteOptionForRetailHail" />
-          <include name="testCustomerSelfPayOptionForRetailHail" />
-          <include name="testEvenWOLevelTechSplitForRetailHail" />
-          <include name="testEvenServiceLevelTechSplitForRetailHail" />
-          <include name="testDeductibleFeatureForRetailHail" />
-          <include name="testZipCodeValidatorForRetailHail" />
-          <include name="testCustomWOLevelTechSplitForRetailHail" />
-          <include name="testCustomServiceLevelTechSplitForRetailHail" />
-          <include name="testCustomerDiscountOnRetailHail" />
-          <include name="testRetailHailPackageQuantityMultiplier" />
           <include name="testVINDuplicateCheck" />
           <include name="testVehiclePartRequirement" />
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
@@ -46,31 +36,41 @@
           <include name="testCustomWOLevelTechSplitForWholesaleHail" />
           <include name="testCustomServiceLevelTechSplitForWholesaleHail" />
           <include name="testCustomerDiscountOnWholesaleHail" />
+          <include name="testQuickQuoteOptionForRetailHail" />
+          <include name="testCustomerSelfPayOptionForRetailHail" />
+          <include name="testEvenWOLevelTechSplitForRetailHail" />
+          <include name="testEvenServiceLevelTechSplitForRetailHail" />
+          <include name="testDeductibleFeatureForRetailHail" />
+          <include name="testZipCodeValidatorForRetailHail" />
+          <include name="testCustomWOLevelTechSplitForRetailHail" />
+          <include name="testCustomServiceLevelTechSplitForRetailHail" />
+          <include name="testCustomerDiscountOnRetailHail" />
           <include name="testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice" />
           <include name="testPhaseEnforcementForWizardProTracker" />
           <include name="testAddingServicesToOnOrderBeingMonitored" />
-          <!--<include name="testStartServiceFeatureIsAccuratelyCapturingTimes" />-->
+          <include name="testStartServiceFeatureIsAccuratelyCapturingTimes" />
           <include name="testQuantityDoesNotMulitplyPriceInRoutePackage" />
           <include name="testDeleteWorkOrderFunction" />
           <include name="testChangingCustomerOnInspection" />
+          <include name="testRetailHailPackageQuantityMultiplier" />
           <include name="testCustomWOLevelSplitForRoutePackage" />
-          <include name="testEvenWOLevelSplitForRoutePackage" />
+          <include name="testEvenWOLevelTechSplitForWholesaleHail" />
           <include name="testAddingNotesToWorkOrder" />
           <include name="testChangingThePOOnAnInvoice" />
           <include name="testEditingAnInspection" />
           <include name="testEditingWorkOrder" />
           <include name="testEditingAnInvoiceInDraft" /> 
-          <include name="testAddingPOToAnInvoiceContainingMultipleWorkOrders" />  
+          <include name="testAddingAPOToAnInvoice" />
+          <include name="testAddingPOToAnInvoiceContainingMultipleWorkOrders" />
           <include name="testCopyVehicleFeature" />
           <include name="testCopyServicesFeature" />
-          <include name="testPreExistingDamageOption" />       
+          <include name="testPreExistingDamageOption" /> 
           <include name="testTotalSaleRequirement" />
           <include name="testPackagePricingForReadOnlyItems" />
           <include name="testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation" /> 
-          <include name="testSendMultipleEmails" />
+          <include name="testSendMultipleEmails" />  
           <include name="testWorkOrderDiscountOverrideFeature" />
           <include name="testCompletedROOnlyRequirementForInvoicing" />
-          <include name="testAddingAPOToAnInvoice" />
           <include name="testEnterprizeWorkOrderQuestionFormsInforced" />
           <include name="testSuccessfulEmailOfPicturesUsingNotesFeature" />
           <include name="testEmailingPhotosInEconomicalInspection" />

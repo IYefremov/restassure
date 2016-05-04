@@ -74,8 +74,8 @@ public class BaseTestCase {
 	
 	
 	@BeforeSuite
-	@Parameters({ "selenium.browser", "ios.bundleid" })
-	public void setUp(String browser, String bundleid ) throws Exception {
+	@Parameters({ "selenium.browser", "ios.bundleid", "ios.build" })
+	public void setUp(String browser, String bundleid, String buildfilename ) throws Exception {
 
 		// Parameters for WebDriver
 		 
@@ -111,9 +111,9 @@ public class BaseTestCase {
 		appiumcap.setCapability("device", "iPad");		
 		appiumcap.setCapability("deviceName", "iPad Air");*/
 		
-		File appDir = new File("/Users/Shared/");
+		File appDir = new File("./data/");
 	    //File app = new File(appDir, "ReconPro_HD_0915.app.zip");
-		app = new File(appDir, "ReconPro_HD_0429.app.zip");
+		app = new File(appDir, buildfilename);
 		appiumcap.setCapability("app", app.getAbsolutePath());
 	
 		//appiumcap.setCapability("app", app.getAbsolutePath());
