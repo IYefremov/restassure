@@ -1,0 +1,42 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="*firefox" />
+  <parameter name="backoffice.url" value="http://reconpro-devqa.cyberianconcepts.com/Admin/Devices.aspx"  />
+  <parameter name="user.name" value="su"  />
+  <parameter name="user.psw" value="su@css"  />
+ 
+  <test name="Smoke tests for iOS client" preserve-order="true">
+    <classes>
+      <class name="com.cyberiansoft.test.ios_client.testcases.IOSSmokeTestCases">
+        <methods>
+          <include name="testGetDeviceRegistrationCode" />
+          <include name="testRegisterationiOSDdevice" />                  
+          <include name="testUpdateDatabase" />
+          <include name="testUpdateVIN" />
+          <include name="testCreateRetailCustomer" />
+          <include name="testEditRetailCustomer" />
+          <include name="testDeleteRetailCustomer" />
+          <include name="testSetInspectionToNonSinglePage" />         
+          <include name="testCreateRetailInspection" />
+          <include name="testAddServicesToVisualInspection" />
+          <include name="testChangeQuantityOfServicesInVisualInspection" />
+          <include name="testEditRetailInspectionNotes" />
+          <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />
+          <include name="testApproveInspectionOnDevice" />
+          <include name="testArchiveAndUnArchiveTheInspection" />
+          <include name="testCreateWorkOrderWithTeamSharingOption" />
+          <!--<include name="testCopyCervicesOfWO" />-->
+          <include name="testApproveInspectionsOnDeviceViaAction" />
+          <include name="testArchiveInspectionsOnDeviceViaAction" />         
+          <include name="testApproveInspectionOnBackOfficeFullInspectionApproval" />
+          <include name="testApproveInspectionOnBackOfficeLinebylineApproval" />
+          <include name="testCreatingServiceRequestOnBackOffice" />  
+          <!--<include name="testCreatingInspectionFromServiceRequest" />-->
+          <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />  
+          <!--<include name="testASD" />-->
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

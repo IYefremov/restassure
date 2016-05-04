@@ -1,0 +1,110 @@
+package com.cyberiansoft.test.bo.pageobjects.webpages;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+
+public class BackofficePaginationPanel  extends BaseWebPage {
+	
+	//Pagination
+	@FindBy(xpath = "//input[@title='First Page']")
+	private WebElement gotofirstpage;
+	
+	@FindBy(xpath = "//input[@title='Previous Page']")
+	private WebElement gotopreviouspage;
+	
+	@FindBy(xpath = "//input[@title='Next Page']")
+	private WebElement gotonextpage;
+	
+	@FindBy(xpath = "//input[@title='Last Page']")
+	private WebElement gotolastpage;
+	
+	@FindBy(xpath = "//div[@class='rgWrap rgNumPart']")
+	private WebElement paginations;
+	
+	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeTextBox')]")
+	private WebElement pagesizefld;
+	
+	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeLinkButton')]")
+	private WebElement changesizebtn;
+	
+	@FindBy(xpath = "//*[contains(@id, 'GoToPageTextBox')]")
+	private WebElement gotopagefld;
+	
+	@FindBy(xpath = "//*[contains(@id, 'GoToPageLinkButton')]")
+	private WebElement gotopagebtn;
+	
+	@FindBy(xpath = "//*[contains(@id, 'PageOfLabel')]")
+	private WebElement pageoflabel;
+	
+	@FindBy(xpath = "//div[@class='rgWrap rgInfoPart']")
+	private WebElement pagesizelabel;
+	
+	public BackofficePaginationPanel(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	
+	public String getLastPageNumber() {
+		String oftxt = "of ";
+		return pageoflabel.getText().substring(oftxt.length(), pageoflabel.getText().length());
+	}
+	
+	public String getCurrentlySelectedPageNumber() {
+		
+		return paginations.findElement(By.xpath(".//a[@class='rgCurrentPage']/span")).getText();
+	}
+	
+	public String getGoToPageFieldValue() {
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(gotopagefld));
+		return gotopagefld.getAttribute("value");
+	}
+	
+	public void setPageSize(String pagesize) throws InterruptedException {
+		pagesizefld.clear();
+		Thread.sleep(1000);
+		pagesizefld.sendKeys(pagesize + "\n");
+		changesizebtn.click();
+		Thread.sleep(3000);
+	}
+	
+	public void clickGoToLastPage() {
+		gotolastpage.click();
+		new WebDriverWait(driver, 10)
+				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+	}
+	
+	public void clickGoToFirstPage() {
+		gotofirstpage.click();
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
+	}
+	
+	public void clickGoToNextPage()  {
+		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int nextpage = currenpage + 1;
+		gotonextpage.click();		
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
+	}
+	
+	public void clickGoToPreviousPage() {
+		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int previouspage = currenpage - 1;
+		gotopreviouspage.click();
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+	}
+	
+}

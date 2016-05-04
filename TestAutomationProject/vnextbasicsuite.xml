@@ -1,0 +1,48 @@
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="firefox" />
+  <parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com"  />  
+  <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
+  <parameter name="user.psw" value="test12345"  />
+  <parameter name="device.license" value="VNext Automation"  />
+  <listeners>
+		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
+  </listeners>
+  <test name="Tests for VNext client" preserve-order="true">
+    <classes>
+      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextRegistrationActivationLoginLogoutTestCases">
+        <methods>                   
+          <include name="testKeyVerificationForExistingDeviceIinvalidKey" />
+          <include name="testVerifyInterruptedDBDownloadIsSupportedWithMessage" />
+          <include name="testVerifyDownloadAgainOptionAppearsAfterDBDownloadInterruption" />
+          <include name="testVerifyMessageAppearsInCaseOfUnsuccessfulApplyOfDownloadAgainOption" />
+          <include name="testVerifyUserCanStartDBDownloadAgainAfterDownloadFail" />
+        </methods>
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+        <methods>                   
+          <include name="testVerifyPasswordDialogIsShownWhenUserSelectsAnEmployeeFromTheList" />
+          <include name="testLogInWithIncorrectPassword" />
+          <include name="testCloseLogInDialogWithHardwareBackButton" />
+          <include name="testLogInSuccessCase" />
+        </methods>
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextSyncInspectionsTestCases">
+        <methods>                   
+          <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection" />
+          <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveSeveralInspection" />
+          <include name="testSendMessageFromTheQueueInAutomaticModeSuccessPath" /> 
+          <include name="testSendMessageFromTheQueueInManualModeSuccessPath" /> 
+          <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
+          <include name="testSendMessageFromTheQueueInAutomaticModeFailPath" />
+        </methods>
+      </class>-->
+      <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
+        <methods>                   
+          <include name="testVerifyLettersAreCapitalizedWhileManualEntry" />
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

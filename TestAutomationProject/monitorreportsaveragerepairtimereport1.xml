@@ -1,0 +1,23 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com/Admin/Devices.aspx"  />
+  <parameter name="backofficedemo.url" value="https://demo.reconpro.net/Admin/Devices.aspx"  />
+  <parameter name="user.name" value="tauser"  />
+  <parameter name="user.psw" value="test12345"  />
+  <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />
+  <parameter name="userdemo.psw" value="111111"  />
+  <listeners>
+		<listener class-name="com.cyberiansoft.test.ios_client.utils.TestListener"/>
+  </listeners>
+  <test name="Back Office Test Cases - IE" preserve-order="true">
+    <parameter name="selenium.browser" value="firefox" />
+    <classes>
+	  <class name="com.cyberiansoft.test.ios_client.testcases.BaclOfficeMonitorReportsTestCases">
+	  <methods> 
+	  	  <include name="testMonitorReportsAverageRepairTimeReport_Part1" />
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

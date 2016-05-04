@@ -1,0 +1,80 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="*firefox" />
+  <parameter name="backoffice.url" value="http://dentwizard.cyberianconcepts.com/Admin/Devices.aspx"  />
+  <parameter name="user.name" value="su"  />
+  <parameter name="user.psw" value="su@css"  />
+ 
+  <test name="Smoke tests for iOS client" preserve-order="true">
+    <classes>
+      <class name="com.cyberiansoft.test.ios_client.testcases.DentWizartestCases">
+        <methods>
+          <include name="testGetDeviceRegistrationCode" />
+          <include name="testRegisterationiOSDdevice" />                           
+          <include name="testValidVINCheck" />
+          <include name="testTopCustomersSetting" />
+          <!--<include name="testQuickQuoteOptionForRetailHail" />
+          <include name="testCustomerSelfPayOptionForRetailHail" />
+          <include name="testEvenWOLevelTechSplitForRetailHail" />
+          <include name="testEvenServiceLevelTechSplitForRetailHail" />
+          <include name="testDeductibleFeatureForRetailHail" />
+          <include name="testZipCodeValidatorForRetailHail" />
+          <include name="testCustomWOLevelTechSplitForRetailHail" />
+          <include name="testCustomServiceLevelTechSplitForRetailHail" />
+          <include name="testCustomerDiscountOnRetailHail" />
+          <include name="testRetailHailPackageQuantityMultiplier" />-->
+          <include name="testVINDuplicateCheck" />
+          <include name="testVehiclePartRequirement" />
+          <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
+          <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
+          <include name="testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker" />
+          <include name="testInspectionsConvertToWorkOrder" />
+          <include name="testVehicleServiceDoesNotMultiplyPriceEnteredWhenSelectingMultiplePanels" />
+          <include name="testPanelServiceMultipliesPriceEnteredWhenSelectingMultiplePanels" />
+          <include name="testCarmaxVehicleInformationRequirements" />
+          <include name="testServiceDriveRequiresAdvisor" />
+          <include name="testInspectionRequirementsInforced" />
+          <include name="testInspectionsCanConvertToMultipleWorkOrders" />
+          <include name="testArchiveFeatureForInspections" />
+          <include name="testEvenWOLevelTechSplitForWholesaleHail" />
+          <include name="testEvenServiceLevelTechSplitForWholesaleHail" />
+          <include name="testCustomWOLevelTechSplitForWholesaleHail" />
+          <include name="testCustomServiceLevelTechSplitForWholesaleHail" />
+          <include name="testCustomerDiscountOnWholesaleHail" />
+          <include name="testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice" />
+          <include name="testPhaseEnforcementForWizardProTracker" />
+          <include name="testAddingServicesToOnOrderBeingMonitored" />
+          <include name="testStartServiceFeatureIsAccuratelyCapturingTimes" />
+          <include name="testQuantityDoesNotMulitplyPriceInRoutePackage" />
+          <include name="testDeleteWorkOrderFunction" />
+          <include name="testChangingCustomerOnInspection" />
+          <include name="testCustomWOLevelSplitForRoutePackage" />
+          <include name="testEvenWOLevelSplitForRoutePackage" />
+          <include name="testAddingNotesToWorkOrder" />
+          <include name="testChangingThePOOnAnInvoice" />
+          <include name="testEditingAnInspection" />
+          <include name="testEditingWorkOrder" />
+          <include name="testEditingAnInvoiceInDraft" /> 
+          <include name="testAddingPOToAnInvoiceContainingMultipleWorkOrders" />  
+          <include name="testCopyVehicleFeature" />
+          <include name="testCopyServicesFeature" />
+          <include name="testPreExistingDamageOption" />       
+          <include name="testTotalSaleRequirement" />
+          <include name="testPackagePricingForReadOnlyItems" />
+          <include name="testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation" /> 
+          <include name="testSendMultipleEmails" />
+          <include name="testWorkOrderDiscountOverrideFeature" />  
+          <!--<include name="testCompletedROOnlyRequirementForInvoicing" />-->
+          <!--<include name="testAddingAPOToAnInvoice" />-->
+          <include name="testEnterprizeWorkOrderQuestionFormsInforced" />
+          <include name="testSuccessfulEmailOfPicturesUsingNotesFeature" />
+          <include name="testEmailingPhotosInEconomicalInspection" />
+          <include name="testEmailingPhotosInAuctionPackage" />
+          <include name="testEmailingPhotosInServiceDrivePackage" />
+          <include name="testCarHistoryFeature" />
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
