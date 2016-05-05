@@ -74,8 +74,8 @@ public class BaseTestCase {
 	
 	
 	@BeforeSuite
-	@Parameters({ "selenium.browser", "ios.bundleid", "ios.build" })
-	public void setUp(String browser, String bundleid, String buildfilename ) throws Exception {
+	@Parameters({ "selenium.browser", "ios.bundleid", "ios.build", "ios.udid" })
+	public void setUp(String browser, String bundleid, String buildfilename, String udid ) throws Exception {
 
 		// Parameters for WebDriver
 		 
@@ -98,7 +98,7 @@ public class BaseTestCase {
 		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad mini 2");
 		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9.2");
-		appiumcap.setCapability("udid", "e80c0135055f336bd77e60483142facccb22b702");
+		appiumcap.setCapability("udid", udid);
 		appiumcap.setCapability("bundleid", this.bundleid);
 		
 		appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");

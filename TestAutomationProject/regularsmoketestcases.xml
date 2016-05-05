@@ -7,6 +7,7 @@
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
   <parameter name="user.psw" value="test12345"  />
   <parameter name="ios.build" value="ReconPro_HD_0429.app.zip"  />
+  <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <parameter name="license.name" value="Mac mini_olkr"  />
   <listeners>
 		<listener class-name="com.cyberiansoft.test.ios_client.utils.RegularSuperListener"/>
