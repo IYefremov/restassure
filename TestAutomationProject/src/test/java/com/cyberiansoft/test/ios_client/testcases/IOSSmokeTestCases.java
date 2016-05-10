@@ -5703,7 +5703,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		vehiclescreeen.clickSaveButton();
-		
+		 
 		myinspectionsscreen.clickHomeButton();
 		
 	}
