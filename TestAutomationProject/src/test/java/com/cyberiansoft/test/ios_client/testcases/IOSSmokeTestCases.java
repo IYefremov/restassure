@@ -5705,6 +5705,5 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.clickSaveButton();
 		 
 		myinspectionsscreen.clickHomeButton();
-		
 	}
 }

@@ -17,7 +17,6 @@ public class InspectionToolBar extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar[1]/UIAStaticText[8]")
     private IOSElement insptotal;
 	
-	
 	public InspectionToolBar(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
