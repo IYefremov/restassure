@@ -43,6 +43,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 	public void testVerifyInterruptedDBDownloadIsSupportedWithMessage() {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regcode);
+		waitABit(1000);
 		setNetworkOff();
 		verificationscreen.clickVerifyButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);

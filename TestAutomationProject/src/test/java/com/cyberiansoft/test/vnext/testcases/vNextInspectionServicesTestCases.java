@@ -12,15 +12,17 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Detail", "Bent Wheel" };
-	final String testcustomer = "test test";
+	final String testcustomer = "111 111";
 	
 	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
 			description = "Show selected services after inspection is saved")
@@ -39,7 +41,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionfromFirstScreen();
-		inspservicesscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnum);
+		inspservicesscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		for (int i=0; i<servicesselect.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
 		inspectionsscreen = inspservicesscreen.clickBackButtonAndCancelInspection();
@@ -94,7 +96,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionfromFirstScreen();
 		
-		inspservicesscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnum);
+		inspservicesscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		
 		for (int i=0; i < servicesselect.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
@@ -104,7 +106,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservicetoadd));
 		inspectionsscreen = inspservicesscreen.saveInspectionfromFirstScreen();
-		inspservicesscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnum);
+		inspservicesscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		for (int i=0; i<thirdservice.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.clickBackButtonAndCancelInspection();
@@ -131,7 +133,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionfromFirstScreen();
-		inspservicesscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnum);
+		inspservicesscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		
 		for (int i=0; i < servicesselect.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
@@ -142,7 +144,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		for (int i=0; i < thirdservice.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.saveInspectionfromFirstScreen();
-		inspservicesscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnum);
+		inspservicesscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		for (int i=0; i<thirdservice.length; i++)
 			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.clickBackButtonAndCancelInspection();
@@ -207,8 +209,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
 		vehicleinfoscreen.setVIN(vinnumber);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), vinnumberverify);
-		vehicleinfoscreen.selectType("New");
-		inspectionsscreen = inspservicesscreen.saveInspectionfromVehicleInfoScreen();
+		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -234,8 +235,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
 		vehicleinfoscreen.setVIN(vinnumber);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), vinnumberverify);
-		vehicleinfoscreen.selectType("New");
-		inspectionsscreen = inspservicesscreen.saveInspectionfromVehicleInfoScreen();
+		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -261,7 +261,11 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehicleinfoscreen.setVIN(vinnumber);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), vinnumber.toUpperCase());
 		vehicleinfoscreen.selectType("New");
-		inspectionsscreen = inspservicesscreen.saveInspectionfromVehicleInfoScreen();
+		inspectionsscreen.swipeScreenLeft();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
+		Assert.assertEquals(msg, VNextAlertMessages.MODEL_REQUIRED_MSG);
+		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	

@@ -53,9 +53,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspectionslist.findElement(By.xpath(".//div[@class='item-title']")).getText();
 	}
 	
-	public VNextInspectionServicesScreen clickOnInspectionByInspNumber(String inspnumber) {
+	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		tap(inspectionslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + inspnumber + "']")));
 		testReporter.log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
-		return new VNextInspectionServicesScreen(appiumdriver);
+		return new VNextInspectionsMenuScreen(appiumdriver);
+	}
+	
+	public VNextInspectionServicesScreen clickOpenInspectionToEdit(String inspnumber) {
+		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
+		return inspmenulist.clickEditInspectionMenuItem();
 	}
 }
