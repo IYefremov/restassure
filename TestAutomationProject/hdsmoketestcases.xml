@@ -6,7 +6,7 @@
   <parameter name="backoffice.url" value="http://reconpro-devqa.cyberianconcepts.com/Admin/Devices.aspx"  />
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
   <parameter name="user.psw" value="test12345"  />
-  <parameter name="ios.build" value="ReconPro_HD_0504.app.zip"  />
+  <parameter name="ios.build" value="ReconPro_HD_0506.app.zip"  />
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <listeners>
 		<listener class-name="com.cyberiansoft.test.ios_client.utils.SuperListener"/>
@@ -17,6 +17,7 @@
         <methods>
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  --> 
+          <include name="testHDVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" /> 
           <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageAuantity" />
           
           <include name="testUpdateDatabase" />             
