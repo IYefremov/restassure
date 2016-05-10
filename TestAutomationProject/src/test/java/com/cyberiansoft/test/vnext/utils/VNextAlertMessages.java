@@ -7,4 +7,5 @@ public class VNextAlertMessages {
 	public static String ENTERED_PASSWORD_IS_INCORRECT = "Entered password is incorrect";
 	public static String CANCEL_INSPECTION_ALERT = "Are you sure you want to cancel inspection?";
 	public static String MODEL_REQUIRED_MSG = "Model is required";
+	
 }

@@ -60,7 +60,7 @@ public class VNextInspectionServicesScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsScreen cancelInspection() {
-		tap(menubtn);
+		tap(menubtn); 
 		testReporter.log(LogStatus.INFO, "Tap Menu button");
 		tap(cancelinspectionmenu);
 		testReporter.log(LogStatus.INFO, "Tap Cancel inspection button");
