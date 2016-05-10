@@ -11,7 +11,7 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextRegistrationActivationLoginLogoutTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextRegistrationActivationLoginLogoutTestCases">
         <methods>                   
           <include name="testKeyVerificationForExistingDeviceIinvalidKey" />
           <include name="testVerifyInterruptedDBDownloadIsSupportedWithMessage" />
@@ -37,11 +37,8 @@
           <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
           <include name="testSendMessageFromTheQueueInAutomaticModeFailPath" />
         </methods>
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
-        <methods>                   
-          <include name="testVerifyLettersAreCapitalizedWhileManualEntry" />
-        </methods>
       </class>
     </classes>
   </test>

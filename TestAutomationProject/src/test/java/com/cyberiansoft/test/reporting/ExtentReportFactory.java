@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.reporting;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,9 +15,15 @@ public class ExtentReportFactory {
 	public static Map<Long, String> threadToExtentTestMap = new HashMap<Long, String>();
 	public static Map<String, ExtentTest> nameToTestMap = new HashMap<String, ExtentTest>();
 	
+	public static String getCurrentTime() {
+		Date now = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+		return dateFormat.format(now);
+	}
+	
 	private synchronized static ExtentReports getExtentReport() {
 		if (reporter == null) {
-			reporter = new ExtentReports("reportvnext/ComplexReport.html", true, DisplayOrder.NEWEST_FIRST);
+			reporter = new ExtentReports("reportvnext/" + getCurrentTime() + "/ComplexReport.html", true, DisplayOrder.NEWEST_FIRST);
 		}
 		return reporter;
 	}
