@@ -43,8 +43,6 @@ import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamInvoice
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VehicleScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VisualInteriorScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -5630,9 +5628,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		
 		homescreen = new HomeScreen(appiumdriver);
-		MainScreen mainscreen = homescreen.clickLogoutButton();
-		HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -5685,25 +5680,240 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		
 		vehiclescreeen.clickSaveButton();
-		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
-		Helpers.selectNextScreen("Price Matrix Zayats");
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$55.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+		for (int i = 0; i<2; i++) {
+			myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
+			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+			Helpers.selectNextScreen("Price Matrix Zayats");
+			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$55.00");
+			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
-		Helpers.selectNextScreen("Zayats test pack");
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$5.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+			Helpers.selectNextScreen("Zayats test pack");
+			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$5.00");
+			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+		
+			Helpers.selectNextScreen("Hail Matrix");
+			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
+			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+		
+			Helpers.selectNextScreen("Hail Damage");
+			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
+			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+			vehiclescreeen.clickSaveButton();
+		}
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 38749:Inspections: HD - Verify that on inspection approval screen selected price matrix value is shown", 
+			description = "Verify that on inspection approval screen selected price matrix value is shown")
+	public void testHDVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown() throws Exception {
+			
+		final String VIN = "111111111111111";
+		final String _make = "Acura";
+		final String _model = "CL";
+		final String _color = "Black";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX_APP_REQ);
+		Helpers.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setMakeAndModel(_make, _model);
+		vehiclescreeen.setColor(_color);
+		String inspectionnumber = vehiclescreeen.getInspectionNumber();
+		
+		Helpers.selectNextScreen("Price Matrix Zayats");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix("VP2 zayats");
+		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$100.00");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$100.00");
 		
 		Helpers.selectNextScreen("Hail Matrix");
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+		pricematrix.selectPriceMatrix("L QUARTER");
+		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$65.00");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$165.00");
 		
-		Helpers.selectNextScreen("Hail Damage");
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
+		Helpers.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
+		
+		//vehiclescreeen.clickSaveButton();
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.clickSaveAsFinal();
+		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspectionnumber);
+		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Dent Removal"));
+		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Test service price matrix"));
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Dent Removal"), "$65.00");
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Test service price matrix"), "$100.00");
+		approveinspscreen.clickHomeButton();
+		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
+		Helpers.selectNextScreen("Price Matrix Zayats");
+		pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix("VP2 zayats");
+		pricematrix.clearVehicleData();
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$0.00");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$65.00");
 		vehiclescreeen.clickSaveButton();
-		 
+		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
+		selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspectionnumber);
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Dent Removal"), "$65.00");
+		Assert.assertFalse(approveinspscreen.isInspectionServiceExistsForApprove("Test service price matrix"));
+		approveinspscreen.clickHomeButton();
 		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 31451:Inspection - HD: Verify that question section is shown per service for first selected panel when QF is not required", 
+			description = "Verify that question section is shown per service for first selected panel when QF is not required")
+	public void testHDVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired() throws Exception {
+
+		final String[] vehicleparts = { "Front Bumper", "Grill", "Hood", "Left Fender" };
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
+
+		Helpers.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		for (String vehiclepart : vehicleparts)
+			selectedservicedetailscreen.selectVehiclePart(vehiclepart);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		final String selectedhehicleparts = selectedservicedetailscreen.getListOfSelectedVehicleParts();
+		for (String vehiclepart : vehicleparts)
+			Assert.assertTrue(selectedhehicleparts.contains(vehiclepart));
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		for (int i = 0; i < vehicleparts.length; i++) {
+			servicesscreen.openServiceDetailsByIndex(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE, i);
+			Assert.assertFalse(selectedservicedetailscreen.isQuestionFormCellExists());
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
+		servicesscreen.cancelOrder();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 31963:Inspections: HD - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
+			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
+	public void testHDVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType ("Inspection_VIN_only");
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.getVINField().click();
+		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
+		vehiclescreeen.getVINField().sendKeys("\n");
+		vehiclescreeen.cancelOrder();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 32226:Inspections: Regular - Verify that inspection is saved as declined when all services are skipped or declined", 
+			description = "Verify that inspection is saved as declined when all services are skipped or declined")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined(String backofficeurl, String userName, String userPassword) throws Exception {
+
+		final String VIN = "111111111111111";
+		final String _make = "Acura";
+		final String _model = "CL";
+		final String _color = "Black";
+		
+		final String[] pricematrixes = { "Hood", "ROOF" };
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType ("Insp_for_auto_WO_line_appr_simple");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
+		
+		Helpers.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setMakeAndModel(_make, _model);
+		vehiclescreeen.setColor(_color);
+		String inspectionnumber = vehiclescreeen.getInspectionNumber();
+		Helpers.selectNextScreen("Default");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		for(String pricemrx : pricematrixes) {
+			pricematrix.selectPriceMatrix(pricemrx);
+			pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
+		}
+		pricematrix.clickSaveButton();
+		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspectionnumber);
+		approveinspscreen.clickSkipAllServicesButton();
+		approveinspscreen.clickSaveButton();
+		approveinspscreen.clickCancelStatusReasonButton();
+		
+		approveinspscreen.clickDeclineAllServicesButton();
+		approveinspscreen.clickSaveButton();
+		approveinspscreen.selectStatusReason("Decline 1");
+		Helpers.acceptAlert();
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+		myinspectionsscreen.clickHomeButton();
+		Thread.sleep(10000);
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InspectionsWebPage inspectionspage = PageFactory.initElements(
+				webdriver, InspectionsWebPage.class);
+		inspectionspage.makeSearchPanelVisible();
+		inspectionspage.selectSearchStatus("Declined");
+		inspectionspage.searchInspectionByNumber(inspectionnumber);
+		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspectionnumber), "$0.00");
+		Assert.assertEquals(inspectionspage.getInspectionReason(inspectionnumber), "Decline 1");
+		Assert.assertEquals(inspectionspage.getInspectionStatus(inspectionnumber), "Declined");
+		getWebDriver().quit();
 	}
 }

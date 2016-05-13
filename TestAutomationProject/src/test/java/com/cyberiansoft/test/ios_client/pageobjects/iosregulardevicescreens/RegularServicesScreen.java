@@ -100,6 +100,10 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public void assertTotalAmauntIsCorrect(String price) {
 		Assert.assertEquals(appiumdriver.findElementByName("AmountTotal").getAttribute("value"), price);
 	}
+	
+	public void assertSubTotalAmauntIsCorrect(String price) {
+		Assert.assertEquals(appiumdriver.findElementByName("AmountSubtotal").getAttribute("value"), price);
+	}
 
 	public void assertServiceTypeExists(String servicetype) {
 		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
@@ -230,8 +234,13 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSaveAsFinal() {
-		savebtn.click();
+		clickSaveButton();
+		//savebtn.click();
 		finalalertbtn.click();
+	}
+	
+	public String getListOfSelectedVehicleParts() {
+		return appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['Vehicle Part'].staticTexts()[1]")).getAttribute("value");
 	}
 
 }

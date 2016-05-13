@@ -119,11 +119,15 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setVIN(String vin) throws InterruptedException {
 		Helpers.setVIN(vin);
 	}
+	
+	public IOSElement getVINField() {
+		return vinfld;
+	}
 
 	public void setVINAndAndSearch(String vin)
 			throws InterruptedException {
 
-		vinfld.click();
+		getVINField().click();
 
 		Helpers.keyboadrType(vin);
 		vinfld.sendKeys("\n");
@@ -144,8 +148,12 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 				.click();
 	}
 	
+	public IOSElement getInspectionNumberLabel() {
+		return regularinspnumberlabel;
+	}
+	
 	public String getInspectionNumber() {
-		return regularinspnumberlabel.getText();
+		return getInspectionNumberLabel().getText();
 	}
 
 	public void setMakeAndModel(String make, String model) {

@@ -122,6 +122,10 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setVIN(String vin) throws InterruptedException {
 		Helpers.setVIN(vin);
 	}
+	
+	public IOSElement getVINField() {
+		return vinfld;
+	}
 
 	public void setVINAndAndSearch(String vin)
 			throws InterruptedException {

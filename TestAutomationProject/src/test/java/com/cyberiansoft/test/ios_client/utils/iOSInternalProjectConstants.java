@@ -41,6 +41,7 @@ public class iOSInternalProjectConstants {
 	public static final String TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE = "Type with preselected companies";
 	public static final String CLIENT_19319_INSPTYPE = "Client 19319";
 	public static final String VITALY_TEST_INSPTYPE = "Vitaly_TEST_Insp";
+	public static final String INSP_TYPE_FOR_PRICE_MATRIX_APP_REQ = "Ins_type_with_PrMatrix_App_req";
 	public static final String INSP_TYPE_FOR_PRICE_MATRIX = "Ins_type_with_price_matrix";
 	public static final String INSP_DRAFT_MODE = "Insp_Draft_Mode";
 	public static final String INSP_FOR_CALC = "Insp_for_calc";
@@ -75,6 +76,7 @@ public class iOSInternalProjectConstants {
     public static final String DISCOUNT_5_10_SERVICE = "Discount 5-10%";
     public static final String VPS1_SERVICE = "VPS1";
     public static final String SERVICE_PP_VEHICLE_NOT_MULTIPLE = "Service_PP_Vehicle_not_multiple";
+    public static final String SR_S1_MONEY_VEHICLE = "SR_S1_Money_Vehicle";
     
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     

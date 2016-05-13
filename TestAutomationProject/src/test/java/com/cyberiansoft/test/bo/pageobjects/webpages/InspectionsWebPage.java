@@ -290,10 +290,22 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		return inspectionstable.getTableColumnIndex("Inspection#");
 	}
 	
+	public int getTableRowWithInspectionsApproved() {
+		return inspectionstable.getTableColumnIndex("Approved");
+	}
+	
+	public int getTableRowWithInspectionsReason() {
+		return inspectionstable.getTableColumnIndex("Reason");
+	}
+	
+	public int getTableRowWithInspectionsStatus() {
+		return inspectionstable.getTableColumnIndex("Status");
+	}
+	
 	public WebElement getTableRowWithInspection(String inspnumber) {
 		List<WebElement> rows = getInspectionsTableRows();		
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[" + inspectionstable.getTableColumnIndex("Inspection#") + "]/a")).getText().equals(inspnumber)) {
+			if (row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsNumbers() + "]/a")).getText().equals(inspnumber)) {
 				return row;
 			}
 		} 
@@ -493,6 +505,39 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			driver.switchTo().window(parent);
 		}
 		
+	}
+	
+	public String getInspectionAmountApproved(String inspnumber) {
+		String amaounapproved = "";
+		WebElement row = getTableRowWithInspection(inspnumber);
+		if (row != null) {
+			amaounapproved = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsApproved() + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");	
+		}
+		return amaounapproved;
+	}
+	
+	public String getInspectionReason(String inspnumber) {
+		String reason = "";
+		WebElement row = getTableRowWithInspection(inspnumber);
+		if (row != null) {
+			reason = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsReason() + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");	
+		}
+		return reason;
+	}
+	
+	public String getInspectionStatus(String inspnumber) {
+		String status = "";
+		WebElement row = getTableRowWithInspection(inspnumber);
+		if (row != null) {
+			status = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsStatus() + "]/img")).getAttribute("title");
+		} else {
+			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");	
+		}
+		return status;
 	}
 
 	public boolean isServicePresentInInspectioncontentTable(String servicesname) {

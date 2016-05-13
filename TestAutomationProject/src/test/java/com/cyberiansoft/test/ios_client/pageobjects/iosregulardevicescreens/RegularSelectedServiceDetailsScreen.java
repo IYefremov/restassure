@@ -111,6 +111,13 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		questionsscreen.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.name("Back")).click();	
 	}
+	
+	public boolean isQuestionFormCellExists() {
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		boolean exists =  appiumdriver.findElements(MobileBy.IosUIAutomation(".tableViews()[0].cells()['Questions']")).size() > 0;
+		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.MILLISECONDS);
+		return exists;
+	}
 
 	public void setServiceQuantityValue(String _quantity)
 			throws InterruptedException {	
@@ -289,13 +296,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {
 		Helpers.scroolTo(vehiclepart);
-		String path = "";
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name=\"unselected\"]").click();
+		/*String path = "";
 		if (appiumdriver.findElements(MobileBy.IosUIAutomation(".scrollViews()[1]")).size() > 0)
 			path = ".scrollViews()[1]";
 		if (appiumdriver.findElements(MobileBy.IosUIAutomation(path + ".tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).size() > 0)
 			appiumdriver.findElement(MobileBy.IosUIAutomation(path + ".tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).click();
 		else
-			Assert.assertTrue(appiumdriver.findElements(MobileBy.IosUIAutomation(path + ".tableViews()[0].cells()['" + vehiclepart + "'].buttons()['selected']")).size() > 0);
+			Assert.assertTrue(appiumdriver.findElements(MobileBy.IosUIAutomation(path + ".tableViews()[0].cells()['" + vehiclepart + "'].buttons()['selected']")).size() > 0);*/
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name=\"selected\"]").size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {

@@ -307,5 +307,16 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void clickAdjustments() {
 		appiumdriver.findElementByName("Adjustments").click();
 	}
+	
+	public String getListOfSelectedVehicleParts() {
+		return appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Vehicle Part'].staticTexts()[1]")).getAttribute("value");
+	}
+	
+	public boolean isQuestionFormCellExists() {
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		boolean exists =  appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Questions']")).size() > 0;
+		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.MILLISECONDS);
+		return exists;
+	}
 
 }

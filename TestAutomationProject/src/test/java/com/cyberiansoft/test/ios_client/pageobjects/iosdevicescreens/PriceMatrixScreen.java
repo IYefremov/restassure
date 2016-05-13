@@ -10,6 +10,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class PriceMatrixScreen extends iOSHDBaseScreen {
@@ -50,6 +51,9 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(name = "Compose")
     private IOSElement composecell;
+	
+	@iOSFindBy(xpath = "//UIATableView[2]/UIATableCell[@name=\"Clear\"]")
+    private IOSElement clearvehiclepartdatabtn;
 	
 	@iOSFindBy(name = "Save")
     private IOSElement savebtn;
@@ -153,6 +157,12 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void clickCancelButton() {
 		cancelbtn.click();
+	}
+	
+	public void clearVehicleData() {
+		clearvehiclepartdatabtn.click();
+		String msg = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
 
 }

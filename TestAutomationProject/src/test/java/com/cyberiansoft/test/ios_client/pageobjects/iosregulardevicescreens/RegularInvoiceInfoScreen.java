@@ -92,7 +92,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getInvoiceNumber() {
-		return appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[contains(@name, \"I-0\")]").getAttribute("name");
+		return appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[contains(@name, \"I-\")]").getAttribute("name");
 	}
 	
 	public String getInvoiceCustomer() {

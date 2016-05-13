@@ -10,6 +10,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
@@ -53,6 +54,9 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	@iOSFindBy(name = "Save")
     private IOSElement savebtn;
+	
+	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Delete\"]")
+    private IOSElement toolbardeletebtn;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[1][@name=\"Cancel\"]")
     private IOSElement cancelbtn;
@@ -156,10 +160,6 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		composecell.click();
 	}
 
-	public void clickSaveButton() {
-		savebtn.click();
-	}
-
 	public void clickCancelButton() {
 		cancelbtn.click();
 	}
@@ -170,6 +170,12 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	public void clickBackButton() {
 		backbtn.click();
+	}
+	
+	public void clearVehicleData() {
+		toolbardeletebtn.click();
+		String msg = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
 
 }
