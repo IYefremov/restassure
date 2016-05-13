@@ -13,5 +13,7 @@ public class AlertsCaptions {
 	public static final String ALERT_CLAIM_REQUIRED = "Warning! Claim# is required.";
 	public static final String ALERT_CLOSE_SERVICEREQUEST = "Would you like to close  selected service request?";
 	public static final String ALERT_REJECT_SERVICEREQUEST = "Would you like to reject  selected service request?";
+	public static final String ALERT_CREATE_APPOINTMENT = "Would you like to create appointment?";
 	public static final String ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED = "All vehicle part data will be erased. Are you sure?";
+	
 }

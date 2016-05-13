@@ -13,6 +13,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -170,6 +171,18 @@ public class iOSBaseScreen {
 				break;
 		}
 
+	}
+	
+	public void swipeScreenUp() {
+		Dimension size = appiumdriver.manage().window().getSize();
+		int starty = (int) (size.height * 0.80);
+		//Find endy point which is at top side of screen.
+		int endy = (int) (size.height * 0.20);
+		//Find horizontal point where you wants to swipe. It is in middle of screen width.
+		int startx = size.width / 2;
+		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
+		//Swipe from Bottom to Top.
+		appiumdriver.swipe(startx, starty, startx, endy, 3000);
 	}
 
 }

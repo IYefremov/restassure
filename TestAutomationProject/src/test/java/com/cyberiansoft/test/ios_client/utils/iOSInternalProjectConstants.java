@@ -77,7 +77,9 @@ public class iOSInternalProjectConstants {
     public static final String VPS1_SERVICE = "VPS1";
     public static final String SERVICE_PP_VEHICLE_NOT_MULTIPLE = "Service_PP_Vehicle_not_multiple";
     public static final String SR_S1_MONEY_VEHICLE = "SR_S1_Money_Vehicle";
-    
+    public static final String SR_S1_MONEY_PANEL = "SR_S1_Money_Panel";
+    public static final String SR_S1_MONEY = "SR_S1_Money";
+    public static final String SR_DISC_20_PERCENT = "SR_Disc_20_Percent";
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     
     //Technicians

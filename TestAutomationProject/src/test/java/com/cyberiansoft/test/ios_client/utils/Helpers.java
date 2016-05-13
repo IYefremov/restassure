@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.ios_client.utils;
 
-import static com.cyberiansoft.test.ios_client.utils.Helpers.element;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 
@@ -17,10 +15,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.openqa.selenium.remote.SessionNotFoundException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -287,14 +283,6 @@ public abstract class Helpers {
 
 	public static void swipeScreen() {
 		driver.swipe(925, 548, 301, 548, 2000);
-	}
-	
-	public static void swipeScreenUp() {		
-		driver.swipe(301, 708, 301, 108, 2000);
-	}
-	
-	public static void swipeRegularScreenUp() {
-		driver.swipe(325, 748, 325, 248, 2000);
 	}
 
 	public static void keyboadrType2(String value) throws InterruptedException {
