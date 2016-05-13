@@ -1,0 +1,25 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="firefox" />
+  <parameter name="ios.bundleid" value="automobiletechnologies.reconpro" />
+  <parameter name="license.name" value="ipadddd" />
+  <parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com/"  />
+  <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />
+  <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
+  <parameter name="user.psw" value="test12345"  />
+  <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />
+  <parameter name="userdemo.psw" value="111111"  />
+  <parameter name="setupengineer.name" value="testapp@i.ua"  />
+  <parameter name="setupengineer.psw" value="ReconPro"  />
+  <listeners>
+		<listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
+  </listeners>
+  <test name="Print templates test cases" preserve-order="true">
+    <parameter name="selenium.browser" value="firefox" />
+    <classes>
+	  <class name="com.cyberiansoft.test.bo.testcases.BackOfficePrintTemplatesestCases">
+      </class>
+    </classes>
+  </test>
+</suite>

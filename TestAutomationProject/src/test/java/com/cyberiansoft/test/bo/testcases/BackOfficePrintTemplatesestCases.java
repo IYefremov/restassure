@@ -527,11 +527,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
 		inspectionspage.clickFindButton();
 		
-		inspectionspage.sendInspectionEmail(inspectionnum, "olexandr.kramar@cyberiansoft.com");
+		inspectionspage.sendInspectionEmail(inspectionnum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInspectionCustomEmailTabWebPage sendcustomemailtab= inspectionspage.clickSendCustomEmail(inspectionnum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -567,11 +567,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
 		inspectionspage.clickFindButton();
 		
-		inspectionspage.sendInspectionEmail(inspectionnum, "olexandr.kramar@cyberiansoft.com");
+		inspectionspage.sendInspectionEmail(inspectionnum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInspectionCustomEmailTabWebPage sendcustomemailtab= inspectionspage.clickSendCustomEmail(inspectionnum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -612,11 +612,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
 		inspectionspage.clickFindButton();
 		
-		inspectionspage.sendInspectionEmail(inspectionnum, "olexandr.kramar@cyberiansoft.com");
+		inspectionspage.sendInspectionEmail(inspectionnum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInspectionCustomEmailTabWebPage sendcustomemailtab= inspectionspage.clickSendCustomEmail(inspectionnum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -658,11 +658,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenum);
 		invoicespage.clickFindButton();
 		
-		invoicespage.sendInvoiceEmail(invoicenum, "olexandr.kramar@cyberiansoft.com");
+		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -704,11 +704,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenum);
 		invoicespage.clickFindButton();
 		
-		invoicespage.sendInvoiceEmail(invoicenum, "olexandr.kramar@cyberiansoft.com");
+		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -755,11 +755,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenum);
 		invoicespage.clickFindButton();
 		
-		invoicespage.sendInvoiceEmail(invoicenum, "olexandr.kramar@cyberiansoft.com");
+		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -800,11 +800,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenum);
 		invoicespage.clickFindButton();
 		
-		invoicespage.sendInvoiceEmail(invoicenum, "olexandr.kramar@cyberiansoft.com");
+		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
-		sendcustomemailtab.setEmailToValue("olexandr.kramar@cyberiansoft.com");
+		sendcustomemailtab.setEmailToValue("petruk@cyberiansoft.com");
 		sendcustomemailtab.selectIncludeInvoicePDFCheckbox();
 		sendcustomemailtab.clickSendEmailButton();
 		sendcustomemailtab.closeNewTab(mainWindowHandle);
@@ -852,15 +852,15 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		Helpers.selectNextScreen("AT_print_section1");
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Traffic-light (GYR)_test1", "Immediate Attention Required");
-		Helpers.swipeRegularScreenUp();
+		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Multi-select", "A1");
 		questionsscreen.selectAnswerForQuestion("Multi-select", "A2");
-		Helpers.swipeRegularScreenUp();
+		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Single-select", "A1");
-		Helpers.swipeRegularScreenUp();
-		Helpers.swipeRegularScreenUp();
+		questionsscreen.swipeScreenUp();
+		questionsscreen.swipeScreenUp();
 		questionsscreen.makeCaptureForQuestionRegular("Image");
-		Helpers.swipeRegularScreenUp();
+		questionsscreen.swipeScreenUp();
 		questionsscreen.setFreeText("Free text");
 		Helpers.selectNextScreen("Price Matrix");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
