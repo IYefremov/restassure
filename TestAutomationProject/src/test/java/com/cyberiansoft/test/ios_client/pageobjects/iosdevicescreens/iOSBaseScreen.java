@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -182,7 +181,15 @@ public class iOSBaseScreen {
 		int startx = size.width / 2;
 		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
 		//Swipe from Bottom to Top.
-		appiumdriver.swipe(startx, starty, startx, endy, 3000);
+		appiumdriver.swipe(startx, starty, startx, endy, 2000);
+	}
+	
+	public void swipeScreenRight() {
+		Dimension size = appiumdriver.manage().window().getSize();
+		int startx = (int) (size.width * 0.20);
+		int endx = (int) (size.width * 0.80);
+		int starty = size.height / 2;		
+		appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 
 }

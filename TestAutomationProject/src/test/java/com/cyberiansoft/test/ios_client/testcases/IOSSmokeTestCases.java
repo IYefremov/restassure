@@ -2046,19 +2046,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.selectNextScreen("Test Section");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setEngineCondition("Really Bad");
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
+		questionsscreen.swipeScreenRight();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setJustOnePossibleAnswer("One");
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
+		questionsscreen.swipeScreenRight();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setMultipleAnswersCopy("Test Answer 3");
 		questionsscreen.setMultipleAnswersCopy("Test Answer 4");
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
+		questionsscreen.swipeScreenRight();
+		questionsscreen.swipeScreenRight();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setFreeText("Test Text1");
 		
@@ -2066,8 +2062,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.drawSignature();
 		Thread.sleep(2000);
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
+		questionsscreen.swipeScreenRight();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setSampleQuestion("Answers 1");
 		
@@ -2077,8 +2072,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.setBetteryTerminalsAnswer("Immediate Attention Required");
 		questionsscreen.setCheckConditionOfBatteryAnswer("Immediate Attention Required");
 		
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
+		questionsscreen.swipeScreenRight();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectTaxPoint("Test Answer 1");
 		
@@ -2112,9 +2106,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SinglePageInspectionScreen singlepageinspectionscreen = new SinglePageInspectionScreen(appiumdriver);
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());
 		Helpers.selectNextScreen("BATTERY PERFORMANCE");
-		Helpers.swipeScreen();
-		Thread.sleep(2000);
-		
+		questionsscreen.swipeScreenRight();		
 		Assert.assertTrue(singlepageinspectionscreen.isAnswerPresent("Test Answer 1"));
 		servicesscreen.clickSaveButton();
 		

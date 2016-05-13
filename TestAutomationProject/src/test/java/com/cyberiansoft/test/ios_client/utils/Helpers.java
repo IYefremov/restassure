@@ -281,10 +281,6 @@ public abstract class Helpers {
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	}
 
-	public static void swipeScreen() {
-		driver.swipe(925, 548, 301, 548, 2000);
-	}
-
 	public static void keyboadrType2(String value) throws InterruptedException {
 
 		for (int i = 0; i < value.length() - 1; i++) {
