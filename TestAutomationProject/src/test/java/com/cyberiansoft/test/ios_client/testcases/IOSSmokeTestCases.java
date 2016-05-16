@@ -1953,13 +1953,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-			
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);	
 
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
-		customersscreen.searchCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
 		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.FOR_COPY_INSP_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -5496,7 +5495,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveButton();
 		alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Warning! Service '" + iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + "' require to select vehicle part");
+		Assert.assertEquals(alerttext, "Warning! Service '" + iOSInternalProjectConstants.SR_S1_MONEY_PANEL + "' require to select vehicle part");
 		selectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicedetailsscreen.clickVehiclePartsCell();
 		selectedservicedetailsscreen.selectVehiclePart("Right Door Mirror");
@@ -5590,7 +5589,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveButton();
 		alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Warning! Service '" + iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + "' require to select vehicle part");
+		Assert.assertEquals(alerttext, "Warning! Service '" + iOSInternalProjectConstants.SR_S1_MONEY_PANEL + "' require to select vehicle part");
 		selectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicedetailsscreen.clickVehiclePartsCell();
 		selectedservicedetailsscreen.selectVehiclePart("Right Door Mirror");

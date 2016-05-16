@@ -12,8 +12,9 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	//final String uipickerxpath = ".popover().pickers()[0]";
 	final String uipickerxpath = "//UIAPicker";
 	
-	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
-    private IOSElement backbtn;
+	//@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"].withValueForKey(1, \"isVisible\")")
+	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@visible=\"true\" and @name=\"Back\"]")
+	private IOSElement backbtn;
 	
 	@iOSFindBy(name = "Save")
     private IOSElement savebtn;

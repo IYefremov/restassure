@@ -2204,8 +2204,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 			ordersummaryscreen.clickSaveButton();
 			myworkordersscreen.clickHomeButton();
-			
-			
+
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 			teamworkordersscreen.clickOnWO(inspection);
 			teamworkordersscreen.selectWOMonitor();

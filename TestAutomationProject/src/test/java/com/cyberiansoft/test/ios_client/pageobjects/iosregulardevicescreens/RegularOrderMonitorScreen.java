@@ -126,6 +126,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isServiceIsActive(String servicedisplayname) {
+		Helpers.scroolTo(servicedisplayname);
 		return appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
 						+ servicedisplayname + "\")]/UIAStaticText[2]").getAttribute("name").equals("Active");
 		//Assert.assertTrue(activecaption.isDisplayed());
