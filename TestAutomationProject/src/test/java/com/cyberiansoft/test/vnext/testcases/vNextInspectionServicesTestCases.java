@@ -264,7 +264,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspectionsscreen.swipeScreenLeft();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.MODEL_REQUIRED_MSG);
+		Assert.assertTrue(msg.contains(VNextAlertMessages.MODEL_REQUIRED_MSG));
+		Assert.assertTrue(msg.contains(VNextAlertMessages.MAKE_REQUIRED_MSG));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}

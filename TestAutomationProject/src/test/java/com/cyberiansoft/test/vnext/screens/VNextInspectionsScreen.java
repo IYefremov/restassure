@@ -26,6 +26,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(addinspectionbtn));
+		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {
