@@ -40,7 +40,7 @@ public class InspectionTypesWebPage extends BaseWebPage {
 	public WebElement getTableRowWithInspectionType(String insptype) {
 		List<WebElement> rows = getInspectionTypesTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[5]")).getText().equals(insptype)) {
+			if (row.findElement(By.xpath(".//td[" + inspectiontypestable.getTableColumnIndex("Type") + "]")).getText().equals(insptype)) {
 				return row;
 			}
 		} 
@@ -76,5 +76,20 @@ public class InspectionTypesWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + insptype + " inspection type");	
 		return PageFactory.initElements(
 				driver, NewInspectionTypeDialogWebPage.class);
+	}
+	
+	public InspectionTypesVehicleInfoSettingsWebPage clickInspectionVehicleInfoSettingLink(String insptype) {
+		String mainWindowHandle = driver.getWindowHandle();
+		WebElement row = getTableRowWithInspectionType(insptype);
+		row.findElement(By.xpath(".//td[" + inspectiontypestable.getTableColumnIndex("Vehicle Info") + "]/a")).click();
+		waitForNewTab();
+		driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+			   driver.switchTo().window(activeHandle);
+			}
+		}
+		return PageFactory.initElements(
+				driver, InspectionTypesVehicleInfoSettingsWebPage.class);
 	}
 }

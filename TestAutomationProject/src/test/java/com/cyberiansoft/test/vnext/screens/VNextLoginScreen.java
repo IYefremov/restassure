@@ -17,6 +17,12 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement userslist;
 	
+	@FindBy(xpath="//a[@action='main-db']/i")
+	private WebElement updatemaindbbtn;
+	
+	@FindBy(xpath="//a[@action='vin-db']/i")
+	private WebElement updatevindbbtn;
+	
 	@FindBy(xpath="//input[@type='password']")
 	private WebElement passwordfld;
 	
@@ -80,5 +86,12 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	public void waitUserListVisibility() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(userslist));
+	}
+	
+	public void updateMainDB() {
+		tap(updatemaindbbtn);
+		testReporter.log(LogStatus.INFO, "Tap Update Main DB button");
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
 	}
 }

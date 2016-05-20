@@ -53,6 +53,13 @@ public class VNextBaseScreen {
 		tap(scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']")));
 	}
 	
+	public void clickHardwareBackButton() {
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		appiumdriver.navigate().back();
+		switchApplicationContext(AppContexts.WEB_CONTEXT);
+		testReporter.log(LogStatus.INFO, "Click Hardware Back Button");
+	}
+	
 	public void swipingVertical() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		Dimension size = appiumdriver.manage().window().getSize();

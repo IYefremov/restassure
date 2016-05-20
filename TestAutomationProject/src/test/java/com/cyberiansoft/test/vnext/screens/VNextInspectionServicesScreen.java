@@ -9,10 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class VNextInspectionServicesScreen extends VNextBaseScreen {
+public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//div[contains(@class, 'page inspections-service hide-searchbar page-on-center')]")
 	private WebElement servicesscreen;
@@ -23,18 +22,9 @@ public class VNextInspectionServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//i[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//i[@action='menu']")
-	private WebElement menubtn;
-	
-	@FindBy(xpath="//div[text()='Cancel Inspection']")
-	private WebElement cancelinspectionmenu;
-	
 	@FindBy(xpath="//div[@class='list-block services-added']")
 	private WebElement addedserviceslist;
-	
-	@FindBy(xpath="//div[@class='estimation-number']/span")
-	private WebElement inspectionnumber;
-	
+
 	public VNextInspectionServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -59,16 +49,7 @@ public class VNextInspectionServicesScreen extends VNextBaseScreen {
 		return saveInspectionfromVehicleInfoScreen();
 	}
 	
-	public VNextInspectionsScreen cancelInspection() {
-		tap(menubtn); 
-		testReporter.log(LogStatus.INFO, "Tap Menu button");
-		tap(cancelinspectionmenu);
-		testReporter.log(LogStatus.INFO, "Tap Cancel inspection button");
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_INSPECTION_ALERT);
-		return new VNextInspectionsScreen(appiumdriver);
-	}
+	
 	
 	public VNextInspectionsScreen saveInspectionfromVehicleInfoScreen() {
 		swipeScreenLeft();
@@ -99,8 +80,5 @@ public class VNextInspectionServicesScreen extends VNextBaseScreen {
 		Assert.assertEquals(msg, "Are you sure you want to cancel inspection?");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
-	
-	public String getNewInspectionNumber() {
-		return inspectionnumber.getText();
-	}
+
 }

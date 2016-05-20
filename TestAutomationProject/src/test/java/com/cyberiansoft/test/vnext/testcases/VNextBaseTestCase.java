@@ -46,15 +46,16 @@ public class VNextBaseTestCase {
 	protected static AppiumDriverLocalService service;
 	protected String regcode = "";
 	protected static String defaultbrowser;
+	protected static String deviceofficeurl;
 	
 	@BeforeSuite
-	@Parameters({ "selenium.browser" })
-	public void startServer(String browser) throws MalformedURLException {
+	@Parameters({ "selenium.browser", "backoffice.url" })
+	public void startServer(String browser, String bourl) throws MalformedURLException {
 		
 		//AppiumServiceBuilder builder = new AppiumServiceBuilder().withArgument(GeneralServerFlag.LOG_LEVEL, "error");
        // service = builder.build();
         //service.start();	
-        
+		deviceofficeurl = bourl;
         File appDir = new File("./data/");
 	    File app = new File(appDir, "ReconPro.apk");
 	    appiumcap = new DesiredCapabilities();
@@ -137,7 +138,7 @@ public class VNextBaseTestCase {
 		webdriver = WebDriverInstansiator.getDriver();
 	}
 	
-	public void registerDevice(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws Exception {
+	public void registerDevice(String deviceuser, String devicepsw, String licensename) throws Exception {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename));
 		verificationscreen.clickVerifyButton();

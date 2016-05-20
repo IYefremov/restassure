@@ -21,7 +21,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public VNextInformationDialog(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 360);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg));
 	}
 	
@@ -41,6 +41,12 @@ public class VNextInformationDialog extends VNextBaseScreen {
 			testReporter.log(LogStatus.INFO, "Tap Information Dialog Yes Button");
 	}
 	
+	public void clickInformationDialogNoButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='No']")));
+		if (testReporter != null)
+			testReporter.log(LogStatus.INFO, "Tap Information Dialog No Button");
+	}
+	
 	public String clickInformationDialogOKButtonAndGetMessage() {
 		String msg = getInformationDialogMessage();
 		clickInformationDialogOKButton();
@@ -50,6 +56,12 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public String clickInformationDialogYesButtonAndGetMessage() {
 		String msg = getInformationDialogMessage();
 		clickInformationDialogYesButton();
+		return msg;
+	}
+	
+	public String clickInformationDialogNoButtonAndGetMessage() {
+		String msg = getInformationDialogMessage();
+		clickInformationDialogNoButton();
 		return msg;
 	}
 	

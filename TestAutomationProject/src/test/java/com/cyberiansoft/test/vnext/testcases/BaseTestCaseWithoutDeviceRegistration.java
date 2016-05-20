@@ -9,8 +9,8 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 public class BaseTestCaseWithoutDeviceRegistration extends VNextBaseTestCase {
 	
 	@BeforeClass(description = "Setting up new suite")
-	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license", "selenium.browser"})	
-	public void settingUp(String deviceofficeurl, String deviceuser, String devicepsw, String licensename, String defbrowser) {
+	@Parameters({ "user.name", "user.psw", "device.license", "selenium.browser"})	
+	public void settingUp(String deviceuser, String devicepsw, String licensename, String defbrowser) {
 		defaultbrowser = defbrowser;
 		setUp();
 		setNetworkOn();
