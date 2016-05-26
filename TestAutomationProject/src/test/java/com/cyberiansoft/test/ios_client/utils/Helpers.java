@@ -437,7 +437,9 @@ public abstract class Helpers {
 
 	public static void setVIN(String vin) throws InterruptedException {
 
-		element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIATextField"))
+		//element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIATextField"))
+		//		.click();
+		element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIAStaticText"))
 				.click();
 		keyboadrType(vin + "\n");
 	}

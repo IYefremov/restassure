@@ -39,7 +39,7 @@ public class ActiveDevicesWebPage extends BaseWebPage {
 	public ActiveDevicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	public void setSearchCriteriaByName(String name) {

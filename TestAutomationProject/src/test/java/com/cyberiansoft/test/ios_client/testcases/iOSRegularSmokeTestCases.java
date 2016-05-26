@@ -2809,7 +2809,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelOrder();
 		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForCopy(inspnumber);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		String copiedinspnumber = vehiclescreeen.getInspectionNumber();
 		servicesscreen.clickSaveButton();
@@ -3545,7 +3545,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickSearchSaveButton();
 		Thread.sleep(3000);
 		teamworkordersscreen.clickOnWO(wonum);
-		
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.VPS1_SERVICE);
 		ordermonitorscreen.clickServiceDetailsDoneButton();
@@ -3645,7 +3644,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
 		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
 		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
-		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.TEST_TAX_SERVICE, "Completed");
 		
 		
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
@@ -3653,9 +3651,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
-		Thread.sleep(3000);
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.TEST_TAX_SERVICE);
-		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.TEST_TAX_SERVICE, "Completed");
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
@@ -4024,7 +4019,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("1");
 		ordersummaryscreen.clickSaveButton();
 		myworkordersscreen.clickHomeButton();
-		
+		Helpers.waitABit(10000);
 		webdriverInicialize();
 		
 		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
@@ -5332,7 +5327,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.getVINField().click();
 		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
-		vehiclescreeen.getVINField().sendKeys("\n");
+		Helpers.keyboadrType("\n");
 		vehiclescreeen.clickChangeScreen();
 		vehiclescreeen.cancelOrder();
 		myinspectionsscreen.clickHomeButton();
@@ -5390,7 +5385,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.drawApprovalSignature ();
 		approveinspscreen.clickApproveButton();
 		myinspectionsscreen.clickHomeButton();
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 

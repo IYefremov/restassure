@@ -17,7 +17,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"VIN#\"]/UIATextField")
+	@iOSFindBy(xpath = "//UIATableCell[@name=\"VIN#\"]/UIAStaticText")
     private IOSElement vinfld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Make\"]/UIATextField")
@@ -129,9 +129,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 
 		getVINField().click();
 
-		Helpers.keyboadrType(vin);
-		vinfld.sendKeys("\n");
-		
+		Helpers.keyboadrType(vin + "\n");		
 		Assert.assertTrue(element(
 				MobileBy.name("No vehicle invoice history found")).isDisplayed());
 		element(

@@ -17,7 +17,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"VIN#\"]/UIATextField")
+	@iOSFindBy(xpath = "//UIATableCell[@name=\"VIN#\"]/UIAStaticText")
     private IOSElement vinfld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Make\"]/UIATextField")

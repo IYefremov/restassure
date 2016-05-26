@@ -3766,7 +3766,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickHomeButton();
 	}
 	
-	@Test(testName="Test Case 26016:WO Monitor: HD - Verify that for % service message about change status is not shown", description = "WO Monitor: HD - Verify that for % service message about change status is not shown")
+	//@Test(testName="Test Case 26016:WO Monitor: HD - Verify that for % service message about change status is not shown", description = "WO Monitor: HD - Verify that for % service message about change status is not shown")
 	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown()
 			throws Exception {
 		
@@ -5739,7 +5739,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.selectNextScreen("Zayats Section1");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
-		
+		System.out.println("++++" + inspectionnumber);
 		//vehiclescreeen.clickSaveButton();
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.clickSaveAsFinal();
@@ -5770,6 +5770,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(approveinspscreen.isInspectionServiceExistsForApprove("Test service price matrix"));
 		approveinspscreen.clickHomeButton();
 		myinspectionsscreen.clickHomeButton();
+		
 	}
 	
 	@Test(testName = "Test Case 31451:Inspection - HD: Verify that question section is shown per service for first selected panel when QF is not required", 
@@ -5830,7 +5831,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.getVINField().click();
 		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
-		vehiclescreeen.getVINField().sendKeys("\n");
+		vehiclescreeen.getVINField().click();
+		Helpers.keyboadrType("\n");
 		vehiclescreeen.cancelOrder();
 		myinspectionsscreen.clickHomeButton();
 	}
