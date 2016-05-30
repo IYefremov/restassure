@@ -201,7 +201,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithTeam(String team) {
 		List<WebElement> rows = getTeamsTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[5]")).getText().contains(team)) {
+			if (row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Team") + "]")).getText().contains(team)) {
 				return row;
 			}
 		} 

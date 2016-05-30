@@ -14,10 +14,12 @@ public class ExtentReportFactory {
 	public static ExtentReports reporter;
 	public static Map<Long, String> threadToExtentTestMap = new HashMap<Long, String>();
 	public static Map<String, ExtentTest> nameToTestMap = new HashMap<String, ExtentTest>();
+	public static String reporttime;
 	
 	public static String getCurrentTime() {
 		Date now = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+		reporttime = dateFormat.format(now);
 		return dateFormat.format(now);
 	}
 	

@@ -9,9 +9,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
+	
+	@FindBy(id = "displayedColumnsList")
+	private WebElement displayedcolumns;
 	
 	@FindBy(id = "ctl00_Content_VinVisible")
 	private WebElement vinvisiblecheckbox;
@@ -29,7 +36,37 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	private WebElement modelvisiblecheckbox;
 	
 	@FindBy(id = "ctl00_Content_ModelRequired")
-	private WebElement modelquiredcheckbox;
+	private WebElement modelrequiredcheckbox;
+	
+	@FindBy(id = "ctl00_Content_ColorVisible")
+	private WebElement colorvisiblecheckbox;
+	
+	@FindBy(id = "ctl00_Content_ColorRequired")
+	private WebElement colorrequiredcheckbox;
+	
+	@FindBy(id = "ctl00_Content_YearVisible")
+	private WebElement yearvisiblecheckbox;
+	
+	@FindBy(id = "ctl00_Content_YearRequired")
+	private WebElement yearrequiredcheckbox;
+	
+	@FindBy(id = "ctl00_Content_StockVisible")
+	private WebElement stockvisiblecheckbox;
+	
+	@FindBy(id = "ctl00_Content_StockRequired")
+	private WebElement stockrequiredcheckbox;
+	
+	@FindBy(id = "ctl00_Content_ROVisible")
+	private WebElement rovisiblecheckbox;
+	
+	@FindBy(id = "ctl00_Content_RORequired")
+	private WebElement rorequiredcheckbox;
+	
+	@FindBy(id = "ctl00_Content_MileageVisible")
+	private WebElement mileagevisiblecheckbox;
+	
+	@FindBy(id = "ctl00_Content_MileageRequired")
+	private WebElement mileagerequiredcheckbox;
 	
 	@FindBy(id = "ctl00_Content_btnUpdate")
 	private WebElement updatebtn;
@@ -45,7 +82,8 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	}
 	
 	public void selectVINRequired() {
-		checkboxSelect(vinrequiredcheckbox);
+		if (!isCheckboxChecked(makerequiredcheckbox))
+			vinrequiredcheckbox.click();
 	}
 	
 	public void unselectVINVisible() {
@@ -57,7 +95,8 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	}
 	
 	public void selectMakeRequired() {
-		checkboxSelect(makerequiredcheckbox);
+		if (!isCheckboxChecked(makerequiredcheckbox))
+			makerequiredcheckbox.click();
 	}
 	
 	public void unselectMakeVisible() {
@@ -69,11 +108,52 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	}
 	
 	public void selectModelRequired() {
-		checkboxSelect(modelvisiblecheckbox);
+		if (!isCheckboxChecked(modelrequiredcheckbox))
+			modelrequiredcheckbox.click();
 	}
 	
 	public void unselectModelVisible() {
 		checkboxUnselect(modelvisiblecheckbox);
+	}
+	
+	public void selectColorVisible() {
+		checkboxSelect(colorvisiblecheckbox);
+	}
+	
+	public void unselectColorVisible() {
+		checkboxUnselect(colorvisiblecheckbox);
+	}
+	
+	public void selectYearVisible() {
+		checkboxSelect(yearvisiblecheckbox);
+	}
+	
+	public void unselectYearVisible() {
+		checkboxUnselect(yearvisiblecheckbox);
+	}
+	
+	public void selectStockVisible() {
+		checkboxSelect(stockvisiblecheckbox);
+	}
+	
+	public void unselectStockVisible() {
+		checkboxUnselect(stockvisiblecheckbox);
+	}
+	
+	public void selectROVisible() {
+		checkboxSelect(rovisiblecheckbox);
+	}
+	
+	public void unselectROVisible() {
+		checkboxUnselect(rovisiblecheckbox);
+	}
+	
+	public void selectMileageVisible() {
+		checkboxSelect(mileagevisiblecheckbox);
+	}
+	
+	public void unselectMileageVisible() {
+		checkboxUnselect(mileagevisiblecheckbox);
 	}
 	
 	public void clickUpdateButton() {
@@ -111,6 +191,10 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 				result = true;
 		}
 		return result;
+    }
+    
+    public List<WebElement> getDisplayedColumnsListItems() {
+    	return displayedcolumns.findElements(By.xpath("./li[@class='column-item ']"));
     }
 
 }

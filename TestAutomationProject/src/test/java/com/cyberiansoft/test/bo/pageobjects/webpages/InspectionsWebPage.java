@@ -151,7 +151,6 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Customer"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Technician"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Advisor"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("View"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Amount"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Archived"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Action"));

@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +14,12 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
+	
+	@FindBy(xpath="//div[@class='page inspections-info page-on-center']")
+	private WebElement vehiclepage;
+	
+	@FindBy(id="my-form")
+	private WebElement vehiclefieldslist;
 	
 	@FindBy(name="Vehicle.VIN")
 	private WebElement vinfld;
@@ -49,7 +58,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(yearfld));
+		wait.until(ExpectedConditions.visibilityOf(vehiclefieldslist));
 	}
 	
 	public void setVIN (String vinnumber) {
@@ -72,6 +81,26 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public boolean isModelFieldVisible() {
 		return appiumdriver.findElements(By.name("Vehicle.Model")).size() > 0;
+	}
+	
+	public boolean isColorFieldVisible() {
+		return appiumdriver.findElements(By.name("Vehicle.Color")).size() > 0;
+	}
+	
+	public boolean isYearFieldVisible() {
+		return appiumdriver.findElements(By.name("Vehicle.Year")).size() > 0;
+	}
+	
+	public boolean isStockNumberFieldVisible() {
+		return appiumdriver.findElements(By.name("Estimations.StockNo")).size() > 0;
+	}
+	
+	public boolean isRONumberFieldVisible() {
+		return appiumdriver.findElements(By.name("Estimations.RONo")).size() > 0;
+	}
+	
+	public boolean isMilageFieldVisible() {
+		return appiumdriver.findElements(By.name("Vehicle.Milage")).size() > 0;
 	}
 	
 	public void selectType (String vehicletype) {
@@ -135,5 +164,13 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public String getRoNo () {
 		return rofld.getAttribute("value");
+	}
+	
+	public List<String> getDisplayedVehicleFieldsListItems() {
+		List<String> fields = new ArrayList<String>();
+    	List<WebElement> elementfields = vehiclefieldslist.findElements(By.xpath("./ul/li/label/div/div[@class='item-title label']"));
+    	for (WebElement element : elementfields)
+    		fields.add(element.getText());
+    	return fields;
 	}
 }

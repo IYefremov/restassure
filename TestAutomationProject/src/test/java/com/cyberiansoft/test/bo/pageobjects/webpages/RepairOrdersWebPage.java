@@ -30,7 +30,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	@FindBy(xpath = "//a[text()='Search']")
 	private WebElement searchbtn;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_LinkButton1")
+	@FindBy(id = "ctl00_ctl00_Content_Main_linkFullDisplayVersion")
 	private WebElement fulldisplaylink;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")

@@ -27,7 +27,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 		String filename = "";
 		SwipeableWebDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
 	    if (driver != null) {
-	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/", "failed" + getTestMethodName(result));
+	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
 	    }
 	    ExtentTest testReporter = ExtentReportFactory.getTest();
 	    testReporter.log(LogStatus.INFO, "Failed result: " + testReporter.addScreenCapture(filename));

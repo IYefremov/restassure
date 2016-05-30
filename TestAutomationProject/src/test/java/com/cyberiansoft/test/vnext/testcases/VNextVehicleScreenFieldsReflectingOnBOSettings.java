@@ -1,5 +1,11 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
@@ -193,5 +199,358 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		Assert.assertTrue(vehicleinfoscreen.isModelFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34346:vNext - Validate Color field on Vehicle screen reflects 'Visible' ON/OFF", 
+			description = "Validate Color field on Vehicle screen reflects 'Visible' ON/OFF")
+	public void testValidateColorFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.unselectColorVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertFalse(vehicleinfoscreen.isColorFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+		backofficeheader.clickCompanyLink();
+		
+		insptypepage = companypage.clickInspectionTypesLink();
+		vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.selectColorVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		webdriver.quit();
+		loginscreen = homescreen.clickLogoutButton();
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertTrue(vehicleinfoscreen.isColorFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34347:vNext - Validate Year field on Vehicle screen reflects 'Visible' ON/OFF", 
+			description = "Validate Year field on Vehicle screen reflects 'Visible' ON/OFF")
+	public void testValidateYearFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.unselectYearVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertFalse(vehicleinfoscreen.isYearFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+		backofficeheader.clickCompanyLink();
+		
+		insptypepage = companypage.clickInspectionTypesLink();
+		vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.selectYearVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		webdriver.quit();
+		loginscreen = homescreen.clickLogoutButton();
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertTrue(vehicleinfoscreen.isYearFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34719:vNext - Validate Stock # field on Vehicle screen reflects 'Visible' ON/OFF", 
+			description = "Validate Stock # field on Vehicle screen reflects 'Visible' ON/OFF")
+	public void testValidateStockNumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.unselectStockVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertFalse(vehicleinfoscreen.isStockNumberFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+		backofficeheader.clickCompanyLink();
+		
+		insptypepage = companypage.clickInspectionTypesLink();
+		vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.selectStockVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		webdriver.quit();
+		loginscreen = homescreen.clickLogoutButton();
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertTrue(vehicleinfoscreen.isStockNumberFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34720:vNext - Validate RO # field on Vehicle screen reflects 'Visible' ON/OFF", 
+			description = "Validate RO # field on Vehicle screen reflects 'Visible' ON/OFF")
+	public void testValidateRONumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.unselectROVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertFalse(vehicleinfoscreen.isRONumberFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+		backofficeheader.clickCompanyLink();
+		
+		insptypepage = companypage.clickInspectionTypesLink();
+		vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.selectROVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		webdriver.quit();
+		loginscreen = homescreen.clickLogoutButton();
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertTrue(vehicleinfoscreen.isRONumberFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34349:vNext - Validate Mileage field on Vehicle screen reflects 'Visible' ON/OFF", 
+			description = "Validate Mileage field on Vehicle screen reflects 'Visible' ON/OFF")
+	public void testValidateMileageFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.unselectMileageVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertFalse(vehicleinfoscreen.isMilageFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+		backofficeheader.clickCompanyLink();
+		
+		insptypepage = companypage.clickInspectionTypesLink();
+		vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		vehicleinfosettingspage.selectMileageVisible();
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		webdriver.quit();
+		loginscreen = homescreen.clickLogoutButton();
+		loginscreen.updateMainDB();
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		Assert.assertTrue(vehicleinfoscreen.isMilageFieldVisible());
+		inspectionsscreen = vehicleinfoscreen.cancelInspection();
+		inspectionsscreen.clickBackButton();
+	}
+	
+	@Parameters({ "user.name", "user.psw"})
+	@Test(testName= "Test Case 34342:vNext - Validate field order is shown correctly on Vehicle Info screen", 
+			description = "Validate field order is shown correctly on Vehicle Info screen")
+	public void testValidateFieldOrderIsShownCorrectlyOnVehicleInfoScreen(String deviceuser, String devicepsw) {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+		
+		
+		initiateWebDriver();
+		webdriver.get(deviceofficeurl);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(deviceuser, devicepsw);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InspectionTypesWebPage insptypepage = companypage.clickInspectionTypesLink();
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
+		List<WebElement> elementfields = vehicleinfosettingspage.getDisplayedColumnsListItems();
+		/*for (WebElement elm : elements) {
+			if (!elm.getText().equals("Owner") & !elm.getText().equals("Fuel Tank Level") & !elm.getText().equals("Advisor"))
+				System.out.println("++++++" + elm.getText());
+		}*/
+		
+		List<String> fields = new ArrayList<String>();
+    	for (WebElement element : elementfields)
+    		if (!element.getText().equals("Owner") & !element.getText().equals("Fuel Tank Level") & !element.getText().equals("Advisor"))
+    			fields.add(element.getText());
+		vehicleinfosettingspage.clickUpdateButton();
+		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
+		
+		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		List<String> vehicleelements = vehicleinfoscreen.getDisplayedVehicleFieldsListItems();
+		Iterator<String> it1 = fields.iterator();
+		Iterator<String> it2 = vehicleelements.iterator();
+		/*for (WebElement vhclfld : vehicleelements) {
+			System.out.println("++++++" + vhclfld.getText());
+		}*/
+		while (it1.hasNext() && it2.hasNext()) {
+			String fldbovalue = it1.next();
+			String flddevvalue = it2.next();
+			
+			System.out.println("++++++" + fldbovalue);
+			System.out.println("++++++" + flddevvalue);
+			System.out.println("++++++" + fldbovalue.contains(flddevvalue.substring(0, flddevvalue.length()-2)));
+			System.out.println("++++++" + flddevvalue.substring(0, flddevvalue.length()-2));
+			
+			/*if (fldvalue.equals("Vehicle Type"))
+				Assert.assertTrue(it2.next().getText().equals("Type"));
+			else if (fldvalue.equals("Tag # (Lic. Plate)"))
+				Assert.assertTrue(it2.next().getText().equals("Lic. Plate"));
+			else if (fldvalue.equals("PO #"))
+				Assert.assertTrue(it2.next().getText().equals("PO#"));
+			else if (fldvalue.equals("Stock #"))
+				Assert.assertTrue(it2.next().getText().equals("Stock#"));
+			else if (fldvalue.equals("RO #"))
+				Assert.assertTrue(it2.next().getText().equals("RO#"));*/
+		}
+		
 	}
 }
