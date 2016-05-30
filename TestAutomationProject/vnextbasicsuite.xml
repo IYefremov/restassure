@@ -11,7 +11,7 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextRegistrationActivationLoginLogoutTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextRegistrationActivationLoginLogoutTestCases">
         <methods>                   
           <include name="testKeyVerificationForExistingDeviceIinvalidKey" />
           <include name="testVerifyInterruptedDBDownloadIsSupportedWithMessage" />
@@ -39,11 +39,8 @@
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextVehicleScreenFieldsReflectingOnBOSettings">
-      <methods>    
-    	  <include name="testValidateFieldOrderIsShownCorrectlyOnVehicleInfoScreen" />               
-        </methods>
       </class>
     </classes>
   </test>
