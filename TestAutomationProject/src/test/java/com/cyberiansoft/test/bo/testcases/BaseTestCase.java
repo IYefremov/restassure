@@ -137,7 +137,7 @@ public class BaseTestCase {
 		appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
 		appiumcap.setCapability("newCommandTimeout", "120");
 		File appDir = new File("./data/");
-		app = new File(appDir, "ReconPro_0506.app.zip");
+		app = new File(appDir, "ReconPro_0518.app.zip");
 		appiumcap.setCapability("app", app.getAbsolutePath());
 		
 		browsertype = browser;

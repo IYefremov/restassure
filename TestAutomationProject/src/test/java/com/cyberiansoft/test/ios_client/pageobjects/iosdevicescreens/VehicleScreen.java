@@ -133,7 +133,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		vinfld.click();
 
 		Helpers.keyboadrType(vin);
-		vinfld.sendKeys("\n");
+		Helpers.hideKeyboard();
 		
 		Assert.assertTrue(element(
 				MobileBy.name("No vehicle invoice history found")).isDisplayed());

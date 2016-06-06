@@ -790,7 +790,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 		vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-		servicesscreen.cancelOrder();
+		servicesscreen.clickCancelButton();
 		
 		myinspectionsscreen.selectInspectionInTable (myinspectionsscreen.getFirstInspectionNumberValue());
 		myinspectionsscreen.clickCreateWOButton();
@@ -3500,7 +3500,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 		vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-		servicesscreen.cancelOrder();
+		servicesscreen.clickCancelButton();
 
 		myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -3746,7 +3746,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 		vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-		servicesscreen.cancelOrder();
+		servicesscreen.clickCancelButton();
 
 		myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();

@@ -40,7 +40,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(name = "Start Phase")
     private IOSElement startphasebtn;
 	
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name=\"Back\"]")
+	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@visible=\"true\" and @name=\"Back\"]")
     private IOSElement backbtn;
 	
 	@iOSFindBy(xpath = "//UIAToolbar[2]/UIAButton[@name= \"Services\"]")

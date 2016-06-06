@@ -18,6 +18,9 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	//final String uipickerxpath = ".popover().pickers()[0]";
 	final String uipickerxpath = "//UIAPicker";
 	
+	//@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@visible=\"true\" and @name=\"Back\"]")
+    //private IOSElement backbtn;
+	
 	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
     private IOSElement backbtn;
 	
@@ -41,9 +44,11 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public RegularHomeScreen clickHomeButton() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(backbtn)).click();
 		Thread.sleep(1000);
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		//wait.until(ExpectedConditions.visibilityOf(backbtn)).click();
+		backbtn.click();
+		//Thread.sleep(1000);
 		return new RegularHomeScreen(appiumdriver);
 	}
 	

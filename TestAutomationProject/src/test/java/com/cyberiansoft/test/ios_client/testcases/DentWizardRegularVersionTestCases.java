@@ -451,7 +451,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					alerttext,
 					"Invoice type " + UtilConstants.NO_ORDER_TYPE + " doesn't support multiple Work Order types.");
 			myworkordersscreen.clickCancel();
-			myworkordersscreen.cancelInvoice();
+			//myworkordersscreen.cancelInvoice();
 			//myworkordersscreen.acceptAlertByCoords();
 			myworkordersscreen.clickHomeButton();
 
@@ -814,7 +814,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-			servicesscreen.cancelOrder();
+			servicesscreen.clickCancel();
 			
 			myinspectionsscreen.selectInspectionType (myinspectionsscreen.getFirstInspectionNumberValue());
 			myinspectionsscreen.clickCreateWOButton();
@@ -3153,7 +3153,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 			myinvoicesscreen.selectInvoice(invoicenum);
-			System.out.println("++++" + invoicenum);
+			
 			invoiceinfoscreen = myinvoicesscreen.clickEditPopup();
 			Thread.sleep(5000);
 			invoiceinfoscreen.clickOnWO(wonum);
@@ -3525,7 +3525,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-			servicesscreen.cancelOrder();
+			servicesscreen.clickCancel();
 
 			myinspectionsscreen.clickHomeButton();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -3710,7 +3710,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-			servicesscreen.cancelOrder();
+			servicesscreen.clickCancel();
 
 			myinspectionsscreen.clickHomeButton();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
