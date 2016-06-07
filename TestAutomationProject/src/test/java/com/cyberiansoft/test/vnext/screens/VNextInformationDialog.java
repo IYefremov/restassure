@@ -21,7 +21,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public VNextInformationDialog(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 360);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg));
 	}
 	

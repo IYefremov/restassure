@@ -80,5 +80,11 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		Assert.assertEquals(msg, "Are you sure you want to cancel inspection?");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
+	
+	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
+		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
+		testReporter.log(LogStatus.INFO, "Open '" + servicename + "' service details");
+		return new VNextServiceDetailsScreen(appiumdriver);
+	}
 
 }

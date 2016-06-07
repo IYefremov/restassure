@@ -66,7 +66,8 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 		appiumcap.setCapability(MobileCapabilityType.APP_PACKAGE,
 						"com.automobiletechnologies.reconpro2");
-				appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.reconpro2.MainActivity");
+		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.reconpro2.MainActivity");
+		//appiumcap.setCapability("chromedriverExecutable", "d:\\Work\\AQC\\TestAutomationProject\\browsers\\chromedriver\\chromedriver.exe");
 		appiumdriver = new SwipeableWebDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appiumcap);
 		//appiumdriver = new SwipeableWebDriver(service.getUrl(), appiumcap);
@@ -100,7 +101,6 @@ public class VNextBaseTestCase {
 	public void switchApplicationContext(String appcontext) {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		for (String contextName : contextNames) {
-			//System.out.println("++++++++++++" + contextName);
 			if (contextName.contains(appcontext)) {
 				appiumdriver.context(contextName);
 			}
@@ -178,6 +178,7 @@ public class VNextBaseTestCase {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		NetworkConnectionSetting networkConnection = new NetworkConnectionSetting(false, true, true);
 	    ((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
+	    waitABit(1000);
 	    switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,5 +65,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public VNextInspectionServicesScreen clickOpenInspectionToEdit(String inspnumber) {
 		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
 		return inspmenulist.clickEditInspectionMenuItem();
+	}
+	
+	public List<WebElement> getInspectionsList() {
+		return inspectionslist.findElements(By.xpath("./ul/li"));
 	}
 }

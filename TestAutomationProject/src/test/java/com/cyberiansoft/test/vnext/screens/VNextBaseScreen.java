@@ -41,6 +41,7 @@ public class VNextBaseScreen {
 	public void tapListElement(WebElement scrollablelist, String value) {
 		while (scrollablelist.findElements(By.xpath(".//div[text()='" + value + "']")).size() < 1) {
 			swipingVertical();
+			
 			/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
 			appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
@@ -63,12 +64,11 @@ public class VNextBaseScreen {
 	public void swipingVertical() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.height * 0.70);
-		int endy = (int) (size.height * 0.30);
+		int starty = (int) (size.height * 0.75);
+		int endy = (int) (size.height * 0.25);
 		int startx = size.width / 2;
-		appiumdriver.swipe(startx, starty, startx, endy, 3000);
-		//Swipe from Top to Bottom.
-		//appiumdriver.swipe(startx, endy, startx, starty, 3000);
+		appiumdriver.swipe(startx, starty, startx, endy, 2000);
+		waitABit(4000);
 		switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	

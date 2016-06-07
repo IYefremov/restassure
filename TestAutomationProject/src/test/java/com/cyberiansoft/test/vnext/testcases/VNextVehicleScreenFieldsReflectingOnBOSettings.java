@@ -486,9 +486,9 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen.clickBackButton();
 	}
 	
-	@Parameters({ "user.name", "user.psw"})
-	@Test(testName= "Test Case 34342:vNext - Validate field order is shown correctly on Vehicle Info screen", 
-			description = "Validate field order is shown correctly on Vehicle Info screen")
+	//@Parameters({ "user.name", "user.psw"})
+	//@Test(testName= "Test Case 34342:vNext - Validate field order is shown correctly on Vehicle Info screen", 
+			//description = "Validate field order is shown correctly on Vehicle Info screen")
 	public void testValidateFieldOrderIsShownCorrectlyOnVehicleInfoScreen(String deviceuser, String devicepsw) {
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);

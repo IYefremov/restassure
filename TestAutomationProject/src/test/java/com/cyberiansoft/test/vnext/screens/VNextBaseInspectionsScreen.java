@@ -14,7 +14,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='estimation-number']/span")
 	private WebElement inspectionnumber;
 
-	@FindBy(xpath="//i[@action='menu']")
+	@FindBy(xpath="//div[@class='left']/i[@action='menu']")
 	private WebElement menubtn;
 	
 	@FindBy(xpath="//div[text()='Cancel Inspection']")
@@ -22,6 +22,9 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[text()='Save Inspection']")
 	private WebElement saveinspectionmenu;
+	
+	@FindBy(xpath="//div[text()='Notes']")
+	private WebElement inspectionnotesmenu;
 	
 	public VNextBaseInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -32,7 +35,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 		clickCancelInspectionMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_INSPECTION_ALERT);
+		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
@@ -60,5 +63,12 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	public String getNewInspectionNumber() {
 		return inspectionnumber.getText();
+	}
+	
+	public VNextNotesScreen clickInspectionNotesOption() {
+		clickMenuButton();
+		tap(inspectionnotesmenu);
+		testReporter.log(LogStatus.INFO, "Tap Inspection Notes button");
+		return new VNextNotesScreen(appiumdriver);
 	}
 }
