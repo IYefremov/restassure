@@ -201,8 +201,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.searchClientByName(companyname);
 		String notetxt = clientspage.mouseMoveToClientNotesGridAndGetNoteContent(companyname);
 		Assert.assertEquals(companynote, notetxt);
-		
-		
+				
 		clientspage.deleteClient(companyname);
 		clientspage.searchClientByName(companyname);
 		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));

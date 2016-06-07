@@ -152,10 +152,10 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 			.selectTeamCountry(teamcountry).selectTeamState(teamstate).setNewTeamZip(teamzip).setNewTeamEmail(teamemail)
 			.setNewTeamPhone(teamphone).clickAddTeamCancelButton();	
 		
-		Assert.assertEquals("Internal", teamspage.getTableTeamType(team).trim());
-		Assert.assertEquals("", teamspage.getTableTeamLocation(team).trim());
-		Assert.assertEquals("Default area", teamspage.getTableTeamArea(team).trim());
-		Assert.assertEquals("", teamspage.getTableTeamTimesheetType(team).trim());
+		Assert.assertEquals("Testteam", teamspage.getTableTeamType(team).trim());
+		Assert.assertEquals("Services", teamspage.getTableTeamLocation(team).trim());
+		Assert.assertEquals("", teamspage.getTableTeamArea(team).trim());
+		Assert.assertEquals("Default area", teamspage.getTableTeamTimesheetType(team).trim());
 		Assert.assertEquals("(UTC-08:00) Pacific Time (US & Canada)", teamspage.getTableTeamTimeZone(team).trim());
 		Assert.assertEquals("", teamspage.getTableTeamDescription(team).trim());
 
@@ -294,7 +294,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		Assert.assertEquals(firstname + " " + lastname, serviceadvisorspage.getTableServiceAdvisorFullName(firstname, lastname));
 		Assert.assertEquals(email, serviceadvisorspage.getTableServiceAdvisorEmail(firstname, lastname));
-		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
+		Assert.assertEquals("..., WI", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(firstname, lastname).trim());
 		Assert.assertEquals(role, serviceadvisorspage.getTableServiceAdvisorRoles(firstname, lastname));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(firstname, lastname).trim());
