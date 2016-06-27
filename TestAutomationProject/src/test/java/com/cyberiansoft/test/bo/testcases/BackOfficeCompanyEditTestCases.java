@@ -558,7 +558,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.clickAddServiceRequestButton();
 		
 		srlistpage.clickServiceEditButton();
-		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 51);
+		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 52);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 		

@@ -575,7 +575,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(testName = "Test Case 24998:Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts", description = "Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts")
 		public void testCompanyPriceMatrixVerifyThatOnMatrixPanelAdminCanSeeInAvailableServicesOnlyServicesSelectedOnVehicleParts() throws Exception {
 			
-			final String vehiclepart = "Vehicle part 1";
+			final String vehiclepart = "Vehicle Part 1";
 			final String pricematrix = "Test Matrix mobile1";
 			
 			final String servicename1 = "Test service zayats";

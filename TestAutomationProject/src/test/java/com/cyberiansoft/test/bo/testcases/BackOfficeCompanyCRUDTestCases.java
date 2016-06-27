@@ -156,8 +156,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals("Services", teamspage.getTableTeamLocation(team).trim());
 		Assert.assertEquals("", teamspage.getTableTeamArea(team).trim());
 		Assert.assertEquals("Default area", teamspage.getTableTeamTimesheetType(team).trim());
-		Assert.assertEquals("(UTC-08:00) Pacific Time (US & Canada)", teamspage.getTableTeamTimeZone(team).trim());
-		Assert.assertEquals("", teamspage.getTableTeamDescription(team).trim());
+		Assert.assertEquals("", teamspage.getTableTeamTimeZone(team).trim());
+		Assert.assertEquals("(UTC-08:00) Pacific Time (US & Canada)", teamspage.getTableTeamDescription(team).trim());
 
 		newteamsdialog = teamspage.clickEditTeam(team);
 		Thread.sleep(1000);
