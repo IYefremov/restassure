@@ -39,7 +39,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	public void onTestSkipped (ITestResult result) {
 		SwipeableWebDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
 	    if (driver != null) {
-	    	((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/", "skipped" + getTestMethodName(result));
+	    	((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "skipped" + getTestMethodName(result));
 	    }
 	    ExtentTest testReporter = ExtentReportFactory.getTest();
 	    testReporter.log(LogStatus.SKIP, getTestMethodName(result));

@@ -34,23 +34,14 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextSelectServicesScreen clickAddServicesButton() {
 		tap(addservicesbtn);
-		testReporter.log(LogStatus.INFO, "Tap Add Services button");
+		log(LogStatus.INFO, "Tap Add Services button");
 		return new VNextSelectServicesScreen(appiumdriver);
 	}
 	
 	public boolean isServiceAdded(String servicename) {
 		return addedserviceslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")).size() > 0;
 	}
-	
-	public VNextInspectionsScreen saveInspectionfromFirstScreen() {
-		VNextVehicleInfoScreen vehicleinfoscreen = goToVehicleInfoScreen();
-		vehicleinfoscreen.setVIN("1FMCU0DG4BK830800");
-		vehicleinfoscreen.selectType("New");
-		return saveInspectionfromVehicleInfoScreen();
-	}
-	
-	
-	
+
 	public VNextInspectionsScreen saveInspectionfromVehicleInfoScreen() {
 		swipeScreenLeft();
 		swipeScreenLeft();
@@ -63,7 +54,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextVehicleInfoScreen goToVehicleInfoScreen() {
-		waitABit(4000);
+		waitABit(5000);
 		swipeScreenLeft();
 		swipeScreenLeft(); 
 		swipeScreenLeft();
@@ -74,7 +65,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextInspectionsScreen clickBackButtonAndCancelInspection() {
 		tap(backbtn);
-		testReporter.log(LogStatus.INFO, "Tap Inspection Services screen Back button");
+		log(LogStatus.INFO, "Tap Inspection Services screen Back button");
 		VNextInformationDialog errordialog = new VNextInformationDialog(appiumdriver);
 		String msg = errordialog.clickInformationDialogYesButtonAndGetMessage();
 		Assert.assertEquals(msg, "Are you sure you want to cancel inspection?");
@@ -83,7 +74,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
-		testReporter.log(LogStatus.INFO, "Open '" + servicename + "' service details");
+		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 

@@ -61,7 +61,8 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	
 	public String clickAddPOPayButtonAndAcceptPayment() {
 		clickAddPOPayButton();
-		waitABit(300);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		String alerttext = alert.getText();
 		alert.accept();

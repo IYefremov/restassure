@@ -42,7 +42,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public void clickCancelInspectionMenuItem() {
 		clickMenuButton();
 		tap(cancelinspectionmenu);
-		testReporter.log(LogStatus.INFO, "Tap Cancel inspection button");
+		log(LogStatus.INFO, "Tap Cancel inspection button");
 	}
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
@@ -52,13 +52,13 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	public void clickMenuButton() {
 		tap(menubtn); 
-		testReporter.log(LogStatus.INFO, "Tap Menu button");
+		log(LogStatus.INFO, "Tap Menu button");
 	}
 	
 	public void clickSaveInspectionMenuButton() {
 		clickMenuButton();
 		tap(saveinspectionmenu);
-		testReporter.log(LogStatus.INFO, "Tap Save Inspection button");
+		log(LogStatus.INFO, "Tap Save Inspection button");
 	}
 	
 	public String getNewInspectionNumber() {
@@ -68,7 +68,8 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public VNextNotesScreen clickInspectionNotesOption() {
 		clickMenuButton();
 		tap(inspectionnotesmenu);
-		testReporter.log(LogStatus.INFO, "Tap Inspection Notes button");
+		log(LogStatus.INFO, "Tap Inspection Notes button");
 		return new VNextNotesScreen(appiumdriver);
 	}
+
 }

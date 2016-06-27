@@ -12,7 +12,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInformationDialog extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@class='modal modal-in']")
+	@FindBy(xpath="//body/div[contains(@class, 'modal-in')]")
 	private WebElement modaldlg;
 	
 	@FindBy(xpath="//div[@class='modal-text']")
@@ -30,21 +30,20 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	}
 	
 	public void clickInformationDialogOKButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
+		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Tap Information Dialog OK Button");
+		log(LogStatus.INFO, "Tap Information Dialog OK Button");
 	}
 	
 	public void clickInformationDialogYesButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Yes']")));
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Tap Information Dialog Yes Button");
+		log(LogStatus.INFO, "Tap Information Dialog Yes Button");
 	}
 	
 	public void clickInformationDialogNoButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='No']")));
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Tap Information Dialog No Button");
+		log(LogStatus.INFO, "Tap Information Dialog No Button");
 	}
 	
 	public String clickInformationDialogOKButtonAndGetMessage() {

@@ -25,7 +25,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	final String[] servicesselect = { "Detail", "Bent Wheel" };
 	final String testcustomer = "111 111";
 	
-	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
+	/*@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
 			description = "Show selected services after inspection is saved")
 	public void testShowSelectedServicesAfterInspectionIsSaved() {
 		
@@ -428,5 +428,5 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_INSPECTION_ALERT);
 		inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-	}
+	}*/
 }

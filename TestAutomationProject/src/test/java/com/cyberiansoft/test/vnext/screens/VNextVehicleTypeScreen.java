@@ -25,6 +25,6 @@ public class VNextVehicleTypeScreen extends VNextBaseScreen {
 	
 	public void selectType(String vehicletype) {
 		tap(typeslist.findElement(By.xpath("//div[@class='item-inner']/div[@class='item']/div[text()='" + vehicletype + "']")));
-		testReporter.log(LogStatus.INFO, "Select '" + vehicletype + "' vehicle type");
+		log(LogStatus.INFO, "Select '" + vehicletype + "' vehicle type");
 	}
 }

@@ -35,7 +35,8 @@ public class VNextBaseScreen {
 	
 	public void setValue(WebElement element, String value) {
 		element.clear();
-		element.sendKeys(value);
+		appiumdriver.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
+		//element.sendKeys(value);
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {
@@ -58,7 +59,7 @@ public class VNextBaseScreen {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.navigate().back();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);
-		testReporter.log(LogStatus.INFO, "Click Hardware Back Button");
+		log(LogStatus.INFO, "Click Hardware Back Button");
 	}
 	
 	public void swipingVertical() {
@@ -81,7 +82,7 @@ public class VNextBaseScreen {
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);		
 		waitABit(2000);
-		testReporter.log(LogStatus.INFO, "Swipe To Next Screen");
+		log(LogStatus.INFO, "Swipe To Next Screen");
 	}
 	
 	public void swipeScreenRight() {
@@ -93,7 +94,7 @@ public class VNextBaseScreen {
 		int starty = size.height / 10;
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);		
-		testReporter.log(LogStatus.INFO, "Swipe To Next Screen");
+		log(LogStatus.INFO, "Swipe To Next Screen");
 	}
 	
 	public void switchApplicationContext(String appcontext) {
@@ -112,5 +113,10 @@ public class VNextBaseScreen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void log(LogStatus logstatus, String logmessage) {
+		if (testReporter != null)
+			testReporter.log(logstatus, logmessage);		
 	}
 }

@@ -59,27 +59,24 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void setUserLoginPassword(String userpsw) {
 		setValue(passwordfld, userpsw);
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Set User password: " + userpsw);
+		log(LogStatus.INFO, "Set User password: " + userpsw);
 		
 	}
 	
 	public void selectEmployee(String username) {
 		tapListElement(userslist, username);
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Select employee: " + username);
+		log(LogStatus.INFO, "Select employee: " + username);
 	}
 	
 	public void tapLoginButton() {
 		tap(loginbtn);
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Tap Login button");
+		log(LogStatus.INFO, "Tap Login button");
 		
 	}
 	
 	public void tapCancelButton() {
 		tap(cancelbtn);
-		testReporter.log(LogStatus.INFO, "Tap Cancel button");
+		log(LogStatus.INFO, "Tap Cancel button");
 		waitUserListVisibility();
 	}
 	
@@ -90,7 +87,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void updateMainDB() {
 		tap(updatemaindbbtn);
-		testReporter.log(LogStatus.INFO, "Tap Update Main DB button");
+		log(LogStatus.INFO, "Tap Update Main DB button");
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}

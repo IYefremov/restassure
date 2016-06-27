@@ -38,19 +38,19 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
-		testReporter.log(LogStatus.INFO, "Tap Inspections menu item");
+		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public VNextSettingsScreen clickSettingsMenuItem() {
 		tap(settingslist);
-		testReporter.log(LogStatus.INFO, "Tap Settings menu item");
+		log(LogStatus.INFO, "Tap Settings menu item");
 		return new VNextSettingsScreen(appiumdriver);
 	}
 	
 	public void clickQueueMessageIcon() {
 		tap(queuemessageicon);
-		testReporter.log(LogStatus.INFO, "Tap Queue Message Icon");
+		log(LogStatus.INFO, "Tap Queue Message Icon");
 		waitABit(500);
 	}
 	

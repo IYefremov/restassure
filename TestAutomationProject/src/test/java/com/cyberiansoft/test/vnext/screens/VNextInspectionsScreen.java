@@ -34,22 +34,22 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public VNextCustomersScreen clickAddInspectionButton() {
 		waitABit(2000);		
 		tap(addinspectionbtn);
-		testReporter.log(LogStatus.INFO, "Tap Add inspection button");
+		log(LogStatus.INFO, "Tap Add inspection button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
 	public VNextHomeScreen clickBackButton() {
 		tap(backbtn);
-		testReporter.log(LogStatus.INFO, "Tap Back button");
+		log(LogStatus.INFO, "Tap Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
 	public void createSimpleInspection() {	
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
-		customersscreen.selectCustomer("Test 2");
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		customersscreen.selectCustomer("Test retail");
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		waitABit(4000);
-		inspservicesscreen.saveInspectionfromFirstScreen();
+		inspinfoscreen.saveInspectionfromFirstScreen();
 	}
 	
 	public String getFirstInspectionNumber() {
@@ -58,11 +58,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		tap(inspectionslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + inspnumber + "']")));
-		testReporter.log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
+		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
 	
-	public VNextInspectionServicesScreen clickOpenInspectionToEdit(String inspnumber) {
+	public VNextVehicleInfoScreen clickOpenInspectionToEdit(String inspnumber) {
 		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
 		return inspmenulist.clickEditInspectionMenuItem();
 	}

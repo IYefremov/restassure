@@ -62,9 +62,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setVIN (String vinnumber) {
-		vinfld.clear();
-		vinfld.sendKeys(vinnumber);
-		testReporter.log(LogStatus.INFO, "Set VIN: " + vinnumber);
+		setValue(vinfld, vinnumber);
+		log(LogStatus.INFO, "Set VIN: " + vinnumber);
 	}
 	
 	public String getVINFieldValue() {
@@ -107,7 +106,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		tap(typefld);
 		VNextVehicleTypeScreen vehicletypescreen = new VNextVehicleTypeScreen(appiumdriver);
 		vehicletypescreen.selectType(vehicletype);
-		testReporter.log(LogStatus.INFO, "Select Vehicle Type: " + vehicletype);
+		log(LogStatus.INFO, "Select Vehicle Type: " + vehicletype);
 	}
 	
 	public String getType () {
@@ -129,7 +128,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setLicPlate (String licplate) {
 		licplatefld.clear();
 		licplatefld.sendKeys(licplate);
-		testReporter.log(LogStatus.INFO, "Set License Plate : " + licplate);
+		log(LogStatus.INFO, "Set License Plate : " + licplate);
 	}
 	
 	public String getLicPlate () {
@@ -139,7 +138,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setMilage (String milage) {
 		milagefld.clear();
 		milagefld.sendKeys(milage);
-		testReporter.log(LogStatus.INFO, "Set Milage: " + milage);
+		log(LogStatus.INFO, "Set Milage: " + milage);
 	}
 	
 	public String getMilage () {
@@ -149,7 +148,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setStockNo (String stockno) {
 		stockfld.clear();
 		stockfld.sendKeys(stockno);
-		testReporter.log(LogStatus.INFO, "Set Stock Number : " + stockno);
+		log(LogStatus.INFO, "Set Stock Number : " + stockno);
 	}
 	
 	public String getStockNo () {
@@ -159,7 +158,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setRoNo (String rono) {
 		rofld.clear();
 		rofld.sendKeys(rono);
-		testReporter.log(LogStatus.INFO, "Set RO Number : " + rono);
+		log(LogStatus.INFO, "Set RO Number : " + rono);
 	}
 	
 	public String getRoNo () {
@@ -172,5 +171,18 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
     	for (WebElement element : elementfields)
     		fields.add(element.getText());
     	return fields;
+	}
+	
+	public VNextInspectionsScreen saveInspectionfromFirstScreen() {
+		setVIN("1FMCU0DG4BK830800");
+		return saveInspectionViaMenu();
+	}
+	
+	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
+		waitABit(5000);
+		swipeScreenLeft();
+		swipeScreenLeft(); 
+		swipeScreenLeft();
+		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }

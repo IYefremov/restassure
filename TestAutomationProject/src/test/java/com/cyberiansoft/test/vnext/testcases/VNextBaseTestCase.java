@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,9 +26,16 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.ssts.pcloudy.ConnectError;
+import com.ssts.pcloudy.Connector;
+import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
+import com.ssts.pcloudy.dto.device.MobileDevice;
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -75,7 +83,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void setUp() {
-		waitABit(8000);
+		waitABit(10000);
 	    switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -142,6 +150,7 @@ public class VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename));
 		verificationscreen.clickVerifyButton();
+		waitABit(5000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}
@@ -175,10 +184,13 @@ public class VNextBaseTestCase {
 	}
 	
 	public void setNetworkOn() {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		NetworkConnectionSetting networkConnection = new NetworkConnectionSetting(false, true, true);
-	    ((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
-	    waitABit(1000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
+		NetworkConnectionSetting networkConnection = ((AndroidDriver)appiumdriver).getNetworkConnection();
+		if (networkConnection.airplaneModeEnabled()) {
+			networkConnection = new NetworkConnectionSetting(false, true, true);		
+			((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
+			waitABit(1000);
+		}
 	    switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -187,5 +199,109 @@ public class VNextBaseTestCase {
 		appiumdriver.navigate().back();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
+	
+	/////////////////////////////
+	//@BeforeSuite
+	@Parameters({ "selenium.browser", "backoffice.url" })
+	public void runExecutionOnPCloudy(String browser, String bourl) throws InterruptedException, IOException, ConnectError {
+		deviceofficeurl = bourl;
+		defaultbrowser = browser;
+		
+		
+		Connector pCloudyCONNECTOR = new Connector();
+
+		// User Authentication over pCloudy
+		String authToken = pCloudyCONNECTOR.authenticateUser("olexandr.kramar@cyberiansoft.com", "kg3s78jmj7qbxs7xhs4krrhp");
+		ArrayList selectedDevices = new ArrayList<>();
+
+		// Populate the selected Devices here
+		
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS5_Android_5.0.0", 51, "GalaxyS5", "Galaxy S5", "android", "5.0.0", "Samsung"));    
+
+		// Book the selected devices in pCloudy
+
+		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 10, "friendlySessionName");
+		System.out.println("Devices booked successfully");
+
+		// Upload apk in pCloudy
+		File appDir = new File("./data/");
+		File app = new File(appDir, "ReconPro.apk");
+		PDriveFileDTO pDriveFile = pCloudyCONNECTOR.uploadApp(authToken, app);
+		System.out.println("apk file uploaded successfully");
+		pCloudyCONNECTOR.initAppiumHubForApp(authToken, pDriveFile);
+
+		// Get the endpoint from pCloudy
+		URL endpoint = pCloudyCONNECTOR.getAppiumEndpoint(authToken);
+		System.out.println("Appium Endpoint:" + endpoint);
+
+		appiumcap = new DesiredCapabilities();
+		//capabilities.setCapability("newCommandTimeout", 600);
+		//capabilities.setCapability("launchTimeoutv", 90000);
+		appiumcap.setCapability("deviceName", bookedDevicesIDs[0].capabilities.deviceName);
+		appiumcap.setCapability("browserName", bookedDevicesIDs[0].capabilities.deviceName);
+		appiumcap.setCapability("platformName", "Android");
+		appiumcap.setCapability("appPackage", "com.automobiletechnologies.reconpro2");
+		appiumcap.setCapability("appActivity", "com.automobiletechnologies.reconpro2.MainActivity");
+		appiumcap.setCapability("rotatable", true);
+		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
+		appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);
+		/*waitABit(20000);
+	    switchApplicationContext(AppContexts.WEB_CONTEXT);
+	    setNetworkOn();
+		resetApp();
+		try {
+			registerDevice("olexandr.kramar@cyberiansoft.com", "test12345", "VNext Automation");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		loginscreen.userLogin("VD_Employee VD_Employee", "1111");
+		//}
+		
+		// Create multiple driver objects in multiple threads
+		/*for (int i = 0; i < bookedDevicesIDs.length; i++) {
+		Thread.sleep(5000);
+		new Thread(getTestCaseClass(endpoint, bookedDevicesIDs[i])).start();
+		}
+		}
+
+		private Runnable getTestCaseClass(final URL endpoint, final BookingDtoDevice dto) {
+
+		// this will give a Thread Safe TestScript class.
+
+		// You may also like to have this as a named class in a separate file
+
+		return new Runnable() {
+		@Override
+
+		public void run() {
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("newCommandTimeout", 600);
+		capabilities.setCapability("launchTimeoutv", 90000);
+		capabilities.setCapability("deviceName", dto.capabilities.deviceName);
+		capabilities.setCapability("browserName", dto.capabilities.deviceName);
+		capabilities.setCapability("platformName", "Android");
+		capabilities.setCapability("appPackage", "com.automobiletechnologies.reconpro2");
+		capabilities.setCapability("appActivity", "com.automobiletechnologies.reconpro2.MainActivity");
+		capabilities.setCapability("rotatable", true);
+		appiumdriver = new SwipeableWebDriver(endpoint, capabilities);
+
+		// Your Test Script Goes Here…
+		waitABit(10000);
+	    switchApplicationContext(AppContexts.WEB_CONTEXT);
+	    setNetworkOn();
+		resetApp();
+		try {
+			registerDevice("olexandr.kramar@cyberiansoft.com", "test12345", "VNext Automation");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		loginscreen.userLogin("VD_Employee VD_Employee", "1111");
+		}
+		};*/
+		}
 
 }

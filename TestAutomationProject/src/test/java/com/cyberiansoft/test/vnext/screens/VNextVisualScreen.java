@@ -23,7 +23,7 @@ public class VNextVisualScreen extends VNextBaseScreen {
 
 	public VNextInspectionsScreen clickSaveInspectionButton() {		
 		tap(saveinspectionbtn);
-		testReporter.log(LogStatus.INFO, "Tap Save Inspection button");
+		log(LogStatus.INFO, "Tap Save Inspection button");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 }

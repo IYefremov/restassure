@@ -48,7 +48,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		
 		tap(customerslist.findElement(By.xpath(".//div[text()='" + customer + "']")));
 		waitABit(1000);
-		testReporter.log(LogStatus.INFO, "Select customer " + customer);
+		log(LogStatus.INFO, "Select customer " + customer);
 	}
 
 }
