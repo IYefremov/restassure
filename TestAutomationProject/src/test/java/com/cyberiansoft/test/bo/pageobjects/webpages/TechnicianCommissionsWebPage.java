@@ -77,6 +77,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
+	
 	public void verifyInvoicesTableColumnsAreVisible() {
 		new WebDriverWait(driver, 60)
 		  .until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()));
