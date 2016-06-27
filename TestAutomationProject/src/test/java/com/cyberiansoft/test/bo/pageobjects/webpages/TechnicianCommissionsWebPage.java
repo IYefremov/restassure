@@ -83,7 +83,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		new WebDriverWait(driver, 60)
 		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Vendor Name"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order"));
+		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order #"));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order Amount"));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Tech Amount"));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Vendor Bill #"));
