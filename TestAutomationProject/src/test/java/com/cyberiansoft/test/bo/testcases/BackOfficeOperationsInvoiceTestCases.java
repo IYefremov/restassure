@@ -15,6 +15,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicePaymentsTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 
@@ -307,8 +308,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
 	
-	@Test(testName = "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity ", 
-			description = "Operation - Invoice : Sent Custom mail in Mail Activity ")
+	@Test(testName = "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", 
+			description = "Operation - Invoice : Sent Custom mail in Mail Activity")
 	public void testOperationInvoiceSentCustomMailInMailActivity() throws Exception {
 		
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
@@ -345,5 +346,43 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
-
+	
+	@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", 
+			description = "Operation - Invoice: Edit - Customer")
+	public void testOperationInvoiceEditCustomer() throws Exception {
+		
+		final String ponum = "123";
+		final String invoicecustomername = "000 My Company";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		
+		final String mainWindowHandle = webdriver.getWindowHandle();
+		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditInvoice(invoicenumber);
+		invoiceeditpage.changeInvoiceWholesaleCustomer(invoicecustomername);
+		Assert.assertEquals(invoicecustomername, invoiceeditpage.getInvoiceCustomer());
+		invoiceeditpage.closeNewTab(mainWindowHandle);
+	}
 }

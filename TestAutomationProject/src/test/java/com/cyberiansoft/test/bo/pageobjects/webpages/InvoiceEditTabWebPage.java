@@ -41,6 +41,16 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	@FindBy(xpath = "//a[text()='Technicians:']")
 	private WebElement technicianslink;
 	
+	/////////////////////
+	@FindBy(id = "customerText")
+	private WebElement invoicecustomer;
+	
+	@FindBy(name = "isWholesaler")
+	private WebElement customerwholesaleradio;
+	
+	@FindBy(id = "customerAutoComplete")
+	private WebElement entercustomerwholesalefld;
+	
 	public InvoiceEditTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -176,6 +186,18 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 				
 			}
 		}
+	}
+	
+	public void changeInvoiceWholesaleCustomer(String customername) {
+		invoicecustomer.click();
+		customerwholesaleradio.click();
+		entercustomerwholesalefld.sendKeys(customername.substring(0, 3));
+		waitABit(2000);
+		driver.findElement(By.xpath("//ul/li/a[text()='" + customername + "']")).click();
+	}
+	
+	public String getInvoiceCustomer() {
+		return invoicecustomer.getText();
 	}
 
 }

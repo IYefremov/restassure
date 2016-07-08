@@ -409,7 +409,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			servicerequestslistpage.makeSearchPanelVisible();
 			servicerequestslistpage.setSearchFreeText(newservicerequest);
 			servicerequestslistpage.clickFindButton();
-			Assert.assertFalse(servicerequestslistpage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
+			Assert.assertTrue(servicerequestslistpage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
+			Assert.assertEquals("Closed", servicerequestslistpage.getFirstServiceRequestStatus());
 		}
 		
 		/*@Test(description = "Test Case 18476:Operations- New Inspection")

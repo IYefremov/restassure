@@ -20,8 +20,6 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 
-//public class WorkOrdersWebPage extends BaseWebPage<WorkOrdersWebPage> {
-//public class WorkOrdersWebPage extends WebPageWithPagination {
 public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";
@@ -89,6 +87,16 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")
 	private WebElement findbtn;	
+	
+	////////////// Create Invoice Form
+	@FindBy(xpath = "//input[contains(@id, 'Content_Main_tbPoNum')]")
+	private TextField ponumfld;
+	
+	@FindBy(xpath = "//textarea[contains(@id, 'Content_Main_txtInvoiceDescription')]")
+	private WebElement invoicedescfld;
+	
+	@FindBy(xpath = "//input[contains(@id, 'Content_Main_btCreateInvoice')]")
+	private WebElement createinvoicebtn;
 	
 	public WorkOrdersWebPage(WebDriver driver) {
 		super(driver);
@@ -204,14 +212,14 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public String getTableRowWorkOrderNumber(WebElement row) {
-		return row.findElement(By.xpath(".//td[3]/a")).getText();
+		return row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
 	}
 	
 	public WorkOrderInfoTabWebPage clickWorkOrderInTable(String wonumber) {
 		String mainWindowHandle = driver.getWindowHandle();
 		WebElement row = getTableRowWithWorkOrder(wonumber);
 		if (row != null) {
-			row.findElement(By.xpath(".//td[3]/a")).click();
+			row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).click();
 			waitForNewTab();
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
@@ -239,10 +247,44 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		String status = null;
 		WebElement row = getTableRowWithWorkOrder(wonumber); 
 		if (row != null) {
-			status = row.findElement(By.xpath("./td[9]")).getText();
+			status = row.findElement(By.xpath("./td[" + wotable.getTableColumnIndex("Date") + "]")).getText();
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");	
 		}
 		return status; 
+	}
+	
+	public void selectWorkOrderInTheTable(String wonumber) {
+		WebElement row = getTableRowWithWorkOrder(wonumber); 
+		if (row != null) {
+			labeledCheckBoxSelect(row.findElement(By.xpath(".//td/input[contains(@id, 'cbAction')]")));
+		} else {
+			Assert.assertTrue(false, "Can't find " + wonumber + " work order");	
+		}
+	}
+	
+	public String getFirstWorkOrderNumberInTheTable() {
+		return wotable.getWrappedElement().findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
+	}
+	
+	public void createInvoiceFromWorkOrder(String wonumber, String ponum) {
+		selectWorkOrderInTheTable(wonumber);
+		setInvoicePONumber(ponum);
+		clickAndWait(createinvoicebtn);
+	}
+	
+	public void setInvoicePONumber(String ponum) {
+		ponumfld.clearAndType(ponum);
+	}
+	
+	public String getWorkOrderInvoiceNumber(String wonumber) {
+		String invoicenum = "";
+		WebElement row = getTableRowWithWorkOrder(wonumber); 
+		if (row != null) {
+			invoicenum = row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Invoice#") + "]/a")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + wonumber + " work order");	
+		}
+		return invoicenum;
 	}
 }

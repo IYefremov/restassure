@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -43,6 +44,10 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_bRecalcCommissions")
 	private WebElement recalccomissionsbtn;
 	
+	//Service Package Items 
+	@FindBy(id = "ctl00_Content_gv_ctl00")
+	private WebTable servicepackageitemstable;
+	
 	public ServicePackagesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -70,7 +75,8 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	public WebElement getTableRowWithServicePackage(String servicepackagename) {
 		List<WebElement> servicepackagetablerows = getServicePackagesTableRows();
 		for (WebElement servicepackagetablerow : servicepackagetablerows) {
-			if (servicepackagetablerow.findElement(By.xpath(".//td[5]")).getText().equals(servicepackagename)) {
+			if (servicepackagetablerow.findElement(By.xpath(".//td[" + 
+					servicepackagestable.getTableColumnIndex("Service Package") + "]")).getText().equals(servicepackagename)) {
 				return servicepackagetablerow;
 			}
 		}
@@ -140,4 +146,33 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		return servicepkgfromtype;
 	}
 	
+	public Set<String> clickServicesLinkForServicePackage(String servicepackagename) {
+		WebElement row = getTableRowWithServicePackage(servicepackagename);
+		if (row != null) {
+			row.findElement(By.xpath(".//a[contains(text(), 'Services')]")).click();
+		} else 
+			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+		waitForNewTab();
+    	String mainWindowHandle = driver.getWindowHandle();
+    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+		for (String activeHandle : driver.getWindowHandles()) {
+	        if (!activeHandle.equals(mainWindowHandle)) {
+	        	driver.switchTo().window(activeHandle);
+	        }
+	    }
+		return driver.getWindowHandles();
+	}
+	
+	////////////////////////
+	public int getServicePackageItemsTableRowsCount() {
+		return getServicePackageItemsTableRows().size();
+	}
+	
+	public List<WebElement> getServicePackageItemsTableRows() {
+		return servicepackageitemstable.getTableRows();
+	}
+	
+	public List<WebElement> getAllServicePackageItems() {
+		return servicepackageitemstable.getWrappedElement().findElements(By.xpath(".//tr[contains(@id, 'ctl00_Content_gv_ctl00')]/td[" + servicepackageitemstable.getTableColumnIndex("Service") + "]"));
+	}
 }

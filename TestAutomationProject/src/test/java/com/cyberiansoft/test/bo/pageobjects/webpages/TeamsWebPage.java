@@ -110,7 +110,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamtype = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtype = row.findElement(By.xpath(".//td[6]")).getText();
+			teamtype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Type") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamtype;
@@ -120,7 +120,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamlocation = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamlocation = row.findElement(By.xpath(".//td[8]")).getText();
+			teamlocation = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Location") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamlocation;
@@ -130,7 +130,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamarea = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamarea = row.findElement(By.xpath(".//td[9]")).getText();
+			teamarea = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Area") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamarea;
@@ -140,7 +140,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamtimesheettype = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtimesheettype = row.findElement(By.xpath(".//td[10]")).getText();
+			teamtimesheettype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Timesheet type") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamtimesheettype;
@@ -150,7 +150,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamtimezone = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtimezone = row.findElement(By.xpath(".//td[11]")).getText();
+			teamtimezone = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Time Zone") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamtimezone;
@@ -160,7 +160,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamdesc = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamdesc = row.findElement(By.xpath(".//td[12]")).getText();
+			teamdesc = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Description") + "]")).getText();
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
 		return teamdesc;

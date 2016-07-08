@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,35 +43,15 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	public boolean isServiceAdded(String servicename) {
 		return addedserviceslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")).size() > 0;
 	}
-
-	public VNextInspectionsScreen saveInspectionfromVehicleInfoScreen() {
-		swipeScreenLeft();
-		swipeScreenLeft();
-		swipeScreenLeft();
-		swipeScreenLeft();
-		swipeScreenLeft();
-		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		visualscreen.clickSaveInspectionButton();
-		return new VNextInspectionsScreen(appiumdriver);
-	}
 	
-	public VNextVehicleInfoScreen goToVehicleInfoScreen() {
-		waitABit(5000);
-		swipeScreenLeft();
-		swipeScreenLeft(); 
-		swipeScreenLeft();
-		swipeScreenLeft();
-		swipeScreenLeft();
-		return new VNextVehicleInfoScreen(appiumdriver);
-	}
-	
-	public VNextInspectionsScreen clickBackButtonAndCancelInspection() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Tap Inspection Services screen Back button");
-		VNextInformationDialog errordialog = new VNextInformationDialog(appiumdriver);
-		String msg = errordialog.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertEquals(msg, "Are you sure you want to cancel inspection?");
-		return new VNextInspectionsScreen(appiumdriver);
+	public String getSelectedservicePriceValue(String servicename) {
+		String serviceprice = "";
+		List<WebElement> selectedservices = addedserviceslist.findElements(By.xpath(".//li/a/div[@class='item-inner']"));
+		for (WebElement servicerow : selectedservices) {
+			if (servicerow.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(servicename))
+				serviceprice = servicerow.findElement(By.xpath(".//div[@class='item-price']/div/strong")).getText();
+		}
+		return serviceprice;
 	}
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {

@@ -26,6 +26,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	}
 	
 	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
+		waitABit(500);
 		tap(editinspectionbtn);
 		testReporter.log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);

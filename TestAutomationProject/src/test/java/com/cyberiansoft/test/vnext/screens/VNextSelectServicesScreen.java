@@ -34,7 +34,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public List<WebElement> getServicesListItems() {	
-		return getServicesList().findElements(By.xpath("./ul/li/a"));
+		return getServicesList().findElements(By.xpath("./ul/li/a[@action='select-item']"));
 	}
 	
 	public WebElement getServiceListItem(String servicename) {

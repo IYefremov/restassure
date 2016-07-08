@@ -50,7 +50,7 @@ public class ActiveDevicesWebPage extends BaseWebPage {
 	}
 
 	public String getFirstRegCodeInTable() {
-		new WebDriverWait(driver, 10)
+		new WebDriverWait(driver, 5)
 		  .until(ExpectedConditions.visibilityOf(devicestable.getWrappedElement()));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
 		if (regcodefld.getText().isEmpty())

@@ -210,5 +210,17 @@ public abstract class BaseWebPage {
 		}
 		return result;
     }
+    
+    public void labeledCheckBoxSelect(WebElement checkbox) {
+    	if (!isCheckboxChecked(checkbox)) 
+    		if (getBrowserType().contains("firefox")) {
+    			WebElement parent = checkbox.findElement(By.xpath("parent::*"));
+    			parent.findElement(By.xpath("./label")).click();
+    		} else {
+    			checkbox.click();
+    		}
+    			
+    		
+    }
 
 }

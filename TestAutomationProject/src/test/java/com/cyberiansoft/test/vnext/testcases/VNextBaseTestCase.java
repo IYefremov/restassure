@@ -26,14 +26,13 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.ssts.pcloudy.ConnectError;
+/*import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NetworkConnectionSetting;
@@ -202,7 +201,7 @@ public class VNextBaseTestCase {
 	
 	/////////////////////////////
 	//@BeforeSuite
-	@Parameters({ "selenium.browser", "backoffice.url" })
+	/*@Parameters({ "selenium.browser", "backoffice.url" })
 	public void runExecutionOnPCloudy(String browser, String bourl) throws InterruptedException, IOException, ConnectError {
 		deviceofficeurl = bourl;
 		defaultbrowser = browser;
@@ -216,11 +215,10 @@ public class VNextBaseTestCase {
 
 		// Populate the selected Devices here
 		
-		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS5_Android_5.0.0", 51, "GalaxyS5", "Galaxy S5", "android", "5.0.0", "Samsung"));    
-
-		// Book the selected devices in pCloudy
-
-		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 10, "friendlySessionName");
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS5_Android_5.0.0", 51, "GalaxyS5", "Galaxy S5", "android", "5.0.0", "Samsung"));    
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyGrand2_Android_4.3.0", 23, "GalaxyGrand2", "Galaxy Grand2", "android", "4.3.0", "Samsung")); 
+		
+		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 8, "friendlySessionName");
 		System.out.println("Devices booked successfully");
 
 		// Upload apk in pCloudy
@@ -244,7 +242,17 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability("appActivity", "com.automobiletechnologies.reconpro2.MainActivity");
 		appiumcap.setCapability("rotatable", true);
 		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
-		appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);
+		
+		try {
+			appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);
+		} catch (Exception ex) {
+			// this might have happened due to the remote appium server taking some more time to register with the hub
+			waitABit(10000);
+			// lets wait for some time and then give it a retry
+			appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);
+		}
+		
+		//appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);
 		/*waitABit(20000);
 	    switchApplicationContext(AppContexts.WEB_CONTEXT);
 	    setNetworkOn();
@@ -260,48 +268,7 @@ public class VNextBaseTestCase {
 		//}
 		
 		// Create multiple driver objects in multiple threads
-		/*for (int i = 0; i < bookedDevicesIDs.length; i++) {
-		Thread.sleep(5000);
-		new Thread(getTestCaseClass(endpoint, bookedDevicesIDs[i])).start();
-		}
-		}
-
-		private Runnable getTestCaseClass(final URL endpoint, final BookingDtoDevice dto) {
-
-		// this will give a Thread Safe TestScript class.
-
-		// You may also like to have this as a named class in a separate file
-
-		return new Runnable() {
-		@Override
-
-		public void run() {
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("newCommandTimeout", 600);
-		capabilities.setCapability("launchTimeoutv", 90000);
-		capabilities.setCapability("deviceName", dto.capabilities.deviceName);
-		capabilities.setCapability("browserName", dto.capabilities.deviceName);
-		capabilities.setCapability("platformName", "Android");
-		capabilities.setCapability("appPackage", "com.automobiletechnologies.reconpro2");
-		capabilities.setCapability("appActivity", "com.automobiletechnologies.reconpro2.MainActivity");
-		capabilities.setCapability("rotatable", true);
-		appiumdriver = new SwipeableWebDriver(endpoint, capabilities);
-
-		// Your Test Script Goes Here…
-		waitABit(10000);
-	    switchApplicationContext(AppContexts.WEB_CONTEXT);
-	    setNetworkOn();
-		resetApp();
-		try {
-			registerDevice("olexandr.kramar@cyberiansoft.com", "test12345", "VNext Automation");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin("VD_Employee VD_Employee", "1111");
-		}
-		};*/
-		}
+		
+		}*/
 
 }

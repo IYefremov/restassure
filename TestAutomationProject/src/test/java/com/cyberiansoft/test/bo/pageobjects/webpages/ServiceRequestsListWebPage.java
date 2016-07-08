@@ -313,6 +313,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		return result;
 	}
 	
+	public String getFirstServiceRequestStatus()  { 
+		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestStatus']")).getText();		
+	}
+	
 	
 	public void clickGeneralInfoEditButton()  { 
 		click(getGeneralInfoEditButton());

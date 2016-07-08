@@ -35,8 +35,8 @@ public class VNextBaseScreen {
 	
 	public void setValue(WebElement element, String value) {
 		element.clear();
-		appiumdriver.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
-		//element.sendKeys(value);
+		//appiumdriver.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
+		element.sendKeys(value);
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {
@@ -81,7 +81,7 @@ public class VNextBaseScreen {
 		int starty = size.height / 10;
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);		
-		waitABit(2000);
+		waitABit(3000);
 		log(LogStatus.INFO, "Swipe To Next Screen");
 	}
 	

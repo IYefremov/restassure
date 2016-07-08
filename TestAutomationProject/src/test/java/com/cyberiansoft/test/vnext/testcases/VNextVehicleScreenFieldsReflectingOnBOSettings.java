@@ -58,8 +58,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isVINFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -78,8 +77,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isVINFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -115,8 +113,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isMakeFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -136,8 +133,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isMakeFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -173,8 +169,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isModelFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -194,8 +189,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isModelFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -231,8 +225,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isColorFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -251,8 +244,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isColorFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -288,8 +280,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isYearFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -308,8 +299,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isYearFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -345,8 +335,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isStockNumberFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -365,8 +354,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isStockNumberFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -402,8 +390,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isRONumberFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -422,8 +409,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isRONumberFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -459,8 +445,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertFalse(vehicleinfoscreen.isMilageFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -479,8 +464,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertTrue(vehicleinfoscreen.isMilageFieldVisible());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
@@ -523,8 +507,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehicleInfoScreen vehicleinfoscreen = inspservicesscreen.goToVehicleInfoScreen();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		List<String> vehicleelements = vehicleinfoscreen.getDisplayedVehicleFieldsListItems();
 		Iterator<String> it1 = fields.iterator();
 		Iterator<String> it2 = vehicleelements.iterator();

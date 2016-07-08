@@ -55,7 +55,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	public void addQuickNote(String quicknote) {
 		tap(quicknotescontent.findElement(By.xpath(".//ul/li[@action='quick-note']/div/div[text()='" + quicknote + "']")));
-		testReporter.log(LogStatus.INFO, "Add '" + quicknote + "' quick note");
+		log(LogStatus.INFO, "Add '" + quicknote + "' quick note");
 	}
 	
 	public String getSelectedNotes() {
@@ -65,32 +65,28 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void setNoteText(String notetext) {
 		//notestextfld.clear();
 		//notestextfld.sendKeys(notetext);
-		notestextfld.click();
 		setValue(notestextfld, notetext);
-		setValue(notestextfld, "111111");
-		System.out.println("++++++++++");
-		waitABit(5000);
-		testReporter.log(LogStatus.INFO, "Type note text '" + notetext + "'");
+		log(LogStatus.INFO, "Type note text '" + notetext + "'");
 	}
 	
 	public void clickNotesBackButton() {
 		tap(notesbackbtn);
-		testReporter.log(LogStatus.INFO, "Clack Notes Back button");
+		log(LogStatus.INFO, "Clack Notes Back button");
 	}
 	
 	public void selectNotesPicturesTab() {
 		tap(notespicturestab);
-		testReporter.log(LogStatus.INFO, "Select Notes Pictures tab");
+		log(LogStatus.INFO, "Select Notes Pictures tab");
 	}
 	
 	public void selectNotesTextTab() {
 		tap(notestexttab);
-		testReporter.log(LogStatus.INFO, "Select Notes Text tab");
+		log(LogStatus.INFO, "Select Notes Text tab");
 	}
 	
 	public void clickCameraIcon() {
 		tap(notescamerabtn);
-		testReporter.log(LogStatus.INFO, "Select Notes Camera icon");
+		log(LogStatus.INFO, "Select Notes Camera icon");
 	}
 	
 	public void addCameraPictureToNote() {
@@ -100,11 +96,14 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		waitABit(8000);
 		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
 		waitABit(8000);
-		appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).click();
+		if (appiumdriver.findElements(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).size() > 0)
+			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).click();
+		else
+			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'ok')]")).click();
 		waitABit(4000);
 		switchApplicationContext(AppContexts.WEB_CONTEXT);
 		Assert.assertTrue(isPictureaddedToNote());
-		testReporter.log(LogStatus.INFO, "Add Camera picture to Note");
+		log(LogStatus.INFO, "Add Camera picture to Note");
 	}
 
 	public boolean isPictureaddedToNote() {

@@ -7,6 +7,8 @@ public class WebConstants {
 		TIMEFRAME_LASTWEEK("Last Week"),
 		TIMEFRAME_MONTHTODATE("Month to date"),
 		TIMEFRAME_LASTMONTH("Last Month"),
+		TIMEFRAME_30_DAYS("Last 30 Days"),
+		TIMEFRAME_90_DAYS("Last 90 Days"),
 		TIMEFRAME_YEARTODATE("Year to date"),
 		TIMEFRAME_LASTYEAR("Last Year"),
 		TIMEFRAME_CUSTOM("custom");
