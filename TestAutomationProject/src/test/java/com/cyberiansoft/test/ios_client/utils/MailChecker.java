@@ -62,7 +62,7 @@ public class MailChecker {
 		Folder folderInbox = null;
 		try {
 			folderInbox = store.getFolder("INBOX");
-			folderInbox.open(Folder.READ_ONLY);					
+			folderInbox.open(Folder.READ_WRITE);					
 		} catch (MessagingException ex) {
             System.out.println("No provider.");
             ex.printStackTrace();
@@ -126,7 +126,7 @@ public class MailChecker {
     public static boolean findMailWithMessageText(Message[] foundMessages, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
     	boolean val = false;
     	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-10; i--) {
+    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-5; i--) {
     			Message message = foundMessages[i];
     			Address[] froms = message.getFrom();
     			String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
@@ -174,7 +174,7 @@ public class MailChecker {
     	Message requiredmessage = null;
     	
     	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-10; i--) {
+    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-5; i--) {
     			Message message = foundMessages[i];
                 Address[] froms = message.getFrom();
                 String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
@@ -190,7 +190,7 @@ public class MailChecker {
                 System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
                 System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                 System.out.println("Current "+ i + " :"+ "Subject:"+ email);    	
-                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=103) {
+                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=5) {
                 	requiredmessage = message;
                 }
     		}
@@ -291,9 +291,41 @@ public class MailChecker {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-        return val;
+        return val; 	
+    }
+    
+    public static String searchEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
+    	String mailmessage = "";
+    	try {
+    		Store store = loginToGMailBox(userName, password);
+            
+            Folder folderInbox = getInboxMailMessages(store);
+            //create a search term for all "unseen" messages
+            Flags seen = new Flags(Flags.Flag.SEEN);
+			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+			//create a search term for all recent messages
+			Flags recent = new Flags(Flags.Flag.RECENT);
+			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            Message[] foundMessages = folderInbox.search(searchTerm);
+            System.out.println("Total Messages Found :"+ foundMessages.length);
+            Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
+            if (message != null)        
+            	mailmessage = getText(message);
+            message.setFlag(Flags.Flag.SEEN, true);
+            // disconnect
+            folderInbox.close(false);
+            store.close();
+    	} catch (MessagingException ex) {
+            System.out.println("Could not connect to the message store.");
+            ex.printStackTrace();
+        } catch (IOException e) {
+        	System.out.println("IOException.");
+            e.printStackTrace();
+		}
     	
     	
+    	return mailmessage;
     }
     
     /*public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail) throws IOException {

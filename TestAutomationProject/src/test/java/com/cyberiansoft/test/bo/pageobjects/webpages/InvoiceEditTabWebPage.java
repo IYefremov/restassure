@@ -82,6 +82,14 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	public void clcikAddPO() {		 
 		if (getBrowserType().equals("chrome")) {
 			clickTechniciansLink();
+			try {
+				WebDriverWait wait = new WebDriverWait(driver, 3);
+				wait.until(ExpectedConditions.alertIsPresent());
+					Alert alert = driver.switchTo().alert();
+					alert.dismiss();
+				} catch (Exception e) {
+					
+				}
 			Actions act  = new Actions(driver);
 			act.click(addpobtn).perform();
 			/*new WebDriverWait(driver, 5)

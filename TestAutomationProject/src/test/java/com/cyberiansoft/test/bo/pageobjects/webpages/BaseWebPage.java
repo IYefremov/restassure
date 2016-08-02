@@ -18,7 +18,7 @@ import com.google.common.base.Function;
 public abstract class BaseWebPage {
 
 
-	WebDriver driver;
+	public WebDriver driver;
 	
 	private static final long SLEEP_TIMEOUT_IN_SEC = 10;
 

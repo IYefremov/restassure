@@ -21,6 +21,9 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[contains(@class, 'page orders-note')]")
 	private WebElement servicenotessscreen;
 	
+	@FindBy(xpath="//a[@action='clear']")
+	private WebElement clearnotesbtn;
+	
 	@FindBy(xpath="//textarea[@name='notes']")
 	private WebElement notestextfld;
 	
@@ -87,6 +90,11 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void clickCameraIcon() {
 		tap(notescamerabtn);
 		log(LogStatus.INFO, "Select Notes Camera icon");
+	}
+	
+	public void clickClearNotesButton() {
+		tap(clearnotesbtn);
+		log(LogStatus.INFO, "Tap Clear Notes button");
 	}
 	
 	public void addCameraPictureToNote() {

@@ -8,7 +8,7 @@ import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 
 public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 	
-	final static String testEmployee = "VD_Employee VD_Employee";
+	final static String testEmployee = "Test User";
 	final static String testEmployeePsw = "1111";
 	
 	@Test(testName= "Test Case 35900:vNext - Verify 'Password' dialog is shown when user selects an employee from the list, Test Case 35903:vNext - Close Log in dialog", 
@@ -36,7 +36,7 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 		loginscreen.waitUserListVisibility();
 	}
 	
-	@Test(testName= "Test Case 35901:vNext - Log in (success case)", description = "Log in (success case)")
+	@Test(testName= "Test Case 35901:vNext - Log in from the list of available users (success case)", description = "Log in from the list of available users (success case)")
 	public void testLogInSuccessCase() {
 		
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);

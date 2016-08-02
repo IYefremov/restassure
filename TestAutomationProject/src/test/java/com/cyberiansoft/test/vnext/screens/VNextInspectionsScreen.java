@@ -46,7 +46,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public void createSimpleInspection() {	
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
-		customersscreen.selectCustomer("Test retail");
+		customersscreen.selectCustomer("Oksana Osmak");
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		waitABit(4000);
 		inspinfoscreen.saveInspectionfromFirstScreen();

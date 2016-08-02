@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@action='edit'][2]/i")
+	@FindBy(xpath="//a[@action='edit']/i")
 	private WebElement editinspectionbtn;
 	
 	@FindBy(xpath="//div[@class='page inspections-menu hide-toolbar hide-searchbar page-on-center']")
@@ -26,7 +26,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	}
 	
 	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
-		waitABit(500);
+		waitABit(1000);
 		tap(editinspectionbtn);
 		testReporter.log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);

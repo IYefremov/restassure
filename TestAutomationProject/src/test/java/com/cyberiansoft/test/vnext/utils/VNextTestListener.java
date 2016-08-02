@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
@@ -26,9 +27,15 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	public void onTestFailure(ITestResult result) {
 		String filename = "";
 		SwipeableWebDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
+		WebDriver webdriver = ((VNextBaseTestCase) currentClass).getWebDriver();
 	    if (driver != null) {
 	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
 	    }
+	    
+	    if (webdriver != null) {
+	    	System.out.println("+++++++WEBDRIVER");
+	    }
+	    
 	    ExtentTest testReporter = ExtentReportFactory.getTest();
 	    testReporter.log(LogStatus.INFO, "Failed result: " + testReporter.addScreenCapture(filename));
 	    testReporter.log(LogStatus.FAIL, getTestMethodName(result));

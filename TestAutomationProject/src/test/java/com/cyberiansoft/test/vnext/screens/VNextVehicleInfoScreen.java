@@ -179,10 +179,12 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(3000);
-		swipeScreenLeft();
-		swipeScreenLeft(); 
-		swipeScreenLeft();
+		waitABit(5000);
+		swipeScreensLeft(4);
+		//swipeScreenLeft();
+		//swipeScreenLeft(); 
+		//swipeScreenLeft();
+		//swipeScreenLeft();
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import com.cyberiansoft.test.bo.webelements.IWebElement;
 
-abstract class AbstractWebElement implements IWebElement {
+public abstract class AbstractWebElement implements IWebElement {
     protected final WebElement wrappedElement;
 
     protected AbstractWebElement(final WebElement wrappedElement) {

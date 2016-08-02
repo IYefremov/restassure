@@ -26,11 +26,14 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Detail", "Odor Removal" };
-	final String testcustomer = "Test retail";
+	final String testcustomer = "Oksana Osmak";
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
@@ -198,18 +201,18 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
+		homescreen.waitABit(30000);
 		initiateWebDriver();
-		webdriver.get(deviceofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
-		inspectionspage.makeSearchPanelVisible();
-		inspectionspage.searchInspectionByNumber(inspnum);
-		inspectionspage.verifyServicesPresentForInspection(inspnum, servicesselect);
+		webdriver.get("http://capi.cyberianconcepts.com");
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(deviceuser, devicepsw);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
+		inspectionspage.selectInspectionInTheList(inspnum);
+		for (int i=0; i < servicesselect.length; i++)
+			Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection(servicesselect[i]));
 		webdriver.quit();
 	}
 	
@@ -335,11 +338,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehicleinfoscreen.setStockNo(stockno);
 		vehicleinfoscreen.setRoNo(vehiclerono);
 		vehicleinfoscreen.swipeScreenLeft();
-		/*VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
-		claiminfoscreen.setPolicyNumber(policynumber);
-		claiminfoscreen.setClaimNumber(claimnumber);
-		claiminfoscreen.selectInsuranceCompany(insurCompany);
-*/
+		
 		inspectionsscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), vinnumber);
@@ -445,11 +444,11 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		List<WebElement> services = selectservicecreen.getServicesListItems();
 		List<String> servicestxt = new ArrayList<String>();
 		for (WebElement lst : services)
-			servicestxt.add(lst.getText());
+			servicestxt.add(selectservicecreen.getServiceListItemName(lst));
 		
-		for (String srv : allservicestxt)
+		for (String srv : allservicestxt) {
 			Assert.assertTrue(servicestxt.contains(srv));
-		
+		}
 		selectservicecreen.clickHardwareBackButton();
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
@@ -478,6 +477,43 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			Assert.assertEquals(inspservicesscreen.getSelectedservicePriceValue(servicestoselect[i]), servicesprices[i]);
 		
 		inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 41561:vNext - Add the same service multiple times", 
+			description = "Add the same service multiple times")
+	public void testAddTheSameServiceMultipleTimes() {
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(testVIN);
+		
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectServices(servicesselect);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (int i=0; i < servicesselect.length; i++)
+			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+		selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectServices(servicesselect);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (int i=0; i < servicesselect.length; i++)
+			Assert.assertEquals(inspservicesscreen.getQuantityOfSelectedService(servicesselect[i]), 2);
+
+		final String inspnum = inspservicesscreen.getNewInspectionNumber();
+		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		
+		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
+		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		for (int i=0; i < servicesselect.length; i++)
+			Assert.assertEquals(inspservicesscreen.getQuantityOfSelectedService(servicesselect[i]), 2);
+
+		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 }

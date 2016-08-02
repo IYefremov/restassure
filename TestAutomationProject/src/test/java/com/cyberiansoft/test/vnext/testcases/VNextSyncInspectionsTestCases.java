@@ -19,6 +19,8 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+		homescreen.clickQueueMessageIcon();
+		homescreen.waitABit(2000);
 	}
 
 	@Test(testName= "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspections", 
@@ -66,6 +68,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	public void testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		setNetworkOff();
+		homescreen.waitABit(13000);
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();

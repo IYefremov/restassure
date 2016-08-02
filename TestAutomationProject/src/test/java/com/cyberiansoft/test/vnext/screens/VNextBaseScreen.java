@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import java.util.Set;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,6 +15,9 @@ import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
+import io.appium.java_client.NoSuchContextException;
+import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextBaseScreen {
 	
@@ -57,8 +61,12 @@ public class VNextBaseScreen {
 	
 	public void clickHardwareBackButton() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		System.out.println("++++++++++");
+		waitABit(3000);
+		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_MENU);
 		appiumdriver.navigate().back();
-		switchApplicationContext(AppContexts.WEB_CONTEXT);
+		Assert.assertTrue(switchToWebViewContext());
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 		log(LogStatus.INFO, "Click Hardware Back Button");
 	}
 	
@@ -70,7 +78,8 @@ public class VNextBaseScreen {
 		int startx = size.width / 2;
 		appiumdriver.swipe(startx, starty, startx, endy, 2000);
 		waitABit(4000);
-		switchApplicationContext(AppContexts.WEB_CONTEXT);
+		Assert.assertTrue(switchToWebViewContext());
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
 	public void swipeScreenLeft() {		
@@ -80,9 +89,26 @@ public class VNextBaseScreen {
 		int endx = (int) (size.width * 0.25);
 		int starty = size.height / 10;
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-		switchApplicationContext(AppContexts.WEB_CONTEXT);		
-		waitABit(3000);
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);		
+		Assert.assertTrue(switchToWebViewContext());
+		waitABit(4000);
 		log(LogStatus.INFO, "Swipe To Next Screen");
+	}
+	
+	public void swipeScreensLeft(int screensnumber) {
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		Dimension size = appiumdriver.manage().window().getSize();
+		int startx = (int) (size.width * 0.75);
+		int endx = (int) (size.width * 0.25);
+		int starty = size.height / 8;
+		for (int i = 0; i < screensnumber; i++) {
+			new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
+			waitABit(4000);
+			log(LogStatus.INFO, "Swipe To Next Screen");
+		}
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);
+		Assert.assertTrue(switchToWebViewContext());
+		
 	}
 	
 	public void swipeScreenRight() {
@@ -93,8 +119,37 @@ public class VNextBaseScreen {
 		int endx = (int) (size.width * 0.70);
 		int starty = size.height / 10;
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-		switchApplicationContext(AppContexts.WEB_CONTEXT);		
+		Assert.assertTrue(switchToWebViewContext());
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);		
 		log(LogStatus.INFO, "Swipe To Next Screen");
+	}
+	
+	public boolean switchToWebViewContext() {
+		boolean switched = false;
+		final int ITERATIONS_COUNT = 200;
+		for (int i = 0; i < ITERATIONS_COUNT; i++) {
+			Set<String> contextNames = appiumdriver.getContextHandles();
+			for (String contextName : contextNames) {
+				System.out.println("++++++" + contextName);
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.reconpro2")) {
+					System.out.println("----------" + contextName);
+					try {
+						appiumdriver.context(contextName);
+						System.out.println("---------- Success");
+						i = ITERATIONS_COUNT;
+						switched = true;
+						break;
+					} catch (NoSuchContextException ex) {
+						System.out.println("---------- Fail");
+						waitABit(1000);
+					}
+				} else if (!contextName.equals("NATIVE_APP")){
+					System.out.println("=============" + contextName);
+					waitABit(1000);
+				}
+			}
+		}
+		return switched;
 	}
 	
 	public void switchApplicationContext(String appcontext) {
