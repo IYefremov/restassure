@@ -9,6 +9,7 @@ import org.testng.TestListenerAdapter;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
+import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -26,10 +27,10 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String filename = "";
-		SwipeableWebDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
+		SwipeableWebDriver appiumdriver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
 		WebDriver webdriver = ((VNextBaseTestCase) currentClass).getWebDriver();
-	    if (driver != null) {
-	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
+	    if (appiumdriver != null) {
+	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(appiumdriver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
 	    }
 	    
 	    if (webdriver != null) {
@@ -40,6 +41,18 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    testReporter.log(LogStatus.INFO, "Failed result: " + testReporter.addScreenCapture(filename));
 	    testReporter.log(LogStatus.FAIL, getTestMethodName(result));
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
+	    
+	    ((VNextBaseTestCase) currentClass).resetApp();
+	    ((VNextBaseTestCase) currentClass).setUp();
+	    ((VNextBaseTestCase) currentClass).setNetworkOn();
+	    try {
+			((VNextBaseTestCase) currentClass).registerDevice();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		loginscreen.userLogin("Test User", "1111");
 	}
 	
 	@Override

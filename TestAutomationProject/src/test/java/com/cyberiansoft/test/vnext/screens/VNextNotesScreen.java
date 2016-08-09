@@ -68,6 +68,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void setNoteText(String notetext) {
 		//notestextfld.clear();
 		//notestextfld.sendKeys(notetext);
+		notestextfld.click();
 		setValue(notestextfld, notetext);
 		log(LogStatus.INFO, "Type note text '" + notetext + "'");
 	}

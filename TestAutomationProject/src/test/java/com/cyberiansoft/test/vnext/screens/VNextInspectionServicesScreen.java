@@ -21,6 +21,9 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//div[@class='left']/i[@action='add']")
 	private WebElement addservicesbtn;
 	
+	@FindBy(xpath="//div[@class='right']/i[@action='save']")
+	private WebElement savebtn;
+	
 	@FindBy(xpath="//i[@action='back']")
 	private WebElement backbtn;
 	
@@ -62,6 +65,21 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
 		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextServiceDetailsScreen(appiumdriver);
+	}
+	
+	public void clickSaveButton() {
+		tap(savebtn);
+		log(LogStatus.INFO, "Click Save inspection button");
+	}
+	
+	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
+		waitABit(5000);
+		swipeScreensRight(4);
+		//swipeScreenLeft();
+		//swipeScreenLeft(); 
+		//swipeScreenLeft();
+		//swipeScreenLeft();
+		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 
 }

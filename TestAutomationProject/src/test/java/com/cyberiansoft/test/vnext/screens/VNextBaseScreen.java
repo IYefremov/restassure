@@ -61,10 +61,12 @@ public class VNextBaseScreen {
 	
 	public void clickHardwareBackButton() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		System.out.println("++++++++++");
-		waitABit(3000);
-		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_MENU);
-		appiumdriver.navigate().back();
+		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
+		//appiumdriver.navigate().back();
+		try {
+			appiumdriver.hideKeyboard();
+            } catch (Exception e) {
+            }
 		Assert.assertTrue(switchToWebViewContext());
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 		log(LogStatus.INFO, "Click Hardware Back Button");
@@ -121,7 +123,23 @@ public class VNextBaseScreen {
 		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
 		Assert.assertTrue(switchToWebViewContext());
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);		
-		log(LogStatus.INFO, "Swipe To Next Screen");
+		log(LogStatus.INFO, "Swipe Back To Previous Screen");
+	}
+	
+	public void swipeScreensRight(int screensnumber) {
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		Dimension size = appiumdriver.manage().window().getSize();
+		int startx = (int) (size.width * 0.25);
+		int endx = (int) (size.width * 0.75);
+		int starty = size.height / 10;
+		for (int i = 0; i < screensnumber; i++) {
+			new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
+			waitABit(4000);
+			log(LogStatus.INFO, "Swipe Back To Previous Screen");
+		}
+		//switchApplicationContext(AppContexts.WEB_CONTEXT);
+		Assert.assertTrue(switchToWebViewContext());
+		
 	}
 	
 	public boolean switchToWebViewContext() {
@@ -156,7 +174,7 @@ public class VNextBaseScreen {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		for (String contextName : contextNames) {
 			if (contextName.contains(appcontext)) {
-				appiumdriver.context(contextName);
+				appiumdriver.context(contextName);			
 			}
 		}
 	}	

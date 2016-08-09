@@ -312,7 +312,9 @@ public class MailChecker {
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
             if (message != null)        
             	mailmessage = getText(message);
-            message.setFlag(Flags.Flag.SEEN, true);
+            
+            //message.setFlag(Flags.Flag.SEEN, true);
+            message.setFlag(Flags.Flag.DELETED, true);
             // disconnect
             folderInbox.close(false);
             store.close();

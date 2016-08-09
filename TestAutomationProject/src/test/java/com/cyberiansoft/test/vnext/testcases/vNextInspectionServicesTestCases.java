@@ -358,30 +358,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 39549:vNext - Inspections - Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)", 
-			description = "Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)")
-	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })
-	public void testNavigateToScreenWithRequiredFieldsOnSaveInspectionCalledFromHumburgerMenu_FirstStep() { 
-	
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.clickCancelInspectionMenuItem();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
-		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
-		vehicleinfoscreen.swipeScreenLeft();
-		informationdlg = new VNextInformationDialog(appiumdriver);
-		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
-	}
-	
+
 	@Test(testName= "Test Case 39550:vNext - Inspections - Exit 'Cancel inspection' state called from humburger menu (first step)", 
 			description = "Exit 'Cancel inspection' state called from humburger menu (first step)")
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })

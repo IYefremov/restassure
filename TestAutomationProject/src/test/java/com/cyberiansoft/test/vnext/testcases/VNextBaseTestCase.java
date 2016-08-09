@@ -40,6 +40,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -57,10 +58,13 @@ public class VNextBaseTestCase {
 	protected String regcode = "";
 	protected static String defaultbrowser;
 	protected static String deviceofficeurl;
+	protected static String deviceuser;
+	protected static String devicepsw;
+	protected static String devicelicensename;
 	
 	@BeforeSuite
-	@Parameters({ "selenium.browser", "backoffice.url" })
-	public void startServer(String browser, String bourl) throws MalformedURLException {
+	@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
+	public void startServer(String browser, String bourl, String username, String userpsw, String licensename) throws MalformedURLException {
 		
 		//AppiumServiceBuilder builder = new AppiumServiceBuilder().withArgument(GeneralServerFlag.LOG_LEVEL, "error");
        // service = builder.build();
@@ -78,10 +82,15 @@ public class VNextBaseTestCase {
 						"com.automobiletechnologies.reconpro2");
 		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.reconpro2.MainActivity");
 		//appiumcap.setCapability("chromedriverExecutable", "d:\\Work\\AQC\\TestAutomationProject\\browsers\\chromedriver\\chromedriver.exe");
+		appiumcap.setCapability("recreateChromeDriverSessions", true);
+		
 		appiumdriver = new SwipeableWebDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appiumcap);
 		//appiumdriver = new SwipeableWebDriver(service.getUrl(), appiumcap);
 		defaultbrowser = browser;
+		deviceuser = username;
+		devicepsw = userpsw;
+		devicelicensename = licensename;
 	}
 	
 	public void setUp() {
@@ -180,13 +189,13 @@ public class VNextBaseTestCase {
 		webdriver = WebDriverInstansiator.getDriver();
 	}
 	
-	public void registerDevice(String deviceuser, String devicepsw, String licensename) throws Exception {
+	public void registerDevice() throws Exception {
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo("380", "978385064", "osmak.oksana+408@gmail.com");
 		appiumdriver.switchTo().defaultContent();
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
-		verificationscreen.setDeviceRegistrationCode(getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename));
+		verificationscreen.setDeviceRegistrationCode(getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, devicelicensename));
 		verificationscreen.clickVerifyButton();
 		waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -243,10 +252,13 @@ public class VNextBaseTestCase {
 	
 	/////////////////////////////
 	//@BeforeSuite
-	@Parameters({ "selenium.browser", "backoffice.url" })
-	public void runExecutionOnPCloudy(String browser, String bourl) throws InterruptedException, IOException, ConnectError {
+	@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
+	public void runExecutionOnPCloudy(String browser, String bourl, String username, String userpsw, String licensename) throws InterruptedException, IOException, ConnectError {
 		deviceofficeurl = bourl;
 		defaultbrowser = browser;
+		deviceuser = username;
+		devicepsw = userpsw;
+		devicelicensename = licensename;
 		
 		
 		Connector pCloudyCONNECTOR = new Connector();
@@ -260,11 +272,11 @@ public class VNextBaseTestCase {
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS5_Android_5.0.0", 51, "GalaxyS5", "Galaxy S5", "android", "5.0.0", "Samsung"));    
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS4_Android_5.0.1", 44, "GalaxyS4", "Galaxy S4", "android", "5.0.1", "Samsung"));  
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyA7_Android_5.0.2", 106, "GalaxyA7", "Galaxy A7", "android", "5.0.2", "Samsung"));
-		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyNote5_Android_6.0.1", 91, "GalaxyNote5", "Galaxy Note5", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyNote5_Android_6.0.1", 91, "GalaxyNote5", "Galaxy Note5", "android", "6.0.1", "Samsung")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_S7Edge_Android_6.0.1", 130, "S7Edge", "S7 Edge", "android", "6.0.1", "Samsung"));
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6_Android_6.0.1", 132, "GalaxyS6", "Galaxy S6", "android", "6.0.1", "Samsung")); 
 		
-		
-		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 30, "friendlySessionName");
+		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 60, "friendlySessionName");
 		System.out.println("Devices booked successfully");
 
 		// Upload apk in pCloudy

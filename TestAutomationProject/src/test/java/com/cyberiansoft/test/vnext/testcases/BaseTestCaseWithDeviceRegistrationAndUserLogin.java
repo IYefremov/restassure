@@ -11,14 +11,12 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 	final static String testEmployeePsw = "1111";
 
 	@BeforeClass(description = "Setting up new suite")
-	@Parameters({ "user.name", "user.psw", "device.license", "selenium.browser" })	
-	public void settingUp(String deviceuser, String devicepsw, String licensename, String defbrowser) throws Exception {
-		defaultbrowser = defbrowser;
-		
+	public void settingUp() throws Exception {
+
 		setUp();	
 		setNetworkOn();
 		resetApp();
-		registerDevice(deviceuser, devicepsw, licensename);
+		registerDevice();
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 		loginscreen.userLogin(testEmployee, testEmployeePsw);
 	}

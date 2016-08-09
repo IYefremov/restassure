@@ -200,6 +200,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.clickHardwareBackButton();
+		//notesscreen.clickHardwareBackButton();
 		
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		inspservicesscreen = servicedetailsscreen.clickServiceDetailsDoneButton();

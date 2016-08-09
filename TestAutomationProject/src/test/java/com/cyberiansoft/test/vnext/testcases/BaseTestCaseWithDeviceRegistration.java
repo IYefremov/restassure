@@ -5,13 +5,11 @@ import org.testng.annotations.Parameters;
 
 public class BaseTestCaseWithDeviceRegistration extends VNextBaseTestCase {
 	
-	@BeforeClass(description = "Setting up new suite")
-	@Parameters({ "user.name", "user.psw", "device.license", "selenium.browser" })	
-	public void settingUp(String deviceuser, String devicepsw, String licensename, String defbrowser) throws Exception {
-		defaultbrowser = defbrowser;
+	@BeforeClass(description = "Setting up new suite")	
+	public void settingUp() throws Exception {
 		setUp();	
 		setNetworkOn();
-		registerDevice(deviceuser, devicepsw, licensename);		
+		registerDevice();		
 	}
 
 }

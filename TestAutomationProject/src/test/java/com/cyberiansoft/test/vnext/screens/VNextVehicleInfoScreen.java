@@ -185,6 +185,9 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();
 		//swipeScreenLeft();
+		if (appiumdriver.findElements(By.xpath("//span[@class='client-mode' and text()='All Services']")).size() > 0)
+			swipeScreenLeft();
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
+
 }
