@@ -1,0 +1,45 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="firefox" />
+  <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
+  <parameter name="backoffice.url" value="http://capi.cyberianconcepts.com"  />
+  <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
+  <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />
+  <parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />
+  <parameter name="user.psw" value="ZZzz11!!"  />
+  <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />
+  <parameter name="userdemo.psw" value="111111"  />
+  <parameter name="setupengineer.name" value="testapp@i.ua"  />
+  <parameter name="setupengineer.psw" value="ReconPro"  />
+  <listeners>
+		<listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
+  </listeners>
+  <test name="Back Office Test Cases - IE" preserve-order="true">
+    <parameter name="selenium.browser" value="chrome" />
+    <classes>
+	  <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
+	  <methods> 
+	  	 <include name="testCreateUserWithWebAccess" />
+	  	 <include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />
+	  	 <include name="testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn" />
+	  	 <include name="testVerifyValidationMessagesOnChangePasswordPage" />
+	  	 <include name="testVerifyValidationMessagesOnRequestPasswordResetPage" />
+	  	 <include name="testVerifyForgotPasswordPageIsOpenedOnClickForgotPasswordLink" />
+	  	 <include name="testEditNotConfirmedUserWithWebAccess" />
+	  	 <include name="testEditUserWithoutWebAccess" />
+	  	 <include name="testCheckPosibilityToResendRegistrationEmail" />
+	  	 <include name="testCheckValidationErrorsOnTheCreateNewUserDialog" />
+	  	 <include name="testCheckValidationErrorsOnTheSetPasswordPage" />
+	  	 <include name="testCreateUserWithExistingEmailAddress" />
+      </methods>
+      </class>-->
+      <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicestestCases">
+	  <methods> 
+	  	 <!--<include name="testAddMoneyService" />-->
+	  	 <include name="testAddPercentageService" />
+      </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
