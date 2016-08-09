@@ -36,36 +36,29 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(name = "Work Orders")
     private IOSElement myworkordersmenumenu;
 	
-	int xx = 0;
-	int yy = 0;
-	
 	public RegularCarHistoryScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn));
-		xx = searchbtn.getLocation().getX() + searchbtn.getSize().getWidth() + 50;
-
-		yy = searchbtn.getLocation().getY() + 20;
 	}
 	
 	public void searchCar(String vin)
 			throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
-		Helpers.keyboadrType(vin);
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".searchBars()['Search']")).sendKeys(vin);		
 		appiumdriver.findElement(By.xpath("//UIAKeyboard[1]/UIAButton[@name=\"Search\"]")).click();
 	}
 	
 	public void clickCancelSearchButton() throws InterruptedException {
-		Thread.sleep(2000);
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(xx,yy).release().perform();
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".buttons()['Cancel']")).click();
 	}
 	
 	public void clickFirstCarHistoryInTable() {		
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
+		appiumdriver.tap(1, appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")), 200);
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
 	}
 	
 	public String getFirstCarHistoryValueInTable() {		

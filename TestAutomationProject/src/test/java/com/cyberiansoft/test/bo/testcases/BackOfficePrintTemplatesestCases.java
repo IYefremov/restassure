@@ -40,7 +40,6 @@ import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.Regu
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
@@ -849,7 +848,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		vehiclescreeen.setStock("1111");
 		inspectionnum = vehiclescreeen.getInspectionNumber();
 		
-		Helpers.selectNextScreen("AT_print_section1");
+		vehiclescreeen.selectNextScreen("AT_print_section1");
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Traffic-light (GYR)_test1", "Immediate Attention Required");
 		questionsscreen.swipeScreenUp();
@@ -862,7 +861,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		questionsscreen.makeCaptureForQuestionRegular("Image");
 		questionsscreen.swipeScreenUp();
 		questionsscreen.setFreeText("Free text");
-		Helpers.selectNextScreen("Price Matrix");
+		questionsscreen.selectNextScreen("Price Matrix");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Hood");
 		pricematrix.setSizeAndSeverity(RegularPriceMatrixScreen.DIME_SIZE, "HEAVY");
@@ -882,7 +881,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix.selectDiscaunt("VPS1");
 		pricematrix.clickSaveButton();
-		Helpers.selectNextScreen("All Services");
+		pricematrix.selectNextScreen("All Services");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService("Body Shop");
@@ -913,7 +912,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickCreateInvoicesMenuItemForWO(wonum);
 		myworkordersscreen.selectWorkOrderType("AT_print_invoice");
-		Helpers.selectNextScreen("Info");
+		myworkordersscreen.selectNextScreen("Info");
 		RegularInvoiceInfoScreen regularinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoicenum = regularinfoscreen.getInvoiceNumber();
 		regularinfoscreen.clickSaveButton();

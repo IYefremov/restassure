@@ -276,6 +276,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestStatus']")).getText();
 	}
 	
+	public String getFirstInTheListServiceRequestNumber() {
+		String srnumber = getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemSrNo']/b")).getText();
+		return srnumber.substring(0, srnumber.length()-1);
+	}
+	
 	public SRAppointmentInfoPopup clickAddAppointmentToFirstServiceRequestFromList() {
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")).click();
 		waitABit(300);

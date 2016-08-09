@@ -1,11 +1,16 @@
 package com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
@@ -47,6 +52,19 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	public void cancelOrder() {
 		cancelbtn.click();
 		acceptAlert();
+	}
+	
+	public void selectNextScreen(String screenname) {
+		waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]").click();
+		Helpers.scroolTo(screenname);
+		element(
+				MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell/UIAStaticText[@name='" + screenname + "']")).click();
+		Helpers.waitABit(1000);
+	}
+	
+	public WebElement waitUntilVisible(String xpath) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 	}
 
 }

@@ -81,6 +81,8 @@ public class iOSInternalProjectConstants {
     public static final String SR_S1_MONEY = "SR_S1_Money";
     public static final String SR_DISC_20_PERCENT = "SR_Disc_20_Percent";
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
+    public static final String SR_S4_BUNDLE = "SR_S4_Bundle";
+    public static final String OKSI_SERVICE_PP_VEHICLE = "Oksi_Service_PP_Vehicle";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

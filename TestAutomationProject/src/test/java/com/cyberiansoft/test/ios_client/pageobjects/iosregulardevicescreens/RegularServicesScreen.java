@@ -51,6 +51,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")
     private IOSElement finalalertbtn;
 	
+	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Draft\"]")
+    private IOSElement draftalertbtn;
+	
 	public RegularServicesScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
@@ -111,7 +114,11 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectService(String service) {
-		appiumdriver.findElementByName(service).click();
+		//appiumdriver.tap(1, appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
+		//		+ service + "\"]"), 200);
+		Helpers.scroolTo(service);
+		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
+			+ service + "\"]").click();
 	}
 	
 	public void selectSubService(String service) {
@@ -235,12 +242,23 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public void clickSaveAsFinal() {
 		clickSaveButton();
-		//savebtn.click();
 		finalalertbtn.click();
+	}
+	
+	public void clickSaveAsDraft() {
+		clickSaveButton();
+		draftalertbtn.click();
 	}
 	
 	public String getListOfSelectedVehicleParts() {
 		return appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['Vehicle Part'].staticTexts()[1]")).getAttribute("value");
+	}
+	
+	public boolean isServiceWithVehiclePartExists(String srvname, String srvvehiclepart) {
+		System.out.println("++++" + "//UIAScrollView[2]/UIATableView[@name='ServiceGroupServicesTable']/UIATableCell[@name='" + 
+				srvname + "]/UIAStaticText[@name='" + srvvehiclepart + "']");
+		return Helpers.elementExists(By.xpath("//UIAScrollView[2]/UIATableView[1]/UIATableCell[@name='" + 
+				srvname + "]/UIAStaticText[@name='" + srvvehiclepart + "']"));
 	}
 
 }

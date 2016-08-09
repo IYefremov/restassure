@@ -112,6 +112,14 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.name("Back")).click();	
 	}
 	
+	public void answerTaxPoint1Question(String answer) {
+
+		questionsfld.click();
+		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[6]")).click();
+		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[@name=\"" + answer + "\"]")).click();	
+		appiumdriver.findElement(MobileBy.name("Back")).click();
+	}
+	
 	public boolean isQuestionFormCellExists() {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		boolean exists =  appiumdriver.findElements(MobileBy.IosUIAutomation(".tableViews()[0].cells()['Questions']")).size() > 0;

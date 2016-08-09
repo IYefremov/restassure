@@ -103,6 +103,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
 	}
 	
+	public void answerTaxPoint1Question(String answer) {
+
+		questionsfld.click();
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[5]")).click();
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + answer + "']")).click();	
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
+	}
+	
 	public void answerQuestion2(String answer) {
 
 		questionsfld.click();
@@ -293,8 +301,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {
 		if (appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).size() > 0) {
-			Helpers.scroolTo(vehiclepart);
-			appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
+			Helpers.scroolToByXpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']");
+			//appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
+			appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).click();
 		}
 		else
 			Assert.assertTrue(appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['selected']")).size() > 0);

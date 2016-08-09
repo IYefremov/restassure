@@ -326,7 +326,8 @@ public abstract class Helpers {
 		TouchAction action = new TouchAction(driver);
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
-		MobileElement element = element(By.name("car_interior_color.png"));
+		MobileElement element = (MobileElement) driver
+				.findElementByXPath("//UIAScrollView/UIAImage[contains(@name, 'car_interior_color.png')]");
 		action.tap(element, x, y).perform();
 		//action.press(element).moveTo(element, 30, 30).release().perform();
 		Thread.sleep(1000);
@@ -338,7 +339,9 @@ public abstract class Helpers {
 		TouchAction action = new TouchAction(driver);
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[2]");*/
-		MobileElement element = element(By.name("car_exterior_color.png"));
+		MobileElement element = (MobileElement) driver
+				.findElementByXPath("//UIAScrollView/UIAImage[contains(@name, 'car_exterior_color.png"
+						+ "')]");
 		action.tap(element, x, y).perform();
 		Thread.sleep(1000);
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -467,16 +470,6 @@ public abstract class Helpers {
 		return element(
 				MobileBy.xpath("//UIAButton[@name=\""
 						+ screenname + "\"]")).isDisplayed();
-	}
-
-	public static void selectNextScreen(String screenname) throws InterruptedException {
-		//driver.findElement(MobileBy.IosUIAutomation(".navigationBars()[0].buttons()[3]")).click();
-		waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]").click();
-		Helpers.scroolTo(screenname);
-		element(
-				MobileBy.xpath("//UIAStaticText[@name=\""
-						+ screenname + "\"]")).click();
-		Thread.sleep(1000);
 	}
 	
 	public static void selectDefaultNextScreen(String screenname) throws InterruptedException {

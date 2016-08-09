@@ -17,14 +17,14 @@ public class WorkOrderInfoTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isServiceSelectedForWorkOrder(String service) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		boolean exists =  driver.findElements(By.xpath(".//table/tbody/tr/td/div[text()='" + service + "']")).size() > 0;
 		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public boolean isServicePriceCorrectForWorkOrder(String serviceprice) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(13, TimeUnit.SECONDS);
 		boolean exists =  driver.findElements(By.xpath(".//table/tbody/tr/td[2]/div[text()='" + serviceprice + "']")).size() > 0;
 		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;

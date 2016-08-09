@@ -47,11 +47,11 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectService(String _service) {
-		appiumdriver.findElementByName(_service).click();
+		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIATableView[1]/UIATableCell[@name='" + _service + "']").click();
 	}
 
 	public void selectSubService(String _subservice) {
-		appiumdriver.findElementByName(_subservice).click();
+		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + _subservice + "']").click();
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {

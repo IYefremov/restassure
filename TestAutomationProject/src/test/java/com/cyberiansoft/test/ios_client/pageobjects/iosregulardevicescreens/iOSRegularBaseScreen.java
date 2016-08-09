@@ -2,10 +2,12 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens;
 
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,7 +29,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	@iOSFindBy(name = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(xpath = "//UIAButton[@name='Cancel']")
     private IOSElement cancelbtn;
 	
 	@iOSFindBy(xpath = uipickerxpath)
@@ -66,7 +68,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
-		cancelbtn.click();
+		appiumdriver.tap(1, cancelbtn, 200);
 	}
 	
 	public void clickChangeScreen() {
@@ -85,6 +87,18 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
 	}
 	
+	public void selectNextScreen(String screenname) {
+		waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]").click();
+		Helpers.scroolTo(screenname);
+		element(
+				MobileBy.xpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name=\""
+						+ screenname + "\"]")).click();
+		Helpers.waitABit(1000);
+	}
 	
+	public WebElement waitUntilVisible(String xpath) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+	}
 
 }
