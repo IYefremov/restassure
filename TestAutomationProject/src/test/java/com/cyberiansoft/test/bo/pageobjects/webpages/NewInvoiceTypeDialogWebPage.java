@@ -142,6 +142,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectNewInvoiceTypeWholesalePrintTemplate(String wholesailprinttemplate) {
+		waitABit(300);
 		selectComboboxValue(wholesaleprinttemplatecmb, wholesaleprinttemplatedd, wholesailprinttemplate);
 	}
 	

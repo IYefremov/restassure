@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -26,8 +27,14 @@ public class RegularMainScreen {
 	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[2]/UIAButton[1]")
     private IOSElement loginbtn;
 	
-	@iOSFindBy(name = "Licenses")
+	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Search']")
+    private IOSElement searchbtn;
+	
+	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Licenses']")
     private IOSElement licenses;
+	
+	@iOSFindBy(xpath = "//UIASearchBar[@name='Search']")
+    private IOSElement searchbar;
 	
 	//final static String mainbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[1]";
 	//final static String updatevinxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[2]";
@@ -65,10 +72,8 @@ public class RegularMainScreen {
 		Thread.sleep(1000);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		Thread.sleep(1000);
-		Helpers.scroolTo(user);
-		Helpers.text_exact(user).click();
-		Thread.sleep(1000);
-
+		Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']").click();
 		securefld.setValue(password);
 		loginbtn.click();
 		return new RegularHomeScreen(appiumdriver);

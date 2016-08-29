@@ -4971,6 +4971,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town & Country";
+		final String[] servicestoadd = { "VPS1", "Dye" };
+		final String[] servicestoadd2 = { "Bundle1_Disc_Ex", "Fee_Bundle" };
 		
 		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
@@ -4993,7 +4995,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		srlistwebpage.setServiceRequestVIN(VIN);
 		srlistwebpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		srlistwebpage.clickDoneButton();
-		
+		srlistwebpage.addServicesToServiceRequest(servicestoadd);
 		srlistwebpage.saveNewServiceRequest();
 		String srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
@@ -5005,6 +5007,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		HomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertFalse(servicerequestsscreen.isRejectActionExists());
 		servicerequestsscreen.selectSummaryRequestAction();
@@ -5032,6 +5035,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		srlistwebpage.setServiceRequestVIN(VIN);
 		srlistwebpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		srlistwebpage.clickDoneButton();
+		srlistwebpage.addServicesToServiceRequest(servicestoadd2);
 		srlistwebpage.saveNewServiceRequest();
 		srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
@@ -5050,11 +5054,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.clickSaveButton();
-		Helpers.getAlertTextAndAccept();
+		/*Helpers.getAlertTextAndAccept();
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		servicesscreen.clickSaveButton();
-		Helpers.getAlertTextAndCancel();
+		Helpers.getAlertTextAndCancel();*/
 		servicerequestsscreen.clickHomeButton();
 	}
 	

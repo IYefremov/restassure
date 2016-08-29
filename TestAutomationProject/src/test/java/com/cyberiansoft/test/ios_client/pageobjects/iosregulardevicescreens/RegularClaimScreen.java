@@ -35,6 +35,7 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	
 	public void selectInsuranceCompany(String insurancecompany) {
 		insurancecompanyselectbtn.click();
+		Helpers.scroolTo(insurancecompany);
 		appiumdriver.findElementByName(insurancecompany).click();
 	}
 

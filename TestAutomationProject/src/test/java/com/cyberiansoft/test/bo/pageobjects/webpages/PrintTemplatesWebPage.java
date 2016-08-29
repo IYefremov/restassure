@@ -119,7 +119,7 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickDeletetemplateButton() {
-		waitABit(500);
+		waitABit(1000);
 		Actions act = new Actions(driver);
 		act.click(deletetemplatebtn).perform();
 	}

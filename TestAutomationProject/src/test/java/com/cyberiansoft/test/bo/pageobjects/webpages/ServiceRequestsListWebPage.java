@@ -531,5 +531,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		return exists;
 	}
 
+	
+	public void addServicesToServiceRequest(String[] services) {
+		Actions act = new Actions(driver);
+		act.moveToElement(driver.findElement(By.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"))).perform();
+		act.click(driver.findElement(By.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"))).perform();
+		WebElement servicespopup = new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
+		for (String srv : services) {
+			servicespopup.findElement(By.xpath(".//span[@class='name-service' and text()='" + srv + "']")).click();
+		}
+		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
+	}
 
 }

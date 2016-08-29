@@ -7,9 +7,11 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.remote.HideKeyboardStrategy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -123,6 +125,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public void selectSubService(String service) {
 		if (Helpers.elementExists(MobileBy.IosUIAutomation(".scrollViews()[1]"))) {
+			Helpers.scroolTo(service);
 			appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[0].cells()['"
 						+ service
 						+ "'].buttons()['unselected']")).click();
@@ -137,6 +140,13 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String service) {
 		Helpers.scroolTo(service);
 		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
+		return new RegularSelectedServiceDetailsScreen(appiumdriver);
+	}
+	
+	public RegularSelectedServiceDetailsScreen clickServiceCustomDetailButton(String service) {
+		//appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
+		
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()['ServiceGroupServicesTable'].cells()['Paint - Mirror'].buttons()['custom detail button']")).click();
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
 		return new RegularSelectedServiceDetailsScreen(appiumdriver);
 	}
@@ -180,6 +190,14 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		Helpers.keyboadrType("\n");
 	}
 	
+	public void searchserviceByName(String service) {
+		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIASearchBar['Search']").click();
+		
+		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIASearchBar['Search']").sendKeys(service);
+		Helpers.waitABit(500);
+		((IOSDriver)appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Search");
+		//appiumdriver.findElementByXPath("//UIAKeyboard[1]/UIAButton['Search']").click();
+	}
 	
 	public void openServiceDetailsByIndex(String service, int servicedetailindex) {
 		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name=\""
