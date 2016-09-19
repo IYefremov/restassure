@@ -67,7 +67,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {
-		List<WebElement> elements = appiumdriver.findElementsByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[2]");
+		List<WebElement> elements = appiumdriver.findElementsByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[3]");
 		for (WebElement element : elements) {
 			Assert.assertTrue(element.getAttribute("name").equals(status));
 		}
@@ -131,7 +131,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public boolean isServiceIsActive(String servicedisplayname) {
 		return appiumdriver.findElementByXPath("//UIATableView[3]/UIATableCell[contains(@name, \""
-						+ servicedisplayname + "\")]/UIAStaticText[2]").getAttribute("name").equals("Active");
+						+ servicedisplayname + "\")]/UIAStaticText[3]").getAttribute("name").equals("Active");
 		//Assert.assertTrue(activecaption.isDisplayed());
 	}
 	

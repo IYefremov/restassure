@@ -4,6 +4,8 @@ import static com.cyberiansoft.test.ios_client.utils.Helpers.element;
 import io.appium.java_client.MobileBy;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
@@ -39,6 +41,7 @@ import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServiceRequ
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServicesScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SettingsScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SinglePageInspectionScreen;
+import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamInspectionsScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamInvoicesScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VehicleScreen;
@@ -2116,7 +2119,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				MobileBy.name("Yes"))
 				.click();
 		Thread.sleep(10000);
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$837.98");
+		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$837.99");
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -3251,6 +3254,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.setAddressAppointmet("Maidan");
 		servicerequestsscreen.setCityAppointmet("Kiev");
 		servicerequestsscreen.saveAppointment();
+		Thread.sleep(1000);
 		servicerequestsscreen.selectCloseAction();
 		Thread.sleep(3000);		
 		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");	
@@ -3368,7 +3372,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter", "2014");
 		vehiclescreeen.selectNextScreen("Zayats test pack");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService("Test service price matrix");
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectService("VP1 zayats");		
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("VP1 zayats");
@@ -3382,7 +3386,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		pricematrix.selectDiscaunt("Dye");
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.assertServiceIsSelected("Test service price matrix");
+		servicesscreen.assertServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectNextScreen("Zayats Section1");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.cancelOrder();
@@ -3458,7 +3462,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String wonum = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen("Zayats test pack");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService("Test service price matrix");
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("VP1 zayats");
 		pricematrix.switchOffOption("PDR");
@@ -3476,7 +3480,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.assertServiceIsSelected("Test service price matrix");
+		servicesscreen.assertServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		
 		servicesscreen.clickSaveButton();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
@@ -3602,11 +3606,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickOnWO(wonum);
 		
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
+		Thread.sleep(3000);
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickServiceStatusCell();		
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Order Monitor It is impossible to change service status until you start service.");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
@@ -3691,7 +3696,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
 		ordermonitorscreen.clickPhaseStatusCell();
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Order Monitor It is impossible to change phase status until you start phase.");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
 		ordermonitorscreen.clickStartPhase();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
@@ -3827,6 +3832,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clickServiceDetailsDoneButton();
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
+		Helpers.waitABit(1000);
 		teamworkordersscreen.clickHomeButton();
 	}
 	
@@ -3916,7 +3922,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
 		ordermonitorscreen.clickPhaseStatusCell();
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Order Monitor It is impossible to change phase status until you start phase.");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
 		ordermonitorscreen.clickStartPhase();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
@@ -4493,7 +4499,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
 		vehiclescreeen.selectNextScreen("All Services");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
@@ -4501,7 +4507,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.assertPriceIsCorrect("$33.00");
 		
-		servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("13");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
@@ -4509,7 +4515,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.assertPriceIsCorrect("$34.00");
 		
-		servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Driver Seat");
@@ -4736,7 +4742,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
 		vehiclescreeen.selectNextScreen("All Services");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
@@ -4744,7 +4750,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.assertPriceIsCorrect("$33.00");
 		
-		servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("13");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
@@ -4752,7 +4758,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.assertPriceIsCorrect("$34.00");
 		
-		servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Driver Seat");
@@ -5747,9 +5753,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inspectionnumber);
 		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Dent Removal"));
-		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Test service price matrix"));
+		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
 		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Dent Removal"), "$65.00");
-		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Test service price matrix"), "$100.00");
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX), "$100.00");
 		approveinspscreen.clickHomeButton();
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		pricematrix.selectNextScreen("Price Matrix Zayats");
@@ -5765,7 +5771,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inspectionnumber);
 		Assert.assertEquals(approveinspscreen.getInspectionServicePrice("Dent Removal"), "$65.00");
-		Assert.assertFalse(approveinspscreen.isInspectionServiceExistsForApprove("Test service price matrix"));
+		Assert.assertFalse(approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
 		approveinspscreen.clickHomeButton();
 		myinspectionsscreen.clickHomeButton();
 		
@@ -6164,7 +6170,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		Thread.sleep(2000);
-		servicerequestsscreen.selectInspectionType("Insp_Draft_Mode");
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
 		
@@ -6213,7 +6219,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType ("Insp_Draft_Mode");
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();	
@@ -6257,7 +6263,211 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$0.00");
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionTotalPriceValue(), "$2,638.00");		
-		myinspectionsscreen.clickHomeButton();
+		myinspectionsscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 33117:Inspections: HD - Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)", 
+			description = "Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)")
+	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() throws Exception {
 		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		settingscreen.setInspectionToNonSinglePageInspection();
+		settingscreen.clickHomeButton();
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		servicedetailsscreen.answerQuestion2("A1");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicedetailsscreen.selectVehiclePart("Back Glass");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicedetailsscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);	
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix("VP1 zayats");
+		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
+		pricematrix.selectDiscaunt("Test service zayats");
+		pricematrix.clickSaveButton();
+		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicedetailsscreen.selectVehiclePart("Grill");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveAsFinal();
+		myinspectionsscreen.clickActionButton();
+		myinspectionsscreen.selectInspectionForAction(inspnumber);
+		
+		myinspectionsscreen.clickApproveInspections();
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		approveinspscreen.isInspectionServiceExistsForApprove("Test service zayats");
+		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		approveinspscreen.clickHomeButton();
+		myinspectionsscreen.clickDoneButton();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 33116:Inspections: HD - Verify that text notes are copied to new inspections when use copy action", description = "Verify that text notes are copied to new inspections when use copy action")
+	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() throws Exception {
+			
+		final String VIN  = "1D7HW48NX6S507810";
+		final String _notes = "Test notes for copy";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		settingscreen.setInspectionToNonSinglePageInspection();
+		settingscreen.clickHomeButton();
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		VehicleScreen vehiclescreeen = myinspectionsscreen.selectDefaultInspectionType();
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		NotesScreen notesscreen = vehiclescreeen.clickNotesButton();
+		notesscreen.setNotes(_notes);
+		notesscreen.clickSaveButton();
+		vehiclescreeen.clickSaveButton();
+		myinspectionsscreen.selectInspectionForCopy(inspnumber);
+		Thread.sleep(2000);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		String copiedinspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.clickSaveButton();
+		
+		Assert.assertTrue(myinspectionsscreen.isNotesIconPresentForInspection(copiedinspnumber));
+		notesscreen = myinspectionsscreen.openInspectionNotesScreen(copiedinspnumber);
+		Assert.assertTrue(notesscreen.isNotesPresent(_notes));
+		notesscreen.clickSaveButton();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	
+	@Test(testName = "Test Case 33154:Inspections: HD - Verify that it is possible to approve Team Inspections use multi select", 
+			description = "Verify that it is possible to approve Team Inspections use multi select")
+	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		List<String> inspnumbers = new ArrayList<String>();
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		settingscreen.setInspectionToNonSinglePageInspection();
+		settingscreen.clickHomeButton();
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		for (int i = 0; i < 3; i++) {
+			myinspectionsscreen.clickAddInspectionButton();
+			CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+			customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
+			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+			vehiclescreeen.setVIN(VIN);
+			inspnumbers.add(vehiclescreeen.getInspectionNumber());
+			vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+			ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+			servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+			servicesscreen.clickSaveAsFinal();
+		}
+		myinspectionsscreen.clickHomeButton();
+		TeamInspectionsScreen teaminspectionsscreen = homescreen.clickTeamInspectionsButton();
+		teaminspectionsscreen.clickActionButton();
+		for (int i = 0; i < 3; i++) {
+			teaminspectionsscreen.selectInspectionForAction(inspnumbers.get(i));
+		}
+		
+		teaminspectionsscreen.clickApproveInspections();
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		for (int i = 0; i < 3; i++) {
+			approveinspscreen.approveInspectionApproveAllAndSignature(inspnumbers.get(i));
+			Helpers.waitABit(2000);
+		}
+		
+		teaminspectionsscreen.clickActionButton();
+		for (int i = 0; i < 3; i++) {
+			myinspectionsscreen.selectInspectionForAction(inspnumbers.get(i));
+		}
+		teaminspectionsscreen.clickActionButton();
+		Assert.assertFalse(teaminspectionsscreen.isApproveInspectionMenuActionExists());
+		Assert.assertTrue(teaminspectionsscreen.isSendEmailInspectionMenuActionExists());
+		teaminspectionsscreen.clickActionButton();
+		teaminspectionsscreen.clickDoneButton();
+		teaminspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Inspections: HD - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard", 
+			description = "Verify that Services on Service Package are grouped by type selected on Insp type->Wizard")
+	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		List<String> inspnumbers = new ArrayList<String>();
+		
+		homescreen = new HomeScreen(appiumdriver);
+		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		settingscreen.setInspectionToNonSinglePageInspection();
+		settingscreen.clickHomeButton();
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		myinspectionsscreen.selectInspectionType ("Inspection_group_service");
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		inspnumbers.add(vehiclescreeen.getInspectionNumber());
+		vehiclescreeen.selectNextScreen("Zayats test pack");
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		servicesscreen.selectNextScreen("Test_pack_for_calc");
+		servicesscreen.selectService("Back Glass");
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Vehicle");
+		servicedetailsscreen.answerQuestion2("A1");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.selectNextScreen("SR_FeeBundle");
+		servicesscreen.selectService("Price Adjustment");
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails("SR_S6_Bl_I1_Percent");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveAsFinal();
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Warning! Question 'Signature' in section 'Follow up Requested' should be answered.");
+		Thread.sleep(3000);
+		Helpers.drawQuestionsSignature();
+		servicesscreen.clickSaveAsFinal();
+		Assert.assertTrue(element(
+				MobileBy.name("Question 'Tax_Point_1' in section 'BATTERY PERFORMANCE' should be answered.")).isDisplayed());
+		element(
+				MobileBy.name("Close"))
+				.click();
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectTaxPoint("Test Answer 1");
+		servicesscreen.clickSaveAsFinal();
+		
+		Assert.assertTrue(element(
+				MobileBy.name("Question 'Question 2' in section 'Zayats Section1' should be answered.")).isDisplayed());
+		element(
+				MobileBy.name("Close"))
+				.click();
+		questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		servicesscreen.clickSaveAsFinal();
+		myinspectionsscreen.assertInspectionExists(inspnumber);
+		myinspectionsscreen.clickHomeButton();
 	}
 }

@@ -24,6 +24,9 @@ public class HomeScreen extends iOSHDBaseScreen {
 	@iOSFindBy(name = "My Inspections")
     private IOSElement myinspectionsbtn;
 	
+	@iOSFindBy(name = "Team Inspections")
+    private IOSElement teaminspectionsbtn;
+	
 	@iOSFindBy(name = "My Work Orders")
     private IOSElement myworkordersbtn;
 	
@@ -71,6 +74,13 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(myinspectionsbtn));
 		myinspectionsbtn.click();
 		return new MyInspectionsScreen(appiumdriver);
+	}
+	
+	public TeamInspectionsScreen clickTeamInspectionsButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(teaminspectionsbtn));
+		teaminspectionsbtn.click();
+		return new TeamInspectionsScreen(appiumdriver);
 	}
 
 	public MyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {

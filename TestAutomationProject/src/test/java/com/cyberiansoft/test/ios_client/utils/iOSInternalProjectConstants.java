@@ -83,6 +83,8 @@ public class iOSInternalProjectConstants {
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     public static final String SR_S4_BUNDLE = "SR_S4_Bundle";
     public static final String OKSI_SERVICE_PP_VEHICLE = "Oksi_Service_PP_Vehicle";
+    public static final String OKSI_SERVICE_PP_PANEL = "Oksi_Service_PP_Panel";
+    public static final String TEST_SERVICE_PRICE_MATRIX = "Test service price matrix";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

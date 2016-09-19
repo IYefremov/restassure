@@ -24,6 +24,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(name = "My Inspections")
     private IOSElement myinspectionsbtn;
 	
+	@iOSFindBy(name = "Team Inspections")
+    private IOSElement teaminspectionsbtn;
+	
 	@iOSFindBy(name = "My Work Orders")
     private IOSElement myworkordersbtn;
 	
@@ -70,6 +73,13 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(myinspectionsbtn));
 		myinspectionsbtn.click();
 		return new RegularMyInspectionsScreen(appiumdriver);
+	}
+	
+	public RegularTeamInspectionsScreen clickTeamInspectionsButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(teaminspectionsbtn));
+		teaminspectionsbtn.click();
+		return new RegularTeamInspectionsScreen(appiumdriver);
 	}
 
 	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
