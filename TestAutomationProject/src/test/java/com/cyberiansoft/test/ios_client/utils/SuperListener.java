@@ -4,7 +4,6 @@ import io.appium.java_client.AppiumDriver;
 
 import java.net.MalformedURLException;
 
-import org.openqa.selenium.remote.SessionNotFoundException;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
@@ -108,7 +107,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	        if (appiumdriver != null) {
 	        	try {
 	        		testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));        
-	        	} catch (SessionNotFoundException e) {
+	        	} catch (Exception e) {
 	        		try {
 						((BaseTestCase) currentClass).appiumdriverInicialize();
 					} catch (MalformedURLException e1) {

@@ -51,20 +51,48 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		return addedserviceslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")).size();
 	}
 	
-	public String getSelectedservicePriceValue(String servicename) {
+	public String getSelectedServicePriceValue(String servicename) {
 		String serviceprice = "";
-		List<WebElement> selectedservices = addedserviceslist.findElements(By.xpath(".//li/a/div[@class='item-inner']"));
-		for (WebElement servicerow : selectedservices) {
-			if (servicerow.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(servicename))
-				serviceprice = servicerow.findElement(By.xpath(".//div[@class='item-price']/div/strong")).getText();
-		}
+		WebElement servicerow = getSelectedServiceListItem(servicename);
+		if (servicerow != null) {
+			serviceprice = servicerow.findElement(By.xpath(".//div[@class='item-price']/div/strong")).getText();
+		} else
+			Assert.assertTrue(false, "Can't find service: " + servicename);
 		return serviceprice;
+	}
+	
+	public String getSelectedServicePriceMatrixValue(String servicename) {
+		String pricematrixname = "";
+		WebElement servicerow = getSelectedServiceListItem(servicename);
+		if (servicerow != null) {
+			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='subtitle']")).getText();
+		} else
+			Assert.assertTrue(false, "Can't find service: " + servicename);
+		return pricematrixname;
+	}
+	
+	public WebElement getSelectedServiceListItem(String servicename) {
+		List<WebElement> services = getSelectedServicesListItems();
+		for (WebElement srv: services)
+			if (srv.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(servicename))
+				return srv;
+		return null;
+	}
+	
+	public List<WebElement> getSelectedServicesListItems() {	
+		return addedserviceslist.findElements(By.xpath("./ul/li/a[@action='select-item']"));
 	}
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
 		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextServiceDetailsScreen(appiumdriver);
+	}
+	
+	public VNextVehiclePartsScreen openMatrixServiceVehiclePartsScreen(String servicename) {
+		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
+		log(LogStatus.INFO, "Open '" + servicename + "' service details");
+		return new VNextVehiclePartsScreen(appiumdriver);
 	}
 	
 	public void clickSaveButton() {

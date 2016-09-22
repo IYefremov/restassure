@@ -13,11 +13,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
-public class VNexBOAddNewUserDialog extends BaseWebPage {
+public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "users-firstName")
 	private TextField firstnamefld;

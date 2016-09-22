@@ -13,12 +13,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.VNextWebTable;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 
-public class VNexBOUsersWebPage extends BaseWebPage {
+public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@id='users-form-popup-view']/button")
 	private WebElement adduserbtn;

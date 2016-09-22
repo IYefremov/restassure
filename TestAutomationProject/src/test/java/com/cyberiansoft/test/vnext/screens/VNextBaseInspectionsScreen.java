@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,6 +23,9 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[text()='Save Inspection']")
 	private WebElement saveinspectionmenu;
+	
+	@FindBy(xpath="//div[text()='Save Work Order']")
+	private WebElement saveworkordermenu;
 	
 	@FindBy(xpath="//div[text()='Notes']")
 	private WebElement inspectionnotesmenu;
@@ -50,6 +54,11 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
+	public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
+		clickSaveWorkOrderMenuButton();
+		return new VNextWorkOrdersScreen(appiumdriver);
+	}
+	
 	public void clickMenuButton() {
 		tap(menubtn); 
 		log(LogStatus.INFO, "Tap Menu button");
@@ -61,6 +70,12 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 		log(LogStatus.INFO, "Tap Save Inspection button");
 	}
 	
+	public void clickSaveWorkOrderMenuButton() {
+		clickMenuButton();
+		tap(saveworkordermenu);
+		log(LogStatus.INFO, "Tap Save Work Order button");
+	}
+	
 	public String getNewInspectionNumber() {
 		return inspectionnumber.getText();
 	}
@@ -70,6 +85,10 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 		tap(inspectionnotesmenu);
 		log(LogStatus.INFO, "Tap Inspection Notes button");
 		return new VNextNotesScreen(appiumdriver);
+	}
+	
+	public String getInspectionTotalPriceValue() {
+		return appiumdriver.findElement(By.xpath("//div[contains(@class, 'toolbar-inner')]/div[@class='right']")).getText().trim();
 	}
 
 }

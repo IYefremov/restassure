@@ -17,6 +17,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='title' and text()='Inspections']")
 	private WebElement inspectionslist;
 	
+	@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
+	private WebElement workorderslist;
+	
 	@FindBy(xpath="//div[@class='title' and text()='Settings']")
 	private WebElement settingslist;
 	
@@ -34,6 +37,18 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customerslist));
+	}
+	
+	public VNextCustomersScreen clickCustomersMenuItem() {
+		tap(customerslist);
+		log(LogStatus.INFO, "Tap Customers menu item");
+		return new VNextCustomersScreen(appiumdriver);
+	}
+	
+	public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
+		tap(workorderslist);
+		log(LogStatus.INFO, "Tap Work Orders menu item");
+		return new VNextWorkOrdersScreen(appiumdriver);
 	}
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
@@ -63,6 +78,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		tap(logoutbtn);
 		testReporter.log(LogStatus.INFO, "Tap Logout button");
 		return new VNextLoginScreen(appiumdriver);
+	}
+	
+	public VNextVehicleInfoScreen openCreateWOWizard(String testcustomer) {
+		VNextWorkOrdersScreen workordersscreen = clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(testcustomer);
+		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 
 }

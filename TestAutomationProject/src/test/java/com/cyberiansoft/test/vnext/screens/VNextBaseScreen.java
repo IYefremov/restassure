@@ -31,8 +31,8 @@ public class VNextBaseScreen {
 	
 	public void tap(WebElement element) {
 		waitABit(300);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.elementToBeClickable(element));
 		new TouchActions(appiumdriver).singleTap(element).perform();
 		waitABit(300);
 	}
@@ -149,7 +149,7 @@ public class VNextBaseScreen {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.reconpro2")) {
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconPro")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);

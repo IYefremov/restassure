@@ -170,7 +170,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		clearAndType(searchclientfld, name);
 	}
 	
-	public void searchClientByName(String companyname) throws InterruptedException {
+	public void searchClientByName(String companyname) {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(companyname);
 		clickFindButton();
@@ -257,7 +257,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithClient(String clientname) {
 		List<WebElement> clientstablerows = getClientsTableRows();
 		for (WebElement clientstablerow : clientstablerows) {
-			if (clientstablerow.findElement(By.xpath(".//td[7]")).getText().equals(clientname)) {
+			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]")).getText().equals(clientname)) {
 				return clientstablerow;
 			}
 		}

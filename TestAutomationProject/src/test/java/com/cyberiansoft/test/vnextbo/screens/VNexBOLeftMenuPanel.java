@@ -10,10 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
-public class VNexBOLeftMenuPanel extends BaseWebPage {
+public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "mainMenu")
 	private WebElement mainmenu;
@@ -58,6 +57,12 @@ public class VNexBOLeftMenuPanel extends BaseWebPage {
 		selectMenuItem(usersmenu, SETTINGS_MAINMENU_ITEM);
 		return PageFactory.initElements(
 				driver, VNexBOUsersWebPage.class);
+	}
+	
+	public boolean isUsersMenuItemExists() {
+		if (!isMainMenuExpanded(SETTINGS_MAINMENU_ITEM))
+			expandMainMenu(SETTINGS_MAINMENU_ITEM);
+		return driver.findElements(By.xpath("//span[@data-id='users']")).size() > 0;
 	}
 	
 	public VNexBOServicesWebPage selectServicesMenu() {

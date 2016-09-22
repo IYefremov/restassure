@@ -10,10 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
-public class VNextBOInspectionsWebPage extends BaseWebPage {
+public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsList']")
 	private WebElement inspectionslist;

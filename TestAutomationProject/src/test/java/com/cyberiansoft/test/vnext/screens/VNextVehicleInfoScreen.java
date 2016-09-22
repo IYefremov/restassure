@@ -30,6 +30,12 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Vehicle.Model")
 	private WebElement modelfld;
 	
+	@FindBy(name="Vehicle.Color")
+	private WebElement colcorfld;
+	
+	@FindBy(xpath="//a[@action='select-color']/i")
+	private WebElement selectcolorbtn;
+	
 	@FindBy(name="Vehicle.VehicleTypeId")
 	private WebElement typefld;
 	
@@ -45,6 +51,9 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.RONo")
 	private WebElement rofld;
 	
+	@FindBy(name="Orders.PONo")
+	private WebElement pofld;
+	
 	@FindBy(name="Vehicle.Color")
 	private WebElement colorfld;
 		
@@ -53,6 +62,9 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
+	
+	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
+	private WebElement keyboard;
 	
 	public VNextVehicleInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -63,6 +75,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public void setVIN (String vinnumber) {
 		setValue(vinfld, vinnumber);
+		waitABit(4000);
 		log(LogStatus.INFO, "Set VIN: " + vinnumber);
 	}
 	
@@ -109,6 +122,14 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		log(LogStatus.INFO, "Select Vehicle Type: " + vehicletype);
 	}
 	
+	public void selectModelColor (String color) {
+		tap(selectcolorbtn);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + color + "']"))));
+		tap(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + color + "']")));
+		log(LogStatus.INFO, "Select Vehicle Color: " + color);
+	}
+	
 	public String getType () {
 		return typefld.getAttribute("value");
 	}
@@ -136,8 +157,14 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setMilage (String milage) {
-		milagefld.clear();
-		milagefld.sendKeys(milage);
+		milagefld.click();
+		waitABit(2000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(keyboard));
+		for (int i = 0; i < milage.length(); i++) {
+			tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + milage.charAt(i) + "']")));
+		}
+		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
 		log(LogStatus.INFO, "Set Milage: " + milage);
 	}
 	
@@ -161,6 +188,16 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		log(LogStatus.INFO, "Set RO Number : " + rono);
 	}
 	
+	public String getPoNo () {
+		return pofld.getAttribute("value");
+	}
+	
+	public void setPoNo (String pono) {
+		pofld.clear();
+		pofld.sendKeys(pono);
+		log(LogStatus.INFO, "Set RO Number : " + pono);
+	}
+	
 	public String getRoNo () {
 		return rofld.getAttribute("value");
 	}
@@ -178,6 +215,10 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		return saveInspectionViaMenu();
 	}
 	
+	public String getCustomercontextValue() {
+		return vehiclepage.findElement(By.xpath(".//span[@class='client-mode']")).getText();
+	}
+	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
 		waitABit(5000);
 		swipeScreensLeft(4);
@@ -188,6 +229,23 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		if (appiumdriver.findElements(By.xpath("//span[@class='client-mode' and text()='All Services']")).size() > 0)
 			swipeScreenLeft();
 		return new VNextInspectionServicesScreen(appiumdriver);
+	}
+	
+	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color, String mileage, 
+			String stockno, String rono, String licplate, String pono, String vehicletype) {
+		setVIN(VIN);
+		selectModelColor(color);
+		setMilage(mileage);
+		setStockNo(stockno);
+		setRoNo(rono);
+		setLicPlate(licplate);
+		setPoNo(pono);
+		selectType(vehicletype);
+	}
+	
+	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
+		setVIN(VIN);
+		selectModelColor(color);
 	}
 
 }

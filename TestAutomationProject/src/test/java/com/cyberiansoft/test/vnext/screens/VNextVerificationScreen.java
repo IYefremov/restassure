@@ -32,7 +32,9 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	
 	public VNextVerificationScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
+		wait.until(ExpectedConditions.visibilityOf(verifyBtn));
 	}
 	
 	public void setDeviceRegistrationCode(String regcode) {

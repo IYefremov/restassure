@@ -26,7 +26,6 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	public VNextRegistrationPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
-		System.out.println("++++++");
 		//VNextRegistrationPersonalInfoScreen.WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		//wait.until(ExpectedConditions. visibilityOf(phonenumberselect));
 	}

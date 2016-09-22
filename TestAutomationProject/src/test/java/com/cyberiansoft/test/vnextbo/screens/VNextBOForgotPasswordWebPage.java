@@ -10,11 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
-public class VNextBOForgotPasswordWebPage extends BaseWebPage {
+public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "confirmEmail")
 	private TextField confirmmailfld;

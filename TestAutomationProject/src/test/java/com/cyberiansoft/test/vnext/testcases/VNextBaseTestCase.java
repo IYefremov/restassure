@@ -34,8 +34,8 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
-
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;
+*/
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.NoSuchContextException;
@@ -79,13 +79,24 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 		appiumcap.setCapability(MobileCapabilityType.APP_PACKAGE,
-						"com.automobiletechnologies.reconpro2");
-		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.reconpro2.MainActivity");
+						"com.automobiletechnologies.ReconPro");
+		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.ReconPro.MainActivity");
+		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
+		//appiumcap.setCapability("chromedriverExecutable", "c:\\Users\\Alex\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\appium-chromedriver\\chromedriver\\win\\chromedriver.exe");
 		//appiumcap.setCapability("chromedriverExecutable", "d:\\Work\\AQC\\TestAutomationProject\\browsers\\chromedriver\\chromedriver.exe");
-		appiumcap.setCapability("recreateChromeDriverSessions", true);
+		//appiumcap.setCapability("recreateChromeDriverSessions", true);
+		//String ANDROID_DEVICE_SOCKET = "com.automobiletechnologies.ReconPro" + "_devtools_remote";
+		//appiumcap.setCapability("androidDeviceSocket", ANDROID_DEVICE_SOCKET);
+		//ChromeOptions chromeOptions = new ChromeOptions();
+		//chromeOptions.setExperimentalOption("androidDeviceSocket", ANDROID_DEVICE_SOCKET);
+		//appiumcap.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		
+		
+		
 		
 		appiumdriver = new SwipeableWebDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				appiumcap);
+		
 		//appiumdriver = new SwipeableWebDriver(service.getUrl(), appiumcap);
 		defaultbrowser = browser;
 		deviceuser = username;
@@ -117,7 +128,7 @@ public class VNextBaseTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		switchApplicationContext(AppContexts.WEB_CONTEXT);
+		switchToWebViewContext();
 		return testcasename + uuid + ".jpeg";
 	}
 	
@@ -128,7 +139,7 @@ public class VNextBaseTestCase {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.reconpro2")) {
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconPro")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);
@@ -238,7 +249,7 @@ public class VNextBaseTestCase {
 		if (networkConnection.airplaneModeEnabled()) {
 			networkConnection = new NetworkConnectionSetting(false, true, true);		
 			((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
-			waitABit(1000);
+			waitABit(5000);
 		}
 		switchToWebViewContext();
 	    //switchApplicationContext(AppContexts.WEB_CONTEXT);
@@ -248,6 +259,15 @@ public class VNextBaseTestCase {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.navigate().back();
 		switchApplicationContext(AppContexts.WEB_CONTEXT);
+	}
+	
+	public void webdriverGotoWebPage(String url) {
+		webdriver.get(url);
+		if (defaultbrowser.equals("ie")) {
+			if (webdriver.findElements(By.id("overridelink")).size() > 0) {
+				webdriver.navigate().to("javascript:document.getElementById('overridelink').click()");
+			}
+		}
 	}
 	
 	/////////////////////////////
@@ -274,7 +294,16 @@ public class VNextBaseTestCase {
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyA7_Android_5.0.2", 106, "GalaxyA7", "Galaxy A7", "android", "5.0.2", "Samsung"));
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyNote5_Android_6.0.1", 91, "GalaxyNote5", "Galaxy Note5", "android", "6.0.1", "Samsung")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_S7Edge_Android_6.0.1", 130, "S7Edge", "S7 Edge", "android", "6.0.1", "Samsung"));
-		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6_Android_6.0.1", 132, "GalaxyS6", "Galaxy S6", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6_Android_6.0.1", 132, "GalaxyS6", "Galaxy S6", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Huawei_HuaweiHonor5X_Android_5.1.1", 129, "HuaweiHonor5X", "Honor 5X", "android", "5.1.1", "Huawei")); 
+		//selectedDevices.add(MobileDevice.getNew("Motorola_Nexus6_Android_5.0.1", 76, "Nexus6", "Nexus 6", "android", "5.0.1", "Motorola"));
+		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaXPlay_Android_6.0.1", 142, "MotorolaXPlay", "X Play", "android", "6.0.1", "Motorola")); 
+		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaMotoE2_Android_5.0.2", 122, "MotorolaMotoE2", "Moto E2", "android", "5.0.2", "Motorola")); 
+		//selectedDevices.add(MobileDevice.getNew("Lg_G4Dual_Android_6.0.0", 100, "G4Dual", "G4 Dual", "android", "6.0.0", "Lg"));
+		//selectedDevices.add(MobileDevice.getNew("Htc_One_Android_5.0.2", 62, "One", "One", "android", "5.0.2", "Htc"));
+		//selectedDevices.add(MobileDevice.getNew("Lg_G5_Android_6.0.1", 154, "G5", "G5", "android", "6.0.1", "Lg")); 
+		//selectedDevices.add(MobileDevice.getNew("Htc_10_Android_6.0.1", 155, "10", "10", "android", "6.0.1", "Htc")); 
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS7_Android_6.0.1", 153, "GalaxyS7", "Galaxy S7", "android", "6.0.1", "Samsung")); 
 		
 		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 60, "friendlySessionName");
 		System.out.println("Devices booked successfully");
@@ -296,10 +325,11 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability("deviceName", bookedDevicesIDs[0].capabilities.deviceName);
 		appiumcap.setCapability("browserName", bookedDevicesIDs[0].capabilities.deviceName);
 		appiumcap.setCapability("platformName", "Android");
-		appiumcap.setCapability("appPackage", "com.automobiletechnologies.reconpro2");
-		appiumcap.setCapability("appActivity", "com.automobiletechnologies.reconpro2.MainActivity");
+		appiumcap.setCapability("appPackage", "com.automobiletechnologies.ReconPro");
+		appiumcap.setCapability("appActivity", "com.automobiletechnologies.ReconPro.MainActivity");
 		appiumcap.setCapability("rotatable", true);
 		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
+		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
 		
 		try {
 			appiumdriver = new SwipeableWebDriver(endpoint, appiumcap);

@@ -88,6 +88,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	public void updateMainDB() {
 		tap(updatemaindbbtn);
 		log(LogStatus.INFO, "Tap Update Main DB button");
+		waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}

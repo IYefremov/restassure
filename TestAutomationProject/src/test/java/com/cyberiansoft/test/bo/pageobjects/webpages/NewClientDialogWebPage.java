@@ -51,8 +51,23 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//textarea[contains(@id, 'Card_tbAddress')]")
 	private TextField companyshiptoaddress;
 	
+	@FindBy(xpath = "//textarea[contains(@id, 'Card_tbAddress2')]")
+	private TextField companyshiptoaddress2;
+	
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbCity')]")
 	private TextField companyshiptocity;
+	
+	@FindBy(xpath = "//input[contains(@id, 'Card_countryState_ddlCountry_Input')]")
+	private ComboBox companyshiptocountrycmb;
+	
+	@FindBy(xpath = "//*[contains(@id, 'Card_countryState_ddlCountry_DropDown')]")
+	private DropDown companyshiptocountrydd;
+	
+	@FindBy(xpath = "//input[contains(@id, 'Card_countryState_ddlState_Input')]")
+	private ComboBox companyshiptostatecmb;
+	
+	@FindBy(xpath = "//*[contains(@id, 'Card_countryState_ddlState_DropDown')]")
+	private DropDown companyshiptostatedd;
 	
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbZip')]")
 	private TextField companyshiptozip;
@@ -188,6 +203,10 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		clearAndType(companyshiptoaddress, shiptoaddress);
 	}
 	
+	public void setCompanyShipToAddress2(String shiptoaddress2) {
+		clearAndType(companyshiptoaddress2, shiptoaddress2);
+	}
+	
 	public String getCompanyShipToAddress() {
 		return companyshiptoaddress.getValue();
 	}
@@ -198,6 +217,15 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	
 	public String getCompanyShipToCity() {
 		return companyshiptocity.getValue();
+	}
+	
+	public void selectCompanyShipToCountry(String shiptocountry) {
+		selectComboboxValue(companyshiptocountrycmb, companyshiptocountrydd, shiptocountry);
+		waitUntilPageReloaded();
+	}
+	
+	public void selectCompanyShipToState(String shiptostate) {
+		selectComboboxValue(companyshiptostatecmb, companyshiptostatedd, shiptostate);
 	}
 	
 	public void setCompanyShipToZip(String shiptozip) {

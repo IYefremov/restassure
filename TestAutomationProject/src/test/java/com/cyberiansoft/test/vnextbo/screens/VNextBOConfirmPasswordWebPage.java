@@ -11,11 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
-public class VNextBOConfirmPasswordWebPage extends BaseWebPage {
+public class VNextBOConfirmPasswordWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@class='loginForm']")
 	private WebElement loginform;
@@ -63,9 +62,9 @@ public class VNextBOConfirmPasswordWebPage extends BaseWebPage {
 		Actions act = new Actions(driver);
 		act.click(submitbtn).perform();
 		waitABit(300);
-		if (submitbtn.isDisplayed()) {
-			submitbtn.click();
-		}
+		//if (submitbtn.isDisplayed()) {
+		//	submitbtn.click();
+		//}
 		//
 	}
 	

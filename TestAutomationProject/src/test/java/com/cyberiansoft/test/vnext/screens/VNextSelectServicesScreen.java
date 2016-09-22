@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextSelectServicesScreen extends VNextBaseScreen {
 	
@@ -62,7 +63,27 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find service: " + servicename);
 	}
 	
+	public VNextPriceMatrixesScreen openMatrixServiceDetails(String matrixservicename) {
+		WebElement servicerow = getServiceListItem(matrixservicename);
+		if (servicerow != null)
+			tap(servicerow.findElement(By.xpath(".//i[@action='detail']")));
+		else
+			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
+		return new VNextPriceMatrixesScreen(appiumdriver);
+	}
+	
+	public String getSelectedPriceMatrixValueForPriceMatrixService(String matrixservicename) {
+		String pricematrixname = "";
+		WebElement servicerow = getServiceListItem(matrixservicename);
+		if (servicerow != null)
+			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='subtitle']")).getText();
+		else
+			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
+		return pricematrixname;
+	}
+	
 	public void clickSaveSelectedServicesButton() {
 		tap(selectservicesscreen.findElement(By.xpath(".//i[@action='save']")));
+		log(LogStatus.INFO, "Click Save button");
 	}
 }

@@ -56,6 +56,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspectionslist.findElement(By.xpath(".//div[@class='item-title']")).getText();
 	}
 	
+	public String getFirstInspectionCustomerValue() {
+		return inspectionslist.findElement(By.xpath(".//div[@action='select']/div[2]")).getText();
+	}
+	
+	public String getFirstInspectionPrice() {
+		return inspectionslist.findElement(By.xpath(".//div[@class='item-after']")).getText();
+	}
+	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		tap(inspectionslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + inspnumber + "']")));
 		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
