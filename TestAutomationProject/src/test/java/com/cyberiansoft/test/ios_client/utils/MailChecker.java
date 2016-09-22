@@ -330,6 +330,26 @@ public class MailChecker {
     	return mailmessage;
     }
     
+    public static String getMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    	String mailmessage = "";
+		for (int i=0; i < 3; i++) {
+			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+				try {
+					Thread.sleep(60*1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+				if (mailmessage.length() > 3) {
+					break;
+				}				
+			}
+		}
+    	return mailmessage; 
+    }
+    
     /*public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail) throws IOException {
         Properties properties = new Properties();
         boolean val = false;
