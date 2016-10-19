@@ -50,13 +50,13 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIATableView/UIATableCell[contains(@name,\"Technicians\")]/UIAStaticText[2]")
     private IOSElement technicianscellvalue;
 	
-	@iOSFindBy(name = "Compose")
+	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composecell;
 	
 	@iOSFindBy(xpath = "//UIATableView[2]/UIATableCell[@name=\"Clear\"]")
     private IOSElement clearvehiclepartdatabtn;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Cancel\"]")

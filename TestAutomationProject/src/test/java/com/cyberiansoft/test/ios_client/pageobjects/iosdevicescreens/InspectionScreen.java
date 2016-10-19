@@ -17,7 +17,7 @@ public class InspectionScreen extends iOSHDBaseScreen {
 	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Save\"]")
     private IOSElement savechangesbtn;
 	
-	@iOSFindBy(name = "Advisor")
+	@iOSFindBy(accessibility  = "Advisor")
     private IOSElement advisorcell;
 
 	public InspectionScreen(AppiumDriver driver) {

@@ -4,6 +4,7 @@
   <parameter name="selenium.browser" value="firefox" />
   <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
   <parameter name="backoffice.url" value="http://capi.cyberianconcepts.com"  />
+  <parameter name="backofficeold.url" value="https://vnext_dev.cyberianconcepts.com"  />
   <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
   <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />
   <parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />
@@ -18,7 +19,7 @@
   <test name="Back Office Test Cases - IE" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     <classes>
-	  <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
+	  <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
 	  <methods> 
 	  	 <include name="testCreateUserWithWebAccess" />
 	  	 <include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />
@@ -33,13 +34,24 @@
 	  	 <include name="testCheckValidationErrorsOnTheSetPasswordPage" />
 	  	 <include name="testCreateUserWithExistingEmailAddress" />
       </methods>
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicestestCases">
 	  <methods> 
-	  	 <!--<include name="testAddMoneyService" />-->
+	  	 <include name="testAddMoneyService" />	  	 
+	  	 <include name="testEditMoneyService" />
+	  	 <include name="testRemoveMoneyService" />
+	  	 <include name="testResumeRemovedMoneyService" />
 	  	 <include name="testAddPercentageService" />
+	  	 <include name="testEditPercentageService" />
+	  	 <include name="testRemovePercentageService" />
+	  	 <include name="testResumeRemovedPercentageService" />
       </methods>
       </class>
+      <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextWebServices">
+	  <methods> 
+	  	 <include name="testSetupConfigurationToRunInvoiceListSuite" />	  	 
+      </methods>
+      </class>-->
     </classes>
   </test>
 </suite>

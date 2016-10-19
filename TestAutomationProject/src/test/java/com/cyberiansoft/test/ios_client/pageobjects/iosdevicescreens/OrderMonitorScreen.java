@@ -32,13 +32,13 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIANavigationBar[@name=\"Service Details\"]/UIAButton[@name=\"Done icon\"]")
     private IOSElement servicedetailsdonebtn;
 	
-	@iOSFindBy(name = "custom detail button")
+	@iOSFindBy(accessibility  = "custom detail button")
     private IOSElement customservicestatusbtn;
 	
-	@iOSFindBy(name = "Start Service")
+	@iOSFindBy(accessibility  = "Start Service")
     private IOSElement startservicebtn;
 	
-	@iOSFindBy(name = "Start Phase")
+	@iOSFindBy(accessibility  = "Start Phase")
     private IOSElement startphasebtn;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[2]")

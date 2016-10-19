@@ -41,9 +41,9 @@ import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
 import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.Connection;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
@@ -82,9 +82,9 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
 		appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-		appiumcap.setCapability(MobileCapabilityType.APP_PACKAGE,
+		/*appiumcap.setCapability(MobileCapabilityType.APP_PACKAGE,
 						"com.automobiletechnologies.ReconPro");
-		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.ReconPro.MainActivity");
+		appiumcap.setCapability(MobileCapabilityType.APP_ACTIVITY, "com.automobiletechnologies.ReconPro.MainActivity");*/
 		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
 		//appiumcap.setCapability("chromedriverExecutable", "c:\\Users\\Alex\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\appium-chromedriver\\chromedriver\\win\\chromedriver.exe");
 		//appiumcap.setCapability("chromedriverExecutable", "d:\\Work\\AQC\\TestAutomationProject\\browsers\\chromedriver\\chromedriver.exe");
@@ -247,18 +247,16 @@ public class VNextBaseTestCase {
 	
 	public void setNetworkOff() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		NetworkConnectionSetting networkConnection = new NetworkConnectionSetting(true, false, false);
-	    ((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
+		appiumdriver.setConnection(Connection.AIRPLANE);
 	    switchToWebViewContext();
 	    //switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
 	public void setNetworkOn() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
-		NetworkConnectionSetting networkConnection = ((AndroidDriver)appiumdriver).getNetworkConnection();
-		if (networkConnection.airplaneModeEnabled()) {
-			networkConnection = new NetworkConnectionSetting(false, true, true);		
-			((AndroidDriver)appiumdriver).setNetworkConnection(networkConnection);
+		Connection networkConnection = appiumdriver.getConnection();
+		if (networkConnection.equals(Connection.AIRPLANE) ) {
+			appiumdriver.setConnection(Connection.ALL);		
 			waitABit(5000);
 		}
 		switchToWebViewContext();

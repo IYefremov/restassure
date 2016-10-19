@@ -21,10 +21,10 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@visible=\"true\" and @name=\"Back\"]")
 	private IOSElement backbtn;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
 	@iOSFindBy(xpath = uipickerxpath)

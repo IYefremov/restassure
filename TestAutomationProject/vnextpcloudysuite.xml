@@ -3,15 +3,19 @@
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="firefox" />
   <parameter name="backoffice.url" value="https://vnext_dev.cyberianconcepts.com"  />  
+  <parameter name="backofficecapi.url" value="http://capi.cyberianconcepts.com"  /> 
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
   <parameter name="user.psw" value="test12345"  />
+  <parameter name="usercapi.mail" value="test.cyberiansoft@gmail.com"  />
+  <parameter name="usercapi.name" value="test.cyberiansoft+su@gmail.com"  />
+  <parameter name="usercapi.psw" value="ZZzz11!!"  />
   <parameter name="device.license" value="VNext Automation"  />
-  <listeners>
+  <!--<listeners>
 		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
-  </listeners>
+  </listeners>-->
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-      <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+     <!--<class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
@@ -28,6 +32,7 @@
       	  <include name="testShowSelectedServicesAfterInspectionIsSaved" />
       	  <include name="testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited" />
       	  <include name="testAddTheSameServiceMultipleTimes" />
+      	  <include name="testEditInspectionServices" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
@@ -39,16 +44,50 @@
       	</methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
-        <methods>                   
+        <methods>   
+          <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
+          <include name="testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase" />   
+          <include name="testCreateCustomerAlongWithInspection" />              
           <include name="testNavigateBySwipeThroughWizardStepsForInspeciton" />
-          <include name="testNavigateThroughWizardStepsForInspectionByHardwareBackButton" />
+          <include name="testNavigateThroughWitestEditInspectionVehicleInfozardStepsForInspectionByHardwareBackButton" />
+          <include name="testEditInspectionVehicleInfo" />
         </methods>
       </class>
-     <!--<class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
-     <methods>                   
-          <include name="testVerifySelectedServicesAreSavedToBO" />
+      <class name="com.cyberiansoft.test.vnext.testcases.vNextCustomersTestCases">
+     	<methods>                   
+          <include name="testCreateNewCustomerWithEmptyFirstNameAndLastName" />
+          <include name="testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate" />
         </methods>
+      </class>
+     <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrdersTestCases">
+     <methods>                   
+          <include name="testShowSelectedServicesAfterWOIsSaved" />
+        </methods>
+     </class>-->
+     <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
+     <methods>                   
+          <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
+          <include name="testVerifyCreatingBOWithTechnicianEdition_PDR" />
+      </methods>
       </class>-->
+     <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInspectionOnTheClientTestCases">
+     <methods>                   
+          <include name="testCreateInspectionWhichContainsBreakageServiceWithBigQuantity" />
+          <include name="testCreateInspectionWhithCustomerWithFirstNameOnly" />
+          <include name="testVerifyDisplayingInspectionWhichContainsBreakageServiceWithBigQuantity" />
+          <include name="testVerifyDisplayingInspectionWithCustomerWithFirstNameOnly" />
+          <include name="testCheckApprovedAmmountIsCalculatedCorrectlyForApprovedInspection" />
+          <include name="testVerifyDisplayingApprovedAmountForInspection" />
+      </methods>
+      </class>-->
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextInvoicesTestCases">
+     <methods>                   
+          <include name="testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity" />
+          <include name="testVerifyCustomerInfoOnInvoiceDetail" />
+          <!--<include name="testCreateInvoiceWithTextNote" />
+          <include name="testVerifyTextNoteOnInvoiceDetail" />-->
+      </methods>
+      </class>
     </classes>
   </test>
 </suite>

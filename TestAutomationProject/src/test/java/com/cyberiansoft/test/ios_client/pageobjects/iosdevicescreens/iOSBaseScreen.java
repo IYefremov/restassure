@@ -30,10 +30,10 @@ public class iOSBaseScreen {
 	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
     private IOSElement backbtn;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
 	@iOSFindBy(xpath = uipickerxpath)

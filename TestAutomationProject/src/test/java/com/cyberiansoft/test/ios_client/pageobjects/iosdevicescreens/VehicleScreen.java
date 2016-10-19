@@ -35,49 +35,49 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Make\"]/UIAButton[@name=\"custom detail button\"]")
     private IOSElement makecustombtn;
 	
-	@iOSFindBy(name = "Advisor")
+	@iOSFindBy(accessibility  = "Advisor")
     private IOSElement advisorfld;
 	
-	@iOSFindBy(name = "Color")
+	@iOSFindBy(accessibility  = "Color")
     private IOSElement colorfld;
 	
-	@iOSFindBy(name = "Mileage")
+	@iOSFindBy(accessibility  = "Mileage")
     private IOSElement mileagefld;
 	
-	@iOSFindBy(name = "Fuel Tank Level")
+	@iOSFindBy(accessibility  = "Fuel Tank Level")
     private IOSElement fueltanklevelfld;
 	
-	@iOSFindBy(name = "License Plate")
+	@iOSFindBy(accessibility  = "License Plate")
     private IOSElement licenseplatefld;
 	
-	@iOSFindBy(name = "Owner")
+	@iOSFindBy(accessibility  = "Owner")
     private IOSElement ownerfld;
 	
-	@iOSFindBy(name = "Tech")
+	@iOSFindBy(accessibility  = "Tech")
     private IOSElement techfld;
 	
-	@iOSFindBy(name = "Location")
+	@iOSFindBy(accessibility  = "Location")
     private IOSElement locationfld;
 	
-	@iOSFindBy(name = "Type")
+	@iOSFindBy(accessibility  = "Type")
     private IOSElement typefld;
 	
-	@iOSFindBy(name = "Year")
+	@iOSFindBy(accessibility  = "Year")
     private IOSElement yearfld;
 	
-	@iOSFindBy(name = "Stock#")
+	@iOSFindBy(accessibility  = "Stock#")
     private IOSElement stockfld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Stock#\"]/UIATextField")
     private IOSElement stockfldvalue;
 	
-	@iOSFindBy(name = "RO#")
+	@iOSFindBy(accessibility  = "RO#")
     private IOSElement rofld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"RO#\"]/UIATextField[1]")
     private IOSElement rofldvalue;
 	
-	@iOSFindBy(name = "PO#")
+	@iOSFindBy(accessibility  = "PO#")
     private IOSElement pofld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"PO#\"]/UIATextField")
@@ -98,10 +98,10 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"VehicleForm\"]/UIAStaticText[1]")
 			private IOSElement navbarinspectioncustomercaption;
 	
-	@iOSFindBy(name = "Compose")
+	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
 	public VehicleScreen(AppiumDriver driver) {

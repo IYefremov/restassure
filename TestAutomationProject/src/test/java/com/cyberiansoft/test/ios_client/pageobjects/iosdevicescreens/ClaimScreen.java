@@ -28,7 +28,7 @@ public class ClaimScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Deductible\"]/UIAStaticText[2]")
     private IOSElement deductiblefld;
 	
-	@iOSFindBy(name = "Done")
+	@iOSFindBy(accessibility  = "Done")
     private IOSElement donebtn;
 	
 	public ClaimScreen(AppiumDriver driver) {

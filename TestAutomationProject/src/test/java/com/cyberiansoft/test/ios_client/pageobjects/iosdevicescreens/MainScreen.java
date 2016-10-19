@@ -13,10 +13,10 @@ public class MainScreen {
 	
 	private AppiumDriver appiumdriver;
 	
-	@iOSFindBy(name = "UpdateMainDatabaseButton")
+	@iOSFindBy(accessibility  = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
 	
-	@iOSFindBy(name = "UpdateVinDatabaseButton")
+	@iOSFindBy(accessibility  = "UpdateVinDatabaseButton")
     private IOSElement updatevin;
 	
 	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIASecureTextField[1]")
@@ -25,7 +25,7 @@ public class MainScreen {
 	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAButton[1]")
     private IOSElement loginbtn;
 	
-	@iOSFindBy(name = "Licenses")
+	@iOSFindBy(accessibility  = "Licenses")
     private IOSElement licenses;
 	
 	//final static String mainbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[1]";

@@ -20,7 +20,7 @@ public class OrderSummaryScreen extends iOSHDBaseScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String ordersummaryscreencapt = "Summary";
 	
-	@iOSFindBy(name = "Default")
+	@iOSFindBy(accessibility  = "Default")
     private IOSElement defaultinvoicetype;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"OrderSummaryForm\"]/UIAButton[contains(@name, \"Total Sale\")]")

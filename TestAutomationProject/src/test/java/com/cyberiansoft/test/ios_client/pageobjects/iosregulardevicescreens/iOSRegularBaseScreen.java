@@ -26,7 +26,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
     private IOSElement backbtn;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(xpath = "//UIAButton[@name='Cancel']")

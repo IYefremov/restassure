@@ -17,10 +17,10 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	@iOSFindBy(name = "Custom")
+	@iOSFindBy(accessibility  = "Custom")
     private IOSElement customtab;
 	
-	@iOSFindBy(name = "Quantity")
+	@iOSFindBy(accessibility  = "Quantity")
     private IOSElement quantityfld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
