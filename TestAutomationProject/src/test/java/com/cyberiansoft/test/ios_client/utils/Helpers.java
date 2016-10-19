@@ -175,7 +175,7 @@ public abstract class Helpers {
 
 	public static void waitForAlert() {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(driver, 180);
+		WebDriverWait wait = new WebDriverWait(driver, 240);
 		wait.until(ExpectedConditions.alertIsPresent());
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

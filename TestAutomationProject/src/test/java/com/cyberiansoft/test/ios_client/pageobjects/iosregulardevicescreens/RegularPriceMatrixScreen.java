@@ -3,10 +3,12 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -135,9 +137,9 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}*/
 	
 	public boolean isPriceMatrixContainsPriceValue(String pricematrix, String pricevalue) {
-		Helpers.scroolTo(pricematrix);
-		return appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
-						+ pricematrix + "\"]/UIAStaticText[@name=\""+ pricevalue + "\"]").isDisplayed();
+		//Helpers.scroolTo(pricematrix);
+		return appiumdriver.findElementsByXPath("//UIATableView[1]/UIATableCell[@name=\""
+						+ pricematrix + "\"]/UIAStaticText[@name=\""+ pricevalue + "\"]").size() > 0;
 	}
 
 	public void assertNotesExists() {
@@ -178,4 +180,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
 
+	public String getInspectionSubTotalPrice() {
+		return appiumdriver.findElement(MobileBy.xpath("//UIAStaticText[@name='SubtotalAmount']")).getAttribute("value");
+	}
 }

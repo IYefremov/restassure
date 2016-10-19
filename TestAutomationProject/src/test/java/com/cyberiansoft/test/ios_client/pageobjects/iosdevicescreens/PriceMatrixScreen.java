@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -103,8 +104,13 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectDiscaunt(String discaunt) {
-		appiumdriver.findElementByXPath("//UIATableView[2]/UIATableCell[@name=\""
-				+ discaunt + "\"]/UIAButton[@name=\"unselected\"]").click();
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[1].cells()['"
+			//	+ discaunt + "']")).click();
+		Helpers.scroolToByXpath("//UIATableCell[@name='"
+				+ discaunt + "']");
+		
+		appiumdriver.findElementByXPath("//UIATableCell[@name='"
+				+ discaunt + "']/UIAButton[@name='unselected']").click();
 	}
 
 	public void clickDiscaunt(String discaunt) {

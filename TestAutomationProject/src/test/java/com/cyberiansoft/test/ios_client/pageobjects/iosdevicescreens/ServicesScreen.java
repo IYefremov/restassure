@@ -89,11 +89,11 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public void assertServiceIsSelectedWithServiceValues(String service, String servicepriceandquantity) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name=\""
-								+ service + "\"]").isDisplayed());
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name=\""
-				+ service + "\"]/UIAStaticText[@name=\""
-				+ servicepriceandquantity + "\"]").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name='"
+								+ service + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name='"
+				+ service + "']/UIAStaticText[@name='"
+				+ servicepriceandquantity + "']").isDisplayed());
 	}
 
 	public int getServiceSelectedNumber(String service) {
@@ -131,8 +131,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 	public SelectedServiceDetailsScreen openServiceDetails(String service) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name=\""
-				+ service + "\"]"))).click();
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name='"
+				+ service + "']"))).click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

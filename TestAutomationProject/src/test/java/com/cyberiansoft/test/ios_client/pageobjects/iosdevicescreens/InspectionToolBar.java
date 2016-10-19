@@ -11,10 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class InspectionToolBar extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar[1]/UIAStaticText[7]")
+	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar/UIAStaticText[@name='SubtotalAmount']")
     private IOSElement inspsubtotal;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar[1]/UIAStaticText[8]")
+	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar/UIAStaticText[@name='TotalAmount']")
     private IOSElement insptotal;
 	
 	public InspectionToolBar(AppiumDriver driver) {
@@ -24,11 +24,11 @@ public class InspectionToolBar extends iOSHDBaseScreen {
 	}
 	
 	public String getInspectionSubTotalPrice() {
-		return inspsubtotal.getAttribute("name");
+		return inspsubtotal.getAttribute("value");
 	}
 	
 	public String getInspectionTotalPrice() {
-		return insptotal.getAttribute("name");
+		return insptotal.getAttribute("value");
 	}
 
 }

@@ -45,6 +45,8 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_TYPE_FOR_PRICE_MATRIX = "Ins_type_with_price_matrix";
 	public static final String INSP_DRAFT_MODE = "Insp_Draft_Mode";
 	public static final String INSP_FOR_CALC = "Insp_for_calc";
+	public static final String INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT = "Insp_for_auto_WO_line_appr_multiselect";
+	public static final String INSP_FOR_AUTO_WO_LINE_APPR = "Inspection_for_auto_WO_line_appr";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";

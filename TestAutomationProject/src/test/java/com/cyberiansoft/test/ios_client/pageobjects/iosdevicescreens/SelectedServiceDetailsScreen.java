@@ -300,13 +300,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectVehiclePart(String vehiclepart) {
-		if (appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).size() > 0) {
+		if (appiumdriver.findElements(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).size() > 0) {
 			Helpers.scroolToByXpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']");
 			//appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
-			appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['unselected']")).click();
+			appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
 		}
 		else
-			Assert.assertTrue(appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + vehiclepart + "'].buttons()['selected']")).size() > 0);
+			Assert.assertTrue(appiumdriver.findElements(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {

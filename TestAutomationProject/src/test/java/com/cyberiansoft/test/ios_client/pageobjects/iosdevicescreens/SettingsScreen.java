@@ -12,7 +12,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 public class SettingsScreen extends iOSHDBaseScreen {
 	
 	
-	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[2]")
+	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[1]")
     private IOSElement inspectionsinglepagetoggle;
 	
 	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[3]")

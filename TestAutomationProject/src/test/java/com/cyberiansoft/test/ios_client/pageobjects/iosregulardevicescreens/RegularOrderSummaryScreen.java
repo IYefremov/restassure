@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -70,7 +71,7 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	}
 
 	public void assertOrderSummIsCorrect(String summ) {
-		Assert.assertEquals(appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[contains(@name, \"$\")]").getText(), summ);
+		Assert.assertEquals(appiumdriver.findElement(MobileBy.xpath("//UIAStaticText[@name='TotalAmount']")).getAttribute("value"), summ);
 	}
 	
 	public void setTotalSale(String totalsale) throws InterruptedException {

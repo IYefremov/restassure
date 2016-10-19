@@ -2213,21 +2213,21 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 			teamworkordersscreen.clickOnWO(inspection);
 			teamworkordersscreen.selectWOMonitor();
+			Helpers.waitABit(3000);
 			RegularOrderMonitorScreen ordermonitorscreen = new RegularOrderMonitorScreen(appiumdriver);
-			ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_SUBSERVICE);
+			ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_SUBSERVICE + " (" + vehicleparts[0] + ")");
 			ordermonitorscreen.setCompletedPhaseStatus();
 			//ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 			Assert.assertTrue(ordermonitorscreen.isServiceIsActive(UtilConstants.PAINTDOORHANDLE_SUBSERVICE));
-
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE + " (" + vehicleparts[0] + ")"), "Completed");
 			
 			ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Completed");
-			
-			ordermonitorscreen.selectPanel(UtilConstants.WHEEL_SUBSERVICE);
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE), "Completed");
+
+			ordermonitorscreen.selectPanel(UtilConstants.WHEEL_SUBSERVICE + " (" + vehiclepartswheel[0] + ")");
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE + " (" + vehiclepartswheel[0] + ")"), "Completed");
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
 			
 			teamworkordersscreen.clickCreateInvoiceForWO(inspection);
@@ -2319,11 +2319,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Thread.sleep(2000);
 			teamworkordersscreen.clickOnWO(inspection);
 			teamworkordersscreen.selectWOMonitor();
+			Thread.sleep(3000);
 			RegularOrderMonitorScreen ordermonitorscreen = new RegularOrderMonitorScreen(appiumdriver);
-			ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
+			ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE + " (" + vehicleparts[0] + ")");
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE, "Completed");
-			ordermonitorscreen.verifyPanelsStatuses("Paint - Full Bumper", "Active");
+			Thread.sleep(2000);
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE + " (" + vehicleparts[0] + ")"), "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses("Paint - Full Bumper" + " (" + vehiclepartspaint[0] + ")"), "Active");
 			
 			ordermonitorscreen.clickServicesButton();
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
@@ -2341,21 +2343,19 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickSaveButton();
 			Thread.sleep(5000);
 			ordermonitorscreen = new RegularOrderMonitorScreen(appiumdriver);
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Queued");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE), "Queued");
 			ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE), "Completed");
 			
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Active");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE), "Active");
 			ordermonitorscreen.selectPanel(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Completed");
-			
-			
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Active");	
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE), "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE), "Active");		
 			ordermonitorscreen.selectPanel(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE), "Completed");
 
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
 			
@@ -3167,6 +3167,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			invoiceinfoscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			servicesscreen.searchserviceByName(UtilConstants.PAINTMIRROR_SUBSERVICE);
+			Thread.sleep(2000);
 			selectedservicescreen = servicesscreen.clickServiceCustomDetailButton(UtilConstants.PAINTMIRROR_SUBSERVICE);
 			selectedservicescreen.removeService();
 			servicesscreen.clickToolButton();
@@ -3238,12 +3239,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 			ordermonitorscreen.selectPanel(UtilConstants.PDR6PANEL_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE), "Completed");
 			ordermonitorscreen.verifyPanelStatusInPopup("Tear/Burn >2\" (Fabric)", "Active");
 			Thread.sleep(4000);
 			ordermonitorscreen.selectPanel("Tear/Burn >2\" (Fabric)");
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE), "Completed");
 			ordermonitorscreen.verifyPanelStatusInPopup("Tear/Burn >2\" (Fabric)", "Completed");
 			Thread.sleep(4000);
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
@@ -3351,22 +3352,23 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 			teamworkordersscreen.clickOnWO(inspection1);
 			RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-			ordermonitorscreen.selectPanel(UtilConstants.PDRVEHICLE_SUBSERVICE);
+			Helpers.waitABit(3000);
+			ordermonitorscreen.selectPanel(UtilConstants.PDRVEHICLE_SUBSERVICE + " (" + vehicleparts[1] + ")");
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE + " (" + vehicleparts[1] + ")"), "Completed");
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
 			teamworkordersscreen.clickOnWO(inspection2);
 			teamworkordersscreen.selectWOMonitor();
 			ordermonitorscreen.selectPanel(UtilConstants.LEATHERREPAIR_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE), "Completed");
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
 			teamworkordersscreen.clickOnWO(inspection3);
 			teamworkordersscreen.selectWOMonitor();
 			Helpers.waitABit(3000);
 			ordermonitorscreen.selectPanel(UtilConstants.BLACKOUT_SUBSERVICE);
 			ordermonitorscreen.setCompletedPhaseStatus();
-			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE, "Completed");
+			Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE), "Completed");
 			teamworkordersscreen = ordermonitorscreen.clickBackButton();
 
 			teamworkordersscreen = homescreen.clickTeamWorkordersButton();

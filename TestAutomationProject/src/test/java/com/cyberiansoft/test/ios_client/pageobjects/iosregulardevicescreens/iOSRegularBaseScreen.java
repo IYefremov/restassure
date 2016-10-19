@@ -88,11 +88,14 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void selectNextScreen(String screenname) {
-		waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]").click();
-		Helpers.scroolTo(screenname);
+		//waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]");
 		element(
-				MobileBy.xpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name=\""
-						+ screenname + "\"]")).click();
+				MobileBy.xpath("//UIANavigationBar[1]/UIAButton[4]")).click();
+		Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='"
+				+ screenname + "']");
+		element(
+				MobileBy.xpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='"
+						+ screenname + "']")).click();
 		Helpers.waitABit(1000);
 	}
 	

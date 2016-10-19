@@ -65,9 +65,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		//return element.getAttribute("name");
 	}
 	
-	public void verifyPanelsStatuses(String panelname, String status) throws InterruptedException {
-		Helpers.scroolTo(panelname);
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[@name=\"" + status + "\"]").isDisplayed());
+	public String getPanelsStatuses(String panelname) {
+		//Helpers.scroolTo(panelname);
+		return appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[3]").getAttribute("name");
 	}
 	
 	public void verifyPanelStatus(String panelname, String status) {
@@ -128,7 +128,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public boolean isServiceIsActive(String servicedisplayname) {
 		Helpers.scroolTo(servicedisplayname);
 		return appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ servicedisplayname + "\")]/UIAStaticText[2]").getAttribute("name").equals("Active");
+						+ servicedisplayname + "\")]/UIAStaticText[3]").getAttribute("name").equals("Active");
 		//Assert.assertTrue(activecaption.isDisplayed());
 	}
 	

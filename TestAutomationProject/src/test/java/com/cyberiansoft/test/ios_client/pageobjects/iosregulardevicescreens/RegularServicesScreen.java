@@ -90,11 +90,11 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void assertServiceIsSelectedWithServiceValues(String service, String pricevalue) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name=\""
-				+ service + "\"]/UIAButton[@name=\"selected\"]").isEnabled());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name='"
+				+ service + "']/UIAButton[@name='selected']").isEnabled());
 
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name=\""
-				+ service + "\"]/UIAStaticText[@name=\"" + pricevalue + "\"]").isEnabled());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name='"
+				+ service + "']/UIAStaticText[@name='" + pricevalue + "']").isEnabled());
 	}
 
 	public int getServiceSelectedNumber(String service) {
@@ -103,11 +103,11 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void assertTotalAmauntIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByName("AmountTotal").getAttribute("value"), price);
+		Assert.assertEquals(appiumdriver.findElementByXPath("//UIAStaticText[@name='TotalAmount']").getAttribute("value"), price);
 	}
 	
 	public void assertSubTotalAmauntIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByName("AmountSubtotal").getAttribute("value"), price);
+		Assert.assertEquals(appiumdriver.findElementByXPath("//UIAStaticText[@name='SubtotalAmount']").getAttribute("value"), price);
 	}
 
 	public void assertServiceTypeExists(String servicetype) {
@@ -119,8 +119,8 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		//appiumdriver.tap(1, appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
 		//		+ service + "\"]"), 200);
 		Helpers.scroolTo(service);
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
-			+ service + "\"]").click();
+		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name='"
+			+ service + "']").click();
 	}
 	
 	public void selectSubService(String service) {
@@ -144,10 +144,12 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public RegularSelectedServiceDetailsScreen clickServiceCustomDetailButton(String service) {
-		//appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
+		//Helpers.scroolToByXpath("//UIATableView[@name='ServiceGroupServicesTable']/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
+		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
 		
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()['ServiceGroupServicesTable'].cells()['Paint - Mirror'].buttons()['custom detail button']")).click();
-		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()['ServiceGroupServicesTable'].cells()['" + service + "'].buttons()['custom detail button']")).click();
+		
+		//
 		return new RegularSelectedServiceDetailsScreen(appiumdriver);
 	}
 	

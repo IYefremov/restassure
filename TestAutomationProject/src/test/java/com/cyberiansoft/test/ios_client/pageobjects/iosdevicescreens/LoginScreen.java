@@ -18,19 +18,19 @@ public class LoginScreen extends iOSHDBaseScreen {
 	private AppiumDriver appiumdriver;
 	
 	
-	@iOSFindBy(name = "CodeField1")
+	@iOSFindBy(accessibility = "CodeField1")
     private IOSElement firstcode;
 	
-	@iOSFindBy(name = "CodeField2")
+	@iOSFindBy(accessibility = "CodeField2")
     private IOSElement secondcode;
 	
-	@iOSFindBy(name = "CodeField3")
+	@iOSFindBy(accessibility = "CodeField3")
     private IOSElement thirdcode;
 	
-	@iOSFindBy(name = "Verify")
+	@iOSFindBy(accessibility = "Verify")
     private IOSElement registerbtn;
 	
-	@iOSFindBy(name = "Don't Allow")
+	@iOSFindBy(accessibility = "Don't Allow")
     private IOSElement dontallowbtn;
 	
 	public LoginScreen(AppiumDriver driver) {
