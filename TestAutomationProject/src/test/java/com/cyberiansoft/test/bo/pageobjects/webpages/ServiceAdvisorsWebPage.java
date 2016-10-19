@@ -319,7 +319,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectNewServiceAdvisorCountry(String country) {
-		selectComboboxValue(serviceadvisorcountrycmb, serviceadvisorcountrydd, country);
+		selectComboboxValueAndWait(serviceadvisorcountrycmb, serviceadvisorcountrydd, country);
 	}
 	
 	public void selectNewServiceAdvisorState(String state) {

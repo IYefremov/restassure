@@ -38,28 +38,35 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		while (customerslist.findElements(By.xpath(".//div[text()='" + customer + "']")).size() < 1) {
+		if (customerslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + customer + "']")).size() > 0) {
+			WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + customer + "']"));	
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",elem);			
+			tap(customerslist.findElement(By.xpath(".//div[text()='" + customer + "']")));
+			waitABit(1000);
+		} else {
+			
+			while (customerslist.findElements(By.xpath(".//div[text()='" + customer + "']")).size() < 1) {
+				switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+				int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
+				appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
+				Assert.assertTrue(switchToWebViewContext());
+				//switchApplicationContext(AppContexts.WEB_CONTEXT);			
+				}	
+			WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + customer + "']"));	
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",elem);
+			
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
-			appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
+			appiumdriver.swipe(20, 140, 20, yscreenresolution-180, 1000);
 			Assert.assertTrue(switchToWebViewContext());
 			//switchApplicationContext(AppContexts.WEB_CONTEXT);
 			
-		}	
-		
-		WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + customer + "']"));	
-		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-		je.executeScript("arguments[0].scrollIntoView(true);",elem);
-		
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
-		appiumdriver.swipe(20, 140, 20, yscreenresolution-180, 1000);
-		Assert.assertTrue(switchToWebViewContext());
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		
-		
-		tap(customerslist.findElement(By.xpath(".//div[text()='" + customer + "']")));
-		waitABit(1000);
+			
+			tap(customerslist.findElement(By.xpath(".//div[text()='" + customer + "']")));
+			waitABit(1000);
+		}
 		log(LogStatus.INFO, "Select customer " + customer);
 	}
 	

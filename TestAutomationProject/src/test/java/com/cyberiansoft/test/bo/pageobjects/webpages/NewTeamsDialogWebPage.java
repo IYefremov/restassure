@@ -201,7 +201,7 @@ public class NewTeamsDialogWebPage extends BaseWebPage {
 	}
 	
 	public NewTeamsDialogWebPage selectTeamCountry(String teamcountry)  {
-		selectComboboxValue(teamcountrycmb, teamcountrydd, teamcountry);
+		selectComboboxValueAndWait(teamcountrycmb, teamcountrydd, teamcountry);
 		return PageFactory.initElements(
 				driver, NewTeamsDialogWebPage.class);
 	}

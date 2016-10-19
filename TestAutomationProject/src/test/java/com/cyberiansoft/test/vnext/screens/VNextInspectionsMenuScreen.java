@@ -14,6 +14,12 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='edit']/i")
 	private WebElement editinspectionbtn;
 	
+	@FindBy(xpath="//a[@action='email']/i")
+	private WebElement emailinspectionbtn;
+	
+	@FindBy(xpath="//a[@action='create-order']/i")
+	private WebElement createwoinspectionbtn;
+	
 	@FindBy(xpath="//div[@class='page inspections-menu hide-toolbar hide-searchbar page-on-center']")
 	private WebElement inspectionsmenuscreen;
 	
@@ -26,10 +32,28 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	}
 	
 	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
-		waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
 		tap(editinspectionbtn);
 		waitABit(1000);
-		testReporter.log(LogStatus.INFO, "Tap on Inspection Edit Menu");
+		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
+		return new VNextVehicleInfoScreen(appiumdriver);
+	}
+	
+	public VNextEmailScreen clickEmailInspectionMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(emailinspectionbtn));
+		tap(emailinspectionbtn);
+		log(LogStatus.INFO, "Tap on Email Inspection Menu");
+		return new VNextEmailScreen(appiumdriver);
+	}
+	
+	public VNextVehicleInfoScreen clickCreateWorkOrderInspectionMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(createwoinspectionbtn));
+		tap(createwoinspectionbtn);
+		waitABit(8000);
+		log(LogStatus.INFO, "Tap on Inspection Create Work Order Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 

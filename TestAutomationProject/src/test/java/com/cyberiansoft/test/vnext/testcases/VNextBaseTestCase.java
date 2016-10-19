@@ -16,6 +16,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -28,14 +31,15 @@ import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 /*import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;
-*/
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.NoSuchContextException;
@@ -105,7 +109,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void setUp() {
-		waitABit(10000);
+		waitABit(15000);
 	   // switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -201,14 +205,20 @@ public class VNextBaseTestCase {
 	}
 	
 	public void registerDevice() throws Exception {
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//iframe"))));
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo("380", "978385064", "osmak.oksana+408@gmail.com");
-		appiumdriver.switchTo().defaultContent();
+		String userregmail = "osmak.oksana+408@gmail.com";
+		regscreen.setUserRegistrationInfo("QA", "QA", "380", "978385064", userregmail);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
-		verificationscreen.setDeviceRegistrationCode(getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, devicelicensename));
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
 		waitABit(10000);
+		appiumdriver.switchTo().defaultContent();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}
@@ -296,14 +306,14 @@ public class VNextBaseTestCase {
 		//selectedDevices.add(MobileDevice.getNew("Samsung_S7Edge_Android_6.0.1", 130, "S7Edge", "S7 Edge", "android", "6.0.1", "Samsung"));
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6_Android_6.0.1", 132, "GalaxyS6", "Galaxy S6", "android", "6.0.1", "Samsung")); 
 		//selectedDevices.add(MobileDevice.getNew("Huawei_HuaweiHonor5X_Android_5.1.1", 129, "HuaweiHonor5X", "Honor 5X", "android", "5.1.1", "Huawei")); 
-		//selectedDevices.add(MobileDevice.getNew("Motorola_Nexus6_Android_5.0.1", 76, "Nexus6", "Nexus 6", "android", "5.0.1", "Motorola"));
+		//selectedDevices.add(MobileDevice.getNew("Motorola_Nexus6_Android_6.0.1", 201, "Nexus6", "Nexus 6", "android", "6.0.1", "Motorola")); 
 		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaXPlay_Android_6.0.1", 142, "MotorolaXPlay", "X Play", "android", "6.0.1", "Motorola")); 
-		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaMotoE2_Android_5.0.2", 122, "MotorolaMotoE2", "Moto E2", "android", "5.0.2", "Motorola")); 
+		selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaMotoE2_Android_5.0.2", 122, "MotorolaMotoE2", "Moto E2", "android", "5.0.2", "Motorola")); 
 		//selectedDevices.add(MobileDevice.getNew("Lg_G4Dual_Android_6.0.0", 100, "G4Dual", "G4 Dual", "android", "6.0.0", "Lg"));
 		//selectedDevices.add(MobileDevice.getNew("Htc_One_Android_5.0.2", 62, "One", "One", "android", "5.0.2", "Htc"));
 		//selectedDevices.add(MobileDevice.getNew("Lg_G5_Android_6.0.1", 154, "G5", "G5", "android", "6.0.1", "Lg")); 
 		//selectedDevices.add(MobileDevice.getNew("Htc_10_Android_6.0.1", 155, "10", "10", "android", "6.0.1", "Htc")); 
-		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS7_Android_6.0.1", 153, "GalaxyS7", "Galaxy S7", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS7_Android_6.0.1", 153, "GalaxyS7", "Galaxy S7", "android", "6.0.1", "Samsung")); 
 		
 		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 60, "friendlySessionName");
 		System.out.println("Devices booked successfully");

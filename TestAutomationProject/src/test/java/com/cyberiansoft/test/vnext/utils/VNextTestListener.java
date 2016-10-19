@@ -9,6 +9,7 @@ import org.testng.TestListenerAdapter;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -44,15 +45,20 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    
 	    ((VNextBaseTestCase) currentClass).resetApp();
 	    ((VNextBaseTestCase) currentClass).setUp();
-	    ((VNextBaseTestCase) currentClass).setNetworkOn();
+	    //((VNextBaseTestCase) currentClass).setNetworkOn();
 	    try {
 			((VNextBaseTestCase) currentClass).registerDevice();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin("Test User", "1111");
+	    try {
+			((VNextBaseTestCase) currentClass).registerDevice();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	@Override

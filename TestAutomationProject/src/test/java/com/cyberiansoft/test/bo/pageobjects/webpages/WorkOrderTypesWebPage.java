@@ -25,8 +25,8 @@ import com.cyberiansoft.test.bo.webelements.WebTable;
 public class WorkOrderTypesWebPage extends BaseWebPage {
 	
 	final String monitorrepairingchkbox = "Monitor Repairing";
-	final String invoicecompletedroonlychkbox = "Invoice completed RO only";
-	final String delayedrostartchkbox = "Delayed RO Start";
+	final String invoicecompletedroonlychkbox = "Invoicing Requires Completed RO";
+	final String delayedrostartchkbox = "Start RO Required";
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_qv_ctl00")
 	private WebTable wotypestable;

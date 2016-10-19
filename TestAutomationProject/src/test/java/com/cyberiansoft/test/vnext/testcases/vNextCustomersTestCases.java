@@ -32,7 +32,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		customersscreen = newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
+		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
+		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomerByCustomerAddress(customeraddress);
 		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
@@ -78,8 +79,9 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		setNetworkOff();
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		customersscreen = newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
+		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		setNetworkOn();
+		customersscreen = new VNextCustomersScreen(appiumdriver);
 		homescreen = customersscreen.clickBackButton();
 		homescreen.waitABit(1000);
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();

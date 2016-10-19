@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 
 public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTestCase {
@@ -14,10 +15,9 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 	public void settingUp() throws Exception {
 
 		setUp();	
-		setNetworkOn();
+		//setNetworkOn();
 		resetApp();
 		registerDevice();
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextHomeScreen homecreen = new VNextHomeScreen(appiumdriver);
 	}
 }

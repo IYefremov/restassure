@@ -14,6 +14,12 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//select[@data-template='personal-info-country-phone-code-template']")
 	private WebElement phonenumberselect;
 	
+	@FindBy(xpath="//input[contains(@data-bind, 'data.firstName')]")
+	private WebElement firstnamefld;
+	
+	@FindBy(xpath="//input[contains(@data-bind, 'data.lastName')]")
+	private WebElement lastnamefld;
+	
 	@FindBy(id="personal-info-phone")
 	private WebElement phonenumberfld;
 	
@@ -30,7 +36,9 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		//wait.until(ExpectedConditions. visibilityOf(phonenumberselect));
 	}
 	
-	public void setUserRegistrationInfo(String countrycode, String phonenumber, String usermail) {
+	public void setUserRegistrationInfo(String firstname, String lastname, String countrycode, String phonenumber, String usermail) {
+		setFirstName(firstname);
+		setLastName(lastname);
 		selectPhoneNumberCountryCode(countrycode);
 		setPhoneNumber(phonenumber);
 		setEmail(usermail);
@@ -40,6 +48,16 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	public void selectPhoneNumberCountryCode(String countrycode) {
 		Select sel = new Select(phonenumberselect);
 		sel.selectByValue(countrycode);
+	}
+	
+	public void setFirstName(String firstname) {
+		firstnamefld.clear();
+		firstnamefld.sendKeys(firstname);
+	}
+	
+	public void setLastName(String lastname) {
+		lastnamefld.clear();
+		lastnamefld.sendKeys(lastname);
 	}
 	
 	public void setPhoneNumber(String phonenumber) {

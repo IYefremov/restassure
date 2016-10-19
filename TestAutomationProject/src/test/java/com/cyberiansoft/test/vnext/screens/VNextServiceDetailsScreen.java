@@ -79,6 +79,10 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		return servicedetailssscreen.findElement(By.xpath(".//input[@name='Amount']")).getAttribute("value");
 	}
 	
+	public String getServiceQuantityValue() {
+		return servicedetailssscreen.findElement(By.xpath(".//input[@name='QuantityFloat']")).getAttribute("value");
+	}
+	
 	public void clickServiceAmountField() {
 		tap(servicedetailssscreen.findElement(By.xpath(".//input[@name='Amount']")));
 		waitABit(2000);
@@ -109,11 +113,12 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public void setServiceQuantityValue(String quantity) {
 		clickServiceQuantityField();
-		for (int i = 0; i < 10; i++)
-			clickKeyboardBackspaceButton();
-		
-		for (int i = 0; i < quantity.length(); i++) {
-			clickKeyboardButton(quantity.charAt(i));
+		final String actualvalue = getServiceQuantityValue();
+		if (!actualvalue.equals(quantity)) {
+			for (int i = 0; i < actualvalue.length(); i++)
+				clickKeyboardBackspaceButton();
+			for (int i = 0; i < quantity.length(); i++)
+				clickKeyboardButton(quantity.charAt(i));
 		}
 		clickKeyboardDoneButton();
 		log(LogStatus.INFO, "Set Service quantity value: " + quantity);

@@ -72,10 +72,10 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 	}
 	
-	public VNextCustomersScreen createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 
+	public void createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 
 			String customerphone, String customeraddress, String customercountry, String customerstate) {
 		setCustomerFirstName(firstname);
-		setCustomerFirstName(lastname);
+		setCustomerLastName(lastname);
 		setCustomerCompanyName(companyname);
 		setCustomerEmail(customeremail);
 		setCustomerPhone(customerphone);
@@ -83,7 +83,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		selectCustomerCountry(customercountry);
 		selectCustomerState(customerstate);
 		clickSaveCustomerButton();
-		return new VNextCustomersScreen(appiumdriver);
 	}
 	
 	public void setCustomerFirstName(String firstname) {
@@ -97,9 +96,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerLastName(String lastname) {
-		lastnamefld.clear();
-		lastnamefld.sendKeys(lastname);
-		log(LogStatus.INFO, "Set customer Larst Name: " + lastname);
+		if (lastname.length() > 0) {
+			lastnamefld.clear();
+			lastnamefld.sendKeys(lastname);
+			log(LogStatus.INFO, "Set customer Last Name: " + lastname);
+		}
 	}
 	
 	public String getCustomerLastName() {
@@ -107,9 +108,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerCompanyName(String companyname) {
-		companynamefld.clear();
-		companynamefld.sendKeys(companyname);
-		log(LogStatus.INFO, "Set customer Company Name: " + companyname);
+		if (companyname.length() > 0) {
+			companynamefld.clear();
+			companynamefld.sendKeys(companyname);
+			log(LogStatus.INFO, "Set customer Company Name: " + companyname);
+		}
 	}
 	
 	public String getCustomerCompanyName() {
@@ -117,9 +120,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerEmail(String customeremail) {
-		emailfld.clear();
-		emailfld.sendKeys(customeremail);
-		log(LogStatus.INFO, "Set customer Email: " + customeremail);
+		if (customeremail.length() > 0) {
+			emailfld.clear();
+			emailfld.sendKeys(customeremail);
+			log(LogStatus.INFO, "Set customer Email: " + customeremail);
+		}
 	}
 	
 	public String getCustomerEmail() {
@@ -127,9 +132,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerPhone(String customerphone) {
-		phonefld.clear();
-		phonefld.sendKeys(customerphone);
-		log(LogStatus.INFO, "Set customer Phone: " + customerphone);
+		if (customerphone.length() > 0) {
+			phonefld.clear();
+			phonefld.sendKeys(customerphone);
+			log(LogStatus.INFO, "Set customer Phone: " + customerphone);
+		}
 	}
 	
 	public String getCustomerPhone() {
@@ -137,9 +144,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerAddress(String customeraddress) {
-		addressfld.clear();
-		addressfld.sendKeys(customeraddress);
-		log(LogStatus.INFO, "Set customer Address: " + customeraddress);
+		if (customeraddress.length() > 0) {
+			addressfld.clear();
+			addressfld.sendKeys(customeraddress);
+			log(LogStatus.INFO, "Set customer Address: " + customeraddress);
+		}
 	}
 	
 	public String getCustomerAddress() {
@@ -147,9 +156,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerCity(String customercity) {
-		cityfld.clear();
-		cityfld.sendKeys(customercity);
-		log(LogStatus.INFO, "Set customer Address: " + customercity);
+		if (customercity.length() > 0) {
+			cityfld.clear();
+			cityfld.sendKeys(customercity);
+			log(LogStatus.INFO, "Set customer Address: " + customercity);
+		}
 	}
 	
 	public String getCustomerCity() {
@@ -157,9 +168,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void setCustomerZIP(String customerzip) {
-		zipfld.clear();
-		zipfld.sendKeys(customerzip);
-		log(LogStatus.INFO, "Set customer Address: " + customerzip);
+		if (customerzip.length() > 0) {
+			zipfld.clear();
+			zipfld.sendKeys(customerzip);
+			log(LogStatus.INFO, "Set customer Address: " + customerzip);
+		}
 	}
 	
 	public String getCustomerZIP() {
@@ -167,13 +180,15 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomerCountry(String customercountry) {
-		tap(countrycell);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(countriespage));
-		tap(countriespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customercountry + "']")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-		log(LogStatus.INFO, "Select customer Country: " + customercountry);
+		if (customercountry.length() > 0) {
+			tap(countrycell);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.visibilityOf(countriespage));
+			tap(countriespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customercountry + "']")));
+			wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
+			log(LogStatus.INFO, "Select customer Country: " + customercountry);
+		}
 	}
 	
 	public String getCustomerCountry() {
@@ -181,13 +196,15 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomerState(String customerstate) {
-		tap(statecell);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(statespage));
-		tap(statespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customerstate + "']")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-		log(LogStatus.INFO, "Select customer State: " + customerstate);
+		if (customerstate.length() > 0) {
+			tap(statecell);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.visibilityOf(statespage));
+			tap(statespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customerstate + "']")));
+			wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
+			log(LogStatus.INFO, "Select customer State: " + customerstate);
+		}
 	}
 	
 	public String getCustomerState() {

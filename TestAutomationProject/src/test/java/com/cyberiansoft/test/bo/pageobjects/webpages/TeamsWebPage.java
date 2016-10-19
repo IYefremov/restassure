@@ -96,10 +96,9 @@ public class TeamsWebPage extends WebPageWithPagination {
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		Assert.assertTrue(teamstable.isTableColumnExists("Guests"));
-		Assert.assertTrue(teamstable.isTableColumnExists("Type"));
+		Assert.assertTrue(teamstable.isTableColumnExists("Managers"));
+		Assert.assertTrue(teamstable.isTableColumnExists("Tax Rates"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Team"));
-		Assert.assertTrue(teamstable.isTableColumnExists("Services"));
-		Assert.assertTrue(teamstable.isTableColumnExists("Location"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Area"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Timesheet type"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Time Zone"));

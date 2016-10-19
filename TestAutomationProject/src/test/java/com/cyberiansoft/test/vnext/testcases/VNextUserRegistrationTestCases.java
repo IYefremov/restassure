@@ -137,7 +137,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo("380", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo("QA", "QA" , "380", userregphone, userregmail);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -217,7 +217,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo("380", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo("QA", "QA", "380", userregphone, userregmail);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));

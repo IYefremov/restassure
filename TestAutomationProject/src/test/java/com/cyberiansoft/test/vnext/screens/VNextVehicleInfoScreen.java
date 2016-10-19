@@ -74,6 +74,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setVIN (String vinnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(vinfld));
 		setValue(vinfld, vinnumber);
 		waitABit(4000);
 		log(LogStatus.INFO, "Set VIN: " + vinnumber);
@@ -229,6 +231,18 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		if (appiumdriver.findElements(By.xpath("//span[@class='client-mode' and text()='All Services']")).size() > 0)
 			swipeScreenLeft();
 		return new VNextInspectionServicesScreen(appiumdriver);
+	}
+	
+	public VNextWorkOrderSummaryScreen goToWorkOrderSummaryScreen() {
+		waitABit(5000);
+		swipeScreensLeft(2);
+		//swipeScreenLeft();
+		//swipeScreenLeft(); 
+		//swipeScreenLeft();
+		//swipeScreenLeft();
+		if (appiumdriver.findElements(By.xpath("//div[@data-page='summary']")).size() > 0)
+			swipeScreenLeft();
+		return new VNextWorkOrderSummaryScreen(appiumdriver);
 	}
 	
 	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color, String mileage, 

@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,10 +18,13 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class VNextVerificationScreen extends VNextBaseScreen {
 	
-	@FindBy(name="regName")
+	@FindBy(id="phone-verification-view")
+	private WebElement phonevereficationscreren;
+	
+	@FindBy(xpath="//input[contains(@data-bind,'data.verificationCode')]")
 	private WebElement regfld;
 	
-	@FindBy(xpath="//a[@action='verify']")
+	@FindBy(xpath="//a[contains(@data-bind,'navigateNext')]")
 	private WebElement verifyBtn;
 	
 	@FindBy(xpath="//div[contains(@class,'download-main')]")
@@ -34,13 +40,12 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
-		wait.until(ExpectedConditions.visibilityOf(verifyBtn));
+		wait.until(ExpectedConditions.visibilityOf(phonevereficationscreren));
 	}
 	
 	public void setDeviceRegistrationCode(String regcode) {
 		setValue(regfld, regcode);
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Set registration code: " + regcode);
+		log(LogStatus.INFO, "Set registration code: " + regcode);
 	}
 	
 	public String getEnteredDeviceRegistrationCodeValue() {
@@ -48,9 +53,12 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void clickVerifyButton() {
-		tap(verifyBtn);
-		if (testReporter != null)
-			testReporter.log(LogStatus.INFO, "Tap Verify button");
+		List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath("//a[contains(@data-bind,'navigateNext')]/span/i"));
+		for (WebElement nextbtn : nextbtns) {
+			if (nextbtn.isDisplayed())
+				tap(nextbtn);
+		}
+		log(LogStatus.INFO, "Tap Verify button");
 	}
 	
 	public boolean isDownloadDBProgressBarAppears() {
@@ -74,7 +82,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	public void clickDownloadAgainButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		tap(wait.until(ExpectedConditions.visibilityOf(downloadagainbtn)));
-		testReporter.log(LogStatus.INFO, "Tap Download Again button");
+		log(LogStatus.INFO, "Tap Download Again button");
 	}
 	
 }

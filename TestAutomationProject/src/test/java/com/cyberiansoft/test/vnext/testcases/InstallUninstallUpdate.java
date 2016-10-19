@@ -39,10 +39,7 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 	@Test(testName= "Test Case 35901:vNext - Log in from the list of available users (success case)", description = "Log in from the list of available users (success case)")
 	public void testLogInSuccessCase() {
 		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		VNextHomeScreen homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.waitUserListVisibility();
+		new VNextHomeScreen(appiumdriver);
 	}
 
 }

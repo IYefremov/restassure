@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;

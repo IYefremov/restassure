@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class VNextBOBaseWebPage {
@@ -48,5 +49,20 @@ public abstract class VNextBOBaseWebPage {
 		}
 		return result;
     }
+    
+    public void waitForNewTab() { 
+		  WebDriverWait wait = new WebDriverWait(driver,30); 
+		  wait.until(new ExpectedCondition<Boolean>(){ 
+			  @Override
+	            public Boolean apply(WebDriver d) {
+	                return (d.getWindowHandles().size() != 1);
+	            }
+		  }); 
+	}
+    
+    public void closeNewTab(String mainWindowHandle) {
+		driver.close();
+		driver.switchTo().window(mainWindowHandle);
+	}
 
 }

@@ -49,8 +49,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 				driver, VNextBOInspectionsWebPage.class);
 	}
 	
-	public void selectInvoicesMenu() {
+	public VNextBOInvoicesWebPage selectInvoicesMenu() {
 		selectMenuItem(invoicesmenu, OPERATIONS_MAINMENU_ITEM);
+		waitABit(4000);
+		return PageFactory.initElements(
+				driver, VNextBOInvoicesWebPage.class);
 	}
 	
 	public VNexBOUsersWebPage selectUsersMenu() {

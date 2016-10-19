@@ -56,5 +56,16 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		log(LogStatus.INFO, "Click Invoices screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
+	
+	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
+		tap(getInvoicesList().findElement(By.xpath(".//div[@class='item-title' and text()='" + invoicenumber + "']")));
+		log(LogStatus.INFO, "Tap VNextInvoiceMenuScreen Invoice: " + invoicenumber);
+		return new VNextInvoiceMenuScreen(appiumdriver);
+	}
+	
+	public VNextEmailScreen clickOnInvoiceToEmail(String invoicenumber) {
+		VNextInvoiceMenuScreen invoicemenulist = clickOnInvoiceByInvoiceNumber(invoicenumber);
+		return invoicemenulist.clickEmailInvoiceMenuItem();
+	}
 
 }
