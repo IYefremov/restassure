@@ -147,6 +147,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			
 			employeespage.archiveEmployee(employeefirstname, employeelastname);		
 			employeespage.clickArchivedTab();
+			employeespage.makeSearchPanelVisible();
+			employeespage.setSearchUserParameter(employeelastname);
+			employeespage.clickFindButton();
 			Assert.assertTrue(employeespage.isArchivedEmployeeExists(employeefirstname, employeelastname));
 			employeespage.unarchiveEmployee(employeefirstname, employeelastname);
 			employeespage.clickActiveTab();
@@ -628,7 +631,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			
 			final String servicename1 = "Dye";
 			final String servicename2 = "VPS1";
-			final String servicename3 = "Wheel Repair";
+			final String servicename3 = "Wheel Repair1";
 			
 			final String pricematrix = "New Matrix with assigned services";
 			final String pricematrixservice = "Matrix Service";

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ConfirmPasswordWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EmployeesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InsuranceCompaniesWePpage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
@@ -19,8 +20,11 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.UsersWebPage;
+import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -92,10 +96,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 27891:Company- Service Advisors: Authentication", description = "Company- Service Advisors: Authentication")
-	public void testCompanyServiceAdvisorsAuthentication() throws InterruptedException {
+	public void testCompanyServiceAdvisorsAuthentication() throws InterruptedException, IOException {
 		
-		final String email = "test123CD@domain.com";
-		final String psw = "111aaa";
+		//final String email = "test123CD@domain.com";
+		final String usermailprefix = "test.cyberiansoft+";
+		final String usermailpostbox = "@gmail.com";
+		final String confirmpsw = "111aaa";
 		final String customer = "001 - Test Company";
 		final String firstname = "test123CDF";
 		final String lastname = "test123CDF";
@@ -112,12 +118,41 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 			serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 		}
 		serviceadvisorspage.clickServiceAdvisorAddButton();
-		serviceadvisorspage.createNewServiceAdvisor(email, firstname, lastname, customer, role);
+		long currtime = java.lang.System.currentTimeMillis();
+		String usermail = "test.cyberiansoft+" + currtime + "@gmail.com";
+		serviceadvisorspage.createNewServiceAdvisor(usermail, firstname, lastname, customer, role);
 		
 		backofficeheader.clickLogout();
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(email, psw);
+		
+		boolean search = false;
+		String mailmessage = "";
+		for (int i=0; i < 4; i++) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "Test@email.com", "Please click link below to complete the registration process.")) {
+				serviceadvisorspage.waitABit(60*500);
+			} else {
+				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "Test@email.com");
+				if (mailmessage.length() > 3) {
+					search = true;
+					break;
+				}				
+			}
+		}
+		
+		String confirmationurl = "";
+		if (search) {
+			
+			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+			
+		}
+		
+		serviceadvisorspage.waitABit(60*1000);
+		webdriver.get(confirmationurl);
+		ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver,
+				ConfirmPasswordWebPage.class);
+		
+		
+		BackOfficeLoginWebPage loginpage = confirmpasswordpage.confirmUserPassword(confirmpsw);
+		loginpage.UserLogin(usermail, confirmpsw);
 		backofficeheader.clickHomeLink();	
 		
 		backofficeheader.clickLogout();
@@ -353,7 +388,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeerole = "Employee";
 		
 		//Edited employee
-		final String employeeteamed = "02_TimeRep_team";
+		final String employeeteamed = "Default team";
 		final String employeefirstnameed = "azalex2";
 		final String employeelastnameed = "avalex2";
 		final String employeepswed = "1234";

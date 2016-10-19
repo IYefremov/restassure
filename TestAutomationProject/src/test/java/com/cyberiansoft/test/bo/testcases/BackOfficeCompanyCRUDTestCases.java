@@ -667,8 +667,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		final String wotypegroupby = "Panels";
 		final String wotypepriceaccess = "Hidden";
 		final String wotypesharingtype = "Team Sharing";
-		final String[] wotypeoptions = {"Approval Required", "Allow Delete", "Block for the same VIN", "Block for the same services", 
-				"Vehicle History Enforced", "Total Sale Required", "Allow Client Changing", "Status Reason Required"};
+		final String[] wotypeoptions = {"Approval Required", "Allow Delete", "Block Identical VIN", "Block Identical Services", 
+				"Vehicle History Enforced", "Total Sale Field Required", "Status Reason Required"};
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
