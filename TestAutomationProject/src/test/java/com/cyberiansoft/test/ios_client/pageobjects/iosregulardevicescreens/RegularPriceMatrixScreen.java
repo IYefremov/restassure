@@ -51,10 +51,10 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIATableView/UIATableCell[contains(@name,\"Technicians\")]/UIAStaticText[2]")
     private IOSElement technicianscellvalue;
 	
-	@iOSFindBy(name = "Compose")
+	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composecell;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Delete\"]")

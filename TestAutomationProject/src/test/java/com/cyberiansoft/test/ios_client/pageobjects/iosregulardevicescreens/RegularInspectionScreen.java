@@ -17,7 +17,7 @@ public class RegularInspectionScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Save\"]")
     private IOSElement savechangesbtn;
 	
-	@iOSFindBy(name = "Advisor")
+	@iOSFindBy(accessibility  = "Advisor")
     private IOSElement advisorcell;
 
 	public RegularInspectionScreen(AppiumDriver driver) {

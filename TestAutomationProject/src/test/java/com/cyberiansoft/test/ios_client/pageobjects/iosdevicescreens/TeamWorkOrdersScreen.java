@@ -16,7 +16,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(name = "Monitor")
+	@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
 	
 	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Search\"]")

@@ -23,13 +23,13 @@ public class SwipeableWebDriver extends AndroidDriver implements HasTouchScreen 
 		return touch;
 	}
 
-	@Override
+	//@Override
 	public MobileElement scrollTo(String text) {
 	// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	//@Override
 	public MobileElement scrollToExact(String text) {
 	// TODO Auto-generated method stub
 		return null;

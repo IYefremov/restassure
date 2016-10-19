@@ -15,10 +15,10 @@ public class RegularMainScreen {
 	
 	private AppiumDriver appiumdriver;
 	
-	@iOSFindBy(name = "UpdateMainDatabaseButton")
+	@iOSFindBy(accessibility  = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
 	
-	@iOSFindBy(name = "UpdateVinDatabaseButton")
+	@iOSFindBy(accessibility  = "UpdateVinDatabaseButton")
     private IOSElement updatevin;
 	
 	@iOSFindBy(xpath = "//UIASecureTextField[@value=\"Enter password here\"]")

@@ -13,7 +13,7 @@ import org.testng.Assert;
 
 public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(name = "services")
+	@iOSFindBy(accessibility  = "services")
 	private IOSElement tollbarservicesbtn;
 	
 	@iOSFindBy(uiAutomator = ".scrollViews()[1].toolbars()[1].buttons()['Close']")

@@ -31,13 +31,13 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"Login\"]/UIAButton[@name=\"Done icon\"]")
     private IOSElement servicedetailsdonebtn;
 	
-	@iOSFindBy(name = "custom detail button")
+	@iOSFindBy(accessibility  = "custom detail button")
     private IOSElement customservicestatusbtn;
 	
 	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Start Service\"]")
     private IOSElement startservicebtn;
 	
-	@iOSFindBy(name = "Start Phase")
+	@iOSFindBy(accessibility  = "Start Phase")
     private IOSElement startphasebtn;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name=\"Back\"]")

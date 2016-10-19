@@ -19,10 +19,10 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	@iOSFindBy(name = "Quantity")
+	@iOSFindBy(accessibility  = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(name = "Price")
+	@iOSFindBy(accessibility  = "Price")
     private IOSElement pricefld;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")

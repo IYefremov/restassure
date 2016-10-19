@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(name = "Print")
+	@iOSFindBy(accessibility  = "Print")
     private IOSElement printmenu;
 	
 	public TeamInvoicesScreen(AppiumDriver driver) {

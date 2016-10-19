@@ -27,13 +27,13 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(uiAutomator = ".popover().buttons()[\"Close\"]")
     private IOSElement closesearchbtn;
 	
-	@iOSFindBy(name = "Switch to web")
+	@iOSFindBy(accessibility = "Switch to web")
     private IOSElement switchtowebbtn;
 	
-	@iOSFindBy(name = "Invoices")
+	@iOSFindBy(accessibility = "Invoices")
     private IOSElement invoicesmenu;
 	
-	@iOSFindBy(name = "Work Orders")
+	@iOSFindBy(accessibility = "Work Orders")
     private IOSElement myworkordersmenumenu;
 	
 	public RegularCarHistoryScreen(AppiumDriver driver) {

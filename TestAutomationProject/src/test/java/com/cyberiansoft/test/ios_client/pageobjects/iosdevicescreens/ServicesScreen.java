@@ -22,22 +22,22 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String servicesscreencapt = "Services";
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(name = "Delete")
+	@iOSFindBy(accessibility  = "Delete")
     private IOSElement deletebtn;
 	
-	@iOSFindBy(name = "AvailableServicesSwitchButton")
+	@iOSFindBy(accessibility  = "AvailableServicesSwitchButton")
     private IOSElement servicetypesbtn;
 	
-	@iOSFindBy(name = "Price Matrices")
+	@iOSFindBy(accessibility  = "Price Matrices")
     private IOSElement pricematrixespopupname;
 	
-	@iOSFindBy(name = "Compose")
+	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composebtn;
 	
 	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")

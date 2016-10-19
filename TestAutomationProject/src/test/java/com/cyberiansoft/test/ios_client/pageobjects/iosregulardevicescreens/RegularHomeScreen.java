@@ -18,37 +18,37 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(name = "Customers")
+	@iOSFindBy(accessibility  = "Customers")
     private IOSElement customersbtn;
 	
-	@iOSFindBy(name = "My Inspections")
+	@iOSFindBy(accessibility  = "My Inspections")
     private IOSElement myinspectionsbtn;
 	
-	@iOSFindBy(name = "Team Inspections")
+	@iOSFindBy(accessibility  = "Team Inspections")
     private IOSElement teaminspectionsbtn;
 	
-	@iOSFindBy(name = "My Work Orders")
+	@iOSFindBy(accessibility  = "My Work Orders")
     private IOSElement myworkordersbtn;
 	
-	@iOSFindBy(name = "Car History")
+	@iOSFindBy(accessibility  = "Car History")
     private IOSElement carhistorybtn;
 	
-	@iOSFindBy(name = "My Invoices")
+	@iOSFindBy(accessibility  = "My Invoices")
     private IOSElement myinvoicesbtn;
 	
-	@iOSFindBy(name = "Service Requests")
+	@iOSFindBy(accessibility  = "Service Requests")
     private IOSElement servicerequestsbtn;
 	
-	@iOSFindBy(name = "Status")
+	@iOSFindBy(accessibility  = "Status")
     private IOSElement statustsbtn;
 	
-	@iOSFindBy(name = "Team Work Orders")
+	@iOSFindBy(accessibility  = "Team Work Orders")
     private IOSElement temworkorderstsbtn;
 	
-	@iOSFindBy(name = "Settings")
+	@iOSFindBy(accessibility  = "Settings")
     private IOSElement settingstsbtn;
 	
-	@iOSFindBy(name = "logout")
+	@iOSFindBy(accessibility  = "logout")
     private IOSElement logoutbtn;
 	
 	public RegularHomeScreen(AppiumDriver driver) {

@@ -44,7 +44,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Quantity']")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(name = "Notes")
+	@iOSFindBy(accessibility  = "Notes")
     private IOSElement notesfld;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"Vehicle Parts\"]")

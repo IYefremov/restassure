@@ -31,10 +31,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[contains(@name,\"Vehicle Part\")]/UIAStaticText[2]")
     private IOSElement vehiclepartsfld;
 	
-	@iOSFindBy(name = "Vehicle Part")
+	@iOSFindBy(accessibility  = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
-	@iOSFindBy(name = "Questions")
+	@iOSFindBy(accessibility  = "Questions")
     private IOSElement questionsfld;
 	
 	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Remove\"]")
@@ -43,7 +43,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(name = "Notes")
+	@iOSFindBy(accessibility  = "Notes")
     private IOSElement notesfld;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"Vehicle Parts\"]")

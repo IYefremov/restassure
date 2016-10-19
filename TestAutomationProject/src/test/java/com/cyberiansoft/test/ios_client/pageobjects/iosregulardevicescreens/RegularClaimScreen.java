@@ -24,7 +24,7 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Deductible\"]/UIATextField[1]")
     private IOSElement deductiblefld;
 	
-	@iOSFindBy(name = "Done")
+	@iOSFindBy(accessibility  = "Done")
     private IOSElement donebtn;
 	
 	public RegularClaimScreen(AppiumDriver driver) {

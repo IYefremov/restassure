@@ -20,13 +20,13 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String ordersummaryscreencapt = "Summary";
 	
-	@iOSFindBy(name = "Default")
+	@iOSFindBy(accessibility  = "Default")
     private IOSElement defaultinvoicetype;
 	
 	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name=\"Total Sale\"]/UIATextField[1]")
     private IOSElement totalsalefld;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
 	private By approveandcreateinvoicechekbox = By.name("checkbox unchecked");

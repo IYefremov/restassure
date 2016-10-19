@@ -12,10 +12,10 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(name = "window screen")
+	@iOSFindBy(accessibility  = "window screen")
     private IOSElement windowscreen;
 	
-	@iOSFindBy(name = "notes")
+	@iOSFindBy(accessibility  = "notes")
     private IOSElement signatureelement;
 	
 	

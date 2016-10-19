@@ -20,10 +20,10 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(name = "btnWholesale")
+	@iOSFindBy(accessibility  = "btnWholesale")
     private IOSElement btnwholesale;
 	
-	@iOSFindBy(name = "btnRetail")
+	@iOSFindBy(accessibility  = "btnRetail")
     private IOSElement btnretail;
 	
 	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Add\"]")
@@ -35,13 +35,13 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
     private IOSElement searchbar;
 	
-	@iOSFindBy(name = "Edit")
+	@iOSFindBy(accessibility  = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(name = "Select")
+	@iOSFindBy(accessibility  = "Select")
     private IOSElement selectpopupmenu;
 	
-	@iOSFindBy(name = "Top Customers")
+	@iOSFindBy(accessibility  = "Top Customers")
 	private List<IOSElement> topcustomers;
 	
 	public RegularCustomersScreen(AppiumDriver driver) {

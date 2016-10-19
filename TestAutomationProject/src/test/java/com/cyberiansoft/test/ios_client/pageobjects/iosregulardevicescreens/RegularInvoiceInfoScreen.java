@@ -24,10 +24,10 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[@name=\"PO#\"]/UIATextField[1]")
     private IOSElement setpofld;
 	
-	@iOSFindBy(name = "Save")
+	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(name = "Cancel")
+	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
 	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAButton[@name=\"Return\"]")
