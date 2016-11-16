@@ -723,7 +723,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyServicePackagesCRUD() throws Exception {
 
 		final String servicepackagename = "testpackage";
-		final String servicepackagetype = "Bundle";
+		final String servicepackagetype = "Package";
 		final String servicepackageformtype = "Order";	
 		final String servicepackagetechcomm = "2.00";	
 		final String servicepackageadvcomm = "5.00";
