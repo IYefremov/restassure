@@ -71,7 +71,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void verifyPanelStatus(String panelname, String status) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[2]").getAttribute("name").equals(status));
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[@name='" + status + "']").size() > 0);
 	}
 	
 	public void verifyPanelStatusInPopup(String panelname, String status) {

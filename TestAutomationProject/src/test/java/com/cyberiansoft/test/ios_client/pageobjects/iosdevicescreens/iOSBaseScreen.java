@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -181,23 +182,30 @@ public class iOSBaseScreen {
 		int startx = size.width / 2;
 		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
 		//Swipe from Bottom to Top.
-		appiumdriver.swipe(startx, starty, startx, endy, 2000);
+		TouchAction act = new TouchAction(appiumdriver);
+		act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
+		Helpers.waitABit(2000);
 	}
 	
 	public void swipeScreenRight() {
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);
-		int starty = size.height / 2;		
-		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		int starty = size.height / 2;	
+		TouchAction act = new TouchAction(appiumdriver);
+		act.press(endx, starty).waitAction(2000) .moveTo(startx, starty).release().perform();
+		
+		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 	
 	public void swipeScreenLeft() {
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.80);
 		int endx = (int) (size.width * 0.20);
-		int starty = size.height / 2;		
-		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		int starty = size.height / 2;	
+		TouchAction act = new TouchAction(appiumdriver);
+		act.press(endx, starty).waitAction(2000) .moveTo(startx, starty).release().perform();
+		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 
 }

@@ -30,6 +30,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_FOR_FEE_ITEM_IN_2_PACKS = "WO_for_fee_item_in_2_packs";
 	public static final String WO_FEE_PRICE_OVERRIDE = "WO_fee_price_override";
 	public static final String WO_TYPE_FOR_CALC = "WO_type_for_calc";
+	public static final String WO_SMOKE_MONITOR = "WO_smoke_monitor";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";

@@ -81,6 +81,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	private final String mail = "test@cyberiansoft.com";
 	private final String state = "California";
 	private final String country = "United States";
+	
+	String inspnumber47279 = "";
 
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
@@ -2326,7 +2328,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Thread.sleep(4000);
 		myworkordersscreen.searchWO(wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		
 		Assert.assertEquals(vehiclescreeen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -3375,7 +3377,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
 		Helpers.waitABit(2000);
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE), "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
@@ -3439,8 +3441,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clickStartPhase();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
@@ -3638,7 +3640,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE), "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
 
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
@@ -3649,9 +3651,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
-		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
 				
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
@@ -4294,9 +4296,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveButton();
 		
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
@@ -6062,7 +6061,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		
 		vehiclescreeen.setVIN(VIN);
-		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		inspnumber47279 = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen("Zayats Section1");
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.swipeScreenUp();
@@ -6371,5 +6370,28 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		
 		teaminspectionsscreen.clickHomeButton();		
+	}
+	
+	@Test(testName = "Test Case 47257:WO: Regular - Verify that on Price Matrix step sub total is shown correctly", 
+			description = "Verify that on Price Matrix step sub total is shown correctly",
+			dependsOnMethods = { "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" })
+	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() throws Exception {
+		
+		inspnumber47279 = "E-002-12606";
+		
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.selectInspectionForApprove(inspnumber47279);
+		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
+		
+		approveinspscreen.approveInspectionApproveAllAndSignature();
+		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber47279);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.WO_SMOKE_MONITOR);
+		myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.assertTotalAmauntIsCorrect("$298.00");
+		
+		servicesscreen.cancelOrder();
+		myinspectionsscreen.clickHomeButton();
 	}
 }
