@@ -55,7 +55,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -122,7 +122,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -189,7 +189,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -281,7 +281,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -376,7 +376,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -472,7 +472,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "USG";
+		final String insurance = "Company1";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
