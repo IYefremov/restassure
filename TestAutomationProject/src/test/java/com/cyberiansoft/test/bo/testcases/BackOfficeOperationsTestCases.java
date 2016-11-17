@@ -356,7 +356,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			final String _model = "Accord";
 			final String _year = "2001";
 			
-			final String insurance = "USG";
+			final String insurance = "Company1";
 			final String _label = "test";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,

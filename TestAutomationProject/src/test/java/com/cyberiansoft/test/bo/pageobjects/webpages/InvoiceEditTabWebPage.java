@@ -201,7 +201,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 		customerwholesaleradio.click();
 		entercustomerwholesalefld.sendKeys(customername.substring(0, 3));
 		waitABit(2000);
-		driver.findElement(By.xpath("//ul/li/a[text()='" + customername + "']")).click();
+		driver.findElement(By.xpath("//ul/li/div[text()='" + customername + "']")).click();
 	}
 	
 	public String getInvoiceCustomer() {

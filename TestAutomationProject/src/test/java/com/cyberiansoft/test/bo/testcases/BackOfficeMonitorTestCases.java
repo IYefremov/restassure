@@ -168,10 +168,10 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
 		averagerepairtimereportpage.selectSearchLocation("Default Location");
-		averagerepairtimereportpage.selectSearchWOType("New Car");
+		averagerepairtimereportpage.selectSearchWOType("Lilia");
 		averagerepairtimereportpage.setSearchFromDate("3/1/2013");
 		averagerepairtimereportpage.clickFindButton();
-		averagerepairtimereportpage.verifySearchResults("Default Location", "New Car");
+		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
 		
 	}
 	
