@@ -382,7 +382,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditInvoice(invoicenumber);
 		invoiceeditpage.changeInvoiceWholesaleCustomer(invoicecustomername);
-		invoiceeditpage.waitABit(1000);
+		invoiceeditpage.waitABit(1500);
 		Assert.assertEquals(invoicecustomername, invoiceeditpage.getInvoiceCustomer());
 		invoiceeditpage.closeNewTab(mainWindowHandle);
 	}
