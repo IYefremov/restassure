@@ -603,8 +603,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			description = "Operations: CLUser - Verify that accepted SR is in read-only mode (not possible to edit)")
 	@Parameters({ "user.name", "user.psw" })
 	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String userName, String userPassword) throws InterruptedException {
-
-		
+	
 		final String addsrvalue = "SR_type_WO_auto_create";
 		
 		final String VIN = "1GC5KXBG1AZ501950";
