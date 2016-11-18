@@ -150,7 +150,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	        	webdriver.switchTo().window(activeHandle);
 	        }
 	    }
-		
+		Thread.sleep(5000);
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(po));		
 		invoicepaymentstab.clickNotesForInvoicesPaymentsLastTableRow();
@@ -300,7 +300,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(2000);
 		Assert.assertTrue(invoicespage.sendInvoiceEmail(invoicenumber, usermail));
-		Thread.sleep(10000);
+		Thread.sleep(30*1000);
 		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(invoicenumber);
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(usermail));
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));
@@ -339,7 +339,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		
 		sendinvoicecustomemailtab.closeNewTab(mainWindowHandle);
 		
-		Thread.sleep(10000);
+		Thread.sleep(30*1000);
 		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(invoicenumber);
 		Assert.assertEquals(usermail, invoiceemailactivitytab.getFirstRowRecipientsValue());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));

@@ -198,6 +198,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public void clickAddServiceRequestButton() { 
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
 		click(addservicerequestbtn);	
 		waitABit(100);
 		new WebDriverWait(driver, 30)
