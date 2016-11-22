@@ -170,6 +170,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.selectSearchLocation("Default Location");
 		averagerepairtimereportpage.selectSearchWOType("Lilia");
 		averagerepairtimereportpage.setSearchFromDate("3/1/2013");
+		averagerepairtimereportpage.waitABit(1000);
 		averagerepairtimereportpage.clickFindButton();
 		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
 		

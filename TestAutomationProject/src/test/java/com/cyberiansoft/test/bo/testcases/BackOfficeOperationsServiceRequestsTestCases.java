@@ -233,8 +233,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
 		
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
-		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(BackOfficeUtils.getDayAfterTomorrowDateFormatted());
+		appointmentpopup.setToDateValue(BackOfficeUtils.getDayAfterTomorrowDateFormatted());
 		appointmentpopup.setStartTimeValue("8:00 AM");
 		appointmentpopup.setEndTimeValue("8:40 AM");
 		Thread.sleep(1000);

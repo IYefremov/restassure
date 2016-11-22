@@ -93,7 +93,7 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 	}
 	
 	public void clickFindButton() { 
-		waitABit(1000);
+		waitABit(300);
 		clickAndWait(findbtn);
 	}
 	
