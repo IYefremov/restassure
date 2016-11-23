@@ -31,6 +31,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_FEE_PRICE_OVERRIDE = "WO_fee_price_override";
 	public static final String WO_TYPE_FOR_CALC = "WO_type_for_calc";
 	public static final String WO_SMOKE_MONITOR = "WO_smoke_monitor";
+	public static final String WO_SMOKE_TEST = "WO_smoke_test";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
@@ -48,6 +49,7 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_FOR_CALC = "Insp_for_calc";
 	public static final String INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT = "Insp_for_auto_WO_line_appr_multiselect";
 	public static final String INSP_FOR_AUTO_WO_LINE_APPR = "Inspection_for_auto_WO_line_appr";
+	public static final String INSP_WITH_PART_SERVICES = "Insp_with_part_services";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";
@@ -82,6 +84,7 @@ public class iOSInternalProjectConstants {
     public static final String SR_S1_MONEY_VEHICLE = "SR_S1_Money_Vehicle";
     public static final String SR_S1_MONEY_PANEL = "SR_S1_Money_Panel";
     public static final String SR_S1_MONEY = "SR_S1_Money";
+    public static final String SR_S1_MONEY_FLATFEE = "SR_S1_Money_FlatFee";
     public static final String SR_DISC_20_PERCENT = "SR_Disc_20_Percent";
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     public static final String SR_S4_BUNDLE = "SR_S4_Bundle";

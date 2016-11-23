@@ -179,6 +179,10 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		String msg = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
+	
+	public String getPriceMatrixVehiclePartSubTotalPrice() {
+		return appiumdriver.findElement(MobileBy.xpath("//UIAToolbar[1]/UIAStaticText[1]")).getAttribute("value");
+	}
 
 	public String getInspectionSubTotalPrice() {
 		return appiumdriver.findElement(MobileBy.xpath("//UIAStaticText[@name='SubtotalAmount']")).getAttribute("value");

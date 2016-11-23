@@ -170,5 +170,9 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 		String msg = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
+	
+	public String getPriceMatrixVehiclePartSubTotalPrice() {
+		return appiumdriver.findElement(MobileBy.xpath("//UIAToolbar[2]/UIAStaticText[1]")).getAttribute("value");
+	}
 
 }

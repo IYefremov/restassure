@@ -32,8 +32,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name,\"Vehicle Part\")]/UIAStaticText[2]")
     private IOSElement vehiclepartsfld;
 	
+	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name,\"Service Part\")]/UIAStaticText[2]")
+    private IOSElement servicepartfld;
+	
 	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Vehicle Part']")
     private IOSElement vehiclepartscell;
+	
+	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Service Part']")
+    private IOSElement servicepartscell;
 	
 	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Questions']")
     private IOSElement questionsfld;
@@ -87,12 +93,22 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		  .until(ExpectedConditions.elementToBeClickable(vehiclepartscell)).click();
 	}
 	
+	public ServicePartPopup clickServicePartCell() {
+		new WebDriverWait(appiumdriver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(servicepartscell)).click();
+		return new ServicePartPopup(appiumdriver);
+	}
+	
 	public void clickNotesCell() {
 		notesfld.click();
 	}
 
 	public String getVehiclePartValue() {
 		return vehiclepartsfld.getAttribute("name");
+	}
+	
+	public String getServicePartValue() {
+		return servicepartfld.getAttribute("name");
 	}
 
 	public void answerQuestion(String answer) {
@@ -119,6 +135,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
 	}
 
+	public void answerQuestionCheckButton() {
+
+		questionsfld.click();
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
+		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
+	}
+	
 	public void setServiceQuantityValue(String _quantity)
 			throws InterruptedException {	
 		
@@ -326,6 +350,10 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		boolean exists =  appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Questions']")).size() > 0;
 		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.MILLISECONDS);
 		return exists;
+	}
+	
+	public String getServiceDetailsPriceValue() {
+		return appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAStaticText[1]").getAttribute("value");
 	}
 
 }

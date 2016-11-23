@@ -38,6 +38,7 @@ import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.QuestionsSc
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SelectEmployeePopup;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SelectedServiceDetailsScreen;
+import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServicePartPopup;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServiceRequestsScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServicesScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SettingsScreen;
@@ -47,7 +48,6 @@ import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamInvoice
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VehicleScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VisualInteriorScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularServicesScreen;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -85,7 +85,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	private final String mail = "test@cyberiansoft.com";
 	private final String state = "California";
 	private final String country = "United States";
-
+	
+	String inspnumber47249 = "";
+	
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
@@ -126,6 +128,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
 	}
 	
 	//Test Case 8438:Update database on the device
@@ -3374,6 +3379,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen("Zayats test pack");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");
 		servicesscreen.selectService("VP1 zayats");		
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("VP1 zayats");
@@ -4818,7 +4824,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
+		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
 		servicesscreen.clickSaveButton();
 		
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
@@ -4897,7 +4903,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);		
 		approveinspscreen.approveInspectionWithSelectionAndSignature(inspectnumber);
 		myinspectionsscreen.clickBackServiceRequest();
-		
+		Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();
@@ -6276,10 +6282,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
-		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -6334,10 +6342,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
-		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		VehicleScreen vehiclescreeen = myinspectionsscreen.selectDefaultInspectionType();
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -6370,11 +6380,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i < 3; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
-			CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
-			customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
@@ -6423,10 +6435,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
-		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType ("Inspection_group_service");
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -6543,7 +6557,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 47249:Inspections: HD - Verify that on Price matrix step sub total value is shown correctly", 
 			description = "Verify that on Price matrix step sub total value is shown correctly")
-	public void testHDVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly() throws Exception {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6566,7 +6580,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		
+		inspnumber47249 = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen("Zayats Section1");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
@@ -6891,5 +6905,1012 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(teaminspectionsscreen.isDraftIconPresentForInspection(inspnumber));
 		teaminspectionsscreen.clickHomeButton();
 	}
+	
+	@Test(testName = "Test Case 47257:WO: Regular - Verify that on Price Matrix step sub total is shown correctly", 
+			description = "Verify that on Price Matrix step sub total is shown correctly",
+			dependsOnMethods = { "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" })
+	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() throws Exception {
 		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.selectInspectionForApprove(inspnumber47249);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.approveInspectionApproveAllAndSignature(inspnumber47249);
+		
+		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber47249);
+		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_MONITOR);
+		myworkordersscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$298.00");
+		servicesscreen.assertServiceIsSelectedWithServiceValues("Dent Removal", "$112.50");
+		servicesscreen.assertServiceIsSelectedWithServiceValues("Dent Removal", "$130.50");
+		servicesscreen.cancelOrder();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 30672:WO: HD - Verify that money value of some percentage service is rounds up after 0.095", 
+			description = "HD - Verify that money value of some percentage service is rounds up after 0.095")
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095()
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String srs1moneyprice  = "40";
+		final String srs1moneyflatfeeprice  = "8.25";
+		final String discountvalue = "6";
+		final String servicetotalprice = "$2.90";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+			
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		//servicesscreen.clickToolButton();
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		SelectedServiceDetailsScreen regularselectedservicedetailsscreen = new SelectedServiceDetailsScreen(appiumdriver);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyprice);
+		regularselectedservicedetailsscreen.clickVehiclePartsCell();
+		regularselectedservicedetailsscreen.selectVehiclePart("Grill");
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyflatfeeprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		regularselectedservicedetailsscreen.setServicePriceValue(discountvalue);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelOrder();
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 30675:WO: HD - Verify that money value of some percentage service is rounds down after 0.003", 
+			description = "HD - Verify that money value of some percentage service is rounds down after 0.003")
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003()
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String srs1moneyprice  = "40";
+		final String srs1moneyflatfeeprice  = "1.38";
+		final String discountvalue = "6";
+		final String servicetotalprice = "$2.48";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+			
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		//servicesscreen.clickToolButton();
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		SelectedServiceDetailsScreen regularselectedservicedetailsscreen = new SelectedServiceDetailsScreen(appiumdriver);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyprice);
+		regularselectedservicedetailsscreen.clickVehiclePartsCell();
+		regularselectedservicedetailsscreen.selectVehiclePart("Grill");
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyflatfeeprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		regularselectedservicedetailsscreen.setServicePriceValue(discountvalue);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelOrder();
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 30676:WO: HD - Verify that money value of some percentage service is rounds up after 0.005", 
+			description = "HD - Verify that money value of some percentage service is rounds up after 0.005")
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005()
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String srs1moneyprice  = "20";
+		final String srs1moneyflatfeeprice  = "8.09";
+		final String discountvalue = "6";
+		final String servicetotalprice = "$1.69";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+			
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		//servicesscreen.clickToolButton();
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		SelectedServiceDetailsScreen regularselectedservicedetailsscreen = new SelectedServiceDetailsScreen(appiumdriver);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyprice);
+		regularselectedservicedetailsscreen.clickVehiclePartsCell();
+		regularselectedservicedetailsscreen.selectVehiclePart("Grill");
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyflatfeeprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		regularselectedservicedetailsscreen.setServicePriceValue(discountvalue);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		
+		regularselectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
+		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelOrder();
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 29398:WO: HD - Verify that Fee Bundle services is calculated for additional matrix services", 
+			description = "Verify that Fee Bundle services is calculated for additional matrix services")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String _pricematrix  = "Roof";
+		final String price  = "54";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_TEST_FEE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("All Services");
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService("SR_S5_Matrix_DE_TE");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix(_pricematrix);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice(price);
+		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
+		pricematrix.selectDiscaunt("SR_S5_Mt_Money");
+		pricematrix.selectDiscaunt("SR_S5_Mt_Upcharge_25");
+		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$2,117.50");
+		pricematrix.clickSaveButton();
+		InspectionToolBar toolabar = new InspectionToolBar(appiumdriver);
+		Assert.assertEquals(toolabar.getInspectionTotalPrice(), "$2,127.50");
+		servicesscreen.clickSaveButton();
+		myworkordersscreen.clickHomeButton();
+		Helpers.waitABit(1*60*1000);
+		webdriverInicialize();
+		
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		WorkOrdersWebPage wopage = PageFactory.initElements(webdriver,
+				WorkOrdersWebPage.class);
+		wopage.makeSearchPanelVisible();
+		wopage.setSearchOrderNumber(wonumber);
+		wopage.clickFindButton();
+		String mainWindowHandle = webdriver.getWindowHandle();
+		WorkOrderInfoTabWebPage woinfowebpage = wopage.clickWorkOrderInTable(wonumber);
+		Assert.assertTrue(woinfowebpage.isServicePriceCorrectForWorkOrder("$2,127.50"));
+		Assert.assertTrue(woinfowebpage.isServiceSelectedForWorkOrder("SR_S6_FeeBundle"));
+
+		woinfowebpage.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Test(testName="Test Case 31498:WO: HD - Verify that amount is calculated and rounded correctly", 
+			description = "Verify that amount is calculated and rounded correctly")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String[] prices  = { "160", "105", "400", "195", "2400", "180", "160", "105", "300" };
+		final String discount  = "-25";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		for (String _price : prices) {
+			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+			selectedservicedetailscreen.setServicePriceValue(_price);
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		selectedservicedetailscreen.setServicePriceValue(discount);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Hood");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService("Tax discount");
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$3,153.94");
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		
+		ordersummaryscreen.clickSaveButton();
+		myworkordersscreen.clickHomeButton();
+		
+		Helpers.waitABit(60*1500);
+		webdriverInicialize();
+		
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		WorkOrdersWebPage wopage = PageFactory.initElements(webdriver,
+				WorkOrdersWebPage.class);
+		wopage.makeSearchPanelVisible();
+		wopage.setSearchOrderNumber(wonumber);
+		wopage.clickFindButton();
+		String mainWindowHandle = webdriver.getWindowHandle();
+		WorkOrderInfoTabWebPage woinfowebpage = wopage.clickWorkOrderInTable(wonumber);
+		Assert.assertTrue(woinfowebpage.isServicePriceCorrectForWorkOrder("$3,153.94"));
+
+		woinfowebpage.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
+			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount(String userName, String userPassword) throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Hood");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForApprove(inspnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspnumber);
+		approveinspscreen.clickDeclineAllServicesButton();
+		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)");
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+		myinspectionsscreen.clickHomeButton();
+		Thread.sleep(10000);
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InspectionsWebPage inspectionspage = PageFactory.initElements(
+				webdriver, InspectionsWebPage.class);
+		inspectionspage.makeSearchPanelVisible();
+		inspectionspage.selectSearchStatus("All active");
+		inspectionspage.searchInspectionByNumber(inspnumber);		
+		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
+		Assert.assertEquals(inspectionspage.getInspectionStatus(inspnumber), "Approved");
+		Assert.assertEquals(inspectionspage.getInspectionApprovedTotal(inspnumber), "$2000.00");
+		getWebDriver().quit();
+	}
+	
+	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount", 
+			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc(String userName, String userPassword) throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Hood");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForApprove(inspnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspnumber);
+		approveinspscreen.clickSkipAllServicesButton();		
+		approveinspscreen.clickSaveButton();
+		approveinspscreen.clickDoneStatusReasonButton();
+		Helpers.acceptAlert();
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+		
+		myinspectionsscreen.clickHomeButton();
+		Thread.sleep(10000);
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InspectionsWebPage inspectionspage = PageFactory.initElements(
+				webdriver, InspectionsWebPage.class);
+		inspectionspage.makeSearchPanelVisible();
+		inspectionspage.selectSearchStatus("Declined");
+		inspectionspage.searchInspectionByNumber(inspnumber);		
+		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$0.00");
+		Assert.assertEquals(inspectionspage.getInspectionApprovedTotal(inspnumber), "$0.00");
+		getWebDriver().quit();
+	}
+	
+	@Test(testName="Test Case 42184:WO: HD - Verify that message is shown total is over limitation 999999999.999", 
+			description = "Verify that message is shown total is over limitation 999999999.999")
+	public void testWOVerifyThatMessageIsShownTotalIsOverLimitation()
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_TEST);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServicePriceValue("999999.00");
+		selectedservicedetailscreen.setServiceQuantityValue("98765");
+		
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.clickSaveButton();
+		
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Total amount of work order is huge."));
+		Assert.assertTrue(alerttext.contains("Maximum allowed total amount is $999,999,999.99"));
+		ordersummaryscreen.swipeScreenLeft();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		selectedservicedetailscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServiceQuantityValue("987");
+		
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveButton();
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 42183:Invoices: Regular - Verify that message is shown total is over limitation 999,999,999.999", 
+			description = "Verify that message is shown total is over limitation 999,999,999.999")
+	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation()
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wo1 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServicePriceValue("999999.00");
+		selectedservicedetailscreen.setServiceQuantityValue("987");
+		
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wo2 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServicePriceValue("999999.00");
+		selectedservicedetailscreen.setServiceQuantityValue("987");
+		
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.clickSaveButton();
+		myworkordersscreen.approveWorkOrderWithoutSignature(wo1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
+		myworkordersscreen.clickInvoiceIcon();
+		
+		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType("Invoice_Custom1");
+		invoiceinfoscreen.selectNextScreen("Info");
+		invoiceinfoscreen.setPO("123");
+		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsDraft();
+		
+		myworkordersscreen.approveWorkOrderWithoutSignature(wo2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myworkordersscreen.clickHomeButton();
+		
+		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		myinvoicesscreen.selectInvoice(invoicenum);
+		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen.selectNextScreen("Info");
+		invoiceinfoscreen.addWorkOrder(wo2);
+		invoiceinfoscreen.clickSaveButton();
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Total amount of invoice is huge."));
+		Assert.assertTrue(alerttext.contains("Maximum allowed total amount is $999,999,999.99"));
+		ordersummaryscreen.swipeScreenLeft();
+		invoiceinfoscreen.cancelInvoice();
+		myinvoicesscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 42182:Inspection: HD - Verify that message is shown total is over limitation 999999999.999", 
+			description = "Inspection: Verify that message is shown total is over limitation 999999999.999")
+	public void testInspectionVerifyThatMessageIsShownTotalIsOverLimitation() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServicePriceValue("999999.00");
+		selectedservicedetailscreen.setServiceQuantityValue("98765");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveButton();
+		String alerttext = Helpers.getAlertTextAndAccept();
+		
+		Assert.assertTrue(alerttext.contains("Total amount of inspection is huge."));
+		Assert.assertTrue(alerttext.contains("Maximum allowed total amount is $999,999,999.99"));
+		selectedservicedetailscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServiceQuantityValue("987");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveAsDraft();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 33664:Inspections: HD - Verify that services are marked as strikethrough when exclude from total", 
+			description = "Inspections: HD - Verify that services are marked as strikethrough when exclude from total")
+	public void testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String inspectionnumber = vehiclescreeen.getInspectionNumber();
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Grill");
+		selectedservicedetailscreen.selectVehiclePart("Hood");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$1,050.00");
+		for (int i = 0; i < 2; i++) {
+			selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+			selectedservicedetailscreen.selectVehiclePart("Right Door Mirror");
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$2,050.00");
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
+		questionsscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspectionnumber);
+		approveinspscreen.clickApproveAllServicesButton();
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspectionnumber), "$2,050.00");
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	String inspnumber48543 = "";
+		
+	@Test(testName = "Test Case 48543:Inspections: HD - Verify that part services with different configurations are correctly shown for inspection", 
+			description = "Inspections: HD - Verify that part services with different configurations are correctly shown for inspection")
+	public void testVerifyInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_WITH_PART_SERVICES);
+		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		inspnumber48543 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.clickSaveAsDraft();
+		
+		myinspectionsscreen.selectInspectionForEdit(inspnumber48543);
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
+		ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
+		servicepartpopup.selectServicePartSubcategory("Filters");
+		servicepartpopup.selectServicePartSubcategoryPart("Engine Oil Filter");
+		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("2.35");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Driver Seat");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
+		selectedservicescreen.setServicePriceValue("2.5");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("VP1 zayats");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		servicepartpopup.selectServicePartCategory("Body");
+		servicepartpopup.selectServicePartSubcategory("Bumper");
+		servicepartpopup.selectServicePartSubcategoryPart("Bumper");
+		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("5.09");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.answerQuestionCheckButton();		
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_several");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		servicepartpopup.selectCategory("Air and Fuel Delivery");
+		servicepartpopup.selectServicePartSubcategory("Filters");
+		servicepartpopup.selectServicePartSubcategoryPart("Air Filter");
+		servicepartpopup.selectServicePartSubcategoryPosition("Inner");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("7");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
+		servicepartpopup.selectServicePartSubcategoryPart("Bumper Air Shield");
+		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("4.31");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("VP1 zayats");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		vehiclescreeen.selectNextScreen("Future Audi Car");
+		VisualInteriorScreen visualinteriorscreen = new VisualInteriorScreen(appiumdriver);
+		visualinteriorscreen.switchToCustomTab();
+		visualinteriorscreen.selectService("None");
+		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
+		Helpers.tapCarImage();
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
+		servicepartpopup.selectServicePartSubcategoryPart("Bumper Assembly");
+		servicepartpopup.selectServicePartSubcategoryPosition("Front");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("6.43");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("VP1 zayats");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		vehiclescreeen.selectNextScreen("PM_New");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix("VP1 zayats");
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice("10");
+		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
+		servicepartpopup.selectServicePartSubcategory("Electrical Connectors");
+		servicepartpopup.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
+		servicepartpopup.saveSelectedServicePart();	
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
+		selectedservicescreen.setServicePriceValue("12.44");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		pricematrix.clickDiscaunt("Oksi_Part_Name");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Belts and Cooling");
+		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Hardware");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("2.13");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$24.57");
+		
+		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServiceQuantityValue("3");
+		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$82.13");
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$49.45");
+		
+		servicesscreen.clickSaveAsFinal();
+		myinspectionsscreen.clickHomeButton();
+	}
+	
+	
+	@Test(testName = "Test Case 48562:WO: HD - Verify that part services are copied from insp to order", 
+			description = "WO: HD - Verify that part services are copied from insp to order")
+	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() throws Exception {
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.selectInspectionForAction(inspnumber48543);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspnumber48543);
+		approveinspscreen.clickApproveAllServicesButton();
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+	
+		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber48543);
+		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.selectWorkOrderType("WO_with_part_service");
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$77.13");
+		vehiclescreeen.clickSaveButton();
+		
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$77.13");
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	String wonumber48563 = "";
+	
+	@Test(testName = "Test Case 48563:WO: HD - Verify that part services with different configurations are correctly shown for WO", 
+			description = "WO: HD - Verify that part services with different configurations are correctly shown for WO")
+	public void testInspectionThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		
+		myworkordersscreen.selectWorkOrderType("WO_with_part_service");
+		myworkordersscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		wonumber48563 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");		
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.selectWorkOrderForEidt(wonumber48563);
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
+		ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
+		servicepartpopup.selectServicePartSubcategory("Filters");
+		servicepartpopup.selectServicePartSubcategoryPart("Engine Oil Filter");
+		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("2.35");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Driver Seat");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
+		selectedservicescreen.setServicePriceValue("2.5");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("VP1 zayats");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		servicepartpopup.selectServicePartCategory("Body");
+		servicepartpopup.selectServicePartSubcategory("Bumper");
+		servicepartpopup.selectServicePartSubcategoryPart("Bumper");
+		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("5.09");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.answerQuestionCheckButton();		
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_several");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		servicepartpopup.selectCategory("Air and Fuel Delivery");
+		servicepartpopup.selectServicePartSubcategory("Filters");
+		servicepartpopup.selectServicePartSubcategoryPart("Air Filter");
+		servicepartpopup.selectServicePartSubcategoryPosition("Inner");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("7");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
+		servicepartpopup.selectServicePartSubcategoryPart("Bumper Air Shield");
+		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("4.31");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("VP1 zayats");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectService("PM_New");	
+		servicesscreen.selectService("VP1 zayats");	
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice("10");
+		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
+		servicepartpopup.selectServicePartSubcategory("Electrical Connectors");
+		servicepartpopup.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
+		servicepartpopup.saveSelectedServicePart();	
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
+		selectedservicescreen.setServicePriceValue("12.44");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		pricematrix.clickDiscaunt("Oksi_Part_Name");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
+		servicepartpopup = selectedservicescreen.clickServicePartCell();
+		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Belts and Cooling");
+		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Hardware");
+		servicepartpopup.saveSelectedServicePart();	
+		selectedservicescreen.setServicePriceValue("2.13");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		//Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$24.57");
+		
+		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServiceQuantityValue("3");
+		selectedservicescreen.saveSelectedServiceDetails();
+		pricematrix.clickSaveButton();
+		//Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$82.13");
+		//Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$49.45");
+		servicesscreen.clickSaveButton();
+		myworkordersscreen.clickHomeButton();
+	}
 }

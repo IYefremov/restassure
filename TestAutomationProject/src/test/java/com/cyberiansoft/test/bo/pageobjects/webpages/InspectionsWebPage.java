@@ -506,6 +506,29 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		
 	}
 	
+	public String getInspectionApprovedTotal(String inspnumber) {
+		String totalapproved = "";
+		clickInspectionLink(inspnumber);
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		waitForNewTab();
+		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
+		Set<String> handles = driver.getWindowHandles();
+		Iterator<String> it = handles.iterator();
+		// iterate through your windows
+		while (it.hasNext()) {
+			String parent = it.next();
+			String newwin = it.next();
+			driver.switchTo().window(newwin);
+			driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+			waitABit(10000);
+			WebElement totalrow = driver.findElement(By.xpath("//tr[@class='total-row line-item']"));
+			totalapproved = totalrow.findElement(By.xpath(".//table/tbody/tr/td[2]/div")).getText();
+			driver.close();
+			driver.switchTo().window(parent);
+		}
+		return totalapproved;
+	}
+	
 	public String getInspectionAmountApproved(String inspnumber) {
 		String amaounapproved = "";
 		WebElement row = getTableRowWithInspection(inspnumber);

@@ -56,7 +56,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		Helpers.keyboadrType(regCode.substring(10, 14));		
 		registerbtn.click();
 		
-		appiumdriver.manage().timeouts().implicitlyWait(60*8, TimeUnit.SECONDS);
+		appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);
 		Helpers.element(MobileBy.name("UpdateMainDatabaseButton"));
 		
 	}

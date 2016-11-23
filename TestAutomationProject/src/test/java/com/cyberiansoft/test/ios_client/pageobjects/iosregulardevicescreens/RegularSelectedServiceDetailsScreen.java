@@ -34,6 +34,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility  = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
+	@iOSFindBy(accessibility  = "Service Part")
+    private IOSElement servicepartcell;
+	
 	@iOSFindBy(accessibility  = "Questions")
     private IOSElement questionsfld;
 	
@@ -60,6 +63,17 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAKey[@name=\"Delete\"]")
     private IOSElement keyboarddeletebtn;
+	
+	//Service Part
+	
+	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[contains(@name,\"Service Part\")]/UIAStaticText[2]")
+    private IOSElement servicepartfld;
+	
+	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name='Category']/UIAStaticText[2]")
+    private IOSElement categoryvaluecell;
+	
+	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name='Subcategory']/UIAStaticText[2]")
+    private IOSElement subcategoryvaluecell;
 	
 	
 	public RegularSelectedServiceDetailsScreen(AppiumDriver driver) {
@@ -88,12 +102,21 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		  .until(ExpectedConditions.elementToBeClickable(vehiclepartscell)).click();
 	}
 	
+	public void clickServicePartCell() {
+		new WebDriverWait(appiumdriver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(servicepartcell)).click();
+	}
+	
 	public void clickNotesCell() {
 		notesfld.click();
 	}
 
 	public String getVehiclePartValue() {
 		return vehiclepartsfld.getAttribute("name");
+	}
+	
+	public String getServicePartValue() {
+		return servicepartfld.getAttribute("name");
 	}
 
 	public void answerQuestion(String answer) {
@@ -109,6 +132,14 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		questionsfld.click();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.answerQuestion2(answer);
+		appiumdriver.findElement(MobileBy.name("Back")).click();	
+	}
+	
+	public void answerQuestionCheckButton() {
+
+		questionsfld.click();
+		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[2]")).click();
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
 		appiumdriver.findElement(MobileBy.name("Back")).click();	
 	}
 	
@@ -321,6 +352,47 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void clickAdjustments() {
 		appiumdriver.findElementByName("Adjustments").click();
+	}
+	
+	public String getServiceDetailsPriceValue() {
+		return appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[1]").getAttribute("value");
+	}
+	
+	//Service Parts /////////
+	
+	public void selectServicePartCategory(String categoryname) {
+		appiumdriver.findElementByAccessibilityId("Category").click();
+		appiumdriver.findElementByAccessibilityId(categoryname).click();
+	}
+	
+	public String getServicePartCategoryValue() {
+		return categoryvaluecell.getAttribute("value");
+	}
+	
+	public void selectCategory(String categoryname) {
+		appiumdriver.findElementByAccessibilityId(categoryname).click();
+	}
+	
+	public void selectServicePartSubcategory(String subcategoryname) {
+		appiumdriver.findElementByAccessibilityId("Subcategory").click();
+		Helpers.scroolTo(subcategoryname);
+		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
+	}
+	
+	public String getServicePartSubCategoryValue() {
+		return subcategoryvaluecell.getAttribute("value");
+	}
+	
+	public void selectServicePartSubcategoryPart(String subcategorypartname) {
+		appiumdriver.findElementByAccessibilityId("Part").click();
+		Helpers.scroolTo(subcategorypartname);
+		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
+	}
+	
+	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
+		appiumdriver.findElementByAccessibilityId("Position").click();
+		Helpers.scroolTo(subcategorypositionname);
+		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
 	}
 
 }

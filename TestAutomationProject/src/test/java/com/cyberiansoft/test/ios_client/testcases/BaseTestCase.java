@@ -161,7 +161,7 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		WebDriverInstansiator.setDriver("firefox");
+		WebDriverInstansiator.setDriver("chrome");
 		webdriver = WebDriverInstansiator.getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);
