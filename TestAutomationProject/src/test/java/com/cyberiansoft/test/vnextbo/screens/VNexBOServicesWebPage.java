@@ -75,7 +75,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		setSearchFreeTextValue(searchtext);
 		openAdvancedSearchPanel();
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
 		if (archived)
 			checkboxSelect(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
