@@ -254,7 +254,7 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 	
 	public void setFooterTextPrintTemplateOptions(String footertext) {
 		footertexteditbtn.click();		
-		driver.switchTo().frame(driver.findElement(By.id("ctl00_ctl00_Content_Main_footerTextArea_ifr")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.id("ctl00_ctl00_Content_Main_footerTextArea_ifr")));
 		driver.findElement(By.xpath("//body")).clear();
 		driver.findElement(By.xpath("//body")).sendKeys(footertext);
 		driver.switchTo().defaultContent();

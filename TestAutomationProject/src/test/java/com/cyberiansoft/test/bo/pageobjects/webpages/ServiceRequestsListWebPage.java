@@ -205,7 +205,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		waitABit(100);
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));		
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 		//driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
@@ -342,7 +342,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void clickClaimInfoEditButton()  {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 		//driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		getClaimInfoEditButton().click();
 	}
@@ -357,7 +357,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public void switchToServiceRequestInfoFrame() {
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));			
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));			
 	}
 	
 	
@@ -507,28 +507,28 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public String getVINValueForSelectedServiceRequest() {
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String VINValue = driver.findElement(By.xpath("//span[@data-for='Card_vehicleVin']")).getText();
 		driver.switchTo().defaultContent();
 		return VINValue;
 	}
 	
 	public String getCustomerValueForSelectedServiceRequest() {
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String clientname = driver.findElement(By.xpath("//span[@data-for='Card_hdnFullClientName']")).getText();
 		driver.switchTo().defaultContent();
 		return clientname;
 	}
 	
 	public String getEmployeeValueForSelectedServiceRequest() {
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String employee = driver.findElement(By.xpath("//span[@data-for='Card_hdnEmployeeFullName']")).getText();
 		driver.switchTo().defaultContent();
 		return employee;
 	}
 	
 	public boolean isServiceIsPresentForForSelectedServiceRequest(String servicename) {
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		boolean exists = driver.findElement(By.xpath("//span[contains(text(), '" + servicename + "')]")).isDisplayed();
 		driver.switchTo().defaultContent();
 		return exists;

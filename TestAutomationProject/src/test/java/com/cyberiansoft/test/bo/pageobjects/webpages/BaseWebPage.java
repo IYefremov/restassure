@@ -186,7 +186,7 @@ public abstract class BaseWebPage {
     
     public void checkboxSelect(String checkboxvalue) {
     	WebDriverWait wait = new WebDriverWait(driver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//label[text()='" + checkboxvalue + "']")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable((WebElement) driver.findElement(By.xpath("//label[text()='" + checkboxvalue + "']")))).click();
     }
     
     public void checkboxSelect(WebElement checkbox) {

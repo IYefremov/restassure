@@ -223,7 +223,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(rolescheckboxes));
 		waitABit(300);
-		checkboxSelect(rolescheckboxes.findElement(By.xpath(".//label[text()='" + employeerole + "']")));
+		checkboxSelect((WebElement) rolescheckboxes.findElement(By.xpath(".//label[text()='" + employeerole + "']")));
 	}
 	
 	

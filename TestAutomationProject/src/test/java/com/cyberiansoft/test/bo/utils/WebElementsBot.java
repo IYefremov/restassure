@@ -106,7 +106,7 @@ public class WebElementsBot {
 		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
 		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
 		//waitABit(1000);
 		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
 		droplist.selectByVisibleText(value);

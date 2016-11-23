@@ -296,7 +296,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
 			}
 			new WebDriverWait(driver, 5)
-				.until(ExpectedConditions.elementToBeClickable(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+				.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
 			act.click(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	

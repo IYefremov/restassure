@@ -610,7 +610,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 				act.moveToElement(getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
 			}
 			new WebDriverWait(driver, 5)
-				.until(ExpectedConditions.elementToBeClickable(getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+				.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
 			act.click(getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
 			Assert.assertTrue(false, "Can't find " + inspectionnumber + " invoice");	
