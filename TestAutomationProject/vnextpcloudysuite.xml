@@ -10,12 +10,12 @@
   <parameter name="usercapi.name" value="test.cyberiansoft+su@gmail.com"  />
   <parameter name="usercapi.psw" value="ZZzz11!!"  />
   <parameter name="device.license" value="VNext Automation"  />
-  <!--<listeners>
+  <listeners>
 		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
-  </listeners>-->
+  </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-     <!--<class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+     <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
@@ -33,6 +33,8 @@
       	  <include name="testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited" />
       	  <include name="testAddTheSameServiceMultipleTimes" />
       	  <include name="testEditInspectionServices" />
+      	  <include name="testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen" />
+          <include name="testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
@@ -63,6 +65,12 @@
      <methods>                   
           <include name="testShowSelectedServicesAfterWOIsSaved" />
         </methods>
+     </class>
+     <!--<class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
+     <methods>                   
+          <include name="testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen" />
+          <include name="testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen" />
+        </methods>
      </class>-->
      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   
@@ -80,14 +88,14 @@
           <include name="testVerifyDisplayingApprovedAmountForInspection" />
       </methods>
       </class>-->
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextInvoicesTestCases">
+      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextInvoicesTestCases">
      <methods>                   
           <include name="testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity" />
           <include name="testVerifyCustomerInfoOnInvoiceDetail" />
-          <!--<include name="testCreateInvoiceWithTextNote" />
-          <include name="testVerifyTextNoteOnInvoiceDetail" />-->
+          <include name="testCreateInvoiceWithTextNote" />
+          <include name="testVerifyTextNoteOnInvoiceDetail" />
       </methods>
-      </class>
+      </class>-->
     </classes>
   </test>
 </suite>
