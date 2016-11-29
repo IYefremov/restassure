@@ -1,17 +1,20 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOErrorMessages;
@@ -27,6 +30,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	String userPassword = "";
 	String usermail = "";
 	final String confirmpsw = "111111";
+	ArrayList<String> userslist = new ArrayList<String>();
 	
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
@@ -38,11 +42,19 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@AfterMethod
-	public void BackOfficeLogout() {		
+	public void BackOfficeLogout() throws IOException {
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		if (headerpanel.isLogOutLinkExists())
 			headerpanel.userLogout();		
+	}
+	
+	@AfterSuite
+	public void clearUsers() throws IOException {
+		System.out.println("++++++++++++" + userslist.size());
+		if (userslist.size() > 0)
+			for (String usermails : userslist)
+				VNextWebServicesUtils.deleteUserByMail(usermails);		
 	}
 	
 	@Test(description = "Test Case 43038:vNext: create user without Web access")
@@ -64,6 +76,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
@@ -78,6 +91,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		final String usermailpostbox = "@gmail.com";
 		final String userphone = "12345";
 		
+		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(userName, userPassword);
@@ -88,28 +102,10 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
+		String confirmationurl = MailChecker.getUserRegistrationURL();
 		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========0" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			
-		}
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
@@ -123,7 +119,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
 
 		loginpage.userLogin(usermail, confirmpsw);
-		userswabpage = leftmenu.selectUsersMenu();
+		leftmenu.selectServicesMenu();
 		headerpanel.userLogout();
 	}
 	
@@ -138,9 +134,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		
 		boolean search = false;
 		String mailmessage = "";
-		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "Please click link below to to reset your password.")) {
-				loginpage.waitABit(60*1000);
+		for (int i=0; i < 4; i++) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
+				loginpage.waitABit(60*500);
 			} else {
 				search = true;
 				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");
@@ -151,7 +147,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		String confirmationurl = "";
 		if (search) {
 			System.out.println("==========1" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 			System.out.println("+++++++" + confirmationurl);
 		}
 		loginpage.waitABit(6000);
@@ -179,12 +175,17 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
 		loginpage = forgotpswpage.sendConfirmationMail(usermail);
 		
+		loginpage.userLogin(usermail, confirmpsw);
+		
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		leftmenu.selectUsersMenu();
 		
 		boolean search = false;
 		String mailmessage = "";
-		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "Please click link below to to reset your password.")) {
-				loginpage.waitABit(60*1000);
+		for (int i=0; i < 4; i++) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
+				loginpage.waitABit(60*500);
 			} else {
 				search = true;
 				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");
@@ -195,17 +196,16 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		String confirmationurl = "";
 		if (search) {
 			System.out.println("==========2" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 			System.out.println("+++++++" + confirmationurl);
 		}
 		
-		loginpage.userLogin(usermail, confirmpsw);
-		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
-				VNexBOLeftMenuPanel.class);
-		leftmenu.selectUsersMenu();
 		
-		webdriver.navigate().to(confirmationurl);
-		leftmenu.waitABit(4000);
+		System.out.println("++++++++++++" + usermail);
+		System.out.println("++++++++++++" + confirmpsw);
+		System.out.println("++++++++++++" + confirmationurl);
+		//webdriver.navigate().to(confirmationurl);
+		//leftmenu.waitABit(4000);
 		webdriver.get(confirmationurl);
 		leftmenu.selectInvoicesMenu();
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
@@ -226,7 +226,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		boolean search = false;
 		String mailmessage = "";
 		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "Please click link below to to reset your password.")) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
 				loginpage.waitABit(60*1000);
 			} else {
 				search = true;
@@ -238,7 +238,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		String confirmationurl = "";
 		if (search) {
 			System.out.println("==========3" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 			System.out.println("+++++++" + confirmationurl);
 		}
 		
@@ -250,7 +250,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 				webdriver, VNextBOConfirmPasswordWebPage.class);
 		confirmationpswpage.setUserPasswordFieldValue(confirmpsw);
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), "Please, confirm password!");
+		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), "Please confirm password!");
 		confirmationpswpage.setUserConfirmPasswordFieldValue("222222");
 		confirmationpswpage.clickSubmitButton();
 		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), "Passwords do not match!");
@@ -304,6 +304,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
 		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
 		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
@@ -349,6 +350,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, false);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(usermail));
 		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
 		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
@@ -391,50 +393,29 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
 		
 		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 3; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
+		String mailmessage = MailChecker.getUserMailContent();
+		if (mailmessage.length() > 3)
+			search = true;
+
 		Assert.assertTrue(search);
 		userswabpage.clickUserResendButtonAndDisagree(usermail);
 		
 		search = false;
-		for (int i=0; i < 2; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
+		mailmessage = MailChecker.getUserMailContent();
+		if (mailmessage.length() > 3)
+			search = true;
+		
 		Assert.assertFalse(search);
 		userswabpage.clickUserResendButtonAndAgree(usermail);
+		
 		search = false;
-		for (int i=0; i < 3; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
+		mailmessage = MailChecker.getUserMailContent();
+		if (mailmessage.length() > 3)
+			search = true;
 		Assert.assertTrue(search);
 	}
 	
@@ -473,7 +454,8 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		
 		adduserdialog.setUserEmail(usermail);
 		adduserdialog.clickSaveButtonAndWait();
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));	
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 	}
 	
 	@Test(description = "Test Case 43377:vNext: check validation errors on the set password page")
@@ -496,28 +478,10 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
+		String confirmationurl = MailChecker.getUserRegistrationURL();
 		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 3; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========0" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			
-		}
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
@@ -562,6 +526,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
 		adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.setUserFirstName(firstname);

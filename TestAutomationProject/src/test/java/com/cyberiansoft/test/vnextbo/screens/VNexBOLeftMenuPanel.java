@@ -80,17 +80,29 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	public void expandMainMenu(String meinmenu) {
 		getMainMenuItem(meinmenu).click();
+		/*waitABit(1000);
+		if (!isMainMenuExpanded(meinmenu)) {
+			getMainMenuItem(meinmenu).click();
+		}*/
 	}
 	
 	public WebElement getMainMenuItem(String meinmenu) {
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(mainmenu));
+		waitABit(1000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(mainmenu.findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
 		return mainmenu.findElement(By.xpath(".//div[contains(text(), '" + meinmenu + "')]"));
 	}
 	
 	public void selectMenuItem(WebElement menuitem, String mainmenuitem) {
 		if (!isMainMenuExpanded(mainmenuitem))
 			expandMainMenu(mainmenuitem);
+		waitABit(1000);
+		if (!menuitem.isDisplayed())
+			expandMainMenu(mainmenuitem);
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(menuitem)).click();		
+		  .until(ExpectedConditions.elementToBeClickable(menuitem)).click();		
 	}
 
 }
