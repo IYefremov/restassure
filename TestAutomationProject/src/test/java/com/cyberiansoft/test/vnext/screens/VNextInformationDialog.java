@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +32,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	}
 	
 	public void clickInformationDialogOKButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
+		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 600);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
 		log(LogStatus.INFO, "Tap Information Dialog OK Button");

@@ -49,7 +49,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void clickVerifyButton() {
-		List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath("//a[contains(@data-bind,'navigateNext')]/span/i"));
+		List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath(".//button[@data-bind='click: navigateNext']"));
 		for (WebElement nextbtn : nextbtns) {
 			if (nextbtn.isDisplayed())
 				tap(nextbtn);

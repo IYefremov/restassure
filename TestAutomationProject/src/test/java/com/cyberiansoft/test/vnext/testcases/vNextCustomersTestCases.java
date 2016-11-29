@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.io.IOException;
+
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -12,9 +15,16 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
+import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
+import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 
 
 public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
+	
+	@AfterSuite
+	public void deleteClients() throws IOException {
+		VNextWebServicesUtils.deleteClientsByMail("cnolan@gmail.com");
+	}
 	
 	@Test(testName= "Test Case 43519:vNext - Create new Customer with empty First Name and Last Name", 
 			description = "Create new Customer with empty First Name and Last Name")
@@ -59,6 +69,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
 		clientspage.deleteClient(companyname);
+		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		webdriver.quit();
 	}
 	
 	@Test(testName= "Test Case 43522:vNext - Verify customer created in Offline mode is available after DB update", 
@@ -84,9 +96,9 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		homescreen = customersscreen.clickBackButton();
 		homescreen.waitABit(1000);
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
 		final String customer = firstname + " " + lastname;
 		customersscreen.selectCustomer(customer);

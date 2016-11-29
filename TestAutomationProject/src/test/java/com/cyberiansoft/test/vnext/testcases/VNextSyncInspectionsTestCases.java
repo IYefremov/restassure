@@ -76,7 +76,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		setNetworkOn();
-		homescreen.waitABit(3000);
+		homescreen.waitABit(10000);
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "");
 	}
 	

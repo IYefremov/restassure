@@ -16,8 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -306,14 +304,17 @@ public class VNextBaseTestCase {
 		//selectedDevices.add(MobileDevice.getNew("Huawei_HuaweiHonor5X_Android_5.1.1", 129, "HuaweiHonor5X", "Honor 5X", "android", "5.1.1", "Huawei")); 
 		//selectedDevices.add(MobileDevice.getNew("Motorola_Nexus6_Android_6.0.1", 201, "Nexus6", "Nexus 6", "android", "6.0.1", "Motorola")); 
 		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaXPlay_Android_6.0.1", 142, "MotorolaXPlay", "X Play", "android", "6.0.1", "Motorola")); 
-		selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaMotoE2_Android_5.0.2", 122, "MotorolaMotoE2", "Moto E2", "android", "5.0.2", "Motorola")); 
+		//selectedDevices.add(MobileDevice.getNew("Motorola_MotorolaMotoE2_Android_5.0.2", 122, "MotorolaMotoE2", "Moto E2", "android", "5.0.2", "Motorola")); 
 		//selectedDevices.add(MobileDevice.getNew("Lg_G4Dual_Android_6.0.0", 100, "G4Dual", "G4 Dual", "android", "6.0.0", "Lg"));
 		//selectedDevices.add(MobileDevice.getNew("Htc_One_Android_5.0.2", 62, "One", "One", "android", "5.0.2", "Htc"));
 		//selectedDevices.add(MobileDevice.getNew("Lg_G5_Android_6.0.1", 154, "G5", "G5", "android", "6.0.1", "Lg")); 
 		//selectedDevices.add(MobileDevice.getNew("Htc_10_Android_6.0.1", 155, "10", "10", "android", "6.0.1", "Htc")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS7_Android_6.0.1", 153, "GalaxyS7", "Galaxy S7", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyA7_Android_6.0.1", 226, "GalaxyA7", "Galaxy A7", "android", "6.0.1", "Samsung")); 
+		selectedDevices.add(MobileDevice.getNew("Htc_Desire630_Android_6.0.1", 209, "Desire630", "Desire 630", "android", "6.0.1", "Htc")); 
+		//selectedDevices.add(MobileDevice.getNew("Lg_Nexus5X_Android_7.0.0", 215, "Nexus5X", "Nexus 5X", "android", "7.0.0", "Lg")); 
 		
-		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 60, "friendlySessionName");
+		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 90, "friendlySessionName");
 		System.out.println("Devices booked successfully");
 
 		// Upload apk in pCloudy

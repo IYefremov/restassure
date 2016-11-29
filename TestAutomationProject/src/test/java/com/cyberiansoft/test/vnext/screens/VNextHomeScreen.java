@@ -23,6 +23,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='title' and text()='Settings']")
 	private WebElement settingslist;
 	
+	@FindBy(xpath="//div[@class='title' and text()='Status']")
+	private WebElement statuslist;
+	
 	@FindBy(xpath="//span[@class='letter-number']")
 	private WebElement queuemessage;
 	
@@ -61,6 +64,12 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		tap(settingslist);
 		log(LogStatus.INFO, "Tap Settings menu item");
 		return new VNextSettingsScreen(appiumdriver);
+	}
+	
+	public VNextStatusScreen clickStatusMenuItem() {
+		tap(statuslist);
+		log(LogStatus.INFO, "Tap Status menu item");
+		return new VNextStatusScreen(appiumdriver);
 	}
 	
 	public void clickQueueMessageIcon() {

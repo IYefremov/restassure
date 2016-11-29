@@ -18,10 +18,10 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//div[contains(@class, 'page inspections-service hide-searchbar page-on-center')]")
 	private WebElement servicesscreen;
 	
-	@FindBy(xpath="//div[@class='left']/i[@action='add']")
+	@FindBy(xpath="//i[@action='add']")
 	private WebElement addservicesbtn;
 	
-	@FindBy(xpath="//div[@class='right']/i[@action='save']")
+	@FindBy(xpath="//i[@action='save']")
 	private WebElement savebtn;
 	
 	@FindBy(xpath="//i[@action='back']")

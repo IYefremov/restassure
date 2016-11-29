@@ -188,6 +188,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";
+		final String customeremail = "osmak.oksana+408222@gmail.com";
 		final String customer = firstname + " " + lastname;
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -196,6 +197,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.setCustomerFirstName(firstname);
 		newcustomerscreen.setCustomerLastName(lastname);
+		newcustomerscreen.setCustomerEmail(customeremail);
 		newcustomerscreen.setCustomerAddress(customeraddress);
 		newcustomerscreen.setCustomerCity(customercity);
 		newcustomerscreen.setCustomerZIP(customerzip);

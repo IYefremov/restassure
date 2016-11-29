@@ -33,8 +33,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public VNextCustomersScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(firstcustomer));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.visibilityOf(customersscreen));
 	}
 	
 	public void selectCustomer(String customer) {

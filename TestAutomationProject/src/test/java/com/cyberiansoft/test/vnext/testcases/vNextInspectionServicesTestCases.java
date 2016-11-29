@@ -34,7 +34,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Dent Repair", "Double Panel" };
-	final String testcustomer = "Oksana Osmak";
+	final String testcustomer = "Retail Automation";
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
@@ -493,8 +493,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Edit inspection services")
 	public void testEditInspectionServices() {
 		
-		final String[] secondservices = { "Bumper Repair", "Large Size Dent" }; 
-		final String[] thirdservices = { "oosmak %%%%%", "tesla" };
+		final String[] secondservices = { "Bumper Repair", "PART - Hood" }; 
+		final String[] secondservicesprices = { "20", "222" }; 
+		final String[] thirdservices = { "Double Panel", "Large Size Dent" };
+		final String[] thirdservicesprices = { "10", "0" };
 	
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -508,6 +510,12 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectServices(secondservices);
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (int i = 0; i <  secondservices.length; i++) {
+			VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(secondservices[i]);
+			servicedetailsscreen.setServiceAmountValue(secondservicesprices[i]);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		}
 		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$242.00");
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		
@@ -521,6 +529,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		
+		for (int i = 0; i <  secondservices.length; i++) {
+			servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(thirdservices[i]);
+			servicedetailsscreen.setServiceAmountValue(thirdservicesprices[i]);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		}
+		
 		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(thirdservices[0]);
 		servicedetailsscreen.setServiceAmountValue("5");
 		servicedetailsscreen.clickServiceDetailsDoneButton();
@@ -531,7 +546,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		servicedetailsscreen.setServiceQuantityValue("9.15");
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$1161.96");
+		
+		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$812.31");
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -829,6 +845,87 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(moneyservice), "$3.20");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 48947:vNext - Verify Total is correct when adding several money services on Visuals screen", 
+			description = "Verify Total is correct when adding several money services on Visuals screen")
+	public void testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen() {
+		
+		final String selectdamage = "Dent";
+		final String[] amounts = { "20.00", "647.99" };
+		final String[] quantities = { "10.58", "6" };
+		final String inspprice = "$4099.54";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		inspinfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		visualscreen = selectdamagesscreen.clickDefaultDamageType(selectdamage);
+		visualscreen.clickCarImageACoupleTimes(quantities.length);
+		visualscreen.waitABit(1000);
+		
+		for (int i =0 ; i <  quantities.length; i++) {
+			List<WebElement> damagemarkers =  visualscreen.getImageMarkers();
+			VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker(damagemarkers.get(i));
+			servicedetailsscreen.setServiceAmountValue(amounts[i]);
+			servicedetailsscreen.setServiceQuantityValue(quantities[i]);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			visualscreen = new VNextVisualScreen(appiumdriver);
+			visualscreen.waitABit(1000);
+		}
+		visualscreen.clickDamageCancelEditingButton();
+		Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspprice);
+		inspectionsscreen = visualscreen.saveInspectionViaMenu();
+		Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspprice);
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 48955:vNext - Verify Total is correct when adding money and percentage services on Visuals screen", 
+			description = "Verify Total is correct when adding money and percentage services on Visuals screen")
+	public void testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen() {
+		
+		final String dentdamage = "Dent";
+		final String dentamount = "506.35";
+		final String dentquantity = "5.00";
+		
+		final String selectdamage = "Price Adjustment";
+		final String servicepercentage = "Double Panel";
+		final String inspprice = "$3164.69";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		inspinfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		visualscreen = selectdamagesscreen.clickDefaultDamageType(selectdamage);
+		visualscreen.clickCarImage();
+		visualscreen.waitABit(1000);
+		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+		servicedetailsscreen.setServiceAmountValue(dentamount);
+		servicedetailsscreen.setServiceQuantityValue(dentquantity);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		visualscreen = new VNextVisualScreen(appiumdriver);
+		
+		selectdamagesscreen = visualscreen.clickAddServiceButton();
+		selectdamagesscreen.selectAllDamagesTab();
+		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
+		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
+		visualscreen.clickCarImageSecondTime();
+		
+		visualscreen.clickDamageCancelEditingButton();
+		Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspprice);
+		inspectionsscreen = visualscreen.saveInspectionViaMenu();
+		Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspprice);
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 }

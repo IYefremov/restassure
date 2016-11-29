@@ -1,10 +1,15 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
@@ -142,7 +147,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	@Test(testName= "Test Case 48094:vNext mobile: Create Invoice which contains price services with decimal quantity", 
 			description = "Create Invoice which contains price services with decimal quantity")
 	@Parameters({ "usercapi.mail", "usercapi.psw"})
-	public void testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity(String usermail, String userpsw) {
+	public void testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity(String usermail, String userpsw) throws IOException {
 		
 		final String dentdamage = "Dent"; 
 		final String amountvalue = "0.99"; 
@@ -194,12 +199,33 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		invoicenumbertc48094  = invoiceinfoscreen.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumbertc48094), PricesCalculations.getPriceRepresentation(insppriceexp));
-		
 		VNextEmailScreen emailscreen = invoicesscreen.clickOnInvoiceToEmail(invoicenumbertc48094);
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))
 			emailscreen.sentToEmailAddress(usermail);
 		
 		emailscreen.clickSendEmailsButton();
+		emailscreen.waitABit(60*1000);
+		boolean search = false;
+		final String inspectionreportfilenname = invoicenumbertc48094 + ".pdf";
+		for (int i= 0; i < 5; i++) {
+			if (!MailChecker.searchEmailAndGetAttachment(usermail, userpsw, "Invoice #" + invoicenumbertc48094 + " from ReconPro vNext Dev", "ReconPro@cyberiansoft.com", inspectionreportfilenname)) {
+				emailscreen.waitABit(30*1000); 
+			} else {
+				
+				search = true;
+				break;
+			}
+		}
+		if (search) {
+			File pdfdoc = new File(inspectionreportfilenname);
+			String pdftext = PDFReader.getPDFText(pdfdoc);
+			System.out.println("++++++" + unEscapeString(pdftext));
+			Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
+			Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
+		} else {
+			Assert.assertTrue(search, "Can't find email with " + invoicenumbertc48094 + " inspection");
+		}
+
 		emailscreen.waitABit(60*1000);
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 	}
@@ -236,6 +262,20 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextBOInvoicesWebPage invoiceswebpage = leftmenu.selectInvoicesMenu();
 		invoiceswebpage.selectInvoiceInTheList(invoicenumbertc46415);
 		Assert.assertEquals(invoiceswebpage.getSelectedInvoiceNote(), notetext);		
+	}
+	
+	public static String unEscapeString(String s){
+	    StringBuilder sb = new StringBuilder();
+	    for (int i=0; i<s.length(); i++)
+	        switch (s.charAt(i)){
+	            case '\n': sb.append("\\n"); break;
+	            case '\t': sb.append("\\t"); break;
+	            case '\r': sb.append("\\r"); break;
+	            case '\f': sb.append("\\f"); break;
+	            // ... rest of escape characters
+	            default: sb.append(s.charAt(i));
+	        }
+	    return sb.toString();
 	}
 
 }
