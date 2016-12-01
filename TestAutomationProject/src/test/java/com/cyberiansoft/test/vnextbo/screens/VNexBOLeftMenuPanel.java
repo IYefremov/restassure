@@ -91,7 +91,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 		  .until(ExpectedConditions.visibilityOf(mainmenu));
 		waitABit(1000);
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(mainmenu.findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) mainmenu.findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
 		return mainmenu.findElement(By.xpath(".//div[contains(text(), '" + meinmenu + "')]"));
 	}
 	
