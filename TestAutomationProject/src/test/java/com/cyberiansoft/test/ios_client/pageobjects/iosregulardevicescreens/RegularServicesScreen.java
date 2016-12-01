@@ -50,10 +50,10 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[1][@name=\"Vehicle Part\"]")
     private IOSElement vehiclepartsbtn;
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")
+	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Draft\"]")
+	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
 	public RegularServicesScreen(AppiumDriver driver) {
@@ -124,7 +124,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectSubService(String service) {
-		if (Helpers.elementExists(MobileBy.IosUIAutomation(".scrollViews()[1]"))) {
+		Helpers.scroolTo(service);
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='unselected']").click();
+		/*if (Helpers.elementExists(MobileBy.IosUIAutomation(".scrollViews()[1]"))) {
 			Helpers.scroolTo(service);
 			appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[0].cells()['"
 						+ service
@@ -134,7 +136,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 			appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['"
 					+ service
 					+ "'].buttons()['unselected']")).click();
-		}
+		}*/
 	}
 
 	public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String service) {

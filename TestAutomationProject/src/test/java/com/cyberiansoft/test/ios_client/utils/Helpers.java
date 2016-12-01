@@ -321,6 +321,14 @@ public abstract class Helpers {
 		.click();
 		// driver.executeScript("UIATarget.localTarget().frontMostApp().keyboard().buttons()[\"Hide keyboard\"].tap();");
 	}
+	
+	public static void keyboardClickDeleteButton() throws InterruptedException {
+		Helpers.waitABit(500);
+		driver.findElementByAccessibilityId("Delete").click();
+		//element(By.xpath("//UIAKeyboard[1]/UIAKey[@name='Delete']"))
+		//.click();
+		// driver.executeScript("UIATarget.localTarget().frontMostApp().keyboard().buttons()[\"Hide keyboard\"].tap();");
+	}
 
 	public static void tapInterior(int x, int y) throws InterruptedException {
 		TouchAction action = new TouchAction(driver);

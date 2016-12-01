@@ -11,10 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegularInspectionToolBar extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIAToolbar[1]/UIAStaticText[@name='SubtotalAmount']")
+	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAStaticText[@name='SubtotalAmount']")
     private IOSElement inspsubtotal;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIAToolbar[1]/UIAStaticText[@name='TotalAmount']")
+	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAStaticText[@name='TotalAmount']")
     private IOSElement insptotal;
 	
 	public RegularInspectionToolBar(AppiumDriver driver) {

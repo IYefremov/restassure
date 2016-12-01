@@ -50,6 +50,7 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT = "Insp_for_auto_WO_line_appr_multiselect";
 	public static final String INSP_FOR_AUTO_WO_LINE_APPR = "Inspection_for_auto_WO_line_appr";
 	public static final String INSP_WITH_PART_SERVICES = "Insp_with_part_services";
+	public static final String INSP_WITH_0_PRICE = "Insp_with_0_Price";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";
@@ -90,7 +91,12 @@ public class iOSInternalProjectConstants {
     public static final String SR_S4_BUNDLE = "SR_S4_Bundle";
     public static final String OKSI_SERVICE_PP_VEHICLE = "Oksi_Service_PP_Vehicle";
     public static final String OKSI_SERVICE_PP_PANEL = "Oksi_Service_PP_Panel";
+    public static final String OKSI_SERVICE_PP_SERVICE = "Oksi_Service_PP_Service";
+    public static final String OKSI_SERVICE_PP_FLAT_FEE = "Oksi_Service_PP_Flat_Fee";
+    public static final String OKSI_BUNDLE_PP = "Oksi_Bundle_PP";
     public static final String TEST_SERVICE_PRICE_MATRIX = "Test service price matrix";
+    public static final String SERVICE_REQ_0_PRICE = "Service_req_0_price";
+    
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

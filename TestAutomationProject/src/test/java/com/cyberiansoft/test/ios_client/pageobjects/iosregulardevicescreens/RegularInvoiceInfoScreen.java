@@ -21,7 +21,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[@name=\"PO#\"]/UIATextField[1]")
+	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name=\"PO#\"]/UIATextField[1]")
     private IOSElement setpofld;
 	
 	@iOSFindBy(accessibility  = "Save")
@@ -51,7 +51,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickSaveAsFinal() {
-		savebtn.click();
+		clickSaveButton();
 		finalalertbtn.click();
 	}
 
@@ -72,7 +72,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickFirstWO() {
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[1]/UIATableCell[2]").click();
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[2]").click();
 	}
 	
 	public void assertOrderSummIsCorrect(String summ) {
@@ -85,7 +85,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	
 	public void addWorkOrder(String wonumber) throws InterruptedException {
 		Thread.sleep(3000);
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[1]/UIATableCell[3]").click();
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[3]").click();
 		//appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
 		appiumdriver.findElementByXPath("//UIATableCell[contains(@name, \""
 						+ wonumber + "\")]/UIAButton[@name=\"unselected\"]").click();

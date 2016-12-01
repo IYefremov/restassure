@@ -47,6 +47,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
@@ -4454,7 +4455,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Chrysler";
 		final String _model = "Town & Country";
 		final String[] servicestoadd = { "VPS1", "Dye" };
-		final String[] servicestoadd2 = { "Bundle1_Disc_Ex", "Fee_Bundle" };
+		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
 		
 		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
@@ -4526,7 +4527,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		System.out.println("++++" + srnumber);
 		servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertFalse(servicerequestsscreen.isRejectActionExists());
@@ -7284,7 +7284,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48563:WO: Regular - Verify that part services with different configurations are correctly shown for WO", 
 			description = "WO: Regular - Verify that part services with different configurations are correctly shown for WO")
-	public void testInspectionThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() throws Exception {
+	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -7427,5 +7427,352 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
+	@Test(testName = "Test Case 45100:WO: Regular - Verify rounding in calculation script with price matrix", 
+			description = "WO: Regular - Verify rounding in calculation script with price matrix")
+	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new RegularHomeScreen(appiumdriver);			
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+			
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectService("Price Matrix Zayats");
+		servicesscreen.selectService("Grill");	
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice("975");
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServicePriceValue("25");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+		selectedservicescreen.setServicePriceValue("192");
+		selectedservicescreen.saveSelectedServiceDetails();
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		selectedservicescreen.setServicePriceValue("-30");
+		selectedservicescreen.saveSelectedServiceDetails();
+		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$987.52");
+		
+		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.clickSaveButton();
+		
+		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType("Invoice_Default_Template");
+		invoiceinfoscreen.setPO("12345");
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveButton();
+		Helpers.acceptAlert();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		invoiceinfoscreen.clickSaveAsFinal();
+		myworkordersscreen.clickFilterButton();
+		myworkordersscreen.setFilterBilling("All");
+		myworkordersscreen.clickSaveFilter();
+		
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$987.52");
+		homescreen = myworkordersscreen.clickHomeButton();
+		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoicenumber), "$987.52");
+		myinvoicesscreen.clickHomeButton();		
+	}
 	
+	@Parameters({ "user.name", "user.psw" })
+	@Test(testName = "Test Case 45224:WO: Regular - Verify calculation with price matrix Labor type", 
+			description = "WO: Regular - Verify calculation with price matrix Labor type")
+	public void testWOVerifyCalculationWithPriceMatrixLaborType(String userName, String userPassword) throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new RegularHomeScreen(appiumdriver);			
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+			
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		selectedservicedetailscreen.setServicePriceValue("100");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		RegularSelectedServiceBundleScreen selectedservicebundlescreen = new RegularSelectedServiceBundleScreen(appiumdriver);
+		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.WHEEL_SERVICE);
+		selectedservicedetailscreen.setServicePriceValue("90");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.changeAmountOfBundleService("100");
+		//selectedservicebundlescreen.overrideBundleAmountValue("100");		
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		selectedservicedetailscreen.setServicePriceValue("25");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.selectVehiclePart("Hood");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Tax discount");
+		selectedservicedetailscreen.setServicePriceValue("10");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectSubService("Matrix Service");
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix("Test Matrix Labor");
+		pricematrix.selectPriceMatrix("123");
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setTime("100");
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		selectedservicedetailscreen.setServicePriceValue("25");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		selectedservicedetailscreen.setServicePriceValue("100");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.clickSaveButton();
+		
+		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType("Invoice_AutoWorkListNet");
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		questionsscreen.selectNextScreen("Info");
+		invoiceinfoscreen.setPO("12345");
+		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsFinal();
+		
+		myworkordersscreen.clickFilterButton();
+		myworkordersscreen.setFilterBilling("All");
+		myworkordersscreen.clickSaveFilter();
+		
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InvoicesWebPage invoicespage = PageFactory.initElements(
+				webdriver, InvoicesWebPage.class);
+		
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String mainWindowHandle = webdriver.getWindowHandle();
+		invoicespage.clickInvoicePrintPreview(invoicenumber);
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceListValue("Matrix Service"), "$100.00");
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceNetValue("Matrix Service"), "$112.50");
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceListValue("Test service zayats"), "$100.00");
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceNetValue("Test service zayats"), "$112.50");
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceListValue("SR_Disc_20_Percent (25.000%)"), "$25.00");
+		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceNetValue("SR_Disc_20_Percent (25.000%)"), "$28.13");
+		invoicespage.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Parameters({ "user.name", "user.psw" })
+	@Test(testName = "Test Case 42803:Invoices: Regular - Verify rounding money amount values", 
+			description = "Invoices: Regular - Verify rounding money amount values")
+	public void testInvoicesVerifyRoundingMoneyAmountValues(String userName, String userPassword) throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new RegularHomeScreen(appiumdriver);			
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+			
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectService("Price Matrix Zayats");
+		servicesscreen.selectService("Grill");	
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice("100");
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.OKSI_SERVICE_PP_FLAT_FEE);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServicePriceValue("23");
+		selectedservicescreen.saveSelectedServiceDetails();
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		
+		servicesscreen.selectSubService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServicePriceValue("10");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.answerQuestion2("A3");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_BUNDLE_PP);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
+		selectedservicescreen.setServicePriceValue("25");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Hood");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectSubService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		selectedservicescreen.setServicePriceValue("5");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Grill");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.changeAmountOfBundleService("30");
+		servicesscreen.clickSaveButton();
+		servicesscreen.openCustomServiceDetails("Sales Tax");
+		selectedservicescreen.setServicePriceValue("3.8");
+		selectedservicescreen.saveSelectedServiceDetails();
+		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$169.19");
+		
+		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.selectWorkOrderForApprove(wonumber);
+		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.clickApproveButton();
+		
+		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
+		myworkordersscreen.clickInvoiceIcon();
+		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.DEFAULT_INVOICETYPE);
+		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsFinal();
+		myworkordersscreen.clickHomeButton();
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InvoicesWebPage invoicespage = PageFactory.initElements(
+				webdriver, InvoicesWebPage.class);
+		
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String mainWindowHandle = webdriver.getWindowHandle();
+		invoicespage.clickInvoiceInternalTechInfo(invoicenumber);
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Test service price matrix"), "4.67000");
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Test service price matrix (Sev: None; Size: None)"), "3.79600");
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Oksi_Service_PP_Flat_Fee"), "0.87400");
+		invoicespage.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Test(testName = "Test Case 38970:Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels", 
+			description = "Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels")
+	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageAroupedByPanels() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String serviceprice = "21";
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_WITH_0_PRICE);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForAction(inspnumber);
+		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);	
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), "$0.00");
+		approveinspscreen.clickCancelButton();
+		approveinspscreen.clickCancelButton();
+		
+		myinspectionsscreen.selectInspectionForEdit(inspnumber);
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectService("Other");
+		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE);
+		selectedservicescreen.setServicePriceValue(serviceprice);
+		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen.clickBackServicesButton();
+		servicesscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForAction(inspnumber);
+		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);	
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), PricesCalculations.getPriceRepresentation(serviceprice));
+		approveinspscreen.clickCancelButton();
+		approveinspscreen.clickCancelButton();
+		myinspectionsscreen.clickHomeButton();
+	}
 }

@@ -359,4 +359,88 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return PageFactory.initElements(
 				driver, InvoicePaymentsTabWebPage.class);
 	}
+	
+	public void clickInvoicePrintPreview(String invoicenumber) {
+		String mainWindowHandle = driver.getWindowHandle();
+		clickInvoiceSelectExpandableMenu(invoicenumber, "Print preview (server)");
+		waitForNewTab();
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+			    driver.switchTo().window(activeHandle);
+			}
+		}
+	}
+	
+	public String getPrintPreviewServiceListValue(String servicename) {
+		WebElement parentrow = driver.findElement(By.xpath("//table/tbody/tr/td/div[text()='" + servicename + "']/../.."));
+		return parentrow.findElement(By.xpath("./td[2]/div/div/div/span")).getText();
+	}
+	
+	public String getPrintPreviewServiceNetValue(String servicename) {
+		WebElement parentrow = driver.findElement(By.xpath("//table/tbody/tr/td/div[text()='" + servicename + "']/../.."));
+		return parentrow.findElement(By.xpath("./td[3]/div")).getText();
+	}
+	
+	public String getPrintPreviewTestMartrixLaborServiceListValue(String servicename) {
+		WebElement parentrow = driver.findElement(By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='" + servicename + "']/../../../../../.."));
+		return parentrow.findElement(By.xpath("./td[2]/div/table/tbody/tr/td")).getText();
+	}
+	
+	public String getPrintPreviewTestMartrixLaborServiceNetValue(String servicename) {
+		WebElement parentrow = driver.findElement(By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='" + servicename + "']/../../../../../.."));
+		return parentrow.findElement(By.xpath("./td[3]/div/table/tbody/tr/td")).getText();
+	}
+	
+	public void clickInvoiceInternalTechInfo(String invoicenumber) {
+		String mainWindowHandle = driver.getWindowHandle();
+		clickInvoiceSelectExpandableMenu(invoicenumber, "Internal Tech. Info");
+		waitForNewTab();
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+			    driver.switchTo().window(activeHandle);
+			}
+		}
+	}
+	
+	public WebElement getTechInfoServicesTable() {
+		return driver.findElement(By.xpath("//table/tbody/tr[2]/td/div[text()='SERVICES']/../../../.."));
+	}
+	
+	public String getTechInfoServicesTableServiceValue(String columnname, String servicename) {
+		int icolumn = getTechInfoServicesTableColumnIndex(columnname);
+		int irow = getTechInfoServicesTableServiceRowIndex(servicename);
+		System.out.println("++++" + icolumn);
+		System.out.println("++++" + irow);
+		
+		return getTechInfoServicesTable().findElement(By.xpath("./tbody/tr[" + irow + "]/td[" + icolumn + "]")).getText();
+	}
+	
+	public int getTechInfoServicesTableColumnIndex(String columnname) {
+		int iterator = 0;
+		int icolumn = -1;
+		List<WebElement> columns =  getTechInfoServicesTable().findElements(By.xpath("./tbody/tr[4]/td"));
+		for (WebElement column:columns) {
+			++iterator;
+			if (column.getText().contains(columnname)) {
+				icolumn = iterator;
+				break;		
+			}
+		}
+		return icolumn;
+	}
+	
+	public int getTechInfoServicesTableServiceRowIndex(String servicename) {
+		int iterator = 0;
+		int irow = -1;
+		List<WebElement> rows =  getTechInfoServicesTable().findElements(By.xpath("./tbody/tr"));
+		for (WebElement row:rows) {
+			++iterator;
+			if (row.getText().contains(servicename)) {
+				irow = iterator;
+				break;		
+			}
+		}
+		return irow;
+	}
+	
 }

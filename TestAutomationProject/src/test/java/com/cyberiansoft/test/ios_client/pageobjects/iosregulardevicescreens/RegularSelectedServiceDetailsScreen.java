@@ -316,7 +316,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIAToolbar[1]/UIAButton[3]").click();
+		appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAButton[3]").click();
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIACollectionView[1]/UIACollectionCell[1]/UIATextField[1]");
 		amountfld.clear();
 		amountfld.setValue(newamount);
