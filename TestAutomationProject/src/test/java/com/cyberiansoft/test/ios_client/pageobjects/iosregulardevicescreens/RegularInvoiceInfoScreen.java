@@ -97,7 +97,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getInvoiceCustomer() {
-		return appiumdriver.findElementByXPath("//UIANavigationBar[1]/UIAStaticText[1]").getAttribute("name");
+		return appiumdriver.findElementByXPath("//UIANavigationBar[1]/UIAStaticText[@name='viewPrompt']").getAttribute("value");
 	}
 
 	public void clickCancelButton() {

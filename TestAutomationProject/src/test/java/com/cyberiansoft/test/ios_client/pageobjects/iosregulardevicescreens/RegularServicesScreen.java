@@ -67,7 +67,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 
 	public void assertDefaultServiceIsSelected() {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name=\""
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
 						+ defaultServiceValue + "\"]/UIAButton[@name=\"selected\"]").isDisplayed());
 	}
 
@@ -90,15 +90,15 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void assertServiceIsSelectedWithServiceValues(String service, String pricevalue) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name='"
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='"
 				+ service + "']/UIAButton[@name='selected']").isEnabled());
 
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView/UIATableView[1]/UIATableCell[@name='"
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='"
 				+ service + "']/UIAStaticText[@name='" + pricevalue + "']").isEnabled());
 	}
 
 	public int getServiceSelectedNumber(String service) {
-		return appiumdriver.findElementsByXPath("//UIAScrollView[1]/UIATableView[4]/UIATableCell[@name=\""
+		return appiumdriver.findElementsByXPath("//UIATableView[4]/UIATableCell[@name=\""
 								+ service + "\"]").size();
 	}
 	
@@ -147,7 +147,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public RegularSelectedServiceDetailsScreen clickServiceCustomDetailButton(String service) {
 		//Helpers.scroolToByXpath("//UIATableView[@name='ServiceGroupServicesTable']/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
+		appiumdriver.findElementByXPath("//UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
 		
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()['ServiceGroupServicesTable'].cells()['" + service + "'].buttons()['custom detail button']")).click();
 		
@@ -172,7 +172,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void openCustomServiceDetailsByPartOfServiceName(String service) throws InterruptedException {
-		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[2]/UIATableCell[4]").click();
+		appiumdriver.findElementByXPath("//UIATableView[2]/UIATableCell[@name='" + service + "']").click();
 	}
 
 
@@ -195,21 +195,21 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void searchserviceByName(String service) {
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIASearchBar['Search']").click();
+		appiumdriver.findElementByXPath("//UIATableView[@name=\"ServiceGroupServicesTable\"]/UIASearchBar['Search']").click();
 		
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIASearchBar['Search']").sendKeys(service);
+		appiumdriver.findElementByXPath("//UIASearchBar['Search']").sendKeys(service);
 		Helpers.waitABit(500);
 		((IOSDriver)appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Search");
 		//appiumdriver.findElementByXPath("//UIAKeyboard[1]/UIAButton['Search']").click();
 	}
 	
 	public void openServiceDetailsByIndex(String service, int servicedetailindex) {
-		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name=\""
+		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name=\""
 				+ service + "\"]/UIAButton[@name=\"custom detail button\"]");
 		Helpers.scroolToElement(selectedservices.get(servicedetailindex));
 		Helpers.waitABit(2000);
 		
-		((WebElement) appiumdriver.findElementsByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name=\""
+		((WebElement) appiumdriver.findElementsByXPath("//UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name=\""
 				+ service + "\"]/UIAButton[@name=\"custom detail button\"]").get(servicedetailindex)).click();
 	}
 	
@@ -237,9 +237,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void removeSelectedServices(String service) {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[0].cells()['"
-				+ service
-				+ "'].buttons()['selected']")).click();
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
+						+ service
+						+ "\"]/UIAButton[@name='selected']").click();
 	}
 	
 	public void clickNotesButton() {
@@ -277,9 +277,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isServiceWithVehiclePartExists(String srvname, String srvvehiclepart) {
-		System.out.println("++++" + "//UIAScrollView[2]/UIATableView[@name='ServiceGroupServicesTable']/UIATableCell[@name='" + 
-				srvname + "]/UIAStaticText[@name='" + srvvehiclepart + "']");
-		return Helpers.elementExists(By.xpath("//UIAScrollView[2]/UIATableView[1]/UIATableCell[@name='" + 
+		return Helpers.elementExists(By.xpath("//UIATableView[1]/UIATableCell[@name='" + 
 				srvname + "]/UIAStaticText[@name='" + srvvehiclepart + "']"));
 	}
 

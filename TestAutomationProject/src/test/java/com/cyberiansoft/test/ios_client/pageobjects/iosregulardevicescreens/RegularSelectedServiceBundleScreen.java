@@ -57,7 +57,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isBundleServiceExists(String bundle) {
-		return appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].scrollViews()[0].staticTexts()['" + bundle + "']")).isDisplayed();
+		return appiumdriver.findElement(MobileBy.AccessibilityId(bundle)).isDisplayed();
 	}
 	
 	public WebElement getTableParentCell(String cellname) {

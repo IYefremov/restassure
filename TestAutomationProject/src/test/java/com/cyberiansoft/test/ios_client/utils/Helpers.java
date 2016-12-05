@@ -358,7 +358,7 @@ public abstract class Helpers {
 	
 	public static void tapCarImage() throws InterruptedException {
 		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]"));
+		MobileElement element = element(By.xpath("//UIAImage[1]"));
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
@@ -368,7 +368,7 @@ public abstract class Helpers {
 	
 	public static void tapRegularCarImage() throws InterruptedException {
 		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//UIAApplication[1]/UIAWindow[2]/UIAScrollView[2]/UIAImage[1]"));
+		MobileElement element = element(By.xpath("//UIAImage[1]"));
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
@@ -392,7 +392,7 @@ public abstract class Helpers {
 	
 	public static void drawRegularQuestionsSignature() throws InterruptedException {
 		MobileElement element = element(By
-				.xpath("//UIAScrollView[2]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]/UIAStaticText[1]"));
+				.xpath("//UIATableView[1]/UIATableCell[2]/UIAStaticText[1]"));
 		element.click();
 		int xx = element.getLocation().getX();
 
@@ -402,12 +402,12 @@ public abstract class Helpers {
 
 		int duration = 1000;
 		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
-		driver.findElement(By.xpath("//UIAScrollView[2]/UIAToolbar[1]/UIAButton[@name=\"Done\"]")).click();           
+		driver.findElement(By.xpath("//UIAToolbar[1]/UIAButton[@name=\"Done\"]")).click();           
 	}
 	
 	public static void drawQuestionsSignature() throws InterruptedException {
 		MobileElement element = element(By
-				.xpath("//UIAScrollView[1]/UIATableView[2]/UIATableCell[2]/UIAStaticText[1]"));
+				.xpath("//UIATableView[2]/UIATableCell[2]/UIAStaticText[1]"));
 		element.click();
 		int xx = element.getLocation().getX();
 
@@ -419,7 +419,7 @@ public abstract class Helpers {
 		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
 		//driver.findElementByXPath("//UIAScrollView/UIATableView[2]/UIATableCell[2]/UIAButton[@name='Done']").click();
-		MobileElement signatureview  = element(By.xpath("//UIAScrollView/UIATableView[2]/UIATableCell[2]"));
+		MobileElement signatureview  = element(By.xpath("//UIATableView[2]/UIATableCell[2]"));
 
 		//int x = signatureview.getLocation().getX() + signatureview.getSize().getWidth()/2+5;
 		//int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;

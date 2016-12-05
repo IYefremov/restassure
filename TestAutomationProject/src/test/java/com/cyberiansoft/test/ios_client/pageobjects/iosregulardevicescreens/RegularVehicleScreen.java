@@ -92,7 +92,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"OrderVehicleForm\"]/UIAStaticText[1]")
 	private IOSElement navbarworkordercustomercaption;
 	
-	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"VehicleInfoView\"]/UIAStaticText[1]")
+	@iOSFindBy(xpath = "//UIANavigationBar[@name='VehicleInfoView']/UIAStaticText[@name='viewPrompt']")
 	private IOSElement navbarinspectioncustomercaption;
 	
 	@iOSFindBy(accessibility  = "Compose")
@@ -117,7 +117,10 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setVIN(String vin) throws InterruptedException {
-		Helpers.setVIN(vin);
+		element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIAStaticText")).click();
+		appiumdriver.getKeyboard().pressKey(vin + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(vin + "\n");
+		//Helpers.setVIN(vin);
 	}
 	
 	public IOSElement getVINField() {
@@ -263,11 +266,11 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getWorkOrderCustomer() {
-		return navbarinspectioncustomercaption.getAttribute("name");
+		return navbarinspectioncustomercaption.getAttribute("value");
 	}
 	
 	public String getInspectionCustomer() {
-		return navbarinspectioncustomercaption.getAttribute("name");
+		return navbarinspectioncustomercaption.getAttribute("value");
 	}
 
 	public RegularNotesScreen clickNotesButton() {

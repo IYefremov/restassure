@@ -28,10 +28,10 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
     private IOSElement quantityfldvalue;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIAToolbar/UIAStaticText[1]")
+	@iOSFindBy(xpath = "//UIAToolbar/UIAStaticText[1]")
     private IOSElement toolbarvisualpricevalue;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIAToolbar/UIAStaticText[3]")
+	@iOSFindBy(xpath = "//UIAToolbar/UIAStaticText[3]")
     private IOSElement toolbarpricevalue;
 	
 	
@@ -45,13 +45,13 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void switchToCustomTab() {	
-		if (Helpers.elementExists(By.xpath("//UIAScrollView[2]/UIAToolbar[1]/UIAButton[@name=\"default services on\"]")))
-			appiumdriver.findElementByXPath("//UIAScrollView[2]/UIAToolbar[1]/UIAButton[@name=\"default services on\"]").click();
+		if (Helpers.elementExists(By.xpath("//UIAToolbar[1]/UIAButton[@name=\"default services on\"]")))
+			appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAButton[@name=\"default services on\"]").click();
 
 	}
 	
 	public void clickServicesBackButton() {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].toolbars()[0].buttons()['Back']")).click();
+		appiumdriver.findElement(MobileBy.xpath("//UIAScrollView[1]/UIAToolbar[1]/UIAButton[@name='Back']")).click();
 	}
 
 	public void selectService(String _service) {
@@ -100,14 +100,14 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickServicesToolbarButton() {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].toolbars()[0].buttons()['services']")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("services")).click();
 	}
 
 	public void assertPriceIsCorrect(String price) {
 		if (Helpers.elementExists(By.xpath("//UIAScrollView[2]/UIAToolbar/UIAStaticText[3]")))
-			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAScrollView[2]/UIAToolbar/UIAStaticText[3]")).getText(), price);
+			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAToolbar/UIAStaticText[3]")).getText(), price);
 		else
-			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAScrollView[2]/UIAToolbar/UIAStaticText[2]")).getText(), price);
+			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAToolbar/UIAStaticText[2]")).getText(), price);
 	}
 	
 	public void assertVisualPriceIsCorrect(String price) {

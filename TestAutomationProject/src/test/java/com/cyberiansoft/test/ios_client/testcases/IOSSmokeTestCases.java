@@ -8100,8 +8100,182 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceNetValue("SR_Disc_20_Percent (25.000%)"), "$28.13");
 		invoicespage.closeNewTab(mainWindowHandle);
 		getWebDriver().quit();
+	}
+	
+	@Parameters({ "user.name", "user.psw" })
+	@Test(testName = "Test Case 42803:Invoices: HD - Verify rounding money amount values", 
+			description = "Invoices: HD - Verify rounding money amount values")
+	public void testInvoicesVerifyRoundingMoneyAmountValues(String userName, String userPassword) throws Exception {
 		
+		final String VIN  = "1D7HW48NX6S507810";
 		
+		homescreen = new HomeScreen(appiumdriver);			
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+			
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectService("Price Matrix Zayats");
+		servicesscreen.selectService("Grill");	
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setPrice("100");
+		pricematrix.clickDiscaunt(iOSInternalProjectConstants.OKSI_SERVICE_PP_FLAT_FEE);
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServicePriceValue("23");
+		selectedservicescreen.saveSelectedServiceDetails();
+		pricematrix.clickSaveButton();
+		
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServicePriceValue("10");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.answerQuestion2("A3");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_BUNDLE_PP);
+		selectedservicescreen.selectBundle(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
+		selectedservicescreen.setServicePriceValue("25");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Hood");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen.selectBundle(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		selectedservicescreen.setServicePriceValue("5");
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Grill");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.changeAmountOfBundleService("30");
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.openCustomServiceDetails("Sales Tax");
+		selectedservicescreen.setServicePriceValue("3.8");
+		selectedservicescreen.saveSelectedServiceDetails();
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$169.19");
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.clickSaveButton();
+		myworkordersscreen.clickWorkOrderForApproveButton(wonumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.clickApproveButton();
+		
+		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
+		myworkordersscreen.clickInvoiceIcon();
+		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.DEFAULT_INVOICETYPE);
+		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsFinal();
+		myworkordersscreen.clickHomeButton();
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InvoicesWebPage invoicespage = PageFactory.initElements(
+				webdriver, InvoicesWebPage.class);
+		
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String mainWindowHandle = webdriver.getWindowHandle();
+		invoicespage.clickInvoiceInternalTechInfo(invoicenumber);
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Test service price matrix"), "4.67000");
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Test service price matrix (Sev: None; Size: None)"), "3.79600");
+		Assert.assertEquals(invoicespage.getTechInfoServicesTableServiceValue("<Tax>", "Oksi_Service_PP_Flat_Fee"), "0.87400");
+		invoicespage.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Test(testName = "Test Case 40463:Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection", 
+			description = "Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection")
+	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		selectedservicedetailscreen.setServicePriceValue("25");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedservicedetailscreen.setServicePriceValue("2000");
+		selectedservicedetailscreen.clickVehiclePartsCell();
+		selectedservicedetailscreen.selectVehiclePart("Roof");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		selectedservicedetailscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		selectedservicedetailscreen.setServicePriceValue("600");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		selectedservicedetailscreen.setServicePriceValue("13");
+		selectedservicedetailscreen.clickVehiclePartsCell();
+		selectedservicedetailscreen.selectVehiclePart("Back Glass");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		selectedservicedetailscreen.answerQuestion2("A3");
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$2,688.00");
+		servicesscreen.clickSaveButton();
+		myinspectionsscreen.selectInspectionForApprove(inspnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspnumber);
+		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Roof)");
+		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		approveinspscreen.selectInspectionServiceToSkip("3/4\" - Penny Size");
+		approveinspscreen.selectInspectionServiceToSkip(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE + " (Back Glass)");
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickSaveButton();
+		
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber), "$2,688.00");
+		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspnumber), "$2,650.00");
+		myinspectionsscreen.clickHomeButton();
 	}
 	
 	

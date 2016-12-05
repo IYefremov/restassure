@@ -10,6 +10,8 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
@@ -105,5 +107,23 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void closeDublicaterServicesWarningByClickingEdit() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
+        appiumdriver.findElementByAccessibilityId("Edit").click();
+	}
+	
+	public void closeDublicaterServicesWarningByClickingCancel() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
+        appiumdriver.findElementByAccessibilityId("Cancel").click();
+	}
+	
+	public void closeDublicaterServicesWarningByClickingOverride() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
+        appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 }

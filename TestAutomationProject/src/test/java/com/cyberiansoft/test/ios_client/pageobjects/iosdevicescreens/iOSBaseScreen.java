@@ -200,9 +200,9 @@ public class iOSBaseScreen {
 	
 	public void swipeScreenLeft() {
 		Dimension size = appiumdriver.manage().window().getSize();
-		int startx = (int) (size.width * 0.80);
-		int endx = (int) (size.width * 0.20);
-		int starty = size.height / 2;	
+		int startx = (int) (size.width * 0.90);
+		int endx = (int) (size.width * 0.10);
+		int starty = size.height / 3;	
 		TouchAction act = new TouchAction(appiumdriver);
 		act.press(endx, starty).waitAction(2000) .moveTo(startx, starty).release().perform();
 		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
