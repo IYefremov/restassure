@@ -18,59 +18,12 @@
         <methods>
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  --> 
-          
-           <include name="testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection" /> 
-           <include name="testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" /> 
-          
-          
-          <include name="testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageAroupedByPanels" />
-         <include name="testInvoicesVerifyRoundingMoneyAmountValues" /> 
-          
-          <!--<include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />-->
-          <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
-          <include name="testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech" /> 
-          
-          <include name="testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" />
-          
-          <include name="testVerifyInspectionThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection" />
-          
-          
-          <include name="testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal" />
-          <!--<include name="testWOVerifyThatMessageIsShownTotalIsOverLimitation" />-->
-          <include name="testInspectionVerifyThatMessageIsShownTotalIsOverLimitation" />
-          <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
-           
-          <!--<include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly" />
-          <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount" />-->
-          <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc" />
-			<include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices" />
-                 
-          <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
-           <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
-           <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" />
-          
-           <include name="testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" />
-           <include name="testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly" />
-           
-			<include name="testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal" />
-			
-          <!--<include name="testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection" /> 
-          <include name="testCreateWorkOrderWithTeamSharingOption" /> 
-          <include name="testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" />  -->
-          
-          
-          
-          
-          <!--<include name="testUpdateDatabase" /> 
+          <include name="testUpdateDatabase" /> 
           <include name="testUpdateVIN" />
           <include name="testCreateRetailCustomer" />
           <include name="testEditRetailCustomer" />
           <include name="testDeleteRetailCustomer" />  
-          <include name="testCreateRetailInspection" />
-          <include name="testAddServicesToVisualInspection" />-->
-          <!--<include name="testChangeQuantityOfServicesInVisualInspection" />-->
-          <!--<include name="testEditRetailInspectionNotes" />
-          <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />
+          <include name="testEditRetailInspectionNotes" />
           <include name="testApproveInspectionOnDevice" />
           <include name="testArchiveAndUnArchiveTheInspection" />
           <include name="testCreateWorkOrderWithTeamSharingOption" />
@@ -84,7 +37,7 @@
           <include name="testCreateInspectionFromInvoiceWithTwoWOs" />
           <include name="testCreateInvoiceFromWOInMyWOsList" /> 
           <include name="testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode" /> 
-          <include name="testDontAlowToChangeBilledOrders" />-->
+          <include name="testDontAlowToChangeBilledOrders" />
           <include name="testChangeCustomerForInvoice" />  
           <include name="testBugWithCrashOnCopyVehicle" />
           <include name="testChangeCustomerOptionForInspection" /> 
@@ -119,12 +72,6 @@
           <include name="testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature" /> 
           <include name="testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature" />
           <include name="testRegularVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists" />
-          <include name="testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-          <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageAuantity" />
-          <include name="testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
-          <include name="testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
-          <include name="testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
-          <include name="testRegularVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
           <include name="testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech" />
           <include name="testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech" /> 
           <include name="testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech" />
@@ -139,33 +86,26 @@
           <include name="testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO" />
           <include name="testSRRegularVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
           <include name="testSRRegularVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
-          <include name="testRegularVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" /> 
           <include name="testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" /> 
           <include name="testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
-          <include name="testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined" />
           <include name="testRegularVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired" /> 
           <include name="testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
-          <include name="testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount" />
           <include name="testRegularVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent" />
-          <include name="testVerifyApprovedAmountForInspectionCreatedFromSR" />
           <include name="testRegularVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR" />
-          <include name="testRegularVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection" />
           
           <include name="testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped" /> 
           <include name="testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction" />        
           <include name="testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect" /> 
           <include name="testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard" /> 
           <include name="testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO" />
-          <include name="testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" />
           <include name="testHDVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType" />
           <include name="testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly" />
           <include name="testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode" />
           <include name="testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected" /> 
 		  <include name="testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal" /> 
+		  <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount" />
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
-          
-          
-          
+
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />-->
           <!--<include name="testASD" />-->
         </methods>
