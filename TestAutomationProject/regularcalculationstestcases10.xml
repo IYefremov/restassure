@@ -45,7 +45,7 @@
             <include name="testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly" />
             <include name="testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection" />
             <include name="testWOVerifyThatPartServicesAreCopiedFromInspToOrder" /> 
-            <include name="testInspectionThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" />
+            <include name="testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" />
             <include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />
             <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
             <include name="testInvoicesVerifyRoundingMoneyAmountValues" />
