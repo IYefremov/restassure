@@ -22,7 +22,7 @@
             <include name="testAddServicesToVisualInspection" /> 
             <include name="testChangeQuantityOfServicesInVisualInspection" />
             <include name="testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-            <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageAuantity" />
+            <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity" />
             <include name="testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
             <include name="testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
             <include name="testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
@@ -49,7 +49,7 @@
             <include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />
             <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
             <include name="testInvoicesVerifyRoundingMoneyAmountValues" />
-            <include name="testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageAroupedByPanels" />
+            <include name="testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels" />
             <include name="testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection" />
         	<include name="testRegularVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection" />    
         </methods>
