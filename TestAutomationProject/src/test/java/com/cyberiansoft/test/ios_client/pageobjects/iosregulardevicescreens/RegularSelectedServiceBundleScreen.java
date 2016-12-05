@@ -8,6 +8,8 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -16,7 +18,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility  = "services")
 	private IOSElement tollbarservicesbtn;
 	
-	@iOSFindBy(uiAutomator = ".scrollViews()[1].toolbars()[1].buttons()['Close']")
+	@iOSFindBy(accessibility = "Close")
 	private IOSElement tollbarcloseservicesbtn;
 	
 	public RegularSelectedServiceBundleScreen(AppiumDriver driver) {
@@ -36,14 +38,14 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectBundle(String bundle) {
-		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"unselected\"]").click();
+		WebElement par = getTableParentCell(bundle);
+		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='unselected']")).click();
 
 	}
 
 	public void openBundleInfo(String bundle) {
-		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"custom detail button\"]").click();
+		WebElement par = getTableParentCell(bundle);
+		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='custom detail button']")).click();
 	}
 	
 	public void clickServicesIcon() {
@@ -57,5 +59,10 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	public boolean isBundleServiceExists(String bundle) {
 		return appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].scrollViews()[0].staticTexts()['" + bundle + "']")).isDisplayed();
 	}
+	
+	public WebElement getTableParentCell(String cellname) {
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
+	}
+
 
 }
