@@ -409,9 +409,6 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	public String getTechInfoServicesTableServiceValue(String columnname, String servicename) {
 		int icolumn = getTechInfoServicesTableColumnIndex(columnname);
 		int irow = getTechInfoServicesTableServiceRowIndex(servicename);
-		System.out.println("++++" + icolumn);
-		System.out.println("++++" + irow);
-		
 		return getTechInfoServicesTable().findElement(By.xpath("./tbody/tr[" + irow + "]/td[" + icolumn + "]")).getText();
 	}
 	
