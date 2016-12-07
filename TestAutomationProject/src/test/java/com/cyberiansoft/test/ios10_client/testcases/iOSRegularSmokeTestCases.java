@@ -1471,7 +1471,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderForAction(wonumber1);
 		//myworkordersscreen.woExistsViaSearch(wonumber1);
 		myworkordersscreen.clickDoneButton();
-		
+		Helpers.waitABit(1000);
 		myworkordersscreen.clickFilterButton();
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
@@ -2693,14 +2693,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.selectNextScreen("All Services");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY);
-		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Roof");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		
-		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Front Bumper");
@@ -4180,8 +4179,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
-		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.selectVehiclePart("Back Glass");
 		selectedservicescreen.selectVehiclePart("Deck Lid");
@@ -4816,8 +4814,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicedetailscreen.clickSaveButton();
 		for (String vehiclepart : vehicleparts)
 			selectedservicedetailscreen.selectVehiclePart(vehiclepart);
@@ -5008,8 +5005,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		RegularSelectedServiceDetailsScreen servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A1");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Back Glass");
@@ -5027,7 +5023,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.clickBackButton();
 		Helpers.waitABit(500);
 		
-		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -5249,19 +5245,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService("3/4\" - Penny Size");
-		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openSelectedServiceDetails("3/4\" - Penny Size");
+		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(firstprice);
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService("3/4\" - Penny Size");
-		servicesscreen.openSelectedServiceDetails("3/4\" - Penny Size");
-		servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(secondprice);
 		servicedetailsscreen.setServiceQuantityValue(secondquantity);
 		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
-		servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		Helpers.waitABit(500);
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		servicedetailsscreen.clickVehiclePartsCell();
 		for (String vp: vehicleparts)
 			servicedetailsscreen.selectVehiclePart(vp);
