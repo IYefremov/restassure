@@ -51,7 +51,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		
 		
 		//firstcode.setValue(regCode.substring(0, 4));
-		firstcode.sendKeys(regCode.substring(0, 4));
+		firstcode.setValue(regCode.substring(0, 4));
 		secondcode.setValue(regCode.substring(5, 9));
 		thirdcode.setValue(regCode.substring(10, 14));
 		//thirdcode.click();

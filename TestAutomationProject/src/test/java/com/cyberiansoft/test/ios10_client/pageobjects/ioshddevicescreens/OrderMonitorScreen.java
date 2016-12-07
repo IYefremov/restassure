@@ -17,19 +17,19 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView/UIATableCell[@name=\"Phase Status\"]")
+	@iOSFindBy(accessibility = "Phase Status")
     private IOSElement phasestatuscell;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView/UIATableCell[@name=\"Service Status\"]")
+	@iOSFindBy(accessibility = "Service Status")
     private IOSElement servicestatuscell;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIAButton[@name=\"Start Service\"]]")
+	@iOSFindBy(accessibility = "Start Service")
     private IOSElement startservice;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView/UIATableCell[@name=\"Completed\"]")
+	@iOSFindBy(accessibility = "Completed")
     private IOSElement completedcell;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIANavigationBar[@name=\"Service Details\"]/UIAButton[@name=\"Done icon\"]")
+	@iOSFindBy(accessibility = "Done icon")
     private IOSElement servicedetailsdonebtn;
 	
 	@iOSFindBy(accessibility  = "custom detail button")
@@ -44,10 +44,10 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[2]")
     private IOSElement backbtn;
 	
-	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name= \"Services\"]")
+	@iOSFindBy(accessibility = "Services")
     private IOSElement servicesbtn;
 	
-	@iOSFindBy(xpath = "//UIAStaticText[@name= \"Active\"]")
+	@iOSFindBy(accessibility = "Active")
     private IOSElement activecaption;
 	
 	public OrderMonitorScreen(AppiumDriver driver) {

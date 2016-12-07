@@ -40,10 +40,10 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composebtn;
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")
+	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Draft\"]")
+	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
 	public ServicesScreen(AppiumDriver driver) {

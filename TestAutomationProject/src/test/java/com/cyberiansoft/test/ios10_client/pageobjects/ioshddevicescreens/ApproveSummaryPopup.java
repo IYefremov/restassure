@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator =".popover().navigationBar().buttons()[\"Approve\"]")
+	@iOSFindBy(accessibility ="Approve")
     private IOSElement approvebtn;
 	
 	public ApproveSummaryPopup(AppiumDriver driver) {

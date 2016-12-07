@@ -12,22 +12,22 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ServicePartPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Category']")
+	@iOSFindBy(accessibility = "Category")
     private IOSElement categorycell;
 	
 	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Category'].staticTexts()[1]")
     private IOSElement categoryvaluecell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Subcategory']")
+	@iOSFindBy(accessibility = "Subcategory")
     private IOSElement subcategorycell;
 	
 	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Subcategory'].staticTexts()[1]")
     private IOSElement subcategoryvaluecell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Part']")
+	@iOSFindBy(accessibility = "Part")
     private IOSElement partcell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Position']")
+	@iOSFindBy(accessibility = "Position")
     private IOSElement positioncell;
 	
 	public ServicePartPopup(AppiumDriver driver) {

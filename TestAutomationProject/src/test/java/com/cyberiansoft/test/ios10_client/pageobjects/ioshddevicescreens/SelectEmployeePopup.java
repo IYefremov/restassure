@@ -14,7 +14,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class SelectEmployeePopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIASecureTextField[@value=\"Enter password here\"]")
+	@iOSFindBy(accessibility = "Enter password here")
     private IOSElement securefld;
 	
 	public SelectEmployeePopup(AppiumDriver driver) {

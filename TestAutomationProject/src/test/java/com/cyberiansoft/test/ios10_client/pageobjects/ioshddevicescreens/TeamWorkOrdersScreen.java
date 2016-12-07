@@ -19,16 +19,16 @@ public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Search\"]")
+	@iOSFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView/UIATableCell[@name= \"Edit\"]")
+	@iOSFindBy(accessibility = "Edit")
     private IOSElement editmanu;
 	
-	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"invoice new\"]")
+	@iOSFindBy(accessibility = "invoice new")
     private IOSElement invoicenewbtn;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView[1]/UIATableCell[@name= \"Location\"]")
+	@iOSFindBy(accessibility = "Location")
     private IOSElement locationfld;
 	
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIANavigationBar[@name= \"Search\"]/UIAButton[@name= \"Save\"]")

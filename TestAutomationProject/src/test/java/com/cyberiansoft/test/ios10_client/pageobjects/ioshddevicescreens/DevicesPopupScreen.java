@@ -11,11 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Assign\"]")
+	@iOSFindBy(accessibility = "Assign")
     private IOSElement assignlbtn;
 	
 	
-	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Cancel\"]")
+	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
 	

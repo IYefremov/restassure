@@ -13,13 +13,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CarHistoryScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"btnSearch\"]")
+	@iOSFindBy(accessibility = "btnSearch")
     private IOSElement searchbtn;
 	
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
     private IOSElement searchbar;
 	
-	@iOSFindBy(uiAutomator = ".popover().buttons()[\"Close\"]")
+	@iOSFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
 	
 	@iOSFindBy(accessibility  = "Switch to web")

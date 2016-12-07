@@ -14,10 +14,10 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].navigationBars()['Print Selector'].buttons()['Print']")
+	@iOSFindBy(accessibility = "Print")
     private IOSElement printserverprintbtn;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Print']")
+	@iOSFindBy(accessibility = "Print")
 	 private IOSElement printoptionsprintbtn;
 	
 	public PrintSelectorPopup(AppiumDriver driver) {

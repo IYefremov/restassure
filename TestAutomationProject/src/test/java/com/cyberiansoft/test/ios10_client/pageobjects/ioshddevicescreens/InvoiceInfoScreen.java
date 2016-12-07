@@ -14,10 +14,10 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Draft\"]")
+	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
-	@iOSFindBy(xpath = "//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Final\"]")
+	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
 	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[1]")

@@ -14,7 +14,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class InspectionScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Save\"]")
+	@iOSFindBy(accessibility = "Save")
     private IOSElement savechangesbtn;
 	
 	@iOSFindBy(accessibility  = "Advisor")

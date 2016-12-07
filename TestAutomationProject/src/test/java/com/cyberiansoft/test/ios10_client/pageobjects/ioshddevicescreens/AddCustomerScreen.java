@@ -51,10 +51,10 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	@iOSFindBy(uiAutomator = scrollviewxpath + ".buttons()[1]")
     private IOSElement countrybtn;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Save\"]")
+	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Clients\"]")
+	@iOSFindBy(accessibility = "Clients")
     private IOSElement clientsbtn;
 	
 	public AddCustomerScreen(AppiumDriver driver) {
