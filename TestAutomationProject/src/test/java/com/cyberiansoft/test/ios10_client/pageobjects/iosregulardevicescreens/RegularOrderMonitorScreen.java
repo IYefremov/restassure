@@ -12,6 +12,8 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -39,7 +41,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Start Service")
     private IOSElement startservicebtn;
 	
-	@iOSFindBy(accessibility = "Start Phase")
+	@iOSFindBy(accessibility = "Start phase")
     private IOSElement startphasebtn;
 	
 	@iOSFindBy(accessibility = "Back")
@@ -86,18 +88,28 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
 	
-	public void setCompletedServiceStatus() throws InterruptedException {
-		clickServiceStatusCell();
-		completedcell.click();
-		Thread.sleep(2000);
-		//clickBackButton();
+	public void verifyServiceStatusInPopup(String panelname, String status) {
+		appiumdriver.findElementByName(panelname).click();
+		WebElement par = getTableParentCell("Service Status");
+		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("name").equals(status));
+		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
 	
-	public void setCompletedPhaseStatus() throws InterruptedException {
+	public void setCompletedServiceStatus() {
+		clickServiceStatusCell();
+		clickCompletedPhaseCell();
+	}
+	
+	public void setCompletedPhaseStatus() {
 		//clickCustomServiceStatusButton();
 		clickPhaseStatusCell();
+		clickCompletedPhaseCell();
+	}
+	
+	public void clickCompletedPhaseCell() {
 		completedcell.click();
-		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public void clickPhaseStatusCell() {
@@ -111,12 +123,14 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickStartPhase() throws InterruptedException {
 		startphasebtn.click();
-		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
 		servicedetailsdonebtn.click();
-		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public boolean isStartServiceButtonPresent() {
@@ -169,4 +183,21 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
+	public boolean isRepairPhaseExists() { 
+		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
+	}
+	
+	public void clicksRepairPhaseLine() { 
+		appiumdriver.findElementByAccessibilityId("Repair phase").click();
+	}
+	
+	public void clickStartPhaseButton() { 
+		appiumdriver.findElementByXPath("//XCUIElementTypeButton[@name='Start phase']").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
+	}
+	
+	public boolean isStartPhaseButtonExists() { 
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='Start phase']").size() > 0;
+	}
 }
