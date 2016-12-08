@@ -16,6 +16,6 @@ public class AlertsCaptions {
 	public static final String ALERT_CREATE_APPOINTMENT = "Would you like to create appointment?";
 	public static final String ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED = "All vehicle part data will be erased. Are you sure?";
 	public static final String ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the phase before changing the status.";
-	public static final String ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the service before changing the status.";
+	public static final String ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the service before you can change its status.";
 	
 }
