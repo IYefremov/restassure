@@ -9,7 +9,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -34,18 +33,18 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 
 	public void assertBundleIsNotSelected(String bundle) {
 		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"unselected\"]").isDisplayed());
+						+ bundle + "\"]/UIAButton[@name='unselected']").isDisplayed());
 	}
 
 	public void selectBundle(String bundle) {
-		WebElement par = getTableParentCell(bundle);
-		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='unselected']")).click();
+		appiumdriver.findElement(By.xpath("//UIATableView[1]/UIATableCell[@name=\""
+						+ bundle + "\"]/UIAButton[@name='unselected']")).click();
 
 	}
 
 	public void openBundleInfo(String bundle) {
-		WebElement par = getTableParentCell(bundle);
-		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='custom detail button']")).click();
+		appiumdriver.findElement(By.xpath("//UIATableView[1]/UIATableCell[@name=\""
+				+ bundle + "\"]/UIAButton[@name='custom detail button']")).click();
 	}
 	
 	public void clickServicesIcon() {
@@ -59,10 +58,5 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	public boolean isBundleServiceExists(String bundle) {
 		return appiumdriver.findElement(MobileBy.AccessibilityId(bundle)).isDisplayed();
 	}
-	
-	public WebElement getTableParentCell(String cellname) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
-	}
-
 
 }

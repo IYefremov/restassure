@@ -19,7 +19,7 @@ public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Search\"]")
+	@iOSFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
 	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView/UIATableCell[@name= \"Edit\"]")

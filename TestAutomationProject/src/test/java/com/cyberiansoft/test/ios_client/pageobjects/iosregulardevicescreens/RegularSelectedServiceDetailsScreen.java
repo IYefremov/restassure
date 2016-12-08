@@ -90,11 +90,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		Assert.assertEquals(serviceadjustmentsfld.getText(), adjustments);
 	}
 
-	public void setServicePriceValue(String _quantity)
-			throws InterruptedException {
+	public void setServicePriceValue(String _quantity)  {
 		servicepricefld.click();
 		servicepricefld.clear();
-		Helpers.keyboadrType(_quantity + "\n");
+		appiumdriver.getKeyboard().pressKey(_quantity + "\n");
+		//Helpers.keyboadrType(_quantity + "\n");
 	}
 
 	public void clickVehiclePartsCell() {
@@ -199,7 +199,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		return vehiclepartsfldname.isDisplayed();
 	}
 
-	public void saveSelectedServiceDetails() throws InterruptedException {
+	public void saveSelectedServiceDetails() {
 		appiumdriver.findElement(MobileBy.name("Save")).click();	
 	}
 

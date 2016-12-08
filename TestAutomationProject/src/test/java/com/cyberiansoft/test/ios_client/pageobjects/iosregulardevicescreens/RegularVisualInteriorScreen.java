@@ -104,10 +104,7 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void assertPriceIsCorrect(String price) {
-		if (Helpers.elementExists(By.xpath("//UIAScrollView[2]/UIAToolbar/UIAStaticText[3]")))
-			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAToolbar/UIAStaticText[3]")).getText(), price);
-		else
-			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAToolbar/UIAStaticText[2]")).getText(), price);
+			Assert.assertEquals(appiumdriver.findElement(By.xpath("//UIAToolbar/UIAStaticText[@name='TotalAmount']")).getText(), price);
 	}
 	
 	public void assertVisualPriceIsCorrect(String price) {

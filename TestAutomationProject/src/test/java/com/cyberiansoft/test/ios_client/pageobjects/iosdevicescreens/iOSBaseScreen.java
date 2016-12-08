@@ -158,7 +158,7 @@ public class iOSBaseScreen {
 	}
 	
 	public void selectUIAPickerValue(String value) throws InterruptedException {
-		int defaultwheelnumer = 10;
+		/*int defaultwheelnumer = 10;
 		int clicks = 0;
 		while (!(pickerwheel.getAttribute("name").contains(value))) {
 			appiumdriver.tap(1, pickerwheel.getLocation().getX()
@@ -169,8 +169,8 @@ public class iOSBaseScreen {
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
-		}
-
+		}*/
+		pickerwheel.sendKeys(value);
 	}
 	
 	public void swipeScreenUp() {

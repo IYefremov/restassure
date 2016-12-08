@@ -4,12 +4,15 @@ package com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
@@ -77,6 +80,12 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByXPath("//UIANavigationBar[1]/UIAButton[@name=\"Done icon\"]").click();
 	}
 	
+	public void verifyServiceStatusInPopup(String panelname, String status) {
+		appiumdriver.findElementByName(panelname).click();
+		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='Service Status']/UIAStaticText[2]").getAttribute("value").equals(status));
+		appiumdriver.findElementByXPath("//UIANavigationBar[1]/UIAButton[@name=\"Done icon\"]").click();
+	}
+	
 	public void setCompletedServiceStatus() {
 		clickServiceStatusCell();
 		clickCompletedPhaseCell();
@@ -90,7 +99,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickCompletedPhaseCell() {
 		completedcell.click();
-		Helpers.waitABit(3000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
+		//Helpers.waitABit(3000);
 	}
 	
 	public void clickPhaseStatusCell() {
@@ -103,7 +114,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
 		servicedetailsdonebtn.click();
-		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public boolean isStartServiceButtonPresent() {
@@ -163,7 +175,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickStartPhaseButton() { 
 		appiumdriver.findElementByXPath("//UIAButton[@name='Start phase']").click();
-		Helpers.waitABit(2000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 
 }

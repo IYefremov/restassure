@@ -993,8 +993,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		appiumdriver.closeApp();
 		Thread.sleep(60*1000*15);
 		
-		appiumdriverInicialize();
-		String srnum = "R-00004064";
+		appiumdriverInicialize();;
 		RegularMainScreen mainscreen = new RegularMainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
@@ -2598,15 +2597,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.selectNextScreen("All Services");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY);
-		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Roof");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		
-		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Front Bumper");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
@@ -3184,7 +3181,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickSearchSaveButton();
 		Helpers.waitABit(3000);
 		teamworkordersscreen.clickOnWO(wonum);
-		System.out.println("++++" + wonum);
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		Helpers.waitABit(3000);
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
@@ -3239,7 +3236,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExistsViaSearch(wonum);
-		
 		homescreen = myworkordersscreen.clickHomeButton();
 		
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3251,18 +3247,28 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		Thread.sleep(3000);
-		
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clickPhaseStatusCell();
+		Assert.assertTrue(ordermonitorscreen.isRepairPhaseExists());
+		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
+		ordermonitorscreen.clicksRepairPhaseLine();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
-		ordermonitorscreen.clickStartPhase();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
+		ordermonitorscreen.clickStartPhaseButton();
 		
+		
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonExists());
+		Assert.assertTrue(ordermonitorscreen.isServiceStartDateExists());
+		
+		ordermonitorscreen.clickServiceStatusCell();
+		alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
+		ordermonitorscreen.clickServiceDetailsDoneButton();
+		
+		ordermonitorscreen.clicksRepairPhaseLine();
+		ordermonitorscreen.clickCompletedPhaseCell();
+		
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
+		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}	
@@ -3374,7 +3380,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickSearchSaveButton();
 		Thread.sleep(3000);
 		teamworkordersscreen.clickOnWO(wonum);
-		System.out.println("++++" + wonum);
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.VPS1_SERVICE);
 		ordermonitorscreen.clickServiceDetailsDoneButton();
@@ -3461,24 +3467,28 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.setCompletedServiceStatus();
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
 
+		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
+		ordermonitorscreen.clickStartPhaseButton();
+		
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clickPhaseStatusCell();
+		ordermonitorscreen.clickServiceStatusCell();;
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
-		ordermonitorscreen.clickStartPhase();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		ordermonitorscreen.setCompletedPhaseStatus();
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
+		ordermonitorscreen.clickServiceDetailsDoneButton();
+		
+		ordermonitorscreen.clicksRepairPhaseLine();
+		ordermonitorscreen.clickCompletedPhaseCell();
 		
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
 				
+		
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
+		ordermonitorscreen.verifyServiceStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
 		Thread.sleep(3000);
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
+		ordermonitorscreen.verifyServiceStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
@@ -3563,11 +3573,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE), "Completed");
 		
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
+		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
 		ordermonitorscreen.clickPhaseStatusCell();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, "Order Monitor It is impossible to change phase status until you start phase.");
-		ordermonitorscreen.clickStartPhase();
+		ordermonitorscreen.clickStartPhaseButton();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		Assert.assertEquals(ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
@@ -4664,10 +4674,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		questionsscreen.clickSaveButton();
 		Helpers.waitABit(5000);
-		myinspectionsscreen.searchInspection(inspectionnumber);
-		Helpers.waitABit(3000);
-		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
-		//myinspectionsscreen.selectFirstInspectionToApprove();
+		//myinspectionsscreen.searchInspection(inspectionnumber);
+		//Helpers.waitABit(3000);
+		//myinspectionsscreen.selectInspectionForAction(inspectionnumber);
+		myinspectionsscreen.selectInspectionForApprove(inspectionnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -4718,8 +4728,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicedetailscreen.clickSaveButton();
 		for (String vehiclepart : vehicleparts)
 			selectedservicedetailscreen.selectVehiclePart(vehiclepart);
@@ -4789,8 +4798,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
-		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		for (int i=0; i < vehicleparts.length; i++)
 			selectedservicedetailscreen.selectVehiclePart(vehicleparts[i]);
@@ -4859,8 +4867,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
-		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Hood");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -4923,7 +4930,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.clickBackButton();
 		pricematrix.clickBackButton();
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		servicesscreen.selectSubService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -5149,13 +5156,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickToolButton();
 		servicesscreen.selectSubService("3/4\" - Penny Size");
-		servicesscreen.openSelectedServiceDetails("3/4\" - Penny Size");
-		servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen = servicesscreen.openSelectedServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(secondprice);
 		servicedetailsscreen.setServiceQuantityValue(secondquantity);
 		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
-		servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen = servicesscreen.openSelectedServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		servicedetailsscreen.clickVehiclePartsCell();
 		for (String vp: vehicleparts)
 			servicedetailsscreen.selectVehiclePart(vp);
@@ -5239,8 +5244,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickToolButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
-		RegularSelectedServiceDetailsScreen servicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
