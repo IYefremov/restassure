@@ -17,5 +17,5 @@ public class AlertsCaptions {
 	public static final String ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED = "All vehicle part data will be erased. Are you sure?";
 	public static final String ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the phase before you can change its status.";
 	public static final String ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the service before you can change its status.";
-	public static final String ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE = "You cannot change the status of services for this phase. You can only change the status of the whole phase.";
+	public static final String ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE = "Order Monitor You cannot change the status of services for this phase. You can only change the status of the whole phase.";
 }

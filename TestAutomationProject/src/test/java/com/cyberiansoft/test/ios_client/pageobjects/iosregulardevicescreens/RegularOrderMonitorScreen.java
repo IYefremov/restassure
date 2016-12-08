@@ -37,9 +37,6 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Start Service\"]")
     private IOSElement startservicebtn;
 	
-	@iOSFindBy(accessibility  = "Start Phase")
-    private IOSElement startphasebtn;
-	
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name=\"Back\"]")
     private IOSElement backbtn;
 	
@@ -56,7 +53,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectPanel(String panelname) {
-		appiumdriver.findElementByName(panelname).click();
+		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name='" + panelname + "']/UIAButton[@name='customizedDetails']").click();
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		//MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//UIATableView/UIATableCell[contains(@name, \""
 		//		+ panelname
@@ -80,18 +77,20 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByXPath("//UIANavigationBar[1]/UIAButton[@name=\"Done icon\"]").click();
 	}
 	
-	public void setCompletedServiceStatus() throws InterruptedException {
+	public void setCompletedServiceStatus() {
 		clickServiceStatusCell();
-		completedcell.click();
-		Thread.sleep(2000);
-		//clickBackButton();
+		clickCompletedPhaseCell();
 	}
 	
-	public void setCompletedPhaseStatus() throws InterruptedException {
+	public void setCompletedPhaseStatus() {
 		//clickCustomServiceStatusButton();
 		clickPhaseStatusCell();
+		clickCompletedPhaseCell();
+	}
+	
+	public void clickCompletedPhaseCell() {
 		completedcell.click();
-		Thread.sleep(3000);
+		Helpers.waitABit(3000);
 	}
 	
 	public void clickPhaseStatusCell() {
@@ -102,12 +101,6 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		servicestatuscell.click();
 	}
 	
-	
-	public void clickStartPhase() throws InterruptedException {
-		startphasebtn.click();
-		Thread.sleep(3000);
-	}
-	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
 		servicedetailsdonebtn.click();
 		Thread.sleep(3000);
@@ -115,10 +108,6 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public boolean isStartServiceButtonPresent() {
 		return startservicebtn.isDisplayed();
-	}
-	
-	public boolean isStartPhaseButtonPresent() {
-		return startphasebtn.isDisplayed();
 	}
 	
 	public void clickServicesButton() {
@@ -158,6 +147,23 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public RegularTeamWorkOrdersScreen clickBackButton() {
 		backbtn.click();
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
+	}
+	
+	public boolean isRepairPhaseExists() { 
+		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
+	}
+	
+	public void clicksRepairPhaseLine() { 
+		appiumdriver.findElementByAccessibilityId("Repair phase").click();
+	}
+	
+	public boolean isStartPhaseButtonExists() { 
+		return appiumdriver.findElementsByXPath("//UIAButton[@name='Start phase']").size() > 0;
+	}
+	
+	public void clickStartPhaseButton() { 
+		appiumdriver.findElementByXPath("//UIAButton[@name='Start phase']").click();
+		Helpers.waitABit(2000);
 	}
 
 }
