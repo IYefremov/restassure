@@ -252,17 +252,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setClientCityValue("Chicago");
 		appointmentpopup.setClientZipValue("20002");
 		appointmentpopup.clickAddAppointment();
+		
 		servicerequestslistpage.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 		Thread.sleep(1000);
 		appointmentpopup = servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 		
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "101 Main Road.,");
 		Assert.assertEquals(appointmentpopup.getClientCityValue(), "Chicago");
 		Assert.assertEquals(appointmentpopup.getClientZipValue(), "20002");
 		appointmentpopup.clickAddAppointment();
-		Thread.sleep(1000);
+		appointmentpopup.waitABit(2000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();		
 	}
 	
@@ -347,7 +348,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		servicerequestslistpage.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 		
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
@@ -453,7 +454,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
 		appointmentpopup.clickAddAppointment();
-		Thread.sleep(1000);
+		appointmentpopup.waitABit(2000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();		
 	}
 	
@@ -550,9 +551,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
 		Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(), "Ukraine");
 		Assert.assertEquals(appointmentpopup.getClientStateValue(), "Kyiv");
-		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227 street");
-		Assert.assertEquals(appointmentpopup.getClientCityValue(), "mercedes");
-		Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
+		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "");
+		Assert.assertEquals(appointmentpopup.getClientCityValue(), "");
+		Assert.assertEquals(appointmentpopup.getClientZipValue(), "");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();		

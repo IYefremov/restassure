@@ -63,7 +63,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbZip')]")
 	private TextField employeezipfld;
 	
-	@FindBy(xpath = "//input[contains(@id, 'Card_tbPhone')]")
+	@FindBy(id = "inPhone0")
 	private TextField employeephonefld;
 	
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbEmail')]")

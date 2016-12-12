@@ -402,6 +402,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void setServiceRequestGeneralInfo(String _team, String _assignedto, String _po, String _ro) {
 		setServiceRequestGeneralInfoTeam(_team);
+		waitABit(2000);
 		setServiceRequestGeneralInfoAssignedTo(_assignedto);
 		clearAndType(addsrvponum, _po);
 		clearAndType(addsrvronum, _ro);
@@ -441,7 +442,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void decodeAndVerifyServiceRequestVIN(String _make, String _model) {
 		click(addsrvcardecodevinbtn);
-		waitABit(1000);
+		waitABit(2000);
 		Assert.assertEquals(addsrvcarmake.getValue(), _make);
 		Assert.assertEquals(addsrvcarmodel.getValue(), _model);
 	}
@@ -455,6 +456,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		List<WebElement> donebtns = driver.findElements(donebtn);
 		for (WebElement donebtn : donebtns) {
 			if (donebtn.isDisplayed()) {
+				new WebDriverWait(driver, 10)
+				  .until(ExpectedConditions.elementToBeClickable(donebtn));
 				donebtn.click();
 				break;
 			}

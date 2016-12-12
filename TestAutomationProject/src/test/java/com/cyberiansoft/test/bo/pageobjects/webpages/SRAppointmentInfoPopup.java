@@ -195,6 +195,7 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	
 	public void clickAddAppointment() {
 		click(addapointmentbtn);
+		waitABit(2000);
 	}
 
 }

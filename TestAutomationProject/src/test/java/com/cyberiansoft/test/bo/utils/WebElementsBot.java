@@ -66,16 +66,19 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
+		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
 		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		Actions act = new Actions(WebDriverInstansiator.getDriver());
 		act.click(combobox.getWrappedElement()).perform();
 		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
 		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		combobox.clearAndType(value);
+		combobox.click();
+		combobox.clear();
+		combobox.typeValue(value);
+		//combobox.clearAndType(value);
 		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		waitABit(1000);
+		  .until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
+		waitABit(2000);
 		droplist.selectByVisibleText(value);
 		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
