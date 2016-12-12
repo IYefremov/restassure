@@ -118,8 +118,8 @@ public class BaseTestCase {
 		
 		File appDir = new File("./data/");
 	    //app = new File(appDir, "ReconPro_1124.app.zip");
-		app = new File(appDir, "ReconPro_1202.app.zip");
-		//app = new File(appDir, buildfilename);
+		//app = new File(appDir, "ReconPro_1208.app.zip");
+		app = new File(appDir, buildfilename);
 		appiumcap.setCapability("app", app.getAbsolutePath());
 	
 		//appiumcap.setCapability("app", app.getAbsolutePath());
@@ -168,7 +168,7 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		WebDriverInstansiator.setDriver("firefox");
+		WebDriverInstansiator.setDriver("chrome");
 		webdriver = WebDriverInstansiator.getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);

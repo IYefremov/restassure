@@ -163,6 +163,32 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par = getTableParentCell("Quantity");
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_quantity);
 	}
+	
+	public void setServiceTimeValue(String _timevalue)
+			throws InterruptedException {	
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Time")));	
+        WebElement par = getTableParentCell("Time");
+		
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).click();
+		par = getTableParentCell("Time");
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
+		par = getTableParentCell("Time");
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_timevalue);
+	}
+	
+	public void setServiceRateValue(String _ratevalue)
+			throws InterruptedException {	
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate")));	
+        WebElement par = getTableParentCell("Rate");
+		
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).click();
+		par = getTableParentCell("Rate");
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
+		par = getTableParentCell("Rate");
+		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_ratevalue);
+	}
 
 	public void assertAdjustmentValue(String adjustment,
 			String adjustmentvalue) {

@@ -89,8 +89,10 @@ public class iOSInternalProjectConstants {
     public static final String SR_DISC_20_PERCENT = "SR_Disc_20_Percent";
     public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     public static final String SR_S4_BUNDLE = "SR_S4_Bundle";
+    public static final String SR_S5_MT_DISCOUNT_10 = "SR_S5_Mt_Discount_10";
     public static final String OKSI_SERVICE_PP_VEHICLE = "Oksi_Service_PP_Vehicle";
     public static final String OKSI_SERVICE_PP_PANEL = "Oksi_Service_PP_Panel";
+    public static final String OKSI_SERVICE_PP_LABOR = "Oksi_Service_PP_Labor";
     public static final String OKSI_SERVICE_PP_SERVICE = "Oksi_Service_PP_Service";
     public static final String OKSI_SERVICE_PP_FLAT_FEE = "Oksi_Service_PP_Flat_Fee";
     public static final String OKSI_BUNDLE_PP = "Oksi_Bundle_PP";

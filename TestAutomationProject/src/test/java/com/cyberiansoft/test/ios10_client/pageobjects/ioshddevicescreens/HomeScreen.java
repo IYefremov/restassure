@@ -133,10 +133,14 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 
 	public SettingsScreen clickSettingsButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
-		swipeScreenUp();
-		settingstsbtn.click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
+		//swipeScreenUp();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(settingstsbtn));
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(settingstsbtn).waitAction(1000).release().perform();
+		//settingstsbtn.click();
 		return new SettingsScreen(appiumdriver);
 	}	
 	

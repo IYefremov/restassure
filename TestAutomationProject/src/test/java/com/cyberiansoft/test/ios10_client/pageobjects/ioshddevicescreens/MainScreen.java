@@ -1,13 +1,17 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class MainScreen {
 	
@@ -19,10 +23,10 @@ public class MainScreen {
 	@iOSFindBy(accessibility  = "UpdateVinDatabaseButton")
     private IOSElement updatevin;
 	
-	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIASecureTextField[1]")
+	@iOSFindBy(accessibility = "Enter Password")
     private IOSElement securefld;
 	
-	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAButton[1]")
+	@iOSFindBy(xpath = "//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Login']")
     private IOSElement loginbtn;
 	
 	@iOSFindBy(accessibility  = "Licenses")
@@ -63,12 +67,17 @@ public class MainScreen {
 	public HomeScreen userLogin(String user, String password) throws InterruptedException {
 		Thread.sleep(1000);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
-		Thread.sleep(1000);
-		Helpers.text_exact(user).click();
-		Thread.sleep(1000);
-
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(1000).release().perform();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(securefld));
 		securefld.setValue(password);
-		loginbtn.click();
+		action = new TouchAction(appiumdriver);
+		action.press(loginbtn).waitAction(1000).release().perform();
+		//loginbtn.click();
 		return new HomeScreen(appiumdriver);
 	}
 	

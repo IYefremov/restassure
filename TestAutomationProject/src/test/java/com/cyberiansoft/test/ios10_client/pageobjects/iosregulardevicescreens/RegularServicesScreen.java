@@ -158,6 +158,8 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 			//appiumdriver.findElementByAccessibilityId("Save").click();
 		}
 		else {
+			//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='custom detail button']").click();
+			
 			WebElement par = getServiceTableCell(servicename);		
 			new TouchAction(appiumdriver).tap(par.findElement(MobileBy.AccessibilityId("custom detail button"))).perform() ;
 		}

@@ -122,8 +122,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriverInicialize();	
-		appiumdriver.removeApp("com.automobiletechnologies.reconprohd");
-		appiumdriverInicialize();
+		appiumdriver.removeApp(bundleid);
+		//appiumdriverInicialize();
+		appiumdriver.installApp(app.getAbsolutePath());
+		appiumdriver.launchApp();
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);

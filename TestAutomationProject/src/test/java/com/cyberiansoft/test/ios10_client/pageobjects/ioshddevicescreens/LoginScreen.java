@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import static org.junit.Assert.assertEquals;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -49,14 +50,18 @@ public class LoginScreen extends iOSHDBaseScreen {
 	public void registeriOSDevice(String regCode)
 			throws InterruptedException {
 		
-		
+		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//firstcode.setValue(regCode.substring(0, 4));
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(firstcode).waitAction(1000).release().perform();
+		firstcode.click();
 		firstcode.setValue(regCode.substring(0, 4));
 		secondcode.setValue(regCode.substring(5, 9));
 		thirdcode.setValue(regCode.substring(10, 14));
 		//thirdcode.click();
-		//Helpers.keyboadrType(regCode.substring(10, 14));		
-		registerbtn.click();
+		action = new TouchAction(appiumdriver);
+		action.press(registerbtn).waitAction(1000).release().perform();	
+		//registerbtn.click();
 		
 		appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);
 		appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton");
