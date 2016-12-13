@@ -194,6 +194,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public void clickFindButton() { 
+		waitABit(1000);
 		clickAndWait(findbtn);
 	}
 	
