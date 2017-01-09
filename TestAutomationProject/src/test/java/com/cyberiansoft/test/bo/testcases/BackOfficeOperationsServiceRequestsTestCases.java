@@ -55,7 +55,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -122,7 +122,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -189,7 +189,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -282,7 +282,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -377,7 +377,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -473,7 +473,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 		
-		final String insurance = "Company1";
+		final String insurance = "Oranta";
 		final String _label = "test";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -551,9 +551,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
 		Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(), "Ukraine");
 		Assert.assertEquals(appointmentpopup.getClientStateValue(), "Kyiv");
-		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "");
-		Assert.assertEquals(appointmentpopup.getClientCityValue(), "");
-		Assert.assertEquals(appointmentpopup.getClientZipValue(), "");
+		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227 street");
+		Assert.assertEquals(appointmentpopup.getClientCityValue(), "mercedes");
+		Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();		

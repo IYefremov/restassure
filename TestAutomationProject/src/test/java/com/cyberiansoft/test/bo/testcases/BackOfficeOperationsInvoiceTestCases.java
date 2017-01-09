@@ -46,12 +46,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	@Test(description = "Test Case 15161:Operation - Invoice: Search")
 	public void testOperationInvoiceSearch() throws Exception {
 		
-		final String customer = "002 - Test Company";
-		final String ponumber = "64465";
+		final String customer = "000 My Company";
+		final String ponumber = "234";
 		
-		final String amountfrom = "179";
-		final String amountto = "181";
-		final String invoicenumber = "I-015-00072";
+		final String amountfrom = "174";
+		final String amountto = "176";
+		final String invoicenumber = "I-049-00106";
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -120,7 +120,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -175,7 +175,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -217,7 +217,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		//	description = "Operation - Invoice: Edit - Technician")
 	public void testOperationInvoiceEditTechnician() throws Exception {
 
-		final String invoicenumber = "I-083-00001";
+		final String invoicenumber = "I-000-00243";
 		
 		final String po = "#123";
 		final String notes = "Test note for payments";
@@ -251,7 +251,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -314,14 +314,14 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
 		final String message = "Mail Message";
-		final String invoicenumber = "I-098-00002";
+		final String invoicenumber = "I-000-00242";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();

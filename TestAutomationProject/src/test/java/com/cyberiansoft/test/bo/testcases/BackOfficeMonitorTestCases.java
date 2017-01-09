@@ -43,7 +43,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
 	public void testMonitorRepairOrderSearch() throws Exception {
 
-		final String wonumber = "O-021-00061";
+		final String wonumber = "O-021-00233";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -83,27 +83,27 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation("Default Location");
 		Thread.sleep(1000);
 		repairorderspage.selectSearchCustomer("Additional Recon");
-		repairorderspage.setSearchVIN("2566TREWTUU664YHH");
+		repairorderspage.setSearchVIN("R4YHH");
 		repairorderspage.setSearchWoNumber(wonumber);
-		repairorderspage.setSearchStockNumber("g3467");
+		repairorderspage.setSearchStockNumber("4488");
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
 		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
-		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("Additional Recon", "2566TREWTUU664YHH");
+		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("Additional Recon", "R4YHH");
 		
 	}
 	
 	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
 	public void testMonitorVendorOrdersSearch() throws Exception {
 
-		final String wonum = "O-10000-00118";
-		final String company = "005 - Test Company";
-		final String VIN = "3773747FHDHHDH3E";
+		final String wonum = "O-000-147178";
+		final String company = "Amazing Nissan";
+		final String VIN = "JM1GL1W51H1105084";
 		final String vendor = "Test Team";
 		final String deflocation = "Default Location";
 		
 		final String servicestatus = "All Services";
-		final String employee = "Vitaly Lyashenko";
+		final String employee = "Oksi Manager";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -265,7 +265,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		final String repairorderlocation = "Default Location";
 		final String repairordertimeframe = "Last Year";
-		final String repairordernumber = "O-10005-00077";
+		final String repairordernumber = "O-062-00034";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -303,7 +303,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		final String repairorderlocation = "Default Location";
 		final String repairordertimeframe = "Last Year";
-		final String repairordernumber = "O-10005-00077";
+		final String repairordernumber = "O-062-00034";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
