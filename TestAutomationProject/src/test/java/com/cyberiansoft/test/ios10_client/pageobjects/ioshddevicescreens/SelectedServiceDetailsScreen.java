@@ -6,11 +6,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.HowToUseLocators;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBLE;
-import static io.appium.java_client.pagefactory.LocatorGroupStrategy.CHAIN;
+
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
