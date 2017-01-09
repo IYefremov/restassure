@@ -2,9 +2,15 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.HowToUseLocators;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBLE;
+import static io.appium.java_client.pagefactory.LocatorGroupStrategy.CHAIN;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -15,55 +21,61 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Price']")
+	@iOSFindBy(accessibility = "Price")
     private IOSElement servicepricefld;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Price'].textFields()[0]")
+	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")
     private IOSElement servicepricevaluefld;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Adjustments'].textFields()[0]")
+	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Adjustments']/XCUIElementTypeTextField[1]")
     private IOSElement serviceadjustmentsfld;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name,\"Vehicle Part\")]/UIAStaticText[2]")
+	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Vehicle Part']/XCUIElementTypeStaticText[2]")
     private IOSElement vehiclepartsfld;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name,\"Service Part\")]/UIAStaticText[2]")
+	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Service Part']/XCUIElementTypeStaticText[2]")
     private IOSElement servicepartfld;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Vehicle Part']")
+	@iOSFindBy(accessibility = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Service Part']")
+	@iOSFindBy(accessibility = "Service Part")
     private IOSElement servicepartscell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Questions']")
+	@iOSFindBy(accessibility = "Questions")
     private IOSElement questionsfld;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIAToolbar[1]/UIAButton[@name=\"Remove\"]")
+	@iOSFindBy(accessibility = "Remove")
     private IOSElement removeservice;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Quantity']")
+	@iOSFindBy(accessibility = "Quantity")
     private IOSElement quantityfld;
 	
 	@iOSFindBy(accessibility  = "Notes")
     private IOSElement notesfld;
 	
-	@iOSFindBy(xpath = "//UIANavigationBar[@name=\"Vehicle Parts\"]")
+	@iOSFindBy(accessibility = "Vehicle Parts")
     private IOSElement vehiclepartsfldname;
 	
-	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Custom\"]")
+	@iOSFindBy(accessibility = "Custom")
     private IOSElement technitianscustomview;
 	
-	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")
+	@iOSFindBy(accessibility = "Evenly")
     private IOSElement technitiansevenlyview;
 	
-	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Cancel\"]")
+	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
+	
+	@iOSFindBy(accessibility = "PercentageGroupsView")
+    private IOSElement adjustmentstable;
+	
+	@iOSFindBy(accessibility = "BundleItemsView")
+    private IOSElement bundleitemstable;
 	
 	
 	public SelectedServiceDetailsScreen(AppiumDriver driver) {
@@ -80,12 +92,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		Assert.assertEquals(serviceadjustmentsfld.getText(), adjustments);
 	}
 
-	public void setServicePriceValue(String _quantity)
+	public void setServicePriceValue(String _price)
 			throws InterruptedException {
 		servicepricefld.click();
-		servicepricevaluefld.clear();
-		servicepricevaluefld.setValue(_quantity);
-		Helpers.keyboadrType("\n");
+		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		//servicepricevaluefld.clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 
 	public void clickVehiclePartsCell() {
@@ -124,7 +139,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		questionsfld.click();
 		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[5]")).click();
 		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + answer + "']")).click();	
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 	
 	public void answerQuestion2(String answer) {
@@ -132,7 +147,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		questionsfld.click();
 		QuestionsPopup questionspopup = new QuestionsPopup(appiumdriver);
 		questionspopup.answerQuestion2(answer);
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 
 	public void answerQuestionCheckButton() {
@@ -140,43 +155,45 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		questionsfld.click();
 		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Back']")).click();	
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 	
 	public void setServiceQuantityValue(String _quantity)
 			throws InterruptedException {	
 		
 		quantityfld.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Quantity'].textFields()[0]")).clear();
-		Helpers.keyboadrType(_quantity + "\n");
+		Helpers.waitABit(300);
+		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Quantity']/XCUIElementTypeTextField[1]").clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 
 	public void assertAdjustmentValue(String adjustment,
 			String adjustmentvalue) {
-		Assert.assertEquals(appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-								+ adjustment + "\"]/UIATextField[1]")
-						.getAttribute("value"), adjustmentvalue);
+		Helpers.waitABit(500);
+		Assert.assertEquals(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + adjustment + "']/XCUIElementTypeTextField[1]")).getAttribute("value"), adjustmentvalue);
 	}
 
 	public void selectAdjustment(String adjustment) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-								+ adjustment + "\"]/UIAButton[@name=\"unselected\"]").click();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + adjustment + "']/XCUIElementTypeButton[@name=\"unselected\"]")).click();
 	}
 	
 	public void selectBundle(String bundle) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-								+ bundle + "\"]/UIAButton[@name=\"unselected\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name=\""
+								+ bundle + "\"]/XCUIElementTypeButton[@name=\"unselected\"]").click();
 	}
 	
 	public void changeBundleQuantity(String bundle, String _quantity) throws InterruptedException {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-								+ bundle + "\"]/UIAButton[@name=\"custom detail button\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name=\""
+								+ bundle + "\"]/XCUIElementTypeButton[@name=\"custom detail button\"]").click();
 		setServiceQuantityValue(_quantity);
 	}
 	
 	public PriceMatrixScreen selectMatrics(String matrics) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-								+ matrics + "\"]/UIAStaticText[@name=\"" + matrics + "\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + matrics + "']").click();
 		return new PriceMatrixScreen(appiumdriver);
 	}
 
@@ -185,12 +202,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
-		Thread.sleep(2000);
-		if (elementExists("//UIAPopover[1]")) {
-			appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Save']")).click();	
-		} else {
-			appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[0].navigationBars()['Technicians'].buttons()['Save']")).click();	
-		}
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(2000);
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()
@@ -236,7 +249,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getAdjustmentsValue() {
-		return appiumdriver.findElementByXPath("//UIATableCell[@name=\"Adjustments\"]/UIATextField[1]").getText();
+		return serviceadjustmentsfld.getText();
 	}
 	
 	public void clickTechniciansIcon() {
@@ -324,13 +337,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectVehiclePart(String vehiclepart) {
-		if (appiumdriver.findElements(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).size() > 0) {
-			Helpers.scroolToByXpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']");
-			//appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
-			appiumdriver.findElement(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).click();
-		}
+		WebElement vehiclepartstable = null;
+		if (appiumdriver.findElementsByAccessibilityId("VehiclePartSelectorView").size() > 1)
+			vehiclepartstable = (WebElement) appiumdriver.findElementsByAccessibilityId("VehiclePartSelectorView").get(1);
 		else
-			Assert.assertTrue(appiumdriver.findElements(MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + vehiclepart + "']/UIAButton[@name='unselected']")).size() > 0);
+			vehiclepartstable = appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
+		
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(300).release().perform();
+		Assert.assertTrue(vehiclepartstable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + vehiclepart + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {
@@ -342,12 +357,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getListOfSelectedVehicleParts() {
-		return appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Vehicle Part'].staticTexts()[1]")).getAttribute("value");
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Vehicle Part']/XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public boolean isQuestionFormCellExists() {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		boolean exists =  appiumdriver.findElements(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Questions']")).size() > 0;
+		boolean exists =  appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
 		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.MILLISECONDS);
 		return exists;
 	}

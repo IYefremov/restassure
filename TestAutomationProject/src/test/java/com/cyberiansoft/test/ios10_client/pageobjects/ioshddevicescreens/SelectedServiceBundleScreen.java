@@ -18,13 +18,13 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].navigationBars()[0].buttons()['Cancel']")
+	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
 	private IOSElement cancelbundlepopupbtn;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].toolbars()[0].buttons()['services']")
+	@iOSFindBy(accessibility = "services")
 	private IOSElement tollbarservicesbtn;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[1].toolbars()[0].buttons()['Close']")
+	@iOSFindBy(accessibility = "Close")
 	private IOSElement tollbarcloseservicesbtn;
 	
 	public SelectedServiceBundleScreen(AppiumDriver driver) {
@@ -34,24 +34,20 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertBundleIsSelected(String bundle) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"selected\"]").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"selected\"]")).isDisplayed());
 	}
 
 	public void assertBundleIsNotSelected(String bundle) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"unselected\"]").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"unselected\"]")).isDisplayed());
+		
 	}
 
 	public void selectBundle(String bundle) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"unselected\"]").click();
-
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"unselected\"]")).click();
 	}
 
 	public void openBundleInfo(String bundle) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-						+ bundle + "\"]/UIAButton[@name=\"custom detail button\"]").click();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"custom detail button\"]")).click();
 	}
 	
 	public void clickCancelBundlePopupButton() {
@@ -67,7 +63,7 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isBundleServiceExists(String bundle) {
-		return appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[1].scrollViews()[0].staticTexts()['" + bundle + "']")).isDisplayed();
+		return appiumdriver.findElements(MobileBy.AccessibilityId(bundle)).size() > 0;
 	}
 	
 	public void overrideBundleAmountValue(String newvalue) throws InterruptedException {

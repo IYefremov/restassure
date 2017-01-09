@@ -191,6 +191,7 @@ public abstract class Helpers {
 		Alert alert = driver.switchTo().alert();
 		String alertetxt = alert.getText();
 		alert.accept();
+		waitABit(500);
 		return alertetxt;
 	}
 	
@@ -327,10 +328,12 @@ public abstract class Helpers {
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
 		MobileElement element = (MobileElement) driver
-				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage[contains(@name, 'car_interior_color.png')]");
 		action.tap(element, x, y).perform();
+		//action = new TouchAction(driver);
+		//action.press(element, x, y).waitAction(1000).release().perform();
 		//action.press(element).moveTo(element, 30, 30).release().perform();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
 		// js.executeScript("target.frontMostApp().mainWindow().images()[\"car_interior_color.png\"].tapWithOptions({tapOffset:{x:0.19, y:0.16}}) ;");
 	}
@@ -340,21 +343,24 @@ public abstract class Helpers {
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[2]");*/
 		MobileElement element = (MobileElement) driver
-				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage[contains(@name, 'car_exterior_color.png')]");
 		action.tap(element, x, y).perform();
 		Thread.sleep(1000);
+		System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
+		System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
 		// js.executeScript("target.frontMostApp().mainWindow().images()[\"car_exterior_color.png\"].tapWithOptions({tapOffset:{x:0.19, y:0.16}}) ;");
 	}
 	
-	public static void tapCarImage() throws InterruptedException {
+	public static void tapCarImage() { 
+		
 		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//XCUIElementTypeImage]"));
+		MobileElement element = element(By.xpath("//XCUIElementTypeImage"));
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		driver.tap(1, x, y, 1000);
-		Thread.sleep(1000);
+		action.tap(element, x, y).perform();
+		waitABit(1000);
 	}
 	
 	public static void tapRegularCarImage() throws InterruptedException {
@@ -403,7 +409,7 @@ public abstract class Helpers {
 	
 	public static void drawQuestionsSignature() throws InterruptedException {
 		MobileElement element = element(By
-				.xpath("//UIAScrollView[1]/UIATableView[2]/UIATableCell[2]/UIAStaticText[1]"));
+				.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]"));
 		element.click();
 		int xx = element.getLocation().getX();
 
@@ -412,10 +418,12 @@ public abstract class Helpers {
 		int yyd = yy + 200;
 
 		int duration = 1000;
+		TouchAction action = new TouchAction(driver);
+		action.press(xx + 100,yy + 100).waitAction(3000).moveTo(xx + 200, yy + 200).release().perform();
 		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
 		//driver.findElementByXPath("//UIAScrollView/UIATableView[2]/UIATableCell[2]/UIAButton[@name='Done']").click();
-		MobileElement signatureview  = element(By.xpath("//UIAScrollView/UIATableView[2]/UIATableCell[2]"));
+		MobileElement signatureview  = element(By.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]"));
 
 		//int x = signatureview.getLocation().getX() + signatureview.getSize().getWidth()/2+5;
 		//int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
@@ -475,15 +483,7 @@ public abstract class Helpers {
 				MobileBy.xpath("//UIAButton[@name=\""
 						+ screenname + "\"]")).isDisplayed();
 	}
-	
-	public static void selectDefaultNextScreen(String screenname) throws InterruptedException {
-		waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]").click();
-		element(
-				MobileBy.xpath("//UIAStaticText[@name=\""
-						+ screenname + "\"]")).click();
-		Thread.sleep(1000);
-	}
-	
+
 	public static void makeCapture() throws InterruptedException {
 		Thread.sleep(2000);
 		if (elementExists(By.xpath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]"))) {

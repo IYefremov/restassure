@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -12,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
@@ -32,34 +34,34 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	public final static String SEVERE_SEVERITY = "Severe (76-100 Dents)";
 	public final static String QUICK_QUOTE_SEVERITY = "Quick Quote";
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Price\"]/UIAStaticText[@name=\"Price\"]")
+	@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Price\"]")
     private IOSElement pricecell;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Time\"]/UIAStaticText[@name=\"Time\"]")
+	@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Time\"]")
     private IOSElement timecell;
 	
-	@iOSFindBy(uiAutomator = ".tableViews()[1].cells()[\"Price\"].textFields()[0]")
+	@iOSFindBy(uiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
     private IOSElement pricevaluefld;
 	
-	@iOSFindBy(uiAutomator = ".tableViews()[1].cells()[\"Notes\"]")
+	@iOSFindBy(accessibility = "Notes")
     private IOSElement notescell;
 	
-	@iOSFindBy(xpath = "//UIATableView/UIATableCell[contains(@name,\"Technicians\")]")
+	@iOSFindBy(accessibility = "Technicians")
     private IOSElement technicianscell;
 	
-	@iOSFindBy(xpath = "//UIATableView/UIATableCell[contains(@name,\"Technicians\")]/UIAStaticText[2]")
+	@iOSFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
     private IOSElement technicianscellvalue;
 	
 	@iOSFindBy(accessibility  = "Compose")
     private IOSElement composecell;
 	
-	@iOSFindBy(xpath = "//UIATableView[2]/UIATableCell[@name=\"Clear\"]")
+	@iOSFindBy(accessibility = "Clear")
     private IOSElement clearvehiclepartdatabtn;
 	
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Cancel\"]")
+	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
 	public PriceMatrixScreen(AppiumDriver driver) {
@@ -69,28 +71,30 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
-		Helpers.scroolTo(pricematrix);
-		Helpers.text_exact(pricematrix).click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(1000).release().perform();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + pricematrix + "']").click();
 
 	}
 
 	public void setSizeAndSeverity(String size, String severity) {
-		Helpers.text_exact("Size").click();
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-				+ size + "\"]").click();
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[2]/UIATableCell[@name=\""
-				+ severity + "\"]").click();
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIANavigationBar[1]/UIAButton[@name=\"Save\"]").click();
+		appiumdriver.findElementByAccessibilityId("Size").click();
+		appiumdriver.findElementByAccessibilityId(size).click();
+		appiumdriver.findElementByAccessibilityId(severity).click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
 	}
 
-	public void setPrice(String price) throws InterruptedException {
+	public void setPrice(String price) {
 		pricecell.click();
-		Helpers.keyboadrType(price + "\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
+		Helpers.waitABit(500);
 	}
 	
-	public void setTime(String timevalue) throws InterruptedException {
+	public void setTime(String timevalue) {
 		timecell.click();
-		Helpers.keyboadrType(timevalue + "\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
+		Helpers.waitABit(500);
 	}
 
 	/*public void setSeverity(String severity) {
@@ -100,41 +104,40 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}*/
 
 	public void assertPriceCorrect(String price) {
-		Assert.assertEquals(pricevaluefld.getText(), price);
+		Assert.assertEquals(appiumdriver.findElement(
+				MobileBy.xpath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='PriceMatrixItemDetailsCellPrice']/XCUIElementTypeTextField[1]")).
+				getAttribute("value"),price);
 	}
 
 	public void selectDiscaunt(String discaunt) {
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[1].cells()['"
-			//	+ discaunt + "']")).click();
-		Helpers.scroolToByXpath("//UIATableCell[@name='"
-				+ discaunt + "']");
-		
-		appiumdriver.findElementByXPath("//UIATableCell[@name='"
-				+ discaunt + "']/UIAButton[@name='unselected']").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
+				+ discaunt + "']/XCUIElementTypeButton[@name='unselected']").click();
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name,\""
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
 						+ discaunt + "\")]").click();
 	}
 	
 	public void switchOffOption(String optionname) {
-		((IOSElement) appiumdriver.findElementByXPath("//UIASwitch[@name=\"" + optionname + "\"]")).setValue("0");
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
+			((IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']")).click();
+		Helpers.waitABit(1000);
 	}
 	
 	public String getDiscauntPriceAndValue(String discaunt) {
-		return appiumdriver.findElementByXPath("//UIATableView[2]/UIATableCell[@name=\""
-						+ discaunt + "\"]/UIAStaticText[2]").getAttribute("name");
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
+						+ discaunt + "']").getAttribute("label");
 	}
 	
 	public boolean isDiscauntPresent(String discaunt) {
-		return appiumdriver.findElementByXPath("//UIATableView[2]/UIATableCell[@name=\""
-						+ discaunt + "\"]").isDisplayed();
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='"
+						+ discaunt + "']").isDisplayed();
 	}
 	
 	public boolean isPriceMatrixSelected(String pricematrix) {
-		return appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
-						+ pricematrix + "\"]/UIAButton[@name=\"selected\"]").isDisplayed();
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixVehiclePartList']/XCUIElementTypeCell[@name='"
+						+ pricematrix + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
 	}
 
 	public void assertNotesExists() {
@@ -159,6 +162,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void clickSaveButton() {
 		savebtn.click();
+		Helpers.waitABit(1000);
 	}
 
 	public void clickCancelButton() {
@@ -167,12 +171,13 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
 	public void clearVehicleData() {
 		clearvehiclepartdatabtn.click();
+		Helpers.waitABit(1000);
 		String msg = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
-		return appiumdriver.findElement(MobileBy.xpath("//UIAToolbar[2]/UIAStaticText[1]")).getAttribute("value");
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar[2]/XCUIElementTypeStaticText[1]")).getAttribute("value");
 	}
 
 }

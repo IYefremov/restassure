@@ -103,7 +103,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 	}
 	
-	public void selectUIAPickerValue(String value) throws InterruptedException {
+	public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		if (!pickerwheel.getAttribute("value").contains(value))

@@ -6,11 +6,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -72,6 +70,8 @@ public class HomeScreen extends iOSHDBaseScreen {
 	public MyInspectionsScreen clickMyInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(myinspectionsbtn));
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(myinspectionsbtn).waitAction(300).release().perform();
 		myinspectionsbtn.click();
 		return new MyInspectionsScreen(appiumdriver);
 	}
@@ -108,6 +108,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(teaminvoicesbtn));
 		teaminvoicesbtn.click();
+		Helpers.waitABit(1000);
 		return new TeamInvoicesScreen(appiumdriver);
 	}
 
@@ -146,16 +147,15 @@ public class HomeScreen extends iOSHDBaseScreen {
 	
 	public void updateDatabase() {
 		Helpers.setTimeOut(180);
-		MobileElement element = Helpers.element(MobileBy.xpath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[1]"));
-		element.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton").click();
+		
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 	
 	public void updateVIN() {
 		Helpers.setTimeOut(60);
-		MobileElement element = Helpers.element(MobileBy.xpath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[2]"));
-		element.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[2]").click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}

@@ -14,7 +14,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Print")
+	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Print Selector']/XCUIElementTypeButton[@name='Print']")
     private IOSElement printserverprintbtn;
 	
 	@iOSFindBy(accessibility = "Print")
@@ -27,14 +27,17 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	}
 	
 	public void checkRemotePrintServerAndSelectPrintServer(String printserver) {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Remote']")).click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + printserver + "']")).click();
-		IOSElement remoteserverchkbox = (IOSElement) appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['Remote'].buttons()[0]"));
+		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(printserver)).click();
+		IOSElement par = (IOSElement) appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='Remote']/.."));
+		IOSElement remoteserverchkbox = (IOSElement) par.findElement(MobileBy.xpath("//XCUIElementTypeButton[1]"));
 		if (remoteserverchkbox.getAttribute("name").equals("black unchecked"))
-			remoteserverchkbox.click();				
+			remoteserverchkbox.click();	
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickPrintSelectorPrintButton() {
+		//appiumdriver.findElement(MobileBy.AccessibilityId("Print Selector")).findElement(MobileBy.AccessibilityId("Print")).click();
 		printserverprintbtn.click();
 		Helpers.waitABit(3000);
 	}

@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -16,39 +19,39 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	
 	private AppiumDriver appiumdriver;
 
-	final static String scrollviewxpath = ".scrollViews()[0]";
+	final static String scrollviewxpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther";
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[0]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[1]")
     private IOSElement firstnamefld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[1]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[2]")
     private IOSElement lastnamefld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[2]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[3]")
     private IOSElement companyfld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[3]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[4]")
     private IOSElement streetfld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[5]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[6]")
     private IOSElement cityfld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[6]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[7]")
     private IOSElement statefld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[7]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[8]")
     private IOSElement zipfld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[8]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[9]")
     private IOSElement phonefld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".textFields()[9]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[10]")
     private IOSElement mailfld;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".buttons()[0]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[1]")
     private IOSElement statebtn;
 	
-	@iOSFindBy(uiAutomator = scrollviewxpath + ".buttons()[1]")
+	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[2]")
     private IOSElement countrybtn;
 	
 	@iOSFindBy(accessibility = "Save")
@@ -65,22 +68,19 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	public void addCustomer(String firstname, String lastname,
 			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail)
-			throws InterruptedException {
+			String zip, String country, String phone, String mail)	{
+		Helpers.waitABit(2000);
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);
 		setStreet(street);
+		Helpers.waitABit(2000);
 		setCity(city);
-		//Helpers.acceptAlert();
-		selectState(state);
-		Thread.sleep(2000);
-		setZip(zip);
-		Thread.sleep(2000);
+		Helpers.waitABit(2000);
 		selectCountry(country);
-		Thread.sleep(2000);
+		selectState(state);
+		setZip(zip);
 		setPhone(phone);
-		Thread.sleep(2000);
 		setMail(mail);
 	}
 
@@ -103,53 +103,70 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	}
 
 	public void setFirstName(String firstname) {
+		firstnamefld.clear();
 		firstnamefld.setValue(firstname);
+		Helpers.waitABit(300);
 	}
 
 	public void setLastName(String lastname) {
+		lastnamefld.clear();
 		lastnamefld.setValue(lastname);
+		Helpers.waitABit(300);
 	}
 
 	public void setCompanyName(String companyname) {
-		companyfld.setValue(companyname);
+		companyfld.clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(companyname);
+		Helpers.waitABit(300);
 	}
 
 	public void setStreet(String street) {
+		streetfld.clear();
 		streetfld.setValue(street);
+		Helpers.waitABit(300);
 	}
 
 	public void setCity(String city) {
-		cityfld.setValue(city);
+		cityfld.clear();	
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(city + "\n");
+		Helpers.waitABit(300);
 	}
 
 	public void setState(String state) {
 		statefld.setValue(state);
+		appiumdriver.hideKeyboard();
 	}
 
 	public void setZip(String zip) {
-		zipfld.setValue(zip);
+		zipfld.clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(zip + "\n");
+		Helpers.waitABit(1000);
 	}
 
 	public void setPhone(String phone) {
-		phonefld.setValue(phone);
+		phonefld.clear();		
+		phonefld.sendKeys(phone + "\n");
+		Helpers.waitABit(1000);
 	}
 
 	public void setMail(String mail) {
-		mailfld.setValue(mail);
+		mailfld.clear();
+		mailfld.sendKeys(mail + "\n");
+		Helpers.waitABit(1000);
 	}
 
-	public void selectState(String state) throws InterruptedException {
+	public void selectState(String state) {
 		statebtn.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(state))).click();		
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(state))).waitAction(300).release().perform();
+		Helpers.waitABit(2000);
 	}
 
-	public void selectCountry(String country)
-			throws InterruptedException {
+	public void selectCountry(String country) {
 		countrybtn.click();
-		Helpers.scroolTo(country);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(country))).click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(country))).waitAction(300).release().perform();
+		Helpers.waitABit(2000);
 	}
 
 	public void clickSaveBtn() {

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class SelectEmployeePopup extends iOSHDBaseScreen {
 	
@@ -30,7 +30,7 @@ public class SelectEmployeePopup extends iOSHDBaseScreen {
 	}
 	
 	public void selectEmployee(String employee) {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + employee + "']")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(employee)).click();
 	}
 
 }

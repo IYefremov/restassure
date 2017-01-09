@@ -6,8 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
@@ -26,7 +28,7 @@ public class iOSBaseScreen {
 	
 	protected AppiumDriver appiumdriver;
 	//final String uipickerxpath = ".popover().pickers()[0]";
-	final String uipickerxpath = "//UIAPicker";
+	final String uipickerxpath = "//XCUIElementTypePicker";
 	
 	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
     private IOSElement backbtn;
@@ -40,7 +42,7 @@ public class iOSBaseScreen {
 	@iOSFindBy(xpath = uipickerxpath)
     private IOSElement picker;
 	
-	@iOSFindBy(xpath = uipickerxpath + "/UIAPickerWheel[1]")
+	@iOSFindBy(xpath = uipickerxpath + "/XCUIElementTypePickerWheel[1]")
     private IOSElement pickerwheel;
 	
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[4]")
@@ -157,15 +159,19 @@ public class iOSBaseScreen {
 		return exists;
 	}
 	
-	public void selectUIAPickerValue(String value) throws InterruptedException {
+	public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
-		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			appiumdriver.tap(1, pickerwheel.getLocation().getX()
+		Helpers.waitABit(500);
+		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		while (!(pickerwhl.getAttribute("value").contains(value))) {
+			/*appiumdriver.tap(1, pickerwheel.getLocation().getX()
 					+ picker.getSize().getWidth() - 100, pickerwheel
 					.getLocation().getY() + picker.getSize().getHeight() - 10,
-					100);
-			Thread.sleep(1000);
+					100);*/
+			//MobileElement slider = appiumdriver.findElementByClassName("UIASlider");
+			pickerwhl.setValue(value);
+			Helpers.waitABit(1000);
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;

@@ -65,15 +65,16 @@ public class MainScreen {
 	}
 
 	public HomeScreen userLogin(String user, String password) throws InterruptedException {
-		Thread.sleep(1000);
-		Helpers.waitUntilCheckLicenseDialogDisappears();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
+		Helpers.waitABit(10000);
+		Helpers.setTimeOut(5);
+		//Helpers.waitUntilCheckLicenseDialogDisappears();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(1000).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(securefld));
+		//wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(securefld));
 		securefld.setValue(password);
 		action = new TouchAction(appiumdriver);
 		action.press(loginbtn).waitAction(1000).release().perform();

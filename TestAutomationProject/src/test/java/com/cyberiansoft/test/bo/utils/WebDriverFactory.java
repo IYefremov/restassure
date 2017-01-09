@@ -24,6 +24,11 @@ public class WebDriverFactory {
 		switch (browserName) {
 		case "firefox":
 			webcap = DesiredCapabilities.firefox();
+			if (Platform.getCurrent().is(Platform.WINDOWS)) {
+				System.setProperty("webdriver.gecko.driver", "./browsers/geckodriver/geckodriver.exe");
+			} else {
+				System.setProperty("webdriver.gecko.driver", "./browsers/geckodriver/geckodriver");
+			}
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":

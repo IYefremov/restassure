@@ -3,14 +3,18 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class VisualInteriorScreen extends iOSHDBaseScreen {
 	
@@ -23,17 +27,17 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name=\"Quantity\"]/XCUIElementTypeTextField[1]")
     private IOSElement quantityfldvalue;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar[1]/UIAStaticText[7]")
+	@iOSFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[7]")
     private IOSElement toolbarvisualpricevalue;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[1]/UIAToolbar[1]/UIAStaticText[8]")
+	@iOSFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[8]")
     private IOSElement toolbarpricevalue;
 	
 	
-	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Save\"]")
+	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;
 
 	public VisualInteriorScreen(AppiumDriver driver) {
@@ -47,11 +51,12 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectService(String _service) {
-		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIATableView[1]/UIATableCell[@name='" + _service + "']").click();
+		appiumdriver.findElementByAccessibilityId(_service).click();
 	}
 
 	public void selectSubService(String _subservice) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name='" + _subservice + "']").click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElementByAccessibilityId(_subservice)).waitAction(300).release().perform();
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
@@ -74,9 +79,34 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		Helpers.tapInterior(x, y);
 	}
 
-	public static void tapExterior() throws InterruptedException {
+	public void tapExterior() throws InterruptedException {
 		Thread.sleep(1000);
-		Helpers.tapExterior(50, 50);
+		TouchAction action = new TouchAction(appiumdriver);
+		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+		
+		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
+		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
+		//action.tap(element, x, y).perform();
+		action.press(element, x, y).waitAction(1000).release().perform();
+		Helpers.waitABit(1000);
+		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
+		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
+		//action.tap(element, x, y).perform();
+		action.press(element, x, y).waitAction(1000).release().perform();
+		Helpers.waitABit(1000);
+		Helpers.tapExterior(50, 50);*/
+	}
+	
+	public void tapCarImage() { 
+		
+		TouchAction action = new TouchAction(appiumdriver);
+		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+		
+		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
+		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
+		//action.tap(element, x, y).perform();
+		action.press(element, x, y).waitAction(1000).release().perform();
+		Helpers.waitABit(1000);
 	}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
@@ -85,20 +115,19 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertPriceIsCorrect(String price) {
-		Assert.assertEquals(toolbarpricevalue.getText(), price);
+		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
 	}
 	
 	public void assertVisualPriceIsCorrect(String price) {
-		Assert.assertEquals(toolbarvisualpricevalue.getText(), price);
+		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("SubtotalAmount").getAttribute("value"), price);
 	}
 
 
-	public static void assertDefaultInteriorServicesPresent()
+	public void assertDefaultInteriorServicesPresent()
 			throws InterruptedException {
-		Assert.assertTrue(Helpers.text_exact("Miscellaneous").isDisplayed());
-		Assert.assertTrue(Helpers.text_exact("Price Adjustment - 2")
-				.isDisplayed());
-		Assert.assertTrue(Helpers.text_exact("WHEEL REPAIR").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
 	}
 
 	public static String getVisualInteriorCaption() {

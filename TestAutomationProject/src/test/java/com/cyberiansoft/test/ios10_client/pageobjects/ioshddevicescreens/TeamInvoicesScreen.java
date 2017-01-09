@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 
+import com.cyberiansoft.test.ios_client.utils.Helpers;
+
 public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility  = "Print")
@@ -29,7 +31,7 @@ public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectInvoice(String invoice) {
-		appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name= \""
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \""
 								+ invoice + "\"]").click();
 	}
 	
@@ -39,7 +41,7 @@ public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public IOSElement getFirstInvoice() {
-		return (IOSElement) appiumdriver.findElementByXPath("//UIAElement[1]/UIATableView[1]/UIATableCell[1]");
+		return (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]");
 	}
 	
 	public String getFirstInvoiceValue() {
@@ -47,7 +49,8 @@ public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isInvoicePrintButtonExists(String invoicenumber) {
-		return appiumdriver.findElementsByXPath("//UIAElement[1]/UIATableView[1]/UIATableCell[@name=\"" + invoicenumber + "\"]/UIAImage[@name=\"INVOICE_PRINTED\"]").size() > 0;
+		Helpers.waitABit(2000);
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoicenumber + "']/XCUIElementTypeImage[@name='INVOICE_PRINTED']").size() > 0;
 	}
 
 }

@@ -10,8 +10,8 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.HomeScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.MainScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios_client.utils.LogAssertions;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.ios_client.utils.iOSLogger;

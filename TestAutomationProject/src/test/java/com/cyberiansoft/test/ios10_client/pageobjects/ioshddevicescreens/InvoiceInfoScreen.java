@@ -3,10 +3,12 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -20,17 +22,17 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[1]")
+	@iOSFindBy(accessibility = "txtPO")
     private IOSElement setpofld;
+	
+	@iOSFindBy(accessibility = "InvoiceOrdersTable")
+    private IOSElement invoicewostable;
 	
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
-	
-	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAButton[@name=\"Hide keyboard\"]")
-    private IOSElement hidekeyboardbtn;
 
 	public InvoiceInfoScreen(AppiumDriver driver) {
 		super(driver);
@@ -43,10 +45,10 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public void clickSaveAsDraft() throws InterruptedException {
+	public void clickSaveAsDraft()  {
 		clickSaveButton();
 		draftalertbtn.click();
-		Thread.sleep(1000);
+		Helpers.waitABit(1000);
 	}
 
 	public void clickSaveAsFinal() {
@@ -54,43 +56,43 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		finalalertbtn.click();
 	}
 
-	public void setPO(String _po) throws InterruptedException {
+	public void setPO(String _po) {
 		setPOWithoutHidingkeyboard(_po);
-		hidekeyboardbtn.click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 	
-	public void setPOWithoutHidingkeyboard(String _po) throws InterruptedException {
+	public void setPOWithoutHidingkeyboard(String _po) {
 		setpofld.setValue(_po);
 	}
 
-	public void assertWOIsSelected(String wo) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[contains(@name, \""
-						+ wo + "\")]").isDisplayed());
+	public void assertWOIsSelected(String wonumber) {
+		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(wonumber).size() > 0);
 	}
 	
 	public void clickFirstWO() {
-		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIATableView/UIATableCell[1]").click();
+		invoicewostable.findElementByXPath("//XCUIElementTypeCell[1]").click();
 	}
 	
 	public void assertOrderSummIsCorrect(String summ) {
-		Assert.assertEquals(appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[6]").getText(), summ);
+		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), summ);
 	}
 	
-	public void addWorkOrder(String wonumber) throws InterruptedException {
-		Thread.sleep(3000);
-		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
+	public void addWorkOrder(String wonumber) {
+		Helpers.waitABit(3000);
+		invoicewostable.findElementByXPath("//XCUIElementTypeCell[2]").click();
 		//appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
-		appiumdriver.findElementByXPath("//UIATableCell[contains(@name, \""
-						+ wonumber + "\")]/UIAButton[@name=\"unselected\"]").click();
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIANavigationBar[1]/UIAButton[@name=\"Done\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
+						+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public String getInvoiceNumber() {
-		return appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAStaticText[contains(@name, \"I-00\")]").getAttribute("name");
+		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-00\")]").getAttribute("value");
 	}
 	
 	public String getInvoiceCustomer() {
-		return appiumdriver.findElementByXPath("//UIANavigationBar[@name=\"InvoiceFormView\"]/UIAStaticText[1]").getAttribute("name");
+		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
 	}
 
 	//public void clickSaveButton() {

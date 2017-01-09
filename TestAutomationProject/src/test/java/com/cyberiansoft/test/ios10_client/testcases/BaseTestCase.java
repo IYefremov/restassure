@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class BaseTestCase {
 	protected String userpsw;
 	protected static ExtentTest testlogger;
 	
-	//final String bundleid = "com.automobiletechnologies.reconprohd";
+	protected static AppiumDriverLocalService service;
 	String bundleid = "";
 	
 	public void setTestLogger(ExtentTest logger) {
@@ -90,14 +91,19 @@ public class BaseTestCase {
 		// File appDir = new File("/Users/vladimir/Downloads/");
 		// File app = new File(appDir, "ReconPro_HD.app");
 		    
-		    
-		    
+		/* service = AppiumDriverLocalService.buildDefaultService();
+	        service.start();
+
+	        if (service == null || !service.isRunning()) {
+	            throw new RuntimeException("An appium server node is not started!");
+	        }   
+		  */  
 		appiumcap = new DesiredCapabilities();
 		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad Retina");
 		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7 Plus");
 		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7");
-		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.1");
+		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
 		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
 		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 		appiumcap.setCapability("nativeWebTap", true);
@@ -182,6 +188,7 @@ public class BaseTestCase {
 		} catch (MalformedURLException e) {			
 			e.printStackTrace();
 		}*/
+		//appiumdriver = new IOSDriver<>(service.getUrl(), appiumcap);
 		appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
 
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);

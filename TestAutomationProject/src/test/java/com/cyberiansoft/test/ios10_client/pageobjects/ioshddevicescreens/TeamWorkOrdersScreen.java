@@ -31,7 +31,7 @@ public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Location")
     private IOSElement locationfld;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIANavigationBar[@name= \"Search\"]/UIAButton[@name= \"Save\"]")
+	@iOSFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;
 	
 	public TeamWorkOrdersScreen(AppiumDriver driver) {
@@ -46,8 +46,7 @@ public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickOnWO(String wonumber) {
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ wonumber + "\")]").click();
+		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
 	
 	public OrderMonitorScreen selectWOMonitor() {

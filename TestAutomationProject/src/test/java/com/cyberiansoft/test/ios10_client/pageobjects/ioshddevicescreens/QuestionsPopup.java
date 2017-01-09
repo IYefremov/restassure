@@ -19,8 +19,8 @@ public class QuestionsPopup extends iOSHDBaseScreen {
 	}
 	
 	public void answerQuestion2(String answer) {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[3]")).click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + answer + "']")).click();		
+		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeSelect_Question 2")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();		
 	}
 
 }

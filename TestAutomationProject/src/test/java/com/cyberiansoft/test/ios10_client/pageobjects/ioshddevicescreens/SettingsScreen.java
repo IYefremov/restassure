@@ -12,13 +12,13 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 public class SettingsScreen extends iOSHDBaseScreen {
 	
 	
-	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[1]")
+	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[2]")
     private IOSElement inspectionsinglepagetoggle;
 	
-	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[3]")
+	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[4]")
     private IOSElement duplicatestoggle;
 	
-	@iOSFindBy(uiAutomator = ".scrollViews()[0].switches()[18]")
+	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[19]")
     private IOSElement showtopcustomerstoggle;
 	
 	public SettingsScreen(AppiumDriver driver) {
@@ -28,11 +28,13 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setInspectionToSinglePageInspection() {
-		inspectionsinglepagetoggle.setValue("1");
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("0"))
+			inspectionsinglepagetoggle.click();
 	}
 
 	public void setInspectionToNonSinglePageInspection() {
-		inspectionsinglepagetoggle.setValue("0");
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("1"))
+			inspectionsinglepagetoggle.click();
 	}
 
 	public void setCheckDuplicatesOn() {
