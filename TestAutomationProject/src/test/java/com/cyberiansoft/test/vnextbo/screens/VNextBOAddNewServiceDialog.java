@@ -99,6 +99,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 	
 	public void selectServicePriceType(String servicepricetype) {
 		servicepricetypecmb.click();
+		waitABit(300);
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable((WebElement) driver.findElement(By.xpath("//ul[@id='price-type_listbox']/li/div/span[text()='" + servicepricetype + "']")))).click();
 	}

@@ -852,7 +852,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Verify Total is correct when adding several money services on Visuals screen")
 	public void testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen() {
 		
-		final String selectdamage = "Dent";
+		final String selectdamage = "Dent Repair";
 		final String[] amounts = { "20.00", "647.99" };
 		final String[] quantities = { "10.58", "6" };
 		final String inspprice = "$4099.54";
@@ -890,7 +890,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Verify Total is correct when adding money and percentage services on Visuals screen")
 	public void testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen() {
 		
-		final String dentdamage = "Dent";
+		final String dentdamage = "Dent Repair";
 		final String dentamount = "506.35";
 		final String dentquantity = "5.00";
 		

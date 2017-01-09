@@ -84,21 +84,16 @@ public class VNextBaseScreen {
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
-	public void swipeScreenLeft() {		
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		Dimension size = appiumdriver.manage().window().getSize();
-		int startx = (int) (size.width * 0.75);
-		int endx = (int) (size.width * 0.25);
-		int starty = size.height / 10;
-		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);		
-		Assert.assertTrue(switchToWebViewContext());
-		waitABit(4000);
+	public void swipeScreenLeft() {	
+		//if (appiumdriver instanceof JavascriptExecutor)
+		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
+		tap(appiumdriver.findElementByXPath("//i[@action='forward']"));
 		log(LogStatus.INFO, "Swipe To Next Screen");
+		waitABit(1000);
 	}
 	
 	public void swipeScreensLeft(int screensnumber) {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.75);
 		int endx = (int) (size.width * 0.25);
@@ -109,25 +104,28 @@ public class VNextBaseScreen {
 			log(LogStatus.INFO, "Swipe To Next Screen");
 		}
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		Assert.assertTrue(switchToWebViewContext());
-		
+		Assert.assertTrue(switchToWebViewContext())
+		*/
+		for (int i = 0; i < screensnumber; i++) {
+			if (appiumdriver instanceof JavascriptExecutor)
+			    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
+			waitABit(1000);	
+		}	
 	}
 	
 	public void swipeScreenRight() {
-		waitABit(1000);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		Dimension size = appiumdriver.manage().window().getSize();
-		int startx = (int) (size.width * 0.30);
-		int endx = (int) (size.width * 0.70);
-		int starty = size.height / 10;
-		new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-		Assert.assertTrue(switchToWebViewContext());
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);		
+		
+		//if (appiumdriver instanceof JavascriptExecutor)
+		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
+		tap(appiumdriver.findElementByXPath("//i[@action='back']"));		
 		log(LogStatus.INFO, "Swipe Back To Previous Screen");
+		waitABit(1000);
 	}
 	
 	public void swipeScreensRight(int screensnumber) {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		if (appiumdriver instanceof JavascriptExecutor)
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
+		/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.25);
 		int endx = (int) (size.width * 0.75);
@@ -138,7 +136,7 @@ public class VNextBaseScreen {
 			log(LogStatus.INFO, "Swipe Back To Previous Screen");
 		}
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		Assert.assertTrue(switchToWebViewContext());
+		Assert.assertTrue(switchToWebViewContext());*/
 		
 	}
 	
@@ -149,7 +147,7 @@ public class VNextBaseScreen {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconPro")) {
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconProClient")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);

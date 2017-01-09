@@ -40,6 +40,8 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customerslist));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
 	}
 	
 	public VNextCustomersScreen clickCustomersMenuItem() {
@@ -79,7 +81,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public String getQueueMessageValue() {
-		waitABit(500);
+		waitABit(1000);
 		return queuemessage.getText();
 	}
 	

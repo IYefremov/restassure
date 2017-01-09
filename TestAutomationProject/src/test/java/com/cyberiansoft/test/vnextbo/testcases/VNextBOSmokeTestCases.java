@@ -51,10 +51,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	
 	@AfterSuite
 	public void clearUsers() throws IOException {
-		System.out.println("++++++++++++" + userslist.size());
 		if (userslist.size() > 0)
 			for (String usermails : userslist)
-				VNextWebServicesUtils.deleteUserByMail(usermails);		
+				VNextWebServicesUtils.deleteUserByMail(usermails);	
 	}
 	
 	@Test(description = "Test Case 43038:vNext: create user without Web access")
@@ -205,8 +204,8 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		System.out.println("++++++++++++" + confirmpsw);
 		System.out.println("++++++++++++" + confirmationurl);
 		//webdriver.navigate().to(confirmationurl);
-		//leftmenu.waitABit(4000);
-		webdriver.get(confirmationurl);
+		leftmenu.waitABit(5000);
+		webdriver.navigate().to(confirmationurl);
 		leftmenu.selectInvoicesMenu();
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
@@ -227,7 +226,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		String mailmessage = "";
 		for (int i=0; i < 7; i++) {
 			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
-				loginpage.waitABit(60*1000);
+				loginpage.waitABit(60*500);
 			} else {
 				search = true;
 				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");

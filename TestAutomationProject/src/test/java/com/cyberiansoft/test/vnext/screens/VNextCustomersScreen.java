@@ -14,8 +14,7 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
-	
-	@FindBy(xpath="//div[@class='page customers-list hide-searchbar page-on-center']")
+	@FindBy(xpath="//div[contains(@class, 'page customers-list')]")
 	private WebElement customersscreen;
 	
 	@FindBy(xpath="//a[@class='link icon-only back']/i")
@@ -33,8 +32,10 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public VNextCustomersScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
 	}
 	
 	public void selectCustomer(String customer) {
@@ -71,7 +72,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomerByCustomerAddress(String customeraddress) {
-		System.out.println("++++++++" + customerslist.findElements(By.xpath(".//div[@class='item-address' and contains(text(), '" + customeraddress + "')]")).size());
 		while (customerslist.findElements(By.xpath(".//div[@class='item-address' and contains(text(), '" + customeraddress + "')]")).size() < 1) {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();

@@ -33,11 +33,11 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-/*import com.ssts.pcloudy.ConnectError;
+import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidDriver;
@@ -141,7 +141,7 @@ public class VNextBaseTestCase {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconPro")) {
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconProClient")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);
@@ -278,7 +278,7 @@ public class VNextBaseTestCase {
 	
 	/////////////////////////////
 	//@BeforeSuite
-	/*@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
+	@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
 	public void runExecutionOnPCloudy(String browser, String bourl, String username, String userpsw, String licensename) throws InterruptedException, IOException, ConnectError {
 		deviceofficeurl = bourl;
 		defaultbrowser = browser;
@@ -311,9 +311,10 @@ public class VNextBaseTestCase {
 		//selectedDevices.add(MobileDevice.getNew("Htc_10_Android_6.0.1", 155, "10", "10", "android", "6.0.1", "Htc")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS7_Android_6.0.1", 153, "GalaxyS7", "Galaxy S7", "android", "6.0.1", "Samsung")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyA7_Android_6.0.1", 226, "GalaxyA7", "Galaxy A7", "android", "6.0.1", "Samsung")); 
-		selectedDevices.add(MobileDevice.getNew("Htc_Desire630_Android_6.0.1", 209, "Desire630", "Desire 630", "android", "6.0.1", "Htc")); 
+		//selectedDevices.add(MobileDevice.getNew("Htc_Desire630_Android_6.0.1", 209, "Desire630", "Desire 630", "android", "6.0.1", "Htc")); 
 		//selectedDevices.add(MobileDevice.getNew("Lg_Nexus5X_Android_7.0.0", 215, "Nexus5X", "Nexus 5X", "android", "7.0.0", "Lg")); 
-		
+		//selectedDevices.add(MobileDevice.getNew("Htc_Desire830_Android_5.1.0", 217, "Desire830", "Desire 830", "android", "5.1.0", "Htc"));
+		selectedDevices.add(MobileDevice.getNew("Htc_Desire628_Android_5.1.0", 211, "Desire628", "Desire 628", "android", "5.1.0", "Htc"));
 		BookingDtoDevice[] bookedDevicesIDs = pCloudyCONNECTOR.bookDevicesForAppium(authToken, selectedDevices, 90, "friendlySessionName");
 		System.out.println("Devices booked successfully");
 
@@ -334,8 +335,8 @@ public class VNextBaseTestCase {
 		appiumcap.setCapability("deviceName", bookedDevicesIDs[0].capabilities.deviceName);
 		appiumcap.setCapability("browserName", bookedDevicesIDs[0].capabilities.deviceName);
 		appiumcap.setCapability("platformName", "Android");
-		appiumcap.setCapability("appPackage", "com.automobiletechnologies.ReconPro");
-		appiumcap.setCapability("appActivity", "com.automobiletechnologies.ReconPro.MainActivity");
+		appiumcap.setCapability("appPackage", "com.automobiletechnologies.ReconProClient");
+		appiumcap.setCapability("appActivity","com.automobiletechnologies.ReconProClient.MainActivity");
 		appiumcap.setCapability("rotatable", true);
 		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
 		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
@@ -353,6 +354,6 @@ public class VNextBaseTestCase {
 		
 		// Create multiple driver objects in multiple threads
 		
-		}*/
+		}
 
 }

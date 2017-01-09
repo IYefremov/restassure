@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -71,6 +72,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(vehiclefieldslist));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
 	}
 	
 	public void setVIN (String vinnumber) {
@@ -222,14 +225,18 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(5000);
-		swipeScreensLeft(5);
+		waitABit(1000);	
+		swipeScreenLeft();
+		new VNextVisualScreen(appiumdriver);
+		swipeScreenLeft();
+		new VNextVisualScreen(appiumdriver);
+		swipeScreenLeft();
+		new VNextVisualScreen(appiumdriver);
+		swipeScreenLeft();
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();
 		//swipeScreenLeft();
-		if (appiumdriver.findElements(By.xpath("//span[@class='client-mode' and text()='All Services']")).size() > 0)
-			swipeScreenLeft();
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 	

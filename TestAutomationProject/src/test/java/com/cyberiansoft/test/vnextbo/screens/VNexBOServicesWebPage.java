@@ -80,6 +80,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 			checkboxSelect(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
 			checkboxUnselect(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']")));
+		waitABit(1000);
 		searchservicespanel.findElement(By.xpath(".//button[@type='submit']")).click();
 		waitABit(500);
 	}
@@ -184,7 +185,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
 	public void clickDeleteServiceButton(WebElement tablerow) {
 		Actions act = new Actions(driver);
-		act.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']"))).click(tablerow.findElement(By.xpath(".//span[@class='icon-trash-bin']"))).build().perform();
+		act.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']"))).click(tablerow.findElement(By.xpath(".//span[@title='Delete']"))).build().perform();
 	}
 	
 	public void clickDeleteServiceButtonAndAcceptAlert (WebElement tablerow) {
