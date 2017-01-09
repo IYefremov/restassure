@@ -84,18 +84,18 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			
 			techcommissionpage.selectSearchStatus("New");
 			//techcommissionpage.selectSearchTeamVendor("TestTeamInternal");
-			techcommissionpage.selectSearchTechnician("Inspector Inspector");			 
+			techcommissionpage.selectSearchTechnician("Alex Morozov");			 
 			techcommissionpage.clickFindButton();
 			
 			Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
-			techcommissionpage.verifySearchResults("O-021-00151");
+			techcommissionpage.verifySearchResults("O-068-00210");
 		}
 
 		@Test(description = "Test Case 15386:Operations - Work Orders: Search")
 		public void testOperationWorkOrdersSearch() throws Exception {
 
-			final String wonum = "O-021-00141";
-			final String vin = "355";
+			final String wonum = "O-116-00172";
+			final String vin = "KRKFMGM4GVJGJFFFF";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);		
@@ -224,15 +224,15 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			
 			final String timeframe = "Last Year";
 			
-			final String inspnum = "E-057-00002";
-			final String insptype = "Vovan test type";
-			final String customer = "002 - Test Company";
+			final String inspnum = "E-095-00034";
+			final String insptype = "Cirrus Cosmetic Inspection";
+			final String customer = "ABC Insurance Company";
 			
 			final String inspstatus = "Approved";
-			final String technician = "Oksi Oprysk";
-			final String technicianfull = "Oksi Oprysk (OKSI ZZZ)";
-			final String inspstock = "rerfgcrtgcxbv";
-			final String inspro = "wsxfrvgxzrbtb";
+			final String technician = "Vitaliy K aka script";
+			final String technicianfull = "Vitaliy K aka script";
+			final String inspstock = "Ver1";
+			final String inspro = "RRR";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);		
@@ -356,7 +356,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			final String _model = "Accord";
 			final String _year = "2001";
 			
-			final String insurance = "Company1";
+			final String insurance = "Oranta";
 			final String _label = "test";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
