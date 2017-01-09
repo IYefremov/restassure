@@ -326,6 +326,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestStatus']")).getText();		
 	}
 	
+	public String getFirstServiceRequestPhase()  { 
+		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestPhase']")).getText();		
+	}
 	
 	public void clickGeneralInfoEditButton()  { 
 		click(getGeneralInfoEditButton());

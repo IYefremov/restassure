@@ -108,7 +108,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickCompletedPhaseCell() {
 		completedcell.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		Helpers.waitABit(2000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
@@ -123,13 +124,13 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickStartPhase() throws InterruptedException {
 		startphasebtn.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 40);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
 		servicedetailsdonebtn.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 40);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	

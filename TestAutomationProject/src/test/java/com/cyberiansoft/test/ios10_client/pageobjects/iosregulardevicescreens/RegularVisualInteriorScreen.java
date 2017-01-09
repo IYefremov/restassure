@@ -103,6 +103,7 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	
 	public void clickServicesToolbarButton() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("services")).click();
+		Helpers.waitABit(500);
 	}
 
 	public void assertPriceIsCorrect(String price) {
@@ -117,7 +118,7 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	public void assertDefaultInteriorServicesPresent()
 			throws InterruptedException {
 		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment - 2")).isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
 		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
 	}
 

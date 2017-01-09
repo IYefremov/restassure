@@ -10,7 +10,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class LicensesScreen extends iOSHDBaseScreen {
 	

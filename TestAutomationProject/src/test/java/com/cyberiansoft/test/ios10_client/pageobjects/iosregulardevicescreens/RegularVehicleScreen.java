@@ -76,6 +76,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
     private IOSElement regularinspnumberlabel;
 	
+	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
+    private IOSElement regularwotypelabel;
+	
 	@iOSFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;
 	
@@ -109,8 +112,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setVIN(String vin)  {
 		element(MobileBy.xpath("//XCUIElementTypeStaticText[@name=\"VIN#\"]"))
 		.click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin + "\n");
-		//Helpers.setVIN(vin);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public WebElement getVINField() {
@@ -140,6 +143,11 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		return regularinspnumberlabel;
 	}
 	
+	public String getWorkOrderTypeValue() {
+		Helpers.waitABit(1000);
+		return regularwotypelabel.getAttribute("value");
+	}
+	
 	public String getInspectionNumber() {
 		Helpers.waitABit(500);
 		return getInspectionNumberLabel().getText();
@@ -161,24 +169,20 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	
 	public String getMake() {
-		WebElement par = getVehicleInfoTableParentNode("Make");
-		return par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value");
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
 	public String getModel() {
-		WebElement par = getVehicleInfoTableParentNode("Model");
-		return par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value");
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Model']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
 	public String getYear() {
-		WebElement par = getVehicleInfoTableParentNode("Year");
-		return par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value");
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
 	public String getTechnician() {
 		Helpers.waitABit(1000);
-		WebElement par = getVehicleInfoTableParentNode("Tech");
-		return par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value");
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {

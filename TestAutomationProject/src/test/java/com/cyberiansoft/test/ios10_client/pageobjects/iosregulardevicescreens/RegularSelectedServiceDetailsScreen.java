@@ -275,8 +275,28 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getAdjustmentsValue() {
-		return appiumdriver.findElementByXPath("//UIATableCell[@name=\"Adjustments\"]/UIATextField[1]").getText();
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name=\"Adjustments\"]/XCUIElementTypeTextField[1]").getAttribute("value");
 	}
+	
+	public String getServiceDetailsFieldValue(String fieldname) {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").getAttribute("value");
+	}
+	
+	public boolean isServiceDetailsFieldEditable(String fieldname) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+		return appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0;
+	}
+	
+	public void setServiceDetailsFieldValue(String fieldname, String _value) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+		appiumdriver.findElementByAccessibilityId("Clear text").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").sendKeys(_value + "\n");
+	}
+	
+	public String getServiceDetailsTotalValue() {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]").getAttribute("value");
+	}
+	
 	
 	public void clickTechniciansIcon() {
 

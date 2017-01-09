@@ -61,7 +61,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 			clickChangeScreen();
 		}
 		savebtn.click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 	
 	public void cancelOrder() {

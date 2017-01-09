@@ -14,6 +14,7 @@ public class iOSInternalProjectConstants {
 	public static final String SPECIFIC_CLIENT_CUSTOMER = "Specific_Client";
 	public static final String O02TEST__CUSTOMER = "002 - Test Company";
 	public static final String O03TEST__CUSTOMER = "003 - Test Company";
+	public static final String O04TEST__CUSTOMER = "004 - Test Company";
 	
 	//Work Order Types
 	public static final String WO_FORR_MONITOR_WOTYPE = "WO_for_Monitor";
@@ -32,6 +33,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_TYPE_FOR_CALC = "WO_type_for_calc";
 	public static final String WO_SMOKE_MONITOR = "WO_smoke_monitor";
 	public static final String WO_SMOKE_TEST = "WO_smoke_test";
+	public static final String WO_TYPE_WITH_JOB = "WO_type_with_job";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
@@ -67,6 +69,7 @@ public class iOSInternalProjectConstants {
 	public static final String SR_TYPE_DONOT_ALLOW_CLOSE_SR = "SR_type_do_not_allow_close_SR";
 	public static final String SR_WO_ONLY = "SR_WO_only";
 	public static final String SR_INSP_ONLY = "SR_Insp_only";
+	public static final String MULTIPLE_INSPECTION_SERVICE_TYPE_ALM = "Multiple Inspection Service Type - ALM";
 	
 	//Services
     public static final String MISCELLANEOUS_SERVICE = "Miscellaneous";
@@ -98,7 +101,8 @@ public class iOSInternalProjectConstants {
     public static final String OKSI_BUNDLE_PP = "Oksi_Bundle_PP";
     public static final String TEST_SERVICE_PRICE_MATRIX = "Test service price matrix";
     public static final String SERVICE_REQ_0_PRICE = "Service_req_0_price";
-    
+    public static final String TAX_DISCOUNT = "Tax discount";
+    public static final String SALES_TAX = "Sales Tax";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

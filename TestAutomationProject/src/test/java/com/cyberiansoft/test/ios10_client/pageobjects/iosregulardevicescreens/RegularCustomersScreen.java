@@ -5,6 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.SwipeElementDirection;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -51,13 +54,13 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	}
 
 	public void swtchToRetailMode() {
-		if (elementExists(MobileBy.AccessibilityId("Wholesale Mode"))) {
+		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnWholesale")).size() > 0) {
 			btnwholesale.click();
 		}
 	}
 
 	public void swtchToWholesaleMode() {
-		if (elementExists(MobileBy.AccessibilityId("Retail Mode"))) {
+		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnRetail")).size() > 0) {
 			btnretail.click();
 		}
 	}
@@ -87,6 +90,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
 	public void selectCustomer(String customer) {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()['CustomersTable'].cells()['" + customer + "']")).click();
+		
 		appiumdriver.findElement(MobileBy.AccessibilityId(customer)).click();
 	}
 	
