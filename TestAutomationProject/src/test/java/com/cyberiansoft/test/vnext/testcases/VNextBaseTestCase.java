@@ -33,11 +33,11 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.ssts.pcloudy.ConnectError;
+/*import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidDriver;
@@ -278,7 +278,7 @@ public class VNextBaseTestCase {
 	
 	/////////////////////////////
 	//@BeforeSuite
-	@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
+	/*@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
 	public void runExecutionOnPCloudy(String browser, String bourl, String username, String userpsw, String licensename) throws InterruptedException, IOException, ConnectError {
 		deviceofficeurl = bourl;
 		defaultbrowser = browser;
@@ -354,6 +354,6 @@ public class VNextBaseTestCase {
 		
 		// Create multiple driver objects in multiple threads
 		
-		}
+		}*/
 
 }
