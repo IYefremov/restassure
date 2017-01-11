@@ -14,7 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//i[@action='apply']")
+	@FindBy(xpath="//i[@action='save']")
 	private WebElement servicedtailsapplybtn;
 	
 	@FindBy(xpath="//i[@action='notes']")
@@ -53,7 +53,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDeleteServiceIcon() {
-		tap(servicedetailssscreen.findElement(By.xpath(".//i[@action='delete']")));
+		tap(servicedetailssscreen.findElement(By.xpath(".//i[@action='remove']")));
 		log(LogStatus.INFO, "Click Delete Service icon");
 	}
 	
