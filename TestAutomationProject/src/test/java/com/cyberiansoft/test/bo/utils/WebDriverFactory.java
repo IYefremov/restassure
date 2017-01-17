@@ -1,19 +1,17 @@
 package com.cyberiansoft.test.bo.utils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class WebDriverFactory {
 	
@@ -41,13 +39,14 @@ public class WebDriverFactory {
 			webdriver = new InternetExplorerDriver(webcap);
 			break;
 		case "chrome":
-			if (Platform.getCurrent().is(Platform.WINDOWS)) {
+			/*if (Platform.getCurrent().is(Platform.WINDOWS)) {
 				System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
 			    		 "./browsers/chromedriver/chromedriver.exe");
 			} else {
 				System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
 			    		 "./browsers/chromedriver/chromedriver");
-			}
+			}*/
+			ChromeDriverManager.getInstance().setup();
 			webcap =  DesiredCapabilities.chrome();
 			webdriver = new ChromeDriver();
 			break;
