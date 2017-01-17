@@ -295,7 +295,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
 	}
 	
-	@Test(testName = "Test Case 28379:Monitor - Verify \"Closed\" Reason at RO", description = "Monitor - Verify \"Closed\" Reason at RO")
+	@Test(testName = "Test Case 28380:Monitor - Verify \"Closed\" Reason at RO", description = "Monitor - Verify \"Closed\" Reason at RO")
 	public void testMonitorVerifyClosedReasonAtRO() throws Exception {
 		
 		final String orderstatus = "Closed";
