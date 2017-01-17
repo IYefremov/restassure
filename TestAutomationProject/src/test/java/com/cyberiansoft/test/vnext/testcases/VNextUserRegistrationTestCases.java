@@ -22,12 +22,17 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewLegalInfosSc
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPaymentInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOUsersWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmPasswordWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
@@ -35,7 +40,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	private String usercapimail = "";
 	private String usercapimailpsw = "";
 	private String fromEmail = "ReconPro@cyberiansoft.com";
-	private String bodySearchText = "Dear Valued Customer,";
+	private String bodySearchText = "Dear ";
 	
 	final String usermailprefix = "test.cyberiansoft+";
 	final String usermailpostbox = "@gmail.com";
@@ -44,69 +49,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	String userregfirstname = "TestTech";
 	String userreglastname = "AQA";
-	
+	String userregphone = "050555013455";
 	
 	@BeforeClass(description = "Setting up new suite")
 	@Parameters({ "backofficecapi.url", "usercapi.mail", "usercapi.name", "usercapi.psw", "selenium.browser"})	
 	public void settingUp(String backofficeurl, String usermail, String userName, String userPassword, String defbrowser) throws IOException {
 		usercapimail = usermail;
 		usercapimailpsw = userPassword;
-		
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		
-		/*defaultbrowser = defbrowser;
-		initiateWebDriver();
-		webdriverGotoWebPage(backofficeurl);
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(userName, userPassword);
-		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
-				VNexBOLeftMenuPanel.class);
-		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(userregfirstname, userreglastname, userregmail, userregphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userregmail));
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userregmail));
-		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com", "Please click link below to complete the registration process.")) {
-				userswabpage.waitABit(60*1000);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: REGISTRATION", "ReconPro@cyberiansoft.com");
-				if (mailmessage.length() > 3) {
-					search = true;
-					break;
-				}				
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========0" + mailmessage);
-			confirmationurl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			
-		}
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		headerpanel.userLogout();
-		headerpanel.waitABit(4000);
-		webdriver.get(confirmationurl);
-		webdriver.navigate().to(confirmationurl);
-		headerpanel.waitABit(4000);
-		webdriver.get(confirmationurl);
-		VNextBOConfirmPasswordWebPage confirmationpswpage = PageFactory.initElements(
-				webdriver, VNextBOConfirmPasswordWebPage.class);
-		loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
-
-		loginpage.userLogin(userregmail, confirmpsw);
-		userswabpage = leftmenu.selectUsersMenu();
-		headerpanel.userLogout();
-		*/
-		
 		
 		setUp();
 		setNetworkOn();
@@ -130,27 +79,44 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
 	public void testVerifyCreatingBOWithJumpStartEdition_PDR(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
 		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
 		final String boeditionname = "JumpStart";
 		final String bolineofbusiness = "PDR";
-		String userregphone = "111116789";
+		final String userregphone = "6267477803";
+		final String userstate = "California";
 		
-		userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo("QA", "QA" , "380", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , "1", userregphone, userregmail);
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone("1"+userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
-		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, boeditionname, boeditionname);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
 		reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
 		reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
-		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), boeditionname);
-		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
 		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
@@ -159,30 +125,30 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
-		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		/*verificationscreen = new VNextVerificationScreen(appiumdriver);
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
-		verificationscreen.clickVerifyButton();
+		verificationscreen.clickVerifyButton();*/
 		verificationscreen.waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
 		//VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 			
-		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "380" + userregphone + ": REGISTRATION", fromEmail, bodySearchText);
+		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "JumpStart: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
 		
 		String newbourl = "";
 		if (!mailmessage.equals("")) {
 			System.out.println("==========0" + mailmessage);
-			newbourl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		} else {
 			Assert.assertTrue(false, "Mail message is empty");
 		}
 		initiateWebDriver();
 		webdriverGotoWebPage(newbourl);
-		VNextBOConfirmPasswordWebPage confirmationpswpage = PageFactory.initElements(
-				webdriver, VNextBOConfirmPasswordWebPage.class);
-		VNextBOLoginScreenWebPage loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
-
+		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
+				webdriver, VNextBOApproveAccountWebPage.class);
+		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+		
 		loginpage.userLogin(userregmail, confirmpsw);
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
@@ -212,17 +178,31 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String boeditionname = "Technician";
 		final String bolineofbusiness = "PDR";
-		String userregphone = "111111789";
-		
-		userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		final String userregphone = "6267477803";
+		final String userstate = "California";
+
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo("QA", "QA", "380", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , "1", userregphone, userregmail);
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		regscreen.clickDoneButton();
+		
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone("1"+userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
-		newuserpersonalinfoscreen.setNewUserPersonaInfo(newuserfirstname, newuserlastname, newusercompanyname,
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
@@ -251,37 +231,39 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
 		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
 		registrationoverviewscreen.clickDoneButton();
-		registrationoverviewscreen.waitABit(3000);
+		registrationoverviewscreen.waitABit(10000);
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 25.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
-		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		/*
+		verificationscreen = new VNextVerificationScreen(appiumdriver);
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
-		verificationscreen.clickVerifyButton();
+		verificationscreen.clickVerifyButton();*/
 		verificationscreen.waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
 		//VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 			
-		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "380" + userregphone + ": REGISTRATION", fromEmail, bodySearchText);
+		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "PDR: REGISTRATION", fromEmail, bodySearchText + newuserfirstname + " " + newuserlastname);
 		
 		String newbourl = "";
 		if (!mailmessage.equals("")) {
 			System.out.println("==========0" + mailmessage);
-			newbourl = "http://" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		} else {
 			Assert.assertTrue(false, "Mail message is empty");
 		}
+
 		initiateWebDriver();
 		webdriverGotoWebPage(newbourl);
-		VNextBOConfirmPasswordWebPage confirmationpswpage = PageFactory.initElements(
-				webdriver, VNextBOConfirmPasswordWebPage.class);
-		VNextBOLoginScreenWebPage loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
-
+		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
+				webdriver, VNextBOApproveAccountWebPage.class);
+		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+		
 		loginpage.userLogin(userregmail, confirmpsw);
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);

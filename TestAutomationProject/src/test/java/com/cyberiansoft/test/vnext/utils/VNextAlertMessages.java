@@ -12,5 +12,5 @@ public class VNextAlertMessages {
 	public static String SOME_NOTES_CHARACTERS_NOT_ALLOWED = "Some characters used in Notes are not allowed.";
 	public static String ARE_YOU_SURE_REMOVE_THIS_ITEM = "Are you sure you want to remove this item?";
 	public static String ARE_YOU_SURE_STOP_CREATING_INSPECTION = "Any unsaved changes will be lost. Are you sure you want to stop creating this Inspection?";
-	public static String ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY = "All databases are downloaded successfully";
+	public static String ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY = "Data has been successfully downloaded";
 }

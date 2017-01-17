@@ -208,10 +208,10 @@ public class VNextBaseTestCase {
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		String userregmail = "osmak.oksana+408@gmail.com";
-		regscreen.setUserRegistrationInfo("QA", "QA", "380", "978385064", userregmail);
+		regscreen.setUserRegistrationInfoAndSend("QA", "QA", "380", "978385064", userregmail);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
-		verificationscreen.clickVerifyButton();
+		verificationscreen.clickVerifyButton(); 
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		

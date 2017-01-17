@@ -68,6 +68,8 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickPaymentTermsLink() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(paymenttermslink));
 		tap(paymenttermslink);
 		log(LogStatus.INFO, "Click Payment Termslink link");
 	}

@@ -1,9 +1,12 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
+import java.awt.AWTException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -167,7 +170,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	
 	@Test(description = "Test Case 41410:vNext: Verify change password page is not opened when user is logged in")
 	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn(String userName, String userPassword) throws IOException {
+	public void testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn(String userName, String userPassword) throws IOException, AWTException {
 		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -205,7 +208,16 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		System.out.println("++++++++++++" + confirmationurl);
 		//webdriver.navigate().to(confirmationurl);
 		leftmenu.waitABit(5000);
+		
+		
+		Set<Cookie> cookiesInstance1 = webdriver.manage().getCookies();
+		
+		for(Cookie cookie : cookiesInstance1)
+		{
+			webdriver.manage().addCookie(cookie);
+		}
 		webdriver.navigate().to(confirmationurl);
+		
 		leftmenu.selectInvoicesMenu();
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);

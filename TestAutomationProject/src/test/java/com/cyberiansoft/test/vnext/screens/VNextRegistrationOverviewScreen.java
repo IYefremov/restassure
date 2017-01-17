@@ -15,10 +15,10 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	@FindBy(id="summary-view")
 	private WebElement registrationoverviewscreen;
 	
-	@FindBy(xpath="//input[contains(@data-bind, 'data.personalInfo.firstName')]")
+	@FindBy(xpath="//input[contains(@data-bind, 'data.user.firstName')]")
 	private WebElement firstnamefld;
 	
-	@FindBy(xpath="//input[contains(@data-bind, 'data.personalInfo.lastName')]")
+	@FindBy(xpath="//input[contains(@data-bind, 'data.user.lastName')]")
 	private WebElement lastnamefld;
 	
 	@FindBy(xpath="//input[contains(@data-bind, 'data.personalInfo.companyName')]")

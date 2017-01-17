@@ -20,12 +20,6 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	@FindBy(id="personal-info-view")
 	private WebElement personalinfouserscreen;
 	
-	@FindBy(xpath="//li[@data-name='firstName']/label/input")
-	private WebElement userfirstnamefld;
-	
-	@FindBy(xpath="//li[@data-name='lastName']/label/input")
-	private WebElement userlastnamefld;
-	
 	@FindBy(xpath="//li[@data-name='companyName']/label/input")
 	private WebElement usercompanynamefld;
 	
@@ -61,17 +55,14 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		wait.until(ExpectedConditions.visibilityOf(personalinfouserscreen));
 	}
 	
-	public void setNewUserPersonaInfo(String newuserfirstname, String newuserlastname, String newusercompanyname) {
-		setNewUserFirstName(newuserfirstname);
-		setNewUserLastName(newuserlastname);
+	public void setNewUserPersonaInfo(String newusercompanyname, String userstate) {
 		setNewUserCompanyName(newusercompanyname);
+		selectNewUserState(userstate);
 	}
 	
-	public void setNewUserPersonaInfo(String newuserfirstname, String newuserlastname, String newusercompanyname,
+	public void setNewUserPersonaInfo(String newusercompanyname,
 			String newuseraddress1, String newuseraddress2, String newusercity, String newuserzip,
 			String newusercountry, String newuserstate) {
-		setNewUserFirstName(newuserfirstname);
-		setNewUserLastName(newuserlastname);
 		setNewUserCompanyName(newusercompanyname);
 		setNewUserAddress1(newuseraddress1);
 		setNewUserAddress2(newuseraddress2);
@@ -79,17 +70,6 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		setNewUserZIP(newuserzip);
 		selectNewUserCountry(newusercountry);
 		selectNewUserState(newuserstate);
-	}
-	
-	public void setNewUserFirstName(String userfirstname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(userfirstnamefld)).clear();
-		userfirstnamefld.sendKeys(userfirstname);
-	}
-	
-	public void setNewUserLastName(String userlastname) {
-		userlastnamefld.clear();
-		userlastnamefld.sendKeys(userlastname);
 	}
 	
 	public void setNewUserCompanyName(String usercompanyname) {
@@ -127,7 +107,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		wait.until(ExpectedConditions.visibilityOf(countriespage));
 		tap(countriespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + usercountry + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(userfirstnamefld));
+		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
 		log(LogStatus.INFO, "Select new user Country: " + usercountry);
 	}
 	
@@ -137,7 +117,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		wait.until(ExpectedConditions.visibilityOf(statespage));
 		tap(statespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + userstate + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(userfirstnamefld));
+		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
 		log(LogStatus.INFO, "Select new user State: " + userstate);
 	}
 	

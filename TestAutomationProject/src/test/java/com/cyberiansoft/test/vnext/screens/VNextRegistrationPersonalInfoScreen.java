@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+
+import io.appium.java_client.android.Connection;
 
 public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
@@ -29,11 +32,19 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[contains(@data-bind, 'navigateNext')]/span/i")
 	private WebElement donebtn;
 	
+	@FindBy(xpath="//button[@class='btn btn-red']")
+	private WebElement clearuserbtn;
+	
 	public VNextRegistrationPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		//VNextRegistrationPersonalInfoScreen.WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		//wait.until(ExpectedConditions. visibilityOf(phonenumberselect));
+	}
+	
+	public void setUserRegistrationInfoAndSend(String firstname, String lastname, String countrycode, String phonenumber, String usermail) {
+		setUserRegistrationInfo(firstname, lastname, countrycode, phonenumber, usermail);
+		clickDoneButton();
 	}
 	
 	public void setUserRegistrationInfo(String firstname, String lastname, String countrycode, String phonenumber, String usermail) {
@@ -42,7 +53,10 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		selectPhoneNumberCountryCode(countrycode);
 		setPhoneNumber(phonenumber);
 		setEmail(usermail);
-		clickDoneButton();
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.hideKeyboard();
+	    switchToWebViewContext();
+		
 	}
 	
 	public void selectPhoneNumberCountryCode(String countrycode) {
@@ -72,5 +86,9 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickDoneButton() {
 		tap(donebtn);
+	}
+	
+	public void clickClearUserButton() {
+		tap(clearuserbtn);
 	}
 }
