@@ -121,6 +121,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(temworkorderstsbtn));
 		temworkorderstsbtn.click();
+		Helpers.waitABit(1000);
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 

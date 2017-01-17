@@ -68,6 +68,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		clickChangeScreen();
 		clickCancel();
 		acceptAlert();
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickCancel() {
