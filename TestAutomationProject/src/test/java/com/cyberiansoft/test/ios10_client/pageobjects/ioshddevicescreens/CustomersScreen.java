@@ -51,15 +51,13 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	}
 
 	public void swtchToRetailMode() {
-		if (elementExists(By.name("Wholesale Mode"))) {
+		if (appiumdriver.findElementsByAccessibilityId("btnWholesale").size() > 0)
 			btnwholesale.click();
-		}
 	}
 
 	public void swtchToWholesaleMode() {
-		if (elementExists(By.name("Retail Mode"))) {
+		if (appiumdriver.findElementsByAccessibilityId("btnRetail").size() > 0)
 			btnretail.click();
-		}
 	}
 
 	public AddCustomerScreen clickAddCustomersButton() {
@@ -84,15 +82,21 @@ public class CustomersScreen extends iOSHDBaseScreen {
 		editpopupmenu.click();
 		return new AddCustomerScreen(appiumdriver);
 	}
+	
+	public void clickOnCustomer(String customer) {
+		appiumdriver.findElementByAccessibilityId(customer).click();
+	}
 
 	public void selectCustomer(String customer)
 			throws InterruptedException {
-		appiumdriver.findElementByAccessibilityId(customer).click();
+		clickOnCustomer(customer);
 		selectpopupmenu.click();
 		/*element(
 				MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\"Select\"]"))
 				.click();*/
 	}
+	
+	
 
 	public void selectFirstCustomerWithoutEditing()
 			throws InterruptedException {
@@ -104,9 +108,8 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	
 	public void selectCustomerWithoutEditing(String customer)
 			throws InterruptedException {
-		Thread.sleep(2000);
-		element(MobileBy.name(customer))
-				.click();
+		Helpers.waitABit(1000);
+		clickOnCustomer(customer);
 		selectpopupmenu.click();
 	}
 

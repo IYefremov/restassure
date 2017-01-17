@@ -100,4 +100,43 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		
 		appiumdriver.swipe(starty, endx, starty, startx, 2000);
 	}
+	
+	public void selectUIAPickerValue(String value) {
+		int defaultwheelnumer = 10;
+		int clicks = 0;
+		boolean found = false;
+		Helpers.waitABit(1000);
+		//selectUIAPickerValue(year);
+		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
+		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		int  xx = pickerwhl.getLocation().getX();
+		int yy = pickerwhl.getLocation().getY();		
+
+		while (!found) {
+			if (!(pickerwhl.getAttribute("value").contains(value))) {
+				TouchAction action = new TouchAction(appiumdriver);
+				action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
+					release().perform();
+			} else
+				found = true;
+			clicks = clicks+1;
+			if (clicks > defaultwheelnumer)
+				break;
+		}
+	}
+	
+	public void swipeScreenUp() {
+		Dimension size = appiumdriver.manage().window().getSize();
+		int starty = (int) (size.width * 0.80);
+		//Find endy point which is at top side of screen.
+		int endy = (int) (size.width * 0.20);
+		//Find horizontal point where you wants to swipe. It is in middle of screen width.
+		int startx = size.height / 2;
+		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
+		//Swipe from Bottom to Top.
+		//TouchAction act = new TouchAction(appiumdriver);
+		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
+		//appiumdriver.swipe(startx, starty, startx, endy, 2000);
+		Helpers.waitABit(2000);
+	}
 }

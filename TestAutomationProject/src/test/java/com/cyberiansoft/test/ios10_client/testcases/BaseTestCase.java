@@ -100,10 +100,10 @@ public class BaseTestCase {
 		  */  
 		appiumcap = new DesiredCapabilities();
 		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
-		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad Retina");
+		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad Air");
 		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7 Plus");
 		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7");
-		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
+		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.2");
 		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
 		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 		appiumcap.setCapability("nativeWebTap", true);

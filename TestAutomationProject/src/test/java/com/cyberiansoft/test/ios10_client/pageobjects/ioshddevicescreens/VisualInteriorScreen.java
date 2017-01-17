@@ -74,9 +74,22 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		Helpers.tapInterior(50, 50);
 	}
 	
-	public static void tapInteriorWithCoords(int x, int y) throws InterruptedException {
+	public void tapInteriorWithCoords(int x, int y) throws InterruptedException {
 		Thread.sleep(1000);
-		Helpers.tapInterior(x, y);
+		TouchAction action = new TouchAction(appiumdriver);
+		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+		
+		//int x = element.getLocation().getX() + element.getSize().getWidth()/2;
+		//int y = element.getLocation().getY() + element.getSize().getHeight()/2;
+		//action.tap(element, x, y).perform();
+		action.press(element, x, y).waitAction(1000).release().perform();
+		Helpers.waitABit(1000);
+		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
+		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
+		//action.tap(element, x, y).perform();
+		action.press(element, x, y).waitAction(1000).release().perform();
+		Helpers.waitABit(1000);
+		Helpers.tapExterior(50, 50);*/
 	}
 
 	public void tapExterior() throws InterruptedException {

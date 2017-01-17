@@ -28,12 +28,12 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setInspectionToSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("0"))
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("false"))
 			inspectionsinglepagetoggle.click();
 	}
 
 	public void setInspectionToNonSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("1"))
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("true"))
 			inspectionsinglepagetoggle.click();
 	}
 

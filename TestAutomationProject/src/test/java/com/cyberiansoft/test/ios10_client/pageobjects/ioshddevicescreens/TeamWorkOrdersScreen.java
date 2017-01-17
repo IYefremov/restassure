@@ -14,7 +14,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-public class TeamWorkOrdersScreen extends iOSHDBaseScreen {
+public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
 	@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;

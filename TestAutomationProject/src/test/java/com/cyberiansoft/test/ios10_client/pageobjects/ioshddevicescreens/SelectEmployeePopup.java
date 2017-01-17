@@ -27,6 +27,7 @@ public class SelectEmployeePopup extends iOSHDBaseScreen {
 		selectEmployee(employee);
 		securefld.setValue(password);
 		Helpers.acceptAlert();
+		Helpers.waitABit(500);
 	}
 	
 	public void selectEmployee(String employee) {

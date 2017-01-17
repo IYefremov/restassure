@@ -11,6 +11,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -145,7 +146,24 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	
+	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
+		appiumdriver.findElementByAccessibilityId(servicename).click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
+				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(1000).release().perform();
+		return new SelectedServiceDetailsScreen(appiumdriver);
+	}
+	
+	public SelectedServiceDetailsScreen selectBundleServiceDetails(String servicename) {
+		appiumdriver.findElementByAccessibilityId(servicename).click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
+				servicename + "']/XCUIElementTypeButton[@name='unselected']"))).waitAction(1000).release().perform();
+		return new SelectedServiceDetailsScreen(appiumdriver);
+	}
+	
 	public void searchAvailableService(String servicename) {
+		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);
 	}
@@ -229,5 +247,15 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 	public static String getServicesScreenCaption() {
 		return servicesscreencapt;
+	}
+	
+	public boolean isServiceApproved(String srvname) {
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
+				srvname + "']/XCUIElementTypeButton[@name='selected']")).size() > 0;
+	}
+	
+	public boolean isServiceDeclinedSkipped(String srvname) {
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
+				srvname + "']/XCUIElementTypeButton[@name='declined']")).size() > 0;
 	}
 }

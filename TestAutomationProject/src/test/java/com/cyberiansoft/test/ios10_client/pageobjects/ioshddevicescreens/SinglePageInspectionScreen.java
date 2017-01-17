@@ -26,16 +26,16 @@ public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getInspectionNumber() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[5]/XCUIElementTypeStaticText[3]").getText();
+		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, 'E-00')]").getText();
 	}
 	
 	public void expandToFullScreeenSevicesSection() throws InterruptedException {
-		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[2]/XCUIElementTypeButton[@name=\"full screen\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
 		Thread.sleep(2000);
 	}
 	
 	public void expandToFullScreeenQuestionsSection() throws InterruptedException {
-		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[3]/XCUIElementTypeButton[@name=\"full screen\"]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[3]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
 		Thread.sleep(2000);
 	}
 	
@@ -49,7 +49,7 @@ public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isAnswerPresent(String _answer) throws InterruptedException {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + _answer + "']").isDisplayed();
+		return appiumdriver.findElementsByAccessibilityId(_answer).size() > 0;
 	}
 
 }

@@ -103,6 +103,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
+	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
+    private IOSElement wotypelabel;
+	
 	public VehicleScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
@@ -192,7 +195,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getTechnician() {
-		return techfldvalue.getAttribute("value");
+		return techfldvalue.getText();
 	}
 	
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
@@ -255,12 +258,15 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setYear(String year) {
+		int defaultwheelnumer = 10;
+		int clicks = 0;
+		
 		yearfld.click();
-		Helpers.waitABit(1000);
 		selectUIAPickerValue(year);
-		/*if (appiumdriver.findElementsByAccessibilityId("Done").size() > 0)
+		
+		if (appiumdriver.findElementsByAccessibilityId("Done").size() > 1)
 			((IOSElement) appiumdriver.findElementsByAccessibilityId("Done").get(1)).click();
-		else*/
+		else
 			toolbardonebtn.click();
 	}
 
@@ -304,6 +310,11 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		action.press(composebtn).waitAction(300).release().perform();
 		//composebtn.click();
 		return new NotesScreen(appiumdriver);
+	}
+	
+	public String getWorkOrderTypeValue() {
+		Helpers.waitABit(1000);
+		return wotypelabel.getAttribute("value");
 	}
 
 }

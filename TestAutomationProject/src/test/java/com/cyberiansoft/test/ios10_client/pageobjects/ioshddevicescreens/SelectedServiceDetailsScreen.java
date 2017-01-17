@@ -8,10 +8,10 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -92,8 +92,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void setServicePriceValue(String _price)
 			throws InterruptedException {
 		servicepricefld.click();
-		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		WebElement par = getTableParentCell("Price");
+		
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		//servicepricevaluefld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -116,7 +117,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getVehiclePartValue() {
-		return vehiclepartsfld.getAttribute("name");
+		WebElement par = getTableParentCell("Vehicle Part");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public String getServicePartValue() {
@@ -134,9 +136,10 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void answerTaxPoint1Question(String answer) {
 
 		questionsfld.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[5]")).click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()['" + answer + "']")).click();	
+		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeSelect_Tax_Point_1")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+		Helpers.waitABit(500);
 	}
 	
 	public void answerQuestion2(String answer) {
@@ -159,9 +162,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			throws InterruptedException {	
 		
 		quantityfld.click();
-		Helpers.waitABit(300);
-		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		Helpers.waitABit(500);
+		
+		WebElement par = getTableParentCell("Quantity");
+		
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		
+		//if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
+		//	appiumdriver.findElementByAccessibilityId("Clear text").click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Quantity']/XCUIElementTypeTextField[1]").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -310,17 +318,18 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		}
 		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
 						+ technician + "\"]").clear();
-		Helpers.keyboadrType(percentage);
-		Helpers.keyboadrType("\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[3]").click();
-		IOSElement amountfld = (IOSElement) appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIACollectionView[1]/UIACollectionCell[1]/UIATextField[1]");
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[3]").click();
+		IOSElement amountfld = (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTextField[1]");
 		amountfld.clear();
-		amountfld.setValue(newamount);
-		appiumdriver.findElementByXPath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[@name=\"Override\"]").click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(newamount);
+		appiumdriver.findElementByAccessibilityId("Override").click();
+		Helpers.waitABit(1000);
 	}
 
 	public void assertTechnicianIsSelected(String technician) {
@@ -365,7 +374,54 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getServiceDetailsPriceValue() {
-		return appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAStaticText[1]").getAttribute("value");
+		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]").getAttribute("value");
+	}
+	
+	public String getServiceDetailsTotalValue() {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]").getAttribute("value");
+	}
+	
+	public String getServiceDetailsFieldValue(String fieldname) {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").getAttribute("value");
+	}
+	
+	public void setServiceTimeValue(String _timevalue)
+			throws InterruptedException {	
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Time"))).click();	
+        WebElement par = getTableParentCell("Time");
+		
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_timevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
+	}
+	
+	public void setServiceRateValue(String _ratevalue)
+			throws InterruptedException {	
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate"))).click();
+        WebElement par = getTableParentCell("Rate");
+		
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_ratevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
+	}
+	
+	public boolean isServiceDetailsFieldEditable(String fieldname) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+		return appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0;
+	}
+	
+	public void setServiceDetailsFieldValue(String fieldname, String _value) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+		appiumdriver.findElementByAccessibilityId("Clear text").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").sendKeys(_value + "\n");
+	}
+	
+	public WebElement getTableParentCell(String cellname) {
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
 }
