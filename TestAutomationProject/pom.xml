@@ -5,12 +5,12 @@
          <modelVersion>4.0.0</modelVersion>
 <groupId>com.cyberiansoft.test.bo</groupId>
     <artifactId>TestAutomationProject</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>backofficetests</name>
     <parent>
         <groupId>com.cyberiansoft.test</groupId>
         <artifactId>testcases</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
         <relativePath>./mainpom.xml</relativePath>
     </parent>
 

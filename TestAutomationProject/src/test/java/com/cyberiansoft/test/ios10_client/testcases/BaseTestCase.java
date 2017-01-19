@@ -40,6 +40,9 @@ import org.testng.annotations.Parameters;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
+import com.cyberiansoft.test.core.AppiumDriverBuilder;
+import com.cyberiansoft.test.core.AppiumDriverBuilder.IOSDriverBuilder;
+import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
@@ -164,6 +167,7 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
+		
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
 	}

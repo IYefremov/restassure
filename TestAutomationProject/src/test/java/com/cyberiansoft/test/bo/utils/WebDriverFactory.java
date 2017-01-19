@@ -10,8 +10,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 
 public class WebDriverFactory {
 	
@@ -21,16 +25,12 @@ public class WebDriverFactory {
 	public WebDriver getDriver(String browserName) {
 		switch (browserName) {
 		case "firefox":
-			webcap = DesiredCapabilities.firefox();
-			if (Platform.getCurrent().is(Platform.WINDOWS)) {
-				System.setProperty("webdriver.gecko.driver", "./browsers/geckodriver/geckodriver.exe");
-			} else {
-				System.setProperty("webdriver.gecko.driver", "./browsers/geckodriver/geckodriver");
-			}
+			FirefoxDriverManager.getInstance().setup();
+			webcap = DesiredCapabilities.firefox();			
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			System.setProperty(InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY, "./browsers/iedriver/IEDriverServer.exe");
+			InternetExplorerDriverManager.getInstance().setup();
 			webcap = DesiredCapabilities.internetExplorer();
 			//webcap.setCapability("nativeEvents", false); 
 			webcap.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
@@ -39,17 +39,22 @@ public class WebDriverFactory {
 			webdriver = new InternetExplorerDriver(webcap);
 			break;
 		case "chrome":
-			/*if (Platform.getCurrent().is(Platform.WINDOWS)) {
-				System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
-			    		 "./browsers/chromedriver/chromedriver.exe");
-			} else {
-				System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
-			    		 "./browsers/chromedriver/chromedriver");
-			}*/
 			ChromeDriverManager.getInstance().setup();
 			webcap =  DesiredCapabilities.chrome();
 			webdriver = new ChromeDriver();
 			break;
+		case "safari":
+			SafariOptions safariOpts = new SafariOptions();
+		    DesiredCapabilities cap = DesiredCapabilities.safari();
+
+		    safariOpts.setUseCleanSession(true);
+		    cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		    cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, "dismiss");
+		    cap.setCapability(SafariOptions.CAPABILITY, safariOpts);
+		    cap.setBrowserName("safari");
+		    cap.setPlatform(Platform.MAC);
+		    webdriver = new SafariDriver(cap);
+		    break;
 		}
 		 
 		webdriver.manage().window().maximize();
@@ -57,52 +62,4 @@ public class WebDriverFactory {
 		webdriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 	    return webdriver;
 	 }
-	 
-	 public void webdriverInicialize(String browsertype) {
-			System.setProperty("webdriver.ie.driver", "C:/iedriver/IEDriverServer.exe");
-			/*try {
-				webdriver = new RemoteWebDriver(
-						new URL("http://127.0.0.1:4444/wd/hub"), webcap);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			 if (browsertype.equalsIgnoreCase("chrome")) {
-				/*ChromeDriverService service = new ChromeDriverService.Builder()
-			        .usingDriverExecutable(new File("C:/iedriver/IEDriverServer.exe"))
-			        .usingPort(9515)
-			        .build();
-					service.start();*/
-					/*try {
-						webdriver = new RemoteWebDriver(
-								new URL("http://127.0.0.1:9515"), webcap);
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
-				 webdriver = new ChromeDriver(webcap);
-			 } else if (browsertype.equalsIgnoreCase("firefox")) {
-				 webdriver = new FirefoxDriver(webcap);
-			 } else if (browsertype.equalsIgnoreCase("ie")) {
-				 webdriver = new InternetExplorerDriver(webcap);
-				/* try {
-					webdriver = new RemoteWebDriver(
-								new URL("http://127.0.0.1:5555"), webcap);
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-			 } else {
-				 webdriver = new ChromeDriver();
-			 }
-			
-			
-			//webdriver = new InternetExplorerDriver();
-			webdriver.manage().window().maximize();
-			webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			webdriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-			//webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);
-			//webdriver = new ChromeDriver();
-		}
-
 }
