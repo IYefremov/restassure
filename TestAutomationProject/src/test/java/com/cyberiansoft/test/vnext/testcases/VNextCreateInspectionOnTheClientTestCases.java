@@ -292,7 +292,6 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		String mainWindowHandle = webdriver.getWindowHandle();	
 		
 		VNextBOInspectionInfoWebPage inspectioninfopage = inspectionspage.clickSelectedInspectionPrintIcon();
-		System.out.println("++++++" +  inspectioninfopage.getInspectionTotalPriceValue());
 		inspectioninfopage.closeNewTab(mainWindowHandle);
 	}
 	

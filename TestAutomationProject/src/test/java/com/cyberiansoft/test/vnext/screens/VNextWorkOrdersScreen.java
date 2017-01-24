@@ -21,7 +21,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement workorderslist;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']/i")
+	@FindBy(xpath="//a[@action='back']/i")
 	private WebElement backbtn;
 	
 	@FindBy(xpath="//a[@action='create-invoice']/i")

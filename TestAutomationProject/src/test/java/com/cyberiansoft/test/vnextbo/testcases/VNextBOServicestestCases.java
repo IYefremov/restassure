@@ -233,5 +233,55 @@ public class VNextBOServicestestCases extends BaseTestCase {
 		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(percentageservicename + serviceedited));	
 		servicespage.deleteServiceByServiceName(percentageservicename + serviceedited);
 	}
+	
+	@Test(description = "Test Case 44153:vNext: verify error messages on Create-Edit service dialog")
+	public void testVerifyErrorMessagesOnCreateEditServiceDialog() throws IOException {
+		
+		final String emptyservicename = "    ";
+		final String servicename = "TestErrors";
+		
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(userName, userPassword);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNexBOServicesWebPage servicespage = leftmenu.selectServicesMenu();
+		VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewserviceButton();
+		addnewservicedialog.clickServiceAddButton();
+		Assert.assertEquals(addnewservicedialog.getErrorMessage(), 
+				"Service name is required!");
+		addnewservicedialog.setServiceName(emptyservicename);
+		addnewservicedialog.clickServiceAddButton();
+		Assert.assertEquals(addnewservicedialog.getErrorMessage(), 
+				"Service name is required!");
+		addnewservicedialog.setServiceName(servicename);
+		addnewservicedialog.saveNewService();
+		servicespage.searchServiceByServiceName(servicename);
+		addnewservicedialog = servicespage.clickEditServiceByServiceName(servicename);
+		addnewservicedialog.setServiceName(emptyservicename);
+		addnewservicedialog.clickServiceAddButton();
+		Assert.assertEquals(addnewservicedialog.getErrorMessage(), 
+				"Service name is required!");
+		servicespage = addnewservicedialog.closeNewServiceDialog();
+		servicespage.deleteServiceByServiceName(servicename);
+	}
+	
+	@Test(description = "Test Case 44157:vNext: Edit matrix service")
+	public void testEditMatrixService() throws IOException {
+		
+		final String matrixservicetype = "Hail Damage Repair";
+		final String matrixservicename = "Hail Dent Repair";
+		final String newmatrixservicename = "Test Matrix Service";
+		
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(userName, userPassword);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNexBOServicesWebPage servicespage = leftmenu.selectServicesMenu();
+		servicespage.advancedSearchServiceByServiceType(matrixservicetype);
+		VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickEditServiceByServiceName(matrixservicename);
+		addnewservicedialog.setServiceName(newmatrixservicename);
+	}
 
 }

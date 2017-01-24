@@ -147,7 +147,7 @@ public class VNextBaseScreen {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconProClient")) {
+				if (contextName.equals("WEBVIEW_com.automobiletechnologies.ReconPro")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);

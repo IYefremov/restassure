@@ -17,13 +17,16 @@ import com.cyberiansoft.test.bo.webelements.TextField;
 
 public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 	
-	@FindBy(xpath = "//input[contains(@data-bind, 'value: name')]")
+	@FindBy(id = "service-popup")
+	private WebElement newservicepopup;
+	
+	@FindBy(xpath = "//input[@data-automation-id='servicePopup-serviceName']")
 	private TextField servicenamefld;
 	
 	@FindBy(xpath = "//span[@aria-owns='popup-services-type_listbox']/span/span/span")
 	private WebElement servicetypecmb;
 	
-	@FindBy(xpath = "//textarea[@data-bind='value: description']")
+	@FindBy(xpath = "//textarea[@data-automation-id='servicePopup-description']")
 	private TextField servicedescfld;
 	
 	@FindBy(xpath = "//span[@aria-owns='price-type_listbox']/span/span")
@@ -35,11 +38,11 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 	@FindBy(id = "priceForPercentageType")
 	private TextField servicepercentagefld;
 	
-	@FindBy(xpath = "//button[contains(@data-bind, 'click: saveBtn.click')]")
-	private WebElement serviceaddbtn;
-	
 	@FindBy(xpath = "//div[@class='errorMessege']/p")
 	private WebElement errormsg;
+	
+	final By serviceaddbtnxpath = By.xpath(".//button[@data-automation-id='servicePopup-submit']");
+	final By closenewservicedialogbtnxpath = By.xpath(".//button[@class='close']");
 	
 	public VNextBOAddNewServiceDialog(WebDriver driver) {
 		super(driver);
@@ -144,14 +147,25 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 	public VNexBOServicesWebPage saveNewService() {
 		clickServiceAddButton();		
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//button[contains(@data-bind, 'click: saveBtn.click')]"))); 
+		  .until(ExpectedConditions.invisibilityOfElementLocated(serviceaddbtnxpath)); 
 		waitABit(500);
 		return PageFactory.initElements(
 				driver, VNexBOServicesWebPage.class);
 	}
 	
 	public void clickServiceAddButton() {
-		serviceaddbtn.click();
+		newservicepopup.findElement(serviceaddbtnxpath).click();
+	}
+	
+	public VNexBOServicesWebPage closeNewServiceDialog() {
+		newservicepopup.findElement(closenewservicedialogbtnxpath).click();
+		waitABit(500);
+		return PageFactory.initElements(
+				driver, VNexBOServicesWebPage.class);
+	}
+	
+	public String getErrorMessage() {
+		return errormsg.getText();
 	}
 
 }

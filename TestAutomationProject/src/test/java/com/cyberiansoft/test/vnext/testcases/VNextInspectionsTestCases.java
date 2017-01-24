@@ -172,8 +172,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), newVIN);
 		Assert.assertEquals(vehicleinfoscreen.getMilage(), milage);
-		Assert.assertEquals(vehicleinfoscreen.getStockNo(), freetext);
-		Assert.assertEquals(vehicleinfoscreen.getRoNo(), freetext);
+		Assert.assertEquals(vehicleinfoscreen.getStockNo(), freetext.toUpperCase());
+		Assert.assertEquals(vehicleinfoscreen.getRoNo(), freetext.toUpperCase());
 		Assert.assertEquals(vehicleinfoscreen.getLicPlate(), milage);
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -56,6 +57,8 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.hideKeyboard();
 	    switchToWebViewContext();
+	    if (appiumdriver.findElements(By.xpath("//iframe")).size() > 0)
+	    	appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		
 	}
 	

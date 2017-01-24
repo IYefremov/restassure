@@ -17,7 +17,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[contains(@class, 'page customers-list')]")
 	private WebElement customersscreen;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']/i")
+	@FindBy(xpath="//a[@class='link icon-only back']")
 	private WebElement backbtn;
 	
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")

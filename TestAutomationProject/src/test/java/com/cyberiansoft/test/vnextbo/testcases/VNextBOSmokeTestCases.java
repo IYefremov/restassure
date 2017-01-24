@@ -84,7 +84,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43038:vNext: create user without Web access")
+	@Test(description = "Test Case 43046:vNext: create user with Web access")
 	public void testCreateUserWithWebAccess() throws IOException {
 		
 		final String firstname = "TestTech";
@@ -340,7 +340,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43165:vNext: Edit user without Web access")
+	@Test(description = "Test Case 43371:vNext: Edit user without Web access")
 	public void testEditUserWithoutWebAccess() throws IOException {
 		
 		final String firstname = "TestTech";
