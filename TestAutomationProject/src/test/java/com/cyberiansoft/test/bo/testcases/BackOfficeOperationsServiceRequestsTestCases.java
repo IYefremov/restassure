@@ -99,7 +99,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getSubjectValue(), newservicerequest);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
-		Assert.assertEquals(appointmentpopup.getTechnicianValue(), assignedto);
+		Assert.assertEquals(appointmentpopup.getTechnicianFieldValue(), "All");
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();
@@ -166,7 +166,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getSubjectValue(), "Dfg 25");
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), "Johon Connor");
-		Assert.assertEquals(appointmentpopup.getTechnicianValue(), assignedto);
+		Assert.assertEquals(appointmentpopup.getTechnicianFieldValue(), "All");
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();

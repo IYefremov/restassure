@@ -85,6 +85,22 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		waitABit(500);
 	}
 	
+	public void advancedSearchServiceByServiceType(String servicetype) {
+		openAdvancedSearchPanel();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
+		driver.findElement(By.xpath("//span[@aria-owns='advSearchServices-type_listbox']/span/span[2]")).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchServices-type_listbox"))));
+		WebElement advserchcmb = driver.findElement(By.id("advSearchServices-type_listbox"));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) advserchcmb.
+		findElement(By.xpath(".//li/span[text()='" + servicetype + "']")))).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//button[@type='submit']")))).click();
+		waitABit(500);
+	}
+	
 	public void openAdvancedSearchPanel() {
 		searchservicespanel.findElement(By.xpath(".//i[@data-bind='click: showAdvancedSearch']")).click();
 		new WebDriverWait(driver, 30)

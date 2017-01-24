@@ -56,6 +56,9 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_Input")
 	private TextField technicianfld;
 	
+	@FindBy(id = "gvTechnicians")
+	private WebElement technicianspopup;
+	
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbCountries_Input")
 	private TextField countryfld;
 	
@@ -173,8 +176,15 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 		return subjectfld.getValue();
 	}
 	
-	public String getTechnicianValue() {
+	public String getTechnicianFieldValue() {
 		return technicianfld.getValue();
+	}
+	
+	public String getTechnicianValue() {
+		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
+		  .until(ExpectedConditions.visibilityOf(technicianspopup));
+		return technicianspopup.findElement(By.xpath(".//table/tbody/tr/td")).getText();
+		//return technicianfld.getValue();
 	}
 	
 	public String getClientInfoNameValue() {
