@@ -51,7 +51,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15245:Company-Users: Search")
 		public void testCompanyUsersSearch() throws Exception {
 
-			final String userfirstname = "Alex";
+			final String userfirstname = "Oleksandr";
 			final String userlastname = "Kramar";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -109,9 +109,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15265:Company-Employees: Search")
 		public void testCompanyEmployeesSearch() throws Exception {
 
-			final String employeefirstname = "Alex";
-			final String employeelastname = "Morozov";
-			final String team = "TestTeamInternal";
+			final String employeefirstname = "Employee";
+			final String employeelastname = "Employee";
+			final String team = "Test Team";
 			final String employeename = employeefirstname + " " + employeelastname;
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);
@@ -215,7 +215,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15539:Company - Teams: Search")
 		public void testCompanyTeamsSearch() throws Exception {
 
-			final String teamlocation = "TestTeamInternal";
+			final String teamlocation = "Test Team";
 			final String _type = "Internal";
 			final String timezone = "Pacific Standard Time";
 			
