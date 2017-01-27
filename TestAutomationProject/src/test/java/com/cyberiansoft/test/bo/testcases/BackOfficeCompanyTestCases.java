@@ -51,8 +51,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15245:Company-Users: Search")
 		public void testCompanyUsersSearch() throws Exception {
 
-			final String userfirstname = "Oleksandr";
-			final String userlastname = "Kramar";
+			final String userfirstname = "Delete";
+			final String userlastname = "Test";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);
@@ -91,6 +91,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			Assert.assertEquals("", userspage.verifyUserNamesDuplicatesArchived(usernamesact));
 			userspage.clickActiveTab();
 			
+			userspage.makeSearchPanelVisible();
+			userspage.setSearchUserParameter(userfirstname);
+			userspage.clickFindButton();
 			userspage.archiveUser(userfirstname, userlastname);
 			userspage.clickArchivedTab();
 			Assert.assertTrue(userspage.isUserArchived(userfirstname, userlastname));
@@ -528,9 +531,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(testName = "Test Case 26730:Company- Users: Archive", description = "Company- Users: Archive")
 		public void testCompanyUsersArchive() throws Exception {
 
-			//final String username = "Zakaulov Admin";
-			final String userfirstname = "Admin";
-			final String userlastname = "TestAutomation";
+			final String userfirstname = "Archive";
+			final String userlastname = "User";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);
