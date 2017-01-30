@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -20,16 +21,16 @@ import com.cyberiansoft.test.bo.utils.WebConstants;
 
 public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	
-	final Date currentdate = new Date();
-	final Date weekStart = BackOfficeUtils.getWeekStartDate();
-	final Date lastweekstart = BackOfficeUtils.getLastWeekStartDate();
-	final Date lastweekend = BackOfficeUtils.getLastWeekEndDate();
-	final Date startmonth = BackOfficeUtils.getMonthStartDate();
-	final Date startlastmonth = BackOfficeUtils.getLastMonthStartDate();
-	final Date endlastmonth = BackOfficeUtils.getLastMonthEndDate();
-	final Date startyear = BackOfficeUtils.getYearStartDate();
-	final Date startlastyear = BackOfficeUtils.getLastYearStartDate();
-	final Date endlastyear = BackOfficeUtils.getLastYearEndDate();
+	final LocalDate currentdate = LocalDate.now().plusDays(1);
+	final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
+	final LocalDate lastweekstart = BackOfficeUtils.getLastWeekStartDate().minusDays(1);
+	final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(1);
+	final LocalDate startmonth = BackOfficeUtils.getMonthStartDate().minusDays(1);
+	final LocalDate startlastmonth = BackOfficeUtils.getLastMonthStartDate().minusDays(1);
+	final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(1);
+	final LocalDate startyear = BackOfficeUtils.getYearStartDate().minusDays(1);
+	final LocalDate startlastyear = BackOfficeUtils.getLastYearStartDate().minusDays(1);
+	final LocalDate endlastyear = BackOfficeUtils.getLastYearEndDate().plusDays(1);
 	
 	
 	@BeforeMethod
@@ -143,19 +144,19 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startmonth, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startmonth, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastmonth, endlastmonth, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastmonth, endlastmonth, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);	
+		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));	
 	}
 	
 	@Test(testName = "Test Case 31974:Operation - Invoices: timeframe search", description = "Operation - Invoices: timeframe search")

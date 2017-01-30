@@ -281,13 +281,14 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath(".//span[text()='Select']"))).click().build().perform();
 			waitABit(300);
-			act.click(row.findElement(By.xpath(".//span[text()='Select']"))).build().perform();
+			//act.click(row.findElement(By.xpath(".//span[text()='Select']"))).build().perform();
 		}	
 		return row;		
 	}
 	
 	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) {
 		WebElement row = clickSelectButtonForInvoice(invoicenumber);
+		waitABit(1000);
 		if (row != null) {
 			new WebDriverWait(driver, 10)
 			.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));

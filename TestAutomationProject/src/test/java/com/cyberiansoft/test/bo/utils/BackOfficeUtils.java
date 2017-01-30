@@ -1,14 +1,23 @@
 package com.cyberiansoft.test.bo.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class BackOfficeUtils {
 	
 	public static String getFullDateFormat() {
 		return "MM/dd/yyyy";
+	}
+	
+	public static String getTheShortestDateFormat() {
+		return "M/d/yyyy";
 	}
 	
 	public static String getTomorrowDateFormatted() {
@@ -39,6 +48,14 @@ public class BackOfficeUtils {
 		return date.format(DateTimeFormatter.ofPattern("M/d/uuuu"));
 	}
 	
+	public static String getShortCurrentTimeWithTimeZone() {
+		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneOffset.of("-08:00"));
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/uuuu");
+	    
+	    
+	    return localDateAndTime.format(format);
+	}
+	
 	private static Calendar getCalendarForNow() {
 		Date today = new Date();                   
 		Calendar calendar = Calendar.getInstance();
@@ -46,67 +63,62 @@ public class BackOfficeUtils {
 	    return calendar;
 	}
 	
-	public static Date getWeekStartDate() {
-		Calendar calendar = getCalendarForNow();
-		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - calendar.getFirstDayOfWeek();
-		calendar.add(Calendar.DAY_OF_MONTH, - dayOfWeek - 1);
-		return calendar.getTime();
+	public static LocalDate getWeekStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+		return localDate.with(fieldUS, 1);
 	}
 	
-	public static Date getLastWeekStartDate() {
-		Calendar calendar = getCalendarForNow();
-		int i = calendar.get(Calendar.DAY_OF_WEEK) - calendar.getFirstDayOfWeek();
-		calendar.add(Calendar.DATE, -i - 7 - 1);
-		return calendar.getTime();
+	public static LocalDate getLastWeekStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+
+		localDate = localDate.minusWeeks(1);
+		return localDate.with(fieldUS, 1);		
 	}
 	
-	public static Date getLastWeekEndDate() {
-		Calendar calendar = getCalendarForNow();
-		int i = calendar.get(Calendar.DAY_OF_WEEK) - calendar.getFirstDayOfWeek();
-		calendar.add(Calendar.DATE, -i - 7);
-		calendar.add(Calendar.DATE, 7);
-		return calendar.getTime();
+	public static LocalDate getLastWeekEndDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+
+		localDate = localDate.minusWeeks(1);
+		return localDate.with(fieldUS, 7);
 	}
 	
-	public static Date getMonthStartDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DAY_OF_MONTH, 0);
-		return calendar.getTime();
+	public static LocalDate getMonthStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		return localDate.withDayOfMonth(1);
+		
 	}
 	
-	public static Date getLastMonthStartDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DATE, 1);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		calendar.set(Calendar.DATE, 0);
-		return calendar.getTime();
+	public static LocalDate getLastMonthStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		localDate = localDate.minusMonths(1);
+		return localDate.withDayOfMonth(1);
+		
 	}
 	
-	public static Date getLastMonthEndDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DATE, 1);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		return calendar.getTime();
+	public static LocalDate getLastMonthEndDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		localDate = localDate.minusMonths(1);
+		return localDate.withDayOfMonth(localDate.lengthOfMonth());
 	}
 	
-	public static Date getYearStartDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DAY_OF_YEAR, 0);
-		return calendar.getTime();
+	public static LocalDate getYearStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		return localDate.withDayOfYear(1);
 	}
 	
-	public static Date getLastYearStartDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DAY_OF_YEAR, 1);
-		calendar.add(Calendar.YEAR, -1);
-		calendar.set(Calendar.MONTH, 0);
-		return calendar.getTime();
+	public static LocalDate getLastYearStartDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		localDate = localDate.minusYears(1);
+		return localDate.withDayOfYear(1);
 	}
 	
-	public static Date getLastYearEndDate() {
-		Calendar calendar = getCalendarForNow();
-		calendar.set(Calendar.DAY_OF_YEAR, 1);
-		return calendar.getTime();
+	public static LocalDate getLastYearEndDate() {
+		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		localDate = localDate.minusYears(1);
+		return localDate.withDayOfYear(localDate.lengthOfYear());
 	}
 	
 	public static String getFullPriceRepresentation(String price) {

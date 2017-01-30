@@ -151,7 +151,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	        }
 	    }
 		Thread.sleep(5000);
-		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));
+		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue().contains(BackOfficeUtils.getShortCurrentTimeWithTimeZone()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(po));		
 		invoicepaymentstab.clickNotesForInvoicesPaymentsLastTableRow();
 		Assert.assertEquals(invoicepaymentstab.getInvoicePaymentNoteValue(), notes);
@@ -303,7 +303,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Thread.sleep(30*1000);
 		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(invoicenumber);
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(usermail));
-		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));
+		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentTimeWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
@@ -340,9 +340,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		sendinvoicecustomemailtab.closeNewTab(mainWindowHandle);
 		
 		Thread.sleep(30*1000);
+		invoicespage.clickFindButton();
 		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(invoicenumber);
 		Assert.assertEquals(usermail, invoiceemailactivitytab.getFirstRowRecipientsValue());
-		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentDateFormatted()));
+		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue().contains(BackOfficeUtils.getShortCurrentTimeWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}

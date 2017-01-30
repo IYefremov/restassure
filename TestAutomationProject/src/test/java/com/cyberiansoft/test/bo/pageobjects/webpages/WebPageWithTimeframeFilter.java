@@ -2,10 +2,8 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -40,19 +38,24 @@ public class WebPageWithTimeframeFilter extends WebPageWithPagination {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
 	}
 	
-	public void verifyTableDateRangeForCurrentTablePage(Date startrange, Date endrange, List<WebElement> datecells) {
-		DateFormat dateFormat = new SimpleDateFormat(BackOfficeUtils.getFullDateFormat());	
+	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells) {
+		DateTimeFormatter dateFormat =
+                DateTimeFormatter.ofPattern(BackOfficeUtils.getFullDateFormat());
+		
 		for (WebElement datecell : datecells) {
-			try {
-				Date datevalue = dateFormat.parse(datecell.getText());
-				Assert.assertTrue((datevalue.after(startrange) & datevalue.before(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);
-			} catch (ParseException e) {
-				Assert.assertTrue(false, "Can't parse " + datecell.getText() + " value");
-			}		
+			LocalDate datevalue = LocalDate.parse(datecell.getText(), dateFormat);
+			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);		
 		}	
 	}
 	
-	public void verifyTableDateRangeForAllTablePages(Date startrange, Date endrange, WebTable table, String datecolumnname) {		
+	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells, DateTimeFormatter dateFormat) {
+		for (WebElement datecell : datecells) {
+			LocalDate datevalue = LocalDate.parse(datecell.getText(), dateFormat);
+			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);		
+		}	
+	}
+	
+	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {		
 		int pagenum =  Integer.valueOf(getLastPageNumber());	
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
@@ -62,11 +65,22 @@ public class WebPageWithTimeframeFilter extends WebPageWithPagination {
 		}
 	}
 	
-	public void verifyTableDateRangeForFirstAndLastTablePages(Date startrange, Date endrange, WebTable table, String datecolumnname) {
+	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
 		int pagenum =  Integer.valueOf(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
+			if (i < pagenum) {
+				clickGoToLastPage();
+			}
+		}
+	}
+	
+	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {
+		int pagenum =  Integer.valueOf(getLastPageNumber());
+		for (int i = 1; i <= 3; i++) {
+			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
+			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);
 			if (i < pagenum) {
 				clickGoToLastPage();
 			}
