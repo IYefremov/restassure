@@ -94,8 +94,8 @@ public class ApplicationsWebPage extends WebPageWithPagination {
 		applicationsearchcmb.sendKeys(_application);
 		waitABit(1000);
 		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']")));
-		driver.findElement(By.xpath("//li/em[text()='" + _application + "']")).click();
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _application + "']")));
+		driver.findElement(By.xpath("//li[text()='" + _application + "']")).click();
 	}
 	
 	public void selectSearchStatus(String status) {

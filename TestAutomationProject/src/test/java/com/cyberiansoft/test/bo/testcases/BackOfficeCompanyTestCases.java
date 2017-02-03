@@ -570,6 +570,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 			Thread.sleep(1000);
 			Assert.assertFalse(newinvoicetypedialog.isRequiredCheckBoxVisible());
+			newinvoicetypedialog.waitABit(500);
 			newinvoicetypedialog.selectVisibleCheckBox();
 			Assert.assertTrue(newinvoicetypedialog.isRequiredCheckBoxVisible());
 			newinvoicetypedialog.unselectVisibleCheckBox();

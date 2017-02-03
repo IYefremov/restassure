@@ -623,6 +623,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		
 		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 		newinvoicetypedialog.setInvoiceTypeName(invoicetype);
+		newinvoicetypedialog.waitABit(500);
 		newinvoicetypedialog.selectVisibleCheckBox();
 		newinvoicetypedialog.selectRequiredCheckBox();
 		newinvoicetypedialog.selectQuestionsTemplate(questiontemplate);
