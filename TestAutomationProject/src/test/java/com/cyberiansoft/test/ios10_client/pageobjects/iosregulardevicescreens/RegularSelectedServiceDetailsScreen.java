@@ -83,13 +83,14 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		Assert.assertEquals(par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).getText(), adjustments);
 	}
 
-	public void setServicePriceValue(String _quantity)
+	public void setServicePriceValue(String _price)
 			throws InterruptedException {
 		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("Price");
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).click();
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void clickVehiclePartsCell() {
@@ -161,7 +162,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par = getTableParentCell("Quantity");
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		par = getTableParentCell("Quantity");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setServiceTimeValue(String _timevalue)

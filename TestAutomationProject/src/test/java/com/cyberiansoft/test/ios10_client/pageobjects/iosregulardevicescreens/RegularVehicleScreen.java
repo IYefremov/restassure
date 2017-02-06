@@ -250,9 +250,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 
 	public void setStock(String stock) {
 		appiumdriver.findElementByAccessibilityId("Stock#").click();
-		appiumdriver.findElementByAccessibilityId("RO#").click();
-		WebElement par = getVehicleInfoTableParentNode("Stock#");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField")).sendKeys(stock + "\n");
+		//appiumdriver.findElementByAccessibilityId("RO#").click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		/*stockfld.click();
 		Helpers.keyboadrType(stock);		
 		//stockfldvalue.setValue(stock);
@@ -260,8 +260,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setRO(String ro) {
-		WebElement par = getVehicleInfoTableParentNode("RO#");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField")).sendKeys(ro + "\n");
+		appiumdriver.findElementByAccessibilityId("RO#").click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		/*rofld.click();
 		Helpers.keyboadrType(ro);
 		//rofldvalue.setValue(ro);
@@ -270,9 +271,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public void setPO(String po) throws InterruptedException {
 		pofld.click();
-		Helpers.keyboadrType(po);
-		//pofldvalue.setValue(po);
-		Helpers.keyboadrType("\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {

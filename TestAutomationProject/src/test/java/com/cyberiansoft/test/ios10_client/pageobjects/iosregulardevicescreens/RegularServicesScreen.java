@@ -319,11 +319,13 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public void clickSaveAsFinal() {
 		clickSaveButton();
 		finalalertbtn.click();
+		Helpers.waitABit(500);
 	}
 	
 	public void clickSaveAsDraft() {
 		clickSaveButton();
 		draftalertbtn.click();
+		Helpers.waitABit(500);
 	}
 	
 	public String getListOfSelectedVehicleParts() {

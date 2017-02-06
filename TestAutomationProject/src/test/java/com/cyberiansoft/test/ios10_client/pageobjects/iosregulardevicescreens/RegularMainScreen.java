@@ -70,7 +70,7 @@ public class RegularMainScreen {
 
 	public RegularHomeScreen userLogin(String user, String password) throws InterruptedException {
 		Thread.sleep(1000);
-		Helpers.waitUntilCheckLicenseDialogDisappears();
+		//Helpers.waitUntilCheckLicenseDialogDisappears();
 		Thread.sleep(3000);
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");
 		appiumdriver.findElementByAccessibilityId(user).click();

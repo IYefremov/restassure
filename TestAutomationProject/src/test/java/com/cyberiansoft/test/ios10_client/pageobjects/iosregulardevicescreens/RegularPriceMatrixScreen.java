@@ -127,7 +127,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	public void switchOffOption(String optionname) {
 		Helpers.waitABit(1000);
-		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("true"))
 			appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
 	}
 	

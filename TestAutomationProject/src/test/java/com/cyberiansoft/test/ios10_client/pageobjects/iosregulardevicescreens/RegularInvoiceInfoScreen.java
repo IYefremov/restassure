@@ -49,18 +49,21 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	public void clickSaveAsDraft() throws InterruptedException {
 		savebtn.click();
 		draftalertbtn.click();
-		Thread.sleep(1000);
+		savebtn.click();
+		Helpers.waitABit(500);
 	}
 
 	public void clickSaveAsFinal() {
 		savebtn.click();
 		finalalertbtn.click();
+		savebtn.click();
+		Helpers.waitABit(500);
 	}
 
 	public void setPO(String _po) throws InterruptedException {
 		setPOWithoutHidingkeyboard(_po);
 		//IOSDriver drv 
-		((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Done");
+		((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
 		//hidekeyboardbtn.click();
 	}
 	
@@ -93,8 +96,9 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void addWorkOrder(String wonumber)  {
-		Helpers.waitABit(2000);
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[3]").click();
+		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("Insert").click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[3]").click();
 		Helpers.waitABit(1000);
 		WebElement par = getTableParentCell(wonumber);
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]"));
