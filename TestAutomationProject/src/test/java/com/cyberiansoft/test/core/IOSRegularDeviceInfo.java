@@ -42,7 +42,7 @@ public class IOSRegularDeviceInfo {
 	}
 	
 	public String getDeviceUDID() {
-	      return configProp.getProperty("bundleID");
+	      return configProp.getProperty("udid");
 	}
 
 }

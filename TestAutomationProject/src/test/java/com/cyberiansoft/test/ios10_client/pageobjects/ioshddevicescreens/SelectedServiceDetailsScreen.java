@@ -91,14 +91,20 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void setServicePriceValue(String _price)
 			throws InterruptedException {
-		servicepricefld.click();
-		WebElement par = getTableParentCell("Price");
+		if (appiumdriver.findElementsByAccessibilityId("Price").size() > 1) {
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Price").get(1)).click();
+			appiumdriver.findElement(
+					By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")).clear();
+		} else {
+			servicepricefld.click();
+			WebElement par = getTableParentCell("Price");
 		
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+			par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		}
 		//servicepricevaluefld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 
 	public void clickVehiclePartsCell() {
@@ -122,7 +128,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartValue() {
-		return servicepartfld.getAttribute("name");
+		return servicepartfld.getAttribute("value");
 	}
 
 	public void answerQuestion(String answer) {
@@ -153,7 +159,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void answerQuestionCheckButton() {
 
 		questionsfld.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeLogical_Q1")).click();
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
@@ -207,8 +213,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
-		Helpers.waitABit(2000);
+		Helpers.waitABit(500);
+		if (appiumdriver.findElementsByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").size() > 1)
+			((IOSElement) appiumdriver.
+					findElementsByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").get(1)).click();
+		else
+			appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()

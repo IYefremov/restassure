@@ -41,6 +41,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.core.AppiumDriverBuilder;
+import com.cyberiansoft.test.core.AppiumDriverBuilder.AndroidDriverBuilder;
 import com.cyberiansoft.test.core.AppiumDriverBuilder.IOSDriverBuilder;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -167,7 +168,7 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		
+		//appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
 	}
@@ -193,10 +194,10 @@ public class BaseTestCase {
 			e.printStackTrace();
 		}*/
 		//appiumdriver = new IOSDriver<>(service.getUrl(), appiumcap);
-		appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
+		//appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
 
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-
+		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}

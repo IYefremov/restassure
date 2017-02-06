@@ -8,21 +8,19 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class ServicePartPopup extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "Category")
     private IOSElement categorycell;
 	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Category'].staticTexts()[1]")
-    private IOSElement categoryvaluecell;
-	
 	@iOSFindBy(accessibility = "Subcategory")
     private IOSElement subcategorycell;
-	
-	@iOSFindBy(uiAutomator = ".popovers()[0].tableViews()[0].cells()['Subcategory'].staticTexts()[1]")
-    private IOSElement subcategoryvaluecell;
 	
 	@iOSFindBy(accessibility = "Part")
     private IOSElement partcell;
@@ -42,7 +40,8 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartCategoryValue() {
-		return categoryvaluecell.getAttribute("value");
+		WebElement par = getTableParentCell("Category");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public void selectCategory(String categoryname) {
@@ -55,21 +54,29 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartSubCategoryValue() {
-		return subcategoryvaluecell.getAttribute("value");
+		WebElement par = getTableParentCell("Subcategory");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
 		partcell.click();
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
+		Helpers.waitABit(500);
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
 		positioncell.click();
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
+		Helpers.waitABit(500);
 	}
 	
 	public void saveSelectedServicePart() throws InterruptedException {
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].navigationBars()[0].buttons()['Save']")).click();	
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Part']/XCUIElementTypeButton[@name='Save']")).click();	
+		Helpers.waitABit(500);
+	}
+	
+	public WebElement getTableParentCell(String cellname) {
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 	
 

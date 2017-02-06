@@ -115,12 +115,15 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
-						+ discaunt + "\")]").click();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(1000).release().perform();
+		//appiumdriver.findElementByAccessibilityId(discaunt).click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
+		//				+ discaunt + "\")]").click();
 	}
 	
 	public void switchOffOption(String optionname) {
-		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("true"))
 			((IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']")).click();
 		Helpers.waitABit(1000);
 	}
@@ -177,7 +180,12 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar[2]/XCUIElementTypeStaticText[1]")).getAttribute("value");
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
+	
+	public String getPriceMatrixVehiclePartTotalPrice() {
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeStaticText[1]")).getAttribute("value");
+	}
+
 
 }

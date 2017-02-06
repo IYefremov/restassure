@@ -93,7 +93,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		//testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
+		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
 	}
@@ -122,13 +122,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriverInicialize();	
-		//appiumdriver.removeApp(bundleid);
+		appiumdriver.removeApp(bundleid);
 
-		/*appiumdriver.installApp(app.getAbsolutePath());
+		appiumdriver.installApp(app.getAbsolutePath());
 		appiumdriver.launchApp();
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
-		loginscreen.registeriOSDevice(regCode);*/
+		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -758,7 +758,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		MainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
-		
+		Helpers.waitABit(10*1000);
 
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
@@ -822,7 +822,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		MainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
-
+		Helpers.waitABit(10*1000);
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
@@ -954,8 +954,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
-		
+	
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		
 		servicerequestsscreen.clickAddButton();
@@ -1019,10 +1018,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		//Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestOnHold());
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectCompany(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectEmployee(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectVIN("WERTYU123"));
+		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(newsrnumber), iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(newsrnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(newsrnumber).contains("WERTYU123"));
 		servicerequestsscreen.clickHomeButton();
 		
 		
@@ -1041,10 +1040,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestslistpage.verifySearchFieldsAreVisible();
 		
-		servicerequestslistpage.selectSearchStatus("All On Scheduled");
+		//servicerequestslistpage.selectSearchStatus("All On Scheduled");
 		servicerequestslistpage.selectSearchTeam(teamname);
 		servicerequestslistpage.selectSearchTechnician("Employee Simple 20%");
-		servicerequestslistpage.setSearchFreeText("WERTYU123");
+		servicerequestslistpage.setSearchFreeText(newsrnumber);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.verifySearchResultsByServiceName("Test Company (Universal Client)");
 		//Assert.assertTrue(servicerequestslistpage.isFirstServiceRequestFromListHasStatusOnHold());
@@ -1075,7 +1074,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Thread.sleep(3000);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
+		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		Thread.sleep(8000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
@@ -1156,7 +1156,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//test case		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Thread.sleep(5000);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
+		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		Thread.sleep(2000);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		Thread.sleep(5000);
@@ -2926,7 +2927,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		Thread.sleep(8000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSPTYPE_FOR_SR_INSPTYPE);
@@ -2942,7 +2944,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectSummaryRequestAction();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
@@ -2988,7 +2990,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen("Zayats Section1");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		
+		Helpers.waitABit(30*1000);
 		resrtartApplication();
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3023,7 +3025,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			
 			
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-			
+
 		servicerequestsscreen.clickAddButton();
 		customersscreen.searchCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
@@ -3060,7 +3062,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		final String srnumber = servicerequestsscreen.getFirstServiceRequestOnHoldNumber();
+		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectAppointmentRequestAction();
 		servicerequestsscreen.clickAddAppointmentButton();
@@ -3076,8 +3078,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		servicerequestsscreen.selectCloseAction();
 		Thread.sleep(3000);		
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");	
-		servicerequestsscreen.selectServiceRequest(srnumber);
+		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(newsrnumber), "Scheduled");	
+		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectRejectAction();
 		Helpers.acceptAlert();
 		servicerequestsscreen.clickHomeButton();
@@ -3136,8 +3139,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-	
-		final String srnumber = servicerequestsscreen.getFirstServiceRequestOnHoldNumber();
+		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		System.out.println("=======================" + srnumber);
+		System.out.println("=======================");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		
 		servicerequestsscreen.selectAppointmentRequestAction();
@@ -3153,8 +3158,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.saveAppointment();
 		servicerequestsscreen.selectCloseAction();
 		Thread.sleep(3000);
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);		
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
+		servicerequestsscreen.selectServiceRequest(srnumber);		
 		servicerequestsscreen.selectSummaryRequestAction();	
 		Thread.sleep(3000);
 		//String summaryapp = servicerequestsscreen.getSummaryAppointmentsInformation();
@@ -3791,10 +3796,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		//Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestOnHold());
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectCompany(iOSInternalProjectConstants.O02TEST__CUSTOMER));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectEmployee(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectVIN(VIN));
+		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(srnumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(srnumber).contains(VIN));
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -3827,11 +3832,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		//Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestOnHold());
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectCompany(iOSInternalProjectConstants.O02TEST__CUSTOMER));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectEmployee(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectVIN(VIN));
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(srnumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(srnumber).contains(VIN));
+		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCheckInMenu();
 		servicerequestsscreen.clickHomeButton();
 	}
@@ -3865,15 +3870,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		//Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestOnHold());
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectCompany(iOSInternalProjectConstants.O02TEST__CUSTOMER));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectEmployee(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectVIN(VIN));
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(srnumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(srnumber).contains(VIN));
+		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCheckInMenu();
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectUndoCheckMenu();
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCheckInMenu();
 		servicerequestsscreen.clickHomeButton();
 	}
@@ -3907,11 +3912,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
-		//Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestOnHold());
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectCompany(iOSInternalProjectConstants.O02TEST__CUSTOMER));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectEmployee(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.isFirstServiceRequestContainsCorrectVIN(VIN));
-		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(srnumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(srnumber).contains(VIN));
+		//servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.applyNotCheckedInFilter();
 		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestNumber(), srnumber);
 		
@@ -4002,6 +4007,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			Assert.assertTrue(pdftext.contains("75.00"));
 		}
 		appiumdriverInicialize();
+		MainScreen mainscreen = new MainScreen(appiumdriver);
+		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 	
 	@Test(testName="Test Case 26663:Invoices: HD - verify that when ‘Customer approval required’ is set to OFF - auto email is sent when invoice is auto approved", 
@@ -4011,10 +4018,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		appiumdriverInicialize();
+		/*appiumdriverInicialize();
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+		*/
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -4076,7 +4083,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			Assert.assertTrue(pdftext.contains("75.00"));
 		}
 		appiumdriverInicialize();
-		mainscreen = new MainScreen(appiumdriver);
+		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 	
@@ -4334,7 +4341,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		String srnumber1 = servicerequestsscreen.getFirstServiceRequestNumber();
+		servicerequestsscreen.selectServiceRequest(srnumber1);
 		servicerequestsscreen.selectRejectAction();
 		Helpers.acceptAlert();
 		//Create second SR
@@ -4350,9 +4358,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		Helpers.waitABit(2000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
-		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");	
-		servicerequestsscreen.selectServiceRequest(srnumber);
+		String srnumber2 = servicerequestsscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber2), "Scheduled");	
+		servicerequestsscreen.selectServiceRequest(srnumber2);
 		servicerequestsscreen.selectRejectAction();
 		Helpers.acceptAlert();
 		Thread.sleep(3000);
@@ -4398,7 +4406,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "On Hold");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isRejectActionExists());
@@ -4744,7 +4752,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
 		servicerequestsscreen.selectCloseAction();
@@ -4784,7 +4792,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertFalse(servicerequestsscreen.isCloseActionExists());
 		servicerequestsscreen.selectRejectAction();
@@ -4824,7 +4832,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(4000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
 		servicerequestsscreen.selectCloseAction();
@@ -4865,7 +4873,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
 		servicerequestsscreen.selectCloseAction();
@@ -4906,7 +4914,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isServiceRequestExists(srnumber));
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
@@ -4952,7 +4960,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getFirstServiceRequestStatus(), "Scheduled");
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isServiceRequestExists(srnumber));
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
@@ -5432,6 +5440,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A1");
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -5439,19 +5448,25 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
 		
-		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);	
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);	
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Price Matrix Zayats");
 		pricematrix.selectPriceMatrix("VP1 zayats");
 		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
 		pricematrix.selectDiscaunt("Test service zayats");
 		pricematrix.clickSaveButton();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		servicesscreen.selectService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);	
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);	
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.clickSaveButton();
 		servicesscreen.clickSaveAsFinal();
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
@@ -5777,6 +5792,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.cancelSearchAvailableService();
 		servicesscreen.clickSaveButton();
+		Helpers.waitABit(1000);
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -5828,6 +5844,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			myinspectionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 			ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 			servicesscreen.clickSaveButton();
+			Helpers.waitABit(1000);
 			myinspectionsscreen.selectInspectionForAction(inspections.get(i));
 			//myinspectionsscreen.clickApproveInspections();
 			SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
@@ -6084,6 +6101,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		homescreen = myworkordersscreen.clickHomeButton();
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		teamworkordersscreen.clickSearchButton();
+		teamworkordersscreen.selectSearchLocation("All locations");
+		teamworkordersscreen.clickSearchSaveButton();
 		Assert.assertTrue(teamworkordersscreen.woExists(wonumber));
 		Assert.assertTrue(teamworkordersscreen.isWorkOrderHasApproveIcon(wonumber));
 		teamworkordersscreen.approveWorkOrder(wonumber, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);

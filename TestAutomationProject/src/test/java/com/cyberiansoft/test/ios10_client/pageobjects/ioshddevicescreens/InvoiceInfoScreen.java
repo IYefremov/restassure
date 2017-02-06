@@ -48,12 +48,15 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	public void clickSaveAsDraft()  {
 		clickSaveButton();
 		draftalertbtn.click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
 	}
 
 	public void clickSaveAsFinal() {
 		clickSaveButton();
 		finalalertbtn.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
 	}
 
 	public void setPO(String _po) {
