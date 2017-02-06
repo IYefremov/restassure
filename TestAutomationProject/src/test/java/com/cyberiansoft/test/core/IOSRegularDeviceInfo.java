@@ -6,43 +6,50 @@ import java.util.Properties;
 
 public class IOSRegularDeviceInfo {
 	
-	private final Properties configProp = new Properties();
+	private static IOSRegularDeviceInfo _instance = null;
+
+    private Properties props = null;
+
+    private IOSRegularDeviceInfo() {
+         props = new Properties();
+    	try {
+    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdevicehdconf.properties");
+	    props.load(in);
+    	}
+    	catch (Exception e) {
+    	    // catch Configuration Exception right here
+    	}
+    }
+
+    public synchronized static IOSRegularDeviceInfo getInstance() {
+        if (_instance == null)
+            _instance = new IOSRegularDeviceInfo();
+        return _instance;
+    }		 
 	
-	private IOSRegularDeviceInfo() {
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdeviceregularconf.properties");
-	    try {
-	        configProp.load(in);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
-			 
-	private static class LazyHolder {
-	      private static final IOSRegularDeviceInfo INSTANCE = new IOSRegularDeviceInfo();
-	}
-	
-	public static IOSRegularDeviceInfo getInstance() {
-	      return LazyHolder.INSTANCE;
-	}
 	
 	public String getDeviceName() {
-	      return configProp.getProperty("deviceName");
+	      return props.getProperty("deviceName");
 	}
 	
 	public String getDeviceBundleId() {
-	      return configProp.getProperty("bundleID");
-	}
-	
-	public String getAppDir() {
-	      return configProp.getProperty("appDir");
-	}
-	
-	public String getBuildFileName() {
-	      return configProp.getProperty("buildFileName");
+	      return props.getProperty("bundleID");
 	}
 	
 	public String getDeviceUDID() {
-	      return configProp.getProperty("udid");
+	      return props.getProperty("udid");
+	}
+	
+	public String getPlatformVersion() {
+	      return props.getProperty("platformVersiom");
+	}
+	
+	public String getAutomationName() {
+	      return props.getProperty("automationName");
+	}
+	
+	public String getNewCommandTimeout() {
+	      return props.getProperty("newCommandTimeout");
 	}
 
 }

@@ -1,20 +1,13 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -27,12 +20,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -54,7 +43,6 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	protected File app;
 	
 	protected TestUser testuser;
 	protected String userpsw;
@@ -62,6 +50,7 @@ public class BaseTestCase {
 	
 	protected static AppiumDriverLocalService service;
 	String bundleid = "";
+	String buildtype = "";
 	
 	public void setTestLogger(ExtentTest logger) {
 		testlogger = logger;
@@ -78,77 +67,11 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	@Parameters({ "selenium.browser", "ios.bundleid", "ios.build", "ios.udid" })
-	public void setUp(String browser, String bundleid, String buildfilename, String udid ) throws Exception {
+	public void setUp(String browser, String bundleid, String buildtype, String udid ) throws Exception {
 
 		// Parameters for WebDriver
 		 
 		 this.bundleid =  bundleid;
-		 /*File appDir = new File("/Users/kolin/Documents");
-		    File app = new File(appDir, "ReconPro_HD.app");
-		    appiumcap = new DesiredCapabilities();
-		    appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
-		    appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.3");
-		    appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "iPad 2");
-		    appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());*/
-		
-		// parameters for Appium iOS Driver
-		// File appDir = new File("/Users/vladimir/Downloads/");
-		// File app = new File(appDir, "ReconPro_HD.app");
-		    
-		/* service = AppiumDriverLocalService.buildDefaultService();
-	        service.start();
-
-	        if (service == null || !service.isRunning()) {
-	            throw new RuntimeException("An appium server node is not started!");
-	        }   
-		  */  
-		appiumcap = new DesiredCapabilities();
-		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
-		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad Air");
-		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7 Plus");
-		//appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 7");
-		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.2");
-		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
-		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
-		appiumcap.setCapability("nativeWebTap", true);
-		appiumcap.setCapability("automationName", "XCUITest"); 
-		appiumcap.setCapability("appiumVersion", "1.6.1");
-		//appiumcap.setCapability("udid", "02a22d694f78075036f90c22f5aa89ba6fa35b93");
-		appiumcap.setCapability("bundleid", this.bundleid);
-		
-		appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
-		appiumcap.setCapability("newCommandTimeout", "120");
-		//appiumcap.setCapability(CapabilityType.VERSION, "7.1.1");
-		/*appiumcap.setCapability("platformVersion", "7.1");
-		appiumcap.setCapability(CapabilityType.PLATFORM, "Mac");
-		appiumcap.setCapability("platformName", "iOS");
-		appiumcap.setCapability("newCommandTimeout", "120");
-		appiumcap.setCapability("device", "iPad");		
-		appiumcap.setCapability("deviceName", "iPad Air");*/
-		
-		File appDir = new File("./data/");
-	    //app = new File(appDir, "ReconPro_1124.app.zip");
-		//app = new File(appDir, "ReconPro_1208.app.zip");
-		app = new File(appDir, buildfilename);
-		appiumcap.setCapability("app", app.getAbsolutePath());
-	
-		//appiumcap.setCapability("app", app.getAbsolutePath());
-		
-		// appiumcap.setCapability("app", app.getAbsolutePath());
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		cal.add(Calendar.DAY_OF_MONTH, -1);
-		final String appfileversion = dateFormat.format(cal.getTime())
-				.substring(5, 7)
-				+ dateFormat.format(cal.getTime()).substring(8, 10);
-
-		// appiumcap.setCapability("app",
-		//"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + appfileversion + ".app.zip");
-
-		//appiumcap
-		//	.setCapability("app",
-		//				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_0413.app.zip");
 
 		/*
 		 * GraphicsConfiguration gc = GraphicsEnvironment
@@ -186,7 +109,7 @@ public class BaseTestCase {
 		//webdriver = new ChromeDriver();
 	}
 
-	public void appiumdriverInicialize() throws MalformedURLException {
+	public void appiumdriverInicialize(String buildtype)  {
 		/*try {
 			appiumdriver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 					appiumcap);
@@ -197,7 +120,11 @@ public class BaseTestCase {
 		//appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
 
 		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
+		this.buildtype = buildtype;
+		if (buildtype.toLowerCase().equals("hd"))
+			appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
+		else
+			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}
@@ -240,7 +167,7 @@ public class BaseTestCase {
 		try {
 			appiumdriver.closeApp();
 		} catch (NoSuchSessionException e) {
-			appiumdriverInicialize();
+			appiumdriverInicialize(buildtype);
 		}
 		Helpers.waitABit(7000);
 		try {

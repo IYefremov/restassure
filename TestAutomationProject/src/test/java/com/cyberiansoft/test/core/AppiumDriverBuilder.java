@@ -41,21 +41,28 @@ public abstract class AppiumDriverBuilder<SELF, DRIVER> {
 
     }
 
-    public static IOSDriverBuilder forIOS(){
+    public static IOSDriverBuilder forIOSHD(){
+    	mobileplatform = MobilePlatform.IOS_HD;
+        return new IOSDriverBuilder();
+    }
+    
+    public static IOSDriverBuilder forIOSRegular(){
+    	mobileplatform = MobilePlatform.IOS_REGULAR;
         return new IOSDriverBuilder();
     }
 
     public static class IOSDriverBuilder extends AppiumDriverBuilder<IOSDriverBuilder, IOSDriver>{
     	 
     	//DesiredCapabilities appiumcap = new DesiredCapabilities();
-    	DesiredCapabilities appiumcap =  new AppiumConfiguration().getCapabilities(MobilePlatform.IOS);
+    	
+    	DesiredCapabilities appiumcap =  new AppiumConfiguration().getCapabilities(mobileplatform);
         public IOSDriver newInstance(){
-        	
             return new IOSDriver<MobileElement>(endpoint, appiumcap);
         }
     }
 
     protected URL endpoint;
+    protected static MobilePlatform mobileplatform;
     
     public SELF againstLocalhost(){
         try {

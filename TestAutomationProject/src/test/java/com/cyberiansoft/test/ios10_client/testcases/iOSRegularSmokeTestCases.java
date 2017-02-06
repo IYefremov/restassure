@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -49,8 +48,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -65,6 +62,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	private String regCode;
 	private RegularHomeScreen homescreen;
+	private final String buildtype = "regular";
 	
 	private final String firstname = "supermy12";
 	private final String firstnamenew = "supernewmy12";
@@ -108,11 +106,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
-		appiumdriverInicialize();	
-		appiumdriver.removeApp(bundleid);
+		appiumdriverInicialize(buildtype);	
+		//appiumdriver.removeApp(bundleid);
 		//appiumdriverInicialize();
-		appiumdriver.installApp(app.getAbsolutePath());
-		appiumdriver.launchApp();
+		//appiumdriver.installApp(app.getAbsolutePath());
+		//appiumdriver.launchApp();
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
@@ -3703,10 +3701,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		/*appiumdriverInicialize();
+
 		RegularMainScreen mainscreen = new RegularMainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		*/
 		
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();

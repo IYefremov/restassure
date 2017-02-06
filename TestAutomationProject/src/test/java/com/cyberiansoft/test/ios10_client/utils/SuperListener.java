@@ -111,12 +111,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	        	try {
 	        		testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));        
 	        	} catch (Exception e) {
-	        		try {
-						((BaseTestCase) currentClass).appiumdriverInicialize();
-					} catch (MalformedURLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					((BaseTestCase) currentClass).appiumdriverInicialize("hd");
 	        	}
 	        	
 	        }

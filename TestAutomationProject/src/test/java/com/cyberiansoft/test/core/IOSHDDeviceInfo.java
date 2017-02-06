@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.core;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -16,8 +17,8 @@ public class IOSHDDeviceInfo {
     		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdevicehdconf.properties");
 	    props.load(in);
     	}
-    	catch (Exception e) {
-    	    // catch Configuration Exception right here
+    	catch (IOException e) {
+    	    System.out.println("Can't load device properties");
     	}
     }
 
@@ -36,20 +37,12 @@ public class IOSHDDeviceInfo {
 	      return props.getProperty("bundleID");
 	}
 	
-	public String getAppDir() {
-	      return props.getProperty("appDir");
-	}
-	
-	public String getBuildFileName() {
-	      return props.getProperty("buildFileName");
-	}
-	
 	public String getDeviceUDID() {
 	      return props.getProperty("udid");
 	}
 	
 	public String getPlatformVersion() {
-	      return props.getProperty("platformVersiom");
+	      return props.getProperty("platformVersion");
 	}
 	
 	public String getAutomationName() {

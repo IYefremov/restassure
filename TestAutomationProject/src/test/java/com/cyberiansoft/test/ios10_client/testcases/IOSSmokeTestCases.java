@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,6 +77,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	private String regCode;
 	public HomeScreen homescreen;
+	private final String buildtype = "hd";
+	
 	
 	private final String firstname = "supermy12";
 	private final String firstnamenew = "supernewmy12";
@@ -121,11 +124,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
-		appiumdriverInicialize();	
-		appiumdriver.removeApp(bundleid);
-
-		appiumdriver.installApp(app.getAbsolutePath());
-		appiumdriver.launchApp();
+		appiumdriverInicialize(buildtype);	
+		//appiumdriver.removeApp(bundleid);
+		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
+		//appiumdriver.launchApp();
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
@@ -1141,7 +1143,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		appiumdriver.closeApp();
 		Thread.sleep(60*1000*15);
 		
-		appiumdriverInicialize();
+		appiumdriverInicialize(buildtype);
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
@@ -4006,7 +4008,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
 			Assert.assertTrue(pdftext.contains("75.00"));
 		}
-		appiumdriverInicialize();
+		appiumdriverInicialize(buildtype);
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
@@ -4082,7 +4084,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
 			Assert.assertTrue(pdftext.contains("75.00"));
 		}
-		appiumdriverInicialize();
+		appiumdriverInicialize(buildtype);
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
@@ -4120,7 +4122,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		appiumdriverInicialize();
+		appiumdriverInicialize(buildtype);
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
@@ -4172,7 +4174,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		appiumdriverInicialize();
+		appiumdriverInicialize(buildtype);
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
