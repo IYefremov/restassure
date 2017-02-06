@@ -61,12 +61,22 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		log(LogStatus.INFO, "Select additional servivce: " + additionalservicename);			
 	}
 	
+	public void selectAllAvailableAdditionalServices() {
+		List<WebElement> addservs = additionalserviceslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
+		for (WebElement additinalservice : addservs) {
+			additinalservice.findElement(By.xpath(".//div[@action='select']")).click();
+			waitABit(500);
+		}
+	}
+	
 	public WebElement getVehiclePartAdditionalServiceCell(String additionalservicename) {
 		WebElement addsrvc = null;
 		List<WebElement> addservs = additionalserviceslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
 		for (WebElement additinalservice : addservs)
-			if (additinalservice.findElements(By.xpath(".//div[@class='item-title' and text()='" + additionalservicename + "']")).size() > 0)
+			if (additinalservice.findElements(By.xpath(".//div[@class='item-title' and text()='" + additionalservicename + "']")).size() > 0) {
 				addsrvc = additinalservice;
+				break;
+			}
 		return addsrvc;
 	}
 	

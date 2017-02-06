@@ -18,7 +18,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='parts']")
 	private WebElement vehiclepartsscreen;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']/i")
+	@FindBy(xpath="//a[@action='back']/i")
 	private WebElement backbtn;
 	
 	public VNextVehiclePartsScreen(SwipeableWebDriver appiumdriver) {
@@ -46,16 +46,20 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	public WebElement getVehiclePartCell(String vehiclepartname) {
 		WebElement vpcell = null;
 		List<WebElement> vehicleparts = getVehiclePartsList().findElements(By.xpath("./ul/li/a"));
-		for (WebElement vehiclepartcell : vehicleparts)
-			if (vehiclepartcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + vehiclepartname + "']")).size() > 0)
+		for (WebElement vehiclepartcell : vehicleparts) {
+			if (vehiclepartcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + vehiclepartname + "']")).size() > 0) {
 				vpcell = vehiclepartcell;
+				break;
+			}
+		}
 		return vpcell;
 	}
 	
-	public VNextInspectionServicesScreen clickVehiclePartsBackButton() {
+	public VNextSelectServicesScreen clickVehiclePartsBackButton() {
 		tap(backbtn);
 		log(LogStatus.INFO, "Click Vehicle Parts Back button");
-		return new VNextInspectionServicesScreen(appiumdriver);
+		return new VNextSelectServicesScreen(appiumdriver);
 		
 	}
 }
+ 

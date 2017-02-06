@@ -231,7 +231,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		swipeScreenLeft();
 		new VNextVisualScreen(appiumdriver);
 		swipeScreenLeft();
-		new VNextVisualScreen(appiumdriver);
+		//new VNextVisualScreen(appiumdriver);
 		swipeScreenLeft();
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 

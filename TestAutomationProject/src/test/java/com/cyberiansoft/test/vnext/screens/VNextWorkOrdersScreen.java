@@ -71,8 +71,10 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		WebElement wocell = null;
 		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
 		for (WebElement workordercell : workorders)
-			if (workordercell.findElements(By.xpath(".//div[@class='item-title' and text()='" + wonumber + "']")).size() > 0)
+			if (workordercell.findElements(By.xpath(".//div[@class='item-title' and text()='" + wonumber + "']")).size() > 0) {
 				wocell = workordercell;
+				break;
+			}
 		return wocell;
 	}
 	

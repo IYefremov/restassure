@@ -85,9 +85,9 @@ public class VNextBaseScreen {
 	}
 	
 	public void swipeScreenLeft() {	
-		//if (appiumdriver instanceof JavascriptExecutor)
-		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
-		tap(appiumdriver.findElementByXPath("//i[@action='forward']"));
+		if (appiumdriver instanceof JavascriptExecutor)
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
+		//tap(appiumdriver.findElementByXPath("//i[@action='forward']"));
 		log(LogStatus.INFO, "Swipe To Next Screen");
 		waitABit(1000);
 	}
@@ -115,9 +115,9 @@ public class VNextBaseScreen {
 	
 	public void swipeScreenRight() {
 		
-		//if (appiumdriver instanceof JavascriptExecutor)
-		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
-		tap(appiumdriver.findElementByXPath("//i[@action='back']"));		
+		if (appiumdriver instanceof JavascriptExecutor)
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
+		//tap(appiumdriver.findElementByXPath("//i[@action='back']"));		
 		log(LogStatus.INFO, "Swipe Back To Previous Screen");
 		waitABit(1000);
 	}

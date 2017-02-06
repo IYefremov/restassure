@@ -14,7 +14,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='update-main-db']")
 	private WebElement updatemaindbbtn;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']")
+	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
 	public VNextStatusScreen(SwipeableWebDriver appiumdriver) {

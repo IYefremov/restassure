@@ -14,8 +14,10 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.vnext.screens.VNextEmailMismatchDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPhoneMismatchDialog;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationLineOfBusinessScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationNewUserPersonalInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewLegalInfosScreen;
@@ -47,9 +49,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	String userregmail = "";
 	final String confirmpsw = "111111";
 	
-	String userregfirstname = "TestTech";
-	String userreglastname = "AQA";
-	String userregphone = "050555013455";
+	final String userregphone = "6267477803";
+	final String userphonecountrycode = "1";
 	
 	@BeforeClass(description = "Setting up new suite")
 	@Parameters({ "backofficecapi.url", "usercapi.mail", "usercapi.name", "usercapi.psw", "selenium.browser"})	
@@ -75,7 +76,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	}
 	
 	@Test(testName= "Test Case 44318:vNext: verify creating BO with JumpStart Edition (PDR)", 
-			description = "verify creating BO with JumpStart Edition (PDR)")
+			description = "Verify creating BO with JumpStart Edition (PDR)")
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
 	public void testVerifyCreatingBOWithJumpStartEdition_PDR(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
 		
@@ -83,14 +84,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userlastname = "QA";
 		final String boeditionname = "JumpStart";
 		final String bolineofbusiness = "PDR";
-		final String userregphone = "6267477803";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		userregmail = usermailprefix + "99999111" + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo(userfirstname, userlastname , "1", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen.clickClearUserButton();
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
@@ -98,7 +98,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		regscreen.clickDoneButton();
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
-		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone("1"+userregphone).replaceAll("\"", ""));
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
@@ -157,7 +157,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	}
 	
 	@Test(testName= "Test Case 44329:vNext: verify creating BO with Technician Edition (PDR)", 
-			description = "verify creating BO with Technician Edition (PDR)")
+			description = "Verify creating BO with Technician Edition (PDR)")
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
 	public void testVerifyCreatingBOWithTechnicianEdition_PDR(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
 		
@@ -178,13 +178,12 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String boeditionname = "Technician";
 		final String bolineofbusiness = "PDR";
-		final String userregphone = "6267477803";
-		final String userstate = "California";
+		
 
 		userregmail = usermailprefix + "99999111" + usermailpostbox;
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , "1", userregphone, userregmail);
+		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen.clickClearUserButton();
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
@@ -192,7 +191,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		regscreen.clickDoneButton();
 		
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
-		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone("1"+userregphone).replaceAll("\"", ""));
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
@@ -268,5 +267,233 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		Assert.assertTrue(leftmenu.isUsersMenuItemExists());
+	}
+	
+	@Test(testName= "Test Case 44272:vNext: verify 'Phone doesn't match this email. Email me my phone number' error for non-existing phone", 
+			description = "Verify 'Phone doesn't match this email. Email me my phone number' error for non-existing phone")
+	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
+	public void testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
+		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
+		final String boeditionname = "JumpStart";
+		final String bolineofbusiness = "PDR";
+		final String userstate = "California";
+		
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+
+		verificationscreen.waitABit(10000);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
+		
+		resetApp();
+		waitABit(10*1000);
+		switchToWebViewContext();
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setFirstName(userfirstname);	
+		regscreen.setLastName(userlastname);	
+		regscreen.setEmail(userregmail);
+		regscreen.setPhoneNumber("3182324555");
+		regscreen.clickDoneButton();
+		VNextPhoneMismatchDialog phonemismatchdlg = new VNextPhoneMismatchDialog(appiumdriver);
+		Assert.assertTrue(phonemismatchdlg.getInformationDialogBodyMessage().contains("Phone doesn't match this email"));
+		phonemismatchdlg.clickEmailMeMyPhoneButton();
+		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "Remind Phone Number", fromEmail, "Your Phone Number is");
+		
+		String userphone = "";
+		if (!mailmessage.equals("")) {
+			System.out.println("==========0" + mailmessage);
+			userphone = mailmessage.substring(mailmessage.indexOf("+")+1, mailmessage.lastIndexOf(".<br>"));		
+		} else {
+			Assert.assertTrue(false, "Mail message is empty");
+		}
+		Assert.assertEquals(userphone, userphonecountrycode + userregphone);
+	}
+	
+	@Test(testName= "Test Case 44273:vNext: verify 'Email doesn't match this phone' error for non-existing email", 
+			description = "Verify 'Email doesn't match this phone' error for non-existing email")
+	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
+	public void testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
+		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
+		final String boeditionname = "JumpStart";
+		final String bolineofbusiness = "PDR";
+		final String userstate = "California";
+		
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+
+		verificationscreen.waitABit(10000);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
+		
+		resetApp();
+		waitABit(10*1000);
+		switchToWebViewContext();
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setFirstName(userfirstname);	
+		regscreen.setLastName(userlastname);	
+		regscreen.setEmail("nonexistent@gmail.com");
+		regscreen.setPhoneNumber(userregphone);
+		regscreen.clickDoneButton();
+		VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(appiumdriver);
+		Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
+		mailmismatchdlg.clickTextEmailAddressButton();
+	}
+	
+	@Test(testName= "Test Case 44316:vNext: verify 'Phone number or email address doesn't match the user's account information.' error for existing email_phone", 
+			description = "Verify 'Phone number or email address doesn't match the user's account information.' error for existing email_phone")
+	@Parameters({ "backoffice.url", "user.name", "user.psw", "device.license" })	
+	public void testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) throws IOException {
+		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
+		final String boeditionname = "JumpStart";
+		final String bolineofbusiness = "PDR";
+		final String userstate = "California";
+		
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+
+		verificationscreen.waitABit(10000);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
+		
+		resetApp();
+		waitABit(10*1000);
+		switchToWebViewContext();
+		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setFirstName(userfirstname);	
+		regscreen.setLastName(userlastname);	
+		regscreen.setEmail("mpstart@gmail.com");
+		regscreen.setPhoneNumber("3182324584");
+		regscreen.clickDoneButton();
+		VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(appiumdriver);
+		Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
+		mailmismatchdlg.clickTextEmailAddressButton();
+		
+		mailmismatchdlg.waitABit(1000*15);
+		regscreen.setEmail(userregmail);
+		regscreen.setPhoneNumber("3127641152");
+		regscreen.clickDoneButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Phone number or email address doesn't match the user's account information.");
+		
 	}
 }

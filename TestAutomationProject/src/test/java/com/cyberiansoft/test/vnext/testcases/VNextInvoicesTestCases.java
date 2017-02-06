@@ -62,6 +62,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		final String vehiclepartseverity = "Light 6 to 15";	
 		final String additionalservice = "Aluminum Upcharge";
 		final String ponumber = "123po";
+		final String invoicequicknote = "Alum Deck";
 		final String wopriceexp = "$267.81";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -77,7 +78,15 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		selectservicesscreen.selectService(percservices);
 		selectservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
-		selectservicesscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		
 		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -86,21 +95,13 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		servicedetailsscreen.setServiceQuantityValue(moneyservicequant);
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextVehiclePartsScreen vehiclepartsscreen = servicesscreen.openMatrixServiceVehiclePartsScreen(matrixservice);
-		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
-		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
-		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		servicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
 		final String wonumber = servicesscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String woprice = workordersscreen.getWorkOrderPriceValue(wonumber);
 		Assert.assertEquals(woprice, wopriceexp);
 		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
-		invoiceinfoscreen.addQuickNoteToInvoice("Alum Deck");
+		invoiceinfoscreen.addQuickNoteToInvoice(invoicequicknote);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumber), woprice);
@@ -219,7 +220,6 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		if (search) {
 			File pdfdoc = new File(inspectionreportfilenname);
 			String pdftext = PDFReader.getPDFText(pdfdoc);
-			System.out.println("++++++" + unEscapeString(pdftext));
 			Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
 			Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
 		} else {
@@ -228,6 +228,135 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 
 		emailscreen.waitABit(60*1000);
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+	}
+	
+	@Test(testName= "Test Case 49787:vNext: Create Invoice with set PO", 
+			description = "Create Invoice with set PO")
+	public void testCreateInvoiceWithSetPO() {
+		final String VIN = "19UUA66278A050105";
+		final String _make = "Acura";
+		final String _model = "TL";
+		final String year = "2008";
+		
+		final String percservices = "Aluminum Upcharge"; 
+		final String moneyservices = "Dent Repair"; 
+		final String matrixservice = "Hail Dent Repair";
+		final String matrixsubservice = "State Farm";
+		final String moneyserviceprice = "58";
+		final String moneyservicequant = "1";
+		final String vehiclepartname = "Hood";
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
+		final String additionalservice = "Aluminum Upcharge";
+		final String ponumber = "Edyfycydydyftwfxfxhxgdy2555*&*-\"4*-\"&\"-\"55$6'+'&*6";
+		final String invoicenote = "Only text Note";
+		final String wopriceexp = "$267.81";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
+		vehicleinfoscreen.setVIN(VIN);
+		
+		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
+		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
+		Assert.assertEquals(vehicleinfoscreen.getYear(), year);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectService(percservices);
+		selectservicesscreen.selectService(moneyservices);
+		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		
+		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextServiceDetailsScreen servicedetailsscreen = servicesscreen.openServiceDetailsScreen(moneyservices);
+		servicedetailsscreen.setServiceAmountValue(moneyserviceprice);
+		servicedetailsscreen.setServiceQuantityValue(moneyservicequant);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		final String wonumber = servicesscreen.getNewInspectionNumber();
+		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
+		final String woprice = workordersscreen.getWorkOrderPriceValue(wonumber);
+		Assert.assertEquals(woprice, wopriceexp);
+		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		invoiceinfoscreen.addTextNoteToInvoice(invoicenote);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumber), woprice);
+		homescreen = invoicesscreen.clickBackButton();
+		
+	}
+	
+	@Test(testName= "Test Case 52817:vNext mobile: create and email Invoice with two matrix panel", 
+			description = "Create and email Invoice with two matrix panel")
+	@Parameters({ "usercapi.mail"})
+	public void testCreateAndEmailInvoiceWithTwoMatrixPanel(String usermail) {
+		final String VIN = "JT3AC11R4N1023558";
+		final String _make = "Toyota";
+		final String _model = "Previa";
+		final String year = "1992";
+		
+		final String matrixservice = "Hail Dent Repair";
+		final String matrixsubservice = "State Farm";
+		final String[] vehiclepartsname = { "Hood", "Roof" };
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
+		final String ponumber = "123po";
+		final String insppriceexp = "$660.00";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
+		vehicleinfoscreen.setVIN(VIN);
+		
+		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
+		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
+		Assert.assertEquals(vehicleinfoscreen.getYear(), year);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		for (String vehiclepartname : vehiclepartsname) {
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+			vehiclepartinfoscreen.selectAllAvailableAdditionalServices();
+			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+
+		}
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		
+		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		//final String wonumber = servicesscreen.getNewInspectionNumber();
+		servicesscreen.swipeScreenLeft();
+		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+		wosummaryscreen.clickCreateInvoiceOption();
+		wosummaryscreen.clickWorkOrderSaveButton();
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		String invoicenumber  = invoiceinfoscreen.getInvoiceNumber();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumber), insppriceexp);
+		VNextEmailScreen emailscreen = invoicesscreen.clickOnInvoiceToEmail(invoicenumber);
+		if (!emailscreen.getToEmailFieldValue().equals(usermail))
+			emailscreen.sentToEmailAddress(usermail);
+		
+		emailscreen.clickSendEmailsButton();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.clickBackButton();
+		
 	}
 
 	@Test(testName= "Test Case 38638:vNext: Verify Customer Info on Invoice detail", 

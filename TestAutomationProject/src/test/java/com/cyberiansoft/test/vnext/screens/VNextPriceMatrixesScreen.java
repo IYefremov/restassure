@@ -30,10 +30,10 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 		return getPriceMatrixesList().findElements(By.xpath(".//div[@class='item-title' and text()='" + pricematrix + "']")).size() > 0;
 	}
 	
-	public VNextSelectServicesScreen selectPriceMatrix(String pricematrix) {
+	public VNextVehiclePartsScreen selectPriceMatrix(String pricematrix) {
 		tap(getPriceMatrixesList().findElement(By.xpath(".//div[@class='item-title' and text()='" + pricematrix + "']")));
 		log(LogStatus.INFO, "Select Price Matrix: " + pricematrix);
-		return new VNextSelectServicesScreen(appiumdriver);
+		return new VNextVehiclePartsScreen(appiumdriver);
 	}
 
 }

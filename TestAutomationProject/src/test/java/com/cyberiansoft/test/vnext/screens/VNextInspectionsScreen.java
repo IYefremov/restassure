@@ -79,8 +79,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		WebElement inspcell = null;
 		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
 		for (WebElement invcell : inspections)
-			if (invcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + inspectionnumber + "']")).size() > 0)
+			if (invcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + inspectionnumber + "']")).size() > 0) {
 				inspcell = invcell;
+				break;
+			}
 		return inspcell;
 	}
 	

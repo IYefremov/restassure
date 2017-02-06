@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -44,19 +45,19 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
-		customersscreen.selectCustomerByCustomerAddress(customeraddress);
+		customersscreen.selectCustomerByCustomerAddress(WordUtils.capitalize(customeraddress));
 		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), lastname);
 		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), companyname);
 		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), customeremail);
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
-		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
+		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), WordUtils.capitalize(customeraddress));
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
 		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
 		homescreen = customersscreen.clickBackButton();
-		homescreen.waitABit(10000);
+		homescreen.waitABit(15000);
 		initiateWebDriver();
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -68,6 +69,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
+		clientspage.waitABit(1000);
 		clientspage.deleteClient(companyname);
 		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
 		webdriver.quit();

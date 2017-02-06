@@ -24,6 +24,8 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -557,8 +559,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	public void testVerifyPriceMatrixAddedToServicePackageIsAvailableToChooseWhenAddEditInspection() {
 		
 		final String matrixservice = "Hail Dent Repair";
-		final String[] availablepricematrixes = { "Nationwide Insurance", "Nationwide Insurance-copy",
-				"Progressive", "Progressive-copy", "State Farm", "State Farm-copy" };
+		final String[] availablepricematrixes = { "Nationwide Insurance", "Progressive", "State Farm" };
+		final String vehiclepartname = "Hood";
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
 	
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -570,7 +574,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
-		selectservicesscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
 		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[2]);
 		
 		selectservicesscreen.clickSaveSelectedServicesButton();
@@ -585,8 +595,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	public void testVerifyListOfAvailablePriceMatricesIsLoadedWhenChoosingMatrixService() {
 		
 		final String matrixservice = "Hail Dent Repair";
-		final String[] availablepricematrixes = { "Nationwide Insurance", "Nationwide Insurance-copy",
-				"Progressive", "Progressive-copy", "State Farm", "State Farm-copy" };
+		final String[] availablepricematrixes = { "Nationwide Insurance", "Progressive", "State Farm" };
+		final String vehiclepartname = "Hood";
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
 	
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -600,7 +612,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
 		for (String pricematrix : availablepricematrixes)
 			Assert.assertTrue(pricematrixesscreen.isPriceMatrixExistsInTheList(pricematrix));
-		selectservicesscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
 		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[2]);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -615,9 +633,11 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	public void testVerifyPriceMatrixNameIsShownOnSelectServicesScreenAfterSelection() {
 		
 		final String matrixservice = "Hail Dent Repair";
-		final String[] availablepricematrixes = { "Nationwide Insurance", "Nationwide Insurance-copy",
-				"Progressive", "Progressive-copy", "State Farm", "State Farm-copy" };
-	
+		final String[] availablepricematrixes = { "Nationwide Insurance", "Progressive", "State Farm" };
+		final String vehiclepartname = "Hood";
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
+		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
@@ -628,7 +648,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
-		selectservicesscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
 		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[2]);
 		
 		selectservicesscreen.clickSaveSelectedServicesButton();

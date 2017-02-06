@@ -18,7 +18,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='page invoices-list hide-searchbar hide-toolbar page-on-center']")
 	private WebElement invoicesscreen;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//a[@class='link icon-only back']/i")
 	private WebElement backbtn;
 	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
@@ -42,8 +42,11 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		WebElement invoicecell = null;
 		List<WebElement> invoices = getInvoicesList().findElements(By.xpath(".//a[@class='item-link item-content']"));
 		for (WebElement invcell : invoices)
-			if (invcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + invoicenumber + "']")).size() > 0)
+			if (invcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + invoicenumber + "']")).size() > 0) {
 				invoicecell = invcell;
+				break;
+			}
+				
 		return invoicecell;
 	}
 	
