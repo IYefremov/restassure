@@ -13,7 +13,7 @@ public class IOSRegularDeviceInfo {
     private IOSRegularDeviceInfo() {
          props = new Properties();
     	try {
-    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdevicehdconf.properties");
+    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdeviceregularconf.properties");
 	    props.load(in);
     	}
     	catch (Exception e) {
@@ -41,7 +41,7 @@ public class IOSRegularDeviceInfo {
 	}
 	
 	public String getPlatformVersion() {
-	      return props.getProperty("platformVersiom");
+	      return props.getProperty("platformVersion");
 	}
 	
 	public String getAutomationName() {
