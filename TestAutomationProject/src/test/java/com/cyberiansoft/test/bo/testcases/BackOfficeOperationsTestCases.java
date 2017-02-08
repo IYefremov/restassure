@@ -66,7 +66,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			
 			String lastpagenumber = techcommissionpage.getLastPageNumber();
 			techcommissionpage.clickGoToLastPage(browsertype);
-			Assert.assertEquals(lastpagenumber, techcommissionpage.getGoToPageFieldValue());
+			Assert.assertEquals(lastpagenumber, techcommissionpage.getGoToPageFieldValue().replace(",", ""));
 			
 			techcommissionpage.clickGoToFirstPage();
 			Assert.assertEquals("1", techcommissionpage.getGoToPageFieldValue());
@@ -84,18 +84,19 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 			
 			techcommissionpage.selectSearchStatus("New");
 			//techcommissionpage.selectSearchTeamVendor("TestTeamInternal");
-			techcommissionpage.selectSearchTechnician("Alex Morozov");			 
+			techcommissionpage.selectSearchTechnician("1111 2222");	
+			techcommissionpage.setSearchInvoice("I-068-00086");
 			techcommissionpage.clickFindButton();
 			
 			Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
-			techcommissionpage.verifySearchResults("O-068-00210");
+			techcommissionpage.verifySearchResults("I-068-00086");
 		}
 
 		@Test(description = "Test Case 15386:Operations - Work Orders: Search")
 		public void testOperationWorkOrdersSearch() throws Exception {
 
-			final String wonum = "O-116-00172";
-			final String vin = "KRKFMGM4GVJGJFFFF";
+			final String wonum = "O-105-00005";
+			final String vin = "23ERY90KNBV";
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);		

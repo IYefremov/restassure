@@ -24,7 +24,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	final LocalDate currentdate = LocalDate.now().plusDays(1);
 	final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
 	final LocalDate lastweekstart = BackOfficeUtils.getLastWeekStartDate().minusDays(1);
-	final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(1);
+	final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(2);
 	final LocalDate startmonth = BackOfficeUtils.getMonthStartDate().minusDays(1);
 	final LocalDate startlastmonth = BackOfficeUtils.getLastMonthStartDate().minusDays(1);
 	final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(1);
@@ -136,11 +136,11 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		vendorbillspage.selectSearchStatus(statusall);
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		vendorbillspage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 		
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		vendorbillspage.clickFindButton();
-		vendorbillspage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		vendorbillspage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
 		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		vendorbillspage.clickFindButton();

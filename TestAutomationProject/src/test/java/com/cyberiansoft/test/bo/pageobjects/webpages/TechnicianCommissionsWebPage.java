@@ -130,8 +130,12 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//li[text()='" + technician + "']")).click();
 	}
 	
-	public void selectSearchTimeframe(String timeframe) throws InterruptedException  { 
+	public void selectSearchTimeframe(String timeframe)  { 
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe);
+	}
+	
+	public void setSearchInvoice(String invoicenumber)  { 
+		searchinvoicenofld.clearAndType(invoicenumber);
 	}
 	
 	public void setSearchFromDate(String date, String month, String year) { 

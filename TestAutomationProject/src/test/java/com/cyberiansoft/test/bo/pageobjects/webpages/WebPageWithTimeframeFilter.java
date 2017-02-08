@@ -65,6 +65,16 @@ public class WebPageWithTimeframeFilter extends WebPageWithPagination {
 		}
 	}
 	
+	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {		
+		int pagenum =  Integer.valueOf(getLastPageNumber());	
+		for (int i = 1; i <= pagenum; i++) {
+			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
+			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);
+			if (i < pagenum)
+				clickGoToNextPage();
+		}
+	}
+	
 	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
 		int pagenum =  Integer.valueOf(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
