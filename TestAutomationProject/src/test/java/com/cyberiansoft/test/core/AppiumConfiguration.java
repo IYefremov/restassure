@@ -34,7 +34,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 				appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSHDDeviceInfo.getInstance().getPlatformVersion());
 				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
-				appiumcap.setCapability(MobileCapabilityType.NO_RESET, false);
+				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 				appiumcap.setCapability("nativeWebTap", true);
 				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOSHDDeviceInfo.getInstance().getAutomationName()); 
 				appiumcap.setCapability("appiumVersion", "1.6.1");
@@ -48,9 +48,6 @@ public class AppiumConfiguration {
 
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
 	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + date.format(dateFormat) + ".app.zip");
-	    		System.out.println("++++" + IOSHDDeviceInfo.getInstance().getDeviceName());
-	    		System.out.println("++++" + IOSHDDeviceInfo.getInstance().getNewCommandTimeout());
-	    		System.out.println("++++" + IOSHDDeviceInfo.getInstance().getPlatformVersion());
 				return appiumcap;
 			case IOS_REGULAR:
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");

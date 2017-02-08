@@ -1970,8 +1970,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();		
 	}
 	
-	//Test Case 16493:Create Invoice with two WOs and copy vehicle
-	@Test(testName = "Test Case 16493:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
+	@Test(testName = "Test Case 26266:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
 	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
 		
 		final String VIN = "QWERTYUI123";

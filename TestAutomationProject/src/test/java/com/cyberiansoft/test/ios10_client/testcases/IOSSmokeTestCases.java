@@ -2,15 +2,12 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -41,7 +38,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Questio
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEmployeePopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServicePartPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SettingsScreen;
@@ -62,6 +58,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -2021,10 +2018,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		
 	}
-	
-	//Test Case 16493:Create Invoice with two WOs and copy vehicle
-	@Test(testName = "Test Case 16493:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
-	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
+
+	@Test(testName = "Test Case 25526:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testCreateInvoiceWithTwoWOsAndCopyVehicle(String backofficeurl, String userName, String userPassword) throws Exception {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -2038,9 +2035,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _ro = "123";
 		final String[] vehicleparts = { "Cowl, Other", "Hood", };
 		
-		//resrtartApplication();
-		//MainScreen mainscreen = new MainScreen(appiumdriver);
-		//HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		homescreen = new HomeScreen(appiumdriver);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
@@ -2082,8 +2076,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		
+
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
@@ -2097,7 +2090,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		
 		myworkordersscreen.approveWorkOrderWithoutSignature(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-			
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber1), "$13.50");
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.searchCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -2122,8 +2115,26 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
+		final String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
+		Helpers.waitABit(10*1000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage(backofficeurl);
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
+		invoiceswebpage.clickFindButton();
+		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
+		getWebDriver().quit();
 	}
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
@@ -6112,5 +6123,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(teamworkordersscreen.isWorkOrderHasActionIcon(wonumber));
 		teamworkordersscreen.clickHomeButton();
 	}
+	
+	
 
 }

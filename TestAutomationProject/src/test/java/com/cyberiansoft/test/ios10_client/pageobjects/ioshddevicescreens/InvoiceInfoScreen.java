@@ -82,12 +82,13 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 	
 	public void addWorkOrder(String wonumber) {
-		Helpers.waitABit(3000);
+		Helpers.waitABit(2000);
 		invoicewostable.findElementByXPath("//XCUIElementTypeCell[2]").click();
 		//appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
 						+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
+		Helpers.waitABit(1000);
 	}
 	
 	public String getInvoiceNumber() {
