@@ -34,6 +34,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_SMOKE_MONITOR = "WO_smoke_monitor";
 	public static final String WO_SMOKE_TEST = "WO_smoke_test";
 	public static final String WO_TYPE_WITH_JOB = "WO_type_with_job";
+	public static final String WO_FOR_INVOICE_PRINT = "WO_for_invoice_print";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
@@ -103,6 +104,7 @@ public class iOSInternalProjectConstants {
     public static final String SERVICE_REQ_0_PRICE = "Service_req_0_price";
     public static final String TAX_DISCOUNT = "Tax discount";
     public static final String SALES_TAX = "Sales Tax";
+    public static final String SR_S4_Bl_I1_M = "SR_S4_Bl_I1_M";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

@@ -242,7 +242,29 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
-			status = row.findElement(By.xpath("./td[7]/table/tbody/tr/td")).getText();
+			status = row.findElement(By.xpath("./td[" + invoicestable.getTableColumnIndex("Status") + "]/table/tbody/tr/td")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
+		}
+		return status; 
+	}
+	
+	public String getInvoicePONumber(String invoicenumber) {
+		String status = null;
+		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
+		if (row != null) {
+			status = row.findElement(By.xpath("./td[" + invoicestable.getTableColumnIndex("PO#") + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
+		}
+		return status; 
+	}
+	
+	public String getInvoicePOPaidValue(String invoicenumber) {
+		String status = null;
+		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
+		if (row != null) {
+			status = row.findElement(By.xpath("./td[" + invoicestable.getTableColumnIndex("Paid") + "]")).getText();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
 		}
@@ -355,8 +377,14 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public InvoicePaymentsTabWebPage clickInvoicePayments(String invoicenumber) throws InterruptedException {
+		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Payments");
 		waitForNewTab();
+		for (String activeHandle : driver.getWindowHandles()) {
+	        if (!activeHandle.equals(mainWindowHandle)) {
+	        	driver.switchTo().window(activeHandle);
+	        }
+	    }
 		return PageFactory.initElements(
 				driver, InvoicePaymentsTabWebPage.class);
 	}

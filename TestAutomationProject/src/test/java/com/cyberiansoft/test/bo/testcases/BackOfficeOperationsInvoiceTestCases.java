@@ -143,14 +143,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals(alerttext, "PO/RO payment has processed.");
 		invoiceedittab.closeNewTab(mainWindowHandle);
 		mainWindowHandle = webdriver.getWindowHandle();
-		Thread.sleep(3000);
+		invoiceedittab.waitABit(1000);
 		InvoicePaymentsTabWebPage invoicepaymentstab = invoicespage.clickInvoicePayments(invoicenumber);
-		for (String activeHandle : webdriver.getWindowHandles()) {
-	        if (!activeHandle.equals(mainWindowHandle)) {
-	        	webdriver.switchTo().window(activeHandle);
-	        }
-	    }
-		Thread.sleep(5000);
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue().contains(BackOfficeUtils.getShortCurrentTimeWithTimeZone()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(po));		
 		invoicepaymentstab.clickNotesForInvoicesPaymentsLastTableRow();

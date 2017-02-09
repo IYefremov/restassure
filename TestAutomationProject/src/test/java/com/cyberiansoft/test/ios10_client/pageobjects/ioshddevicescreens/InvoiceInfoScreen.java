@@ -8,6 +8,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -27,6 +28,12 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "InvoiceOrdersTable")
     private IOSElement invoicewostable;
+	
+	@iOSFindBy(accessibility  = "action pay")
+    private IOSElement invoicepaybtn;
+	
+	@iOSFindBy(accessibility  = "cash normal")
+    private IOSElement cashnormalbtn;
 	
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
@@ -57,6 +64,10 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		finalalertbtn.click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		Helpers.waitABit(500);
+	}
+	
+	public String getInvoicePOValue() {
+		return setpofld.getAttribute("value");
 	}
 
 	public void setPO(String _po) {
@@ -112,4 +123,23 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		acceptAlert();
 	}
 
+	public void clickInvoicePayButton() {
+		invoicepaybtn.click();
+	}
+	
+	public void changePaynentMethodToCashNormal() {
+		cashnormalbtn.click();
+	}
+	
+	public void setCashCheckAmountValue(String amountvalue) {
+		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='Cash / Check']/..");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(amountvalue);
+	}
+	
+	public void clickInvoicePayDialogButon() {
+		appiumdriver.findElementByAccessibilityId("Pay").click();
+	}
+	
+	
 }

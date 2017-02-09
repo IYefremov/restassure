@@ -9,6 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
@@ -32,6 +35,8 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	}
 	
 	public List<WebElement> getInvoicesPaymentsTableRows() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(paymentsnotestable.getWrappedElement()));
 		return paymentsnotestable.getTableRows();
 	}
 	
@@ -63,5 +68,37 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	
 	public void clickClosePaymentsPopup() {
 		paymentsnotesclosebtnpopup.click();
+	}
+	
+	public WebElement getTableRowWithPaymentsType(String paymentstype) {
+		List<WebElement> rows = getInvoicesPaymentsTableRows();
+		for (WebElement row : rows) {
+			if (row.findElement(By.xpath(".//td[" + paymentsnotestable.getTableColumnIndex("Type") + "]")).getText().equals(paymentstype)) {
+				return row;
+			}
+		} 
+		return null;
+	}
+	
+	public String getPaymentsTypeAmountValue(String paymentstype) {
+		String amount = null;
+		WebElement row = getTableRowWithPaymentsType(paymentstype); 
+		if (row != null) {
+			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Amount") + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
+		}
+		return amount; 
+	}
+	
+	public String getPaymentsTypeCreatedByValue(String paymentstype) {
+		String amount = null;
+		WebElement row = getTableRowWithPaymentsType(paymentstype); 
+		if (row != null) {
+			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Created By") + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
+		}
+		return amount; 
 	}
 }
