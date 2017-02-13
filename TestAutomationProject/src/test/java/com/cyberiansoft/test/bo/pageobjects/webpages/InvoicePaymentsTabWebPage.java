@@ -19,6 +19,9 @@ import com.cyberiansoft.test.bo.webelements.WebTable;
 
 public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	
+	@FindBy(id = "ctl00_Content_gvInvoice_ctl00__0")
+	private WebTable invoiceinfotable;
+	
 	@FindBy(id = "ctl00_Content_gv_ctl00")
 	private WebTable paymentsnotestable;
 	
@@ -80,6 +83,16 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 		return null;
 	}
 	
+	public WebElement getTableRowWithPaymentDescription(String paymentdesc) {
+		List<WebElement> rows = getInvoicesPaymentsTableRows();
+		for (WebElement row : rows) {
+			if (row.findElement(By.xpath(".//td[" + paymentsnotestable.getTableColumnIndex("Description") + "]")).getText().equals(paymentdesc)) {
+				return row;
+			}
+		} 
+		return null;
+	}
+	
 	public String getPaymentsTypeAmountValue(String paymentstype) {
 		String amount = null;
 		WebElement row = getTableRowWithPaymentsType(paymentstype); 
@@ -87,6 +100,17 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Amount") + "]")).getText();
 		} else {
 			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
+		}
+		return amount; 
+	}
+	
+	public String getPaymentDescriptionTypeAmountValue(String paymentdesc) {
+		String amount = null;
+		WebElement row = getTableRowWithPaymentDescription(paymentdesc); 
+		if (row != null) {
+			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Amount") + "]")).getText();
+		} else {
+			Assert.assertTrue(false, "Can't find payment with the following description: " + paymentdesc + " payment type");	
 		}
 		return amount; 
 	}
