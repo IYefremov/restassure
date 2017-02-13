@@ -66,7 +66,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
 	public PriceMatrixScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
