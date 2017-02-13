@@ -16,7 +16,7 @@ public class LicensesScreen extends iOSHDBaseScreen {
 	
 	public LicensesScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
