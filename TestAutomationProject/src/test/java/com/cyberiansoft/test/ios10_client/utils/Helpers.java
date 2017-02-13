@@ -346,8 +346,8 @@ public abstract class Helpers {
 				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage[contains(@name, 'car_exterior_color.png')]");
 		action.tap(element, x, y).perform();
 		Thread.sleep(1000);
-		System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
-		System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());
+		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
+		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
 		// js.executeScript("target.frontMostApp().mainWindow().images()[\"car_exterior_color.png\"].tapWithOptions({tapOffset:{x:0.19, y:0.16}}) ;");
 	}
