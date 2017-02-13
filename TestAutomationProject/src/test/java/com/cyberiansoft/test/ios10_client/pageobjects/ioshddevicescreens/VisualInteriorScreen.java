@@ -69,27 +69,27 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		savebtn.click();
 	}
 
-	public static void tapInterior() throws InterruptedException {
-		Thread.sleep(1000);
-		Helpers.tapInterior(50, 50);
+	public void tapInterior() {
+		
+		TouchAction action = new TouchAction(appiumdriver);
+		MobileElement imagecar = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+		
+		int  xx = imagecar.getLocation().getX();
+		int yy = imagecar.getLocation().getY();	
+		action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
+		release().perform();
 	}
 	
-	public void tapInteriorWithCoords(int x, int y) throws InterruptedException {
-		Thread.sleep(1000);
+	public void tapInteriorWithCoords(int times) {
 		TouchAction action = new TouchAction(appiumdriver);
-		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+		MobileElement imagecar = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		
-		//int x = element.getLocation().getX() + element.getSize().getWidth()/2;
-		//int y = element.getLocation().getY() + element.getSize().getHeight()/2;
-		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(1000).release().perform();
+		int  xx = imagecar.getLocation().getX();
+		int yy = imagecar.getLocation().getY();	
+		action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
+		release().perform();
+
 		Helpers.waitABit(1000);
-		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
-		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
-		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(1000).release().perform();
-		Helpers.waitABit(1000);
-		Helpers.tapExterior(50, 50);*/
 	}
 
 	public void tapExterior() throws InterruptedException {

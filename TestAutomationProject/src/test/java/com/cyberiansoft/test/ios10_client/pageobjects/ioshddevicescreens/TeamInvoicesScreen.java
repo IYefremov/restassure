@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
-public class TeamInvoicesScreen extends iOSHDBaseScreen {
+public class TeamInvoicesScreen extends MyInvoicesScreen {
 	
 	@iOSFindBy(accessibility  = "Print")
     private IOSElement printmenu;

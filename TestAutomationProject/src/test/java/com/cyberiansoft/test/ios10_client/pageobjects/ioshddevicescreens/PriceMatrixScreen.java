@@ -165,7 +165,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void clickSaveButton() {
 		savebtn.click();
-		Helpers.waitABit(1000);
+		Helpers.waitABit(2000);
 	}
 
 	public void clickCancelButton() {

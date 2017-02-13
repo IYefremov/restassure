@@ -56,7 +56,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		clickSaveButton();
 		draftalertbtn.click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(2000);
 	}
 
 	public void clickSaveAsFinal() {
