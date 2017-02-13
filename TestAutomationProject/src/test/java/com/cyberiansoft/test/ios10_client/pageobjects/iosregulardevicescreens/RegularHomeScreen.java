@@ -37,6 +37,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "My Invoices")
     private IOSElement myinvoicesbtn;
 	
+	@iOSFindBy(accessibility = "Team Invoices")
+    private IOSElement teaminvoicesbtn;
+	
 	@iOSFindBy(accessibility = "Service Requests")
     private IOSElement servicerequestsbtn;
 	
@@ -86,6 +89,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(myworkordersbtn));
 		myworkordersbtn.click();
+		Helpers.waitABit(500);
 		return new RegularMyWorkOrdersScreen(appiumdriver);
 	}
 	
@@ -101,6 +105,13 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(myinvoicesbtn));
 		myinvoicesbtn.click();
 		return new RegularMyInvoicesScreen(appiumdriver);
+	}
+	
+	public RegularTeamInvoicesScreen clickTeamInvoices() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(teaminvoicesbtn));
+		teaminvoicesbtn.click();
+		return new RegularTeamInvoicesScreen(appiumdriver);
 	}
 
 	public RegularServiceRequestsScreen clickServiceRequestsButton() {

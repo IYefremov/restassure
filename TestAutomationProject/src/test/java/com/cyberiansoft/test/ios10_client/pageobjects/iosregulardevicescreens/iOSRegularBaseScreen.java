@@ -37,7 +37,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	@iOSFindBy(xpath = uipickerxpath)
     private IOSElement picker;
 	
-	@iOSFindBy(className = "XCUIElementTypePickerWheel")
+	@iOSFindBy(className = "UIAPickerWheel")
     private IOSElement pickerwheel;
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[1]/XCUIElementTypeButton[2]")
@@ -107,30 +107,16 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
-		if (!pickerwheel.getAttribute("value").contains(value))
-			pickerwheel.swipe(SwipeElementDirection.UP, pickerwheel.getSize().getHeight()/6, 0, 100);
 		
-		/*IOSElement pkw =  (IOSElement)  appiumdriver.findElementByXPath("//XCUIElementTypePickerWheel");
-		IOSElement pk =  (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypePicker");
-		while (!(pkw.getAttribute("value").contains(value))) {
-			pkw.setValue(value);
-			//pk.setValue(value);
+		WebElement picker = appiumdriver.findElementByClassName("XCUIElementTypePicker");
+		while (!(pickerwheel.getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.press(pk.getLocation().getX()
-					+ pk.getSize().getWidth()/2, pk
-					.getLocation().getY() + pk.getSize().getHeight()/2).waitAction(3000).release().perform();
-			pickerwheel.swipe(SwipeElementDirection.UP, pickerwheel.getSize().getHeight()/6, 0, 100);
-			//pickerwheel.tap(1, 100);*/
-			/*appiumdriver.tap(1, pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 100, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() - 10,
-					100);
-			Thread.sleep(1000);*/
-			/*clicks = clicks+1;
+			action.tap(picker.getSize().getWidth()/2, picker
+					.getLocation().getY() + picker.getSize().getHeight()/2+40).perform();
+			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
-		}*/
-
+		}
 	}
 
 }

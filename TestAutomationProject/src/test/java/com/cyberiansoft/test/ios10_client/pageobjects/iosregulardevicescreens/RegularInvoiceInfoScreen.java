@@ -25,6 +25,11 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 
+	@iOSFindBy(accessibility  = "action pay")
+    private IOSElement invoicepaybtn;
+	
+	@iOSFindBy(accessibility  = "cash normal")
+    private IOSElement cashnormalbtn;
 	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;
@@ -71,9 +76,12 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("PO#");
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_po);
-		//setpofld.click();
-		//Helpers.keyboadrType(_po);
-		//setpofld.setValue(_po);
+	}
+	
+	public String  getInvoicePOValue()  {
+		Helpers.waitABit(500);
+		WebElement par = getTableParentCell("PO#");
+		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
 	public void assertWOIsSelected(String wo) {
@@ -127,5 +135,22 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
-
+	public void clickInvoicePayButton() {
+		invoicepaybtn.click();
+	}
+	
+	public void changePaynentMethodToCashNormal() {
+		cashnormalbtn.click();
+	}
+	
+	public void setCashCheckAmountValue(String amountvalue) {
+		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='Cash / Check']/..");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(amountvalue);
+	}
+	
+	public void clickInvoicePayDialogButon() {
+		appiumdriver.findElementByAccessibilityId("Pay").click();
+	}
+	
 }

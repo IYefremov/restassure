@@ -16,6 +16,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.License
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularCarHistoryScreen;
@@ -45,9 +46,12 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicePaymentsTabWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -3701,8 +3705,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
 
-		RegularMainScreen mainscreen = new RegularMainScreen(appiumdriver);
-		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		//RegularMainScreen mainscreen = new RegularMainScreen(appiumdriver);
+		//homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -5680,6 +5684,282 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickHomeButton();
 	}
 	
+	@Test(testName="Test Case 27717:Invoices: Regular - Verify that it is posible to add payment from device for draft invoice", 
+			description = "Invoices: Regular - Verify that it is posible to add payment from device for draft invoice")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice(String backofficeurl, String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "WDZPE7CD9E5889222";
+		final String _po  = "12345";
+		final String cashcheckamount = "100";
+
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+			
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
+		pricematrix.selectPriceMatrix("VP2 zayats");
+		pricematrix.switchOffOption("PDR");
+		pricematrix.selectDiscaunt("Dye");
+		pricematrix.selectDiscaunt("Wheel");
+		pricematrix.selectDiscaunt("Test service zayats");
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		
+		servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
+		invoiceinfoscreen.setPO(_po);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsDraft();
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		myinvoicesscreen.selectInvoice(invoicenumber);
+		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
+		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
+		invoiceinfoscreen.clickInvoicePayButton();
+		invoiceinfoscreen.changePaynentMethodToCashNormal();
+		invoiceinfoscreen.setCashCheckAmountValue(cashcheckamount);
+		invoiceinfoscreen.clickInvoicePayDialogButon();
+		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
+		invoiceinfoscreen.clickSaveAsDraft();
+		homescreen = myinvoicesscreen.clickHomeButton();
+		Helpers.waitABit(10000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage(backofficeurl);
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
+		invoiceswebpage.clickFindButton();
 	
+		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), _po);
+		Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
+		String mainWindowHandle = webdriver.getWindowHandle();
+		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
+		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("Cash/Check"), PricesCalculations.getPriceRepresentation(cashcheckamount));
+		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("Cash/Check"), "Employee Simple 20%");
+		
+		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("PO/RO"), PricesCalculations.getPriceRepresentation("0"));
+		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("PO/RO"), "Back Office");
+		invoicepayments.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
 	
+	@Test(testName="Test Case 27739:Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice", 
+			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice(String backofficeurl, String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "WDZPE7CD9E5889222";
+		final String _po  = "12345";
+		final String newpo  = "New test PO";
+		final String cashcheckamount = "100";
+
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+			
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
+		pricematrix.selectPriceMatrix("VP2 zayats");
+		pricematrix.switchOffOption("PDR");
+		pricematrix.selectDiscaunt("Dye");
+		pricematrix.selectDiscaunt("Wheel");
+		pricematrix.selectDiscaunt("Test service zayats");
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		
+		servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
+		invoiceinfoscreen.setPO(_po);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsDraft();
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		myinvoicesscreen.selectInvoice(invoicenumber);
+		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
+		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
+		invoiceinfoscreen.clickInvoicePayButton();
+		invoiceinfoscreen.changePaynentMethodToCashNormal();
+		invoiceinfoscreen.setCashCheckAmountValue(cashcheckamount);
+		invoiceinfoscreen.clickInvoicePayDialogButon();
+		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
+		invoiceinfoscreen.clickSaveAsDraft();
+		
+		myinvoicesscreen.selectInvoice(invoicenumber);
+		myinvoicesscreen.clickChangePOPopup();
+		myinvoicesscreen.changePO(newpo);
+		myinvoicesscreen.clickHomeButton();
+		Helpers.waitABit(10000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage(backofficeurl);
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
+		invoiceswebpage.clickFindButton();
+	
+		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), newpo);
+		Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
+		String mainWindowHandle = webdriver.getWindowHandle();
+		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
+		
+		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
+		invoicepayments.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
+	
+	@Test(testName="Test Case 27741:Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice", 
+			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice(String backofficeurl, String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "WDZPE7CD9E5889222";
+		final String _po  = "12345";
+		final String newpo  = "New test PO from Team";
+		final String cashcheckamount = "100";
+
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+			
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
+		pricematrix.selectPriceMatrix("VP2 zayats");
+		pricematrix.switchOffOption("PDR");
+		pricematrix.selectDiscaunt("Dye");
+		pricematrix.selectDiscaunt("Wheel");
+		pricematrix.selectDiscaunt("Test service zayats");
+		pricematrix.clickSaveButton();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
+		
+		servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
+		invoiceinfoscreen.setPO(_po);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsDraft();
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		RegularTeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
+		teaminvoicesscreen.selectInvoice(invoicenumber);
+		teaminvoicesscreen.clickChangePOPopup();
+		teaminvoicesscreen.changePO(newpo);
+		teaminvoicesscreen.clickHomeButton();
+		
+		Helpers.waitABit(10000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage(backofficeurl);
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
+		invoiceswebpage.clickFindButton();
+	
+		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), newpo);
+		//Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
+		String mainWindowHandle = webdriver.getWindowHandle();
+		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
+		
+		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
+		invoicepayments.closeNewTab(mainWindowHandle);
+		getWebDriver().quit();
+	}
 }
