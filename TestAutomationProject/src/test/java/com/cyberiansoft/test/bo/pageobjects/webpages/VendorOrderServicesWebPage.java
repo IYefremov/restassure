@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -12,11 +13,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import com.cyberiansoft.test.bo.webelements.impl.ComboBoxImpl;
 import com.cyberiansoft.test.bo.webelements.impl.DropDownImpl;
 
@@ -42,6 +45,12 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_hlBackRO")
 	private WebElement backtoROLink;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
+	private WebTable servicestable;
+	
+	@FindBy(xpath = "//div[contains(@id, 'comboVendor_DropDown')]")
+	private DropDown combovendordd;
 	
 	public VendorOrderServicesWebPage(WebDriver driver) {
 		super(driver);
@@ -101,5 +110,38 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 		} else
 			selectComboboxValue(getRepairOrderReasonCombobox(), new DropDownImpl(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]"))), _reason);
 	}
+	
+	public List<WebElement> getRepairOrderServiceTableRows() {
+		return servicestable.getTableRows();
+	}
+	
+	public WebElement getTableRowWithRepairOrderService(String servicename) {
+		List<WebElement> rows = getRepairOrderServiceTableRows();
+		for (WebElement row : rows) {
+			if (row.findElement(By.xpath(".//td[" + servicestable.getTableColumnIndex("Service")  + "]")).getText().contains(servicename)) {
+				return row;
+			}
+		} 
+		return null;
+	}
 
+	public void changeRepairOrderServiceVendor(String servicename, String vendorname) {
+		WebElement row = getTableRowWithRepairOrderService(servicename);
+		if (row != null) {
+			row.findElement(By.xpath(".//input[contains(@id, 'comboVendor_Input')]")).click();
+			combovendordd.selectByVisibleText(vendorname);
+		} else 
+			Assert.assertTrue(false, "Can't find " + servicename + " repair order service");				
+	}
+	
+	public String getRepairOrderServiceTechnician(String servicename) {
+		String tech = "";
+		WebElement row = getTableRowWithRepairOrderService(servicename);
+		if (row != null) {
+			tech = row.findElement(By.xpath(".//input[contains(@id, 'comboEmployee_Input')]")).getAttribute("value");
+		} else 
+			Assert.assertTrue(false, "Can't find " + servicename + " repair order service");	
+		return tech;
+	}
+	
 }
