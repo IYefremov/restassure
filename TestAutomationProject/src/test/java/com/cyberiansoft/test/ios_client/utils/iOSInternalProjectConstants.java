@@ -35,6 +35,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_SMOKE_TEST = "WO_smoke_test";
 	public static final String WO_TYPE_WITH_JOB = "WO_type_with_job";
 	public static final String WO_FOR_INVOICE_PRINT = "WO_for_invoice_print";
+	public static final String WO_DELAY_START = "WO_Delay_Start";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
@@ -54,6 +55,7 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_FOR_AUTO_WO_LINE_APPR = "Inspection_for_auto_WO_line_appr";
 	public static final String INSP_WITH_PART_SERVICES = "Insp_with_part_services";
 	public static final String INSP_WITH_0_PRICE = "Insp_with_0_Price";
+	public static final String INS_LINE_APPROVE_OFF = "Ins_line_approve_OFF";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";
