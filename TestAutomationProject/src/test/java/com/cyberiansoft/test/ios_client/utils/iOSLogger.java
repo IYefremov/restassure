@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.ios_client.utils;
 
 import java.io.File;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.relevantcodes.extentreports.DisplayOrder;
@@ -18,7 +18,7 @@ public class iOSLogger {
     	String time = "";
         if (extent == null) {
         	if (loggerdir == null) {
-        		LocalDate currentdate = LocalDate.now();
+        		LocalDateTime currentdate = LocalDateTime.now();
 				DateTimeFormatter dateFormat =
 		                DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss");
 				time = dateFormat.format(currentdate);
