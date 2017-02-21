@@ -91,7 +91,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen.clickClearUserButton();
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
@@ -184,7 +184,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen.clickClearUserButton();
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");

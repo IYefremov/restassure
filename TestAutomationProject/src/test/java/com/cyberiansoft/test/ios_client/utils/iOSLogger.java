@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.ios_client.utils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -18,9 +18,10 @@ public class iOSLogger {
     	String time = "";
         if (extent == null) {
         	if (loggerdir == null) {
-				Date now = new Date();
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
-				time = dateFormat.format(now);
+        		LocalDate currentdate = LocalDate.now();
+				DateTimeFormatter dateFormat =
+		                DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss");
+				time = dateFormat.format(currentdate);
 				loggerdir = "report/" + time;
 				File dir = new File(loggerdir);
 				dir.mkdirs();
@@ -35,7 +36,6 @@ public class iOSLogger {
                
             // optional
             extent
-                .addSystemInfo("Appium Version", "1.40")
                 .addSystemInfo("Environment", "QA");
         }
         return extent;
