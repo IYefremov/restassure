@@ -10,6 +10,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -317,4 +318,8 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		return wotypelabel.getAttribute("value");
 	}
 
+	public void clickNavigationBarSaveButton() {
+		appiumdriver.findElement(By.xpath("//XCUIElementTypeNavigationBar[@name='Vehicle']/XCUIElementTypeButton[@name='Save']")).click();
+	}
+	
 }

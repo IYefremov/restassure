@@ -269,25 +269,26 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickTechniciansIcon() {
-
-		List<WebElement> elemts = appiumdriver.findElementsByXPath("//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAToolbar[1]/*");
-		for (WebElement element : elemts) {
-			if (element.getAttribute("name").equals("technician")) {
-				element.click();
-			}
-		}
-
+		IOSElement popuptoolbar = (IOSElement) appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").get(1);
+		popuptoolbar.findElementByAccessibilityId("technician").click();
 	}
 
 	public void selecTechnician(String technician) {
-		Helpers.scroolTo(technician);
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name,\""
-						+ technician + "\")]/UIAButton[@name=\"unselected\"]").click();
+		WebElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
+			techsplittable = (WebElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
+		else
+			techsplittable = appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");	
+		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
 	}
 
 	public void unselecTechnician(String technician) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"selected\"]").click();
+		WebElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
+			techsplittable = (WebElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
+		else
+			techsplittable = appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");	
+		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='selected']")).click();
 	}
 
 	public String getTechnicianPrice(String technician) {

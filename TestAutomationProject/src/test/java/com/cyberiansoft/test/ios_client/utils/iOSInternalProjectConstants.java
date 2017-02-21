@@ -56,6 +56,7 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_WITH_PART_SERVICES = "Insp_with_part_services";
 	public static final String INSP_WITH_0_PRICE = "Insp_with_0_Price";
 	public static final String INS_LINE_APPROVE_OFF = "Ins_line_approve_OFF";
+	public static final String INSP_DRAFT_SINGLE_PAGE = "Insp_Draft_Single_page";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";
