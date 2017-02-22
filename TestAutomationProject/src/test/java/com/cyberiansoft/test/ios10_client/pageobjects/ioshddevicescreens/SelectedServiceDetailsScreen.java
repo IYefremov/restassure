@@ -118,8 +118,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return new ServicePartPopup(appiumdriver);
 	}
 	
-	public void clickNotesCell() {
+	public NotesScreen clickNotesCell() {
 		notesfld.click();
+		return new NotesScreen(appiumdriver);
 	}
 
 	public String getVehiclePartValue() {

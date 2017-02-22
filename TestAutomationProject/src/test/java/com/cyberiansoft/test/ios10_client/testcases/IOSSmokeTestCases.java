@@ -63,6 +63,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -127,6 +128,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriverInicialize(buildtype);	
 		//appiumdriver.removeApp(bundleid);
+		//System.out.println("+++" + appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
+		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
+		//appiumdriver.launchApp();
+		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		appiumdriver.quit();
+		appiumdriverInicialize(buildtype);
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
@@ -6703,13 +6710,129 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttxt.contains("Question 'Question 2' in section 'Zayats Section1' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		servicesscreen.clickSaveAsFinal();
-		
-		alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("Question 'Traffic-light 1' in section 'zayats section 2' should be answered."));
-		questionsscreen.answerTrafficLight1Question();
-		servicesscreen.clickSaveAsFinal();
+
 		
 		myinspectionsscreen.selectInspectionInTable (inspnumber);
 		myinspectionsscreen.isApproveInspectionMenuActionExists();
+	}
+	
+	@Test(testName = "Test Case 45128:Inspections: HD - Verify that service level notes are copied from Inspection to WO when it is auto created after approval", 
+			description = "Verify that service level notes are copied from Inspection to WO when it is auto created after approval")
+	public void testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String _price  = "100";
+		final int timetowaitwo = 4;
+		final String _pricematrix1 = "Left Front Door";
+		final String _pricematrix2 = "Grill";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		
+		vehiclescreeen.setVIN(VIN);
+		final String inspnumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		servicedetailsscreen.setServicePriceValue("10");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.SALES_TAX);
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelSearchAvailableService();
+		servicesscreen.clickSaveButton();
+		
+		myinspectionsscreen.selectInspectionForEdit(inspnumber);
+		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		NotesScreen notesscreen = vehiclescreeen.clickNotesButton();
+		notesscreen.setNotes("Inspection notes");
+		notesscreen.clickSaveButton();
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		
+		servicedetailsscreen = servicesscreen.openServiceDetails("3/4\" - Penny Size");		
+		notesscreen = servicedetailsscreen.clickNotesCell();
+		notesscreen.setNotes("Service Notes");
+		notesscreen.clickSaveButton();
+		servicedetailsscreen.saveSelectedServiceDetails();
+		Assert.assertTrue(servicesscreen.isNotesIconPresentForSelectedService("3/4\" - Penny Size"));
+		
+		servicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SALES_TAX);		
+		notesscreen = servicedetailsscreen.clickNotesCell();
+		notesscreen.setNotes("Service Notes");
+		notesscreen.clickSaveButton();		
+		servicedetailsscreen.saveSelectedServiceDetails();
+		Assert.assertTrue(servicesscreen.isNotesIconPresentForSelectedService(iOSInternalProjectConstants.SALES_TAX));
+		
+		servicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);		
+		notesscreen = servicedetailsscreen.clickNotesCell();
+		notesscreen.setNotes("Service Notes");
+		notesscreen.clickSaveButton();
+		servicedetailsscreen.saveSelectedServiceDetails();
+		Assert.assertTrue(servicesscreen.isNotesIconPresentForSelectedService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
+		
+		servicesscreen.selectNextScreen("Default");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix(_pricematrix1);
+		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
+		pricematrix.setPrice("100");
+		
+		servicesscreen.selectNextScreen("Matrix Labor");
+		pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.selectPriceMatrix(_pricematrix2);
+		pricematrix.switchOffOption("PDR");
+		pricematrix.setTime("12");
+		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);		
+		pricematrix.clickSaveButton();
+		
+		Assert.assertTrue(myinspectionsscreen.isNotesIconPresentForInspection(inspnumber));
+		myinspectionsscreen.selectInspectionForAction(inspnumber);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.selectInspectionForApprove(inspnumber);
+		approveinspscreen.clickApproveAllServicesButton();
+		approveinspscreen.clickSaveButton();
+		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.clickDoneButton();
+		
+		homescreen = myinspectionsscreen.clickHomeButton();
+		
+		TeamWorkOrdersScreen teamwoscreen = homescreen.clickTeamWorkordersButton();
+		homescreen = teamwoscreen.clickHomeButton();
+		
+		for (int i = 0; i < timetowaitwo; i++) {
+			Helpers.waitABit(60*1000);
+			teamwoscreen = homescreen.clickTeamWorkordersButton();
+			homescreen = teamwoscreen.clickHomeButton();
+		}
+		teamwoscreen = homescreen.clickTeamWorkordersButton();
+		teamwoscreen.clickSearchButton();
+		teamwoscreen.setSearchType(iOSInternalProjectConstants.WO_TYPE_FOR_MONITOR);
+		teamwoscreen.selectSearchLocation("Test Location ZZZ");
+		teamwoscreen.clickSearchSaveButton();
+		
+		final String wonumber = teamwoscreen.getFirstWorkOrderNumberValue();
+		teamwoscreen.selectWorkOrderForEidt(wonumber);
+		System.out.println("+++" + wonumber);
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService("11");
 	}
 }

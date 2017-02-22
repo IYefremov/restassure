@@ -258,4 +258,9 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
 				srvname + "']/XCUIElementTypeButton[@name='declined']")).size() > 0;
 	}
+	
+	public boolean isNotesIconPresentForSelectedService(String servicename) {
+		WebElement selectedservicestable = appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ESTIMATION_NOTES']")).size() > 0;
+	}
 }

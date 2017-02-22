@@ -84,11 +84,18 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
 	public void clickSearchSaveButton() {
 		searccsavebtn.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void selectSearchLocation(String _location) {
 		locationfld.click();
 		appiumdriver.findElementByName(_location).click();
+	}
+	
+	public void setSearchType(String wotype)  {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
+		Helpers.waitABit(500);
+		selectWorkOrderType(wotype);
 	}
 
 }
