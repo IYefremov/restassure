@@ -105,6 +105,9 @@ public class ClientsWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_Content_gv_ctl00")
 	private WebTable clientuserstable;
 	
+	@FindBy(xpath = "//label[text()='Contact Verification Disabled']")
+	private WebElement contverifdisablechkbox;
+	
 	public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -150,6 +153,23 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public void clickFindButton() { 
 		clickAndWait(new WebDriverWait(driver, 60)
 		  .until(ExpectedConditions.elementToBeClickable(findbtn)));
+	}
+	
+	
+	public boolean isContactVerifDisableChkboxChecked(){
+		return isCheckboxChecked(contverifdisablechkbox);
+	}
+	
+	public void clickContactVerifDisableChkbox(){
+		if (!isContactVerifDisableChkboxChecked()){
+			clickAndWait(contverifdisablechkbox);
+		}
+	}
+	
+	public void unclickContactVerifDisableChkbox(){
+		if (isContactVerifDisableChkboxChecked()){
+			clickAndWait(contverifdisablechkbox);
+		}
 	}
 	
 	public int getClientsTableRowsCount() {
@@ -284,6 +304,53 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return PageFactory.initElements(
 				driver, NewClientDialogWebPage.class);
 	}
+	
+	//method for click on client users link and open new dialog window
+    public ClientUsersWebPage clickClientUsersLinkForClientOpenDialogWindow(String clientname) {
+			
+			WebElement row = getTableRowWithClient(clientname);
+			if (row != null) {
+				row.findElement(By.xpath(".//a[text()='Client Users']")).click();
+			} else 
+				Assert.assertTrue(false, "Can't find client: " + clientname);
+			
+			waitForNewTab();
+	    	String mainWindowHandle = driver.getWindowHandle();
+	    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+			for (String activeHandle : driver.getWindowHandles()) {
+		        if (!activeHandle.equals(mainWindowHandle)) {
+		        	driver.switchTo().window(activeHandle);
+		        }
+		    }
+			
+			return PageFactory.initElements(
+					driver, ClientUsersWebPage.class);
+	}
+    
+    
+    //method for click on contacts link and open new dialog window
+    public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) {
+    	
+    	WebElement row = getTableRowWithClient(clientname);
+    	if (row != null) {
+			row.findElement(By.xpath(".//a[text()='Contacts']")).click();
+		} else 
+			Assert.assertTrue(false, "Can't find client: " + clientname);
+    	
+    	waitForNewTab();
+    	String mainWindowHandle = driver.getWindowHandle();
+    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+		for (String activeHandle : driver.getWindowHandles()) {
+	        if (!activeHandle.equals(mainWindowHandle)) {
+	        	driver.switchTo().window(activeHandle);
+	        }
+	    }
+    	return PageFactory.initElements(
+				driver, ClientContactsWebPage.class);
+    }
+		
+		
+		
 	
 	public boolean isClientExistsInTable(String clientname) {
 		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);

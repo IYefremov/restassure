@@ -35,6 +35,12 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//textarea[contains(@id, 'Card_tbNotes')]")
 	private TextField notesttxtarea;
 	
+	@FindBy(xpath = "//input[contains(@id, 'Card_rtpWorkDayStart_dateInput')]")
+	private TextField workhourstart;
+	
+	@FindBy(xpath = "//input[contains(@id, 'Card_rtpWorkDayFinish_dateInput')]")
+	private TextField workhourfinish;
+	
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbAccountingId')]")
 	private TextField companyaccidfld;
 	
@@ -173,6 +179,30 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	
 	public String getCompanyNotes() {
 		return notesttxtarea.getValue();
+	}
+	
+	public void setWorkHoursStart(String hours) {
+		clearAndType(workhourstart, hours);
+	}
+	
+	public String getWorkHoursStart() {
+		return workhourstart.getValue();
+	}
+	
+	public boolean isWorkHoursStartVisible(){
+		return workhourstart.isDisplayed();
+	}
+	
+	public void setWorkHoursFinish(String hours) {
+		clearAndType(workhourfinish, hours);
+	}
+	
+	public String getWorkHoursFinish() {
+		return workhourfinish.getValue();
+	}
+	
+	public boolean isWorkHoursFinishtVisible(){
+		return workhourfinish.isDisplayed();
 	}
 	
 	public void setCompanyAccountingID(String companyaccid) {
