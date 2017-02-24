@@ -156,6 +156,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		questionspopup.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
+	
+	public String getQuestion2Value() {
+		String questionvalue = "";
+		questionsfld.click();
+		QuestionsPopup questionspopup = new QuestionsPopup(appiumdriver);
+		questionvalue = questionspopup.getQuestion2Value();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+		return questionvalue;
+	}
 
 	public void answerQuestionCheckButton() {
 

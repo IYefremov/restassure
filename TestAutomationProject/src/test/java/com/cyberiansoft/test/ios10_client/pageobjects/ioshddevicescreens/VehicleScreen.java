@@ -35,6 +35,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField")
     private IOSElement techfldvalue;
 	
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField")
+    private IOSElement estfldvalue;
+	
 	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Make']/XCUIElementTypeButton[@name='custom detail button']")
     private IOSElement makecustombtn;
 	
@@ -197,6 +200,10 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	
 	public String getTechnician() {
 		return techfldvalue.getText();
+	}
+	
+	public String getEst() {
+		return estfldvalue.getText();
 	}
 	
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {

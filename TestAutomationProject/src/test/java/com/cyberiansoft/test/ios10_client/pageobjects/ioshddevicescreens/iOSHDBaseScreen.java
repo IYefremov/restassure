@@ -47,8 +47,9 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public HomeScreen clickHomeButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(backbtn).waitAction(1000).release().perform();	
-		return new HomeScreen(appiumdriver);
+		action.press(backbtn).waitAction(300).release().perform();
+		Helpers.waitABit(1000);
+		return new HomeScreen(appiumdriver);		
 	}
 	
 	public void clickSaveButton() {
@@ -58,8 +59,12 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void cancelOrder() {
-		cancelbtn.click();
+		clickCancelButton();
 		acceptAlert();
+	}
+	
+	public void clickCancelButton() {
+		cancelbtn.click();		
 	}
 	
 	public void selectNextScreen(String screenname) {

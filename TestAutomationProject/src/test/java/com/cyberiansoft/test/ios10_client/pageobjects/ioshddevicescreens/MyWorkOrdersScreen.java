@@ -90,7 +90,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		addinspbtn.click();
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 	
 	public IOSElement getAddOrderButton() {	
@@ -128,6 +128,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
+		Helpers.waitABit(1000);
 	}
 	
 	public void customersPopupSwitchToWholesailMode() throws InterruptedException {

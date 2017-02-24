@@ -27,7 +27,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_FOR_INV_PRINT = "WO_for_invoice_print";
 	public static final String WO_MONITOR_DEVICE = "WO_Monitor_Device";
 	public static final String WO_FOR_SR = "WO_For_SR";
-	public static final String WO_TYPE_FOR_TEST_FEE = "WO_type_for_test_fee";
+	public static final String WO_TYPE_FOR_TEST_FEE = "WO_Type_for_test_fee";
 	public static final String WO_TYPE_FOR_MONITOR = "WO_type_for_monitor";
 	public static final String WO_FOR_FEE_ITEM_IN_2_PACKS = "WO_for_fee_item_in_2_packs";
 	public static final String WO_FEE_PRICE_OVERRIDE = "WO_fee_price_override";
