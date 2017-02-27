@@ -291,6 +291,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		/*appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
 						+ invoicetype + "\")]/UIAStaticText[1]").click();*/
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
+		Helpers.waitABit(1000);
 		return new InvoiceInfoScreen(appiumdriver);
 	}
 

@@ -64,13 +64,17 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void clickSaveAsFinal() {
 		clickSaveButton();
 		finalalertbtn.click();
-		Helpers.waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 	}
 	
 	public void clickSaveAsDraft() {
 		clickSaveButton();
 		draftalertbtn.click();
-		Helpers.waitABit(1000);
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		//Helpers.waitABit(1000);
 	}
 
 	public void clickCancelButton() {
@@ -148,6 +152,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
 		appiumdriver.findElementByAccessibilityId(servicename).click();
+		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
 				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(1000).release().perform();

@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -62,11 +63,15 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
 		quantityfld.click();
 		quantityfldvalue.setValue("");
-		Helpers.keyboadrType(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void saveCarServiceDetails() {
-		savebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("ServiceDetailsView").size() > 0)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("ServiceDetailsView").get(1)).findElement(MobileBy.AccessibilityId("Save")).click();
+		else
+			appiumdriver.findElementByAccessibilityId("ServiceDetailsView").findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
 	public void tapInterior() {
