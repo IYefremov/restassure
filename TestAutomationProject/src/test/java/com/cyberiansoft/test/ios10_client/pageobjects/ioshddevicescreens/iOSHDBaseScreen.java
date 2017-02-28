@@ -119,14 +119,17 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 		int  xx = pickerwhl.getLocation().getX();
 		int yy = pickerwhl.getLocation().getY();		
-
 		while (!found) {
+			
 			if (!(pickerwhl.getAttribute("value").contains(value))) {
 				TouchAction action = new TouchAction(appiumdriver);
 				action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
 					release().perform();
-			} else
+			} else {
 				found = true;
+				break;
+			}
+			
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;

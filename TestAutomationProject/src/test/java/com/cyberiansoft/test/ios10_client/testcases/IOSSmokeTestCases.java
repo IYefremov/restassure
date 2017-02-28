@@ -1141,6 +1141,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//Helpers.acceptAlert();
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inspnumber);
+		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawSignature AfterSelection();
 		approveinspscreen.clickDoneButton();
 		//myinspectionsscreen.clickDoneButton();
@@ -6919,7 +6920,128 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			servicedetailsscreen.saveSelectedServiceDetails();
 		}
 		servicesscreen.cancelOrder();
-		myinspectionsscreen.clickHomeButton();
+		myinspectionsscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 26265:Invoices HD: Create Invoice with two WOs and copy vehicle for Retail customer", 
+			description = "Create Invoice with two WOs and copy vehicle for Retail customer")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer(String backofficeurl, String userName, String userPassword) throws Exception {
 		
+		final String VIN = "QWERTYUI123";
+		final String retailcustomer  = "19319";
+		final String _make = "Buick";
+		final String _model = "Electra";
+		final String _year = "2012";
+		final String _color = "Black";
+		final String mileage = "77777";
+		final String fueltanklevel = "25";
+		final String _type = "Used";	
+		final String stock = "Stock1";
+		final String _ro = "123";
+		final String[] vehicleparts = { "Cowl, Other", "Hood" };
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToRetailMode();
+		customersscreen.clickHomeButton();
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomerWithoutEditing(retailcustomer);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		Assert.assertTrue(element(
+				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		element(
+				MobileBy.name("Close"))
+				.click();
+		final String wonum = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.setMakeAndModel(_make, _model);
+		vehiclescreeen.setColor(_color);
+		vehiclescreeen.setYear(_year);
+		Thread.sleep(2000);
+		vehiclescreeen.setMileage(mileage);
+		vehiclescreeen.setFuelTankLevel(fueltanklevel);
+		vehiclescreeen.setType(_type);
+		vehiclescreeen.setStock(stock);
+		vehiclescreeen.setRO(_ro);
+		
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicescreen.clickVehiclePartsCell();
+		for (int i = 0; i < vehicleparts.length; i++) {
+			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
+		}
+		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(), "Cowl, Other Hood");
+		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(iOSInternalProjectConstants.DYE_SERVICE), 2);
+		
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		String wonumber1 = ordersummaryscreen.getWorkOrderNumber();
+		ordersummaryscreen.clickSaveButton();
+		Assert.assertTrue(element(
+				MobileBy.name("Warning!")).isDisplayed());
+		element(
+				MobileBy.name("Yes"))
+				.click();
+		Thread.sleep(3000);
+		
+		myworkordersscreen.approveWorkOrderWithoutSignature(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber1), "$19.00");
+		myworkordersscreen.selectWorkOrder(wonumber1);
+		myworkordersscreen.selectCopyVehicle();
+		customersscreen.searchCustomer(retailcustomer);
+		customersscreen.selectFirstCustomerWithoutEditing();
+		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		
+		Assert.assertEquals(vehiclescreeen.getMake(), _make);
+		Assert.assertEquals(vehiclescreeen.getModel(), _model);		
+		//Assert.assertEquals(vehiclescreeen.getYear(), _year);
+
+		vehiclescreeen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.clickSaveButton();
+		Assert.assertTrue(element(
+				MobileBy.name("Warning!")).isDisplayed());
+		element(
+				MobileBy.name("Yes"))
+				.click();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
+		invoiceinfoscreen.setPO("23");
+		invoiceinfoscreen.addWorkOrder(wonumber1);
+		final String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.clickSaveAsDraft();
+		myworkordersscreen.clickHomeButton();
+		Helpers.waitABit(10*1000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage(backofficeurl);
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
+		invoiceswebpage.clickFindButton();
+		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
+		getWebDriver().quit();
 	}
 }
