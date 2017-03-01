@@ -71,9 +71,10 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void clickSaveAsDraft() {
 		clickSaveButton();
 		draftalertbtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 		//Helpers.waitABit(1000);
 	}
 
