@@ -86,6 +86,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
 	public void clickFirstWO() {
 		invoicewostable.findElementByXPath("//XCUIElementTypeCell[1]").click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void assertOrderSummIsCorrect(String summ) {

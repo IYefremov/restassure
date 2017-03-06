@@ -45,6 +45,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SingleP
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechRevenueScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VisualInteriorScreen;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
@@ -461,7 +462,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttxt, "Warning! VIN# is required");
+		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehiclescreeen.setVIN(VIN);
 		
 		ordersummaryscreen.clickSaveButton();
@@ -7043,5 +7044,143 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
 		getWebDriver().quit();
+	}
+	
+	
+	@Test(testName = "Test Case 30509:Invoices: HD - Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices", 
+			description = "Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices")
+	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices() throws Exception {
+		
+		final String emptypo = "";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		TeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
+		final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
+		teaminvoicesscreen.selectInvoice(invoicenum);
+		teaminvoicesscreen.clickChangePOPopup();
+		teaminvoicesscreen.changePO(emptypo);
+		String alerttxt = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttxt.contains("Invoice PO# shouldn't be empty"));
+		teaminvoicesscreen.clickCancelButton();
+		teaminvoicesscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 30510:Invoices: HD - Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices", 
+			description = "Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices")
+	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices() throws Exception {
+		
+		final String emptypo = "";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		final String invoicenum = myinvoicesscreen.getFirstInvoiceValue();
+		myinvoicesscreen.selectInvoice(invoicenum);
+		myinvoicesscreen.clickChangePOPopup();
+		myinvoicesscreen.changePO(emptypo);
+		String alerttxt = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttxt.contains("Invoice PO# shouldn't be empty"));
+		myinvoicesscreen.clickCancelButton();
+		myinvoicesscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 40023:Invoices: Verify that 'Create invoice' check mark is not shown for WO that is selected for billing", 
+			description = "Verify that 'Create invoice' check mark is not shown for WO that is selected for billing")
+	public void testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.clickSaveButton();
+		
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
+		invoiceinfoscreen.clickFirstWO();
+		vehiclescreeen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		Assert.assertFalse(ordersummaryscreen.isApproveAndCreateInvoiceExists());
+		ordersummaryscreen.cancelOrder();
+		invoiceinfoscreen.cancelInvoice();
+		myworkordersscreen.clickHomeButton();		
+	}
+	
+	@Test(testName = "Test Case 33115:WO: HD - Verify that Tech splits is saved in price matrices", 
+			description = "Verify that Tech splits is saved in price matrices")
+	public void testWOVerifyThatTechSplitsIsSavedInPriceMatrices() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String pricevalue  = "100";
+		final String totalsale = "5";
+		final String defaulttech  = "Employee Simple 20%";
+		final String techname  = "Oksana Zayats";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");
+		servicesscreen.selectService("VP2 zayats");		
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
+		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech);
+		pricematrix.setPrice(pricevalue);
+		pricematrix.clickOnTechnicians();
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.selecTechnician(techname);
+		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech + ", " + techname);
+		pricematrix.clickSaveButton();		
+		
+		servicesscreen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale(totalsale);
+		ordersummaryscreen.clickSaveButton();
+		
+		TechRevenueScreen techrevenuescreen = myworkordersscreen.selectWorkOrderTechRevenueMenuItem(wonumber);
+		Assert.assertTrue(techrevenuescreen.isTechIsPresentInReport(techname));
+		Assert.assertTrue(techrevenuescreen.isTechIsPresentInReport(defaulttech));
+
+		techrevenuescreen.clickHomeButton();
+		myworkordersscreen.clickHomeButton();	
 	}
 }

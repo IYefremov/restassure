@@ -48,7 +48,7 @@ public class CarHistoryScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickFirstCarHistoryInTable() {		
-		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIATableView[1]/UIATableCell[1]").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
 	}
 	
 	public String getFirstCarHistoryValueInTable() {		

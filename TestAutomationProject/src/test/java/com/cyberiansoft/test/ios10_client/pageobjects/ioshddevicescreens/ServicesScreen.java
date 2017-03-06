@@ -87,7 +87,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertDefaultServiceIsSelected() {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAScrollView[1]/UIAElement[@name='SelectedServicesView']/UIATableView[1]/UIATableCell[@name='" + defaultServiceValue + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + defaultServiceValue + "']").isDisplayed());
 	}
 
 	public void assertServiceIsSelected(String service) {

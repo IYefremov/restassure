@@ -75,6 +75,9 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Edit")
     private IOSElement editbtn;
 	
+	@iOSFindBy(accessibility  = "Tech Revenue")
+    private IOSElement techrevenuebtn;
+	
 	@iOSFindBy(accessibility  = "Service Request")
     private IOSElement servicerequestbtn;
 
@@ -230,10 +233,17 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId(wo).click();
 	}
 	
-	public void selectWorkOrderForEidt(String wo) throws InterruptedException {		
+	public void selectWorkOrderForEidt(String wo) {		
 		selectWorkOrder(wo);
 		editbtn.click();
+		Helpers.waitABit(2000);
+	}
+	
+	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wo) {		
+		selectWorkOrder(wo);
+		techrevenuebtn.click();
 		Helpers.waitABit(1000);
+		return new TechRevenueScreen(appiumdriver);
 	}
 	
 	public void selectWorkOrderForCopyVehicle(String wo) {
