@@ -109,6 +109,7 @@ public class iOSInternalProjectConstants {
     public static final String TAX_DISCOUNT = "Tax discount";
     public static final String SALES_TAX = "Sales Tax";
     public static final String SR_S4_Bl_I1_M = "SR_S4_Bl_I1_M";
+    public static final String SERVICE_WITH_DEFAUT_TECH = "Service_with_default_Tech";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";
