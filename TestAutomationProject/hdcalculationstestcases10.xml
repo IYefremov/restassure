@@ -1,7 +1,7 @@
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
-  <parameter name="selenium.browser" value="firefox" />
+  <parameter name="selenium.browser" value="chrome" />
   <parameter name="ios.bundleid" value="automobiletechnologies.reconpro" />
   <parameter name="backoffice.url" value="http://reconpro-devqa.cyberianconcepts.com/Admin/Devices.aspx"  />
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
@@ -16,7 +16,7 @@
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
-        <methods> 
+        <methods>  
         	<include name="testCreateInspectionOnTheDeviceWithApprovalRequired" /> 
         	<include name="testCreateRetailInspection" />   
             <include name="testAddServicesToVisualInspection" /> 
