@@ -431,6 +431,19 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 	
+	public void archiveInvoiceByNumber(String invoicenumber) {
+		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
+		if (row != null) {			
+			checkboxSelect(row.findElement(By.xpath(".//td/input[@type='checkbox']")));
+		}	else {
+			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
+		}
+		driver.findElement(By.xpath("//span[@class='rtbText' and text()='Archive']")).click();;
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.alertIsPresent()).accept();
+		waitUntilPageReloaded();
+	}
+	
 	public WebElement getTechInfoServicesTable() {
 		return driver.findElement(By.xpath("//table/tbody/tr[2]/td/div[text()='SERVICES']/../../../.."));
 	}

@@ -63,6 +63,7 @@ public class iOSInternalProjectConstants {
 	public static final String DEFAULT_INVOICETYPE = "Default";
 	public static final String CUSTOMER_APPROVALON_INVOICETYPE = "Customer_approval_ON";
 	public static final String CUSTOMER_APPROVALOFF_INVOICETYPE = "Customer_approval_OFF";
+	public static final String INVOICE_DEFAULT_TEMPLATE = "Invoice_Default_Template";
 	
 	//Service Requests Types
 	public static final String SR_EST_WO_REQ_SRTYPE = "SR_Est_WO_Req";
