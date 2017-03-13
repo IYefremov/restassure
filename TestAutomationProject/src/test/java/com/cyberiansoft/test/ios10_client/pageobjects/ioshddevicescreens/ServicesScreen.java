@@ -91,7 +91,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertServiceIsSelected(String service) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + service + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + service + "']").isDisplayed());
 	}
 	
 	public int getNumberOfServiceSelectedItems(String service) {
@@ -172,6 +172,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void cancelSearchAvailableService() {
@@ -273,5 +274,25 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public boolean isNotesIconPresentForSelectedWorkOrderService(String servicename) {
 		WebElement selectedservicestable = appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ORDER_NOTES']")).size() > 0;
+	}
+	
+	public void clickTechnicianToolbarIcon() {
+		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("technician")).click();
+	}
+	
+	public void changeTechnician(String servicetype, String techname) {
+		appiumdriver.findElementByAccessibilityId(servicetype).click();
+		if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 0) {
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1)).
+			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
+				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		} else {
+		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
+			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
+				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		}
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();
 	}
 }

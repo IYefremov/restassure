@@ -876,7 +876,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		
 		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequests.aspx");
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequestList.aspx");
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
@@ -3320,6 +3320,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen("Zayats test pack");
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");		
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("VP1 zayats");
 		pricematrix.switchOffOption("PDR");
@@ -3332,14 +3333,17 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			
 		pricematrix.selectDiscaunt("Dye");
 		pricematrix.selectDiscaunt("Wheel");
-		pricematrix.selectDiscaunt("VPS1");
+		pricematrix.selectDiscaunt("Test service zayats");
 
 		
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.assertServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		
-		servicesscreen.clickSaveButton();
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.approveWorkOrderWithoutSignature(wonum, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		
@@ -6426,8 +6430,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		getWebDriver().quit();
 	}
 	
-	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in", 
-			description = "WO: HD - Verify filter for Team WO that returns only work assigned to tech who is logged in")
+	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in,"
+			+ "Test Case 40034:WO Monitor: Verify that employee with Manager role may see and change all services of repair order", 
+			description = "WO: HD - Verify filter for Team WO that returns only work assigned to tech who is logged in,"
+					+ "WO Monitor: Verify that employee with Manager role may see and change all services of repair order")
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn(String backofficeurl, String userName, String userPassword)
 			throws Exception {
@@ -6527,6 +6533,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = boheader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
+		repairorderspage.selectSearchLocation("Default Location");
 		repairorderspage.setSearchWoNumber(wonum);
 		repairorderspage.clickFindButton();
 		
@@ -6726,6 +6733,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		myinspectionsscreen.selectInspectionInTable (inspnumber);
 		myinspectionsscreen.isApproveInspectionMenuActionExists();
+		myinspectionsscreen.clickHomeButton();
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -7181,6 +7189,125 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(techrevenuescreen.isTechIsPresentInReport(defaulttech));
 
 		techrevenuescreen.clickHomeButton();
+		myworkordersscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 34551:WO: HD - Verify that it is not possible to change default tech via service type split", 
+			description = "Verify that it is not possible to change default tech via service type split")
+	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String defaulttech  = "Employee Simple 20%";
+		final String techname  = "Oksana Zayats";
+		final String totalsale = "5";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(defaulttech));
+		selectedservicescreen.selecTechnician(techname);
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(defaulttech));
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen.clickTechnicianToolbarIcon();
+		servicesscreen.changeTechnician("Dent", techname);
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
+		selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(defaulttech));
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale(totalsale);
+		ordersummaryscreen.clickSaveButton();
+		Assert.assertTrue(myworkordersscreen.woExists(wonumber));
+		
+		myworkordersscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 45097:WO: HD - Verify that when use Copy Services action for WO all service instances should be copied", 
+			description = "Verify that when use Copy Services action for WO all service instances should be copied")
+	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String totalsale = "5";
+		final String[] servicestoadd = { iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL, iOSInternalProjectConstants.TEST_SERVICE_WITH_QF_PP_VEHICLE};
+		final String[] vehicleparts = { "Dashboard", "Deck Lid"};
+		
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		for (String serviceadd : servicestoadd) {
+			servicesscreen.searchAvailableService(serviceadd);
+			SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(serviceadd);
+			selectedservicescreen.clickVehiclePartsCell();
+			for (String vehiclepart : vehicleparts) {
+				selectedservicescreen.selectVehiclePart(vehiclepart);
+			}
+			selectedservicescreen.saveSelectedServiceDetails();
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+
+		for (String serviceadd : servicestoadd) {
+			servicesscreen.assertServiceIsSelected(serviceadd);
+		}
+		
+		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
+		servicesscreen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale(totalsale);
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.selectWorkOrderForCopyServices(wonumber);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		for (String serviceadd : servicestoadd) {
+			Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(serviceadd), servicestoadd.length);
+		}
+		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
+		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
 	}
 }

@@ -16,8 +16,9 @@ public class AppiumConfiguration {
 		DesiredCapabilities appiumcap = new DesiredCapabilities();
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
-		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
-		LocalDate date = LocalDate.now();
+		LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
+		//date = date.minusDays(1);
+		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
 				appiumcap.setCapability("bundleId", IOSHDDeviceInfo.getInstance().getDeviceBundleId());
@@ -33,7 +34,7 @@ public class AppiumConfiguration {
 			
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 				appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSHDDeviceInfo.getInstance().getPlatformVersion());
-				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
+				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
 				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 				appiumcap.setCapability("nativeWebTap", true);
 				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOSHDDeviceInfo.getInstance().getAutomationName()); 
@@ -52,7 +53,7 @@ public class AppiumConfiguration {
 			case IOS_REGULAR:
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 				appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSRegularDeviceInfo.getInstance().getPlatformVersion());
-				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, true);
+				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
 				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 				appiumcap.setCapability("nativeWebTap", true);
 				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOSRegularDeviceInfo.getInstance().getAutomationName()); 

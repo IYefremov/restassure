@@ -8,6 +8,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -49,7 +50,8 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
 	public void clickSaveEmptyPO() {
 		clickSaveButton();
-		Helpers.acceptAlert();
+		Alert alert = appiumdriver.switchTo().alert();
+		alert.accept();
 	}
 
 	public void clickSaveAsDraft()  {

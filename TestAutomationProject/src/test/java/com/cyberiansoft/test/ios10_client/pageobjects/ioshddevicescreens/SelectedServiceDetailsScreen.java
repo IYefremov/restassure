@@ -354,14 +354,24 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		Helpers.waitABit(1000);
 	}
 
-	public void assertTechnicianIsSelected(String technician) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"selected\"]").isDisplayed());
+	public boolean isTechnicianIsSelected(String technician) {
+		IOSElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
+			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
+		else
+			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");	
+		return techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
+						+ technician + "')]/XCUIElementTypeButton[@name='selected']").size() > 0;
 	}
 
-	public void assertTechnicianIsNotSelected(String technician) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"unselected\"]").isDisplayed());
+	public boolean isTechnicianIsNotSelected(String technician) {
+		IOSElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
+			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
+		else
+			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");	
+		return techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
+						+ technician + "')]/XCUIElementTypeButton[@name='unselected']").size() > 0;
 	}
 
 	public void selectVehiclePart(String vehiclepart) {
