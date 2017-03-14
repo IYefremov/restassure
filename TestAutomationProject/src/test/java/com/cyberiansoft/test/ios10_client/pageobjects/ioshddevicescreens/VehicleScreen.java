@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -11,6 +12,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -126,12 +128,21 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 
 	public void setVIN(String vin) throws InterruptedException {
-		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"VIN#\"]").click();
+		
 		appiumdriver.findElementByAccessibilityId("VIN#").click();
+
+		//appiumdriver.findElementByAccessibilityId("VIN#").click();
 		Helpers.waitABit(500);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
+	}
+	
+	public void clearVINCode() {
+		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		for (int i = 0; i < 17; i++)
+			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
+		
 	}
 	
 	public IOSElement getVINField() {

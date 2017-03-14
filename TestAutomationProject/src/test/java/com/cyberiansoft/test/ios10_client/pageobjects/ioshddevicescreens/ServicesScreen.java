@@ -171,8 +171,9 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void searchAvailableService(String servicename) {
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
-		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);
-		appiumdriver.hideKeyboard();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 	
 	public void cancelSearchAvailableService() {

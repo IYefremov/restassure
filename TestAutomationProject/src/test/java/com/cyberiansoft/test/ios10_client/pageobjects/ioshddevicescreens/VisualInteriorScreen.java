@@ -81,7 +81,9 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		
 		int  xx = imagecar.getLocation().getX();
 		int yy = imagecar.getLocation().getY();	
-		action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
+		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
+		action.press(xx + imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(1000).
+		
 		release().perform();
 	}
 	
@@ -91,7 +93,9 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		
 		int  xx = imagecar.getLocation().getX();
 		int yy = imagecar.getLocation().getY();	
-		action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
+		
+		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
+		action.press(xx + imagecar.getSize().getWidth()/(times+1), imagecar.getSize().getHeight()/2 + 30).waitAction(1000).
 		release().perform();
 
 		Helpers.waitABit(1000);
