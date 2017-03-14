@@ -127,10 +127,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		boolean search = false;
 		String mailmessage = "";
 		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "Test@email.com", "Please click link below to complete the registration process.")) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com", "Please click link below to complete the registration process.")) {
 				serviceadvisorspage.waitABit(60*500);
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "Test@email.com");
+				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com");
 				if (mailmessage.length() > 3) {
 					search = true;
 					break;
@@ -144,7 +144,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 			
 		}
-		
+		System.out.println("++++++" + confirmationurl);
 		serviceadvisorspage.waitABit(60*1000);
 		webdriver.get(confirmationurl);
 		ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver,
