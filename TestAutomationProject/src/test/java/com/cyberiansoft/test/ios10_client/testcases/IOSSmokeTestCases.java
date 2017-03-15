@@ -6112,8 +6112,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		getWebDriver().quit();
 	}
 	
-	@Test(testName="Test Case 51336:WO: Regular - Verify that approve WO is working correct under Team WO", 
-			description = "WO: Regular - Verify that approve WO is working correct under Team WO")
+	@Test(testName="Test Case 51336:WO: HD - Verify that approve WO is working correct under Team WO", 
+			description = "WO: HD - Verify that approve WO is working correct under Team WO")
 	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO()
 			throws Exception {
 		
@@ -7309,5 +7309,175 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
 		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
+	}
+	
+	@Test(testName="Test Case 50250:WO: HD - Verify that WO number is not duplicated", 
+			description = "WO: - Verify that WO number is not duplicated")
+	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	public void testWOVerifyThatWONumberIsNotDuplicated(String backofficeurl, String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN  = "JA4LS31H8YP047397";
+		final String _po  = "12345";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		final String wonumber1 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.approveWorkOrderWithoutSignature(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber1);
+		myworkordersscreen.clickInvoiceIcon();
+		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.INVOICE_DEFAULT_TEMPLATE);
+		invoiceinfoscreen.setPO(_po);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		invoiceinfoscreen.clickSaveAsFinal();
+		Helpers.waitABit(10000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		InvoicesWebPage invoiceswebpage = PageFactory.initElements(
+				webdriver, InvoicesWebPage.class);
+
+		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
+		invoiceswebpage.clickFindButton();
+		
+		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
+		Assert.assertFalse(invoiceswebpage.isInvoiceNumberExists(invoicenumber));
+		webdriver.quit();
+		
+		//Create second WO
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		final String wonumber2 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.approveWorkOrderWithoutSignature(wonumber2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);	
+		
+		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber2);
+		myworkordersscreen.clickInvoiceIcon();
+		invoiceinfoscreen = myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.INVOICE_DEFAULT_TEMPLATE);
+		invoiceinfoscreen.setPO(_po);
+		invoiceinfoscreen.selectNextScreen("Zayats Section1");
+		questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		invoiceinfoscreen.clickSaveAsFinal();
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		homescreen.clickStatusButton();
+		homescreen.updateDatabase();
+		MainScreen mainscreen = new MainScreen(appiumdriver);
+		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		
+		//Create third WO
+		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		
+		final String wonumber3 = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.clickSaveButton();
+		homescreen = myworkordersscreen.clickHomeButton();
+		Helpers.waitABit(10000);
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+
+		loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		WorkOrdersWebPage workorderspage = PageFactory.initElements(
+				webdriver, WorkOrdersWebPage.class);
+
+		workorderspage.makeSearchPanelVisible();
+		workorderspage.setSearchOrderNumber(wonumber3);
+		workorderspage.clickFindButton();
+
+		Assert.assertEquals(workorderspage.getWorkOrdersTableRowCount(), 1);
+		webdriver.quit();
+	}
+	
+	@Test(testName="Test Case 39573:WO: HD - Verify that in case valid VIN is decoded, replace existing make and model with new one", 
+			description = "WO: - Verify that in case valid VIN is decoded, replace existing make and model with new one")
+	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne()
+			throws Exception {
+		
+		final String VIN1  = "2A8GP54L87R279721";
+		final String make1  = "Chrysler";
+		final String model1  = "Town and Country";
+		final String VIN2  = "1FMDU32X0PUB50142";
+		final String make2  = "Ford";
+		final String model2  = "Explorer";
+		final String VIN3  = "GFFGG";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
+
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FOR_INVOICE_PRINT);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN1);
+		Assert.assertEquals(vehiclescreeen.getMake(), make1);
+		Assert.assertEquals(vehiclescreeen.getModel(), model1);
+		
+		vehiclescreeen.clearVINCode();
+		vehiclescreeen.setVIN(VIN2);
+		Assert.assertEquals(vehiclescreeen.getMake(), make2);
+		Assert.assertEquals(vehiclescreeen.getModel(), model2);
+		
+		vehiclescreeen.clearVINCode();
+		vehiclescreeen.setVIN(VIN3);
+		Assert.assertEquals(vehiclescreeen.getMake(), null);
+		Assert.assertEquals(vehiclescreeen.getModel(), null);
+		vehiclescreeen.cancelOrder();
+		myworkordersscreen.clickHomeButton();
 	}
 }
