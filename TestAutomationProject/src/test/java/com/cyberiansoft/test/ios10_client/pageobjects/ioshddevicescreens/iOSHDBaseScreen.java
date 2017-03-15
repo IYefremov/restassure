@@ -55,7 +55,11 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	public void clickSaveButton() {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(savebtn).waitAction(1000).release().perform();
-		Helpers.waitABit(1000);
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(500);
 	}
 	
 	public void cancelOrder() {
@@ -118,13 +122,17 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 		int  xx = pickerwhl.getLocation().getX();
-		int yy = pickerwhl.getLocation().getY();		
+		int yy = pickerwhl.getLocation().getY();
 		while (!found) {
 			
 			if (!(pickerwhl.getAttribute("value").contains(value))) {
 				TouchAction action = new TouchAction(appiumdriver);
-				action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
-					release().perform();
+				//action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
+				//action.press(xx+picker.getSize().getWidth()/2, yy + picker.getSize().getHeight()/2 +70).waitAction(1000).
+				action.press(xx+picker.getSize().getWidth()/2, (int) (yy + picker.getSize().getHeight()*0.8)).waitAction(1000).
+				release().perform();
+				
+				
 			} else {
 				found = true;
 				break;

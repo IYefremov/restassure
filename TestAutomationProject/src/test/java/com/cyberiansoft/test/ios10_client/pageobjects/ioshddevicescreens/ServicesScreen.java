@@ -177,7 +177,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public void cancelSearchAvailableService() {
-		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.AccessibilityId("Cancel")).click();
+		if (appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElements(MobileBy.AccessibilityId("Cancel")).size() > 0)
+			appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 
 	public PriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {

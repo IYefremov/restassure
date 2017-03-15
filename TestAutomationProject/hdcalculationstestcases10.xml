@@ -17,24 +17,28 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>  
-        	<include name="testCreateInspectionOnTheDeviceWithApprovalRequired" /> 
+        <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" /> 
+        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
+        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
+        <include name="testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" /> 
+        <include name="testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" /> 
+        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1" />
+        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
+        <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
+        
+          
+            <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" /> 
         	<include name="testCreateRetailInspection" />   
             <include name="testAddServicesToVisualInspection" /> 
             <include name="testChangeQuantityOfServicesInVisualInspection" />
             <include name="testHDIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-            <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity" />
             <include name="testHDVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
             <include name="testHDIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
             <include name="testHDIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
             <include name="testHDVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
-            <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices" />
             <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
             <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
             <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" /> 
-            <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly" />
-            <include name="testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined" />
-            <include name="testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount" />
-            <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc" /> 
             <include name="testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal" />
             <include name="testHDVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" />
             <include name="testWOVerifyThatMessageIsShownTotalIsOverLimitation" />
@@ -47,8 +51,6 @@
             <include name="testWOVerifyThatPartServicesAreCopiedFromInspToOrder" /> 
             <include name="testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" />
             <include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />
-            <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
-            <include name="testInvoicesVerifyRoundingMoneyAmountValues" />
             <include name="testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection" />
             <include name="testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection" />
             <include name="testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels" />  
@@ -62,6 +64,15 @@
         	<include name="testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline" />
         	<include name="testSRVerifyALMFlowWhenDeclineBothInspections" />
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
+        	
+        <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2" /> 
+        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2" />   
+        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2" /> 
+        <include name="testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2" /> 
+        <include name="testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2" /> 
+        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2" />
+        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_2" />
+        <include name="testInvoicesVerifyRoundingMoneyAmountValues_2" />
         </methods>
       </class>
     </classes>
