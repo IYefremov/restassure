@@ -87,11 +87,19 @@ public class RegularTeamWorkOrdersScreen extends RegularMyWorkOrdersScreen {
 	
 	public void clickSearchSaveButton() {
 		searccsavebtn.click();
+		Helpers.waitABit(2000);
 	}
 	
 	public void selectSearchLocation(String _location) {
 		locationfld.click();
 		appiumdriver.findElementByName(_location).click();
 	}
+	
+	public void setSearchType(String wotype)  {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
+		Helpers.waitABit(500);
+		selectWorkOrderType(wotype);
+	}
+
 
 }

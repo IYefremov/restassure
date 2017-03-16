@@ -201,4 +201,18 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public boolean isStartPhaseButtonExists() { 
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='Start phase']").size() > 0;
 	}
+	
+	public boolean isServicePresent(String servicename) { 
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']").size() > 0;
+	}
+	
+	public void checkMyWorkCheckbox() {
+		if (appiumdriver.findElementsByAccessibilityId("checkbox unchecked").size() > 0)
+			appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
+	}
+	
+	public void uncheckMyWorkCheckbox() {
+		if (appiumdriver.findElementsByAccessibilityId("checkbox checked").size() > 0)
+			appiumdriver.findElementByAccessibilityId("checkbox checked").click();
+	}
 }

@@ -51,15 +51,15 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public void clickSaveAsDraft() throws InterruptedException {
-		savebtn.click();
+	public void clickSaveAsDraft() {
+		clickSaveButton();
 		draftalertbtn.click();
 		savebtn.click();
 		Helpers.waitABit(500);
 	}
 
 	public void clickSaveAsFinal() {
-		savebtn.click();
+		clickSaveButton();
 		finalalertbtn.click();
 		savebtn.click();
 		Helpers.waitABit(500);
@@ -67,8 +67,8 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 
 	public void setPO(String _po) throws InterruptedException {
 		setPOWithoutHidingkeyboard(_po);
-		//IOSDriver drv 
-		((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		//((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
 		//hidekeyboardbtn.click();
 	}
 	
@@ -152,5 +152,4 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	public void clickInvoicePayDialogButon() {
 		appiumdriver.findElementByAccessibilityId("Pay").click();
 	}
-	
 }

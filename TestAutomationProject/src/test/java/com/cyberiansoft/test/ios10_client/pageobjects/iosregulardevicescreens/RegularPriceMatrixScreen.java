@@ -168,6 +168,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 
 	public void clickOnTechnicians() {
 		technicianscell.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickNotesButton() {

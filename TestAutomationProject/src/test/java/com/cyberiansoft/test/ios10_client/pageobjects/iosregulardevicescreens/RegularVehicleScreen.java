@@ -10,6 +10,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -116,6 +117,13 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
+	public void clearVINCode() {
+		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		for (int i = 0; i < 17; i++)
+			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
+		
+	}
+	
 	public WebElement getVINField() {
 		//WebElement par = getVehicleInfoTableParentNode("VIN#");
 		//return par.findElement(By.xpath("./XCUIElementTypeTextField[1]"));
@@ -180,6 +188,10 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
+	public String getEst() {
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField[1]")).getAttribute("value");
+	}
+	
 	public String getTechnician() {
 		Helpers.waitABit(1000);
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
@@ -192,6 +204,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void cancelOrder() {
+		clickChangeScreen();
 		cancelbtn.click();
 		acceptAlert();
 	}

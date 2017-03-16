@@ -150,6 +150,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		IOSElement el = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='unselected']"));
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(el.getLocation().getX()+2, el.getLocation().getY()+2).perform();
+		Helpers.waitABit(500);
 		//Assert.assertTrue(appiumdriver.findElementByClassName("XCUIElementTypeTable").
 		//		findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
 		/*
@@ -319,13 +320,15 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public void clickSaveAsFinal() {
 		clickSaveButton();
 		finalalertbtn.click();
-		Helpers.waitABit(500);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 	}
 	
 	public void clickSaveAsDraft() {
 		clickSaveButton();
 		draftalertbtn.click();
-		Helpers.waitABit(500);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 	}
 	
 	public String getListOfSelectedVehicleParts() {
@@ -346,6 +349,36 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public boolean isServiceDeclinedSkipped(String srvname) {
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
 				srvname + "']/XCUIElementTypeButton[@name='declined']")).size() > 0;
+	}
+	
+	public boolean isNotesIconPresentForSelectedService(String servicename) {
+		WebElement selectedservicestable = appiumdriver.findElementByClassName("XCUIElementTypeTable");
+		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ESTIMATION_NOTES']")).size() > 0;
+	}
+	
+	public boolean isNotesIconPresentForSelectedWorkOrderService(String servicename) {
+		WebElement selectedservicestable = appiumdriver.findElementByClassName("XCUIElementTypeTable");
+		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ORDER_NOTES']")).size() > 0;
+	}
+	
+	public void clickTechnicianToolbarIcon() {
+		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("technician")).click();
+	}
+	
+	public void changeTechnician(String servicetype, String techname) {
+		appiumdriver.findElementByAccessibilityId(servicetype).click();
+		/*if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 0) {
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1)).
+			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
+				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		} else {*/
+		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
+			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
+				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		//}
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
+		Helpers.waitABit(500);
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();
 	}
 
 }

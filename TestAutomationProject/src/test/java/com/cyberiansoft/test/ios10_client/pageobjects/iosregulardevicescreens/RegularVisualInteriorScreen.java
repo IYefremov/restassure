@@ -81,7 +81,7 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 		savebtn.click();
 	}
 
-	public static void tapInterior() throws InterruptedException {
+	public void tapInterior() throws InterruptedException {
 		Thread.sleep(1000);
 		Helpers.tapInterior(50, 50);
 	}

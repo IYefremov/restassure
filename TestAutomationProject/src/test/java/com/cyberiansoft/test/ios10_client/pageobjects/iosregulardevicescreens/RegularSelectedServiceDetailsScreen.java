@@ -98,8 +98,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		  .until(ExpectedConditions.elementToBeClickable(vehiclepartscell)).click();
 	}
 	
-	public void clickNotesCell() {
+	public RegularNotesScreen clickNotesCell() {
 		notesfld.click();
+		return new RegularNotesScreen(appiumdriver);
 	}
 
 	public String getVehiclePartValue() {
@@ -122,6 +123,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+	}
+	
+	public String getQuestion2Value() {
+		String questionvalue = "";
+		questionsfld.click();
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionvalue = questionsscreen.getQuestion2Value();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+		return questionvalue;
 	}
 	
 	public void answerQuestionCheckButton() {
@@ -176,7 +186,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par = getTableParentCell("Time");
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		par = getTableParentCell("Time");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_timevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_timevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setServiceRateValue(String _ratevalue)
@@ -189,7 +200,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par = getTableParentCell("Rate");
 		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		par = getTableParentCell("Rate");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_ratevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(_ratevalue);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void assertAdjustmentValue(String adjustment,
@@ -301,25 +313,20 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	
 	public void clickTechniciansIcon() {
-
-		List<WebElement> elemts = appiumdriver.findElementsByXPath("//UIAToolbar[1]/*");
-		for (WebElement element : elemts) {
-			if (element.getAttribute("name").equals("technician")) {
-				element.click();
-			}
-		}
+		appiumdriver.findElementByAccessibilityId("technician").click();
+		Helpers.waitABit(1000);
 
 	}
 
 	public void selecTechnician(String technician) {
-		Helpers.scroolTo(technician);
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name,\""
-						+ technician + "\")]/UIAButton[@name=\"unselected\"]").click();
+		appiumdriver.
+				findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']").click();
 	}
 
 	public void unselecTechnician(String technician) {
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"selected\"]").click();
+		WebElement par = appiumdriver.
+				findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name, '" + technician + "')]/..");
+		par.findElement(By.xpath("//XCUIElementTypeButton[@name='selected']")).click();
 	}
 
 	public String getTechnicianPrice(String technician) {
@@ -375,14 +382,16 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 
-	public void assertTechnicianIsSelected(String technician) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"selected\"]").isDisplayed());
+	public boolean isTechnicianIsSelected(String technician) {
+		return appiumdriver.
+				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
+						+ technician + "\")]/XCUIElementTypeButton[@name=\"selected\"]").size() > 0;
 	}
 
-	public void assertTechnicianIsNotSelected(String technician) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAButton[@name=\"unselected\"]").isDisplayed());
+	public boolean isTechnicianIsNotSelected(String technician) {
+		return appiumdriver.
+				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
+						+ technician + "\")]/XCUIElementTypeButton[@name=\"unselected\"]").size() > 0;
 	}
 
 	public void selectVehiclePart(String vehiclepart) {
