@@ -112,7 +112,7 @@ public class iOSInternalProjectConstants {
     public static final String SR_S4_Bl_I1_M = "SR_S4_Bl_I1_M";
     public static final String SERVICE_WITH_DEFAUT_TECH = "Service_with_default_Tech";
     public static final String TEST_SERVICE_WITH_QF_PP_VEHICLE = "Test_service_with_QF_PP_Vehicle";
-    
+    public static final String TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL = "Test_service_without_questions_PP_Panel";
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";
 }
