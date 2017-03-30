@@ -3857,7 +3857,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoiceForApprove(invoicenumberapproveon);
 		myinvoicesscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
-		
+		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawApprovalSignature ();
 		approveinspscreen.clickDoneButton();
 		myinvoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
@@ -3895,6 +3895,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoiceForApprove(invoicenumbeapprovaloff);
 		myinvoicesscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
+		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawApprovalSignature ();
 		approveinspscreen.clickDoneButton();
 		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumbeapprovaloff));	
@@ -6827,6 +6828,44 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 
 		vehiclescreeen.cancelOrder();
+		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 34626:WO: Regular - Verify that when service do not have questions and select several panels do not underline anyone", 
+			description = "WO: - Verify that when service do not have questions and select several panels do not underline anyone")
+	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone()
+			throws Exception {
+		
+		final String VIN  = "2A8GP54L87R279721";
+		final String[] vehicleparts  = { "Center Rear Passenger Seat", "Dashboard" };
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		//customer approval ON
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.clickVehiclePartsCell();
+		for (String vehiclepart : vehicleparts) {
+			selectedservicescreen.selectVehiclePart(vehiclepart);
+		}
+		selectedservicescreen.saveSelectedServiceDetails();
+		for (String vehiclepart : vehicleparts) {
+			Assert.assertTrue(selectedservicescreen.getVehiclePartValue().contains(vehiclepart));
+		}
+		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(iOSInternalProjectConstants.TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL), vehicleparts.length);
+		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();
 	}
 }
