@@ -355,8 +355,72 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		
 		emailscreen.clickSendEmailsButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-		invoicesscreen.clickBackButton();
+		invoicesscreen.clickBackButton();		
+	}
+	
+	@Test(testName= "Test Case 49221:vNext - Verify Invoice can be created from WO Wizard", 
+			description = "Verify Invoice can be created from WO Wizard")
+	public void testVerifyInvoiceCanBeCreatedFromWOWizard() {
+		final String VIN = "19UUA66278A050105";
+		final String percservices = "Large Vehicle Upcharge"; 
+		final String moneyservices = "Bumper Repair"; 		
+		final String ponumber = "123po";
 		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
+		vehicleinfoscreen.setVIN(VIN);
+		
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectService(moneyservices);
+		selectservicesscreen.selectService(percservices);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+		wosummaryscreen.clickCreateInvoiceOption();
+		wosummaryscreen.clickWorkOrderSaveButton();
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);		
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+		homescreen = invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 49436:vNext - Verify Invoice can be created from WO menu", 
+			description = "Verify Invoice can be created from WO menu")
+	public void testVerifyInvoiceCanBeCreatedFromWOMenu() {
+		final String VIN = "19UUA66278A050105";
+		final String percservices = "Large Vehicle Upcharge"; 
+		final String moneyservices = "Bumper Repair"; 		
+		final String ponumber = "123po";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
+		vehicleinfoscreen.setVIN(VIN);
+		final String wonumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectService(moneyservices);
+		selectservicesscreen.selectService(percservices);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+		wosummaryscreen.clickWorkOrderSaveButton();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
+		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);		
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+		homescreen = invoicesscreen.clickBackButton();
 	}
 
 	@Test(testName= "Test Case 38638:vNext: Verify Customer Info on Invoice detail", 

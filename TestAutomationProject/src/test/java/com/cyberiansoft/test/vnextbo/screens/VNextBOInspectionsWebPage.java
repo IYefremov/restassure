@@ -46,6 +46,28 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		return inspectionserviceslist.findElements(By.xpath("./tbody/tr/td[text()='" + servicename + "']")).size() > 0;
 	}
 	
+	public boolean isServiceNotesIconDisplayed(String servicename) {
+		WebElement sepviserow = inspectionserviceslist.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
+		return sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).isDisplayed();
+	}
+	
+	public void clickServiceNotesIcon(String servicename) {
+		WebElement sepviserow = inspectionserviceslist.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
+		sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
+	}
+	
+	public boolean isImageExistsForServiceNote(String servicename) {
+		boolean exists = false;
+		clickServiceNotesIcon(servicename);
+		WebElement notesmodaldlg = new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
+		exists = notesmodaldlg.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
+		waitABit(500);
+		return exists;		
+	}
+	
 	public boolean isImageLegendContainsBreakageIcon(String brackageicontype) {
 		return imagelegend.findElements(By.xpath("./li[contains(text(), '" + brackageicontype + "')]")).size() > 0;
 	}

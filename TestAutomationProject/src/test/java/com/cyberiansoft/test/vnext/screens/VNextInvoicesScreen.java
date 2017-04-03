@@ -18,7 +18,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='page invoices-list hide-searchbar hide-toolbar page-on-center']")
 	private WebElement invoicesscreen;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']/i")
+	@FindBy(xpath="//a[@action='back']/i")
 	private WebElement backbtn;
 	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
@@ -48,6 +48,10 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			}
 				
 		return invoicecell;
+	}
+	
+	public boolean isInvoiceExists(String invoicenumber) {
+		return invoicesscreen.findElements(By.xpath(".//div[@class='item-title' and text()='" + invoicenumber + "']")).size() > 0;
 	}
 	
 	public WebElement getInvoicesList() {

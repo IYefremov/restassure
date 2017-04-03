@@ -916,7 +916,6 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Verify Total is correct when adding money and percentage services on Visuals screen")
 	public void testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen() {
 		
-		final String dentdamage = "Dent Repair";
 		final String dentamount = "506.35";
 		final String dentquantity = "5.00";
 		
@@ -952,6 +951,44 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspprice);
 		inspectionsscreen = visualscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspprice);
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 41571:vNext - INSP - Delete service from Services screen", 
+			description = "Delete service from Services screen")
+	public void testDeleteServiceFromServicesScreen() {
+		
+		final String moneyservice1 = "Dent Repair";
+		final String moneyservice2 = "Bumper Repair";
+		final String percentageservice = "Aluminum Upcharge";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		String inspnumber = inspinfoscreen.getNewInspectionNumber();
+		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectService(moneyservice1);
+		selectservicesscreen.selectService(moneyservice2);
+		selectservicesscreen.selectService(percentageservice);
+		selectservicesscreen.clickSaveSelectedServicesButton();	
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		
+		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(moneyservice1);
+		inspservicesscreen = servicedetailsscreen.deleteService();
+		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(percentageservice);
+		inspservicesscreen = servicedetailsscreen.deleteService();
+		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		
+		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
+		inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
+		Assert.assertTrue(inspservicesscreen.isServiceAdded(moneyservice2));
+		Assert.assertFalse(inspservicesscreen.isServiceAdded(moneyservice1));
+		Assert.assertFalse(inspservicesscreen.isServiceAdded(percentageservice));
+		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 }

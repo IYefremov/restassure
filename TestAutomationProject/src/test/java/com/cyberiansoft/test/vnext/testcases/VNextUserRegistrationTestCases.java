@@ -82,13 +82,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
-		final String boeditionname = "JumpStart";
+		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		userregmail = usermailprefix + "99999111" + usermailpostbox;
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -106,7 +106,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
@@ -129,12 +129,17 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		verificationscreen.waitABit(10000);
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		//VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.waitABit(60*1000);
+		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
+			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
+		}
 			
-		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "JumpStart: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
+		switchToWebViewContext();
+		System.out.println("====" + appiumdriver.findElements(By.xpath("//body/child::*")).size());
+		
+		
+		String mailmessage = MailChecker.getMailMessage(usercapimail, usercapimailpsw, "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
 		
 		String newbourl = "";
 		if (!mailmessage.equals("")) {
@@ -143,6 +148,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		} else {
 			Assert.assertTrue(false, "Mail message is empty");
 		}
+		
 		initiateWebDriver();
 		webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
@@ -153,6 +159,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		Assert.assertFalse(leftmenu.isUsersMenuItemExists());
+		webdriver.quit();
 		
 	}
 	
@@ -176,12 +183,12 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String  expmonth = "11";
 		final String  expyear = "2019";
 		
-		final String boeditionname = "Technician";
+		final String boeditionname = "Repair360";
 		final String bolineofbusiness = "PDR";
 		
 
 		userregmail = usermailprefix + "99999111" + usermailpostbox;
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -199,7 +206,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
 		regscreen.waitABit(5000);
-		appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
@@ -267,6 +274,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		Assert.assertTrue(leftmenu.isUsersMenuItemExists());
+		webdriver.quit();
 	}
 	
 	@Test(testName= "Test Case 44272:vNext: verify 'Phone doesn't match this email. Email me my phone number' error for non-existing phone", 
@@ -276,7 +284,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
-		final String boeditionname = "JumpStart";
+		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR";
 		final String userstate = "California";
 		
@@ -356,7 +364,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
-		final String boeditionname = "JumpStart";
+		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR";
 		final String userstate = "California";
 		
@@ -426,7 +434,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
-		final String boeditionname = "JumpStart";
+		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR";
 		final String userstate = "California";
 		

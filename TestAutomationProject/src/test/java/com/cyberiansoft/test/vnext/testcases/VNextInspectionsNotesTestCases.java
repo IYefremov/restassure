@@ -1,23 +1,35 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -526,4 +538,135 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
+	@Test(testName= "Test Case 40285:vNext - Save picture note from gallery on tapping 'Back' button (Estimation level)", 
+			description = "Save picture note from gallery on tapping 'Back' button (Estimation level)")
+	public void testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel() throws IOException {
+		
+		final int addedpictures = 1;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
+		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
+		VNextNotesScreen notesscreen = vehicleinfoscreen.clickInspectionNotesOption();
+		notesscreen.selectNotesPicturesTab();
+		notesscreen.addImageToNotesFromGallery();
+		notesscreen.clickNotesBackButton();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		notesscreen = vehicleinfoscreen.clickInspectionNotesOption();
+		notesscreen.selectNotesPicturesTab();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
+		notesscreen.clickNotesBackButton();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 55441:vNext mobile: Create Inspection with breakage service image notes, "
+			+ "Test Case 55444:vNext: verify displaying image notes for the Inspection Visual Breakage service", 
+			description = "Create Inspection with breakage service image notes, "
+					+ "verify displaying image notes for the Inspection Visual Breakage service")
+	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
+	public void testCreateInspectionWithBreakageServiceImageNotes(String bourl, String username, String userpsw) throws IOException {
+		
+		final String selectdamage = "Price Adjustment";
+		final String servicepercentage = "Corrosion Protection";
+		final int addedpictures = 1;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		final String inspnumber = inspectionsscreen.getFirstInspectionNumber();
+		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		selectdamagesscreen.selectAllDamagesTab();
+		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
+		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
+		visualscreen.clickCarImage();
+		visualscreen.waitABit(1000);
+		
+		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		notesscreen.selectNotesPicturesTab();
+		notesscreen.addImageToNotesFromGallery();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
+		notesscreen.clickNotesBackButton();
+		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		visualscreen = new VNextVisualScreen(appiumdriver);
+		inspectionsscreen = visualscreen.saveInspectionViaMenu();
+		homescreen = inspectionsscreen.clickBackButton();
+		
+		homescreen.waitABit(30000);
+		initiateWebDriver();
+		webdriverGotoWebPage(bourl);
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(username, userpsw);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
+		inspectionspage.selectInspectionInTheList(inspnumber);
+		Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection(servicepercentage));
+		Assert.assertTrue(inspectionspage.isServiceNotesIconDisplayed(servicepercentage));
+		Assert.assertTrue(inspectionspage.isImageExistsForServiceNote(servicepercentage));
+		webdriver.quit();
+	}
+	
+	@Test(testName= "Test Case 55648:vNext mobile: Create Inspection with money service image notes,"
+			+ "Test Case 55649:vNext mobile: Create Inspection with percentage service image notes,"
+			+ "Test Case 55662:vNext: verify displaying image notes for the Inspection Money service,"
+			+ "Test Case 55663:vNext: verify displaying image notes for the Percentage service", 
+			description = "Create Inspection with money service image notes")
+	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
+	public void testCreateInspectionWithMoneyServiceImageNotes(String bourl, String username, String userpsw) throws IOException {
+		
+		final String[] servicestoadd = { "Dent Repair", "Aluminum Upcharge" };
+		final int addedpictures = 1;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		final String inspnumber = inspectionsscreen.getFirstInspectionNumber();
+		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		for (String serviceadd : servicestoadd)
+			selectservicesscreen.selectService(serviceadd);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (String serviceadd : servicestoadd) {
+			VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(serviceadd);
+			VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();		
+			notesscreen.selectNotesPicturesTab();
+			notesscreen.addImageToNotesFromGallery();
+			Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
+			notesscreen.clickNotesBackButton();
+			servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		}
+		
+		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		homescreen = inspectionsscreen.clickBackButton();
+		
+		homescreen.waitABit(30000);
+		initiateWebDriver();
+		webdriverGotoWebPage(bourl);
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(username, userpsw);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
+		inspectionspage.selectInspectionInTheList(inspnumber);
+		for (String serviceadd : servicestoadd) {
+			Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection(serviceadd));
+			Assert.assertTrue(inspectionspage.isServiceNotesIconDisplayed(serviceadd));
+			Assert.assertTrue(inspectionspage.isImageExistsForServiceNote(serviceadd));
+		}
+		webdriver.quit();
+	}
 }

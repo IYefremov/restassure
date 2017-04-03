@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.bo.utils;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -119,14 +122,16 @@ public class WebElementsBot {
 	}
 	
 	private static void waitUntilSelectOptionsLoaded(final WebElement element) {
-        new FluentWait<WebDriver>(WebDriverInstansiator.getDriver())
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(WebDriverInstansiator.getDriver())
                 .withTimeout(60, TimeUnit.SECONDS)
                 .pollingEvery(10, TimeUnit.MILLISECONDS)
-                .until(new Predicate<WebDriver>() {
-                    public boolean apply(WebDriver d) {
-                        return (element.findElements(By.xpath(".//li")).size() == 1);
-                    }
-                });
+                .ignoring(NoSuchElementException.class);
+		wait.until(new Function<WebDriver, Boolean>() {
+             @Override
+             public Boolean apply(WebDriver driver) {
+            	    return driver.findElements(By.xpath(".//li")).size() == 1;
+            	  }
+            	});
     }
 	
 	public static void clearAndType(TextField field, final String value) {

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextVerificationScreen extends VNextBaseScreen {
@@ -41,6 +42,9 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	
 	public void setDeviceRegistrationCode(String regcode) {
 		setValue(regfld, regcode);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.hideKeyboard();
+	    switchToWebViewContext();
 		log(LogStatus.INFO, "Set registration code: " + regcode);
 	}
 	
@@ -49,11 +53,13 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void clickVerifyButton() {
-		List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath(".//button[@data-bind='click: navigateNext']"));
+		/*List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath(".//button[@data-bind='click: navigateNext']"));
+		System.out.println("+++++++++" + nextbtns.size());
 		for (WebElement nextbtn : nextbtns) {
 			if (nextbtn.isDisplayed())
 				tap(nextbtn);
-		}
+		}*/
+		tap(phonevereficationscreren.findElement(By.xpath(".//button[@data-bind='click: navigateNext']")));
 		log(LogStatus.INFO, "Tap Verify button");
 	}
 	

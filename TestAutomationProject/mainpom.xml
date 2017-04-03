@@ -7,7 +7,7 @@
     <groupId>com.cyberiansoft.test</groupId>
     <artifactId>testcases</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <name>testng-tests</name>
     <dependencies>
         <dependency>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.0.1</version>
+            <version>3.3.1</version>
         </dependency> 
         <dependency>
             <groupId>junit</groupId>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>20.0</version>
+            <version>21.0</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -59,7 +59,7 @@
   		<dependency>
   			<groupId>io.appium</groupId>
   			<artifactId>java-client</artifactId>
-  			<version>5.0.0-BETA3</version>
+  			<version>5.0.0-BETA6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pojosontheweb</groupId>
@@ -119,7 +119,7 @@
 		<dependency>
     		<groupId>io.github.bonigarcia</groupId>
     		<artifactId>webdrivermanager</artifactId>
-    		<version>1.5.0</version>
+    		<version>1.6.2</version>
 		</dependency>       	
     </dependencies>
 	<build>

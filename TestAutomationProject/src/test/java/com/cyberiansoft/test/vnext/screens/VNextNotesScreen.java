@@ -14,11 +14,12 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextNotesScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[contains(@class, 'page orders-note')]")
+	@FindBy(xpath="//div[@data-page='notes']")
 	private WebElement servicenotessscreen;
 	
 	@FindBy(xpath="//a[@action='clear']")
@@ -41,6 +42,9 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//i[@action='take-camera']")
 	private WebElement notescamerabtn;
+	
+	@FindBy(xpath="//i[@action='take-lib']")
+	private WebElement notesgallerybtn;
 	
 	@FindBy(id="notes-pictures")
 	private WebElement notespicturesframe;
@@ -93,6 +97,11 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		log(LogStatus.INFO, "Select Notes Camera icon");
 	}
 	
+	public void clickGalleryIcon() {
+		tap(notesgallerybtn);
+		log(LogStatus.INFO, "Select Notes Camera icon");
+	}
+	
 	public void clickClearNotesButton() {
 		tap(clearnotesbtn);
 		log(LogStatus.INFO, "Tap Clear Notes button");
@@ -117,6 +126,28 @@ public class VNextNotesScreen extends VNextBaseScreen {
 
 	public boolean isPictureaddedToNote() {
 		return notespicturesframe.findElement(By.xpath("./ul/li[@class='picture-item']/div")).isDisplayed();
+	}
+	
+	public void addImageToNotesFromGallery() {
+		clickGalleryIcon();
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		waitABit(1000);
+		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
+		waitABit(4000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']"))).click();
+		waitABit(2000);
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).click();
+		
+		waitABit(3000);
+		switchToWebViewContext();
+		waitABit(3000);
+	}
+	
+	public int getNumberOfAddedNotesPictures() {
+		return servicenotessscreen.findElement(By.id("notes-pictures")).findElements(By.xpath(".//li[@class='picture-item']")).size();
 	}
 	
 }
