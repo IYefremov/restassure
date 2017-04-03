@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 
 public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTestCase {
 	
