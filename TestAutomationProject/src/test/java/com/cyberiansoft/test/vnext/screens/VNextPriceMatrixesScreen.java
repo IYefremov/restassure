@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +17,7 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='priceMatrices']")
 	private WebElement pricematrixesscreen;
 	
-	public VNextPriceMatrixesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextPriceMatrixesScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

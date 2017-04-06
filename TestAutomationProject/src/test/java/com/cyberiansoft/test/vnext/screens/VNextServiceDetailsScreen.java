@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +31,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
 	private WebElement keyboard;
 	
-	public VNextServiceDetailsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextServiceDetailsScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

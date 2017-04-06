@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -16,15 +18,18 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextBaseScreen {
 	
-	SwipeableWebDriver appiumdriver;
+	AppiumDriver appiumdriver;
 	ExtentTest testReporter;
 
-	public VNextBaseScreen(SwipeableWebDriver driver) {
+	public VNextBaseScreen(AppiumDriver driver) {
 		this.appiumdriver = driver;
 		testReporter = ExtentReportFactory.getTest();
 	}
@@ -33,7 +38,12 @@ public class VNextBaseScreen {
 		waitABit(300);
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.elementToBeClickable(element));
-		new TouchActions(appiumdriver).singleTap(element).perform();
+		int xx = element.getLocation().getX() + element.getSize().getWidth()/2;
+		int yy = element.getLocation().getY() + element.getSize().getHeight()/2;
+		
+		new TouchAction(appiumdriver).tap(xx, yy) .perform();
+		
+		//new TouchActions(appiumdriver).singleTap(element).perform();
 		waitABit(300);
 	}
 	
@@ -61,13 +71,13 @@ public class VNextBaseScreen {
 	
 	public void clickHardwareBackButton() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
+		((AndroidDriver)  appiumdriver).pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
 		//appiumdriver.navigate().back();
 		try {
 			appiumdriver.hideKeyboard();
             } catch (Exception e) {
             }
-		Assert.assertTrue(switchToWebViewContext());
+		switchToWebViewContext();
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 		log(LogStatus.INFO, "Click Hardware Back Button");
 	}
@@ -80,7 +90,7 @@ public class VNextBaseScreen {
 		int startx = size.width / 2;
 		appiumdriver.swipe(startx, starty, startx, endy, 2000);
 		waitABit(4000);
-		Assert.assertTrue(switchToWebViewContext());
+		switchToWebViewContext();
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -140,14 +150,22 @@ public class VNextBaseScreen {
 		
 	}
 	
-	public boolean switchToWebViewContext() {
-		boolean switched = false;
+	public void switchToWebViewContext() {
+		Set<String> contextNames = appiumdriver.getContextHandles();
+		List<String> handlesList = new ArrayList(contextNames);
+		if (handlesList.size() > 2)
+			appiumdriver.context(handlesList.get(2));
+		else
+			appiumdriver.context(handlesList.get(1));
+		
+		/*boolean switched = false;
 		final int ITERATIONS_COUNT = 200;
 		for (int i = 0; i < ITERATIONS_COUNT; i++) {
 			Set<String> contextNames = appiumdriver.getContextHandles();
 			for (String contextName : contextNames) {
 				System.out.println("++++++" + contextName);
-				if (contextName.equals("WEBVIEW_com.automobiletechnologies.repair360")) {
+				//if (contextName.equals("WEBVIEW_com.automobiletechnologies.repair360")) {
+				if (contextName.contains(".5")) {
 					System.out.println("----------" + contextName);
 					try {
 						appiumdriver.context(contextName);
@@ -165,7 +183,7 @@ public class VNextBaseScreen {
 				}
 			}
 		}
-		return switched;
+		return switched;*/
 	}
 	
 	public void switchApplicationContext(String appcontext) {

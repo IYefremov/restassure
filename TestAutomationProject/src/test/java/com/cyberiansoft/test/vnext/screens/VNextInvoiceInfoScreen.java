@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +35,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='estimation-number']/span")
 	private WebElement invoicenumberfld;
 	
-	public VNextInvoiceInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInvoiceInfoScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

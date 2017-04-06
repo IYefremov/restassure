@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -29,7 +31,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='add']/i")
 	private WebElement addcustomerbtn;
 	
-	public VNextCustomersScreen(SwipeableWebDriver appiumdriver) {
+	public VNextCustomersScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -51,7 +53,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 				switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 				int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
 				appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
-				Assert.assertTrue(switchToWebViewContext());
+				switchToWebViewContext();
 				//switchApplicationContext(AppContexts.WEB_CONTEXT);			
 				}	
 			WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + customer + "']"));	
@@ -61,7 +63,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
 			appiumdriver.swipe(20, 140, 20, yscreenresolution-180, 1000);
-			Assert.assertTrue(switchToWebViewContext());
+			switchToWebViewContext();
 			//switchApplicationContext(AppContexts.WEB_CONTEXT);
 			
 			

@@ -14,7 +14,9 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextNotesScreen extends VNextBaseScreen {
@@ -49,7 +51,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	@FindBy(id="notes-pictures")
 	private WebElement notespicturesframe;
 	
-	public VNextNotesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextNotesScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -112,7 +114,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		clickCameraIcon();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		waitABit(8000);
-		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		((AndroidDriver) appiumdriver).pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
 		waitABit(8000);
 		if (appiumdriver.findElements(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).size() > 0)
 			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).click();

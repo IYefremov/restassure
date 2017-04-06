@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,7 +22,7 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.ClaimNumber")
 	private WebElement claimfld;
 	
-	public VNextClaimInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextClaimInfoScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,7 +20,7 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	private WebElement invoicemenuscreen;
 	
 	
-	public VNextInvoiceMenuScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInvoiceMenuScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

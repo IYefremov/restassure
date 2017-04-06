@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +32,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[text()='Notes']")
 	private WebElement inspectionnotesmenu;
 	
-	public VNextBaseInspectionsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextBaseInspectionsScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 	}

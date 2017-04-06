@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -27,7 +29,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
 	
-	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
+	public VNextWorkOrdersScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

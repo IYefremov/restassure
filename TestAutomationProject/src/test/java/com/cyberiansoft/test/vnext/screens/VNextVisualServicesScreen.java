@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +17,7 @@ public class VNextVisualServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='visual/services']")
 	private WebElement visualservicesscreen;
 	
-	public VNextVisualServicesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextVisualServicesScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

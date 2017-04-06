@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +19,7 @@ public class VNextSettingsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@class='link icon-only back']")
 	private WebElement backbtn;
 	
-	public VNextSettingsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextSettingsScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import io.appium.java_client.AppiumDriver;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -20,7 +22,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='modal-text']")
 	private WebElement modaldlgmsg;
 	
-	public VNextInformationDialog(SwipeableWebDriver appiumdriver) {
+	public VNextInformationDialog(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.utils;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -28,7 +30,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String filename = "";
-		SwipeableWebDriver appiumdriver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
+		AppiumDriver appiumdriver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
 		WebDriver webdriver = ((VNextBaseTestCase) currentClass).getWebDriver();
 	    if (appiumdriver != null) {
 	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(appiumdriver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
@@ -63,7 +65,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	
 	@Override
 	public void onTestSkipped (ITestResult result) {
-		SwipeableWebDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
+		AppiumDriver driver = ((VNextBaseTestCase) currentClass).getAppiumDriver();
 	    if (driver != null) {
 	    	((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "skipped" + getTestMethodName(result));
 	    }

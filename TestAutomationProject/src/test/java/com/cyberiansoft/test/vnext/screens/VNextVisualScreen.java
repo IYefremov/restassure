@@ -13,6 +13,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 
 public class VNextVisualScreen extends VNextBaseInspectionsScreen {
@@ -29,7 +30,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//i[@action='add']")
 	private WebElement adddamagesbtn;
 	
-	public VNextVisualScreen(SwipeableWebDriver appiumdriver) {
+	public VNextVisualScreen(AppiumDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
