@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,7 +8,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextBaseScreenWithListSelection  extends VNextBaseScreen {
 	
-	public VNextBaseScreenWithListSelection(AppiumDriver appiumdriver) {
+	public VNextBaseScreenWithListSelection(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 	}

@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -35,7 +33,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[text()='Download again']")
 	private WebElement downloadagainbtn;
 	
-	public VNextVerificationScreen(AppiumDriver appiumdriver) {
+	public VNextVerificationScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);

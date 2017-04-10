@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -34,7 +32,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	@FindBy(xpath="//span[text()='Cancel']")
 	private WebElement cancelbtn;
 	
-	public VNextLoginScreen(AppiumDriver appiumdriver) {
+	public VNextLoginScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		waitUserListVisibility();

@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -25,7 +23,7 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 	@FindBy(xpath="//li[@data-name='businessType']/label/input")
 	private WebElement businesstypefld;
 	
-	public VNextRegistrationLineOfBusinessScreen(AppiumDriver appiumdriver) {
+	public VNextRegistrationLineOfBusinessScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

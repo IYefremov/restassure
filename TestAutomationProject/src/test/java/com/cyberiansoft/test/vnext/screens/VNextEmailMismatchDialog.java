@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +18,7 @@ public class VNextEmailMismatchDialog extends VNextBaseScreen {
 	@FindBy(xpath="//button[text()='Text me my email address']")
 	private WebElement textmailbtn;
 	
-	public VNextEmailMismatchDialog(AppiumDriver appiumdriver) {
+	public VNextEmailMismatchDialog(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

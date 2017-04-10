@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -37,7 +35,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='logout']/i")
 	private WebElement logoutbtn;
 	
-	public VNextHomeScreen(AppiumDriver appiumdriver) {
+	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

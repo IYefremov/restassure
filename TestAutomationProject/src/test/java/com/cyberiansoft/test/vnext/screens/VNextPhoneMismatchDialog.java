@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +18,7 @@ public class VNextPhoneMismatchDialog extends VNextBaseScreen {
 	@FindBy(xpath="//button[text()='Email me my phone number']")
 	private WebElement emailmephonebtn;
 	
-	public VNextPhoneMismatchDialog(AppiumDriver appiumdriver) {
+	public VNextPhoneMismatchDialog(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
@@ -49,7 +48,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	@FindBy(id="selection-list-view")
 	private WebElement statespage;
 	
-	public VNextRegistrationNewUserPersonalInfoScreen(AppiumDriver appiumdriver) {
+	public VNextRegistrationNewUserPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

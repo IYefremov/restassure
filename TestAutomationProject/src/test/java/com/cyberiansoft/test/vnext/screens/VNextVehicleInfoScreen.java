@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +67,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
 	private WebElement keyboard;
 	
-	public VNextVehicleInfoScreen(AppiumDriver appiumdriver) {
+	public VNextVehicleInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -154,9 +152,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setLicPlate (String licplate) {
-		waitABit(500);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(licplatefld));
 		licplatefld.clear();
 		licplatefld.sendKeys(licplate);
 		log(LogStatus.INFO, "Set License Plate : " + licplate);
@@ -193,9 +188,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setRoNo (String rono) {
-		waitABit(500);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(rofld));
 		rofld.clear();
 		rofld.sendKeys(rono);
 		log(LogStatus.INFO, "Set RO Number : " + rono);

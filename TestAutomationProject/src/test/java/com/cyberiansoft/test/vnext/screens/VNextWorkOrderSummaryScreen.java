@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +21,7 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//div[@class='right']/i[@action='save']")
 	private WebElement savebtn;
 
-	public VNextWorkOrderSummaryScreen(AppiumDriver appiumdriver) {
+	public VNextWorkOrderSummaryScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +17,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
-	public VNextStatusScreen(AppiumDriver appiumdriver) {
+	public VNextStatusScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

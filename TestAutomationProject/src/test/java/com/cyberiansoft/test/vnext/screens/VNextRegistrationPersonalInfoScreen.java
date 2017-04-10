@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +33,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//button[@class='btn btn-red']")
 	private WebElement clearuserbtn;
 	
-	public VNextRegistrationPersonalInfoScreen(AppiumDriver appiumdriver) {
+	public VNextRegistrationPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		//VNextRegistrationPersonalInfoScreen.WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -56,8 +54,8 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.hideKeyboard();
 	    switchToWebViewContext();
-	   // if (appiumdriver.findElements(By.xpath("//iframe")).size() > 0)
-	    //	appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+	    if (appiumdriver.findElements(By.xpath("//iframe")).size() > 0)
+	    	appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		
 	}
 	

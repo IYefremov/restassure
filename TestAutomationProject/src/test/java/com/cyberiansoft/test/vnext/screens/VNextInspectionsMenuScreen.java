@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,7 +24,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	private WebElement inspectionsmenuscreen;
 	
 	
-	public VNextInspectionsMenuScreen(AppiumDriver appiumdriver) {
+	public VNextInspectionsMenuScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
