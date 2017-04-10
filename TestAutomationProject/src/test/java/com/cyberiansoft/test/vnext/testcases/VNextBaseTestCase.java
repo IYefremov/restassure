@@ -41,17 +41,9 @@ import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoResult;
 import com.ssts.pcloudy.dto.device.MobileDevice;
 import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.NoSuchContextException;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.Connection;
 import io.appium.java_client.android.HasNetworkConnection;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.remote.MobilePlatform;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
 
 public class VNextBaseTestCase {
@@ -77,34 +69,7 @@ public class VNextBaseTestCase {
 	       // service = builder.build();
 	        //service.start();	
 			deviceofficeurl = bourl;
-	       /* File appDir = new File("./data/");
-		    File app = new File(appDir, "ReconPro.apk");
-		    appiumcap = new DesiredCapabilities();
-
-			appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
-			appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
-			appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-			appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-			appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
-			appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
-			appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
-			//appiumcap.setCapability("chromedriverExecutable", "c:\\Users\\Alex\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\appium-chromedriver\\chromedriver\\win\\chromedriver.exe");
-			//appiumcap.setCapability("chromedriverExecutable", "d:\\Work\\AQC\\TestAutomationProject\\browsers\\chromedriver\\chromedriver.exe");
-			//appiumcap.setCapability("recreateChromeDriverSessions", true);
-			//String ANDROID_DEVICE_SOCKET = "com.automobiletechnologies.ReconPro" + "_devtools_remote";
-			//appiumcap.setCapability("androidDeviceSocket", ANDROID_DEVICE_SOCKET);
-			//ChromeOptions chromeOptions = new ChromeOptions();
-			//chromeOptions.setExperimentalOption("androidDeviceSocket", ANDROID_DEVICE_SOCKET);
-			//appiumcap.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			//appiumcap.setCapability("appWaitPackage", "com.android.packageinstaller");
-			//appiumcap.setCapability("appWaitActivity", ".permission.ui.GrantPermissionsActivity");
-			appiumcap.setCapability("autoGrantPermissions", "true");
-			
-			
-			appiumdriver = new SwipeableWebDriver(new URL("http://127.0.0.1:4723/wd/hub"),
-					appiumcap);*/
-			
-			//appiumdriver = new SwipeableWebDriver(service.getUrl(), appiumcap);
+	       
 			deviceplatform = devplatform;
 			if (deviceplatform.contains("ios"))
 				appiumdriver = VNextAppiumDriverBuilder.forIOS().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
@@ -153,32 +118,6 @@ public class VNextBaseTestCase {
 			appiumdriver.context(handlesList.get(2));
 		else
 			appiumdriver.context(handlesList.get(1));
-		/*boolean switched = false;
-		final int ITERATIONS_COUNT = 100;
-		for (int i = 0; i < ITERATIONS_COUNT; i++) {
-			Set<String> contextNames = appiumdriver.getContextHandles();
-			for (String contextName : contextNames) {
-				System.out.println("++++++" + contextName);
-				//if (contextName.equals("WEBVIEW_com.automobiletechnologies.repair360")) {
-				if (contextName.contains(".5")) {
-					System.out.println("----------" + contextName);
-					try {
-						appiumdriver.context(contextName);
-						System.out.println("---------- Success");
-						i = ITERATIONS_COUNT;
-						switched = true;
-						break;
-					} catch (NoSuchContextException ex) {
-						System.out.println("---------- Fail");
-						waitABit(1000);
-					}
-				} else if (!contextName.equals("NATIVE_APP")){
-					System.out.println("=============" + contextName);
-					waitABit(1000);
-				}
-			}
-		}
-		return switched;*/
 	}
 
 	public void switchApplicationContext(String appcontext) {

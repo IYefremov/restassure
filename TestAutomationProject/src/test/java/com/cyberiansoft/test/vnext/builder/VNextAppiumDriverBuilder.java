@@ -14,6 +14,12 @@ import io.appium.java_client.remote.MobilePlatform;
 
 public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWebDriver> {
 
+	private static String PLATFORM_NAME;
+	
+	public static String getPlatformName() {
+        return PLATFORM_NAME;
+    }
+	
     public static AndroidDriverBuilder forAndroid() {
         return new AndroidDriverBuilder();
     }
@@ -23,6 +29,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         DesiredCapabilities appiumcap = new DesiredCapabilities();
 
         public SwipeableWebDriver build() {
+        	PLATFORM_NAME = MobilePlatform.ANDROID;
         	File appDir = new File("./data/");
     	    File app = new File(appDir, "ReconPro.apk");
     	    appiumcap = new DesiredCapabilities();
@@ -50,7 +57,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         DesiredCapabilities appiumcap = new DesiredCapabilities();
 
         public SwipeableWebDriver build() {
-
+        	PLATFORM_NAME = MobilePlatform.IOS;
         	File appDir = new File("/Users/kolin/Documents");
     	    File app = new File(appDir, "Repair360_0328.app.zip");
     		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");

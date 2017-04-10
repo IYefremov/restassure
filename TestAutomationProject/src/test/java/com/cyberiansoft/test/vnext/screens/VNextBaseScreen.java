@@ -2,12 +2,9 @@ package com.cyberiansoft.test.vnext.screens;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -18,13 +15,13 @@ import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.internal.Locatable;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
+import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidKeyCode;
-import io.appium.java_client.remote.MobileCapabilityType;
 
 public class VNextBaseScreen {
 	
@@ -38,12 +35,9 @@ public class VNextBaseScreen {
 	
 	public void tap(WebElement element) {
 		waitABit(300);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.elementToBeClickable(element));
 		//new TouchActions(appiumdriver).singleTap(element).perform();
-		Capabilities cap = appiumdriver.getCapabilities();
-		Map<String, ?> desired = (Map<String, ?>) cap.getCapability("desired");
-		if (desired.get(MobileCapabilityType.PLATFORM_NAME).toString().toLowerCase().equals("android")) {
+		
+		if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
 			Action tapAction = new SingleTapAction(appiumdriver.getTouch(), (Locatable) element);
 			CompositeAction action = new CompositeAction();
 			action.addAction(tapAction).perform();
@@ -52,25 +46,18 @@ public class VNextBaseScreen {
 			int yy = element.getLocation().getY() + element.getSize().getHeight()/2;
 			
 			new TouchAction(appiumdriver).tap(xx, yy).perform();
-		}
-		
+		}		
 		waitABit(300);
 	}
 	
 	public void setValue(WebElement element, String value) {
 		element.clear();
-		//appiumdriver.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
 		element.sendKeys(value);
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {
 		while (scrollablelist.findElements(By.xpath(".//div[text()='" + value + "']")).size() < 1) {
 			swipingVertical();
-			
-			/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
-			appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
-			switchApplicationContext(AppContexts.WEB_CONTEXT);*/
 			
 		}		
 		WebElement elem = scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']"));	
@@ -167,33 +154,6 @@ public class VNextBaseScreen {
 			appiumdriver.context(handlesList.get(2));
 		else
 			appiumdriver.context(handlesList.get(1));
-		
-		/*boolean switched = false;
-		final int ITERATIONS_COUNT = 200;
-		for (int i = 0; i < ITERATIONS_COUNT; i++) {
-			Set<String> contextNames = appiumdriver.getContextHandles();
-			for (String contextName : contextNames) {
-				System.out.println("++++++" + contextName);
-				//if (contextName.equals("WEBVIEW_com.automobiletechnologies.repair360")) {
-				if (contextName.contains(".5")) {
-					System.out.println("----------" + contextName);
-					try {
-						appiumdriver.context(contextName);
-						System.out.println("---------- Success");
-						i = ITERATIONS_COUNT;
-						switched = true;
-						break;
-					} catch (NoSuchContextException ex) {
-						System.out.println("---------- Fail");
-						waitABit(1000);
-					}
-				} else if (!contextName.equals("NATIVE_APP")){
-					System.out.println("=============" + contextName);
-					waitABit(1000);
-				}
-			}
-		}
-		return switched;*/
 	}
 	
 	public void switchApplicationContext(String appcontext) {
