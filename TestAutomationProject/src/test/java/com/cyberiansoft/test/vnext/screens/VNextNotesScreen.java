@@ -112,7 +112,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		clickCameraIcon();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		waitABit(8000);
-		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
 		waitABit(8000);
 		if (appiumdriver.findElements(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).size() > 0)
 			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).click();

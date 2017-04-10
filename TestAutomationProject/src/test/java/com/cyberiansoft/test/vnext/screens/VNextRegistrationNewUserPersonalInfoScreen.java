@@ -75,7 +75,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	public void setNewUserCompanyName(String usercompanyname) {
 		usercompanynamefld.clear();
 		usercompanynamefld.sendKeys(usercompanyname);
-		((AndroidDriver) appiumdriver).hideKeyboard();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserAddress1(String address1line) {
@@ -86,19 +86,19 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	public void setNewUserAddress2(String address2line) {
 		adress2fld.clear();
 		adress2fld.sendKeys(address2line);
-		((AndroidDriver) appiumdriver).hideKeyboard();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserCity(String usercity) {
 		cityfld.clear();
 		cityfld.sendKeys(usercity);
-		((AndroidDriver) appiumdriver).hideKeyboard();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserZIP(String userzipcode) {
 		zipfld.clear();
 		zipfld.sendKeys(userzipcode);
-		((AndroidDriver) appiumdriver).hideKeyboard();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void selectNewUserCountry(String usercountry) {

@@ -7,11 +7,13 @@ import org.openqa.selenium.interactions.HasTouchScreen;
 import org.openqa.selenium.interactions.TouchScreen;
 import org.openqa.selenium.remote.RemoteTouchScreen;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.PressesKeyCode;
+import io.appium.java_client.android.HasNetworkConnection;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class SwipeableWebDriver extends AndroidDriver implements HasTouchScreen {
+public class SwipeableWebDriver extends AppiumDriver implements HasTouchScreen, PressesKeyCode, HasNetworkConnection {
 	public RemoteTouchScreen touch;
 	
 	public SwipeableWebDriver(URL url, Capabilities caps) {

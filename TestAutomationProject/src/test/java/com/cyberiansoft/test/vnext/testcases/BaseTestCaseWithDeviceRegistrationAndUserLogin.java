@@ -13,7 +13,7 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 	public void settingUp() throws Exception {
 
 		setUp();	
-		//setNetworkOn();
+		setNetworkOn();
 		resetApp();
 		registerDevice();
 		VNextHomeScreen homecreen = new VNextHomeScreen(appiumdriver);

@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -51,7 +50,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 				switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 				int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
 				appiumdriver.swipe(20, yscreenresolution-180, 20, 140, 1000);
-				Assert.assertTrue(switchToWebViewContext());
+				switchToWebViewContext();
 				//switchApplicationContext(AppContexts.WEB_CONTEXT);			
 				}	
 			WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + customer + "']"));	
@@ -61,7 +60,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			int yscreenresolution = appiumdriver.manage().window().getSize().getHeight();
 			appiumdriver.swipe(20, 140, 20, yscreenresolution-180, 1000);
-			Assert.assertTrue(switchToWebViewContext());
+			switchToWebViewContext();
 			//switchApplicationContext(AppContexts.WEB_CONTEXT);
 			
 			
