@@ -55,10 +55,12 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	public VehiclePartsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void verifyVehiclePartsColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(vehiclepartstable.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vehiclepartstable.getWrappedElement()));
 		Assert.assertTrue(vehiclepartstable.isTableColumnExists("Part"));
 	}
 	
@@ -84,13 +86,15 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	}
 	
 	public void setVehiclePartName(String vehiclepartname) {
-		wait.until(ExpectedConditions.visibilityOf(vehiclepartnamefld.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vehiclepartnamefld.getWrappedElement()));
 		getVehiclePartNameField().clear();
 		getVehiclePartNameField().sendKeys(vehiclepartname);
 	}
 	
 	public WebElement getVehiclePartNameField() {
-		wait.until(ExpectedConditions.visibilityOf(vehiclepartnamefld.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vehiclepartnamefld.getWrappedElement()));
 		return vehiclepartnamefld.getWrappedElement();
 	}
 	
@@ -155,7 +159,8 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 		for (WebElement vehiclepartsrow : vehiclepartsrows) {
 			if (vehiclepartsrow.getText().contains(vehiclepart)) {
 				vehiclepartsrow.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-				wait.until(ExpectedConditions.alertIsPresent());
+				new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				waitUntilPageReloaded();
@@ -165,7 +170,9 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isVehiclePartExists(String vehiclepart) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  vehiclepartstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + vehiclepart + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 

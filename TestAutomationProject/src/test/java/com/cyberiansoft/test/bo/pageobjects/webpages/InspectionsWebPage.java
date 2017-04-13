@@ -119,10 +119,12 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	public InspectionsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.visibilityOf(searchtab));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(searchtab));
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -130,12 +132,15 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
-		wait.until(ExpectedConditions.visibilityOf(searchcustomercmb.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(searchcustomercmb.getWrappedElement()));
 	}
 	
 	public void verifyInspectionsTableColumnsAreVisible() {	
-		wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInspections")));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInspections")));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Status"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Inspection#"));
 		Assert.assertTrue(inspectionstable.isTableColumnExists("Date"));
@@ -152,19 +157,22 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void verifySearchFieldsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(searchcustomercmb.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(searchcustomercmb.getWrappedElement()));
 		Assert.assertTrue(searchcustomercmb.isDisplayed());
 		Assert.assertTrue(searchtechniciancmb.isDisplayed());
 		Assert.assertTrue(searchtypecmb.isDisplayed());
 		Assert.assertTrue(searchstocknofld.isDisplayed());
 		Assert.assertTrue(searchwocmb.isDisplayed());
-		wait.until(ExpectedConditions.visibilityOf(inspectionnumberfld.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(inspectionnumberfld.getWrappedElement()));
 		Assert.assertTrue(inspectionnumberfld.isDisplayed());
 		Assert.assertTrue(searchviewcmb.isDisplayed());
 		Assert.assertTrue(searchtimeframecmb.isDisplayed());
 		Assert.assertTrue(searcharchivedchck.isDisplayed());
 		Assert.assertTrue(searchstatuscmb.isDisplayed());
-		wait.until(ExpectedConditions.visibilityOf(searchronofld.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(searchronofld.getWrappedElement()));
 		Assert.assertTrue(searchronofld.isDisplayed());
 		Assert.assertTrue(searchvinfld.isDisplayed());
 	}
@@ -196,8 +204,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	public void selectSearchCustomer(String customer) { 
 		searchcustomercmb.click();
 		searchcustomercmb.clearAndType(customer);
-		//waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(searchcustomerdd.getWrappedElement()));
+		waitABit(1000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(searchcustomerdd.getWrappedElement()));
 		searchcustomerdd.selectByVisibleText(customer);
 	}
 	
@@ -218,13 +227,16 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public boolean isInspNumberExists(String inspectionnumber) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  inspectionstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + inspectionnumber + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public void deleteFirstInspection() throws InterruptedException {
 		click(deleteinspectionbtn);
-		wait.until(ExpectedConditions.alertIsPresent());
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
         alert.accept();
         waitUntilPageReloaded();
@@ -232,7 +244,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	
 	public void clickFindButton() {
 		clickAndWait(findbtn);
-		//waitABit(4000);
+		waitABit(4000);
 	}
 
 	public void assertInspectionPrice(String inspnumber, String expectedprice)
@@ -240,7 +252,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 		Assert.assertEquals(expectedprice,
 				inspectionstable.getWrappedElement().findElement(By.xpath(".//tr/td[14]"))
 						.getText());
@@ -260,7 +272,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	
 	public boolean isInspectionExists(String inspnumber) {
 		searchInspectionByNumber(inspnumber);
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  inspectionstable.getWrappedElement().findElements(By.xpath(".//tr/td/a[@title='" + inspnumber + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -268,7 +282,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
-		//waitABit(3000);
+		waitABit(3000);
 	}
 	
 	public int getTableRowWithInspectionsNumbers() {
@@ -328,14 +342,14 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			driver.findElement(By.id("btnDecline")).click();
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 
 	public void approveInspectionByNumber(String inspnumber)
@@ -351,18 +365,18 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(10000);
+			Thread.sleep(10000);
 			driver.findElement(By.xpath("//button[@class='btn icon ok']"))
 					.click();
-			//Thread.sleep(1000);
+			Thread.sleep(1000);
 			driver.findElement(By.id("btnApprove")).click();
-			//Thread.sleep(3000);
+			Thread.sleep(3000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 
 	public void approveInspectionLinebylineApprovalByNumber(String inspnumber,
@@ -379,17 +393,17 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			serviceApprove(serviceapprove);
 			serviceDecline(servicedecline);
 			servicegeneralapprovebtn.click();
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void approveInspectionLinebylineApprovalByNumberWithAllServicesApproval(String inspnumber)
@@ -405,19 +419,19 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			List<WebElement> serviceslist = driver.findElements(By.id("divStatusAccept"));
 			for (WebElement service : serviceslist) {
 				service.click();
 			}
 			servicegeneralapprovebtn.click();
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void approveInspectionByNumbeApproveAll(String inspnumber)
@@ -433,15 +447,15 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(15000);
+			Thread.sleep(15000);
 			approveallbtn.click();
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void approveInspectionByNumberApproveAndSubmit(String inspnumber)
@@ -457,19 +471,19 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			List<WebElement> serviceslist = driver.findElements(By.id("divStatusAccept"));
 			for (WebElement service : serviceslist) {
 				service.click();
 			}
 			approveandsubmitbtn.click();
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void verifyServicesPresentForInspection(String inspnumber, String[] servicesnames) {
@@ -483,7 +497,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//waitABit(5000);
+			waitABit(5000);
 			for (String servicesname : servicesnames)
 				Assert.assertTrue(isServicePresentInInspectioncontentTable(servicesname));
 			driver.close();
@@ -495,6 +509,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	public String getInspectionApprovedTotal(String inspnumber) {
 		String totalapproved = "";
 		clickInspectionLink(inspnumber);
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		waitForNewTab();
 		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
 		Set<String> handles = driver.getWindowHandles();
@@ -504,7 +519,8 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//waitABit(10000);
+			driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+			waitABit(10000);
 			WebElement totalrow = driver.findElement(By.xpath("//tr[@class='total-row line-item']"));
 			totalapproved = totalrow.findElement(By.xpath(".//table/tbody/tr/td[2]/div")).getText();
 			driver.close();
@@ -578,7 +594,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath(".//span[text()='Select']"))).click().build().perform();
-			//waitABit(300);
+			waitABit(300);
 			act.click(row.findElement(By.xpath(".//span[text()='Select']"))).build().perform();
 		}	
 		return row;		
@@ -587,12 +603,14 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	public void clickInspectionSelectExpandableMenu(String inspectionnumber, String menuitem) {
 		WebElement row = clickSelectButtonForInspection(inspectionnumber);
 		if (row != null) {
-			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+			new WebDriverWait(driver, 10)
+			.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 			Actions act = new Actions(driver);
 			if (!getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']")).isDisplayed()) {				
 				act.moveToElement(getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
 			}
-			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+			new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
 			act.click(getTableRowWithInspection(inspectionnumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
 			Assert.assertTrue(false, "Can't find " + inspectionnumber + " invoice");	

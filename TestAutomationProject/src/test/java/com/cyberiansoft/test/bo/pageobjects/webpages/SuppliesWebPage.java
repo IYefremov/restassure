@@ -36,10 +36,12 @@ public class SuppliesWebPage extends WebPageWithPagination {
 	public SuppliesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void verifySuppliesTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(suppliestable.getWrappedElement()));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(suppliestable.getWrappedElement()));
 		Assert.assertTrue(suppliestable.isTableColumnExists("Supply"));
 	}
 	
@@ -62,7 +64,8 @@ public class SuppliesWebPage extends WebPageWithPagination {
 	}
 	
 	public void setSupplyName(String newsupplyname) {
-		wait.until(ExpectedConditions.visibilityOf(newsupplynamefld.getWrappedElement()));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(newsupplynamefld.getWrappedElement()));
 		clearAndType(newsupplynamefld, newsupplyname);
 		clickAndWait(newsupplyOKbtn);
 	}
@@ -83,7 +86,8 @@ public class SuppliesWebPage extends WebPageWithPagination {
 		for (WebElement questionformsrow : questionformsrows) {
 			if (questionformsrow.getText().contains(supplyname)) {
 				questionformsrow.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-				wait.until(ExpectedConditions.alertIsPresent());
+				new WebDriverWait(driver, 10)
+				  .until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				waitUntilPageReloaded();
@@ -93,7 +97,9 @@ public class SuppliesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isSupplyExists(String supplyname) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  suppliestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + supplyname + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 

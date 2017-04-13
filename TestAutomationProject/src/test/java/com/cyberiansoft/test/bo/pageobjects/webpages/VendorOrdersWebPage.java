@@ -83,6 +83,7 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 	public VendorOrdersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -170,7 +171,9 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public boolean isVendorOrderExists(String orderno) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  vendororderstable.getWrappedElement().findElements(By.xpath(".//tr/td/a[text()='" + orderno + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -215,14 +218,14 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + vin + "']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + customer + "']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + employee + "']")).isDisplayed());
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
-			//Thread.sleep(2000);
+			Thread.sleep(2000);
 		}
 	}
 	
@@ -237,7 +240,8 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 	
 	public void openServicesInformationByOrderNoWindowAndVerifyContent(String orderno, String vin, String customer) {
 		clickServicesByOrderNo(orderno);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/span[text()='" + orderno + "']")));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/span[text()='" + orderno + "']")));
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/span[text()='" + vin + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/span[text()='" + customer + "']")).isDisplayed());
 		driver.navigate().back();

@@ -101,6 +101,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	public NewClientDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void createRetailClient(String firstname, String lastname) {

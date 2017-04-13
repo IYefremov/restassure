@@ -24,10 +24,12 @@ public class InvoiceEmailActivityTabWebPage extends BaseWebPage {
 	public InvoiceEmailActivityTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public List<WebElement> getInvoiceEmailActivityTableRows() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(mailactivitytable.getWrappedElement())));
+		click(new WebDriverWait(driver, 10)
+		 .until(ExpectedConditions.elementToBeClickable(mailactivitytable.getWrappedElement())));
 		return mailactivitytable.getTableRows();
 	}
 	

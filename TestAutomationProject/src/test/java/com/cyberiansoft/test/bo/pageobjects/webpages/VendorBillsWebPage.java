@@ -59,6 +59,7 @@ public class VendorBillsWebPage extends WebPageWithTimeframeFilter {
 	public VendorBillsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -80,13 +81,13 @@ public class VendorBillsWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void verifyVendorBillsTableColumnsAreVisible() {
-		wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.visibilityOf(vendorbillstable.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(vendorbillstable.getWrappedElement()));
 		Assert.assertTrue(vendorbillstable.isTableColumnExists("Invoice #"));
 		Assert.assertTrue(vendorbillstable.isTableColumnExists("Vendor"));
 		Assert.assertTrue(vendorbillstable.isTableColumnExists("Date"));
 		Assert.assertTrue(vendorbillstable.isTableColumnExists("Amount"));
 		Assert.assertTrue(vendorbillstable.isTableColumnExists("Status"));
-		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
 	
 	public WebTable getVendorBillsTable() {

@@ -72,6 +72,7 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	public RepairLocationTimeTrackingWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -79,7 +80,8 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	}
 	
 	public void makeSearchPanelVisible() {
-		wait.until(ExpectedConditions.elementToBeClickable(searchbtn));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(searchbtn));
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
@@ -105,8 +107,9 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
-		//waitABit(1000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
+		waitABit(1000);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
 	public void setSearchFromDate(String dateformat) { 
@@ -121,13 +124,14 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public void clickFindButton() { 
 		click(findbtn);
-		//waitABit(5000);
+		waitABit(5000);
 		//new WebDriverWait(driver, 10)
 		  //.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public void verifySearchResults(String[] wonumbers) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wonumbers[0] + "']")));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wonumbers[0] + "']")));
 		for (int i =0; i< wonumbers.length; i++) {
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wonumbers[i] + "']")).isDisplayed());
 		}
@@ -152,26 +156,30 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public void clickGoToLastPage() {
 		click(gotolastpage);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='ctl00_ctl00_Content_Main_report_ctl05_ctl00_Last_ctl01_ctl00' and @disabled='disabled']")));
+		new WebDriverWait(driver, 10)
+				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='ctl00_ctl00_Content_Main_report_ctl05_ctl00_Last_ctl01_ctl00' and @disabled='disabled']")));
 	}
 	
 	public void clickGoToFirstPage() {
 		click(gotofirstpage);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title='First Page' and @disabled='disabled']")));
+		new WebDriverWait(driver, 10)
+		  		 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title='First Page' and @disabled='disabled']")));
 	}
 	
 	public void clickGoToNextPage()  {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		click(gotonextpage);		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + nextpage + " of ')]")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + nextpage + " of ')]")));
 	}
 	
 	public void clickGoToPreviousPage() {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		click(gotopreviouspage);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + previouspage + " of ')]")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + previouspage + " of ')]")));
 	}
 	
     public String getCurrentlySelectedPageNumber() {		

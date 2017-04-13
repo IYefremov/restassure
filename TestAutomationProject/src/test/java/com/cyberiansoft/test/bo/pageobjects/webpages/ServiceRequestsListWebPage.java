@@ -153,10 +153,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.elementToBeClickable(searchtab)).click();
+		new WebDriverWait(driver, 20)
+		  .until(ExpectedConditions.elementToBeClickable(searchtab)).click();
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -192,19 +194,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public void clickFindButton() { 
-		//waitABit(1000);
+		waitABit(1000);
 		clickAndWait(findbtn);
 	}
 	
 	public void clickAddServiceRequestButton() { 
-		//waitABit(1000);
-		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
+		waitABit(1000);
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
 		click(addservicerequestbtn);	
-		//waitABit(100);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));		
+		waitABit(100);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));		
 		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 		//driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 	}
 	
 	public WebElement getFirstServiceRequestFromList() {		
@@ -218,19 +223,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList());
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[@class='detailsPopover-icon icon-chevron-right']")).click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		//waitABit(8000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
+		waitABit(8000);
 	}
 	
 	public void closeFirstServiceRequestFromTheList() {
 		selectFirstServiceRequestFromList();
 		switchToServiceRequestInfoFrame();
 		//driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		wait.until(ExpectedConditions.elementToBeClickable(closeservicerequestbtn));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(closeservicerequestbtn));
 		clickCloseServiceRequestButton();
 		driver.switchTo().defaultContent();
-		//waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitABit(1000);
+		new WebDriverWait(driver, 40)
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public void clickCloseServiceRequestButton() {
@@ -243,7 +251,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList()).perform();
 		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();	
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		//Thread.sleep(4000);
 	}
 	
@@ -251,7 +260,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList()).perform();
 		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Reject']")).click();	
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 	}
 	
 	
@@ -277,7 +287,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public SRAppointmentInfoPopup clickAddAppointmentToFirstServiceRequestFromList() {
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")).click();
-		//waitABit(300);
+		waitABit(300);
 		return PageFactory.initElements(driver,
 				SRAppointmentInfoPopup.class);
 	}
@@ -292,12 +302,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 	
 	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  getFirstServiceRequestFromList().findElements(By.xpath(".//div[@class='" + insurancecompany + "  ']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public boolean verifySearchResultsByServiceName(String servicename)  { 
-		wait.until(ExpectedConditions.visibilityOf(servicerequestslist));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(servicerequestslist));
 		return getFirstServiceRequestFromList().findElements(By.xpath(".//div[@class='name' and contains(text(), '" + servicename + "')]")).size() > 0;
 	}
 	
@@ -393,7 +406,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void setServiceRequestGeneralInfo(String _team, String _assignedto, String _po, String _ro) {
 		setServiceRequestGeneralInfoTeam(_team);
-		//waitABit(2000);
+		waitABit(2000);
 		setServiceRequestGeneralInfoAssignedTo(_assignedto);
 		clearAndType(addsrvponum, _po);
 		clearAndType(addsrvronum, _ro);
@@ -405,12 +418,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void selectServiceRequestOwner(String owner) {
 		click(driver.findElement(By.xpath("//li[@id='tabsCustOwner_o']/a")));
-		//waitABit(1000);
+		waitABit(1000);
 		selectComboboxValueWithTyping(addsrvownercmb, addsrvownerdd, owner);
 	}
 	
 	public void setServiceRequestVIN(String vin) {
-		wait.until(ExpectedConditions.visibilityOf(addsrvvin.getWrappedElement()));	
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(addsrvvin.getWrappedElement()));	
 		clearAndType(addsrvvin, vin);
 	}
 	
@@ -424,14 +438,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	public void setServiceRequestDescription(String description) {
 		click(driver.findElement(By.xpath("//div[@class='description-content']/span[@class='infoBlock-editBtn']")));
-		wait.until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
 		clearAndType(addsrvdescription, description);
 		driver.findElement(By.xpath("//div[@class='description-content']")).findElement(By.xpath(".//div[@class='infoBlock-doneBtn sr-btn']")).click();
 	}
 	
 	public void decodeAndVerifyServiceRequestVIN(String _make, String _model) {
 		click(addsrvcardecodevinbtn);
-		//waitABit(2000);
+		waitABit(2000);
 		Assert.assertEquals(addsrvcarmake.getValue(), _make);
 		Assert.assertEquals(addsrvcarmodel.getValue(), _model);
 	}
@@ -531,7 +546,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(By.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"))).perform();
 		act.click(driver.findElement(By.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"))).perform();
-		WebElement servicespopup = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
+		WebElement servicespopup = new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
 		for (String srv : services) {
 			servicespopup.findElement(By.xpath(".//span[@class='name-service' and text()='" + srv + "']")).click();
 		}

@@ -15,7 +15,6 @@ import java.util.List;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
-
 public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	
 	@FindBy(id = "displayedColumnsList")

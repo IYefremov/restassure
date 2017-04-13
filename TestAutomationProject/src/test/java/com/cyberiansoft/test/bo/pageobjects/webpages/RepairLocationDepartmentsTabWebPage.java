@@ -39,6 +39,7 @@ public class RepairLocationDepartmentsTabWebPage extends BaseWebPage {
 	public RepairLocationDepartmentsTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddDepartmentButton() {
@@ -73,7 +74,9 @@ public class RepairLocationDepartmentsTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRepairLocationDepartmentExists(String repairlocationdepartment) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  departmentstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocationdepartment + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

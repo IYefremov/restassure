@@ -31,6 +31,7 @@ public class WebPageWithTimeframeFilter extends WebPageWithPagination {
 	public WebPageWithTimeframeFilter(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectSearchTimeframe(WebConstants.TimeFrameValues timeframe) { 

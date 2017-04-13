@@ -101,10 +101,12 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	public WorkOrdersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.visibilityOf(searchbtn)).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(searchbtn)).click();
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -115,8 +117,10 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void verifyWorkOrdersTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(wotable.getWrappedElement()));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(wotable.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		//Assert.assertTrue(wotable.findElement(By.id("chkAllInvoices")).isDisplayed());
 		Assert.assertTrue(wotable.isTableColumnExists("Order#"));
 		Assert.assertTrue(wotable.isTableColumnExists("Invoice#"));
@@ -197,7 +201,9 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public boolean isWorkOrderExists(String wordernumber) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  wotable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wordernumber + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

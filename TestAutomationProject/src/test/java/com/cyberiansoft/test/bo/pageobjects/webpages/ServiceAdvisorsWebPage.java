@@ -109,7 +109,9 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	public ServiceAdvisorsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(serviceadvisorstable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(serviceadvisorstable.getWrappedElement()));
 	}
 	
 	
@@ -225,15 +227,18 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 
 	public void selectSearchClient(String _client) throws InterruptedException  { 
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		searchclientcbx.click();
 		searchclientcbx.sendKeys(_client);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _client + "']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _client + "']")));
 		driver.findElement(By.xpath("//li[text()='" + _client + "']")).click();
 	}
 	
 	public boolean isServiceAdvisorExists(String firstname, String lastname) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

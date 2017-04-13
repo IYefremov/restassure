@@ -93,6 +93,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	public NewEmployeeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectNewEmployeeTeam(String employeeteam) {
@@ -219,8 +220,9 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectEmployeeRole(String employeerole) {
+		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(rolescheckboxes));
-		//waitABit(300);
+		waitABit(300);
 		checkboxSelect((WebElement) rolescheckboxes.findElement(By.xpath(".//label[text()='" + employeerole + "']")));
 	}
 	

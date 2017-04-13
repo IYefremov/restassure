@@ -27,22 +27,26 @@ public class SuperUserWebPage  extends BaseWebPage {
 	public SuperUserWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public ApplicationsWebPage clickApplicationsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(applicationslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(applicationslink)));
 		return PageFactory.initElements(
 				driver, ApplicationsWebPage.class);
 	}
 	
 	public AllUsersWebPage clickAllUsersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(alluserslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(alluserslink)));
 		return PageFactory.initElements(
 				driver, AllUsersWebPage.class);
 	}
 	
 	public AllEmployeesWebPage clickAllEmployeesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(allemployeeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(allemployeeslink)));
 		return PageFactory.initElements(
 				driver, AllEmployeesWebPage.class);
 	}

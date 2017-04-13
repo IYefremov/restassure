@@ -51,6 +51,7 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	public BackofficePaginationPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	
@@ -65,40 +66,45 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	}
 	
 	public String getGoToPageFieldValue() {
-		wait.until(ExpectedConditions.visibilityOf(gotopagefld));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(gotopagefld));
 		return gotopagefld.getAttribute("value");
 	}
 	
 	public void setPageSize(String pagesize) throws InterruptedException {
 		pagesizefld.clear();
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
 		changesizebtn.click();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void clickGoToLastPage() {
 		gotolastpage.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+		new WebDriverWait(driver, 10)
+				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 	}
 	
 	public void clickGoToNextPage()  {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		gotonextpage.click();		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
 	}
 	
 	public void clickGoToPreviousPage() {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
 	}
 	
 }

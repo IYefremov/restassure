@@ -126,6 +126,7 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 	public NewInspectionTypeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void setNewInspectionTypeName(String insptypename) {
@@ -141,7 +142,7 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectUseNewPrintingCheckBox() {
-		//waitABit(300);
+		waitABit(300);
 		checkboxSelect(insptypeusenewprintingcmbox);
 	}
 	
@@ -207,7 +208,7 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 		packagevisualinspcmb.getWrappedElement().click();
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", packagevisualinspdd.getWrappedElement().findElement(By.xpath("./div/ul/li[text()='" + packagetype + "']")));
 		packagevisualinspdd.getWrappedElement().findElement(By.xpath("./div/ul/li[text()='" + packagetype + "']")).click();
-		//waitABit(300);
+		waitABit(300);
 		clickAndWait(insertvisulinspbtn);
 		Assert.assertEquals(visualformstable.getTableRowCount(), rowcountbefore+1);
 	}

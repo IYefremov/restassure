@@ -28,7 +28,9 @@ public class InspectionTypesWebPage extends BaseWebPage {
 	public InspectionTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(inspectiontypestable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(inspectiontypestable.getWrappedElement()));
 	}
 
 	public List<WebElement> getInspectionTypesTableRows() {
@@ -52,7 +54,9 @@ public class InspectionTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isInspectionTypeExists(String insptype) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  inspectiontypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insptype + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -79,6 +83,7 @@ public class InspectionTypesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithInspectionType(insptype);
 		row.findElement(By.xpath(".//td[" + inspectiontypestable.getTableColumnIndex("Vehicle Info") + "]/a")).click();
 		waitForNewTab();
+		driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 			if (!activeHandle.equals(mainWindowHandle)) {
 			   driver.switchTo().window(activeHandle);

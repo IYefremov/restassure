@@ -44,6 +44,7 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	public EmailTemplatesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddMailTemplateButton() {
@@ -108,7 +109,9 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isEmailTemplateExists(String templatename) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  emailtemplatestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + templatename + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

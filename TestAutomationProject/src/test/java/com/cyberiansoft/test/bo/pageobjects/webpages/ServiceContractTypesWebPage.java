@@ -54,11 +54,13 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 	public ServiceContractTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void waitServiceContractTypesPageIsLoaded() { 
-		//waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(servicecontracttypestable.getWrappedElement()));
+		waitABit(1000);
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(servicecontracttypestable.getWrappedElement()));
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='Service Contract Types']")).isDisplayed());
 	}
 	
@@ -140,7 +142,9 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isServiceContractTypeExists(String servicecontacttype) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  servicecontracttypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicecontacttype + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

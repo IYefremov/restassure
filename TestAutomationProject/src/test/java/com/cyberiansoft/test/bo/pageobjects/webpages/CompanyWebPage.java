@@ -96,160 +96,187 @@ public class CompanyWebPage extends BaseWebPage {
 	public CompanyWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public ClientsWebPage clickClientsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(clientslink));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(clientslink)));
 		return PageFactory.initElements(
 				driver, ClientsWebPage.class);
 	}
 	
 	public ServicePackagesWebPage clickServicePackagesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicepackageslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(servicepackageslink)));
 		return PageFactory.initElements(
 				driver, ServicePackagesWebPage.class);
 	}
 	
 	public UsersWebPage clickUsersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(userslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(userslink)));
 		return PageFactory.initElements(
 				driver, UsersWebPage.class);
 	}
 	
 	public EmployeesWebPage clickEmployeesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(employeeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(employeeslink)));
 		return PageFactory.initElements(
 				driver, EmployeesWebPage.class);
 	}
 	
 	public ServicesWebPage clickServicesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(serviceslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(serviceslink)));
 		return PageFactory.initElements(
 				driver, ServicesWebPage.class);
 	}
 	
 	public TeamsWebPage clickTeamsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(teamslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(teamslink)));
 		return PageFactory.initElements(
 				driver, TeamsWebPage.class);
 	}
 	
 	public JobsWebPage clickJobsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(jobslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(jobslink)));
 		return PageFactory.initElements(
 				driver, JobsWebPage.class);
 	}
 	
 	public AreasWebPage clickAreasLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(areaslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(areaslink)));
 		return PageFactory.initElements(
 				driver, AreasWebPage.class);
 	}
 	
 	public EmailTemplatesWebPage clickEmailTemplatesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(emailtemplateslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(emailtemplateslink)));
 		return PageFactory.initElements(
 				driver, EmailTemplatesWebPage.class);
 	}
 	
 	public PrintServersWebPage clickPrintServersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printserverslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(printserverslink)));
 		return PageFactory.initElements(
 				driver, PrintServersWebPage.class);
 	}
 	
 	public PrintTemplatesWebPage clickPrintTemplatesConfigurationsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printtemplatesconfiglink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(printtemplatesconfiglink)));
 		return PageFactory.initElements(
 				driver, PrintTemplatesWebPage.class);
 	}
 	
 	public InsuranceCompaniesWePpage clickInsuranceCompaniesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(insurancecompanieslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(insurancecompanieslink)));
 		return PageFactory.initElements(
 				driver, InsuranceCompaniesWePpage.class);
 	}
 	
 	public ServiceAdvisorsWebPage clickServiceAdvisorsLink() {
-		click(wait .until(ExpectedConditions.elementToBeClickable(serviceadvisorslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(serviceadvisorslink)));
 		return PageFactory.initElements(
 				driver, ServiceAdvisorsWebPage.class);
 	}
 	
 	public QuestionsFormsWebPage clickQuestionsFormsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(questionsformslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(questionsformslink)));
 		return PageFactory.initElements(
 				driver, QuestionsFormsWebPage.class);
 	}
 	
 	public InspectionTypesWebPage clickInspectionTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(inspectiontypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(inspectiontypeslink)));
 		return PageFactory.initElements(
 				driver, InspectionTypesWebPage.class);
 	}
 	
 	public SuppliesWebPage clickSuppliesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(supplieslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(supplieslink)));
 		return PageFactory.initElements(
 				driver, SuppliesWebPage.class);
 	}
 
 	public ExpensesTypesWebPage clickExpensesTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(expensestypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(expensestypeslink)));
 		return PageFactory.initElements(
 				driver, ExpensesTypesWebPage.class);
 	}
 	
 	public InvoiceTypesWebPage clickInvoiceTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(invoicetypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(invoicetypeslink)));
 		return PageFactory.initElements(
 				driver, InvoiceTypesWebPage.class);
 	}
 	
 	public WorkOrderTypesWebPage clickWorkOrderTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(workordertypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(workordertypeslink)));
 		return PageFactory.initElements(
 				driver, WorkOrderTypesWebPage.class);
 	}
 	
 	public PriceMatricesWebPage clickPriceMatricesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(pricematriceslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(pricematriceslink)));
 		return PageFactory.initElements(
 				driver, PriceMatricesWebPage.class);
 	}
 	
 	public ServiceContractTypesWebPage clickServiceContractTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicecontracttypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(servicecontracttypeslink)));
 		return PageFactory.initElements(
 				driver, ServiceContractTypesWebPage.class);
 	}
 	
 	public ServiceRequestTypesWebPage clickServiceRequestTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicerequesttypeslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(servicerequesttypeslink)));
 		return PageFactory.initElements(
 				driver, ServiceRequestTypesWebPage.class);
 	}
 	
 	public VehiclePartsWebPage clickVehiclePartsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(vehiclepartslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(vehiclepartslink)));
 		return PageFactory.initElements(
 				driver, VehiclePartsWebPage.class);
 	}
 	
 	public TimesheetTypesWebPage clickTimesheetTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(timesheetypesslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(timesheetypesslink)));
 		return PageFactory.initElements(
 				driver, TimesheetTypesWebPage.class);
 	}
 	
 	public ManageLicencesWebPage clickManageLicencesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(managelicenceslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(managelicenceslink)));
 		return PageFactory.initElements(
 				driver, ManageLicencesWebPage.class);
 	}
 	
 	public ActiveDevicesWebPage clickManageDevicesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(managedeviceslink)));
+		click(new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.elementToBeClickable(managedeviceslink)));
 		return PageFactory.initElements(
 				driver, ActiveDevicesWebPage.class);
 	}

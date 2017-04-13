@@ -52,6 +52,7 @@ public class NewServiceDialogWebPage extends BaseWebPage {
 	public NewServiceDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void setNewServiceName(String servicename) {

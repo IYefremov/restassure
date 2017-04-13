@@ -82,6 +82,7 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	public VendorsTeamsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -152,7 +153,8 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyVendorsTeamsTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(vendorsteamstable.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vendorsteamstable.getWrappedElement()));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Guests"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Vendor/Team"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Type"));
@@ -164,12 +166,16 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isVendorTeamExists(String vendorteam) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  vendorsteamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + vendorteam + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public boolean isArchivedVendorTeamExists(String vendorteam) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  archivedvendorsteamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + vendorteam + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -261,7 +267,8 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickActiveTab() throws InterruptedException {
-		wait.until(ExpectedConditions.elementToBeClickable(activetab));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
 	}
 	
@@ -300,6 +307,7 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 		
 		waitForNewTab();
     	String mainWindowHandle = driver.getWindowHandle();
+    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 	        if (!activeHandle.equals(mainWindowHandle)) {
 	        	driver.switchTo().window(activeHandle);
@@ -309,10 +317,12 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectTeamGuestEmployees(String employeename) {	
-		wait.until(ExpectedConditions.visibilityOf(teamguestemployeecmb)).click();
+    	new WebDriverWait(driver, 5)
+		  .until(ExpectedConditions.visibilityOf(teamguestemployeecmb)).click();
     	teamguestemployeecmb.sendKeys(employeename);
-    	//waitABit(1000);  	
-    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[text()='" + employeename + "']"))).click();
+    	waitABit(1000);  	
+    	new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[text()='" + employeename + "']"))).click();
 	}
 	
 	public void clickAddTeamGuestEmployeesButton() {
@@ -329,7 +339,9 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isTeamGuestEmployeesExists(String employeename) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  teamguestemployeestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

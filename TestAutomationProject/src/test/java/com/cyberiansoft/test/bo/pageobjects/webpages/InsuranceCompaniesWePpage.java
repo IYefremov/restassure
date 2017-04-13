@@ -55,7 +55,9 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 	public InsuranceCompaniesWePpage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(insurancecompaniestable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(insurancecompaniestable.getWrappedElement()));
 	}
 	
 	public void clickAddInsuranceCompanyButton() {
@@ -143,7 +145,9 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 	}
 	
 	public boolean isInsuranceCompanyExists(String insurancecompany) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  insurancecompaniestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insurancecompany + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

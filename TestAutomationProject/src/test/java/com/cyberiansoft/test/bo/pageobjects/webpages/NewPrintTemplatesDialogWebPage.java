@@ -45,7 +45,9 @@ public class NewPrintTemplatesDialogWebPage extends WebPageWithPagination {
 	public NewPrintTemplatesDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(printtemplatecategorycmb.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(printtemplatecategorycmb.getWrappedElement()));
 	}
 	
 	public void createNewPrintTemplate(String ptcategory, String pttype, String ptname, boolean ptdefault) {

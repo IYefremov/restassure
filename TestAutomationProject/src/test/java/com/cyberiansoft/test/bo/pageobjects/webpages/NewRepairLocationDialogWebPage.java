@@ -69,6 +69,7 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	public NewRepairLocationDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void createNewRepairLocation(String repairlocationname) {
@@ -118,10 +119,13 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 		final String datecheckboxxpath = "Card_cb" + workingday;
 		final String starttimexpath = "Card_rtp" + workingday + "Start_dateInput";
 		final String finishtimexpath = "Card_rtp" + workingday + "Finish_dateInput";
+		this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		if (driver.findElements(By.xpath("//label[contains(@id, '" + datecheckboxxpath + "')]")).size() > 0)
 			driver.findElement(By.xpath("//label[contains(@id, '" + datecheckboxxpath + "')]")).click();
 		else 
-			driver.findElement(By.xpath("//input[contains(@id, '" + datecheckboxxpath + "')]")).click();		
+			driver.findElement(By.xpath("//input[contains(@id, '" + datecheckboxxpath + "')]")).click();
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		
 		new TextFieldImpl(driver.findElement(By.xpath("//input[contains(@id, '" + starttimexpath + "')]"))).clearAndType(starttime);
 		new TextFieldImpl(driver.findElement(By.xpath("//input[contains(@id, '" + finishtimexpath + "')]"))).clearAndType(finishtime);
@@ -131,21 +135,21 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	
 	public NewRepairLocationDialogWebPage selectAddressInfoTab() {
 		driver.findElement(By.xpath("//span[text()='Address Info']")).click();
-		wait.until(ExpectedConditions.visibilityOf(locationaddressfld.getWrappedElement()));
-		wait.until(ExpectedConditions.visibilityOf(locationaddress2fld.getWrappedElement()));
-		wait.until(ExpectedConditions.visibilityOf(locationcityfld.getWrappedElement()));
-		wait.until(ExpectedConditions.visibilityOf(locationcountrycmb));
-		wait.until(ExpectedConditions.visibilityOf(locationstatecmb));
-		wait.until(ExpectedConditions.visibilityOf(locationzipfld.getWrappedElement()));
-		wait.until(ExpectedConditions.visibilityOf(locationmailfld.getWrappedElement()));
-		wait.until(ExpectedConditions.visibilityOf(locationphonefld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationaddressfld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationaddress2fld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationcityfld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationcountrycmb));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationstatecmb));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationzipfld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationmailfld.getWrappedElement()));
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(locationphonefld.getWrappedElement()));
 		return PageFactory.initElements(
 				driver, NewRepairLocationDialogWebPage.class);
 	}
 	
 	public NewRepairLocationDialogWebPage selectWorkingHoursTab() {
 		driver.findElement(By.xpath("//span[text()='Working Hours']")).click();
-		wait.until(ExpectedConditions.
+		new WebDriverWait(driver, 30).until(ExpectedConditions.
 				visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(text(), 'Once Time Zone is set, it cannot be changed')]")));
 		return PageFactory.initElements(
 				driver, NewRepairLocationDialogWebPage.class);

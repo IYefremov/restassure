@@ -103,7 +103,9 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	public ServiceRequestsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -164,7 +166,8 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifySearchResultsByVehicleInfo(String vehicleinfo) {
-		wait.until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + vehicleinfo + "']")))); 
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + vehicleinfo + "']")))); 
 	}
 
 	public void createServiceRequest(String devicefordispatch,
@@ -175,7 +178,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
 		click(setdefaultdevicebtn);
-		//Thread.sleep(5000);
+		Thread.sleep(5000);
 		addservicerequestcmbbox.click();
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='" + servicerequest
@@ -197,7 +200,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		addservicelink.click();
 		teamcmbbox.click();
 		driver.findElement(
@@ -216,32 +219,32 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 
 	public void clickSaveBtn() {
 		click(savebtn);
-		//waitABit(4000);
+		waitABit(4000);
 	}
 
 	public void clickDispatchBtn() {
 		click(dispatchbtn);
-		//waitABit(4000);
+		waitABit(4000);
 	}
 
 	public void clickEditBtn() {
 		click(editsevicebtn);
-		//waitABit(1000);
+		waitABit(1000);
 	}
 
 	public void clickCustomerTab() {
 		click(customertab);
-		//waitABit(1000);
+		waitABit(1000);
 	}
 
 	public void clickVehicleInfoTab() {
 		click(vehicleinfotab);
-		//waitABit(1000);
+		waitABit(1000);
 	}
 
 	public void clickServicesTab() {
 		click(servicestab);
-		//waitABit(1000);
+		waitABit(1000);
 	}
 
 	public void selectCustomer(String customer) {
@@ -256,7 +259,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 			}
 		}
 
-		//waitABit(2000);
+		waitABit(2000);
 	}
 
 	public void setVIN(String vin) {
@@ -264,11 +267,11 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 
 	public void selectSelectServiceType(String servicetype) {
-		//waitABit(2000);
+		waitABit(2000);
 		click(driver.findElement(
 				By.xpath("//tr/td[contains(text(),'" + servicetype + "')]")));
 		click(moverightbtn);
-		//waitABit(4000);
+		waitABit(4000);
 	}
 
 	public void setServiceTypeQuantity(String servicetype, String quantity) {
@@ -284,7 +287,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 						.sendKeys(quantity);
 			}
 		}
-		//waitABit(3000);
+		waitABit(3000);
 	}
 
 }

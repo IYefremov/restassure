@@ -97,7 +97,9 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	public AddEditClientUsersDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(clientchkbox));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(clientchkbox));
 	}
 	
 	public void setUserEmail(String useremail) {

@@ -82,6 +82,7 @@ public class NewVendorTeamDialogWebPage extends BaseWebPage {
 	public NewVendorTeamDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void setNewVendorTeamName(String vendorname) {
@@ -137,8 +138,9 @@ public class NewVendorTeamDialogWebPage extends BaseWebPage {
 	public void selectNewVendorTeamHOUSEAccount(String vendorhouseaccount) {
 		vendorhouseaccountcmb.click();
 		vendorhouseaccountcmb.clearAndType(vendorhouseaccount);
-		wait.until(ExpectedConditions.visibilityOf(vendorhouseaccountdd.getWrappedElement()));
-		//waitABit(1000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vendorhouseaccountdd.getWrappedElement()));
+		waitABit(1000);
 		vendorhouseaccountdd.selectByVisibleText(vendorhouseaccount);
 	}
 	
@@ -147,11 +149,13 @@ public class NewVendorTeamDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectNewVendorTeamDefaultTechnician(String vendordeftech) {
-		wait.until(ExpectedConditions.elementToBeClickable(vendordefaulttechniciancmb.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(vendordefaulttechniciancmb.getWrappedElement()));
 		vendordefaulttechniciancmb.click();
 		vendordefaulttechniciancmb.clearAndType(vendordeftech);
-		wait.until(ExpectedConditions.visibilityOf(vendordefaulttechniciandd.getWrappedElement()));
-		//waitABit(1000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(vendordefaulttechniciandd.getWrappedElement()));
+		waitABit(1000);
 		vendordefaulttechniciandd.selectByVisibleText(vendordeftech);
 	}
 	

@@ -45,6 +45,7 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	public MonitorSettingsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public List<WebElement>  getOrderStatusReasonsTableRows() {
@@ -62,7 +63,9 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	}
 	
 	public boolean isOrderStatusReasonExists(String orderstatusreason) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  orderstatusreasonstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + orderstatusreason + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

@@ -28,7 +28,9 @@ public class ClientContactsWebPage extends BaseWebPage{
 	public ClientContactsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
 	
 	
@@ -40,14 +42,17 @@ public class ClientContactsWebPage extends BaseWebPage{
 	
 	
 	public boolean isClientContactExistsInTable(String contactfstname, String contactlstname) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  clientcontactstable.getWrappedElement().
 				findElements(By.xpath(".//td/b[text()='" + contactfstname + " " + contactlstname + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	
 	public List<WebElement>  getClientContactsTableRows() {
-		wait.until(ExpectedConditions.visibilityOf(clientcontactstable.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(clientcontactstable.getWrappedElement()));
 		return clientcontactstable.getTableRows();
 	}
 	

@@ -107,6 +107,7 @@ public class WorkOrderTypesWebPage extends BaseWebPage {
 	public WorkOrderTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddWorkOrderTypeButton() {
@@ -243,7 +244,9 @@ public class WorkOrderTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isWorkOrderTypeExists(String wotype) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  wotypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wotype + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

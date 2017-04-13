@@ -34,9 +34,11 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	public InvoicePaymentsTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public List<WebElement> getInvoicesPaymentsTableRows() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(paymentsnotestable.getWrappedElement()));
 		return paymentsnotestable.getTableRows();
 	}

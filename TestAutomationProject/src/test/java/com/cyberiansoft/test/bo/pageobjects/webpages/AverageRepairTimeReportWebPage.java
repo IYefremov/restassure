@@ -61,10 +61,12 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 	public AverageRepairTimeReportWebPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.visibilityOf(searchbtn));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(searchbtn));
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -91,17 +93,19 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 	}
 	
 	public void clickFindButton() { 
-		//waitABit(300);
+		waitABit(300);
 		clickAndWait(findbtn);
 	}
 	
 	public void verifySearchResults(String location, String wotype) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wotype + "']")));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wotype + "']")));
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wotype + "']")).isDisplayed());
 	}
 	
 	public void verifyDetailReportSearchResults(String location, String wotype, String VIN, String make, String model, String year) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wotype + "']")));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wotype + "']")));
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wotype + "']")).isDisplayed());
 		
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + VIN + "']")).isDisplayed());

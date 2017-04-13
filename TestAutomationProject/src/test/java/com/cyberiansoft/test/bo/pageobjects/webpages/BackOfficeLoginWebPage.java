@@ -28,10 +28,12 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 	public BackOfficeLoginWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void UserLogin(String userName, String userPassword) {
-		wait.until(ExpectedConditions.visibilityOf(loginbtn));
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(loginbtn));
 		clearAndType(usernamefld, userName);
 		clearAndType(userpasswordfld, userPassword);
 		click(loginbtn);

@@ -39,6 +39,7 @@ public class SendInspectionCustomEmailTabWebPage extends BaseWebPage {
 	public SendInspectionCustomEmailTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void setEmailToValue(String emailto) {
@@ -63,7 +64,8 @@ public class SendInspectionCustomEmailTabWebPage extends BaseWebPage {
 	
 	public void clickSendEmailButton() {
 		clickAndWait(sendbtn);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Your message has been sent.']")));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Your message has been sent.']")));
 	}
 	
 	public void clickCloseButton() {

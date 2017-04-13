@@ -54,10 +54,11 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	public InvoiceEditTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddPOPayButton() {
-		//waitABit(3000);
+		waitABit(3000);
 		Actions act  = new Actions(driver);
 		act.click(addpopaybtn).perform();
 	}
@@ -65,12 +66,13 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	public void clickSaveInvoiceButton() {
 		Actions act  = new Actions(driver);
 		act.click(saveinvoicebtn).perform();
-		//waitABit(1000);
+		waitABit(1000);
 	}
 	
 	public String clickAddPOPayButtonAndAcceptPayment() {
 		clickAddPOPayButton();
-		wait.until(ExpectedConditions.alertIsPresent());
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		String alerttext = alert.getText();
 		alert.accept();
@@ -93,7 +95,8 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			/*new WebDriverWait(driver, 5)
 			  .until(ExpectedConditions.alertIsPresent());*/
 			try {
-				wait.until(ExpectedConditions.alertIsPresent());
+			WebDriverWait wait = new WebDriverWait(driver, 3);
+			wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.dismiss();
 			} catch (Exception e) {
@@ -101,11 +104,11 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			}
 			//Alert alert = driver.switchTo().alert();
 			//alert.dismiss();
-			//waitABit(1000);
+			waitABit(1000);
 			act.click(addpobtn).perform(); 
-			//waitABit(1000);
+			waitABit(1000);
 			if (!ponumberfld.isDisplayed()) {		
-				//waitABit(1000);
+				waitABit(1000);
 				act.click(addpobtn).perform(); 
 			}
 		} else {
@@ -136,7 +139,8 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	}
 	
 	public void clickTechniciansLink() {
-		wait.until(ExpectedConditions.visibilityOf(technicianslink));
+		new WebDriverWait(driver, 60)
+		 .until(ExpectedConditions.visibilityOf(technicianslink));
 		click(technicianslink);
 	}
 	
@@ -156,6 +160,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			clickSaveInvoiceButton();
 			
 			try {
+				WebDriverWait wait = new WebDriverWait(driver, 3);
 				wait.until(ExpectedConditions.alertIsPresent());
 					Alert alert = driver.switchTo().alert();
 					alert.dismiss();
@@ -163,9 +168,9 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 					
 				}		
 		}
-		//waitABit(2000);
+		waitABit(2000);
 		clickClickHereToAddNotes();
-		//waitABit(300);
+		waitABit(300);
 		Actions act  = new Actions(driver);
 		act.sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), notes).perform();
 	}
@@ -195,7 +200,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 		invoicecustomer.click();
 		customerwholesaleradio.click();
 		entercustomerwholesalefld.sendKeys(customername.substring(0, 3));
-		//waitABit(2000);
+		waitABit(2000);
 		driver.findElement(By.xpath("//ul/li/div[text()='" + customername + "']")).click();
 	}
 	

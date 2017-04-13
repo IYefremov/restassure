@@ -65,7 +65,9 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	public QuestionsFormsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(questionformstable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(questionformstable.getWrappedElement()));
 	}
 	
 	public void verifyQuestionSectionsTableColumnsAreVisible() {		
@@ -75,7 +77,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	}
 	
 	public void verifyQuestionFormsTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(questionsectionstable.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(questionsectionstable.getWrappedElement()));
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[contains(text(), 'Question Forms')]")).isDisplayed());
 		Assert.assertTrue(questionsectionstable.isTableColumnExists("Section"));
 		Assert.assertTrue(questionsectionstable.isTableColumnExists("Expanded"));
@@ -83,7 +86,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	}
 	
 	public void verifyPrintTemplatesTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(printtemplatestable.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(printtemplatestable.getWrappedElement()));
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[contains(text(), 'Print Templates')]")).isDisplayed());
 		Assert.assertTrue(printtemplatestable.isTableColumnExists("Print Template"));
 		Assert.assertTrue(printtemplatestable.isTableColumnExists("Description"));
@@ -147,14 +151,16 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	
 	public void createQuestionForm(String questionformname) {
 		clickAddQuestionFormButton();
-		wait.until(ExpectedConditions.elementToBeClickable(newquestionformmefld.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(newquestionformmefld.getWrappedElement()));
 		setNewQuestionFormName(questionformname);
 		clickNewQuestionFormOKButton();
 	}
 	
 	public void createQuestionFormAndAssignSection(String questionformname, String sectionname) {
 		clickAddQuestionFormButton();
-		wait.until(ExpectedConditions.elementToBeClickable(newquestionformmefld.getWrappedElement()));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(newquestionformmefld.getWrappedElement()));
 		setNewQuestionFormName(questionformname);
 		assignSectionToQuestionForm(sectionname);
 		clickNewQuestionFormOKButton();
@@ -196,7 +202,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	}
 	
 	public void assignSectionToQuestionForm(String questionsectionname) {
-		wait.until(ExpectedConditions.elementToBeClickable(listofavailablesections));
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(listofavailablesections));
 		Select availablesections = new Select(listofavailablesections);
 		availablesections.selectByVisibleText(questionsectionname);
 		click(availablesectionsaddtoassignedbtn);
@@ -212,7 +219,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			WebElement questionformcontent =  wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[@id='ctl00_tdContent']"))));
+			WebElement questionformcontent =  new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[@id='ctl00_tdContent']"))));
 			Assert.assertTrue(questionformcontent.findElement(By.xpath(".//td/b[contains(text(), '" + questionname + "')]")).isDisplayed());			
 			driver.close();
 			driver.switchTo().window(parent);
@@ -232,7 +240,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 		for (WebElement questionformsrow : questionformsrows) {
 			if (questionformsrow.getText().contains(questionformname)) {
 				questionformsrow.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-				wait.until(ExpectedConditions.alertIsPresent());
+				new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				waitUntilPageReloaded();
@@ -246,7 +255,8 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 		for (WebElement questionsectionsrow : questionsectionsrows) {
 			if (questionsectionsrow.getText().contains(questionsectionname)) {
 				questionsectionsrow.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-				wait.until(ExpectedConditions.alertIsPresent());
+				new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				waitUntilPageReloaded();
@@ -256,12 +266,16 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	}
 	
 	public boolean isQuestionFormExists(String questionformname) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  questionformstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionformname + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}	
 	
 	public boolean isQuestionSectionExists(String questionsectionname) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  questionsectionstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionsectionname + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 }

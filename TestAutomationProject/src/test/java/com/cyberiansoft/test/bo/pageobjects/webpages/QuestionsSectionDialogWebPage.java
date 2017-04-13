@@ -85,6 +85,7 @@ public class QuestionsSectionDialogWebPage extends BaseWebPage {
 	public QuestionsSectionDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void createNewQuestionForQuestionSection(String questionname) {
@@ -159,7 +160,8 @@ public class QuestionsSectionDialogWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithQuestion(questionname);
 		if (row != null) {
 			row.findElement(By.xpath(".//td[4]/a")).click();
-			wait.until(ExpectedConditions.visibilityOf(backtoquestionslink));
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.visibilityOf(backtoquestionslink));
 		} else {
 			Assert.assertTrue(false, "Can't find " + questionname + " question for question section");	
 		}
@@ -214,7 +216,8 @@ public class QuestionsSectionDialogWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithAnswer(answertype);
 		if (row != null) {
 			clickEditTableRow(row);
-			wait.until(ExpectedConditions.visibilityOf(backtoquestionslink));
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.visibilityOf(backtoquestionslink));
 		} else {
 			Assert.assertTrue(false, "Can't find " + answertype + " answer");	
 		}

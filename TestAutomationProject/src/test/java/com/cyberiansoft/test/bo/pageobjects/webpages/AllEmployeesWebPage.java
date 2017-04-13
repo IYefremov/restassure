@@ -45,7 +45,9 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	public AllEmployeesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -74,10 +76,11 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchApplication(String _application) throws InterruptedException {
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
+		new WebDriverWait(driver, 20)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
 		//driver.findElement(By.xpath("//li/em[text()='" + _application + "']")).click();
 	}
 	
@@ -107,9 +110,12 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gvEmployee_ctl00"))).isDisplayed();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00"))).isDisplayed();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_EmployeeCommissions_gv_ctl00"))).isDisplayed();
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gvEmployee_ctl00"))).isDisplayed();
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00"))).isDisplayed();
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_EmployeeCommissions_gv_ctl00"))).isDisplayed();
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);

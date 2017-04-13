@@ -64,10 +64,12 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	public ManageLicencesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.visibilityOf(searchbtn)).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(searchbtn)).click();
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -146,7 +148,9 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	
 	
 	public boolean isLicenceApplicationExists(String licenceapp) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  managelicensestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + licenceapp + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

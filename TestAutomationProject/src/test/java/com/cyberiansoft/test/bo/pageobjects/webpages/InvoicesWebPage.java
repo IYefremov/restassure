@@ -100,11 +100,14 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	public InvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void verifyInvoicesTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(invoicestable.getWrappedElement()));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(invoicestable.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		Assert.assertTrue(invoicestable.isTableColumnExists("Invoice #"));
 		Assert.assertTrue(invoicestable.isTableColumnExists("Date"));
 		Assert.assertTrue(invoicestable.isTableColumnExists("Status"));
@@ -155,15 +158,17 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public boolean invoicesTableIsVisible() {
-		wait.until(ExpectedConditions.visibilityOf(invoicestable.getWrappedElement()));
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(invoicestable.getWrappedElement()));
 		return invoicestable.isDisplayed();
 	}
 	
 	public void selectSearchCustomer(String customer)  { 
 		searchclientscmb.click();
 		searchclientscmb.clearAndType(customer);
-		wait.until(ExpectedConditions.visibilityOf(searchclientsdd.getWrappedElement()));
-		//waitABit(1000);
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(searchclientsdd.getWrappedElement()));
+		waitABit(1000);
 		searchclientsdd.selectByVisibleText(customer);
 	}
 	
@@ -172,7 +177,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void setSearchFromDate(String date, String month, String year) throws InterruptedException { 
-		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_calendar_Title")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();		
@@ -194,13 +200,15 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void setSearchToDate(String date, String month, String year) throws InterruptedException {
-		wait.until(ExpectedConditions.elementToBeClickable(searchtopopupbtn)).click();
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.elementToBeClickable(searchtopopupbtn)).click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_calendar_Title")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
 		//Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
 	public void selectSearchStatus(WebConstants.InvoiceStatuses status) {
@@ -224,7 +232,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public boolean isInvoiceNumberExists(String invoicenum) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  invoicestable.getWrappedElement().findElements(By.xpath(".//tr/td/a[text()='" + invoicenum + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -265,10 +275,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(@id, 'comboStatus_Arrow')]")).click();
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@id, 'comboStatus_DropDown')]"))));
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@id, 'comboStatus_DropDown')]"))));
 			driver.findElement(By.xpath("//div[contains(@id, 'comboStatus_DropDown')]")).
 			findElement(By.xpath(".//ul/li/a[text()='" + invoicestatus + "']")).click();
-			wait.until(ExpectedConditions.alertIsPresent()).accept();
+			new WebDriverWait(driver, 30)
+			  .until(ExpectedConditions.alertIsPresent()).accept();
 			waitUntilPageReloaded();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
@@ -290,7 +302,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath(".//span[text()='Select']"))).click().build().perform();
-			//waitABit(300);
+			waitABit(300);
 			//act.click(row.findElement(By.xpath(".//span[text()='Select']"))).build().perform();
 		}	
 		return row;		
@@ -298,14 +310,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	
 	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) {
 		WebElement row = clickSelectButtonForInvoice(invoicenumber);
-		//waitABit(1000);
+		waitABit(1000);
 		if (row != null) {
-			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+			new WebDriverWait(driver, 10)
+			.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 			Actions act = new Actions(driver);
 			if (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']")).isDisplayed()) {				
 				act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
 			}
-			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+			new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
 			act.click(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
@@ -352,6 +366,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	    String mainWindowHandle = driver.getWindowHandle();
 	    clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
 	    waitForNewTab();
+		driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 			if (!activeHandle.equals(mainWindowHandle)) {
 			   driver.switchTo().window(activeHandle);
@@ -424,7 +439,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
 		}
 		driver.findElement(By.xpath("//span[@class='rtbText' and text()='Archive']")).click();;
-		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.alertIsPresent()).accept();
 		waitUntilPageReloaded();
 	}
 	

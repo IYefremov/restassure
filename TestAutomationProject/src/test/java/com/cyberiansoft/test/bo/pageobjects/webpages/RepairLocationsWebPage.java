@@ -51,7 +51,9 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	public RepairLocationsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 20)
+		  .until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -128,6 +130,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='Phases']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -144,6 +147,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='Services']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -160,6 +164,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='Departments']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -176,6 +181,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='Clients']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -192,6 +198,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='Managers']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -208,6 +215,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			click(row.findElement(By.xpath(".//a[text()='User Settings']")));
 			waitForNewTab();
 		    String mainWindowHandle = driver.getWindowHandle();
+		    driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
 					driver.switchTo().window(activeHandle);
@@ -281,7 +289,9 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isRepairLocationExists(String repairlocation) {
+		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  repairlocationstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocation + "']")).size() > 0;
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 }

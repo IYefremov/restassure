@@ -54,7 +54,9 @@ public class ApplicationsWebPage extends WebPageWithPagination {
 	public ApplicationsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(applicationstable.getWrappedElement()));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.visibilityOf(applicationstable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -87,11 +89,12 @@ public class ApplicationsWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchApplication(String _application) throws InterruptedException {
-		//waitABit(1000);
+		waitABit(1000);
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);
-		//waitABit(1000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _application + "']")));
+		waitABit(1000);
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _application + "']")));
 		driver.findElement(By.xpath("//li[text()='" + _application + "']")).click();
 	}
 	
