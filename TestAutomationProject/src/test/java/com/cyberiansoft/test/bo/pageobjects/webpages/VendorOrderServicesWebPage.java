@@ -55,7 +55,6 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	public VendorOrderServicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void setServicesStatus(String _status) {
@@ -79,14 +78,12 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	}
 	
 	public ComboBox getRepairOrderStatusCombobox() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderStatus_Input')]"))));
+		wait.until(ExpectedConditions.visibilityOf(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderStatus_Input')]"))));
 		return new ComboBoxImpl(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderStatus_Input')]")));
 	}
 	
 	public ComboBox getRepairOrderReasonCombobox() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderReason_Input')]"))));
+		wait.until(ExpectedConditions.visibilityOf(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderReason_Input')]"))));
 		return new ComboBoxImpl(tollbarbuttons.findElement(By.xpath(".//input[contains(@id, 'comboOrderReason_Input')]")));
 	}
 	
@@ -97,16 +94,13 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	public void selectRepairOrderReason(String _reason) {
 		if (getBrowserType().equals("firefox")) {		
 			WebElement combobox = getRepairOrderReasonCombobox().getWrappedElement();
-			new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-				.until(ExpectedConditions.elementToBeClickable(combobox));
+			wait.until(ExpectedConditions.elementToBeClickable(combobox));
 			combobox.click();
-			new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-				.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]"))));
-			waitABit(300);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]"))));
+			//waitABit(300);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]")).findElement(By.xpath(".//li[text()='" + _reason + "']")));
 			driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]")).findElement(By.xpath(".//li[text()='" + _reason + "']")).click();
-			new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-				.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]")))));		
+			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]")))));		
 		} else
 			selectComboboxValue(getRepairOrderReasonCombobox(), new DropDownImpl(driver.findElement(By.xpath("//*[contains(@id, 'comboOrderReason_DropDown')]"))), _reason);
 	}

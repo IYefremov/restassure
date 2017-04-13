@@ -52,7 +52,6 @@ public class TrendingReportWebPage extends BaseWebPage {
 	public TrendingReportWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -72,7 +71,7 @@ public class TrendingReportWebPage extends BaseWebPage {
 		click(driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")));
 		click(driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")));
 		click(driver.findElement(By.id("rcMView_OK")));
-		waitABit(1000);
+		//waitABit(1000);
 	}
 	
 	public void setSearchToDate(String month, String year) { 
@@ -80,19 +79,18 @@ public class TrendingReportWebPage extends BaseWebPage {
 		click(driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")));
 		click(driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")));
 		click(driver.findElement(By.id("rcMView_OK")));
-		waitABit(1000);
+		//waitABit(1000);
 	}
 	
 	public void clickFindButton() { 
 		click(findbtn);
-		waitABit(5000);
+		//waitABit(5000);
 		//new WebDriverWait(driver, 10)
 		//  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public void verifySearchResults(String location, String wotype) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + location + "']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + location + "']")));
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + location + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wotype + "']")).isDisplayed());
 	}

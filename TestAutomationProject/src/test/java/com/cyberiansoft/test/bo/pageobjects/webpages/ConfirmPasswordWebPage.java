@@ -24,7 +24,7 @@ public class ConfirmPasswordWebPage extends BaseWebPage {
 	public ConfirmPasswordWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public BackOfficeLoginWebPage confirmUserPassword(String newpassword) {

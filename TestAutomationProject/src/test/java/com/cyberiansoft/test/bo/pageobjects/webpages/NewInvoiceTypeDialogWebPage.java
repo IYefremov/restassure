@@ -89,7 +89,6 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	public NewInvoiceTypeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void createInvoiceType(String invoicetype) {
@@ -142,7 +141,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectNewInvoiceTypeWholesalePrintTemplate(String wholesailprinttemplate) {
-		waitABit(300);
+		//waitABit(300);
 		selectComboboxValue(wholesaleprinttemplatecmb, wholesaleprinttemplatedd, wholesailprinttemplate);
 	}
 	
@@ -151,7 +150,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void selectUseNewPrintingCheckBox() {
-		waitABit(300);
+		//waitABit(300);
 		checkboxSelect(usenewprintingcmbox);
 	}
 	

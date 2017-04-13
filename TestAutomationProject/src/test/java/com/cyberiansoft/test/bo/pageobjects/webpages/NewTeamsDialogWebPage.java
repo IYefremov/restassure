@@ -100,7 +100,6 @@ public class NewTeamsDialogWebPage extends BaseWebPage {
 	public NewTeamsDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public NewTeamsDialogWebPage setNewTeamName(String team) {

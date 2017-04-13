@@ -47,7 +47,6 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 	public InvoiceTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public NewInvoiceTypeDialogWebPage clickAddInvoiceTypeButton() {
@@ -81,9 +80,7 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isInvoiceTypeExists(String invoicetype) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  invoicestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + invoicetype + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -103,10 +100,8 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 			row.findElement(By.xpath(".//a[text()='Clients']")).click();
 		} else 
 			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");
-		
 		waitForNewTab();
     	String mainWindowHandle = driver.getWindowHandle();
-    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 	        if (!activeHandle.equals(mainWindowHandle)) {
 	        	driver.switchTo().window(activeHandle);
@@ -141,9 +136,8 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 	public void addAssignedClient(String clientname) {
 		assignedclientscmb.click();
 		assignedclientscmb.clearAndType(clientname);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(assignedclientsdd.getWrappedElement()));
-		waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(assignedclientsdd.getWrappedElement()));
+		//waitABit(1000);
 		assignedclientsdd.selectByVisibleText(clientname);
 		addassignedclientbtn.click();
 		waitUntilPageReloaded();
@@ -151,15 +145,12 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 	
 	public void clickUpdateClientsButton() {
 		clickAndWait(updateclientsbtn);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()= 'Clients have been updated for this Invoice Type']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()= 'Clients have been updated for this Invoice Type']")));
 		
 	}
 	
 	public boolean isAssignedClientSelected(String clientname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  assignedclientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

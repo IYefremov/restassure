@@ -41,7 +41,6 @@ public class PrintServersWebPage extends BaseWebPage {
 	public PrintServersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddPrintServerButton() {
@@ -100,9 +99,7 @@ public class PrintServersWebPage extends BaseWebPage {
 	}
 	
 	public boolean isPrintServerExists(String servername) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  printserverstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servername + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

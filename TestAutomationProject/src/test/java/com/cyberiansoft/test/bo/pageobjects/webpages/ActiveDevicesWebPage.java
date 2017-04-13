@@ -39,30 +39,28 @@ public class ActiveDevicesWebPage extends BaseWebPage {
 	public ActiveDevicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	public void setSearchCriteriaByName(String name) {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(searchbtn)).click();
+		wait.until(ExpectedConditions.visibilityOf(searchbtn)).click();
 		filtercriterianame.sendKeys(name);
 		clickAndWait(findbtn);
 	}
 
 	public String getFirstRegCodeInTable() {
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.visibilityOf(devicestable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(devicestable.getWrappedElement()));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
 		if (regcodefld.getText().isEmpty())
 			replacemarker.click();
 		else {
 			devicestable.getWrappedElement().findElement(By.xpath(".//a[text()='x']")).click();
-			waitABit(3000);
+			//waitABit(3000);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
 			replacemarker.click();
 		}
-		waitABit(3000);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));		
+		//waitABit(3000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));	
 		return regcodefld.getText();
 	}
 

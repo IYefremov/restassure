@@ -52,18 +52,15 @@ public class NewInspectionWebPage extends BaseWebPage {
 	public NewInspectionWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectCustomerType(String customertype) throws InterruptedException {
-		Thread.sleep(2000);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(customertypecmb));
+		//Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(customertypecmb));
 		Select selectObject = new Select(customertypecmb);
 		selectObject.selectByValue(customertype);
 		Thread.sleep(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public void selectInspectionType(String insptype) {
@@ -75,12 +72,10 @@ public class NewInspectionWebPage extends BaseWebPage {
 	}
 	
 	public void selectCustomer(String customer) throws InterruptedException {
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.elementToBeClickable(customercmb)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(customercmb)).click();
 		customercmb.sendKeys(customer);
-		Thread.sleep(1000);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + customer + "']"))).click();
+		//Thread.sleep(1000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + customer + "']"))).click();
 	}
 	
 	public void clickSelectCustomerButton() {
@@ -98,8 +93,7 @@ public class NewInspectionWebPage extends BaseWebPage {
 	public void setVINAnddecode(String vin) {
 		setVIN(vin);
 		clickDecodeVINButton();
-		click(new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(closedlgbtn)));
+		click(wait.until(ExpectedConditions.elementToBeClickable(closedlgbtn)));
 	}
 	
 	public void selectService(String servicename)  {		
@@ -107,8 +101,7 @@ public class NewInspectionWebPage extends BaseWebPage {
 	}
 	
 	public void setInspectionDescription(String inspdesc) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(inspectiondescription.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(inspectiondescription.getWrappedElement()));
 		clearAndType(inspectiondescription, inspdesc);
 	}
 	

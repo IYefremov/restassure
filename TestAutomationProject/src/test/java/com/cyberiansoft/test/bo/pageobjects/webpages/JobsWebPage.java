@@ -89,9 +89,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	public JobsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(jobstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(jobstable.getWrappedElement()));
 	}
 	
 	
@@ -194,9 +192,8 @@ public class JobsWebPage extends WebPageWithPagination {
 	public void selectSearchCustomer(String customer) throws InterruptedException  { 
 		searchcustomercbx.click();
 		searchcustomercbx.sendKeys(customer);
-		Thread.sleep(1000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + customer + "']"))).click();
+		//Thread.sleep(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + customer + "']"))).click();
 	}
 	
 	public WebElement getTableRowWithJob(String job) {
@@ -240,21 +237,18 @@ public class JobsWebPage extends WebPageWithPagination {
 	public void selectJobClient(String clientname) {
 		jobclientcmb.click();
 		jobclientcmb.clearAndType(clientname);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(jobclientdd.getWrappedElement()));
-		waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(jobclientdd.getWrappedElement()));
+		//waitABit(1000);
 		jobclientdd.selectByVisibleText(clientname);
 	}
 	
 	public void selectJobParentClient(String clientname) { 
-		waitABit(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(jobparentclientcmb.getWrappedElement())).click();
+		//waitABit(300);
+		wait.until(ExpectedConditions.elementToBeClickable(jobparentclientcmb.getWrappedElement())).click();
 		jobparentclientcmb.click();
 		jobparentclientcmb.clearAndType(clientname);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(jobparentclientdd.getWrappedElement()));
-		waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(jobparentclientdd.getWrappedElement()));
+		//waitABit(1000);
 		jobparentclientdd.selectByVisibleText(clientname);
 	}
 	
@@ -263,7 +257,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickAddJobOKButton() {
-		waitABit(300);
+		//waitABit(300);
 		Actions act  = new Actions(driver);
 		act.click(addjobOKbtn).perform();
 		waitUntilPageReloaded();
@@ -282,9 +276,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	
 	
 	public boolean isJobExists(String job) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  jobstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + job + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

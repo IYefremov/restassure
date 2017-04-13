@@ -76,9 +76,7 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 	public AddEditClientUsersContactsDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(buttoncnsl));
+		wait.until(ExpectedConditions.visibilityOf(buttoncnsl));
 	}
 	
 

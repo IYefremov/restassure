@@ -99,7 +99,6 @@ public class UsersWebPage extends WebPageWithPagination {
 	public UsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -122,8 +121,7 @@ public class UsersWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyTabsAreVisible() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(activetab)).click();
+		wait.until(ExpectedConditions.visibilityOf(activetab)).click();
 		Assert.assertTrue(activetab.isDisplayed());
 		Assert.assertTrue(archivedtab.isDisplayed());
 	}
@@ -133,8 +131,7 @@ public class UsersWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickActiveTab() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(activetab));
+		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
 	}
 	
@@ -214,9 +211,7 @@ public class UsersWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isUserActive(String firstname, String lastname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  userstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -229,9 +224,7 @@ public class UsersWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isUserArchived(String firstname, String lastname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  archiveduserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

@@ -79,9 +79,7 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	public AllUsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(alluserstable.getWrappedElement()));
+	wait.until(ExpectedConditions.visibilityOf(alluserstable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -121,9 +119,8 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	public void selectSearchApplication(String _application) throws InterruptedException {
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);
-		Thread.sleep(1000);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
+		//Thread.sleep(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
 	}
 	
 	public void setSearchUserParameter(String _user) {
@@ -148,9 +145,7 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	
 	
 	public boolean isUserExists(String username) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  alluserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + username + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 

@@ -48,7 +48,6 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	public ServiceRequestTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void clickAddServiceRequestTypeButton() {
@@ -64,30 +63,26 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 	
 	public void selectNewServiceRequestTypeTeam(String srtypeteam) {
-		waitABit(1000);
-    	new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
+		//waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
     	invoicetypeteamcmb.click();
     	invoicetypeteamcmb.clear();
     	invoicetypeteamcmb.sendKeys(srtypeteam);
-    	waitABit(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']"))).click();
-		waitABit(1000);
+    	//waitABit(300);
+    	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']"))).click();
+		//waitABit(1000);
 		
 	}
 	
 	public void selectNewServiceRequestTypePackage(String srtypepackage) {
-		waitABit(1000);
-    	new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.visibilityOf(invoicetypepackagecmb));
+		//waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(invoicetypepackagecmb));
     	invoicetypepackagecmb.click();
     	invoicetypepackagecmb.clear();
     	invoicetypepackagecmb.sendKeys(srtypepackage);
-    	waitABit(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']"))).click();
-		waitABit(1000);
+    	//waitABit(300);
+    	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']"))).click();
+		//waitABit(1000);
 		
 	}
 	
@@ -129,9 +124,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isServiceRequestTypeExists(String srtype) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  servicerequesttypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + srtype + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

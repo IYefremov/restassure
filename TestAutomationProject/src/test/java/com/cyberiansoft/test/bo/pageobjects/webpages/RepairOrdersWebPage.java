@@ -91,7 +91,6 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	public RepairOrdersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void makeSearchPanelVisible() {
@@ -113,8 +112,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean repairOrdersTableIsVisible() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(repairorderstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(repairorderstable.getWrappedElement()));
 		return repairorderstable.isDisplayed();
 	}
 	
@@ -143,13 +141,12 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 	
 	public void setSearchFromDate(String date, String month, String year) { 
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_calendar_Title")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();		
 		driver.findElement(By.id("rcMView_OK")).click();
-		waitABit(1000);
+		//waitABit(1000);
 		driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']")).click();
 	}
 	
@@ -159,9 +156,8 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
-		waitABit(1000);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
+		//waitABit(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
 	public void selectSearchWOType(String wotype)  { 
@@ -242,8 +238,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			new WebDriverWait(driver, 90)
-			  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fullGrid']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fullGrid']")));
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='VIN']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='StockNo']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='ClientName']")).isDisplayed());
@@ -252,8 +247,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='ActiveTechnicians']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='Completed']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='OrderDescription']")).isDisplayed());
-			new WebDriverWait(driver, 10)
-			  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("fullGrid")).findElement(By.xpath("./table/tbody/tr[2]"))));
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("fullGrid")).findElement(By.xpath("./table/tbody/tr[2]"))));
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);

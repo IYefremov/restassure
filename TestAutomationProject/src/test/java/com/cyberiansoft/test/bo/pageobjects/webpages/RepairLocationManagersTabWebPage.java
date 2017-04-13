@@ -46,7 +46,6 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	public RepairLocationManagersTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public List<WebElement> getManagersTableRows() {
@@ -72,7 +71,7 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	public RepairLocationManagersTabWebPage selectRepairLocationManager(String employee) {
 		employeecmb.click();
 		employeecmb.clearAndType(employee);
-		waitABit(1000);
+		//waitABit(1000);
 		employeedd.selectByVisibleText(employee);
 		return PageFactory.initElements(
 				driver, RepairLocationManagersTabWebPage.class);
@@ -86,16 +85,13 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	
 	public RepairLocationManagersTabWebPage clickUpdateManagersButton() {
 		clickAndWait(updateemployeesbtn);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Managers have been updated for this Repair Location']"))));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Managers have been updated for this Repair Location']"))));
 		return PageFactory.initElements(
 				driver, RepairLocationManagersTabWebPage.class);
 	}
 	
 	public boolean isRepairLocationManagerExists(String employee) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  managerstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + employee + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

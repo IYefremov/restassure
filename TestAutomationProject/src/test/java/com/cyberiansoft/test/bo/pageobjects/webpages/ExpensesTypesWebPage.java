@@ -36,9 +36,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	public ExpensesTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(expensestypestable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(expensestypestable.getWrappedElement()));
 	}
 	
 	public void verifyExpensesTypesColumnsAreVisible() {
@@ -71,8 +69,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	}
 	
 	public void setNewExpenceTypeName(String newexpensetypename) {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(newexpencetypefld.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(newexpencetypefld.getWrappedElement()));
 		clearAndType(newexpencetypefld, newexpensetypename);
 	}
 	
@@ -95,8 +92,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 		for (WebElement qexpensetypesrow : qexpensetypesrows) {
 			if (qexpensetypesrow.getText().contains(expensetype)) {
 				click(qexpensetypesrow.findElement(By.xpath(".//td/input[@title='Delete']")));
-				new WebDriverWait(driver, 10)
-				  .until(ExpectedConditions.alertIsPresent());
+				wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				waitUntilPageReloaded();
@@ -106,9 +102,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isExpenseTypeExists(String expensetype) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  expensestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + expensetype + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 

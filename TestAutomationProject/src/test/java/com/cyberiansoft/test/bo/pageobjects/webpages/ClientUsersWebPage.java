@@ -30,9 +30,7 @@ public class ClientUsersWebPage extends BaseWebPage{
 	public ClientUsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(adduserbtn));
+		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
  
 	
@@ -46,17 +44,14 @@ public class ClientUsersWebPage extends BaseWebPage{
 
 	
 	public boolean isClientUserExistsInTable(String clientusername, String userlstname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  clientuserstable.getWrappedElement().
 				findElements(By.xpath(".//td/b[text()='" + clientusername + " " + userlstname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 
 	
 	public List<WebElement>  getClientUsersTableRows() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(clientuserstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(clientuserstable.getWrappedElement()));
 		return clientuserstable.getTableRows();
 	}
 	

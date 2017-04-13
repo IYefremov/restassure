@@ -39,13 +39,12 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 	public RepairLocationClientsTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public RepairLocationClientsTabWebPage selectRepairLocationClient(String clientname) {
 		locationclientscmb.click();
 		locationclientscmb.clearAndType(clientname);
-		waitABit(1000);
+		//waitABit(1000);
 		//new WebDriverWait(driver, 20)
 		//  .until(ExpectedConditions.visibilityOf(locationclientsdd.getWrappedElement()));
 		locationclientsdd.selectByVisibleText(clientname);
@@ -61,8 +60,7 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 	
 	public RepairLocationClientsTabWebPage clickUpdateClientsButton() {
 		clickAndWait(updateclientsbtn);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Clients have been updated for this Repair Location']"))));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Clients have been updated for this Repair Location']"))));
 		return PageFactory.initElements(
 				driver, RepairLocationClientsTabWebPage.class);
 	}
@@ -72,9 +70,7 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRepairLocationClientExists(String clientname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  locationclientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

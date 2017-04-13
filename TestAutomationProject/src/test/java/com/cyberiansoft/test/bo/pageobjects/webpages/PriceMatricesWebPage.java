@@ -91,7 +91,6 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 	public PriceMatricesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddPriceMarixButton() {
@@ -186,9 +185,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isPriceMatrixExists(String pricematrix) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  pricematricestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + pricematrix + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -205,9 +202,8 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().contains(pricematrix)) {
 				row.findElement(By.xpath(".//a[text()='Prices']")).click();
-				Thread.sleep(300);
-				new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				//Thread.sleep(300);
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				break;
 			}			
 		}		

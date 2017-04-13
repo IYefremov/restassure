@@ -78,9 +78,7 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 	public ServiceContractsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -94,8 +92,7 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyServiceContactsTableColumnsAreVisible() {	
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllItems")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllItems")));
 		Assert.assertTrue(repairlocationstable.isTableColumnExists("Invoice #"));
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "ID /\nContract#");
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[6]")).getText(), "Issue Date /\nExpiration");
@@ -121,17 +118,15 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickContractDataButton() {
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.elementToBeClickable(repairlocationstable.getWrappedElement()));
+		wait.until(ExpectedConditions.elementToBeClickable(repairlocationstable.getWrappedElement()));
 		click(contractdatabtn);
-		waitABit(1000);
+		//waitABit(1000);
 	}
 	
 	public void clickClaimDataButton() throws InterruptedException {
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.elementToBeClickable(repairlocationstable.getWrappedElement()));
+		wait.until(ExpectedConditions.elementToBeClickable(repairlocationstable.getWrappedElement()));
 		click(claimdatabtn);
-		waitABit(1000);
+		//waitABit(1000);
 	}
 	
 	public void clickPortfolioButton() {
@@ -139,8 +134,7 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyDropDownMenuIsOpened(String browsertype) throws URISyntaxException, IOException, KeyManagementException, NoSuchAlgorithmException {
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(dropdownmenu));
+		wait.until(ExpectedConditions.visibilityOf(dropdownmenu));
 		Assert.assertTrue(dropdownmenu.isDisplayed());
 		URLStatusChecker urlChecker = new URLStatusChecker(driver);
 		List<WebElement> _elemnts = dropdownmenu.findElements(By.xpath(".//li"));

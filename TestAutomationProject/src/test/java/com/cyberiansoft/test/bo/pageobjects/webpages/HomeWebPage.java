@@ -21,12 +21,10 @@ public class HomeWebPage extends BaseWebPage {
 	public HomeWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public ServiceRequestsListWebPage clickNewServiceRequestLink() {
-		click(new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(newservicerequestlink)));
+		click(wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)));
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);
 	}

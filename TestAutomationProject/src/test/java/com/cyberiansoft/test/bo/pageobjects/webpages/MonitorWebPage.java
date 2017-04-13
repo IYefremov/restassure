@@ -43,68 +43,58 @@ public class MonitorWebPage extends BaseWebPage {
 	public MonitorWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public RepairOrdersWebPage clickRepairOrdersLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(repairorderslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(repairorderslink)).click();
 		return PageFactory.initElements(
 				driver, RepairOrdersWebPage.class);
 	}
 	
 	public VendorsTeamsWebPage clickVendorsTeamsLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(vendorsteamslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(vendorsteamslink)).click();
 		return PageFactory.initElements(
 				driver, VendorsTeamsWebPage.class);
 	}
 	
 	public RepairLocationsWebPage clickRepairLocationsLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(repairlocationslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(repairlocationslink)).click();
 		return PageFactory.initElements(
 				driver, RepairLocationsWebPage.class);
 	}
 	
 	public VendorOrdersWebPage clickVendorOrdersLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(vendororderslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(vendororderslink)).click();
 		return PageFactory.initElements(
 				driver, VendorOrdersWebPage.class);
 	}
 	
 	public MonitorSettingsWebPage clickMonitorSettingsLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(monitorsettingslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(monitorsettingslink)).click();
 		return PageFactory.initElements(
 				driver, MonitorSettingsWebPage.class);
 	}
 	
 	public AverageRepairTimeReportWebPage clickAverageRepairTimeReportLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(averagerepairtimereportlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(averagerepairtimereportlink)).click();
 		return PageFactory.initElements(
 				driver, AverageRepairTimeReportWebPage.class);
 	}
 	
 	public RepairLocationTimeTrackingWebPage clickRepairLocationTimeTrackingLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(repairlocationtimetrackinglink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(repairlocationtimetrackinglink)).click();
 		return PageFactory.initElements(
 				driver, RepairLocationTimeTrackingWebPage.class);
 	}
 	
 	public TrendingReportWebPage clickTrendingReportLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(trendingreportlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(trendingreportlink)).click();
 		return PageFactory.initElements(
 				driver, TrendingReportWebPage.class);
 	}
 	
 	public EventsWebPage clickEventsLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(eventslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(eventslink)).click();
 		return PageFactory.initElements(
 				driver, EventsWebPage.class);
 	}
