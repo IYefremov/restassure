@@ -74,7 +74,6 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	public RepairLocationPhasesTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddPhasetButton() {
@@ -96,9 +95,7 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRepairLocationPhaseExists(String repairlocationphase) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  phasestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocationphase + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

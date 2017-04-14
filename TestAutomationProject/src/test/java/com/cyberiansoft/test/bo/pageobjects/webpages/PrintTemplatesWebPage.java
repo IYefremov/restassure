@@ -105,9 +105,7 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 	public PrintTemplatesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(addnewtemplatebtn));
+		wait.until(ExpectedConditions.visibilityOf(addnewtemplatebtn));
 	}
 	
 	
@@ -119,7 +117,7 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickDeletetemplateButton() {
-		waitABit(1000);
+	waitABit(1000);
 		Actions act = new Actions(driver);
 		act.click(deletetemplatebtn).perform();
 	}
@@ -197,9 +195,8 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 	
 	public void clickSavePrintTemplateOptionsButton() {
 		clickAndWait(saveprinttemplateoptionsbtn);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Template is saved.']"))));
-		waitABit(1000);
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Template is saved.']"))));
+	waitABit(1000);
 	}
 	
 	public void checkPrintOutOptionsCheckboxes(String[] optionstocheck) {

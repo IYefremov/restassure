@@ -51,7 +51,6 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	public BackofficePaginationPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	
@@ -66,8 +65,7 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	}
 	
 	public String getGoToPageFieldValue() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(gotopagefld));
+		wait.until(ExpectedConditions.visibilityOf(gotopagefld));
 		return gotopagefld.getAttribute("value");
 	}
 	
@@ -81,30 +79,26 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	
 	public void clickGoToLastPage() {
 		gotolastpage.click();
-		new WebDriverWait(driver, 10)
-				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 	}
 	
 	public void clickGoToNextPage()  {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		gotonextpage.click();		
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
 	}
 	
 	public void clickGoToPreviousPage() {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
 	}
 	
 }

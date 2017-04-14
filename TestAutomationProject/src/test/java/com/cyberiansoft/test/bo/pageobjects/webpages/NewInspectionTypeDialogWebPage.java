@@ -126,7 +126,6 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 	public NewInspectionTypeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void setNewInspectionTypeName(String insptypename) {

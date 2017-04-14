@@ -51,7 +51,6 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	public ServicePackagesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public boolean searchPanelIsExpanded() {
@@ -118,11 +117,8 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isServicePackageExists(String servicepackagename) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(servicepackagestable.getWrappedElement()));
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.visibilityOf(servicepackagestable.getWrappedElement()));
 		boolean exists =  servicepackagestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicepackagename + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -154,7 +150,6 @@ public class ServicePackagesWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
 		waitForNewTab();
     	String mainWindowHandle = driver.getWindowHandle();
-    	driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 	        if (!activeHandle.equals(mainWindowHandle)) {
 	        	driver.switchTo().window(activeHandle);

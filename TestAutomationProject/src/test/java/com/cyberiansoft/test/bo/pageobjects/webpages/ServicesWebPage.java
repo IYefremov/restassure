@@ -73,7 +73,6 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public ServicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	
@@ -88,8 +87,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyServicesTableColumnsAreVisible() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
 		Assert.assertTrue(servicestable.isTableColumnExists("Packages"));
 		Assert.assertTrue(servicestable.isTableColumnExists("Type"));
 		Assert.assertTrue(servicestable.isTableColumnExists("Service"));
@@ -155,8 +153,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public void clickActiveTab() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(activetab));
+		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
 	}
 	
@@ -177,17 +174,13 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isActiveServiceExists(String servicename) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
 		boolean exists =  servicestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public boolean isArchivedServiceExists(String servicename) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(archivedservicestable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(archivedservicestable.getWrappedElement()));
 		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  archivedservicestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

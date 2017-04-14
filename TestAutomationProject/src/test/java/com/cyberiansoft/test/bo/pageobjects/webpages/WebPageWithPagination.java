@@ -54,7 +54,6 @@ public class WebPageWithPagination extends BaseWebPage {
 	public WebPageWithPagination(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public String getLastPageNumber() {
@@ -77,18 +76,15 @@ public class WebPageWithPagination extends BaseWebPage {
 		pagesizefld.sendKeys(pagesize + "\n");
 		//changesizebtn.click();
 		Thread.sleep(700);
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		Thread.sleep(3000);
 	}
 	
 	public void clickGoToLastPage() {
 		gotolastpage.click();
 		waitABit(700);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
 	public void clickGoToLastPage(String browsertype) throws InterruptedException {
@@ -100,29 +96,28 @@ public class WebPageWithPagination extends BaseWebPage {
 		}
 		Thread.sleep(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-			new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}	
-		Thread.sleep(2000);
-		new WebDriverWait(driver, 60)
-				  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+	Thread.sleep(2000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
 	
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
 		waitABit(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-			new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.withTimeout(30, TimeUnit.SECONDS);
 		}
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 	}
 	
 	public void clickGoToNextPage()  {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		gotonextpage.click();		
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
 	}
 	
 	public void clickGoToPreviousPage() throws InterruptedException {
@@ -130,10 +125,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
 		Thread.sleep(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
 	}
 
 }

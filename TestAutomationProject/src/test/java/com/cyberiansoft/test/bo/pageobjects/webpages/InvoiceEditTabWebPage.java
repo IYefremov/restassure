@@ -54,7 +54,6 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	public InvoiceEditTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddPOPayButton() {
@@ -71,8 +70,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	
 	public String clickAddPOPayButtonAndAcceptPayment() {
 		clickAddPOPayButton();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.alertIsPresent());
+		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		String alerttext = alert.getText();
 		alert.accept();
@@ -95,8 +93,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			/*new WebDriverWait(driver, 5)
 			  .until(ExpectedConditions.alertIsPresent());*/
 			try {
-			WebDriverWait wait = new WebDriverWait(driver, 3);
-			wait.until(ExpectedConditions.alertIsPresent());
+				wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.dismiss();
 			} catch (Exception e) {
@@ -104,7 +101,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			}
 			//Alert alert = driver.switchTo().alert();
 			//alert.dismiss();
-			waitABit(1000);
+		waitABit(1000);
 			act.click(addpobtn).perform(); 
 			waitABit(1000);
 			if (!ponumberfld.isDisplayed()) {		
@@ -139,8 +136,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	}
 	
 	public void clickTechniciansLink() {
-		new WebDriverWait(driver, 60)
-		 .until(ExpectedConditions.visibilityOf(technicianslink));
+		wait.until(ExpectedConditions.visibilityOf(technicianslink));
 		click(technicianslink);
 	}
 	
@@ -160,7 +156,6 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 			clickSaveInvoiceButton();
 			
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, 3);
 				wait.until(ExpectedConditions.alertIsPresent());
 					Alert alert = driver.switchTo().alert();
 					alert.dismiss();
@@ -170,7 +165,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 		}
 		waitABit(2000);
 		clickClickHereToAddNotes();
-		waitABit(300);
+	waitABit(300);
 		Actions act  = new Actions(driver);
 		act.sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), notes).perform();
 	}

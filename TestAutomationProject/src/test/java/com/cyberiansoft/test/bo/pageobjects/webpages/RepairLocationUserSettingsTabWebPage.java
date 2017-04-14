@@ -25,13 +25,11 @@ public class RepairLocationUserSettingsTabWebPage extends BaseWebPage {
 	public RepairLocationUserSettingsTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public RepairLocationUserSettingsTabWebPage clickUpdateSettingButton() {
 		clickAndWait(updatesettingsbtn);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='User settings have been updated for this location.']"))));
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='User settings have been updated for this location.']"))));
 		return PageFactory.initElements(
 				driver, RepairLocationUserSettingsTabWebPage.class);
 	}

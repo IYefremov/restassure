@@ -103,9 +103,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	public ServiceRequestsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -166,8 +164,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifySearchResultsByVehicleInfo(String vehicleinfo) {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + vehicleinfo + "']")))); 
+		wait.until(ExpectedConditions.visibilityOf(servicerequeststable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + vehicleinfo + "']")))); 
 	}
 
 	public void createServiceRequest(String devicefordispatch,
@@ -200,7 +197,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
-		Thread.sleep(1000);
+	Thread.sleep(1000);
 		addservicelink.click();
 		teamcmbbox.click();
 		driver.findElement(
@@ -244,7 +241,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 
 	public void clickServicesTab() {
 		click(servicestab);
-		waitABit(1000);
+	waitABit(1000);
 	}
 
 	public void selectCustomer(String customer) {

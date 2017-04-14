@@ -42,7 +42,6 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	public RepairLocationPhaseServicesTabWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public List<WebElement> getPhaseServicesTableRows() {
@@ -92,7 +91,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		if (row != null) {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", row);
 			click(row.findElement(By.xpath(".//input[contains(@id, 'comboPhase_Input')]")));
-			waitABit(300);
+		waitABit(300);
 			new DropDownImpl(driver.findElement(By.xpath(".//*[contains(@id, 'comboPhase_DropDown')]"))).selectByVisibleText(phase);
 		} else {
 			Assert.assertTrue(false, "Can't find " + phaseservice + " phase service");	

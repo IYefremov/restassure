@@ -74,15 +74,12 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	public TechnicianCommissionsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	
 	public void verifyInvoicesTableColumnsAreVisible() {
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()));
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
+		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Vendor Name"));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order #"));
 		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order Amount"));
@@ -123,10 +120,9 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchTechnician(String technician) { 
-		waitABit(1000);
+	waitABit(1000);
 		searchtechniciancmb.clearAndType(technician);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + technician + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + technician + "']")));
 		driver.findElement(By.xpath("//li[text()='" + technician + "']")).click();
 	}
 	
@@ -154,14 +150,12 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
-		waitABit(1000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
+	waitABit(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
 	public void verifySearchResults(String ordernumber) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + ordernumber + "']")))); 
+		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement().findElement(By.xpath(".//tr/td[text()='" + ordernumber + "']")))); 
 	}
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
+
 public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	
 	@FindBy(id = "displayedColumnsList")
@@ -74,7 +75,6 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	public InspectionTypesVehicleInfoSettingsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectVINVisible() {
@@ -158,8 +158,7 @@ public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {
 	
 	public void clickUpdateButton() {
 		clickAndWait(updatebtn);
-		new WebDriverWait(driver, 15)
-		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Vehicle Info Settings have been saved']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Vehicle Info Settings have been saved']")));
 	}
 	
 	public void checkboxSelect(WebElement checkbox) {

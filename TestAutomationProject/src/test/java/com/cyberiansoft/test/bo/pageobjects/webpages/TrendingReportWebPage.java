@@ -52,7 +52,6 @@ public class TrendingReportWebPage extends BaseWebPage {
 	public TrendingReportWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
@@ -91,8 +90,7 @@ public class TrendingReportWebPage extends BaseWebPage {
 	}
 	
 	public void verifySearchResults(String location, String wotype) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + location + "']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + location + "']")));
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + location + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wotype + "']")).isDisplayed());
 	}

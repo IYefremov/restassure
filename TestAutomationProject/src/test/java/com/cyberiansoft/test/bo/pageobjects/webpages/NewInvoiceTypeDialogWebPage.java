@@ -89,7 +89,6 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	public NewInvoiceTypeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void createInvoiceType(String invoicetype) {

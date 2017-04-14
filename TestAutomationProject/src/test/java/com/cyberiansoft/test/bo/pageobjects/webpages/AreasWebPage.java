@@ -43,7 +43,6 @@ public class AreasWebPage extends BaseWebPage {
 	public AreasWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickAddAreaButton() {
@@ -102,9 +101,7 @@ public class AreasWebPage extends BaseWebPage {
 	}
 	
 	public boolean isAreaExists(String areaname) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  areastable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + areaname + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
@@ -113,8 +110,7 @@ public class AreasWebPage extends BaseWebPage {
 		if (row != null) {
 			row.findElement(By.xpath(".//*[@title='Edit']")).click();
 			Thread.sleep(300);
-			new WebDriverWait(driver, 30)
-			  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else 
 			Assert.assertTrue(false, "Can't find " + areaname + " area");
 	}
@@ -127,8 +123,7 @@ public class AreasWebPage extends BaseWebPage {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Thread.sleep(300);
-			new WebDriverWait(driver, 30)
-			  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	
 		}
@@ -142,8 +137,7 @@ public class AreasWebPage extends BaseWebPage {
 			Alert alert = driver.switchTo().alert();
 			alert.dismiss();
 			Thread.sleep(300);
-			new WebDriverWait(driver, 30)
-			  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	
 		}

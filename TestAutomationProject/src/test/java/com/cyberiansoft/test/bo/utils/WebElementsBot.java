@@ -18,13 +18,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import com.google.common.base.Predicate;
 
 public class WebElementsBot {
 	
 	public static void click(WebElement element) {
 	    try {
-	        (new WebDriverWait(WebDriverInstansiator.getDriver(), 10)).until(ExpectedConditions.elementToBeClickable(element));
+	    	WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(element));
 	        element.click();	        
 	    } catch (StaleElementReferenceException sere) {
 	        // simply retry finding the element in the refreshed DOM
@@ -36,31 +35,26 @@ public class WebElementsBot {
 	}
 	
 	public static void clickAndWait(WebElement element) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10).until(ExpectedConditions.elementToBeClickable(element));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(element));
 	    element.click();
 	    waitUntilPageReloaded();
 	}
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(300);
 		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		 // .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 		droplist.selectByVisibleText(value);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	public static void selectComboboxValueAndWait(ComboBox combobox, DropDown droplist, String value) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(300);
 		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		 // .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
@@ -69,56 +63,44 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		Actions act = new Actions(WebDriverInstansiator.getDriver());
 		act.click(combobox.getWrappedElement()).perform();
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		combobox.click();
 		combobox.clear();
 		combobox.typeValue(value);
 		//combobox.clearAndType(value);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
 		waitABit(2000);
 		droplist.selectByVisibleText(value);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		combobox.clearAndType(typevalue);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(1000);
 		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		  //.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 		droplist.selectByVisibleText(selectvalue);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	public static void doubleselectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
 		combobox.clearAndType(value);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
-		//waitABit(1000);
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
+		waitABit(1000);
 		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
 		droplist.selectByVisibleText(value);
 		droplist.selectByVisibleText(value);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	private static void waitUntilSelectOptionsLoaded(final WebElement element) {
@@ -140,8 +122,7 @@ public class WebElementsBot {
 	
 	public static void waitUntilPageReloaded() {
     	waitABit(300);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
     }
 	
 	/* Wait For */

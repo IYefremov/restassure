@@ -96,7 +96,6 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	public SRAppointmentInfoPopup(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectLocationType(String locationtype) {
@@ -167,8 +166,7 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	public void setEndTimeValue(String endtime) {
 		clearAndType(endtimefld, endtime);
 		click(endtimeclockbtn);
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.not(ExpectedConditions.visibilityOf(
+		wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(
 				  driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timeView_wrapper")))));
 	}
 	
@@ -181,8 +179,7 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	}
 	
 	public String getTechnicianValue() {
-		new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
-		  .until(ExpectedConditions.visibilityOf(technicianspopup));
+		wait.until(ExpectedConditions.visibilityOf(technicianspopup));
 		return technicianspopup.findElement(By.xpath(".//table/tbody/tr/td")).getText();
 		//return technicianfld.getValue();
 	}

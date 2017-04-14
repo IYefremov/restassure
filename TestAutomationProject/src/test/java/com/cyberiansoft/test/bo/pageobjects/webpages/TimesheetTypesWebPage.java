@@ -59,12 +59,10 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 	public TimesheetTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean searchPanelIsExpanded() {
-		click(new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(searchbtn)));
+		click(wait.until(ExpectedConditions.visibilityOf(searchbtn)));
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -148,9 +146,7 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isTimesheetTypeExists(String timesheettype) {
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		boolean exists =  timesheettypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + timesheettype + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	

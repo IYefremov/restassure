@@ -34,7 +34,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	public BackOfficeHeaderPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickLogout() {
@@ -45,45 +44,38 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		}
 		driver.switchTo().defaultContent();
 		waitABit(1000);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
 	}
 	
 	public OperationsWebPage clickOperationsLink() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(operationstab)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(operationstab)).click();
 		return PageFactory.initElements(
 				driver, OperationsWebPage.class);
 	}
 	
 	public HomeWebPage clickHomeLink() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(hometab)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(hometab)).click();
 		return PageFactory.initElements(
 				driver, HomeWebPage.class);
 	}
 	
 	public CompanyWebPage clickCompanyLink() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(companytab)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(companytab)).click();
 		return PageFactory.initElements(
 				driver, CompanyWebPage.class);
 	}
 	
 	public MonitorWebPage clickMonitorLink() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(monitortab)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(monitortab)).click();
 		return PageFactory.initElements(
 				driver, MonitorWebPage.class);
 	}
 	
 	public SuperUserWebPage clickSuperUserLink() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(superusertab)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(superusertab)).click();
 		return PageFactory.initElements(
 				driver, SuperUserWebPage.class);
 	}

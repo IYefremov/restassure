@@ -43,73 +43,63 @@ public class OperationsWebPage extends BaseWebPage {
 	public OperationsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public InvoicesWebPage clickInvoicesLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(invoiceslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(invoiceslink)).click();
 		return PageFactory.initElements(
 				driver, InvoicesWebPage.class);
 	}
 	
 	public WorkOrdersWebPage clickWorkOrdersLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(workorderslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(workorderslink)).click();
 		return PageFactory.initElements(
 				driver, WorkOrdersWebPage.class);
 	}
 	
 	public TechnicianCommissionsWebPage clickTechnicianCommissionsLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(techniciancommissionslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(techniciancommissionslink)).click();
 		return PageFactory.initElements(
 				driver, TechnicianCommissionsWebPage.class);
 	}
 	
 	public ServiceRequestsWebPage clickServiceRequestsLink() throws InterruptedException {
 		Thread.sleep(2000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(servicerequestslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(servicerequestslink)).click();
 		return PageFactory.initElements(
 				driver, ServiceRequestsWebPage.class);
 	}
 	
 	public ServiceContractsWebPage clickServiceContactsLink() throws InterruptedException {
 		Thread.sleep(2000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(servicecontactslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(servicecontactslink)).click();
 		return PageFactory.initElements(
 				driver, ServiceContractsWebPage.class);
 	}
 	
 	public InspectionsWebPage clickInspectionsLink() {
 		waitABit(2000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(inspectionslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(inspectionslink)).click();
 		return PageFactory.initElements(
 				driver, InspectionsWebPage.class);
 	}
 	
 	public VendorBillsWebPage clickVendorBillsLink() {
 		waitABit(2000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(vendorbillslink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(vendorbillslink)).click();
 		return PageFactory.initElements(
 				driver, VendorBillsWebPage.class);
 	}
 	
 	public ServiceRequestsListWebPage clickNewServiceRequestLink() {
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);
 	}
 	
 	public NewInspectionWebPage clickNewInspectionLink() throws InterruptedException {
 		Thread.sleep(2000);
-		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(newinspectionlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(newinspectionlink)).click();
 		return PageFactory.initElements(
 				driver, NewInspectionWebPage.class);
 	}

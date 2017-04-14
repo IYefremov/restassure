@@ -48,9 +48,7 @@ public class EventsWebPage extends BaseWebPage {
 	public EventsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(eventstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(eventstable.getWrappedElement()));
 	}
 	
 	public void verifyEventsTableColumnsAreVisible() {		
@@ -68,8 +66,7 @@ public class EventsWebPage extends BaseWebPage {
 	
 	public void clickAddEventButton() {
 		clickAndWait(addeventbtn);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
+		wait.until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
 	}
 	
 	public void createNewEventWithConditions(String eventname, String alertname, String firstconditionname, String firstconditiontype, String firstconditioncriteria) throws InterruptedException {
@@ -99,8 +96,7 @@ public class EventsWebPage extends BaseWebPage {
 	
 	public void selectFirstConditionValues(String firstconditionname, String firstconditiontype, String firstconditioncriteria) throws InterruptedException {
 		Thread.sleep(1000);
-		new WebDriverWait(driver, 20)
-		  .until(ExpectedConditions.visibilityOf(visibleconditions));
+		wait.until(ExpectedConditions.visibilityOf(visibleconditions));
 		Thread.sleep(1000);
 		selectFirstConditionNameCriteria(firstconditionname); 	
 		selectFirstConditionTypeCriteria(firstconditiontype); 	
@@ -146,19 +142,16 @@ public class EventsWebPage extends BaseWebPage {
 	}
 	
 	public void verifyFirstConditionValues(String firstconditionname, String firstconditiontype, String firstconditioncriteria) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(visibleconditions));
+		wait.until(ExpectedConditions.elementToBeClickable(visibleconditions));
 		Assert.assertEquals(getFirstConditionNameCriteriaCombobox().getFirstSelectedOption().getText(), firstconditionname);
 		Assert.assertEquals(selectFirstConditionTypeCriteriaCombobox().getFirstSelectedOption().getAttribute("value"), firstconditiontype);	
 		Assert.assertEquals(getFirstConditionnameCriteriaField().getAttribute("value"), firstconditioncriteria);	
 	}
 	
 	public void saveNewEvent() {	
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(neweventOKbtn)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(neweventOKbtn)).click();
 		waitABit(1000);
-		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public void cancelNewEvent() {	
@@ -174,10 +167,8 @@ public class EventsWebPage extends BaseWebPage {
 			}
 		}
 		Thread.sleep(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
 	}
 	
 	public void deleteEvent(String alertname) throws InterruptedException {
@@ -185,15 +176,14 @@ public class EventsWebPage extends BaseWebPage {
 		for (WebElement eventsrow : eventsrows) {
 			if (eventsrow.getText().contains(alertname)) {
 				eventsrow.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 				break;
 			}
 		}
 		Thread.sleep(300);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 	public boolean isEventExists(String expensetype) {

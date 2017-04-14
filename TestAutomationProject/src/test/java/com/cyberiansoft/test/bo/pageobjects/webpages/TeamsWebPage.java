@@ -58,13 +58,11 @@ public class TeamsWebPage extends WebPageWithPagination {
 	public TeamsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	
 	public boolean searchPanelIsExpanded() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
@@ -93,8 +91,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyTeamsTableColumnsAreVisible() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		Assert.assertTrue(teamstable.isTableColumnExists("Guests"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Managers"));
 		Assert.assertTrue(teamstable.isTableColumnExists("Tax Rates"));
@@ -208,11 +205,8 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}	
 	
 	public boolean isTeamExists(String team) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		boolean exists =  teamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + team + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return exists;
 	}
 	
