@@ -88,8 +88,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickAddOrderButton() {	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(addinspbtn));
 		addinspbtn.click();
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
