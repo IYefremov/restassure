@@ -5,6 +5,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.Rule;
+import org.junit.rules.TemporaryFolder;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,11 +24,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.io.TemporaryFilesystem;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
@@ -41,9 +48,21 @@ public class BaseTestCase {
 	protected File app;
 	String bundleid = "";
 	
+	@BeforeSuite
+	public void beforeSuite() throws IOException{
+		if(!new File("C:\\frameworkTemps").isDirectory())
+	        FileUtils.forceMkdir(new File("C:\\frameworkTemps"));
+	        TemporaryFilesystem.setTemporaryDirectory(new File("C:\\frameworkTemps"));
+	}
+	
+	@Rule
+	public TemporaryFolder folder= new TemporaryFolder();
+	
 	@BeforeClass
 	@Parameters({ "selenium.browser", "ios.bundleid" })
 	public void setUp(String browser, String bundleid) throws Exception {
+
+		
 
 		// Parameters for WebDriver
 		/* System.setProperty("webdriver.chrome.driver",
@@ -195,8 +214,15 @@ public class BaseTestCase {
 		return webdriver;
 	}
 
+	@AfterMethod
+	public void cookieCleaner(){
+		webdriver.manage().deleteAllCookies();
+	}
+	
 	@AfterClass
 	public void tearDown() throws Exception {
+        FileUtils.deleteDirectory(new File("C:\\frameworkTemps"));
+
 		if (webdriver != null)
 			webdriver.quit();
 		if (appiumdriver != null)

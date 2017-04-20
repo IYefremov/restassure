@@ -203,9 +203,7 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 	
 	
     public ClientContactsWebPage closeContactsDialogWebPageWithoutEdit(){
-		
 		clickButtonCancel();
- 
 		return PageFactory.initElements(
 				driver, ClientContactsWebPage.class);
 	}

@@ -97,6 +97,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	@FindBy(id = "ctl00_ctl00_Content_Main_grdInvoices_ctl00")
 	private WebTable invoicestable;
 	
+	@FindBy(className = "rmBottomArrow")
+	private WebElement botArrow;
+	
+//	@FindBy(className = "rfdSkinnedButton")
+//	private WebElement voidBTN;
+	
 	public InvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -297,19 +303,20 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 	
 	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) {
+		
 		WebElement row = clickSelectButtonForInvoice(invoicenumber);
-		waitABit(1000);
-		if (row != null) {
-			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
-			Actions act = new Actions(driver);
-			if (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']")).isDisplayed()) {				
-				act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
-			}
-			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
-			act.click(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
-		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");	
-		}
+		  waitABit(1000);
+		  if (row != null) {
+		   wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+		   Actions act = new Actions(driver);
+		   if (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']")).isDisplayed()) {    
+		    act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
+		   }
+		   wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+		   act.click(getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
+		  } else {
+		   Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice"); 
+		  }
 	}
 	
 	public boolean sendInvoiceEmail(String invoicenumber, String email) {

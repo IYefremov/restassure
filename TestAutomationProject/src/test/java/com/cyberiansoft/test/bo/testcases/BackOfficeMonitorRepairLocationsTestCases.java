@@ -47,7 +47,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		
 		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	@Test(testName = "Test Case 15527:Monitor - Repair Locations: Search", description = "Monitor - Repair Locations: Search")
@@ -70,7 +70,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		
 	}
 	
-	@Test(testName = "Test Case 26707:Monitor - Repair Locations: Add", description = "Monitor - Repair Locations: Add")
+@Test(testName = "Test Case 26707:Monitor - Repair Locations: Add", description = "Monitor - Repair Locations: Add")
 	public void testMonitorRepairLocationsAdd() throws Exception {
 		
 		final String repairlocationname = "test_loc";

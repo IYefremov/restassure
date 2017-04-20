@@ -29,7 +29,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	@Test(description = "Test Case 19250:\"Estimate approved\" event creation")

@@ -99,7 +99,7 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 	
 	public ClientsWebPage clickClientsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(clientslink));
+		wait.until(ExpectedConditions.elementToBeClickable(clientslink)).click();;
 		return PageFactory.initElements(
 				driver, ClientsWebPage.class);
 	}

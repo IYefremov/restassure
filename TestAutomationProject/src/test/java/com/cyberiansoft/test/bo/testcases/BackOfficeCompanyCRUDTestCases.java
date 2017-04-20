@@ -139,7 +139,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(team).clickFindButton();
 		teamspage.deleteTeamIfExists(team);
 		teamspage.deleteTeamIfExists(teamedited);
-		teamspage.createNewTeam(team);		
+		teamspage.createNewTeam(team , "Default area");	
 		teamspage.setTeamLocationSearchCriteria(team).clickFindButton();
 		
 		NewTeamsDialogWebPage newteamsdialog = teamspage.clickEditTeam(team);
@@ -294,7 +294,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		Assert.assertEquals(firstname + " " + lastname, serviceadvisorspage.getTableServiceAdvisorFullName(firstname, lastname));
 		Assert.assertEquals(email, serviceadvisorspage.getTableServiceAdvisorEmail(firstname, lastname));
-		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
+		Assert.assertEquals("..., AZ", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(firstname, lastname).trim());
 		Assert.assertEquals(role, serviceadvisorspage.getTableServiceAdvisorRoles(firstname, lastname));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(firstname, lastname).trim());
@@ -575,8 +575,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		printserverspage.deletePrintServer(printsrvnameedited);
 		Assert.assertFalse(printserverspage.isPrintServerExists(printsrvnameedited));
 	}
-	
-	@Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
+
+@Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
 	public void testCompanyLicenceCRUD() throws Exception {
 
 

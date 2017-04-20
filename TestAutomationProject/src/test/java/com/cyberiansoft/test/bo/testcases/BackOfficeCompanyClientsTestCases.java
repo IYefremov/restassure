@@ -184,7 +184,6 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.searchClientByName(companyname);
 		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
 	}
-	
 	@Test(testName = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file", description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file")
 	public void testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile() throws Exception {
 

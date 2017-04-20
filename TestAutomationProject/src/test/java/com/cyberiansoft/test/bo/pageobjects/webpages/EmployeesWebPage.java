@@ -125,12 +125,13 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	public List<WebElement> getArchivedEmployeesTableRows() {
 		return archivedemployeestable.getTableRows();
 	}
-
+	
+//TODO
 	public WebElement getTableRowWithActiveEmployee(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
 		List<WebElement> employeestablerows = getEmployeesTableRows();
 		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td[4]")).getText().equals(employeename)) {
+			if (employeestablerow.findElement(By.xpath(".//td["+ employeestable.getTableColumnIndex("Employee") +"]")).getText().equals(employeename)) {
 				return employeestablerow;
 			}
 		}

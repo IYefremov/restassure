@@ -484,7 +484,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 	}
 	
-	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
+@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
 	public void testCompanyServicesEdit() throws Exception {
 
 		final String servicename = "Test Bundle Service";

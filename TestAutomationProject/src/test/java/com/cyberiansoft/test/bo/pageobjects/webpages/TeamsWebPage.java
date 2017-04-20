@@ -90,6 +90,13 @@ public class TeamsWebPage extends WebPageWithPagination {
 		newteamsdialog.clickAddTeamOKButton();
 	}
 	
+	public void createNewTeam(String team , String area) {
+		NewTeamsDialogWebPage newteamsdialog = clickAddTeamButton();
+		newteamsdialog.setNewTeamName(team);
+		newteamsdialog.selectTeamArea(area);
+		newteamsdialog.clickAddTeamOKButton();
+	}
+	
 	public void verifyTeamsTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		Assert.assertTrue(teamstable.isTableColumnExists("Guests"));

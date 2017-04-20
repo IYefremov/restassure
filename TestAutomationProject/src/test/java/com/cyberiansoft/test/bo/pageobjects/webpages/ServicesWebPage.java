@@ -113,7 +113,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithArchivedService(String servicename) {
 		List<WebElement> employeestablerows = getArchivedServicesTableRows();
 		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td[3]")).getText().equals(servicename)) {
+			if (employeestablerow.findElement(By.xpath(".//td["+archivedservicestable.getTableColumnIndex("Service")+"]")).getText().equals(servicename)) {
 				return employeestablerow;
 			}
 		}
@@ -156,11 +156,12 @@ public class ServicesWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
 	}
-	
+
 	public void archiveService(String servicename) {
-		WebElement row = getTableRowWithActiveService(servicename);
+		archivedtab.click();
+		WebElement row = getTableRowWithArchivedService(servicename);
 		if (row != null) {
-			archiveTableRow(row);
+			//archiveTableRow(row);
 		} else 
 			Assert.assertTrue(false, "Can't find " + servicename + " service");		
 	}

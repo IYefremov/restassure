@@ -199,6 +199,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 			vendorsteamspage.clickArchivedTab();
 			Assert.assertTrue(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
 			vendorsteamspage.restoreVendorTeam(vendorteam);
+			//fix deletion
 			Assert.assertFalse(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
 			vendorsteamspage.clickActiveTab();
 		

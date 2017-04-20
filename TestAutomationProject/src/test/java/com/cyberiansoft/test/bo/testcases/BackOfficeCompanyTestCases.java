@@ -45,10 +45,11 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 					BackOfficeHeaderPanel.class);
 			backofficeheader.clickLogout();
-			//Thread.sleep(3000);
+			Thread.sleep(3000);
 		}
 		
-		@Test(description = "Test Case 15245:Company-Users: Search")
+		//TODO no user
+	@Test(description = "Test Case 15245:Company-Users: Search")
 		public void testCompanyUsersSearch() throws Exception {
 
 			final String userfirstname = "Delete";
@@ -472,8 +473,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(testName = "Test Case 26726:Company- Employees: Archive", description = "Company- Employees: Archive")
 		public void testCompanyEmployeesArchive() throws Exception {
 
-			final String employeefirstname = "archive";
-			final String employeelastname = "unarchive";
+			final String employeefirstname = "Archive";
+			final String employeelastname = "User";
 			final String employeename = employeefirstname + " " + employeelastname;
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -502,6 +503,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			}
 		}
 		
+		//TODO need to restore service 
 		@Test(testName = "Test Case 26727:Company- Services: Archive", description = "Company- Services: Archive")
 		public void testCompanyServicesArchive() throws Exception {
 
