@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -49,6 +50,28 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public boolean isServiceNotesIconDisplayed(String servicename) {
 		WebElement sepviserow = inspectionserviceslist.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
 		return sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).isDisplayed();
+	}
+	
+	public boolean isMatrixServiceExists(String matrixservicename) {
+		WebElement matrixsepviserow = inspectionserviceslist.findElement(By.xpath(".//tr[@class='entity-details__matrix']"));
+		return matrixsepviserow.findElement(By.xpath("./td[contains(text(), '" +  matrixservicename + "')]")).isDisplayed();
+	}
+
+	public List<WebElement> getAllMatrixServicesRows(String matrixservicename) {
+		return inspectionserviceslist.findElements(By.xpath(".//tr[@class='entity-details__matrix']"));
+	}
+
+	
+	public boolean isImageExistsForMatrixServiceNotes(WebElement matrixsepviserow) {
+		boolean exists = false;
+		matrixsepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
+		WebElement notesmodaldlg = new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
+		exists = notesmodaldlg.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
+		waitABit(500);
+		return exists;	
 	}
 	
 	public void clickServiceNotesIcon(String servicename) {

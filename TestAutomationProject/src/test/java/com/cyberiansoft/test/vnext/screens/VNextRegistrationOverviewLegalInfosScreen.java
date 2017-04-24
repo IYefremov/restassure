@@ -33,10 +33,10 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	@FindBy(xpath="//button[contains(@data-bind, 'paymentTerms.decline')]")
 	private WebElement paymentdeclinebtn;
 
-	@FindBy(xpath="//button[text()='Submit']")
+	@FindBy(xpath="//*[text()='Submit']")
 	private WebElement submitbtn;
 	
-	@FindBy(xpath="//button[text()='Pay now!']")
+	@FindBy(xpath="//*[text()='Pay now!']")
 	private WebElement paynowbtn;
 	
 	public VNextRegistrationOverviewLegalInfosScreen(SwipeableWebDriver appiumdriver) {
@@ -52,6 +52,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
 	public void agreetermsAndconditions() {
 		clickTermsAndConditionsLink();
+		waitABit(3000);
 		clickIAgreeButton();
 	}
 	
@@ -64,6 +65,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(termsandconditionslink));
 		tap(termsandconditionslink);
+		waitABit(1000);
 		log(LogStatus.INFO, "Click Terms And Conditions link");
 	}
 	
@@ -80,7 +82,11 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickIAgreeButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(agreebtn));
 		tap(agreebtn);
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.invisibilityOf(agreebtn));
 		log(LogStatus.INFO, "Click I Agree button");
 	}
 	
@@ -90,6 +96,8 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSubmitButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(submitbtn));
 		tap(submitbtn);
 		log(LogStatus.INFO, "Click Submit button");
 	}

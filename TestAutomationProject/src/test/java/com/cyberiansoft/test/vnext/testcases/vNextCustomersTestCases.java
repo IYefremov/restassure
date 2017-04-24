@@ -8,10 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
@@ -22,10 +24,10 @@ import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 
 public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	@AfterSuite
+	/*@AfterSuite
 	public void deleteClients() throws IOException {
 		VNextWebServicesUtils.deleteClientsByMail("cnolan@gmail.com");
-	}
+	}*/
 	
 	@Test(testName= "Test Case 43519:vNext - Create new Customer with empty First Name and Last Name", 
 			description = "Create new Customer with empty First Name and Last Name")
@@ -59,10 +61,10 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		homescreen = customersscreen.clickBackButton();
 		homescreen.waitABit(15000);
 		initiateWebDriver();
-		webdriver.get(deviceofficeurl);
+		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();

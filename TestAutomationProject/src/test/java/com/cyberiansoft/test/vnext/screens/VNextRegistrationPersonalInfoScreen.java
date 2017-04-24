@@ -3,7 +3,9 @@ package com.cyberiansoft.test.vnext.screens;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -85,6 +87,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickDoneButton() {
 		tap(donebtn);
+		waitABit(2000);
 	}
 	
 	public void clickClearUserButton() {

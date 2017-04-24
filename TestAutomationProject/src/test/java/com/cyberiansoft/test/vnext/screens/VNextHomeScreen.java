@@ -81,8 +81,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public String getQueueMessageValue() {
-		waitABit(1000);
+		waitABit(300);
 		return queuemessage.getText();
+	}
+	
+	public void waitUntilQueueMessageInvisible() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOf(queuemessage));
 	}
 	
 	public VNextLoginScreen clickLogoutButton() {

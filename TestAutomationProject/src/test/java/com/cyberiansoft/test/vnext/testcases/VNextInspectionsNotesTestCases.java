@@ -11,19 +11,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -566,8 +566,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			+ "Test Case 55444:vNext: verify displaying image notes for the Inspection Visual Breakage service", 
 			description = "Create Inspection with breakage service image notes, "
 					+ "verify displaying image notes for the Inspection Visual Breakage service")
-	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
-	public void testCreateInspectionWithBreakageServiceImageNotes(String bourl, String username, String userpsw) throws IOException {
+	public void testCreateInspectionWithBreakageServiceImageNotes() throws IOException {
 		
 		final String selectdamage = "Price Adjustment";
 		final String servicepercentage = "Corrosion Protection";
@@ -601,10 +600,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		homescreen.waitABit(30000);
 		initiateWebDriver();
-		webdriverGotoWebPage(bourl);
+		webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(username, userpsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
@@ -620,8 +619,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			+ "Test Case 55662:vNext: verify displaying image notes for the Inspection Money service,"
 			+ "Test Case 55663:vNext: verify displaying image notes for the Percentage service", 
 			description = "Create Inspection with money service image notes")
-	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
-	public void testCreateInspectionWithMoneyServiceImageNotes(String bourl, String username, String userpsw) throws IOException {
+	public void testCreateInspectionWithMoneyServiceImageNotes() throws IOException {
 		
 		final String[] servicestoadd = { "Dent Repair", "Aluminum Upcharge" };
 		final int addedpictures = 1;
@@ -654,10 +652,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		homescreen.waitABit(30000);
 		initiateWebDriver();
-		webdriverGotoWebPage(bourl);
+		webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(username, userpsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
@@ -666,6 +664,68 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection(serviceadd));
 			Assert.assertTrue(inspectionspage.isServiceNotesIconDisplayed(serviceadd));
 			Assert.assertTrue(inspectionspage.isImageExistsForServiceNote(serviceadd));
+		}
+		webdriver.quit();
+	}
+	
+	@Test(testName= "Test Case 55650:vNext mobile: Create Inspection with matrix services image notes", 
+			description = "Create Inspection with matrix services image notes")
+	public void testCreateInspectionWithMatrixServicesImageNotes() throws IOException {
+		
+		final String matrixservice = "Hail Dent Repair";
+		final String pricematrix = "State Farm";
+		final String[] vehiclepartnames = { "Hood", "Roof" };
+		final String[] vehiclepartsizes = { "Dime", "Dime" };	
+		final String[] vehiclepartseverities = { "Light 6 to 15", "Light 6 to 15" };	
+		final int addedpictures = 1;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		final String inspnumber = inspectionsscreen.getFirstInspectionNumber();
+		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		for (int i=0; i < vehiclepartnames.length; i++) {
+			;
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartnames[i]);
+			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsizes[i]);
+			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);
+			VNextNotesScreen notesscreen = vehiclepartinfoscreen.clickMatrixServiceNotesOption();
+			notesscreen.selectNotesPicturesTab();
+			notesscreen.addImageToNotesFromGallery();
+			Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
+			notesscreen.clickNotesBackButton();
+			vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
+			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		}
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		Assert.assertTrue(inspservicesscreen.isServiceAdded(matrixservice));
+		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		homescreen = inspectionsscreen.clickBackButton();		
+		homescreen.waitUntilQueueMessageInvisible();
+		
+		homescreen.waitABit(30000);
+		initiateWebDriver();
+		webdriverGotoWebPage(deviceofficeurl);
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(deviceuser, devicepsw);
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
+		inspectionspage.selectInspectionInTheList(inspnumber);
+		Assert.assertTrue(inspectionspage.isMatrixServiceExists(matrixservice));
+		List<WebElement> matrixsepviserows = inspectionspage.getAllMatrixServicesRows(matrixservice);
+		Assert.assertEquals(matrixsepviserows.size(), vehiclepartnames.length);
+		for (WebElement matrixsepviserow : matrixsepviserows) {
+			Assert.assertTrue(inspectionspage.isImageExistsForMatrixServiceNotes(matrixsepviserow));
 		}
 		webdriver.quit();
 	}

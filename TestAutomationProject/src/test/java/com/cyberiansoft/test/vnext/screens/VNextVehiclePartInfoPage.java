@@ -30,6 +30,9 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(id="additional-services")
 	private WebElement additionalserviceslist;
 	
+	@FindBy(xpath="//i[@action='notes']")
+	private WebElement notesbutton;
+	
 	@FindBy(xpath="//a[@action='save']/i")
 	private WebElement savebtn;
 	
@@ -83,6 +86,12 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	public void clickSaveVehiclePartInfo() {
 		tap(savebtn);
 		log(LogStatus.INFO, "Click Save Vehicle Part Info button");
+	}
+	
+	public VNextNotesScreen clickMatrixServiceNotesOption() {
+		tap(notesbutton);
+		log(LogStatus.INFO, "Click service Notes option");
+		return new VNextNotesScreen(appiumdriver);
 	}
 
 }

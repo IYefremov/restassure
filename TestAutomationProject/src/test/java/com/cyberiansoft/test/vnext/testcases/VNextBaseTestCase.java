@@ -28,6 +28,8 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
@@ -35,12 +37,19 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-/*import com.ssts.pcloudy.ConnectError;
+import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
+import com.ssts.pcloudy.Version;
+import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoResult;
 import com.ssts.pcloudy.dto.device.MobileDevice;
-import com.ssts.pcloudy.dto.file.PDriveFileDTO;*/
+import com.ssts.pcloudy.dto.file.PDriveFileDTO;
+import com.ssts.util.reporting.ExecutionResult;
+import com.ssts.util.reporting.MultipleRunReport;
+import com.ssts.util.reporting.SingleRunReport;
+import com.ssts.util.reporting.printers.HtmlFilePrinter;
+
 import io.appium.java_client.android.Connection;
 import io.appium.java_client.android.HasNetworkConnection;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -58,17 +67,16 @@ public class VNextBaseTestCase {
 	protected static String deviceofficeurl;
 	protected static String deviceuser;
 	protected static String devicepsw;
-	protected static String devicelicensename;
 	protected static String deviceplatform;
 	
-	@BeforeSuite
-	@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license", "device.platform" })
-	public void startServer(String browser, String bourl, String username, String userpsw, String licensename, String devplatform) throws MalformedURLException {
+	//@BeforeSuite
+	@Parameters({ "selenium.browser", "device.platform" })
+	public void startServer(String browser, String devplatform) throws MalformedURLException {
 		
 		//AppiumServiceBuilder builder = new AppiumServiceBuilder().withArgument(GeneralServerFlag.LOG_LEVEL, "error");
 	       // service = builder.build();
 	        //service.start();	
-			deviceofficeurl = bourl;
+			deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 	       
 			deviceplatform = devplatform;
 			if (deviceplatform.contains("ios"))
@@ -77,10 +85,8 @@ public class VNextBaseTestCase {
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
 			
 			defaultbrowser = browser;
-			deviceuser = username;
-			devicepsw = userpsw;
-			devicelicensename = licensename;
-
+			deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
+			devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
 	}
 	
 	public void setUp() {
@@ -166,9 +172,12 @@ public class VNextBaseTestCase {
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		switchToWebViewContext();
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
-		String userregmail = "osmak.oksana+408@gmail.com";
-		regscreen.setUserRegistrationInfoAndSend("QA", "QA", "380", "978385064", userregmail);
-		regscreen.waitABit(5000);
+		String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
+		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
+				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
+				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode(), 
+				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber(), userregmail);
+		regscreen.waitABit(7000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton(); 
@@ -244,16 +253,260 @@ public class VNextBaseTestCase {
 	}
 	
 	/////////////////////////////
-	//@BeforeSuite
-	/*@Parameters({ "selenium.browser", "backoffice.url", "user.name", "user.psw", "device.license" })
-	public void runExecutionOnPCloudy(String browser, String bourl, String username, String userpsw, String licensename) throws InterruptedException, IOException, ConnectError {
-		deviceofficeurl = bourl;
+	@SuppressWarnings("unchecked")
+	@BeforeSuite
+	@Parameters({ "selenium.browser", "device.platform" })
+	public void runExecutionOnPCloudy(String browser, String devplatform) throws InterruptedException, IOException, ConnectError {
+		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 		defaultbrowser = browser;
-		deviceuser = username;
-		devicepsw = userpsw;
-		devicelicensename = licensename;
+		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
+		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
+		deviceplatform = devplatform;
 		
 		
+		File reportsFolder = new File("Reports"); 
+	     
+        Connector con = new Connector("https://us.pcloudy.com/api"); 
+
+        // User Authentication over pCloudy 
+        String authToken = con.authenticateUser("olexandr.kramar@cyberiansoft.com", "kg3s78jmj7qbxs7xhs4krrhp"); 
+
+        ArrayList selectedDevices = new ArrayList<>();
+        selectedDevices.add(MobileDevice.getNew("Apple_iPhone7_Ios_10.0.2", 229, "iPhone7", "iPhone 7", "ios", "10.0.2", "Apple")); 
+                     
+        // To select multiple devices manually, use either of these: 
+        //selectedDevices.addAll(con.chooseMultipleDevicFile deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
+        // selectedDevices.add(con.chooseSingleDevice(authToken, "ios")); 
+         
+        // To select devices from a CI variable, use: 
+        //selectedDevices.addAll(con.chooseMultipleDevices(authToken,"ios",CI_VariableWithDeviceFullNamesArray)); 
+         
+        String sessionName = "Appium " + "Apple_iPhone7plus_Ios_10.2.1"; 
+        if (selectedDevices.size() > 1) 
+            sessionName += " & " + (selectedDevices.size() - 1) + " others"; 
+             
+        // Book the selected devices in pCloudy 
+        BookingDtoDevice[] bookedDevices = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, 10, sessionName); 
+        System.out.println("Devices booked successfully"); 
+
+        // Select ipa in pCloudy Cloud Drive 
+        
+        
+	    
+        PDriveFileDTO pDriveFile = PDriveFileDTO.getNew("Repair360_JumpStart_Staging_3.1.0.1711001.ipa"); 
+        System.out.println("IPA file selected from CloudDrive"); 
+                 
+        con.AppiumApis().initAppiumHubForApp(authToken, pDriveFile); 
+
+        // Get the endpoint from pCloudy 
+
+        URL endpoint = con.AppiumApis().getAppiumEndpoint(authToken);
+        System.out.println("Appium Endpoint: " + endpoint); 
+
+        URL reportFolderOnPCloudy = con.AppiumApis().getAppiumReportFolder(authToken); 
+        System.out.println("Report Folder: " + reportFolderOnPCloudy); 
+
+         
+        List allThreads = new ArrayList(); 
+        MultipleRunReport multipleReports = new MultipleRunReport(); 
+        //BookingDtoDevice aDevice = bookedDevices[i]; 
+        PCloudyAppiumSession pCloudySession = new PCloudyAppiumSession(con, authToken, bookedDevices[0]); 
+        SingleRunReport report = new SingleRunReport(); 
+        multipleReports.add(report); 
+
+        report.Header = bookedDevices[0].manufacturer + " " + bookedDevices[0].model + " " + bookedDevices[0].version; 
+        report.Enviroment.addDetail("NetworkType", bookedDevices[0].networkType); 
+        report.Enviroment.addDetail("Phone Number", bookedDevices[0].phoneNumber); 
+        report.HyperLinks.addLink("Appium Endpoint", endpoint); 
+        report.HyperLinks.addLink("pCloudy Result Folder", reportFolderOnPCloudy); 
+        
+        File deviceFolder = new File(reportsFolder, bookedDevices[0].manufacturer + " " + bookedDevices[0].model + " " + bookedDevices[0].version); 
+        File snapshotsFolder = new File(deviceFolder, "Snapshots"); 
+        snapshotsFolder.mkdirs(); 
+        try {
+        
+        DesiredCapabilities capabilities = new DesiredCapabilities(); 
+        capabilities.setCapability("newCommandTimeout", 600); 
+        capabilities.setCapability("launchTimeout", 90000); 
+        capabilities.setCapability("deviceName", bookedDevices[0].capabilities.deviceName); 
+        capabilities.setCapability("browserName", bookedDevices[0].capabilities.deviceName); 
+        capabilities.setCapability("platformName", "ios"); 
+        capabilities.setCapability("bundleId", "com.automobiletechnologies.repair360"); 
+        capabilities.setCapability("usePrebuiltWDA", true); 
+        capabilities.setCapability("acceptAlerts", true); 
+     
+        if (bookedDevices[0].getVersion().compareTo(new Version("9.3")) >= 0) 
+            capabilities.setCapability("automationName", "XCUITest"); 
+        else 
+            capabilities.setCapability("automationName", "Appium");
+        appiumdriver = new SwipeableWebDriver(endpoint, capabilities);
+        
+        File snapshotTmpFile = pCloudySession.takeScreenshot(); 
+        File snapshotFile = new File(snapshotsFolder, snapshotTmpFile.getName()); 
+        FileUtils.moveFile(snapshotTmpFile, snapshotFile); 
+
+        report.addStep("Take Screenshot", null, null, snapshotFile.getAbsolutePath(), ExecutionResult.Pass); 
+
+        // release session now 
+        pCloudySession.releaseSessionNow(); 
+
+        report.addStep("Release Appium Session", null, null, ExecutionResult.Pass); 
+
+        } catch (ConnectError | IOException e) { 
+            report.addStep("Error Running TestCase", null, e.getMessage(), ExecutionResult.Fail); 
+            e.printStackTrace(); 
+        } finally { 
+            HtmlFilePrinter printer = new HtmlFilePrinter(new File(deviceFolder, deviceFolder.getName() + ".html")); 
+            printer.printSingleRunReport(report); 
+
+        } 
+        
+        
+        // Create multiple driver objects in multiple threads 
+        /*for (int i = 0; i < bookedDevices.length; i++) { 
+            BookingDtoDevice aDevice = bookedDevices[i]; 
+            PCloudyAppiumSession pCloudySession = new PCloudyAppiumSession(con, authToken, aDevice); 
+            SingleRunReport report = new SingleRunReport(); 
+            multipleReports.add(report); 
+
+            report.Header = aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version; 
+            report.Enviroment.addDetail("NetworkType", aDevice.networkType); 
+            report.Enviroment.addDetail("Phone Number", aDevice.phoneNumber); 
+            report.HyperLinks.addLink("Appium Endpoint", endpoint); 
+            report.HyperLinks.addLink("pCloudy Result Folder", reportFolderOnPCloudy); 
+            
+            File deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
+            File snapshotsFolder = new File(deviceFolder, "Snapshots"); 
+            snapshotsFolder.mkdirs(); 
+            try {
+            
+            DesiredCapabilities capabilities = new DesiredCapabilities(); 
+            capabilities.setCapability("newCommandTimeout", 600); 
+            capabilities.setCapability("launchTimeout", 90000); 
+            capabilities.setCapability("deviceName", aDevice.capabilities.deviceName); 
+            capabilities.setCapability("browserName", aDevice.capabilities.deviceName); 
+            capabilities.setCapability("platformName", "ios"); 
+            capabilities.setCapability("bundleId", "com.automobiletechnologies.repair360"); 
+            capabilities.setCapability("usePrebuiltWDA", true); 
+            capabilities.setCapability("acceptAlerts", true); 
+         
+            if (aDevice.getVersion().compareTo(new Version("9.3")) >= 0) 
+                capabilities.setCapability("automationName", "XCUITest"); 
+            else 
+                capabilities.setCapability("automationName", "Appium");
+            appiumdriver = new SwipeableWebDriver(endpoint, capabilities);
+            
+            File snapshotTmpFile = pCloudySession.takeScreenshot(); 
+            File snapshotFile = new File(snapshotsFolder, snapshotTmpFile.getName()); 
+            FileUtils.moveFile(snapshotTmpFile, snapshotFile); 
+
+            report.addStep("Take Screenshot", null, null, snapshotFile.getAbsolutePath(), ExecutionResult.Pass); 
+
+            // release session now 
+            pCloudySession.releaseSessionNow(); 
+
+            report.addStep("Release Appium Session", null, null, ExecutionResult.Pass); 
+
+            } catch (ConnectError | IOException e) { 
+                report.addStep("Error Running TestCase", null, e.getMessage(), ExecutionResult.Fail); 
+                e.printStackTrace(); 
+            } finally { 
+                HtmlFilePrinter printer = new HtmlFilePrinter(new File(deviceFolder, deviceFolder.getName() + ".html")); 
+                printer.printSingleRunReport(report); 
+
+            } 
+        }*/
+            
+/*
+            Runnable testCase = getTestCaseClass(endpoint, aDevice, pCloudySession, report,reportsFolder); 
+            Thread aThread = new Thread(testCase); 
+            aThread.start(); 
+            allThreads.add(aThread); 
+        } 
+            for(Thread aThread : allThreads) { 
+            aThread.join(); 
+        } 
+            con.revokeTokenPrivileges(authToken); 
+             
+            File consolidatedReport = new File(reportsFolder, "ConsolidatedReports.html"); 
+            HtmlFilePrinter printer = new HtmlFilePrinter(consolidatedReport); 
+            printer.printConsolidatedSingleRunReport(multipleReports); 
+            System.out.println("Check the reports at : " + consolidatedReport.getAbsolutePath()); 
+
+            System.out.println("Execution Completed..."); 
+         
+
+    } 
+
+    private Runnable getTestCaseClass(final URL endpoint, final BookingDtoDevice aDevice,final PCloudyAppiumSession pCloudySession, final SingleRunReport report,final File reportsFolder) { 
+        // this will give a Thread Safe TestScript class. 
+        // You may also like to have this as a named class in a separate file 
+
+        return new Runnable() { 
+
+            @Override 
+            public void run() { 
+             
+                
+            try{ 
+                DesiredCapabilities capabilities = new DesiredCapabilities(); 
+                capabilities.setCapability("newCommandTimeout", 600); 
+                capabilities.setCapability("launchTimeout", 90000); 
+                capabilities.setCapability("deviceName", aDevice.capabilities.deviceName); 
+                capabilities.setCapability("browserName", aDevice.capabilities.deviceName); 
+                capabilities.setCapability("platformName", "ios"); 
+                capabilities.setCapability("bundleId", "com.automobiletechnologies.repair360"); 
+                capabilities.setCapability("usePrebuiltWDA", true); 
+                capabilities.setCapability("acceptAlerts", true); 
+             
+                if (aDevice.getVersion().compareTo(new Version("9.3")) >= 0) 
+                    capabilities.setCapability("automationName", "XCUITest"); 
+                else 
+                    capabilities.setCapability("automationName", "Appium"); 
+                 
+                IOSDriver driver = new IOSDriver(endpoint, capabilities); 
+                // ########################################### 
+                // ########################################### 
+                // ########################################### 
+                // ########################################### 
+                // Your Test Script Goes Here 
+                // ########################################### 
+                // ########################################### 
+                // ########################################### 
+                // ########################################### 
+                // ########################################### 
+                 
+                File snapshotTmpFile = pCloudySession.takeScreenshot(); 
+                File snapshotFile = new File(snapshotsFolder, snapshotTmpFile.getName()); 
+                FileUtils.moveFile(snapshotTmpFile, snapshotFile); 
+
+                report.addStep("Take Screenshot", null, null, snapshotFile.getAbsolutePath(), ExecutionResult.Pass); 
+
+                // release session now 
+                pCloudySession.releaseSessionNow(); 
+
+                report.addStep("Release Appium Session", null, null, ExecutionResult.Pass); 
+
+                } catch (ConnectError | IOException e) { 
+                    report.addStep("Error Running TestCase", null, e.getMessage(), ExecutionResult.Fail); 
+                    e.printStackTrace(); 
+                } finally { 
+                    HtmlFilePrinter printer = new HtmlFilePrinter(new File(deviceFolder, deviceFolder.getName() + ".html")); 
+                    printer.printSingleRunReport(report); 
+
+                } 
+            } 
+
+        }; */
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		Connector pCloudyCONNECTOR = new Connector();
 
 		// User Authentication over pCloudy
@@ -322,7 +575,7 @@ public class VNextBaseTestCase {
 		
 		
 		// Create multiple driver objects in multiple threads
-		
-		}*/
+		*/
+		}
 
 }
