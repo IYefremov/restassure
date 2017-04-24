@@ -44,7 +44,7 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
       </class>-->
-     <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
+     <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <!--<methods>                   
           <include name="testVerifySelectedServicesAreSavedToBO" />
         </methods>-->

@@ -2,15 +2,7 @@
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="chrome" />
-  <parameter name="backoffice.url" value="https://vnext_dev.cyberianconcepts.com"  />  
-  <parameter name="backofficecapi.url" value="http://capi.cyberianconcepts.com"  /> 
-  <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
-  <parameter name="user.psw" value="test12345"  />
-  <parameter name="usercapi.mail" value="test.cyberiansoft@gmail.com"  />
-  <parameter name="usercapi.name" value="test.cyberiansoft+su@gmail.com"  />
-  <parameter name="usercapi.psw" value="ZZzz11!!"  />
-  <parameter name="device.license" value="VNext Automation"  />
-  <parameter name="device.platform" value="android"  />
+  <parameter name="device.platform" value="ios"  />
   <listeners>
 		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
   </listeners>
@@ -46,7 +38,9 @@
       	  <include name="testAddSeveralQuickNotesForServiceInTheList" />
       	  <include name="testClearTextNotesForServiceInTheList" /> 
       	  <include name="testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel" />  	
-      	  <include name="testCreateInspectionWithBreakageServiceImageNotes" />  
+      	  <include name="testCreateInspectionWithBreakageServiceImageNotes" />
+      	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
+          <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
@@ -85,11 +79,12 @@
           <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />
       </methods>
       </class>
-     <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
+     <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
      <methods>                   
           <include name="testCreateInspectionWithMoneyServiceImageNotes" />
+          <include name="testCreateInspectionWithMatrixServicesImageNotes" />
       </methods>
-      </class>
+      </class>-->
      <!--<class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
      <methods>                   
           <include name="testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen" />
