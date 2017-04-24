@@ -244,7 +244,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		builder.moveToElement(getFirstServiceRequestFromList()).perform();
 		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();	
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 	}
 	
 	public void rejectFirstServiceRequestFromList() {

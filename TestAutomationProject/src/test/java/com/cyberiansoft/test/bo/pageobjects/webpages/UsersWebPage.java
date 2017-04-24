@@ -155,6 +155,7 @@ public class UsersWebPage extends WebPageWithPagination {
 		return archiveduserstable.getTableRows();
 	}
 	
+	//TODO add data at the web site, empty row
 	public WebElement getTableRowWithActiveUser(String firstname, String lastname) {
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {

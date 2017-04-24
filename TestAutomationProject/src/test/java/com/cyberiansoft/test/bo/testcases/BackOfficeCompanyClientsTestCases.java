@@ -63,7 +63,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertEquals(lastpagenumber, clientspage.getGoToPageFieldValue().replace(",", ""));
 		
 		clientspage.clickGoToFirstPage();
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 		Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
 		
 		clientspage.clickGoToNextPage();

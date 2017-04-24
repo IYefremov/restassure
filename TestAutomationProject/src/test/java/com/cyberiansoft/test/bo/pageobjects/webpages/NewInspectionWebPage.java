@@ -49,17 +49,22 @@ public class NewInspectionWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_Card_ctl04_BtnClose")
 	private WebElement closedlgbtn;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public NewInspectionWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
 	public void selectCustomerType(String customertype) throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(customertypecmb));
 		Select selectObject = new Select(customertypecmb);
 		selectObject.selectByValue(customertype);
-		Thread.sleep(300);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(300);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
@@ -74,7 +79,9 @@ public class NewInspectionWebPage extends BaseWebPage {
 	public void selectCustomer(String customer) throws InterruptedException {
 		wait.until(ExpectedConditions.elementToBeClickable(customercmb)).click();
 		customercmb.sendKeys(customer);
-		Thread.sleep(1000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + customer + "']"))).click();
 	}
 	

@@ -44,6 +44,9 @@ public class EventsWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement neweventCancelbtn;
+	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
 
 	public EventsWebPage(WebDriver driver) {
 		super(driver);
@@ -97,10 +100,13 @@ public class EventsWebPage extends BaseWebPage {
 	public void selectFirstConditionValues(String firstconditionname, String firstconditiontype, String firstconditioncriteria) throws InterruptedException {
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOf(visibleconditions));
-		Thread.sleep(1000);
+
+		//Thread.sleep(1000);
 		selectFirstConditionNameCriteria(firstconditionname); 	
-		selectFirstConditionTypeCriteria(firstconditiontype); 	
-		Thread.sleep(1000);
+		selectFirstConditionTypeCriteria(firstconditiontype);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(1000);
 		setFirstConditionCriteria(firstconditioncriteria); 	
 	}
 	

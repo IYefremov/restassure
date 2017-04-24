@@ -31,6 +31,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Super User']")
 	private WebElement superusertab;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public BackOfficeHeaderPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	

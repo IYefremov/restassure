@@ -99,6 +99,9 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")
 	private WebElement findbtn;
+	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
 
 	public ServiceRequestsWebPage(WebDriver driver) {
 		super(driver);
@@ -175,7 +178,9 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
 		click(setdefaultdevicebtn);
-		Thread.sleep(5000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(5000);
 		addservicerequestcmbbox.click();
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='" + servicerequest
@@ -197,7 +202,9 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
-	Thread.sleep(1000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+	//Thread.sleep(1000);
 		addservicelink.click();
 		teamcmbbox.click();
 		driver.findElement(

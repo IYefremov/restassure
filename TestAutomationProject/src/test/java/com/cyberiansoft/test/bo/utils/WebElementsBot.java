@@ -10,6 +10,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -20,6 +21,9 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
 public class WebElementsBot {
+	
+	@FindBy(className = "updateProcess")
+	private static WebElement updateProcess;
 	
 	public static void click(WebElement element) {
 	    try {
@@ -90,13 +94,16 @@ public class WebElementsBot {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
+	//TODO
 	public static void doubleselectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
 		combobox.clearAndType(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
-		waitABit(1000);
+//		WebDriverInstansiator.getUpdateWait().until(ExpectedConditions.visibilityOf(updateProcess));
+//		WebDriverInstansiator.getUpdateWait().until(ExpectedConditions.invisibilityOf(updateProcess));
+		//waitABit(1000);
 		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
 		droplist.selectByVisibleText(value);
 		droplist.selectByVisibleText(value);
@@ -106,7 +113,7 @@ public class WebElementsBot {
 	private static void waitUntilSelectOptionsLoaded(final WebElement element) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(WebDriverInstansiator.getDriver())
                 .withTimeout(60, TimeUnit.SECONDS)
-                .pollingEvery(10, TimeUnit.MILLISECONDS)
+                .pollingEvery(80, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
 		wait.until(new Function<WebDriver, Boolean>() {
              @Override

@@ -225,7 +225,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 
 	public void selectSearchClient(String _client) throws InterruptedException  { 
-	Thread.sleep(1000);
+	//Thread.sleep(1000);
 		searchclientcbx.click();
 		searchclientcbx.sendKeys(_client);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _client + "']")));

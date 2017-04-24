@@ -88,6 +88,9 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement cancelnewPricemarixbtn;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public PriceMatricesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -202,8 +205,9 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().contains(pricematrix)) {
 				row.findElement(By.xpath(".//a[text()='Prices']")).click();
-			Thread.sleep(300);
-				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(300);
+			//	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				break;
 			}			
 		}		

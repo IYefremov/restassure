@@ -39,6 +39,8 @@ public class AreasWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement newareacancelbtn;
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
 
 	public AreasWebPage(WebDriver driver) {
 		super(driver);
@@ -109,7 +111,9 @@ public class AreasWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//*[@title='Edit']")).click();
-			Thread.sleep(300);
+			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else 
 			Assert.assertTrue(false, "Can't find " + areaname + " area");
@@ -119,10 +123,14 @@ public class AreasWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-			Thread.sleep(1000);
+			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(1000);
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
-			Thread.sleep(300);
+			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	
@@ -133,10 +141,14 @@ public class AreasWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-			Thread.sleep(1000);
+			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(1000);
 			Alert alert = driver.switchTo().alert();
 			alert.dismiss();
-			Thread.sleep(300);
+			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	

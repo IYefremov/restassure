@@ -106,6 +106,9 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	@FindBy(xpath = "//label[text()='Contact Verification Disabled']")
 	private WebElement contverifdisablechkbox;
+	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
 
 	public ClientsWebPage(WebDriver driver) {
 		super(driver);
@@ -193,11 +196,15 @@ public class ClientsWebPage extends WebPageWithPagination {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(clientname);
 		clickFindButton();
-		Thread.sleep(3000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(3000);
 		deletemarker.click();
 		wait.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
-		Thread.sleep(3000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(3000);
 	}
 
 	public NewClientDialogWebPage clickAddClientButton() {

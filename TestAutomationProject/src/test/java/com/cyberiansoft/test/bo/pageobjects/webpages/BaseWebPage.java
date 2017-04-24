@@ -19,6 +19,7 @@ public abstract class BaseWebPage {
 
 	public WebDriver driver;
 	public WebDriverWait wait;
+	public WebDriverWait updateWait;
 
 	private static final long SLEEP_TIMEOUT_IN_SEC = 15;
 
@@ -29,6 +30,7 @@ public abstract class BaseWebPage {
 		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
 
 		wait = new WebDriverWait(driver, 30);
+		updateWait = new WebDriverWait(driver , 40 , 1);
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement parent, final By locator) {

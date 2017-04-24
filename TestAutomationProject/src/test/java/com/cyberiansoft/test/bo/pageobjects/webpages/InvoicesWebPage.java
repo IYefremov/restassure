@@ -100,6 +100,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	@FindBy(className = "rmBottomArrow")
 	private WebElement botArrow;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 //	@FindBy(className = "rfdSkinnedButton")
 //	private WebElement voidBTN;
 	
@@ -183,18 +186,18 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();		
 		driver.findElement(By.id("rcMView_OK")).click();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']")).click();
 	}
 	
 	public void setSearchFromDate(String date) throws InterruptedException { 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")).sendKeys(date);
 	}
 	
 	public void setSearchToDate(String date) throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")).sendKeys(date);
 	}
@@ -205,7 +208,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
-	Thread.sleep(1000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+	//Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
@@ -296,7 +301,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath(".//span[text()='Select']"))).click().build().perform();
-			waitABit(300);
+			//waitABit(300);
 			//act.click(row.findElement(By.xpath(".//span[text()='Select']"))).build().perform();
 		}	
 		return row;		

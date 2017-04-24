@@ -23,4 +23,9 @@ public class WebDriverInstansiator {
     WebDriverWait wait = new WebDriverWait(WebDriverInstansiator.getDriver() , 30);
     return wait;
     }
+    
+    public static WebDriverWait getUpdateWait(){
+        WebDriverWait wait = new WebDriverWait(WebDriverInstansiator.getDriver() , 30 , 1);
+        return wait;
+        }
 }

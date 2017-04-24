@@ -42,6 +42,9 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")
 	private WebElement findbtn;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public AllEmployeesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -74,7 +77,9 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchApplication(String _application) throws InterruptedException {
-		Thread.sleep(1000);
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(1000);
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();

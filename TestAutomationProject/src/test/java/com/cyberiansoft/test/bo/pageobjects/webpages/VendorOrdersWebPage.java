@@ -222,7 +222,7 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		}
 	}
 	

@@ -51,6 +51,9 @@ public class WebPageWithPagination extends BaseWebPage {
 	@FindBy(xpath = "//div[@class='rgWrap rgInfoPart']")
 	private WebElement pagesizelabel;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public WebPageWithPagination(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -72,17 +75,23 @@ public class WebPageWithPagination extends BaseWebPage {
 	
 	public void setPageSize(String pagesize) throws InterruptedException {
 		pagesizefld.clear();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
 		//changesizebtn.click();
-		Thread.sleep(700);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		Thread.sleep(3000);
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(700);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+//		Thread.sleep(3000);
 	}
 	
 	public void clickGoToLastPage() {
 		gotolastpage.click();
-		waitABit(700);
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//waitABit(700);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
@@ -94,18 +103,22 @@ public class WebPageWithPagination extends BaseWebPage {
 		} else {
 			gotolastpage.click();
 		}
-		Thread.sleep(300);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
 			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}	
-	Thread.sleep(2000);
+	//Thread.sleep(2000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
 	
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
-		waitABit(300);
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//waitABit(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
 			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			wait.withTimeout(30, TimeUnit.SECONDS);
@@ -124,9 +137,11 @@ public class WebPageWithPagination extends BaseWebPage {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
-		Thread.sleep(300);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(300);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
 	}
 
 }

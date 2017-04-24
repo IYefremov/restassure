@@ -71,6 +71,9 @@ public class JobsWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement addjobCancelbtn;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	
 	//Search Panel
 	
@@ -189,9 +192,12 @@ public class JobsWebPage extends WebPageWithPagination {
 		clearAndType(searchjobfld, _job);
 	}
 
+	//TODO
 	public void selectSearchCustomer(String customer) throws InterruptedException  { 
 		searchcustomercbx.click();
 		searchcustomercbx.sendKeys(customer);
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + customer + "']"))).click();
 	}

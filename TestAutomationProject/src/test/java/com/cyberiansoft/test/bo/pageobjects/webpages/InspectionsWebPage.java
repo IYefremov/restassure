@@ -115,6 +115,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl04_btnDelete")
 	private WebElement deleteinspectionbtn;
+	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
 
 	public InspectionsWebPage(WebDriver driver) {
 		super(driver);
@@ -240,7 +243,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
-		Thread.sleep(3000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(3000);
 		Assert.assertEquals(expectedprice,
 				inspectionstable.getWrappedElement().findElement(By.xpath(".//tr/td[14]"))
 						.getText());
@@ -268,7 +273,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
-		waitABit(3000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//waitABit(3000);
 	}
 	
 	public int getTableRowWithInspectionsNumbers() {
@@ -328,14 +335,15 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			Thread.sleep(5000);
-			driver.findElement(By.id("btnDecline")).click();
+			//Thread.sleep(5000);
+			//driver.findElement(By.id("btnDecline")).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("btnDecline"))).click();;
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 	}
 
 	public void approveInspectionByNumber(String inspnumber)
@@ -351,18 +359,18 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			Thread.sleep(10000);
+			//Thread.sleep(10000);
 			driver.findElement(By.xpath("//button[@class='btn icon ok']"))
 					.click();
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			driver.findElement(By.id("btnApprove")).click();
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 	}
 
 	public void approveInspectionLinebylineApprovalByNumber(String inspnumber,
@@ -379,7 +387,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			serviceApprove(serviceapprove);
 			serviceDecline(servicedecline);
 			servicegeneralapprovebtn.click();

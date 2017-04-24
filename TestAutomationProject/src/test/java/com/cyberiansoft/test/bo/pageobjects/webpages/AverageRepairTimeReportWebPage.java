@@ -58,6 +58,9 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_BtnFind")
 	private WebElement findbtn;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public AverageRepairTimeReportWebPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	

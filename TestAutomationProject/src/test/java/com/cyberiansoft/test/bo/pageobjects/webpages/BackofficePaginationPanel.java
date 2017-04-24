@@ -48,6 +48,9 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	@FindBy(xpath = "//div[@class='rgWrap rgInfoPart']")
 	private WebElement pagesizelabel;
 	
+	@FindBy(className = "updateProcess")
+	private WebElement updateProcess;
+	
 	public BackofficePaginationPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -71,10 +74,14 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	
 	public void setPageSize(String pagesize) throws InterruptedException {
 		pagesizefld.clear();
-		Thread.sleep(1000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
 		changesizebtn.click();
-		Thread.sleep(3000);
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		//Thread.sleep(3000);
 	}
 	
 	public void clickGoToLastPage() {

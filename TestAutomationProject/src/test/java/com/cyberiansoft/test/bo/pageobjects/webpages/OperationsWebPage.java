@@ -64,28 +64,28 @@ public class OperationsWebPage extends BaseWebPage {
 	}
 	
 	public ServiceRequestsWebPage clickServiceRequestsLink() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(servicerequestslink)).click();
 		return PageFactory.initElements(
 				driver, ServiceRequestsWebPage.class);
 	}
 	
 	public ServiceContractsWebPage clickServiceContactsLink() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(servicecontactslink)).click();
 		return PageFactory.initElements(
 				driver, ServiceContractsWebPage.class);
 	}
 	
 	public InspectionsWebPage clickInspectionsLink() {
-		waitABit(2000);
+		//waitABit(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(inspectionslink)).click();
 		return PageFactory.initElements(
 				driver, InspectionsWebPage.class);
 	}
 	
 	public VendorBillsWebPage clickVendorBillsLink() {
-		waitABit(2000);
+		//waitABit(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(vendorbillslink)).click();
 		return PageFactory.initElements(
 				driver, VendorBillsWebPage.class);
@@ -98,7 +98,7 @@ public class OperationsWebPage extends BaseWebPage {
 	}
 	
 	public NewInspectionWebPage clickNewInspectionLink() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(newinspectionlink)).click();
 		return PageFactory.initElements(
 				driver, NewInspectionWebPage.class);
