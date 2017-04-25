@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -82,8 +83,8 @@ public class WebPageWithPagination extends BaseWebPage {
 //		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(700);
 //		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 //		Thread.sleep(3000);
 	}
 	
@@ -116,13 +117,15 @@ public class WebPageWithPagination extends BaseWebPage {
 	
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		try{
+		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		}catch(TimeoutException e){}
 		//waitABit(300);
-		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			wait.withTimeout(30, TimeUnit.SECONDS);
-		}
+//		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
+//			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//			wait.withTimeout(30, TimeUnit.SECONDS);
+//		}
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 	}
 	
@@ -137,8 +140,10 @@ public class WebPageWithPagination extends BaseWebPage {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
+		try{
 		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		}catch(TimeoutException e){}
 		//Thread.sleep(300);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 //		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));

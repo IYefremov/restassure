@@ -118,7 +118,7 @@ public class WebElementsBot {
 		wait.until(new Function<WebDriver, Boolean>() {
              @Override
              public Boolean apply(WebDriver driver) {
-            	    return driver.findElements(By.xpath(".//li")).size() == 1;
+            	    return wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("b"))).getText().equals("1");
             	  }
             	});
     }

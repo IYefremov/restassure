@@ -51,12 +51,25 @@ public class WebTableImpl extends AbstractWebElement implements WebTable {
 		int iterator = 0;
 		List<WebElement> columns =  getTableColumns();
 		for (WebElement column:columns) {
-			++iterator;
-			//something different
+			
+			try{
 			if (column.getText().equals(columnname)) {
 				icolumn = iterator;
 				break;		
 			}
+			}catch(Throwable e){
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+				System.out.println(e.getMessage());
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+				System.out.println("--------------------------------");
+
+			}
+			++iterator;
 		}
 		return icolumn;
     }

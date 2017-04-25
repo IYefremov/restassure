@@ -30,7 +30,7 @@ public abstract class BaseWebPage {
 		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
 
 		wait = new WebDriverWait(driver, 30);
-		updateWait = new WebDriverWait(driver , 40 , 1);
+		updateWait = new WebDriverWait(driver , 20 , 1);
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement parent, final By locator) {

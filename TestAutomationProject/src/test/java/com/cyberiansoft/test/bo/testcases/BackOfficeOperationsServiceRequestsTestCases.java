@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -33,6 +34,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
+		try{
+			webdriver.switchTo().alert().accept();
+		}
+			catch(NoAlertPresentException e){
+				
+		}
+		
+		
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
