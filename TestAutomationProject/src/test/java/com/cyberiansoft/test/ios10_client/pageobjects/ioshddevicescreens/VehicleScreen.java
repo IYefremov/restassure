@@ -142,6 +142,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("VIN#").click();
 		for (int i = 0; i < 17; i++)
 			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		
 	}
 	
@@ -153,7 +154,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setVINAndAndSearch(String vin)
 			throws InterruptedException {
 
-		vinfld.click();
+		appiumdriver.findElementByAccessibilityId("VIN#").click();
 
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -192,8 +193,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 
 	public void seletAdvisor(String advisor) {
 		advisorfld.click();
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
-						+ advisor + "\"]").click();
+		appiumdriver.findElementByAccessibilityId(advisor).click();
+		//appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
+		//				+ advisor + "\"]").click();
 	}
 	
 	
@@ -210,6 +212,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getTechnician() {
+		System.out.println("+++" + techfldvalue.getText());
 		return techfldvalue.getText();
 	}
 	

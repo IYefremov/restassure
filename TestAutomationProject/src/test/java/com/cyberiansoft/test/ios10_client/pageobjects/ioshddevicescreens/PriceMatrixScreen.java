@@ -10,6 +10,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -80,7 +81,10 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	public void setSizeAndSeverity(String size, String severity) {
 		appiumdriver.findElementByAccessibilityId("Size").click();
 		appiumdriver.findElementByAccessibilityId(size).click();
-		appiumdriver.findElementByAccessibilityId(severity).click();
+		if (appiumdriver.findElementsByAccessibilityId(severity).size() > 2)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId(severity).get(2)).click();
+		else
+			appiumdriver.findElementByAccessibilityId(severity).click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
 		Helpers.waitABit(500);
 	}

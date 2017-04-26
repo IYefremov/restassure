@@ -67,13 +67,11 @@ public class CustomersScreen extends iOSHDBaseScreen {
 
 	public void searchCustomer(String customer)
 			throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
+		searchbtn.click();
 		//searchbar.setValue(customer);
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-		wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(closesearchbtn)).click();
+		closesearchbtn.click();
 		Helpers.waitABit(1000);
 	}
 

@@ -158,16 +158,12 @@ public class iOSBaseScreen {
 		return exists;
 	}
 	
-	public void selectUIAPickerValue(String value) {
+	/*public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		Helpers.waitABit(500);
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 		while (!(pickerwhl.getAttribute("value").contains(value))) {
-			/*appiumdriver.tap(1, pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 100, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() - 10,
-					100);*/
 			//MobileElement slider = appiumdriver.findElementByClassName("UIASlider");
 			pickerwhl.setValue(value);
 			Helpers.waitABit(1000);
@@ -176,7 +172,7 @@ public class iOSBaseScreen {
 				break;
 		}
 
-	}
+	}*/
 	
 	public void swipeScreenUp() {
 		Dimension size = appiumdriver.manage().window().getSize();

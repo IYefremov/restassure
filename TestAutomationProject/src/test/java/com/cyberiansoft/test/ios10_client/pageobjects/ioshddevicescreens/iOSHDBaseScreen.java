@@ -72,6 +72,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void selectNextScreen(String screenname) {
+		Helpers.waitABit(500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(300).release().perform();
@@ -104,16 +105,53 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public void swipeScreenRight() {
 		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) size.width / 2;	
-		int startx = (int) (size.height * 0.10);
-		int endx = (int) (size.height * 0.90);
-		//TouchAction act = new TouchAction(appiumdriver);
-		//act.press(endx, starty).waitAction(1000) .moveTo(startx, starty).release().perform();
+		int starty = (int) (size.width *0.7);
 		
-		appiumdriver.swipe(starty, endx, starty, startx, 2000);
+		int startx = (int) (size.width * 0.20);
+		int endx = (int) (size.width * 0.80);
+		//TouchAction act = new TouchAction(appiumdriver);
+		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
+		/*int starty = (int) size.height / 2;	
+		int startx = (int) (size.width * 0.90);
+		int endx = (int) (size.width * 0.10);*/
+		
+		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		/*System.out.println("====" );
+		appiumdriver.swipe(startx, starty, endx, starty, 2000);
+		System.out.println("====" );
+		TouchAction act = new TouchAction(appiumdriver);		
+		act.press(endx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
+		System.out.println("====" );
+		act = new TouchAction(appiumdriver);
+		act.press(starty, startx).waitAction(3000) .moveTo(starty, endx).release().perform();
+		//appiumdriver.swipe(startx, endy, startx, starty, 2000);*/
 	}
 	
-	public void selectUIAPickerValue(String value) {
+	public void swipeScreenRight1() {
+		Dimension size = appiumdriver.manage().window().getSize();
+		int starty = (int) (size.width *0.9);
+		
+		int startx = (int) (size.width * 0.20);
+		int endx = (int) (size.width * 0.80);
+		//TouchAction act = new TouchAction(appiumdriver);
+		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
+		/*int starty = (int) size.height / 2;	
+		int startx = (int) (size.width * 0.90);
+		int endx = (int) (size.width * 0.10);*/
+		
+		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		/*System.out.println("====" );
+		appiumdriver.swipe(startx, starty, endx, starty, 2000);
+		System.out.println("====" );
+		TouchAction act = new TouchAction(appiumdriver);		
+		act.press(endx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
+		System.out.println("====" );
+		act = new TouchAction(appiumdriver);
+		act.press(starty, startx).waitAction(3000) .moveTo(starty, endx).release().perform();
+		//appiumdriver.swipe(startx, endy, startx, starty, 2000);*/
+	}
+	
+	public boolean selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		boolean found = false;
@@ -142,6 +180,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 			if (clicks > defaultwheelnumer)
 				break;
 		}
+		return found;
 	}
 	
 	public void swipeScreenUp() {

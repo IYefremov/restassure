@@ -1,7 +1,7 @@
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
-  <parameter name="selenium.browser" value="firefox" />
+  <parameter name="selenium.browser" value="chrome" />
   <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
   <parameter name="backoffice.url" value="http://reconpro-devqa.cyberianconcepts.com/Admin/Devices.aspx"  />
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
@@ -16,10 +16,44 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
           <!--<include name="testGetDeviceRegistrationCode" />
-          <include name="testRegisterationiOSDdevice" />  -->            
+          <include name="testRegisterationiOSDdevice" />  -->      
+          <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" />
+          
+           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
+          <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" />          
+          <include name="testSRHDVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON" />
+          <include name="testSRHDVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa" />
+          
+          <include name="testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone" />
+          <include name="testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne" /> 
+          <include name="testWOVerifyThatWONumberIsNotDuplicated" /> 
+          <include name="testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied" /> 
+          <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" /> 
+          
+            
+          <include name="testWOVerifyThatTechSplitsIsSavedInPriceMatrices" /> 
+          <include name="testVerifyTthatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling" />
+          
+          
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices" /> 
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices" /> 
+<include name="testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer" /> 
+
+            <include name="testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect" />  
+                  
           <!--<include name="testBugWithCrashOnCopyVehicle" />-->
           <!--<include name="testThatAutoSavedWOIsCreatedCorrectly" /> -->                
-          
+          <!--<include name="testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice" />
+          <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice" /> 
+		  <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice" />
+		  <include name="testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn" />-->
+		  
+		  <!--<include name="testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired" />-->
+		  <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
+		  <include name="testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush" />
+		     
+		  
+          <include name="testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest" />
           
           <!--<include name="testUpdateDatabase" />           
           <include name="testUpdateVIN" />

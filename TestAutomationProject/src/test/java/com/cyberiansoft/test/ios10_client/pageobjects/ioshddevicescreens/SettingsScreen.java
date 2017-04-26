@@ -15,10 +15,10 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[2]")
     private IOSElement inspectionsinglepagetoggle;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[4]")
+	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[13]/XCUIElementTypeSwitch")
     private IOSElement duplicatestoggle;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[19]")
+	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]")
     private IOSElement showtopcustomerstoggle;
 	
 	public SettingsScreen(AppiumDriver driver) {
@@ -38,19 +38,23 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	}
 
 	public void setCheckDuplicatesOn() {
-		duplicatestoggle.setValue("1");
+		if (duplicatestoggle.getAttribute("value").equals("false"))
+			duplicatestoggle.click();
 	}
 
 	public void setCheckDuplicatesOff() {
-		duplicatestoggle.setValue("0");
+		if (duplicatestoggle.getAttribute("value").equals("true"))
+			duplicatestoggle.click();
 	}
 	
 	public void setShowTopCustomersOn() {
-		showtopcustomerstoggle.setValue("1");
+		if (showtopcustomerstoggle.getAttribute("value").equals("false"))
+			showtopcustomerstoggle.click();
 	}
 	
 	public void setShowTopCustomersOff() {
-		showtopcustomerstoggle.setValue("0");
+		if (showtopcustomerstoggle.getAttribute("value").equals("true"))
+			showtopcustomerstoggle.click();
 	}
 
 }

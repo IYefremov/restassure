@@ -3,11 +3,12 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -72,6 +73,22 @@ public class BaseTestCase {
 		// Parameters for WebDriver
 		 
 		 this.bundleid =  bundleid;
+		 
+		 
+		 //service = AppiumDriverLocalService.buildDefaultService();
+		/* service = AppiumDriverLocalService
+					.buildService(new AppiumServiceBuilder()
+							.usingDriverExecutable(new File("/usr/local/bin/node"))
+							.withAppiumJS(
+									new File(
+											"/usr/local/lib/node_modules/appium/build/lib/main.js"))
+							.withIPAddress("127.0.0.1").usingPort(4723));
+
+	        service.start();
+
+	        if (service == null || !service.isRunning()) {
+	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
+	        }*/
 
 		/*
 		 * GraphicsConfiguration gc = GraphicsEnvironment
@@ -160,7 +177,9 @@ public class BaseTestCase {
 			webdriver.quit();
 		if (appiumdriver != null)
 			appiumdriver.quit();
-		// this.screenRecorder.stop();
+		if (service != null) {
+            service.stop();
+        }
 	}
 	
 	public void resrtartApplication() throws MalformedURLException {

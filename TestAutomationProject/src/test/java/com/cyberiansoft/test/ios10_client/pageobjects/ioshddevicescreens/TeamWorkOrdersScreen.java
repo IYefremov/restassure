@@ -40,11 +40,6 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	public void clickCreateInvoiceForWO(String wonumber) {
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ wonumber + "\")]/UIAButton[contains(@name, \"EntityInfoButtonUnchecked\")]").click();
-	}
-	
 	public void clickOnWO(String wonumber) {
 		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
@@ -78,8 +73,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}	
 	
 	public void clickSearchButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
+		searchbtn.click();
 	}
 	
 	public void clickSearchSaveButton() {

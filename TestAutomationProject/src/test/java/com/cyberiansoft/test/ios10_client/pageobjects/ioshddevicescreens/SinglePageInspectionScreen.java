@@ -44,11 +44,11 @@ public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 		Thread.sleep(2000);
 	}
 	
-	public boolean isSignaturePresent() throws InterruptedException {
-		return signatureelement.isDisplayed();
+	public boolean isSignaturePresent() {
+		return appiumdriver.findElementsByAccessibilityId("notes").size() > 0;
 	}
 	
-	public boolean isAnswerPresent(String _answer) throws InterruptedException {
+	public boolean isAnswerPresent(String _answer) {
 		return appiumdriver.findElementsByAccessibilityId(_answer).size() > 0;
 	}
 

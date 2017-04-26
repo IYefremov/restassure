@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+
 public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "Assign")
@@ -30,6 +32,7 @@ public class DevicesPopupScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isAssignButtonDisplayed() {
+		Helpers.waitABit(500);
 		return assignlbtn.isDisplayed();
 	}
 

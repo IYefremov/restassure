@@ -6,13 +6,23 @@ import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class InspectionScreen extends iOSHDBaseScreen {
+	
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField")
+    private IOSElement makefld;
+	
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Model']/XCUIElementTypeTextField")
+    private IOSElement modelfld;
+	
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField")
+    private IOSElement yearfldvalue;
 	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savechangesbtn;
@@ -36,32 +46,31 @@ public class InspectionScreen extends iOSHDBaseScreen {
 	}
 
 	public void setVIN(String vin) throws InterruptedException  {
-		Helpers.setVIN(vin);
+		appiumdriver.findElementByAccessibilityId("VIN#").click();
+
+		//appiumdriver.findElementByAccessibilityId("VIN#").click();
+		Helpers.waitABit(500);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 
 	public String getMake() {
-		return Helpers.getMake();
+		return makefld.getAttribute("value");
 	}
 
 	public String getModel() {
-		return Helpers.getModel();
+		return modelfld.getAttribute("value");
 
 	}
 
 	public String getYear() {
-		return Helpers.getYear();
+		return yearfldvalue.getAttribute("value");
 	}
 
 	public void seletAdvisor(String advisor) {
 		advisorcell.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".popover().tableViews()[1].cells()[\""
-						+ advisor + "\"]")).click();
-	}
-	
-	public void seletRegularAdvisor(String advisor) {
-		advisorcell.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[0].cells()[\""
-						+ advisor + "\"]")).click();
+		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
 
 }

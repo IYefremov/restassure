@@ -477,11 +477,10 @@ public abstract class Helpers {
 				.getAttribute("value");
 	}
 
-	public static boolean screenIsDisplayed(String screenname) throws InterruptedException {
-		Thread.sleep(1000);
-		return element(
-				MobileBy.xpath("//UIAButton[@name=\""
-						+ screenname + "\"]")).isDisplayed();
+	public static boolean screenIsDisplayed(String screenname) {
+		waitABit(500);
+		return driver.findElementsByXPath("//XCUIElementTypeButton[@label='"
+						+ screenname + "']").size() > 0;
 	}
 
 	public static void makeCapture() throws InterruptedException {

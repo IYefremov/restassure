@@ -58,7 +58,11 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 	public void clickSaveButton() {
 		savebtn.click();
-		Helpers.waitABit(2000);
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(500);
 	}
 	
 	public void clickSaveAsFinal() {
@@ -121,9 +125,9 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		Assert.assertEquals(appiumdriver.findElementByName("SubtotalAmount").getAttribute("value"), price);
 	}
 
-	public void assertServiceTypeExists(String servicetype) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
-						+ servicetype + "\"]").isDisplayed());
+	public boolean isServiceTypeExists(String servicetype) {
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeOther[@name='AvailableServiceList']/XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
+				servicetype + "']")).size() > 0;
 	}
 	
 	public void searchServiceToSelect(String servicename) {
@@ -240,7 +244,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public PriceMatrixScreen selectPriceMatrices(String pricematrice) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name, \""
 						+ pricematrice + "\")]").click();
 		return new PriceMatrixScreen(appiumdriver);
 	}
