@@ -37,19 +37,18 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.ssts.pcloudy.ConnectError;
+/*import com.ssts.pcloudy.ConnectError;
 import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.Version;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
-import com.ssts.pcloudy.dto.appium.booking.BookingDtoResult;
 import com.ssts.pcloudy.dto.device.MobileDevice;
 import com.ssts.pcloudy.dto.file.PDriveFileDTO;
 import com.ssts.util.reporting.ExecutionResult;
 import com.ssts.util.reporting.MultipleRunReport;
 import com.ssts.util.reporting.SingleRunReport;
 import com.ssts.util.reporting.printers.HtmlFilePrinter;
-
+*/
 import io.appium.java_client.android.Connection;
 import io.appium.java_client.android.HasNetworkConnection;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -256,14 +255,14 @@ public class VNextBaseTestCase {
 	@SuppressWarnings("unchecked")
 	@BeforeSuite
 	@Parameters({ "selenium.browser", "device.platform" })
-	public void runExecutionOnPCloudy(String browser, String devplatform) throws InterruptedException, IOException, ConnectError {
+	public void runExecutionOnPCloudy(String browser, String devplatform) throws InterruptedException, IOException {
 		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 		defaultbrowser = browser;
 		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
 		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
 		deviceplatform = devplatform;
 		
-		
+		/*
 		File reportsFolder = new File("Reports"); 
 	     
         Connector con = new Connector("https://us.pcloudy.com/api"); 
@@ -273,6 +272,7 @@ public class VNextBaseTestCase {
 
         ArrayList selectedDevices = new ArrayList<>();
         selectedDevices.add(MobileDevice.getNew("Apple_iPhone7_Ios_10.0.2", 229, "iPhone7", "iPhone 7", "ios", "10.0.2", "Apple")); 
+        //selectedDevices.add(MobileDevice.getNew("Apple_iPhone7plus_Ios_10.2.1", 133, "iPhone7plus", "iPhone 7 Plus", "ios", "10.2.1", "Apple")); 
                      
         // To select multiple devices manually, use either of these: 
         //selectedDevices.addAll(con.chooseMultipleDevicFile deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
@@ -286,14 +286,14 @@ public class VNextBaseTestCase {
             sessionName += " & " + (selectedDevices.size() - 1) + " others"; 
              
         // Book the selected devices in pCloudy 
-        BookingDtoDevice[] bookedDevices = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, 10, sessionName); 
+        BookingDtoDevice[] bookedDevices = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, 7, sessionName); 
         System.out.println("Devices booked successfully"); 
 
         // Select ipa in pCloudy Cloud Drive 
         
         
 	    
-        PDriveFileDTO pDriveFile = PDriveFileDTO.getNew("Repair360_JumpStart_Staging_3.1.0.1711001.ipa"); 
+        PDriveFileDTO pDriveFile = PDriveFileDTO.getNew("Repair360_JumpStart_Staging_3.1.0.1711502.ipa");  
         System.out.println("IPA file selected from CloudDrive"); 
                  
         con.AppiumApis().initAppiumHubForApp(authToken, pDriveFile); 
@@ -360,7 +360,7 @@ public class VNextBaseTestCase {
             printer.printSingleRunReport(report); 
 
         } 
-        
+        */
         
         // Create multiple driver objects in multiple threads 
         /*for (int i = 0; i < bookedDevices.length; i++) { 
