@@ -40,6 +40,7 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartCategoryValue() {
+		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("Category");
 		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
