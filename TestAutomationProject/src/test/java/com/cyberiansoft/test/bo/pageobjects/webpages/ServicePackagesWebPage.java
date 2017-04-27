@@ -71,6 +71,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		return servicepackagestable.getTableRows();
 	}
 	
+	//todo add search by column name with CSS
 	public WebElement getTableRowWithServicePackage(String servicepackagename) {
 		List<WebElement> servicepackagetablerows = getServicePackagesTableRows();
 		for (WebElement servicepackagetablerow : servicepackagetablerows) {

@@ -29,7 +29,7 @@ public abstract class BaseWebPage {
 		driver.manage().timeouts().pageLoadTimeout(SLEEP_TIMEOUT_IN_SEC*4, TimeUnit.SECONDS);
 		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
 
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, 60);
 		updateWait = new WebDriverWait(driver , 20 , 1);
 	}
 

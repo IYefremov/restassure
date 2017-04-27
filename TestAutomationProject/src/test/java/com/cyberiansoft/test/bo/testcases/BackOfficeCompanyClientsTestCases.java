@@ -35,7 +35,8 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
+		
 	}
 	
 	@Test(description = "Test Case 15322:Company- Clients: Search")

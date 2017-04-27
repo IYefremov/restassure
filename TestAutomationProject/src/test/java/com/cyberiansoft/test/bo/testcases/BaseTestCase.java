@@ -48,15 +48,6 @@ public class BaseTestCase {
 	protected File app;
 	String bundleid = "";
 	
-	@BeforeSuite
-	public void beforeSuite() throws IOException{
-		if(!new File("C:\\frameworkTemps").isDirectory())
-	        FileUtils.forceMkdir(new File("C:\\frameworkTemps"));
-	        TemporaryFilesystem.setTemporaryDirectory(new File("C:\\frameworkTemps"));
-	}
-	
-	@Rule
-	public TemporaryFolder folder= new TemporaryFolder();
 	
 	@BeforeClass
 	@Parameters({ "selenium.browser", "ios.bundleid" })
@@ -216,12 +207,12 @@ public class BaseTestCase {
 
 	@AfterMethod
 	public void cookieCleaner(){
+		webdriver.get("https://reconpro.cyberianconcepts.com/");
 		webdriver.manage().deleteAllCookies();
 	}
 	
 	@AfterClass
 	public void tearDown() throws Exception {
-        FileUtils.deleteDirectory(new File("C:\\frameworkTemps"));
 
 		if (webdriver != null)
 			webdriver.quit();

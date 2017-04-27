@@ -52,7 +52,7 @@ public class WebElementsBot {
 		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		 // .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 		droplist.selectByVisibleText(value);
-		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		//WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	public static void selectComboboxValueAndWait(ComboBox combobox, DropDown droplist, String value) {

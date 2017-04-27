@@ -85,7 +85,7 @@ public class WebPageWithPagination extends BaseWebPage {
 //		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 //		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
 //		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
-//		Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	public void clickGoToLastPage() {
