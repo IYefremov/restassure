@@ -147,7 +147,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		newteamsdialog.setNewTeamName(teamedited).selectTeamTimezone(teamtimezone).setNewTeamDescription(teamdesc)
 			.setNewTeamAccountingID(teamid).selectTeamArea(teamarea).selectTeamTimesheetType(teamtimesheettype)
-			.selectTeamDefaultRepairLocation(teamdefaultlocation).selectTeamAdditionalRepairLocation(teamadditionallocation)
+			.selectTeamDefaultRepairLocation(teamdefaultlocation).
+			selectTeamAdditionalRepairLocation(teamadditionallocation)
 			.selectTeamType(teamtype).setNewTeamCompany(teamcompany).setNewTeamAddress(teamaddress).setNewTeamCity(teamcity)
 			.selectTeamCountry(teamcountry).selectTeamState(teamstate).setNewTeamZip(teamzip).setNewTeamEmail(teamemail)
 			.setNewTeamPhone(teamphone).clickAddTeamCancelButton();	

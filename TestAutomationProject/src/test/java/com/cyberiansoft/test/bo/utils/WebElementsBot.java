@@ -46,8 +46,10 @@ public class WebElementsBot {
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value) {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		try{
 		combobox.click();
-		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		}catch(Exception e){}
+		//WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(300);
 		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
 		 // .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
