@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.utils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -25,6 +26,7 @@ public class WebElementsBot {
 	@FindBy(className = "updateProcess")
 	private static WebElement updateProcess;
 	
+	//TODO
 	public static void click(WebElement element) {
 	    try {
 	    	WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(element));
@@ -49,13 +51,28 @@ public class WebElementsBot {
 		try{
 		combobox.click();
 		}catch(Exception e){}
-		//WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(300);
-		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		 // .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
+//		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
+//		items.get(1).click();
+		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 		droplist.selectByVisibleText(value);
-		//WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
+	
+//	public static void selectTimeSheetComboboxValue(ComboBox combobox, DropDown droplist, String value) {
+//		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+//		try{
+//		combobox.click();
+//		}catch(Exception e){}
+//		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+//		waitABit(300);
+//		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
+//		items.get(1).click();
+//	//	WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
+//	//	droplist.selectByVisibleText(value);
+//		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
+//	}
 	
 	public static void selectComboboxValueAndWait(ComboBox combobox, DropDown droplist, String value) {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
@@ -108,7 +125,7 @@ public class WebElementsBot {
 		//waitABit(1000);
 		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
 		droplist.selectByVisibleText(value);
-		droplist.selectByVisibleText(value);
+//		droplist.selectByVisibleText(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	

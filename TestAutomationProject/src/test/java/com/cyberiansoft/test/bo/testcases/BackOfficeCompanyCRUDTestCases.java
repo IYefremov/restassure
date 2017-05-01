@@ -116,7 +116,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		final String teamid = "testID";
 		final String teamtimezone = "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius";
 		final String teamarea = "QA Area";
-		final String teamtimesheettype = "Day type";
+		final String teamtimesheettype = "Day Type";
 		final String teamdefaultlocation = "Time_Reports_01";
 		final String teamadditionallocation = "Default Location";
 		final String teamtype = "Vendor";
@@ -146,7 +146,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals(team, newteamsdialog.getNewTeamName());
 		
 		newteamsdialog.setNewTeamName(teamedited).selectTeamTimezone(teamtimezone).setNewTeamDescription(teamdesc)
-			.setNewTeamAccountingID(teamid).selectTeamArea(teamarea).selectTeamTimesheetType(teamtimesheettype)
+			.setNewTeamAccountingID(teamid).selectTeamArea(teamarea)
+			.selectTeamTimesheetType(teamtimesheettype)
 			.selectTeamDefaultRepairLocation(teamdefaultlocation).
 			selectTeamAdditionalRepairLocation(teamadditionallocation)
 			.selectTeamType(teamtype).setNewTeamCompany(teamcompany).setNewTeamAddress(teamaddress).setNewTeamCity(teamcity)
