@@ -26,6 +26,7 @@ public class DropDownImpl extends AbstractWebElement implements DropDown {
 		boolean valuefinded = false;
 		List<WebElement> options = wrappedElement.findElements(By.tagName("li"));
 		for (WebElement option : options) {
+			System.out.println(option.getText());
 	        if (value.equals(option.getText())) {
 	        	new WebDriverWait(WebDriverInstansiator.getDriver(), 10)
 	  		  .until(ExpectedConditions.elementToBeClickable(option));
