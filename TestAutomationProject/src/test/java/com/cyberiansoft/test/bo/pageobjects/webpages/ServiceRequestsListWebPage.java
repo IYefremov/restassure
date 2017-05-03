@@ -289,7 +289,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		if (browsername.equalsIgnoreCase("internet explorer"))
 			return getFirstServiceRequestFromList().findElements(By.xpath(".//a[@class='command-accept ']")).size() > 0;
 
-		return getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).isDisplayed();
+		return //wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("command-accept "))).isDisplayed();
+				getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).isDisplayed();
 	}
 
 	public String getStatusOfFirstServiceRequestFromList() {
@@ -649,10 +650,24 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		driver.findElement(By.xpath("//div[@class='description-content']"))
 		.findElement(By.xpath(".//div[@class='infoBlock-doneBtn sr-btn']")).click();
 		
-		System.out.println(driver.findElement(By.className("description-content")).findElement(By.className("infoBlock-valContainer")).getAttribute("style").equals("display: none;"));
 		if(!driver.findElement(By.className("description-content")).findElement(By.className("infoBlock-valContainer")).getAttribute("style").equals("display: none;"))
 			return false;
 		
 		return true;
+	}
+
+	public boolean checkServiceDescription(String string) {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+
+		click(driver.findElement(By.xpath("//div[@class='description-content']/span[@class='infoBlock-editBtn']")));
+		wait.until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
+		WebElement lastDescription = oldDescriptions.get(0);
+		System.out.println(lastDescription.findElement(By.tagName("span")).getText());
+		if(!lastDescription.findElement(By.tagName("span")).getText().equals(string)){
+			return false;
+		}
+		return true;
+		
 	}
 }

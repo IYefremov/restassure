@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -40,9 +41,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			catch(NoAlertPresentException e){
 				
 		}
-		
-		
-		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
@@ -835,4 +833,88 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
+	@Test(testName = "Test Case 56760:Operation - Service Request - Description in excisting SR" , dataProvider = "provideSRdescription")
+	public void testServiceRequestdescription(String description) throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+	
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setServiceRequestDescription(description);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkTimeOfLastDescription());
+	}
+	
+	@DataProvider
+	public Object[][] provideSRdescription(){
+		return new Object[][]{
+			{"test description"}
+		};
+	}
+	
+	@Test(testName = "Test Case 56761:Operation - Service Request - Tags manipulation in new SR" , dataProvider = "provideSRwholeInfo")
+	public void testServiceRequest(String []tags , String symbol ) throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.addTags(tags);
+		Assert.assertTrue(serviceRequestsWebPage.addTags(tags[tags.length-1]));
+		serviceRequestsWebPage.addTags(symbol);
+		Assert.assertTrue(serviceRequestsWebPage.removeLastTag());
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkTags(tags));
+	}
+	
+	@DataProvider
+	public Object[][] provideSRwholeInfo(){
+		return new Object[][]{
+			{ new String[]{"tag1", "tag2","tag3","tag4","tag5","tag6","tag7","tag8","tag9","tag10", } , "s"}
+		};
+	}
+	
+	@Test(testName = "Test Case 56760:Operation - Service Request - Description in excisting SR" , dataProvider = "provideSomeDescriptions")
+	public void testServiceRequestDesciptionInExistingSR(String [] descriptions) throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.addNewDescriptionAndCheckOld(descriptions[1] ,descriptions[0] ));
+
+	}
+	
+	@DataProvider
+	public Object[][] provideSomeDescriptions(){
+		return new Object[][]{
+			{ new String[]{"test description1" , "test description2"}}
+		};
+	}
+	
+	
+//	@Test(testName = "Test Case 56827:Operation - Service Request - Documents not shown during creation" )//TODO 
+//	public void testShownSRDuringCreation(){
+//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+//		serviceRequestsWebPage.clickAddServiceRequestButton();
+//	}
+	
+	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR" , dataProvider = "provideSomeDescriptions" )
+	public void testCreatingSRWithDifferentDescriptions(String [] descriptions){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
+		serviceRequestsWebPage.setServiceRequestDescription(descriptions[1]);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(descriptions[1]));
+	}
+	
 }
