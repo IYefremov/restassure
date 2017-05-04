@@ -896,13 +896,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 	
 	
-//	@Test(testName = "Test Case 56827:Operation - Service Request - Documents not shown during creation" )//TODO 
-//	public void testShownSRDuringCreation(){
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//	}
+	@Test(testName = "Test Case 56827:Operation - Service Request - Documents not shown during creation,"
+			+ "Test Case 56828:Operation - Service Request - Answers not shown during creation" )
+					
+	public void testShownSRDuringCreation(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
+		}
 	
 	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR" , dataProvider = "provideSomeDescriptions" )
 	public void testCreatingSRWithDifferentDescriptions(String [] descriptions){
@@ -916,5 +919,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(descriptions[1]));
 	}
+	
+//	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR")
+//	public void testAddingMultiTechInSR(){
+//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+//		
+//	}
+	
+	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
+	public void checkTestDocument(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
+	}
+
 	
 }

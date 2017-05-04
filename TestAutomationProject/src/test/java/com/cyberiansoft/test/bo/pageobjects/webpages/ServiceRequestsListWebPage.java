@@ -167,6 +167,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	
 	@FindBy(className = "spanNote")
 	private List<WebElement> oldDescriptions;
+	
+	@FindBy(id = "linkDocs")
+	private WebElement descriptionDocuments;
+	
+	@FindBy(id = "linkAnswers")
+	private WebElement descriptionAnswers;
+	
 
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
@@ -669,5 +676,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		}
 		return true;
 		
+	}
+
+	public boolean checkIfDescriptionIconsVisible() {
+	 boolean documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("");
+	 boolean answerShown =	descriptionAnswers.findElement(By.tagName("i")).getAttribute("style").equals("");
+	 
+		return documentShown || answerShown;
+	}
+
+	public boolean checkServiceRequestDocumentIcon() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
