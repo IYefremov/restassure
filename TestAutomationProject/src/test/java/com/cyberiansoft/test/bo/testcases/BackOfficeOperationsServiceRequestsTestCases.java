@@ -929,7 +929,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //	}
 	
 	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
-	public void checkTestDocument(){
+	public void checkDescriptionDocument(){
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -937,6 +937,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
+		serviceRequestsWebPage.clickDocumerntButton();
 	}
 
 	

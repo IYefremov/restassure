@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -164,16 +165,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 
 	@FindBy(className = "tag")
 	private List<WebElement> allAddedTags;
-	
+
 	@FindBy(className = "spanNote")
 	private List<WebElement> oldDescriptions;
-	
+
 	@FindBy(id = "linkDocs")
 	private WebElement descriptionDocuments;
-	
+
 	@FindBy(id = "linkAnswers")
 	private WebElement descriptionAnswers;
-	
 
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
@@ -296,8 +296,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		if (browsername.equalsIgnoreCase("internet explorer"))
 			return getFirstServiceRequestFromList().findElements(By.xpath(".//a[@class='command-accept ']")).size() > 0;
 
-		return //wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("command-accept "))).isDisplayed();
-				getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).isDisplayed();
+		return // wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("command-accept
+				// "))).isDisplayed();
+		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).isDisplayed();
 	}
 
 	public String getStatusOfFirstServiceRequestFromList() {
@@ -627,39 +628,40 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		}
 		return true;
 	}
-	
-	public boolean removeLastTag(){
+
+	public boolean removeLastTag() {
 		int prevSize = allAddedTags.size();
-		allAddedTags.get(allAddedTags.size()-1).findElement(By.cssSelector("a[title='Removing tag']")).click();
+		allAddedTags.get(allAddedTags.size() - 1).findElement(By.cssSelector("a[title='Removing tag']")).click();
 		return prevSize - allAddedTags.size() == 1;
 	}
 
-	public boolean checkTags(String ... tags){
+	public boolean checkTags(String... tags) {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		boolean result =  allAddedTags.stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
+		boolean result = allAddedTags.stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
 				.collect(Collectors.toList()).containsAll(Arrays.asList(tags));
 		closeservicerequestbtn.click();
 		return result;
 	}
-	
-	public boolean addNewDescriptionAndCheckOld(String newDescription, String prevDescription){
+
+	public boolean addNewDescriptionAndCheckOld(String newDescription, String prevDescription) {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		click(driver.findElement(By.xpath("//div[@class='description-content']/span[@class='infoBlock-editBtn']")));
 		wait.until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
 		clearAndType(addsrvdescription, newDescription);
 		WebElement lastDescription = oldDescriptions.get(0);
-		if(!lastDescription.findElement(By.tagName("span")).getText().equals(prevDescription)){
+		if (!lastDescription.findElement(By.tagName("span")).getText().equals(prevDescription)) {
 			return false;
 		}
 		addsrvdescription.clear();
 		driver.findElement(By.xpath("//div[@class='description-content']"))
-		.findElement(By.xpath(".//div[@class='infoBlock-doneBtn sr-btn']")).click();
-		
-		if(!driver.findElement(By.className("description-content")).findElement(By.className("infoBlock-valContainer")).getAttribute("style").equals("display: none;"))
+				.findElement(By.xpath(".//div[@class='infoBlock-doneBtn sr-btn']")).click();
+
+		if (!driver.findElement(By.className("description-content")).findElement(By.className("infoBlock-valContainer"))
+				.getAttribute("style").equals("display: none;"))
 			return false;
-		
+
 		return true;
 	}
 
@@ -671,22 +673,40 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
 		WebElement lastDescription = oldDescriptions.get(0);
 		System.out.println(lastDescription.findElement(By.tagName("span")).getText());
-		if(!lastDescription.findElement(By.tagName("span")).getText().equals(string)){
+		if (!lastDescription.findElement(By.tagName("span")).getText().equals(string)) {
 			return false;
 		}
 		return true;
-		
+
 	}
 
 	public boolean checkIfDescriptionIconsVisible() {
-	 boolean documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("");
-	 boolean answerShown =	descriptionAnswers.findElement(By.tagName("i")).getAttribute("style").equals("");
-	 
+		boolean documentShown; 
+		boolean answerShown;
+		try {
+			 documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("");
+			 answerShown = descriptionAnswers.findElement(By.tagName("i")).getAttribute("style").equals("");
+		} catch (NoSuchElementException e) {
+			return false;
+		}
 		return documentShown || answerShown;
 	}
 
 	public boolean checkServiceRequestDocumentIcon() {
-		// TODO Auto-generated method stub
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		try{
+		descriptionDocuments.findElement(By.tagName("i")).getAttribute("style");
+		}
+		catch (NoSuchElementException e) {
+			return true;
+		}
 		return false;
+	}
+
+	public void clickDocumerntButton() {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		descriptionDocuments.findElement(By.tagName("i")).click();		
 	}
 }
