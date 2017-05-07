@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -904,7 +905,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
+		Assert.assertTrue(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
 		}
 	
 	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR" , dataProvider = "provideSomeDescriptions" )
@@ -929,7 +930,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //	}
 	
 	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
-	public void checkDescriptionDocument(){
+	public void checkDescriptionDocument() throws AWTException, InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -937,7 +938,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
-		serviceRequestsWebPage.clickDocumerntButton();
+		serviceRequestsWebPage.clickDocumentButton();
+		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
+		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
+		serviceRequestsWebPage.addImage();
+		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
+		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
+		System.out.println("");
 	}
 
 	

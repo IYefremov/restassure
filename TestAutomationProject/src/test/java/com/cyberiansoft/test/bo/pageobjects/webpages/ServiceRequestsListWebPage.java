@@ -2,10 +2,24 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -17,6 +31,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +45,7 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
-public class ServiceRequestsListWebPage extends BaseWebPage {
+public class ServiceRequestsListWebPage extends BaseWebPage implements ClipboardOwner {
 
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
 	private WebElement searchtab;
@@ -174,6 +189,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 
 	@FindBy(id = "linkAnswers")
 	private WebElement descriptionAnswers;
+
+	@FindBy(className = "content")
+	private WebElement documentContent;
+
+	@FindBy(css = "input[class='ruFakeInput radPreventDecorate']")
+	private WebElement addFileBTN;
+
+	@FindBy(css = "input[class='ruButton ruRemove']")
+	private WebElement removeBTN;
 
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
@@ -681,32 +705,141 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
 	}
 
 	public boolean checkIfDescriptionIconsVisible() {
-		boolean documentShown; 
+		boolean documentShown;
 		boolean answerShown;
-		try {
-			 documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("");
-			 answerShown = descriptionAnswers.findElement(By.tagName("i")).getAttribute("style").equals("");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
+		documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style")
+				.equals("display : none;");
+		answerShown = descriptionAnswers.findElement(By.tagName("i")).getAttribute("style").equals("display : none;");
+
 		return documentShown || answerShown;
 	}
 
 	public boolean checkServiceRequestDocumentIcon() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		try{
-		descriptionDocuments.findElement(By.tagName("i")).getAttribute("style");
-		}
-		catch (NoSuchElementException e) {
-			return true;
-		}
-		return false;
+
+		if (descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("display : none;"))
+			return false;
+		return true;
 	}
 
-	public void clickDocumerntButton() {
+	public void clickDocumentButton() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		descriptionDocuments.findElement(By.tagName("i")).click();		
+
+		String oldWindow = driver.getWindowHandle();
+		descriptionDocuments.findElement(By.tagName("i")).click();
+		Set allWindows = driver.getWindowHandles();
+		allWindows.remove(oldWindow);
+		driver.switchTo().window((String) allWindows.iterator().next());
 	}
+
+	public boolean checkElementsInDocument() {
+		try {
+			documentContent.findElement(By.xpath("//h2[contains(text(), 'Documents')]"));
+			documentContent.findElement(By.xpath("//h3[contains(text(), 'Service Request:')]"));
+			documentContent.findElement(By.className("add"));
+			if (!documentContent.findElements(By.className("rgHeader")).stream().map(w -> w.getText())
+					.collect(Collectors.toList()).containsAll(Arrays.asList("Name/Description", "Size", "Uploaded")))
+				return false;
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+	public boolean clickAddImageBTN() {
+		documentContent.findElement(By.className("add")).click();
+		try {
+			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")));
+			updateWait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnCancel")));
+			updateWait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[class='ruButton ruBrowse']")));
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public void addImage() throws AWTException {
+
+		Actions builder = new Actions(driver);
+		Action myAction = builder.click(addFileBTN).release().build();
+
+		myAction.perform();
+		ServiceRequestsListWebPage textTransfer = new ServiceRequestsListWebPage(driver);
+		textTransfer.setClipboardContents("C:\\Pony.png");
+
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
+		updateWait.until(ExpectedConditions.visibilityOf(removeBTN));
+		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
+				.click();
+	}
+
+	@Override
+	public void lostOwnership(Clipboard arg0, Transferable arg1) {
+	}
+
+	public void setClipboardContents(String aString) {
+
+		StringSelection stringSelection = new StringSelection(aString);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, this);
+	}
+
+	public boolean checkPresentanceOFAddedFile() throws InterruptedException {
+		try {
+			int prevSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
+			updateWait.until(ExpectedConditions
+					.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_imgDownload"))).click();
+			Thread.sleep(5000);
+			int afterSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
+			if (afterSize - prevSize != 1)
+				return false;
+			updateWait.until(ExpectedConditions
+					.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn"))).click();
+			updateWait.until(ExpectedConditions
+					.elementToBeClickable(By.id("ctl00_Content_ctl01_ctl01_Card_tbName")));
+			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk"))).click();
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public int countFilesInDir(String dir){
+		return new File(dir).listFiles().length;
+	}
+	
+	public boolean checkDeletionOfFile(){
+		try{
+			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1"))).click();
+			driver.switchTo().alert().accept();
+			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rgNoRecords")));
+		}catch(TimeoutException e){
+			return false;
+		}
+
+		return true;
+	}
+
+//	public boolean checkIfFileDownloaded(String path, String fileName) {
+//		File dir = new File(path);
+//		File[] dirContents = dir.listFiles();
+//
+//		for (int i = 0; i < dirContents.length; i++) {
+//			if (dirContents[i].getName().equals(fileName)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }
