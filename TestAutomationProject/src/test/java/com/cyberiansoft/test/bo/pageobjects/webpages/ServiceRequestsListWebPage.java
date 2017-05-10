@@ -37,6 +37,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -199,6 +200,54 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(css = "input[class='ruButton ruRemove']")
 	private WebElement removeBTN;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_rcbServicePachages_Input")
+	private WebElement addServiceRequestDopDown;
+
+	@FindBy(css = "div[class='infoBlock main']")
+	private List<WebElement> serviceRequestInfoBlocks;
+
+	@FindBy(id = "Card_ddlClients_Input")
+	private WebElement customerName;
+
+	@FindBy(id = "doneCustOwner")
+	private WebElement acceptCustomerBTN;
+
+	@FindBy(className = "icon-calendar")
+	private WebElement appointmentCalendarIcon;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_rdpStartDate_dateInput")
+	private WebElement appointmentFromDate;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_rdpStartTime_dateInput")
+	private WebElement appointmentFromTime;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_rdpEndDate_dateInput")
+	private WebElement appointmentToDate;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_rdpEndTime_dateInput")
+	private WebElement appointmentToTime;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_btnAddApp")
+	private WebElement addAppointmentBTN;
+
+	@FindBy(id = "addAppointmentLink")
+	private WebElement addAppointmentBTNfromSRedit;
+
+	@FindBy(css = "div[class='appointment-info clearfix']")
+	private WebElement appointmentContent;
+
+	@FindBy(id = "Card_rdpStartDate_dateInput")
+	private WebElement appointmentFromDateSRedit;
+
+	@FindBy(id = "Card_rdpStartTime_dateInput")
+	private WebElement appointmentFromTimeSRedit;
+
+	@FindBy(id = "Card_rdpEndDate_dateInput")
+	private WebElement appointmentToDateSRedit;
+
+	@FindBy(id = "Card_rdpEndTime_dateInput")
+	private WebElement appointmentToTimeSRedit;
+
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
 
@@ -269,6 +318,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void selectFirstServiceRequestFromList() {
+		waitABit(4000);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList());
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[@class='detailsPopover-icon icon-chevron-right']"))
@@ -798,48 +848,158 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkPresentanceOFAddedFile() throws InterruptedException {
 		try {
 			int prevSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
-			updateWait.until(ExpectedConditions
-					.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_imgDownload"))).click();
+			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_imgDownload")))
+					.click();
 			Thread.sleep(5000);
 			int afterSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
 			if (afterSize - prevSize != 1)
 				return false;
-			updateWait.until(ExpectedConditions
-					.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn"))).click();
-			updateWait.until(ExpectedConditions
-					.elementToBeClickable(By.id("ctl00_Content_ctl01_ctl01_Card_tbName")));
-			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk"))).click();
+			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn")))
+					.click();
+			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_ctl01_ctl01_Card_tbName")));
+			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
+					.click();
 		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
-	
-	public int countFilesInDir(String dir){
+
+	public int countFilesInDir(String dir) {
 		return new File(dir).listFiles().length;
 	}
-	
-	public boolean checkDeletionOfFile(){
-		try{
-			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1"))).click();
+
+	public boolean checkDeletionOfFile() {
+		try {
+			updateWait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1")))
+					.click();
 			driver.switchTo().alert().accept();
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rgNoRecords")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 
 		return true;
 	}
 
-//	public boolean checkIfFileDownloaded(String path, String fileName) {
-//		File dir = new File(path);
-//		File[] dirContents = dir.listFiles();
-//
-//		for (int i = 0; i < dirContents.length; i++) {
-//			if (dirContents[i].getName().equals(fileName)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+	public void selectAddServiceRequestDropDown(String string) {
+		addServiceRequestDopDown.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
+				.get().click();
+	}
+
+	public void setCustomer(String customer) throws InterruptedException {
+		serviceRequestInfoBlocks.get(1).click();
+		customerName.click();
+		customerName.sendKeys(customer);
+		customerName.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		updateWait.until(ExpectedConditions.visibilityOf(acceptCustomerBTN)).click();
+		serviceRequestInfoBlocks.get(1).click();
+		updateWait.until(ExpectedConditions.visibilityOf(acceptCustomerBTN)).click();
+	}
+
+	public boolean addAppointmentFromSRlist(String fromDate, String toDate) {
+		appointmentCalendarIcon.click();
+		appointmentFromDate.sendKeys(fromDate);
+		appointmentToDate.sendKeys(toDate);
+		appointmentFromTime.sendKeys("6:00 AM");
+		appointmentToTime.sendKeys("7:00 AM");
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTN)).click();
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+	}
+
+	public boolean checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(String startDate, String endDate)
+			throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		addAppointmentBTNfromSRedit.click();
+
+		appointmentContent.findElement(By.id("Card_rcbAppointmentPhase_Input")).click();
+		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Work")) {
+			return false;
+		}
+		appointmentContent.findElement(By.id("Card_rcbAppointmentPhase_Arrow")).click();
+
+		if (!(appointmentFromDateSRedit.getText().isEmpty() && appointmentToDateSRedit.getText().isEmpty()
+				&& appointmentFromTimeSRedit.getText().isEmpty() && appointmentToTimeSRedit.getText().isEmpty())) {
+			return false;
+		}
+
+		if (!(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value").equals("Alex SASHAZ"))) {
+			return false;
+		}
+
+		appointmentContent.findElement(By.id("Card_rcbAppLocations_Input")).click();
+		
+		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Custom") && appointmentContent
+				.findElement(By.id("Card_rcbAppointmentLocations_Input")).getAttribute("disabled").equals("disabled")) {
+			return false;
+		}
+	//	Thread.sleep(400);
+
+		if (!appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).getAttribute("value").equals("All")
+				&& appointmentContent.findElement(By.id("Card_rcbStates_Input")).getAttribute("value").equals("All")) {
+			return false;
+		}
+	//	Thread.sleep(400);
+
+		if (!appointmentContent.findElement(By.id("Card_tbxAddress")).getText().isEmpty()
+				&& appointmentContent.findElement(By.id("Card_tbxCity")).getText().isEmpty()
+				&& appointmentContent.findElement(By.id("Card_tbxZip")).getText().isEmpty()) {
+			return false;
+		}
+	//	Thread.sleep(400);
+
+		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
+						.equals("407 SILVER SAGE DR., NewYork, 10001")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientPhone")).getText()
+						.equals("14043801674")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientEmail")).getText()
+						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
+			return false;
+		}
+
+		appointmentFromDateSRedit.sendKeys(startDate);
+		appointmentToDateSRedit.sendKeys(endDate);
+		appointmentFromTimeSRedit.sendKeys("6:00 AM");
+		appointmentToTimeSRedit.sendKeys("7:00 AM");
+		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		Thread.sleep(1000);
+		try {
+			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+					.findElements(By.className("rcbItem")).get(0).click();
+			Thread.sleep(500);
+			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+					.findElements(By.className("rcbItem")).get(1).click();
+		} catch (TimeoutException e) {
+			return false;
+		}
+		Thread.sleep(400);
+
+		if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4 && driver
+				.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container")).size() != 4) {
+			return false;
+		}
+		driver.findElement(By.id("Card_btnAddApp")).click();
+
+		return true;
+	}
+
+	public boolean checkStatus(String status) {
+		driver.switchTo().defaultContent();
+		System.out.println(driver.findElement(By.className("serviceRequestStatus")).getText());
+		if (driver.findElement(By.className("serviceRequestStatus")).getText().equals(status))
+			return true;
+		return false;
+	}
 }

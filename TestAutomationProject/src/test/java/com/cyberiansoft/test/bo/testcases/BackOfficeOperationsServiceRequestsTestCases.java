@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import java.awt.AWTException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -921,14 +923,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(descriptions[1]));
 	}
 	
-//	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR")
-//	public void testAddingMultiTechInSR(){
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-//		
-//	}
-	
 	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
 	public void checkDescriptionDocument() throws AWTException, InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -944,8 +938,29 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addImage();
 		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
 		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
-		System.out.println("");
 	}
 
+	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR", dataProvider = "provideSRdata")
+	public void checkMultiTechInSR(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setCustomer(customer);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(startDate , endDate));
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(startDate , endDate));
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
+
+	}
 	
+	@DataProvider
+	public Object[][] provideSRdata(){
+		DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		return new Object[][]{
+			{"Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "Scheduled"} 
+		};
+	}
 }
