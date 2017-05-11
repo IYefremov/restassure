@@ -869,8 +869,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return new File(dir).listFiles().length;
 	}
 
-	public boolean checkDeletionOfFile() {
+	public boolean checkDeletionOfFile() throws InterruptedException {
 		try {
+			Thread.sleep(3000);
 			updateWait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1")))
 					.click();
@@ -921,42 +922,39 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		addAppointmentBTNfromSRedit.click();
 
-		appointmentContent.findElement(By.id("Card_rcbAppointmentPhase_Input")).click();
-		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Work")) {
-			return false;
-		}
-		appointmentContent.findElement(By.id("Card_rcbAppointmentPhase_Arrow")).click();
-
+		Thread.sleep(1000);
 		if (!(appointmentFromDateSRedit.getText().isEmpty() && appointmentToDateSRedit.getText().isEmpty()
 				&& appointmentFromTimeSRedit.getText().isEmpty() && appointmentToTimeSRedit.getText().isEmpty())) {
 			return false;
 		}
-
+		
+		Thread.sleep(1000);
 		if (!(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value").equals("Alex SASHAZ"))) {
 			return false;
 		}
 
 		appointmentContent.findElement(By.id("Card_rcbAppLocations_Input")).click();
 		
+		Thread.sleep(1000);
 		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Custom") && appointmentContent
 				.findElement(By.id("Card_rcbAppointmentLocations_Input")).getAttribute("disabled").equals("disabled")) {
 			return false;
 		}
-	//	Thread.sleep(400);
-
+		
+		Thread.sleep(1000);
 		if (!appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).getAttribute("value").equals("All")
 				&& appointmentContent.findElement(By.id("Card_rcbStates_Input")).getAttribute("value").equals("All")) {
 			return false;
 		}
-	//	Thread.sleep(400);
-
+		
+		Thread.sleep(1000);
 		if (!appointmentContent.findElement(By.id("Card_tbxAddress")).getText().isEmpty()
 				&& appointmentContent.findElement(By.id("Card_tbxCity")).getText().isEmpty()
 				&& appointmentContent.findElement(By.id("Card_tbxZip")).getText().isEmpty()) {
 			return false;
 		}
-	//	Thread.sleep(400);
-
+		
+		Thread.sleep(1000);
 		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
 				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
 						.equals("407 SILVER SAGE DR., NewYork, 10001")
@@ -972,6 +970,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		appointmentFromTimeSRedit.sendKeys("6:00 AM");
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
 		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		
 		Thread.sleep(1000);
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
@@ -984,8 +983,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		} catch (TimeoutException e) {
 			return false;
 		}
-		Thread.sleep(400);
-
+		
+		Thread.sleep(1000);
 		if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4 && driver
 				.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container")).size() != 4) {
 			return false;
@@ -1001,5 +1000,49 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		if (driver.findElement(By.className("serviceRequestStatus")).getText().equals(status))
 			return true;
 		return false;
+	}
+
+	public boolean checkShowHideTeches(String startDate, String endDate) throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		addAppointmentBTNfromSRedit.click();
+		
+		appointmentFromDateSRedit.sendKeys(startDate);
+		appointmentToDateSRedit.sendKeys(endDate);
+		appointmentFromTimeSRedit.sendKeys("6:00 AM");
+		appointmentToTimeSRedit.sendKeys("7:00 AM");
+		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		
+		Thread.sleep(1000);
+		try {
+			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+					.findElements(By.className("rcbItem")).get(0).click();
+			Thread.sleep(500);
+			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+					.findElements(By.className("rcbItem")).get(1).click();
+			
+			Thread.sleep(1000);
+			if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4 && driver
+					.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container")).size() != 4) {
+				return false;
+			} 
+			
+			if(!wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText().equals("Hide")){
+				return false;
+			}
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).click();
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("gvTechnicians-table")));
+			
+			if(!wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText().equals("Show")){
+				return false;
+			}
+		} catch (TimeoutException e) {
+			return false;
+		}
+		
+		
+		return true;
 	}
 }

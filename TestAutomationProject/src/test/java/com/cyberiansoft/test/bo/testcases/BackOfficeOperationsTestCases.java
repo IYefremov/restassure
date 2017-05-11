@@ -464,7 +464,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	 * inspectionspage.getInspectionsTableRowCount()); }
 	 */
 
-	@Test(testName = "Test Case 24668:Operations: Automatic WO Creation after Inspection Approval (Approval required - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Approval required - ON)")
+//	@Test(testName = "Test Case 24668:Operations: Automatic WO Creation after Inspection Approval (Approval required - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Approval required - ON)")
 	public void testOperationAutomaticWOCreationAfterInspectionApproval_ApprovalRequiredON() throws Exception {
 
 		final String customername = "003 - Test Company";
@@ -512,7 +512,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 	}
 
-	@Test(testName = "Test Case 24670:Operations: Automatic WO Creation after Inspection Approval (Line approval - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Line approval - ON)")
+//	@Test(testName = "Test Case 24670:Operations: Automatic WO Creation after Inspection Approval (Line approval - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Line approval - ON)")
 	public void testOperationAutomaticWOCreationAfterInspectionApproval_LineApprovalON() throws Exception {
 
 		final String customername = "003 - Test Company";
@@ -558,7 +558,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 	}
 
-	@Test(testName = "Test Case 24671:Operations: Automatic WO Creation after Inspection Approval (Enable Multiselect - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Enable Multiselect - ON)")
+//	@Test(testName = "Test Case 24671:Operations: Automatic WO Creation after Inspection Approval (Enable Multiselect - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Enable Multiselect - ON)")
 	public void testOperationAutomaticWOCreationAfterInspectionApproval_EnableMultiselectON() throws Exception {
 
 		final String customername = "003 - Test Company";
@@ -606,7 +606,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 	}
 
-	@Test(testName = "Test Case 24672:Operations: Automatic WO Creation after Inspection Approval (Enable Simple Approval - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Enable Simple Approval - ON)")
+//	@Test(testName = "Test Case 24672:Operations: Automatic WO Creation after Inspection Approval (Enable Simple Approval - ON)", description = "Operations: Automatic WO Creation after Inspection Approval (Enable Simple Approval - ON)")
 	public void testOperationAutomaticWOCreationAfterInspectionApproval_EnableSimpleApprovalON() throws Exception {
 
 		final String customername = "003 - Test Company";
@@ -700,7 +700,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 	}
 
-	@Test(testName = "Test Case 24676:Operations: WO is not created after Inspection Decline (Approval required - ON)", description = "Operations: WO is not created after Inspection Decline (Approval required - ON)")
+//	@Test(testName = "Test Case 24676:Operations: WO is not created after Inspection Decline (Approval required - ON)", description = "Operations: WO is not created after Inspection Decline (Approval required - ON)")
 	public void testOperationWOIsNotCreatedAfterInspectionDecline_ApprovalRequiredON() throws Exception {
 
 		final String customername = "003 - Test Company";

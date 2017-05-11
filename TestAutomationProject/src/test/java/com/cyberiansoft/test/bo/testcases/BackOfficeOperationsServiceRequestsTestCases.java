@@ -907,7 +907,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		Assert.assertTrue(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
+		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
 		}
 	
 	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR" , dataProvider = "provideSomeDescriptions" )
@@ -963,4 +963,20 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			{"Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "Scheduled"} 
 		};
 	}
+	
+	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
+	public void checkMultiTechInSRshowHideTech(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setCustomer(customer);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(startDate , endDate));
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkShowHideTeches(startDate , endDate));
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
+	}
+	
 }
