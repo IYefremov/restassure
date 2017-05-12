@@ -653,7 +653,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 	}
 
-	@Test(testName = "Test Case 24674:Operations: Automatic WO Creation after Inspection Approval (Approval required - OFF)", description = "Operations: Automatic WO Creation after Inspection Approval (Approval required - OFF)")
+//	@Test(testName = "Test Case 24674:Operations: Automatic WO Creation after Inspection Approval (Approval required - OFF)", description = "Operations: Automatic WO Creation after Inspection Approval (Approval required - OFF)")
 	public void testOperationAutomaticWOCreationAfterInspectionApproval_EnableSimpleApprovalOFF() throws Exception {
 
 		final String customername = "003 - Test Company";

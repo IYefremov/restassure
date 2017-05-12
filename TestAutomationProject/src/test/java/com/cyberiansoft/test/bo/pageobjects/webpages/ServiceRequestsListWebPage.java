@@ -819,13 +819,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		myAction.perform();
 		ServiceRequestsListWebPage textTransfer = new ServiceRequestsListWebPage(driver);
-		textTransfer.setClipboardContents("C:\\Pony.png");
+		textTransfer.setClipboardContents("C:\\temp\\Pony.png");
 
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
+	    robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
+
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 

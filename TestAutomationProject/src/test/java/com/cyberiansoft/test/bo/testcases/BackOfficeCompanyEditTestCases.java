@@ -395,7 +395,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeehometeamed = "Team 2";
 		final String employeeaddressed = "E. La Palma Ave.";
 		final String employeecityed = "L'viv";
-		final String employeecountryed = "Ukraine";
+		final String employeecountryed = "Uruguay";
 		final String employeeziped = "79031";		
 		final String employeephoneed = "1";
 		final String employeemailed = "123123213@domaintest.com";

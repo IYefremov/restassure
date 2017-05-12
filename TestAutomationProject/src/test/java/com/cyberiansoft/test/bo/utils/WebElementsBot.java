@@ -52,10 +52,10 @@ public class WebElementsBot {
 		combobox.click();
 		}catch(Exception e){}
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		waitABit(300);
-//		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
-//		items.get(1).click();
-		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
+		waitABit(1000);
+		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
+		items.get(1).click();
+//		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 //		droplist.selectByVisibleText(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
