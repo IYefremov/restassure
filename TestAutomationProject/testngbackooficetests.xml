@@ -41,7 +41,9 @@
        
        
       <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-  
+  		<methods>
+  		<include name="  checkMultiTechInSideScrollbar"/>
+  		</methods>
      </class>
      
         
@@ -49,7 +51,7 @@
       </class>   
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       </class>
-           <!--  -->
+        <!--     -->
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->
     </classes>

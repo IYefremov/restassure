@@ -979,4 +979,27 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 	}
 	
+	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1")
+	public void checkMultiTechInSideScrollbar(String customer ,String startDate, String endDate, String status , String SRcustomer , String newStatus) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Vit_All_Services");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setCustomer(customer);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		//Assert.assertTrue(serviceRequestsWebPage.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
+		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentValuesFromCalendar(startDate , endDate , SRcustomer));
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
+	}
+	
+	@DataProvider
+	public Object[][] provideSRdata1(){
+		DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		return new Object[][]{
+			{"006 - Test Company", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "OnHold" , "Alex SASHAZ" , "Scheduled"} 
+		};
+	}
 }
