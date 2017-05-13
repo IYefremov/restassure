@@ -236,7 +236,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(css = "div[class='appointment-info clearfix']")
 	private WebElement appointmentContent;
 
-	@FindBy(id = "RadToolTipWrapper_ctl00_ctl00_Content_Main_RadToolTip1")
+	@FindBy(id = "Card_rdpStartDate_dateInput")
 	private WebElement appointmentFromDateSRedit;
 
 	@FindBy(id = "Card_rdpStartTime_dateInput")
@@ -896,14 +896,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		
 		serviceRequestInfoBlocks.get(1).click();
 		customerName.click();
 		customerName.sendKeys(customer);
 		customerName.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
-		updateWait.until(ExpectedConditions.visibilityOf(acceptCustomerBTN)).click();
-		serviceRequestInfoBlocks.get(1).click();
-		updateWait.until(ExpectedConditions.visibilityOf(acceptCustomerBTN)).click();
+		Actions act = new Actions(driver);
+		act.moveToElement(acceptCustomerBTN).click().build().perform();
+		//updateWait.until(ExpectedConditions.elementToBeClickable(By.id("doneCustOwner"))).click();
+		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(1))).click();
+		act.moveToElement(acceptCustomerBTN).click().build().perform();
+		//updateWait.until(ExpectedConditions.elementToBeClickable(By.id("doneCustOwner"))).click();
 	}
 
 	public boolean addAppointmentFromSRlist(String fromDate, String toDate) {

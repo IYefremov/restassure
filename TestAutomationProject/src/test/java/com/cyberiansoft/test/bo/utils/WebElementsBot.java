@@ -54,9 +54,8 @@ public class WebElementsBot {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(1000);
 		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
-		items.get(1).click();
-//		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
-//		droplist.selectByVisibleText(value);
+		waitABit(100);
+		items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	

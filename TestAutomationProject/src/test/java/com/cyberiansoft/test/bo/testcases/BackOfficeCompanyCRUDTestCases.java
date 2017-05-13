@@ -28,6 +28,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.TeamsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TimesheetTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.core.Retry;
 
 public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	
@@ -50,7 +51,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		//Thread.sleep(3000);
 	}
 	
-	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD", description = "Company- Insurance Company: CRUD")
+	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD", description = "Company- Insurance Company: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyInsuranceCompanyCRUD() throws Exception {
 
 		final String insurancecompany = "testinsurancecompany";
@@ -108,7 +109,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(insurancecompaniespage.isInsuranceCompanyExists(insurancecompanyedited));
 	}
 
-	@Test(testName = "Test Case 27876:Company-Teams: CRUD", description = "Company-Teams: CRUD")
+	@Test(testName = "Test Case 27876:Company-Teams: CRUD", description = "Company-Teams: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyTeamsCRUD() throws Exception {
 
 		final String team = "Testteam";
@@ -182,7 +183,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(teamspage.isTeamExists(teamedited));
 	}
 	
-	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
+	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyJobsCRUD() throws Exception {
 
 		
@@ -249,7 +250,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(jobspage.isJobExists(jobedited));
 	}
 	
-	@Test(testName = "Test Case 27878:Company- Service Advisors: CRUD", description = "Company- Service Advisors: CRUD")
+	@Test(testName = "Test Case 27878:Company- Service Advisors: CRUD", description = "Company- Service Advisors: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyServiceAdvisorsCRUD() throws Exception {
 
 
@@ -327,7 +328,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(serviceadvisorspage.isServiceAdvisorExists(firstname, lastname));		
 	}
 	
-	@Test(testName = "Test Case 28114:Company- Service Contract Types: CRUD", description = "Company- Service Contract Types: CRUD")
+	@Test(testName = "Test Case 28114:Company- Service Contract Types: CRUD", description = "Company- Service Contract Types: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyServiceContractTypesCRUD() throws Exception {
 
 
@@ -388,7 +389,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(servicecontracttypespage.isServiceContractTypeExists(contracttype));
 	}
 	
-	@Test(testName = "Test Case 28119:Company- Price Matrix: CRUD", description = "Company- Price Matrix: CRUD")
+	@Test(testName = "Test Case 28119:Company- Price Matrix: CRUD", description = "Company- Price Matrix: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyPriceMatrixCRUD() throws Exception {
 
 
@@ -433,7 +434,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(pricematricespage.isPriceMatrixExists(pricematrixnameedited));
 	}
 	
-	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD")
+	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyInvoiceTypeCRUD() throws Exception {
 
 
@@ -469,7 +470,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(invoicestypespage.isInvoiceTypeExists(invoicetypeedited));
 	}
 	
-	@Test(testName = "Test Case 28130:Company - Service Request Type: CRUD", description = "Company- Service Request Type: CRUD")
+	@Test(testName = "Test Case 28130:Company - Service Request Type: CRUD", description = "Company- Service Request Type: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyServiceRequestTypeCRUD() throws Exception {
 
 
@@ -508,7 +509,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequesttypespage.isServiceRequestTypeExists(srtypeedited));
 	}
 	
-	@Test(testName = "Test Case 28182:Company - Email Templates: CRUD", description = "Company- Email Templates: CRUD")
+	@Test(testName = "Test Case 28182:Company - Email Templates: CRUD", description = "Company- Email Templates: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyEmailTemplatesCRUD() throws Exception {
 
 
@@ -544,7 +545,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(emailtemplatespage.isEmailTemplateExists(templatenameedited));
 	}
 	
-	@Test(testName = "Test Case 28218:Company - Print Server: CRUD", description = "Company- Print Server: CRUD")
+	@Test(testName = "Test Case 28218:Company - Print Server: CRUD", description = "Company- Print Server: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyPrintServerCRUD() throws Exception {
 
 
@@ -578,7 +579,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(printserverspage.isPrintServerExists(printsrvnameedited));
 	}
 
-@Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
+@Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD"/*,retryAnalyzer = Retry.class*/ )
 	public void testCompanyLicenceCRUD() throws Exception {
 
 
@@ -598,7 +599,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		}
 		
 		managelicencespage.clickAddManageLicenceButton();
-		managelicencespage.selectNewLicenceApplication(licenceapp);
+//		managelicencespage.selectNewLicenceApplication(licenceapp);
 		String deflicencetype = managelicencespage.getNewLicenceType();
 		managelicencespage.clickNewLicenceOKButton();
 		
@@ -617,7 +618,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(managelicencespage.isLicenceApplicationExists(licenceapp));
 	}
 	
-	@Test(testName = "Test Case 28422:Company- Timesheet Types: CRUD", description = "Company- Timesheet Types: CRUD")
+	@Test(testName = "Test Case 28422:Company- Timesheet Types: CRUD", description = "Company- Timesheet Types: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyTimesheetTypesCRUD() throws Exception {
 
 
@@ -657,7 +658,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(timesheettypespage.isTimesheetTypeExists(timesheettypeedited));
 	}
 	
-	@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD")
+	@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyWorkOrderTypesCRUD() throws Exception {
 
 
@@ -721,7 +722,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(workordertypespage.isWorkOrderTypeExists(wotype));
 	}
 	
-	@Test(testName = "Test Case 31504:Company - Service Packages: CRUD", description = "Company- Service Packages: CRUD")
+	@Test(testName = "Test Case 31504:Company - Service Packages: CRUD", description = "Company- Service Packages: CRUD",retryAnalyzer = Retry.class )
 	public void testCompanyServicePackagesCRUD() throws Exception {
 
 		final String servicepackagename = "testpackage";
