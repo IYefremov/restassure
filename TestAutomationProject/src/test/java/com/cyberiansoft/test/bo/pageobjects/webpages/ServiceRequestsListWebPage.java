@@ -250,6 +250,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	@FindBy(css = "div[class='appointment-info']")
 	private WebElement appointmentContentFromCalendar;
+	
+	@FindBy(id ="Card_dpScheduledDate_dateInput")
+	private WebElement suggestedStart;
+	
+	@FindBy(id ="divGeneralButtonsDone")
+	private WebElement acceptGeneralInfoBTN;
+	
+	@FindBy(id ="Card_btnCancel")
+	private WebElement cancelAppointmentFromSRedit;
 
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
@@ -309,7 +318,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		driver.switchTo()
 				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 	}
 
@@ -582,6 +590,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void saveNewServiceRequest() {
+		driver.switchTo().defaultContent();
 		click(saveservicerequestbutton);
 		driver.switchTo().defaultContent();
 		waitUntilPageReloaded();
@@ -906,10 +915,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(2000);
 		Actions act = new Actions(driver);
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
-		//updateWait.until(ExpectedConditions.elementToBeClickable(By.id("doneCustOwner"))).click();
+		Thread.sleep(2000);
 		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(1))).click();
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
-		//updateWait.until(ExpectedConditions.elementToBeClickable(By.id("doneCustOwner"))).click();
 	}
 
 	public boolean addAppointmentFromSRlist(String fromDate, String toDate) {
@@ -1013,8 +1021,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}catch(TimeoutException e){
 			return false;
 		}
-//		if (driver.findElement(By.className("serviceRequestStatus")).getText().equals(status))
-//			return true;
 	}
 
 	public boolean checkShowHideTeches(String startDate, String endDate) throws InterruptedException {
@@ -1066,7 +1072,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkDefaultAppointmentValuesFromCalendar(String fromDate, String toDate , String subject)
 			throws InterruptedException {
 		appointmentCalendarIcon.click();
-				
+		
+		Thread.sleep(1000);
+		if (!driver.findElement(By.id("Card_rcbAppointmentPhase_Input")).getAttribute("value").equals("Work")) {
+			return false;
+		}
+		
 		Thread.sleep(1000);
 		if (!(appointmentFromDate.getText().isEmpty() && appointmentFromTime.getText().isEmpty()
 				&& appointmentToDate.getText().isEmpty() && appointmentToTime.getText().isEmpty())) {
@@ -1151,11 +1162,85 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container")).size() != 4) {
 			return false;
 		}
-		
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_tbxSubject")).sendKeys(subject);
-		
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnAddApp")).click();
+		return true;
+	}
 
+	public void suggestedStartDate(String startDate) throws InterruptedException {
+		
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		
+		serviceRequestInfoBlocks.get(0).click();
+		suggestedStart.sendKeys(startDate);
+		Thread.sleep(2000);
+		Actions act = new Actions(driver);
+		act.moveToElement(acceptGeneralInfoBTN).click().build().perform();
+//		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(0))).click();
+//		act.moveToElement(acceptGeneralInfoBTN).click().build().perform();
+		
+	}
+
+	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		addAppointmentBTNfromSRedit.click();
+		
+		if(!driver.findElement(By.id("Card_rcbAppointmentPhase_Input")).getAttribute("value").equals("Estimating"))
+		return false;
+		
+		System.out.println(appointmentFromDateSRedit.getAttribute("value"));
+		if (!(appointmentFromDateSRedit.getAttribute("value").equals(startDate) && appointmentFromTimeSRedit.getAttribute("value").equals("12:00 AM")
+				&& appointmentToDateSRedit.getAttribute("value").equals(startDate) && appointmentToTimeSRedit.getAttribute("value").equals("12:30 AM"))) {
+			return false;
+		}
+		
+		Thread.sleep(1000);
+		if (!(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value").equals("Alex SASHAZ"))) {
+			return false;
+		}
+
+		appointmentContent.findElement(By.id("Card_rcbAppLocations_Input")).click();
+
+		Thread.sleep(1000);
+		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Custom") && appointmentContent
+				.findElement(By.id("Card_rcbAppointmentLocations_Input")).getAttribute("disabled").equals("disabled")) {
+			return false;
+		}
+
+		Thread.sleep(1000);
+		if (!appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).getAttribute("value").equals("All")
+				&& appointmentContent.findElement(By.id("Card_rcbStates_Input")).getAttribute("value").equals("All")) {
+			return false;
+		}
+
+		Thread.sleep(1000);
+		if (!appointmentContent.findElement(By.id("Card_tbxAddress")).getText().isEmpty()
+				&& appointmentContent.findElement(By.id("Card_tbxCity")).getText().isEmpty()
+				&& appointmentContent.findElement(By.id("Card_tbxZip")).getText().isEmpty()) {
+			return false;
+		}
+	
+		Thread.sleep(1000);
+		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
+						.equals("407 SILVER SAGE DR., NewYork, 10001")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientPhone")).getText()
+						.equals("14043801674")
+				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientEmail")).getText()
+						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
+			return false;
+		}
+		driver.findElement(By.id("Card_btnAddApp")).click();		
+		return true;
+	}
+
+	public boolean checkScheduler(String startDate) {
+		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+	
+		
 		return true;
 	}
 }

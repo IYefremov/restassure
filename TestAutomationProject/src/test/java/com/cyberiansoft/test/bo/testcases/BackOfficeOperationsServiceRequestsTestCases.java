@@ -988,7 +988,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setCustomer(customer);
 		serviceRequestsWebPage.saveNewServiceRequest();
-		//Assert.assertTrue(serviceRequestsWebPage.isAcceptIconPresentForFirstServiceRequestFromList());
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentValuesFromCalendar(startDate , endDate , SRcustomer));
@@ -1001,5 +1000,19 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		return new Object[][]{
 			{"006 - Test Company", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "OnHold" , "Alex SASHAZ" , "Scheduled"} 
 		};
+	}
+	
+	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Week", dataProvider = "provideSRdata")
+	public void checkSRappointmentSchedulerWeek(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setCustomer(customer);
+		serviceRequestsWebPage.suggestedStartDate(startDate);
+		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
+		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkScheduler(startDate));
 	}
 }
