@@ -1007,12 +1007,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate);
+		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setCustomer(customer);
 		serviceRequestsWebPage.suggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkScheduler(startDate));
+		serviceRequestsWebPage.reloadPage();
+		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate);
+		Assert.assertTrue(afterReqestsCount- prevReqestsCount ==1);
 	}
 }

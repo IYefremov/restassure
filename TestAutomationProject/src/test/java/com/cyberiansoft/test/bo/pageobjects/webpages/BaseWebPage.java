@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -155,7 +156,9 @@ public abstract class BaseWebPage {
 
 	public void deleteTableRow(WebElement row) {
 		clickDeleteTableRow(row);
+		try{
 		acceptAlertAndWait();
+		}catch(NoAlertPresentException e){}
 	}
 
 	public void archiveTableRow(WebElement row) {

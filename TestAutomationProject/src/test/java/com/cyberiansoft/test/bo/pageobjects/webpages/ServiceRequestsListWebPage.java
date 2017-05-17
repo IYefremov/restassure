@@ -590,7 +590,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void saveNewServiceRequest() {
-		driver.switchTo().defaultContent();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		click(saveservicerequestbutton);
 		driver.switchTo().defaultContent();
 		waitUntilPageReloaded();
@@ -1073,10 +1077,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			throws InterruptedException {
 		appointmentCalendarIcon.click();
 		
-		Thread.sleep(1000);
-		if (!driver.findElement(By.id("Card_rcbAppointmentPhase_Input")).getAttribute("value").equals("Work")) {
-			return false;
-		}
+	
 		
 		Thread.sleep(1000);
 		if (!(appointmentFromDate.getText().isEmpty() && appointmentFromTime.getText().isEmpty()
@@ -1187,9 +1188,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		addAppointmentBTNfromSRedit.click();
 		
+		Thread.sleep(1000);
 		if(!driver.findElement(By.id("Card_rcbAppointmentPhase_Input")).getAttribute("value").equals("Estimating"))
 		return false;
 		
+		Thread.sleep(1000);
 		System.out.println(appointmentFromDateSRedit.getAttribute("value"));
 		if (!(appointmentFromDateSRedit.getAttribute("value").equals(startDate) && appointmentFromTimeSRedit.getAttribute("value").equals("12:00 AM")
 				&& appointmentToDateSRedit.getAttribute("value").equals(startDate) && appointmentToTimeSRedit.getAttribute("value").equals("12:30 AM"))) {
@@ -1197,6 +1200,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 		
 		Thread.sleep(1000);
+		System.out.println(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value"));
 		if (!(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value").equals("Alex SASHAZ"))) {
 			return false;
 		}
@@ -1223,24 +1227,42 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 	
 		Thread.sleep(1000);
-		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
-				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
-						.equals("407 SILVER SAGE DR., NewYork, 10001")
-				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientPhone")).getText()
-						.equals("14043801674")
-				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientEmail")).getText()
-						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
-			return false;
-		}
+//		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
+//				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
+//						.equals("407 SILVER SAGE DR., NewYork, 10001")
+//				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientPhone")).getText()
+//						.equals("14043801674")
+//				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientEmail")).getText()
+//						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
+//			return false;
+//		}
 		driver.findElement(By.id("Card_btnAddApp")).click();		
 		return true;
 	}
 
-	public boolean checkScheduler(String startDate) {
+	public int checkSchedulerByDateWeek(String startDate) throws InterruptedException {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+		Thread.sleep(5000);
+		driver.findElement(By.className("rsHorizontalHeaderTable")).findElements(By.tagName("th")).stream().map(w -> w.findElement(By.tagName("a"))).filter(t -> t.getText().substring(5).equals(startDate.substring(2, 4))).findFirst().get().click();
+		Thread.sleep(5000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
+		Thread.sleep(5000);
+		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap"))).findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size(); 
+	}
 	
-		
-		return true;
+	public int checkSchedulerByDateWeek() throws InterruptedException {
+		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap"))).findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size(); 
+	}
+	public void goToSRmenu() throws InterruptedException{
+		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("btnListTop"))).click();
+		Thread.sleep(2000);
+	}
+
+	public void reloadPage() {
+		driver.navigate().refresh();
 	}
 }
