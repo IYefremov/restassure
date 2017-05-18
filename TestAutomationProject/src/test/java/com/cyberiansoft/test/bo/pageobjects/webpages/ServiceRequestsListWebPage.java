@@ -920,6 +920,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Actions act = new Actions(driver);
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(1))).click();
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 	}
@@ -1243,19 +1245,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public int checkSchedulerByDateWeek(String startDate) throws InterruptedException {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		Thread.sleep(5000);
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		driver.findElement(By.className("rsHorizontalHeaderTable")).findElements(By.tagName("th")).stream().map(w -> w.findElement(By.tagName("a"))).filter(t -> t.getText().substring(5).equals(startDate.substring(2, 4))).findFirst().get().click();
-		Thread.sleep(5000);
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
-		Thread.sleep(5000);
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap"))).findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size(); 
 	}
 	
-	public int checkSchedulerByDateWeek() throws InterruptedException {
-		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap"))).findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size(); 
-	}
 	public void goToSRmenu() throws InterruptedException{
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("btnListTop"))).click();
@@ -1264,5 +1264,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void reloadPage() {
 		driver.navigate().refresh();
+	}
+
+	public int checkSchedulerByDateMonth(String date) {
+		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
+		driver.findElement(By.cssSelector("a[title='"+date+"']")).click();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsNonWorkHour"))).findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size(); 
 	}
 }
