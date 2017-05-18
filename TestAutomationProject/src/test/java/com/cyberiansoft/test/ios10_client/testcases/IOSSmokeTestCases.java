@@ -1113,13 +1113,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		singlepageinspectionscreen.expandToFullScreeenQuestionsSection();
 		Thread.sleep(5000);
-		singlepageinspectionscreen.swipeScreenLeft();
-		singlepageinspectionscreen.swipeScreenLeft();
-		singlepageinspectionscreen.swipeScreenLeft();
+		//singlepageinspectionscreen.swipeScreenLeft();
+		//singlepageinspectionscreen.swipeScreenLeft();
+		//singlepageinspectionscreen.swipeScreenLeft();
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());		
-		singlepageinspectionscreen.swipeScreenRight();
+		singlepageinspectionscreen.swipeScreenRight1();
 		Thread.sleep(2000);
-		singlepageinspectionscreen.swipeScreenRight();
+		singlepageinspectionscreen.swipeScreenRight1();
 		Thread.sleep(2000);
 		singlepageinspectionscreen.swipeScreenUp();
 		
@@ -2960,6 +2960,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(newsrnumber);
+		System.out.println("+++" + newsrnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		Thread.sleep(8000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSPTYPE_FOR_SR_INSPTYPE);
@@ -7087,7 +7088,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
-		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String invoicenum = myinvoicesscreen.getFirstInvoiceValue();

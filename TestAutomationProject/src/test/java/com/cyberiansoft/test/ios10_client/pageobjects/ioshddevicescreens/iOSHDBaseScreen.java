@@ -129,10 +129,10 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public void swipeScreenRight1() {
 		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.width *0.9);
+		int starty = (int) (size.width/2);
 		
-		int startx = (int) (size.width * 0.20);
-		int endx = (int) (size.width * 0.80);
+		int startx = (int) (size.width * 0.10);
+		int endx = (int) (size.width * 0.90);
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
 		/*int starty = (int) size.height / 2;	

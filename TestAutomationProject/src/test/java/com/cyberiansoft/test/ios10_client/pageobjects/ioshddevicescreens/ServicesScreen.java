@@ -263,13 +263,13 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isServiceApproved(String srvname) {
-		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
-				srvname + "']/XCUIElementTypeButton[@name='selected']")).size() > 0;
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
+				srvname + "_SelectedServiceIconSelected" + "']")).size() > 0;
 	}
 	
 	public boolean isServiceDeclinedSkipped(String srvname) {
-		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + 
-				srvname + "']/XCUIElementTypeButton[@name='declined']")).size() > 0;
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
+				srvname + "_SelectedServiceIconDeclined" + "']")).size() > 0;
 	}
 	
 	public boolean isNotesIconPresentForSelectedService(String servicename) {

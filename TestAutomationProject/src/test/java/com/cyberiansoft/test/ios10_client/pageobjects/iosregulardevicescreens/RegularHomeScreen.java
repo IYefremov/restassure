@@ -13,6 +13,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -64,17 +65,22 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	final static String scrollviewxpath = "//UIAScrollView[1]";
 
 	public RegularCustomersScreen clickCustomersButton() {	
-		/*Helpers.scroolTo("Customers");
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(customersbtn));*/
-		customersbtn.click();
+		if(!customersbtn.isDisplayed()) {
+			TouchAction action = new TouchAction(appiumdriver);
+			action.press(customersbtn).waitAction(300).release().perform();
+		}
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(customersbtn).waitAction(300).release().perform();
 		return new RegularCustomersScreen(appiumdriver);
 	}
 
 	public RegularMyInspectionsScreen clickMyInspectionsButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(myinspectionsbtn));
-		myinspectionsbtn.click();
+		if(!myinspectionsbtn.isDisplayed()) {
+			TouchAction action = new TouchAction(appiumdriver);
+			action.press(myinspectionsbtn).waitAction(300).release().perform();
+		}
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(myinspectionsbtn).waitAction(300).release().perform();
 		return new RegularMyInspectionsScreen(appiumdriver);
 	}
 	
@@ -89,7 +95,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(myworkordersbtn));
 		myworkordersbtn.click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 		return new RegularMyWorkOrdersScreen(appiumdriver);
 	}
 	

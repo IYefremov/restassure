@@ -13,6 +13,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios_client.utils.UtilConstants;
 
 public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
@@ -90,7 +92,10 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
 	public void selectCustomer(String customer) {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()['CustomersTable'].cells()['" + customer + "']")).click();
-		
+		searchbtn.click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(1000);
 		appiumdriver.findElement(MobileBy.AccessibilityId(customer)).click();
 	}
 	

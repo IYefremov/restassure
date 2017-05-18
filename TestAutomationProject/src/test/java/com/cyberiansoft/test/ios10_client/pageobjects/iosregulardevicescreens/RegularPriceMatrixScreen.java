@@ -7,6 +7,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -83,6 +84,8 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
+		if (!appiumdriver.findElementByName(pricematrix).isDisplayed())
+			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + pricematrix + "']/..")));
 		appiumdriver.findElement(MobileBy.AccessibilityId(pricematrix)).click();
 	}
 
@@ -93,24 +96,28 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + size + "']")).click();
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + severity + "']")).click();
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		Helpers.waitABit(500);
 	}
 
-	public void setPrice(String price) throws InterruptedException {
+	public void setPrice(String price) {
 		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("Price");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField")).sendKeys(price + "\n");
+		par.findElement(By.xpath("//XCUIElementTypeTextField")).click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 	
 	public void setTime(String timevalue) throws InterruptedException {
 		WebElement par = getTableParentCell("Time");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
+		par.findElement(By.xpath("//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
 	}
 
 	public void assertPriceCorrect(String expectedprice) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Price")));
 		WebElement par = getTableParentCell("Price");
-		Assert.assertEquals(par.findElement(By.xpath("./XCUIElementTypeTextField")).getAttribute("value"), expectedprice);
+		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField")).getAttribute("value"), expectedprice);
 	}
 
 	public void selectDiscaunt(String discaunt) {
@@ -122,6 +129,8 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickDiscaunt(String discaunt) {
+		if (!appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")).isDisplayed())
+			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")));
 		appiumdriver.findElementByAccessibilityId(discaunt).click();
 	}
 	
@@ -133,7 +142,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	public String getDiscauntPriceAndValue(String discaunt) {
 		WebElement par = getTableParentCell(discaunt);
-		return par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public boolean isDiscauntPresent(String discaunt) {
@@ -147,7 +156,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	public boolean isPriceMatrixContainsPriceValue(String pricematrix, String pricevalue) {
 		WebElement par = getTableParentCell(pricematrix);
-		return par.findElements(By.xpath(".//XCUIElementTypeStaticText[@name=\""+ pricevalue + "\"]")).size() > 0;
+		return par.findElements(By.xpath("//XCUIElementTypeStaticText[@name=\""+ pricevalue + "\"]")).size() > 0;
 	}
 
 	public void assertNotesExists() {
@@ -163,7 +172,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Technicians")));
 		WebElement par = getTableParentCell("Technicians");
-		return par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 
 	public void clickOnTechnicians() {
@@ -185,7 +194,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
 	public void clickBackButton() {
 		backbtn.click();
-		Helpers.waitABit(300);
+		Helpers.waitABit(1000);
 	}
 	
 	public void clearVehicleData() {

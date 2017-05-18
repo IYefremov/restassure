@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,8 +44,9 @@ public class RegularTeamWorkOrdersScreen extends RegularMyWorkOrdersScreen {
 	}
 	
 	public void clickCreateInvoiceForWO(String wonumber) {
-		appiumdriver.findElementByXPath("//UIATableView[@name=\"TeamOrdersTable\"]/UIATableCell[@name=\""
-						+ wonumber + "\"]/UIAButton[1]").click();
+		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
+		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
+						+ wonumber + "']/XCUIElementTypeOther")).click();
 	}
 	
 	public void clickOnWO(String wonumber) {
@@ -52,6 +55,7 @@ public class RegularTeamWorkOrdersScreen extends RegularMyWorkOrdersScreen {
 	
 	public RegularOrderMonitorScreen selectWOMonitor() {
 		womonitor.click();
+		Helpers.waitABit(5000);
 		return new RegularOrderMonitorScreen(appiumdriver);
 	}
 	
@@ -60,19 +64,14 @@ public class RegularTeamWorkOrdersScreen extends RegularMyWorkOrdersScreen {
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
-		if (Helpers.elementExists("//UIAPopover[1]")) {
-			appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[@name= \"" + invoicetype + "\"]").click();
-		} else {
-			appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name= \"" + invoicetype + "\"]").click();
-		}
+		appiumdriver.findElementByAccessibilityId(invoicetype).click();
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {
-		Thread.sleep(2000);
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()['TeamOrdersTable'].cells()['" + wonumber + "'].buttons().firstWithPredicate(\"name BEGINSWITH 'EntityInfoButtonChecked' \")")).isDisplayed());
-		//Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-		//				+ wonumber + "\")]/UIAButton[@name=\"EntityInfoButtonChecked\"]").isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("invoice new")).isDisplayed());		
+		Helpers.waitABit(1000);
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
+				+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
+Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	
 	}
 	
 	public void clickiCreateInvoiceButton()  {

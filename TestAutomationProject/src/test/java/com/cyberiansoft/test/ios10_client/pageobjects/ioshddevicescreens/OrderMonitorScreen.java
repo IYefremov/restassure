@@ -70,9 +70,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {
-		List<WebElement> elements = appiumdriver.findElementsByXPath("//UIATableCell[@name=\"" + panelname + "\"]/UIAStaticText[3]");
+		List<WebElement> elements = appiumdriver.findElementsByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]");
 		for (WebElement element : elements) {
-			Assert.assertTrue(element.getAttribute("name").equals(status));
+			Assert.assertTrue(element.getAttribute("value").equals(status));
 		}
 
 	}

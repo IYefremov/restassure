@@ -75,7 +75,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	public void setPOWithoutHidingkeyboard(String _po)  {
 		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("PO#");
-		par.findElement(By.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_po);
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_po);
 	}
 	
 	public String  getInvoicePOValue()  {
@@ -84,14 +84,14 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
-	public void assertWOIsSelected(String wo) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[contains(@name, \""
-						+ wo + "\")]").isDisplayed());
+	public boolean isWOSelected(String wo) {
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='"
+						+ wo + "']").size() > 0;
 	}
 	
 	public void clickWO(String wonumber) {
 		WebElement par = getTableParentCell(wonumber);
-		par.findElement(By.xpath(".//XCUIElementTypeStaticText[1]")).click();
+		par.findElement(By.xpath("//XCUIElementTypeStaticText[1]")).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[1]/XCUIElementTypeCell[1]").click();
 	}
 	
@@ -110,7 +110,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(1000);
 		WebElement par = getTableParentCell(wonumber);
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]"));
-		par.findElement(By.xpath(".//XCUIElementTypeButton[@name=\"unselected\"]")).click();
+		par.findElement(By.xpath("//XCUIElementTypeButton[@name=\"unselected\"]")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	

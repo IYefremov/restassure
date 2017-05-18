@@ -112,7 +112,7 @@ public class DentWizartestCases extends BaseTestCase {
 		System.out.println("================================ NEW TESTACASE ====================================");
 	}
 
-	/*@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
+	@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
 	public void testValidVINCheck() throws Exception {
 		final String tcname = "testValidVINCheck";
 		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
@@ -1102,7 +1102,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 		vehiclescreeen.clickTech();
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
-		Assert.assertTrueselectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
 		selectedservicescreen.selectTechniciansCustomView();
 		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 		Assert.assertEquals(
@@ -2120,7 +2120,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertTrue(alerttext.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
 		teamworkordersscreen.clickHomeButton();
 		
-	}*/
+	}
 	
 	@Test(testName = "Test Case 12628:Test Phase Enforcement for WizardPro Tracker", description = "Test Phase Enforcement for WizardPro Tracker")
 	public void testPhaseEnforcementForWizardProTracker()
@@ -2195,34 +2195,36 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		//ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
-		Assert.assertTrue(ordermonitorscreen.isServiceIsActive(UtilConstants.PAINTDOORHANDLE_SUBSERVICE));
+		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Active");
 
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
 		
-		ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Completed");
 		
-		ordermonitorscreen.selectPanel(UtilConstants.WHEEL_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
+		
 		teamworkordersscreen.verifyCreateInvoiceIsActivated(inspection);
 		teamworkordersscreen.clickiCreateInvoiceButton();
 		teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
+		Helpers.waitABit(1000);
 		teamworkordersscreen.clickHomeButton();
 		
 	}
 	
-	/*@Test(testName = "Test Case 12630:Test adding services to an order being monitored", description = "Test adding services to an order being monitored")
+	@Test(testName = "Test Case 12630:Test adding services to an order being monitored", description = "Test adding services to an order being monitored")
 	public void testAddingServicesToOnOrderBeingMonitored()
 			throws Exception {
 		String tcname = "testAddingServicesToOnOrderBeingMonitored";
@@ -4416,5 +4418,5 @@ public class DentWizartestCases extends BaseTestCase {
 		invoiceinfoscreen.setPO(_po);
 		invoiceinfoscreen.clickSaveAsFinal();		
 		myworkordersscreen.clickHomeButton();
-	}*/
+	}
 }

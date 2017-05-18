@@ -29,22 +29,22 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 
 	public void assertBundleIsSelected(String bundle) {
 		WebElement par = getTableParentCell(bundle);	
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeButton[@name='selected']")).isDisplayed());
+		Assert.assertTrue(par.findElement(By.xpath("//XCUIElementTypeButton[@name='selected']")).isDisplayed());
 	}
 
 	public void assertBundleIsNotSelected(String bundle) {
 		WebElement par = getTableParentCell(bundle);		
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeButton[@name='unselected']")).isDisplayed());
+		Assert.assertTrue(par.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).isDisplayed());
 	}
 
 	public void selectBundle(String bundle) {
 		WebElement par = getTableParentCell(bundle);		
-		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='unselected']")).click();
+		par.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).click();
 	}
 
 	public void openBundleInfo(String bundle) {
 		WebElement par = getTableParentCell(bundle);		
-		par.findElement(By.xpath(".//XCUIElementTypeButton[@name='custom detail button']")).click();
+		par.findElement(By.xpath("//XCUIElementTypeButton[@name='custom detail button']")).click();
 	}
 	
 	public void clickServicesIcon() {

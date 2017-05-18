@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -12,6 +13,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularClaimScreen extends iOSRegularBaseScreen {
@@ -28,16 +30,21 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	public void selectInsuranceCompany(String insurancecompany) {
 		WebElement par = getTableParentCell("Insurance Company");
 		new TouchAction(appiumdriver).tap(par.findElement(MobileBy.AccessibilityId("custom detail button"))).perform() ;
+		if (!appiumdriver.findElementByAccessibilityId(insurancecompany).isDisplayed())
+			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + insurancecompany + "']")));
 		appiumdriver.findElementByAccessibilityId(insurancecompany).click();
+		Helpers.waitABit(500);
 	}
 
-	public void setClaim(String claim) throws InterruptedException {
+	public void setClaim(String claim) {
 		appiumdriver.findElementByAccessibilityId("Claim#").click();
-		Helpers.keyboadrType(claim + "\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(claim);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 
 	}
 	
-	public void selectInsuranceCompanyAndSetClaim(String insurancecompany, String claim) throws InterruptedException {
+	public void selectInsuranceCompanyAndSetClaim(String insurancecompany, String claim) {
 		selectInsuranceCompany(insurancecompany);
 		setClaim(claim);
 	}
@@ -46,13 +53,15 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	public void setDeductible(String deductible)
 			throws InterruptedException {
 		WebElement par = getTableParentCell("Deductible");
-		par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).sendKeys(deductible + "\n");
-		//Helpers.keyboadrType(deductible + "\n");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(deductible);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 
 	public String getDeductibleValue() {
 		WebElement par = getTableParentCell("Deductible");
-		return par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value");
+		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
 	public void setAccidentDate() {

@@ -76,7 +76,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
 		
-		Assert.assertTrue(appiumdriver.findElements(By.xpath(".//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
+		Assert.assertTrue(appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
 	}
 	
 	public int getNumberOfServiceSelectedItems(String servicename) {
@@ -88,12 +88,12 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	
-	public void assertServiceIsSelectedAndVisible(String service, String pricevalue) throws InterruptedException {
-		Helpers.scroolTo(service);
-		
-		Assert.assertTrue(appiumdriver.findElement(By.name(service)).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(By.name("selected")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(By.name(pricevalue)).isDisplayed());
+	public boolean isServiceSelected(String servicename) {
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0;
+	}
+	
+	public String getServicePriceValue(String servicename) {
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public void assertServiceIsSelectedWithServiceValues(String servicename, String pricevalue) {
@@ -110,13 +110,19 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void assertTotalAmauntIsCorrect(String price) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("TotalAmount")));
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
+		//WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+        //wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("TotalAmount")));
+		if (appiumdriver.findElementsByName("TotalAmount").size() > 0)
+			Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
+		else
+			Assert.assertEquals(appiumdriver.findElementByAccessibilityId("AmountTotal").getAttribute("value"), price);
 	}
 	
 	public void assertSubTotalAmauntIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByName("SubtotalAmount").getAttribute("value"), price);
+		if (appiumdriver.findElementsByName("SubtotalAmount").size() > 0)
+			Assert.assertEquals(appiumdriver.findElementByName("SubtotalAmount").getAttribute("value"), price);
+		else
+			Assert.assertEquals(appiumdriver.findElementByName("AmountSubtotal").getAttribute("value"), price);
 	}
 
 	public void assertServiceTypeExists(String servicetype) {
@@ -130,14 +136,15 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectService(String servicename) {
-		searchServiceByName(servicename);
+		if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
+			searchServiceByName(servicename);
 		//appiumdriver.findElementByAccessibilityId(servicename).click();
 		IOSElement el = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']"));
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(el.getLocation().getX()+2, el.getLocation().getY()+2).perform();
-		Assert.assertTrue(appiumdriver.findElementByClassName("XCUIElementTypeTable").
-				findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
+		//Assert.assertTrue(appiumdriver.findElementByClassName("XCUIElementTypeTable").
+		//		findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
 		//action.press(appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.className("XCUIElementTypeCell"))).waitAction(1000).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']").click();
 		//appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
@@ -236,7 +243,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		Helpers.waitABit(500);
 		WebElement par = getServiceTableCell(servicename);
-		par.findElement(MobileBy.xpath(".//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity + "\n");
 		//par.findElement(MobileBy.xpath(".//XCUIElementTypeTextField[1]")).sendKeys(_quantity + "\n");
 		/*wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@name=\""
@@ -249,13 +256,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		Helpers.keyboadrType("\n");*/
 	}
 	
-	public void openServiceDetailsByIndex(String service, int servicedetailindex) {
-		
-		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeButton[@name='custom detail button']");
-		//Helpers.scroolToElement(selectedservices.get(servicedetailindex));
-		//Helpers.waitABit(2000);
-		
-		((WebElement) appiumdriver.findElementsByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeButton[@name='custom detail button']").get(servicedetailindex)).click();
+	public void openServiceDetailsByIndex(String servicename, int servicedetailindex) {
+		((WebElement) appiumdriver.findElementsByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='custom detail button']").get(servicedetailindex)).click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void setSelectedServiceRequestServicePrice(String servicename, String price) {
@@ -310,6 +313,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public void clickBackServicesButton() {	
 		appiumdriver.findElement(MobileBy.name("Back")).click();
+		Helpers.waitABit(500);
 	}
 	
 	public void clickAddServicesButton() {	
@@ -333,7 +337,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public String getListOfSelectedVehicleParts() {
 		WebElement par = getServiceTableCell("Vehicle Part");	
-		return par.findElement(MobileBy.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public boolean isServiceWithVehiclePartExists(String srvname, String srvvehiclepart) {

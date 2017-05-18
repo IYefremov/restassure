@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -115,6 +116,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		.click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 	
 	public void clearVINCode() {
@@ -170,14 +172,18 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void seletAdvisor(String advisor) {
+		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
 		advisorfld.click();
-		appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
-						+ advisor + "\"]").click();
+		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
 	
 	
 	public String getMake() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
+		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
+		return table.findElement(By.xpath("//XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
 	public String getModel() {
@@ -212,6 +218,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setColor(String color) {
 		colorfld.click();
 		appiumdriver.findElementByAccessibilityId(color).click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void setMileage(String mileage) throws InterruptedException {
@@ -234,13 +241,16 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setTech(String _tech) throws InterruptedException {
 		clickTech();
 		appiumdriver.findElementByAccessibilityId(_tech).click();
+		Helpers.waitABit(500);
 	}
 	
 	public void selectLocation(String _location) {
+		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Location']")));
 		appiumdriver.findElementByAccessibilityId("Location").click();
 		//WebElement par = getVehicleInfoTableParentNode("Location");
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField")).click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
@@ -258,6 +268,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickTech() {
+		if (!techfld.isDisplayed())
+			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeCell[@name='Tech']")));
 		techfld.click();
 	}
 
@@ -266,26 +278,22 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElementByAccessibilityId("RO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		/*stockfld.click();
-		Helpers.keyboadrType(stock);		
-		//stockfldvalue.setValue(stock);
-		Helpers.keyboadrType("\n");*/
+		Helpers.waitABit(500);
+		
 	}
 
 	public void setRO(String ro) {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		/*rofld.click();
-		Helpers.keyboadrType(ro);
-		//rofldvalue.setValue(ro);
-		Helpers.keyboadrType("\n");*/
+		Helpers.waitABit(500);
 	}
 	
 	public void setPO(String po) throws InterruptedException {
 		pofld.click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(500);
 	}
 	
 	public String getWorkOrderCustomer() {

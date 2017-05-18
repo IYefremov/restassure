@@ -33,7 +33,7 @@ public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
 	public boolean isAssignButtonDisplayed() {
 		Helpers.waitABit(500);
-		return assignlbtn.isDisplayed();
+		return appiumdriver.findElementsByAccessibilityId("Assign").size() > 0;
 	}
 
 }

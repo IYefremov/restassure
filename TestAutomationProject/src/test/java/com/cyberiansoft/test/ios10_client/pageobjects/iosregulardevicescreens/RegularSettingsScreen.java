@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -9,21 +11,15 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class RegularSettingsScreen extends iOSRegularBaseScreen {
 	
-	final String chekdublicates = "Check duplicates";
-	
-	@iOSFindBy(uiAutomator = ".tableViews()[0].cells()[\"" + chekdublicates + "\"].switches()[\"" + chekdublicates + "\"]")
-    private IOSElement duplicatestoggle;
-	
-	@iOSFindBy(uiAutomator = ".tableViews()[0].cells()[\"Top customers\"].switches()[\"Top customers\"]")
-    private IOSElement showtopcustomerstoggle;
-	
-	@iOSFindBy(uiAutomator = ".tableViews()[0].cells()[\"Show all services\"].switches()[\"Show all services\"]")
+	@iOSFindBy(xpath = "//XCUIElementTypeSwitch[@name='Show all services']")
     private IOSElement showallservicestoggle;
 	
 	public RegularSettingsScreen(AppiumDriver driver) {
@@ -33,31 +29,45 @@ public class RegularSettingsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setCheckDuplicatesOn() {
-		Helpers.scroolTo(chekdublicates);
-		duplicatestoggle.setValue("1");
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']/..")));
+		
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).getAttribute("value").equals("false")) {
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).click();
+		}
 	}
 
 	public void setCheckDuplicatesOff() {
-		Helpers.scroolTo(chekdublicates);
-		duplicatestoggle.setValue("0");
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']/..")));
+		
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).getAttribute("value").equals("true")) {
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).click();
+		}
 	}
 	
 	public void setShowTopCustomersOn() {
-		showtopcustomerstoggle.setValue("1");
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("false"))
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).click();
 	}
 	
 	public void setShowTopCustomersOff() {
-		showtopcustomerstoggle.setValue("0");
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("true"))
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).click();
 	}
 
 	public void setShowAllServicesOn() {
-		Helpers.scroolToElement((WebElement) appiumdriver.findElements(MobileBy.xpath("//UIATableView[@name='SettingsTable']/UIATableCell[@name='Show all services']/UIASwitch[@name='Show all services']")).get(1));
-		Helpers.waitABit(1000);		
-		IOSElement option = ((IOSElement) appiumdriver.findElements(MobileBy.xpath("//UIATableView[@name='SettingsTable']/UIATableCell[@name='Show all services']/UIASwitch[@name='Show all services']")).get(1));
-		option.setValue("1");
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElements(By.xpath("//XCUIElementTypeSwitch[@name='Show all services']/..")).get(1));
+		IOSElement option = ((IOSElement) table.findElements(By.xpath("//XCUIElementTypeSwitch[@name='Show all services']")).get(1));
+		if (option.getAttribute("value").equals("false"))
+			option.click();
 	}
 	
 	public void setShowAllServicesOff() {
-		showallservicestoggle.setValue("0");
+		if (showallservicestoggle.getAttribute("value").equals("true"))
+			showallservicestoggle.click();
 	}
 }

@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
@@ -53,9 +55,10 @@ public class RegularInspectionScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void seletAdvisor(String advisor) {
+		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
 		advisorcell.click();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".scrollViews()[1].tableViews()[0].cells()[\""
-						+ advisor + "\"]")).click();
+		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
 
 }

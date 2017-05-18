@@ -55,7 +55,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		//wait.until(ExpectedConditions.visibilityOf(backbtn)).click();
 		backbtn.click();
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		return new RegularHomeScreen(appiumdriver);
 	}
 	
@@ -64,7 +64,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 			clickChangeScreen();
 		}
 		savebtn.click();
-		Helpers.waitABit(1000);
+		Helpers.waitABit(2000);
 	}
 	
 	public void cancelOrder() {
@@ -80,6 +80,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	
 	public void clickChangeScreen() {
 		changescreenbtn.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void acceptAlertByCoords() {
@@ -97,7 +98,8 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void selectNextScreen(String screenname) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(changescreenbtn)).click();
-		//Helpers.scroolTo(screenname);
+		swipeToElement(appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
 		appiumdriver.findElementByAccessibilityId(screenname).click();
 		Helpers.waitABit(1000);
 	}
@@ -119,6 +121,19 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
+		}
+	}
+	
+	public void swipeToElement(WebElement elementtoswipe) {
+		boolean swipe = true;
+		int screenheight = (int) (appiumdriver.manage().window().getSize().getHeight()*0.8);
+		
+		while (swipe) {
+			//if (elementtoswipe.getLocation().getY() > screenheight)
+			if (!elementtoswipe.isDisplayed())
+				swipeScreenUp();
+			else
+				swipe = false;
 		}
 	}
 

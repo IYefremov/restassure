@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -60,6 +61,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectPanel(String panelname) {
+		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']").click();
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		//MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//UIATableView/UIATableCell[contains(@name, \""
@@ -69,29 +71,30 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		//return element.getAttribute("name");
 	}
 	
-	/*public void verifyPanelsStatuses(String panelname, String status)  {
-		//appiumdriver.findElementByAccessibilityId(panelname).click();
-		WebElement par = getTableParentCell(panelname);
-		System.out.print("++++" + );
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeStaticText[@name='" + status + "']")).isDisplayed());
-	}*/
+	public void verifyPanelsStatuses(String panelname, String status) {
+		List<WebElement> elements = appiumdriver.findElementsByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]");
+		for (WebElement element : elements) {
+			Assert.assertTrue(element.getAttribute("value").equals(status));
+		}
+
+	}
 	
 	public void verifyPanelStatus(String panelname, String status) {
 		WebElement par = getTableParentCell(panelname);
-		Assert.assertTrue(par.findElements(By.xpath(".//XCUIElementTypeStaticText[@name='" + status + "']")).size() > 0);
+		Assert.assertTrue(par.findElements(By.xpath("//XCUIElementTypeStaticText[@name='" + status + "']")).size() > 0);
 	}
 	
 	public void verifyPanelStatusInPopup(String panelname, String status) {
 		appiumdriver.findElementByName(panelname).click();
 		WebElement par = getTableParentCell("Phase Status");
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("name").equals(status));
+		Assert.assertTrue(par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("name").equals(status));
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
 	
 	public void verifyServiceStatusInPopup(String panelname, String status) {
 		appiumdriver.findElementByName(panelname).click();
 		WebElement par = getTableParentCell("Service Status");
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("name").equals(status));
+		Assert.assertTrue(par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("name").equals(status));
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
 	
@@ -147,14 +150,14 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isServiceIsActive(String servicedisplayname) {
-		WebElement par = getTableParentCell(servicedisplayname);
-		return par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("name").equals("Active");
+		WebElement par = appiumdriver.
+				findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicedisplayname + "']"));
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[3]")).getAttribute("name").equals("Active");
 	}
 	
 	public void verifyServiceStartDateIsSet(String servicedisplayname, String startdate) {
-		WebElement par = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@label='" + servicedisplayname + "')]/.."));
-		Assert.assertTrue(par.findElement(By.xpath(".//XCUIElementTypeStaticText[contains(@name, \""
-						+ startdate + "\")]")).isDisplayed());
+		Assert.assertTrue(appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicedisplayname + "']/XCUIElementTypeStaticText[contains(@name, \""
+						+ startdate + "\")]")).size() > 0);
 	}
 	
 	public void verifyStartServiceDissapeared() {
@@ -168,7 +171,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public String getServiceStartDate() {
 		WebElement par = getTableParentCell("Start Date");
-		return par.findElement(By.xpath(".//XCUIElementTypeStaticText[2]")).getAttribute("name");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("name");
 	}
 	
 	public boolean isServiceStartDateExists() { 

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -185,8 +187,18 @@ public class iOSBaseScreen {
 		//Swipe from Bottom to Top.
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
-		appiumdriver.swipe(startx, starty, startx, endy, 2000);
+		
+		
+		
+		appiumdriver.swipe(startx, starty, startx, endy, 500);
 		Helpers.waitABit(2000);
+	}
+	
+	public void scrollScreenUp() {
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("direction", "down");
+		js.executeScript("mobile: scroll", scrollObject);
 	}
 	
 	public void swipeScreenRight() {

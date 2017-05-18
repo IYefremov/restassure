@@ -54,18 +54,14 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
-		if (Helpers.elementExists("//UIAPopover[1]")) {
-			appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[@name= \"" + invoicetype + "\"]").click();
-		} else {
-			appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name= \"" + invoicetype + "\"]").click();
-		}
+			appiumdriver.findElementByAccessibilityId(invoicetype).click();
 	}
 	
-	public void verifyCreateInvoiceIsActivated(String wovincode) throws InterruptedException {
-		Thread.sleep(3000);
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ wovincode + "\")]/UIAButton[contains(@name, \"EntityInfoButtonChecked\")]").isDisplayed());
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAToolbar[1]/UIAButton[@name=\"invoice new\"]").isDisplayed());		
+	public void verifyCreateInvoiceIsActivated(String wonumber) {
+		Helpers.waitABit(2000);		
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
+						+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);		
 	}
 	
 	public void clickiCreateInvoiceButton()  {

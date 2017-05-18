@@ -67,7 +67,7 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 
 	public void selectWorkOrderDetails(String workorderdetails) {
 
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name=\"" + workorderdetails + "\"]").click();
+		appiumdriver.findElementByAccessibilityId(workorderdetails).click();
 	}
 
 	public void assertOrderSummIsCorrect(String summ) {
@@ -77,12 +77,12 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	public void setTotalSale(String totalsale) throws InterruptedException {
 		setTotalSaleWithoutHidingkeyboard(totalsale+"\n");
 		WebElement par = getTableParentNode("Total Sale");
-		Assert.assertEquals(par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).getAttribute("value"), PricesCalculations.getPriceRepresentation(totalsale));
+		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value"), PricesCalculations.getPriceRepresentation(totalsale));
 	}
 	
 	public void setTotalSaleWithoutHidingkeyboard(String totalsale) throws InterruptedException {
 		WebElement par = getTableParentNode("Total Sale");
-		par.findElement(By.xpath("./XCUIElementTypeTextField[1]")).sendKeys(totalsale);
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(totalsale);
 		//appiumdriver.findElement(By.xpath("//XCUIElementTypeButton[@name='Return']")).click();
 	}
 
