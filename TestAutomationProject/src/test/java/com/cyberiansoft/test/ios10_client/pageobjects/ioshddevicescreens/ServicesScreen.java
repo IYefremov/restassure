@@ -195,7 +195,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 	public SelectedServiceDetailsScreen openServiceDetails(String service) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='"
 				+ service + "']"))).click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
