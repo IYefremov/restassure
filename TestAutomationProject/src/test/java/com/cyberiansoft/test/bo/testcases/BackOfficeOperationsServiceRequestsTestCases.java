@@ -1083,15 +1083,33 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-//		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.setCustomer(customer);
-//		serviceRequestsWebPage.suggestedStartDate(startDate);
-//		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
-//		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
 		Assert.assertTrue(serviceRequestsWebPage.checkIf5TechiciansIsMaximum());
-		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheckTecniciansFromScheduler());
+		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheck5TecniciansFromScheduler());
+	}
+	
+	@Test(testName = "Test Case 56838:Operation - Service Request - Appointment - Scheduler - Technicians filter", dataProvider = "provideSRdata")
+	public void checkOperationSRappointmentSchedulerTechniciansFilter(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
+		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.suggestedStartDate(startDate);
+		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.reloadPage();
+		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
+		Assert.assertTrue(afterReqestsCount- prevReqestsCount ==1);
+		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
+		serviceRequestsWebPage.selectTechniciansFromSchedulerByIndex(0);
+		serviceRequestsWebPage.aplyTechniciansFromScheduler();
+
 	}
 }

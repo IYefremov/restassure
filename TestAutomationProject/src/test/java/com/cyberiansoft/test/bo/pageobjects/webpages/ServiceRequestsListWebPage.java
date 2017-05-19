@@ -195,16 +195,16 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(className = "content")
 	private WebElement documentContent;
 
-	@FindBy(css = "input[class='ruFakeInput radPreventDecorate']")
+	@FindBy(xpath = "//div[contains(@class, 'ruFakeInput radPreventDecorate')]")
 	private WebElement addFileBTN;
 
-	@FindBy(css = "input[class='ruButton ruRemove']")
+	@FindBy(xpath = "//div[contains(@class, 'ruButton ruRemove')]")
 	private WebElement removeBTN;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbServicePachages_Input")
 	private WebElement addServiceRequestDopDown;
 
-	@FindBy(css = "div[class='infoBlock main']")
+	@FindBy(xpath = "//div[contains(@class, 'infoBlock main')]")
 	private List<WebElement> serviceRequestInfoBlocks;
 
 	@FindBy(id = "Card_ddlClients_Input")
@@ -234,7 +234,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "addAppointmentLink")
 	private WebElement addAppointmentBTNfromSRedit;
 
-	@FindBy(css = "div[class='appointment-info clearfix']")
+	@FindBy(xpath = "//div[contains(@class, 'appointment-info clearfix')]")
 	private WebElement appointmentContent;
 
 	@FindBy(id = "Card_rdpStartDate_dateInput")
@@ -249,8 +249,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "Card_rdpEndTime_dateInput")
 	private WebElement appointmentToTimeSRedit;
 
-	@FindBy(css = "div[class='appointment-info']")
+	@FindBy(xpath = "//div[contains(@class, 'appointment-info')]")
 	private WebElement appointmentContentFromCalendar;
+	
 
 	@FindBy(id = "Card_dpScheduledDate_dateInput")
 	private WebElement suggestedStart;
@@ -731,7 +732,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				tagField.sendKeys(Keys.ENTER);
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(
-							By.cssSelector("input[class='ui-autocomplete-input not_valid']")));
+							By.xpath("//input[contains (@class, 'ui-autocomplete-input not_valid')]")));
 					return true;
 				} catch (TimeoutException e) {
 					return false;
@@ -746,7 +747,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean removeLastTag() {
 		int prevSize = allAddedTags.size();
-		allAddedTags.get(allAddedTags.size() - 1).findElement(By.cssSelector("a[title='Removing tag']")).click();
+		allAddedTags.get(allAddedTags.size() - 1).findElement(By.xpath("//a[contains(@title, 'Removing tag')]")).click();
 		return prevSize - allAddedTags.size() == 1;
 	}
 
@@ -845,8 +846,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")));
 			updateWait
 					.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnCancel")));
+
 			updateWait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[class='ruButton ruBrowse']")));
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class, 'ruButton ruBrowse')]")));
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -1070,11 +1072,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
-					.findElements(By.className("rcbItem")).get(0).click();
+					.findElements(By.tagName("li")).get(0).click();
 			Thread.sleep(500);
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
-					.findElements(By.className("rcbItem")).get(1).click();
+					.findElements(By.tagName("li")).get(1).click();
 
 			Thread.sleep(1000);
 			if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4
@@ -1306,7 +1308,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap")))
-				.findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size();
+				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
 
 	public void goToSRmenu() throws InterruptedException {
@@ -1325,14 +1327,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
-		driver.findElement(By.cssSelector("a[title='" + date + "']")).click();
+		driver.findElement(By.xpath("//a[contains(@title, '" + date + "')]")).click();
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsNonWorkHour")))
-				.findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size();
+				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
 
 	public void goToMonthInScheduler() throws InterruptedException {
@@ -1351,8 +1353,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		try {
 			retryingFindClick(By.className("scheduler-dropdown"));
-			// wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(By.className("scheduler-dropdown"))).click();
-			// driver.findElement(By.className("scheduler-dropdown")).click();
 			wait.ignoring(StaleElementReferenceException.class)
 					.until(ExpectedConditions.elementToBeClickable(tecniciansNamesFromScheduler));
 			wait.ignoring(StaleElementReferenceException.class)
@@ -1390,13 +1390,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		try {
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='divColorPane violet']")));
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane violet'))]")));
 			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("div[class='divColorPane limeGreen']")));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='divColorPane red']")));
+					.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane limeGreen')]")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane red')]")));
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='divColorPane yellow']")));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='divColorPane blue']")));
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane yellow')]")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane blue')]")));
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -1404,7 +1404,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean alpyAndCheckTecniciansFromScheduler() {
+	public boolean alpyAndCheck5TecniciansFromScheduler() {
 		arrowInTechniciansList.click();
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(
@@ -1417,22 +1417,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_RadScheduler1_ctl52_pnlColor")));
 
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-					By.cssSelector("div[style='background-color:Yellow;height:5px;']")));
+					By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")));
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-					By.cssSelector("div[style='background-color:Blue;height:5px;']")));
+					By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")));
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-					By.cssSelector("div[style='background-color:LimeGreen;height:5px;']")));
+					By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]")));
 			wait.until(ExpectedConditions
-					.visibilityOfAllElementsLocatedBy(By.cssSelector("div[style='background-color:Red;height:5px;']")));
+					.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")));
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-					By.cssSelector("div[style='background-color:Violet;height:5px;']")));
+					By.xpath("//div[style='background-color:Violet;height:5px;']")));
 
-			if (driver.findElements(By.cssSelector("div[style='background-color:Yellow;height:5px;']")).size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:Blue;height:5px;']")).size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:LimeGreen;height:5px;']"))
+			if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 5
+					&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 5
+					&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
 							.size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:Red;height:5px;']")).size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:Violet;height:5px;']"))
+					&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 5
+					&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]"))
 							.size() != 5) {
 				return false;
 			}
@@ -1441,5 +1441,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 		return true;
+	}
+
+	public void selectTechniciansFromSchedulerByIndex(int i) {
+		wait.ignoring(StaleElementReferenceException.class)
+		.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
+	}
+
+	public void aplyTechniciansFromScheduler() {
+		arrowInTechniciansList.click();
+			wait.until(ExpectedConditions.elementToBeClickable(
+					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_rpTechniciansPopup_ctl192_btnApplyTechPopup")))
+					.click();
+			waitABit(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));		
 	}
 }
