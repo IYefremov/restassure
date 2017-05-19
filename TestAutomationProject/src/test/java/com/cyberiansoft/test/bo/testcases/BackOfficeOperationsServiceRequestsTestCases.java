@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import java.awt.AWTException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -941,7 +942,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR", dataProvider = "provideSRdata")
-	public void checkMultiTechInSR(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+	public void checkMultiTechInSR(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -959,13 +960,30 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@DataProvider
 	public Object[][] provideSRdata(){
 		DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String firstDate;
+		String secondDate;
+		boolean isDateShifted;
+		if(LocalDate.now().getDayOfWeek().equals(DayOfWeek.FRIDAY)){
+			firstDate = LocalDate.now().plusDays(3).format(formatter);
+			secondDate = LocalDate.now().plusDays(4).format(formatter);
+			isDateShifted = true;
+		}else if(LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY)){
+			firstDate = LocalDate.now().plusDays(2).format(formatter);
+			secondDate = LocalDate.now().plusDays(3).format(formatter);
+			isDateShifted = true;
+		}else{
+			firstDate = LocalDate.now().plusDays(1).format(formatter);
+			secondDate = LocalDate.now().plusDays(2).format(formatter);
+			isDateShifted = false;
+		}
+		
 		return new Object[][]{
-			{"Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "Scheduled"} 
+			{"Alex SASHAZ",firstDate, secondDate, "Scheduled" , isDateShifted} 
 		};
 	}
 	
 	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
-	public void checkMultiTechInSRshowHideTech(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+	public void checkMultiTechInSRshowHideTech(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -997,17 +1015,29 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@DataProvider
 	public Object[][] provideSRdata1(){
 		DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String firstDate;
+		String secondDate;
+		if(LocalDate.now().getDayOfWeek().equals(DayOfWeek.FRIDAY)){
+			firstDate = LocalDate.now().plusDays(3).format(formatter);
+			secondDate = LocalDate.now().plusDays(4).format(formatter);
+		}else if(LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY)){
+			firstDate = LocalDate.now().plusDays(2).format(formatter);
+			secondDate = LocalDate.now().plusDays(3).format(formatter);
+		}else{
+			firstDate = LocalDate.now().plusDays(1).format(formatter);
+			secondDate = LocalDate.now().plusDays(2).format(formatter);
+		}
 		return new Object[][]{
-			{"006 - Test Company", LocalDate.now().plusDays(1).format(formatter), LocalDate.now().plusDays(2).format(formatter), "OnHold" , "Alex SASHAZ" , "Scheduled"} 
+			{"006 - Test Company", firstDate , secondDate , "OnHold" , "Alex SASHAZ" , "Scheduled"} 
 		};
 	}
 	
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Week", dataProvider = "provideSRdata")
-	public void checkSRappointmentSchedulerWeek(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+	public void checkSRappointmentSchedulerWeek(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate);
+		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate , isDateShifted);
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1016,12 +1046,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
-		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate);
+		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
 		Assert.assertTrue(afterReqestsCount- prevReqestsCount ==1);
 	}
 	
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdata")
-	public void checkSRappointmentSchedulerMonth(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+	public void checkSRappointmentSchedulerMonth(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1039,7 +1069,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5", dataProvider = "provideSRdata")
-	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5(String customer ,String startDate, String endDate, String status) throws InterruptedException{
+	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();

@@ -871,6 +871,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
+		driver.switchTo().activeElement();
 		updateWait.until(ExpectedConditions.visibilityOf(removeBTN));
 		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 				.click();
@@ -1205,8 +1206,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(2000);
 		Actions act = new Actions(driver);
 		act.moveToElement(acceptGeneralInfoBTN).click().build().perform();
-		// updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(0))).click();
-		// act.moveToElement(acceptGeneralInfoBTN).click().build().perform();
 
 	}
 
@@ -1256,37 +1255,61 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 
 		Thread.sleep(1000);
-		// if
-		// (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex
-		// SASHAZ")
-		// &&
-		// appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
-		// .equals("407 SILVER SAGE DR., NewYork, 10001")
-		// &&
-		// appointmentContent.findElement(By.id("Card_tbAppointmentClientPhone")).getText()
-		// .equals("14043801674")
-		// &&
-		// appointmentContent.findElement(By.id("Card_tbAppointmentClientEmail")).getText()
-		// .equals("ALICIA.VILLALOBOS@KCC.COM")) {
-		// return false;
-		// }
 		driver.findElement(By.id("Card_btnAddApp")).click();
 		return true;
 	}
 
-	public int checkSchedulerByDateWeek(String startDate) throws InterruptedException {
+	public boolean retryingFindClick(By by , By byInner ,String startDate) throws InterruptedException {
+		boolean result = false;
+		int attempts = 0;
+		while (attempts < 10) {
+		
+			try {
+				waitABit(1000);
+				wait.until(
+						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
+				driver.findElement(by).findElements(byInner).stream()
+				.map(w -> w.findElement(By.tagName("a")))
+				.filter(t -> t.getText().substring(5).equals(startDate.substring(2, 4))).findFirst().get().click();
+				result = true;
+				break;
+			} catch (StaleElementReferenceException e) {
+				Thread.sleep(500);
+			}
+			attempts++;
+		}
+		return result;
+	}
+
+	public int checkSchedulerByDateWeek(String startDate , boolean isDateShifted) throws InterruptedException {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		driver.findElement(By.className("rsHorizontalHeaderTable")).findElements(By.tagName("th")).stream()
-				.map(w -> w.findElement(By.tagName("a")))
-				.filter(t -> t.getText().substring(5).equals(startDate.substring(2, 4))).findFirst().get().click();
+
+		if(!isDateShifted){ 
+			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
+		}else{
+			retryingFindClick(By.className("rsNextDay"));
+			waitABit(2000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime")));
+			retryingFindClick(By.className("rsFullTime"));
+			waitABit(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
+		}
+		
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime")));
+//		retryingFindClick(By.className("rsFullTime"));
+//		waitABit(1000);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap")))
 				.findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size();
 	}
@@ -1410,12 +1433,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					By.cssSelector("div[style='background-color:Violet;height:5px;']")));
 
 			if (driver.findElements(By.cssSelector("div[style='background-color:Yellow;height:5px;']")).size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:Blue;height:5px;']"))
-							.size() != 5
+					&& driver.findElements(By.cssSelector("div[style='background-color:Blue;height:5px;']")).size() != 5
 					&& driver.findElements(By.cssSelector("div[style='background-color:LimeGreen;height:5px;']"))
 							.size() != 5
-					&& driver.findElements(By.cssSelector("div[style='background-color:Red;height:5px;']"))
-							.size() != 5
+					&& driver.findElements(By.cssSelector("div[style='background-color:Red;height:5px;']")).size() != 5
 					&& driver.findElements(By.cssSelector("div[style='background-color:Violet;height:5px;']"))
 							.size() != 5) {
 				return false;
