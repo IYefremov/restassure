@@ -41,7 +41,7 @@
       
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
  <methods>
- <include name="checkDescriptionDocument"/>
+ <include name="checkSRappointmentSchedulerWeek"/>
   <include name="checkMultiTechInSR"/>
   <include name="checkMultiTechInSRshowHideTech"/>
   <include name="checkSRappointmentSchedulerMonth"/>

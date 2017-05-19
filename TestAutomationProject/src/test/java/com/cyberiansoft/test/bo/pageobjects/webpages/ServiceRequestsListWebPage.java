@@ -872,7 +872,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		driver.switchTo().activeElement();
-		updateWait.until(ExpectedConditions.visibilityOf(removeBTN));
 		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 				.click();
 	}
@@ -1293,7 +1292,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
 		}else{
 			retryingFindClick(By.className("rsNextDay"));
-			waitABit(2000);
+			waitABit(10000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime")));
@@ -1306,10 +1305,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-//		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime")));
-//		retryingFindClick(By.className("rsFullTime"));
-//		waitABit(1000);
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap")))
 				.findElements(By.cssSelector("div[class='rsApt appointmentClassDefault']")).size();
 	}
