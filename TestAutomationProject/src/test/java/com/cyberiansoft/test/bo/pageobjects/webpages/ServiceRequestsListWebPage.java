@@ -1387,10 +1387,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			wait.ignoring(StaleElementReferenceException.class)
 					.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
 		}
-
+		driver.switchTo().defaultContent();
 		try {
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane violet'))]")));
+					ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane violet')]")));
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane limeGreen')]")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'divColorPane red')]")));
@@ -1425,7 +1425,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			wait.until(ExpectedConditions
 					.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")));
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-					By.xpath("//div[style='background-color:Violet;height:5px;']")));
+					By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")));
 
 			if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 5
 					&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 5
@@ -1472,5 +1472,29 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		int failedSRs = driver.findElements(By.className("appointmentClassFailed")).size();
 		int completedSRs = driver.findElements(By.className("appointmentClassCompleted")).size();
 		return defaultSRs + failedSRs + completedSRs;
+	}
+
+	public boolean resetAndCheckTecniciansFromScheduler() throws InterruptedException {
+		retryingFindClick(By.className("scheduler-dropdown"));
+		arrowInTechniciansList.click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(
+				By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_rpTechniciansPopup_ctl192_btnResetTechPopup")))
+				.click();
+		waitABit(1000);
+		wait.until(
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		
+		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0
+				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0
+				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
+						.size() != 0
+				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0
+				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]"))
+						.size() != 0) {
+			return false;
+		}
+		
+		return true;
 	}
 }
