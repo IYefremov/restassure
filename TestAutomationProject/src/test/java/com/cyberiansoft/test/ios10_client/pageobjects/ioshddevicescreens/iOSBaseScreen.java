@@ -222,4 +222,7 @@ public class iOSBaseScreen {
 		appiumdriver.swipe(startx, starty, endx, starty, 2000);
 	}
 
+	public void hideKeyboard() {
+		appiumdriver.hideKeyboard();
+	}
 }

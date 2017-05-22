@@ -17,6 +17,7 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>  
+ 
         <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" /> 
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
@@ -65,6 +66,8 @@
         	<include name="testSRVerifyALMFlowWhenDeclineBothInspections" />
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
         	
+        	
+        <include name="testWaitTestCase" />
         <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2" /> 
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2" /> 

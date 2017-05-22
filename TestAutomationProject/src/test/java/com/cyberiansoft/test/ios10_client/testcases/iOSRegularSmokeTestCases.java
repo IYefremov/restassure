@@ -6869,4 +6869,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();
 	}
+
+	@Test(testName = "Test Case 31964:WO: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
+				description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
+	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+			
+		final String VIN = "2A8GP54L87R279721";
+
+			
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.clickHomeButton();
+			
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_VIN_ONLY);
+			
+		vehiclescreeen.setVIN(VIN);
+		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
+		vehiclescreeen.clickVINField();
+		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
+		vehiclescreeen.cancelOrder();
+		homescreen = myworkordersscreen.clickHomeButton();
+	}
 }

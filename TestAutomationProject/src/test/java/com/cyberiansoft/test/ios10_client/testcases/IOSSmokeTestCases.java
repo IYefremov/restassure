@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,6 +49,10 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamWor
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechRevenueScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VisualInteriorScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -1240,9 +1245,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		
+		
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1334,9 +1346,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1442,9 +1460,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1578,9 +1601,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1668,9 +1696,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1802,9 +1835,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.FOR_COPY_INSP_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1997,9 +2035,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -2069,9 +2112,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -3065,10 +3113,17 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
-		element(MobileBy.name("Close")).click();
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 	
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -3143,10 +3198,17 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 				
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
-		element(MobileBy.name("Close")).click();
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 				
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -6964,10 +7026,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(retailcustomer);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
-		vehiclescreeen.setVIN(VIN);
-		
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();	
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -7508,5 +7574,31 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(iOSInternalProjectConstants.TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL), vehicleparts.length);
 		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 31964:WO: HD - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
+			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
+	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+		
+		final String VIN = "2A8GP54L87R279721";
+
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.clickHomeButton();
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		myworkordersscreen.clickAddOrderButton();
+		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_VIN_ONLY);
+		
+		vehiclescreeen.setVIN(VIN);
+		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
+		vehiclescreeen.clickVINField();
+		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
+		vehiclescreeen.hideKeyboard();
+		vehiclescreeen.cancelOrder();
+		homescreen = myworkordersscreen.clickHomeButton();
 	}
 }

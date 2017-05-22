@@ -37,6 +37,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_TYPE_WITH_JOB = "WO_type_with_job";
 	public static final String WO_FOR_INVOICE_PRINT = "WO_for_invoice_print";
 	public static final String WO_DELAY_START = "WO_Delay_Start";
+	public static final String WO_VIN_ONLY = "WO_VIN_only";
 	
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";

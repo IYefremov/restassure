@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
+
 import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
@@ -127,9 +129,16 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		return Helpers.getAlertTextAndAccept();
 	}
 
-	public void setVIN(String vin) throws InterruptedException {
+	public void setVIN(String vin) {
 		
-		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		setVINFieldValue(vin);
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Close").click();
+	}
+	
+	public void setVINFieldValue(String vin) {
+		
+		clickVINField();
 
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
 		Helpers.waitABit(500);
@@ -139,7 +148,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clearVINCode() {
-		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		clickVINField();
 		for (int i = 0; i < 17; i++)
 			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -149,6 +158,10 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public IOSElement getVINField() {
 		return (IOSElement) appiumdriver.findElementByAccessibilityId("VIN#");
 		//return vinfld;
+	}
+	
+	public void clickVINField() {
+		getVINField().click();
 	}
 
 	public void setVINAndAndSearch(String vin)
@@ -234,6 +247,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setColor(String color) {
 		colorfld.click();
 		appiumdriver.findElementByName(color).click();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void setMileage(String mileage) {

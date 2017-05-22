@@ -91,11 +91,11 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertDefaultServiceIsSelected() {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + defaultServiceValue + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + defaultServiceValue + "']").isDisplayed());
 	}
 
 	public void assertServiceIsSelected(String service) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + service + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + service + "']").isDisplayed());
 	}
 	
 	public int getNumberOfServiceSelectedItems(String service) {
@@ -105,8 +105,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public void assertServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
 		final String labelvalue = servicename + ", " + servicepriceandquantity;
-		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@label='"
-								+ labelvalue + "']").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeButton[contains(@label, '"
+								+ labelvalue + "')]").isDisplayed());
 		//Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
 		//		+ service + "']").getAttribute("label").contains(servicepriceandquantity));
 	}
@@ -214,7 +214,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	
 	public void openServiceDetailsByIndex(String service, int dervicedetailindex) {
-		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + service + "']");
+		List<WebElement> selectedservices = appiumdriver.findElementsByXPath("//XCUIElementTypeOther[@name='SelectedServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[contains(@name, '" + service + "')]");
 		if (selectedservices.size() > dervicedetailindex) {
 			selectedservices.get(dervicedetailindex).click();
 		}
@@ -274,12 +274,12 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public boolean isNotesIconPresentForSelectedService(String servicename) {
 		WebElement selectedservicestable = appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ESTIMATION_NOTES']")).size() > 0;
+		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[contains(@name, '" + servicename + "')]/XCUIElementTypeImage[@name='ESTIMATION_NOTES']")).size() > 0;
 	}
 	
 	public boolean isNotesIconPresentForSelectedWorkOrderService(String servicename) {
 		WebElement selectedservicestable = appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeImage[@name='ORDER_NOTES']")).size() > 0;
+		return selectedservicestable.findElements(By.xpath("//XCUIElementTypeCell[contains(@name, '" + servicename + "')]/XCUIElementTypeImage[@name='ORDER_NOTES']")).size() > 0;
 	}
 	
 	public void clickTechnicianToolbarIcon() {

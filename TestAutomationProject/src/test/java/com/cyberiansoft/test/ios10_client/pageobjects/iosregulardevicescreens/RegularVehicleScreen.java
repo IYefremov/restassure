@@ -112,8 +112,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setVIN(String vin)  {
-		element(MobileBy.xpath("//XCUIElementTypeStaticText[@name=\"VIN#\"]"))
-		.click();
+		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
@@ -130,6 +129,10 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		//WebElement par = getVehicleInfoTableParentNode("VIN#");
 		//return par.findElement(By.xpath("./XCUIElementTypeTextField[1]"));
 		return appiumdriver.findElementByAccessibilityId("VIN#");
+	}
+	
+	public void clickVINField() {
+		getVINField().click();
 	}
 
 	public void setVINAndAndSearch(String vin)
