@@ -1050,7 +1050,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.suggestedStartDate(startDate);
+		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
@@ -1070,7 +1070,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.suggestedStartDate(startDate);
+		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
@@ -1094,22 +1094,22 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.suggestedStartDate(startDate);
+		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.reloadPage();
-		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
-		Assert.assertTrue(afterReqestsCount- prevReqestsCount ==1);
+		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
-		serviceRequestsWebPage.selectTechniciansFromSchedulerByIndex(0);
 		serviceRequestsWebPage.aplyTechniciansFromScheduler();
-
+		int countBeforeAnySelections = serviceRequestsWebPage.countSR();
+		serviceRequestsWebPage.selectTechnicianFromSchedulerByIndex(0);
+		serviceRequestsWebPage.aplyTechniciansFromScheduler();
+		int countAfterFilter = serviceRequestsWebPage.countSR();
+		Assert.assertFalse(countBeforeAnySelections == countAfterFilter);
 	}
 }

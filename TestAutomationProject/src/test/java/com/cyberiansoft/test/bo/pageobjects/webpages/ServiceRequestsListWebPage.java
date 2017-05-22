@@ -1197,7 +1197,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void suggestedStartDate(String startDate) throws InterruptedException {
+	public void setSuggestedStartDate(String startDate) throws InterruptedException {
 
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
@@ -1443,7 +1443,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void selectTechniciansFromSchedulerByIndex(int i) {
+	public void selectTechnicianFromSchedulerByIndex(int i) throws InterruptedException {
+		driver.switchTo().defaultContent();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+
+		retryingFindClick(By.className("scheduler-dropdown"));
+		
 		wait.ignoring(StaleElementReferenceException.class)
 		.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
 	}
@@ -1456,5 +1462,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));		
+	}
+	public int countSR(){
+		waitABit(1000);
+		wait.until(
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("appointmentClassDefault")));
+		int defaultSRs = driver.findElements(By.className("appointmentClassDefault")).size();
+		int failedSRs = driver.findElements(By.className("appointmentClassFailed")).size();
+		int completedSRs = driver.findElements(By.className("appointmentClassCompleted")).size();
+		return defaultSRs + failedSRs + completedSRs;
 	}
 }
