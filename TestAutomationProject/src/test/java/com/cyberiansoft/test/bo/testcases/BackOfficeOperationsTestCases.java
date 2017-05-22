@@ -351,7 +351,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		final String teamname = "Default team";
 		final String textsearchparameter = "001 - Test Company";
-		final String newservicerequest = "123Test";
+		final String newservicerequest = "Alex SASHAZ";
 
 		final String assignedto = "Igor Baluev";
 		final String ponum = "D525";
