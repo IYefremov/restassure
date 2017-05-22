@@ -16,46 +16,8 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
           <!--<include name="testGetDeviceRegistrationCode" />
-          <include name="testRegisterationiOSDdevice" />  -->      
-          <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" />
-          
-           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
-          <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" />          
-          <include name="testSRHDVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON" />
-          <include name="testSRHDVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa" />
-          
-          <include name="testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone" />
-          <include name="testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne" /> 
-          <include name="testWOVerifyThatWONumberIsNotDuplicated" /> 
-          <include name="testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied" /> 
-          <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" /> 
-          
-            
-          <include name="testWOVerifyThatTechSplitsIsSavedInPriceMatrices" /> 
-          <include name="testVerifyTthatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling" />
-          
-          
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices" /> 
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices" /> 
-<include name="testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer" /> 
-
-            <include name="testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect" />  
-                  
-          <!--<include name="testBugWithCrashOnCopyVehicle" />-->
-          <!--<include name="testThatAutoSavedWOIsCreatedCorrectly" /> -->                
-          <!--<include name="testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice" />
-          <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice" /> 
-		  <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice" />
-		  <include name="testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn" />-->
-		  
-		  <!--<include name="testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired" />-->
-		  <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
-		  <include name="testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush" />
-		     
-		  
-          <include name="testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest" />
-          
-          <!--<include name="testUpdateDatabase" />           
+          <include name="testRegisterationiOSDdevice" />  -->  
+		  <!--<include name="testUpdateDatabase" />           
           <include name="testUpdateVIN" />
           <include name="testCreateRetailCustomer" />
           <include name="testEditRetailCustomer" />
@@ -157,16 +119,27 @@
           <include name="testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal" />
           <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount" />
           <include name="testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO" />
-          
-          
+          <include name="testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice" />
+          <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice" /> 
+          <include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice" />
+          <include name="testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn" />
+          <include name="testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest" />
+          <include name="testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush" />
+          <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
+          <include name="testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired" />
+          <include name="testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer" /> 
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices" />
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices" /> 
+          <include name="testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling" />
+          <include name="testWOVerifyThatTechSplitsIsSavedInPriceMatrices" /> 
+          <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" /> 
+          <include name="testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied" />
+          <include name="testWOVerifyThatWONumberIsNotDuplicated" /> 
+          <include name="testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne" />
+          <include name="testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone" />
+          <include name="testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
+
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
-          
-          
-           
-          
-          
-              
-          <!--<include name="testASD" />-->
         </methods>
       </class>
     </classes>
