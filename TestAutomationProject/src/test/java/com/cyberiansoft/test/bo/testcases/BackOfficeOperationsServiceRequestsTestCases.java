@@ -866,7 +866,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addTags(tags);
 		Assert.assertTrue(serviceRequestsWebPage.addTags(tags[tags.length-1]));
 		serviceRequestsWebPage.addTags(symbol);
-		Assert.assertTrue(serviceRequestsWebPage.removeLastTag());
+		Assert.assertTrue(serviceRequestsWebPage.removeFirtsTag());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkTags(tags));
@@ -875,7 +875,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@DataProvider
 	public Object[][] provideSRwholeInfo(){
 		return new Object[][]{
-			{ new String[]{"tag1", "tag2","tag3","tag4","tag5","tag6","tag7","tag8","tag9","tag10", } , "s"}
+			{ new String[]{"tag1", "tag2","tag3","tag4","tag5","tag6","tag7" } , "s"}
 		};
 	}
 	

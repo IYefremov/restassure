@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -195,7 +196,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(className = "content")
 	private WebElement documentContent;
 
-	@FindBy(xpath = "//div[contains(@class, 'ruFakeInput radPreventDecorate')]")
+	@FindBy(xpath = "//input[contains(@class, 'ruButton ruBrowse')]")
 	private WebElement addFileBTN;
 
 	@FindBy(xpath = "//div[contains(@class, 'ruButton ruRemove')]")
@@ -745,17 +746,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean removeLastTag() {
+	public boolean removeFirtsTag() {
 		int prevSize = allAddedTags.size();
-		allAddedTags.get(allAddedTags.size() - 1).findElement(By.xpath("//a[contains(@title, 'Removing tag')]")).click();
+		allAddedTags.get(0).findElement(By.xpath("//a[contains(@title, 'Removing tag')]")).click();
 		return prevSize - allAddedTags.size() == 1;
 	}
 
 	public boolean checkTags(String... tags) {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		
+		System.out.println(allAddedTags.stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
+				.collect(Collectors.toList()));
+		List tagsToCheck = new LinkedList(Arrays.asList(tags));
+		tagsToCheck.remove(0);
 		boolean result = allAddedTags.stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
-				.collect(Collectors.toList()).containsAll(Arrays.asList(tags));
+				.collect(Collectors.toList()).containsAll(tagsToCheck);
 		closeservicerequestbtn.click();
 		return result;
 	}
@@ -858,7 +864,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void addImage() throws AWTException {
 
 		Actions builder = new Actions(driver);
-		Action myAction = builder.click(addFileBTN).release().build();
+		Action myAction = builder.moveToElement(addFileBTN).click().build();
 
 		myAction.perform();
 		ServiceRequestsListWebPage textTransfer = new ServiceRequestsListWebPage(driver);
@@ -1071,14 +1077,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(1000);
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(0).click();
 			Thread.sleep(500);
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(1).click();
-
-			Thread.sleep(1000);
 			if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4
 					&& driver.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container"))
 							.size() != 4) {
@@ -1269,7 +1275,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				waitABit(1000);
 				wait.until(
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
+				Thread.sleep(1500);
+//				wait.ignoring(TimeoutException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
 				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
 				driver.findElement(by).findElements(byInner).stream()
 				.map(w -> w.findElement(By.tagName("a")))
@@ -1290,14 +1297,18 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 
-		if(!isDateShifted){ 
+		if(!isDateShifted){
+			retryingFindClick(By.className("rsFullTime"));
+			waitABit(1000);
+			wait.until(
+			ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
 		}else{
 			retryingFindClick(By.className("rsNextDay"));
 			waitABit(10000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
 			retryingFindClick(By.className("rsFullTime"));
 			waitABit(1000);
 			wait.until(
@@ -1408,8 +1419,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		arrowInTechniciansList.click();
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(
-					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_rpTechniciansPopup_ctl192_btnApplyTechPopup")))
-					.click();
+					By.xpath("//a[contains(@class, 'sr-btn btn-apply')]"))).click();
 			waitABit(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
@@ -1457,7 +1467,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void aplyTechniciansFromScheduler() {
 		arrowInTechniciansList.click();
 			wait.until(ExpectedConditions.elementToBeClickable(
-					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_rpTechniciansPopup_ctl192_btnApplyTechPopup")))
+					By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
 					.click();
 			waitABit(1000);
 			wait.until(
@@ -1477,14 +1487,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean resetAndCheckTecniciansFromScheduler() throws InterruptedException {
 		retryingFindClick(By.className("scheduler-dropdown"));
 		arrowInTechniciansList.click();
-		
 		wait.until(ExpectedConditions.elementToBeClickable(
-				By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_rpTechniciansPopup_ctl192_btnResetTechPopup")))
+				By.className("btn-reset")))
 				.click();
 		waitABit(1000);
 		wait.until(
 				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		
+		waitABit(3000);
 		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0
 				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0
 				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
