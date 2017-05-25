@@ -41,12 +41,12 @@
      
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
        <methods>
-       <include name=" checkDescriptionDocument"/>
-              <include name=" checkMultiTechInSR"/>
-              <include name=" checkMultiTechInSideScrollbar"/>
-              <include name=" checkSRmultiTechReset"/>
-              <include name=" checkSchedulerTechniciansFilter"/>
-              <include name=" testOperationNewServiceRequestAppointmentLocationTypeCustom"/>
+       <include name="checkDescriptionDocument"/>
+              <include name="checkMultiTechInSR"/>
+              <include name="checkMultiTechInSideScrollbar"/>
+              <include name="checkSRmultiTechReset"/>
+              <include name="checkSchedulerTechniciansFilter"/>
+              <include name="testOperationNewServiceRequestAppointmentLocationTypeCustom"/>
              <include name="testOperationNewServiceRequestAppointmentLocationTypeRepairLocation"/>
             
        </methods>
