@@ -1471,7 +1471,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		int attempts = 0;
 		while (attempts < 10) {
 			try {
-				element.click();
+				wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 				result = true;
 				break;
 			} catch (StaleElementReferenceException e) {
