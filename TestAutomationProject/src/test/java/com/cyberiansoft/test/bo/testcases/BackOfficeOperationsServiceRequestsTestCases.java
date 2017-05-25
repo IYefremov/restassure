@@ -260,7 +260,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		
 		appointmentpopup.selectLocationType("Custom");
 		appointmentpopup.setClientAddressValue("407 SILVER SAGE DR.");
-		appointmentpopup.setClientCityValue("Chicago");
+		appointmentpopup.setClientCityValue("NewYork");
 		appointmentpopup.setClientZipValue("20002");
 		appointmentpopup.clickAddAppointment();
 		
@@ -271,7 +271,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 		
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
-		Assert.assertEquals(appointmentpopup.getClientCityValue(), "Chicago");
+		Assert.assertEquals(appointmentpopup.getClientCityValue(), "NewYork");
 		Assert.assertEquals(appointmentpopup.getClientZipValue(), "20002");
 		appointmentpopup.clickAddAppointment();
 		appointmentpopup.waitABit(2000);

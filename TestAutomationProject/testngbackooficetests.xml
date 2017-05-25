@@ -28,31 +28,35 @@
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
     </class>  
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-      </class>    
-      <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
       </class>
+       -->
+     
+      <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
+      <methods>
+      <include name="testOperationInspection"/>
+      <include name="testOperationWorkOrdersSearch"/>
+      </methods>
+      </class>
+      
+      <!--  
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
       </class>   
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">  
       </class> 
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class> 
-       -->
-     
+      
+      -->
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
        <methods>
        <include name="checkDescriptionDocument"/>
-              <include name="checkMultiTechInSR"/>
-              <include name="checkMultiTechInSideScrollbar"/>
               <include name="checkSRmultiTechReset"/>
               <include name="checkSchedulerTechniciansFilter"/>
               <include name="testOperationNewServiceRequestAppointmentLocationTypeCustom"/>
-             <include name="testOperationNewServiceRequestAppointmentLocationTypeRepairLocation"/>
-            
        </methods>
      </class>
      
-     <!-- 
+       <!--
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
       </class>   
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">

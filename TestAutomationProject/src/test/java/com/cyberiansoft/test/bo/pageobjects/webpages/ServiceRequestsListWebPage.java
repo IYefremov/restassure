@@ -340,7 +340,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
 		click(addservicerequestbtn);
-		waitABit(100);
+		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		driver.switchTo()
@@ -898,7 +898,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkPresentanceOFAddedFile() throws InterruptedException {
 		try {
-			int prevSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
+			//int prevSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
+			int prevSize = countFilesInDir("C:\\Users\\OKramar\\Downloads");
 			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_imgDownload")))
 					.click();
 			Thread.sleep(5000);
@@ -1461,7 +1462,23 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		retryingFindClick(By.className("scheduler-dropdown"));
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
+		retryingFindClick(techniciansList.get(i));
+	}
+	
+	public boolean retryingFindClick(WebElement element) throws InterruptedException {
+		boolean result = false;
+		int attempts = 0;
+		while (attempts < 10) {
+			try {
+				element.click();
+				result = true;
+				break;
+			} catch (StaleElementReferenceException e) {
+				Thread.sleep(500);
+			}
+			attempts++;
+		}
+		return result;
 	}
 
 	public void aplyTechniciansFromScheduler() {
@@ -1487,13 +1504,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean resetAndCheckTecniciansFromScheduler() throws InterruptedException {
 		retryingFindClick(By.className("scheduler-dropdown"));
 		arrowInTechniciansList.click();
+		
 		wait.until(ExpectedConditions.elementToBeClickable(
 				By.className("btn-reset")))
 				.click();
-		waitABit(1000);
+		waitABit(3000);
 		wait.until(
 				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		waitABit(3000);
+		waitABit(5000);
 		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0
 				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0
 				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))

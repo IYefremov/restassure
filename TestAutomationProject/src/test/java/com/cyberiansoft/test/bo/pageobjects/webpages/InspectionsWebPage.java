@@ -176,7 +176,8 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		return inspectionstable;
 	}
 
-	public int getInspectionsTableRowCount() {
+	public int getInspectionsTableRowCount() throws InterruptedException {
+		Thread.sleep(3000);
 		return inspectionstable.getTableRowCount();
 	}
 
