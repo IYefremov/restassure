@@ -74,7 +74,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		final String vendordesc = "Test decription";
 		final String vendoraccid = "1234567";
 		final String vendorarea = "QA Area";
-		final String vendortimesheettype = "Day type";		
+		final String vendortimesheettype = "Day Type";		
 		final String deflocation = "Default Location";
 		final String vendortemtype = "Vendor";
 		final String additionallocation = "Best Location";

@@ -76,15 +76,10 @@ public class WebPageWithPagination extends BaseWebPage {
 	
 	public void setPageSize(String pagesize) throws InterruptedException {
 		pagesizefld.clear();
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
-		//changesizebtn.click();
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		//Thread.sleep(700);
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		Thread.sleep(700);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		Thread.sleep(3000);
 	}
 	

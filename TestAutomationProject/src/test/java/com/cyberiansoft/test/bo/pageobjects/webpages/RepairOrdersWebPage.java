@@ -116,7 +116,8 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		return repairorderstable.isDisplayed();
 	}
 	
-	public int getRepairOrdersTableRowCount() {
+	public int getRepairOrdersTableRowCount() throws InterruptedException {
+		Thread.sleep(4000);
 		return repairorderstable.getTableRowCount();
 	}
 	

@@ -97,7 +97,8 @@ public class VendorOrdersWebPage extends WebPageWithTimeframeFilter {
 		return vendororderstable.isDisplayed();
 	}
 	
-	public int getRepairOrdersTableRowCount() {
+	public int getRepairOrdersTableRowCount() throws InterruptedException {
+		Thread.sleep(4000);
 		return vendororderstable.getTableRowCount();
 	}
 	

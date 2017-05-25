@@ -1457,12 +1457,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void selectTechnicianFromSchedulerByIndex(int i) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		waitABit(1000);
+		waitABit(4000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 
 		retryingFindClick(By.className("scheduler-dropdown"));
 		Thread.sleep(2000);
 		retryingFindClick(techniciansList.get(i));
+		Thread.sleep(2000);
 	}
 	
 	public boolean retryingFindClick(WebElement element) throws InterruptedException {
@@ -1481,14 +1482,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return result;
 	}
 
-	public void aplyTechniciansFromScheduler() {
+	public void aplyTechniciansFromScheduler() throws InterruptedException {
 		arrowInTechniciansList.click();
 			wait.until(ExpectedConditions.elementToBeClickable(
 					By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
 					.click();
 			waitABit(1000);
 			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));		
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			Thread.sleep(4000);
 	}
 	public int countSR(){
 		waitABit(1000);
@@ -1508,19 +1510,26 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		wait.until(ExpectedConditions.elementToBeClickable(
 				By.className("btn-reset")))
 				.click();
-		waitABit(3000);
+		waitABit(1000);
 		wait.until(
 				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		waitABit(5000);
-		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0
-				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0
-				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
-						.size() != 0
-				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0
-				&& driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]"))
-						.size() != 0) {
+		waitABit(3000);
+		
+		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0)
 			return false;
-		}
+		
+		if(driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0)
+			return false;
+		
+		if(driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]")).size() != 0)
+			return false;
+		
+		if(driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0)
+			return false;
+		
+		if(driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")).size() != 0)
+			return false;
+		
 		
 		return true;
 	}

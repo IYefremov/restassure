@@ -151,7 +151,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return invoicestable;
 	}
 	
-	public int getInvoicesTableRowCount() {
+	public int getInvoicesTableRowCount() throws InterruptedException {
+		Thread.sleep(4000);
 		return getInvoicesTableRows().size();
 	}
 	

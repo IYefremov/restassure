@@ -53,8 +53,9 @@ public class WebElementsBot {
 		}catch(Exception e){}
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(1000);
+		WebDriverInstansiator.getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(e -> e.getText()).forEach(System.out::println);
 		List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
-		waitABit(100);
 		items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
