@@ -259,7 +259,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
 		
 		appointmentpopup.selectLocationType("Custom");
-		appointmentpopup.setClientAddressValue("101 Main Road.,");
+		appointmentpopup.setClientAddressValue("407 SILVER SAGE DR.");
 		appointmentpopup.setClientCityValue("Chicago");
 		appointmentpopup.setClientZipValue("20002");
 		appointmentpopup.clickAddAppointment();
@@ -270,7 +270,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(2000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 		
-		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "101 Main Road.,");
+		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
 		Assert.assertEquals(appointmentpopup.getClientCityValue(), "Chicago");
 		Assert.assertEquals(appointmentpopup.getClientZipValue(), "20002");
 		appointmentpopup.clickAddAppointment();
@@ -1132,7 +1132,21 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkIf5TechiciansIsMaximum());
 		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheck5TecniciansFromScheduler());
 		Assert.assertTrue(serviceRequestsWebPage.resetAndCheckTecniciansFromScheduler());
-
-
+	}
+	
+	@Test(testName = "Test Case 56839:Operation - Service Request - Appointment - Scheduler - Add Service Request", dataProvider = "provideSRdata")
+	public void checkSRcreation(String customer ,String startDate, String endDate, String status , boolean isDateShifted) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.setSuggestedStartDate(startDate);
+		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
+	
 	}
 }

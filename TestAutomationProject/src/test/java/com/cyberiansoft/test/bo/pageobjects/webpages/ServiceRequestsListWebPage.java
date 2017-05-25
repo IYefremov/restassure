@@ -385,8 +385,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void acceptFirstServiceRequestFromList() throws InterruptedException {
 		Actions builder = new Actions(driver);
-		builder.moveToElement(getFirstServiceRequestFromList()).perform();
-		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();
+		builder.moveToElement(getFirstServiceRequestFromList()).moveToElement(getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']"))).click().perform();
+		//getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		// Thread.sleep(4000);
@@ -861,7 +861,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void addImage() throws AWTException {
+	public void addImage() throws AWTException, InterruptedException {
 
 		Actions builder = new Actions(driver);
 		Action myAction = builder.moveToElement(addFileBTN).click().build();
@@ -880,6 +880,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		driver.switchTo().activeElement();
+		Thread.sleep(4000);
 		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 				.click();
 	}
@@ -960,7 +961,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean addAppointmentFromSRlist(String fromDate, String toDate) {
+		
 		appointmentCalendarIcon.click();
+		
+		appointmentFromDate.clear();
+		appointmentToDate.clear();
+		appointmentFromTime.clear();
+		appointmentToTime.clear();
+		
 		appointmentFromDate.sendKeys(fromDate);
 		appointmentToDate.sendKeys(toDate);
 		appointmentFromTime.sendKeys("6:00 AM");
@@ -1021,13 +1029,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
 			return false;
 		}
-
-		appointmentFromDateSRedit.sendKeys(startDate);
-		appointmentToDateSRedit.sendKeys(endDate);
-		appointmentFromTimeSRedit.sendKeys("6:00 AM");
-		appointmentToTimeSRedit.sendKeys("7:00 AM");
-		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
-
+		driver.findElement(By.id("Card_rcbAppLocations_Arrow")).click();
 		Thread.sleep(1000);
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
@@ -1113,13 +1115,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			throws InterruptedException {
 		appointmentCalendarIcon.click();
 
-		Thread.sleep(1000);
-		if (!(appointmentFromDate.getText().isEmpty() && appointmentFromTime.getText().isEmpty()
-				&& appointmentToDate.getText().isEmpty() && appointmentToTime.getText().isEmpty())) {
-			return false;
-		}
-
-		appointmentCalendarIcon.click();
+		appointmentFromDate.clear();
+		appointmentToDate.clear();
+		appointmentFromTime.clear();
+		appointmentToTime.clear();
+		
 		appointmentFromDate.sendKeys(fromDate);
 		appointmentToDate.sendKeys(toDate);
 		appointmentFromTime.sendKeys("6:00 AM");
@@ -1147,21 +1147,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 
-		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Input")).click();
+//		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Input")).click();
 
 		Thread.sleep(1000);
-		if (!driver.findElement(By.className("rcbHovered")).getText().equals("California")) {
+		System.out.println(driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Input")).getAttribute("disabled"));
+		if (!driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Input")).getAttribute("disabled").equals("true")) {
 			return false;
 		}
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Arrow")).click();
+//		driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbStates_Arrow")).click();
 
 		Thread.sleep(1000);
 		if (!appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_tbxAddress")).getText()
 				.isEmpty()
 				&& appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_tbxCity")).getText()
-						.isEmpty()
+						.equals("L.A.")
 				&& appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_tbxZip")).getText()
-						.isEmpty()) {
+						.equals("78523")) {
 			return false;
 		}
 
@@ -1179,7 +1180,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 						.equals("T@K.A")) {
 			return false;
 		}
-
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbAppLocations_Arrow")).click();
 		Thread.sleep(1000);
 		try {
 			appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbTechnician_Input")).click();
@@ -1459,9 +1460,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 
 		retryingFindClick(By.className("scheduler-dropdown"));
-		
-		wait.ignoring(StaleElementReferenceException.class)
-		.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(techniciansList.get(i))).click();
 	}
 
 	public void aplyTechniciansFromScheduler() {
