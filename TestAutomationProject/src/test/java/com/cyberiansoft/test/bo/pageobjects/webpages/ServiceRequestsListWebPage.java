@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -396,6 +397,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList()).perform();
 		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Reject']")).click();
+		try{
+			driver.switchTo().alert().accept();
+		}catch(NoAlertPresentException e){}
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 	}
@@ -1070,6 +1074,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		addAppointmentBTNfromSRedit.click();
+		
+		appointmentFromDateSRedit.clear();
+		appointmentToDateSRedit.clear();
+		appointmentFromTimeSRedit.clear();
+		appointmentToTimeSRedit.clear();
 
 		appointmentFromDateSRedit.sendKeys(startDate);
 		appointmentToDateSRedit.sendKeys(endDate);
@@ -1081,11 +1090,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(0).click();
 			Thread.sleep(500);
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(1).click();
 			if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4
@@ -1330,8 +1341,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(2000);
 	}
 
-	public void reloadPage() {
+	public void reloadPage() throws InterruptedException {
 		driver.navigate().refresh();
+		Thread.sleep(5000);
 	}
 
 	public int checkSchedulerByDateMonth(String date) {
@@ -1496,7 +1508,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(
 				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("appointmentClassDefault")));
+		waitABit(3000);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("appointmentClassDefault")));
 		int defaultSRs = driver.findElements(By.className("appointmentClassDefault")).size();
 		int failedSRs = driver.findElements(By.className("appointmentClassFailed")).size();
 		int completedSRs = driver.findElements(By.className("appointmentClassCompleted")).size();
