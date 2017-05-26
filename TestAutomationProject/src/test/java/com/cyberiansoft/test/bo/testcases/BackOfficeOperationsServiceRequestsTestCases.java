@@ -1162,6 +1162,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
+		
 		Assert.assertTrue(serviceRequestsWebPage.checkTimeline(startDate));
 	}
 }

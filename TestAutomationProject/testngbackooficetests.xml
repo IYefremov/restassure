@@ -41,9 +41,9 @@
           
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
  <methods>
- <include name=" checkMultiTechInSRshowHideTech"/>
-  <include name=" checkSRappointmentSchedulerWeek"/>
-  <include name=" checkSchedulerTechniciansFilter"/>
+ <include name="checkMultiTechInSRshowHideTech"/>
+  <include name="checkSRappointmentSchedulerWeek"/>
+  <include name="checkSchedulerTechniciansFilter"/>
 <include name="testOperationNewServiceRequestAppointmentLocationTypeRepairLocation"/>
  </methods>
      </class>    

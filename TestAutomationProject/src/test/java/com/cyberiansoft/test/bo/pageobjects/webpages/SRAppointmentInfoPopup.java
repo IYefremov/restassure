@@ -118,7 +118,8 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 		return clientstatefld.getValue();
 	}
 	
-	public String getClientAddressValue() {
+	public String getClientAddressValue() throws InterruptedException {
+		Thread.sleep(3000);
 		return clientaddressfld.getValue();
 	}
 	
