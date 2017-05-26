@@ -41,14 +41,10 @@
           
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
  <methods>
- <include name="checkMultiTechInSRshowHideTech"/>
-  <include name="checkSRappointmentSchedulerWeek"/>
-  <include name="checkSchedulerTechniciansFilter"/>
-  <include name="testOperationNewServiceRequestAppointmentLocationTypeCustom"/>
+ <include name=" checkMultiTechInSRshowHideTech"/>
+  <include name=" checkSRappointmentSchedulerWeek"/>
+  <include name=" checkSchedulerTechniciansFilter"/>
 <include name="testOperationNewServiceRequestAppointmentLocationTypeRepairLocation"/>
-<include name="testOperationNewServiceRequestAppointmentWholesale"/>
-<include name="testOperationsCLUserItNotPossibleToAcceptSR_OptionIsNotPresent"/>
-<include name="testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR"/>
  </methods>
      </class>    
      

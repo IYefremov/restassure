@@ -1109,6 +1109,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					.equals("Hide")) {
 				return false;
 			}
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("gvTechnicians-table")));
 
@@ -1502,13 +1503,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			Thread.sleep(4000);
+			Thread.sleep(10000);
 	}
 	public int countSR(){
-		waitABit(1000);
+		waitABit(3000);
 		wait.until(
 				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		waitABit(3000);
+		waitABit(1000);
 //		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("appointmentClassDefault")));
 		int defaultSRs = driver.findElements(By.className("appointmentClassDefault")).size();
 		int failedSRs = driver.findElements(By.className("appointmentClassFailed")).size();
@@ -1545,5 +1546,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		
 		
 		return true;
+	}
+
+	public boolean checkTimeline(String startDate) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
