@@ -32,13 +32,15 @@ public class iOSInternalProjectConstants {
 	public static final String WO_FOR_FEE_ITEM_IN_2_PACKS = "WO_for_fee_item_in_2_packs";
 	public static final String WO_FEE_PRICE_OVERRIDE = "WO_fee_price_override";
 	public static final String WO_TYPE_FOR_CALC = "WO_type_for_calc";
+	public static final String WO_TOTAL_SALE_NOT_REQUIRED = "WO_Total_Sale_not_required";
 	public static final String WO_SMOKE_MONITOR = "WO_smoke_monitor";
 	public static final String WO_SMOKE_TEST = "WO_smoke_test";
 	public static final String WO_TYPE_WITH_JOB = "WO_type_with_job";
 	public static final String WO_FOR_INVOICE_PRINT = "WO_for_invoice_print";
 	public static final String WO_DELAY_START = "WO_Delay_Start";
 	public static final String WO_VIN_ONLY = "WO_VIN_only";
-	
+	public static final String WO_VEHICLE_TRIM_VALIDATION = "WO_Vehicle_Trim_Validation";
+
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
 	public static final String INSP_NOTLA_TS_INSPTYPE = "Insp_NotLA_TS";
@@ -114,6 +116,9 @@ public class iOSInternalProjectConstants {
     public static final String SERVICE_WITH_DEFAUT_TECH = "Service_with_default_Tech";
     public static final String TEST_SERVICE_WITH_QF_PP_VEHICLE = "Test_service_with_QF_PP_Vehicle";
     public static final String TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL = "Test_service_without_questions_PP_Panel";
+    public static final String AMONEYVEHICLEFF_WASHING = "AMoneyVehicleFF_Washing";
+    public static final String CALC_LABOR = "Calc_Labor";
+    
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";
 }

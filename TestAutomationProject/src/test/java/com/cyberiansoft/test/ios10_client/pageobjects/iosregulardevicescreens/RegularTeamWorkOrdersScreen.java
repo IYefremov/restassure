@@ -91,6 +91,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	
 	public void selectSearchLocation(String _location) {
 		locationfld.click();
+		Helpers.waitABit(500);
 		appiumdriver.findElementByName(_location).click();
 	}
 	

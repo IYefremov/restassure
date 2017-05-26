@@ -54,6 +54,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Year")
     private IOSElement yearfld;
 	
+	@iOSFindBy(accessibility = "Trim")
+    private IOSElement trimfld;
+	
 	@iOSFindBy(accessibility = "Stock#")
     private IOSElement stockfld;
 	
@@ -197,6 +200,10 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
+	public String getTrim() {
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Trim']/XCUIElementTypeTextField[1]")).getAttribute("value");
+	}
+	
 	public String getEst() {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
@@ -267,6 +274,15 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		yearfld.click();
 		Thread.sleep(1000);
 		selectUIAPickerValue(year);
+		toolbardonebtn.click();
+	}
+	
+	public void setTrim(String trimvalue) throws InterruptedException {
+		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
+		trimfld.click();
+		Thread.sleep(1000);
+		selectUIAPickerValue(trimvalue);
 		toolbardonebtn.click();
 	}
 

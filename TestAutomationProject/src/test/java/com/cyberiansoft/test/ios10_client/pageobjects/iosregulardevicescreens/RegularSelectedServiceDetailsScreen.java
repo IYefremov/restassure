@@ -57,7 +57,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")
     private IOSElement technitiansevenlyview;
 	
-	@iOSFindBy(uiAutomator = ".navigationBar().buttons()[\"Cancel\"]")
+	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
 	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAKey[@name=\"Delete\"]")
@@ -199,8 +199,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
 		par = getTableParentCell("Rate");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
-		par = getTableParentCell("Rate");
+		if (par.findElements(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).size() > 0)
+			par.findElement(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_ratevalue);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
@@ -244,7 +244,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void saveSelectedServiceDetails() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();	
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()

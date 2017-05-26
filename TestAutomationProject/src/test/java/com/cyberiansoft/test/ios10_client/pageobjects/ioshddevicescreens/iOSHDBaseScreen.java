@@ -162,17 +162,16 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		int  xx = pickerwhl.getLocation().getX();
 		int yy = pickerwhl.getLocation().getY();
 		while (!found) {
-			
-			if (!(pickerwhl.getAttribute("value").contains(value))) {
+			found = pickerwhl.getAttribute("value").contains(value);
+			if (!found) {
 				TouchAction action = new TouchAction(appiumdriver);
 				//action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
 				//action.press(xx+picker.getSize().getWidth()/2, yy + picker.getSize().getHeight()/2 +70).waitAction(1000).
 				action.press(xx+picker.getSize().getWidth()/2, (int) (yy + picker.getSize().getHeight()*0.8)).waitAction(1000).
 				release().perform();
-				
+				Helpers.waitABit(1000);
 				
 			} else {
-				found = true;
 				break;
 			}
 			

@@ -92,6 +92,7 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	
 	public void clickSaveButton() {
 		savebtn.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public WebElement getTableParentNode(String cellname) {
@@ -114,5 +115,9 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
         appiumdriver.findElementByAccessibilityId("Override").click();
+	}
+	
+	public boolean isTotalSaleFieldPresent()  {
+		return appiumdriver.findElementsByAccessibilityId("Total Sale").size() > 0;
 	}
 }

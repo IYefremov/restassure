@@ -98,6 +98,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void selectNextScreen(String screenname) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(changescreenbtn)).click();
+		Helpers.waitABit(500);
 		swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
 		appiumdriver.findElementByAccessibilityId(screenname).click();

@@ -78,6 +78,9 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Tech Revenue")
     private IOSElement techrevenuebtn;
 	
+	@iOSFindBy(accessibility  = "Technicians")
+    private IOSElement techniciansmenubtn;
+	
 	@iOSFindBy(accessibility  = "Service Request")
     private IOSElement servicerequestbtn;
 
@@ -227,30 +230,37 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		approvepopup.clickApproveButton();
 	}
 	
-	public void selectWorkOrder(String wo) {
-		appiumdriver.findElementByAccessibilityId(wo).click();
+	public void selectWorkOrder(String wonumber) {
+		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
 	
-	public void selectWorkOrderForEidt(String wo) {		
-		selectWorkOrder(wo);
+	public void selectWorkOrderForEidt(String wonumber) {		
+		selectWorkOrder(wonumber);
 		editbtn.click();
 		Helpers.waitABit(2000);
 	}
 	
-	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wo) {		
-		selectWorkOrder(wo);
+	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {		
+		selectWorkOrder(wonumber);
 		techrevenuebtn.click();
 		Helpers.waitABit(1000);
 		return new TechRevenueScreen(appiumdriver);
 	}
 	
-	public void selectWorkOrderForCopyVehicle(String wo) {
+	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {		
 		selectWorkOrder(wo);
+		techniciansmenubtn.click();
+		Helpers.waitABit(1000);
+		return new SelectedServiceDetailsScreen(appiumdriver);
+	}
+	
+	public void selectWorkOrderForCopyVehicle(String wonumber) {
+		selectWorkOrder(wonumber);
 		copyvehiclemenu.click();
 	}
 	
-	public void selectWorkOrderForAddingNotes(String wo) {
-		selectWorkOrder(wo);
+	public void selectWorkOrderForAddingNotes(String wonumber) {
+		selectWorkOrder(wonumber);
 		notesmenu.click();
 	}
 	

@@ -49,10 +49,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamWor
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechRevenueScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VisualInteriorScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMyWorkOrdersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -984,12 +980,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
-		element(
-				MobileBy.name("Close"))
-				.click();
+		alert.findElementByAccessibilityId("Close").click();
 		
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -1505,9 +1500,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectFirstCustomerWithoutEditing();
 		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
-		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setVINFieldValue(VIN);
+		alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		alert.findElementByAccessibilityId("Close").click();
+		element(
+				MobileBy.name("Close"))
+				.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1840,13 +1840,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
-		element(
-				MobileBy.name("Close"))
-				.click();
-		vehiclescreeen.setMakeAndModel(_make, _model);
+				vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setYear(_year);
 		Thread.sleep(2000);
@@ -3118,12 +3112,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
-		element(
-				MobileBy.name("Close"))
-				.click();
 	
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -3203,12 +3191,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
-		element(
-				MobileBy.name("Close"))
-				.click();
 				
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -3225,9 +3207,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("Close"))
 				.click();
-		//Thread.sleep(4000);
-		//Helpers.swipeScreen();
-		//Thread.sleep(2000);
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectTaxPoint("Test Answer 1");
 		servicesscreen.clickSaveButton();
@@ -3235,8 +3214,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		Thread.sleep(5000);
 		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
-		System.out.println("=======================" + srnumber);
-		System.out.println("=======================");
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		
@@ -6570,7 +6547,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = teamworkordersscreen.clickHomeButton();		
 		mainscreen = homescreen.clickLogoutButton();
 		
-
 		homescreen = mainscreen.userLogin("Inspector", "12345");
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(wonum);		
@@ -6606,8 +6582,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vendororderservicespage.waitABit(1000);
 		Assert.assertEquals(vendororderservicespage.getRepairOrderServiceTechnician(iOSInternalProjectConstants.DYE_SERVICE), "Oksi User");
 		getWebDriver().quit();
-		
-		
+			
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(wonum);		
 		ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
@@ -7600,5 +7575,246 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.hideKeyboard();
 		vehiclescreeen.cancelOrder();
 		homescreen = myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 53824:WO: HD - Verify that message is shown for Money and Labor service when price is changed to 0$ under WO", 
+			description = "Verify that message is shown for Money and Labor service when price is changed to 0$ under WO")
+	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String totalsale = "5";
+		final String servicezeroprice = "0";
+		final String servicecalclaborprice = "12";
+
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_MONITOR);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale(totalsale);
+		ordersummaryscreen.clickSaveButton();
+		
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.AMONEYVEHICLEFF_WASHING);
+		
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.AMONEYVEHICLEFF_WASHING);
+		selectedservicescreen.setServicePriceValue(servicezeroprice);
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Order's technician split will be assigned to this order service if you set zero amount."));
+		
+		selectedservicescreen.clickTechniciansIcon();
+		alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
+		selectedservicescreen.selecTechnician("Manager 1");
+		selectedservicescreen.selecTechnician("Oksana Zayats");
+		Assert.assertFalse(selectedservicescreen.isTechnicianIsSelected("Manager 1"));
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.CALC_LABOR);
+		selectedservicescreen.clickTechniciansIcon();
+		alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
+		
+		
+		selectedservicescreen.cancelSelectedServiceDetails();
+		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
+		selectedservicescreen.clickTechniciansIcon();
+		selectedservicescreen.selecTechnician("Manager 1");
+		selectedservicescreen.selecTechnician("Oksana Zayats");
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Manager 1"));
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen.cancelOrder();
+		homescreen =  myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 45252:WO: HD - Verify that validation is present for vehicle trim field", 
+			description = "Verify that validation is present for vehicle trim field")
+	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() throws Exception {
+		
+		final String VIN  = "TESTVINN";
+		final String _make = "Acura";
+		final String _model = "CL";
+		final String trimvalue = "2.2 Premium";
+
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_VEHICLE_TRIM_VALIDATION);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		vehiclescreeen.setMakeAndModel(_make, _model);
+		vehiclescreeen.clickSaveButton();
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Trim is required"));
+		vehiclescreeen.setTrim(trimvalue);
+		Assert.assertEquals(vehiclescreeen.getTrim(), trimvalue);
+		
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.clickSaveButton();
+		homescreen =  myworkordersscreen.clickHomeButton();
+	}
+	
+	
+	@Test(testName = "Test Case 35375:WO: HD - Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF", 
+			description = "Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF")
+	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TOTAL_SALE_NOT_REQUIRED);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		
+		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.TAX_DISCOUNT);
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
+		ordersummaryscreen.clickSaveButton();
+		homescreen = myworkordersscreen.clickHomeButton();
+		
+		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		teamworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
+		ordersummaryscreen.clickSaveButton();
+		homescreen = teamworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 40821:WO: HD - Verify that it is possible to assign tech to order by action Technicians", 
+			description = "Verify that it is possible to assign tech to order by action Technicians")
+	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		final String pricevalue  = "21";
+		final String totalsale = "5";
+		final String defaulttech  = "Employee Simple 20%";
+		final String techname  = "Oksana Zayats";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setVIN(VIN);
+		final String wonumber = vehiclescreeen.getInspectionNumber();
+		
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService("3/4\" - Penny Size");
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen(appiumdriver);
+		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.WHEEL_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
+		selectedservicescreen.setServiceQuantityValue("2.00");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Front Bumper");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Hood");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");	
+		servicesscreen.selectPriceMatrices("VP2 zayats");	
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen(appiumdriver);
+		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
+		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech);
+		pricematrix.setPrice(pricevalue);
+		pricematrix.selectDiscaunt("Test service zayats");
+		pricematrix.clickSaveButton();		
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.TAX_DISCOUNT);
+		servicesscreen.selectService(iOSInternalProjectConstants.SALES_TAX);
+		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
+		selectedservicescreen.clickVehiclePartsCell();
+		selectedservicescreen.selectVehiclePart("Back Glass");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
+		
+		questionsscreen.selectNextScreen(OrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.setTotalSale(totalsale);
+		ordersummaryscreen.clickSaveButton();
+		
+		selectedservicescreen = myworkordersscreen.selectWorkOrderTechniciansMenuItem(wonumber);
+		//selectedservicescreen.selecTechnician(defaulttech);
+		selectedservicescreen.selecTechnician(techname);
+		selectedservicescreen.saveSelectedServiceDetails();
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertTrue(alerttext.contains("Changing default employees for a work order will change split data for all services."));
+		
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		Assert.assertEquals(vehiclescreeen.getTechnician(), techname + ", " + defaulttech);
+		vehiclescreeen.cancelOrder();
+		myworkordersscreen.clickHomeButton();	
 	}
 }

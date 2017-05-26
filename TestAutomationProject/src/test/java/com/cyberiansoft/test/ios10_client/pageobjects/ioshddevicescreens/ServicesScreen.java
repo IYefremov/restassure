@@ -236,7 +236,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void cancelOrder() {
 		clickCancelButton();
 		acceptAlert();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1500);
 	}
 
 	public boolean priceMatricesPopupIsDisplayed() {

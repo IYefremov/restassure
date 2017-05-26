@@ -304,9 +304,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		} else {
 			IOSElement popuptoolbar = (IOSElement) appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").get(1);
 			popuptoolbar.findElementByAccessibilityId("technician").click();
-		}
-		
-		
+		}	
 	}
 
 	public void selecTechnician(String technician) {
@@ -315,6 +313,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
 		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
 			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
+		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").size() > 1)
+			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").get(1);
 		else
 			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
@@ -422,6 +422,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
 		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
 			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
+		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").size() > 1)
+			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").get(1);
 		else
 			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
 		return techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"

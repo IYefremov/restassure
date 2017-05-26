@@ -42,6 +42,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField")
     private IOSElement estfldvalue;
 	
+	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Trim']/XCUIElementTypeTextField")
+    private IOSElement trimfldvalue;
+	
 	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Make']/XCUIElementTypeButton[@name='custom detail button']")
     private IOSElement makecustombtn;
 	
@@ -74,6 +77,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility  = "Year")
     private IOSElement yearfld;
+	
+	@iOSFindBy(accessibility  = "Trim")
+    private IOSElement trimfld;
 	
 	@iOSFindBy(accessibility  = "Stock#")
     private IOSElement stockfld;
@@ -233,6 +239,10 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		return estfldvalue.getText();
 	}
 	
+	public String getTrim() {
+		return trimfldvalue.getAttribute("value");
+	}
+	
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
 		Assert.assertEquals(getMake(), exp_make);
 		Assert.assertEquals(getModel(), exp_model);
@@ -299,6 +309,19 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		
 		yearfld.click();
 		selectUIAPickerValue(year);
+		
+		if (appiumdriver.findElementsByAccessibilityId("Done").size() > 1)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Done").get(1)).click();
+		else
+			toolbardonebtn.click();
+	}
+	
+	public void setTrim(String trimvalue) {
+		int defaultwheelnumer = 10;
+		int clicks = 0;
+		
+		trimfld.click();
+		selectUIAPickerValue(trimvalue);
 		
 		if (appiumdriver.findElementsByAccessibilityId("Done").size() > 1)
 			((IOSElement) appiumdriver.findElementsByAccessibilityId("Done").get(1)).click();
