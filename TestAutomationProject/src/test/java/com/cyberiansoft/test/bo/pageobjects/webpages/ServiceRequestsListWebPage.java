@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -289,7 +291,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	@FindBy(className = "rsHorizontalHeaderTable")
 	private WebElement horizontalHeaderTimeline;
-	
+
 	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
 	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
 
@@ -856,7 +858,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean clickAddImageBTN() {
-		documentContent.findElement(By.className("add")).click();
+//		try {
+//			documentContent.findElement(By.className("add")).click();
+//		} catch (Exception e) {
+			driver.findElement(By.className("add")).click();
+//		}
 		try {
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")));
 			updateWait
@@ -892,6 +898,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(4000);
 		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 				.click();
+		
+		waitABit(1000);
+		wait.until(ExpectedConditions
+				.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	@Override
@@ -907,20 +917,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkPresentanceOFAddedFile() throws InterruptedException {
 		try {
-			// int prevSize =
-			// countFilesInDir("C:\\Users\\madja_000\\Downloads");
-			int prevSize = countFilesInDir("C:\\Users\\OKramar\\Downloads");
-			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_imgDownload")))
-					.click();
-			Thread.sleep(5000);
-			int afterSize = countFilesInDir("C:\\Users\\madja_000\\Downloads");
-			if (afterSize - prevSize != 1)
-				return false;
 			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn")))
 					.click();
 			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_ctl01_ctl01_Card_tbName")));
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 					.click();
+			waitABit(1000);
+			wait.until(ExpectedConditions
+					.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -938,6 +942,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1")))
 					.click();
 			driver.switchTo().alert().accept();
+			waitABit(1000);
+			wait.until(ExpectedConditions
+					.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rgNoRecords")));
 		} catch (TimeoutException e) {
 			return false;
@@ -1560,32 +1567,32 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public int countSRinTimelineByDate(String startDate) {
 		List<WebElement> days = horizontalHeaderTimeline.findElements(By.tagName("div"));
 		boolean isDateVisible = false;
-		
-		for(WebElement e: days){
-			if(e.getText().equals(startDate)){
+
+		for (WebElement e : days) {
+			if (e.getText().equals(startDate)) {
 				isDateVisible = true;
 				break;
 			}
 		}
-		
-		if(!isDateVisible){
+
+		if (!isDateVisible) {
 			driver.findElement(By.className("rsNextDay")).click();
 			waitABit(1000);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}
-		
+
 		int column = 0;
-		
-		for(WebElement e: days){
-			if(e.getText().equals(startDate)){
+
+		for (WebElement e : days) {
+			if (e.getText().equals(startDate)) {
 				break;
 			}
 			column++;
 		}
-		
-		
-		return driver.findElement(By.className("rsAllDayTable"))
-				.findElements(By.tagName("td")).get(column).findElements(By.className("rsWrap")).size();
+
+		return driver.findElement(By.className("rsAllDayTable")).findElements(By.tagName("td")).get(column)
+				.findElements(By.className("rsWrap")).size();
 	}
 
 	public void goToTimeLine() {
@@ -1595,5 +1602,128 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		waitABit(4000);
+	}
+
+	public boolean checkLifeCycleBTN() {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.findElement(By.id("Card_srLifeCycle")).click();
+		waitABit(1000);
+		return driver.getWindowHandles().size() == 2;
+	}
+
+	public void addAppointmentWithoutDescription(String startDate, String toDate) throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+
+		addAppointmentBTNfromSRedit.click();
+		appointmentFromDateSRedit.clear();
+		appointmentFromTimeSRedit.clear();
+		appointmentToDateSRedit.clear();
+		appointmentToTimeSRedit.clear();
+
+		appointmentFromDateSRedit.sendKeys(startDate);
+		appointmentToDateSRedit.sendKeys(toDate);
+		appointmentFromTimeSRedit.sendKeys("6:00 AM");
+		appointmentToTimeSRedit.sendKeys("7:00 AM");
+		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("Card_btnAddApp")).click();
+
+	}
+
+	public boolean checkLifeCycleDate() {
+		String parentFrame = driver.getWindowHandle();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.findElement(By.id("Card_srLifeCycle")).click();
+		Set windows = driver.getWindowHandles();
+		windows.remove(parentFrame);
+		driver.switchTo().window((String) windows.iterator().next());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		try {
+			wait.until(
+					ExpectedConditions.presenceOfElementLocated(By.partialLinkText(LocalDate.now().format(formatter))));
+		} catch (TimeoutException e) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public void goToLifeCycle() {
+		String parentFrame = driver.getWindowHandle();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.findElement(By.id("Card_srLifeCycle")).click();
+		Set windows = driver.getWindowHandles();
+		driver.close();
+		windows.remove(parentFrame);
+		driver.switchTo().window((String) windows.iterator().next());
+		
+	}
+
+	public boolean checkLifeCycleContent() throws InterruptedException {
+		Thread.sleep(5000);
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'SR')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Year')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'VIN')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Make')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Stock')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Model')]")));
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_tbVin")));
+			if (wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_tbSrNumber")))
+					.getAttribute("value").isEmpty()) {
+				return false;
+			}
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public void goToDocumentLinkFromLC() {
+		waitABit(1000);
+		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to R-')]"))).click();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+	}
+
+	public boolean checkLifeCycleDocumentsContent() {
+		waitABit(1000);
+
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Photos')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Documents')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Type')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Creation')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Description')]")));
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkDocumentDownloadingInLC() throws AWTException, InterruptedException {
+		String parentFrame = driver.getWindowHandle();
+		driver.findElement(By.xpath("//a[contains(text(), 'Link to Documents')]")).click();
+		Set windows = driver.getWindowHandles();
+		windows.remove(parentFrame);
+		driver.switchTo().window((String) windows.iterator().next());
+		return true;
+	}
+
+	public boolean checkImage() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
