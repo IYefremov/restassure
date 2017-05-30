@@ -74,7 +74,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
 	public void clickSearchSaveButton() {
 		searccsavebtn.click();
-		Helpers.waitABit(1000);
+		Helpers.waitABit(2000);
 	}
 	
 	public void selectSearchLocation(String _location) {

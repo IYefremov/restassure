@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -103,6 +104,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
+	}
+	
+	@AfterMethod
+	public void closeBrowser() {
+		if (webdriver != null)
+			webdriver.quit();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,

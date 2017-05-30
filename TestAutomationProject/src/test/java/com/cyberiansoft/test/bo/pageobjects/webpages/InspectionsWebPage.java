@@ -508,9 +508,9 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			waitABit(10000);
-			WebElement totalrow = driver.findElement(By.xpath("//tr[@class='total-row line-item']"));
-			totalapproved = totalrow.findElement(By.xpath(".//table/tbody/tr/td[2]/div")).getText();
+			waitABit(2000);
+			WebElement totalrow = driver.findElements(By.xpath("//td[@class='amount-column']/div")).get(driver.findElements(By.xpath("//td[@class='amount-column']/div")).size()-1);
+			totalapproved = totalrow.getText();
 			driver.close();
 			driver.switchTo().window(parent);
 		}

@@ -352,18 +352,15 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isWorkOrderHasApproveIcon(String wonumber) {
-		return appiumdriver.findElementByClassName("XCUIElementTypeTable").
-				findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_37')]")).size() > 0;
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_37')]")).size() > 0;
 	}
 	
 	public boolean isWorkOrderHasActionIcon(String wonumber) {
-		return appiumdriver.findElementByClassName("XCUIElementTypeTable").
-				findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
 	}
 	
 	public void selectWorkOrderForApprove(String wonumber) {
-		appiumdriver.findElementByClassName("XCUIElementTypeTable").
-		findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'EntityInfoButtonUnchecked')]")).click();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'EntityInfoButtonUnchecked')]")).click();
 	}
 	
 	public void approveWorkOrder(String wo, String employee, String pwd) {
