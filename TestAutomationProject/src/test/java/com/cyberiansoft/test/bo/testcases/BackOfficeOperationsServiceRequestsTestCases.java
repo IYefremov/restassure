@@ -900,7 +900,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
 //		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
-		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
+//		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
 	}
 
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR", dataProvider = "provideSRdata")
@@ -1196,7 +1196,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
 //		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
-		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
+//		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
 	}
 	
 	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
