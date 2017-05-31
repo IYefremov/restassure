@@ -1154,7 +1154,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		Thread.sleep(1000);
 		if (!(appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_tbxSubject"))
-				.getAttribute("value").isEmpty())) {
+				.getAttribute("value").equals("Alex SASHAZ"))) {
 			return false;
 		}
 
@@ -1308,7 +1308,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				// wait.ignoring(TimeoutException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
 				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
 				driver.findElement(by).findElements(byInner).stream().map(w -> w.findElement(By.tagName("a")))
-						.filter(t -> t.getText().substring(5).equals(startDate.substring(2, 4))).findFirst().get()
+						.filter(t -> t.getText().split(" ")[1].equals(startDate.split("/")[1])).findFirst().get()
 						.click();
 				result = true;
 				break;

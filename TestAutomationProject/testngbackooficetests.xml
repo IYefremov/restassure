@@ -18,7 +18,7 @@
   <test name="Back Office Test Cases - Chrome" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     <classes> 
-    <!--      -->
+    <!--    
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
     </class>  
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
@@ -37,19 +37,27 @@
       </class> 
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class>   
-   
+     -->
           
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-
+ <methods>
+  <include name="checkMultiTechInSideScrollbar"/>
+  <include name="checkDescriptionDocument"/>
+  <include name="checkSRLCafterCreation"/>
+  <include name="checkSRLCestimate"/>
+  <include name="checkSRappointmentSchedulerWeek"/>
+  <include name="testOperationNewServiceRequestAppointmentWholesale"/>
+ 
+ </methods>
      </class>    
      
-    
+       <!--
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
       </class>  
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       </class>
              
-             <!--   -->
+             -->
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->
     </classes>

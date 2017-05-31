@@ -97,6 +97,7 @@ public class WebElementsBot {
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
 		waitABit(4000);
 		droplist.selectByVisibleText(value);
+		waitABit(2000);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
