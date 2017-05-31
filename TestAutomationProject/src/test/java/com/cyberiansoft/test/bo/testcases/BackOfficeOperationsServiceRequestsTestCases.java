@@ -1198,4 +1198,26 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
 		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
 	}
+	
+	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
+	public void checkSRLCwoAutoCreation(String customer, String startDate, String endDate, String status,
+			boolean isDateShifted) throws InterruptedException, AWTException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_Auto");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		serviceRequestsWebPage.goToLifeCycle();
+		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLC());
+
+	}
 }

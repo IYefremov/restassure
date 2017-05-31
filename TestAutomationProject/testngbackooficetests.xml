@@ -41,13 +41,11 @@
           
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
  <methods>
-  <include name="checkMultiTechInSideScrollbar"/>
-  <include name="checkDescriptionDocument"/>
-  <include name="checkSRLCafterCreation"/>
-  <include name="checkSRLCestimate"/>
-  <include name="checkSRappointmentSchedulerWeek"/>
-  <include name="testOperationNewServiceRequestAppointmentWholesale"/>
- 
+<include name="checkDescriptionDocument"/>
+<include name="checkSRLCafterCreation"/>
+<include name="checkSRLCestimate"/>
+<include name="checkSRLCwoAutoCreation"/>
+
  </methods>
      </class>    
      

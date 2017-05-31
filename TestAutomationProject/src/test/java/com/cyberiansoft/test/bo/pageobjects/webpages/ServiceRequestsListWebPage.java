@@ -858,11 +858,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean clickAddImageBTN() {
-//		try {
-//			documentContent.findElement(By.className("add")).click();
-//		} catch (Exception e) {
-			driver.findElement(By.className("add")).click();
-//		}
+		// try {
+		// documentContent.findElement(By.className("add")).click();
+		// } catch (Exception e) {
+		driver.findElement(By.className("add")).click();
+		// }
 		try {
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")));
 			updateWait
@@ -898,10 +898,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Thread.sleep(4000);
 		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 				.click();
-		
+
 		waitABit(1000);
-		wait.until(ExpectedConditions
-				.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	@Override
@@ -922,9 +921,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			updateWait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_Content_ctl01_ctl01_Card_tbName")));
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
 					.click();
-			waitABit(1000);
-			wait.until(ExpectedConditions
-					.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitABit(3000);
+
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -942,9 +940,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_gbccolumn1")))
 					.click();
 			driver.switchTo().alert().accept();
-			waitABit(1000);
-			wait.until(ExpectedConditions
-					.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitABit(3000);
+
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rgNoRecords")));
 		} catch (TimeoutException e) {
 			return false;
@@ -1633,11 +1630,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	}
 
-	public boolean checkLifeCycleDate() {
+	public boolean checkLifeCycleDate() throws InterruptedException {
 		String parentFrame = driver.getWindowHandle();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		driver.findElement(By.id("Card_srLifeCycle")).click();
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("Card_srLifeCycle"))).click();
 		Set windows = driver.getWindowHandles();
 		windows.remove(parentFrame);
 		driver.switchTo().window((String) windows.iterator().next());
@@ -1661,7 +1659,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.close();
 		windows.remove(parentFrame);
 		driver.switchTo().window((String) windows.iterator().next());
-		
+
 	}
 
 	public boolean checkLifeCycleContent() throws InterruptedException {
@@ -1722,8 +1720,33 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean checkImage() {
-		// TODO Auto-generated method stub
-		return false;
+	public WebElement getVehicleEditButton() {
+		Actions moveact = new Actions(driver);
+		moveact.moveToElement(
+				driver.findElement(By.xpath("//div[@id='Card_divVehInfoAll']/b[text()='Vehicle info:']"))).perform();
+		return driver.findElement(By.xpath("//div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"));
+	}
+
+	public void clickVehicleEditButton() {
+		driver.findElement(By.id("Card_divVehInfoAll")).click();
+		//click(getVehicleEditButton());
+	}
+
+	public void setVehicleInfo(String stock, String vin) {
+		driver.findElement(By.id("Card_tbStock")).sendKeys(stock);
+		driver.findElement(By.id("Card_vehicleVin")).sendKeys(vin);
+	}
+
+	public boolean goToWOfromLC() {
+		try{
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]"))).click();
+		waitABit(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		
+		return true;
 	}
 }
