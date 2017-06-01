@@ -126,7 +126,6 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		return archivedemployeestable.getTableRows();
 	}
 	
-//TODO
 	public WebElement getTableRowWithActiveEmployee(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
 		List<WebElement> employeestablerows = getEmployeesTableRows();

@@ -96,7 +96,8 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		clickOKAddInvoiceTypeButton();
 	}
 	
-	public boolean isRequiredCheckBoxVisible() {
+	public boolean isRequiredCheckBoxVisible() throws InterruptedException {
+		Thread.sleep(3000);
 		return requiredchkbx.isDisplayed();
 	}
 

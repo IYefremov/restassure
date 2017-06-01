@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -360,10 +361,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return null;
 	}
 
-	public void selectFirstServiceRequestFromList() {
+	public void selectFirstServiceRequestFromList() throws InterruptedException {
 		waitABit(4000);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList());
+		Thread.sleep(1000);
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[@class='detailsPopover-icon icon-chevron-right']"))
 				.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
@@ -371,10 +373,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(8000);
 	}
 
-	public void closeFirstServiceRequestFromTheList() {
+	public void closeFirstServiceRequestFromTheList() throws InterruptedException {
 		selectFirstServiceRequestFromList();
 		switchToServiceRequestInfoFrame();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		wait.until(ExpectedConditions.elementToBeClickable(closeservicerequestbtn));
 		clickCloseServiceRequestButton();
 		driver.switchTo().defaultContent();
@@ -384,8 +385,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void clickCloseServiceRequestButton() {
 		click(closeservicerequestbtn);
-		// new WebDriverWait(driver, 10)
-		// .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 	}
 
 	public void acceptFirstServiceRequestFromList() throws InterruptedException {
@@ -501,9 +500,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void clickClaimInfoEditButton() {
 		driver.switchTo().defaultContent();
-		driver.switchTo()
-				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+//		driver.switchTo()
+//				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		 driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		getClaimInfoEditButton().click();
 	}
 
@@ -543,7 +542,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public WebElement getClaimInfoEditButton() {
-		return driver.findElement(By.xpath("//div[@id='Card_divCliamInfoAll']/span"));
+		return driver.findElement(By.id("Card_divCliamInfoAll"));
 	}
 
 	public WebElement getServiceEditButton() {
@@ -1743,6 +1742,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		
+		return true;
+	}
+
+	public boolean checkAcceptanceOfSRinLC() {
+		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String dateSTR = dateToCheck.format(formatter);
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Accepted')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '"+dateSTR+"')]")));
 		}catch(TimeoutException e){
 			return false;
 		}

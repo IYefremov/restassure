@@ -62,8 +62,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit", description = "Company- Insurance Company: in Service Request Claim info Edit")
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() throws InterruptedException {
 		
-		final String srcompany = "006 - Test Company";
-		final String insurancecompanyname = "testinsurancecompany";
+		final String srcompany = "Alex SASHAZ";
+		final String insurancecompanyname = "Oranta";
 			
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -80,11 +80,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequestslistpage.setSearchFreeText(srcompany);
 		servicerequestslistpage.clickFindButton();
 		
-		servicerequestslistpage.selectFirstServiceRequestFromList();
+		//servicerequestslistpage.selectFirstServiceRequestFromList();
 		
+		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickClaimInfoEditButton();
 		servicerequestslistpage.selectServiceRequesInsurance(insurancecompanyname);
 		servicerequestslistpage.clickDoneButton();
+		
 		servicerequestslistpage.saveNewServiceRequest();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.clickFindButton();

@@ -206,11 +206,12 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		return wotable.getWrappedElement().findElements(By.xpath(".//tr/td[contains(text(), '" + vin + "')]")).size() > 0; 
 	}
 	
-	public String getTableRowWorkOrderNumber(WebElement row) {
+	public String getTableRowWorkOrderNumber(WebElement row) throws InterruptedException {
+		Thread.sleep(2000);
 		return row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
 	}
 	
-	public WorkOrderInfoTabWebPage clickWorkOrderInTable(String wonumber) {
+	public WorkOrderInfoTabWebPage clickWorkOrderInTable(String wonumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		WebElement row = getTableRowWithWorkOrder(wonumber);
 		if (row != null) {
@@ -228,7 +229,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 				driver, WorkOrderInfoTabWebPage.class);
 	}
 	
-	public WebElement getTableRowWithWorkOrder(String wonumber) {
+	public WebElement getTableRowWithWorkOrder(String wonumber) throws InterruptedException {
 		List<WebElement> rows = getWorkOrdersTableRows();
 		for (WebElement row : rows) {
 			if (getTableRowWorkOrderNumber(row).equals(wonumber)) {
@@ -238,7 +239,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		return null;
 	}
 	
-	public String getWorkOrderDate(String wonumber) {
+	public String getWorkOrderDate(String wonumber) throws InterruptedException {
 		String status = null;
 		WebElement row = getTableRowWithWorkOrder(wonumber); 
 		if (row != null) {
@@ -249,7 +250,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		return status; 
 	}
 	
-	public void selectWorkOrderInTheTable(String wonumber) {
+	public void selectWorkOrderInTheTable(String wonumber) throws InterruptedException {
 		WebElement row = getTableRowWithWorkOrder(wonumber); 
 		if (row != null) {
 			labeledCheckBoxSelect(row.findElement(By.xpath(".//td/input[contains(@id, 'cbAction')]")));
@@ -262,7 +263,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		return wotable.getWrappedElement().findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
 	}
 	
-	public void createInvoiceFromWorkOrder(String wonumber, String ponum) {
+	public void createInvoiceFromWorkOrder(String wonumber, String ponum) throws InterruptedException {
 		selectWorkOrderInTheTable(wonumber);
 		setInvoicePONumber(ponum);
 		clickAndWait(createinvoicebtn);
@@ -272,7 +273,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		ponumfld.clearAndType(ponum);
 	}
 	
-	public String getWorkOrderInvoiceNumber(String wonumber) {
+	public String getWorkOrderInvoiceNumber(String wonumber) throws InterruptedException {
 		String invoicenum = "";
 		WebElement row = getTableRowWithWorkOrder(wonumber); 
 		if (row != null) {

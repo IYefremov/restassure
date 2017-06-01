@@ -79,7 +79,9 @@ public class WebPageWithPagination extends BaseWebPage {
 		Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
 		Thread.sleep(700);
+		try{
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}catch(TimeoutException e){}
 		Thread.sleep(3000);
 	}
 	

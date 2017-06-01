@@ -31,7 +31,8 @@ public class InvoiceEmailActivityTabWebPage extends BaseWebPage {
 		return mailactivitytable.getTableRows();
 	}
 	
-	public String getFirstRowSentTimeValue() {
+	public String getFirstRowSentTimeValue() throws InterruptedException {
+		Thread.sleep(4000);
 		return getInvoiceEmailActivityTableRows().get(0).findElement(By.xpath("./td[1]")).getText();
 	}
 	

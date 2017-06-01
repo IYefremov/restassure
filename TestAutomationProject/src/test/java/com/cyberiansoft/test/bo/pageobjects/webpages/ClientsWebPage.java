@@ -216,7 +216,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchtypecbx, searchtypedd, _type);
 	}
 
-	public void deleteClient(String clientname) {
+	public void deleteClient(String clientname) throws InterruptedException {
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
@@ -270,9 +270,10 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return notetxt;
 	}
 
-	public WebElement getTableRowWithClient(String clientname) {
+	public WebElement getTableRowWithClient(String clientname) throws InterruptedException {
 		List<WebElement> clientstablerows = getClientsTableRows();
 		for (WebElement clientstablerow : clientstablerows) {
+			Thread.sleep(2000);
 			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
 					.getText().equals(clientname)) {
 				return clientstablerow;
@@ -291,7 +292,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return null;
 	}
 
-	public NewClientDialogWebPage clickEditClient(String clientname) {
+	public NewClientDialogWebPage clickEditClient(String clientname) throws InterruptedException {
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
@@ -302,7 +303,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	// method for click on client users link and open new dialog window
-	public ClientUsersWebPage clickClientUsersLinkForClientOpenDialogWindow(String clientname) {
+	public ClientUsersWebPage clickClientUsersLinkForClientOpenDialogWindow(String clientname) throws InterruptedException {
 
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
@@ -321,7 +322,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	// method for click on contacts link and open new dialog window
-	public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) {
+	public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) throws InterruptedException {
 
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
@@ -377,7 +378,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.visibilityOf(clientstable.getWrappedElement()));
 	}
 
-	public Set<String> clickServicesLinkForClient(String clientname) {
+	public Set<String> clickServicesLinkForClient(String clientname) throws InterruptedException {
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
 			row.findElement(By.xpath(".//a[text()='Services']")).click();
@@ -394,7 +395,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return driver.getWindowHandles();
 	}
 
-	public Set<String> clickClientUsersLinkForClient(String clientname) {
+	public Set<String> clickClientUsersLinkForClient(String clientname) throws InterruptedException {
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
 			row.findElement(By.xpath(".//a[text()='Client Users']")).click();

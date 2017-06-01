@@ -274,7 +274,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceedittab.closeNewTab(mainWindowHandle);
 	}
 	
-	//TODO!!!!!!!!!!!!!!!!!!!!
 	@Test(testName = "Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", 
 			description = "Operation - Invoice : Sent mail in Mail Activity")
 	public void testOperationInvoiceSentMailInMailActivity() throws Exception {

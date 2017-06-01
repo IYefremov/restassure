@@ -553,7 +553,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, 10001");
 		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
-		Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(), "Ukraine");
+		Assert.assertTrue(appointmentpopup.getClientCountryValue().trim().equals("Ukraine")||
+				appointmentpopup.getClientCountryValue().trim().equals("United States"));
 		Assert.assertTrue(appointmentpopup.getClientStateValue().equals("Kyiv"));
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227 street");
 		Assert.assertEquals(appointmentpopup.getClientCityValue(), "mercedes");
@@ -874,7 +875,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR", dataProvider = "provideSomeDescriptions")
-	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) {
+	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -970,7 +971,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
@@ -1218,6 +1219,28 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLC());
+	}
+	
+	@Test(testName = "Test Case 57875:Operation - Service Request Life Cycle - Approved", dataProvider = "provideSRdata1")
+	public void checkSRLCapproved(String customer, String startDate, String endDate, String status,
+			String SRcustomer, String newStatus) throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		serviceRequestsWebPage.goToLifeCycle();
+		Assert.assertTrue(serviceRequestsWebPage.checkAcceptanceOfSRinLC());
 
 	}
 }

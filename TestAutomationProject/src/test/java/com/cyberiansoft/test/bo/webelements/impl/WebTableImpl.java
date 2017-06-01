@@ -44,7 +44,6 @@ public class WebTableImpl extends AbstractWebElement implements WebTable {
         return columncells;
     }
 	
-	//TODO 
 	@Override
     public int getTableColumnIndex(String columnname) {
 		int icolumn = -1;
