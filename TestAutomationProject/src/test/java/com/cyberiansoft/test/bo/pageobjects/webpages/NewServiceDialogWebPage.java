@@ -94,7 +94,7 @@ public class NewServiceDialogWebPage extends BaseWebPage {
 		return serviceassignedtocmb.getSelectedValue();
 	}
 	
-	public void selectNewServiceMultiple() {
+	public void selectNewServiceMultiple() throws InterruptedException {
 		checkboxSelect(multiplecheckbox);
 	}
 	

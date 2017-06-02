@@ -971,13 +971,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 		Assert.assertTrue(
 				serviceRequestsWebPage.checkDefaultAppointmentValuesFromCalendar(startDate, endDate, SRcustomer));
@@ -1241,6 +1241,27 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.checkAcceptanceOfSRinLC());
-
+	}
+	
+	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Rejected", dataProvider = "provideSRdata1")
+	public void checkSRLCrejected(String customer, String startDate, String endDate, String status,
+			String SRcustomer, String newStatus) throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		serviceRequestsWebPage.goToLifeCycle();
+		Assert.assertTrue(serviceRequestsWebPage.checkRejectOfSRinLC());
 	}
 }

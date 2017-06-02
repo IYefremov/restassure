@@ -167,7 +167,7 @@ public class NewVendorTeamDialogWebPage extends BaseWebPage {
 		return vendordefaultlocationscmb.getSelectedValue();
 	}
 	
-	public void selectNewVendorTeamAdditionalRepairLocations(String additionalrepairlocation) {
+	public void selectNewVendorTeamAdditionalRepairLocations(String additionalrepairlocation) throws InterruptedException {
 		checkboxSelect(additionalrepairlocation);
 	}
 	

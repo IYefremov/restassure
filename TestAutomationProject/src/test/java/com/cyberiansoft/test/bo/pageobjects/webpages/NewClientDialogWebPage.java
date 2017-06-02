@@ -103,20 +103,20 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void createRetailClient(String firstname, String lastname) {
+	public void createRetailClient(String firstname, String lastname) throws InterruptedException {
 		switchToRetailCustomer();
 		setClientFirstName(firstname);
 		setClientLastName(lastname);
 		clickOKButton();
 	}
 	
-	public void createWholesaleClient(String clientname) {
+	public void createWholesaleClient(String clientname) throws InterruptedException {
 		switchToWholesaleCustomer();
 		setCompanyName(clientname);
 		clickOKButton();
 	}
 	
-	public void switchToRetailCustomer() {
+	public void switchToRetailCustomer() throws InterruptedException {
 		checkboxSelect("Retail");
 	}
 	
@@ -124,7 +124,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Retail']")));
 	}
 	
-	public void switchToWholesaleCustomer() {
+	public void switchToWholesaleCustomer() throws InterruptedException {
 		checkboxSelect("Wholesale");
 	}
 	

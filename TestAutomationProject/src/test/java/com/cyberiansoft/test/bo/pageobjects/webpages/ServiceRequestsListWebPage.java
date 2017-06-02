@@ -1135,6 +1135,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkDefaultAppointmentValuesFromCalendar(String fromDate, String toDate, String subject)
 			throws InterruptedException {
+		Thread.sleep(5000);
 		appointmentCalendarIcon.click();
 
 		appointmentFromDate.clear();
@@ -1760,6 +1761,19 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 		
+		return true;
+	}
+
+	public boolean checkRejectOfSRinLC() {
+		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String dateSTR = dateToCheck.format(formatter);
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Rejected')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '"+dateSTR+"')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
 		return true;
 	}
 }

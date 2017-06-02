@@ -468,7 +468,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 35463:Create Work Order type", description = "Create Work Order type",
 			dependsOnMethods = { "testCreateInvoiceType" } )
-	public void testCreateWorkOrderType() {
+	public void testCreateWorkOrderType() throws InterruptedException {
 		
 		final String wotype = "AT_print_WO";
 		final String wotypeoption = "Invoice From Device";

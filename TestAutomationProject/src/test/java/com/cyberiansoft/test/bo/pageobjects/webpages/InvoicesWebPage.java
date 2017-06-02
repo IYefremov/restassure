@@ -153,6 +153,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	
 	public int getInvoicesTableRowCount() throws InterruptedException {
 		Thread.sleep(4000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return getInvoicesTableRows().size();
 	}
 	

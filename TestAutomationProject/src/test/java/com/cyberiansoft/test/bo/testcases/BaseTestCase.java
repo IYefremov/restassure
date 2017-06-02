@@ -53,8 +53,6 @@ public class BaseTestCase {
 	@Parameters({ "selenium.browser", "ios.bundleid" })
 	public void setUp(String browser, String bundleid) throws Exception {
 
-		
-
 		// Parameters for WebDriver
 		/* System.setProperty("webdriver.chrome.driver",
 		 "/Users/Shared/chromedriver");

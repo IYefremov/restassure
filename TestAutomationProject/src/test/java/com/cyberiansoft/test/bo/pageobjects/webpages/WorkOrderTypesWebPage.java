@@ -145,7 +145,7 @@ public class WorkOrderTypesWebPage extends BaseWebPage {
 		selectComboboxValue(newwotypesharingcmb, newwotypesharingdd, wotypesharingtype);
 	}
 	
-	public void chechWOTypeOption(String optionname) {
+	public void chechWOTypeOption(String optionname) throws InterruptedException {
 		checkboxSelect(optionname);
 	}
 	
@@ -187,7 +187,7 @@ public class WorkOrderTypesWebPage extends BaseWebPage {
 		return defaultwotypepriceaccess;
 	}
 	
-	public void setNewWorkOrderTypeMonitorRepairingInformation(boolean invoicecompletedroonly, boolean delayedrostart, String approxrepairtime) {
+	public void setNewWorkOrderTypeMonitorRepairingInformation(boolean invoicecompletedroonly, boolean delayedrostart, String approxrepairtime) throws InterruptedException {
 		chechWOTypeOption(monitorrepairingchkbox);
 		chechWOTypeOption(invoicecompletedroonlychkbox);
 		chechWOTypeOption(delayedrostartchkbox);

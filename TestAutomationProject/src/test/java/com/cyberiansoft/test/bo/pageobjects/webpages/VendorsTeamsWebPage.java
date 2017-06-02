@@ -209,7 +209,7 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 				driver, NewVendorTeamDialogWebPage.class);
 	}
 	
-	public void createNewVendorTeam(String vendorname, String vendortimezone, String vendordesc, String vendortimesheettype, String defaultlocation, String additionallocation) {
+	public void createNewVendorTeam(String vendorname, String vendortimezone, String vendordesc, String vendortimesheettype, String defaultlocation, String additionallocation) throws InterruptedException {
 		NewVendorTeamDialogWebPage newvendordialog = clickAddVendorTeamButton();
 		newvendordialog.setNewVendorTeamName(vendorname);
 		newvendordialog.selectNewVendorTeamTimezone(vendortimezone);

@@ -110,7 +110,7 @@ public class RepairLocationDepartmentsTabWebPage extends BaseWebPage {
 		return newdepartmentdescfld.getValue();
 	}
 	
-	public void selectNewRepairLocationDepartmentAcceptanceRequired() {
+	public void selectNewRepairLocationDepartmentAcceptanceRequired() throws InterruptedException {
 		checkboxSelect("Acceptance Required");
 	}
 	

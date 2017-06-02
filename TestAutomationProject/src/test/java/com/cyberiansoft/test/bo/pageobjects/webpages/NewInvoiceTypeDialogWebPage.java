@@ -4,10 +4,12 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -98,6 +100,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	
 	public boolean isRequiredCheckBoxVisible() throws InterruptedException {
 		Thread.sleep(3000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return requiredchkbx.isDisplayed();
 	}
 
@@ -113,7 +116,9 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		click(invoicetypeCancelbtn);
 	}
 	
-	public void selectRequiredCheckBox() {
+	public void selectRequiredCheckBox() throws InterruptedException {
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		checkboxSelect(requiredchkbx);
 	}
 	
@@ -162,7 +167,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		click(assignquestionsformbtn);
 	}
 	
-	public void selectNewInvoiceTypeOption(String optionname) {
+	public void selectNewInvoiceTypeOption(String optionname) throws InterruptedException {
 		checkboxSelect(optionname);
 	}
 	
