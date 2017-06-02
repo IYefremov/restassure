@@ -59,7 +59,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
 		homescreen = customersscreen.clickBackButton();
-		homescreen.waitABit(15000);
+		homescreen.waitABit(45000);
 		initiateWebDriver();
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,

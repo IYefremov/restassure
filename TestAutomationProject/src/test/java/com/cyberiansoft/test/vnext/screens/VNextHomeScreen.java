@@ -11,29 +11,41 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextHomeScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@class='title' and text()='Customers']")
+	final String quemessagexpath = "//span[@class='letter-number']";
+	
+	//@FindBy(xpath="//div[@class='title' and text()='Customers']")
+	@FindBy(xpath="//a[@class='tile-link tile-item customers-tile']")
 	private WebElement customerslist;
 	
-	@FindBy(xpath="//div[@class='title' and text()='Inspections']")
+	//@FindBy(xpath="//div[@class='title' and text()='Inspections']")
+	@FindBy(xpath="//a[@class='tile-link tile-item inspections-tile']")
 	private WebElement inspectionslist;
 	
-	@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
+	//@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
+	@FindBy(xpath="//a[@class='tile-link tile-item work-orders-tile']")
 	private WebElement workorderslist;
 	
-	@FindBy(xpath="//div[@class='title' and text()='Settings']")
+	@FindBy(xpath="//a[@class='tile-link tile-item more-tile']")
+	private WebElement morelist;
+	
+	//@FindBy(xpath="//div[@class='title' and text()='Settings']")
+	@FindBy(xpath="//a[@class='tile-link tile-item settings-tile']")
 	private WebElement settingslist;
 	
-	@FindBy(xpath="//div[@class='title' and text()='Status']")
+	//@FindBy(xpath="//div[@class='title' and text()='Status']")
+	@FindBy(xpath="//a[@class='tile-link tile-item status-tile']")
 	private WebElement statuslist;
 	
-	@FindBy(xpath="//span[@class='letter-number']")
+	@FindBy(xpath=quemessagexpath)
 	private WebElement queuemessage;
 	
-	@FindBy(xpath="//i[@action='messager-send']")
+	@FindBy(xpath="//*[@action='messager-send']")
 	private WebElement queuemessageicon;
 	
 	@FindBy(xpath="//a[@action='logout']/i")
 	private WebElement logoutbtn;
+	
+	
 	
 	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -63,12 +75,16 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public VNextSettingsScreen clickSettingsMenuItem() {
+		if (!settingslist.isDisplayed())
+			tap(morelist);
 		tap(settingslist);
 		log(LogStatus.INFO, "Tap Settings menu item");
 		return new VNextSettingsScreen(appiumdriver);
 	}
 	
 	public VNextStatusScreen clickStatusMenuItem() {
+		if (!statuslist.isDisplayed())
+			tap(morelist);
 		tap(statuslist);
 		log(LogStatus.INFO, "Tap Status menu item");
 		return new VNextStatusScreen(appiumdriver);
@@ -81,8 +97,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public String getQueueMessageValue() {
-		waitABit(300);
 		return queuemessage.getText();
+	}
+	
+	public boolean isQueueMessageVisible() {
+		return appiumdriver.findElementsByXPath(quemessagexpath).size() > 0;
 	}
 	
 	public void waitUntilQueueMessageInvisible() {

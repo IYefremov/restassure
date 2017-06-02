@@ -122,12 +122,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		}
-			
+		registrationoverviewlegalinfoscreen.waitABit(60*1000);			
 		switchToWebViewContext();
 				
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
@@ -241,10 +236,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		}
 			
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "PDR: REGISTRATION", fromEmail, bodySearchText + newuserfirstname + " " + newuserlastname);
@@ -321,11 +312,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		}
-		
 		resetApp();
 		waitABit(10*1000);
 
@@ -402,12 +388,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		}
-		
+		registrationoverviewlegalinfoscreen.waitABit(60*1000);		
 		resetApp();
 		waitABit(10*1000);
 		switchToWebViewContext();
@@ -474,11 +455,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() > 0) {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY);
-		}
-		
 		resetApp();
 		waitABit(10*1000);
 		switchToWebViewContext();

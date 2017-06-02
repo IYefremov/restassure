@@ -20,7 +20,6 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen = inspectionsscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
 		homescreen.clickQueueMessageIcon();
-		homescreen.waitABit(2000);
 	}
 
 	@Test(testName= "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspections", 
@@ -45,7 +44,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-		Assert.assertEquals(homescreen.getQueueMessageValue(), "");		
+		Assert.assertFalse(homescreen.isQueueMessageVisible());		
 	}
 	
 	@Test(testName= "Test Case 36490:vNext - Send message from the queue in Manual Mode (success path)", 
@@ -60,7 +59,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
 		homescreen.clickQueueMessageIcon();
 		homescreen.waitABit(3000);
-		Assert.assertEquals(homescreen.getQueueMessageValue(), "");
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
 	@Test(testName= "Test Case 36510:vNext - Send messages automatically from the queue in Automatic Mode after reconnect to network", 
@@ -77,7 +76,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen = inspectionsscreen.clickBackButton();
 		setNetworkOn();
 		homescreen.waitABit(20000);
-		Assert.assertEquals(homescreen.getQueueMessageValue(), "");
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
 	@Test(testName= "Test Case 36497:vNext - Send message from the queue in Automatic Mode (fail path)", 

@@ -52,7 +52,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
 	public void agreetermsAndconditions() {
 		clickTermsAndConditionsLink();
-		waitABit(3000);
+		waitABit(5000);
 		clickIAgreeButton();
 	}
 	

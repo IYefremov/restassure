@@ -15,16 +15,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@action='add']/i")
+	@FindBy(xpath="//a[@action='add']")
 	private WebElement addwobtn;
 	
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement workorderslist;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//a[@action='create-invoice']/i")
+	@FindBy(xpath="//a[@action='create-invoice']")
 	private WebElement createinvoicemenu;
 	
 	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
@@ -42,11 +42,11 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public String getFirstWorkOrderNumber() {
-		return workorderslist.findElement(By.xpath(".//div[@class='item-title']")).getText();
+		return workorderslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
 	}
 	
-	public VNextInspectionsMenuScreen clickOnWorkOrderByInspNumber(String workordernumber) {
-		tap(workorderslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + workordernumber + "']")));
+	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String workordernumber) {
+		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + workordernumber + "']")));
 		log(LogStatus.INFO, "Tap on Work order: " + workordernumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
@@ -61,7 +61,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		String woprice = null;
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null)
-			woprice = workordercell.findElement(By.xpath(".//div[@class='item-after']")).getText();
+			woprice = workordercell.findElement(By.xpath(".//div[@class='entity-item-currency']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
 		return woprice;		
@@ -69,9 +69,9 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public WebElement getWorkOrderCell(String wonumber) {
 		WebElement wocell = null;
-		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
+		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//a[@class='entity-item accordion-item']"));
 		for (WebElement workordercell : workorders)
-			if (workordercell.findElements(By.xpath(".//div[@class='item-title' and text()='" + wonumber + "']")).size() > 0) {
+			if (workordercell.findElements(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + wonumber + "']")).size() > 0) {
 				wocell = workordercell;
 				break;
 			}
@@ -81,7 +81,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public VNextInvoiceInfoScreen clickCreateInvoiceFromWorkOrder(String wonumber) {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null) {
-			tap(workordercell.findElement(By.xpath(".//div[@class='item-title' and text()='" + wonumber + "']")));
+			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + wonumber + "']")));
 			log(LogStatus.INFO, "Click on Work Order: " + wonumber);
 		}
 		else

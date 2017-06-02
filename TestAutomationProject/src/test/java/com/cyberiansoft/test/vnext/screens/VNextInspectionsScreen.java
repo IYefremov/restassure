@@ -21,7 +21,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement inspectionslist;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
 	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
@@ -47,29 +47,29 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public void createSimpleInspection() {	
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
-		customersscreen.selectCustomer("Oksana Osmak");
+		customersscreen.selectCustomer("Retail Automation");
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		waitABit(4000);
 		inspinfoscreen.saveInspectionfromFirstScreen();
 	}
 	
 	public String getFirstInspectionNumber() {
-		return inspectionslist.findElement(By.xpath(".//div[@class='item-title']")).getText();
+		return inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
 	}
 	
 	public String getFirstInspectionCustomerValue() {
-		return inspectionslist.findElement(By.xpath(".//div[@action='select']/div[2]")).getText();
+		return inspectionslist.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
 	}
 	
 	public String getFirstInspectionPrice() {
-		return inspectionslist.findElement(By.xpath(".//div[@class='item-after']")).getText();
+		return inspectionslist.findElement(By.xpath(".//div[@class='entity-item-currency']")).getText();
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
 		String inspprice = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
 		if (inspcell != null)
-			inspprice = inspcell.findElement(By.xpath(".//div[@class='item-after']")).getText();
+			inspprice = inspcell.findElement(By.xpath(".//div[@class='entity-item-currency']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
 		return inspprice;	
@@ -77,9 +77,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
 		WebElement inspcell = null;
-		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//a[@class='item-link item-content']"));
+		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//a[@class='entity-item accordion-item']"));
 		for (WebElement invcell : inspections)
-			if (invcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + inspectionnumber + "']")).size() > 0) {
+			if (invcell.findElements(By.xpath(".//div[@class='entity-item-text' and text()='" + inspectionnumber + "']")).size() > 0) {
 				inspcell = invcell;
 				break;
 			}
@@ -87,7 +87,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
-		tap(inspectionslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + inspnumber + "']")));
+		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + inspnumber + "']")));
 		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}

@@ -65,7 +65,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	public boolean isUsersMenuItemExists() {
 		if (!isMainMenuExpanded(SETTINGS_MAINMENU_ITEM))
 			expandMainMenu(SETTINGS_MAINMENU_ITEM);
-		return driver.findElements(By.xpath("//*[@data-automation-id='users']")).size() > 0;
+		return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
 	}
 	
 	public VNexBOServicesWebPage selectServicesMenu() {

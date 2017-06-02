@@ -55,9 +55,6 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.hideKeyboard();
 	    switchToWebViewContext();
-	    //if (appiumdriver.findElements(By.xpath("//iframe")).size() > 0)
-	    //	appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
-		
 	}
 	
 	public void selectPhoneNumberCountryCode(String countrycode) {
@@ -87,7 +84,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickDoneButton() {
 		tap(donebtn);
-		waitABit(2000);
+		waitABit(5000);
 	}
 	
 	public void clickClearUserButton() {

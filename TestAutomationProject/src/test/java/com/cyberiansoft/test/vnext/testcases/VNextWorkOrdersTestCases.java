@@ -36,7 +36,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
-		VNextInspectionsMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByInspNumber(wonumber);
+		VNextInspectionsMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
 		vehicleinfoscreen = menuscreen.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);

@@ -24,37 +24,37 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(id="my-form")
 	private WebElement newcustomerform;
 	
-	@FindBy(xpath="//input[@name='FirstName']")
+	@FindBy(id="customerDetailsFirstName")
 	private WebElement firstnamefld;
 	
-	@FindBy(xpath="//input[@name='LastName']")
+	@FindBy(id="customerDetailsLastName")
 	private WebElement lastnamefld;
 	
-	@FindBy(xpath="//input[@name='CompanyName']")
+	@FindBy(id="customerDetailsCompanyName")
 	private WebElement companynamefld;
 	
-	@FindBy(xpath="//input[@name='Email']")
+	@FindBy(id="customerDetailsEmail")
 	private WebElement emailfld;
 	
-	@FindBy(xpath="//input[@name='Phone']")
+	@FindBy(id="customerDetailsPhone")
 	private WebElement phonefld;
 	
-	@FindBy(xpath="//input[@name='Address']")
+	@FindBy(id="customerDetailsAddress")
 	private WebElement addressfld;
 	
-	@FindBy(xpath="//input[@name='Address2']")
+	@FindBy(id="customerDetailsAddress2")
 	private WebElement address2fld;
 	
-	@FindBy(xpath="//input[@name='City']")
+	@FindBy(id="customerDetailsCity")
 	private WebElement cityfld;
 	
-	@FindBy(xpath="//li[@action='country']")
+	@FindBy(id="customerDetailsCountry")
 	private WebElement countrycell;
 	
-	@FindBy(xpath="//li[@action='state']")
+	@FindBy(id="customerDetailsState")
 	private WebElement statecell;
 	
-	@FindBy(xpath="//input[@name='Zip']")
+	@FindBy(id="customerDetailsZip")
 	private WebElement zipfld;
 	
 	////////////Countries
@@ -184,7 +184,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(countrycell);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(countriespage));
-			tap(countriespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customercountry + "']")));
+			tap(countriespage.findElement(By.xpath(".//li/a[@class='list-select-item' and contains(text(), '" + customercountry + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 			log(LogStatus.INFO, "Select customer Country: " + customercountry);
@@ -192,7 +192,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public String getCustomerCountry() {
-		return countrycell.findElement(By.xpath("./label/div/div[2]/input[2]")).getAttribute("value");
+		return countrycell.getAttribute("value");
 	}
 	
 	public void selectCustomerState(String customerstate) {
@@ -200,7 +200,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(statecell);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statespage));
-			tap(statespage.findElement(By.xpath(".//div[@class='item-title' and text()='" + customerstate + "']")));
+			tap(statespage.findElement(By.xpath(".//li/a[@class='list-select-item' and contains(text(), '" + customerstate + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 			log(LogStatus.INFO, "Select customer State: " + customerstate);
@@ -208,7 +208,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public String getCustomerState() {
-		return statecell.findElement(By.xpath("./label/div/div[2]/input[2]")).getAttribute("value");
+		return statecell.getAttribute("value");
 	}
 	
 	public void clickSaveCustomerButton() {

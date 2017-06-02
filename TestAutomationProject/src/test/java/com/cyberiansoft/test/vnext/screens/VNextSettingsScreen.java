@@ -27,20 +27,20 @@ public class VNextSettingsScreen extends VNextBaseScreen {
 	public VNextSettingsScreen setManualSendOn() {
 		if (manualsendradio.getAttribute("checked") == null)
 			tap(manualsendradio);
-		testReporter.log(LogStatus.INFO, "Set Manual Send to ON");
+		log(LogStatus.INFO, "Set Manual Send to ON");
 		return new VNextSettingsScreen(appiumdriver);
 	}
 	
 	public VNextSettingsScreen setManualSendOff() {
 		if (manualsendradio.getAttribute("checked") != null)
 			tap(manualsendradio);
-		testReporter.log(LogStatus.INFO, "Set Manual Send to ON");
+		log(LogStatus.INFO, "Set Manual Send to ON");
 		return new VNextSettingsScreen(appiumdriver);
 	}
 	
 	public VNextHomeScreen clickBackButton() {
 		tap(backbtn);
-		testReporter.log(LogStatus.INFO, "Tap Back button");
+		log(LogStatus.INFO, "Tap Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 
