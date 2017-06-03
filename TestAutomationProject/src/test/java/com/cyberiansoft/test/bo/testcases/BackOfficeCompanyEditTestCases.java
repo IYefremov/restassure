@@ -330,7 +330,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newclientdialogpage.setCompanyShipToZip(clientzip);
 		newclientdialogpage.clickCopyToBillToButton();
 		newclientdialogpage.clickOKButton();
-		clientspage.waitABit(1000);
+		clientspage.waitABit(3000);
 		newclientdialogpage = clientspage.clickEditClient(retailcompanyname);
 		Assert.assertTrue(newclientdialogpage.isCompanyRetail());
 		Assert.assertEquals(newclientdialogpage.getCompanyName(), clientname);
@@ -627,6 +627,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newinvoicetypedialog.setInvoiceTypeName(invoicetype);
 		newinvoicetypedialog.waitABit(500);
 		newinvoicetypedialog.selectVisibleCheckBox();
+		newinvoicetypedialog.waitABit(500);
 		newinvoicetypedialog.selectRequiredCheckBox();
 		newinvoicetypedialog.selectQuestionsTemplate(questiontemplate);
 		newinvoicetypedialog.selectQuestionForm(questionform);

@@ -478,7 +478,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		final String _make = "Honda";
 		final String _model = "Accord";
 
-		final String insurance = "Oranta";
+		final String insurance = "Miami Beach Insurance";
 		final String _label = "test";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -523,7 +523,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
 		appointmentpopup.setStartTimeValue("8:00 AM");
 		appointmentpopup.setEndTimeValue("8:40 AM");
-		Thread.sleep(1000);
+		appointmentpopup.waitABit(3000);
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), assignedto);
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
@@ -534,9 +534,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Repair Location");
-		Thread.sleep(1000);
+		appointmentpopup.waitABit(1000);
 		appointmentpopup.selectLocation("VD_Location");
-		Thread.sleep(1000);
+		appointmentpopup.waitABit(1000);
 		Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(), "Ukraine");
 		Assert.assertEquals(appointmentpopup.getClientStateValue(), "Kyiv");
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227 street");

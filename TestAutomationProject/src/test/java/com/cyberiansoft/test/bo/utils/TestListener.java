@@ -34,7 +34,7 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
 	public void onTestFailure(ITestResult result) {
 	        WebDriver driver = ((BaseTestCase) currentClass).getWebDriver();
 	        if (driver != null) {
-	        	//createScreenshot(driver, "report/", getTestMethodName(result));
+	        	createScreenshot(driver, "report/", getTestMethodName(result));
 	        }
 	}
 	
