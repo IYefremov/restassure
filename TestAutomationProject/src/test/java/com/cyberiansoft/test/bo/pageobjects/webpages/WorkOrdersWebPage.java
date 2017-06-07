@@ -208,14 +208,14 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	
 	public String getTableRowWorkOrderNumber(WebElement row) throws InterruptedException {
 		Thread.sleep(2000);
-		return row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
+		return row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/div/a")).getText();
 	}
 	
 	public WorkOrderInfoTabWebPage clickWorkOrderInTable(String wonumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		WebElement row = getTableRowWithWorkOrder(wonumber);
 		if (row != null) {
-			row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).click();
+			row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/div/a")).click();
 			waitForNewTab();
 			for (String activeHandle : driver.getWindowHandles()) {
 				if (!activeHandle.equals(mainWindowHandle)) {
