@@ -277,6 +277,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		String invoicenum = "";
 		WebElement row = getTableRowWithWorkOrder(wonumber); 
 		if (row != null) {
+			Thread.sleep(2000);
 			invoicenum = row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Invoice#") + "]/a")).getText();
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");	

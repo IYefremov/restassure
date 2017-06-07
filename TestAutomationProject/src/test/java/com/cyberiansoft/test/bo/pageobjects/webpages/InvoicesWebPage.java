@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -364,8 +365,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	
 	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) {
 	    String mainWindowHandle = driver.getWindowHandle();
+	    System.out.println(mainWindowHandle);
 	    clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
 	    waitForNewTab();
+//	    driver.switchTo().defaultContent();
+//		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+//		Set windows = driver.getWindowHandles();
+//		driver.close();
+//		windows.remove(mainWindowHandle);
+//		driver.switchTo().window((String) windows.iterator().next());
+
 		for (String activeHandle : driver.getWindowHandles()) {
 			if (!activeHandle.equals(mainWindowHandle)) {
 			   driver.switchTo().window(activeHandle);

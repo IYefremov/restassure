@@ -42,7 +42,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	private WebElement technicianslink;
 	
 	/////////////////////
-	@FindBy(id = "customerText")
+	@FindBy(id = "customerName")
 	private WebElement invoicecustomer;
 	
 	@FindBy(name = "isWholesaler")

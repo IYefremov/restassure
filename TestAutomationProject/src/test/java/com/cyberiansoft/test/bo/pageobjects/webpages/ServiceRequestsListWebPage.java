@@ -500,9 +500,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void clickClaimInfoEditButton() {
 		driver.switchTo().defaultContent();
-//		driver.switchTo()
-//				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
-		 driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		// driver.switchTo()
+		// .frame((WebElement)
+		// driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		getClaimInfoEditButton().click();
 	}
 
@@ -1722,14 +1723,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public WebElement getVehicleEditButton() {
 		Actions moveact = new Actions(driver);
-		moveact.moveToElement(
-				driver.findElement(By.xpath("//div[@id='Card_divVehInfoAll']/b[text()='Vehicle info:']"))).perform();
+		moveact.moveToElement(driver.findElement(By.xpath("//div[@id='Card_divVehInfoAll']/b[text()='Vehicle info:']")))
+				.perform();
 		return driver.findElement(By.xpath("//div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"));
 	}
 
 	public void clickVehicleEditButton() {
 		driver.findElement(By.id("Card_divVehInfoAll")).click();
-		//click(getVehicleEditButton());
+		// click(getVehicleEditButton());
 	}
 
 	public void setVehicleInfo(String stock, String vin) {
@@ -1738,15 +1739,18 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean goToWOfromLC() {
-		try{
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
-		}catch(TimeoutException e){
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
+					.click();
+			waitABit(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
+		} catch (TimeoutException e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -1754,13 +1758,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		String dateSTR = dateToCheck.format(formatter);
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Accepted')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '"+dateSTR+"')]")));
-		}catch(TimeoutException e){
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Accepted')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + dateSTR + "')]")));
+		} catch (TimeoutException e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -1768,12 +1774,52 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		String dateSTR = dateToCheck.format(formatter);
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Rejected')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '"+dateSTR+"')]")));
-		}catch(TimeoutException e){
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Rejected')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + dateSTR + "')]")));
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean checkClosedOfSRinLC() {
+		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String dateSTR = dateToCheck.format(formatter);
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'ServiceRequests Closed')]")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + dateSTR + "')]")));
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkSRsearchCriterias() {
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_rbxPhases_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_rbcTeamsForFilter_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_rbcTechsForFilter_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_rcbRepairLocations_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_tbSearchTags_tagsinput")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_tbSearchFreeText")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_btnSearch")));
+		} catch (TimeoutException e) {
+			return false;
+		}
+		return true;
+
 	}
 }
