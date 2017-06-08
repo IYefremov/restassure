@@ -104,8 +104,10 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		return requiredchkbx.isDisplayed();
 	}
 
-	public void selectVisibleCheckBox() {
+	public void selectVisibleCheckBox() throws InterruptedException {
+		Thread.sleep(1000);
 		checkboxSelect(visiblechkbx);
+		Thread.sleep(3000);
 	}
 	
 	public void unselectVisibleCheckBox() {
@@ -119,6 +121,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	public void selectRequiredCheckBox() throws InterruptedException {
 		Thread.sleep(3000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(@for, 'Card_cbPORequired')]")));
 		checkboxSelect(requiredchkbx);
 	}
 	

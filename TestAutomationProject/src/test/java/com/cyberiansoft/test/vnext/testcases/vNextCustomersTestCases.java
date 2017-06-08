@@ -31,7 +31,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 	
 	@Test(testName= "Test Case 43519:vNext - Create new Customer with empty First Name and Last Name", 
 			description = "Create new Customer with empty First Name and Last Name")
-	public void testCreateNewCustomerWithEmptyFirstNameAndLastName() {
+	public void testCreateNewCustomerWithEmptyFirstNameAndLastName() throws InterruptedException {
 		
 		final String firstname = "";
 		final String lastname = "";

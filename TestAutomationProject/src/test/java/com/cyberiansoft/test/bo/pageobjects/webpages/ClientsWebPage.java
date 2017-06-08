@@ -216,7 +216,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchtypecbx, searchtypedd, _type);
 	}
 
-	public void deleteClient(String clientname) {
+	public void deleteClient(String clientname) throws InterruptedException {
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
@@ -270,10 +270,11 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return notetxt;
 	}
 
-	public WebElement getTableRowWithClient(String clientname) {
+	public WebElement getTableRowWithClient(String clientname) throws InterruptedException {
 		List<WebElement> clientstablerows = getClientsTableRows();
 		for (WebElement clientstablerow : clientstablerows) {
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
+			Thread.sleep(3000);
 			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
 					.getText().equals(clientname)) {
 				return clientstablerow;

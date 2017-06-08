@@ -451,7 +451,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemWO']")).getText();
 	}
 
-	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany) {
+	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany) throws InterruptedException {
+		waitABit(2000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		boolean exists = getFirstServiceRequestFromList()
 				.findElements(By.xpath(".//div[@class='" + insurancecompany + "  ']")).size() > 0;
 		return exists;

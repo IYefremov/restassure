@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
@@ -120,7 +121,9 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		checkboxSelect("Retail");
 	}
 	
-	public boolean isCompanyRetail() {
+	public boolean isCompanyRetail() throws InterruptedException {
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Retail']")));
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Retail']")));
 	}
 	
