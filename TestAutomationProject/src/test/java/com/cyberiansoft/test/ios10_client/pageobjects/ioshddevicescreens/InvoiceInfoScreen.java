@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -12,6 +13,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
@@ -65,6 +68,10 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		clickSaveButton();
 		finalalertbtn.click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 		Helpers.waitABit(500);
 	}
 	
