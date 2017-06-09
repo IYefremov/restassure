@@ -4176,6 +4176,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			throws Exception {
 		
 		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.searchCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		customersscreen.selectFirstCustomerWithoutEditing();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String invoicenum = myinvoicesscreen.getFirstInvoiceValue();
 		myinvoicesscreen.printInvoice(invoicenum, "TA_Print_Server");
@@ -7799,6 +7803,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicesscreen.selectService(iOSInternalProjectConstants.TAX_DISCOUNT);
 		servicesscreen.selectService(iOSInternalProjectConstants.SALES_TAX);
+		servicesscreen.searchAvailableService(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 		selectedservicescreen.clickVehiclePartsCell();
 		selectedservicescreen.selectVehiclePart("Back Glass");
@@ -7823,5 +7828,43 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(vehiclescreeen.getTechnician(), techname + ", " + defaulttech);
 		vehiclescreeen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 58663:Inspections: HD - Verify that when Panel grouping is used for package for selected Panel only linked services are shown", 
+			description = "Verify that when Panel grouping is used for package for selected Panel only linked services are shown")
+	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
+		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_SERVICE_TYPE_WITH_OUT_REQUIRED);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);		
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
+		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.BUFF_SERVICE);
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL));
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE));
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE));
+		servicesscreen.clickServiceTypesButton();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_VEHICLE));
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_PANEL));
+		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_SERVICE));
+		servicesscreen.clickServiceTypesButton();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
+		Assert.assertTrue(servicesscreen.isServiceTypeExists("3/4\" - Penny Size"));
+
+		servicesscreen.cancelOrder();
+		myinspectionsscreen.clickHomeButton();	
 	}
 }

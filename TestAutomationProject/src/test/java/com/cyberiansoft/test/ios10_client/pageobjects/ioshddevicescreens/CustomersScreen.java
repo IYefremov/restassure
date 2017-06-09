@@ -124,7 +124,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean customerIsPresent(String customer) {		
-		return element(MobileBy.name(customer)).isDisplayed();
+		return appiumdriver.findElementsByAccessibilityId(customer).size() > 0;
 	}
 
 }

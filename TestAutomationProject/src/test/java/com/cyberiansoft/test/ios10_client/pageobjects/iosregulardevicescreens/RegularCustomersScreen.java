@@ -96,7 +96,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(1000);
-		appiumdriver.findElement(MobileBy.AccessibilityId(customer)).click();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']")).click();
 	}
 	
 	public void selectCustomerWithoutEditing(String customer) {

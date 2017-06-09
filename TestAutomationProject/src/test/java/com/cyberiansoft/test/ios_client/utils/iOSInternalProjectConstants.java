@@ -61,6 +61,7 @@ public class iOSInternalProjectConstants {
 	public static final String INSP_WITH_0_PRICE = "Insp_with_0_Price";
 	public static final String INS_LINE_APPROVE_OFF = "Ins_line_approve_OFF";
 	public static final String INSP_DRAFT_SINGLE_PAGE = "Insp_Draft_Single_page";
+	public static final String INSP_SERVICE_TYPE_WITH_OUT_REQUIRED = "Insp_Service_Type_with_out_required";
 	
 	//Invoices Types
 	public static final String DEFAULT_INVOICETYPE = "Default";
@@ -118,6 +119,11 @@ public class iOSInternalProjectConstants {
     public static final String TEST_SERVICE_WITHOUT_QUESTIONS_PP_PANEL = "Test_service_without_questions_PP_Panel";
     public static final String AMONEYVEHICLEFF_WASHING = "AMoneyVehicleFF_Washing";
     public static final String CALC_LABOR = "Calc_Labor";
+    public static final String BUFF_SERVICE = "Buff";
+    public static final String CALC_MONEY_PP_VEHICLE = "Calc_Money_PP_Vehicle";
+    public static final String CALC_MONEY_PP_PANEL = "Calc_Money_PP_Panel";
+    public static final String CALC_MONEY_PP_SERVICE = "Calc_Money_PP_Service";
+    
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

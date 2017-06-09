@@ -140,6 +140,8 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		setVINFieldValue(vin);
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Close").click();
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
 	public void setVINFieldValue(String vin) {
@@ -149,7 +151,8 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
 		Helpers.waitABit(500);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		((IOSDriver) appiumdriver).hideKeyboard();
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
 	}
 	

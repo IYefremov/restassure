@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
@@ -576,6 +577,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		
 		vehiclescreeen.setVIN(VIN);
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		String wonum = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
@@ -956,6 +960,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Thread.sleep(2000);
 	}
 	
+	String srtowo = "";
+	
 	//Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device", description = "Creating Service Request with Inspection, WO and Appointment required on device")
@@ -1051,6 +1057,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestClient(srnumber).contains(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER));
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestVehicleInfo(srnumber).contains("WERTYU123"));
+		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.clickHomeButton();
 		
 		
@@ -1157,7 +1164,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//test case		
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Thread.sleep(5000);
-		servicerequestsscreen.selectServiceRequest(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
+		servicerequestsscreen.selectServiceRequest(srtowo);
 		Thread.sleep(2000);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		Thread.sleep(5000);
@@ -1216,8 +1223,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -1302,8 +1312,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -1406,8 +1419,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -1536,8 +1552,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -1620,8 +1639,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -1955,12 +1977,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
+		//Helpers.getAlertTextAndAccept();
 		String wonumber1 = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -2022,8 +2047,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		
 		vehiclescreeen.setVIN(VIN);
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+		final String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "The VIN is invalid.");
+		appiumdriver.findElement(
+				MobileBy.name("Close"))
+				.click();
 		appiumdriver.findElement(
 				MobileBy.name("Close"))
 				.click();
@@ -3623,6 +3651,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.verifyServiceStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
+		Helpers.waitABit(2000);
 		teamworkordersscreen.clickHomeButton();
 	}	
 	
@@ -6473,7 +6502,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = new RegularHomeScreen(appiumdriver);
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
-		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String invoicenum = myinvoicesscreen.getFirstInvoiceValue();
@@ -7140,5 +7169,50 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(vehiclescreeen.getTechnician(), techname + ", " + defaulttech);
 		vehiclescreeen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
+	}
+	
+	@Test(testName = "Test Case 58663:Inspections: Regular - Verify that when Panel grouping is used for package for selected Panel only linked services are shown", 
+			description = "Verify that when Panel grouping is used for package for selected Panel only linked services are shown")
+	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_SERVICE_TYPE_WITH_OUT_REQUIRED);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);		
+		vehiclescreeen.setVIN(VIN);
+		
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen.selectService(iOSInternalProjectConstants.BUFF_SERVICE);
+		servicesscreen.clickToolButton();
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		servicesscreen.clickCancelButton();
+		servicesscreen.clickHomeButton();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
+		servicesscreen.clickToolButton();
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_VEHICLE);
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_PANEL);
+		servicesscreen.assertServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_SERVICE);
+		servicesscreen.clickCancelButton();
+		servicesscreen.clickHomeButton();
+		
+		servicesscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
+		servicesscreen.clickToolButton();
+		servicesscreen.assertServiceTypeExists("3/4\" - Penny Size");
+		servicesscreen.clickCancelButton();
+		servicesscreen.clickHomeButton();
+
+		servicesscreen.clickSaveButton();
+		myinspectionsscreen.clickHomeButton();	
 	}
 }

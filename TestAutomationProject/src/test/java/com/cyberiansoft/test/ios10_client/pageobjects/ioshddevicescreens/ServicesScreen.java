@@ -244,6 +244,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public PriceMatrixScreen selectPriceMatrices(String pricematrice) {
+		Helpers.waitABit(1500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name, \""
 						+ pricematrice + "\")]").click();
 		return new PriceMatrixScreen(appiumdriver);

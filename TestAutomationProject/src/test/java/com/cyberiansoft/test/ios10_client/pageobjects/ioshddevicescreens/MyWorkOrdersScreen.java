@@ -250,7 +250,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {		
 		selectWorkOrder(wo);
 		techniciansmenubtn.click();
-		Helpers.waitABit(1000);
+		Helpers.waitABit(1500);
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

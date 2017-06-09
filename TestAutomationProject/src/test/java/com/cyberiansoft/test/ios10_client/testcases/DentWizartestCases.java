@@ -3231,15 +3231,15 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDR6PANEL_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-		ordermonitorscreen.verifyPanelStatusInPopup("Tear/Burn >2\" (Fabric)", "Active");
+		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Active");
 		Thread.sleep(4000);
-		ordermonitorscreen.selectPanel("Tear/Burn >2\" (Fabric)");
+		ordermonitorscreen.selectPanel("Interior Repair");
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-		ordermonitorscreen.verifyPanelStatusInPopup("Tear/Burn >2\" (Fabric)", "Completed");
+		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		Thread.sleep(4000);
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
@@ -3251,15 +3251,16 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		questionsscreen.chooseAVISCode("Rental-921");
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectFirstInvoice(ExcelUtils.getVIN(testcaserow));
+		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickChangePOPopup();
 		myinvoicesscreen.changePO("170116");
 		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceNumberIcon());
 		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceSharedIcon());
-		myinvoicesscreen.verifyFirstInvoicePrice(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		Assert.assertEquals(myinvoicesscreen.getInvoicePrice(invoicenumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		myinvoicesscreen.clickHomeButton();
 	}
 	
