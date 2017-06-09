@@ -15,10 +15,10 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizartestCases">
         <methods>
-          <!--<include name="testGetDeviceRegistrationCode" />
-          <include name="testRegisterationiOSDdevice" />   -->
+		  <!--<include name="testGetDeviceRegistrationCode" />
+          <include name="testRegisterationiOSDdevice" />   -->      
           <include name="testValidVINCheck" /> 
-          <include name="testTopCustomersSetting" />
+          <!--<include name="testTopCustomersSetting" />-->
           <include name="testQuickQuoteOptionForRetailHail" />
           <include name="testCustomerSelfPayOptionForRetailHail" />
           <include name="testEvenWOLevelTechSplitForRetailHail" />
