@@ -242,7 +242,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return exists;
 	}
 	
-	public String getInvoiceStatus(String invoicenumber) {
+	public String getInvoiceStatus(String invoicenumber) throws InterruptedException {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
@@ -253,7 +253,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status; 
 	}
 	
-	public String getInvoicePONumber(String invoicenumber) {
+	public String getInvoicePONumber(String invoicenumber) throws InterruptedException {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
@@ -264,7 +264,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status; 
 	}
 	
-	public String getInvoicePOPaidValue(String invoicenumber) {
+	public String getInvoicePOPaidValue(String invoicenumber) throws InterruptedException {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
@@ -275,7 +275,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status; 
 	}
 	
-	public void changeInvoiceStatus(String invoicenumber, String invoicestatus) {
+	public void changeInvoiceStatus(String invoicenumber, String invoicestatus) throws InterruptedException {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber); 
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(@id, 'comboStatus_Arrow')]")).click();
@@ -289,8 +289,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 	
-	public WebElement getTableRowWithInvoiceNumber(String invoicenumber) {
+	public WebElement getTableRowWithInvoiceNumber(String invoicenumber) throws InterruptedException {
+		Thread.sleep(4000);
 		List<WebElement> rows = getInvoicesTableRows();
+		Thread.sleep(4000);
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[" + invoicestable.getTableColumnIndex("Invoice #") + "]/a")).getText().equals(invoicenumber)) {
 				return row;
@@ -299,7 +301,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return null;
 	}
 	
-	public WebElement clickSelectButtonForInvoice(String invoicenumber) {
+	public WebElement clickSelectButtonForInvoice(String invoicenumber) throws InterruptedException {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
 			Actions act = new Actions(driver);
@@ -310,7 +312,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return row;		
 	}
 	
-	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) {
+	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) throws InterruptedException {
 		
 		WebElement row = clickSelectButtonForInvoice(invoicenumber);
 		  waitABit(1000);
@@ -327,7 +329,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		  }
 	}
 	
-	public boolean sendInvoiceEmail(String invoicenumber, String email) {
+	public boolean sendInvoiceEmail(String invoicenumber, String email) throws InterruptedException {
 		boolean emailsended = false;
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Send Email");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
@@ -337,7 +339,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return emailsended; 
 	}
 	
-	public SendInvoiceCustomEmailTabWebPage clickSendCustomEmail(String invoicenumber) {
+	public SendInvoiceCustomEmailTabWebPage clickSendCustomEmail(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Send Custom Email");
 		waitForNewTab();
@@ -350,7 +352,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				driver, SendInvoiceCustomEmailTabWebPage.class);
 	}
 	
-	public InvoiceEmailActivityTabWebPage clickEmailActivity(String invoicenumber) {
+	public InvoiceEmailActivityTabWebPage clickEmailActivity(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Email Activity");	    
 		waitForNewTab();
@@ -363,7 +365,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				driver, InvoiceEmailActivityTabWebPage.class);
 	}
 	
-	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) {
+	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) throws InterruptedException {
 	    String mainWindowHandle = driver.getWindowHandle();
 	    System.out.println(mainWindowHandle);
 	    clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
@@ -397,7 +399,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				driver, InvoicePaymentsTabWebPage.class);
 	}
 	
-	public void clickInvoicePrintPreview(String invoicenumber) {
+	public void clickInvoicePrintPreview(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Print preview (server)");
 		waitForNewTab();
@@ -428,7 +430,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return parentrow.findElement(By.xpath("./td[3]/div/table/tbody/tr/td")).getText();
 	}
 	
-	public void clickInvoiceInternalTechInfo(String invoicenumber) {
+	public void clickInvoiceInternalTechInfo(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Internal Tech. Info");
 		waitForNewTab();
@@ -439,7 +441,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 	
-	public void archiveInvoiceByNumber(String invoicenumber) {
+	public void archiveInvoiceByNumber(String invoicenumber) throws InterruptedException {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {			
 			checkboxSelect(row.findElement(By.xpath(".//td/input[@type='checkbox']")));
@@ -487,6 +489,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}
 		}
 		return irow;
+	}
+
+	public void refreshPage() { 
+		driver.navigate().refresh();
 	}
 	
 }

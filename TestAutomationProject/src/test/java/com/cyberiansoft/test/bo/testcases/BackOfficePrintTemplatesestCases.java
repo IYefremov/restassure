@@ -623,7 +623,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36052:Test invoice print template with all options selected", description = "Test invoice print template with all options selected",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInvoicePrintTemplateWithAllOptionsSelected() {
+	public void testTestInvoicePrintTemplateWithAllOptionsSelected() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		
@@ -669,7 +669,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36087:Test invoice print template with no options selected", description = "Test invoice print template with no options selected",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInvoicePrintTemplateWithNoOptionsSelected() {
+	public void testTestInvoicePrintTemplateWithNoOptionsSelected() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		
@@ -715,7 +715,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36530:Test invoice print template with several options selected", description = "Test invoice print template with several options selected",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInvoicePrintTemplateWithSeveralOptionsSelected() {
+	public void testTestInvoicePrintTemplateWithSeveralOptionsSelected() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		
@@ -766,7 +766,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36532:Test invoice print template with selected allow edit options", description = "Test invoice print template with selected allow edit options",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInvoicePrintTemplateWithSelectedAllowEditOptions() {
+	public void testTestInvoicePrintTemplateWithSelectedAllowEditOptions() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		

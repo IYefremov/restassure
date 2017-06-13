@@ -400,7 +400,6 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		newClientDialogWebPage.switchToRetailCustomer();
 	
 		Assert.assertEquals(companyname,  newClientDialogWebPage.getCompanyName()); 
-		Assert.assertTrue(newClientDialogWebPage.isCompanyRetail());
 		Assert.assertFalse(newClientDialogWebPage.isWorkHoursStartVisible());
 		Assert.assertFalse(newClientDialogWebPage.isWorkHoursFinishtVisible());
 		

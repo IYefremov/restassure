@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,6 +19,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWe
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.utils.WebConstants.InvoiceStatuses;
 
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	
@@ -380,5 +382,176 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceeditpage.waitABit(1500);
 		Assert.assertEquals(invoicecustomername, invoiceeditpage.getInvoiceCustomer());
 		invoiceeditpage.closeNewTab(mainWindowHandle);
+	}
+	
+	@Test(testName = "Test Case 43708:Operation - Invoice: Status - Approved")
+	public void checkOperationInvoiceStatusApproved() throws InterruptedException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		String status = "";
+		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
+			try{
+		invoicespage.selectSearchStatus(stat);
+		invoicespage.clickFindButton();
+		status = invoicespage.getInvoiceStatus(invoicenumber);
+		if(!status.isEmpty())
+			break;
+			}catch(Exception e){}
+		}
+		if(status.equals("New")){
+		invoicespage.changeInvoiceStatus(invoicenumber, "Approved");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_APPROVED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Approved"));
+		}else{
+		invoicespage.changeInvoiceStatus(invoicenumber, "New");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));	
+		invoicespage.changeInvoiceStatus(invoicenumber, "Approved");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_APPROVED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Approved"));	
+		}
+	}
+	
+	@Test(testName = "Test Case 43712:Operation - Invoice: Status - Exported")
+	public void checkOperationInvoiceStatusExported() throws InterruptedException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		String status = "";
+		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
+			try{
+		invoicespage.selectSearchStatus(stat);
+		invoicespage.clickFindButton();
+		status = invoicespage.getInvoiceStatus(invoicenumber);
+		if(!status.isEmpty())
+			break;
+			}catch(Exception e){}
+		}
+		if(status.equals("New")){
+		invoicespage.changeInvoiceStatus(invoicenumber, "Exported");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORTED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Exported"));
+		}else{
+		invoicespage.changeInvoiceStatus(invoicenumber, "New");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));	
+		invoicespage.changeInvoiceStatus(invoicenumber, "Exported");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORTED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Exported"));	
+		}
+	}
+	
+	@Test(testName = "Test Case 43713:Operation - Invoice: Status - Void")
+	public void checkOperationInvoiceStatusVoid() throws InterruptedException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+//		invoicespage.clickFindButton();
+//		String status = invoicespage.getInvoiceStatus(invoicenumber);
+		String status = "";
+		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
+			try{
+		invoicespage.selectSearchStatus(stat);
+		invoicespage.clickFindButton();
+		status = invoicespage.getInvoiceStatus(invoicenumber);
+		if(!status.isEmpty())
+			break;
+			}catch(Exception e){}
+		}
+		if(status.equals("New")){
+		invoicespage.changeInvoiceStatus(invoicenumber, "Void");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Void"));
+		}else{
+		invoicespage.changeInvoiceStatus(invoicenumber, "New");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));	
+		invoicespage.changeInvoiceStatus(invoicenumber, "Void");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Void"));	
+		}
 	}
 }
