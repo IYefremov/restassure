@@ -191,7 +191,8 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return workhourstart.getValue();
 	}
 	
-	public boolean isWorkHoursStartVisible(){
+	public boolean isWorkHoursStartVisible() throws InterruptedException{
+		Thread.sleep(5000);
 		return workhourstart.isDisplayed();
 	}
 	

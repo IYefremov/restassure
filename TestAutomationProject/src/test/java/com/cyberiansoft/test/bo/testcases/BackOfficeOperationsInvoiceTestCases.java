@@ -522,9 +522,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
-//		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
-//		invoicespage.clickFindButton();
-//		String status = invoicespage.getInvoiceStatus(invoicenumber);
 		String status = "";
 		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
 			try{
@@ -552,6 +549,118 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 		invoicespage.clickFindButton();
 		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Void"));	
+		}
+	}
+	
+	@Test(testName = "Test Case 43710:Operation - Invoice: Status - Export Failed")
+	public void checkOperationInvoiceStatusExportFailed() throws InterruptedException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		String status = "";
+		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
+			try{
+		invoicespage.selectSearchStatus(stat);
+		invoicespage.clickFindButton();
+		status = invoicespage.getInvoiceStatus(invoicenumber);
+		if(!status.isEmpty())
+			break;
+			}catch(Exception e){}
+		}
+		if(status.equals("New")){
+		invoicespage.changeInvoiceStatus(invoicenumber, "Export Failed");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORT_FAILED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Export Failed"));
+		}else{
+		invoicespage.changeInvoiceStatus(invoicenumber, "New");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));	
+		invoicespage.changeInvoiceStatus(invoicenumber, "Export Failed");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORT_FAILED);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Export Failed"));	
+		}
+	}
+	
+	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft")
+	public void checkOperationInvoiceStatusDraft() throws InterruptedException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		String status = "";
+		for(InvoiceStatuses stat:WebConstants.InvoiceStatuses.values()){
+			try{
+		invoicespage.selectSearchStatus(stat);
+		invoicespage.clickFindButton();
+		status = invoicespage.getInvoiceStatus(invoicenumber);
+		if(!status.isEmpty())
+			break;
+			}catch(Exception e){}
+		}
+		if(status.equals("New")){
+		invoicespage.changeInvoiceStatus(invoicenumber, "Draft");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Draft"));
+		}else{
+		invoicespage.changeInvoiceStatus(invoicenumber, "New");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));	
+		invoicespage.changeInvoiceStatus(invoicenumber, "Draft");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Draft"));	
 		}
 	}
 }
