@@ -104,6 +104,24 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 	
+	@FindBy(linkText = "Select")
+	private WebElement selectBTN;
+	
+	@FindBy(linkText ="Mark as Paid")
+	private WebElement markAsPaidOption;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_panelPopup")
+	private WebElement paymentNote;
+	
+	@FindBy(className = "rmVertical")
+	private WebElement ivoiceOptions;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_popupPaymentNotesEditable")
+	private WebElement paymentTextField;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_btnMarkAsPaidWithNotes")
+	private WebElement markAsPaidBTN;
+	
 //	@FindBy(className = "rfdSkinnedButton")
 //	private WebElement voidBTN;
 	
@@ -493,6 +511,17 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public void refreshPage() { 
 		driver.navigate().refresh();
+	}
+
+	public void selectActionForFirstInvoice(String string) throws InterruptedException {
+		Actions act = new Actions(driver);
+		act.moveToElement(selectBTN).click().build().perform();
+		ivoiceOptions.findElement(By.linkText("Mark as Paid")).click();
+		wait.until(ExpectedConditions.visibilityOf(paymentNote));
+		paymentTextField.sendKeys("test");
+		markAsPaidBTN.click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
 }

@@ -49,6 +49,11 @@ public class BaseTestCase {
 	String bundleid = "";
 	
 	
+	@BeforeSuite
+	public void cleanScreenShotsFolder() throws IOException{
+		FileUtils.cleanDirectory(new File("C:\\TestAutomationProject\\report")); 
+	}
+	
 	@BeforeClass
 	@Parameters({ "selenium.browser", "ios.bundleid" })
 	public void setUp(String browser, String bundleid) throws Exception {
