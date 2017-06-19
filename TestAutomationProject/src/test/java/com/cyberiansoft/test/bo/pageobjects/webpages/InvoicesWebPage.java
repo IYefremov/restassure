@@ -2,11 +2,15 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -121,6 +125,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_btnMarkAsPaidWithNotes")
 	private WebElement markAsPaidBTN;
+	
+	@FindBy(xpath = "//tr[contains(@class, 'order-row border-row custom-order-row')]")
+	WebElement editableRow;
+	
+	@FindBy(xpath = "//div[contains(@title, 'Save')]")
+	WebElement saveVehicleInfoBTN;
 	
 //	@FindBy(className = "rfdSkinnedButton")
 //	private WebElement voidBTN;
@@ -514,14 +524,91 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void selectActionForFirstInvoice(String string) throws InterruptedException {
+		String mainWindow = driver.getWindowHandle();
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
-		ivoiceOptions.findElement(By.linkText("Mark as Paid")).click();
+		if(string.equals("Mark as Paid")){
+		ivoiceOptions.findElement(By.linkText(string)).click();
 		wait.until(ExpectedConditions.visibilityOf(paymentNote));
 		paymentTextField.sendKeys("test");
 		markAsPaidBTN.click();
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}
+		else if(string.equals("Edit")){
+			ivoiceOptions.findElement(By.linkText(string)).click();
+			Set frames = driver.getWindowHandles();
+			Thread.sleep(10000);
+			frames.remove(mainWindow);		
+			driver.switchTo().window((String)frames.iterator().next());
+		}
+		else{
+			while(true){
+			act.moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+			try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), '"+string+"')]"))).click();
+			break;
+			}catch(Exception e){}
+			}
+		}
+		
+	}
+
+	public boolean firstInvoiceMarkedAsPaid() {
+		try{
+		Actions act = new Actions(driver);
+		act.moveToElement(selectBTN).click().build().perform();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid")));
+		act.moveToElement(selectBTN).click().build().perform();
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public void editVehicleInfo(String editText) throws AWTException {
+
+		List<WebElement> editableFields = driver.findElements(By.tagName("td"));
+		Actions act = new Actions(driver);
+		for(WebElement element:editableFields){
+			act.moveToElement(element).click().sendKeys(editText).build().perform();
+		}
+		saveVehicleInfoBTN.click();
 	}
 	
+	public InvoiceEditTabWebPage clickEditFirstInvoice() throws InterruptedException {
+		
+	    String mainWindowHandle = driver.getWindowHandle();
+	    Actions act = new Actions(driver);
+		act.moveToElement(selectBTN).click().build().perform();
+		ivoiceOptions.findElement(By.linkText("Edit")).click();
+	    waitForNewTab();
+
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+			   driver.switchTo().window(activeHandle);
+			}
+		}
+		return PageFactory.initElements(
+				driver, InvoiceEditTabWebPage.class);
+	}
+
+	public boolean checkInvoiceFrameOpened() {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_panelPopup")));
+			return true;
+		}catch(TimeoutException e){
+			return false;
+		}
+	}
+
+	public boolean isInvoiceAbleToChange() {
+		try{
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_popupInvoiceNoSuffix"))).sendKeys("test");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnPopupCancel")).click();
+		return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
 }

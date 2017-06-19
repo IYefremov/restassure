@@ -51,7 +51,7 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
-		FileUtils.cleanDirectory(new File("C:\\TestAutomationProject\\report")); 
+		FileUtils.cleanDirectory(new File(".//report")); 
 	}
 	
 	@BeforeClass

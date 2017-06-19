@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import java.awt.AWTException;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -692,8 +694,110 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 
 		invoicespage.clickFindButton();
+		try{
 		invoicespage.selectActionForFirstInvoice("Mark as Paid");
-		
+		Assert.assertTrue(invoicespage.firstInvoiceMarkedAsPaid());
+		}finally{
+		invoicespage.selectActionForFirstInvoice("Mark as Unpaid");
+		}
+	}
 	
+	@Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle Info")
+	public void checkOperationInvoiceEditVehicleInfo() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		
+		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();	
+	//	invoiceeditpage.editVehicleInfo("test");
+		//Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
+	}
+	
+	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice")
+	public void checkOperationInvoiceEditChangeInvoice() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		
+		invoicespage.selectActionForFirstInvoice("Change Invoice#");
+		Assert.assertTrue(invoicespage.checkInvoiceFrameOpened());
+		Assert.assertTrue(invoicespage.isInvoiceAbleToChange());
+		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
+		Assert.assertTrue(invoicenumber.equals(newInvoiceNumber));
+	}
+	
+	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
+	public void checkOperationInvoiceDownloadJSON() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		
+		invoicespage.selectActionForFirstInvoice("Download JSON");
 	}
 }

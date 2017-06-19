@@ -203,4 +203,8 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 		return invoicecustomer.getText();
 	}
 
+	public void editVehicleInfo(String string) {
+		List <WebElement> td = driver.findElements(By.tagName("td"));
+	}
+
 }
