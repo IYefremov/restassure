@@ -89,10 +89,8 @@ public abstract class BaseWebPage {
 	}
 
 	public void waitForNewTab() {
-<<<<<<< Updated upstream
 		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-=======
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -104,7 +102,6 @@ public abstract class BaseWebPage {
 				return (d.getWindowHandles().size() != 1);
 			}
 		});
->>>>>>> Stashed changes
 	}
 
 	// Bot actions

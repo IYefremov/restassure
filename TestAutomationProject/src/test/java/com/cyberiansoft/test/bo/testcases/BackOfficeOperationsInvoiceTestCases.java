@@ -39,15 +39,14 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
 		
-		
-		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+		try{
 		backofficeheader.clickLogout();
+		}catch(Exception e){}
 	}
 	
-	@Test(description = "Test Case 15161:Operation - Invoice: Search")
+	@Test(description = "Test Case 15161:Operation - Invoice: Search", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceSearch() throws Exception {
 		
 		final String customer = "000 My Company";
@@ -112,7 +111,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add PO is present and payment is added", 
-		description = "Operations: Invoice editor - verify Add PO is present and payment is added")
+		description = "Operations: Invoice editor - verify Add PO is present and payment is added", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded() throws Exception {
 	
 		final String po = "#123";
@@ -158,7 +157,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 24751:Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", 
-			description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved")
+			description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved() throws Exception {
 		
 		final String po = "#123";
@@ -239,7 +238,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes", 
-			description = "Operation - Invoice: Edit - Click here to edit notes")
+			description = "Operation - Invoice: Edit - Click here to edit notes", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditClickHereToEditNotes() throws Exception {
 
 		final String invoicenumber = "I-046-00065";
@@ -279,7 +278,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", 
-			description = "Operation - Invoice : Sent mail in Mail Activity")
+			description = "Operation - Invoice : Sent mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceSentMailInMailActivity() throws Exception {
 
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
@@ -307,7 +306,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", 
-			description = "Operation - Invoice : Sent Custom mail in Mail Activity")
+			description = "Operation - Invoice : Sent Custom mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceSentCustomMailInMailActivity() throws Exception {
 		
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
@@ -347,7 +346,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", 
-			description = "Operation - Invoice: Edit - Customer")
+			description = "Operation - Invoice: Edit - Customer", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditCustomer() throws Exception {
 		
 		final String ponum = "123";
@@ -386,7 +385,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceeditpage.closeNewTab(mainWindowHandle);
 	}
 	
-	@Test(testName = "Test Case 43708:Operation - Invoice: Status - Approved")
+	@Test(testName = "Test Case 43708:Operation - Invoice: Status - Approved", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusApproved() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -442,7 +441,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43712:Operation - Invoice: Status - Exported")
+	@Test(testName = "Test Case 43712:Operation - Invoice: Status - Exported", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusExported() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -498,7 +497,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43713:Operation - Invoice: Status - Void")
+	@Test(testName = "Test Case 43713:Operation - Invoice: Status - Void", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusVoid() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -554,7 +553,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43710:Operation - Invoice: Status - Export Failed")
+	@Test(testName = "Test Case 43710:Operation - Invoice: Status - Export Failed", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusExportFailed() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -610,7 +609,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft")
+	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusDraft() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -666,7 +665,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
+	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException{	
 		final String ponum = "123";
 		
@@ -702,7 +701,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 	
-	@Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle Info")
+	@Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle Info", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditVehicleInfo() throws InterruptedException, AWTException{	
 		final String ponum = "123";
 		
@@ -735,7 +734,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		//Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
 	}
 	
-	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice")
+	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditChangeInvoice() throws InterruptedException, AWTException{	
 		final String ponum = "123";
 	
@@ -770,7 +769,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicenumber.equals(newInvoiceNumber));
 	}
 	
-	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
+	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceDownloadJSON() throws InterruptedException, AWTException{	
 		final String ponum = "123";
 	
@@ -799,5 +798,68 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		
 		invoicespage.selectActionForFirstInvoice("Download JSON");
+	}
+	
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditTechInfo() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info");
+		Assert.assertTrue(invoicespage.isWindowOpened());
+		invoicespage.closeTab(newTab);
+	}
+	
+	@Test(testName = "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split" , retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditRecalcTechSplit() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		invoicespage.selectActionForFirstInvoice("Recalc Tech Split");
+		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 }
