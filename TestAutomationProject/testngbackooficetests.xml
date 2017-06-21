@@ -46,7 +46,7 @@
 
       </class>
       
-     
+    
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class> 
      <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
@@ -67,7 +67,7 @@
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       </class>
 
-          <!--      -->
+            <!--     -->
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->

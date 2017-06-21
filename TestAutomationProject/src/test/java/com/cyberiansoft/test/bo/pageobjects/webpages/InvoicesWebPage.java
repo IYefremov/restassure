@@ -535,7 +535,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.navigate().refresh();
 	}
 
-	public String selectActionForFirstInvoice(String string) throws InterruptedException {
+	public String selectActionForFirstInvoice(String string , boolean swichArrow ) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
@@ -554,18 +554,21 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			Thread.sleep(10000);
 			frames.remove(mainWindow);
 			driver.switchTo().window((String) frames.iterator().next());
-			return mainWindow;
+			return (String) frames.iterator().next();
 		} else {
 			while (true) {
-				if (driver.findElement(By.className("rmBottomArrow")).isDisplayed())
+				if(swichArrow){
+					act.moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
+				}
+				else if (driver.findElement(By.className("rmBottomArrow")).isDisplayed()){
 					act.moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+				}
 				try {
 					wait.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
 							.click();
 					break;
-				} catch (Exception e) {
-				}
+				} catch (Exception e) {}
 			}
 			Set frames = driver.getWindowHandles();
 			if (frames.size() > 1) {
@@ -658,5 +661,64 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		} catch (TimeoutException e) {
 			return false;
 		}
+	}
+
+	public int countEmailActivities(String emailWindow) throws InterruptedException {
+		String mainWindow = "";
+		Set<String> windows = driver.getWindowHandles();
+		for(String window: windows){
+			if(window.equals(emailWindow))
+				driver.switchTo().window(window);
+			else{
+				mainWindow = window;
+			}
+		}
+		try{
+		int size = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("tr"))).size();
+		driver.close();
+		driver.switchTo().window(mainWindow);
+		return size;
+		}catch(TimeoutException e){
+			driver.close();
+			driver.switchTo().window(mainWindow);
+			return 0;
+		}
+	}
+
+	public boolean isSendEmailBoxOpened() {
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")));
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+	}
+
+	public void setEmailAndSend(String string) throws InterruptedException {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(string);
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).click();
+		Thread.sleep(1000);
+		wait.until(
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+	}
+
+	public void setCustomEmailAndSend(String email, String emailWindow) {
+		String mainWindow = "";
+		Set<String> windows = driver.getWindowHandles();
+		for(String window: windows){
+			if(window.equals(emailWindow))
+				driver.switchTo().window(window);
+			else{
+				mainWindow = window;
+			}
+		}		
+		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_txtEmailTo")).clear();
+		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_txtEmailTo")).sendKeys(email);
+		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_btnSend")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Your message has been sent.')]")));
+		driver.close();
+		driver.switchTo().window(mainWindow);
 	}
 }

@@ -694,10 +694,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		invoicespage.clickFindButton();
 		try{
-		invoicespage.selectActionForFirstInvoice("Mark as Paid");
+		invoicespage.selectActionForFirstInvoice("Mark as Paid", false);
 		Assert.assertTrue(invoicespage.firstInvoiceMarkedAsPaid());
 		}finally{
-		invoicespage.selectActionForFirstInvoice("Mark as Unpaid");
+		invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
 		}
 	}
 	
@@ -762,7 +762,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
-		invoicespage.selectActionForFirstInvoice("Change Invoice#");
+		invoicespage.selectActionForFirstInvoice("Change Invoice#", false);
 		Assert.assertTrue(invoicespage.checkInvoiceFrameOpened());
 		Assert.assertTrue(invoicespage.isInvoiceAbleToChange());
 		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
@@ -797,7 +797,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
-		invoicespage.selectActionForFirstInvoice("Download JSON");
+		invoicespage.selectActionForFirstInvoice("Download JSON", false);
 	}
 	
 	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info", retryAnalyzer = Retry.class)
@@ -827,7 +827,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
-		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info");
+		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
 		invoicespage.closeTab(newTab);
 	}
@@ -859,7 +859,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
-		invoicespage.selectActionForFirstInvoice("Recalc Tech Split");
+		invoicespage.selectActionForFirstInvoice("Recalc Tech Split", false);
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 	
@@ -890,7 +890,48 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
-		invoicespage.selectActionForFirstInvoice("Email Activity");
-		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
+		String emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
+		int emailActivities = invoicespage.countEmailActivities(emailWindow);
+		invoicespage.selectActionForFirstInvoice("Send Email", true);
+		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
+		invoicespage.setEmailAndSend("test123@domain.com");
+		emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
+		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
+	}
+	
+	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity" , retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
+		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
+		String emailWindow = invoicespage.selectActionForFirstInvoice("Send Custom Email", true);
+		invoicespage.setCustomEmailAndSend("test123@domain.com" , emailWindow);
+		invoicespage.selectActionForFirstInvoice("Email Activity", false);
+		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
+		Assert.assertTrue(emailActivities < emailActivitiesAfter);
 	}
 }
