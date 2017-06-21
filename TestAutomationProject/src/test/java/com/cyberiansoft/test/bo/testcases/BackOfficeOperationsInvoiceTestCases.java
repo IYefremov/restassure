@@ -862,4 +862,35 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectActionForFirstInvoice("Recalc Tech Split");
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
+	
+	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity" , retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceSentMailInMailActivity() throws InterruptedException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		invoicespage.selectActionForFirstInvoice("Email Activity");
+		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
+	}
 }
