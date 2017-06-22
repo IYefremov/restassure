@@ -535,7 +535,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.navigate().refresh();
 	}
 
-	public String selectActionForFirstInvoice(String string , boolean swichArrow ) throws InterruptedException {
+	public String selectActionForFirstInvoice(String string, boolean swichArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
@@ -557,10 +557,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			return (String) frames.iterator().next();
 		} else {
 			while (true) {
-				if(swichArrow){
+				if (swichArrow) {
 					act.moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
-				}
-				else if (driver.findElement(By.className("rmBottomArrow")).isDisplayed()){
+				} else if (driver.findElement(By.className("rmBottomArrow")).isDisplayed()) {
 					act.moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 				}
 				try {
@@ -568,7 +567,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
 							.click();
 					break;
-				} catch (Exception e) {}
+				} catch (Exception e) {
+				}
 			}
 			Set frames = driver.getWindowHandles();
 			if (frames.size() > 1) {
@@ -666,19 +666,19 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	public int countEmailActivities(String emailWindow) throws InterruptedException {
 		String mainWindow = "";
 		Set<String> windows = driver.getWindowHandles();
-		for(String window: windows){
-			if(window.equals(emailWindow))
+		for (String window : windows) {
+			if (window.equals(emailWindow))
 				driver.switchTo().window(window);
-			else{
+			else {
 				mainWindow = window;
 			}
 		}
-		try{
-		int size = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("tr"))).size();
-		driver.close();
-		driver.switchTo().window(mainWindow);
-		return size;
-		}catch(TimeoutException e){
+		try {
+			int size = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("tr"))).size();
+			driver.close();
+			driver.switchTo().window(mainWindow);
+			return size;
+		} catch (TimeoutException e) {
 			driver.close();
 			driver.switchTo().window(mainWindow);
 			return 0;
@@ -700,25 +700,132 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(string);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).click();
 		Thread.sleep(1000);
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public void setCustomEmailAndSend(String email, String emailWindow) {
 		String mainWindow = "";
 		Set<String> windows = driver.getWindowHandles();
-		for(String window: windows){
-			if(window.equals(emailWindow))
+		for (String window : windows) {
+			if (window.equals(emailWindow))
 				driver.switchTo().window(window);
-			else{
+			else {
 				mainWindow = window;
 			}
-		}		
+		}
 		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_txtEmailTo")).clear();
 		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_txtEmailTo")).sendKeys(email);
 		driver.findElement(By.id("ctl00_Content_InvoiceSendEmail1_btnSend")).click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Your message has been sent.')]")));
+		wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Your message has been sent.')]")));
 		driver.close();
 		driver.switchTo().window(mainWindow);
+	}
+
+	public void setSearchByYear(String s) {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")).click();
+		driver.findElement(By.xpath("//li[contains(text(), '" + s + "')]")).click();
+	}
+
+	public void setSearchByMake(String string) {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")).sendKeys(string);
+	}
+
+	public void setSearchByModel(String string) {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")).sendKeys(string);
+	}
+
+	public boolean checkSearchResult() throws InterruptedException {
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+
+		return driver.findElements(By.className("rgRow")).size() > 0;
+	}
+
+	public void selectSearchStatus(String s) {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")).click();
+		driver.findElement(By.xpath("//li[contains(text(), '" + s + "')]")).click();
+	}
+
+	public boolean checkWindowContent(String tab ,String...content) {
+		driver.switchTo().window(tab);
+		for(String str: content){
+			try{
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(str)));
+			}catch(TimeoutException e){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean checkPayBoxContent() throws InterruptedException {
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Invoice#:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'PO#:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'TOTAL:')]")));
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtPoRoNumber"))).sendKeys("123");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_chkPoRoApprove"))).click();
+
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_error")));
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Cash/Check')]"))).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Check #:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Amount:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Notes:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_chkCashApprove")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCashPay")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCheckNumber")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_tbCashAmount")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCashNotes")));
+
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Credit Card')]"))).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Amount:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'First Name:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Last Name:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Card#:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Expiration:')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_tbCardAmount")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardFirstName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardLastName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardNumber")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardCVV")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCardPay")));
+			
+		}catch(TimeoutException e){
+			return false;
+		}
+		
+		return true;
+	}
+
+	public boolean checkAuditLogWindowContent(String auditLogWindow) {
+		String mainWindow = "";
+		Set<String> windows = driver.getWindowHandles();
+		for (String window : windows) {
+			if (window.equals(auditLogWindow))
+				driver.switchTo().window(window);
+			else {
+				mainWindow = window;
+			}
+		}
+		try{
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Invoice #')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Date')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Customer')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'PO#')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Amount')]")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Paid')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
 	}
 }

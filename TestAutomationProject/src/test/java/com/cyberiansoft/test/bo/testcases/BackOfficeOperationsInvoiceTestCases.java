@@ -729,8 +729,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
+		@SuppressWarnings("unused")
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();	
-	//	invoiceeditpage.editVehicleInfo("test");
+//		invoiceeditpage.editVehicleInfo("test");
 		//Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
 	}
 	
@@ -933,5 +934,175 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
+	}
+	
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditInternalTechInfo() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String newTab = invoicespage.selectActionForFirstInvoice("Internal Tech. Info", false);
+		Assert.assertTrue(invoicespage.isWindowOpened());
+		invoicespage.closeTab(newTab);
+	}
+	
+//	@Test(testName = "Test Case 28933:Operations - Invoice: Archive", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceArchive() throws InterruptedException, AWTException{	
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+			
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.clickFindButton();
+
+	}
+	
+	@Test(testName = "Test Case 29198:Operation - Invoice: Year/Make/Model Search", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceYearMakeModelSearch() throws InterruptedException, AWTException{	
+	
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+			
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchStatus("All");
+		invoicespage.setSearchByYear("2007");
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.checkSearchResult());
+		invoicespage.setSearchByYear("All");
+		invoicespage.setSearchByMake("Jeep");
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.checkSearchResult());
+		invoicespage.setSearchByMake("");
+		invoicespage.setSearchByModel("Patriot");
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.checkSearchResult());
+		invoicespage.setSearchByModel("");
+		invoicespage.setSearchByYear("2007");
+		invoicespage.setSearchByMake("Jeep");
+		invoicespage.setSearchByModel("Patriot");
+		Assert.assertTrue(invoicespage.checkSearchResult());
+	}
+	
+	@Test(testName = "Test Case 43688:Operation - Invoice: Edit - Print Preview (Server)", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditPrintPreview() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		
+		String newTab = invoicespage.selectActionForFirstInvoice("Print preview (server)", false);	
+		Assert.assertTrue(invoicespage.isWindowOpened());
+//		Assert.assertTrue(invoicespage.checkWindowContent(newTab, "VIN #","Make","Model","Year","Color","Tag","R.O #","Stock#"));
+		invoicespage.closeTab(newTab);
+	}
+	
+	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditPay() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		invoicespage.selectActionForFirstInvoice("Pay", false);
+		Assert.assertTrue(invoicespage.checkPayBoxContent());
+	}
+	
+	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceEditAuditLog() throws InterruptedException, AWTException{	
+		final String ponum = "123";
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+		workorderspage.unselectInvoiceFromDeviceCheckbox();
+		workorderspage.selectSearchStatus("All");
+		workorderspage.clickFindButton();
+		
+		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoicenumber.equals("")) {
+			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+			workorderspage.setSearchOrderNumber(wonum);
+			workorderspage.clickFindButton();
+			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		}
+		
+		operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.clickFindButton();
+		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);
+		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 }
