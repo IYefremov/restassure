@@ -40,6 +40,7 @@ public class iOSInternalProjectConstants {
 	public static final String WO_DELAY_START = "WO_Delay_Start";
 	public static final String WO_VIN_ONLY = "WO_VIN_only";
 	public static final String WO_VEHICLE_TRIM_VALIDATION = "WO_Vehicle_Trim_Validation";
+	public static final String WO_PANEL_GROUP = "WO_Panel_group";
 
 	//Inspections Types
 	public static final String FOR_COPY_INSP_INSPTYPE = "For_Copy_Insp";
@@ -123,7 +124,7 @@ public class iOSInternalProjectConstants {
     public static final String CALC_MONEY_PP_VEHICLE = "Calc_Money_PP_Vehicle";
     public static final String CALC_MONEY_PP_PANEL = "Calc_Money_PP_Panel";
     public static final String CALC_MONEY_PP_SERVICE = "Calc_Money_PP_Service";
-    
+    public static final String SERVICE_WITH_SUB_SERVICE = "Service_with_sub_service";
     
     //Technicians
     public static final String EMPLOYEE_TECHNICIAN = "Employee";

@@ -9,6 +9,8 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
@@ -27,6 +29,10 @@ public class SelectEmployeePopup extends iOSHDBaseScreen {
 		selectEmployee(employee);
 		securefld.setValue(password);
 		Helpers.acceptAlert();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 		Helpers.waitABit(1000);
 	}
 	

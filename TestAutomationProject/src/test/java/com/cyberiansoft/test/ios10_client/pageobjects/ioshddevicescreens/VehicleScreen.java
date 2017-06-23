@@ -16,6 +16,8 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -119,6 +121,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
     private IOSElement wotypelabel;
+	
+	@iOSFindBy(accessibility  = "Save")
+    private IOSElement savebtn;
 	
 	public VehicleScreen(AppiumDriver driver) {
 		super(driver);
@@ -381,6 +386,16 @@ public class VehicleScreen extends iOSHDBaseScreen {
 
 	public void clickNavigationBarSaveButton() {
 		appiumdriver.findElement(By.xpath("//XCUIElementTypeNavigationBar[@name='Vehicle']/XCUIElementTypeButton[@name='Save']")).click();
+	}
+	
+	public void saveWorkOrder() {
+		savebtn.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(500);
 	}
 	
 }

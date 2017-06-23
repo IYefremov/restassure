@@ -151,6 +151,22 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		//	+ service + "\"]").click();
 	}
 	
+	public void selectServicePanel(String servicepanelname) {
+
+		swipeToElement(appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicepanelname + "']/XCUIElementTypeStaticText[@name='" + servicepanelname + "']/..")));
+		appiumdriver.findElementByName(servicepanelname).click();
+	}
+	
+	public void selectServiceSubSrvice(String servicesubsrvicename) {
+		appiumdriver.findElementByAccessibilityId(servicesubsrvicename).click();
+	}
+	
+	public boolean isServiceWithSubSrviceSelected(String servicename, String servicesubsrvicename) {
+		return appiumdriver.findElementByClassName("XCUIElementTypeTable").findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + servicesubsrvicename + "']")).size() > 0;
+	}
+	
+	
 	public void selectSubService(String servicename) {
 		if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
 			searchServiceByName(servicename);
@@ -383,6 +399,17 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
 		Helpers.waitABit(500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();
+	}
+	
+	public void saveWorkOrder() {
+		savebtn.click();
+		Helpers.waitABit(500);
+		savebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(500);
 	}
 
 }

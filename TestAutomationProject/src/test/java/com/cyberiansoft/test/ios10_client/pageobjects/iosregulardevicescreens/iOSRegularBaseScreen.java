@@ -127,12 +127,13 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	
 	public void swipeToElement(WebElement elementtoswipe) {
 		boolean swipe = true;
-		int screenheight = (int) (appiumdriver.manage().window().getSize().getHeight()*0.8);
+		int screenheight = (int) (appiumdriver.manage().window().getSize().getHeight()*0.85);
 		
 		while (swipe) {
-			//if (elementtoswipe.getLocation().getY() > screenheight)
-			if (!elementtoswipe.isDisplayed())
+			if ((elementtoswipe.getLocation().getY() > screenheight)) {
+			//if (!elementtoswipe.isDisplayed())
 				swipeScreenUp();
+			}
 			else
 				swipe = false;
 		}

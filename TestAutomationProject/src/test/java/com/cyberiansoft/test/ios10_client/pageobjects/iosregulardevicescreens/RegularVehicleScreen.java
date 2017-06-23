@@ -27,6 +27,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
     private IOSElement makecustombtn;
 	
+	@iOSFindBy(accessibility = "Save")
+    private IOSElement savebtn;
+	
 	@iOSFindBy(accessibility = "Advisor")
     private IOSElement advisorfld;
 	
@@ -333,6 +336,17 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public WebElement getVehicleInfoTableParentNode(String wonumber) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + wonumber + "']/.."));
+	}
+	
+	public void saveWorkOrder() {
+		savebtn.click();
+		Helpers.waitABit(500);
+		savebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(500);
 	}
 
 }
