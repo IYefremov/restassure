@@ -402,7 +402,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void saveWorkOrder() {
-		savebtn.click();
+		clickSaveButton();
 		Helpers.waitABit(500);
 		savebtn.click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
