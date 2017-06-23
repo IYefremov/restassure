@@ -48,17 +48,6 @@
   
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class> 
-     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
-      </class> 
-   <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">  
-      </class> 
-       <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-     </class>     
-   <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-   <methods>
- <include name="testOperationInvoiceSentCustomMailInMailActivity"/>
- </methods>
-      </class> 
 
  
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
