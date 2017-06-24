@@ -20,6 +20,10 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 
+import com.cyberiansoft.test.bo.utils.WebElementExt;
+import lombok.experimental.ExtensionMethod;
+
+@ExtensionMethod(WebElementExt.class)
 public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";

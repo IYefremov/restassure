@@ -93,12 +93,10 @@ public class WebElementsBot {
 		combobox.click();
 		combobox.clear();
 		combobox.typeValue(value);
-		//combobox.clearAndType(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
 		waitABit(4000);
 		droplist.selectByVisibleText(value);
 		waitABit(7000);
-//		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {
@@ -108,8 +106,6 @@ public class WebElementsBot {
 		combobox.clearAndType(typevalue);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(1000);
-		//new WebDriverWait(WebDriverInstansiator.getDriver(), 5)
-		  //.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
 		droplist.selectByVisibleText(selectvalue);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
@@ -121,12 +117,9 @@ public class WebElementsBot {
 		combobox.clearAndType(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
-//		WebDriverInstansiator.getUpdateWait().until(ExpectedConditions.visibilityOf(updateProcess));
-//		WebDriverInstansiator.getUpdateWait().until(ExpectedConditions.invisibilityOf(updateProcess));
-		//waitABit(1000);
+
 		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
 		droplist.selectByVisibleText(value);
-//		droplist.selectByVisibleText(value);
 		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	

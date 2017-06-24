@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,16 +20,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.bo.utils.WebDriverExtention;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 
+
+import com.cyberiansoft.test.bo.utils.WebElementExt;
 import lombok.experimental.ExtensionMethod;
 
-@ExtensionMethod(WebDriverExtention.class)
+@ExtensionMethod(WebElementExt.class)
 public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";
@@ -138,7 +140,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	// private WebElement voidBTN;
 
 	public InvoicesWebPage(WebDriver driver) {
-		super(driver);
+		super(driver);		
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
@@ -545,10 +547,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			wait.until(ExpectedConditions.visibilityOf(paymentNote));
 			paymentTextField.sendKeys("test");
-			markAsPaidBTN.click();
-			Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			markAsPaidBTN.clickAndWaitForLoading();
 			return mainWindow;
 		} else if (string.equals("Edit")) {
 			ivoiceOptions.findElement(By.linkText(string)).click();
@@ -700,9 +699,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	public void setEmailAndSend(String string) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(string);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).clickAndWaitForLoading();
 	}
 
 	public void setCustomEmailAndSend(String email, String emailWindow) {
@@ -740,9 +737,6 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public boolean checkSearchResult() throws InterruptedException {
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-
 		return driver.findElements(By.className("rgRow")).size() > 0;
 	}
 
@@ -809,6 +803,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public boolean checkAuditLogWindowContent(String auditLogWindow) {
+				
 		String mainWindow = "";
 		Set<String> windows = driver.getWindowHandles();
 		for (String window : windows) {

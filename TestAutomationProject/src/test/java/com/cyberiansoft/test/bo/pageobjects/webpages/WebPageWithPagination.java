@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
+
 public class WebPageWithPagination extends BaseWebPage {
 	
 	public final Integer MAX_TABLE_ROW_COUNT_VALUE = 50;

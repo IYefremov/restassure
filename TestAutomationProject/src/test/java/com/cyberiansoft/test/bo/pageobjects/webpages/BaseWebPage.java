@@ -16,11 +16,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
+import com.cyberiansoft.test.bo.utils.WebDriverExt;
+import lombok.experimental.ExtensionMethod;
 
+@ExtensionMethod(WebDriverExt.class)
 public abstract class BaseWebPage {
 
 	public WebDriver driver;
-	public WebDriverWait wait;
+	public static WebDriverWait wait;
 	public WebDriverWait updateWait;
 
 	private static final long SLEEP_TIMEOUT_IN_SEC = 15;

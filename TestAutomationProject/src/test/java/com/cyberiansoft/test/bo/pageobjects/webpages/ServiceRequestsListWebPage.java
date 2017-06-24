@@ -52,6 +52,10 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 
+import com.cyberiansoft.test.bo.utils.WebElementExt;
+import lombok.experimental.ExtensionMethod;
+
+@ExtensionMethod(WebElementExt.class)
 public class ServiceRequestsListWebPage extends BaseWebPage implements ClipboardOwner {
 
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
@@ -898,11 +902,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		driver.switchTo().activeElement();
 		Thread.sleep(4000);
-		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
-				.click();
-
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk"))).clickAndWaitForLoading();
 	}
 
 	@Override
@@ -1322,9 +1322,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public int checkSchedulerByDateWeek(String startDate, boolean isDateShifted) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).clickAndWaitForLoading();
 
 		if (!isDateShifted) {
 			retryingFindClick(By.className("rsFullTime"));
@@ -1364,25 +1362,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public int checkSchedulerByDateMonth(String date) {
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).clickAndWaitForLoading();
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
-		driver.findElement(By.xpath("//a[contains(@title, '" + date + "')]")).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		driver.findElement(By.xpath("//a[contains(@title, '" + date + "')]")).clickAndWaitForLoading();
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).clickAndWaitForLoading();
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsNonWorkHour")))
 				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
 
 	public void goToMonthInScheduler() throws InterruptedException {
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).clickAndWaitForLoading();
 		retryingFindClick(By.className("rsHeaderMonth"));
 		// wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsDateBox")));
@@ -1450,11 +1440,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean alpyAndCheck5TecniciansFromScheduler() {
 		arrowInTechniciansList.click();
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
-					.click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]"))).clickAndWaitForLoading();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_RadScheduler1_ctl52_pnlColor")));
 
@@ -1518,10 +1504,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void aplyTechniciansFromScheduler() throws InterruptedException {
 		arrowInTechniciansList.click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
-				.click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]"))).clickAndWaitForLoading();
 		Thread.sleep(10000);
 	}
 
@@ -1540,9 +1523,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		retryingFindClick(By.className("scheduler-dropdown"));
 		arrowInTechniciansList.click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-reset"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-reset"))).clickAndWaitForLoading();
 		waitABit(3000);
 
 		if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0)
@@ -1576,10 +1557,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 
 		if (!isDateVisible) {
-			driver.findElement(By.className("rsNextDay")).click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			driver.findElement(By.className("rsNextDay")).clickAndWaitForLoading();
 		}
 
 		int column = 0;
@@ -1598,9 +1576,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void goToTimeLine() {
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderTimeline"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderTimeline"))).clickAndWaitForLoading();
 		waitABit(4000);
 	}
 
@@ -1691,9 +1667,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void goToDocumentLinkFromLC() {
 		waitABit(1000);
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to R-')]"))).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to R-')]"))).clickAndWaitForLoading();
 	}
 
 	public boolean checkLifeCycleDocumentsContent() {
@@ -1743,10 +1717,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean goToWOfromLC() {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
-					.click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+					.clickAndWaitForLoading();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
 		} catch (TimeoutException e) {
