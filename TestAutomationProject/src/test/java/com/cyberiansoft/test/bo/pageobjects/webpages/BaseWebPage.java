@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
+
 public abstract class BaseWebPage {
 
 	public WebDriver driver;

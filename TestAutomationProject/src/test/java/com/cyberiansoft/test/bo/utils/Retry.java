@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.bo.testcases;
+package com.cyberiansoft.test.bo.utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
