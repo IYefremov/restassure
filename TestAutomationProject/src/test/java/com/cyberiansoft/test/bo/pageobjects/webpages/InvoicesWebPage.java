@@ -27,10 +27,10 @@ import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 
 
-import com.cyberiansoft.test.bo.utils.WebElementExt;
-import lombok.experimental.ExtensionMethod;
-
-@ExtensionMethod(WebElementExt.class)
+//import com.cyberiansoft.test.bo.utils.WebElementExt;
+//import lombok.experimental.ExtensionMethod;
+//
+//@ExtensionMethod(WebElementExt.class)
 public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";
@@ -547,7 +547,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			wait.until(ExpectedConditions.visibilityOf(paymentNote));
 			paymentTextField.sendKeys("test");
-			markAsPaidBTN.clickAndWaitForLoading();
+			markAsPaidBTN.click();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			return mainWindow;
 		} else if (string.equals("Edit")) {
 			ivoiceOptions.findElement(By.linkText(string)).click();
@@ -699,7 +704,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	public void setEmailAndSend(String string) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(string);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).clickAndWaitForLoading();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public void setCustomEmailAndSend(String email, String emailWindow) {

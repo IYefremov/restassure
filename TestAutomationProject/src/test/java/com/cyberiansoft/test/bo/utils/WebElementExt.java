@@ -13,6 +13,7 @@ public class WebElementExt extends BaseWebPage{
 	}
     
 	public static void clickAndWaitForLoading(WebElement el) {
+		el.click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

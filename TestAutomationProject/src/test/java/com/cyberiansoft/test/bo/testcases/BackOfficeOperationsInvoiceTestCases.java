@@ -3,7 +3,6 @@ package com.cyberiansoft.test.bo.testcases;
 import java.awt.AWTException;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

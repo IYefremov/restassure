@@ -16,10 +16,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
-import com.cyberiansoft.test.bo.utils.WebDriverExt;
-import lombok.experimental.ExtensionMethod;
-
-@ExtensionMethod(WebDriverExt.class)
+//import com.cyberiansoft.test.bo.utils.WebDriverExt;
+//import lombok.experimental.ExtensionMethod;
+//
+//@ExtensionMethod(WebDriverExt.class)
 public abstract class BaseWebPage {
 
 	public WebDriver driver;
