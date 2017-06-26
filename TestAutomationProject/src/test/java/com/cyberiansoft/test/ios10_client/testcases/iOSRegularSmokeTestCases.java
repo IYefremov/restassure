@@ -2555,7 +2555,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.selectNextScreen("All Services");
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.removeSelectedServices("AMoneyService_AdjustHeadlight");
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -3285,7 +3285,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSaveButton();
 		
@@ -3327,7 +3327,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSaveButton();
 		
@@ -3391,7 +3391,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSaveButton();
 		
@@ -3467,7 +3467,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSaveButton();
 		
@@ -3604,7 +3604,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSaveButton();
 		
@@ -4696,7 +4696,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWorkOrder();
 		}
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -5798,10 +5798,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
 		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
+		//ordersummaryscreen.clickSaveButton();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -7034,7 +7034,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		homescreen =  myworkordersscreen.clickHomeButton();
 	}
 	
@@ -7383,5 +7383,128 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.clickCancel();
 		
 		homescreen = myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 35951:SR: Reqular - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
+			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed(
+			String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectAcceptAction();
+		
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Would you like to accept  selected service request?");
+		Helpers.waitABit(4000);
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestOnHold(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertFalse(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertFalse(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.clickCancel();
+		servicerequestsscreen.clickHomeButton();
+	
+	}
+	
+	@Test(testName="Test Case 35953:SR: Regular - Verify that when SR is declined status reason should be selected", 
+			description = "Verify that when SR is declined status reason should be selected")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected(
+			String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectDeclineAction();
+		
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Would you like to decline  selected service request?");
+		servicerequestsscreen.clickDoneCloseReasonDialog();
+		Helpers.waitABit(4000);
+		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
+		servicerequestsscreen.clickHomeButton();
+	
 	}
 }

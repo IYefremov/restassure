@@ -81,6 +81,7 @@ public class iOSInternalProjectConstants {
 	public static final String SR_WO_ONLY = "SR_WO_only";
 	public static final String SR_INSP_ONLY = "SR_Insp_only";
 	public static final String MULTIPLE_INSPECTION_SERVICE_TYPE_ALM = "Multiple Inspection Service Type - ALM";
+	public static final String SR_ACCEPT_ON_MOBILE = "SR_Accept_on_mobile";
 	
 	//Services
     public static final String MISCELLANEOUS_SERVICE = "Miscellaneous";

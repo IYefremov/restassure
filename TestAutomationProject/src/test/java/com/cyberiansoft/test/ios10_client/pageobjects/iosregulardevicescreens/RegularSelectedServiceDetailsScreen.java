@@ -86,8 +86,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void setServicePriceValue(String _price)
 			throws InterruptedException {
-		Helpers.waitABit(500);
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")).clear();
+		Helpers.waitABit(1000);
+		WebElement pricecell = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/	XCUIElementTypeStaticText[@name='Price']/.."));
+		pricecell.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).clear();
 		
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");

@@ -52,6 +52,21 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(1000);
 	}
 	
+	public void checkApproveAndSaveWorkOrder() {
+		savebtn.click();
+		Helpers.waitABit(1000);
+		WebElement approvecell = appiumdriver.
+				findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Approve']/..");
+		if (approvecell.findElements(By.xpath("//XCUIElementTypeButton[@name='unselected']")).size() > 0)
+			approvecell.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).click();
+		savebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+		Helpers.waitABit(1000);
+	}
+	
 	public boolean checkApproveAndCreateInvoiceExists() {
 		return elementExists(approveandcreateinvoicechekbox);
 	}
@@ -102,6 +117,16 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSaveButton() {
+		savebtn.click();
+		Helpers.waitABit(1000);
+		savebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
+	}
+	
+	public void clickSave() {
 		savebtn.click();
 		Helpers.waitABit(1000);
 		savebtn.click();
