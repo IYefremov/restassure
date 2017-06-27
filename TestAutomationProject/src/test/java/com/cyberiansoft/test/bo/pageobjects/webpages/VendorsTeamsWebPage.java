@@ -156,7 +156,7 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Guests"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Vendor/Team"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Type"));
-		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Services"));
+		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Service Assign"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Location"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Area"));
 		Assert.assertTrue(vendorsteamstable.isTableColumnExists("Timesheet type"));

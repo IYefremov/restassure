@@ -93,7 +93,6 @@ public abstract class BaseWebPage {
 	}
 
 	public void waitForNewTab() {
-		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 		try {
 			Thread.sleep(5000);

@@ -327,6 +327,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(2000);
 
+		//invoicespage.selectActionForFirstInvoice("Payments", false);
 		SendInvoiceCustomEmailTabWebPage sendinvoicecustomemailtab = invoicespage.clickSendCustomEmail(invoicenumber);
 		sendinvoicecustomemailtab.setEmailSubjectValue(invoicenumber);
 		sendinvoicecustomemailtab.setEmailToValue(usermail);
@@ -931,9 +932,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
 		String emailWindow = invoicespage.selectActionForFirstInvoice("Send Custom Email", true);
 		invoicespage.setCustomEmailAndSend("test123@domain.com" , emailWindow);
-		invoicespage.selectActionForFirstInvoice("Email Activity", false);
+		emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
+//		invoicespage.closeTab(emailWindow);
 	}
 	
 	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info", retryAnalyzer = Retry.class)

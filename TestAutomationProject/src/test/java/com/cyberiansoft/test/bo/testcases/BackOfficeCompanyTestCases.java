@@ -112,8 +112,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15265:Company-Employees: Search")
 		public void testCompanyEmployeesSearch() throws Exception {
 
-			final String employeefirstname = "000";
-			final String employeelastname = "000";
+			final String employeefirstname = "______";
+			final String employeelastname = "++++++";
 			final String team = "Test Team";
 			final String employeename = employeefirstname + " " + employeelastname;
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
