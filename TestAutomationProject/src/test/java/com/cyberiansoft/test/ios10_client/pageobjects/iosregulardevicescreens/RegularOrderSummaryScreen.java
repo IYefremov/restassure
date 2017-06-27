@@ -117,23 +117,18 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSaveButton() {
-		savebtn.click();
-		Helpers.waitABit(1000);
-		savebtn.click();
+		clickSave();
+		clickSave();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickSave() {
 		savebtn.click();
 		Helpers.waitABit(1000);
-		savebtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
 	}
 	
 	public WebElement getTableParentNode(String cellname) {

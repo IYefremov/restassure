@@ -7945,7 +7945,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "est Case 43408:WO: Regular - Verify that search bar is present for service pack screen", 
+	@Test(testName = "est Case 43408:WO: HD - Verify that search bar is present for service pack screen", 
 			description = "Verify that search bar is present for service pack screen")
 	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() throws Exception {
 		
@@ -7986,5 +7986,168 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicesscreen.cancelOrder();
 		homescreen = myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName = "Test Case 42178:WO: HD - Verify that Cancel message is shown for New/Existing WO", 
+			description = "Verify that Cancel message is shown for New/Existing WO")
+	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() throws Exception {
+		
+		final String VIN  = "1D7HW48NX6S507810";
+		
+		homescreen = new HomeScreen(appiumdriver);
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		
+		myworkordersscreen.clickAddOrderButton();
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_TEST);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.clickCancelButton();
+		String alerttext = Helpers.getAlertTextAndCancel();
+		Assert.assertEquals(alerttext, "Stop Work Order Creation\nAny unsaved changes will be lost. Are you sure you want to stop creating this Work Order?");
+		vehiclescreeen.clickCancelButton();
+		alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Stop Work Order Creation\nAny unsaved changes will be lost. Are you sure you want to stop creating this Work Order?");
+		
+		String wonumber = myworkordersscreen.getFirstWorkOrderNumberValue();
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.clickCancelButton();
+		alerttext = Helpers.getAlertTextAndCancel();
+		Assert.assertEquals(alerttext, "Stop Work Order Edit\nAny unsaved changes will be lost. Are you sure you want to stop editing this Work Order?");
+		vehiclescreeen.clickCancelButton();
+		alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Stop Work Order Edit\nAny unsaved changes will be lost. Are you sure you want to stop editing this Work Order?");
+		Helpers.waitABit(1000);
+		myworkordersscreen.openWorkOrderDetails(wonumber);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.clickCancelButton();
+		
+		homescreen = myworkordersscreen.clickHomeButton();
+	}
+	
+	@Test(testName="Test Case 35951:SR: HD - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
+			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed(
+			String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new HomeScreen(appiumdriver);
+		
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectAcceptAction();
+		
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Would you like to accept  selected service request?");
+		Helpers.waitABit(4000);
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestOnHold(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertFalse(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertFalse(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.clickHomeButton();
+	
+	}
+	
+	@Test(testName="Test Case 35953:SR: HD - Verify that when SR is declined status reason should be selected", 
+			description = "Verify that when SR is declined status reason should be selected")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected(
+			String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new HomeScreen(appiumdriver);
+		
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectDeclineAction();
+		
+		String alerttext = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alerttext, "Would you like to decline  selected service request?");
+		servicerequestsscreen.clickDoneCloseReasonDialog();
+		Helpers.waitABit(4000);
+		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
+		servicerequestsscreen.clickHomeButton();
+	
 	}
 }
