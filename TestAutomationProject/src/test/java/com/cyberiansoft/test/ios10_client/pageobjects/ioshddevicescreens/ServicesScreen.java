@@ -156,7 +156,18 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
 						servicename + "']"))).waitAction(1000).release().perform();
 		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
-		//appiumdriver.findElementByName(service).click();
+		Helpers.waitABit(1500);
+	}
+	
+	public void selectPriceMatrix(String pricematrixname) {
+		TouchAction action = new TouchAction(appiumdriver);
+		/*action.press(appiumdriver.findElementByAccessibilityId("AvailableServiceList")
+				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
+						servicename + "']"))).waitAction(1000).release().perform();*/
+		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + 
+				pricematrixname + "']"))).waitAction(1000).release().perform();
+		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
+		Helpers.waitABit(1500);
 	}
 	
 	public void selectServiceSubSrvice(String servicename, String servicesubsrvicename) {

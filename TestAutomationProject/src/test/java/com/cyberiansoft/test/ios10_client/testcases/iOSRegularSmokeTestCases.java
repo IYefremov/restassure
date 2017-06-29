@@ -7507,4 +7507,68 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();
 	
 	}
+	
+	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
+			description = "Verify that SR is not accepted when employee review or update it")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdatet(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.selectEditServiceRequestAction();
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.setTech("Simple 20%");
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");		
+		questionsscreen.clickSaveButton();
+				
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.clickCancel();
+		
+		servicerequestsscreen.clickHomeButton();
+	
+	}
 }

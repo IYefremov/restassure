@@ -17,7 +17,8 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>  
- 
+        
+        
         <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" /> 
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
@@ -61,9 +62,9 @@
         	<include name="testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo" />
         	<include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
         	<include name="testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO" />
-        	<include name="testSRVerifyALMFlowWhenApproveBothInspections" />
+        	<!--<include name="testSRVerifyALMFlowWhenApproveBothInspections" />
         	<include name="testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline" />
-        	<include name="testSRVerifyALMFlowWhenDeclineBothInspections" />
+        	<include name="testSRVerifyALMFlowWhenDeclineBothInspections" />-->
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
         	
         	

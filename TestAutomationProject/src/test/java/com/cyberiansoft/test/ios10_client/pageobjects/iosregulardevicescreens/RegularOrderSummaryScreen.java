@@ -79,6 +79,7 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		selectEmployee( employee);
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Enter password here")).setValue(password);
 		Helpers.acceptAlert();
+		Helpers.waitABit(1000);
 	}
 
 	public RegularInvoiceInfoScreen selectDefaultInvoiceType() {
@@ -87,6 +88,8 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	}
 	
 	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
+		swipeToElement(appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']/..")));
 		appiumdriver.findElementByName(invoicetype).click();
 		return new RegularInvoiceInfoScreen(appiumdriver);
 	}
