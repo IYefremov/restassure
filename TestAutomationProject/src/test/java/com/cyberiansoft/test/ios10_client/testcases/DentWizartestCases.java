@@ -366,7 +366,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertFalse(myworkordersscreen.woExists(wo2));
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		final String wosubstring = wo1 + "," + wo2;
+		final String wosubstring = wo1 + ", " + wo2;
 		Assert.assertEquals(myinvoicesscreen.getInvoiceInfoLabel(invoicenumber), wosubstring);
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -1702,8 +1702,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails("Hail");
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -2668,8 +2668,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(totalsumm);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails("Hail No Discount Invoice");
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.assertOrderSummIsCorrect(totalsumm);

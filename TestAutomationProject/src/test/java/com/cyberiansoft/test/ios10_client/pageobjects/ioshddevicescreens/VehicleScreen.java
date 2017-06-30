@@ -143,10 +143,11 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setVIN(String vin) {
 		
 		setVINFieldValue(vin);
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 1)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(1)).click();
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Close").click();
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Close").click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void setVINFieldValue(String vin) {

@@ -29,7 +29,7 @@
           <include name="testCustomServiceLevelTechSplitForRetailHail" />
           <include name="testCustomerDiscountOnRetailHail" />
           <include name="testRetailHailPackageQuantityMultiplier" />
-          <include name="testVINDuplicateCheck" />
+          <!--<include name="testVINDuplicateCheck" />-->
           <include name="testVehiclePartRequirement" />
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
