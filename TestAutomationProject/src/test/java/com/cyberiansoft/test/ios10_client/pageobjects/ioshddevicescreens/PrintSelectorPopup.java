@@ -46,6 +46,6 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
 	public void clickPrintOptionsPrintButton() {
 		printoptionsprintbtn.click();
-		Helpers.waitABit(3000);
+		Helpers.waitABit(5000);
 	}
 }

@@ -106,7 +106,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ExcelUtils.setDentWizardExcelFile();
 	}
 	
-	@AfterMethod
+	//@AfterMethod
 	public void closeBrowser() {
 		if (webdriver != null)
 			webdriver.quit();
@@ -468,12 +468,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		
-		ordersummaryscreen.clickSaveButton();
+		//ordersummaryscreen.clickSaveButton();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehiclescreeen.setVIN(VIN);
 		
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.clickSaveEmptyPO();
 		invoiceinfoscreen.setPO(_po);
@@ -4195,6 +4197,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		TeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
 		final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
 		teaminvoicesscreen.printInvoice(invoicenum, "TA_Print_Server");
+		teaminvoicesscreen.clickHomeButton();
+		teaminvoicesscreen = homescreen.clickTeamInvoices();
 		Assert.assertTrue(teaminvoicesscreen.isInvoicePrintButtonExists(invoicenum));
 		teaminvoicesscreen.clickHomeButton();
 	}
@@ -6785,6 +6789,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.isApproveInspectionMenuActionExists();
 		myinspectionsscreen.clickHomeButton();
 		myinspectionsscreen.clickHomeButton();
+		settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 45128:Inspections: HD - Verify that service level notes are copied from Inspection to WO when it is auto created after approval", 
@@ -6803,6 +6810,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.clickHomeButton();
+		
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		
