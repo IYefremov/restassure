@@ -18,13 +18,6 @@
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />   -->
 
-          <include name="testAddingServicesToOnOrderBeingMonitored" />
-          <include name="testEditingAnInvoiceInDraft" />
-          <include name="testEvenWOLevelTechSplitForWholesaleHail" />
-          <include name="testCustomServiceLevelTechSplitForWholesaleHail" />
-          <include name="testCarHistoryFeature" />
-          
-          
           <include name="testValidVINCheck" />
           <include name="testTopCustomersSetting" />
           <include name="testVINDuplicateCheck" />
@@ -81,11 +74,11 @@
           <include name="testSendMultipleEmails" />  
           <include name="testWorkOrderDiscountOverrideFeature" />
           <include name="testCompletedROOnlyRequirementForInvoicing" />
-          <include name="testEnterprizeWorkOrderQuestionFormsInforced" />
+          <!--<include name="testEnterprizeWorkOrderQuestionFormsInforced" />
           <include name="testSuccessfulEmailOfPicturesUsingNotesFeature" />
           <include name="testEmailingPhotosInEconomicalInspection" />
           <include name="testEmailingPhotosInAuctionPackage" />
-          <include name="testEmailingPhotosInServiceDrivePackage" />
+          <include name="testEmailingPhotosInServiceDrivePackage" />-->
           <include name="testPONumberSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testCarHistoryFeature" />

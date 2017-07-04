@@ -20,7 +20,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Phase Status")
+	@iOSFindBy(accessibility = "Change Status")
     private IOSElement phasestatuscell;
 	
 	@iOSFindBy(accessibility = "Service Status")

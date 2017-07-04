@@ -121,6 +121,10 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 1)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(1)).click();
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Close").click();
 		Helpers.waitABit(500);
 	}
 	

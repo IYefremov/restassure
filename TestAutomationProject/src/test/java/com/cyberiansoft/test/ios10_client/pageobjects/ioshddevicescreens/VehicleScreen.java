@@ -137,6 +137,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 
 	public String clickSaveWithAlert() throws InterruptedException {
 		clickSaveButton();
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		return Helpers.getAlertTextAndAccept();
 	}
 
@@ -157,8 +158,8 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
 		Helpers.waitABit(500);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		((IOSDriver) appiumdriver).hideKeyboard();
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		//((IOSDriver) appiumdriver).hideKeyboard();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
 	}
 	

@@ -5,6 +5,9 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 
 import java.io.File;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -60,11 +63,13 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
@@ -8159,6 +8164,135 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickDoneCloseReasonDialog();
 		Helpers.waitABit(4000);
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
+		servicerequestsscreen.clickHomeButton();	
+	}
+	
+	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
+			description = "Verify that SR is not accepted when employee review or update it")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdatet(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		getWebDriver().quit();
+		
+		
+		homescreen = new HomeScreen(appiumdriver);
+		
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.selectEditServiceRequestAction();
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setTech("Simple 20%");
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");		
+		questionsscreen.clickSaveButton();
+				
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		
+		servicerequestsscreen.clickHomeButton();
+	
+	}
+	
+	@Test(testName="Test Case 36004:SR: HD - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
+			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
+	@Parameters({ "user.name", "user.psw" })
+	public void testVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String startDate = LocalDate.now().plusDays(1).format(formatter);
+		String endDate = LocalDate.now().plusDays(2).format(formatter);
+	
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		servicerequestslistpage.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(servicerequestslistpage.addAppointmentFromSRlist(startDate, endDate));
+		getWebDriver().quit();
+		
+		
+		homescreen = new HomeScreen(appiumdriver);
+		
+		
+
+		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		/*Assert.assertTrue(servicerequestsscreen.isServiceRequestProposed(srnumber));
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.selectEditServiceRequestAction();
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
+		vehiclescreeen.setTech("Simple 20%");
+		vehiclescreeen.selectNextScreen("Zayats Section1");
+		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");		
+		questionsscreen.clickSaveButton();*/
+				
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		
 		servicerequestsscreen.clickHomeButton();
 	
 	}
