@@ -1008,8 +1008,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1074,8 +1074,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));		
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1156,8 +1156,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1255,8 +1255,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
@@ -1298,8 +1298,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
@@ -2495,8 +2495,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -2769,8 +2769,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -2849,8 +2849,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -2921,8 +2921,8 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -2965,9 +2965,9 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.setTotalSale("1");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();		
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setPO("832145");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -3144,8 +3144,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -3225,7 +3225,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.assertServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE);
 		servicesscreen.assertTotalAmauntIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3308,7 +3308,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		
 		//Create second WO
 		myworkordersscreen.clickAddOrderButton();
@@ -3443,7 +3443,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
 		
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		myworkordersscreen.selectWorkOrderForCopyServices(wo);
 		vehiclescreeen = myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow2));
@@ -3565,8 +3565,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();	
@@ -3695,8 +3695,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		vehiclescreeen.clickHomeButton();
@@ -3868,8 +3868,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		invoiceinfoscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -4332,8 +4332,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.checkCreateInvoice();
+		//ordersummaryscreen.clickSaveButton();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		invoiceinfoscreen.setPO(_po);
 		invoiceinfoscreen.clickSaveAsFinal();			

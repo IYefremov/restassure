@@ -328,7 +328,7 @@ public abstract class Helpers {
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
 		MobileElement element = (MobileElement) driver
-				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage[contains(@name, 'car_interior_color.png')]");
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		action.tap(element, x, y).perform();
 		//action = new TouchAction(driver);
 		//action.press(element, x, y).waitAction(1000).release().perform();
@@ -343,7 +343,7 @@ public abstract class Helpers {
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[2]");*/
 		MobileElement element = (MobileElement) driver
-				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage[contains(@name, 'car_exterior_color.png')]");
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		action.tap(element, x, y).perform();
 		Thread.sleep(1000);
 		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());

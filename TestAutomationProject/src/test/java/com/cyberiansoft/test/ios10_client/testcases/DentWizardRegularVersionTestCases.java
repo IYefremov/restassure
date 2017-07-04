@@ -3911,11 +3911,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.selectNextScreen(RegularEnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption());
 			RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = new RegularEnterpriseBeforeDamageScreen(appiumdriver);
-			enterprisebeforedamagescreen.clickSaveButton();
+			enterprisebeforedamagescreen.saveWorkOrder();
 			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("Question 'VIN' in section 'Enterprise Before Damage' should be answered."));
 			enterprisebeforedamagescreen.setVINCapture();
-			enterprisebeforedamagescreen.clickSaveButton();
+			enterprisebeforedamagescreen.saveWorkOrder();
 			alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("Question 'License Plate' in section 'Enterprise Before Damage' should be answered."));
 			enterprisebeforedamagescreen.setLicensePlateCapture();
