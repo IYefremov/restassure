@@ -89,7 +89,7 @@ public class MailChecker {
     /**
      * Return the primary text content of the message.
      */
-    private static String getText(Part p) throws MessagingException,IOException {
+    public static String getText(Part p) throws MessagingException,IOException {
         if (p.isMimeType("text/*")) {
             String s = (String)p.getContent();
             textIsHtml = p.isMimeType("text/html");
@@ -191,10 +191,17 @@ public class MailChecker {
                 // }
                 System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
                 System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
-                System.out.println("Current "+ i + " :"+ "Subject:"+ email);    	
+                System.out.println("Current "+ i + " :"+ "Subject:"+ email); 
+            	System.out.println(message.getSubject());
                 if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=5) {
                 	requiredmessage = message;
                 }
+//                if (message.getSubject().contains(subjectKeyword)){
+//                	requiredmessage = message;
+//                }
+//                if (email.equals(fromEmail)){
+//                	requiredmessage = message;
+//                }
     		}
     		
     	} catch (MessagingException ex) {

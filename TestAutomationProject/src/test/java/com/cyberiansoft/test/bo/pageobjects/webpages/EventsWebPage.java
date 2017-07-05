@@ -7,8 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -47,6 +50,10 @@ public class EventsWebPage extends BaseWebPage {
 	
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
+	
+	@FindBy(className = "rgSelectedRow")
+	private WebElement selectedRow;
+	
 
 	public EventsWebPage(WebDriver driver) {
 		super(driver);
@@ -158,6 +165,10 @@ public class EventsWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(neweventOKbtn)).click();
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		try{
+		if(neweventOKbtn.isDisplayed())
+			neweventCancelbtn.click();
+		}catch(NoSuchElementException e){}
 	}
 	
 	public void cancelNewEvent() {	
@@ -202,6 +213,36 @@ public class EventsWebPage extends BaseWebPage {
 			}
 		}
 		return exists;
+	}
+
+	public void setEmailNotificationCheckBoxForSelected() throws InterruptedException {
+		WebElement emailNotificationCheckBox = selectedRow.findElement(By.className("activeCell-outer")).findElement(By.xpath(".//input[@type='checkbox']"));
+		if(emailNotificationCheckBox.getAttribute("checked") == null){
+		emailNotificationCheckBox.click();
+		//driver.findElement(By.linkText("Save")).click();
+		new Actions(driver).moveToElement(emailNotificationCheckBox).moveToElement(selectedRow.findElement(By.linkText("Save"))).click()
+		.build().perform();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}
+	}
+
+	public void setEmailNototificationDropDownForSelected(String string) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		selectedRow.findElement(By.xpath(".//div[@class ='RadComboBox RadComboBox_Office2007 ddlTemplates']")).click();
+		driver.findElement(By.xpath(".//li[text()='"+string+"']")).click();
+	}
+
+	public void selectEventRowByName(String string) {
+		driver.findElement(By.xpath("//td[contains(text(), '"+string+"')]")).click();
+	}
+
+	public void deleteSelectedEvent() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title ='Delete']"))).click();
+		driver.switchTo().alert().accept();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 }

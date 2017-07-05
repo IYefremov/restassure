@@ -51,6 +51,7 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
 //import com.cyberiansoft.test.bo.utils.WebElementExt;
 //import lombok.experimental.ExtensionMethod;
@@ -455,7 +456,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemWO']")).getText();
 	}
 
-	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany) throws InterruptedException {
+	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany)
+			throws InterruptedException {
 		waitABit(2000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		boolean exists = getFirstServiceRequestFromList()
@@ -902,7 +904,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		driver.switchTo().activeElement();
 		Thread.sleep(4000);
-		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk"))).click();
+		updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")))
+				.click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -1470,12 +1473,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean alpyAndCheck5TecniciansFromScheduler() {
 		arrowInTechniciansList.click();
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
+					.click();
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_RadScheduler1_ctl52_pnlColor")));
 
@@ -1539,7 +1544,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void aplyTechniciansFromScheduler() throws InterruptedException {
 		arrowInTechniciansList.click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
+				.click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -1607,7 +1613,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}
 
 		int column = 0;
@@ -1777,12 +1784,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean goToWOfromLC() {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
-			.click();
+					.click();
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
 		} catch (TimeoutException e) {
@@ -1852,12 +1860,69 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_tbSearchTags_tagsinput")));
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_tbSearchFreeText")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_btnSearch")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_btnSearch")));
 		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
+	}
 
+	public void setServiceRequestGeneralInfo(String _assignedto) throws InterruptedException {
+		setServiceRequestGeneralInfoAssignedTo(_assignedto);
+		driver.findElement(By.id("Card_ddlClientsAssignedTo_Arrow")).click();
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("divGeneralButtonsDone"))).click();
+	}
+
+	public void addAppointmentWithTechnisian(String startDate, String endDate, String string)
+			throws InterruptedException {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+
+		addAppointmentBTNfromSRedit.click();
+		appointmentFromDateSRedit.clear();
+		appointmentFromTimeSRedit.clear();
+		appointmentToDateSRedit.clear();
+		appointmentToTimeSRedit.clear();
+
+		appointmentFromDateSRedit.sendKeys(startDate);
+		appointmentToDateSRedit.sendKeys(endDate);
+		appointmentFromTimeSRedit.sendKeys("6:00 AM");
+		appointmentToTimeSRedit.sendKeys("7:00 AM");
+		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		Thread.sleep(2000);
+		appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+		// .findElement(By.linkText(string)).click();
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
+				.get().click();
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("Card_btnAddApp")).click();
+	}
+
+	public boolean checkEmails() throws InterruptedException {
+
+		boolean flag1 = false;
+		boolean flag2 = false;
+		for (int i = 0; i < 5; i++) {
+			try {
+				Thread.sleep(40000);
+				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
+						"Service Request with RO#", "reconpro@cyberianservices.com").isEmpty()) {
+					flag1= true;
+				}
+				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
+						"was not checked in", "reconpro@cyberianservices.com").isEmpty()) {
+					flag2= true;
+				}
+			} catch (NullPointerException e) {
+			}
+			if(flag1 && flag2)
+				return true;
+		}
+		return false;
 	}
 }

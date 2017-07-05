@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class BackOfficeHeaderPanel extends BaseWebPage {
@@ -30,6 +31,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Super User']")
 	private WebElement superusertab;
+	
+	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Miscellaneous']")
+	private WebElement miscellaneoustab;
 	
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
@@ -81,6 +85,13 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(superusertab)).click();
 		return PageFactory.initElements(
 				driver, SuperUserWebPage.class);
+	}
+
+	public MiscellaneousWebPage clickMiscellaneousLink() {
+
+		wait.until(ExpectedConditions.elementToBeClickable(miscellaneoustab)).click();
+		return PageFactory.initElements(
+				driver, MiscellaneousWebPage.class);
 	}
 
 }
