@@ -15,7 +15,7 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizartestCases">
         <methods>
-		  <!--<include name="testGetDeviceRegistrationCode" />
+          <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />   -->      
           <include name="testValidVINCheck" /> 
           <!--<include name="testTopCustomersSetting" />-->
@@ -72,11 +72,11 @@
           <include name="testWorkOrderDiscountOverrideFeature" />
           <include name="testCompletedROOnlyRequirementForInvoicing" />
           <include name="testAddingAPOToAnInvoice" />
-          <include name="testEnterprizeWorkOrderQuestionFormsInforced" />
+          <!--<include name="testEnterprizeWorkOrderQuestionFormsInforced" />
           <include name="testSuccessfulEmailOfPicturesUsingNotesFeature" />
           <include name="testEmailingPhotosInEconomicalInspection" />
           <include name="testEmailingPhotosInAuctionPackage" />
-          <include name="testEmailingPhotosInServiceDrivePackage" />
+          <include name="testEmailingPhotosInServiceDrivePackage" />-->
           <include name="testPONumberSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testCarHistoryFeature" />
