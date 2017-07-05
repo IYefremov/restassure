@@ -95,6 +95,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
         appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Cancel']").click();
+        Helpers.waitABit(1000);
 	}
 	
 	public void closeDublicaterServicesWarningByClickingOverride() {

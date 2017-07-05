@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import io.appium.java_client.MobileBy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +14,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
@@ -7511,7 +7512,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
 			description = "Verify that SR is not accepted when employee review or update it")
 	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdatet(String userName, String userPassword)
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt(String userName, String userPassword)
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -7567,6 +7568,67 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
 		servicerequestsscreen.clickCancel();
+		
+		servicerequestsscreen.clickHomeButton();
+	
+	}
+	
+	@Test(testName="Test Case 36004:SR: Regular - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
+			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
+	@Parameters({ "user.name", "user.psw" })
+	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON(String userName, String userPassword)
+			throws Exception {
+		
+		final String VIN = "2A4RR4DE2AR286008";
+		final String _make = "Chrysler";
+		final String _model = "Town & Country";
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String startDate = LocalDate.now().plusDays(1).format(formatter);
+		String endDate = LocalDate.now().plusDays(2).format(formatter);
+	
+		webdriverInicialize();
+		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.clickAddServiceRequestButton();
+		
+		servicerequestslistpage.clickGeneralInfoEditButton();
+		servicerequestslistpage.setServiceRequestGeneralInfoAssignedTo("Employee Simple 20%");
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		servicerequestslistpage.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(servicerequestslistpage.addAppointmentFromSRlist(startDate, endDate, "Employee Simple 20%"));
+		getWebDriver().quit();
+		
+		
+		homescreen = new RegularHomeScreen(appiumdriver);
+		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+				
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.selectAppointmentRequestAction();
+		Assert.assertTrue(servicerequestsscreen.isAcceptAppointmentRequestActionExists());
+		Assert.assertTrue(servicerequestsscreen.isDeclineAppointmentRequestActionExists());
+		servicerequestsscreen.clickHomeButton();
 		
 		servicerequestsscreen.clickHomeButton();
 	

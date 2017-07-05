@@ -97,7 +97,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void setCompletedPhaseStatus() throws InterruptedException {
 		//clickCustomServiceStatusButton();
-		clickPhaseStatusCell();
+		//clickPhaseStatusCell();
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1][@name='Completed']").click();
 		//completedcell.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);

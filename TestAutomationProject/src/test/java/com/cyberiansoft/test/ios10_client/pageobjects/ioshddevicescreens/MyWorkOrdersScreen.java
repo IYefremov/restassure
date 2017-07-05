@@ -113,6 +113,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void selectCopyVehicle() {
 		copyvehiclemenu.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickChangeCustomerPopupMenu() {

@@ -240,6 +240,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_btnAddApp")
 	private WebElement addAppointmentBTN;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_Input")
+	private TextField addservicerequesapptechcmb;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_DropDown")
+	private DropDown addservicerequesapptechdd;
 
 	@FindBy(id = "addAppointmentLink")
 	private WebElement addAppointmentBTNfromSRedit;
@@ -443,6 +449,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		getFirstServiceRequestFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")).click();
 		waitABit(300);
 		return PageFactory.initElements(driver, SRAppointmentInfoPopup.class);
+	}
+	
+	public void setServiceRequestAppointmentTechnicians(String tech) {
+		selectComboboxValueWithTyping(addservicerequesapptechcmb, addservicerequesapptechdd, tech);
 	}
 
 	public boolean isFirstServiceRequestFromListHasAppointment(String appointmenttime) {
@@ -998,6 +1008,31 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		appointmentToDate.sendKeys(toDate);
 		appointmentFromTime.sendKeys("6:00 AM");
 		appointmentToTime.sendKeys("7:00 AM");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTN)).click();
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+	}
+	
+	public boolean addAppointmentFromSRlist(String fromDate, String toDate, String technician) {
+
+		appointmentCalendarIcon.click();
+
+		appointmentFromDate.clear();
+		appointmentToDate.clear();
+		appointmentFromTime.clear();
+		appointmentToTime.clear();
+
+		appointmentFromDate.sendKeys(fromDate);
+		appointmentToDate.sendKeys(toDate);
+		appointmentFromTime.sendKeys("6:00 AM");
+		appointmentToTime.sendKeys("7:00 AM");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("gvTechnicians"))));
+		
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTN)).click();
 			return true;

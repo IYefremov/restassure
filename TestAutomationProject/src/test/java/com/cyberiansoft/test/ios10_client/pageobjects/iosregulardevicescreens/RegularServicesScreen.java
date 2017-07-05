@@ -203,6 +203,8 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
 		if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
 			searchServiceByName(servicename);
+		swipeToElement(appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + servicename + "']/..")));
 		IOSElement el = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='custom detail button']"));
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(el.getLocation().getX()+2, el.getLocation().getY()+2).perform();
