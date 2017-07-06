@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -134,6 +135,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	@FindBy(xpath = "//div[contains(@title, 'Save')]")
 	WebElement saveVehicleInfoBTN;
+	
+	@FindBy(id= "ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl04_Button1")
+	WebElement voidBTN;
 
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
@@ -357,9 +361,13 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 			Actions act = new Actions(driver);
-			
+			if(menuitem.equals("Edit") ||menuitem.equals("Print preview (server)")){
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]")))
+						.click();
+			}else{
 			while (true) {
-					act.moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 				
 				try {
 					wait.until(ExpectedConditions
@@ -368,6 +376,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					break;
 				} catch (Exception e) {
 				}
+			}
 			}
 			
 //			if (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))
@@ -424,18 +433,21 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		System.out.println(mainWindowHandle);
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
 		waitForNewTab();
-		// driver.switchTo().defaultContent();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		// Set windows = driver.getWindowHandles();
-		// driver.close();
-		// windows.remove(mainWindowHandle);
-		// driver.switchTo().window((String) windows.iterator().next());
-
-		for (String activeHandle : driver.getWindowHandles()) {
-			if (!activeHandle.equals(mainWindowHandle)) {
-				driver.switchTo().window(activeHandle);
+		String mainWindow = "";
+		Set<String> windows = driver.getWindowHandles();
+		for (String window : windows) {
+			if (!window.equals(mainWindowHandle))
+				driver.switchTo().window(window);
+			else {
+				mainWindow = window;
 			}
 		}
+
+//		for (String activeHandle : driver.getWindowHandles()) {
+//			if (!activeHandle.equals(mainWindowHandle)) {
+//				driver.switchTo().window(activeHandle);
+//			}
+//		}
 		return PageFactory.initElements(driver, InvoiceEditTabWebPage.class);
 	}
 
@@ -555,6 +567,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public String selectActionForFirstInvoice(String string, boolean swichArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
+		scrollWindowDown(200);
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
 		if (string.equals("Mark as Paid")) {
@@ -576,18 +589,25 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			frames.remove(mainWindow);
 			driver.switchTo().window((String) frames.iterator().next());
 			return (String) frames.iterator().next();
-		} else {
+		}  else if (string.equals("Download JSON")) {
+			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+			Thread.sleep(3000);
+			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))
+					.click();
+			return mainWindow;
+		}
+		else {
 			while (true) {
-				Thread.sleep(1000);
-				if (swichArrow) {
-					act.moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
-				} else /*
-						 * if
-						 * (driver.findElement(By.className("rmBottomArrow")).
-						 * isDisplayed())
-						 */ {
-					act.moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-				}
+				Thread.sleep(2000);
+//				if (swichArrow) {
+//					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
+//				} else /*
+//						 * if
+//						 * (driver.findElement(By.className("rmBottomArrow")).
+//						 * isDisplayed())
+//						 */ {
+//					act/*.moveToElement(voidBTN)*/.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+//				}				
 				try {
 					wait.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
@@ -607,6 +627,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			return mainWindow;
 		}
 
+	}
+	
+	public void scrollWindowDown(int pix){
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,"+pix+")", "");
 	}
 
 	public boolean firstInvoiceMarkedAsPaid() {
@@ -678,23 +703,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void closeTab(String newTab) {
-		String mainWindow = "";
+		driver.switchTo().window(newTab).close();
 		Set<String> windows = driver.getWindowHandles();
-		for (String window : windows) {
-			if (window.equals(newTab))
-				driver.switchTo().window(window);
-			else {
-				mainWindow = window;
-			}
-		}
-		driver.close();
-		// driver.switchTo().window(mainWindow);
+		driver.switchTo().window(windows.iterator().next());
 	}
 
-	public boolean recalcTechSplitProceed() {
+	public boolean recalcTechSplitProceed() throws InterruptedException {
 		try {
+			Thread.sleep(1000);
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			return true;
 		} catch (TimeoutException e) {
 			return false;

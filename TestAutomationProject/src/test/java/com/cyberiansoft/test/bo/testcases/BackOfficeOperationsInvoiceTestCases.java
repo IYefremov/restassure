@@ -111,7 +111,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add PO is present and payment is added", 
-		description = "Operations: Invoice editor - verify Add PO is present and payment is added", retryAnalyzer = Retry.class)
+		description = "Operations: Invoice editor - verify Add PO is present and payment is added")
 	public void testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded() throws Exception {
 	
 		final String po = "#123";
@@ -157,7 +157,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 24751:Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", 
-			description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", retryAnalyzer = Retry.class)
+			description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved")
 	public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved() throws Exception {
 		
 		final String po = "#123";
@@ -238,7 +238,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes", 
-			description = "Operation - Invoice: Edit - Click here to edit notes", retryAnalyzer = Retry.class)
+			description = "Operation - Invoice: Edit - Click here to edit notes")
 	public void testOperationInvoiceEditClickHereToEditNotes() throws Exception {
 
 		final String invoicenumber = "I-046-00065";
@@ -260,6 +260,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 		//final String invoicenumber = invoicespage.getFirstInvoiceNumberInTable();
 		final String mainWindowHandle = webdriver.getWindowHandle();
+		//TODO when webdriver version will be updated
 		Thread.sleep(2000);
 		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);
 		final String oldivoicenotesvalue = invoiceedittab.getInvoiceNotesValue();
@@ -347,7 +348,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", 
-			description = "Operation - Invoice: Edit - Customer", retryAnalyzer = Retry.class)
+			description = "Operation - Invoice: Edit - Customer")
 	public void testOperationInvoiceEditCustomer() throws Exception {
 		
 		final String ponum = "123";
@@ -379,6 +380,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		
 		final String mainWindowHandle = webdriver.getWindowHandle();
+		//TODO when driver update
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditInvoice(invoicenumber);
 		invoiceeditpage.changeInvoiceWholesaleCustomer(invoicecustomername);
 		invoiceeditpage.waitABit(1500);
@@ -674,24 +676,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 
 		invoicespage.clickFindButton();
 		try{
@@ -710,30 +712,30 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
 		@SuppressWarnings("unused")
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();	
 //		invoiceeditpage.editVehicleInfo("test");
-		//Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
+//		Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
 	}
 	
 	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice", retryAnalyzer = Retry.class)
@@ -744,59 +746,58 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
 		invoicespage.selectActionForFirstInvoice("Change Invoice#", false);
 		Assert.assertTrue(invoicespage.checkInvoiceFrameOpened());
 		Assert.assertTrue(invoicespage.isInvoiceAbleToChange());
 		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
-		Assert.assertTrue(invoicenumber.equals(newInvoiceNumber));
+//		Assert.assertTrue(invoicenumber.equals(newInvoiceNumber));
 	}
 	
 	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceDownloadJSON() throws InterruptedException, AWTException{	
-		final String ponum = "123";
 	
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
 		invoicespage.selectActionForFirstInvoice("Download JSON", false);
@@ -810,24 +811,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
@@ -842,24 +843,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Recalc Tech Split", false);
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
@@ -873,24 +874,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailWindow);
@@ -903,30 +904,30 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	
 	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity" , retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException{	
-		final String ponum = "123";
-	
+//		final String ponum = "123";
+//	
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
@@ -946,28 +947,28 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Internal Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
-		invoicespage.closeTab(newTab);
+//		invoicespage.closeTab(newTab);
 	}
 	
 //	@Test(testName = "Test Case 28933:Operations - Invoice: Archive", retryAnalyzer = Retry.class)
@@ -1020,24 +1021,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		
 		String newTab = invoicespage.selectActionForFirstInvoice("Print preview (server)", false);	
@@ -1054,24 +1055,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Pay", false);
 		Assert.assertTrue(invoicespage.checkPayBoxContent());
@@ -1085,24 +1086,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
-		
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+//		workorderspage.unselectInvoiceFromDeviceCheckbox();
+//		workorderspage.selectSearchStatus("All");
+//		workorderspage.clickFindButton();
+//		
+//		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
+//		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		if (invoicenumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 		
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+//		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));

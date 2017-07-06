@@ -1938,26 +1938,18 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.findElement(By.id("Card_btnAddApp")).click();
 	}
 
-	public boolean checkEmails() throws InterruptedException {
+	public boolean checkEmails(String message) throws InterruptedException {
 
 		boolean flag1 = false;
-		boolean flag2 = false;
 		for (int i = 0; i < 5; i++) {
 			try {
 				Thread.sleep(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
-						"Service Request with RO#", "reconpro@cyberianservices.com").isEmpty()) {
+						message, "reconpro@cyberianservices.com").isEmpty()) {
 					flag1= true;
 				}
-				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
-						"was not checked in", "reconpro@cyberianservices.com").isEmpty()) {
-					flag2= true;
-				}
-			} catch (NullPointerException e) {
-			}
-			if(flag1 && flag2)
-				return true;
+			} catch (NullPointerException e) {}	
 		}
-		return false;
+		return flag1;
 	}
 }
