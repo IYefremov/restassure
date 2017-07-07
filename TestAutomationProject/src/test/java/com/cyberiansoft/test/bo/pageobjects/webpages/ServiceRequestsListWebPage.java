@@ -406,7 +406,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		// getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		// Thread.sleep(4000);
+		 Thread.sleep(1000);
 	}
 
 	public void rejectFirstServiceRequestFromList() {
@@ -663,7 +663,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void clickCheckInButtonForSelectedSR() {
 		switchToServiceRequestInfoFrame();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		click(servicerequestcheckinbtn);
 		driver.switchTo().defaultContent();
 	}
@@ -1033,8 +1032,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("gvTechnicians"))));
 		
+		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbTechnician_Input")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+		.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(technician)).findFirst()
+		.get().click();
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTN)).click();
+			wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_btnAddApp")))).click();
 			return true;
 		} catch (TimeoutException e) {
 			return false;
@@ -1946,6 +1949,24 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				Thread.sleep(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
 						message, "reconpro@cyberianservices.com").isEmpty()) {
+					flag1= true;
+				}
+			} catch (NullPointerException e) {}	
+		}
+		return flag1;
+	}
+
+	public void selectSREditFrame() {
+driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+	}
+
+	public boolean checkTestEmails() throws InterruptedException {
+		boolean flag1 = false;
+		for (int i = 0; i < 5; i++) {
+			try {
+				Thread.sleep(40000);
+				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
+						"test appointment", "test@test.test").isEmpty()) {
 					flag1= true;
 				}
 			} catch (NullPointerException e) {}	

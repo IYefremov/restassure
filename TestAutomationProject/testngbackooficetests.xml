@@ -19,7 +19,7 @@
     <parameter name="selenium.browser" value="chrome" />
     <classes>   
     
-    <!--          --> 
+    <!--            --> 
     
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
     </class> 
@@ -37,18 +37,18 @@
   </class>     
    <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">  
       </class>     
-        
+      
           
   <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
 
      </class> 
     
- 
+   
      <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
      
       </class>
       
-          
+        
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class> 
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
@@ -56,7 +56,7 @@
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       </class>
 
-               <!--      -->   
+             <!--        -->   
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->

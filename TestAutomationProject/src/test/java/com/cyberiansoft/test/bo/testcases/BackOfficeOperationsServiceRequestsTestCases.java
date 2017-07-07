@@ -1304,7 +1304,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		eventsWebPage.saveNewEvent();
-		eventsWebPage.selectEventRowByName("test appointment");
+		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1336,7 +1336,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		eventsWebPage.saveNewEvent();
-		eventsWebPage.selectEventRowByName("test appointment");
+		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1365,12 +1365,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.clickAddEventButton();
-		eventsWebPage.selectEvent("Service Request Created");
-		eventsWebPage.setAlertNewName("test appointment SR created");
+		eventsWebPage.selectEvent("Service Request Checked In");
+		eventsWebPage.setAlertNewName("test appointment SR Checked In");
 		eventsWebPage.saveNewEvent();
-		eventsWebPage.selectEventRowByName("test appointment");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
+		eventsWebPage.setEmailNototificationDropDownForSelected("ServiceRequest Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
+		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1385,10 +1386,113 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
+		serviceRequestsWebPage.selectSREditFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
 
 
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was checked in"));
+		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
+		eventsWebPage.deleteSelectedEvent();
+	}
+	
+	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created", dataProvider = "provideSRdata1")
+	public void testMiscellaneousEventsAppointmentCreated(String customer, String startDate, String endDate, String status,
+			String SRcustomer, String newStatus) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.clickAddEventButton();
+		eventsWebPage.selectEvent("Appointment Created");
+		eventsWebPage.setAlertNewName("test appointment Appointment Created");
+		eventsWebPage.saveNewEvent();
+		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
+		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
+		eventsWebPage.setEmailNotificationCheckBoxForSelected();
+		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Automation Wholesale");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		
+		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
+
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Appointment was created"));
+		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
+		eventsWebPage.deleteSelectedEvent();
+	}
+	
+	@Test(testName = "Test Case 31296:Miscellaneous - Events: Appointment Failed", dataProvider = "provideSRdata1")
+	public void testMiscellaneousEventsAppointmentFailed(String customer, String startDate, String endDate, String status,
+			String SRcustomer, String newStatus) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.clickAddEventButton();
+		eventsWebPage.selectEvent("Appointment Failed");
+		eventsWebPage.setAlertNewName("test appointment Appointment Failed");
+		eventsWebPage.saveNewEvent();
+		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
+		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
+		eventsWebPage.setEmailNotificationCheckBoxForSelected();
+		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Automation Wholesale");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		
+		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
+
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
+		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
+		eventsWebPage.deleteSelectedEvent();
+	}
+	
+	@Test(testName = "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech", dataProvider = "provideSRdata1")
+	public void testMiscellaneousEventsServiceRequestAcceptedByTech(String customer, String startDate, String endDate, String status,
+			String SRcustomer, String newStatus) throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
+		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
+		eventsWebPage.clickAddEventButton();
+		eventsWebPage.selectEvent("Service Request Created");
+		eventsWebPage.setAlertNewName("test appointment SR created");
+		eventsWebPage.saveNewEvent();
+		eventsWebPage.selectEventRowByName("test appointment SR created");
+		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationCheckBoxForSelected();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Automation Wholesale");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails());
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
