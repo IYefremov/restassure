@@ -1381,10 +1381,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
-		//TODO checkin button
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Service Request with RO# was created"));
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was checked in"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");

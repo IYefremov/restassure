@@ -567,7 +567,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public String selectActionForFirstInvoice(String string, boolean swichArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
-		scrollWindowDown(200);
+		scrollWindowDown(100);
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
 		if (string.equals("Mark as Paid")) {
@@ -595,28 +595,37 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))
 					.click();
 			return mainWindow;
+		}else if((string.equals("Send Email") && swichArrow)||(string.equals("Send Custom Email") && swichArrow)){
+			Thread.sleep(2000);
+			try{
+			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
+			}catch(Exception e){}
+			try {
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
+						.click();
+		}catch (TimeoutException e) {}
+			if(string.equals("Send Email"))
+			return mainWindow;
+			else{
+				Set frames = driver.getWindowHandles();
+				Thread.sleep(10000);
+				frames.remove(mainWindow);
+				driver.switchTo().window((String) frames.iterator().next());
+			return (String) frames.iterator().next();
+			}
 		}
 		else {
-			while (true) {
 				Thread.sleep(2000);
-//				if (swichArrow) {
-//					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
-//				} else /*
-//						 * if
-//						 * (driver.findElement(By.className("rmBottomArrow")).
-//						 * isDisplayed())
-//						 */ {
-//					act/*.moveToElement(voidBTN)*/.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-//				}				
+				try{
+				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+				}catch(Exception e){}
 				try {
 					wait.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
 							.click();
-					break;
-				} catch (Exception e) {
-				}
-			}
-			Thread.sleep(3000);
+				} catch (TimeoutException e) {}
+			Thread.sleep(2000);
 			Set<String> windows = driver.getWindowHandles();
 			if (windows.size() > 1) {
 				for (String window : windows) {
