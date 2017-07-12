@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -242,7 +244,15 @@ public class EventsWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title ='Delete']"))).click();
 		driver.switchTo().alert().accept();
 		Thread.sleep(1000);
+		try{
+		driver.switchTo().alert().accept();
+		}catch(NoAlertPresentException e){}
+		try{
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}catch(TimeoutException e){
+			driver.navigate().refresh();
+		}
+		
 	}
 
 }

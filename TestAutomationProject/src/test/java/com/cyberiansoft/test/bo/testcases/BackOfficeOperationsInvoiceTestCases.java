@@ -827,7 +827,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 	
-	@Test(testName = "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split" , retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split" )
 	public void checkOperationInvoiceEditRecalcTechSplit() throws InterruptedException, AWTException{		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
@@ -1031,7 +1031,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 	
-	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay")
 	public void checkOperationInvoiceEditPay() throws InterruptedException, AWTException{	
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,

@@ -193,7 +193,7 @@ public class MailChecker {
                 System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                 System.out.println("Current "+ i + " :"+ "Subject:"+ email); 
             	System.out.println(message.getSubject());
-                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=5) {
+                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=10) {
                 	requiredmessage = message;
                 }
 //                if (message.getSubject().contains(subjectKeyword)){

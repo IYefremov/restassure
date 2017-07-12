@@ -833,7 +833,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Invoice#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'PO#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'TOTAL:')]")));
-
+			driver.findElement(By.xpath("//*[@id='ctl00_ctl00_Content_Main_ctl01_ctl00_Card_RadTabStrip']/div/ul/li[2]/a/span/span/span")).click();;
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtPoRoNumber")))
 					.sendKeys("123");
@@ -882,7 +882,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardCVV")));
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCardPay")));
-
+				driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_BtnCancel")).click();
+				Thread.sleep(1000);
 		} catch (TimeoutException e) {
 			return false;
 		}

@@ -1950,6 +1950,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
 						message, "reconpro@cyberianservices.com").isEmpty()) {
 					flag1= true;
+					break;
 				}
 			} catch (NullPointerException e) {}	
 		}
