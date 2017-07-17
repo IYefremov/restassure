@@ -1948,7 +1948,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			try {
 				Thread.sleep(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
-						message, "reconpro@cyberianservices.com").isEmpty()) {
+						message, "reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1= true;
 					break;
 				}
@@ -1967,7 +1967,7 @@ driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 			try {
 				Thread.sleep(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
-						"test appointment", "test@test.test").isEmpty()) {
+						"test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1= true;
 				}
 			} catch (NullPointerException e) {}	

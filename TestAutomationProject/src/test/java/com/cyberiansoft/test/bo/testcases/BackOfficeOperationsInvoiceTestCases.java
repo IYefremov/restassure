@@ -135,7 +135,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(5000);
-		
+		//TODO when webdriver renewed
 		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);		
 		invoiceedittab.clcikAddPO();		
 		invoiceedittab.clickAddPOPayButton();
@@ -183,6 +183,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(3000);
+		//TODO when webdriver renewed
 		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);		
 		invoiceedittab.clcikAddPO();		
 		invoiceedittab.clickAddPOPayButton();
@@ -260,10 +261,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 		//final String invoicenumber = invoicespage.getFirstInvoiceNumberInTable();
 		final String mainWindowHandle = webdriver.getWindowHandle();
-		//TODO when webdriver version will be updated
 		Thread.sleep(2000);
 		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);
 		final String oldivoicenotesvalue = invoiceedittab.getInvoiceNotesValue();
+		//TODO when webdriver version will be updated
 		invoiceedittab.setEditableNotes(BackOfficeUtils.getCurrentDateFormatted());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 		
@@ -953,7 +954,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Internal Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
-//		invoicespage.closeTab(newTab);
+		invoicespage.closeTab(newTab);
 	}
 	
 //	@Test(testName = "Test Case 28933:Operations - Invoice: Archive", retryAnalyzer = Retry.class)
@@ -1089,5 +1090,16 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
+	}
+	
+	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation", retryAnalyzer = Retry.class)
+	public void checkOperationInvoiceSearchOperation() throws InterruptedException, AWTException{	
+		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);		
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		
+
 	}
 }

@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -582,14 +584,15 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			return mainWindow;
-		} else if (string.equals("Edit")) {
+		} else if (string.equals("Edit") || string.equals("Print preview (server)")) {
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			Set frames = driver.getWindowHandles();
 			Thread.sleep(10000);
 			frames.remove(mainWindow);
 			driver.switchTo().window((String) frames.iterator().next());
 			return (String) frames.iterator().next();
-		}  else if (string.equals("Download JSON")) {
+		}  
+		else if (string.equals("Download JSON")) {
 			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 			Thread.sleep(3000);
 			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))
@@ -602,7 +605,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}catch(Exception e){}
 			try {
 				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
+						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")))
 						.click();
 		}catch (TimeoutException e) {}
 			if(string.equals("Send Email"))
@@ -613,8 +616,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				frames.remove(mainWindow);
 				driver.switchTo().window((String) frames.iterator().next());
 			return (String) frames.iterator().next();
-			}
-		}
+			}}
 		else {
 				Thread.sleep(2000);
 				try{
@@ -622,10 +624,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				}catch(Exception e){}
 				try {
 					wait.until(ExpectedConditions
-							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")))
-							.click();
+							.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
+					Thread.sleep(500);
+							driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 				} catch (TimeoutException e) {}
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			Set<String> windows = driver.getWindowHandles();
 			if (windows.size() > 1) {
 				for (String window : windows) {
@@ -791,18 +794,18 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void setSearchByYear(String s) {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")).click();
-		driver.findElement(By.xpath("//li[contains(text(), '" + s + "')]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//li[contains(text(), '" + s + "')]")))).click();
 	}
 
 	public void setSearchByMake(String string) {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")).sendKeys(string);
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")))).clear();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")))).sendKeys(string);
 	}
 
 	public void setSearchByModel(String string) {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")).sendKeys(string);
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")))).clear();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")))).sendKeys(string);
 	}
 
 	public boolean checkSearchResult() throws InterruptedException {
@@ -810,8 +813,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void selectSearchStatus(String s) {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")).click();
-		driver.findElement(By.xpath("//li[contains(text(), '" + s + "')]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//li[contains(text(), '" + s + "')]")))).click();
 	}
 
 	public boolean checkWindowContent(String tab, String... content) {
