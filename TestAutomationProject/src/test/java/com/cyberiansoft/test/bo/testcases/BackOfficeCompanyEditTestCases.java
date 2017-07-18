@@ -60,7 +60,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		backofficeheader.clickLogout();
 	}
 	
-	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit", description = "Company- Insurance Company: in Service Request Claim info Edit")
+	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit", description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() throws InterruptedException {
 		
 		final String srcompany = "Alex SASHAZ";
@@ -605,7 +605,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.deleteServiceRequestType(srtype);
 	}
 	
-	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit")
+	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit",retryAnalyzer = Retry.class)
 	public void testCompanyInvoiceTypeClientEdit() throws Exception {
 
 		final String invoicetype = "TestIntInvTeam";
