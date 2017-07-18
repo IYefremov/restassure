@@ -26,6 +26,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.SuppliesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TeamsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.UsersWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VehiclePartsWebPage;
+import com.cyberiansoft.test.bo.utils.Retry;
 
 public class BackOfficeCompanyTestCases extends BaseTestCase {
 		
@@ -112,8 +113,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(description = "Test Case 15265:Company-Employees: Search")
 		public void testCompanyEmployeesSearch() throws Exception {
 
-			final String employeefirstname = "______";
-			final String employeelastname = "++++++";
+			final String employeefirstname = "+++";
+			final String employeelastname = "---";
 			final String team = "Test Team";
 			final String employeename = employeefirstname + " " + employeelastname;
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -472,8 +473,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Test(testName = "Test Case 26726:Company- Employees: Archive", description = "Company- Employees: Archive")
 		public void testCompanyEmployeesArchive() throws Exception {
 
-			final String employeefirstname = "Archive";
-			final String employeelastname = "User";
+			final String employeefirstname = "archive";
+			final String employeelastname = "unarchive";
 			final String employeename = employeefirstname + " " + employeelastname;
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -559,7 +560,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			}
 		}
 		
-		@Test(testName = "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options", description = "Company - Invoice type: Verify dependency bwn Visible and Required options")
+		@Test(testName = "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options", description = "Company - Invoice type: Verify dependency bwn Visible and Required options",retryAnalyzer = Retry.class)
 		public void testCompanyInvoiceTypeVerifyDependencyBetweenVisibleAndRequiredOptions() throws Exception {
 			
 			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,

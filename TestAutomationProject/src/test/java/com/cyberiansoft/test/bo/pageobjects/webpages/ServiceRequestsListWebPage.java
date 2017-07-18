@@ -1942,23 +1942,23 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean checkEmails(String message) throws InterruptedException {
-
 		boolean flag1 = false;
+		Thread.sleep(20000);
 		for (int i = 0; i < 5; i++) {
 			try {
-				Thread.sleep(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
 						message, "reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1= true;
 					break;
 				}
 			} catch (NullPointerException e) {}	
+			Thread.sleep(40000);
 		}
 		return flag1;
 	}
 
 	public void selectSREditFrame() {
-driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 	}
 
 	public boolean checkTestEmails() throws InterruptedException {

@@ -176,7 +176,7 @@ public class MailChecker {
     	Message requiredmessage = null;
     	
     	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-3; i--) {
+    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-4; i--) {
     			Message message = foundMessages[i];
                 Address[] froms = message.getFrom();
                 String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
@@ -186,9 +186,7 @@ public class MailChecker {
                 Date date = new Date();//Getting Present date from the system
                 long diff = date.getTime()-message.getReceivedDate().getTime();//Get The difference between two dates
                 long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
-                // if(diffMinutes>2){
-                // diffMinutes=2;
-                // }
+         
                 System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
                 System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                 System.out.println("Current "+ i + " :"+ "Subject:"+ email); 
@@ -196,12 +194,6 @@ public class MailChecker {
                 if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=10) {
                 	requiredmessage = message;
                 }
-//                if (message.getSubject().contains(subjectKeyword)){
-//                	requiredmessage = message;
-//                }
-//                if (email.equals(fromEmail)){
-//                	requiredmessage = message;
-//                }
     		}
     		
     	} catch (MessagingException ex) {

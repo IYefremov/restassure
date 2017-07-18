@@ -349,7 +349,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", 
-			description = "Operation - Invoice: Edit - Customer")
+			description = "Operation - Invoice: Edit - Customer", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditCustomer() throws Exception {
 		
 		final String ponum = "123";

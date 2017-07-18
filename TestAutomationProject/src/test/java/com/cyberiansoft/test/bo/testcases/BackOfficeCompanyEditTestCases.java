@@ -20,6 +20,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.UsersWebPage;
+import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
 import java.io.IOException;
@@ -272,7 +273,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.archiveUser(userfirstnameed, userlastnameed);	
 	}
 	
-	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit")
+	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit", retryAnalyzer= Retry.class)
 	public void testCompanyClientsUsersEdit() throws Exception {
 
 		final String clientmail = "123123213@domain.com";

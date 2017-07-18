@@ -369,8 +369,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 						.click();
 			}else{
 			while (true) {
+				try{
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-				
+				}catch(Exception e){}
 				try {
 					wait.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]")))
@@ -605,8 +606,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}catch(Exception e){}
 			try {
 				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")))
-						.click();
+						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
+				Thread.sleep(500);
+				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 		}catch (TimeoutException e) {}
 			if(string.equals("Send Email"))
 			return mainWindow;

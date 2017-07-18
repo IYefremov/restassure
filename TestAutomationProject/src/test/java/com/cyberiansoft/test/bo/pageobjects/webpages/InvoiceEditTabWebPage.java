@@ -146,7 +146,7 @@ public class InvoiceEditTabWebPage extends BaseWebPage {
 	}
 	
 	public String getInvoiceNotesValue() {
-		String oldvalue = driver.findElement(By.xpath("//div[contains(@class, 'service-notes')]")).getText();
+		String oldvalue = driver.findElement(By.xpath("//div[@class='service-notes custom-service-notes editable-field']")).getText();
 		return oldvalue;
 	}
 	
