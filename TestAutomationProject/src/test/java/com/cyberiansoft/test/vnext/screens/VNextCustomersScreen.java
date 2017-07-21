@@ -35,9 +35,9 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
-		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='Got It']").size() > 0)
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
-				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
+		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
 	public void selectCustomer(String customer) {
@@ -75,17 +75,35 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			
 			tap(customerslist.findElement(By.xpath(".//div[text()='" + customer + "']")));
 			waitABit(1000);*/
+		} else {
+			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name']"));
+			WebElement elem = ctmrs.get(ctmrs.size()-1);
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
+			waitABit(1000);
+			tap(customerslist.findElement(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			waitABit(1000);
+
 		}
 		log(LogStatus.INFO, "Select customer " + customer);
 	}
 	
-	public void selectCustomerByCustomerAddress(String customeraddress) {
-		WebElement elem = customerslist.findElement(By.xpath(".//div[@class='item-address' and contains(text(), '" + customeraddress + "')]"));	
+	/*public void selectCustomerByCustomerAddress(String customeraddress) {
+		WebElement elem = customerslist.findElement(By.xpath(".//div[@class='list-item-text list-item-address' and contains(text(), '" + customeraddress + "')]"));	
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);			
-		tap(customerslist.findElement(By.xpath(".//div[@class='item-address' and contains(text(), '" + customeraddress + "')]")));
+		tap(customerslist.findElement(By.xpath(".//div[@class='list-item-text list-item-address' and contains(text(), '" + customeraddress + "')]")));
 		waitABit(1000);
 		log(LogStatus.INFO, "Select customer by Address " + customeraddress);
+	}*/
+	
+	public void selectCustomerByCompanyName(String customercompany) {
+		WebElement elem = customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));	
+		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+		je.executeScript("arguments[0].scrollIntoView(true);",elem);			
+		tap(customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
+		waitABit(1000);
+		log(LogStatus.INFO, "Select customer by Address " + customercompany);
 	}
 	
 	public VNextNewCustomerScreen clickAddCustomerButton() {

@@ -18,7 +18,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='parts']")
 	private WebElement vehiclepartsscreen;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
 	public VNextVehiclePartsScreen(SwipeableWebDriver appiumdriver) {
@@ -29,13 +29,13 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	}
 	
 	public WebElement getVehiclePartsList() {
-		return vehiclepartsscreen.findElement(By.xpath(".//div[@class='list-block list-selectable']"));
+		return vehiclepartsscreen.findElement(By.xpath(".//div[@class='list-selectable']"));
 	}
 	
 	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclepartname) {
 		WebElement vpcell = getVehiclePartCell(vehiclepartname);
 		if (vpcell != null)
-			tap(vpcell.findElement(By.xpath(".//div[@class='item-check ']/i")));
+			tap(vpcell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
 			Assert.assertTrue(false, "Can't find Vehicle Part: " + vehiclepartname);
 		log(LogStatus.INFO, "Select Vehicle Part: " + vehiclepartname);
@@ -45,7 +45,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	public WebElement getVehiclePartCell(String vehiclepartname) {
 		WebElement vpcell = null;
-		List<WebElement> vehicleparts = getVehiclePartsList().findElements(By.xpath("./ul/li/a"));
+		List<WebElement> vehicleparts = getVehiclePartsList().findElements(By.xpath(".//div[@action='select-item']"));
 		for (WebElement vehiclepartcell : vehicleparts) {
 			if (vehiclepartcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + vehiclepartname + "']")).size() > 0) {
 				vpcell = vehiclepartcell;

@@ -18,19 +18,19 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
 	private WebElement invoicepo;
 	
-	@FindBy(xpath="//i[@action='back']")
+	@FindBy(xpath="//span[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//i[@action='menu']")
+	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
 	private WebElement menubtn;
 	
-	@FindBy(xpath="//i[@action='save']")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 	
 	@FindBy(xpath="//a[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
 	
-	@FindBy(xpath="//div[@class='estimation-number']/span")
+	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement invoicenumberfld;
 	
 	public VNextInvoiceInfoScreen(SwipeableWebDriver appiumdriver) {
@@ -45,6 +45,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(invoicepo));
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set PO number: " + ponumber);		
 	}
 	
@@ -86,7 +87,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public String getInvoiceNumber() {
-		return invoicenumberfld.getText();
+		return invoicenumberfld.getText().trim();
 	}
 
 }

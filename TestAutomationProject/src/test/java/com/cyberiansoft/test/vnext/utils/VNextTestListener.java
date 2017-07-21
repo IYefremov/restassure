@@ -53,7 +53,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 			e.printStackTrace();
 		}
 	    try {
-			((VNextBaseTestCase) currentClass).registerDevice();
+			//((VNextBaseTestCase) currentClass).registerDevice();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

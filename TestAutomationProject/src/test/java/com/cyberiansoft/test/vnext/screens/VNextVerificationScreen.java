@@ -16,7 +16,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	@FindBy(id="phone-verification-view")
 	private WebElement phonevereficationscreren;
 	
-	@FindBy(xpath="//input[contains(@data-bind,'data.verificationCode')]")
+	@FindBy(xpath="//li[@data-name='verificationCode']/label/input")
 	private WebElement regfld;
 	
 	@FindBy(xpath="//a[contains(@data-bind,'navigateNext')]")

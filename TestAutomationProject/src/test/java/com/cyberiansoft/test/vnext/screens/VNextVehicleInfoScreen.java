@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
@@ -72,15 +73,18 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(vehiclefieldslist));
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
 	public void setVIN (String vinnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(vinfld));
 		setValue(vinfld, vinnumber);
-		waitABit(4000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.hideKeyboard();
+	    switchToWebViewContext();
+		//waitABit(2000);
 		log(LogStatus.INFO, "Set VIN: " + vinnumber);
 	}
 	
@@ -229,10 +233,10 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		swipeScreenLeft();
 		new VNextVisualScreen(appiumdriver);
 		swipeScreenLeft();
-		new VNextVisualScreen(appiumdriver);
-		swipeScreenLeft();
 		//new VNextVisualScreen(appiumdriver);
-		swipeScreenLeft();
+		//swipeScreenLeft();
+		//new VNextVisualScreen(appiumdriver);
+		//swipeScreenLeft();
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();

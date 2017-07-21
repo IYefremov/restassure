@@ -92,9 +92,9 @@ public class VNextBaseScreen {
 	}
 	
 	public void swipeScreenLeft() {	
-		if (appiumdriver instanceof JavascriptExecutor)
-		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
-		//tap(appiumdriver.findElementByXPath("//i[@action='forward']"));
+		//if (appiumdriver instanceof JavascriptExecutor)
+		 //   ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
+		tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
 		log(LogStatus.INFO, "Swipe To Next Screen");
 		waitABit(1000);
 	}

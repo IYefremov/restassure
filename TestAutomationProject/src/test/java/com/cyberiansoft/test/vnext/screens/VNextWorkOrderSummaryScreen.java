@@ -18,7 +18,7 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//input[@action='auto-invoice']")
 	private WebElement autoinvoicecreateoption;
 	
-	@FindBy(xpath="//div[@class='right']/i[@action='save']")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 
 	public VNextWorkOrderSummaryScreen(SwipeableWebDriver appiumdriver) {

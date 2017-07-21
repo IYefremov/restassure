@@ -26,21 +26,31 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//div[@class='car-marker']/img")
 	private WebElement carmarker;
 	
-	@FindBy(xpath="//i[@action='add']")
+	@FindBy(xpath="//a[@class='floating-button color-red']")
 	private WebElement adddamagesbtn;
+	
+	@FindBy(xpath="//div[@class='speed-dial-buttons']")
+	private WebElement damagetypeslist;
 	
 	public VNextVisualScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(adddamagesbtn));
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		
+		
 	}
 
-	public VNextSelectDamagesScreen clickAddServiceButton() {		
+	public void clickAddServiceButton() {		
 		tap(adddamagesbtn);
 		log(LogStatus.INFO, "Tap Add Service button");
+	}
+	
+	public VNextSelectDamagesScreen clickOtherServiceOption() {		
+		tap(damagetypeslist.findElement(By.xpath(".//span[text()='Other']")));
+		log(LogStatus.INFO, "Tap Other Damage Type option");
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	
@@ -86,11 +96,17 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void clickDamageCancelEditingButton() {
-		tap(visualscreen.findElement(By.xpath(".//div[@class='right cancel-editing-button']/i")));
+		tap(visualscreen.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
 		log(LogStatus.INFO, "Tap Damage Cancel Editing button");
 	}
 	
 	public List<WebElement> getImageMarkers() {
 		return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img"));
+	}
+	
+	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
+		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
+		log(LogStatus.INFO, "Tap Damage Type: " + damagetype);
+		return new VNextVisualScreen(appiumdriver);
 	}
 }

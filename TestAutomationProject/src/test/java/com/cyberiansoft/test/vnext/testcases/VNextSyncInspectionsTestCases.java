@@ -16,7 +16,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		inspectionsscreen.createSimpleInspection();
+		inspectionsscreen = inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
 		homescreen.clickQueueMessageIcon();

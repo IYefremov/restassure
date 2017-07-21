@@ -47,7 +47,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
-		customersscreen.selectCustomerByCustomerAddress(WordUtils.capitalize(customeraddress));
+		customersscreen.selectCustomerByCompanyName(WordUtils.capitalize(companyname));
 		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), lastname);

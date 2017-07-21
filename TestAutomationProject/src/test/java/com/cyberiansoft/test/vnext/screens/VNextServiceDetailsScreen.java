@@ -14,16 +14,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//i[@action='save']")
+	@FindBy(xpath="//span[@action='save']")
 	private WebElement servicedtailsapplybtn;
 	
-	@FindBy(xpath="//i[@action='notes']")
+	@FindBy(xpath="//div[@action='notes']/span")
 	private WebElement notesbutton;
 	
-	@FindBy(xpath="//div[@class='page inspections-service inspections-service-details page-on-center']")
+	@FindBy(xpath="//div[@data-page='details']")
 	private WebElement servicedetailssscreen;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//span[@action='back']")
 	private WebElement backbtn;
 	
 	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
@@ -33,7 +33,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(notesbutton));
+		wait.until(ExpectedConditions.visibilityOf(servicedetailssscreen));
 	}
 	
 	public VNextNotesScreen clickServiceNotesOption() {
@@ -67,7 +67,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public void setServiceAmountValue(String amount) {
 		clickServiceAmountField();		
-		tap(servicedetailssscreen.findElement(By.xpath(".//i[@class='icon-clear']")));
+		for (int i = 0; i <= servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value").length()+1; i++) {
+			clickKeyboardBackspaceButton();
+		}
 		for (int i = 0; i < amount.length(); i++) {
 			clickKeyboardButton(amount.charAt(i));
 		}
@@ -76,15 +78,15 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public String getServiceAmountValue() {
-		return servicedetailssscreen.findElement(By.xpath(".//input[@name='Amount']")).getAttribute("value");
+		return servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value");
 	}
 	
 	public String getServiceQuantityValue() {
-		return servicedetailssscreen.findElement(By.xpath(".//input[@name='QuantityFloat']")).getAttribute("value");
+		return servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")).getAttribute("value");
 	}
 	
 	public void clickServiceAmountField() {
-		tap(servicedetailssscreen.findElement(By.xpath(".//input[@name='Amount']")));
+		tap(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")));
 		waitABit(2000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(keyboard));		
@@ -92,7 +94,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickServiceQuantityField() {
-		tap(servicedetailssscreen.findElement(By.xpath(".//input[@name='QuantityFloat']")));
+		tap(servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")));
 		waitABit(2000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(keyboard));		

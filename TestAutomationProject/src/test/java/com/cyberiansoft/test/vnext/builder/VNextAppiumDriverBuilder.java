@@ -9,6 +9,7 @@ import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 
@@ -18,6 +19,10 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
 	
 	public static String getPlatformName() {
         return PLATFORM_NAME;
+    }
+	
+	public static void setPlatformName() {
+		PLATFORM_NAME = MobilePlatform.IOS;
     }
 	
     public static AndroidDriverBuilder forAndroid() {
@@ -41,7 +46,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
     		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
     		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
-    		
+    		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             return new SwipeableWebDriver(endpoint, appiumcap);
 
         }

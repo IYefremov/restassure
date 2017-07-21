@@ -41,7 +41,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (String servicename : services)
-			Assert.assertTrue(servicesscreen.isServiceAdded(servicename));
+			Assert.assertTrue(servicesscreen.isServiceSelected(servicename));
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		homescreen = workordersscreen.clickBackButton();
 	}

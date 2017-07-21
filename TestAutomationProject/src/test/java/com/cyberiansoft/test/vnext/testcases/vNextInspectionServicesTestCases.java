@@ -56,13 +56,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -84,15 +84,15 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspservicesscreen.swipeScreenLeft();
 		inspservicesscreen.swipeScreenRight();
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspservicesscreen.swipeScreenLeft();
 		inspservicesscreen.swipeScreenRight();
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		inspectionsscreen.clickBackButton();
 	}
@@ -117,24 +117,24 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectService(thirdservicetoadd);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservicetoadd));
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(thirdservicetoadd));
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		for (int i=0; i<thirdservice.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -159,25 +159,25 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectServices(secondpart);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < thirdservice.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		for (int i=0; i<thirdservice.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(thirdservice[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(thirdservice[i]));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -200,7 +200,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
@@ -295,13 +295,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspservicesscreen.saveInspectionViaMenu();
 
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnum);
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		for (int i=0; i<servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		
@@ -471,7 +471,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i=0; i < servicesselect.length; i++)
-			Assert.assertTrue(inspservicesscreen.isServiceAdded(servicesselect[i]));
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(servicesselect[i]));
 		selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectServices(servicesselect);
 		selectservicesscreen.clickSaveSelectedServicesButton();
@@ -513,18 +513,14 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i = 0; i <  secondservices.length; i++) {
-			VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(secondservices[i]);
-			servicedetailsscreen.setServiceAmountValue(secondservicesprices[i]);
-			servicedetailsscreen.clickServiceDetailsDoneButton();
-			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			inspservicesscreen.setServiceAmountValue(secondservices[i], secondservicesprices[i]);
 		}
 		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$242.00");
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		
 		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
 		inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(secondservices[0]);
-		inspservicesscreen = servicedetailsscreen.deleteService();
+		inspservicesscreen.uselectService(secondservices[0]);
 		
 		selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectServices(thirdservices);
@@ -532,22 +528,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		
 		for (int i = 0; i <  secondservices.length; i++) {
-			servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(thirdservices[i]);
-			servicedetailsscreen.setServiceAmountValue(thirdservicesprices[i]);
-			servicedetailsscreen.clickServiceDetailsDoneButton();
-			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			inspservicesscreen.setServiceAmountValue(thirdservices[i], thirdservicesprices[i]);
 		}
 		
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(thirdservices[0]);
-		servicedetailsscreen.setServiceAmountValue("5");
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inspservicesscreen.setServiceAmountValue(thirdservices[0], "5");
 		
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(secondservices[1]);
-		servicedetailsscreen.setServiceAmountValue("84.55");
-		servicedetailsscreen.setServiceQuantityValue("9.15");
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inspservicesscreen.setServiceAmountValue(secondservices[1], "84.55");
+		inspservicesscreen.setServiceQuantityValue(secondservices[1], "9.15");
 		
 		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$812.31");
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -585,7 +572,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceAdded(matrixservice));
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -659,7 +646,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceAdded(matrixservice));
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceMatrixValue(matrixservice), availablepricematrixes[2]); 
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
@@ -686,14 +673,12 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectService(servicetoselect);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceAdded(servicetoselect));
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(servicetoselect));
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(servicetoselect), serviceprice);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(servicetoselect);
-		servicedetailsscreen.clickServiceAmountField();
-		servicedetailsscreen.clickKeyboardBackspaceButton();
-		servicedetailsscreen.clickKeyboardButton(servicelastsymbol);
-		servicedetailsscreen.clickKeyboardDoneButton();
-		servicedetailsscreen.clickServiceDetailsDoneButton();
+		inspservicesscreen.clickServiceAmountField(servicetoselect);
+		inspservicesscreen.clickKeyboardBackspaceButton();
+		inspservicesscreen.clickKeyboardButton(servicelastsymbol);
+		inspservicesscreen.clickKeyboardDoneButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(servicetoselect), newserviceprice);
 		inspectionsscreen = inspservicesscreen.cancelInspection();
@@ -717,7 +702,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspinfoscreen.setVIN(testVIN);
 		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		visualscreen.clickAddServiceButton();
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -758,7 +744,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), serviceprice);
 		inspservicesscreen.swipeScreensRight(3);
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		visualscreen.clickAddServiceButton();
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -792,8 +779,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspinfoscreen.setVIN(testVIN);
 		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
-		visualscreen = selectdamagesscreen.clickDefaultDamageType(selectdamage);
+		visualscreen.clickAddServiceButton();
+		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImage();
 		visualscreen.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
@@ -828,13 +815,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectService(percentageservice);
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(percentageservice);
-		servicedetailsscreen.clickServiceAmountField();
-		servicedetailsscreen.clickKeyboardBackspaceButton();
-		servicedetailsscreen.clickKeyboardButton(quantitylastdigit.charAt(0));
-		servicedetailsscreen.clickKeyboardDoneButton();
-		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), "28.000");
-		servicedetailsscreen.clickServiceDetailsDoneButton();
+		inspservicesscreen.clickServiceAmountField(percentageservice);
+		inspservicesscreen.clickKeyboardBackspaceButton();
+		inspservicesscreen.clickKeyboardButton(quantitylastdigit.charAt(0));
+		inspservicesscreen.clickKeyboardDoneButton();
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(percentageservice), "28.000%");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -859,15 +843,12 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectService(moneyservice);
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(moneyservice);
-		servicedetailsscreen.clickServiceAmountField();
-		servicedetailsscreen.clickKeyboardBackspaceButton();
+		inspservicesscreen.clickServiceAmountField(moneyservice);
+		inspservicesscreen.clickKeyboardBackspaceButton();
 		for (int i = 0; i < pricevalue.length(); i++) {
-			servicedetailsscreen.clickKeyboardButton(pricevalue.charAt(i));
+			inspservicesscreen.clickKeyboardButton(pricevalue.charAt(i));
 		}
-		servicedetailsscreen.clickKeyboardDoneButton();
-		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), pricevalue);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
+		inspservicesscreen.clickKeyboardDoneButton();		
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(moneyservice), "$3.20");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -891,8 +872,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspinfoscreen.setVIN(testVIN);
 		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
-		visualscreen = selectdamagesscreen.clickDefaultDamageType(selectdamage);
+		visualscreen.clickAddServiceButton();
+		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImageACoupleTimes(quantities.length);
 		visualscreen.waitABit(1000);
 		
@@ -931,8 +912,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspinfoscreen.setVIN(testVIN);
 		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
-		visualscreen = selectdamagesscreen.clickDefaultDamageType(selectdamage);
+		visualscreen.clickAddServiceButton();
+		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImage();
 		visualscreen.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
@@ -941,7 +922,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		
-		selectdamagesscreen = visualscreen.clickAddServiceButton();
+		visualscreen.clickAddServiceButton();
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -977,17 +959,15 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(moneyservice1);
-		inspservicesscreen = servicedetailsscreen.deleteService();
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(percentageservice);
-		inspservicesscreen = servicedetailsscreen.deleteService();
+		inspservicesscreen.uselectService(moneyservice1);
+		inspservicesscreen.uselectService(percentageservice);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		
 		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
 		inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
-		Assert.assertTrue(inspservicesscreen.isServiceAdded(moneyservice2));
-		Assert.assertFalse(inspservicesscreen.isServiceAdded(moneyservice1));
-		Assert.assertFalse(inspservicesscreen.isServiceAdded(percentageservice));
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(moneyservice2));
+		Assert.assertFalse(inspservicesscreen.isServiceSelected(moneyservice1));
+		Assert.assertFalse(inspservicesscreen.isServiceSelected(percentageservice));
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}

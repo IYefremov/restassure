@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextStatusScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@action='update-main-db']")
+	@FindBy(xpath="//*[@action='update-main-db']")
 	private WebElement updatemaindbbtn;
 	
 	@FindBy(xpath="//a[@action='back']")
@@ -34,7 +34,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	
 	public VNextHomeScreen clickBackButton() {
 		tap(backbtn);
-		testReporter.log(LogStatus.INFO, "Tap Back button");
+		log(LogStatus.INFO, "Tap Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 

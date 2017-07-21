@@ -5,7 +5,8 @@ public class VNextAlertMessages {
 	public static String CANT_DOWNLOAD_DB = "Can't download database";
 	public static String REGISTRATION_CODE_IS_NOT_VALID = "Registration code is not valid";
 	public static String ENTERED_PASSWORD_IS_INCORRECT = "Entered password is incorrect";
-	public static String CANCEL_INSPECTION_ALERT = "Any unsaved changes will be lost.";
+	public static String CANCEL_INSPECTION_ALERT = "The changes you made will not be saved if you stop editing this Inspection";
+	public static String CANCEL_CREATING_INSPECTION_ALERT = "The changes you made will not be saved if you stop creating this Inspection";
 	public static String VIN_REQUIRED_MSG = "VIN# is required";
 	public static String MODEL_REQUIRED_MSG = "Model is required";
 	public static String MAKE_REQUIRED_MSG = "Make is required";

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -44,6 +45,28 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		log(LogStatus.INFO, "Tap Information Dialog Yes Button");
 	}
 	
+	public void clickInformationDialogDontSaveButton() {
+		List<WebElement> dlgbtns = modaldlg.findElements(By.xpath(".//span[@class='modal-button ']"));
+		for (WebElement btn : dlgbtns)
+			if (btn.getText().trim().equals("Don\'t save")) {
+				tap(btn);
+				break;
+			}
+			//System.out.println("====" + btn.getText());
+		//tap(modaldlg.findElement(By.xpath(".//span[text()=" + "Don\'t save" + "]")));
+		log(LogStatus.INFO, "Tap Information Dialog Don't save Button");
+	}
+	
+	public void clickInformationDialogSaveButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Save']")));
+		log(LogStatus.INFO, "Tap Information Dialog Save Button");
+	}
+	
+	public void clickInformationDialogCancelButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Cancel']")));
+		log(LogStatus.INFO, "Tap Information Dialog Cancel Button");
+	}
+	
 	public void clickInformationDialogNoButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='No']")));
 		log(LogStatus.INFO, "Tap Information Dialog No Button");
@@ -67,6 +90,10 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		return msg;
 	}
 	
-	
+	public String clickInformationDialogDontSaveButtonAndGetMessage() {
+		String msg = getInformationDialogMessage();
+		clickInformationDialogCancelButton();
+		return msg;
+	}
 
 }

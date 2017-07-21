@@ -45,20 +45,30 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
-	public void createSimpleInspection() {	
+	public VNextInspectionsScreen createSimpleInspection() {	
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
 		customersscreen.selectCustomer("Retail Automation");
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		waitABit(4000);
-		inspinfoscreen.saveInspectionfromFirstScreen();
+		inspinfoscreen.setVIN("TESTVINN");
+		VNextInspectionServicesScreen servicesscreen = inspinfoscreen.goToInspectionServicesScreen();
+		servicesscreen.clickSaveButton();
+		//waitABit(4000);
+		//inspinfoscreen.saveInspectionfromFirstScreen();
+		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public String getFirstInspectionNumber() {
 		return inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
 	}
 	
-	public String getFirstInspectionCustomerValue() {
-		return inspectionslist.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
+	public String getInspectionCustomerValue(String inspectionnumber) {
+		String inspprice = null;
+		WebElement inspcell = getInspectionCell(inspectionnumber);
+		if (inspcell != null)
+			inspprice = inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title open-popup']")).getText();
+		else
+			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
+		return inspprice;
 	}
 	
 	public String getFirstInspectionPrice() {
@@ -77,12 +87,13 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
 		WebElement inspcell = null;
-		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//a[@class='entity-item accordion-item']"));
-		for (WebElement invcell : inspections)
-			if (invcell.findElements(By.xpath(".//div[@class='entity-item-text' and text()='" + inspectionnumber + "']")).size() > 0) {
+		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//div[@class='entity-item accordion-item']"));
+		for (WebElement invcell : inspections) {
+			if (invcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText().equals(inspectionnumber)) {
 				inspcell = invcell;
 				break;
 			}
+		}
 		return inspcell;
 	}
 	

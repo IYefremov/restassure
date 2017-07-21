@@ -23,15 +23,15 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 	}
 	
 	public WebElement getPriceMatrixesList() {
-		return pricematrixesscreen.findElement(By.xpath(".//div[@class='list-block']"));
+		return pricematrixesscreen.findElement(By.xpath(".//div[contains(@class, 'list-block')]"));
 	}
 	
 	public boolean isPriceMatrixExistsInTheList(String pricematrix) {
-		return getPriceMatrixesList().findElements(By.xpath(".//div[@class='item-title' and text()='" + pricematrix + "']")).size() > 0;
+		return getPriceMatrixesList().findElements(By.xpath(".//*[contains(@class, 'item-title') and text()='" + pricematrix + "']")).size() > 0;
 	}
 	
 	public VNextVehiclePartsScreen selectPriceMatrix(String pricematrix) {
-		tap(getPriceMatrixesList().findElement(By.xpath(".//div[@class='item-title' and text()='" + pricematrix + "']")));
+		tap(getPriceMatrixesList().findElement(By.xpath(".//*[contains(@class, 'item-title') and text()='" + pricematrix + "']")));
 		log(LogStatus.INFO, "Select Price Matrix: " + pricematrix);
 		return new VNextVehiclePartsScreen(appiumdriver);
 	}

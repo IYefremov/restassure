@@ -165,8 +165,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		String inspnumbertc = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
-		visualscreen = selectdamagesscreen.clickDefaultDamageType(dentdamage);
+		visualscreen.clickAddServiceButton();
+		visualscreen.clickDefaultDamageType(dentdamage);
 		visualscreen.clickCarImage();
 		visualscreen.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();

@@ -91,7 +91,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void setUp() {
-		waitABit(55000);
+		waitABit(3000);
 	   // switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -181,13 +181,32 @@ public class VNextBaseTestCase {
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber(), userregmail);
 		regscreen.waitABit(7000);
+		
+		/*final String searchlicensecriteria = "VNext Automation";
+
+		initiateWebDriver();
+		webdriverGotoWebPage("https://reconpro.qc.cyberianconcepts.com/Admin/Devices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin("olexandr.kramar@cyberiansoft.com", "test12345");
+
+		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
+				ActiveDevicesWebPage.class);
+
+		devicespage.setSearchCriteriaByName(searchlicensecriteria);
+		String regCode = devicespage.getFirstRegCodeInTable();
+
+		getWebDriver().quit();*/
+		
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
+		//verificationscreen.setDeviceRegistrationCode(regCode);		
 		verificationscreen.clickVerifyButton(); 
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		registrationinformationdlg.waitABit(50*1000);
+		registrationinformationdlg.waitABit(70*1000);
 		/*appiumdriver.switchTo().defaultContent();
 		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() < 1) {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
@@ -198,11 +217,11 @@ public class VNextBaseTestCase {
 			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 			informationdlg.clickInformationDialogOKButton();
 		}*/
-		
+		//System.out.println("++++" + appiumdriver.findElements(By.xpath("//body/child::*")).size());
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
-		registrationinformationdlg.waitABit(10*1000);
+		registrationinformationdlg.waitABit(15*1000);
 	    switchToWebViewContext();
 	}
 	

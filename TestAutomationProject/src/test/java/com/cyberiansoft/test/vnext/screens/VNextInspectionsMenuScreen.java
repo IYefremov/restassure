@@ -11,16 +11,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@action='edit']/i")
+	@FindBy(xpath="//a[@handler='_edit']")
 	private WebElement editinspectionbtn;
 	
-	@FindBy(xpath="//a[@action='email']/i")
+	@FindBy(xpath="//a[@handler='_email']")
 	private WebElement emailinspectionbtn;
 	
-	@FindBy(xpath="//a[@action='create-order']/i")
+	@FindBy(xpath="//a[@handler='_createOrder']")
 	private WebElement createwoinspectionbtn;
 	
-	@FindBy(xpath="//div[@class='page inspections-menu hide-toolbar hide-searchbar page-on-center']")
+	@FindBy(xpath="//div[@class='actions-layer popup tablet-fullscreen modal-in']")
 	private WebElement inspectionsmenuscreen;
 	
 	

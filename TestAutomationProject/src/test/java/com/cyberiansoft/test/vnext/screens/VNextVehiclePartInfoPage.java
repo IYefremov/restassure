@@ -18,7 +18,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='info']")
 	private WebElement vehiclepartinfoscreen;
 	
-	@FindBy(xpath="//div[@action='size']/i")
+	@FindBy(xpath="//div[@action='size']")
 	private WebElement vehiclepartsizeselect;
 	
 	@FindBy(xpath="//div[@action='severity']")
@@ -30,10 +30,10 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(id="additional-services")
 	private WebElement additionalserviceslist;
 	
-	@FindBy(xpath="//i[@action='notes']")
+	@FindBy(xpath="//div[@action='notes']")
 	private WebElement notesbutton;
 	
-	@FindBy(xpath="//a[@action='save']/i")
+	@FindBy(xpath="//a[@action='save']")
 	private WebElement savebtn;
 	
 	public VNextVehiclePartInfoPage(SwipeableWebDriver appiumdriver) {
@@ -45,13 +45,13 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	
 	public void selectVehiclePartSize(String vehiclepartsize) {
 		tap(vehiclepartsizeselect);
-		tap(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + vehiclepartsize + "']")));
+		tap(appiumdriver.findElement(By.xpath("//a[@action='select-item' and contains(text(), '" + vehiclepartsize + "')]")));
 		log(LogStatus.INFO, "Select Vehicle Part size: " + vehiclepartsize);
 	}
 	
 	public void selectVehiclePartSeverity(String vehiclepartseverity) {
 		tap(vehiclepartseverityselect);
-		tap(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + vehiclepartseverity + "']")));
+		tap(appiumdriver.findElement(By.xpath("//a[@action='select-item' and contains(text(), '" + vehiclepartseverity + "')]")));
 		log(LogStatus.INFO, "Select Vehicle Part size: " + vehiclepartseverity);
 	}
 	

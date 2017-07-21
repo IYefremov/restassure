@@ -15,7 +15,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String testcustomer = "Oksana Osmak";
+	final String testcustomer = "Retail Automation";
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 43325:vNext - Verify VIN is decoded correctly for Inspection", 
@@ -112,6 +112,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 			description = "Navigate through wizard steps for Inspection by hardware 'Back' button")
 	public void testNavigateThroughWizardStepsForInspectionByHardwareBackButton() { 
 	
+		final String servicename = "Dent Repair";
+		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
@@ -124,7 +126,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService("Detail");
+		selectservicesscreen.selectService(servicename);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
@@ -208,7 +210,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		final String inspnum = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionsscreen = vehicleinfoscreen.saveInspectionfromFirstScreen();
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnum);
-		Assert.assertEquals(inspectionsscreen.getFirstInspectionCustomerValue(), customer);
+		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer);
 		homescreen = inspectionsscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.selectCustomer(customer);

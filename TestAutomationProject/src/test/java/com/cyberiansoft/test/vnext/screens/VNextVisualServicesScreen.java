@@ -24,8 +24,8 @@ public class VNextVisualServicesScreen extends VNextBaseScreen {
 	
 	public VNextVisualScreen selectCustomService(String servicename) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(visualservicesscreen.findElement(By.xpath(".//span[text()='" + servicename + "']"))));
-		tap(visualservicesscreen.findElement(By.xpath(".//span[text()='" + servicename + "']")));
+		wait.until(ExpectedConditions.visibilityOf(visualservicesscreen.findElement(By.xpath(".//div[@class='service']/div[contains(text(), '" + servicename + "')]"))));
+		tap(visualservicesscreen.findElement(By.xpath(".//div[@class='service']/div[contains(text(), '" + servicename + "')]")));
 		log(LogStatus.INFO, "Tap Custom Service: " + servicename);
 		return new VNextVisualScreen(appiumdriver);
 	}

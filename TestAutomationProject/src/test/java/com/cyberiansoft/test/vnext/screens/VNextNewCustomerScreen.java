@@ -51,7 +51,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(id="customerDetailsCountry")
 	private WebElement countrycell;
 	
-	@FindBy(id="customerDetailsState")
+	@FindBy(xpath="//div[@action='state']")
 	private WebElement statecell;
 	
 	@FindBy(id="customerDetailsZip")
@@ -196,11 +196,14 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomerState(String customerstate) {
+		//waitABit(2000);
 		if (customerstate.length() > 0) {
-			tap(statecell);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.visibilityOf(statecell));
+			tap(statecell);
+			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statespage));
-			tap(statespage.findElement(By.xpath(".//li/a[@class='list-select-item' and contains(text(), '" + customerstate + "')]")));
+			tap(statespage.findElement(By.xpath(".//li/a[@action='select-item' and contains(text(), '" + customerstate + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 			log(LogStatus.INFO, "Select customer State: " + customerstate);
@@ -208,7 +211,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public String getCustomerState() {
-		return statecell.getAttribute("value");
+		return appiumdriver.findElement(By.id("customerDetailsState")).getAttribute("value");
 	}
 	
 	public void clickSaveCustomerButton() {

@@ -12,23 +12,26 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@class='estimation-number']/span")
+	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;
 
-	@FindBy(xpath="//div[@class='left']/i[@action='menu']")
+	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
 	private WebElement menubtn;
 	
-	@FindBy(xpath="//div[text()='Cancel Inspection']")
+	@FindBy(xpath="//a[@handler='_cancel']")
 	private WebElement cancelinspectionmenu;
 	
-	@FindBy(xpath="//div[text()='Save Inspection']")
+	@FindBy(xpath="//a[@handler='_save']")
 	private WebElement saveinspectionmenu;
 	
-	@FindBy(xpath="//div[text()='Save Work Order']")
+	@FindBy(xpath="//a[@handler='_save']")
 	private WebElement saveworkordermenu;
 	
-	@FindBy(xpath="//div[text()='Notes']")
+	@FindBy(xpath="//a[@handler='_notes']")
 	private WebElement inspectionnotesmenu;
+	
+	@FindBy(xpath="//span[@action='save']")
+	private WebElement savebtn;
 	
 	public VNextBaseInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -38,8 +41,8 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public VNextInspectionsScreen cancelInspection() {
 		clickCancelInspectionMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
+		String msg = informationdlg.clickInformationDialogDontSaveButtonAndGetMessage();
+		//Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
@@ -77,7 +80,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getNewInspectionNumber() {
-		return inspectionnumber.getText();
+		return inspectionnumber.getText().trim();
 	}
 	
 	public VNextNotesScreen clickInspectionNotesOption() {

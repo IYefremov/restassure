@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextNotesScreen extends VNextBaseScreen {
@@ -22,28 +24,28 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='notes']")
 	private WebElement servicenotessscreen;
 	
-	@FindBy(xpath="//a[@action='clear']")
+	@FindBy(xpath="//span[@action='clear']")
 	private WebElement clearnotesbtn;
 	
 	@FindBy(xpath="//textarea[@name='notes']")
 	private WebElement notestextfld;
 	
-	@FindBy(name="quick_notes")
+	@FindBy(xpath="//div[contains(@class, 'accordion-item accordion-item-quick-notes')]")
 	private WebElement quicknotescontent;
 	
-	@FindBy(xpath="//a[@action='save']/i")
+	@FindBy(xpath="//span[@action='back']")
 	private WebElement notesbackbtn;
 	
 	@FindBy(xpath="//a[@action='select-text']")
 	private WebElement notestexttab;
 	
-	@FindBy(xpath="//a[@action='select-pictures']")
+	@FindBy(xpath="//div[@action='take-lib']")
 	private WebElement notespicturestab;
 	
-	@FindBy(xpath="//i[@action='take-camera']")
+	@FindBy(xpath="//*[@action='take-camera']")
 	private WebElement notescamerabtn;
 	
-	@FindBy(xpath="//i[@action='take-lib']")
+	@FindBy(xpath="//*[@action='take-lib']")
 	private WebElement notesgallerybtn;
 	
 	@FindBy(id="notes-pictures")
@@ -53,15 +55,17 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(quicknotescontent));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='notes']")));
 	}
 	
 	public List<WebElement> getListOfQuickNotes() {
-		return quicknotescontent.findElements(By.xpath(".//ul/li[@action='quick-note']"));
+		return quicknotescontent.findElements(By.xpath(".//div[@class='list-block']/div[@action='quick-note']"));
 	}
 	
 	public void addQuickNote(String quicknote) {
-		tap(quicknotescontent.findElement(By.xpath(".//ul/li[@action='quick-note']/div/div[text()='" + quicknote + "']")));
+		if (!quicknotescontent.getAttribute("class").contains("accordion-item-expanded"))
+			tap(quicknotescontent);
+		tap(quicknotescontent.findElement(By.xpath(".//div[@action='quick-note' and contains(text(), '" + quicknote + "')]")));
 		log(LogStatus.INFO, "Add '" + quicknote + "' quick note");
 	}
 	
@@ -83,7 +87,8 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void selectNotesPicturesTab() {
-		tap(notespicturestab);
+		//tap(notespicturestab);
+		tap(notescamerabtn);
 		log(LogStatus.INFO, "Select Notes Pictures tab");
 	}
 	
@@ -129,25 +134,59 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void addImageToNotesFromGallery() {
-		clickGalleryIcon();
+		//clickGalleryIcon();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		waitABit(3000);
+		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
+		else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
+		
 		waitABit(1000);
 		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
 			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
+		else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
 		waitABit(4000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']"))).click();
-		waitABit(2000);
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).click();
+		/*if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']")).size() > 0)
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']")).click();
+		//else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='RECENT']")).size() > 0)
+		//	appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='RECENT']")).click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']"))).click();
+		waitABit(1000);
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).click();
 		
+		if (appiumdriver.findElements(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).size() > 0) {
+			new TouchAction(appiumdriver).press(appiumdriver.findElement(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).waitAction(500).release().perform();
+			System.out.println("+++++" + appiumdriver.findElements(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).size());
+			appiumdriver.findElement(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).click();
+			
+		
+		}
+		else if (appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).size() > 0) {
+			List<WebElement> imgs = appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView"));
+			for (WebElement im : imgs)
+				new TouchAction(appiumdriver).press(im).waitAction(500).release().perform();
+			System.out.println("+++++" + appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).size());
+			appiumdriver.findElement(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).click();
+			
+		}
 		waitABit(3000);
+		*/
+		appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
+		waitABit(10000);
+		appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
+		
 		switchToWebViewContext();
 		waitABit(3000);
 	}
 	
 	public int getNumberOfAddedNotesPictures() {
-		return servicenotessscreen.findElement(By.id("notes-pictures")).findElements(By.xpath(".//li[@class='picture-item']")).size();
+		if (!(servicenotessscreen.findElements(By.xpath(".//div[@class='accordion-item accordion-item-pictures accordion-item-expanded']")).size() > 0))
+			tap(servicenotessscreen.findElement(By.xpath(".//div[@class='accordion-item accordion-item-pictures']")));
+		return servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElements(By.xpath(".//div[@class='img-item' and @action='fullscreen']")).size();
 	}
 	
 }

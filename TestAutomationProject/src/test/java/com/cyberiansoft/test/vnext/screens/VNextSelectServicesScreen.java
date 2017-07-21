@@ -18,7 +18,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='center' and text()='Select Services']")
 	private WebElement selectservicesscreencapt;
 	
-	@FindBy(xpath="//div[contains(@class, 'page inspections-service')]")
+	@FindBy(xpath="//div[@data-page='services-add']")
 	private WebElement selectservicesscreen;
 	
 	public VNextSelectServicesScreen(SwipeableWebDriver appiumdriver) {
@@ -31,11 +31,11 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public WebElement getServicesList() {	
 		waitABit(1000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		return wait.until(ExpectedConditions.visibilityOf(selectservicesscreen.findElement(By.xpath(".//div[@class='list-block']"))));
+		return wait.until(ExpectedConditions.visibilityOf(selectservicesscreen.findElement(By.xpath(".//div[@class='services-list-block']"))));
 	}
 	
 	public List<WebElement> getServicesListItems() {	
-		return getServicesList().findElements(By.xpath("./ul/li/a[@action='select-item']"));
+		return getServicesList().findElements(By.xpath(".//div[@action='select-item']"));
 	}
 	
 	public WebElement getServiceListItem(String servicename) {
@@ -47,7 +47,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public String getServiceListItemName(WebElement srvlistitem) {
-		return srvlistitem.findElement(By.xpath(".//div[@class='item-title']")).getText();
+		return srvlistitem.findElement(By.xpath(".//div[@class='item-title']")).getText().trim();
 	}
 	
 	public void selectServices(String[] serviceslist) {
@@ -58,7 +58,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public void selectService(String servicename) {
 		WebElement servicerow = getServiceListItem(servicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//div[@action='select']/i")));
+			tap(servicerow.findElement(By.xpath(".//input[@action='select']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + servicename);
 	}
@@ -66,7 +66,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public VNextPriceMatrixesScreen openMatrixServiceDetails(String matrixservicename) {
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//i[@action='detail']")));
+			tap(servicerow.findElement(By.xpath(".//input[@action='select']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 		return new VNextPriceMatrixesScreen(appiumdriver);
@@ -83,7 +83,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSaveSelectedServicesButton() {
-		tap(selectservicesscreen.findElement(By.xpath(".//i[@action='save']")));
+		tap(selectservicesscreen.findElement(By.xpath(".//span[@action='save']")));
 		log(LogStatus.INFO, "Click Save button");
 	}
 }

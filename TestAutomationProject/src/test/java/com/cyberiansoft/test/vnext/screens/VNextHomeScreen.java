@@ -50,10 +50,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customerslist));
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='Got It']"));
+		
 	}
 	
 	public VNextCustomersScreen clickCustomersMenuItem() {
@@ -101,7 +102,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isQueueMessageVisible() {
-		return appiumdriver.findElementsByXPath(quemessagexpath).size() > 0;
+		return appiumdriver.findElementByXPath(quemessagexpath).isDisplayed();
 	}
 	
 	public void waitUntilQueueMessageInvisible() {

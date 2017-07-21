@@ -24,7 +24,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//a[@action='create-invoice']")
+	@FindBy(xpath="//a[@handler='_createInvoice']")
 	private WebElement createinvoicemenu;
 	
 	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
