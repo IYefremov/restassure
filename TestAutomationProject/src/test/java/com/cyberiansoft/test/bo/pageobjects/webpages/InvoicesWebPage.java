@@ -276,8 +276,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public boolean isInvoiceNumberExists(String invoicenum) {
+		//By.xpath(".//tr/td/a[text()='" + invoicenum + "']")
 		boolean exists = invoicestable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td/a[text()='" + invoicenum + "']")).size() > 0;
+				.findElements(By.partialLinkText(invoicenum)).size() > 0;
 		return exists;
 	}
 
