@@ -778,5 +778,17 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	 * 
 	 * return null; } }
 	 */
+	
+//	@Test(testName = "Test Case 60616:Operations - Work Orders: Search operation")
+	public void testWorkOrderSearchOperation() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		WorkOrdersWebPage workOrderPage = operationspage.clickWorkOrdersLink();
+		
+		Assert.assertTrue(workOrderPage.checkWorkOrdersInfo());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersPagination());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchFIelds());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchResults());
+	}
 
 }

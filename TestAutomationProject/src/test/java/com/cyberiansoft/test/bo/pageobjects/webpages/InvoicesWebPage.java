@@ -920,4 +920,120 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 		return true;
 	}
+
+	public boolean checkInvoiceTableInfo() throws InterruptedException {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind"))).click();
+			Thread.sleep(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Invoice #')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Date')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Status')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Reason')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Amount')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Paid')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Customer')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'PO#')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Notes')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Media')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Duplicates')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Action')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkInvoiceTablePagination() {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart1")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgNumPart")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart2")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkInvoicesSearchFields() {
+		try{			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboArea_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbStockNo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tRONo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbPo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOrderType_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboInvoiceType_Input")));
+
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboServiceGroups_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlInsurance_Input")));
+
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboEmployee_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlPORequired_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbVIN")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtInvoiceNo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountFrom")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountTo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboService_Input")));
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOwner_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_btnRecalculateTotal")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbClaimNum")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkInvoicesSearchResults() throws InterruptedException {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input"))).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
+			.sendKeys("Default Team");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Arrow"))).click();
+//			Thread.sleep(3000);
+//			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+//			.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Default Team")).findFirst()
+//			.get().click();
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+			.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
+			.get().click();
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput"))).clear();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
+			.sendKeys("8/3/2014");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput"))).clear();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
+			.sendKeys("9/3/2014");
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input"))).click();
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input"))).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
+			.sendKeys("Nikolay");
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind"))).click();
+			Thread.sleep(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			
+			wait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'I-012-00237')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
 }

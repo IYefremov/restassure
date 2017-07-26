@@ -197,6 +197,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		for (int i = 0; i < 3; i ++) {
 			vendorsteamspage.archiveVendorTeam(vendorteam);			
 			vendorsteamspage.clickArchivedTab();
+			//TODO no archive
 			Assert.assertTrue(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
 			vendorsteamspage.restoreVendorTeam(vendorteam);
 			//fix deletion
@@ -223,6 +224,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.makeSearchPanelVisible();
 		vendorsteamspage.setSearchTeamLocation(vendorteam);
 		vendorsteamspage.clickFindButton();
+		//TODO no archive
 		if (!vendorsteamspage.isVendorTeamExists(vendorteam)) {
 			vendorsteamspage.clickArchivedTab();
 			vendorsteamspage.restoreVendorTeam(vendorteam);

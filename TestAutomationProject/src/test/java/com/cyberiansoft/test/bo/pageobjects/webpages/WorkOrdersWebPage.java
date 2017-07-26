@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -101,6 +102,9 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 
 	@FindBy(xpath = "//input[contains(@id, 'Content_Main_btCreateInvoice')]")
 	private WebElement createinvoicebtn;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
+	private WebElement workOrdersTable;
 
 	public WorkOrdersWebPage(WebDriver driver) {
 		super(driver);
@@ -289,14 +293,105 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		WebElement row = getTableRowWithWorkOrder(wonumber);
 		if (row != null) {
 			Thread.sleep(2000);
-			// + wotable.getTableColumnIndex("Invoice#") + 
-			invoicenum = row.findElement(By.className("entity-link"))
-					.getText();
-		
+			// + wotable.getTableColumnIndex("Invoice#") +
+			invoicenum = row.findElement(By.className("entity-link")).getText();
+
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
 		}
 		return invoicenum;
+	}
+
+	public boolean checkWorkOrdersInfo() throws InterruptedException {
+		wait.until(
+				ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
+				.click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Order#')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Invoice#')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Stock#')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'RO#')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Customer')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Vehicle')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Type / Package')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Date')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Technician')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Advisor')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Amount')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'PO#')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Notes')]"))));
+			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Media')]"))));
+		}
+		catch(TimeoutException e) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean checkWorkOrdersPagination() {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart1")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgNumPart")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart2")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkWorkOrdersSearchFIelds() {
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboArea_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboTeam_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboOrderType_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboService_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboEmployee_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboStatus_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbVIN")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbPO")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbRO")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbStockNo")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbOrderNum")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbAmountFrom")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbAmountTo")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkWorkOrdersSearchResults() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("002 - Test Company");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+		.findElements(By.className("rcbHovered")).stream().filter(e -> e.getText().equals("Dent Repear Package")).findFirst()
+		.get().click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+		.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
+		.get().click();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys("12/8/2014");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys("12/9/2014");
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
+		.click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'O-10023-00044')]")));
+		}catch(TimeoutException e){
+			return false;
+		}
+		return true;
 	}
 
 }
