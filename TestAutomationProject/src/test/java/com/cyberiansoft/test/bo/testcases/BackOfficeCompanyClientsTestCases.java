@@ -16,6 +16,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ClientUsersWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
+import com.cyberiansoft.test.bo.utils.Retry;
 
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	
@@ -377,7 +378,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 	
 	
-	@Test(testName = "Test Case 48950: Company - Clients : Hours of operation - Add Retail", description = "Company - Clients : Hours of operation - Add Retail")
+	@Test(testName = "Test Case 48950: Company - Clients : Hours of operation - Add Retail", description = "Company - Clients : Hours of operation - Add Retail", retryAnalyzer = Retry.class)
 	public void testCompanyClientsHoursOfOperationAddRetail() throws Exception {
 	 
 		final String companyname = "companyroman";

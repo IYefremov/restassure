@@ -275,7 +275,8 @@ public class ClientsWebPage extends WebPageWithPagination {
 		for (WebElement clientstablerow : clientstablerows) {
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
 			Thread.sleep(5000);
-			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
+		//	if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
+			if (clientstablerow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {
 				return clientstablerow;
 			}

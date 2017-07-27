@@ -185,7 +185,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 	}
 
-	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom", description = "Operation - New service request - Appointment - Location Type: Custom")
+//	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom", description = "Operation - New service request - Appointment - Location Type: Custom")
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustom() throws InterruptedException {
 
 		final String teamname = "Default team";
@@ -971,7 +971,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 	}
 
-	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1")
+	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void checkMultiTechInSideScrollbar(String customer, String startDate, String endDate, String status,
 			String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

@@ -237,7 +237,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	}
 
-	//@Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes", description = "Operation - Invoice: Edit - Click here to edit notes")
+	@Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes", description = "Operation - Invoice: Edit - Click here to edit notes")
 	public void testOperationInvoiceEditClickHereToEditNotes() throws Exception {
 
 		final String invoicenumber = "I-046-00065";
@@ -346,7 +346,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
 
-	//@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", description = "Operation - Invoice: Edit - Customer", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 42737:Operation - Invoice: Edit - Customer", description = "Operation - Invoice: Edit - Customer", retryAnalyzer = Retry.class)
 	public void testOperationInvoiceEditCustomer() throws Exception {
 
 		final String ponum = "123";
@@ -894,7 +894,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
 	}
 
-	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity")
+	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
