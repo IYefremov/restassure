@@ -185,7 +185,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 	}
 
-//	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom", description = "Operation - New service request - Appointment - Location Type: Custom")
+	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom", description = "Operation - New service request - Appointment - Location Type: Custom")
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustom() throws InterruptedException {
 
 		final String teamname = "Default team";
@@ -1023,10 +1023,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
-		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.reloadPage();
-		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
-		Assert.assertTrue(afterReqestsCount != prevReqestsCount);
+//		serviceRequestsWebPage.saveNewServiceRequest();
+//		serviceRequestsWebPage.reloadPage();
+//		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
+//		Assert.assertTrue(afterReqestsCount != prevReqestsCount);
 	}
 
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdata")
@@ -1425,7 +1425,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder"));
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Appointment was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
@@ -1458,8 +1458,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();	
 		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Appointment Employee time based event")|| 
-				serviceRequestsWebPage.checkEmails("Remainder"));
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Appointment was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
