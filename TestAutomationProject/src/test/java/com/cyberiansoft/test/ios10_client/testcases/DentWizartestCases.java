@@ -582,7 +582,7 @@ public class DentWizartestCases extends BaseTestCase {
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
 		Assert.assertEquals(wonumber.substring(0, 1), "O");
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 
 		myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -2109,7 +2109,7 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		homescreen = myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -2189,13 +2189,14 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		//ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Active");
@@ -2203,10 +2204,12 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
 		
 		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Completed");
 		
 		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
@@ -2300,15 +2303,15 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.clickSaveButton();
-		Thread.sleep(2000);
+		ordersummaryscreen.clickSave();
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		Thread.sleep(2000);
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE, "Completed");
 		ordermonitorscreen.verifyPanelsStatuses(" Paint - Full Bumper", "Active");
@@ -2331,18 +2334,21 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen = new OrderMonitorScreen(appiumdriver);
 		
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Queued");
-		ordermonitorscreen.selectPanel(UtilConstants.PDRPANEL_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
 		
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Active");
-		ordermonitorscreen.selectPanel(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Completed");
 		
 		
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Active");	
-		ordermonitorscreen.selectPanel(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Completed");
 
@@ -3186,7 +3192,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		invoiceinfoscreen.clickSaveAsFinal();
 		homescreen = myinvoicesscreen.clickHomeButton();
 	}
@@ -3225,19 +3231,21 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.assertServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE);
 		servicesscreen.assertTotalAmauntIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.saveWorkOrder();
+		servicesscreen.clickSaveButton();
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
 		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Active");
 		Thread.sleep(4000);
 		ordermonitorscreen.selectPanel("Interior Repair");
-		ordermonitorscreen.setCompletedPhaseStatus();
+		ordermonitorscreen.clickChangeStatusCell();
+		ordermonitorscreen.setCompletedPhaseStatus();		
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
 		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
@@ -3308,7 +3316,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
-		servicesscreen.saveWorkOrder();
+		servicesscreen.clickSaveButton();
 		
 		//Create second WO
 		myworkordersscreen.clickAddOrderButton();
@@ -3350,19 +3358,22 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection1);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection2);
 		teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.LEATHERREPAIR_SUBSERVICE);
+		ordermonitorscreen.selectPanel("Interior Repair");
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection3);
 		teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.BLACKOUT_SUBSERVICE);
+		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
@@ -3408,7 +3419,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		Thread.sleep(1000);
 		myworkordersscreen.selectWorkOrderForCopyVehicle(wo);
 		vehiclescreeen = myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
@@ -3641,11 +3652,11 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
-		ordersummaryscreen.setTotalSale(totalsale);
 		Assert.assertTrue(alerttext.contains("Total Sale is required."));
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.setTotalSale(totalsale);		
+		ordersummaryscreen.clickSave();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -3773,9 +3784,9 @@ public class DentWizartestCases extends BaseTestCase {
 		}
 		//servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00");
 		//servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00");
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWorkOrder();
 		
-		Thread.sleep(8000);
+		//Thread.sleep(8000);
 		inspnum = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 		vehiclescreeen = myinspectionsscreen.showWorkOrdersForInspection(inspnum);
@@ -3937,7 +3948,7 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3947,7 +3958,7 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		Assert.assertFalse(ordersummaryscreen.isApproveAndCreateInvoiceExists());
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		Thread.sleep(3000);
 		teamworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 		Thread.sleep(3000);

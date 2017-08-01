@@ -110,6 +110,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickCompletedPhaseCell() {
+		Helpers.waitABit(1000);
 		completedcell.click();
 		Helpers.waitABit(2000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);

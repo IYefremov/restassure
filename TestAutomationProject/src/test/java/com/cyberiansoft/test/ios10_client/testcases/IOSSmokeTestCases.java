@@ -7698,7 +7698,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
-		vehiclescreeen.saveWorkOrder();
+		vehiclescreeen.clickSaveButton();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Trim is required"));
 		vehiclescreeen.setTrim(trimvalue);
@@ -7710,7 +7710,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.saveWorkOrder();
+		servicesscreen.clickSaveButton();
 		homescreen =  myworkordersscreen.clickHomeButton();
 	}
 	
@@ -7744,7 +7744,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		homescreen = myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -7754,7 +7754,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		homescreen = teamworkordersscreen.clickHomeButton();
 	}
 	
@@ -8288,7 +8288,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		Assert.assertTrue(servicerequestsscreen.isAcceptAppointmentRequestActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineAppointmentRequestActionExists());
-		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.clickCloseButton();
 		
 		servicerequestsscreen.clickHomeButton();
 	

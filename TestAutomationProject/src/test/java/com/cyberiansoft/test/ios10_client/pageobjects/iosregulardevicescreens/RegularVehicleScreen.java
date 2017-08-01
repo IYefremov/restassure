@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -121,10 +122,27 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 1)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(1)).click();
+		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (IOSElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
+		
+		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (IOSElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
+		
+		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (IOSElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
+		
+		/*if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(0)).click();
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Close").click();
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Close").click();*/
 		Helpers.waitABit(500);
 	}
 	

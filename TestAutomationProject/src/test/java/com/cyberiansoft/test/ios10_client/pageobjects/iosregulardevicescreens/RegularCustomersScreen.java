@@ -91,8 +91,9 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()['CustomersTable'].cells()['" + customer + "']")).click();
+		Helpers.waitABit(1000);
 		searchbtn.click();
+		Helpers.waitABit(2000);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(1000);

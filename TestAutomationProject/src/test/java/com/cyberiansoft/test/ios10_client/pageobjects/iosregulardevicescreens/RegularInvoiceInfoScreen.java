@@ -72,6 +72,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setPO(String _po) throws InterruptedException {
+		Helpers.waitABit(500);
 		setPOWithoutHidingkeyboard(_po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		//((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");

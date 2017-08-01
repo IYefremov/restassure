@@ -61,12 +61,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void selectPanel(String panelname) {
 		appiumdriver.findElementByName(panelname).click();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		//MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//UIATableView/UIATableCell[contains(@name, \""
-		//		+ panelname
-		//		+ "\")]")));
-		//element.click();
-		//return element.getAttribute("name");
+		Helpers.waitABit(500);
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {
@@ -104,7 +99,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
-	public void clickPhaseStatusCell() {
+	public void clickChangeStatusCell() {
 		phasestatuscell.click();
 	}
 	
@@ -133,7 +128,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickServicesButton() {
-		servicesbtn.click();
+		//appiumdriver.findElement(By.xpath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeButton[@name='Services']")).click();
+		appiumdriver.findElement(By.xpath("//XCUIElementTypeButton[@name='Services']")).click();
+		Helpers.waitABit(1000);
 	}
 	
 	public boolean isRepairPhaseExists() { 

@@ -67,7 +67,9 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 
 	public void setOwnerAddress(String owneraddress) {
-		appiumdriver.findElementByAccessibilityId("Owner Address_TextView_Cell").click();
+		Helpers.waitABit(2000);
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[@name='Owner Address_TextView_Cell']").click();
+		//appiumdriver.findElementByAccessibilityId("Owner Address_TextView_Cell").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(owneraddress);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		appiumdriver.hideKeyboard();
