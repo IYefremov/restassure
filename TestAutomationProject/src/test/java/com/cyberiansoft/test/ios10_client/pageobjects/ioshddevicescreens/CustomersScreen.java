@@ -67,11 +67,13 @@ public class CustomersScreen extends iOSHDBaseScreen {
 
 	public void searchCustomer(String customer)
 			throws InterruptedException {
-		searchbtn.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
+		//searchbtn.click();
 		//searchbar.setValue(customer);
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-		closesearchbtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+			closesearchbtn.click();
 		Helpers.waitABit(1000);
 	}
 
