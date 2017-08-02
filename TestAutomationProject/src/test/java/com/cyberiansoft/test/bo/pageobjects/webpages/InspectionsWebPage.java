@@ -308,7 +308,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 	public void clickInspectionLink(String inspnumber) {
 		WebElement row = getTableRowWithInspection(inspnumber);
 		if (row != null) {
-			row.findElement(By.xpath(".//a[@title='" + inspnumber + "']")).click();
+			row.findElement(By.xpath(".//a[contains(text(), '" + inspnumber + "')]")).click();
 		} else {
 			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
 		}

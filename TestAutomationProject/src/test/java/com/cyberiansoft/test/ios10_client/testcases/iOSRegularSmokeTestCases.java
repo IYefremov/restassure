@@ -7638,38 +7638,4 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();
 	
 	}
-
-	@Test(testName = "Test Case 59643:iOS: Invoices - Send Multiple Emails", description = "Invoices - Send Multiple Emails")
-	public void testInvoicesSendMultipleEmails() throws Exception {
-			
-		final int numberInvoicesToSelect = 4;
-		final String mailaddress = "test@cyberiansoft.com";
-			
-		homescreen = new RegularHomeScreen(appiumdriver);
-			
-		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.selectInvoices(numberInvoicesToSelect);
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.sendSingleEmail(mailaddress);
-		myinvoicesscreen.clickHomeButton();
-	}
-	
-	
-	@Test(testName = "Test Case 59642:iOS: Creating Inspection From Service Request", description = "Creating Inspection From Service Request")
-	@Parameters({ "user.name", "user.psw" })
-	public void testSRCreatingInspectionFromServiceRequest(String userName, String userPassword) throws Exception {
-			
-
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
-
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsWebPage srwebpage = operationspage.clickServiceRequestsLink();
-	}
 }

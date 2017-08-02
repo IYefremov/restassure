@@ -67,13 +67,17 @@ public class CustomersScreen extends iOSHDBaseScreen {
 
 	public void searchCustomer(String customer)
 			throws InterruptedException {
-		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
-		//searchbtn.click();
-		//searchbar.setValue(customer);
-		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+		if (appiumdriver.findElementsByAccessibilityId("ClientsView").size() > 0) {
+			searchbtn.click();
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
+			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 			closesearchbtn.click();
+		} else {
+			
+			appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
+			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
+		}
 		Helpers.waitABit(1000);
 	}
 
@@ -109,6 +113,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	public void selectCustomerWithoutEditing(String customer)
 			throws InterruptedException {
 		Helpers.waitABit(1000);
+		searchCustomer(customer);
 		clickOnCustomer(customer);
 		selectpopupmenu.click();
 	}

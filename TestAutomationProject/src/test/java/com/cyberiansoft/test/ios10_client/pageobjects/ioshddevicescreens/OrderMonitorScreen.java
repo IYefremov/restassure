@@ -61,7 +61,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void selectPanel(String panelname) {
 		appiumdriver.findElementByName(panelname).click();
-		Helpers.waitABit(500);
+		Helpers.waitABit(1500);
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {
@@ -139,6 +139,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void clicksRepairPhaseLine() { 
 		appiumdriver.findElementByAccessibilityId("Repair phase").click();
+		Helpers.waitABit(1000);
 	}
 	
 	public boolean isServiceIsActive(String servicedisplayname) {
