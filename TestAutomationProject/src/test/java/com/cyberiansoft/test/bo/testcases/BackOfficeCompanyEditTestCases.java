@@ -77,11 +77,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.createNewInsuranceCompany(insurancecompanyname);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(srcompany);
-		servicerequestslistpage.clickFindButton();
-		
-		//servicerequestslistpage.selectFirstServiceRequestFromList();
 		
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickClaimInfoEditButton();
@@ -89,8 +84,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequestslistpage.clickDoneButton();
 		
 		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.clickFindButton();
 		Assert.assertTrue(servicerequestslistpage.isInsuranceCompanyPresentForFirstServiceRequestFromList(insurancecompanyname));
 		
 		companypage = backofficeheader.clickCompanyLink();
@@ -98,7 +91,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.deleteInsuranceCompany(insurancecompanyname);		
 	}
 	
-	@Test(testName = "Test Case 27891:Company- Service Advisors: Authentication", description = "Company- Service Advisors: Authentication")
+	@Test(testName = "Test Case 27891:Company- Service Advisors: Authentication", description = "Company- Service Advisors: Authentication",retryAnalyzer=Retry.class)
 	public void testCompanyServiceAdvisorsAuthentication() throws InterruptedException, IOException {
 		
 		//final String email = "test123CD@domain.com";

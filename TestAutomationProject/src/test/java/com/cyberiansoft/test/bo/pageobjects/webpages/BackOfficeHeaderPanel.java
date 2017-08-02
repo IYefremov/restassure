@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,7 +55,12 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
+		try{
 		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		}catch(TimeoutException e){
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		}
 	}
 	
 	public OperationsWebPage clickOperationsLink() {

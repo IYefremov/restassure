@@ -237,7 +237,11 @@ public class EventsWebPage extends BaseWebPage {
 	}
 
 	public void selectEventRowByName(String string) {
+		try{
 		driver.findElement(By.xpath("//td[contains(text(), '"+string+"')]")).click();
+		}catch(Exception e){
+			Assert.assertTrue(false);
+		}
 	}
 
 	public void deleteSelectedEvent() throws InterruptedException {

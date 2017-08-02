@@ -19,7 +19,7 @@
     <parameter name="selenium.browser" value="chrome" />
     <classes>   
     
-    <!--      	    -->  
+    <!--    -->     	
     
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
     </class> 
@@ -35,22 +35,31 @@
  	</class> 	
 
 
-
-       <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
-</class>
-
- <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-</class>
-
-<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-</class>
+   <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
+ <methods>
+ <include name=" checkOperationInvoiceEditPay"/>
+  <include name=" checkOperationInvoiceYearMakeModelSearch"/>
+  <include name=" testOperationInvoiceEditClickHereToEditNotes"/>
+  <include name=" testOperationInvoiceEditCustomer"/>
+  <include name=" testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded"/>
+  <include name=" testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved"/>
+  <include name=" testOperationInvoiceSearch"/>
+   <include name=" testOperationInvoiceSentCustomMailInMailActivity"/>
  
+ </methods>
+</class>
+  
+  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
+</class>
+  
+ <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
 
-
-
+</class>
 
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
     </class> 
+
+
        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       </class> 
  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
@@ -58,7 +67,7 @@
 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       </class>
 
-       <!--           -->   
+         <!--        -->   
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->
