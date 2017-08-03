@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.util.concurrent.TimeUnit;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -42,7 +44,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public iOSHDBaseScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
 	}
 	
 	public HomeScreen clickHomeButton() {
