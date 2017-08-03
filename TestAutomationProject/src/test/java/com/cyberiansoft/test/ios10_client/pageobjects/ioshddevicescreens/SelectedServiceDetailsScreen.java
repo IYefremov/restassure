@@ -321,6 +321,17 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
 	}
+	
+	public void searchTechnician(String technician) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(technician);
+		Helpers.waitABit(1000);
+	}
+	
+	public void cancelSearchTechnician() {
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
+	}
 
 	public void unselecTechnician(String technician) {
 		WebElement techsplittable =  null;

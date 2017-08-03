@@ -7667,8 +7667,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.cancelSelectedServiceDetails();
 		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
 		selectedservicescreen.clickTechniciansIcon();
+		selectedservicescreen.searchTechnician("Manager");
 		selectedservicescreen.selecTechnician("Manager 1");
+		selectedservicescreen.cancelSearchTechnician();
+		selectedservicescreen.searchTechnician("Oksana");
 		selectedservicescreen.selecTechnician("Oksana Zayats");
+		selectedservicescreen.cancelSearchTechnician();
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Manager 1"));
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
 		selectedservicescreen.saveSelectedServiceDetails();
