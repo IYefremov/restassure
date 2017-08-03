@@ -133,6 +133,10 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
+		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
+		}
 		Helpers.waitABit(1000);
 	}
 	
