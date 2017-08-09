@@ -76,6 +76,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
 			
 			appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
+			Helpers.waitABit(1000);
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 		}
 		Helpers.waitABit(1000);

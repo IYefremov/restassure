@@ -528,7 +528,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehiclescreeen.setVIN(VIN);
 		
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(summ));
+		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.clickSaveEmptyPO();
 		invoiceinfoscreen.setPO(_po);
@@ -1170,7 +1176,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		Thread.sleep(5000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_FOR_SR);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		String wonumber = servicerequestsscreen.getWorkOrderNumber();
 
 		servicerequestsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
@@ -1711,6 +1717,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	public void testBugWithCrashOnCopyVehicle() throws Exception {
 
 		final String vin = "SHDHBEVDHDHDGDVDG";
+		final String vehicleinfo = "Black, 2012, BMW, 323i U";
 		
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -1720,7 +1727,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(1000);
 		//carhistoryscreen.searchCar(vin);
 			
-		carhistoryscreen.clickFirstCarHistoryInTable();
+		carhistoryscreen.clickCarHistoryRowByVehicleInfo(vehicleinfo);
 		carhistoryscreen.clickCarHistoryMyWorkOrders();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.selectFirstOrder();
@@ -6681,7 +6688,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			servicesscreen.assertServiceIsSelected(serviceadd);
 		}
 		
-		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
+		servicesscreen.assertSubTotalAmauntIsCorrect("$32.00");
 		servicesscreen.selectNextScreen("Zayats Section1");
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.swipeScreenUp();
@@ -6701,7 +6708,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (String serviceadd : servicestoadd) {
 			Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(serviceadd), servicestoadd.length);
 		}
-		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
+		servicesscreen.assertSubTotalAmauntIsCorrect("$32.00");
 		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
 	}
@@ -6979,8 +6986,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.clickTechniciansIcon();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
+		/*selectedservicescreen.cancelSelectedServiceDetails();
+		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
+		selectedservicescreen.clickTechniciansIcon();*/
+		
+		selectedservicescreen.searchTechnician("Manager");
 		selectedservicescreen.selecTechnician("Manager 1");
+		selectedservicescreen.cancelSearchTechnician();
+		selectedservicescreen.searchTechnician("Oksana");
 		selectedservicescreen.selecTechnician("Oksana Zayats");
+		selectedservicescreen.cancelSearchTechnician();
 		Assert.assertFalse(selectedservicescreen.isTechnicianIsSelected("Manager 1"));
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -6990,13 +7005,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.clickTechniciansIcon();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
-		
-		
 		selectedservicescreen.cancelSelectedServiceDetails();
 		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
 		selectedservicescreen.clickTechniciansIcon();
+		
+		selectedservicescreen.searchTechnician("Manager");
 		selectedservicescreen.selecTechnician("Manager 1");
+		selectedservicescreen.cancelSearchTechnician();
+		selectedservicescreen.searchTechnician("Oksana");
 		selectedservicescreen.selecTechnician("Oksana Zayats");
+		selectedservicescreen.cancelSearchTechnician();
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Manager 1"));
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
 		selectedservicescreen.saveSelectedServiceDetails();

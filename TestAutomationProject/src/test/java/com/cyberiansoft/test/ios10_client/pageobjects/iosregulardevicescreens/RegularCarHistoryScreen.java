@@ -62,6 +62,12 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
 	}
 	
+	public void clickCarHistoryRowByVehicleInfo(String vehicleinfo) {		
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")).click();
+		//appiumdriver.tap(1, appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")), 200);
+		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
+	}
+	
 	public String getFirstCarHistoryValueInTable() {		
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").getAttribute("value");
 	}
