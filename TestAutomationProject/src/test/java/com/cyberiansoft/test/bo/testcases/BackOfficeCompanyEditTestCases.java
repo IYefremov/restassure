@@ -9,6 +9,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ConfirmPasswordWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EmployeesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InsuranceCompaniesWePpage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InterApplicationExchangeWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewEmployeeDialogWebPage;
@@ -35,39 +36,35 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
-	
+
 	String testuser = "";
 	String testuserpsw = "";
-	
+
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) {
+	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) {
 		webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 		testuser = userName;
 		testuserpsw = userPassword;
 	}
-	
+
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
 		backofficeheader.clickLogout();
 	}
-	
+
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit", description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() throws InterruptedException {
-		
+
 		final String srcompany = "Alex SASHAZ";
 		final String insurancecompanyname = "Oranta";
-			
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
 		if (insurancecompaniespage.isInsuranceCompanyExists(insurancecompanyname)) {
@@ -77,24 +74,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.createNewInsuranceCompany(insurancecompanyname);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
-		
+
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickClaimInfoEditButton();
 		servicerequestslistpage.selectServiceRequesInsurance(insurancecompanyname);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.saveNewServiceRequest();
-		Assert.assertTrue(servicerequestslistpage.isInsuranceCompanyPresentForFirstServiceRequestFromList(insurancecompanyname));
-		
+		Assert.assertTrue(
+				servicerequestslistpage.isInsuranceCompanyPresentForFirstServiceRequestFromList(insurancecompanyname));
+
 		companypage = backofficeheader.clickCompanyLink();
 		insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
-		insurancecompaniespage.deleteInsuranceCompany(insurancecompanyname);		
+		insurancecompaniespage.deleteInsuranceCompany(insurancecompanyname);
 	}
-	
-	@Test(testName = "Test Case 27891:Company- Service Advisors: Authentication", description = "Company- Service Advisors: Authentication",retryAnalyzer=Retry.class)
+
+	// @Test(testName = "Test Case 27891:Company- Service Advisors:
+	// Authentication", description = "Company- Service Advisors:
+	// Authentication",retryAnalyzer=Retry.class)
 	public void testCompanyServiceAdvisorsAuthentication() throws InterruptedException, IOException {
-		
-		//final String email = "test123CD@domain.com";
+
+		// final String email = "test123CD@domain.com";
 		final String usermailprefix = "test.cyberiansoft+";
 		final String usermailpostbox = "@gmail.com";
 		final String confirmpsw = "111aaa";
@@ -102,9 +102,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String firstname = "test123CDF";
 		final String lastname = "test123CDF";
 		final String role = "SalesPerson";
-			
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 		serviceadvisorspage.makeSearchPanelVisible();
@@ -117,40 +116,40 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		long currtime = java.lang.System.currentTimeMillis();
 		String usermail = "test.cyberiansoft+" + currtime + "@gmail.com";
 		serviceadvisorspage.createNewServiceAdvisor(usermail, firstname, lastname, customer, role);
-		
+
 		backofficeheader.clickLogout();
-		
+
 		boolean search = false;
 		String mailmessage = "";
-		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com", "Please click link below to complete the registration process.")) {
-				serviceadvisorspage.waitABit(60*500);
+		for (int i = 0; i < 4; i++) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION",
+					"ReconPro@cyberianconcepts.com", "Please click link below to complete the registration process.")) {
+				serviceadvisorspage.waitABit(60 * 500);
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com");
+				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!",
+						"ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com");
 				if (mailmessage.length() > 3) {
 					search = true;
 					break;
-				}				
+				}
 			}
 		}
-		
+
 		String confirmationurl = "";
 		if (search) {
-			
-			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			
+
+			confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
+
 		}
 		System.out.println("++++++" + confirmationurl);
-		serviceadvisorspage.waitABit(60*1000);
+		serviceadvisorspage.waitABit(60 * 1000);
 		webdriver.get(confirmationurl);
-		ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver,
-				ConfirmPasswordWebPage.class);
-		
-		
+		ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver, ConfirmPasswordWebPage.class);
+
 		BackOfficeLoginWebPage loginpage = confirmpasswordpage.confirmUserPassword(confirmpsw);
 		loginpage.UserLogin(usermail, confirmpsw);
-		backofficeheader.clickHomeLink();	
-		
+		backofficeheader.clickHomeLink();
+
 		backofficeheader.clickLogout();
 		loginpage.UserLogin(testuser, testuserpsw);
 		companypage = backofficeheader.clickCompanyLink();
@@ -160,7 +159,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		serviceadvisorspage.clickFindButton();
 		serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 	}
-	
+
 	@Test(testName = "Test Case 29764:Company- Users : Edit", description = "Company- Users : Edit")
 	public void testCompanyUsersEdit() throws Exception {
 
@@ -169,43 +168,42 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String userfirstname = "zalex";
 		final String userlastname = "valex";
 		final String usercompany = "CyberianSoft";
-		final String userphone= "123123";
-		final String useraccid= "8000001F-1370864710";
-		final String useraddress= "5815 E. La Palma Ave.";
-		final String usercity= "L'viv";
-		final String userzip= "79031";
-		final String usercomments= "Test User Comments";
-		final String userrole= "Administrator";
-		
-		//Edited user
+		final String userphone = "123123";
+		final String useraccid = "8000001F-1370864710";
+		final String useraddress = "5815 E. La Palma Ave.";
+		final String usercity = "L'viv";
+		final String userzip = "79031";
+		final String usercomments = "Test User Comments";
+		final String userrole = "Administrator";
+
+		// Edited user
 		final String userfirstnameed = "valex";
 		final String userlastnameed = "zalex";
 		final String usercompanyed = "CyberianSoftConcept";
-		final String userphoneed= "123145";
-		final String useraccided= "8999991F-1370864710";
-		final String useraddressed= "5815 E. La Prima Ave.";
-		final String usercityed= "New York";
-		final String userziped= "79042";
-		final String usercommentsed= "Test User Comments New";
-		final String userroleed= "Work Manager";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		final String userphoneed = "123145";
+		final String useraccided = "8999991F-1370864710";
+		final String useraddressed = "5815 E. La Prima Ave.";
+		final String usercityed = "New York";
+		final String userziped = "79042";
+		final String usercommentsed = "Test User Comments New";
+		final String userroleed = "Work Manager";
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		UsersWebPage userspage = companypage.clickUsersLink();
-		
+
 		userspage.makeSearchPanelVisible();
-		
+
 		userspage.setSearchUserParameter(usermail);
 		userspage.clickFindButton();
 		if (userspage.isUserActive(userfirstnameed, userlastnameed)) {
 			userspage.archiveUser(userfirstnameed, userlastnameed);
-		}		
+		}
 		if (userspage.isUserActive(userfirstname, userlastname)) {
 			userspage.archiveUser(userfirstname, userlastname);
 		}
-		
+
 		userspage.clickUserAddButton();
 		userspage.createNewUser(usermail, userfirstname, userlastname, userrole);
 		userspage.clickEditActiveUser(userfirstname, userlastname);
@@ -217,7 +215,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.setNewUserAccountingID(useraccid);
 		userspage.setNewUserComments(usercomments);
 		userspage.clickNewUserOKButton();
-		
+
 		userspage.clickEditActiveUser(userfirstname, userlastname);
 		Assert.assertEquals(userspage.getNewUserMail(), usermail);
 		Assert.assertEquals(userspage.getNewUserFirstName(), userfirstname);
@@ -231,7 +229,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(userspage.getNewUserComments(), usercomments);
 		Assert.assertTrue(userspage.isNewUserRoleSelected(userrole));
 		Assert.assertFalse(userspage.isNewUserRoleSelected(userroleed));
-		
+
 		userspage.setNewUserFirstName(userfirstnameed);
 		userspage.setNewUserLastName(userlastnameed);
 		userspage.setNewUserCompany(usercompanyed);
@@ -244,7 +242,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.selectAllowCreatingSupportTickets();
 		userspage.selectNewUserRole(userroleed);
 		userspage.clickNewUserOKButton();
-		
+
 		userspage.setSearchUserParameter(usermail);
 		userspage.clickFindButton();
 		userspage.clickEditActiveUser(userfirstnameed, userlastnameed);
@@ -262,11 +260,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertTrue(userspage.isNewUserRoleSelected(userrole));
 		Assert.assertTrue(userspage.isNewUserRoleSelected(userroleed));
 		userspage.clickNewUserCancelButton();
-		
-		userspage.archiveUser(userfirstnameed, userlastnameed);	
+
+		userspage.archiveUser(userfirstnameed, userlastnameed);
 	}
-	
-	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit", retryAnalyzer= Retry.class)
+
+	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit", retryAnalyzer = Retry.class)
 	public void testCompanyClientsUsersEdit() throws Exception {
 
 		final String clientmail = "123123213@domain.com";
@@ -279,8 +277,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String clientcity = "asdfasd";
 		final String clientzip = "12345";
 		final String clientarea = "Default area";
-		
-		//Edited client
+
+		// Edited client
 		final String clientmailed = "123123213@domaintest.com";
 		final String clientnameed = "Anaheim Hills Ford";
 		final String clientfirstnameed = "zalex2";
@@ -291,25 +289,24 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String clientcityed = "L'viv";
 		final String clientziped = "79031";
 		final String clientareaed = "QA Area";
-		
+
 		final String retailcompanyname = clientfirstname + " " + clientlastname;
 		final String retailcompanynameed = clientfirstnameed + " " + clientlastnameed;
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
-		
-		clientspage.searchClientByName(clientfirstname); 
-		
+
+		clientspage.searchClientByName(clientfirstname);
+
 		if (clientspage.isClientExistsInTable(retailcompanyname)) {
 			clientspage.deleteClient(retailcompanyname);
 		}
-	
+
 		if (clientspage.isClientExistsInTable(retailcompanynameed)) {
 			clientspage.deleteClient(retailcompanynameed);
 		}
-		
+
 		NewClientDialogWebPage newclientdialogpage = clientspage.clickAddClientButton();
 		newclientdialogpage.switchToRetailCustomer();
 		newclientdialogpage.setCompanyName(clientname);
@@ -330,7 +327,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(newclientdialogpage.getCompanyName(), clientname);
 		Assert.assertEquals(newclientdialogpage.getClientFirstName(), clientfirstname);
 		Assert.assertEquals(newclientdialogpage.getClientLastName(), clientlastname);
-		
+
 		newclientdialogpage.setCompanyName(clientnameed);
 		newclientdialogpage.setClientFirstName(clientfirstnameed);
 		newclientdialogpage.setClientLastName(clientlastnameed);
@@ -340,9 +337,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newclientdialogpage.selectCompanyDefaultArea(clientareaed);
 		newclientdialogpage.setCompanyShipToAddress(clientaddressed);
 		newclientdialogpage.setCompanyShipToCity(clientcityed);
-		newclientdialogpage.setCompanyShipToZip(clientziped);		
+		newclientdialogpage.setCompanyShipToZip(clientziped);
 		newclientdialogpage.clickOKButton();
-		
+
 		newclientdialogpage = clientspage.clickEditClient(retailcompanynameed);
 		Assert.assertTrue(newclientdialogpage.isCompanyRetail());
 		Assert.assertEquals(newclientdialogpage.getCompanyName(), clientnameed);
@@ -360,10 +357,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(newclientdialogpage.getCompanyBillToCity(), clientcity);
 		Assert.assertEquals(newclientdialogpage.getCompanyBillToZip(), clientzip);
 		newclientdialogpage.clickCancelButton();
-		
-		clientspage.deleteClient(retailcompanynameed);	
+
+		clientspage.deleteClient(retailcompanynameed);
 	}
-	
+
 	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
 	public void testCompanyEmployeesEdit() throws Exception {
 
@@ -375,15 +372,15 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeeaddress = "5815 E. La Palma Ave.";
 		final String employeecity = "asdfasd";
 		final String employeecountry = "United States";
-		final String employeezip = "12345";		
+		final String employeezip = "12345";
 		final String employeephone = "123123";
 		final String employeemail = "123123213@domain.com";
 		final String employeeaccid = "8000001F-1287569622";
 		final String employeestartdate = "10/28/2015";
 		final String employeetype = "Employee";
 		final String employeerole = "Employee";
-		
-		//Edited employee
+
+		// Edited employee
 		final String employeeteamed = "Default team";
 		final String employeefirstnameed = "azalex2";
 		final String employeelastnameed = "avalex2";
@@ -392,31 +389,30 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeeaddressed = "E. La Palma Ave.";
 		final String employeecityed = "L'viv";
 		final String employeecountryed = "Uruguay";
-		final String employeeziped = "79031";		
+		final String employeeziped = "79031";
 		final String employeephoneed = "1";
 		final String employeemailed = "123123213@domaintest.com";
 		final String employeeaccided = "8000001F-1287569655";
 		final String employeestartdateed = "10/28/2014";
 		final String employeetypeed = "Manager";
 		final String employeeroleed = "Manager";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		EmployeesWebPage employeespage = companypage.clickEmployeesLink();
-				
+
 		employeespage.makeSearchPanelVisible();
 		employeespage.setSearchUserParameter(employeelastname);
 		employeespage.clickFindButton();
-		
+
 		if (employeespage.isActiveEmployeeExists(employeefirstname, employeelastname)) {
 			employeespage.archiveEmployee(employeefirstname, employeelastname);
 		}
-		
+
 		if (employeespage.isActiveEmployeeExists(employeefirstnameed, employeelastnameed)) {
 			employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 		}
-		
+
 		NewEmployeeDialogWebPage newemployeedialog = employeespage.clickAddEmployeeButton();
 		newemployeedialog.selectNewEmployeeTeam(employeeteam);
 		newemployeedialog.setNewEmployeeFirstName(employeefirstname);
@@ -434,13 +430,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newemployeedialog.selectNewEmployeeType(employeetype);
 		newemployeedialog.selectEmployeeRole(employeerole);
 		newemployeedialog.clickOKButton();
-		
+
 		newemployeedialog = employeespage.clickEditEmployee(employeefirstname, employeelastname);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeTeam(), employeeteam);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeFirstName(), employeefirstname);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeLastName(), employeelastname);
 		Assert.assertTrue(newemployeedialog.isEmployeeRoleChecked(employeerole));
-		
+
 		newemployeedialog.selectNewEmployeeTeam(employeeteamed);
 		newemployeedialog.setNewEmployeeFirstName(employeefirstnameed);
 		newemployeedialog.setNewEmployeeLastName(employeelastnameed);
@@ -457,7 +453,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newemployeedialog.selectNewEmployeeType(employeetypeed);
 		newemployeedialog.selectEmployeeRole(employeeroleed);
 		newemployeedialog.clickOKButton();
-		
+
 		newemployeedialog = employeespage.clickEditEmployee(employeefirstnameed, employeelastnameed);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeTeam(), employeeteamed);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeFirstName(), employeefirstnameed);
@@ -472,15 +468,15 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(newemployeedialog.getNewEmployeeMail(), employeemailed);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeAccountingID(), employeeaccided);
 		Assert.assertEquals(newemployeedialog.getNewEmployeeStartingDate(), employeestartdateed);
-		Assert.assertEquals(newemployeedialog.getNewEmployeeType(), employeetypeed);		
+		Assert.assertEquals(newemployeedialog.getNewEmployeeType(), employeetypeed);
 		Assert.assertTrue(newemployeedialog.isEmployeeRoleChecked(employeeroleed));
 		Assert.assertTrue(newemployeedialog.isEmployeeRoleChecked(employeerole));
 		newemployeedialog.clickCancelButton();
-		
+
 		employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 	}
-	
-@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
+
+	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
 	public void testCompanyServicesEdit() throws Exception {
 
 		final String servicename = "Test Bundle Service";
@@ -488,22 +484,21 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String servicedesc = "Test service description";
 		final String serviceaccid = "8000001F-1287569622";
 		final String serviceassignedto = "Custom Technician";
-		
-		//Edited employee
+
+		// Edited employee
 		final String servicenameed = "Test Bundle Service2";
 		final String servicetypeed = "Dye";
 		final String servicedesced = "New service description";
 		final String serviceaccided = "12345";
 		final String serviceassignedtoed = "(None)";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServicesWebPage servicespage = companypage.clickServicesLink();
 		servicespage.makeSearchPanelVisible();
 		servicespage.setServiceSearchCriteria(servicename);
 		servicespage.clickFindButton();
-		
+
 		if (servicespage.isActiveServiceExists(servicename)) {
 			servicespage.archiveService(servicename);
 		}
@@ -517,11 +512,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newservicedialog.setNewServiceAccountingID(serviceaccid);
 		newservicedialog.selectNewServiceAssignedTo(serviceassignedto);
 		newservicedialog.clickOKButton();
-		
+
 		newservicedialog = servicespage.clickEditService(servicename);
 		Assert.assertEquals(newservicedialog.getNewServiceName(), servicename);
 		Assert.assertFalse(newservicedialog.isNewServiceMultipleSelected());
-		
+
 		newservicedialog.setNewServiceName(servicenameed);
 		newservicedialog.selectNewServiceType(servicetypeed);
 		newservicedialog.setNewServiceDescription(servicedesced);
@@ -529,7 +524,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newservicedialog.selectNewServiceAssignedTo(serviceassignedtoed);
 		newservicedialog.selectNewServiceMultiple();
 		newservicedialog.clickOKButton();
-		
+
 		newservicedialog = servicespage.clickEditService(servicenameed);
 		Assert.assertEquals(newservicedialog.getNewServiceName(), servicenameed);
 		Assert.assertEquals(newservicedialog.getNewServiceType(), servicetypeed);
@@ -538,10 +533,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(newservicedialog.getNewServiceAssignedTo(), serviceassignedtoed);
 		Assert.assertTrue(newservicedialog.isNewServiceMultipleSelected());
 		newservicedialog.clickCancelButton();
-		
+
 		servicespage.archiveService(servicenameed);
 	}
-	
+
 	@Test(testName = "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit", description = "Company - Service Request Type: Service type at Service Request Edit")
 	public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit() throws Exception {
 
@@ -549,11 +544,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String srtypedesc = "Test description";
 		final String srtypeteam = "01_TimeRep_team";
 		final String srtypepackage = "TimeZone_Test";
-		final String srtypepackagenew = "Test Service Package";	
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+		final String srtypepackagenew = "Test Service Package";
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServiceRequestTypesWebPage servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		if (servicerequesttypespage.isServiceRequestTypeExists(srtype)) {
@@ -565,58 +559,54 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.selectNewServiceRequestTypeTeam(srtypeteam);
 		servicerequesttypespage.selectNewServiceRequestTypePackage(srtypepackage);
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
-		
-		
+
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistpage = operationspage.clickNewServiceRequestLink();
 		srlistpage.selectAddServiceRequestsComboboxValue(srtype);
 		srlistpage.clickAddServiceRequestButton();
-		
+
 		srlistpage.clickServiceEditButton();
 		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 2);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
-		
+
 		companypage = backofficeheader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		servicerequesttypespage.clickEditServiceRequestType(srtype);
 		servicerequesttypespage.selectNewServiceRequestTypePackage(srtypepackagenew);
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
-		
+
 		operationspage = backofficeheader.clickOperationsLink();
 		srlistpage = operationspage.clickNewServiceRequestLink();
 		srlistpage.selectAddServiceRequestsComboboxValue(srtype);
 		srlistpage.clickAddServiceRequestButton();
-		
+
 		srlistpage.clickServiceEditButton();
 		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 52);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
-		
+
 		companypage = backofficeheader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		servicerequesttypespage.deleteServiceRequestType(srtype);
 	}
-	
-	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit",retryAnalyzer = Retry.class)
+
+	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit", retryAnalyzer = Retry.class)
 	public void testCompanyInvoiceTypeClientEdit() throws Exception {
 
 		final String invoicetype = "TestIntInvTeam";
 		final String questiontemplate = "PrintIntForm";
 		final String questionform = "IntForm";
 		final String clientname = "002 - Test Company";
-		
-		
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
 		if (invoicestypespage.isInvoiceTypeExists(invoicetype)) {
 			invoicestypespage.deleteInvoiceType(invoicetype);
 		}
-		
+
 		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 		newinvoicetypedialog.setInvoiceTypeName(invoicetype);
 		newinvoicetypedialog.waitABit(500);
@@ -630,29 +620,29 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		invoicestypespage.clickClientsLinkForInvoiceType(invoicetype);
 		invoicestypespage.addAssignedClient(clientname);
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
-		
+
 		invoicestypespage.clickClientsLinkForInvoiceType(invoicetype);
 		Assert.assertFalse(invoicestypespage.isAssignedClientSelected(clientname));
 		invoicestypespage.addAssignedClient(clientname);
 		invoicestypespage.clickUpdateClientsButton();
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
-		
+
 		invoicestypespage.clickClientsLinkForInvoiceType(invoicetype);
 		Assert.assertTrue(invoicestypespage.isAssignedClientSelected(clientname));
 		invoicestypespage.deleteAssignedClient(clientname);
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
-		
+
 		invoicestypespage.clickClientsLinkForInvoiceType(invoicetype);
 		Assert.assertTrue(invoicestypespage.isAssignedClientSelected(clientname));
 		invoicestypespage.deleteAssignedClient(clientname);
 		invoicestypespage.clickUpdateClientsButton();
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
-		
+
 		invoicestypespage.clickClientsLinkForInvoiceType(invoicetype);
 		Assert.assertFalse(invoicestypespage.isAssignedClientSelected(clientname));
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
 	}
-	
+
 	@Test(testName = "Test Case 29759:Company- Clients: Services Update", description = "Company- Clients: Services Update")
 	public void testCompanyClientsServicesUpdate() throws Exception {
 
@@ -660,35 +650,34 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String servicepackage = "Demo Service Package";
 		final String servicepackagenew = "All Services";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
-		
+
 		clientspage.makeSearchPanelVisible();
 		clientspage.setClientSearchCriteria(clientname);
 		clientspage.clickFindButton();
 		if (clientspage.isClientExistsInTable(clientname)) {
 			clientspage.deleteClient(clientname);
 		}
-		
+
 		NewClientDialogWebPage newclientdialog = clientspage.clickAddClientButton();
 		newclientdialog.createWholesaleClient(clientname);
-		
+
 		String mainWindowHandle = webdriver.getWindowHandle();
 		clientspage.clickServicesLinkForClient(clientname);
 		clientspage.selectClientServicePackage(servicepackage);
 		List<WebElement> clienservicesselected = clientspage.getClientServicesTableRows();
 		clientspage.closeClientServicesTab(mainWindowHandle);
-		
+
 		clientspage.clickServicesLinkForClient(clientname);
 		Assert.assertTrue(clienservicesselected.retainAll(clientspage.getClientServicesTableRows()));
 		clientspage.selectClientServicePackage(servicepackagenew);
 		Assert.assertTrue(clientspage.getClientServicesTableRows().size() > 225);
 		clientspage.closeClientServicesTab(mainWindowHandle);
 	}
-	
+
 	@Test(testName = "Test Case 29761:Company- Clients: Client Users Search", description = "Company- Clients: Client Users Search")
 	public void testCompanyClientsClientUsersSearch() throws Exception {
 
@@ -698,9 +687,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String thirdsearchparemeter = "name@testmail.com";
 		final String lastsearchparemeter = "test3";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
@@ -716,9 +704,102 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 1);
 		clientspage.searchClientUser(lastsearchparemeter);
 		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 0);
-		
 		clientspage.closeClientServicesTab(mainWindowHandle);
 	}
+
+	@Test(testName = "Test Case 62293:Company: Inter Application Exchange Configuration - Sharing Work Order")
+	public void testCompanySharingWorkOrder() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
 		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+	}
+	
+	@Test(testName = "Test Case 62296:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Teams")
+	public void testCompanySharingWorkOrderAddRuleTeams() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+				
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		
+		interApplicationExchangePage.expandFirstCompanyProfile();
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams  (Clients Include Selected)"));
+		
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Teams Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
+		interApplicationExchangePage.fillRuleBoxEdit("testAO");
+		interApplicationExchangePage.clickEditRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Teams Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
+		String newName = Long.toString(System.currentTimeMillis());
+		interApplicationExchangePage.fillRuleBoxEdit(newName);
+		interApplicationExchangePage.clickEditRuleBox("Update");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(newName+" (Teams Include Selected)"));
+
+		interApplicationExchangePage.deleteRule(newName+" (Teams Include Selected)");
+	}
 }

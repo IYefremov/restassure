@@ -70,7 +70,11 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	
 	public RepairLocationManagersTabWebPage selectRepairLocationManager(String employee) {
 		employeecmb.click();
+		try{
 		employeecmb.clearAndType(employee);
+		}catch(Exception e){
+			Assert.assertTrue(false);
+		}
 		waitABit(1000);
 		employeedd.selectByVisibleText(employee);
 		return PageFactory.initElements(

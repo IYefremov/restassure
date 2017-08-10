@@ -142,9 +142,13 @@ public class WebPageWithPagination extends BaseWebPage {
 		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
 		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		}catch(TimeoutException e){}
-		//Thread.sleep(300);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));
+	}
+	public void waitForLoading(){
+		try{
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}catch(TimeoutException e){}
 	}
 
 }

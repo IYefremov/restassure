@@ -953,7 +953,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		return new Object[][] { { "Alex SASHAZ", firstDate, secondDate, "Scheduled", isDateShifted } };
 	}
 
-	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
+	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata", retryAnalyzer = Retry.class)
 	public void checkMultiTechInSRshowHideTech(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1083,8 +1083,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		int countBeforeAnySelections = serviceRequestsWebPage.countSR();
 		serviceRequestsWebPage.selectTechnicianFromSchedulerByIndex(0);
 		serviceRequestsWebPage.aplyTechniciansFromScheduler();
-		int countAfterFilter = serviceRequestsWebPage.countSR();
-		Assert.assertFalse(countBeforeAnySelections == countAfterFilter);
 	}
 
 	@Test(testName = "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset", dataProvider = "provideSRdata")
@@ -1554,8 +1552,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder")||
-			serviceRequestsWebPage.checkEmails("was not checked in"));
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was not checked in"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");

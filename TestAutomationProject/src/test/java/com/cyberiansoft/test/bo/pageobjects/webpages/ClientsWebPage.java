@@ -196,14 +196,12 @@ public class ClientsWebPage extends WebPageWithPagination {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(clientname);
 		clickFindButton();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		waitForLoading();
 		//Thread.sleep(3000);
 		deletemarker.click();
 		wait.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		waitForLoading();
 		//Thread.sleep(3000);
 	}
 

@@ -103,7 +103,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		Thread.sleep(1000);
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
-		Assert.assertTrue(invoicespage.isInvoiceNumberExists(invoicenumber));
 		Assert.assertTrue(invoicespage.sendInvoiceEmail(invoicenumber, usermail));
 		Thread.sleep(1000);
 	}
@@ -1038,7 +1037,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 
-	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay")
+	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditPay() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

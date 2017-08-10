@@ -93,6 +93,9 @@ public class CompanyWebPage extends BaseWebPage {
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Timesheet Types']")
 	private WebElement timesheetypesslink;
 	
+	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Inter Application Exchange']")
+	private WebElement interApplicationExchangeLink;
+	
 	public CompanyWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -252,5 +255,11 @@ public class CompanyWebPage extends BaseWebPage {
 		click(wait.until(ExpectedConditions.elementToBeClickable(managedeviceslink)));
 		return PageFactory.initElements(
 				driver, ActiveDevicesWebPage.class);
+	}
+	
+	public InterApplicationExchangeWebPage clickInterApplicationExchangeLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(interApplicationExchangeLink)).click();;
+		return PageFactory.initElements(
+				driver, InterApplicationExchangeWebPage.class);
 	}
 }
