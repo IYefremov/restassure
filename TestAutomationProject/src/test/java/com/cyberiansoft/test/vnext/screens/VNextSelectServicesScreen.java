@@ -21,6 +21,9 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='services-add']")
 	private WebElement selectservicesscreen;
 	
+	@FindBy(xpath="//*[@action='back']")
+	private WebElement backbtn;
+	
 	public VNextSelectServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -63,6 +66,15 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find service: " + servicename);
 	}
 	
+	public void unselectService(String servicename) {
+		WebElement servicerow = getServiceListItem(servicename);
+		if (servicerow != null)
+			tap(servicerow.findElement(By.xpath(".//input[@class='item-checked big-checkbox green']")));	
+		else
+			Assert.assertTrue(false, "Can't find service: " + servicename);
+		waitABit(5000);
+	}
+	
 	public VNextPriceMatrixesScreen openMatrixServiceDetails(String matrixservicename) {
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
@@ -76,7 +88,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 		String pricematrixname = "";
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='subtitle']")).getText();
+			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='item-subtitle']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 		return pricematrixname;
@@ -85,5 +97,11 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public void clickSaveSelectedServicesButton() {
 		tap(selectservicesscreen.findElement(By.xpath(".//span[@action='save']")));
 		log(LogStatus.INFO, "Click Save button");
+	}
+	
+	public VNextInspectionServicesScreen clickBackButton() {
+		tap(backbtn);
+		log(LogStatus.INFO, "Clack Select Services Back button");
+		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }

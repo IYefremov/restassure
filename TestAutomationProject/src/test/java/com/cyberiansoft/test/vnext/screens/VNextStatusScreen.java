@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -27,7 +28,13 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	public void updateMainDB() {
 		tap(updatemaindbbtn);
 		log(LogStatus.INFO, "Tap Update Main DB button");
-		waitABit(30000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.invisibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='Waiting for application data']"))));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.invisibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='Downloading application data']"))));
+		//waitABit(30000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}

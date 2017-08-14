@@ -50,5 +50,13 @@ public class VNextUserRegistrationInfo {
 	public String getDeviceRegistrationUserPhoneNumber() {
 	      return props.getProperty("user.regPhoneNumber");
 	}
+	
+	public String getProductionDeviceRegistrationUserPhoneCountryCode() {
+	      return props.getProperty("userprod.regCountryCode");
+	}
+	
+	public String getFreePhonesSiteURL() {
+	      return props.getProperty("freephone.serviceurl");
+	}
 
 }

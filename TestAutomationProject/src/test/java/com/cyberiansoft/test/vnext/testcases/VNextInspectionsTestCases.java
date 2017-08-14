@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -122,7 +123,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		vehicleinfoscreen.clickHardwareBackButton();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		visualscreen.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
@@ -222,6 +224,46 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(newcustomerscreen.getCustomerZIP(), customerzip);
 		customersscreen = newcustomerscreen.clickBackButton();
 		homescreen = customersscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case Archive Inspection", 
+			description = "Archive Inspection")
+	public void testArchiveInspection() { 
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer("Retail Automation");
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN("TESTVINN");
+		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
+		inspectionsscreen = inspinfoscreen.saveInspectionViaMenu();
+		
+		inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
+		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber));
+		homescreen = inspectionsscreen.clickBackButton();
+		
+	}
+	
+	@Test(testName= "Test Case Archive Multiple Inspections", 
+			description = "Archive Multiple Inspections")
+	public void testArchiveMultipleInspections() { 
+		
+		final int INSP_TO_ARCHIVE = 3;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		int inspnumbers = inspectionsscreen.getInspectionsList().size();
+		
+		for (int i = 0; i < INSP_TO_ARCHIVE; i++) {
+			String inspnumber = inspectionsscreen.getFirstInspectionNumber();
+			inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
+			Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber));
+		}
+		Assert.assertEquals(inspectionsscreen.getInspectionsList().size(),inspnumbers - INSP_TO_ARCHIVE);
+		
+		homescreen = inspectionsscreen.clickBackButton();
+		
 	}
 
 }

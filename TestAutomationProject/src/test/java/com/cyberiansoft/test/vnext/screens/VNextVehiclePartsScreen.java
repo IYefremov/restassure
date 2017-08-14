@@ -29,13 +29,15 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	}
 	
 	public WebElement getVehiclePartsList() {
-		return vehiclepartsscreen.findElement(By.xpath(".//div[@class='list-selectable']"));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen.findElement(By.xpath(".//*[@data-autotests-id='matrix-parts-list']"))));
+		return vehiclepartsscreen.findElement(By.xpath(".//*[@data-autotests-id='matrix-parts-list']"));
 	}
 	
 	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclepartname) {
 		WebElement vpcell = getVehiclePartCell(vehiclepartname);
 		if (vpcell != null)
-			tap(vpcell.findElement(By.xpath(".//input[@type='checkbox']")));
+			tap(vpcell.findElement(By.xpath(".//i[contains(@class, 'item-checked big-checkbox')]")));
 		else
 			Assert.assertTrue(false, "Can't find Vehicle Part: " + vehiclepartname);
 		log(LogStatus.INFO, "Select Vehicle Part: " + vehiclepartname);

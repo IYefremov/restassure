@@ -5,7 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 public class VNextWebServicesUtils {
 
@@ -143,4 +150,37 @@ public class VNextWebServicesUtils {
 		  return response.toString();
 		
 	}
+	
+	public static String getProdRegCode(String phonenumber) throws IOException {
+		 
+		String output = "";
+		try {
+			 HttpClient httpClient = HttpClientBuilder.create().build(); 
+				HttpPost postRequest = new HttpPost(
+					"https://api2.reconpro.net/v1/users/actions/generatePhoneVerificationCode");
+
+				StringEntity input = new StringEntity("{\"phone\":" + phonenumber + "}");
+				input.setContentType("application/json");
+				postRequest.setEntity(input);
+
+				HttpResponse response = httpClient.execute(postRequest);
+
+				BufferedReader br = new BufferedReader(
+		                        new InputStreamReader((response.getEntity().getContent())));
+
+				output = br.readLine();
+
+			  } catch (MalformedURLException e) {
+
+				e.printStackTrace();
+
+			  } catch (IOException e) {
+
+				e.printStackTrace();
+
+			  }
+		 return output; 
+
+			}
+	
 }

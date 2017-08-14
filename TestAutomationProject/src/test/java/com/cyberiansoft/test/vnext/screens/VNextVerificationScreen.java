@@ -34,7 +34,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	public VNextVerificationScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(phonevereficationscreren));
 	}
 	

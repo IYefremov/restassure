@@ -15,10 +15,10 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='page customer-details page-on-center']")
 	private WebElement newcustomerscreen;
 	
-	@FindBy(xpath="//a[@action='save']/i")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 	
-	@FindBy(xpath="//a[@action='back']/i")
+	@FindBy(xpath="//*[@action='back']")
 	private WebElement backbtn;
 	
 	@FindBy(id="my-form")

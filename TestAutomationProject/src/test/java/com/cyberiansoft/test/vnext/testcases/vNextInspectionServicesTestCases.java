@@ -971,4 +971,141 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
+	
+	@Test(testName= "Test Case:vNext Inspection total price should change when uselect some of the selected service on Services screen", 
+			description = "Inspection total price should change when uselect some of the selected service on Services screen")
+	public void testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen() { 
+		
+		final String[] servicestoselect = { "Bumper Repair", "R&I - Sunroof" };
+		final String[] servicesprices = { "10", "10" };
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(testVIN);
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicecreen = inspservicesscreen.clickAddServicesButton();
+		for (String servicesel : servicestoselect)
+			selectservicecreen.selectService(servicesel);
+		selectservicecreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (int i=0; i< servicestoselect.length; i++)
+			inspservicesscreen.setServiceAmountValue(servicestoselect[i], servicesprices[i]);
+		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$20.00");
+		
+		for (int i=0; i< servicestoselect.length; i++)
+			inspservicesscreen.uselectService(servicestoselect[i]);
+		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), "$0.00");
+		inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case:vNext Services aren't became selected if user unselect them before clicking back button on Select Services screen", 
+			description = "Services aren't became selected if user unselect them before clicking back button on Select Services screen")
+	public void testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen() { 
+		
+		final String[] servicestoselect = { "Bumper Repair", "R&I - Sunroof" };
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(testVIN);
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicecreen = inspservicesscreen.clickAddServicesButton();
+		for (String servicese : servicestoselect)
+			selectservicecreen.selectService(servicese);
+		for (String servicese : servicestoselect)
+			selectservicecreen.unselectService(servicese);
+		
+		
+		inspservicesscreen = selectservicecreen.clickBackButton();
+		for (String servicese : servicestoselect)
+			Assert.assertFalse(inspservicesscreen.isServiceSelected(servicese));
+		inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case:vNext Create inspection with negative price", 
+			description = "Create inspection with negative price")
+	public void testCreateInspectionWithNegativePrice() { 
+		
+		final String damagetype = "Dent Repair";
+		final String amount = "-9" ;
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(testVIN);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		visualscreen.clickAddServiceButton();
+		visualscreen.clickDefaultDamageType(damagetype);
+		visualscreen.clickCarImage();
+		visualscreen.waitABit(1000);
+		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+		servicedetailsscreen.setServiceAmountValue(amount);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		visualscreen = new VNextVisualScreen(appiumdriver);
+		
+		servicedetailsscreen = visualscreen.clickCarImageMarker();
+		servicedetailsscreen.clickServiceAmountField();
+		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amount);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		visualscreen = new VNextVisualScreen(appiumdriver);
+		
+		visualscreen.clickDamageCancelEditingButton();
+		visualscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case :vNext - Total is not set to 0 if user adds Matrix Additional service with negative percentage service",
+			description = "Total is not set to 0 if user adds Matrix Additional service with negative percentage service")
+	public void testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService() {
+		
+		final String matrixservice = "Hail Dent Repair";
+		final String pricematrix = "State Farm" ;
+		final String vehiclepartname = "Hood";
+		final String vehiclepartsize = "Dime";	
+		final String vehiclepartseverity = "Light 6 to 15";	
+		final String additionalservicename = "Aluminum Upcharge";	
+		final String additionalservicenprice = "-25";
+		
+		final String inspectiontotalprice = "$93.75";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		
+		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
+		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
+		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
+		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservicename);
+		vehiclepartinfoscreen.setAdditionalServicePriceValue(additionalservicename, additionalservicenprice);
+		Assert.assertEquals(vehiclepartinfoscreen.getMatrixServiceTotalPriceValue(), inspectiontotalprice);
+		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), pricematrix);
+		
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
+		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceMatrixValue(matrixservice), pricematrix);
+		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), inspectiontotalprice);
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
 }

@@ -15,7 +15,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;
 
-	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
+	@FindBy(xpath="//*[@action='more_actions']")
 	private WebElement menubtn;
 	
 	@FindBy(xpath="//a[@handler='_cancel']")
@@ -41,7 +41,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public VNextInspectionsScreen cancelInspection() {
 		clickCancelInspectionMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogDontSaveButtonAndGetMessage();
+		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
 		//Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
 		return new VNextInspectionsScreen(appiumdriver);
 	}

@@ -96,6 +96,8 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void clickDamageCancelEditingButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='icon cancel-editing-button']")));
 		tap(visualscreen.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
 		log(LogStatus.INFO, "Tap Damage Cancel Editing button");
 	}

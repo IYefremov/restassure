@@ -50,8 +50,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		
+		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(customerslist));
 		
@@ -71,6 +73,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
+		waitABit(2000);
 		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInspectionsScreen(appiumdriver);
 	}

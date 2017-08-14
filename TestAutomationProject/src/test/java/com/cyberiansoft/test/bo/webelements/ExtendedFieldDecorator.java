@@ -22,7 +22,7 @@ public class ExtendedFieldDecorator extends DefaultFieldDecorator {
         super(new DefaultElementLocatorFactory(searchContext));
     }
 
-    @Override
+	@Override
     public Object decorate(final ClassLoader loader, final Field field) {
         if (IWebContainer.class.isAssignableFrom(field.getType())) {
             return decorateContainer(loader, field);

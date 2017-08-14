@@ -17,10 +17,10 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
-	@FindBy(xpath="//div[@class='page inspections-info page-on-center']")
+	@FindBy(xpath="//div[@data-page='info']")
 	private WebElement vehiclepage;
 	
-	@FindBy(id="my-form")
+	@FindBy(xpath="//*[contains(@data-autotests-id, '-vehicle-info')]")
 	private WebElement vehiclefieldslist;
 	
 	@FindBy(name="Vehicle.VIN")
@@ -65,16 +65,18 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
 	
-	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
+	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
 	private WebElement keyboard;
 	
 	public VNextVehicleInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(vehiclefieldslist));
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
+		waitABit(1000);
+		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
 	public void setVIN (String vinnumber) {
@@ -158,6 +160,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setLicPlate (String licplate) {
 		licplatefld.clear();
 		licplatefld.sendKeys(licplate);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set License Plate : " + licplate);
 	}
 	
@@ -229,7 +232,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(1000);	
+		waitABit(2000);	
 		swipeScreenLeft();
 		new VNextVisualScreen(appiumdriver);
 		swipeScreenLeft();

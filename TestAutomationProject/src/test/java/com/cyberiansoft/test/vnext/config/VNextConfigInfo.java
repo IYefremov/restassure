@@ -58,4 +58,8 @@ public class VNextConfigInfo {
 	public String getUserVnextDevUserPassword() {
 	      return props.getProperty("uservnextdev.password");
 	}
+	
+	public String getBuildProductionAttribute() {
+	      return props.getProperty("build.production");
+	}
 }

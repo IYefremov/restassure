@@ -88,7 +88,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customerphone = "032-449-56";
 		final String customeraddress = "";
 		final String customercountry = "Germany";
-		final String customerstate = "Saxony";
+		final String customerstate = "Saarland";
 		
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -97,6 +97,47 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		setNetworkOn();
+		customersscreen = new VNextCustomersScreen(appiumdriver);
+		homescreen = customersscreen.clickBackButton();
+		homescreen.waitABit(1000);
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
+		customersscreen = homescreen.clickCustomersMenuItem();
+		final String customer = firstname + " " + lastname;
+		customersscreen.selectCustomer(customer);
+		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
+		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), lastname);
+		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), companyname);
+		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), customeremail);
+		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
+		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
+		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		customersscreen = newcustomerscreen.clickBackButton();
+		homescreen = customersscreen.clickBackButton();
+		
+	}
+	
+	@Test(testName= "vNext - Verify new customer is available after DB update", 
+			description = "Verify new customer is available after DB update")
+	public void testVerifyNewCustomerIsAvailableAfterDBUpdate() {
+		
+		final String firstname = "Test";
+		final String lastname = "DBUpdateCustomer";
+		final String companyname = "Toyota-Diamant";
+		final String customeremail = "cnolan@gmail.com";
+		final String customerphone = "032-449-56";
+		final String customeraddress = "";
+		final String customercountry = "Germany";
+		final String customerstate = "Saarland";
+		
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		homescreen = customersscreen.clickBackButton();
 		homescreen.waitABit(1000);

@@ -26,7 +26,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//span[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
+	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
 	private WebElement keyboard;
 	
 	public VNextServiceDetailsScreen(SwipeableWebDriver appiumdriver) {
@@ -71,7 +71,10 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 			clickKeyboardBackspaceButton();
 		}
 		for (int i = 0; i < amount.length(); i++) {
-			clickKeyboardButton(amount.charAt(i));
+			if (Character.toString(amount.charAt(i)).equals("-"))
+				tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='-/+']")));
+			else
+				clickKeyboardButton(amount.charAt(i));
 		}
 		clickKeyboardDoneButton();
 		log(LogStatus.INFO, "Set Service value: " + amount);

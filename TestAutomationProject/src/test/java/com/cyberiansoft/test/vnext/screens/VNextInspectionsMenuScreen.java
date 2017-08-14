@@ -11,7 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@handler='_edit']")
+	@FindBy(xpath="//a[@handler='_edit']/span")
 	private WebElement editinspectionbtn;
 	
 	@FindBy(xpath="//a[@handler='_email']")
@@ -19,6 +19,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//a[@handler='_createOrder']")
 	private WebElement createwoinspectionbtn;
+	
+	@FindBy(xpath="//a[@handler='_archive']")
+	private WebElement archiveinspectionbtn;
 	
 	@FindBy(xpath="//div[@class='actions-layer popup tablet-fullscreen modal-in']")
 	private WebElement inspectionsmenuscreen;
@@ -31,11 +34,12 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(inspectionsmenuscreen));
 	}
 	
-	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
+	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {			
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
-		tap(editinspectionbtn);
 		waitABit(1000);
+		tap(editinspectionbtn);
+		waitABit(4000);		
 		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
@@ -55,6 +59,20 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		waitABit(8000);
 		log(LogStatus.INFO, "Tap on Inspection Create Work Order Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
+	}
+	
+	public VNextInspectionsScreen archiveInspection() {
+		clickArchiveInspectionMenuItem();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogArchiveButton();	
+		log(LogStatus.INFO, "Tap on Inspection Archive Menu");
+		return new VNextInspectionsScreen(appiumdriver);
+	}
+	
+	public void clickArchiveInspectionMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(archiveinspectionbtn));
+		tap(archiveinspectionbtn);
 	}
 
 }

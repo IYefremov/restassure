@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,10 +17,13 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionsScreen extends VNextBaseScreen {
 	
+	@FindBy(xpath="//div[contains(@class, 'page inspections-list')]")
+	private WebElement inspectionsscreen;
+	
 	@FindBy(xpath="//a[@action='add']")
 	private WebElement addinspectionbtn;
 	
-	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
+	@FindBy(xpath="//*[@data-autotests-id='inspections-list']")
 	private WebElement inspectionslist;
 	
 	@FindBy(xpath="//a[@action='back']")
@@ -27,14 +32,23 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(addinspectionbtn));
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 	}
 	
-	public VNextCustomersScreen clickAddInspectionButton() {
-		waitABit(3000);		
-		tap(addinspectionbtn);
+	public VNextCustomersScreen clickAddInspectionButton() {	
+		tap(inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")));
+		waitABit(1000);
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		try {
+		if (inspectionsscreen.findElements(By.xpath(".//a[@action='add']/i")).size() > 0)
+			if (inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")).isDisplayed())
+				tap(addinspectionbtn);
+		} catch (NoSuchElementException e) {
+			
+		}
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		log(LogStatus.INFO, "Tap Add inspection button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
@@ -50,11 +64,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		customersscreen.selectCustomer("Retail Automation");
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN("TESTVINN");
-		VNextInspectionServicesScreen servicesscreen = inspinfoscreen.goToInspectionServicesScreen();
-		servicesscreen.clickSaveButton();
-		//waitABit(4000);
-		//inspinfoscreen.saveInspectionfromFirstScreen();
-		return new VNextInspectionsScreen(appiumdriver);
+		return inspinfoscreen.saveInspectionViaMenu();
 	}
 	
 	public String getFirstInspectionNumber() {
@@ -62,13 +72,13 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getInspectionCustomerValue(String inspectionnumber) {
-		String inspprice = null;
+		String inspcustomer = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
 		if (inspcell != null)
-			inspprice = inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title open-popup']")).getText();
+			inspcustomer = inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return inspprice;
+		return inspcustomer;
 	}
 	
 	public String getFirstInspectionPrice() {
@@ -115,5 +125,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public List<WebElement> getInspectionsList() {
 		return inspectionslist.findElements(By.xpath("./ul/li"));
+	}
+	
+	public VNextInspectionsScreen archiveInspection(String inspnumber) {
+		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
+		return inspmenulist.archiveInspection();
+	}
+	
+	public boolean isInspectionExists(String inspnumber) {
+		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + inspnumber + "']")).size() > 0;
 	}
 }

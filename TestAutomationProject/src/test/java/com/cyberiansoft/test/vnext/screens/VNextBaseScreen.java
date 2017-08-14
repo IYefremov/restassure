@@ -3,10 +3,12 @@ package com.cyberiansoft.test.vnext.screens;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
@@ -130,8 +132,13 @@ public class VNextBaseScreen {
 	}
 	
 	public void swipeScreensRight(int screensnumber) {
-		if (appiumdriver instanceof JavascriptExecutor)
-		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
+		//if (appiumdriver instanceof JavascriptExecutor)
+		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
+		for (int i = 0; i < screensnumber; i++) {
+			tap(appiumdriver.findElementByXPath("//*[@action='back']"));
+			log(LogStatus.INFO, "Swipe To Next Screen");
+		}
+		
 		/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.25);
@@ -177,5 +184,17 @@ public class VNextBaseScreen {
 	public void log(LogStatus logstatus, String logmessage) {
 		if (testReporter != null)
 			testReporter.log(logstatus, logmessage);		
+	}
+	
+	protected boolean checkHelpPopupPresence() {
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		boolean exists = false;
+		try {
+			exists = appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed();
+		} catch (NoSuchElementException ignored) {
+			exists = false;
+		}
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return exists;
 	}
 }

@@ -16,7 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
-	@FindBy(xpath="//div[contains(@class, 'page inspections-service hide-searchbar page-on-center')]")
+	@FindBy(xpath="//div[@data-page='services-list']")
 	private WebElement servicesscreen;
 	
 	@FindBy(xpath="//a[@action='add']")
@@ -28,17 +28,20 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//span[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//div[@class='services-list-block']")
+	@FindBy(xpath="//div[contains(@class, 'services-list-block')]")
 	private WebElement addedserviceslist;
 	
-	@FindBy(xpath="//div[@class='picker-modal picker-keypad picker-keypad-type-numpad remove-on-close modal-in']")
+	@FindBy(xpath="//*[@data-autotests-id='selected-services']")
+	private WebElement selectedserviceslist;
+	
+	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
 	private WebElement keyboard;
 
 	public VNextInspectionServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(addservicesbtn));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
 		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
@@ -52,13 +55,15 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public boolean isServiceSelected(String servicename) {
 		boolean selected = false;
-		WebElement servicecell = getSelectedServiceCell(servicename);
-		if (servicecell != null) {
-			if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked") != null)
-				if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked").equals("true"))
-					selected = true;
-		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
+		if (appiumdriver.findElements(By.xpath("//*[@data-autotests-id='selected-services']")).size() > 0) {
+			WebElement servicecell = getSelectedServiceCell(servicename);
+			if (servicecell != null) {
+				if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked") != null)
+					if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked").equals("true"))
+						selected = true;
+			}
+			
+		}
 		return selected;
 	}
 	
@@ -80,7 +85,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		String pricematrixname = "";
 		WebElement servicerow = getSelectedServiceListItem(servicename);
 		if (servicerow != null) {
-			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='subtitle']")).getText();
+			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='item-subtitle']")).getText();
 		} else
 			Assert.assertTrue(false, "Can't find service: " + servicename);
 		return pricematrixname;
@@ -95,7 +100,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public List<WebElement> getSelectedServicesListItems() {	
-		return addedserviceslist.findElements(By.xpath(".//div[contains(@class, 'accordion-item checked-accordion-item')]"));
+		return selectedserviceslist.findElements(By.xpath(".//div[contains(@class, 'checked-accordion-item')]"));
 	}
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
@@ -117,7 +122,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
 		waitABit(5000);
-		swipeScreensRight(4);
+		swipeScreensRight(2);
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();
@@ -201,7 +206,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public void clickKeyboardBackspaceButton() {
 		waitABit(2000);
-		tap(keyboard.findElement(By.xpath(".//i[@class='icon icon-keypad-delete']")));		
+		tap(keyboard.findElement(By.xpath(".//span[contains(@class, 'picker-keypad-delete')]")));		
 	}
 	
 	public void clickKeyboardButton(char button) {

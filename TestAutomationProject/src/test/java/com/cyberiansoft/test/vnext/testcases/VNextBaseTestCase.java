@@ -17,6 +17,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -27,6 +29,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder.AndroidDriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -69,6 +72,7 @@ public class VNextBaseTestCase {
 	protected static String deviceuser;
 	protected static String devicepsw;
 	protected static String deviceplatform;
+	protected static boolean buildproduction;
 	
 	@BeforeSuite
 	@Parameters({ "selenium.browser", "device.platform" })
@@ -82,16 +86,24 @@ public class VNextBaseTestCase {
 			deviceplatform = devplatform;
 			if (deviceplatform.contains("ios"))
 				appiumdriver = VNextAppiumDriverBuilder.forIOS().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
-			else
+			else {
+				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
+				appiumdriver.removeApp("com.automobiletechnologies.repair360_devstage");
+				appiumdriver.quit();
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
 			
+			}
 			defaultbrowser = browser;
 			deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
 			devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
+			if (VNextConfigInfo.getInstance().getBuildProductionAttribute().equals("true"))
+				buildproduction = true;
+			else
+				buildproduction = false;
 	}
 	
 	public void setUp() {
-		waitABit(3000);
+		waitABit(8000);
 	   // switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
@@ -171,6 +183,23 @@ public class VNextBaseTestCase {
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//iframe"))));
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		String phonecountrycode = "1";
+		String phonenumber = "14122264998";
+		String regcode1 = VNextWebServicesUtils.getProdRegCode(phonenumber);
+		
+		
+		if (buildproduction) {
+			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
+			/*initiateWebDriver();
+			webdriver.get("http://receivefreesms.com/");
+			phonenumber = webdriver.findElement(By.xpath("//strong/a[contains(text(), '+1')]")).getText();
+			webdriver.quit();*/
+		} else {
+			phonecountrycode = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode();
+			phonenumber = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber();
+		}
+		
+		
 		
 		switchToWebViewContext();
 		String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
@@ -178,8 +207,7 @@ public class VNextBaseTestCase {
 		
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
-				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode(), 
-				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber(), userregmail);
+				phonecountrycode, phonenumber, userregmail);
 		regscreen.waitABit(7000);
 		
 		/*final String searchlicensecriteria = "VNext Automation";
@@ -200,13 +228,19 @@ public class VNextBaseTestCase {
 		getWebDriver().quit();*/
 		
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
-		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
+		if (buildproduction) 
+			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
+		else
+			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
 		//verificationscreen.setDeviceRegistrationCode(regCode);		
 		verificationscreen.clickVerifyButton(); 
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		registrationinformationdlg.waitABit(70*1000);
+		registrationinformationdlg.waitABit(5*1000);
+		//registrationinformationdlg.waitABit(70*1000);
+		
+		
 		/*appiumdriver.switchTo().defaultContent();
 		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() < 1) {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
@@ -221,8 +255,14 @@ public class VNextBaseTestCase {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
-		registrationinformationdlg.waitABit(15*1000);
-	    switchToWebViewContext();
+		//registrationinformationdlg.waitABit(15*1000);
+	    //switchToWebViewContext();
+
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
 	}
 	
 	public void restartAppAndGetNewRegCode(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) {
