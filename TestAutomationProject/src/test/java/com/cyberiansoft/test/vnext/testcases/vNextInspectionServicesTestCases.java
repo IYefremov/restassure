@@ -658,7 +658,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		final String servicetoselect = "555";
 		final String serviceprice = "0.015%";
-		final char servicelastsymbol = '8';
+		final String servicelastsymbol = "8";
 		final String newserviceprice = "0.018%";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -675,10 +675,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		Assert.assertTrue(inspservicesscreen.isServiceSelected(servicetoselect));
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(servicetoselect), serviceprice);
-		inspservicesscreen.clickServiceAmountField(servicetoselect);
-		inspservicesscreen.clickKeyboardBackspaceButton();
-		inspservicesscreen.clickKeyboardButton(servicelastsymbol);
-		inspservicesscreen.clickKeyboardDoneButton();
+		inspservicesscreen.setServiceAmountValue(servicetoselect, servicelastsymbol);
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(servicetoselect), newserviceprice);
 		inspectionsscreen = inspservicesscreen.cancelInspection();
@@ -815,10 +812,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectService(percentageservice);
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspservicesscreen.clickServiceAmountField(percentageservice);
-		inspservicesscreen.clickKeyboardBackspaceButton();
-		inspservicesscreen.clickKeyboardButton(quantitylastdigit.charAt(0));
-		inspservicesscreen.clickKeyboardDoneButton();
+		inspservicesscreen.setServiceAmountValue(percentageservice, quantitylastdigit);
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(percentageservice), "28.000%");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -843,12 +837,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectservicesscreen.selectService(moneyservice);
 		selectservicesscreen.clickSaveSelectedServicesButton();	
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspservicesscreen.clickServiceAmountField(moneyservice);
-		inspservicesscreen.clickKeyboardBackspaceButton();
-		for (int i = 0; i < pricevalue.length(); i++) {
-			inspservicesscreen.clickKeyboardButton(pricevalue.charAt(i));
-		}
-		inspservicesscreen.clickKeyboardDoneButton();		
+		inspservicesscreen.setServiceAmountValue(moneyservice, pricevalue);	
 		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceValue(moneyservice), "$3.20");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();

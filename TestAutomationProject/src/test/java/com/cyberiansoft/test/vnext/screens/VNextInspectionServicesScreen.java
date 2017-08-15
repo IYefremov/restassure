@@ -33,9 +33,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='selected-services']")
 	private WebElement selectedserviceslist;
-	
-	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
-	private WebElement keyboard;
 
 	public VNextInspectionServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -163,13 +160,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
-			for (int i = 0; i <= servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value").length()+1; i++) {
-				clickKeyboardBackspaceButton();
-			}
-			for (int i = 0; i < amount.length(); i++) {
-				clickKeyboardButton(amount.charAt(i));
-			}
-			clickKeyboardDoneButton();
+			VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
 			log(LogStatus.INFO, "Set Service value: " + amount);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + servicename);	
@@ -192,29 +184,11 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")));
-			for (int i = 0; i <= servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value").length(); i++) {
-				clickKeyboardBackspaceButton();
-			}
-			for (int i = 0; i < quantity.length(); i++) {
-				clickKeyboardButton(quantity.charAt(i));
-			}
-			clickKeyboardDoneButton();
+			VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
 			log(LogStatus.INFO, "Set Service value: " + quantity);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + servicename);	
-	}
-	
-	public void clickKeyboardBackspaceButton() {
-		waitABit(2000);
-		tap(keyboard.findElement(By.xpath(".//span[contains(@class, 'picker-keypad-delete')]")));		
-	}
-	
-	public void clickKeyboardButton(char button) {
-		tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + button + "']")));
-	}
-	
-	public void clickKeyboardDoneButton() {
-		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
 	}
 	
 	public void addNotesToSelectedService(String servicename, String notes) {

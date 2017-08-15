@@ -26,9 +26,6 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//span[@action='back']")
 	private WebElement backbtn;
 	
-	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
-	private WebElement keyboard;
-	
 	public VNextServiceDetailsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -66,17 +63,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void setServiceAmountValue(String amount) {
-		clickServiceAmountField();		
-		for (int i = 0; i <= servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value").length()+1; i++) {
-			clickKeyboardBackspaceButton();
-		}
-		for (int i = 0; i < amount.length(); i++) {
-			if (Character.toString(amount.charAt(i)).equals("-"))
-				tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='-/+']")));
-			else
-				clickKeyboardButton(amount.charAt(i));
-		}
-		clickKeyboardDoneButton();
+		clickServiceAmountField();	
+		VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+		keyboard.setFieldValue(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value"), amount);	
 		log(LogStatus.INFO, "Set Service value: " + amount);
 	}
 	
@@ -89,43 +78,19 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickServiceAmountField() {
-		tap(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")));
-		waitABit(2000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(keyboard));		
+		tap(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")));	
 		log(LogStatus.INFO, "Click Service Amount Field");
 	}
 	
 	public void clickServiceQuantityField() {
-		tap(servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")));
-		waitABit(2000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(keyboard));		
+		tap(servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")));	
 		log(LogStatus.INFO, "Click Service Amount Field");
-	}
-	
-	public void clickKeyboardButton(char button) {
-		tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + button + "']")));
-	}
-	
-	public void clickKeyboardDoneButton() {
-		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
-	}
-	
-	public void clickKeyboardBackspaceButton() {
-		tap(keyboard.findElement(By.xpath(".//i[@class='icon icon-keypad-delete']")));
 	}
 	
 	public void setServiceQuantityValue(String quantity) {
 		clickServiceQuantityField();
-		final String actualvalue = getServiceQuantityValue();
-		if (!actualvalue.equals(quantity)) {
-			for (int i = 0; i < actualvalue.length(); i++)
-				clickKeyboardBackspaceButton();
-			for (int i = 0; i < quantity.length(); i++)
-				clickKeyboardButton(quantity.charAt(i));
-		}
-		clickKeyboardDoneButton();
+		VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+		keyboard.setFieldValue(getServiceQuantityValue(), quantity);
 		log(LogStatus.INFO, "Set Service quantity value: " + quantity);
 	}
 
