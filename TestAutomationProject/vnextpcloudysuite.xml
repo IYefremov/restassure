@@ -2,7 +2,7 @@
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="chrome" />
-  <parameter name="device.platform" value="ios"  />
+  <parameter name="device.platform" value="android"  />
   <listeners>
 		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
   </listeners>
