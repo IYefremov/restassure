@@ -657,7 +657,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(timesheettypespage.isTimesheetTypeExists(timesheettypeedited));
 	}
 	
-	@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD")
+	//@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD")
 	public void testCompanyWorkOrderTypesCRUD() throws Exception {
 
 

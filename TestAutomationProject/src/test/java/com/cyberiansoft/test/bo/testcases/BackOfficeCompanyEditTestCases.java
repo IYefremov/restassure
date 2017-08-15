@@ -781,7 +781,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox("Cancel");
-		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams  (Clients Include Selected)"));
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Clients Include Selected)"));
 		
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
@@ -801,5 +801,187 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(newName+" (Teams Include Selected)"));
 
 		interApplicationExchangePage.deleteRule(newName+" (Teams Include Selected)");
+	}
+	
+	@Test(testName = "Test Case 62295:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Clients")
+	public void testCompanySharingWorkOrderAddRuleClients() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+				
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		
+		interApplicationExchangePage.expandFirstCompanyProfile();
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Clients (Clients Include Selected)"));
+		
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Clients (Clients Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Clients (Clients Include Selected)");
+		interApplicationExchangePage.fillRuleBoxEdit("testAO");
+		interApplicationExchangePage.clickEditRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Clients Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Clients (Clients Include Selected)");
+		String newName = Long.toString(System.currentTimeMillis());
+		interApplicationExchangePage.fillRuleBoxEdit(newName);
+		interApplicationExchangePage.clickEditRuleBox("Update");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(newName+" (Clients Include Selected)"));
+
+		interApplicationExchangePage.deleteRule(newName+" (Clients Include Selected)");
+	}
+	
+	@Test(testName = "Test Case 62298:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Services")
+	public void testCompanySharingWorkOrderAddRuleServices () throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+				
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		
+		interApplicationExchangePage.expandFirstCompanyProfile();
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
+		
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+		interApplicationExchangePage.clickAddRuleBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
+		interApplicationExchangePage.fillRuleBoxEdit("testAO");
+		interApplicationExchangePage.clickEditRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Services Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
+		String newName = Long.toString(System.currentTimeMillis());
+		interApplicationExchangePage.fillRuleBoxEdit(newName);
+		interApplicationExchangePage.clickEditRuleBox("Update");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(newName+" (Services Include Selected)"));
+
+		interApplicationExchangePage.deleteRule(newName+" (Services Include Selected)");
+	}
+	
+	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts")
+	public void testCompanySharingWorkOrderAddRuleVehicleParts() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+				
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)"));
+
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		
+		interApplicationExchangePage.expandFirstCompanyProfile();
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Vehicle Parts (Vehicle Parts Include Selected)"));
+		
+		interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
+		interApplicationExchangePage.clickAddRuleBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Vehicle Parts (Vehicle Parts Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Vehicle Parts (Vehicle Parts Include Selected)");
+		interApplicationExchangePage.fillRuleBoxEdit("testAO");
+		interApplicationExchangePage.clickEditRuleBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Vehicle Parts Include Selected)"));
+		
+		interApplicationExchangePage.editRule("Include Selected Vehicle Parts (Vehicle Parts Include Selected)");
+		String newName = Long.toString(System.currentTimeMillis());
+		interApplicationExchangePage.fillRuleBoxEdit(newName);
+		interApplicationExchangePage.clickEditRuleBox("Update");
+		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(newName+" (Vehicle Parts Include Selected)"));
+
+		interApplicationExchangePage.deleteRule(newName+" (Vehicle Parts Include Selected)");
 	}
 }

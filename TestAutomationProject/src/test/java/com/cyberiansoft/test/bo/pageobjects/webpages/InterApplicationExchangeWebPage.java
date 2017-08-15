@@ -83,6 +83,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 		documentTypeDropDown.click();
+		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(documentType))
 				.findFirst().get().click();
@@ -178,9 +179,26 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		addRuleNameField.sendKeys(name);
 
 		addRuleEntityTypeDropDown.click();
+		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
+	
+
+		waitForLoading();
+
+		if (filterType.equals("Include Selected"))
+			new Select(driver.findElement(
+					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))
+							.selectByIndex(1);
+		;
+	}
+	
+	public void fillFilterRuleBox(String name, String filterType) {
+		addRuleNameField.clear();
+		addRuleNameField.sendKeys(name);
+
+
 		waitForLoading();
 
 		if (filterType.equals("Include Selected"))
