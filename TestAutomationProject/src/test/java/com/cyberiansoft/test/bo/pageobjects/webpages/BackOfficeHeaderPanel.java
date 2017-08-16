@@ -45,6 +45,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public void clickLogout() {
+		driver.navigate().refresh();
 		if (driver.getWindowHandles().size() > 1) {
 			driver.close();
 			for (String activeHandle : driver.getWindowHandles())

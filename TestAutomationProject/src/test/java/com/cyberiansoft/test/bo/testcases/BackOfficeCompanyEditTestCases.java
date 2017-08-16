@@ -52,7 +52,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
-
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		backofficeheader.clickLogout();
@@ -986,7 +985,37 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 62300:Company: Inter Application Exchange Configuration - Sharing Estimate")
-	public void testCompanyExchangeConfigurationSharingEstimate(){
+	public void testCompanyExchangeConfigurationSharingEstimate() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
 	}
 }

@@ -95,6 +95,16 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
 	}
+	
+	public void fillProfileDetails(String name, String entityType) {
+		profileDetailsName.clear();
+		profileDetailsName.sendKeys(name);
+
+		entityTypeDropDown.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
+				.get().click();
+	}
 
 	public void fillProfileDetailsEdit(String name) {
 		profileDetailsNameEdit.clear();
