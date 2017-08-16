@@ -984,4 +984,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Vehicle Parts Include Selected)");
 	}
+	
+	@Test(testName = "Test Case 62300:Company: Inter Application Exchange Configuration - Sharing Estimate")
+	public void testCompanyExchangeConfigurationSharingEstimate(){
+		
+	}
 }
