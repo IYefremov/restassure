@@ -916,12 +916,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(
@@ -959,12 +960,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkShowHideTeches(startDate, endDate));
@@ -977,13 +979,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 		Assert.assertTrue(
 				serviceRequestsWebPage.checkDefaultAppointmentValuesFromCalendar(startDate, endDate, SRcustomer));
@@ -1016,17 +1018,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.reloadPage();
-//		int afterReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
-//		Assert.assertTrue(afterReqestsCount != prevReqestsCount);
 	}
 
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdata")
@@ -1037,7 +1036,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
@@ -1069,11 +1068,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1092,11 +1092,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1114,11 +1115,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 	}
@@ -1135,7 +1137,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToTimeLine();
 		int srCountBefore = serviceRequestsWebPage.countSRinTimelineByDate(startDate);
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
@@ -1167,11 +1169,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1189,9 +1192,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown("Stas_allPhases_Appointments");
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleContent());

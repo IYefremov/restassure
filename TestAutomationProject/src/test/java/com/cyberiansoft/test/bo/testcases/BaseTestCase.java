@@ -4,6 +4,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
+import static org.testng.Assert.assertNotSame;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -196,6 +198,8 @@ public class BaseTestCase {
 	}
 
 	public void webdriverGotoWebPage(String url) {
+		webdriver.navigate().refresh();
+		webdriver.manage().window().maximize();
 		webdriver.get(url);
 		if (browsertype.equals("ie")) {
 			if (webdriver.findElements(By.id("overridelink")).size() > 0) {
