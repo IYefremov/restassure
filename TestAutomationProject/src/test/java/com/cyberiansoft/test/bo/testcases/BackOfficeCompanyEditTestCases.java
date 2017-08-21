@@ -1383,4 +1383,74 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Vehicle Parts Include Selected)");
 	}
+	
+	@Test(testName = "Test Case 62786:Company: Inter Application Exchange Configuration - Mapping Work Order")
+	public void testCompanyExchangeConfigurationMappingWorkOrder() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name","Work Order", "All Jay");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+	}
+	
+	@Test(testName = "Test Case 62787:Company: Inter Application Exchange Configuration - Mapping Work Order Add Rule Clients")
+	public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleCLients() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
+		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.expandFirstCreatedCompany();		
+		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		
+		interApplicationExchangePage.clickAddProfileButton();
+		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name","Work Order", "All Jay");
+		interApplicationExchangePage.clickProfileDetailsBox("Insert");
+		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		
+		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit("test");
+		interApplicationExchangePage.clickProfileEditBox("Cancel");
+		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		
+		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
+		interApplicationExchangePage.clickEditFirstEntry();
+		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
+		interApplicationExchangePage.clickProfileEditBox("Update");
+		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
+		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		
+		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+	}
 }

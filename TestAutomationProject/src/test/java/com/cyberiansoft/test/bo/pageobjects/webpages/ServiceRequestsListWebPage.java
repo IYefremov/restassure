@@ -247,7 +247,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_DropDown")
 	private DropDown addservicerequesapptechdd;
 
-	@FindBy(id = "addAppointmentLink")
+	@FindBy(className = "addAppointmentLink")
 	private WebElement addAppointmentBTNfromSRedit;
 
 	@FindBy(xpath = "//div[contains(@class, 'appointment-info clearfix')]")
@@ -1304,8 +1304,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		System.out.println(appointmentFromDateSRedit.getAttribute("value"));
 		if (!(appointmentFromDateSRedit.getAttribute("value").equals(startDate)
 				&& appointmentFromTimeSRedit.getAttribute("value").equals("12:00 AM")
-				&& appointmentToDateSRedit.getAttribute("value").equals(startDate)
-				&& appointmentToTimeSRedit.getAttribute("value").equals("12:30 AM"))) {
+				&& appointmentToDateSRedit.getAttribute("value").equals(startDate))) {
 			return false;
 		}
 

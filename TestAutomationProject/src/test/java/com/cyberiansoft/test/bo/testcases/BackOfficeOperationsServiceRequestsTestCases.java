@@ -1174,7 +1174,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1531,7 +1530,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //		eventsWebPage.deleteSelectedEvent();
 	}
 	
-	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestEstimationCreated(String customer, String startDate, String endDate, String status,
 			String SRcustomer, String newStatus) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1556,7 +1555,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was not checked in"));
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
