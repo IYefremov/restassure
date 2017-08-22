@@ -23,9 +23,6 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='details']")
 	private WebElement servicedetailssscreen;
 	
-	@FindBy(xpath="//span[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextServiceDetailsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -40,13 +37,13 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickServiceDetailsBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Click Service Details Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Service Details screen Back button");
 	}
 	
 	public void clickServiceDetailsDoneButton() {
 		tap(servicedtailsapplybtn);
-		log(LogStatus.INFO, "Click Service Details Done button");
+		log(LogStatus.INFO, "Click Service Details screen Done button");
 	}
 	
 	public void clickDeleteServiceIcon() {
@@ -64,7 +61,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public void setServiceAmountValue(String amount) {
 		clickServiceAmountField();	
-		VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value"), amount);	
 		log(LogStatus.INFO, "Set Service value: " + amount);
 	}
@@ -89,7 +86,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public void setServiceQuantityValue(String quantity) {
 		clickServiceQuantityField();
-		VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(getServiceQuantityValue(), quantity);
 		log(LogStatus.INFO, "Set Service quantity value: " + quantity);
 	}

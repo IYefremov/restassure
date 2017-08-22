@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
@@ -25,9 +24,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//span[@action='save']")
 	private WebElement savebtn;
 	
-	@FindBy(xpath="//span[@action='back']")
-	private WebElement backbtn;
-	
 	@FindBy(xpath="//div[contains(@class, 'services-list-block')]")
 	private WebElement addedserviceslist;
 	
@@ -39,9 +35,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
-		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		if (checkHelpPopupPresence())
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
 	public VNextSelectServicesScreen clickAddServicesButton() {
@@ -118,7 +113,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
-		waitABit(5000);
+		waitABit(2000);
 		swipeScreensRight(2);
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
@@ -160,7 +155,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
-			VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
 			log(LogStatus.INFO, "Set Service value: " + amount);
 		} else
@@ -184,7 +179,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")));
-			VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
 			log(LogStatus.INFO, "Set Service value: " + quantity);
 		} else

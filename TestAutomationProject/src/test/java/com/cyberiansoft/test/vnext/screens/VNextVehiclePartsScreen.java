@@ -18,9 +18,6 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='parts']")
 	private WebElement vehiclepartsscreen;
 	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextVehiclePartsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -37,7 +34,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclepartname) {
 		WebElement vpcell = getVehiclePartCell(vehiclepartname);
 		if (vpcell != null)
-			tap(vpcell.findElement(By.xpath(".//i[contains(@class, 'item-checked big-checkbox')]")));
+			tap(vpcell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
 			Assert.assertTrue(false, "Can't find Vehicle Part: " + vehiclepartname);
 		log(LogStatus.INFO, "Select Vehicle Part: " + vehiclepartname);
@@ -58,8 +55,8 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextSelectServicesScreen clickVehiclePartsBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Click Vehicle Parts Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Vehicle Parts screen Back button");
 		return new VNextSelectServicesScreen(appiumdriver);
 		
 	}

@@ -92,7 +92,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Price']")));
-			VNextServicePriceCustomKeyboard keyboard = new VNextServicePriceCustomKeyboard(appiumdriver);
+			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Price']")).getAttribute("value"), pricevalue);
 			log(LogStatus.INFO, "Set Service price value: " + pricevalue);
 		} else

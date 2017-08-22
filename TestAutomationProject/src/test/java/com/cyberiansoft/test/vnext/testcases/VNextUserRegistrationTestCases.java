@@ -49,6 +49,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	final String confirmpsw = "111111";
 	
 	final String userregphone = "6267477803";
+	final String  userregphoneformatted = "(626) 747-7803";
 	final String userphonecountrycode = "1";
 	
 	@BeforeClass(description = "Setting up new suite")
@@ -112,7 +113,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
@@ -221,7 +222,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
 		registrationoverviewscreen.clickDoneButton();
 		registrationoverviewscreen.waitABit(10000);
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
@@ -304,7 +305,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
@@ -381,7 +382,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
@@ -447,7 +448,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
 		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
 		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphone);
+		Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);

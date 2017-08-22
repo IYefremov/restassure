@@ -18,9 +18,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 	
-	@FindBy(xpath="//*[@action='back']")
-	private WebElement backbtn;
-	
 	@FindBy(id="my-form")
 	private WebElement newcustomerform;
 	
@@ -220,8 +217,8 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public VNextCustomersScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Click New customer Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click New Customer screen Back button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 

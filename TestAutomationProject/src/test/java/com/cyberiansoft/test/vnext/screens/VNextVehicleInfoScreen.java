@@ -65,9 +65,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
 	
-	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
-	private WebElement keyboard;
-	
 	public VNextVehicleInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -167,13 +164,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public void setMilage (String milage) {
 		milagefld.click();
-		waitABit(2000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(keyboard));
-		for (int i = 0; i < milage.length(); i++) {
-			tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + milage.charAt(i) + "']")));
-		}
-		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
+		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
+		keyboard.setFieldValue(milagefld.getAttribute("value"), milage);
 		log(LogStatus.INFO, "Set Milage: " + milage);
 	}
 	
@@ -229,9 +221,10 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(2000);	
+		waitABit(1000);	
 		swipeScreenLeft();
 		new VNextVisualScreen(appiumdriver);
+		waitABit(1000);	
 		swipeScreenLeft();
 		//new VNextVisualScreen(appiumdriver);
 		//swipeScreenLeft();

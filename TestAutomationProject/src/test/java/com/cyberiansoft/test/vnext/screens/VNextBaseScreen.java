@@ -94,64 +94,38 @@ public class VNextBaseScreen {
 	}
 	
 	public void swipeScreenLeft() {	
-		//if (appiumdriver instanceof JavascriptExecutor)
-		 //   ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
-		tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
+		if (appiumdriver instanceof JavascriptExecutor)
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swipeleft')");
 		log(LogStatus.INFO, "Swipe To Next Screen");
 		waitABit(1000);
 	}
 	
-	public void swipeScreensLeft(int screensnumber) {
-		/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		Dimension size = appiumdriver.manage().window().getSize();
-		int startx = (int) (size.width * 0.75);
-		int endx = (int) (size.width * 0.25);
-		int starty = size.height / 8;
-		for (int i = 0; i < screensnumber; i++) {
-			new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-			waitABit(4000);
-			log(LogStatus.INFO, "Swipe To Next Screen");
-		}
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		Assert.assertTrue(switchToWebViewContext())
-		*/
-		for (int i = 0; i < screensnumber; i++) {
-			if (appiumdriver instanceof JavascriptExecutor)
-			    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swipeleft');");
-			waitABit(1000);	
-		}	
+	public void swipeScreensLeft(int screensnumber) {		
+		for (int i = 0; i < screensnumber; i++)
+			swipeScreenLeft();
 	}
 	
 	public void swipeScreenRight() {
 		
 		if (appiumdriver instanceof JavascriptExecutor)
-		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
-		//tap(appiumdriver.findElementByXPath("//i[@action='back']"));		
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swiperight');");		
 		log(LogStatus.INFO, "Swipe Back To Previous Screen");
 		waitABit(1000);
 	}
 	
+	public void clickScreenBackButton() {
+		tap(appiumdriver.findElementByXPath("//*[@action='back']"));
+		//log(LogStatus.INFO, "Tap Back screen Back button");
+	}
+	
+	public void clickScreenForwardButton() {
+		tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
+		//log(LogStatus.INFO, "Tap Back screen Forward button");
+	}
+	
 	public void swipeScreensRight(int screensnumber) {
-		//if (appiumdriver instanceof JavascriptExecutor)
-		//    ((JavascriptExecutor)appiumdriver).executeScript("$('.page').trigger('swiperight');");
-		for (int i = 0; i < screensnumber; i++) {
-			tap(appiumdriver.findElementByXPath("//*[@action='back']"));
-			log(LogStatus.INFO, "Swipe To Next Screen");
-		}
-		
-		/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		Dimension size = appiumdriver.manage().window().getSize();
-		int startx = (int) (size.width * 0.25);
-		int endx = (int) (size.width * 0.75);
-		int starty = size.height / 10;
-		for (int i = 0; i < screensnumber; i++) {
-			new TouchActions(appiumdriver).down(startx, starty).move(endx, starty).up(endx, starty).perform();
-			waitABit(4000);
-			log(LogStatus.INFO, "Swipe Back To Previous Screen");
-		}
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		Assert.assertTrue(switchToWebViewContext());*/
-		
+		for (int i = 0; i < screensnumber; i++) 
+			swipeScreenRight();	
 	}
 	
 	public void switchToWebViewContext() {

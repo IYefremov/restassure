@@ -15,9 +15,6 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='update-main-db']")
 	private WebElement updatemaindbbtn;
 	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextStatusScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -40,8 +37,8 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Tap Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Status ccreen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 

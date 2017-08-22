@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -20,9 +18,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[contains(@class, 'page customers customers-list')]")
 	private WebElement customersscreen;
-	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
 	
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement customerslist;
@@ -97,8 +92,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Click customer Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Customers screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 }

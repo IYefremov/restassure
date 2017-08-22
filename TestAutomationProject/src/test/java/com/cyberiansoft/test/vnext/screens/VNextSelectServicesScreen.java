@@ -21,9 +21,6 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='services-add']")
 	private WebElement selectservicesscreen;
 	
-	@FindBy(xpath="//*[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextSelectServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -100,8 +97,8 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionServicesScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Clack Select Services Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Select Services screen Back button");
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }

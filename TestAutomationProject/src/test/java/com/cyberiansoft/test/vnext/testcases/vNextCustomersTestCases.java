@@ -140,7 +140,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		homescreen = customersscreen.clickBackButton();
-		homescreen.waitABit(1000);
+		homescreen.waitABit(10000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();

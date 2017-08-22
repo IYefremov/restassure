@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,8 +16,6 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextNotesScreen extends VNextBaseScreen {
 	
@@ -32,9 +30,6 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[contains(@class, 'accordion-item accordion-item-quick-notes')]")
 	private WebElement quicknotescontent;
-	
-	@FindBy(xpath="//span[@action='back']")
-	private WebElement notesbackbtn;
 	
 	@FindBy(xpath="//a[@action='select-text']")
 	private WebElement notestexttab;
@@ -82,8 +77,8 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void clickNotesBackButton() {
-		tap(notesbackbtn);
-		log(LogStatus.INFO, "Clack Notes Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Clack Notes screen Back button");
 	}
 	
 	public void selectNotesPicturesTab() {
@@ -133,6 +128,11 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		return notespicturesframe.findElement(By.xpath("./ul/li[@class='picture-item']/div")).isDisplayed();
 	}
 	
+	public void addFakeImageNote() {
+		if (appiumdriver instanceof JavascriptExecutor)
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('[action=take-camera]').trigger('tap:fake')");
+	}
+	
 	public void addImageToNotesFromGallery() {
 		//clickGalleryIcon();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
@@ -175,6 +175,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		}
 		waitABit(3000);
 		*/
+
 		appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
 		waitABit(10000);
 		appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();

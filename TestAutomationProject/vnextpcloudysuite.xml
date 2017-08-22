@@ -50,7 +50,8 @@
      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
         <methods>   
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
-          <include name="testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase" />  
+          <include name="testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase" /> 
+          <include name="testEditInspectionVehicleInfo" /> 
           <include name="testCreateCustomerAlongWithInspection" />              
           <include name="testNavigateBySwipeThroughWizardStepsForInspeciton" />
           <include name="testNavigateThroughWizardStepsForInspectionByHardwareBackButton" />

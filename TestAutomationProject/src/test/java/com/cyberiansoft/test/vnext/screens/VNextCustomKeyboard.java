@@ -9,12 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
-public class VNextServicePriceCustomKeyboard extends VNextBaseScreen {
+public class VNextCustomKeyboard extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[contains(@class, 'picker-modal picker-keypad picker-keypad-type-numpad')]")
+	@FindBy(xpath="//*[@data-autotests-id='keypad']")
 	private WebElement keyboard;
 	
-	public VNextServicePriceCustomKeyboard(SwipeableWebDriver appiumdriver) {
+	public VNextCustomKeyboard(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -38,16 +38,20 @@ public class VNextServicePriceCustomKeyboard extends VNextBaseScreen {
 		tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='-/+']")));
 	}
 	
-	public void setFieldValue(String existingvalue, String newvalue) {
-		for (int i = 0; i <= existingvalue.length()+1; i++) {
-			clickKeyboardBackspaceButton();
-		}
+	public void typeValue(String newvalue) {
 		for (int i = 0; i < newvalue.length(); i++) {
 			if (Character.toString(newvalue.charAt(i)).equals("-"))
 				clickKeyboardMinusButton();
 			else
 				clickKeyboardButton(newvalue.charAt(i));
 		}
+	}
+	
+	public void setFieldValue(String existingvalue, String newvalue) {
+		for (int i = 0; i <= existingvalue.length()+1; i++) {
+			clickKeyboardBackspaceButton();
+		}
+		typeValue(newvalue);
 		clickKeyboardDoneButton();
 	}
 

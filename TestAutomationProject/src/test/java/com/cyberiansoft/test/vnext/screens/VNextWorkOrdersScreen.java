@@ -21,9 +21,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
 	private WebElement workorderslist;
 	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
-	
 	@FindBy(xpath="//a[@handler='_createInvoice']")
 	private WebElement createinvoicemenu;
 	
@@ -52,8 +49,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Tap Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Tap Work Orders screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	

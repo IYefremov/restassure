@@ -18,9 +18,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='page invoices-list hide-searchbar hide-toolbar page-on-center']")
 	private WebElement invoicesscreen;
 	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -59,7 +56,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
-		tap(backbtn);
+		clickScreenBackButton();
 		log(LogStatus.INFO, "Click Invoices screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}

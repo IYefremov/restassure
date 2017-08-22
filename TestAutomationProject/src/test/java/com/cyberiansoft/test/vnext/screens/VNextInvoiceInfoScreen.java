@@ -18,9 +18,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
 	private WebElement invoicepo;
 	
-	@FindBy(xpath="//span[@action='back']")
-	private WebElement backbtn;
-	
 	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
 	private WebElement menubtn;
 	

@@ -26,15 +26,13 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@data-autotests-id='inspections-list']")
 	private WebElement inspectionslist;
 	
-	@FindBy(xpath="//a[@action='back']")
-	private WebElement backbtn;
-	
 	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(addinspectionbtn));
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
+		waitABit(1000);
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
@@ -54,8 +52,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
-		tap(backbtn);
-		log(LogStatus.INFO, "Tap Back button");
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Tap Inspections Screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	

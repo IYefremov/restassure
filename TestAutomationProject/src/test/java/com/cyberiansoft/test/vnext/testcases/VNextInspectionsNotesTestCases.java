@@ -325,8 +325,6 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist) {
-			System.out.println("+++" + quicknoteslist.size());
-			System.out.println("+++" + note.getText());
     		notes.add(note.getText());
 		}
 		for (int i = 0; i < 3; i++) 

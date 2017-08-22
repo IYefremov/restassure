@@ -80,8 +80,8 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	public void expandMainMenu(String meinmenu) {
 		getMainMenuItem(meinmenu).click();
-		/*waitABit(1000);
-		if (!isMainMenuExpanded(meinmenu)) {
+		waitABit(1000);
+		/*if (!isMainMenuExpanded(meinmenu)) {
 			getMainMenuItem(meinmenu).click();
 		}*/
 	}
