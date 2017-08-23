@@ -38,32 +38,15 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	}
 
 	public void checkApproveAndCreateInvoice() {
-		savebtn.click();
+		//savebtn.click();
 		Helpers.waitABit(1000);
-		WebElement approvecell = appiumdriver.
-				findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Approve and create invoice']/..");
-		if (approvecell.findElements(By.xpath("//XCUIElementTypeButton[@name='unselected']")).size() > 0)
-			approvecell.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).click();
-		savebtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
+		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();				
 		Helpers.waitABit(1000);
 	}
 	
 	public void checkApproveAndSaveWorkOrder() {
-		savebtn.click();
-		Helpers.waitABit(1000);
-		WebElement approvecell = appiumdriver.
-				findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Approve']/..");
-		if (approvecell.findElements(By.xpath("//XCUIElementTypeButton[@name='unselected']")).size() > 0)
-			approvecell.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).click();
-		savebtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
+		//savebtn.click();
+		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();	
 		Helpers.waitABit(1000);
 	}
 	
@@ -122,7 +105,7 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	
 	public void clickSaveButton() {
 		clickSave();
-		clickSave();
+		//clickSave();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));

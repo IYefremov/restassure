@@ -3458,7 +3458,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -3506,7 +3506,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		Assert.assertTrue(myworkordersscreen.woExists(wonum));
@@ -3576,7 +3576,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		Assert.assertTrue(myworkordersscreen.woExists(wonum));
@@ -3658,7 +3658,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		Assert.assertTrue(myworkordersscreen.woExists(wonum));
@@ -3724,7 +3724,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		Assert.assertTrue(myworkordersscreen.woExists(wonum));
@@ -3806,7 +3806,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		Assert.assertTrue(myworkordersscreen.woExists(wonum));
@@ -4056,7 +4056,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -4140,7 +4140,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -4249,7 +4249,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -4301,7 +4301,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -4346,7 +4346,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -4385,7 +4385,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);

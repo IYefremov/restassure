@@ -362,13 +362,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public void saveWorkOrder() {
 		clickSaveButton();
-		Helpers.waitABit(500);
-		savebtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
-		Helpers.waitABit(500);
 	}
 
 }

@@ -3295,7 +3295,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -3337,7 +3337,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -3401,7 +3401,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -3477,7 +3477,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -3614,7 +3614,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.woExists(wonum);
@@ -5908,7 +5908,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -6688,7 +6688,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			servicesscreen.assertServiceIsSelected(serviceadd);
 		}
 		
-		servicesscreen.assertSubTotalAmauntIsCorrect("$32.00");
+		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
 		servicesscreen.selectNextScreen("Zayats Section1");
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.swipeScreenUp();
@@ -6708,7 +6708,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (String serviceadd : servicestoadd) {
 			Assert.assertEquals(servicesscreen.getNumberOfServiceSelectedItems(serviceadd), servicestoadd.length);
 		}
-		servicesscreen.assertSubTotalAmauntIsCorrect("$32.00");
+		servicesscreen.assertSubTotalAmauntIsCorrect("$44.00");
 		servicesscreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();	
 	}
