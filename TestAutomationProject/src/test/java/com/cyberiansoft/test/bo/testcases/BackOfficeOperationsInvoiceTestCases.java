@@ -1104,7 +1104,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 
-	//@Test(testName = "Test Case 60615:Operation - Invoice: Search operation"/*, retryAnalyzer = Retry.class*/)
+	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation"/*, retryAnalyzer = Retry.class*/)
 	public void checkOperationInvoiceSearchOperation() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

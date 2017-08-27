@@ -1008,16 +1008,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput"))).clear();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
-			.sendKeys("8/3/2014");
+			.sendKeys("3/6/2017");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput"))).clear();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
-			.sendKeys("9/3/2014");
+			.sendKeys("4/6/2017");
 			
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input"))).click();
 			
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input"))).click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
-			.sendKeys("Nikolay");
+			.sendKeys("000 1111");
 			
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind"))).click();
@@ -1026,7 +1026,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'I-012-00237')]")));
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'I-000-00283')]")));
 		}catch(TimeoutException e){
 			return false;
 		}
