@@ -198,7 +198,6 @@ public class BaseTestCase {
 	}
 
 	public void webdriverGotoWebPage(String url) {
-		webdriver.navigate().refresh();
 		webdriver.manage().window().maximize();
 		webdriver.get(url);
 		if (browsertype.equals("ie")) {

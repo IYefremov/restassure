@@ -105,6 +105,9 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
 	private WebElement workOrdersTable;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_btCreateInvoice")
+	private WebElement createInvoiceToWorkORderButton;
 
 	public WorkOrdersWebPage(WebDriver driver) {
 		super(driver);
@@ -244,6 +247,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		List<WebElement> rows = getWorkOrdersTableRows();
 		for (WebElement row : rows) {
 			waitABit(3000);
+			System.out.println((getTableRowWorkOrderNumber(row)));
 			if (getTableRowWorkOrderNumber(row).equals(wonumber)) {
 				return row;
 			}
@@ -272,8 +276,9 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public String getFirstWorkOrderNumberInTheTable() {
-		return wotable.getWrappedElement()
-				.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
+//		return wotable.getWrappedElement()
+//				.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]/a")).getText();
+		return wotable.getWrappedElement().findElement(By.className("entity-link")).getText();
 	}
 
 	public void createInvoiceFromWorkOrder(String wonumber, String ponum) throws InterruptedException {
@@ -292,7 +297,7 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			waitABit(2000);
 			// + wotable.getTableColumnIndex("Invoice#") +
-			invoicenum = row.findElement(By.className("entity-link")).getText();
+			invoicenum = row.findElements(By.className("entity-link")).get(1).getText();
 
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
@@ -390,6 +395,20 @@ public class WorkOrdersWebPage extends WebPageWithTimeframeFilter {
 			return false;
 		}
 		return true;
+	}
+
+	public void checkFirstWorkOrderCheckBox() {
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_gv_ctl00_ctl04_cbAction")).click();
+	}
+	
+	public void addInvoiceDescription(String text){
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_txtInvoiceDescription")).sendKeys(text);
+	}
+	
+	public void clickCreateInvoiceButton() throws InterruptedException{
+		createInvoiceToWorkORderButton.click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 }

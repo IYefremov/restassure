@@ -434,24 +434,20 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
-		System.out.println(mainWindowHandle);
+//		System.out.println(mainWindowHandle);
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
-		waitForNewTab();
-		String mainWindow = "";
-		Set<String> windows = driver.getWindowHandles();
-		for (String window : windows) {
-			if (!window.equals(mainWindowHandle))
-				driver.switchTo().window(window);
-			else {
-				mainWindow = window;
+//		waitForNewTab();
+//		Set<String> windows = driver.getWindowHandles();
+//		for (String window : windows) {
+//			if (!window.equals(mainWindowHandle))
+//				driver.switchTo().window(window);
+//		}
+
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+				driver.switchTo().window(activeHandle);
 			}
 		}
-
-//		for (String activeHandle : driver.getWindowHandles()) {
-//			if (!activeHandle.equals(mainWindowHandle)) {
-//				driver.switchTo().window(activeHandle);
-//			}
-//		}
 		return PageFactory.initElements(driver, InvoiceEditTabWebPage.class);
 	}
 
