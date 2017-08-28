@@ -590,7 +590,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.deleteServiceRequestType(srtype);
 	}
 
-	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit")
 	public void testCompanyInvoiceTypeClientEdit() throws Exception {
 
 		final String invoicetype = "TestIntInvTeam";
@@ -714,6 +714,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
+		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
 		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
@@ -747,7 +751,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
@@ -808,7 +816,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
@@ -869,7 +881,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
@@ -930,7 +946,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
@@ -990,7 +1010,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST", "Work Order", "test2");
@@ -1051,7 +1075,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1087,6 +1115,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
+		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1149,6 +1181,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
+		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
@@ -1209,6 +1245,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
+		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1271,6 +1311,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
+		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
@@ -1330,6 +1374,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
+		
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1392,9 +1440,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sharing");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
+		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
+		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+		}
+		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");
-		interApplicationExchangePage.clickProfileDetailsBox("Cancel");
+		interApplicationExchangePage.clickProfileDetailsBox("Cancel");   
 		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1425,7 +1477,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sharing");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();	
+		
+		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
+			interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");

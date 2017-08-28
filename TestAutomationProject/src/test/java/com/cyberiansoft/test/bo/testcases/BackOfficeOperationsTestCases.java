@@ -81,21 +81,19 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		techcommissionpage.verifySearchFieldsAreVisible();
 
 		techcommissionpage.selectSearchStatus("New");
-		// techcommissionpage.selectSearchTeamVendor("TestTeamInternal");
 		techcommissionpage.selectSearchTechnician("1111 2222");
-		techcommissionpage.setSearchInvoice("I-068-00086");
+		techcommissionpage.setSearchInvoice("I-000-00243");
 		techcommissionpage.clickFindButton();
 
 		Assert.assertEquals(Integer.valueOf(1),
 				Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
-		techcommissionpage.verifySearchResults("I-068-00086");
+		techcommissionpage.verifySearchResults("I-000-00243");
 	}
 
 	@Test(description = "Test Case 15386:Operations - Work Orders: Search")
 	public void testOperationWorkOrdersSearch() throws Exception {
 
-		final String wonum = "O-105-00005";
-		final String vin = "23ERY90KNBV";
+		final String wonum = "O-000-147892";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -132,9 +130,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.verifySearchFieldsAreVisible();
 
-		wopage.selectSearchPackage("Vit_TEST_Pack");
-		// wopage.selectSearchStatus("New");
-		wopage.setSearchVIN(vin);
+		wopage.selectSearchPackage("VD_SP_TEST");
+		wopage.selectSearchStatus("New");
 		wopage.setSearchOrderNumber(wonum);
 		wopage.clickFindButton();
 
@@ -228,15 +225,12 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		final String timeframe = "Last Year";
 
-		final String inspnum = "E-095-00034";
-		final String insptype = "Cirrus Cosmetic Inspection";
-		final String customer = "ABC Insurance Company";
+		final String inspnum = "E-062-00050";
+		final String customer = "000 My Company";
 
 		final String inspstatus = "Approved";
-		final String technician = "Vitaliy K aka script";
-		final String technicianfull = "Vitaliy K aka script";
-		final String inspstock = "Ver1";
-		final String inspro = "RRR";
+		final String technician = "Serhii Toropov";
+		final String technicianfull = "Serhii Toropov";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -277,9 +271,6 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		inpectionspage.verifySearchFieldsAreVisible();
 
 		inpectionspage.selectSearchCustomer(customer);
-		inpectionspage.selectSearchType(insptype);
-		inpectionspage.setStockSearchCriteria(inspstock);
-		inpectionspage.setROSearchCriteria(inspro);
 		inpectionspage.selectSearchTechnician(technician, technicianfull);
 		inpectionspage.selectSearchStatus(inspstatus);
 		inpectionspage.setInspectionNumberSearchCriteria(inspnum);

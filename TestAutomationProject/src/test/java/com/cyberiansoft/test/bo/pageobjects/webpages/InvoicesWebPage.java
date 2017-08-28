@@ -1026,7 +1026,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 			
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'I-000-00283')]")));
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
 		}catch(TimeoutException e){
 			return false;
 		}

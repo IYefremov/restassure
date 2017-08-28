@@ -151,7 +151,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	public boolean checkEntryByName(String name) throws InterruptedException {
 		try {
 			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
+					ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
 			return true;
 		} catch (TimeoutException e) {
 			return false;

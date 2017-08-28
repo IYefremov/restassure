@@ -418,7 +418,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("New");
+		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 		
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
@@ -481,8 +481,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("New");
+		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 		
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
@@ -547,7 +548,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("New");
+		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 		
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
@@ -862,7 +863,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 
-	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity")
+	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSentMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
