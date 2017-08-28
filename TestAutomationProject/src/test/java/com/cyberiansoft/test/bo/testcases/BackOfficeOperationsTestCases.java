@@ -93,7 +93,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	@Test(description = "Test Case 15386:Operations - Work Orders: Search")
 	public void testOperationWorkOrdersSearch() throws Exception {
 
-		final String wonum = "O-000-147892";
+		final String wonum = "O-000-147891";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -133,8 +133,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.selectSearchPackage("VD_SP_TEST");
 		wopage.selectSearchStatus("New");
 		wopage.setSearchOrderNumber(wonum);
+		wopage.unselectInvoiceFromDeviceCheckbox();
 		wopage.clickFindButton();
-
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(wopage.getWorkOrdersTableRowCount()));
 		wopage.isWorkOrderExists(wonum);
 	}
