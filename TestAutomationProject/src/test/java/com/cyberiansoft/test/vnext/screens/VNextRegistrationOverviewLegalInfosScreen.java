@@ -62,10 +62,11 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickTermsAndConditionsLink() {
+		waitABit(3000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(termsandconditionslink));
+		wait.until(ExpectedConditions.elementToBeClickable(termsandconditionslink));
 		tap(termsandconditionslink);
-		waitABit(1000);
+		
 		log(LogStatus.INFO, "Click Terms And Conditions link");
 	}
 	

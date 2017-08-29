@@ -39,11 +39,14 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public WebElement getServiceListItem(String servicename) {
+		WebElement serviceListItem = null;
 		List<WebElement> services = getServicesListItems();
 		for (WebElement srv: services)
-			if (getServiceListItemName(srv).equals(servicename))
-				return srv;
-		return null;
+			if (getServiceListItemName(srv).equals(servicename)) {
+				serviceListItem =  srv;
+				break;
+			}
+		return serviceListItem;
 	}
 	
 	public String getServiceListItemName(WebElement srvlistitem) {

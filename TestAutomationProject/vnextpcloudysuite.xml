@@ -77,13 +77,21 @@
           <include name="testVerifyInvoiceCanBeCreatedFromWOMenu" />
       </methods>
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextNavigationTestCases">
+     <methods>                   
+          <include name="testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid" />
+          <include name="testNavigatingByActionScreenForAndroid" />
+          <include name="testVerifyActionScreenWorksCorrectly" />
+      </methods>
+      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   
           <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
           <include name="testVerifyCreatingBOWithTechnicianEdition_PDR" />
           <include name="testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone" />
           <include name="testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail" />
-          <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />      
+          <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />  
+          <include name="testVerifyUserCanCreateRepair360Edition" />    
       </methods>
       </class>
     </classes>

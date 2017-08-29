@@ -35,7 +35,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Vehicle.Color")
 	private WebElement colcorfld;
 	
-	@FindBy(xpath="//a[@action='select-color']/i")
+	@FindBy(xpath="//a[@action='select-color']")
 	private WebElement selectcolorbtn;
 	
 	@FindBy(name="Vehicle.VehicleTypeId")
@@ -130,8 +130,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void selectModelColor (String color) {
 		tap(selectcolorbtn);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + color + "']"))));
-		tap(appiumdriver.findElement(By.xpath("//div[@class='item-title' and text()='" + color + "']")));
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']"))));
+		tap(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']")));
 		log(LogStatus.INFO, "Select Vehicle Color: " + color);
 	}
 	
@@ -149,6 +149,23 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public String getYear() {
 		return yearfld.getAttribute("value");
+	}
+	
+	public void setYear(String yearValue) {
+		tap(yearfld);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
+		WebElement elem = appiumdriver.findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']"));	
+		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+		je.executeScript("arguments[0].scrollIntoView(true);",elem);	
+		tap(appiumdriver.findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
+		List<WebElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='right']/a[@class='link close-picker']"));
+		for (WebElement closebtn : closebtns)
+			if (closebtn.isDisplayed()) {
+				tap(closebtn);
+				break;
+			}
+		log(LogStatus.INFO, "Select Vehicle Year: " + yearValue);
 	}
 	
 	public void setLicPlate (String licplate) {

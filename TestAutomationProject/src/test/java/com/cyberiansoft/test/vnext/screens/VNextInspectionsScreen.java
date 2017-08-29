@@ -121,6 +121,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspmenulist.clickEmailInspectionMenuItem();
 	}
 	
+	public VNextNotesScreen openInspectionNotes(String inspnumber) {
+		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
+		return inspmenulist.clickNotesInspectionMenuItem();
+	}
+	
 	public List<WebElement> getInspectionsList() {
 		return inspectionslist.findElements(By.xpath("./ul/li"));
 	}

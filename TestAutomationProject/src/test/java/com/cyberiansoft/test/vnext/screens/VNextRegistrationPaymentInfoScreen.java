@@ -89,6 +89,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	public void setUserPaymentSecurityCode(String securitycode) {
 		securitycodefld.click();
 		securitycodefld.sendKeys(securitycode);
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void clickUseRegistrationAddress() {

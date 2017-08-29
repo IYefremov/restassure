@@ -15,15 +15,15 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-name='to']")
 	private WebElement toemailpanel;
 	
-	@FindBy(xpath="//i[@action='send']")
+	@FindBy(xpath="//*[@action='send']")
 	private WebElement sendbtn;
 	
 	@FindBy(xpath="//div[@data-page='email']")
 	private WebElement emailscreen;
 	
 	final String toemailxpath = ".//input[@name='address-field']";
-	final String addmorebtn = ".//a[@action='add']";
-	final String removemailbtn = ".//i[@action='remove']";
+	final String addmorebtn = ".//*[@action='add']";
+	final String removemailbtn = ".//*[@action='remove']";
 	
 	public VNextEmailScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);

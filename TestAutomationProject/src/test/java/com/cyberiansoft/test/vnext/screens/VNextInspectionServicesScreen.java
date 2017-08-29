@@ -29,6 +29,9 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='selected-services']")
 	private WebElement selectedserviceslist;
+	
+	@FindBy(xpath="//*[@data-autotests-id='all-services']")
+	private WebElement allserviceslist;
 
 	public VNextInspectionServicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -36,7 +39,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
 		if (checkHelpPopupPresence())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
 	public VNextSelectServicesScreen clickAddServicesButton() {
@@ -122,16 +126,16 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 	
-	public VNextInspectionsScreen saveInspectionViaMenu() {
+	public VNextInspectionsScreen saveInspection() {
 		tap(savebtn);
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
-	public WebElement getSelectedServiceCell(String servicename) {
+	public WebElement getSelectedServiceCell(String serviceName) {
 		WebElement servicecell = null;
 		List<WebElement> servitems = getSelectedServicesListItems();
 		for (WebElement servcell : servitems) {
-			if (servcell.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(servicename)) {
+			if (servcell.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(serviceName)) {
 				servicecell = servcell;
 				break;
 			}
@@ -140,17 +144,17 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		return servicecell;
 	}
 	
-	public void uselectService(String servicename) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public void uselectService(String serviceName) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			tap(servicecell.findElement(By.xpath(".//input[@action='check-item']")));
-			log(LogStatus.INFO, "Unselect Service: " + servicename);
+			log(LogStatus.INFO, "Unselect Service: " + serviceName);
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
+			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
 	
-	public void setServiceAmountValue(String servicename, String amount) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public void setServiceAmountValue(String serviceName, String amount) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
@@ -159,22 +163,22 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
 			log(LogStatus.INFO, "Set Service value: " + amount);
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);	
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}
 	
-	public void clickServiceAmountField(String servicename) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public void clickServiceAmountField(String serviceName) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
-			log(LogStatus.INFO, "Click service " + servicename + " amount field");
+			log(LogStatus.INFO, "Click service " + serviceName + " amount field");
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
+			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
 	
-	public void setServiceQuantityValue(String servicename, String quantity) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public void setServiceQuantityValue(String serviceName, String quantity) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
@@ -183,11 +187,11 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
 			log(LogStatus.INFO, "Set Service value: " + quantity);
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);	
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}
 	
-	public void addNotesToSelectedService(String servicename, String notes) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public void addNotesToSelectedService(String serviceName, String notes) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
@@ -196,38 +200,61 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).clear();
 			servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).sendKeys(notes);
 			appiumdriver.hideKeyboard();
-			tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
-			/*if (appiumdriver.findElement(By.xpath("//a[@class='link close-picker']")).isDisplayed()) {
-				tap(appiumdriver.findElement(By.xpath("//a[@class='link close-picker']")));
-				tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
-			}*/
+			tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
 			log(LogStatus.INFO, "Set Service notes: " + notes);
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);	
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}
 	
-	public String getSelectedServiceNotesValue(String servicename) {
+	public String getSelectedServiceNotesValue(String serviceName) {
 		String notesvalue = "";
-		WebElement servicecell = getSelectedServiceCell(servicename);
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			notesvalue = servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getAttribute("value");
-			tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
+			tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);	
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 		return notesvalue;
 	}
 	
-	public VNextNotesScreen clickServiceNotesOption(String servicename) {
-		WebElement servicecell = getSelectedServiceCell(servicename);
+	public VNextNotesScreen clickServiceNotesOption(String serviceName) {
+		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//div[@action='notes']")));
 		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);	
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 		return new VNextNotesScreen(appiumdriver);
+	}
+	
+	public List<WebElement> getAllServicesListItems() {	
+		return allserviceslist.findElements(By.xpath(".//div[@action='tap-item']"));
+	}
+	
+	public String getUnselectedServiceListItemName(WebElement srvlistitem) {
+		return srvlistitem.findElement(By.xpath(".//div[@class='item-title']")).getText().trim();
+	}
+	
+	public WebElement getUnselectedServiceListItem(String serviceName) {
+		WebElement serviceListItem = null;
+		List<WebElement> services = getAllServicesListItems();
+		for (WebElement srv: services)
+			if (getUnselectedServiceListItemName(srv).equals(serviceName)) {
+				serviceListItem = srv;
+				break;
+			}
+		return serviceListItem;
+	}
+	
+	public void selectService(String serviceName) {
+		WebElement servicerow = getUnselectedServiceListItem(serviceName);
+		if (servicerow != null)
+			tap(servicerow.findElement(By.xpath(".//input[@action='check-item']")));
+		else
+			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
 
 }

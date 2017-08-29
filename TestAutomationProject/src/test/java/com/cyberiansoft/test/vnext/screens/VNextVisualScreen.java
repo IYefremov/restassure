@@ -37,6 +37,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
+		waitABit(1000);
 		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		
@@ -46,6 +47,11 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	public void clickAddServiceButton() {		
 		tap(adddamagesbtn);
 		log(LogStatus.INFO, "Tap Add Service button");
+	}
+	
+	public void selectDefaultDamage(String damageType) {
+		clickAddServiceButton();
+		clickDefaultDamageType(damageType);
 	}
 	
 	public VNextSelectDamagesScreen clickOtherServiceOption() {		

@@ -15,6 +15,8 @@ import org.openqa.selenium.interactions.CompositeAction;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
@@ -110,10 +112,12 @@ public class VNextBaseScreen {
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swiperight');");		
 		log(LogStatus.INFO, "Swipe Back To Previous Screen");
-		waitABit(1000);
+		waitABit(2000);
 	}
 	
 	public void clickScreenBackButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='back']")));
 		tap(appiumdriver.findElementByXPath("//*[@action='back']"));
 		//log(LogStatus.INFO, "Tap Back screen Back button");
 	}
@@ -164,11 +168,25 @@ public class VNextBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		boolean exists = false;
 		try {
-			exists = appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed();
+			exists = appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0;
 		} catch (NoSuchElementException ignored) {
 			exists = false;
 		}
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
+	}
+	
+	public void changeScreen(String screenName) {
+		clickScreenTitleCaption();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebElement changScreenPopover = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@data-autotests-id='change-screen-popover']"))));
+		tap(changScreenPopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
+		waitABit(1000);
+		log(LogStatus.INFO, "Change screen to: " + screenName);
+	}
+	
+	public void clickScreenTitleCaption() {
+		tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
+		log(LogStatus.INFO, "Click Screen Title Caption");
 	}
 }

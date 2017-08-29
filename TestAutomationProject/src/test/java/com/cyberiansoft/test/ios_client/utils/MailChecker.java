@@ -74,6 +74,33 @@ public class MailChecker {
 		
 	}
 	
+	public static Folder getSpamMailMessages(Store store) {
+		Folder folderSpam = null;
+		try {
+			Folder[] f = store.getDefaultFolder().list();
+			for(Folder fd:f){
+			    Folder t[]=fd.list();
+			    for(Folder f1:t)
+			    	if  (f1.getName().equals("Spam")) {
+			    		try {
+			    			folderSpam = f1;
+			    			folderSpam.open(Folder.READ_WRITE);					
+			    		} catch (MessagingException ex) {
+			                System.out.println("No provider.");
+			                ex.printStackTrace();
+			    		}
+			    		break;
+			    	}
+			        
+			    }
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return folderSpam;
+		
+	}
+	
     /**
      * Searches for e-mail messages containing the specified keyword in
      * Subject field.
@@ -229,6 +256,33 @@ public class MailChecker {
         return val;
    }
     
+    public static boolean searchSpamEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    	boolean val = false;	
+    	try {
+    		Store store = loginToGMailBox(userName, password);
+            
+            Folder folderSpam = getSpamMailMessages(store);
+            //create a search term for all "unseen" messages
+            Flags seen = new Flags(Flags.Flag.SEEN);
+			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+			//create a search term for all recent messages
+			Flags recent = new Flags(Flags.Flag.RECENT);
+			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm); 
+            System.out.println("Is open: " + folderSpam.isOpen());
+            Message[] foundMessages = folderSpam.search(searchTerm);
+            System.out.println("Total Messages Found :"+ foundMessages.length);
+            val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
+            // disconnect
+            folderSpam.close(false);
+            store.close();
+    	} catch (MessagingException ex) {
+            System.out.println("Could not connect to the message store.");
+            ex.printStackTrace();
+        }
+        return val;
+   }
+    
 
     public static boolean downloadMessageAttachment(Message message, String attachmentfilename) {
     	boolean downloaded = false;
@@ -326,9 +380,41 @@ public class MailChecker {
         } catch (IOException e) {
         	System.out.println("IOException.");
             e.printStackTrace();
-		}
-    	
-    	
+		}	
+    	return mailmessage;
+    }
+    
+    public static String searchSpamEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
+    	String mailmessage = "";
+    	try {
+    		Store store = loginToGMailBox(userName, password);
+            
+            Folder folderInbox = getSpamMailMessages(store);
+            //create a search term for all "unseen" messages
+            Flags seen = new Flags(Flags.Flag.SEEN);
+			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+			//create a search term for all recent messages
+			Flags recent = new Flags(Flags.Flag.RECENT);
+			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            Message[] foundMessages = folderInbox.search(searchTerm);
+            System.out.println("Total Messages Found :"+ foundMessages.length);
+            Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
+            if (message != null)        
+            	mailmessage = getText(message);
+            
+            //message.setFlag(Flags.Flag.SEEN, true);
+            message.setFlag(Flags.Flag.DELETED, true);
+            // disconnect
+            folderInbox.close(false);
+            store.close();
+    	} catch (MessagingException ex) {
+            System.out.println("Could not connect to the message store.");
+            ex.printStackTrace();
+        } catch (IOException e) {
+        	System.out.println("IOException.");
+            e.printStackTrace();
+		}	
     	return mailmessage;
     }
     
@@ -352,12 +438,18 @@ public class MailChecker {
     	return mailmessage; 
     }
     
+    public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    	String mailmessage = "";
+		if (MailChecker.searchSpamEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+			mailmessage = MailChecker.searchSpamEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);			
+		}
+    	return mailmessage; 
+    }
+    
     public static String getUserRegistrationURL() throws IOException {
     	
 		String mailmessage = getUserMailContent();
 		String confirmationurl = "";
-		System.out.println("==========0" + mailmessage);
-		System.out.println("==========1" + mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'")));
 		confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		return confirmationurl;
     }
