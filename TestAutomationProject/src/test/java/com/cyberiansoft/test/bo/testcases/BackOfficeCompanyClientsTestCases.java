@@ -334,7 +334,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 	
 	
-	@Test(testName = "Test Case 48949: Company - Clients : Hours of operation - Add Wholesale", description = "Company - Clients : Hours of operation - Add Wholesale") 
+	//@Test(testName = "Test Case 48949: Company - Clients : Hours of operation - Add Wholesale", description = "Company - Clients : Hours of operation - Add Wholesale") 
 	public void testCompanyClientsHoursOfOperationAddWholesale() throws Exception {
 		
 		final String companyname = "companyroman";
@@ -362,6 +362,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
  
 		newClientDialogWebPage.setCompanyName(companyname);
 		
+		newClientDialogWebPage.clickToLinkInClientsEdit("Working Hours");
 		newClientDialogWebPage.setWorkHoursStart(workHoursstart);
 		newClientDialogWebPage.setWorkHoursFinish(workHoursfinish);
 		
@@ -378,7 +379,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 	
 	
-	@Test(testName = "Test Case 48950: Company - Clients : Hours of operation - Add Retail", description = "Company - Clients : Hours of operation - Add Retail", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 48950: Company - Clients : Hours of operation - Add Retail", description = "Company - Clients : Hours of operation - Add Retail")
 	public void testCompanyClientsHoursOfOperationAddRetail() throws Exception {
 	 
 		final String companyname = "companyroman";

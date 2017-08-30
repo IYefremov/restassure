@@ -43,7 +43,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
 	public void testMonitorRepairOrderSearch() throws Exception {
 
-		final String wonumber = "O-021-00233";
+		final String wonumber = "O-10074-00174";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -83,13 +83,12 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation("Default Location");
 		Thread.sleep(1000);
 		repairorderspage.selectSearchCustomer("Additional Recon");
-		repairorderspage.setSearchVIN("R4YHH");
+		repairorderspage.setSearchVIN("4Y474UREUR");
 		repairorderspage.setSearchWoNumber(wonumber);
-		repairorderspage.setSearchStockNumber("4488");
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
 		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
-		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("Additional Recon", "R4YHH");
+		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("Additional Recon", "4Y474UREUR");
 		
 	}
 	
@@ -179,9 +178,9 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking", description = "Monitor- Reports - Repair Location Time Tracking")
 	public void testMonitorReportsRepairLocationTimeTracking() throws Exception {
 
-		String[] wonumbersfirstpage = {"O-021-00059", "O-10005-00044", "O-10011-00254", "O-10011-00255" };
-		String[] wonumberslastpage = {"O-006-00251"};
-		String[] wonumberssecondpage = {"O-006-00203", "O-015-00093", "O-10000-00090", "O-10000-00091"};
+		String[] wonumbersfirstpage = {"O-10000-00090", "O-10000-00091", "O-10000-00106", "O-10000-00107" };
+		String[] wonumberslastpage = {"O-000-01595"};
+		String[] wonumberssecondpage = {"O-10000-00118", "O-10000-00124", "O-10000-00125", "O-10000-00128"};
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -195,8 +194,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairlocationtimetrackingpage.selectSearchLocation("Default Location");
 		repairlocationtimetrackingpage.setSearchFromDate("1/1/2015");
 		repairlocationtimetrackingpage.setSearchToDate("8/31/2015");
-		//repairlocationtimetrackingpage.setSearchFromDate("1", "Jan", "2015");
-		//repairlocationtimetrackingpage.setSearchToDate("31", "Aug", "2015");
+
 		repairlocationtimetrackingpage.clickFindButton();
 		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
 		repairlocationtimetrackingpage.clickGoToLastPage();

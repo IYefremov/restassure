@@ -53,6 +53,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		}
 		driver.switchTo().defaultContent();
 		waitABit(1000);
+		
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);

@@ -53,7 +53,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-
+		
 		backofficeheader.clickLogout();
 	}
 
@@ -159,7 +159,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 	}
 
-	@Test(testName = "Test Case 29764:Company- Users : Edit", description = "Company- Users : Edit")
+	@Test(testName = "Test Case 29764:Company- Users : Edit", description = "Company- Users : Edit", retryAnalyzer=Retry.class)
 	public void testCompanyUsersEdit() throws Exception {
 
 		final String usermail = "zakaulov.admin@cyberiansoft.com";
@@ -360,7 +360,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.deleteClient(retailcompanynameed);
 	}
 
-	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
+	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit", retryAnalyzer=Retry.class)
 	public void testCompanyEmployeesEdit() throws Exception {
 
 		final String employeeteam = "01_TimeRep_team";
@@ -475,7 +475,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 	}
 
-	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
+	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit", retryAnalyzer=Retry.class)
 	public void testCompanyServicesEdit() throws Exception {
 
 		final String servicename = "Test Bundle Service";
@@ -536,7 +536,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicespage.archiveService(servicenameed);
 	}
 
-	@Test(testName = "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit", description = "Company - Service Request Type: Service type at Service Request Edit")
+	@Test(testName = "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit", description = "Company - Service Request Type: Service type at Service Request Edit", retryAnalyzer=Retry.class)
 	public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit() throws Exception {
 
 		final String srtype = "ta SR Type";
@@ -590,7 +590,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.deleteServiceRequestType(srtype);
 	}
 
-	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit")
+	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit", retryAnalyzer=Retry.class)
 	public void testCompanyInvoiceTypeClientEdit() throws Exception {
 
 		final String invoicetype = "TestIntInvTeam";
@@ -642,7 +642,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
 	}
 
-	@Test(testName = "Test Case 29759:Company- Clients: Services Update", description = "Company- Clients: Services Update")
+	@Test(testName = "Test Case 29759:Company- Clients: Services Update", description = "Company- Clients: Services Update", retryAnalyzer=Retry.class)
 	public void testCompanyClientsServicesUpdate() throws Exception {
 
 		final String clientname = "TestAlExTest";
@@ -677,7 +677,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.closeClientServicesTab(mainWindowHandle);
 	}
 
-	@Test(testName = "Test Case 29761:Company- Clients: Client Users Search", description = "Company- Clients: Client Users Search")
+	@Test(testName = "Test Case 29761:Company- Clients: Client Users Search", description = "Company- Clients: Client Users Search", retryAnalyzer=Retry.class )
 	public void testCompanyClientsClientUsersSearch() throws Exception {
 
 		final String clientname = "AlExTest";

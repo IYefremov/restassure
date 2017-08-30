@@ -19,11 +19,13 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.HomeWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.Retry;
@@ -1691,6 +1693,19 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
-//		eventsWebPage.deleteSelectedEvent();
+	}
+	
+	//@Test(testName = "Test Case 63581:Company - Service Request Type: Duplicate search Issue")
+	public void testServiceRequestTypeDublicateSearchIssue(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices() , 2);
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServicePackagesWebPage servicePackagePage = companyPage.clickServicePackagesLink();
+		servicePackagePage.clickEditServicePackage("01_Alex2SRT");
 	}
 }

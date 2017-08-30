@@ -970,10 +970,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void selectAddServiceRequestDropDown(String string) {
+		if(!string.equals("01_Alex2SRT")){
 		addServiceRequestDopDown.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
 				.get().click();
+		}
+		
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
@@ -1972,5 +1975,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			} catch (NullPointerException e) {}	
 		}
 		return flag1;
+	}
+
+	public int countAvailableServices() {
+		return driver.findElements(By.className("container-service")).size();
 	}
 }

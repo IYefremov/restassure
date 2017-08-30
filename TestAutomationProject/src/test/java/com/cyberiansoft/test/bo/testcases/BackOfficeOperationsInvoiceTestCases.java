@@ -317,13 +317,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
-		// final String invoicenumber =
-		// invoicespage.getFirstInvoiceNumberInTable();
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(2000);
 
-		// invoicespage.selectActionForFirstInvoice("Payments", false);
 		SendInvoiceCustomEmailTabWebPage sendinvoicecustomemailtab = invoicespage.clickSendCustomEmail(invoicenumber);
 		sendinvoicecustomemailtab.setEmailSubjectValue(invoicenumber);
 		sendinvoicecustomemailtab.setEmailToValue(usermail);
@@ -604,7 +601,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft")
+	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusDraft() throws InterruptedException {
 		final String ponum = "123";
 
@@ -1105,7 +1102,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 
-	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation"/*, retryAnalyzer = Retry.class*/)
+	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSearchOperation() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
