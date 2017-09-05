@@ -35,7 +35,8 @@ public class WebDriverFactory {
 			//webcap.setCapability("nativeEvents", false); 
 			webcap.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
 			webcap.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
-			webcap.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "slow");
+			webcap.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
+			webcap.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 			webdriver = new InternetExplorerDriver(webcap);
 			break;
 		case "chrome":
