@@ -174,7 +174,7 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	
 	public String clickSaveWithAlert() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		return Helpers.getAlertTextAndAccept();
 	}
 	

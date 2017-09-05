@@ -523,7 +523,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehiclescreeen.setVIN(VIN);
@@ -532,9 +532,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(summ));
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		
+		//ordersummaryscreen.checkApproveAndCreateInvoice();
+		//ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.clickSaveButton();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.clickSaveEmptyPO();
 		invoiceinfoscreen.setPO(_po);
@@ -1263,11 +1263,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ordersumm));
 		
 		ordersummaryscreen.clickSaveButton();
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Helpers.waitABit(1000);
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 			
@@ -1285,12 +1285,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
-		/*Assert.assertTrue(appiumdriver.findElement(
+		ordersummaryscreen.clickSaveButton();
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
@@ -1374,11 +1374,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		
 		ordersummaryscreen.clickSaveButton();
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Helpers.waitABit(1000);
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber1);
@@ -1457,11 +1457,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Helpers.waitABit(1000);
 		//Create WO2
 		myworkordersscreen.clickAddOrderButton();
@@ -1499,11 +1499,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 			
 		//Test case
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1592,11 +1592,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 	
 		
 		//Test case
@@ -1679,11 +1679,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Helpers.waitABit(1000);
 		
 		//Test case
@@ -2015,11 +2015,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		ordersummaryscreen.clickSaveButton();
 		
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Helpers.waitABit(2000);
 		
 		//Test case
@@ -2091,11 +2091,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		
 		ordersummaryscreen.clickSaveButton();
-		/*Assert.assertTrue(appiumdriver.findElement(
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		Thread.sleep(1000);
 		//testlogger.log(LogStatus.INFO, testuser.getTestUserName());
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2116,12 +2116,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
-		/*Assert.assertTrue(appiumdriver.findElement(
+		ordersummaryscreen.clickSaveButton();
+		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("Yes"))
-				.click();*/
+				.click();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
@@ -3795,7 +3795,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -3840,7 +3840,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -3884,7 +3884,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -3924,7 +3924,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		
 		invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -5812,7 +5812,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -6004,7 +6004,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
-		//ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSaveButton();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(iOSInternalProjectConstants.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
