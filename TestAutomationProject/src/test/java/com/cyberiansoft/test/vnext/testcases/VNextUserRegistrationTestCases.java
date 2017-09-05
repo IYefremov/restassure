@@ -239,7 +239,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
-		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 25.00");
+		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		/*
 		verificationscreen = new VNextVerificationScreen(appiumdriver);
@@ -670,7 +670,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
-		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 25.00");
+		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		registrationoverviewlegalinfoscreen.waitABit(10000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
@@ -712,6 +712,123 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			selectservicesscreen.clickSaveSelectedServicesButton();
 			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		}
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 63612:Verify user can create Repair Free Edition, "
+			+ "Test Case 63613:Verify Repair 360 Free Edition user can select only one matrix type",
+			description = "Verify user can create Repair Free Edition, "
+					+ "Verify Repair 360 Free Edition user can select only one matrix type")
+	public void testVerifyUserCanCreateRepair360FreeEdition() throws IOException {
+		
+		final String newuserfirstname = "TestTech";
+		final String newuserlastname = "User";
+		final String newusercompanyname = "PDR";
+		final String newuseraddress1 = "Address1";
+		final String newuseraddress2 = "Address2";
+		final String newusercity = "LA";
+		final String newuserzip = "5214BA63";
+		final String newusercountry = "United States";
+		final String newuserstate = "California";
+		
+		final String boeditionname = "Repair360 Free";
+		final String bolineofbusiness = "PDR";
+		
+		final String firstname = "Eric";
+		final String lastname = "Burn";
+		final String customeraddress = "Stryis'ka, 223";
+		final String customercity = "L'viv";
+		final String customerzip = "79051";
+		final String customeremail = "osmak.oksana+408222@gmail.com";
+		
+		final String testVIN = "1FMCU0DG4BK830800";
+		final String matrixservice = "Hail Dent Repair";
+		final String availablepricematrix = "State Farm";
+		
+		
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		regscreen.clickDoneButton();
+		waitABit(3000);
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
+				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		appiumdriver.switchTo().defaultContent();
+
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		//Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
+		Assert.assertEquals(registrationoverviewscreen.getAddress1Value(), newuseraddress1);
+		Assert.assertEquals(registrationoverviewscreen.getAddress2Value(), newuseraddress2);
+		Assert.assertEquals(registrationoverviewscreen.getCityValue(), newusercity);
+		Assert.assertEquals(registrationoverviewscreen.getZipValue(), newuserzip);
+		Assert.assertEquals(registrationoverviewscreen.getStateValue(), newuserstate);
+		Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountry);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+
+		registrationoverviewlegalinfoscreen.waitABit(10000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
+
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		Assert.assertTrue(homescreen.isUpgrateToProBannerVisible());
+		
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+		newcustomerscreen.setCustomerFirstName(firstname);
+		newcustomerscreen.setCustomerLastName(lastname);
+		newcustomerscreen.setCustomerEmail(customeremail);
+		newcustomerscreen.setCustomerAddress(customeraddress);
+		newcustomerscreen.setCustomerCity(customercity);
+		newcustomerscreen.setCustomerZIP(customerzip);
+		newcustomerscreen.clickSaveCustomerButton();
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(testVIN);
+		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectMatrixService(matrixservice);
+		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
+		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceMatrixValue(matrixservice), availablepricematrix);
+		
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}

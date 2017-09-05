@@ -111,7 +111,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		clickOKButton();
 	}
 
-	public void createWholesaleClient(String clientname) throws InterruptedException {
+	public void createWholesaleClient(String clientname) {
 		switchToWholesaleCustomer();
 		setCompanyName(clientname);
 		clickOKButton();
@@ -127,7 +127,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Retail']")));
 	}
 
-	public void switchToWholesaleCustomer() throws InterruptedException {
+	public void switchToWholesaleCustomer() {
 		checkboxSelect("Wholesale");
 	}
 

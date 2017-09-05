@@ -30,6 +30,24 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[contains(@data-bind, 'data.user.email')]")
 	private WebElement usermailfld;
 	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.addressLine1']")
+	private WebElement address1fld;
+	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.addressLine2']")
+	private WebElement address2fld;
+	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.city']")
+	private WebElement cityfld;
+	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.zipCode']")
+	private WebElement zipfld;
+	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.stateText']")
+	private WebElement statefld;
+	
+	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.countryText']")
+	private WebElement countryfld;
+	
 	public VNextRegistrationOverviewScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -55,6 +73,30 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	
 	public String getUserEmailValue() {
 		return usermailfld.getAttribute("value");
+	}
+	
+	public String getAddress1Value() {
+		return address1fld.getAttribute("value");
+	}
+	
+	public String getAddress2Value() {
+		return address2fld.getAttribute("value");
+	}
+	
+	public String getCityValue() {
+		return cityfld.getAttribute("value");
+	}
+	
+	public String getZipValue() {
+		return zipfld.getAttribute("value");
+	}
+	
+	public String getStateValue() {
+		return statefld.getAttribute("value");
+	}
+	
+	public String getCountryValue() {
+		return countryfld.getAttribute("value");
 	}
 	
 	public void clickDoneButton() {

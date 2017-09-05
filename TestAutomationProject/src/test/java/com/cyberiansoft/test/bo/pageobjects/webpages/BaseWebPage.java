@@ -191,8 +191,8 @@ public abstract class BaseWebPage {
 		waitUntilPageReloaded();
 	}
 
-	public void checkboxSelect(String checkboxvalue) throws InterruptedException {
-		Thread.sleep(3000);
+	public void checkboxSelect(String checkboxvalue) {
+		waitABit(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(
 				(WebElement) driver.findElement(By.xpath("//label[text()='" + checkboxvalue + "']")))).click();
 	}

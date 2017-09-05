@@ -51,12 +51,6 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void clickVerifyButton() {
-		/*List<WebElement> nextbtns = phonevereficationscreren.findElements(By.xpath(".//button[@data-bind='click: navigateNext']"));
-		System.out.println("+++++++++" + nextbtns.size());
-		for (WebElement nextbtn : nextbtns) {
-			if (nextbtn.isDisplayed())
-				tap(nextbtn);
-		}*/
 		tap(phonevereficationscreren.findElement(By.xpath(".//button[@data-bind='click: navigateNext']")));
 		log(LogStatus.INFO, "Tap Verify button");
 	}

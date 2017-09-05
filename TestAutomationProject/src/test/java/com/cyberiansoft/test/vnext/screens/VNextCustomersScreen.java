@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
+	
 	@FindBy(xpath="//div[contains(@class, 'page customers customers-list')]")
 	private WebElement customersscreen;
 	
@@ -25,8 +26,23 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='select-customer']")
 	private WebElement firstcustomer;
 	
-	@FindBy(xpath="//a[@action='add']/i")
+	@FindBy(xpath="//a[@action='add']")
 	private WebElement addcustomerbtn;
+	
+	@FindBy(xpath="//*[@action='search']")
+	private WebElement searchbtn;
+	
+	@FindBy(xpath="//input[@type='search']")
+	private WebElement searchfld;
+	
+	@FindBy(xpath="//*[@class='searchbar-cancel']")
+	private WebElement cancelsearchbtn;
+	
+	@FindBy(xpath="//*[@action='select-retail']")
+	private WebElement retailcustomertab;
+	
+	@FindBy(xpath="//*[@action='select-wholesale']")
+	private WebElement wholesalecustomertab;
 	
 	public VNextCustomersScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -81,9 +97,19 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextNewCustomerScreen clickAddCustomerButton() {
-		tap(customersscreen.findElement(By.xpath(".//a[@action='add']/i")));
+		List<WebElement> addbtns = customersscreen.findElements(By.xpath(".//a[@action='add' and @data-text='Create new customer']"));
+		for (WebElement addbtn : addbtns) {
+			if (addbtn.isDisplayed())
+				tap(addbtn);
+		}
+		//tap(customersscreen.findElement(By.xpath(".//a[@action='add']")));
 		log(LogStatus.INFO, "Click Add customer button");
 		return new VNextNewCustomerScreen(appiumdriver);	
+	}
+	
+	public boolean isAddCustomerButtonDisplayed() {
+		return customersscreen.findElement(By.xpath(".//a[@action='add']")).isDisplayed();
+		
 	}
 	
 	public boolean isCustomerExists(String customer) {
@@ -95,5 +121,40 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		clickScreenBackButton();
 		log(LogStatus.INFO, "Click Customers screen Back button");
 		return new VNextHomeScreen(appiumdriver);
+	}
+	
+	public void switchToRetailMode() {
+		tap(retailcustomertab);
+		log(LogStatus.INFO, "Switch To Retail Mode");
+	}
+	
+	public void switchToWholesaleMode() {
+		tap(wholesalecustomertab);
+		log(LogStatus.INFO, "Switch To Wholesale Mode");
+	}
+	
+	public void searchCustomerByName(String customername) {
+		tap(searchbtn);
+		typeSearchParameters(customername);
+		
+	}
+	
+	public void clickSearchButton() {
+		tap(searchbtn);
+	}
+	
+	public void clickCancelSearchButton() {
+		tap(cancelsearchbtn);
+		log(LogStatus.INFO, "Tap Cancel Search Button");
+	}
+	
+	public void typeSearchParameters(String searchtxt) {
+		searchfld.clear();
+		searchfld.sendKeys(searchtxt);
+		appiumdriver.hideKeyboard();
+	}
+	
+	public boolean isNothingFoundCaptionDisplayed() {
+		return customersscreen.findElement(By.xpath(".//b[text()='Nothing found']")).isDisplayed();
 	}
 }

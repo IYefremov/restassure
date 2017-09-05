@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -124,6 +125,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
 		return new VNextVehicleInfoScreen(appiumdriver);
+	}
+	
+	public boolean isUpgrateToProBannerVisible() {
+		return appiumdriver.findElement(By.xpath("//div[@class='upgrade-image' and @action='ad']")).isDisplayed();
 	}
 
 }

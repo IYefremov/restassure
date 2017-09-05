@@ -15,7 +15,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -214,7 +213,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchtypecbx, searchtypedd, _type);
 	}
 
-	public void deleteClient(String clientname) throws InterruptedException {
+	public void deleteClient(String clientname) {
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
@@ -268,11 +267,11 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return notetxt;
 	}
 
-	public WebElement getTableRowWithClient(String clientname) throws InterruptedException {
+	public WebElement getTableRowWithClient(String clientname) {
 		List<WebElement> clientstablerows = getClientsTableRows();
 		for (WebElement clientstablerow : clientstablerows) {
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
-			Thread.sleep(5000);
+			waitABit(5000);
 			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
 			//if (clientstablerow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {

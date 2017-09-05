@@ -38,6 +38,7 @@ import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
+import com.cyberiansoft.test.vnext.screens.VNextTeamEditionVerificationScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
@@ -209,30 +210,11 @@ public class VNextBaseTestCase {
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, phonenumber, userregmail);
 		regscreen.waitABit(7000);
-		
-		/*final String searchlicensecriteria = "VNext Automation";
-
-		initiateWebDriver();
-		webdriverGotoWebPage("https://reconpro.qc.cyberianconcepts.com/Admin/Devices.aspx");
-
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin("olexandr.kramar@cyberiansoft.com", "test12345");
-
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
-
-		devicespage.setSearchCriteriaByName(searchlicensecriteria);
-		String regCode = devicespage.getFirstRegCodeInTable();
-
-		getWebDriver().quit();*/
-		
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
 		else
-			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));
-		//verificationscreen.setDeviceRegistrationCode(regCode);		
+			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));		
 		verificationscreen.clickVerifyButton(); 
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
@@ -258,6 +240,40 @@ public class VNextBaseTestCase {
 		//registrationinformationdlg.waitABit(15*1000);
 	    //switchToWebViewContext();
 
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+	}
+	
+	public void registerTeamEdition() {
+		final String searchlicensecriteria = "Anastasia_android";
+
+		initiateWebDriver();
+		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Devices.aspx");
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin("olexandr.kramar@cyberiansoft.com", "test12345");
+
+		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
+				ActiveDevicesWebPage.class);
+
+		devicespage.setSearchCriteriaByName(searchlicensecriteria);
+		String regCode = devicespage.getFirstRegCodeInTable();
+
+		getWebDriver().quit();
+		
+		switchToWebViewContext();
+		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(regCode);
+		verificationscreen.clickVerifyButton(); 
+		
+		verificationscreen.waitABit(5*1000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
 		switchToWebViewContext();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));

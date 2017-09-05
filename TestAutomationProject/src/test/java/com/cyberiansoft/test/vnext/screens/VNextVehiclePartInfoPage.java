@@ -104,6 +104,8 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 	
 	public void clickSaveVehiclePartInfo() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable(savebtn));
 		tap(savebtn);
 		log(LogStatus.INFO, "Click Save Vehicle Part Info button");
 	}

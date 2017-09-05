@@ -42,6 +42,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customercountry = "Mexico";
 		final String customerstate = "Colima";
 		
+		deleteCustomerOnBackOffice(companyname, "");
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
@@ -90,6 +92,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customercountry = "Germany";
 		final String customerstate = "Saarland";
 		
+		deleteCustomerOnBackOffice(firstname, lastname);
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		setNetworkOff();
@@ -133,6 +136,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customercountry = "Germany";
 		final String customerstate = "Saarland";
 		
+		deleteCustomerOnBackOffice(firstname, lastname);
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
@@ -159,6 +163,33 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = newcustomerscreen.clickBackButton();
 		homescreen = customersscreen.clickBackButton();
 		
+	}
+	
+	public void deleteCustomerOnBackOffice(String firstName, String lastName) {
+		
+		String customerDelete = "";
+		
+		if (lastName.length() > 2)
+			customerDelete = firstName + " " + lastName;
+		else
+			customerDelete = firstName;
+		
+		initiateWebDriver();
+		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.makeSearchPanelVisible();
+		clientspage.searchClientByName(customerDelete);
+		clientspage.waitABit(1000);
+		while (clientspage.isClientExistsInTable(customerDelete))
+			clientspage.deleteClient(customerDelete);
+		Assert.assertFalse(clientspage.isClientExistsInTable(customerDelete));
+		webdriver.quit();
 	}
 
 }
