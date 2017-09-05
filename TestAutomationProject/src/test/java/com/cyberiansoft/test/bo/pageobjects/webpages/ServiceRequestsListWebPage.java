@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -1979,5 +1980,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public int countAvailableServices() {
 		return driver.findElements(By.className("container-service")).size();
+	}
+
+	public void clickDoneButtonAtAddServiceWindow() {
+		driver.findElement(By.linkText("Done")).click();
+	}
+
+	public void scrollWindow(String pixels) {
+		driver.switchTo().defaultContent();
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,"+pixels+")", "");
 	}
 }

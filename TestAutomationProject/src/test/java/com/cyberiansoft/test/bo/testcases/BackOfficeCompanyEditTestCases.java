@@ -711,7 +711,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -750,7 +750,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -815,7 +815,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -880,7 +880,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -945,7 +945,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -1009,7 +1009,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
@@ -1074,7 +1074,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1113,7 +1113,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1178,7 +1178,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1243,7 +1243,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1308,7 +1308,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1372,7 +1372,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
@@ -1437,7 +1437,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
@@ -1476,7 +1476,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
-		interApplicationExchangePage.clickTab("Sharing");
+		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){

@@ -997,7 +997,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			.sendKeys("Default Team");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Arrow"))).click();
 			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 			.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
 			.get().click();

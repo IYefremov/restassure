@@ -26,6 +26,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.Retry;
@@ -1695,8 +1696,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 	}
 	
-	//@Test(testName = "Test Case 63581:Company - Service Request Type: Duplicate search Issue")
-	public void testServiceRequestTypeDublicateSearchIssue(){
+	@Test(testName = "Test Case 63581:Company - Service Request Type: Duplicate search Issue")
+	public void testServiceRequestTypeDublicateSearchIssue() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1704,8 +1705,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
 		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices() , 2);
+		serviceRequestsWebPage.scrollWindow("-300");
 		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
-		ServicePackagesWebPage servicePackagePage = companyPage.clickServicePackagesLink();
-		servicePackagePage.clickEditServicePackage("01_Alex2SRT");
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		
 	}
+
 }
