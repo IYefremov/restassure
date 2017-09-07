@@ -17,6 +17,9 @@ import com.cyberiansoft.test.bo.webelements.TextField;
 
 public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 	
+	@FindBy(xpath = "//div[@class='loginForm']")
+	private WebElement loginform;
+	
 	@FindBy(id = "email")
 	private TextField emailfld;
 	
@@ -34,7 +37,7 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(loginbtn));
+		  .until(ExpectedConditions.visibilityOf(loginform));
 	}
 	
 	public VNextBOHeaderPanel userLogin(String username, String userpsw) {

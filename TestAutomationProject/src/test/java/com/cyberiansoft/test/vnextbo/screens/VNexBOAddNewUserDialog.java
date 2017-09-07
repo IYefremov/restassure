@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -33,10 +34,10 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	@FindBy(id = "users-countryPhoneCodes")
 	private WebElement usercountrycodecbmx;
 	
-	@FindBy(xpath = "//div[@class='checkbox']/label/input")
+	@FindBy(xpath = "//input[@data-bind='checked: data.webAccess']")
 	private WebElement webaccesschkbox;
 	
-	@FindBy(xpath = "//div/div/button[@class='btn btn-black' and text()='Save']")
+	@FindBy(xpath = "//button[@type='submit' and text()='Save']")
 	private WebElement savebtn;
 	
 	@FindBy(xpath = "//div[@class='modal-header']/button[@aria-label='Close']")
@@ -97,13 +98,18 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickSaveButton() {
-		savebtn.click();
+		List<WebElement> savebtns = driver.findElements(By.xpath("//button[@type='submit' and text()='Save']"));
+		for (WebElement btnsave : savebtns)
+			if (btnsave.isDisplayed())
+				btnsave.click();
+		
+		//savebtn.click();
 	}
 	
 	public VNexBOUsersWebPage clickSaveButtonAndWait() {
 		clickSaveButton();
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div/div/button[@class='btn btn-black' and text()='Save']"))); 
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("users-form-popup"))); 
 		waitABit(1000);
 		return PageFactory.initElements(
 				driver, VNexBOUsersWebPage.class);
@@ -130,10 +136,19 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 		return driver.findElement(By.xpath("//div[@class='text-red' and contains(text(), '" + errormsg + "')]")).isDisplayed();
 	}
 	
+	public WebElement getAddUserDialogSaveButton() {
+		WebElement savebtn = null;
+		List<WebElement> savebtns = driver.findElements(By.xpath("//button[@type='submit' and text()='Save']"));
+		for (WebElement btnsave : savebtns)
+			if (btnsave.isDisplayed())
+				savebtn = btnsave;
+		return savebtn;
+	}
+	
 	public VNexBOUsersWebPage closeadduserDialog() {
-		savebtn.sendKeys(Keys.ESCAPE);
+		getAddUserDialogSaveButton().sendKeys(Keys.ESCAPE);
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div/div/button[@class='btn btn-black' and text()='Save']"))); 
+		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("users-form-popup"))); 
 		waitABit(1000);
 		return PageFactory.initElements(
 				driver, VNexBOUsersWebPage.class);

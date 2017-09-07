@@ -4,15 +4,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
-	@FindBy(xpath = "//div[@class='login']/a")
+	@FindBy(xpath = "//div[@class='login']/a[@data-bind='click: logout']")
 	private WebElement logoutlink;
 	
 	@FindBy(xpath = "//div[@class='user']/span")
@@ -28,7 +31,12 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	}
 	
 	public void clickLogout() {
-		logoutlink.click();
+		try {
+		new WebDriverWait(driver, 5)
+		  .until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
+		} catch (WebDriverException e) {
+			logoutlink.click();
+		}
 	}
 	
 	public boolean isLogOutLinkExists() {
@@ -37,8 +45,9 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
 	public VNextBOLoginScreenWebPage userLogout() {
 		clickLogout();
+		waitABit(1000);
 		return PageFactory.initElements(
-				driver, VNextBOLoginScreenWebPage.class); 
+				driver, VNextBOLoginScreenWebPage.class);
 	}
 
 }

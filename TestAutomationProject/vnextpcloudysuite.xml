@@ -33,6 +33,7 @@
           <include name="testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen" />
           <include name="testCreateInspectionWithNegativePrice" />
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
+          <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">

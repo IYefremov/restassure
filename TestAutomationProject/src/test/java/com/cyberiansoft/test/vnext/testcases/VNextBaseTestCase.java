@@ -134,10 +134,16 @@ public class VNextBaseTestCase {
 	public void switchToWebViewContext() {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		List<String> handlesList = new ArrayList(contextNames);
-		if (handlesList.size() > 2)
+		System.out.println("+++" + handlesList.size());
+		for (String handles : handlesList) {
+			System.out.println("+++" + handles);
+			if (handles.contains("com.automobiletechnologies.repair360"))
+				appiumdriver.context(handles);
+		}
+		/*if (handlesList.size() > 2)
 			appiumdriver.context(handlesList.get(2));
 		else
-			appiumdriver.context(handlesList.get(1));
+			appiumdriver.context(handlesList.get(1));*/
 	}
 
 	public void switchApplicationContext(String appcontext) {
@@ -181,9 +187,6 @@ public class VNextBaseTestCase {
 	}
 	
 	public void registerDevice() throws Exception {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//iframe"))));
-		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		String phonecountrycode = "1";
 		String phonenumber = "14122264998";
 		String regcode1 = VNextWebServicesUtils.getProdRegCode(phonenumber);
@@ -199,9 +202,7 @@ public class VNextBaseTestCase {
 			phonecountrycode = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode();
 			phonenumber = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber();
 		}
-		
-		
-		
+
 		switchToWebViewContext();
 		String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
@@ -220,25 +221,10 @@ public class VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		registrationinformationdlg.waitABit(5*1000);
-		//registrationinformationdlg.waitABit(70*1000);
 		
-		
-		/*appiumdriver.switchTo().defaultContent();
-		if (appiumdriver.findElements(By.xpath("//body/child::*")).size() < 1) {
-			switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-			appiumdriver.closeApp();
-			appiumdriver.launchApp();
-		    switchToWebViewContext();
-		} else {
-			VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-			informationdlg.clickInformationDialogOKButton();
-		}*/
-		//System.out.println("++++" + appiumdriver.findElements(By.xpath("//body/child::*")).size());
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
-		//registrationinformationdlg.waitABit(15*1000);
-	    //switchToWebViewContext();
 
 		switchToWebViewContext();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);

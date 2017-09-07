@@ -15,14 +15,15 @@ import org.testng.Assert;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.VNextWebTable;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 
 public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//button[contains(@class, 'btn-add-new-service')]/i")
 	private WebElement addservicebtn;
 	
-	@FindBy(xpath = "//div[@id='serviceTable-wrapper']/table")
-	private VNextWebTable servicestable;
+	@FindBy(id = "serviceTable")
+	private WebTable servicestable;
 	
 	@FindBy(id = "services-search")
 	private WebElement searchservicespanel;
@@ -50,7 +51,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
+		  .until(ExpectedConditions.visibilityOf(addservicebtn));
 	}
 	
 	public VNextBOAddNewServiceDialog clickAddNewserviceButton() {
@@ -93,6 +94,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchServices-type_listbox"))));
 		WebElement advserchcmb = driver.findElement(By.id("advSearchServices-type_listbox"));
+		waitABit(500);
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable((WebElement) advserchcmb.
 		findElement(By.xpath(".//li/span[text()='" + servicetype + "']")))).click();
@@ -102,14 +104,15 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public void openAdvancedSearchPanel() {
-		searchservicespanel.findElement(By.xpath(".//i[@data-bind='click: showAdvancedSearch']")).click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//i[@data-bind='click: showAdvancedSearch']")))).click();
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(advancedsearchform));
 	}
 	
 	public boolean isServicePresentOnCurrentPageByServiceName(String servicename) {
 		boolean founded = false;
-		if (!driver.findElement(By.xpath("//div[@id='services-list']/div/p[text()='No records found. Please refine search criteria ...']")).isDisplayed()) {
+		if (!driver.findElement(By.xpath("//div[@id='services-list-view']/div/p")).getText().equals("No services to show")) {
 			WebElement row = getTableRowWithServiceByServiceName(servicename);
 			if (row != null)
 				founded = true;
@@ -146,7 +149,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		if (row != null) {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Description") + "]/i/i"))).perform();
-			serviceprice = row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Description") + "]/i/span")).getText().trim();
+			serviceprice = row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Description") + "]/i/div")).getText().trim();
 		} else {
 			Assert.assertTrue(false, "Can't find " + servicename + " service");	
 		}
@@ -197,6 +200,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable(addservicebtn));
+		waitABit(500);
 	}
 	
 	public void clickDeleteServiceButton(WebElement tablerow) {

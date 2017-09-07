@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.5.3</version>
+            <version>3.4.0</version>
         </dependency> 
         <dependency>
             <groupId>junit</groupId>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>23.0</version>
+            <version>22.0</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -59,7 +59,7 @@
   		<dependency>
   			<groupId>io.appium</groupId>
   			<artifactId>java-client</artifactId>
-  			<version>5.0.0-BETA7</version>
+  			<version>5.0.0-BETA9</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pojosontheweb</groupId>

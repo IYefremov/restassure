@@ -35,6 +35,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	final String confirmpsw = "111111";
 	ArrayList<String> userslist = new ArrayList<String>();
 	
+	//final String userFromEmail = "ReconPro@cyberiansoft.com";
+	final String userFromEmail = "Repair360-qc@cyberianconcepts.com";
+	
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl,
@@ -137,11 +140,11 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		boolean search = false;
 		String mailmessage = "";
 		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail, "reset your password")) {
 				loginpage.waitABit(60*500);
 			} else {
 				search = true;
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");
+				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail);
 				break;
 			}
 		}
@@ -237,11 +240,11 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		boolean search = false;
 		String mailmessage = "";
 		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
+			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail, "reset your password")) {
 				loginpage.waitABit(60*500);
 			} else {
 				search = true;
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");
+				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail);
 				break;
 			}
 		}

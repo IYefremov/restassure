@@ -459,7 +459,7 @@ public class MailChecker {
     	final String usermail = "test.cyberiansoft@gmail.com";
     	final String usermailpsw = "ZZzz11!!";
     	final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
-    	final String sendermail = "ReconPro@cyberiansoft.com";
+    	final String sendermail = "Repair360-qc@cyberianconcepts.com";
     	final String mailcontainstext = "complete the registration process";
     	
 		String mailmessage = "";

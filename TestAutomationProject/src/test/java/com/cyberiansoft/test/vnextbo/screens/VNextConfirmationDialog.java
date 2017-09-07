@@ -16,7 +16,7 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	@FindBy(id = "dialogModal")
 	private WebElement confirmdialog;
 	
-	@FindBy(xpath = "//div[@class='modal-body']/span[@data-bind='text: text']")
+	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'text: text,')]")
 	private WebElement confirmdialogmessage;
 	
 	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")

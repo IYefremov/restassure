@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailMismatchDialog;
+import com.cyberiansoft.test.vnext.screens.VNextFeedbackScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
@@ -32,6 +33,7 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationPaymentInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
@@ -833,18 +835,80 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
-	//@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
-	//		description = "Show selected services after inspection is saved")
-	public void testShowSelectedServicesAfterInspectionIsSaved() {
+	@Test(testName= "Test Case 64228:R360: Submit Customer Feedback from Repair360 Free ediition", 
+			description = "Submit Customer Feedback from Repair360 Free ediition")
+	public void testSubmitCustomerFeedbackFromRepair360FreeEdiition() throws IOException {
 		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
+		final String boeditionname = "Repair360 Free";
+		final String bolineofbusiness = "PDR";
+		final String userstate = "California";
+		
+		final String feedbackType = "Feature Request";
+		final String feedbackArea = "Customers";
+		final String subArea = "Create/Edit customer";
+		final String feedbackSubject = "Test Feedback Repair360";
+		final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
+		
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		//Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+		
+		registrationoverviewlegalinfoscreen.waitABit(10000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
+
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		
-		/*customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.setVIN(testVIN);
-		
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		
-		*/
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+		feedbackscreen.selectFeedbackType(feedbackType);
+		feedbackscreen.selectArea(feedbackArea, subArea);
+		feedbackscreen.setFeedbackSubject(feedbackSubject);
+		feedbackscreen.setFeedbackDescription(feedbackDesc);
+		statusscreen = feedbackscreen.clickSendButton();
+		homescreen = statusscreen.clickBackButton();
 	}
 }

@@ -25,8 +25,11 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@id='users-list']/table")
 	private VNextWebTable userstable;
 	
-	@FindBy(xpath = "//div[@id='pagingPanel']/button[contains(text(), 'Next')]")
+	@FindBy(xpath = "//div[@id='pagingPanel']/button[@data-automation-id='usersListNext']")
 	private WebElement nextpagebtn;
+	
+	@FindBy(xpath = "//div[@id='pagingPanel']/button[@data-automation-id='usersListPrev']")
+	private WebElement previouspagebtn;
 	
 	public VNexBOUsersWebPage(WebDriver driver) {
 		super(driver);

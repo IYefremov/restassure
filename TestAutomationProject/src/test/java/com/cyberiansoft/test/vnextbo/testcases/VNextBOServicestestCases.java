@@ -282,6 +282,10 @@ public class VNextBOServicestestCases extends BaseTestCase {
 		servicespage.advancedSearchServiceByServiceType(matrixservicetype);
 		VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickEditServiceByServiceName(matrixservicename);
 		addnewservicedialog.setServiceName(newmatrixservicename);
+		servicespage = addnewservicedialog.saveNewService();
+		servicespage.searchServiceByServiceName(newmatrixservicename);
+		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(newmatrixservicename));
+		
 	}
 
 }

@@ -25,8 +25,12 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	public VNextTeamEditionVerificationScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		System.out.println("===" + appiumdriver.getContext());
+		
+		System.out.println("===" + appiumdriver.findElements(By.xpath("//*[@class='verification-form']")).size());
+		
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(phonevereficationform));
+		wait.until(ExpectedConditions.visibilityOf(regfld));
 	}
 	
 	public void setDeviceRegistrationCode(String regcode) {

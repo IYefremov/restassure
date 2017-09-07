@@ -1097,4 +1097,36 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
+	
+	@Test(testName= "Test Case:  Open and set service details on Select Services screen", 
+			description = " Open and set service details on Select Services screen")
+	public void testOpenAndSetServiceDetailsOnSelectServicesScreen() {
+		
+		final String serviceName = "Bumper Repair";
+		final String servicePrice = "5";
+		final String serviceQuantity = "1.99";
+		final String serviceTotal = "$9.95";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		
+		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
+		VNextServiceDetailsScreen servicedetailsscreen = selectservicesscreen.openServiceDetails(serviceName);
+		servicedetailsscreen.setServiceAmountValue(servicePrice);
+		servicedetailsscreen.setServiceQuantityValue(serviceQuantity);
+		servicedetailsscreen.clickServiceDetailsDoneButton();
+		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
+		
+		selectservicesscreen.clickSaveSelectedServicesButton();		
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		Assert.assertEquals(inspservicesscreen.getInspectionTotalPriceValue(), serviceTotal);
+		
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
 }
