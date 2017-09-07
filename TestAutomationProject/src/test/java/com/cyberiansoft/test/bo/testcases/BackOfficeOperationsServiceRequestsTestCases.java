@@ -1026,7 +1026,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 	}
@@ -1206,8 +1205,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkDocumentDownloadingInLC());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
-//		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
-//		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
 	}
 	
 	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
@@ -1709,7 +1706,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
-		
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickErrorWithBLockingRadioButton();
+		serviceRequestTypesPage.selectStockRoVinOptions();
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		serviceRequestTypesPage.getTableRowWithServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.switchToWindow(serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT"));
 	}
 
 }
