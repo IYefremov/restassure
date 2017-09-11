@@ -33,7 +33,10 @@ public class ClientContactsWebPage extends BaseWebPage{
 	
 	
 	public AddEditClientUsersContactsDialogWebPage clickAddUserBtn(){
-		clickAndWait(adduserbtn);		
+		try{
+		driver.switchTo().alert().accept();
+		}catch(Exception e){}
+		clickAndWait(adduserbtn);	
 		return PageFactory.initElements(
 				driver, AddEditClientUsersContactsDialogWebPage.class);
 	}
@@ -83,9 +86,11 @@ public class ClientContactsWebPage extends BaseWebPage{
 		} else {
 			Assert.assertTrue(false, "Can't find client: " + contactfstname);
 		}
-		
+		try{
+		Thread.sleep(3000);
 		driver.switchTo().alert().accept();
 		waitUntilPageReloaded();
+		}catch(Exception e){}
 	
 	}
 	
@@ -115,6 +120,18 @@ public class ClientContactsWebPage extends BaseWebPage{
 		while(!getClientStatusText(contactfstname).equals(message)){
 			driver.navigate().refresh();
 		}
+	}
+	
+	public void closePage() {
+		String mainWindow = "";
+		String thisWindow = driver.getWindowHandle();
+		for (String window : driver.getWindowHandles()) {
+			if(!window.equals(thisWindow))
+				mainWindow = window;
+		}
+		driver.switchTo().window(thisWindow).close();
+		driver.switchTo().window(mainWindow);
+		driver.switchTo().defaultContent();
 	}
 	
 }

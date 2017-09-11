@@ -25,12 +25,10 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//textarea[contains(@id, 'Card_description')]")
 	private TextField invoicetypedescfld;
 	
-	//@FindBy(xpath = "//label[contains(@for, 'Card_cbPOVisible')]")
-	@FindBy(id="ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPOVisible")
+	@FindBy(id="_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPOVisible")
 	private WebElement visiblechkbx;
 	
-	//@FindBy(xpath = "//label[contains(@for, 'Card_cbPORequired')]")
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPORequired")
+	@FindBy(id = "_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPORequired")
 	private WebElement requiredchkbx;
 	
 	@FindBy(xpath = "//label[contains(@for, 'Card_cbUseNewPrinting')]")

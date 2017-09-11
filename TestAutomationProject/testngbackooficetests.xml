@@ -15,10 +15,12 @@
   <listeners>
 		<listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
   </listeners>
+  
+   <!--
   <test name="Back Office Test Cases - Chrome" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     	<classes>   
-    	<!-- -->
+    	
     	
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>            
@@ -33,7 +35,6 @@
 			
 			
         	<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
-       
 			</class> 
 			
 			
@@ -51,14 +52,12 @@
       		</class>   
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       		</class>
-
-
-  <!--   -->          
-
-      <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
-      </class>-->
+      <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
+      </class>
     </classes>
   </test>
+    -->  
+  
   <!--<test name="Back Office Test Cases - Firefox" preserve-order="true">
     <parameter name="selenium.browser" value="firefox" />
     <classes>
@@ -98,18 +97,24 @@
     <parameter name="selenium.browser" value="ie" />
     <classes>  
     
+    <!-- -->
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
- 			</class>            
+ 			</class>    
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
-  			</class>    
+  			</class>  
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
     		</class>
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
 			</class>       
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
 			</class>
+			 
+			 
         	<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
+        
 			</class> 
+			
+			
       		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>   
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
@@ -126,7 +131,7 @@
       		</class>
 
 
-    <!--  -->          
+     	 <!--  -->          
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->

@@ -215,7 +215,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 26725:Company- Clients: Archive", description = "Company- Clients: Archive")
 	public void testCompanyClientsArchive() throws Exception {
 
-		final String companyname = "Ostap Bender";
+		final String companyname = "000 1111";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -330,6 +330,8 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
  
 		
 		Assert.assertFalse(clientUsersWebPage3.isClientUserExistsInTable(userfstname, userlstname));
+		
+		clientUsersWebPage3.closePage();
  
 	}
 	
@@ -491,7 +493,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertFalse(addEditClientUsersContactsDialogWebPage1.isNotificationVisible());
 	 
 		ClientContactsWebPage  clientContactsWebPage3 = 
-				addEditClientUsersContactsDialogWebPage1.createContactWithRequiredField(contactfstname2, 
+		addEditClientUsersContactsDialogWebPage1.createContactWithRequiredField(contactfstname2, 
 						contactlstname2, contactemail2);
 		
 		// verify message text and color for contact2
@@ -590,6 +592,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientContactsWebPage3.clickDeleteClientContact(contactfstname);
 		Assert.assertFalse(clientContactsWebPage3.isClientContactExistsInTable(contactfstname, contactlstname));
 		
+		clientContactsWebPage3.closePage();
 	}
 	
 }

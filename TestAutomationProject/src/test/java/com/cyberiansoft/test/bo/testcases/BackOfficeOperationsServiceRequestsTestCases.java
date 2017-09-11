@@ -26,6 +26,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesVehicleInfoSettingsPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -1711,7 +1712,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectStockRoVinOptions();
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		serviceRequestTypesPage.getTableRowWithServiceRequestType("01_Alex2SRT");
-		serviceRequestTypesPage.switchToWindow(serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT"));
+		//serviceRequestTypesPage.switchToWindow(serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT"));
+		ServiceRequestTypesVehicleInfoSettingsPage settingsPage = serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT");
+	}
+	
+	@Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO")
+	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
 	}
 
 }

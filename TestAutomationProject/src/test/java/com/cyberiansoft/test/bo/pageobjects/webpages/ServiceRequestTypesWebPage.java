@@ -186,20 +186,21 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		}
 	}
 
-	public String clickSettingsVehicleInfo(String srtype) {
-		String mainWindow = driver.getWindowHandle();
+	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) {
+//		String mainWindow = driver.getWindowHandle();
 		List<WebElement> rows = getServiceRequestTypesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().equals(srtype)) {
 				row.findElement(By.linkText("Settings")).click();
+				return 	PageFactory.initElements(driver, ServiceRequestTypesVehicleInfoSettingsPage.class);
 			}
 		}
-		for(String window: driver.getWindowHandles()){
-			if(!window.equals(mainWindow)){
-				return window;
-			}
-		}
-		return mainWindow;
+//		for(String window: driver.getWindowHandles()){
+//			if(!window.equals(mainWindow)){
+//				return window;
+//			}
+//		}
+		return null;
 	}
 
 	public void switchToWindow(String window) {
