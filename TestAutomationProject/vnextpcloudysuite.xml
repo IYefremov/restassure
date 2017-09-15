@@ -92,6 +92,7 @@
           <include name="testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone" />
           <include name="testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail" />
           <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />  
+          <include name="testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO" /> 
           <include name="testVerifyUserCanCreateRepair360Edition" />  
           <include name="testVerifyUserCanCreateRepair360FreeEdition" /> 
       </methods>
