@@ -118,6 +118,8 @@ public class VNextBaseScreen {
 	public void clickScreenBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='back']")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='back']")));
 		tap(appiumdriver.findElementByXPath("//*[@action='back']"));
 		//log(LogStatus.INFO, "Tap Back screen Back button");
 	}

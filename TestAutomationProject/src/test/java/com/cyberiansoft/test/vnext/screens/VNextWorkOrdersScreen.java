@@ -15,6 +15,9 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
+	@FindBy(xpath="//div[contains(@class, 'page work-orders-list')]")
+	private WebElement workordersscreen;
+	
 	@FindBy(xpath="//a[@action='add']")
 	private WebElement addwobtn;
 	
@@ -28,7 +31,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(workorderslist));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
@@ -75,7 +78,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		return wocell;
 	}
 	
-	public VNextInvoiceInfoScreen clickCreateInvoiceFromWorkOrder(String wonumber) {
+	public void clickCreateInvoiceFromWorkOrder(String wonumber) {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null) {
 			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + wonumber + "']")));
@@ -83,14 +86,13 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		}
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
-		return clickCreateInvoiceMenuItem();
+		clickCreateInvoiceMenuItem();
 		
 	}
 	
-	public VNextInvoiceInfoScreen clickCreateInvoiceMenuItem() {
+	public void clickCreateInvoiceMenuItem() {
 		tap(createinvoicemenu);
 		log(LogStatus.INFO, "Click Create Invoice menu item");
-		return new VNextInvoiceInfoScreen(appiumdriver);
 	}
 
 }

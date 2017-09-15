@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -42,13 +43,12 @@ import com.cyberiansoft.test.vnext.screens.VNextTeamEditionVerificationScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-/*import com.ssts.pcloudy.ConnectError;
-import com.ssts.pcloudy.Connector;
-import com.ssts.pcloudy.Version;
+/*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
 import com.ssts.pcloudy.dto.device.MobileDevice;
 import com.ssts.pcloudy.dto.file.PDriveFileDTO;
+import com.ssts.pcloudy.exception.ConnectError;
 import com.ssts.util.reporting.ExecutionResult;
 import com.ssts.util.reporting.MultipleRunReport;
 import com.ssts.util.reporting.SingleRunReport;
@@ -56,6 +56,8 @@ import com.ssts.util.reporting.printers.HtmlFilePrinter;
 */
 import io.appium.java_client.android.Connection;
 import io.appium.java_client.android.HasNetworkConnection;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
@@ -324,219 +326,55 @@ public class VNextBaseTestCase {
 	}
 	
 	/////////////////////////////
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	//@BeforeSuite
 	@Parameters({ "selenium.browser", "device.platform" })
-	public void runExecutionOnPCloudy(String browser, String devplatform) throws InterruptedException, IOException {
+	public void runExecutionOnPCloudy(String browser, String devplatform) throws InterruptedException, IOException, ConnectError {
 		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 		defaultbrowser = browser;
 		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
 		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
 		deviceplatform = devplatform;
+		int deviceBookDuration = 60;
+		
+		PCloudyAppiumSession pCloudySession;
+		
+		//Connector con = new Connector("https://device.pcloudy.com/api/");
+		Connector con = new Connector("https://us.pcloudy.com/api");
 		
 		
-		 /*File reportsFolder = new File("Reports"); 
-         
-	        Connector con = new Connector("https://device.pcloudy.com/api"); 
+		// User Authentication over pCloudy
+		String authToken = con.authenticateUser("olexandr.kramar@cyberiansoft.com", "kg3s78jmj7qbxs7xhs4krrhp");
 
-	        // User Authentication over pCloudy 
-	        String authToken = con.authenticateUser("olexandr.kramar@cyberiansoft.com", "kg3s78jmj7qbxs7xhs4krrhp"); 
+		// Select apk in pCloudy Cloud Drive
+		File appDir = new File("./data/");
+	    File fileToBeUploaded = new File(appDir, "ReconPro.apk");
+	    
+	    //PDriveFileDTO alreadyUploadedApp = con.getAvailableAppIfUploaded(authToken, fileToBeUploaded.getName());
+	    System.out.println("Uploading App: " + fileToBeUploaded.getAbsolutePath());
+		PDriveFileDTO uploadedApp = con.uploadApp(authToken, fileToBeUploaded, false);
+		System.out.println("App uploaded");
+		//PDriveFileDTO alreadyUploadedApp = new PDriveFileDTO();
+		//alreadyUploadedApp.file = uploadedApp.file;
 
-	        ArrayList selectedDevices = new ArrayList(); 
-	        // Populate the selected Devices here 
-	         
-	        selectedDevices.add(MobileDevice.getNew("Huawei_Honor4X_Android_4.4.4", 239, "Honor4X", "Honor 4X", "android", "4.4.4", "Huawei")); 
+		ArrayList<MobileDevice> selectedDevices = new ArrayList<>();
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS8_Android_7.0.0", 149, "GalaxyS8", "Galaxy S8", "android", "7.0.0", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS8Plus_Android_7.0.0", 148, "GalaxyS8Plus", "Galaxy S8 +", "android", "7.0.0", "Samsung")); 
+		
+		// Book the selected devices in pCloudy
+		String sessionName = "Appium Session " + new Date();
+		BookingDtoDevice bookedDevice = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, deviceBookDuration, sessionName)[0];
+		System.out.println("Devices booked successfully");
 
-	                     
-	        // To select multiple devices manually, use either of these: 
-	        //selectedDevices.addAll(con.chooseMultipleDevices(authToken, "android")); 
-	        // selectedDevices.add(con.chooseSingleDevice(authToken, "android")); 
-	         
-	        // To select devices from a CI variable, use: 
-	        //selectedDevices.addAll(con.chooseMultipleDevices(authToken,"android",CI_VariableWithDeviceFullNamesArray)); 
-	         
-	         
-	        String sessionName = "Appium " + "Android 4.4"; 
-	        if (selectedDevices.size() > 1) 
-	            sessionName += " & " + (selectedDevices.size() - 1) + " others"; 
-	             
-	             
-	        // Book the selected devices in pCloudy 
-	        BookingDtoDevice[] bookedDevices = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, 10, sessionName); 
-	        System.out.println("Devices booked successfully"); 
+		con.AppiumApis().initAppiumHubForApp(authToken, uploadedApp);
 
-	        // Select apk in pCloudy Cloud Drive 
-	        PDriveFileDTO pDriveFile = PDriveFileDTO.getNew("ReconPro-1494675141.apk"); 
-	        System.out.println("Apk file selected from CloudDrive"); 
-	         
-	        con.AppiumApis().initAppiumHubForApp(authToken, pDriveFile); 
-
-	        // Get the endpoint from pCloudy 
-	        URL endpoint = con.AppiumApis().getAppiumEndpoint(authToken); 
-	        System.out.println("Appium Endpoint: " + endpoint); 
-	         
-	        URL reportFolderOnPCloudy = con.AppiumApis().getAppiumReportFolder(authToken); 
-	        System.out.println("Report Folder: " + reportFolderOnPCloudy); 
-
-	             
-	        List allThreads = new ArrayList(); 
-	        MultipleRunReport multipleReports = new MultipleRunReport(); 
-	         
-	        // Create multiple driver objects in multiple threads 
-	         
-	        for (int i = 0; i < bookedDevices.length; i++) { 
-	            BookingDtoDevice aDevice = bookedDevices[i]; 
-	            PCloudyAppiumSession pCloudySession = new PCloudyAppiumSession(con, authToken, aDevice); 
-	            SingleRunReport report = new SingleRunReport(); 
-	            multipleReports.add(report); 
-
-	            report.Header = aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version; 
-	            report.Enviroment.addDetail("NetworkType", aDevice.networkType); 
-	            report.Enviroment.addDetail("Phone Number", aDevice.phoneNumber); 
-	            report.HyperLinks.addLink("Appium Endpoint", endpoint); 
-	            report.HyperLinks.addLink("pCloudy Result Folder", reportFolderOnPCloudy); 
-
-	            File deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
-                File snapshotsFolder = new File(deviceFolder, "Snapshots"); 
-                snapshotsFolder.mkdirs(); 
-                 
-            try{ 
-                DesiredCapabilities capabilities = new DesiredCapabilities(); 
-                capabilities.setCapability("newCommandTimeout", 600); 
-                capabilities.setCapability("launchTimeout", 90000); 
-                capabilities.setCapability("deviceName", aDevice.capabilities.deviceName); 
-                capabilities.setCapability("browserName", aDevice.capabilities.deviceName); 
-                capabilities.setCapability("platformName", "Android"); 
-                capabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
-                capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
-                //capabilities.setCapability("appPackage", appPackage); 
-                //capabilities.setCapability("appActivity", appActivity); 
-                capabilities.setCapability("rotatable", true); 
-                appiumdriver = new SwipeableWebDriver(endpoint, capabilities); 
-               
-                } finally { 
-                    HtmlFilePrinter printer = new HtmlFilePrinter(new File(deviceFolder, deviceFolder.getName() + ".html")); 
-                    printer.printSingleRunReport(report); 
-
-                } 
-	                     
-	        File consolidatedReport = new File(reportsFolder, "ConsolidatedReports.html"); 
-	        HtmlFilePrinter printer = new HtmlFilePrinter(consolidatedReport); 
-	        //printer.printConsolidatedSingleRunReport(multipleReports); 
-	        System.out.println("Check the reports at : " + consolidatedReport.getAbsolutePath()); 
-
-	        System.out.println("Execution Completed..."); 
-	     
-	    } 
-		*/
+		pCloudySession = new PCloudyAppiumSession(con, authToken, bookedDevice);
+		
+		URL appiumEndpoint = pCloudySession.getConnector().AppiumApis().getAppiumEndpoint(pCloudySession.getAuthToken());
+		appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(appiumEndpoint).buildForPCloudy(pCloudySession.getDto().capabilities.deviceName, pCloudySession.getDto().capabilities.deviceName);
 		
 		
-		
-		/*File reportsFolder = new File("Reports"); 
-	     
-        Connector con = new Connector("https://device.pcloudy.com/api"); 
-
-        // User Authentication over pCloudy 
-        String authToken = con.authenticateUser("olexandr.kramar@cyberiansoft.com", "kg3s78jmj7qbxs7xhs4krrhp"); 
-
-        ArrayList selectedDevices = new ArrayList<>(); 
-        // Populate the selected Devices here 
-         
-        selectedDevices.add(MobileDevice.getNew("Apple_iPhone6S_Ios_10.1.1", 237, "iPhone6S", "iPhone 6S", "ios", "10.1.1", "Apple")); 
-        //selectedDevices.add(MobileDevice.getNew("Apple_iPhone5_Ios_10.2.0", 256, "iPhone5", "iPhone 5", "ios", "10.2.0", "Apple")); 
-        //selectedDevices.add(MobileDevice.getNew("Apple_iPhone6sPlus_Ios_10.2.1", 314, "iPhone6sPlus", "iPhone 6s Plus", "ios", "10.2.1", "Apple"));
-                     
-        // To select multiple devices manually, use either of these: 
-        //selectedDevices.addAll(con.chooseMultipleDevicFile deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
-        // selectedDevices.add(con.chooseSingleDevice(authToken, "ios")); 
-         
-        // To select devices from a CI variable, use: 
-        //selectedDevices.addAll(con.chooseMultipleDevices(authToken,"ios",CI_VariableWithDeviceFullNamesArray)); 
-         
-        String sessionName = "Appium " + "iOS 10"; 
-        if (selectedDevices.size() > 1) 
-            sessionName += " & " + (selectedDevices.size() - 1) + " others"; 
-             
-        // Book the selected devices in pCloudy 
-        BookingDtoDevice[] bookedDevices = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, 30, sessionName); 
-        System.out.println("Devices booked successfully"); 
-
-        // Select ipa in pCloudy Cloud Drive 
-        PDriveFileDTO pDriveFile = PDriveFileDTO.getNew("Repair360_JumpStart_Staging_3.1.0.1712302.ipa"); 
-        System.out.println("IPA file selected from CloudDrive"); 
-                 
-         
-        con.AppiumApis().initAppiumHubForApp(authToken, pDriveFile); 
-
-        // Get the endpoint from pCloudy 
-
-        URL endpoint = con.AppiumApis().getAppiumEndpoint(authToken); 
-        System.out.println("Appium Endpoint: " + endpoint); 
-
-        URL reportFolderOnPCloudy = con.AppiumApis().getAppiumReportFolder(authToken); 
-        System.out.println("Report Folder: " + reportFolderOnPCloudy); 
-
-         
-        List<Thread> allThreads = new ArrayList(); 
-        MultipleRunReport multipleReports = new MultipleRunReport(); 
-         
-        // Create multiple driver objects in multiple threads 
-        for (int i = 0; i < bookedDevices.length; i++) { 
-            BookingDtoDevice aDevice = bookedDevices[i]; 
-            PCloudyAppiumSession pCloudySession = new PCloudyAppiumSession(con, authToken, aDevice); 
-            SingleRunReport report = new SingleRunReport(); 
-            multipleReports.add(report); 
-
-            report.Header = aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version; 
-            report.Enviroment.addDetail("NetworkType", aDevice.networkType); 
-            report.Enviroment.addDetail("Phone Number", aDevice.phoneNumber); 
-            report.HyperLinks.addLink("Appium Endpoint", endpoint); 
-            report.HyperLinks.addLink("pCloudy Result Folder", reportFolderOnPCloudy); 
-            
-            
-            
-            File deviceFolder = new File(reportsFolder, aDevice.manufacturer + " " + aDevice.model + " " + aDevice.version); 
-            File snapshotsFolder = new File(deviceFolder, "Snapshots"); 
-            snapshotsFolder.mkdirs(); 
-        try{ 
-            DesiredCapabilities capabilities = new DesiredCapabilities(); 
-            capabilities.setCapability("newCommandTimeout", 600); 
-            capabilities.setCapability("launchTimeout", 90000); 
-            capabilities.setCapability("deviceName", aDevice.capabilities.deviceName); 
-            capabilities.setCapability("browserName", aDevice.capabilities.deviceName); 
-            capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ios"); 
-            capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"10.2"); 
-            capabilities.setCapability("bundleId", "com.automobiletechnologies.repair360"); 
-            capabilities.setCapability("usePrebuiltWDA", false); 
-            capabilities.setCapability("acceptAlerts", true); 
-            capabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
-            capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
-			
-            if (aDevice.getVersion().compareTo(new Version("9.3")) >= 0) 
-                capabilities.setCapability("automationName", "XCUITest"); 
-            else 
-                capabilities.setCapability("automationName", "Appium"); 
-             
-            appiumdriver = new SwipeableWebDriver(endpoint, capabilities);
-            AndroidDriverBuilder.setPlatformName();
-            
-            } finally { 
-                HtmlFilePrinter printer = new HtmlFilePrinter(new File(deviceFolder, deviceFolder.getName() + ".html")); 
-                printer.printSingleRunReport(report); 
-            } 
-            
-
-
-        }
-            File consolidatedReport = new File(reportsFolder, "ConsolidatedReports.html"); 
-            HtmlFilePrinter printer = new HtmlFilePrinter(consolidatedReport); 
-            //printer.printConsolidatedSingleRunReport(multipleReports); 
-            System.out.println("Check the reports at : " + consolidatedReport.getAbsolutePath()); 
-
-            System.out.println("Execution Completed..."); 
-         */
-
-    } 
+    } */
 
     /*private Runnable getTestCaseClass(final URL endpoint, final BookingDtoDevice aDevice,final PCloudyAppiumSession pCloudySession, final SingleRunReport report,final File reportsFolder) { 
         // this will give a Thread Safe TestScript class. 

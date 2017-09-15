@@ -282,7 +282,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return exists;
 	}
 
-	public String getInvoiceStatus(String invoicenumber) throws InterruptedException {
+	public String getInvoiceStatus(String invoicenumber) {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
@@ -333,10 +333,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 
-	public WebElement getTableRowWithInvoiceNumber(String invoicenumber) throws InterruptedException {
-		Thread.sleep(4000);
+	public WebElement getTableRowWithInvoiceNumber(String invoicenumber)  {
+		waitABit(4000);
 		List<WebElement> rows = getInvoicesTableRows();
-		Thread.sleep(4000);
+		waitABit(4000);
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[" + invoicestable.getTableColumnIndex("Invoice #") + "]/a")).getText()
 					.equals(invoicenumber)) {

@@ -15,7 +15,7 @@ public class VNextRegistrationScreensModalDialog extends VNextBaseScreen {
 	@FindBy(id="dialogModal")
 	private WebElement modaldlg;
 	
-	@FindBy(xpath="//span[@data-bind='html: text']")
+	@FindBy(xpath="//*[@class='modal-body__content']")
 	private WebElement modaldlgmsg;
 	
 	public VNextRegistrationScreensModalDialog(SwipeableWebDriver appiumdriver) {
@@ -26,6 +26,8 @@ public class VNextRegistrationScreensModalDialog extends VNextBaseScreen {
 	}
 	
 	public String getInformationDialogMessage() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(modaldlgmsg));
 		return modaldlgmsg.getText();
 	}
 	

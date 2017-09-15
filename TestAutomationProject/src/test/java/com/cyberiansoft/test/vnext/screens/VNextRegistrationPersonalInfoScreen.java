@@ -63,6 +63,8 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setFirstName(String firstname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions. visibilityOf(firstnamefld));
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname);
 	}

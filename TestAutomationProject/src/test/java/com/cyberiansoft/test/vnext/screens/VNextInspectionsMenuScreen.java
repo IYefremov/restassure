@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,9 +33,14 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_archive']")
 	private WebElement archiveinspectionbtn;
 	
+	@FindBy(xpath="//a[@handler='_approve']")
+	private WebElement approveinspectionbtn;
+	
 	@FindBy(xpath="//div[@class='actions-layer popup tablet-fullscreen modal-in']")
 	private WebElement inspectionsmenuscreen;
 	
+	@FindBy(xpath="//div[@class='close-popup close-actions']")
+	private WebElement closebtn;
 	
 	public VNextInspectionsMenuScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -69,13 +75,16 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		return new VNextNotesScreen(appiumdriver);
 	}
 	
-	public VNextVehicleInfoScreen clickCreateWorkOrderInspectionMenuItem() {
+	public void clickCreateWorkOrderInspectionMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(createwoinspectionbtn));
 		tap(createwoinspectionbtn);
 		waitABit(8000);
 		log(LogStatus.INFO, "Tap on Inspection Create Work Order Menu");
-		return new VNextVehicleInfoScreen(appiumdriver);
+	}
+	
+	public boolean isCreateWorkOrderMenuPresent() {
+		return createwoinspectionbtn.isDisplayed();
 	}
 	
 	public VNextInspectionsScreen archiveInspection() {
@@ -92,6 +101,18 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		tap(archiveinspectionbtn);
 	}
 	
+	public VNextApproveScreen clickApproveInspectionMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(approveinspectionbtn));
+		tap(approveinspectionbtn);
+		log(LogStatus.INFO, "Tap on Approve Inspection Menu");
+		return new VNextApproveScreen(appiumdriver);
+	}
+	
+	public boolean isApproveMenuPresent() {
+		return approveinspectionbtn.isDisplayed();
+	}
+	
 	public VNextViewScreen clickViewInspectionMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(viewinspectionbtn));
@@ -101,4 +122,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		return new VNextViewScreen(appiumdriver);
 	}
 
+	public VNextInspectionsScreen clickCloseInspectionMenuButton() {
+		tap(closebtn);
+		log(LogStatus.INFO, "Tap on Close Inspection Menu button");
+		return new VNextInspectionsScreen(appiumdriver);
+	}
 }

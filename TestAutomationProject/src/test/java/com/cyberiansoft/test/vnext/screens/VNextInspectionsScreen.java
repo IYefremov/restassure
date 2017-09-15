@@ -79,6 +79,16 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspcustomer;
 	}
 	
+	public String getInspectionStatusValue(String inspectionnumber) {
+		String inspstatus = null;
+		WebElement inspcell = getInspectionCell(inspectionnumber);
+		if (inspcell != null)
+			inspstatus = inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-status')]")).getText();
+		else
+			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
+		return inspstatus;
+	}
+	
 	public String getFirstInspectionPrice() {
 		return inspectionslist.findElement(By.xpath(".//div[@class='entity-item-currency']")).getText();
 	}

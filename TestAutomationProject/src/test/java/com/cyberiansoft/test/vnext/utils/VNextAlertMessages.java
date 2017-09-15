@@ -16,4 +16,6 @@ public class VNextAlertMessages {
 	public static String ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY = "Data has been successfully downloaded";
 	public static String YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE = "Your email message has been added to the queue";
 	public static String YOUR_FEEDBACK_HAS_BEEN_SENT = "Thank you! Your feedback has been sent";
+	public static String PLEASE_DOMT_LEAVE_SIGNATURE_FIELD_EMPTY = "Please don't leave signature field empty if you want to approve inspection";
+	
 }

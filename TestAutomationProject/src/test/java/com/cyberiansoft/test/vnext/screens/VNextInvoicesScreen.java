@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,6 +19,9 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='page invoices-list hide-searchbar hide-toolbar page-on-center']")
 	private WebElement invoicesscreen;
+	
+	@FindBy(xpath="//*[@action='add']")
+	private WebElement addinvoicebtn;
 	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -33,6 +38,16 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 		return invoiceprice;	
+	}
+	
+	public String getInvoiceStatusValue(String invoicenumber) {
+		String inspstatus = null;
+		WebElement inspcell = getInvoiceCell(invoicenumber);
+		if (inspcell != null)
+			inspstatus = inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-status')]")).getText();
+		else
+			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+		return inspstatus;
 	}
 	
 	public WebElement getInvoiceCell(String invoicenumber) {
@@ -70,6 +85,16 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextEmailScreen clickOnInvoiceToEmail(String invoicenumber) {
 		VNextInvoiceMenuScreen invoicemenulist = clickOnInvoiceByInvoiceNumber(invoicenumber);
 		return invoicemenulist.clickEmailInvoiceMenuItem();
+	}
+	
+	public VNextWorkOrdersScreen clickAddInvoiceButton() {	
+		tap(addinvoicebtn);
+		waitABit(1000);
+		log(LogStatus.INFO, "Tap Add inspection button");
+		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
+		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
+			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
+		return woscreeen;
 	}
 
 }

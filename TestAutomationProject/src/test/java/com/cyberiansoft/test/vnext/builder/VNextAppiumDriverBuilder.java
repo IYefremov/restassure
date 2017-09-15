@@ -45,8 +45,30 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
     		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
     		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
+    		appiumcap.setCapability("session-override",true);
     		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
     		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+            return new SwipeableWebDriver(endpoint, appiumcap);
+
+        }
+        
+        public SwipeableWebDriver buildForPCloudy(String deviceName, String browserName) {
+        	PLATFORM_NAME = MobilePlatform.ANDROID;
+    	    appiumcap = new DesiredCapabilities();
+
+    	    appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1500);
+    	    appiumcap.setCapability("launchTimeout", 90000);
+    	    appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+    	    appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
+    	    appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+    	    appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
+    	    appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
+             //capabilities.setCapability("appPackage", appPackage); 
+             //capabilities.setCapability("appActivity", appActivity); 
+    	    appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
+             //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+    	    appiumcap.setCapability("rotatable", true); 
+             
             return new SwipeableWebDriver(endpoint, appiumcap);
 
         }

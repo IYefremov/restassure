@@ -14,7 +14,10 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='email']/i")
 	private WebElement emailinvoicebtn;
 	
-	@FindBy(xpath="//div[@data-page='menu']")
+	@FindBy(xpath="//a[@handler='_approve']")
+	private WebElement approveinvoicebtn;
+	
+	@FindBy(xpath="//div[@data-menu='popup']")
 	private WebElement invoicemenuscreen;
 	
 	
@@ -31,6 +34,14 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		tap(emailinvoicebtn);
 		log(LogStatus.INFO, "Tap on Email Invoice Menu");
 		return new VNextEmailScreen(appiumdriver);
+	}
+	
+	public VNextApproveScreen clickApproveInvoiceMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(approveinvoicebtn));
+		tap(approveinvoicebtn);
+		log(LogStatus.INFO, "Tap on Approve Invoice Menu");
+		return new VNextApproveScreen(appiumdriver);
 	}
 
 }

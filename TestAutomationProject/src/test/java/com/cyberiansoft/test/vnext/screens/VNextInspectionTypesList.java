@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,7 +27,7 @@ public class VNextInspectionTypesList extends VNextBaseScreen {
 	}
 	
 	public void selectInspectionType(String inspectionType) {
-		tap(insptypeslist.findElement(By.xpath(".//div[@class='item-title']/b[text()='" + inspectionType + "']")));
+		tap(insptypeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + inspectionType + "']")));
 		log(LogStatus.INFO, "Select Inspection type: " + inspectionType);
 	}
 	

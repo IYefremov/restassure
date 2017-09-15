@@ -26,6 +26,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@class='tile-link tile-item work-orders-tile']")
 	private WebElement workorderslist;
 	
+	@FindBy(xpath="//a[@class='tile-link tile-item invoices-tile']")
+	private WebElement invoiceslist;
+	
 	@FindBy(xpath="//a[@class='tile-link tile-item more-tile']")
 	private WebElement morelist;
 	
@@ -51,12 +54,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
 		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(customerslist));
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(customerslist));
 		
 	}
 	
@@ -77,6 +81,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		waitABit(2000);
 		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInspectionsScreen(appiumdriver);
+	}
+	
+	public VNextInvoicesScreen clickInvoicesMenuItem() {
+		tap(invoiceslist);
+		waitABit(2000);
+		log(LogStatus.INFO, "Tap Inspections menu item");
+		return new VNextInvoicesScreen(appiumdriver);
 	}
 	
 	public VNextSettingsScreen clickSettingsMenuItem() {
@@ -116,7 +127,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextLoginScreen clickLogoutButton() {
 		tap(logoutbtn);
-		testReporter.log(LogStatus.INFO, "Tap Logout button");
+		log(LogStatus.INFO, "Tap Logout button");
 		return new VNextLoginScreen(appiumdriver);
 	}
 	
@@ -125,6 +136,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
 		return new VNextVehicleInfoScreen(appiumdriver);
+	}
+	
+	public void clickUpgrateToProBanner() {
+		tap(appiumdriver.findElement(By.xpath("//div[@class='upgrade-image' and @action='ad']")));
+		log(LogStatus.INFO, "Tap Upgrate To Pro Banner");
 	}
 	
 	public boolean isUpgrateToProBannerVisible() {

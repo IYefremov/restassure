@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
@@ -575,7 +576,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String mailmessage1 = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Welcome to Client Portal", "testuser+2329@cyberiansoft.com", "Hello " + userfirstname + " " + userlastname);
 		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);	
-		System.out.println("__________4" + ibsurl);
+		
+		initiateWebDriver();
+		webdriverGotoWebPage(ibsurl);
+		IBSLoginWebPage ibsloginpage = PageFactory.initElements(
+				webdriver, IBSLoginWebPage.class);
+		ibsloginpage.UserLogin(userregmail, confirmpsw);
+		webdriver.quit();
 	}
 	
 	
@@ -851,6 +858,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String feedbackSubject = "Test Feedback Repair360";
 		final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
 		
+		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -862,6 +870,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		
 		regscreen.clickDoneButton();
+		waitABit(4000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
@@ -890,6 +899,196 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
+		
+		registrationoverviewlegalinfoscreen.waitABit(10000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
+
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+		feedbackscreen.selectFeedbackType(feedbackType);
+		feedbackscreen.selectArea(feedbackArea, subArea);
+		feedbackscreen.setFeedbackSubject(feedbackSubject);
+		feedbackscreen.setFeedbackDescription(feedbackDesc);
+		statusscreen = feedbackscreen.clickSendButton();
+		homescreen = statusscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)", 
+			description = "Submit Customer Feedback from Repair360 ediition (upgraded from free)")
+	public void testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree() throws IOException {
+		
+		final String userfirstname = "QA";
+		final String userlastname = "QA";
+		final String boeditionname = "Repair360 Free";
+		final String bolineofbusiness = "PDR";
+		final String userstate = "California";
+		
+		final String feedbackType = "Feature Request";
+		final String feedbackArea = "Customers";
+		final String subArea = "Create/Edit customer";
+		final String feedbackSubject = "Test Feedback Repair360";
+		final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
+		
+		
+		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		
+		regscreen.clickDoneButton();
+		waitABit(4000);
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		//Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
+		registrationoverviewscreen.clickDoneButton();
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.clickSubmitButton();
+		
+		registrationoverviewlegalinfoscreen.waitABit(10000);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
+
+		switchToWebViewContext();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		homescreen.clickUpgrateToProBanner();
+		
+		
+		/*
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+		feedbackscreen.selectFeedbackType(feedbackType);
+		feedbackscreen.selectArea(feedbackArea, subArea);
+		feedbackscreen.setFeedbackSubject(feedbackSubject);
+		feedbackscreen.setFeedbackDescription(feedbackDesc);
+		statusscreen = feedbackscreen.clickSendButton();
+		homescreen = statusscreen.clickBackButton();*/
+	}
+	
+	@Test(testName= "Test Case 64408:R360: submit Customer Feedback from Repair360 ediition", 
+			description = "Submit Customer Feedback from Repair360 ediition")
+	public void testSubmitCustomerFeedbackFromRepair360Ediition() throws IOException {
+		
+		final String newuserfirstname = "TestTech";
+		final String newuserlastname = "User";
+		final String newusercompanyname = "PDR";
+		final String newuseraddress1 = "Address1";
+		final String newuseraddress2 = "Address2";
+		final String newusercity = "Lviv";
+		final String newuserzip = "79000";
+		final String newusercountry = "Canada";
+		final String newuserstate = "Alberta";
+		final String userpaymentname = newuserfirstname + " " + newuserlastname;
+		final String  usercardnumber = "4242424242424242";
+		final String  securitycode = "123";
+		final String  expmonth = "11";
+		final String  expyear = "2019";
+		
+		final String boeditionname = "Repair360";
+		final String bolineofbusiness = "PDR";
+		
+		final String feedbackType = "Feature Request";
+		final String feedbackArea = "Customers";
+		final String subArea = "Create/Edit customer";
+		final String feedbackSubject = "Test Feedback Repair360";
+		final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
+
+		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		regscreen.clickClearUserButton();
+		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
+		regscreen.clickDoneButton();
+		waitABit(3000);
+		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
+		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
+		verificationscreen.clickVerifyButton();
+		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		
+		waitABit(2000);
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(5000);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
+		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
+				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
+		newuserpersonalinfoscreen.clickDoneButton();
+		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
+		reglineofbusinessscreen.selectEdition(boeditionname);
+		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
+		reglineofbusinessscreen.clickDoneButton();
+		appiumdriver.switchTo().defaultContent();
+		regscreen.waitABit(2000);
+		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(appiumdriver);
+		registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
+				expmonth, expyear, securitycode);
+		registrationpaymentinfoscreen.clickUseRegistrationAddress();
+		
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserAddress1Value(), newuseraddress1);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserAddress2Value(), newuseraddress2);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserCityValue(), newusercity);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserZipValue(), newuserzip);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountry);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserStateValue(), newuserstate);
+		registrationpaymentinfoscreen.clickDoneButton();
+		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
+		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
+		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
+		Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
+		Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
+		//Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
+		registrationoverviewscreen.clickDoneButton();
+		//registrationoverviewscreen.waitABit(10000);
+		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
+				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
+		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
+		registrationoverviewlegalinfoscreen.agreePaymentTerms();
+		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
+		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		
 		registrationoverviewlegalinfoscreen.waitABit(10000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		

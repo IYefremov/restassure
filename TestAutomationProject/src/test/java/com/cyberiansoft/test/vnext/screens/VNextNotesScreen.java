@@ -54,7 +54,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public List<WebElement> getListOfQuickNotes() {
-		return quicknotescontent.findElements(By.xpath(".//div[@class='list-block']/div[@action='quick-note']"));
+		return quicknotescontent.findElements(By.xpath(".//div[@action='quick-note']"));
 	}
 	
 	public void addQuickNote(String quicknote) {

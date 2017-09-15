@@ -99,7 +99,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String woprice = workordersscreen.getWorkOrderPriceValue(wonumber);
 		Assert.assertEquals(woprice, wopriceexp);
-		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		invoiceinfoscreen.addQuickNoteToInvoice(invoicequicknote);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -135,7 +136,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		final String wonumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(wonumber), "$0.00");
-		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		invoiceinfoscreen.addTextNoteToInvoice(notetext);
 		invoicenumbertc46415 = invoiceinfoscreen.getInvoiceNumber();
@@ -190,7 +192,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc), PricesCalculations.getPriceRepresentation(insppriceexp));
 		
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspnumbertc);
-		vehicleinfoscreen = inspmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		inspmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextWorkOrderSummaryScreen wosummaryscreen = vehicleinfoscreen.goToWorkOrderSummaryScreen();
 		wosummaryscreen.clickCreateInvoiceOption();
 		wosummaryscreen.clickWorkOrderSaveButton();
@@ -286,7 +289,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String woprice = workordersscreen.getWorkOrderPriceValue(wonumber);
 		Assert.assertEquals(woprice, wopriceexp);
-		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		invoiceinfoscreen.addTextNoteToInvoice(invoicenote);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -415,7 +419,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 		wosummaryscreen.clickWorkOrderSaveButton();
 		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
-		VNextInvoiceInfoScreen invoiceinfoscreen = workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);		
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
