@@ -734,7 +734,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		WebElement servicespopup = wait.until(ExpectedConditions.visibilityOf(
 				driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
 		for (String srv : services) {
-			servicespopup.findElement(By.xpath(".//span[@class='name-service' and text()='" + srv + "']")).click();
+			driver.findElement(By.id("Card_comboService_Input")).click();
+			driver.findElement(By.id("Card_comboService_Input")).clear();
+			driver.findElement(By.id("Card_comboService_Input")).sendKeys(srv);
+			driver.findElement(By.id("Card_comboService_DropDown")).findElement(By.xpath(".//ul/li[text()='" + srv + "']")).click();
+			driver.findElement(By.id("Card_btnAddServiceToList")).click();
+			waitABit(500);
 		}
 		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
 	}

@@ -5214,6 +5214,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 		myinspectionsscreen.clickHomeButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = homescreen.clickTeamInspectionsButton();
+		Helpers.waitABit(2000);
 		teaminspectionsscreen.clickActionButton();
 		for (int i = 0; i < 3; i++) {
 			teaminspectionsscreen.selectInspectionForAction(inspnumbers.get(i));

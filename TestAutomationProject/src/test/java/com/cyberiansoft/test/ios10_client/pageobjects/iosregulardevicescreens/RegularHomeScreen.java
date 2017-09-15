@@ -129,7 +129,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
 		servicerequestsbtn.click();
 		Helpers.waitABit(500);
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
 		}
