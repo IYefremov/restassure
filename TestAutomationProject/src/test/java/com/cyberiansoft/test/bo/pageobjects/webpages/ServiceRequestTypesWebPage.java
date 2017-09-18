@@ -186,24 +186,54 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		}
 	}
 
-	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) {
-//		String mainWindow = driver.getWindowHandle();
+	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) throws InterruptedException {
+		// String mainWindow = driver.getWindowHandle();
 		List<WebElement> rows = getServiceRequestTypesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().equals(srtype)) {
 				row.findElement(By.linkText("Settings")).click();
-				return 	PageFactory.initElements(driver, ServiceRequestTypesVehicleInfoSettingsPage.class);
+				Thread.sleep(3000);
+				return PageFactory.initElements(driver, ServiceRequestTypesVehicleInfoSettingsPage.class);
 			}
 		}
-//		for(String window: driver.getWindowHandles()){
-//			if(!window.equals(mainWindow)){
-//				return window;
-//			}
-//		}
 		return null;
 	}
 
 	public void switchToWindow(String window) {
 		driver.switchTo().window(window);
+	}
+
+	public String getCurrentWindow() {
+		return driver.getWindowHandle();
+	}
+
+	public void switchToSecondWindow(String mainWindow) {
+		for (String window : driver.getWindowHandles()) {
+			if (!window.equals(mainWindow)) {
+				driver.switchTo().window(window);
+			}
+		}
+	}
+	
+	public void clickNoneRadioButton() {
+		driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")).click();
+	}
+
+	public void clickWarningOnlyRadioButton() {
+		driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")).click();
+	}
+
+	public void selectOption(String optionName) {
+		WebElement option = driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
+		if(option.getAttribute("class").equals(" rfdCheckboxUnchecked")){
+			option.click();
+		}
+	}
+	
+	public void unselectOption(String optionName) {
+		WebElement option = driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
+		if(option.getAttribute("class").equals(" rfdCheckboxChecked")){
+			option.click();
+		}
 	}
 }

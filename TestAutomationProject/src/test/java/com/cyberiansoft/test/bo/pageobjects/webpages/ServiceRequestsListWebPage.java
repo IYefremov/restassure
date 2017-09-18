@@ -646,7 +646,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 	}
 
-	public void saveNewServiceRequest() {
+	public boolean saveNewServiceRequest() {
+		try{
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -655,6 +656,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		click(saveservicerequestbutton);
 		driver.switchTo().defaultContent();
 		waitUntilPageReloaded();
+		return true;
+		}catch(Exception e){
+			return false;
+		}
 	}
 
 	public void cancelNewServiceRequest() {
@@ -1984,7 +1989,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public int countAvailableServices() {
-		return driver.findElements(By.className("container-service")).size();
+		driver.findElement(By.id("Card_comboService_Arrow")).click();
+		return driver.findElement(By.className("rcbList")).findElements(By.tagName("li")).size();
 	}
 
 	public void clickDoneButtonAtAddServiceWindow() {
@@ -1995,5 +2001,18 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().defaultContent();
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,"+pixels+")", "");
+	}
+
+	public void setRO(String ro) {
+		clearAndType(addsrvronum, ro);
+	}
+
+	public boolean checkForAlert() {
+		try{
+			driver.switchTo().alert().accept();
+			return true;
+		}catch(Exception e){
+		return false;
+		}
 	}
 }

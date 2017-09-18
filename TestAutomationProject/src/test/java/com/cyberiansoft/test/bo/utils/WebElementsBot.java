@@ -26,7 +26,7 @@ public class WebElementsBot {
 	@FindBy(className = "updateProcess")
 	private static WebElement updateProcess;
 	
-	//TODO
+
 	public static void click(WebElement element) {
 	    try {
 	    	WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(element));

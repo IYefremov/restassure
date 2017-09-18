@@ -5,6 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -256,9 +257,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, CA, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, CA, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Custom");
 		appointmentpopup.setClientAddressValue("407 SILVER SAGE DR.");
@@ -348,15 +352,20 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, CA, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, CA, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Customer");
 		Thread.sleep(1000);
-//		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "NewYork");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
+		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
+		// SILVER SAGE DR.");
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "NewYork");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage
@@ -365,12 +374,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(2000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "NewYork");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
+		// SILVER SAGE DR.");
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "NewYork");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(2000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
@@ -443,15 +457,20 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, CA, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, CA, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Owner");
 		Thread.sleep(1000);
-//		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "NewYork");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
+		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
+		// SILVER SAGE DR.");
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "NewYork");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage
@@ -460,12 +479,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407 SILVER SAGE DR.");
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "NewYork");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
+		// SILVER SAGE DR.");
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "NewYork");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 		appointmentpopup.clickAddAppointment();
 		appointmentpopup.waitABit(2000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
@@ -537,19 +561,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Repair Location");
 		appointmentpopup.waitABit(1000);
 		appointmentpopup.selectLocation("VD_Location");
 		appointmentpopup.waitABit(1000);
-//		Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(), "Ukraine");
-//		Assert.assertEquals(appointmentpopup.getClientStateValue(), "Kyiv");
-//		Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227 street");
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "mercedes");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
+		// Assert.assertEquals(appointmentpopup.getClientCountryValue().trim(),
+		// "Ukraine");
+		// Assert.assertEquals(appointmentpopup.getClientStateValue(), "Kyiv");
+		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "227
+		// street");
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "mercedes");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage
@@ -558,17 +588,24 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-//		Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(), "407 SILVER SAGE DR., NewYork, 10001");
-//		Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(), "14043801674");
-//		Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(), "ALICIA.VILLALOBOS@KCC.COM");
-//		Assert.assertTrue(appointmentpopup.getClientCountryValue().trim().equals("Ukraine")||
-//				appointmentpopup.getClientCountryValue().trim().equals("United States"));
-//		Assert.assertTrue(appointmentpopup.getClientStateValue().equals("Kyiv")
-//		|| appointmentpopup.getClientStateValue().equals("All"));
-//		Assert.assertTrue(appointmentpopup.getClientAddressValue().equals("227 street")
-//				|| appointmentpopup.getClientAddressValue().equals("407 SILVER SAGE DR., NewYork, 10001"));
-//		Assert.assertEquals(appointmentpopup.getClientCityValue(), "mercedes");
-//		Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
+		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
+		// "407 SILVER SAGE DR., NewYork, 10001");
+		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
+		// "14043801674");
+		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
+		// "ALICIA.VILLALOBOS@KCC.COM");
+		// Assert.assertTrue(appointmentpopup.getClientCountryValue().trim().equals("Ukraine")||
+		// appointmentpopup.getClientCountryValue().trim().equals("United
+		// States"));
+		// Assert.assertTrue(appointmentpopup.getClientStateValue().equals("Kyiv")
+		// || appointmentpopup.getClientStateValue().equals("All"));
+		// Assert.assertTrue(appointmentpopup.getClientAddressValue().equals("227
+		// street")
+		// || appointmentpopup.getClientAddressValue().equals("407 SILVER SAGE
+		// DR., NewYork, 10001"));
+		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
+		// "mercedes");
+		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "02222");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
@@ -910,8 +947,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
-//		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
-//		Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
+		// Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
+		// Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
 	}
 
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR", dataProvider = "provideSRdata")
@@ -1076,7 +1113,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1100,7 +1137,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1123,7 +1160,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(startDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(startDate));
 	}
@@ -1186,7 +1223,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertFalse(serviceRequestsWebPage.checkLifeCycleDate());
 
 	}
-	
+
 	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation", dataProvider = "provideSRdata")
 	public void checkSRLCafterCreation(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException, AWTException {
@@ -1207,7 +1244,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
 	}
-	
+
 	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
 	public void checkSRLCwoAutoCreation(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException, AWTException {
@@ -1221,17 +1258,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickVehicleEditButton();
-		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLC());
 	}
-	
+
 	@Test(testName = "Test Case 57875:Operation - Service Request Life Cycle - Approved", dataProvider = "provideSRdata1")
-	public void checkSRLCapproved(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException {
+	public void checkSRLCapproved(String customer, String startDate, String endDate, String status, String SRcustomer,
+			String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1241,7 +1278,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickVehicleEditButton();
-		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
@@ -1250,10 +1287,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.checkAcceptanceOfSRinLC());
 	}
-	
+
 	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Rejected", dataProvider = "provideSRdata1")
-	public void checkSRLCrejected(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException {
+	public void checkSRLCrejected(String customer, String startDate, String endDate, String status, String SRcustomer,
+			String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1263,7 +1300,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickVehicleEditButton();
-		serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
@@ -1272,34 +1309,34 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToLifeCycle();
 		Assert.assertTrue(serviceRequestsWebPage.checkRejectOfSRinLC());
 	}
-	
+
 	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Closed", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void checkSRLCclosed(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException {
+	public void checkSRLCclosed(String customer, String startDate, String endDate, String status, String SRcustomer,
+			String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.makeSearchPanelVisible();
 		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
-//		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.clickCustomerEditButton();
-//		serviceRequestsWebPage.selectServiceRequestCustomer(customer);
-//		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.clickVehicleEditButton();
-//		serviceRequestsWebPage.setVehicleInfo("123" , "123");
-//		serviceRequestsWebPage.clickDoneButton();
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
-//		Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
-//		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-//		serviceRequestsWebPage.goToLifeCycle();
-//		Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
+		// serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
+		// serviceRequestsWebPage.clickAddServiceRequestButton();
+		// serviceRequestsWebPage.clickCustomerEditButton();
+		// serviceRequestsWebPage.selectServiceRequestCustomer(customer);
+		// serviceRequestsWebPage.clickDoneButton();
+		// serviceRequestsWebPage.clickVehicleEditButton();
+		// serviceRequestsWebPage.setVehicleInfo("123" , "123");
+		// serviceRequestsWebPage.clickDoneButton();
+		// serviceRequestsWebPage.saveNewServiceRequest();
+		// serviceRequestsWebPage.rejectFirstServiceRequestFromList();
+		// Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
+		// serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		// serviceRequestsWebPage.goToLifeCycle();
+		// Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
 	}
-	
+
 	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1322,18 +1359,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder")||
-				serviceRequestsWebPage.checkEmails("was created"));
-		
+		Assert.assertTrue(
+				serviceRequestsWebPage.checkEmails("Remainder") || serviceRequestsWebPage.checkEmails("was created"));
+
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59700:Miscellaneous - Events:SR Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsSRCreated(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+			String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1356,17 +1393,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Service Request with RO#  was created")||
-				serviceRequestsWebPage.checkTestEmails());
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Service Request with RO#  was created")
+				|| serviceRequestsWebPage.checkTestEmails());
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 31350:Miscellaneous - Events: Service Request Checked In", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestCheckedIn(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestCheckedIn(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1377,7 +1414,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 		eventsWebPage.setEmailNototificationDropDownForSelected("ServiceRequest Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		
+
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1398,12 +1435,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsAppointmentCreated(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsAppointmentCreated(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1414,7 +1451,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		
+
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1431,12 +1468,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 31296:Miscellaneous - Events: Appointment Failed", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsAppointmentFailed(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsAppointmentFailed(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1447,7 +1484,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
 		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		
+
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1458,18 +1495,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.acceptFirstServiceRequestFromList();	
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59702:Miscellaneous - Events: Service Request Appointment Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestAppointmentCreated(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestAppointmentCreated(String customer, String startDate,
+			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1492,15 +1529,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails() ||serviceRequestsWebPage.checkEmails("was not checked in"));
+		Assert.assertTrue(
+				serviceRequestsWebPage.checkTestEmails() || serviceRequestsWebPage.checkEmails("was not checked in"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
+
 	@Test(testName = "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestAcceptedByTech(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestAcceptedByTech(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1523,17 +1562,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails()||
-				serviceRequestsWebPage.checkEmails("Service Request with RO#  was created"));
+		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails()
+				|| serviceRequestsWebPage.checkEmails("Service Request with RO#  was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestEstimationCreated(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestEstimationCreated(String customer, String startDate,
+			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1560,12 +1599,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59704:Miscellaneous - Events: Service Request Is Monitored", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestIsMonitored(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestIsMonitored(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1588,17 +1627,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder")||
-				serviceRequestsWebPage.checkTestEmails());
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder") || serviceRequestsWebPage.checkTestEmails());
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59705:Miscellaneous - Events: Service Request Order Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestOrderCreated(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestOrderCreated(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1625,12 +1663,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59706:Miscellaneous - Events: Service Request Rejected", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestRejected(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestRejected(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1657,12 +1695,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-//		eventsWebPage.deleteSelectedEvent();
+		// eventsWebPage.deleteSelectedEvent();
 	}
-	
+
 	@Test(testName = "Test Case 59636:Events: SR Check In", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
-	public void testMiscellaneousEventsServiceRequestCheckIn(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException{
+	public void testMiscellaneousEventsServiceRequestCheckIn(String customer, String startDate, String endDate,
+			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MiscellaneousWebPage miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1693,16 +1731,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 	}
-	
+
 	@Test(testName = "Test Case 63581:Company - Service Request Type: Duplicate search Issue")
-	public void testServiceRequestTypeDublicateSearchIssue() throws InterruptedException{
+	public void testServiceRequestTypeDublicateSearchIssue() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices() , 2);
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
 		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
@@ -1712,18 +1750,174 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectStockRoVinOptions();
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		serviceRequestTypesPage.getTableRowWithServiceRequestType("01_Alex2SRT");
-		//serviceRequestTypesPage.switchToWindow(serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT"));
-		ServiceRequestTypesVehicleInfoSettingsPage settingsPage = serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT");
+		String currentWindow = serviceRequestTypesPage.getCurrentWindow();
+		ServiceRequestTypesVehicleInfoSettingsPage settingsPage = serviceRequestTypesPage
+				.clickSettingsVehicleInfo("01_Alex2SRT");
+		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
+		settingsPage.unselectCheckBox("VIN #");
+		settingsPage.unselectCheckBox("Stock #");
+		settingsPage.unselectCheckBox("RO #");
+		settingsPage.clickUpdateButton();
+		settingsPage.closeNewTab(currentWindow);
+		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleEditButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		companyPage = backofficeheader.clickCompanyLink();
+		serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickNoneRadioButton();
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		serviceRequestTypesPage.getTableRowWithServiceRequestType("01_Alex2SRT");
+		currentWindow = serviceRequestTypesPage.getCurrentWindow();
+		settingsPage = serviceRequestTypesPage.clickSettingsVehicleInfo("01_Alex2SRT");
+		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
+		settingsPage.selectCheckBox("VIN #");
+		settingsPage.selectCheckBox("Stock #");
+		settingsPage.selectCheckBox("RO #");
+		settingsPage.clickUpdateButton();
+		settingsPage.closeNewTab(currentWindow);
 	}
-	
+
 	@Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO")
-	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException{
+	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("VIN");
+		serviceRequestTypesPage.selectOption("RO");
+		serviceRequestTypesPage.unselectOption("STOCK");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		String randomRO = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setRO(randomRO);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsWebPage.setRO(randomRO);
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 
+	@Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN")
+	public void testServiceRequestTypeDublicateErrorVIN() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("RO");
+		serviceRequestTypesPage.selectOption("VIN");
+		serviceRequestTypesPage.unselectOption("Stock");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		String randomVIN = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+	}
+	
+	@Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN")
+	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("RO");
+		serviceRequestTypesPage.selectOption("VIN");
+		serviceRequestTypesPage.unselectOption("Stock");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		String randomVIN = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+	}
 }
