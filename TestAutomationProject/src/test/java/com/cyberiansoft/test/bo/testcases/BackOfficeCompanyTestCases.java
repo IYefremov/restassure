@@ -34,11 +34,20 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		@Parameters({ "backoffice.url", "user.name", "user.psw" })
 		public void BackOfficeLogin(String backofficeurl,
 				String userName, String userPassword) throws InterruptedException {
+			try{
 			webdriverGotoWebPage(backofficeurl);
 			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 					BackOfficeLoginWebPage.class);
 			loginpage.UserLogin(userName, userPassword);
 			Thread.sleep(2000);
+			}catch(Exception e){
+				BackOfficeLogout();
+				webdriverGotoWebPage(backofficeurl);
+				BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+						BackOfficeLoginWebPage.class);
+				loginpage.UserLogin(userName, userPassword);
+				Thread.sleep(2000);
+			}
 		}
 		
 		@AfterMethod

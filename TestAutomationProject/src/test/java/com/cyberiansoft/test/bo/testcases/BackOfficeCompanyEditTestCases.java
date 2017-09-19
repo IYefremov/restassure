@@ -43,17 +43,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) {
+		try{
 		webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 		testuser = userName;
 		testuserpsw = userPassword;
+		}catch(Exception e){
+			try {
+				BackOfficeLogout();
+			} catch (InterruptedException e1) {}
+			webdriverGotoWebPage(backofficeurl);
+			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+			loginpage.UserLogin(userName, userPassword);
+			testuser = userName;
+			testuserpsw = userPassword;
+		}
 	}
 
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		
 		backofficeheader.clickLogout();
 	}
 
@@ -1450,7 +1460,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
-		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name","Work Order", "All Jay");
+		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox("Insert");
 		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
 		
@@ -1489,7 +1499,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
-		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name","Work Order", "All Jay");
+		interApplicationExchangePage.fillProfileDetails("WO JST for Name","Work Order","All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox("Insert");
 		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
 		

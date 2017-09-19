@@ -58,6 +58,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_tbName")
 	WebElement ruleNameEdit2;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
+	WebElement sendFromCalendarBTN;
 
 	public InterApplicationExchangeWebPage(WebDriver driver) {
 		super(driver);
@@ -94,6 +97,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
+		
+		sendFromCalendarBTN.click();
+		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
 	}
 	
 	public void fillProfileDetails(String name, String entityType) {

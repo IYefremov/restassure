@@ -38,10 +38,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) {
+	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) throws InterruptedException {
+		try{
 		webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
+		}catch(Exception e){
+				BackOfficeLogout();
+			webdriverGotoWebPage(backofficeurl);
+			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+			loginpage.UserLogin(userName, userPassword);
+		}
 	}
 
 	@AfterMethod
@@ -1878,6 +1885,55 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 	
+	@Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO")
+	public void testServiceRequestTypeDublicateErrorRO() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("VIN");
+		serviceRequestTypesPage.selectOption("RO");
+		serviceRequestTypesPage.unselectOption("Stock");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		String randomRO = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setRO(randomRO);
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo("123", "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsWebPage.setRO(randomRO);
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+	}
+	
 	@Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN")
 	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1919,5 +1975,92 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
 		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+	}
+	
+	@Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK")
+	public void testServiceRequestTypeDublicateErrorStock() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("VIN");
+		serviceRequestTypesPage.selectOption("Stock");
+		serviceRequestTypesPage.unselectOption("RO");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		String randonStock = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+	}
+	
+	@Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK")
+	public void testServiceRequestTypeDublicateNotificationStock() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		serviceRequestsWebPage.scrollWindow("-300");
+		CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("01_Alex2SRT");
+		serviceRequestTypesPage.openGeneralSettingsTab();
+		serviceRequestTypesPage.clickWarningOnlyRadioButton();
+		serviceRequestTypesPage.unselectOption("RO");
+		serviceRequestTypesPage.selectOption("Stock");
+		serviceRequestTypesPage.unselectOption("VIN");
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		operationspage = backofficeheader.clickOperationsLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		String randonStock = Integer.toString(new Random().nextInt());
+		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
+		serviceRequestsWebPage.clickDoneButton();
+		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		
 	}
 }

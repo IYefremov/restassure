@@ -35,11 +35,20 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl,
 			String userName, String userPassword) throws InterruptedException {
+		try{
 		webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 		Thread.sleep(2000);
+		}catch(Exception e){
+			BackOfficeLogout();
+			webdriverGotoWebPage(backofficeurl);
+			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+					BackOfficeLoginWebPage.class);
+			loginpage.UserLogin(userName, userPassword);
+			Thread.sleep(2000);
+		}
 	}
 	
 	@AfterMethod
@@ -417,7 +426,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		pricematricespage.selectPriceMarixService(pricematrixservice);
 		pricematricespage.selectPriceMarixType(pricematrixtype);
 		pricematricespage.clickCancelNewPriceMatrix();
-		Assert.assertEquals("Dent Removal", pricematricespage.getTablePriceMatrixService(pricematrixname));
+		Assert.assertEquals("_testStas1", pricematricespage.getTablePriceMatrixService(pricematrixname));
 		Assert.assertEquals("Money", pricematricespage.getTablePriceMatrixType(pricematrixname));
 		
 		pricematricespage.clickEditPriceMatrix(pricematrixname);

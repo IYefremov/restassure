@@ -106,11 +106,17 @@
     		</class>
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
 			</class>       
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
+			
+			
+			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
 			</class>	
-        	<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
+			
+			
+		    <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
 			</class> 
-      		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+			
+			
+			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
 			</class>
@@ -125,7 +131,7 @@
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       		</class>
 
-     	<!--   -->          
+     	 <!--  -->          
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->
