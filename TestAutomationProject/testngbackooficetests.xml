@@ -97,7 +97,7 @@
     <parameter name="selenium.browser" value="ie" />
     <classes>  
     
-    <!-- 
+    <!--  -->
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>    
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
@@ -124,12 +124,9 @@
       		</class>   
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       		</class>
-      		 -->
+      		
       		
       		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyReportsTestCases">
-			<methods>
-      		<include name="testReportsTechnicianCommissions"/>
-      		</methods>
       		</class>
 
      	 <!--  -->          

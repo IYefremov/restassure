@@ -52,16 +52,16 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
 
-			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
-			
-//			InternetExplorerDriverManager.getInstance().setup();
-//			webcap = DesiredCapabilities.internetExplorer();
-//			//webcap.setCapability("nativeEvents", false); 
-//			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
-//			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
-//			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
-//			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 //			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
+			
+			InternetExplorerDriverManager.getInstance().setup();
+			webcap = DesiredCapabilities.internetExplorer();
+			//webcap.setCapability("nativeEvents", false); 
+			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
+			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
+			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
+			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
+			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
 			break;
 		case "chrome":
 			ChromeDriverManager.getInstance().setup();
