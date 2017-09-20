@@ -49,7 +49,7 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.internetExplorer().setCapability("ignoreProtectedModeSettings", true);
 	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 	         IEDesiredCapabilities.setJavascriptEnabled(true);
-	         IEDesiredCapabilities.setCapability("requireWindowFocus", true);
+	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
 
 			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
