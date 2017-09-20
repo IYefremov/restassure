@@ -35,8 +35,15 @@ public class WebDriverFactory {
 			break;
 		case "ie":
 			File file = new File(PATH_TO_IE_DRIVER);
+	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+
 	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
-			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
+	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
+	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
+	         IEDesiredCapabilities.setCapability("disable-popup-blocking", true);
+	         IEDesiredCapabilities.setCapability("enablePersistentHover", true);
+
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, URL);
 	         IEDesiredCapabilities.internetExplorer().setCapability("ignoreProtectedModeSettings", true);

@@ -36,6 +36,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Miscellaneous']")
 	private WebElement miscellaneoustab;
 	
+	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Reports']")
+	private WebElement reportstab;
+	
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 	
@@ -100,10 +103,16 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public MiscellaneousWebPage clickMiscellaneousLink() {
-
 		wait.until(ExpectedConditions.elementToBeClickable(miscellaneoustab)).click();
 		return PageFactory.initElements(
 				driver, MiscellaneousWebPage.class);
+	}
+
+	public ReportsWebPage clickReportsLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
+		return PageFactory.initElements(
+				driver, ReportsWebPage.class);
+		
 	}
 
 }
