@@ -34,7 +34,7 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			File file = new File(PATH_TO_IE_DRIVER);
+			File file = new File(PATH_TO_IE_DRIVER);			
 	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
 	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
@@ -42,7 +42,6 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
 	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
 	         IEDesiredCapabilities.setCapability("disable-popup-blocking", true);
-	         IEDesiredCapabilities.setCapability("enablePersistentHover", true);
 
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, URL);
@@ -51,16 +50,13 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setJavascriptEnabled(true);
 	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
-
-//			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
 			
-			InternetExplorerDriverManager.getInstance().setup();
+//			InternetExplorerDriverManager.getInstance().setup();
+//			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
+//			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
+//			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
+//			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 			webcap = DesiredCapabilities.internetExplorer();
-			//webcap.setCapability("nativeEvents", false); 
-			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
-			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
-			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
-			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
 			break;
 		case "chrome":

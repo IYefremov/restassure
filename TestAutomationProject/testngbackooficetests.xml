@@ -97,7 +97,7 @@
     <parameter name="selenium.browser" value="ie" />
     <classes>  
     
-    <!--  -->
+    <!--  -->	
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>    
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
