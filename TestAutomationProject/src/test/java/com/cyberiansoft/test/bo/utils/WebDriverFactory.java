@@ -34,14 +34,16 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			File file = new File(PATH_TO_IE_DRIVER);			
-	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+			File file = new File(PATH_TO_IE_DRIVER);	
+			InternetExplorerDriverManager.getInstance().arch32().setup();
+//	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
 	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
 	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
 	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
 	         IEDesiredCapabilities.setCapability("disable-popup-blocking", true);
+	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, URL);
@@ -51,7 +53,6 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
 			
-//			InternetExplorerDriverManager.getInstance().setup();
 //			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
 //			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
 //			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
