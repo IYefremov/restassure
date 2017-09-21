@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -158,14 +160,14 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	public void selectState(String state) {
 		statebtn.click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(state))).waitAction(300).release().perform();
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(state))).waitAction(Duration.ofMillis(300)).release().perform();
 		Helpers.waitABit(2000);
 	}
 
 	public void selectCountry(String country) {
 		countrybtn.click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(country))).waitAction(300).release().perform();
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(country))).waitAction(Duration.ofMillis(300)).release().perform();
 		Helpers.waitABit(2000);
 	}
 

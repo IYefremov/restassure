@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -154,7 +155,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
 						servicename + "']"))).waitAction(1000).release().perform();*/
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
-						servicename + "']"))).waitAction(1000).release().perform();
+						servicename + "']"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
 		Helpers.waitABit(1500);
 	}
@@ -165,7 +166,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
 						servicename + "']"))).waitAction(1000).release().perform();*/
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + 
-				pricematrixname + "']"))).waitAction(1000).release().perform();
+				pricematrixname + "']"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
 		Helpers.waitABit(1500);
 	}
@@ -181,7 +182,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther[@name='AvailableServiceList']/XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
-				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(1000).release().perform();
+				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther[@name='AvailableServiceList']/XCUIElementTypeTable/XCUIElementTypeCell[@name='" + service + "']/XCUIElementTypeButton[@name='custom detail button']")).click();
 		/*appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
 						+ service
@@ -194,7 +195,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
-				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(1000).release().perform();
+				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	
@@ -202,7 +203,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
-				servicename + "']/XCUIElementTypeButton[@name='unselected']"))).waitAction(1000).release().perform();
+				servicename + "']/XCUIElementTypeButton[@name='unselected']"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

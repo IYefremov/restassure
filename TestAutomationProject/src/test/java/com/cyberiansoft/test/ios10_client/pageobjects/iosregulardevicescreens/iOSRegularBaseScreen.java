@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -80,7 +79,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
-		appiumdriver.tap(1, cancelbtn, 200);
+		cancelbtn.click();
 	}
 	
 	public void clickChangeScreen() {
@@ -91,13 +90,17 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void acceptAlertByCoords() {
 		int xx = appiumdriver.manage().window().getSize().getWidth();
 		int yy = appiumdriver.manage().window().getSize().getHeight();
-		appiumdriver.tap(1, xx/2+50, yy/2+50, 1000);
+		TouchAction tap = new TouchAction(appiumdriver).tap(xx/2+50, yy/2+50);              
+        tap.perform();
+		//appiumdriver.tap(1, xx/2+50, yy/2+50, 1000);
 	}
 	
 	public void declineAlertByCoords() {
 		int xx = appiumdriver.manage().window().getSize().getWidth();
 		int yy = appiumdriver.manage().window().getSize().getHeight();
-		appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
+		TouchAction tap = new TouchAction(appiumdriver).tap(xx/2-50, yy/2+50);              
+        tap.perform();
+		//appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
 	}
 	
 	public void selectNextScreen(String screenname) {

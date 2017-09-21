@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -294,7 +295,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void selectOwnerT(String owner) throws InterruptedException {
 		ownerfld.click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']")).waitAction(300).release().perform();
+		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 	}
 
 	public void setTech(String _tech) throws InterruptedException {
@@ -376,7 +377,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 
 	public NotesScreen clickNotesButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(composebtn).waitAction(300).release().perform();
+		action.press(composebtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		//composebtn.click();
 		return new NotesScreen(appiumdriver);
 	}

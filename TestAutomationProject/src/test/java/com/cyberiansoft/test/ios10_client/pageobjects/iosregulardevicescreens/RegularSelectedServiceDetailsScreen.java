@@ -456,7 +456,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(300);
 		//appiumdriver.findElementByAccessibilityId("Search").sendKeys(subcategoryname);
 		Helpers.waitABit(300);
-		appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
+		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(subcategoryname));
+        tap.perform();
+		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
 		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + subcategoryname + "']")).click();
 		//appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 	}

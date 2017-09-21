@@ -68,14 +68,14 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
-		appiumdriver.tap(1, cancelbtn, 200);
+		cancelbtn.click();
 	}
 	
 	public void clickChangeScreen() {
 		changescreenbtn.click();
 	}
 	
-	public void acceptAlertByCoords() {
+	/*public void acceptAlertByCoords() {
 		int xx = appiumdriver.manage().window().getSize().getWidth();
 		int yy = appiumdriver.manage().window().getSize().getHeight();
 		appiumdriver.tap(1, xx/2+50, yy/2+50, 1000);
@@ -85,7 +85,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		int xx = appiumdriver.manage().window().getSize().getWidth();
 		int yy = appiumdriver.manage().window().getSize().getHeight();
 		appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
-	}
+	}*/
 	
 	public void selectNextScreen(String screenname) {
 		//waitUntilVisible("//UIANavigationBar[1]/UIAButton[4]");

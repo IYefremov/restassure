@@ -204,11 +204,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 			System.out.println("+++++++" + confirmationurl);
 		}
-		
-		
-		System.out.println("++++++++++++" + usermail);
-		System.out.println("++++++++++++" + confirmpsw);
-		System.out.println("++++++++++++" + confirmationurl);
 		//webdriver.navigate().to(confirmationurl);
 		leftmenu.waitABit(5000);
 		

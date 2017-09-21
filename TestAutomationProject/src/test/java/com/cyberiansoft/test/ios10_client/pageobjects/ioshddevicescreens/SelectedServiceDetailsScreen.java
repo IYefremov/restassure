@@ -8,6 +8,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -463,7 +464,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			vehiclepartstable = appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
 		
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(300).release().perform();
+		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(Duration.ofSeconds(1)).release().perform();
 		Assert.assertTrue(vehiclepartstable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + vehiclepart + "']/XCUIElementTypeButton[@name='selected']")).size() > 0);
 	}
 

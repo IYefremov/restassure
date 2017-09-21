@@ -15,6 +15,7 @@ import org.openqa.selenium.interactions.CompositeAction;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,9 +29,12 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextBaseScreen {
-	
+
 	SwipeableWebDriver appiumdriver;
 	ExtentTest testReporter;
+	
+	@FindBy(xpath="//*[@data-autotests-id='change-screen-popover']")
+	private WebElement changescrenpopover;
 
 	public VNextBaseScreen(SwipeableWebDriver driver) {
 		this.appiumdriver = driver;
@@ -89,7 +93,7 @@ public class VNextBaseScreen {
 		int starty = (int) (size.height * 0.75);
 		int endy = (int) (size.height * 0.25);
 		int startx = size.width / 2;
-		appiumdriver.swipe(startx, starty, startx, endy, 2000);
+		//appiumdriver.swipe(startx, starty, startx, endy, 2000);
 		waitABit(4000);
 		switchToWebViewContext();
 		//switchApplicationContext(AppContexts.WEB_CONTEXT);
@@ -103,8 +107,12 @@ public class VNextBaseScreen {
 	}
 	
 	public void swipeScreensLeft(int screensnumber) {		
-		for (int i = 0; i < screensnumber; i++)
+		for (int i = 0; i < screensnumber; i++) {
 			swipeScreenLeft();
+			if (checkHelpPopupPresence())
+				if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+					tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		}
 	}
 	
 	public void swipeScreenRight() {
@@ -179,16 +187,20 @@ public class VNextBaseScreen {
 	}
 	
 	public void changeScreen(String screenName) {
-		clickScreenTitleCaption();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		WebElement changScreenPopover = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@data-autotests-id='change-screen-popover']"))));
-		tap(changScreenPopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
+		clickScreenTitleCaption();		
+		tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
 		waitABit(1000);
 		log(LogStatus.INFO, "Change screen to: " + screenName);
 	}
 	
+	public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {
+		return changescrenpopover.findElements(By.xpath(".//span[text()='" + screenName + "']")).size() > 0;
+	}
+	
 	public void clickScreenTitleCaption() {
 		tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		log(LogStatus.INFO, "Click Screen Title Caption");
 	}
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -73,7 +74,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
 	public void selectPriceMatrix(String pricematrix) {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(1000).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + pricematrix + "']").click();
 
 	}
@@ -120,7 +121,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void clickDiscaunt(String discaunt) {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(1000).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(discaunt).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
 		//				+ discaunt + "\")]").click();

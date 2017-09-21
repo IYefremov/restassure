@@ -57,7 +57,7 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickFirstCarHistoryInTable() {		
-		appiumdriver.tap(1, appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")), 200);
+		//appiumdriver.tap(1, appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")), 200);
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
 	}
 	

@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailMismatchDialog;
 import com.cyberiansoft.test.vnext.screens.VNextFeedbackScreen;
@@ -705,8 +706,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newcustomerscreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
-		
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		vehicleinfoscreen.swipeScreensLeft(3);		
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i = 0; i < availablepricematrixes.length; i++) {
 			VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 			VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
@@ -829,7 +830,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newcustomerscreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		vehicleinfoscreen.swipeScreensLeft(3);		
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectMatrixService(matrixservice);
 		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -57,7 +58,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 
 	public void selectSubService(String _subservice) {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(_subservice)).waitAction(300).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId(_subservice)).waitAction(Duration.ofSeconds(1)).release().perform();
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
@@ -82,7 +83,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int  xx = imagecar.getLocation().getX();
 		int yy = imagecar.getLocation().getY();	
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
-		action.press(xx + imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(1000).
+		action.press(xx + imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(Duration.ofSeconds(1)).
 		
 		release().perform();
 	}
@@ -95,7 +96,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.press(xx + imagecar.getSize().getWidth()/(times+1), imagecar.getSize().getHeight()/2 + 30).waitAction(1000).
+		action.press(xx + imagecar.getSize().getWidth()/(times+1), imagecar.getSize().getHeight()/2 + 30).waitAction(Duration.ofSeconds(1)).
 		release().perform();
 
 		Helpers.waitABit(1000);
@@ -109,7 +110,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
 		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(1000).release().perform();
+		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
 		Helpers.waitABit(1000);
 		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
@@ -127,7 +128,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
 		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(1000).release().perform();
+		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
 		Helpers.waitABit(1000);
 	}
 	

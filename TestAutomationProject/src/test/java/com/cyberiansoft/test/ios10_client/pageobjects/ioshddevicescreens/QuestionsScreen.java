@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -113,7 +114,7 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 			throws InterruptedException {
 		Assert.assertTrue (appiumdriver.findElementByName("Owner State").isDisplayed());
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByName(ownerstate)).waitAction(300).release().perform();
+		action.press(appiumdriver.findElementByName(ownerstate)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByName(ownerstate).click();
 	}
 
@@ -155,11 +156,9 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 
 		int yy = element.getLocation().getY();
 
-		int duration = 3000;
-
 		TouchAction action = new TouchAction(appiumdriver);
 		//action.press(xx + 100,yy + 100).waitAction(duration).moveTo(xx + 200, yy + 200).release().perform();
-		action.press(xx + 100,yy + 100).waitAction(duration).moveTo(xx + 200, yy + 200).release().perform();
+		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
 		action = new TouchAction(appiumdriver);
 		//action.press(xx - 10,yy + 50).waitAction(3000).moveTo(xx + 200, yy + 200).release().perform();
 		//action.tap(xx - 20, yy + 10).perform();

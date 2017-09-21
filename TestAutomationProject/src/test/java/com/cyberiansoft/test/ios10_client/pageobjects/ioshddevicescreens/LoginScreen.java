@@ -8,7 +8,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.support.PageFactory;
 
@@ -53,14 +53,14 @@ public class LoginScreen extends iOSHDBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//firstcode.setValue(regCode.substring(0, 4));
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(firstcode).waitAction(1000).release().perform();
+		action.press(firstcode).waitAction(Duration.ofSeconds(1)).release().perform();
 		firstcode.click();
 		firstcode.setValue(regCode.substring(0, 4));
 		secondcode.setValue(regCode.substring(5, 9));
 		thirdcode.setValue(regCode.substring(10, 14));
 		//thirdcode.click();
 		action = new TouchAction(appiumdriver);
-		action.press(registerbtn).waitAction(1000).release().perform();	
+		action.press(registerbtn).waitAction(Duration.ofSeconds(1)).release().perform();	
 		//registerbtn.click();
 		
 		appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);

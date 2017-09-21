@@ -5,7 +5,9 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -362,7 +364,9 @@ public abstract class Helpers {
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		driver.tap(1, x, y, 1000);
+		TouchAction ta = new TouchAction(driver);
+		ta.tap(x, y);
+		//driver.tap(1, x, y, 1000);
 		Thread.sleep(1000);
 	}
 	
@@ -372,7 +376,9 @@ public abstract class Helpers {
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		driver.tap(1, x, y, 1000);
+		//driver.tap(1, x, y, 1000);
+		TouchAction ta = new TouchAction(driver);
+		ta.tap(x, y);
 		Thread.sleep(1000);
 	}
 
@@ -386,7 +392,10 @@ public abstract class Helpers {
 		int yyd = yy + 100;
 
 		int duration = 800;
-		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
+		 TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+	                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+	        swipe.perform();
+		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 
 	}
 	
@@ -401,7 +410,10 @@ public abstract class Helpers {
 		int yyd = yy + 200;
 
 		int duration = 1000;
-		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
+		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+        swipe.perform();
+		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		driver.findElement(By.xpath("//UIAToolbar[1]/UIAButton[@name=\"Done\"]")).click();           
 	}
 	
@@ -416,7 +428,10 @@ public abstract class Helpers {
 		int yyd = yy + 200;
 
 		int duration = 1000;
-		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
+		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+        swipe.perform();
+		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
 		//driver.findElementByXPath("//UIAScrollView/UIATableView[2]/UIATableCell[2]/UIAButton[@name='Done']").click();
 		MobileElement signatureview  = element(By.xpath("//UIATableView[2]/UIATableCell[2]"));
@@ -427,7 +442,8 @@ public abstract class Helpers {
 		int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
 		
 		//driver.tap(1, element1.getLocation().getX()+10, element1.getLocation().getY() + element1.getSize().getHeight()-10, 1000);
-		driver.tap(1, x, y, duration);                 
+		new TouchAction(driver).tap(x, y).perform();
+		//driver.tap(1, x, y, duration);                 
 	}
 
 	public static void selectUIAPickerWheelValue(MobileElement picker,
@@ -435,10 +451,13 @@ public abstract class Helpers {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			driver.tap(1, pickerwheel.getLocation().getX()
+			new TouchAction(driver).tap(pickerwheel.getLocation().getX()
+					+ picker.getSize().getWidth() - 100, pickerwheel
+					.getLocation().getY() + picker.getSize().getHeight() + 10).perform();
+			/*driver.tap(1, pickerwheel.getLocation().getX()
 					+ picker.getSize().getWidth() - 100, pickerwheel
 					.getLocation().getY() + picker.getSize().getHeight() + 10,
-					100);
+					100);*/
 			waitABit(1000);
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)

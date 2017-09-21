@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -188,9 +188,11 @@ public class iOSBaseScreen {
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
 		
+		TouchAction swipe = new TouchAction(appiumdriver).press(startx, starty)
+                .waitAction(Duration.ofSeconds(2)).moveTo(startx, endy).release();
+        swipe.perform();
 		
-		
-		appiumdriver.swipe(startx, starty, startx, endy, 500);
+		//appiumdriver.swipe(startx, starty, startx, endy, 500);
 		Helpers.waitABit(2000);
 	}
 	
@@ -208,8 +210,10 @@ public class iOSBaseScreen {
 		int starty = (int) size.height / 2;	
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(endx, starty).waitAction(1000) .moveTo(startx, starty).release().perform();
-		
-		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
+                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
+        swipe.perform();
+		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 	
 	public void swipeScreenLeft() {
@@ -219,7 +223,11 @@ public class iOSBaseScreen {
 		int starty = size.height / 3;	
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(1000) .moveTo(endx, starty).release().perform();
-		appiumdriver.swipe(startx, starty, endx, starty, 2000);
+		
+		TouchAction swipe = new TouchAction(appiumdriver).press(startx, starty)
+                .waitAction(Duration.ofSeconds(2)).moveTo(endx, starty).release();
+        swipe.perform();
+		//appiumdriver.swipe(startx, starty, endx, starty, 2000);
 	}
 
 	public void hideKeyboard() {

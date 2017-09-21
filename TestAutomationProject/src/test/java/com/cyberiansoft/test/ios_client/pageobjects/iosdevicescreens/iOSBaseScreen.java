@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -183,7 +184,7 @@ public class iOSBaseScreen {
 		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
 		//Swipe from Bottom to Top.
 		TouchAction act = new TouchAction(appiumdriver);
-		act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
+		act.press(startx, starty).waitAction(Duration.ofSeconds(2)) .moveTo(startx, endy).release().perform();
 		Helpers.waitABit(2000);
 	}
 	
@@ -193,7 +194,7 @@ public class iOSBaseScreen {
 		int endx = (int) (size.width * 0.80);
 		int starty = size.height / 2;	
 		TouchAction act = new TouchAction(appiumdriver);
-		act.press(endx, starty).waitAction(2000) .moveTo(startx, starty).release().perform();
+		act.press(endx, starty).waitAction(Duration.ofSeconds(2)) .moveTo(startx, starty).release().perform();
 		
 		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
@@ -204,7 +205,7 @@ public class iOSBaseScreen {
 		int endx = (int) (size.width * 0.10);
 		int starty = size.height / 3;	
 		TouchAction act = new TouchAction(appiumdriver);
-		act.press(endx, starty).waitAction(2000) .moveTo(startx, starty).release().perform();
+		act.press(endx, starty).waitAction(Duration.ofSeconds(2)) .moveTo(startx, starty).release().perform();
 		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 

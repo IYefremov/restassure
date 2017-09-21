@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -71,13 +73,13 @@ public class MainScreen {
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(1000).release().perform();
+		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
 		//wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.visibilityOf(securefld));
 		securefld.setValue(password);
 		action = new TouchAction(appiumdriver);
-		action.press(loginbtn).waitAction(1000).release().perform();
+		action.press(loginbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		//loginbtn.click();
 		return new HomeScreen(appiumdriver);
 	}

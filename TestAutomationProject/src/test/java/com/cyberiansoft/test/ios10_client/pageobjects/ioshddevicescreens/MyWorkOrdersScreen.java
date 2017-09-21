@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -126,7 +127,9 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(customer), 200);
+		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
+        tap.perform();
+		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(customer), 200);
 	}
 	
 	public void changeCustomerForWorkOrder(String wonumber, String customer) {
@@ -329,7 +332,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByName(workordertype)).waitAction(300).release().perform();
+		action.press(appiumdriver.findElementByName(workordertype)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByName(workordertype).click();
 		return new VehicleScreen(appiumdriver);
 	}

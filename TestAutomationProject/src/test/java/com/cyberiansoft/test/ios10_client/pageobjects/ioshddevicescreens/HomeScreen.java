@@ -1,5 +1,6 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
@@ -153,7 +154,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(settingstsbtn));
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(settingstsbtn).waitAction(1000).release().perform();
+		action.press(settingstsbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		Helpers.waitABit(1000);
 		return new SettingsScreen(appiumdriver);
 	}	

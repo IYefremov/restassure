@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -385,7 +386,10 @@ public abstract class Helpers {
 		int yyd = yy + 100;
 
 		int duration = 800;
-		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
+		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+        swipe.perform();
+		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 
 	}
 	
@@ -399,9 +403,8 @@ public abstract class Helpers {
 		int xxd = xx + 200;
 		int yyd = yy + 200;
 
-		int duration = 3000;
 		TouchAction action = new TouchAction(driver);
-		action.press(xx + 100,yy + 100).waitAction(duration).moveTo(xxd, yyd).release().perform();
+		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xxd, yyd).release().perform();
 		
 		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		driver.findElementByAccessibilityId("Done").click();           
@@ -419,8 +422,11 @@ public abstract class Helpers {
 
 		int duration = 1000;
 		TouchAction action = new TouchAction(driver);
-		action.press(xx + 100,yy + 100).waitAction(3000).moveTo(xx + 200, yy + 200).release().perform();
-		driver.swipe(xx+100, yy+100, xxd, yyd, duration);
+		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
+		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+        swipe.perform();
+		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
 		//driver.findElementByXPath("//UIAScrollView/UIATableView[2]/UIATableCell[2]/UIAButton[@name='Done']").click();
 		MobileElement signatureview  = element(By.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]"));
@@ -431,7 +437,8 @@ public abstract class Helpers {
 		int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
 		
 		//driver.tap(1, element1.getLocation().getX()+10, element1.getLocation().getY() + element1.getSize().getHeight()-10, 1000);
-		driver.tap(1, x, y, duration);                 
+		TouchAction tap = new TouchAction(driver).tap(x, y).perform();
+		//driver.tap(1, x, y, duration);                 
 	}
 
 	public static void selectUIAPickerWheelValue(MobileElement picker,
@@ -439,10 +446,13 @@ public abstract class Helpers {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			driver.tap(1, pickerwheel.getLocation().getX()
+			TouchAction tap = new TouchAction(driver).tap(pickerwheel.getLocation().getX()
+					+ picker.getSize().getWidth() - 100, pickerwheel
+					.getLocation().getY() + picker.getSize().getHeight() + 10).perform();
+			/*driver.tap(1, pickerwheel.getLocation().getX()
 					+ picker.getSize().getWidth() - 100, pickerwheel
 					.getLocation().getY() + picker.getSize().getHeight() + 10,
-					100);
+					100);*/
 			waitABit(1000);
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)

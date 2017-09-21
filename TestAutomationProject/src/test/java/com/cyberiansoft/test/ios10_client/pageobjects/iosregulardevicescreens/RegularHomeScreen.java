@@ -1,5 +1,6 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
@@ -67,20 +68,20 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	public RegularCustomersScreen clickCustomersButton() {	
 		if(!customersbtn.isDisplayed()) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.press(customersbtn).waitAction(300).release().perform();
+			action.press(customersbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		}
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(customersbtn).waitAction(300).release().perform();
+		action.press(customersbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new RegularCustomersScreen(appiumdriver);
 	}
 
 	public RegularMyInspectionsScreen clickMyInspectionsButton() {
 		if(!myinspectionsbtn.isDisplayed()) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.press(myinspectionsbtn).waitAction(300).release().perform();
+			action.press(myinspectionsbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		}
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(myinspectionsbtn).waitAction(300).release().perform();
+		action.press(myinspectionsbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new RegularMyInspectionsScreen(appiumdriver);
 	}
 	

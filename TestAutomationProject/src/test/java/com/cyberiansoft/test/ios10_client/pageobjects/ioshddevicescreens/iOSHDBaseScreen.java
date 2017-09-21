@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -49,14 +50,14 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public HomeScreen clickHomeButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(backbtn).waitAction(300).release().perform();
+		action.press(backbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		Helpers.waitABit(1000);
 		return new HomeScreen(appiumdriver);		
 	}
 	
 	public void clickSaveButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(savebtn).waitAction(1000).release().perform();
+		action.press(savebtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -77,7 +78,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		Helpers.waitABit(500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(300).release().perform();
+		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(screenname).click();
 		Helpers.waitABit(1000);
 	}
@@ -118,7 +119,16 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		int startx = (int) (size.width * 0.90);
 		int endx = (int) (size.width * 0.10);*/
 		
-		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
+                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
+        swipe.perform();
+		
+		
+		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		
+		
+		
+		
 		/*System.out.println("====" );
 		appiumdriver.swipe(startx, starty, endx, starty, 2000);
 		System.out.println("====" );
@@ -142,7 +152,17 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		int startx = (int) (size.width * 0.90);
 		int endx = (int) (size.width * 0.10);*/
 		
-		appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		
+		
+		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
+                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
+        swipe.perform();
+		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
+		
+		
+		
+		
+		
 		/*System.out.println("====" );
 		appiumdriver.swipe(startx, starty, endx, starty, 2000);
 		System.out.println("====" );
@@ -170,7 +190,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 				TouchAction action = new TouchAction(appiumdriver);
 				//action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
 				//action.press(xx+picker.getSize().getWidth()/2, yy + picker.getSize().getHeight()/2 +70).waitAction(1000).
-				action.press(xx+picker.getSize().getWidth()/2, (int) (yy + picker.getSize().getHeight()*0.8)).waitAction(1000).
+				action.press(xx+picker.getSize().getWidth()/2, (int) (yy + picker.getSize().getHeight()*0.8)).waitAction(Duration.ofSeconds(1)).
 				release().perform();
 				Helpers.waitABit(1000);
 				
