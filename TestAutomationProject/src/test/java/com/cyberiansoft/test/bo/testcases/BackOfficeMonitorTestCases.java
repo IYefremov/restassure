@@ -373,4 +373,15 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		monitorsettingspage.deleteOrderStatusReason(orderstatusreasoned);
 	}
 	
+	@Test(testName = "Test Case 64914:Monitor - Monitor Settings: Employee Role Settings")
+	public void testMonitorSettingsEmployeeRoleSettings(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
+		
+		Assert.assertTrue(monitorsettingspage.checkPresentanceOfTabs("Order Status Reasons","Flags"));
+	}
+	
 }

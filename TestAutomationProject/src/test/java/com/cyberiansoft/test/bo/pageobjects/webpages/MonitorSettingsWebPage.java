@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -112,6 +113,25 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	
 	public void clickNewOrderStatusReasonCancelButton() {
 		click(neworderstatusreasoncancelBtn);
+	}
+
+	public boolean checkPresentanceOfTabs(String...tabs) {
+		for(int i = 0; i < tabs.length; i++){
+			if(tabs[i].equals("Order Status Reasons")){
+				try{
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvReasons")));
+				}catch(Exception e){
+					return false;
+				}
+			}else if(tabs[i].equals("Flags")){
+				try{
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvFlags")));
+				}catch(Exception e){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }
