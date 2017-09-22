@@ -49,7 +49,7 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, URL);
 	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 	         IEDesiredCapabilities.setJavascriptEnabled(true);
-	         IEDesiredCapabilities.setCapability("requireWindowFocus", true);
+	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
 			
 //			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	

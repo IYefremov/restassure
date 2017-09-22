@@ -380,8 +380,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		
 		Assert.assertTrue(monitorsettingspage.checkPresentanceOfTabs("Order Status Reasons","Flags"));
+		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGrid());
 	}
 	
 }
