@@ -34,7 +34,7 @@ public abstract class BaseWebPage {
 		driver.manage().timeouts().pageLoadTimeout(SLEEP_TIMEOUT_IN_SEC*4, TimeUnit.SECONDS);
 		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
 
-		wait = new WebDriverWait(driver, 15);
+		wait = new WebDriverWait(driver, 40);
 		updateWait = new WebDriverWait(driver , 40 , 1);
 	}
 
