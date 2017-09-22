@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -105,6 +106,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public ReportsWebPage clickReportsLink() {
+		WebElement element = driver.findElement(By.tagName("header"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element); 
 		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
 		return PageFactory.initElements(
 				driver, ReportsWebPage.class);
