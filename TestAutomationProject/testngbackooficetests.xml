@@ -102,12 +102,8 @@
  			</class>    
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
   			</class>  
-  				-->
-  			
   			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
     		</class>
-    		
-    	<!-- 
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
 			</class>       
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
@@ -128,12 +124,15 @@
       		</class>   
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
       		</class>
-      		
+      				-->
       		
       		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
+      		<methods>
+      		<include name="testReportsTechnicianCommissions"/>
+      		</methods>
       		</class>
 
-     		  -->          
+     	<!-- 	  -->          
 
       <!--<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>-->

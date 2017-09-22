@@ -190,7 +190,17 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	}
 
 	public boolean checkResultsTable() {
-		return true;//allRows.get(allRows.size()-1).findElements(By.xpath("//tr[@valign='top']")).size() > 0;
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Date')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Invoice #')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'WO #')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'RO #')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Customer')]")));
+
+		}catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 
 	public boolean checkSortAbility() {
@@ -198,9 +208,11 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
 		List<WebElement> allNames = new ArrayList<WebElement>();
 		
+		int counter = 4;
 		while(true){
 			try{
-				allNames.add(driver.findElement(By.xpath("")));
+				allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
+				counter +=2;
 			}catch(Exception e){
 				break;
 			}
@@ -216,7 +228,19 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		if (!firstResultBeforeSort.equals(lastResultBeforeSort)) {
 			originalFilterBTN.get(0).click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
-			results = contentTable.findElements(By.tagName("a")).stream().map(e -> e.getText()).collect(Collectors.toList());
+
+			allNames = new ArrayList<WebElement>();
+			
+			counter = 4;
+			while(true){
+				try{
+					allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
+					counter +=2;
+				}catch(Exception e){
+					break;
+				}
+			}
+			results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
 
 			firstResultAfterSort = results.get(0);
 			lastResultAfterSort = results.get(results.size() - 1);
@@ -225,8 +249,18 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 					&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
 				ascFilterBTN.click();
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
-				results = contentTable.findElements(By.tagName("a")).stream().map(e -> e.getText()).collect(Collectors.toList());
 
+				counter = 4;
+				while(true){
+					try{
+						allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
+						counter +=2;
+					}catch(Exception e){
+						break;
+					}
+				}
+				results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+				
 				firstResultAfterSort = results.get(0);
 				lastResultAfterSort = results.get(results.size() - 1);
 				if (!firstResultBeforeSort.equals(lastResultAfterSort)
