@@ -135,8 +135,18 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	}
 
 	public boolean checkEmployeeRoleSettingsGrid() {
+		WebElement grig = driver.findElement(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00"));
 		
-		return false;
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Role']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Adding Services']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Editing Services']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Removing Services']")));
+
+		}catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 
 }

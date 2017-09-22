@@ -35,8 +35,8 @@ public class WebDriverFactory {
 			break;
 		case "ie":
 			File file = new File(PATH_TO_IE_DRIVER);	
-			InternetExplorerDriverManager.getInstance().arch32().setup();
-//	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+//			InternetExplorerDriverManager.getInstance().arch32().setup();
+	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
 	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
