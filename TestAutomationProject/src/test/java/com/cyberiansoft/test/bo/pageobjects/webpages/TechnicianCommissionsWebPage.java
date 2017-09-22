@@ -2,8 +2,10 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -74,6 +76,15 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_BtnFind")
 	private WebElement searchBTN;
+
+	@FindBy(xpath = "//img[@src='/Reserved.ReportViewerWebControl.axd?OpType=Resource&Version=10.0.40219.329&Name=Microsoft.ReportingServices.Rendering.HtmlRenderer.RendererResources.unsorted.gif']")
+	private List<WebElement> originalFilterBTN;
+
+	@FindBy(xpath = "//img[@src='/Reserved.ReportViewerWebControl.axd?OpType=Resource&Version=10.0.40219.329&Name=Microsoft.ReportingServices.Rendering.HtmlRenderer.RendererResources.sortAsc.gif']")
+	private WebElement ascFilterBTN;
+	
+	@FindBy(id="VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
+	private WebElement contentTable;
 
 	public TechnicianCommissionsWebPage(WebDriver driver) {
 		super(driver);
@@ -168,9 +179,63 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	}
 
 	public void clickOnLastSearchResult() throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
+		wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
 		Thread.sleep(1500);
-		List<WebElement> results = driver.findElement(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")).findElements(By.tagName("a"));
-		results.get(results.size()-1).click();
+		List<WebElement> results = driver
+				.findElement(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09"))
+				.findElements(By.tagName("a"));
+		results.get(results.size() - 1).click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
+	}
+
+	public boolean checkResultsTable() {
+		return true;//allRows.get(allRows.size()-1).findElements(By.xpath("//tr[@valign='top']")).size() > 0;
+	}
+
+	public boolean checkSortAbility() {
+		wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
+		List<WebElement> allNames = new ArrayList<WebElement>();
+		
+		while(true){
+			try{
+				allNames.add(driver.findElement(By.xpath("")));
+			}catch(Exception e){
+				break;
+			}
+		}
+
+		List<String> results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+		String firstResultBeforeSort = results.get(0);
+		String lastResultBeforeSort = results.get(results.size() - 1);
+
+		String firstResultAfterSort = "";
+		String lastResultAfterSort = "";
+
+		if (!firstResultBeforeSort.equals(lastResultBeforeSort)) {
+			originalFilterBTN.get(0).click();
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
+			results = contentTable.findElements(By.tagName("a")).stream().map(e -> e.getText()).collect(Collectors.toList());
+
+			firstResultAfterSort = results.get(0);
+			lastResultAfterSort = results.get(results.size() - 1);
+
+			if (!firstResultBeforeSort.equals(lastResultAfterSort)
+					&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
+				ascFilterBTN.click();
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
+				results = contentTable.findElements(By.tagName("a")).stream().map(e -> e.getText()).collect(Collectors.toList());
+
+				firstResultAfterSort = results.get(0);
+				lastResultAfterSort = results.get(results.size() - 1);
+				if (!firstResultBeforeSort.equals(lastResultAfterSort)
+						&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }

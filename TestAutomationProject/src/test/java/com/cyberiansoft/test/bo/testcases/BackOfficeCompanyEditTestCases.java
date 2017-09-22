@@ -43,22 +43,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) {
-		try{
 		webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 		testuser = userName;
 		testuserpsw = userPassword;
-		}catch(Exception e){
-			try {
-				BackOfficeLogout();
-			} catch (InterruptedException e1) {}
-			webdriverGotoWebPage(backofficeurl);
-			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-			loginpage.UserLogin(userName, userPassword);
-			testuser = userName;
-			testuserpsw = userPassword;
-		}
 	}
 
 	@AfterMethod

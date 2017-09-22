@@ -15,7 +15,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class BackOfficeHeaderPanel extends BaseWebPage {
-	
 	@FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
 	private WebElement logoutlink;
 	
@@ -49,7 +48,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public void clickLogout() {
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
 		if (driver.getWindowHandles().size() > 1) {
 			driver.close();
 			for (String activeHandle : driver.getWindowHandles())
@@ -58,8 +57,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		driver.switchTo().defaultContent();
 		waitABit(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		driver.findElement(By.id("topStatusBarRight")).findElement(By.id("ctl00_ctl00_LoginStatus_LoginStatus1")).click();
-//	
+	
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
 		try{
