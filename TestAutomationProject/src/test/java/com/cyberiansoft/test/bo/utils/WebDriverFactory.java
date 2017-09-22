@@ -3,6 +3,8 @@ package com.cyberiansoft.test.bo.utils;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
@@ -34,9 +36,9 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			File file = new File(PATH_TO_IE_DRIVER);	
-//			InternetExplorerDriverManager.getInstance().arch32().setup();
-	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+//			File file = new File(PATH_TO_IE_DRIVER);	
+			InternetExplorerDriverManager.getInstance().arch32().setup();
+//	         System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 
 	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
@@ -58,6 +60,7 @@ public class WebDriverFactory {
 //			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 			webcap = DesiredCapabilities.internetExplorer();
 			webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
+			webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
 			break;
 		case "chrome":
 			ChromeDriverManager.getInstance().setup();
