@@ -134,18 +134,24 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		return true;
 	}
 
-	public boolean checkEmployeeRoleSettingsGrid() {
-		WebElement grig = driver.findElement(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00"));
-		
-		try{
+	public boolean checkEmployeeRoleSettingsGridColumnsAndRows() {		
+		try{			
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Role']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Adding Services']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Editing Services']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//th[text()='Removing Services']")));
-
+			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//td[text()='Employee']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//td[text()='Inspector']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//td[text()='Manager']")));
 		}catch(Exception e){
 			return false;
 		}
+		return true;
+	}
+
+	public boolean checkEmployeeRoleSettingsGridOnOfFieldsAbility() {
+		
 		return true;
 	}
 

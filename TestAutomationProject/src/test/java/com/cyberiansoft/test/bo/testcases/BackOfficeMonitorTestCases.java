@@ -377,11 +377,11 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void testMonitorSettingsEmployeeRoleSettings(){
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
 		Assert.assertTrue(monitorsettingspage.checkPresentanceOfTabs("Order Status Reasons","Flags"));
-		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGrid());
+		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
+		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 	
 }
