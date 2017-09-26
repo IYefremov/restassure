@@ -5,6 +5,7 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,12 +33,14 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 	}
 
 	public void UserLogin(String userName, String userPassword) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_Login1_LoginButton")));
-		wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_Login1_LoginButton")));
+//		wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
 //		wait.until(ExpectedConditions.visibilityOf(loginbtn));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		clearAndType(usernamefld, userName);
 		clearAndType(userpasswordfld, userPassword);
-		click(loginbtn);
+		executor.executeScript("arguments[0].click();", loginbtn);
+//		click(loginbtn);
 	}
 	
 	public WebElement getLoginButton() {
