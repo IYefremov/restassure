@@ -109,9 +109,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public ReportsWebPage clickReportsLink() {
-		WebElement element = driver.findElement(By.id("__clockTime"));
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].scrollIntoView();", element); 
 		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
 		return PageFactory.initElements(
 				driver, ReportsWebPage.class);

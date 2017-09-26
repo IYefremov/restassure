@@ -46,7 +46,7 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
 	         IEDesiredCapabilities.setCapability("disable-popup-blocking", true);
 	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
+	         IEDesiredCapabilities.setCapability("ignoreZoomSetting", true);
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, URL);
 	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
