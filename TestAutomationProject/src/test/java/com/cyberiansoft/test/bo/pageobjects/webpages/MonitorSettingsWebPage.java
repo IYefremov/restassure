@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -151,7 +152,56 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	}
 
 	public boolean checkEmployeeRoleSettingsGridOnOfFieldsAbility() {
-		
+		try{
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnEnableMonitorCanAddService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnDisableMonitorCanAddService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnEnableMonitorCanEditService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnDisableMonitorCanEditService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnEnableMonitorCanRemoveService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl04_btnDisableMonitorCanRemoveService")));
+			}
+			try{
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnDisableMonitorCanAddService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnEnableMonitorCanAddService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnDisableMonitorCanEditService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnEnableMonitorCanEditService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnEnableMonitorCanRemoveService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl06_btnDisableMonitorCanRemoveService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnDisableMonitorCanAddService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnEnableMonitorCanAddService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnEnableMonitorCanEditService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnDisableMonitorCanEditService")));
+			}
+			try{
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnEnableMonitorCanRemoveService")));
+			}catch(TimeoutException e){
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvAppEmployeeRoleSettingsPresenter_ctl00_ctl08_btnDisableMonitorCanRemoveService")));
+			}
+
+		}catch(TimeoutException e){
+			return false;
+		}
 		return true;
 	}
 
