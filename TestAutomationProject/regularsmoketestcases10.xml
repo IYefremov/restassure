@@ -21,7 +21,7 @@
 
        
         
-        include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" /> 
+        <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" /> 
         <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" /> 
     <include name="testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed" />
     <include name="testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected" />     
