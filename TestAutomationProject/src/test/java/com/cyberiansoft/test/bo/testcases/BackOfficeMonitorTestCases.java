@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.cyberiansoft.test.bo.pageobjects.webpages.AverageRepairTimeReportWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.KanbanWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorSettingsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationTimeTrackingWebPage;
@@ -382,6 +383,22 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(monitorsettingspage.checkPresentanceOfTabs("Order Status Reasons","Flags"));
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
+	}
+	
+	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
+	public void checkMonitorKanbanAutoRefresh() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		KanbanWebPage kanbanPage = monitorpage.clickKanbanLink();
+		kanbanPage.setSearchLocation("Default Location");
+		kanbanPage.clickSearchButton();
+		Assert.assertTrue(kanbanPage.checkSearhResultColumns());
+		Assert.assertFalse(kanbanPage.checkIntervalFieldLessThan(5));
+		Assert.assertFalse(kanbanPage.checkIntervalFieldOverThan(720));
+		Assert.assertFalse(kanbanPage.checkIntervalFieldInputSymbol("a"));
+		Assert.assertTrue(kanbanPage.checkIntervalField(6));
+
 	}
 	
 }

@@ -137,8 +137,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	@FindBy(xpath = "//div[contains(@title, 'Save')]")
 	WebElement saveVehicleInfoBTN;
-	
-	@FindBy(id= "ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl04_Button1")
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl04_Button1")
 	WebElement voidBTN;
 
 	// @FindBy(className = "rfdSkinnedButton")
@@ -146,7 +146,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public InvoicesWebPage(WebDriver driver) {
 		super(driver);
-//		driver.findElement(By.className("header")).shouldHave("MainPage");
+		// driver.findElement(By.className("header")).shouldHave("MainPage");
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
@@ -276,9 +276,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public boolean isInvoiceNumberExists(String invoicenum) {
-		//By.xpath(".//tr/td/a[text()='" + invoicenum + "']")
-		boolean exists = invoicestable.getWrappedElement()
-				.findElements(By.partialLinkText(invoicenum)).size() > 0;
+		// By.xpath(".//tr/td/a[text()='" + invoicenum + "']")
+		boolean exists = invoicestable.getWrappedElement().findElements(By.partialLinkText(invoicenum)).size() > 0;
 		return exists;
 	}
 
@@ -333,7 +332,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 
-	public WebElement getTableRowWithInvoiceNumber(String invoicenumber)  {
+	public WebElement getTableRowWithInvoiceNumber(String invoicenumber) {
 		waitABit(4000);
 		List<WebElement> rows = getInvoicesTableRows();
 		waitABit(4000);
@@ -364,34 +363,39 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		if (row != null) {
 			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 			Actions act = new Actions(driver);
-			if(menuitem.equals("Edit") ||menuitem.equals("Print preview (server)")){
+			if (menuitem.equals("Edit") || menuitem.equals("Print preview (server)")) {
 				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]")))
-						.click();
-			}else{
-			while (true) {
-				try{
-				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-				}catch(Exception e){}
-				try {
-					wait.until(ExpectedConditions
-							.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]")))
-							.click();
-					break;
-				} catch (Exception e) {
+						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]"))).click();
+			} else {
+				while (true) {
+					try {
+						act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow")))
+								.perform();
+					} catch (Exception e) {
+					}
+					try {
+						wait.until(ExpectedConditions
+								.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + menuitem + "')]")))
+								.click();
+						break;
+					} catch (Exception e) {
+					}
 				}
 			}
-			}
-			
-//			if (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='" + menuitem + "']"))
-//					.isDisplayed()) {
-//				act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber)
-//						.findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
-//			}
-//			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInvoiceNumber(invoicenumber)
-//					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
-//			act.click(getTableRowWithInvoiceNumber(invoicenumber)
-//					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
+
+			// if
+			// (!getTableRowWithInvoiceNumber(invoicenumber).findElement(By.xpath(".//span[text()='"
+			// + menuitem + "']"))
+			// .isDisplayed()) {
+			// act.moveToElement(getTableRowWithInvoiceNumber(invoicenumber)
+			// .findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
+			// }
+			// wait.until(ExpectedConditions.elementToBeClickable((WebElement)
+			// getTableRowWithInvoiceNumber(invoicenumber)
+			// .findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
+			// act.click(getTableRowWithInvoiceNumber(invoicenumber)
+			// .findElement(By.xpath(".//span[text()='" + menuitem +
+			// "']"))).perform();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
 		}
@@ -409,7 +413,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public SendInvoiceCustomEmailTabWebPage clickSendCustomEmail(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
-		
+
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Send Custom Email");
 		waitForNewTab();
 		for (String activeHandle : driver.getWindowHandles()) {
@@ -434,14 +438,14 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) throws InterruptedException {
 		String mainWindowHandle = driver.getWindowHandle();
-//		System.out.println(mainWindowHandle);
+		// System.out.println(mainWindowHandle);
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
-//		waitForNewTab();
-//		Set<String> windows = driver.getWindowHandles();
-//		for (String window : windows) {
-//			if (!window.equals(mainWindowHandle))
-//				driver.switchTo().window(window);
-//		}
+		// waitForNewTab();
+		// Set<String> windows = driver.getWindowHandles();
+		// for (String window : windows) {
+		// if (!window.equals(mainWindowHandle))
+		// driver.switchTo().window(window);
+		// }
 
 		for (String activeHandle : driver.getWindowHandles()) {
 			if (!activeHandle.equals(mainWindowHandle)) {
@@ -589,44 +593,46 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			frames.remove(mainWindow);
 			driver.switchTo().window((String) frames.iterator().next());
 			return (String) frames.iterator().next();
-		}  
-		else if (string.equals("Download JSON")) {
+		} else if (string.equals("Download JSON")) {
 			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 			Thread.sleep(3000);
-			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))
-					.click();
+			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 			return mainWindow;
-		}else if((string.equals("Send Email") && swichArrow)||(string.equals("Send Custom Email") && swichArrow)){
+		} else if ((string.equals("Send Email") && swichArrow) || (string.equals("Send Custom Email") && swichArrow)) {
 			Thread.sleep(2000);
-			try{
-			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
-			}catch(Exception e){}
+			try {
+				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
+			} catch (Exception e) {
+			}
 			try {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
 				Thread.sleep(500);
 				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
-		}catch (TimeoutException e) {}
-			if(string.equals("Send Email"))
-			return mainWindow;
-			else{
+			} catch (TimeoutException e) {
+			}
+			if (string.equals("Send Email"))
+				return mainWindow;
+			else {
 				Set frames = driver.getWindowHandles();
 				Thread.sleep(10000);
 				frames.remove(mainWindow);
 				driver.switchTo().window((String) frames.iterator().next());
-			return (String) frames.iterator().next();
-			}}
-		else {
-				Thread.sleep(2000);
-				try{
+				return (String) frames.iterator().next();
+			}
+		} else {
+			Thread.sleep(2000);
+			try {
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-				}catch(Exception e){}
-				try {
-					wait.until(ExpectedConditions
-							.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-					Thread.sleep(500);
-							driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
-				} catch (TimeoutException e) {}
+			} catch (Exception e) {
+			}
+			try {
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
+				Thread.sleep(500);
+				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+			} catch (TimeoutException e) {
+			}
 			Thread.sleep(3000);
 			Set<String> windows = driver.getWindowHandles();
 			if (windows.size() > 1) {
@@ -639,10 +645,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 
 	}
-	
-	public void scrollWindowDown(int pix){
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,"+pix+")", "");
+
+	public void scrollWindowDown(int pix) {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0," + pix + ")", "");
 	}
 
 	public boolean firstInvoiceMarkedAsPaid() {
@@ -793,18 +799,23 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void setSearchByYear(String s) {
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")))).click();
+		wait.until(ExpectedConditions
+				.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")))).click();
 		wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//li[contains(text(), '" + s + "')]")))).click();
 	}
 
 	public void setSearchByMake(String string) {
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")))).clear();
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")))).sendKeys(string);
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake"))))
+				.clear();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake"))))
+				.sendKeys(string);
 	}
 
 	public void setSearchByModel(String string) {
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")))).clear();
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")))).sendKeys(string);
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel"))))
+				.clear();
+		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel"))))
+				.sendKeys(string);
 	}
 
 	public boolean checkSearchResult() throws InterruptedException {
@@ -812,7 +823,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void selectSearchStatus(String s) {
-		wait.until(ExpectedConditions.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))).click();
+		wait.until(ExpectedConditions
+				.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))).click();
 		wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//li[contains(text(), '" + s + "')]")))).click();
 	}
 
@@ -835,7 +847,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Invoice#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'PO#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'TOTAL:')]")));
-			driver.findElement(By.xpath("//*[@id='ctl00_ctl00_Content_Main_ctl01_ctl00_Card_RadTabStrip']/div/ul/li[2]/a/span/span/span")).click();;
+			driver.findElement(By
+					.xpath("//*[@id='ctl00_ctl00_Content_Main_ctl01_ctl00_Card_RadTabStrip']/div/ul/li[2]/a/span/span/span"))
+					.click();
+			;
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtPoRoNumber")))
 					.sendKeys("123");
@@ -884,8 +899,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardCVV")));
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCardPay")));
-				driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_BtnCancel")).click();
-				Thread.sleep(1000);
+			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_BtnCancel")).click();
+			Thread.sleep(1000);
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -918,13 +933,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public boolean checkInvoiceTableInfo() throws InterruptedException {
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind"))).click();
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
+			wait.until(
+					ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")))
+					.click();
 			Thread.sleep(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			
+
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Invoice #')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Date')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Status')]")));
@@ -937,95 +955,185 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Media')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Duplicates')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Action')]")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean checkInvoiceTablePagination() {
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart1")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgNumPart")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart2")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean checkInvoicesSearchFields() {
-		try{			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboArea_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbStockNo")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tRONo")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbPo")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOrderType_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboInvoiceType_Input")));
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboArea_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbStockNo")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tRONo")));
+			wait.until(
+					ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbPo")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOrderType_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboInvoiceType_Input")));
 
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboServiceGroups_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlInsurance_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(
+					By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboServiceGroups_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlInsurance_Input")));
 
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboEmployee_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlPORequired_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbVIN")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtInvoiceNo")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountFrom")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountTo")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboService_Input")));
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOwner_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_btnRecalculateTotal")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbClaimNum")));
-		}catch(TimeoutException e){
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboEmployee_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlPORequired_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbVIN")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtInvoiceNo")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountFrom")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbAmountTo")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboService_Input")));
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboOwner_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboYear_Input")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtMake")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_btnRecalculateTotal")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_txtModel")));
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_tbClaimNum")));
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean checkInvoicesSearchResults() throws InterruptedException {
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input"))).click();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
-			.sendKeys("Default Team");
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Arrow"))).click();
-			
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
+		try {
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
+					.click();
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
+					.sendKeys("Default Team");
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Arrow")))
+					.click();
+
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-			.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
-			.get().click();
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput"))).clear();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
-			.sendKeys("3/6/2017");
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput"))).clear();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
-			.sendKeys("4/6/2017");
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input"))).click();
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input"))).click();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
-			.sendKeys("000 1111");
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind"))).click();
+					.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom"))
+					.findFirst().get().click();
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
+					.clear();
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
+					.sendKeys("3/6/2017");
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
+					.clear();
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
+					.sendKeys("4/6/2017");
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))
+					.click();
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
+					.click();
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
+					.sendKeys("000 1111");
+
+			wait.until(ExpectedConditions
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
+			wait.until(
+					ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")))
+					.click();
 			Thread.sleep(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			
-			wait.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
-		}catch(TimeoutException e){
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
+	}
+
+	public void selectIvoicesFromTop(int count) {
+		int innerCounter = 4;
+		for (int i = 0; i < count; i++) {	
+			String id = String.format("%2s", innerCounter).replace(' ', '0');
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl"+id+"_chkInvoice"))).click();
+			innerCounter +=3;
+		}
+	}
+
+	public void clickExportButton() throws InterruptedException {
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(), 'Export')]"))).click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+	}
+
+	public void setStatusForSelectedInvoices(String status) throws InterruptedException {
+		List<WebElement> invoicesSelectCheckoxesChecked = driver
+				.findElement(By.id("ctl00_ctl00_Content_Main_grdInvoices"))
+				.findElements(By.className(" rfdCheckboxChecked"));
+		WebElement invoiceRow = null;
+		for (int i = 0; i < invoicesSelectCheckoxesChecked.size(); i++) {
+			invoiceRow = invoicesSelectCheckoxesChecked.get(i).findElement(By.xpath("..")).findElement(By.xpath(".."));
+			invoiceRow.findElement(By.xpath("//td[contains(@class, 'rcbArrowCell rcbArrowCellLeft')]")).click();
+			driver.findElement(
+					By.xpath("//div[contains(@class, 'RadComboBoxDropDown RadComboBoxDropDown_Office2007 ')]"))
+					.findElement(By.xpath("//a[contains(@text(), 'Exported')]")).click();
+			driver.switchTo().alert().accept();
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}
+	}
+
+	public String getMainWindow() {
+		return driver.getWindowHandle();
+	}
+
+	public ExportInvoicesWebPage switchToExportInvoicesWindow(String mainWindow) {
+		for(String window: driver.getWindowHandles()){
+			if(!window.equals(mainWindow)){
+				driver.switchTo().window(window);
+			}
+		}
+		return PageFactory.initElements(
+				driver, ExportInvoicesWebPage.class);
 	}
 }

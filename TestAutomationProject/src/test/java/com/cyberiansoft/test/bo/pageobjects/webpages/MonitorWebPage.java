@@ -40,6 +40,9 @@ public class MonitorWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl04_Label1")
 	private WebElement eventslink;
 	
+	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl02_Label1")
+	private WebElement kanbanlink;
+	
 	public MonitorWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -97,6 +100,12 @@ public class MonitorWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(eventslink)).click();
 		return PageFactory.initElements(
 				driver, EventsWebPage.class);
+	}
+
+	public KanbanWebPage clickKanbanLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(kanbanlink)).click();
+		return PageFactory.initElements(
+				driver, KanbanWebPage.class);
 	}
 	
 }

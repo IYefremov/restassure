@@ -45,6 +45,5 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 		Assert.assertTrue(technishialCommissionsPage.checkSortAbility());
 		technishialCommissionsPage.clickOnLastSearchResult();
 		Assert.assertTrue(technishialCommissionsPage.checkResultsTable());
-	}
-	
+	}	
 }

@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ExportInvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceEditTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceEmailActivityTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicePaymentsTabWebPage;
@@ -1060,26 +1061,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		// WorkOrdersWebPage workorderspage =
-		// operationspage.clickWorkOrdersLink();
-		// workorderspage.unselectInvoiceFromDeviceCheckbox();
-		// workorderspage.selectSearchStatus("All");
-		// workorderspage.clickFindButton();
-		//
-		// String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		// String invoicenumber =
-		// workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// if (invoicenumber.equals("")) {
-		// workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-		// workorderspage.setSearchOrderNumber(wonum);
-		// workorderspage.clickFindButton();
-		// invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// }
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
@@ -1095,5 +1079,20 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkInvoiceTablePagination());
 		Assert.assertTrue(invoicespage.checkInvoicesSearchFields());
 		Assert.assertTrue(invoicespage.checkInvoicesSearchResults());
+	}
+	
+	@Test(testName = "Test Case 64968:Operations - Invoice: Export")
+	public void checkOperationsInvoiceExport() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchStatus("New");
+		invoicespage.clickFindButton();
+		invoicespage.selectIvoicesFromTop(3);
+		String mainWindow = invoicespage.getMainWindow();
+		invoicespage.clickExportButton();
+		ExportInvoicesWebPage exportInvoicesPage= invoicespage.switchToExportInvoicesWindow(mainWindow);
+		Assert.assertEquals(exportInvoicesPage.countInvoicesToExport(), "3");
+		Assert.assertTrue(exportInvoicesPage.allInvoicesAreAbleToExport());
 	}
 }
