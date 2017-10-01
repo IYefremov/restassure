@@ -120,16 +120,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	@FindBy(linkText = "Mark as Paid")
 	private WebElement markAsPaidOption;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_panelPopup")
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_pContent")
 	private WebElement paymentNote;
 
 	@FindBy(className = "rmVertical")
 	private WebElement ivoiceOptions;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_popupPaymentNotesEditable")
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCashNotes")
 	private WebElement paymentTextField;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_btnMarkAsPaidWithNotes")
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnCashPay")
 	private WebElement markAsPaidBTN;
 
 	@FindBy(xpath = "//tr[contains(@class, 'order-row border-row custom-order-row')]")
@@ -575,18 +575,25 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
 		if (string.equals("Mark as Paid")) {
-			ivoiceOptions.findElement(By.linkText(string)).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 			wait.until(ExpectedConditions.visibilityOf(paymentNote));
 			paymentTextField.sendKeys("test");
 			markAsPaidBTN.click();
-			try {
+			driver.switchTo().alert().accept();
 				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			driver.navigate().refresh();
 			return mainWindow;
-		} else if (string.equals("Edit") || string.equals("Print preview (server)")) {
+		}
+		 else if (string.equals("Pay")) {
+				ivoiceOptions.findElement(By.linkText(string)).click();
+				Thread.sleep(1000);
+				wait.until(
+						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				return mainWindow;
+			}
+		else if (string.equals("Edit") || string.equals("Print preview (server)")) {
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			Set frames = driver.getWindowHandles();
 			Thread.sleep(10000);
@@ -629,8 +636,10 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			try {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-				Thread.sleep(500);
-				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+				Thread.sleep(300);
+				wait.until(ExpectedConditions
+						.presenceOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]"))).click();	
+	//			driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
 			}
 			Thread.sleep(3000);
@@ -840,45 +849,33 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return true;
 	}
 
-	public boolean checkPayBoxContent() throws InterruptedException {
+	public void checkPayBoxContent() throws InterruptedException {
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		try {
+		WebElement paymentInfo = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_pContent"));
+//		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Invoice#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'PO#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'TOTAL:')]")));
-			driver.findElement(By
-					.xpath("//*[@id='ctl00_ctl00_Content_Main_ctl01_ctl00_Card_RadTabStrip']/div/ul/li[2]/a/span/span/span"))
-					.click();
-			;
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtPoRoNumber")))
+			
+			paymentInfo.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtPoRoNumber"))
 					.sendKeys("123");
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_chkPoRoApprove")))
+			paymentInfo.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chkPoRoApprove"))
 					.click();
-
-			Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_error")));
 
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Cash/Check')]")))
 					.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Check #:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Amount:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Notes:')]")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_chkCashApprove")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCashPay")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCheckNumber")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_tbCashAmount")));
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCashNotes")));
+			
+//			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCheckNumber")));
+//			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_tbCashAmount")));
+//			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCashNotes")));
+			
+			paymentInfo.findElement(By.xpath("//input[@id='ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCheckNumber']"));
+			paymentInfo.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_tbCashAmount"));
+			paymentInfo.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCashNotes"));
 
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), 'Credit Card')]")))
 					.click();
@@ -888,24 +885,24 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Card#:')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), 'Expiration:')]")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_tbCardAmount")));
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_tbCardAmount")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardFirstName")));
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCardFirstName")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardLastName")));
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCardLastName")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardNumber")));
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCardNumber")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_txtCardCVV")));
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_txtCardCVV")));
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl00_Card_btnCardPay")));
-			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_BtnCancel")).click();
+					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnCardPay")));
+			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnCardPayCancel")).click();
 			Thread.sleep(1000);
-		} catch (TimeoutException e) {
-			return false;
-		}
-
-		return true;
+//		} catch (TimeoutException e) {
+//			return false;
+//		}
+//
+//		return true;
 	}
 
 	public boolean checkAuditLogWindowContent(String auditLogWindow) {
@@ -1093,10 +1090,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public void selectIvoicesFromTop(int count) {
 		int innerCounter = 4;
-		for (int i = 0; i < count; i++) {	
+		for (int i = 0; i < count; i++) {
 			String id = String.format("%2s", innerCounter).replace(' ', '0');
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl"+id+"_chkInvoice"))).click();
-			innerCounter +=3;
+			wait.until(ExpectedConditions.presenceOfElementLocated(
+					By.id("ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl" + id + "_chkInvoice"))).click();
+			innerCounter += 3;
 		}
 	}
 
@@ -1119,7 +1117,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 					.findElement(By.xpath("//a[contains(@text(), 'Exported')]")).click();
 			driver.switchTo().alert().accept();
 			Thread.sleep(1000);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}
 	}
 
@@ -1128,12 +1127,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public ExportInvoicesWebPage switchToExportInvoicesWindow(String mainWindow) {
-		for(String window: driver.getWindowHandles()){
-			if(!window.equals(mainWindow)){
+		for (String window : driver.getWindowHandles()) {
+			if (!window.equals(mainWindow)) {
 				driver.switchTo().window(window);
 			}
 		}
-		return PageFactory.initElements(
-				driver, ExportInvoicesWebPage.class);
+		return PageFactory.initElements(driver, ExportInvoicesWebPage.class);
 	}
 }
