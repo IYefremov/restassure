@@ -163,7 +163,8 @@ public class EventsWebPage extends BaseWebPage {
 		Assert.assertEquals(getFirstConditionnameCriteriaField().getAttribute("value"), firstconditioncriteria);	
 	}
 	
-	public void saveNewEvent() {	
+	public boolean saveNewEvent() {	
+		try{
 		wait.until(ExpectedConditions.elementToBeClickable(neweventOKbtn)).click();
 		waitABit(1000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
@@ -171,6 +172,10 @@ public class EventsWebPage extends BaseWebPage {
 		if(neweventOKbtn.isDisplayed())
 			neweventCancelbtn.click();
 		}catch(NoSuchElementException e){}
+		}catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	
 	public void cancelNewEvent() {	

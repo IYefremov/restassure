@@ -157,12 +157,14 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		}
 	}
 
-	public void openGeneralSettingsTab() {
-		driver.findElement(By.linkText("General Settings")).click();
+	public void openGeneralSettingsTab() throws InterruptedException {
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
 	}
 
-	public void clickErrorWithBLockingRadioButton() {
-		driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2")).click();
+	public void clickErrorWithBLockingRadioButton() throws InterruptedException {
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2"))).click();
 	}
 
 	public void clickEditServiceRequestTypeOkButton() {
@@ -172,17 +174,17 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void selectStockRoVinOptions() {
-		if (driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN"))
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN"))
 				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
+			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
 		}
-		if (driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock"))
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock"))
 				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).click();
+			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).click();
 		}
-		if (driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO"))
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO"))
 				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
+			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
 		}
 	}
 
@@ -216,22 +218,22 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 	
 	public void clickNoneRadioButton() {
-		driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")).click();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")).click();
 	}
 
 	public void clickWarningOnlyRadioButton() {
-		driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")).click();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")).click();
 	}
 
 	public void selectOption(String optionName) {
-		WebElement option = driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
+		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
 		if(option.getAttribute("class").equals(" rfdCheckboxUnchecked")){
 			option.click();
 		}
 	}
 	
 	public void unselectOption(String optionName) {
-		WebElement option = driver.findElement(By.id("_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
+		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
 		if(option.getAttribute("class").equals(" rfdCheckboxChecked")){
 			option.click();
 		}

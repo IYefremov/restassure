@@ -1988,9 +1988,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return flag1;
 	}
 
-	public int countAvailableServices() {
-		driver.findElement(By.id("Card_comboService_Arrow")).click();
-		return driver.findElement(By.className("rcbList")).findElements(By.tagName("li")).size();
+	public int countAvailableServices() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("Card_comboService_Arrow")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
+		Thread.sleep(1000);
+		return wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList"))).findElements(By.tagName("li")).size();
 	}
 
 	public void clickDoneButtonAtAddServiceWindow() {
@@ -2007,11 +2009,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		clearAndType(addsrvronum, ro);
 	}
 
-	public boolean checkForAlert() {
+	public boolean checkForAlert() throws InterruptedException {
 		try{
 			driver.switchTo().alert().accept();
+			Thread.sleep(5000);
 			return true;
 		}catch(Exception e){
+			Thread.sleep(1000);
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return false;
 		}
 	}

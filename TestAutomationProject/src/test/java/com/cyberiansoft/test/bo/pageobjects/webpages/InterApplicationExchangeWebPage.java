@@ -88,7 +88,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void fillProfileDetails(String name, String documentType, String entityType) {
+	public void fillProfileDetails(String name, String documentType, String entityType) throws InterruptedException {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 		documentTypeDropDown.click();
@@ -106,6 +106,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		
 		sendFromCalendarBTN.click();
 		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
+		Thread.sleep(2000);
 	}
 	
 	public void fillProfileDetails(String name, String entityType) {

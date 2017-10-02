@@ -947,8 +947,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		serviceRequestsWebPage.addImage();
-		// Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOFAddedFile());
-		// Assert.assertTrue(serviceRequestsWebPage.checkDeletionOfFile());
+
 	}
 
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR", dataProvider = "provideSRdata")
@@ -1343,7 +1342,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1377,7 +1376,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1410,7 +1409,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Checked In");
 		eventsWebPage.setAlertNewName("test appointment SR Checked In");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 		eventsWebPage.setEmailNototificationDropDownForSelected("ServiceRequest Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1447,7 +1446,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Appointment Created");
 		eventsWebPage.setAlertNewName("test appointment Appointment Created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1480,7 +1479,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Appointment Failed");
 		eventsWebPage.setAlertNewName("test appointment Appointment Failed");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
 		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1513,7 +1512,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1546,7 +1545,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1579,7 +1578,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1611,7 +1610,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1643,7 +1642,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1675,7 +1674,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Created");
 		eventsWebPage.setAlertNewName("test appointment SR created");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
@@ -1707,7 +1706,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent("Service Request Checked In");
 		eventsWebPage.setAlertNewName("test appointment SR Checked In");
-		eventsWebPage.saveNewEvent();
+		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1803,7 +1802,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickWarningOnlyRadioButton();
 		serviceRequestTypesPage.unselectOption("VIN");
 		serviceRequestTypesPage.selectOption("RO");
-		serviceRequestTypesPage.unselectOption("STOCK");
+		serviceRequestTypesPage.unselectOption("Stock");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1821,6 +1820,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1913,6 +1913,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1959,6 +1960,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -2002,6 +2004,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -2045,6 +2048,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
+		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
