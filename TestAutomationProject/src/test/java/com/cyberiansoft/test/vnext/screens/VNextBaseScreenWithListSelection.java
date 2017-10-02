@@ -14,7 +14,7 @@ public class VNextBaseScreenWithListSelection  extends VNextBaseScreen {
 	}
 	
 	public void selectListItem(String itemtoselect) {
-		tap(appiumdriver.findElement(By.xpath("//a[@action='select-item']/div[@class='item-inner']/div[@class='item']/div[text()='" + itemtoselect + "']")));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/a[contains(text(), '" + itemtoselect + "')]")));
 	}
 
 }

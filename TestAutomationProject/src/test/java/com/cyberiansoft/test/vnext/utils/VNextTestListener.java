@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.utils;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -35,7 +36,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    }
 	    
 	    if (webdriver != null) {
-	    	System.out.println("+++++++WEBDRIVER");
+	    	webdriver.quit();
 	    }
 	    
 	    ExtentTest testReporter = ExtentReportFactory.getTest();
@@ -43,21 +44,23 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    testReporter.log(LogStatus.FAIL, getTestMethodName(result));
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
 	    
-	    ((VNextBaseTestCase) currentClass).resetApp();
-	    ((VNextBaseTestCase) currentClass).setUp();
-	    //((VNextBaseTestCase) currentClass).setNetworkOn();
-	    try {
-			((VNextBaseTestCase) currentClass).registerDevice();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    try {
-			//((VNextBaseTestCase) currentClass).registerDevice();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
+	    	((VNextBaseTestCase) currentClass).resetApp();
+	    	((VNextBaseTestCase) currentClass).setUp();
+	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
+	    	try {
+	    		((VNextBaseTestCase) currentClass).registerDevice();
+	    	} catch (Exception e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}
+	    	try {
+	    		//((VNextBaseTestCase) currentClass).registerDevice();
+	    	} catch (Exception e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}
+	    }
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	

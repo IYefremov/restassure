@@ -63,7 +63,9 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	}	
 	
 	public void selectInsuranceCompany (String insuranceCompany) {
-		tap(insurancecompanyfld);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(insurancecompanyfld));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='company']/a")));
 		VNextBaseScreenWithListSelection listscreen = new VNextBaseScreenWithListSelection(appiumdriver);
 		listscreen.selectListItem(insuranceCompany);
 		log(LogStatus.INFO, "Select Insurance Company: " + insuranceCompany);

@@ -438,6 +438,28 @@ public class MailChecker {
     	return mailmessage; 
     }
     
+    public static boolean getKayakoFeedbackMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    	String mailmessage = "";
+    	boolean kayakoMailRecieved = false;
+		for (int i=0; i < 15; i++) {
+			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+				try {
+					Thread.sleep(60*1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+				if (mailmessage.length() > 3) {
+					kayakoMailRecieved = true;
+					break;
+				}				
+			}
+		}
+    	return kayakoMailRecieved; 
+    }
+    
     public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
     	String mailmessage = "";
 		if (MailChecker.searchSpamEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {

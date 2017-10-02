@@ -18,6 +18,9 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='feedback']")
 	private WebElement feedbackbtn;
 	
+	@FindBy(xpath="//*[@action='back-office']")
+	private WebElement gotoBObtn;
+	
 	public VNextStatusScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -49,6 +52,12 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		tap(feedbackbtn);
 		log(LogStatus.INFO, "Click Status screen Feedback button");
 		return new VNextFeedbackScreen(appiumdriver);
+	}
+	
+	public VNextEmailVerificationScreen goToBackOfficeButton() {
+		tap(gotoBObtn);
+		log(LogStatus.INFO, "Click Status screen Go To Back Office button");
+		return new VNextEmailVerificationScreen(appiumdriver);
 	}
 
 }

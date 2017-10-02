@@ -21,7 +21,7 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@class='user']/span")
 	private WebElement userprofilelink;
 	
-	@FindBy(xpath = "//a[@class='btn btn-promo']")
+	@FindBy(id = "upgrade-banner")
 	private WebElement upgradenowbtn;
 	
 	public VNextBOHeaderPanel(WebDriver driver) {
@@ -48,6 +48,13 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 		waitABit(1000);
 		return PageFactory.initElements(
 				driver, VNextBOLoginScreenWebPage.class);
+	}
+	
+	public VNextUpgradeInfoWebPage clickUpgradeNowBanner() {
+		new WebDriverWait(driver, 5)
+		  .until(ExpectedConditions.elementToBeClickable(upgradenowbtn)).click();
+		return PageFactory.initElements(
+				driver, VNextUpgradeInfoWebPage.class);
 	}
 
 }

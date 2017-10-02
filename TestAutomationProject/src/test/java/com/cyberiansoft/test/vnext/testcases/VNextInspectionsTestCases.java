@@ -233,9 +233,9 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer("Retail Automation");
+		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		inspinfoscreen.setVIN("TESTVINN");
+		inspinfoscreen.setVIN(testVIN);
 		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
 		inspectionsscreen = inspinfoscreen.saveInspectionViaMenu();
 		

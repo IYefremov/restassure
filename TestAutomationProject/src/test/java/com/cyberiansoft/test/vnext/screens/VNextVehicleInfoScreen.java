@@ -53,7 +53,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.RONo")
 	private WebElement rofld;
 	
-	@FindBy(name="Orders.PONo")
+	@FindBy(name="Estimations.PONo")
 	private WebElement pofld;
 	
 	@FindBy(name="Vehicle.Color")
@@ -203,6 +203,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setRoNo (String rono) {
 		rofld.clear();
 		rofld.sendKeys(rono);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set RO Number : " + rono);
 	}
 	
@@ -213,6 +214,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setPoNo (String pono) {
 		pofld.clear();
 		pofld.sendKeys(pono);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set RO Number : " + pono);
 	}
 	

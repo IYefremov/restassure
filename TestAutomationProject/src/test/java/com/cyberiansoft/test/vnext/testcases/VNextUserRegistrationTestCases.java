@@ -1,9 +1,14 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +24,7 @@ import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailMismatchDialog;
+import com.cyberiansoft.test.vnext.screens.VNextEmailVerificationScreen;
 import com.cyberiansoft.test.vnext.screens.VNextFeedbackScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -50,6 +56,13 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmPasswordWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextPaymentInfoWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextUpgradeInfoWebPage;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.Activity;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
@@ -706,7 +719,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newcustomerscreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
-		vehicleinfoscreen.swipeScreensLeft(3);		
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(appiumdriver);
+		claimscren.selectInsuranceCompany("Test Insurance Company");		
+		vehicleinfoscreen.swipeScreensLeft(2);		
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i = 0; i < availablepricematrixes.length; i++) {
 			VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
@@ -830,7 +846,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newcustomerscreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
-		vehicleinfoscreen.swipeScreensLeft(3);		
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(appiumdriver);
+		claimscren.selectInsuranceCompany("Test Insurance Company");		
+		vehicleinfoscreen.swipeScreensLeft(2);			
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		selectservicesscreen.selectMatrixService(matrixservice);
@@ -902,7 +921,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
-		registrationoverviewlegalinfoscreen.waitABit(10000);
+		registrationoverviewlegalinfoscreen.waitABit(15000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
@@ -921,6 +940,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
 		statusscreen = feedbackscreen.clickSendButton();
 		homescreen = statusscreen.clickBackButton();
+		
+		
+		Assert.assertTrue(MailChecker.getKayakoFeedbackMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Test Feedback Repair360", "info@reconprofree.com", "You can check the status of or update this ticket online at"));
+		
 	}
 	
 	@Test(testName= "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)", 
@@ -932,6 +956,19 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR";
 		final String userstate = "California";
+		
+		
+		final String edition = "Repair360";
+		final String userfullname = "Oleksandr Kramar";
+		final String cardnumber = "4859103055178574";
+		final String expirationmonth = "09";
+		final String expirationyear = "2021";
+		final String cvccode = "122";
+		final String billindaddressline1 = "First street 21/13";
+		final String billindcity = "New York";
+		final String billindzip = "79031";
+		final String billingcountry = "United States";
+		final String billingstate = "California";
 		
 		final String feedbackType = "Feature Request";
 		final String feedbackArea = "Customers";
@@ -992,11 +1029,45 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		homescreen.clickUpgrateToProBanner();
+		//homescreen.clickUpgrateToProBanner();
+		VNextStatusScreen statuscsreen = homescreen.clickStatusMenuItem();
+		VNextEmailVerificationScreen emailverificationscren = statuscsreen.goToBackOfficeButton();
+		statuscsreen = emailverificationscren.clickActivateButton();
+		homescreen = statuscsreen.clickBackButton();
 		
 		
-		/*
-		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
+		
+		String newbourl = "";
+		if (!mailmessage.equals("")) {
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+		} else {
+			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
+					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+		}
+		
+		initiateWebDriver();
+		webdriverGotoWebPage(newbourl);
+		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
+				webdriver, VNextBOApproveAccountWebPage.class);
+		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+		
+		loginpage.userLogin(userregmail, confirmpsw);
+		VNextBOHeaderPanel vnextboheaderpanel = PageFactory.initElements(webdriver,
+				VNextBOHeaderPanel.class);
+		VNextUpgradeInfoWebPage upgradeinfopage = vnextboheaderpanel.clickUpgradeNowBanner();
+		VNextPaymentInfoWebPage paymentinfopage = upgradeinfopage.clickUnlockRepair360EditionButton();
+		
+		paymentinfopage.setUserPaymentsInfo(edition, userfullname, cardnumber, 
+				expirationmonth, expirationyear, cvccode, billindaddressline1, 
+				billindcity, billindzip, billingcountry, billingstate);
+		
+		paymentinfopage.waitABit(6000);
+		//todo: Bug here
+		
+		/*VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
 		feedbackscreen.selectFeedbackType(feedbackType);
 		feedbackscreen.selectArea(feedbackArea, subArea);
