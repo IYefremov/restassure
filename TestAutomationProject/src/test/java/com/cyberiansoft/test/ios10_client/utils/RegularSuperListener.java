@@ -114,8 +114,9 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	        	}
 	        	
 	        }
-	        try {
+	         try {
 				((BaseTestCase) currentClass).resrtartApplication();
+	        	
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

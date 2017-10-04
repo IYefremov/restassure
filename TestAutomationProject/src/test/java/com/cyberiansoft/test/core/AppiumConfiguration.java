@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.core;
 
+import io.appium.java_client.remote.AutomationName;
+import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +18,7 @@ public class AppiumConfiguration {
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
 		LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
-		//date = date.minusDays(1);
+		date = date.minusDays(1);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
@@ -56,8 +57,8 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
 				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 				appiumcap.setCapability("nativeWebTap", true);
-				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOSRegularDeviceInfo.getInstance().getAutomationName()); 
-				appiumcap.setCapability("appiumVersion", "1.6.1");
+				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST); 
+				appiumcap.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 			
 				appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
 				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, IOSRegularDeviceInfo.getInstance().getNewCommandTimeout());

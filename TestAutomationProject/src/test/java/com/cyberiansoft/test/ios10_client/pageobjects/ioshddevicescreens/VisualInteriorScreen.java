@@ -96,8 +96,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.press(xx + imagecar.getSize().getWidth()/(times+1), imagecar.getSize().getHeight()/2 + 30).waitAction(Duration.ofSeconds(1)).
-		release().perform();
+		action.tap(imagecar, imagecar.getSize().getWidth()/(times+2), imagecar.getSize().getHeight()/2 + 130).perform();
 
 		Helpers.waitABit(1000);
 	}

@@ -63,7 +63,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 	
 	public void saveWorkOrder() {
@@ -337,6 +337,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public void changeTechnician(String servicetype, String techname) {
 		appiumdriver.findElementByAccessibilityId(servicetype).click();
+		Helpers.waitABit(500);
 		if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 0) {
 			((IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1)).
 			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"

@@ -63,8 +63,6 @@ public class HomeScreen extends iOSHDBaseScreen {
 	final static String scrollviewxpath = "//UIAScrollView[1]";
 
 	public CustomersScreen clickCustomersButton() {	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(customersbtn));
 		customersbtn.click();
 		return new CustomersScreen(appiumdriver);
 	}

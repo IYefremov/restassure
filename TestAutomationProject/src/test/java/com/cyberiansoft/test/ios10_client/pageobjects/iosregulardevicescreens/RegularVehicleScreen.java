@@ -8,6 +8,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
@@ -282,6 +283,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void selectLocation(String _location) {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Location']")));
+		
+		IOSTouchAction iostouch = new IOSTouchAction(appiumdriver);
+		iostouch.tap(appiumdriver.findElementByAccessibilityId("Location")).perform();
 		appiumdriver.findElementByAccessibilityId("Location").click();
 		//WebElement par = getVehicleInfoTableParentNode("Location");
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField")).click();
@@ -305,6 +309,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setTrim(String trimvalue) throws InterruptedException {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
+		trimfld.click();
 		trimfld.click();
 		Thread.sleep(1000);
 		selectUIAPickerValue(trimvalue);

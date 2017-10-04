@@ -29,32 +29,32 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setInspectionToSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("false"))
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("0"))
 			inspectionsinglepagetoggle.click();
 	}
 
 	public void setInspectionToNonSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("true"))
+		if (inspectionsinglepagetoggle.getAttribute("value").equals("1"))
 			inspectionsinglepagetoggle.click();
 	}
 
 	public void setCheckDuplicatesOn() {
-		if (duplicatestoggle.getAttribute("value").equals("false"))
+		if (duplicatestoggle.getAttribute("value").equals("0"))
 			duplicatestoggle.click();
 	}
 
 	public void setCheckDuplicatesOff() {
-		if (duplicatestoggle.getAttribute("value").equals("true"))
+		if (duplicatestoggle.getAttribute("value").equals("1"))
 			duplicatestoggle.click();
 	}
 	
 	public void setShowTopCustomersOn() {
-		if (showtopcustomerstoggle.getAttribute("value").equals("false"))
+		if (showtopcustomerstoggle.getAttribute("value").equals("0"))
 			showtopcustomerstoggle.click();
 	}
 	
 	public void setShowTopCustomersOff() {
-		if (showtopcustomerstoggle.getAttribute("value").equals("true"))
+		if (showtopcustomerstoggle.getAttribute("value").equals("1"))
 			showtopcustomerstoggle.click();
 	}
 

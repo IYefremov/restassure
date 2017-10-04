@@ -82,8 +82,10 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
-		if (!appiumdriver.findElementByName(pricematrix).isDisplayed())
+		if (!appiumdriver.findElementByName(pricematrix).isDisplayed()) {
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + pricematrix + "']/..")));
+			appiumdriver.findElement(MobileBy.AccessibilityId(pricematrix)).click();
+		}
 		appiumdriver.findElement(MobileBy.AccessibilityId(pricematrix)).click();
 	}
 
@@ -127,14 +129,16 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		if (!appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")).isDisplayed())
+		if (!appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")).isDisplayed()) {
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")));
+			appiumdriver.findElementByAccessibilityId(discaunt).click();
+		}
 		appiumdriver.findElementByAccessibilityId(discaunt).click();
 	}
 	
 	public void switchOffOption(String optionname) {
 		Helpers.waitABit(1000);
-		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("true"))
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
 			appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
 	}
 	

@@ -192,7 +192,7 @@ public abstract class Helpers {
 		Alert alert = driver.switchTo().alert();
 		String alertetxt = alert.getText();
 		alert.accept();
-		waitABit(500);
+		waitABit(1000);
 		return alertetxt;
 	}
 	

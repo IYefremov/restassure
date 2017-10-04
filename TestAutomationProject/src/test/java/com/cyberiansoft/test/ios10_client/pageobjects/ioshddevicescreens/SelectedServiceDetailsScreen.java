@@ -90,21 +90,26 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		Assert.assertEquals(serviceadjustmentsfld.getText(), adjustments);
 	}
 
-	public void setServicePriceValue(String _price)
-			throws InterruptedException {
-		if (appiumdriver.findElementsByAccessibilityId("Price").size() > 1) {
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Price").get(1)).click();
-			appiumdriver.findElement(
-					By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")).clear();
-		} else {
-			servicepricefld.click();
-			WebElement par = getTableParentCell("Price");
+	public void setServicePriceValue(String _price)	 {
 		
-			par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		}
+		WebElement pricefld = null;
+		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
+		for (WebElement prc : priceflds)
+			if (prc.isDisplayed())
+				pricefld = prc;
+		pricefld.findElement(
+				By.xpath("//XCUIElementTypeTextField[1]")).click();
+		pricefld.findElement(
+				By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		pricefld.findElement(
+				By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_price + "\n");
+		
+		//IOSElement prf = (IOSElement) pricefld.findElement(
+		//		By.xpath("//XCUIElementTypeTextField[1]"));
+		//prf.setValue(value);
 		//servicepricevaluefld.clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(1000);
 	}
 
@@ -180,15 +185,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			throws InterruptedException {	
 		
 		quantityfld.click();
+		
 		Helpers.waitABit(500);
 		
-		WebElement par = getTableParentCell("Quantity");
+		//WebElement par = getTableParentCell("Quantity");
 		
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		quantityfld.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		
-		//if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
-		//	appiumdriver.findElementByAccessibilityId("Clear text").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Quantity']/XCUIElementTypeTextField[1]").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
@@ -226,11 +229,22 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
 		Helpers.waitABit(500);
-		if (appiumdriver.findElementsByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").size() > 1)
-			((IOSElement) appiumdriver.
-					findElementsByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").get(1)).click();
+		/*List<WebElement> savebtns = appiumdriver.findElementsByName("Save");
+		System.out.println("+++" + savebtns.size());
+		for (WebElement sv : savebtns)
+			if (sv.isDisplayed())
+				sv.click();*/
+		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
+		for (WebElement nv : navbars)
+			if (nv.findElements(By.name("Save")).size() > 0) {
+				nv.findElement(By.name("Save")).click();
+				break;
+			}
+		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+		/*if (appiumdriver.findElementsByAccessibilityId("Save").size() > 1)
+			((IOSElement) appiumdriver.findElementsByAccessibilityId("Save").get(1)).click();
 		else
-			appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
+			appiumdriver.findElementByAccessibilityId("Save").click();*/
 		Helpers.waitABit(500);
 	}
 
@@ -458,10 +472,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {
 		WebElement vehiclepartstable = null;
-		if (appiumdriver.findElementsByAccessibilityId("VehiclePartSelectorView").size() > 1)
-			vehiclepartstable = (WebElement) appiumdriver.findElementsByAccessibilityId("VehiclePartSelectorView").get(1);
-		else
-			vehiclepartstable = appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
+		List<WebElement> vpselectors = appiumdriver.findElementsByAccessibilityId("VehiclePartSelectorView");
+		for (WebElement vp : vpselectors) 
+			if (vp.getAttribute("type").equals("XCUIElementTypeTable")) {
+				vehiclepartstable = vp;
+				break;
+			}
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(Duration.ofSeconds(1)).release().perform();

@@ -128,7 +128,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public void switchOffOption(String optionname) {
-		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("true"))
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
 			((IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']")).click();
 		Helpers.waitABit(1000);
 	}

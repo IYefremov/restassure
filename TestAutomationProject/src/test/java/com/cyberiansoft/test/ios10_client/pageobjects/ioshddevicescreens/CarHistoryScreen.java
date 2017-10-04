@@ -77,6 +77,7 @@ public class CarHistoryScreen extends iOSHDBaseScreen {
 	public void clickCarHistoryMyWorkOrders() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(myworkordersmenumenu)).click();
+		Helpers.waitABit(1000);
 	}
 
 }

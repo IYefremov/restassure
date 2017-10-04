@@ -1,15 +1,23 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
+import java.time.Duration;
+import java.util.HashMap;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -79,6 +87,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
+		Helpers.waitABit(1000);
 		cancelbtn.click();
 	}
 	
@@ -107,8 +116,11 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(changescreenbtn)).click();
 		Helpers.waitABit(500);
-		swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
+		if (! appiumdriver.findElementByAccessibilityId(screenname).isDisplayed()) {
+			swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
+			appiumdriver.findElementByAccessibilityId(screenname).click();
+		}
 		appiumdriver.findElementByAccessibilityId(screenname).click();
 		Helpers.waitABit(1000);
 	}
@@ -140,11 +152,34 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		while (swipe) {
 			if ((elementtoswipe.getLocation().getY() > screenheight)) {
 			//if (!elementtoswipe.isDisplayed())
-				swipeScreenUp();
+				/*JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+		        HashMap scrollObject = new HashMap<>();
+		        scrollObject.put("element", ((RemoteWebElement) elementtoswipe).getId());
+	            //scrollObject.put("toVisible", "true"); // optional but needed sometimes
+	            js.executeScript("mobile:scroll", scrollObject);
+	           */
+				JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
+				HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+				scrollObject1.put("direction", "up");
+				//scrollObject.put("element", ((IOSElement) ELEMENT).getId());
+				js1.executeScript("mobile: swipe", scrollObject1);
+				
+				//swipeScreenUp();
+				//swipeTableUp();
 			}
 			else
 				swipe = false;
 		}
+	}
+	
+	public void swipeTableUp() {
+		
+		MobileElement table = (MobileElement) appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
+		
+		TouchAction swipe = new TouchAction(appiumdriver).press(table, table.getSize().width/2, table.getSize().height-10)
+                .waitAction(Duration.ofSeconds(2)).moveTo(table, table.getSize().width/2, 10).release();
+        swipe.perform();
 	}
 
 }

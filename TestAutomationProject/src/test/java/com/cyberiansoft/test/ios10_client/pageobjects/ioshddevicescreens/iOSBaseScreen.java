@@ -187,13 +187,17 @@ public class iOSBaseScreen {
 		//Swipe from Bottom to Top.
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
+		MobileElement table = (MobileElement) appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
 		
-		TouchAction swipe = new TouchAction(appiumdriver).press(startx, starty)
-                .waitAction(Duration.ofSeconds(2)).moveTo(startx, endy).release();
+		TouchAction swipe = new TouchAction(appiumdriver).press(table, table.getSize().width/2, table.getSize().height-10)
+                .waitAction(Duration.ofSeconds(2)).moveTo(table, table.getSize().width/2, 10).release();
         swipe.perform();
 		
+        /*swipe = new TouchAction(appiumdriver).press(startx, endy)
+                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
+        swipe.perform();*/
 		//appiumdriver.swipe(startx, starty, startx, endy, 500);
-		Helpers.waitABit(2000);
 	}
 	
 	public void scrollScreenUp() {

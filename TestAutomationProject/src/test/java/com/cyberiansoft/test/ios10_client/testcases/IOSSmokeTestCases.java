@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 
 import java.io.File;
@@ -974,7 +975,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String stock = "Stock1";
 		final String _ro = "123";	
 		final String licplate = "456";
-		final String _year = "2012";
+		final String _year = "2014";
 		
 		final String teamname= "Default team";
 
@@ -1044,7 +1045,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		//Thread.sleep(4000);
 		//Helpers.swipeScreen();
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectTaxPoint("Test Answer 1");
 		servicesscreen.clickSaveButton();
@@ -1135,9 +1136,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//singlepageinspectionscreen.swipeScreenLeft();
 		//singlepageinspectionscreen.swipeScreenLeft();
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());		
-		singlepageinspectionscreen.swipeScreenRight1();
+		singlepageinspectionscreen.swipeScreenRight();
 		Thread.sleep(2000);
-		singlepageinspectionscreen.swipeScreenRight1();
+		singlepageinspectionscreen.swipeScreenRight();
 		Thread.sleep(2000);
 		singlepageinspectionscreen.swipeScreenUp();
 		
@@ -1263,11 +1264,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		
-		
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1365,9 +1365,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		
-		element(
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
+		/*element(
 				MobileBy.name("Close"))
-				.click();
+				.click();*/
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1478,9 +1482,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1511,7 +1516,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("Yes"))
 				.click();
-		
+		Helpers.waitABit(1000);
 		//Create WO2
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.searchCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1523,9 +1528,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1624,9 +1630,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1719,9 +1726,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -1931,9 +1939,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		pricematrix.selectDiscaunt(_discaunt_us);
 		pricematrix.clickSaveButton();
-		servicesscreen.assertServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-		
+		servicesscreen.assertServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);		
 		servicesscreen.selectNextScreen("Test Section");
+
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.setEngineCondition("Really Bad");
 		questionsscreen.swipeScreenRight();
@@ -1973,7 +1981,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("Yes"))
 				.click();
-		Thread.sleep(8000);
+		Thread.sleep(3000);
 		myinspectionsscreen.selectFirstInspection();
 		myinspectionsscreen.clickCopyInspection();
 		vehiclescreeen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
@@ -2007,7 +2015,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("Yes"))
 				.click();
-		Thread.sleep(10000);
+		Thread.sleep(3000);
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$837.99");
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -2052,9 +2060,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -2129,9 +2138,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(element(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
-		element(
-				MobileBy.name("Close"))
-				.click();
+		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (MobileElement closebtn : closebtns)
+			if (closebtn.isDisplayed())
+				closebtn.click();
 		element(
 				MobileBy.name("Close"))
 				.click();
@@ -3088,7 +3098,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Assert.assertTrue(myworkordersscreen.isAutosavedWorkOrderExists());
 		myworkordersscreen.selectContinueWorkOrder(wonumber);
-		Thread.sleep(1000);
+		Thread.sleep(30*1000);
 		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
 		
 		resrtartApplication();

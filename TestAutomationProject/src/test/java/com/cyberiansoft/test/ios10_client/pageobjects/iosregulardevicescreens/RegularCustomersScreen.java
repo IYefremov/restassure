@@ -10,7 +10,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -85,11 +85,11 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
 	public void selectCustomer(String customer) {
 		Helpers.waitABit(1000);
-		searchbtn.click();
-		Helpers.waitABit(2000);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(1000);
+		if (!appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']")).isDisplayed()) {
+			swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/..")));
+				appiumdriver.findElementByAccessibilityId(customer).click();
+		}
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']")).click();
 	}
 	

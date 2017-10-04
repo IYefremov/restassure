@@ -1,8 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.DeviceRotation;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,9 +19,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
-public class MainScreen {
-	
-	private AppiumDriver appiumdriver;
+public class MainScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility  = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
@@ -41,8 +43,9 @@ public class MainScreen {
 	//final static String licensesxpath = "//UIAToolbar[1]/UIAButton[@name=\"Licences\"]";
 
 	public MainScreen(AppiumDriver driver) {
-		appiumdriver = driver;
+		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void updateDatabase() throws InterruptedException {
@@ -67,18 +70,24 @@ public class MainScreen {
 	}
 
 	public HomeScreen userLogin(String user, String password) throws InterruptedException {
-		Helpers.waitABit(10000);
+		Helpers.waitABit(1000);
 		Helpers.setTimeOut(5);
 		//Helpers.waitUntilCheckLicenseDialogDisappears();
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
+		if (!appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").isDisplayed()) {
+			swipeTableUp(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/.."),
+					appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/../.."));
+			appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
+		}
+		
+		appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
 		//wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.visibilityOf(securefld));
 		securefld.setValue(password);
-		action = new TouchAction(appiumdriver);
+		TouchAction action = new TouchAction(appiumdriver);
 		action.press(loginbtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		//loginbtn.click();
 		return new HomeScreen(appiumdriver);

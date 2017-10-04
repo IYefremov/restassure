@@ -16,6 +16,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -159,8 +160,13 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
 		Helpers.waitABit(500);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		//((IOSDriver) appiumdriver).hideKeyboard();
+		//Helpers.waitABit(500);
+		try {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		} catch (WebDriverException e) {
+			
+		}
+		//((IOSDriver) appiumdriver).hideKeyboard();
 		Helpers.waitABit(500);
 	}
 	
@@ -294,8 +300,12 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	
 	public void selectOwnerT(String owner) throws InterruptedException {
 		ownerfld.click();
+		try {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
+		} catch (WebDriverException e) {
+			appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']").click();
+		}
 	}
 
 	public void setTech(String _tech) throws InterruptedException {

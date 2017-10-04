@@ -113,7 +113,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	
 	public void selectCustomerWithoutEditing(String customer)
 			throws InterruptedException {
-		Helpers.waitABit(1000);
+		Helpers.waitABit(2000);
 		searchCustomer(customer);
 		clickOnCustomer(customer);
 		selectpopupmenu.click();

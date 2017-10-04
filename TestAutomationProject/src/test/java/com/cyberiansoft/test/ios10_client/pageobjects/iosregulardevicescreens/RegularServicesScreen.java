@@ -156,6 +156,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicepanelname + "']/XCUIElementTypeStaticText[@name='" + servicepanelname + "']/..")));
 		appiumdriver.findElementByName(servicepanelname).click();
+		appiumdriver.findElementByName(servicepanelname).click();
 	}
 	
 	public void selectServiceSubSrvice(String servicesubsrvicename) {

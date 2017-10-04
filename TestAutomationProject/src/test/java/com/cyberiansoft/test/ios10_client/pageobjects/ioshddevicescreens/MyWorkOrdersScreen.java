@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -11,6 +12,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -119,6 +121,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void clickChangeCustomerPopupMenu() {
 		changecustomermenu.click();
+		Helpers.waitABit(1000);
 	}
 	
 	public void clickDetailspopupMenu() {
@@ -129,7 +132,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public void selectCustomer(String customer) {
 		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
         tap.perform();
-		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(customer), 200);
+        Helpers.waitABit(1000);
 	}
 	
 	public void changeCustomerForWorkOrder(String wonumber, String customer) {
@@ -291,6 +294,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public void selectDiscardWorkOrder(String wo) {
 		selectWorkOrder(wo);
 		discardmenu.click();
+		Helpers.waitABit(1000);
 	}
 
 	public void clickCreateInvoiceIconForWO(String wonumber) {
@@ -331,9 +335,22 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByName(workordertype)).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByName(workordertype).click();
+		WebElement wostable = null;
+		
+		List<WebElement> tbls = appiumdriver.findElementsByAccessibilityId("OrderTypeSelector");
+		for (WebElement tb : tbls) {
+			if (tb.getAttribute("type").equals("XCUIElementTypeTable")) {
+				wostable = tb;
+				break;
+			}
+		}
+		if (!appiumdriver.findElementByAccessibilityId(workordertype).isDisplayed()) {
+			swipeTableUp(appiumdriver.findElementByAccessibilityId(workordertype),
+					wostable);
+			appiumdriver.findElementByAccessibilityId(workordertype).click();
+		}
+		appiumdriver.findElementByAccessibilityId(workordertype).click();
+		Helpers.waitABit(1000);
 		return new VehicleScreen(appiumdriver);
 	}
 

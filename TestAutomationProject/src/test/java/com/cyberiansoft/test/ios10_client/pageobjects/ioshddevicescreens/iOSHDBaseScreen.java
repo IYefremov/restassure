@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -12,6 +13,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -76,7 +78,8 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public void selectNextScreen(String screenname) {
 		Helpers.waitABit(500);
-		appiumdriver.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
+		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
+		navbar.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(screenname).click();
@@ -109,69 +112,24 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public void swipeScreenRight() {
 		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.width *0.7);
+		int starty = (int) (size.height *0.85);
 		
-		int startx = (int) (size.width * 0.20);
+		int startx = (int) (size.width * 0.15);
 		int endx = (int) (size.width * 0.80);
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
-		/*int starty = (int) size.height / 2;	
-		int startx = (int) (size.width * 0.90);
-		int endx = (int) (size.width * 0.10);*/
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+        HashMap<String, String> swipeObject = new HashMap<String, String>();
+        swipeObject.put("direction", "left");
+        js.executeScript("mobile:swipe", swipeObject);
 		
-		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
-                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
-        swipe.perform();
-		
-		
-		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
-		
-		
-		
-		
-		/*System.out.println("====" );
-		appiumdriver.swipe(startx, starty, endx, starty, 2000);
-		System.out.println("====" );
-		TouchAction act = new TouchAction(appiumdriver);		
-		act.press(endx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
-		System.out.println("====" );
-		act = new TouchAction(appiumdriver);
-		act.press(starty, startx).waitAction(3000) .moveTo(starty, endx).release().perform();
-		//appiumdriver.swipe(startx, endy, startx, starty, 2000);*/
 	}
 	
 	public void swipeScreenRight1() {
-		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.width/2);
-		
-		int startx = (int) (size.width * 0.10);
-		int endx = (int) (size.width * 0.90);
-		//TouchAction act = new TouchAction(appiumdriver);
-		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
-		/*int starty = (int) size.height / 2;	
-		int startx = (int) (size.width * 0.90);
-		int endx = (int) (size.width * 0.10);*/
-		
-		
-		
-		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
-                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
-        swipe.perform();
-		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
-		
-		
-		
-		
-		
-		/*System.out.println("====" );
-		appiumdriver.swipe(startx, starty, endx, starty, 2000);
-		System.out.println("====" );
-		TouchAction act = new TouchAction(appiumdriver);		
-		act.press(endx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
-		System.out.println("====" );
-		act = new TouchAction(appiumdriver);
-		act.press(starty, startx).waitAction(3000) .moveTo(starty, endx).release().perform();
-		//appiumdriver.swipe(startx, endy, startx, starty, 2000);*/
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+        HashMap<String, String> swipeObject = new HashMap<String, String>();
+        swipeObject.put("direction", "left");
+        js.executeScript("mobile:swipe", swipeObject);
 	}
 	
 	public boolean selectUIAPickerValue(String value) {
@@ -182,16 +140,18 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		//selectUIAPickerValue(year);
 		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
-		int  xx = pickerwhl.getLocation().getX();
-		int yy = pickerwhl.getLocation().getY();
+		int  xx = picker.getSize().getWidth()/2;
+		int yy = (int) (picker.getSize().getHeight()*0.75);
+
+		//170-210
 		while (!found) {
 			found = pickerwhl.getAttribute("value").contains(value);
 			if (!found) {
+				
 				TouchAction action = new TouchAction(appiumdriver);
-				//action.press(appiumdriver.manage().window().getSize().width - picker.getLocation().getY() - picker.getSize().getHeight()/2 - 30, xx+30).waitAction(1000).
-				//action.press(xx+picker.getSize().getWidth()/2, yy + picker.getSize().getHeight()/2 +70).waitAction(1000).
-				action.press(xx+picker.getSize().getWidth()/2, (int) (yy + picker.getSize().getHeight()*0.8)).waitAction(Duration.ofSeconds(1)).
-				release().perform();
+				action.tap(picker, xx, yy).perform();
+				
+				
 				Helpers.waitABit(1000);
 				
 			} else {
@@ -206,17 +166,28 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void swipeScreenUp() {
-		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.width * 0.80);
-		//Find endy point which is at top side of screen.
-		int endy = (int) (size.width * 0.20);
-		//Find horizontal point where you wants to swipe. It is in middle of screen width.
-		int startx = size.height / 2;
-		//System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
-		//Swipe from Bottom to Top.
-		//TouchAction act = new TouchAction(appiumdriver);
-		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
-		//appiumdriver.swipe(startx, starty, startx, endy, 2000);
-		Helpers.waitABit(2000);
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+        HashMap<String, String> swipeObject = new HashMap<String, String>();
+        swipeObject.put("direction", "down");
+        js.executeScript("mobile:swipe", swipeObject);
+	}
+	
+	public void swipeTableUp(WebElement tableCell, WebElement table) {
+		int tableHeight = (int) (table.getSize().getHeight());
+		boolean swipe = true;
+		
+		while (swipe) {
+			//if (!tableCell.isDisplayed()) {
+			if ((tableCell.getLocation().getY()*0.9 > tableHeight)) {
+				JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+				HashMap<String, String> scrollObject = new HashMap<String, String>();
+				scrollObject.put("direction", "up");
+				scrollObject.put("element", ((IOSElement) table).getId());
+				js.executeScript("mobile: swipe", scrollObject);
+			} else
+				swipe = false;
+		}
+		
+		
 	}
 }
