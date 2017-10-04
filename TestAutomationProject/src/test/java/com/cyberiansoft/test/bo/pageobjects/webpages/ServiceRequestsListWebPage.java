@@ -527,6 +527,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickServiceEditButton() {
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		getServiceEditButton().click();
 	}
 
@@ -649,7 +654,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean saveNewServiceRequest() {
 		try{
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -1989,6 +1994,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public int countAvailableServices() throws InterruptedException {
+		Thread.sleep(2500);
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("Card_comboService_Arrow")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
 		Thread.sleep(1000);
@@ -2006,6 +2012,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void setRO(String ro) {
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clearAndType(addsrvronum, ro);
 	}
 

@@ -43,6 +43,12 @@ public class MonitorWebPage extends BaseWebPage {
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl02_Label1")
 	private WebElement kanbanlink;
 	
+	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl14_Label1")
+	private WebElement serviceCountlink;
+	
+	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl13_Label1")
+	private WebElement activeVehiclesByPhaselink;
+	
 	public MonitorWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -106,6 +112,18 @@ public class MonitorWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(kanbanlink)).click();
 		return PageFactory.initElements(
 				driver, KanbanWebPage.class);
+	}
+
+	public ServiceCountWebPage clickServiceCountLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(serviceCountlink)).click();
+		return PageFactory.initElements(
+				driver, ServiceCountWebPage.class);
+	}
+	
+	public ActiveVechicleByPhaseWebPage clickActiveVehiclesByPhaseLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(activeVehiclesByPhaselink)).click();
+		return PageFactory.initElements(
+				driver, ActiveVechicleByPhaseWebPage.class);
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveVechicleByPhaseWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.AverageRepairTimeReportWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -15,6 +16,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorSettingsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationTimeTrackingWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceCountWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TrendingReportWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrdersWebPage;
@@ -398,7 +400,39 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertFalse(kanbanPage.checkIntervalFieldOverThan(720));
 		Assert.assertFalse(kanbanPage.checkIntervalFieldInputSymbol("a"));
 		Assert.assertTrue(kanbanPage.checkIntervalField(6));
+	}
+	
+	@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
+	public void checkMonitorReportsActiveVechiclesByPhase(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
+		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameField("180"));
+		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
+		activeVechicleByPhasePage.clickFindButton();
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+		
+		activeVechicleByPhasePage.setPhase1("PDR Station");
+		activeVechicleByPhasePage.setPhase2("PDI");
+		activeVechicleByPhasePage.setStatuses1("Active");
+		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+		
+		activeVechicleByPhasePage.clickFindButton();
+
 
 	}
 	
+	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
+	public void checkMonitorReportsServiceCount(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		ServiceCountWebPage serviceCountPage = monitorpage.clickServiceCountLink();
+		Assert.assertTrue(serviceCountPage.verifySearchFields());
+		serviceCountPage.clickSearchButton();
+		Assert.assertTrue(serviceCountPage.verifySearchResultGrid());
+	}
 }

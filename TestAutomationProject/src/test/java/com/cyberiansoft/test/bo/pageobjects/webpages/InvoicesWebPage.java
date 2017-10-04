@@ -574,18 +574,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		scrollWindowDown(100);
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
-		if (string.equals("Mark as Paid")) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
-			wait.until(ExpectedConditions.visibilityOf(paymentNote));
-			paymentTextField.sendKeys("test");
-			markAsPaidBTN.click();
-			driver.switchTo().alert().accept();
-				Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-			driver.navigate().refresh();
-			return mainWindow;
+		
+		if (string.equals("Edit") || string.equals("Print preview (server)")) {
+			ivoiceOptions.findElement(By.linkText(string)).click();
+			Set frames = driver.getWindowHandles();
+			Thread.sleep(10000);
+			frames.remove(mainWindow);
+			driver.switchTo().window((String) frames.iterator().next());
+			return (String) frames.iterator().next();
 		}
+		
 		 else if (string.equals("Pay")) {
 				ivoiceOptions.findElement(By.linkText(string)).click();
 				Thread.sleep(1000);
@@ -593,14 +591,37 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				return mainWindow;
 			}
-		else if (string.equals("Edit") || string.equals("Print preview (server)")) {
-			ivoiceOptions.findElement(By.linkText(string)).click();
-			Set frames = driver.getWindowHandles();
-			Thread.sleep(10000);
-			frames.remove(mainWindow);
-			driver.switchTo().window((String) frames.iterator().next());
-			return (String) frames.iterator().next();
-		} else if (string.equals("Download JSON")) {
+		else 
+			if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
+				Thread.sleep(1000);
+				wait.until(
+						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				wait.until(ExpectedConditions.visibilityOf(paymentNote));
+				paymentTextField.sendKeys("test");
+				markAsPaidBTN.click();
+				driver.switchTo().alert().accept();
+					Thread.sleep(1000);
+				wait.until(
+						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				driver.navigate().refresh();
+				return mainWindow;
+			}
+			else if((string.equals("Email Activity") && !swichArrow)){
+				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
+				Thread.sleep(200);
+				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+		
+					Set frames = driver.getWindowHandles();
+					Thread.sleep(10000);
+					frames.remove(mainWindow);
+					driver.switchTo().window((String) frames.iterator().next());
+					return (String) frames.iterator().next();
+				
+			}
+		 else if (string.equals("Download JSON")) {
 			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 			Thread.sleep(3000);
 			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
@@ -636,10 +657,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			try {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-				Thread.sleep(300);
+				
 				wait.until(ExpectedConditions
-						.presenceOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]"))).click();	
-	//			driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));	
+				Thread.sleep(300);
+				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
 			}
 			Thread.sleep(3000);

@@ -456,21 +456,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
-
-		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
-		// "407 SILVER SAGE DR., NewYork, CA, 10001");
-		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
-		// "14043801674");
-		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
-		// "ALICIA.VILLALOBOS@KCC.COM");
-
 		appointmentpopup.selectLocationType("Owner");
 		Thread.sleep(1000);
-		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
-		// SILVER SAGE DR.");
-		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
-		// "NewYork");
-		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
 		appointmentpopup.clickAddAppointment();
 		Thread.sleep(1000);
 		servicerequestslistpage
@@ -479,20 +466,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
-		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
-		// SILVER SAGE DR.");
-		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
-		// "NewYork");
-		// Assert.assertEquals(appointmentpopup.getClientZipValue(), "10001");
-		// Assert.assertEquals(appointmentpopup.getClientInfoAddressValue(),
-		// "407 SILVER SAGE DR., NewYork, 10001");
-		// Assert.assertEquals(appointmentpopup.getClientInfoPhoneValue(),
-		// "14043801674");
-		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
-		// "ALICIA.VILLALOBOS@KCC.COM");
+	
 		appointmentpopup.clickAddAppointment();
 		appointmentpopup.waitABit(2000);
-		servicerequestslistpage.closeFirstServiceRequestFromTheList();
+//		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
 	@Test(testName = "Test Case 26172:Operation - New service request - Appointment - Location Type: Repair Location", description = "Operation - New service request - Appointment - Location Type: Repair Location")
@@ -1785,7 +1762,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		settingsPage.closeNewTab(currentWindow);
 	}
 
-	@Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO")
+	@Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO", retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1820,7 +1797,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1832,10 +1808,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 
-	@Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN")
+	@Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN", retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateErrorVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1875,10 +1851,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickVehicleInforEditButton();
 		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 	
-	@Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO")
+	@Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO", retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateErrorRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1913,7 +1889,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1925,10 +1900,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 	
-	@Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN")
+	@Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN" , retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1960,8 +1935,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
-
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
@@ -1969,10 +1942,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickVehicleInforEditButton();
 		serviceRequestsWebPage.setVehicleInfo("123", randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 	
-	@Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK")
+	@Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK", retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateErrorStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -2004,8 +1977,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
-
+		
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
@@ -2013,10 +1985,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickVehicleInforEditButton();
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 	
-	@Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK")
+	@Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK", retryAnalyzer = Retry.class)
 	public void testServiceRequestTypeDublicateNotificationStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -2048,7 +2020,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(serviceRequestsWebPage.checkForAlert());
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -2057,7 +2028,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickVehicleInforEditButton();
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertFalse(serviceRequestsWebPage.saveNewServiceRequest());
+		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 		
 	}
 }

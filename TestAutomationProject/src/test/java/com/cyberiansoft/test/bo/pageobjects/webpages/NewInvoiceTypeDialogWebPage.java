@@ -5,6 +5,7 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,10 +26,10 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//textarea[contains(@id, 'Card_description')]")
 	private TextField invoicetypedescfld;
 	
-	@FindBy(id="_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPOVisible")
+	@FindBy(id="ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPOVisible")
 	private WebElement visiblechkbx;
 	
-	@FindBy(id = "_rfdSkinnedctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPORequired")
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbPORequired")
 	private WebElement requiredchkbx;
 	
 	@FindBy(xpath = "//label[contains(@for, 'Card_cbUseNewPrinting')]")
@@ -99,8 +100,12 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRequiredCheckBoxVisible() throws InterruptedException {
-		Thread.sleep(3000);
-		return requiredchkbx.isDisplayed();
+		try{
+			wait.until(ExpectedConditions.visibilityOf(requiredchkbx));
+			return true;
+		}catch(TimeoutException e){
+			return false;
+		}
 	}
 
 	public void selectVisibleCheckBox() throws InterruptedException {
