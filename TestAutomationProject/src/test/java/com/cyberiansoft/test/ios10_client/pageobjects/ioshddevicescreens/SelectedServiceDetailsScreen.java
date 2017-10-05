@@ -92,16 +92,19 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void setServicePriceValue(String _price)	 {
 		
-		WebElement pricefld = null;
+		/*WebElement pricefld = null;
 		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
 		for (WebElement prc : priceflds)
 			if (prc.isDisplayed())
-				pricefld = prc;
-		pricefld.findElement(
+				pricefld = prc;*/
+		WebElement par = getTableParentCell("Price");
+		
+		
+		par.findElement(
 				By.xpath("//XCUIElementTypeTextField[1]")).click();
-		pricefld.findElement(
+		par.findElement(
 				By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		pricefld.findElement(
+		par.findElement(
 				By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_price + "\n");
 		
 		//IOSElement prf = (IOSElement) pricefld.findElement(
@@ -188,9 +191,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		
 		Helpers.waitABit(500);
 		
-		//WebElement par = getTableParentCell("Quantity");
+		WebElement par = getTableParentCell("Quantity");
 		
-		quantityfld.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -270,13 +273,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void setTechnicianCustomPriceValue(String technician,
 			String _quantity) throws InterruptedException {
 		
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");		
+		IOSElement techsplittable =  getTechnicianSplitTable();	
 	
 		techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
 			+ technician + "')]/XCUIElementTypeStaticText[1]").click();
@@ -313,27 +310,21 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickTechniciansIcon() {
-		if (appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").size() > 2) {
+		List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		for (IOSElement techtoolbar : techtoolbars)
+			if (techtoolbar.findElementsByAccessibilityId("technician").size() > 0)
+				techtoolbar.findElementByAccessibilityId("technician").click();
+		/*if (appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").size() > 2) {
 			IOSElement popuptoolbar = (IOSElement) appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").get(2);
 			popuptoolbar.findElementByAccessibilityId("technician").click();
 		} else {
 			IOSElement popuptoolbar = (IOSElement) appiumdriver.findElementsByClassName("XCUIElementTypeToolbar").get(1);
 			popuptoolbar.findElementByAccessibilityId("technician").click();
-		}	
+		}	*/
 	}
 
 	public void selecTechnician(String technician) {
-		WebElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1);
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
+		IOSElement techsplittable =  getTechnicianSplitTable();
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
 	}
 	
@@ -349,37 +340,19 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void unselecTechnician(String technician) {
-		WebElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
+		IOSElement techsplittable =  getTechnicianSplitTable();
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='selected']")).click();
 	}
 
 	public String getTechnicianPrice(String technician) {
-			IOSElement techsplittable =  null;
-			if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-				techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-			else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-				techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-			else
-				techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
+		IOSElement techsplittable =  getTechnicianSplitTable();	
 		
 		return techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
 				+ technician + "')]/XCUIElementTypeTextField[1]").getAttribute("value");
 	}
 
 	public String getTechnicianPercentage(String technician) {
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
+		IOSElement techsplittable =  getTechnicianSplitTable();	
 	
 	return techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
 			+ technician + "')]/XCUIElementTypeTextField[1]").getAttribute("value");
@@ -398,14 +371,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getCustomTechnicianPercentage(String technician) {
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
-		
+		IOSElement techsplittable =  getTechnicianSplitTable();		
 		String techitianlabel = techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
 				+ technician + "')]").getAttribute("label");
 		
@@ -414,16 +380,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void setTechnicianCustomPercentageValue(String technician,
 			String percentage) {
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");		
-	
-		techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-			+ technician + "')]/XCUIElementTypeStaticText[1]").click();
+		IOSElement techsplittable =  getTechnicianSplitTable();
 
 		if (techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
 				+ technician + "')]/XCUIElementTypeTextField[1]").size() > 0)
@@ -445,27 +402,35 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public boolean isTechnicianIsSelected(String technician) {
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").get(1);
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
+		IOSElement techsplittable =  getTechnicianSplitTable();
 		return techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
 						+ technician + "')]/XCUIElementTypeButton[@name='selected']").size() > 0;
 	}
+	
+	public IOSElement getTechnicianSplitTable() {
+		IOSElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1) {
+			List<IOSElement> techviews = appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView");
+			for (IOSElement techview : techviews)
+				if (techview.getAttribute("type").equals("XCUIElementTypeTable")) {
+					techsplittable = techview;
+					break;
+				}
+		} else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsSingleSelectionView").size() > 1) {
+			List<IOSElement> techviews = appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView");
+			for (IOSElement techview : techviews)
+				if (techview.getAttribute("type").equals("XCUIElementTypeTable")) {
+					techsplittable = techview;
+					break;
+				}
+		}
+		else
+			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
+		return techsplittable;
+	}
 
 	public boolean isTechnicianIsNotSelected(String technician) {
-		IOSElement techsplittable =  null;
-		if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() > 1)
-			techsplittable = (IOSElement) appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").get(1);
-		else if (appiumdriver.findElementsByAccessibilityId("TechnicianSplitsView").size() == 1)
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("TechnicianSplitsView");
-		else
-			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");	
+		IOSElement techsplittable =  getTechnicianSplitTable();	
 		return techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
 						+ technician + "')]/XCUIElementTypeButton[@name='unselected']").size() > 0;
 	}

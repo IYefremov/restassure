@@ -338,15 +338,22 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void changeTechnician(String servicetype, String techname) {
 		appiumdriver.findElementByAccessibilityId(servicetype).click();
 		Helpers.waitABit(500);
-		if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 0) {
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1)).
-			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
-				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		
+		IOSElement techsplittable =  null;
+		if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 1) {
+			List<IOSElement> techviews = appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView");
+			for (IOSElement techview : techviews)
+				if (techview.getAttribute("type").equals("XCUIElementTypeTable")) {
+					techsplittable = techview;
+					break;
+				}
 		} else {
-		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
-			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
-				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+			techsplittable = (IOSElement) appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView");
 		}
+		
+		techsplittable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
+				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
+		
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
 		Helpers.waitABit(500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();

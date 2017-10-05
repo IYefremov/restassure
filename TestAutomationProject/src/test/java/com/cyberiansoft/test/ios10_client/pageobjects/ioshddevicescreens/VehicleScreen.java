@@ -269,6 +269,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void cancelOrder() {
 		cancelbtn.click();
 		acceptAlert();
+		Helpers.waitABit(1000);
 	}
 	
 	public void setColor(String color) {
