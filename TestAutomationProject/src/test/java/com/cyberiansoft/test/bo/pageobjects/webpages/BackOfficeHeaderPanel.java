@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -49,19 +52,28 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public void clickLogout() {
-//		driver.navigate().refresh();
+		driver.navigate().refresh();
 		if (driver.getWindowHandles().size() > 1) {
 			driver.close();
 			for (String activeHandle : driver.getWindowHandles())
 				driver.switchTo().window(activeHandle);	
 		}
+		File failReason = new File("C:\\fails\\tests.txt");
 		driver.switchTo().defaultContent();
 		waitABit(1000);
 		WebElement element = driver.findElement(By.id("__clockTime"));
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", element); 
+		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-	
+		}catch(Exception e){
+			try {
+				FileWriter writer = new FileWriter(failReason);
+				writer.write(this.getClass().getEnclosingMethod().getName() + "\n");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
 		try{
@@ -113,6 +125,10 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		return PageFactory.initElements(
 				driver, ReportsWebPage.class);
 		
+	}
+
+	public void refresh() {
+		driver.navigate().refresh();
 	}
 
 }

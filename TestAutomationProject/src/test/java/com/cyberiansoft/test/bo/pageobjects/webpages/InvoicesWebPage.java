@@ -585,18 +585,30 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 		
 		 else if (string.equals("Pay")) {
+			 try{
 				ivoiceOptions.findElement(By.linkText(string)).click();
 				Thread.sleep(1000);
+			 }catch(Exception e){
+					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+					ivoiceOptions.findElement(By.linkText(string)).click();
+			 }
 				wait.until(
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				return mainWindow;
 			}
 		else 
 			if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
+				try{
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
+				}catch(Exception e){
+					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
+				}
 				Thread.sleep(1000);
 				wait.until(
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				
+				if(string.equals("Mark as Paid")){
 				wait.until(ExpectedConditions.visibilityOf(paymentNote));
 				paymentTextField.sendKeys("test");
 				markAsPaidBTN.click();
@@ -605,6 +617,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				wait.until(
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				driver.navigate().refresh();
+				}
 				return mainWindow;
 			}
 			else if((string.equals("Email Activity") && !swichArrow)){

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -26,8 +28,12 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_chbPhasesInRow")
 	WebElement phasesInRowCheckBox;
+
 	@FindBy(id = "VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
 	WebElement reportContent;
+	
+	@FindBy(xpath = "//a[text()='Subscriptions']")
+	WebElement subscriptionsBTN;
 
 	public ActiveVechicleByPhaseWebPage(WebDriver driver) {
 		super(driver);
@@ -99,20 +105,23 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		}
 	}
 
-	public void setPhase1(String phase) {
+	public void setPhase1(String phase) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_comboPhase_Input")).click();
+		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
 	}
 
-	public void setPhase2(String phase) {
+	public void setPhase2(String phase) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_comboPhase2_Input")).click();
+		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
 	}
 
-	public void setStatuses1(String... statuses) {
+	public void setStatuses1(String... statuses) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus_Input")).click();
+		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> {
 			for (String status : statuses) {
 				if (e.getText().equals(status))
@@ -120,16 +129,60 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 			}
 			return false;
 		}).forEach(e -> e.click());
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus_Arrow")).click();
 	}
 
-	public void setStatuses2(String...statuses) {
+	public void setStatuses2(String... statuses) throws InterruptedException {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus2_Input")).click();
+		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> {
 			for (String status : statuses) {
 				if (e.getText().equals(status))
 					return true;
 			}
 			return false;
-		}).forEach(e -> e.click());		
+		}).forEach(e -> e.click());
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus2_Arrow")).click();
+	}
+
+	public void clickPhasesInRow() {
+		phasesInRowCheckBox.click();
+	}
+
+	public boolean checkThatAllPhasesAreInStatus(String phase, String... statuses) {
+		List<WebElement> tableRows = driver.findElements(By.xpath("//tr[@valign='top']"));
+		for (int i = 0; i < 13; i++) {
+			tableRows.remove(0);
+		}
+
+		tableRows.stream().filter(e -> {
+			try {
+				e.findElement(By.xpath("//div[text()='" + phase + "']"));
+				return true;
+			} catch (Exception ex) {
+				return false;
+			}
+		}).allMatch(e -> {
+			for (String status : statuses) {
+				if (e.findElements(By.tagName("td")).get(8).getText().equals(status))
+					return true;
+			}
+			return false;
+		});
+
+		return true;
+	}
+
+	public SubscriptionsWebPage clickSubscriptionsButton() throws InterruptedException {
+		String mainWindow = driver.getWindowHandle();
+		subscriptionsBTN.click();
+		Thread.sleep(1500);
+		for(String window : driver.getWindowHandles()){
+			if(!window.equals(mainWindow))
+				driver.switchTo().window(window);
+			return PageFactory.initElements(
+					driver, SubscriptionsWebPage.class);
+		}
+		return null;
 	}
 }

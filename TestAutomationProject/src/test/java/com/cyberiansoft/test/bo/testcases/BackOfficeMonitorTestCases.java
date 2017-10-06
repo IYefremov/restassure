@@ -17,6 +17,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationTimeTrackingWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceCountWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.SubscriptionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TrendingReportWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrdersWebPage;
@@ -39,8 +40,13 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void BackOfficeLogout() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+		try{
 		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
+		}catch(Exception e){
+			backofficeheader.refresh();
+			backofficeheader.clickLogout();
+		}
 	}
 	
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
@@ -403,7 +409,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
-	public void checkMonitorReportsActiveVechiclesByPhase(){
+	public void checkMonitorReportsActiveVechiclesByPhaseSubscriptions() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
@@ -419,14 +425,36 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		activeVechicleByPhasePage.setPhase2("PDI");
 		activeVechicleByPhasePage.setStatuses1("Active");
 		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
-		
+		activeVechicleByPhasePage.clickPhasesInRow();
 		activeVechicleByPhasePage.clickFindButton();
-
-
+		Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station","Active"));
+		SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
+		Assert.assertTrue(subscriptionsPege.checkGrid());
+		subscriptionsPege.clickAddButton();
+		Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());
+		subscriptionsPege.setSubscriptionPopUpLocation("ALM - Recon Facility");
+		subscriptionsPege.setSubscriptionPopUpPhase1("PDR Station");
+		subscriptionsPege.setSubscriptionPopUpStatuses1("Active");
+		subscriptionsPege.setSubscriptionPopUpPhase2("PDI");
+		subscriptionsPege.setSubscriptionPopUpStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+		subscriptionsPege.setSubscriptionPopUpDescription("test");
+		subscriptionsPege.setSubscriptionPopUpStartTime("12:00 AM");
+		subscriptionsPege.clickOkAddPopUpButton();
 	}
 	
 	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
 	public void checkMonitorReportsServiceCount(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		ServiceCountWebPage serviceCountPage = monitorpage.clickServiceCountLink();
+		Assert.assertTrue(serviceCountPage.verifySearchFields());
+		serviceCountPage.clickSearchButton();
+		Assert.assertTrue(serviceCountPage.verifySearchResultGrid());
+	}
+	
+	//@Test(testName = "Test Case 65433:Monitor: Reports - Active Vehicles by Phase General")
+	public void checkMonitorReportsActiveVechiclesByPhaseGeneral(){
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();

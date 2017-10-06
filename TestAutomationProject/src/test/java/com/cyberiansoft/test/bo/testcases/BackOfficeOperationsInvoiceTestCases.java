@@ -677,13 +677,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 
 		invoicespage.clickFindButton();
-		try {
 			invoicespage.selectActionForFirstInvoice("Mark as Paid", false);
 			invoicespage.clickFindButton();
 			Assert.assertTrue(invoicespage.firstInvoiceMarkedAsPaid());
-		} finally {
-			invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
-		}
 	}
 
 	//@Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle Info", retryAnalyzer = Retry.class)

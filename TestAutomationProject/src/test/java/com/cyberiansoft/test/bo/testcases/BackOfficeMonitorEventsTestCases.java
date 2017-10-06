@@ -28,8 +28,13 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	public void BackOfficeLogout() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+		try{
 		backofficeheader.clickLogout();
 		Thread.sleep(3000);
+		}catch(Exception e){
+			backofficeheader.refresh();
+			backofficeheader.clickLogout();
+		}
 	}
 	
 	@Test(description = "Test Case 19250:\"Estimate approved\" event creation")

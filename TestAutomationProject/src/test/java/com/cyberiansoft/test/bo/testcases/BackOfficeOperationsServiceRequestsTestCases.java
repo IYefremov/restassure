@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import java.awt.AWTException;
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -52,8 +53,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		}
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-
-		backofficeheader.clickLogout();
+		try{
+			backofficeheader.clickLogout();
+		}catch(Exception e){
+			backofficeheader.refresh();
+			backofficeheader.clickLogout();
+		}
 	}
 
 	@Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")

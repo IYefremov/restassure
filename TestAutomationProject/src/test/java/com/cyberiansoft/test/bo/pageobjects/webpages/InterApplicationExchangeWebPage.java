@@ -109,7 +109,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		Thread.sleep(2000);
 	}
 	
-	public void fillProfileDetails(String name, String entityType) {
+	public void fillProfileDetails(String name, String entityType) throws InterruptedException {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 
@@ -120,6 +120,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		
 		calendsrIcon.click();
 		calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
+		Thread.sleep(2000);
 	}
 
 	public void fillProfileDetailsEdit(String name) {
@@ -248,8 +249,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		if (allUsersCount >= usersToAdd) {
 			for (int i = 0; i < usersToAdd; i++) {
 				addRuleUsersList.findElements(By.tagName("option")).get(0).click();
-				for (int j = 0; j < 10; j++) {
-					Thread.sleep(500);
+				for (int j = 0; j < 5; j++) {
+					Thread.sleep(100);
 					try {
 						if (addRuleSelectedUsersList.findElements(By.tagName("options")).size() == i + 1)
 							break;
