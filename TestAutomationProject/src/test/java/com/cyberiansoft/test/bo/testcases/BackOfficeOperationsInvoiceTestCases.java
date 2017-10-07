@@ -863,8 +863,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
@@ -876,7 +874,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
-		// invoicespage.closeTab(emailWindow);
 	}
 
 	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info", retryAnalyzer = Retry.class)
@@ -968,6 +965,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Pay", false);
 		invoicespage.checkPayBoxContent();
+		invoicespage.clickFindButton();
+		invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
+
 	}
 
 	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log", retryAnalyzer = Retry.class)

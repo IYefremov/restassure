@@ -31,8 +31,9 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	@FindBy(id = "VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
 	WebElement reportContent;
-	
-	@FindBy(xpath = "//a[text()='Subscriptions']")
+
+	// @FindBy(xpath = "//a[text()='Subscriptions']")
+	@FindBy(linkText = "Subscriptions")
 	WebElement subscriptionsBTN;
 
 	public ActiveVechicleByPhaseWebPage(WebDriver driver) {
@@ -177,12 +178,30 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		String mainWindow = driver.getWindowHandle();
 		subscriptionsBTN.click();
 		Thread.sleep(1500);
-		for(String window : driver.getWindowHandles()){
-			if(!window.equals(mainWindow))
+		for (String window : driver.getWindowHandles()) {
+			if (!window.equals(mainWindow)) {
 				driver.switchTo().window(window);
-			return PageFactory.initElements(
-					driver, SubscriptionsWebPage.class);
+				return PageFactory.initElements(driver, SubscriptionsWebPage.class);
+			}
 		}
 		return null;
+	}
+
+	public int countLocationsInResultTable() {
+		System.out.println(driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size());
+		return driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size();
+	}
+
+	public boolean checkTimeFrameFilter() {
+		try {
+			timeFrameField.click();
+			return listWithItems.findElements(By.tagName("li")).stream()
+					.allMatch(e -> e.getText().equals("Last 30 Days") || e.getText().equals("Last 90 Days")
+							|| e.getText().equals("Last 180 Days") || e.getText().equals("Last 365 Days")
+							|| e.getText().equals("Custom Dates"));
+
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

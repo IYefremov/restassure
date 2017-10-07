@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -67,6 +70,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_calendar_Top")
 	WebElement calendarPage;
+	
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_dateInput")
+	WebElement addProfileDateField;
 
 	public InterApplicationExchangeWebPage(WebDriver driver) {
 		super(driver);
@@ -118,8 +124,13 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
 		
-		calendsrIcon.click();
-		calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
+		
+		LocalDateTime date = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		addProfileDateField.sendKeys(formatter.format(date));
+		
+//		calendsrIcon.click();
+//		calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
 		Thread.sleep(2000);
 	}
 
