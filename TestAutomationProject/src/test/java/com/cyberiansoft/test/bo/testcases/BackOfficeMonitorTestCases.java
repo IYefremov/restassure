@@ -468,6 +468,22 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() == 1);
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
-
+	}
+	
+	@Test(testName = "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases")
+	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases(){
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
+		activeVechicleByPhasePage.clickFindButton();
+		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 1);
+		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
+		activeVechicleByPhasePage.clickFindButton();
+		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() == 1);
+		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
 	}
 }

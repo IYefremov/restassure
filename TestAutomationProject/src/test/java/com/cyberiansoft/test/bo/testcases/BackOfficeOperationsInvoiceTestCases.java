@@ -602,7 +602,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft")
 	public void checkOperationInvoiceStatusDraft() throws InterruptedException {
 		final String ponum = "123";
 
@@ -667,7 +667,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -711,100 +711,46 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		@SuppressWarnings("unused")
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();
-		// invoiceeditpage.editVehicleInfo("test");
-		// Assert.assertTrue(invoicespage.vehicleInfoWasEdited());
 	}
 
-	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice")
 	public void checkOperationInvoiceEditChangeInvoice() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		// WorkOrdersWebPage workorderspage =
-		// operationspage.clickWorkOrdersLink();
-		// workorderspage.unselectInvoiceFromDeviceCheckbox();
-		// workorderspage.selectSearchStatus("All");
-		// workorderspage.clickFindButton();
-		//
-		// String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		// String invoicenumber =
-		// workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// if (invoicenumber.equals("")) {
-		// workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-		// workorderspage.setSearchOrderNumber(wonum);
-		// workorderspage.clickFindButton();
-		// invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// }
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 
 		invoicespage.selectActionForFirstInvoice("Change Invoice#", false);
 		Assert.assertTrue(invoicespage.checkInvoiceFrameOpened());
 		Assert.assertTrue(invoicespage.isInvoiceAbleToChange());
 		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
-		// Assert.assertTrue(invoicenumber.equals(newInvoiceNumber));
 	}
 
-	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
 	public void checkOperationInvoiceDownloadJSON() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		// WorkOrdersWebPage workorderspage =
-		// operationspage.clickWorkOrdersLink();
-		// workorderspage.unselectInvoiceFromDeviceCheckbox();
-		// workorderspage.selectSearchStatus("All");
-		// workorderspage.clickFindButton();
-		//
-		// String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		// String invoicenumber =
-		// workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// if (invoicenumber.equals("")) {
-		// workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-		// workorderspage.setSearchOrderNumber(wonum);
-		// workorderspage.clickFindButton();
-		// invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// }
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 
 		invoicespage.selectActionForFirstInvoice("Download JSON", false);
 	}
 
-	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info")
 	public void checkOperationInvoiceEditTechInfo() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		// WorkOrdersWebPage workorderspage =
-		// operationspage.clickWorkOrdersLink();
-		// workorderspage.unselectInvoiceFromDeviceCheckbox();
-		// workorderspage.selectSearchStatus("All");
-		// workorderspage.clickFindButton();
-		//
-		// String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		// String invoicenumber =
-		// workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// if (invoicenumber.equals("")) {
-		// workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-		// workorderspage.setSearchOrderNumber(wonum);
-		// workorderspage.clickFindButton();
-		// invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// }
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
@@ -816,22 +762,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		// WorkOrdersWebPage workorderspage =
-		// operationspage.clickWorkOrdersLink();
-		// workorderspage.unselectInvoiceFromDeviceCheckbox();
-		// workorderspage.selectSearchStatus("All");
-		// workorderspage.clickFindButton();
-		//
-		// String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		// String invoicenumber =
-		// workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// if (invoicenumber.equals("")) {
-		// workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-		// workorderspage.setSearchOrderNumber(wonum);
-		// workorderspage.clickFindButton();
-		// invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		// }
-
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
@@ -841,7 +771,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 
-	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", retryAnalyzer = Retry.class)
+	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity")
 	public void checkOperationInvoiceSentMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -859,7 +789,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
 	}
 
-	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", retryAnalyzer = Retry.class)
+	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity")
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -876,7 +806,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
 	}
 
-	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info")
 	public void checkOperationInvoiceEditInternalTechInfo() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -934,7 +864,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkSearchResult());
 	}
 
-	@Test(testName = "Test Case 43688:Operation - Invoice: Edit - Print Preview (Server)", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43688:Operation - Invoice: Edit - Print Preview (Server)")
 	public void checkOperationInvoiceEditPrintPreview() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -948,8 +878,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		String newTab = invoicespage.selectActionForFirstInvoice("Print preview (server)", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
-		// Assert.assertTrue(invoicespage.checkWindowContent(newTab, "VIN
-		// #","Make","Model","Year","Color","Tag","R.O #","Stock#"));
 		invoicespage.closeTab(newTab);
 	}
 
@@ -970,7 +898,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	}
 
-	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log")
 	public void checkOperationInvoiceEditAuditLog() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -984,7 +912,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 
-	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation")
 	public void checkOperationInvoiceSearchOperation() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
