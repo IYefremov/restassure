@@ -895,7 +895,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 56827:Operation - Service Request - Documents not shown during creation,"
 			+ "Test Case 56828:Operation - Service Request - Answers not shown during creation")
 
-	public void testShownSRDuringCreation() {
+	public void testShownSRDuringCreation() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();

@@ -84,7 +84,8 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		}
 	}
 	
-	public OperationsWebPage clickOperationsLink() {
+	public OperationsWebPage clickOperationsLink() throws InterruptedException {
+		Thread.sleep(1500);
 		wait.until(ExpectedConditions.elementToBeClickable(operationstab)).click();
 		return PageFactory.initElements(
 				driver, OperationsWebPage.class);

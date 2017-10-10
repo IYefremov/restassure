@@ -111,6 +111,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
+		Thread.sleep(2500);
 	}
 
 	public void setPhase2(String phase) throws InterruptedException {
@@ -118,6 +119,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
+		Thread.sleep(2500);
 	}
 
 	public void setStatuses1(String... statuses) throws InterruptedException {

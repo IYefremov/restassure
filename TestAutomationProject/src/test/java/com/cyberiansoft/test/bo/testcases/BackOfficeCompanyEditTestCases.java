@@ -262,7 +262,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.archiveUser(userfirstnameed, userlastnameed);
 	}
 
-	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit")
 	public void testCompanyClientsUsersEdit() throws Exception {
 
 		final String clientmail = "123123213@domain.com";
@@ -535,7 +535,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicespage.archiveService(servicenameed);
 	}
 
-	@Test(testName = "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit", description = "Company - Service Request Type: Service type at Service Request Edit", retryAnalyzer=Retry.class)
+	@Test(testName = "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit", description = "Company - Service Request Type: Service type at Service Request Edit")
 	public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit() throws Exception {
 
 		final String srtype = "ta SR Type";
@@ -564,7 +564,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.clickAddServiceRequestButton();
 
 		srlistpage.clickServiceEditButton();
-		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 2);
+		Assert.assertEquals(srlistpage.countAvailableServices(), 2);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 
@@ -580,7 +580,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.clickAddServiceRequestButton();
 
 		srlistpage.clickServiceEditButton();
-		Assert.assertEquals(srlistpage.getServiceRequestServicesToSelect().size(), 52);
+		Assert.assertEquals(srlistpage.getAllAvailableServices(), "52");
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 

@@ -43,34 +43,29 @@ public class ServiceCountWebPage extends BaseWebPage {
 		searchBTN.click();
 	}
 
-	public boolean verifySearchFields() {
+	public boolean verifySearchFields() throws InterruptedException {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		try {
+			Thread.sleep(1500);
 			if (!locationField.getAttribute("value").equals("(all)")) {
 				return false;
 			}
-
 			StringBuilder criteriaDate = new StringBuilder(formatter.format(now.minusWeeks(1)));
-
-			System.out.println(criteriaDate);
-			System.out.println(searchDateFrom.getAttribute("value"));
-			System.out.println(searchDateFrom.getAttribute("value").equals(criteriaDate.toString()));
-
+			Thread.sleep(1500);
 			if (!searchDateFrom.getAttribute("value").equals(criteriaDate.toString())) {
 				return false;
 			}
-			
 			 criteriaDate = new StringBuilder(formatter.format(now));
-
+				Thread.sleep(1500);
 			if (!searchDateTo.getAttribute("value").equals(criteriaDate.toString())) {
 				return false;
 			}
-
+			Thread.sleep(1500);
 			calendarDateFromBTN.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_calendar_Top")));
-
+			Thread.sleep(1500);
 			calendarDateToBTN.click();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateTo_calendar_Top")));

@@ -213,7 +213,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void clickAddRuleToFirstProfile() {
+	public void clickAddRuleToFirstProfile() throws InterruptedException {
+		Thread.sleep(2000);
 		driver.findElement(
 				By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl00_AddNewRecordButton"))
 				.click();
@@ -230,9 +231,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 				.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
 	
-
 		waitForLoading();
-
+		waitABit(2000);
 		if (filterType.equals("Include Selected"))
 			new Select(driver.findElement(
 					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))

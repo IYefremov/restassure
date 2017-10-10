@@ -538,7 +538,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36047:Test inspection print template with no options selected", description = "Test inspection print template with no options selected",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInspectionPrintTemplateWithNoOptionsSelected() {
+	public void testTestInspectionPrintTemplateWithNoOptionsSelected() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		
@@ -578,7 +578,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 36048: Test inspection print template several options selected", description = "Test inspection print template several options selected",
 			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
-	public void testTestInspectionPrintTemplateSeveralOptionsSelected() {
+	public void testTestInspectionPrintTemplateSeveralOptionsSelected() throws InterruptedException {
 
 		final String ptname = "Default_package_test";	
 		

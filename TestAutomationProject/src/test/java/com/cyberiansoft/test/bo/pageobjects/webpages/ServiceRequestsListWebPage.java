@@ -1995,7 +1995,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public int countAvailableServices() throws InterruptedException {
 		Thread.sleep(2500);
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("Card_comboService_Arrow")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Card_comboService_Arrow")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
 		Thread.sleep(1000);
 		return wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList"))).findElements(By.tagName("li")).size();
@@ -2032,5 +2032,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		return false;
 		}
+	}
+
+	public String getAllAvailableServices() throws InterruptedException {
+		Thread.sleep(1500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Card_comboService_Arrow")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
+		Thread.sleep(2500);
+		return driver.findElement(By.id("Card_comboService_MoreResultsBox")).findElements(By.tagName("b")).get(2).getText();
 	}
 }
