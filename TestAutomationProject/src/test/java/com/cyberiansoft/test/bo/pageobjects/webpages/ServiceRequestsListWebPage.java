@@ -733,7 +733,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return exists;
 	}
 
-	public void addServicesToServiceRequest(String[] services) {
+	public WebElement clickAddServicesIcon() {
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(By
 				.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']")))
@@ -741,8 +741,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		act.click(driver.findElement(By
 				.xpath("//div[contains(@class, 'infoBlock-list')]/div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']")))
 				.perform();
-		WebElement servicespopup = wait.until(ExpectedConditions.visibilityOf(
+		return wait.until(ExpectedConditions.visibilityOf(
 				driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
+	}
+	
+	public void addServicesToServiceRequest(String[] services) {
+		WebElement servicespopup = clickAddServicesIcon();
 		for (String srv : services) {
 			driver.findElement(By.id("Card_comboService_Input")).click();
 			driver.findElement(By.id("Card_comboService_Input")).clear();
@@ -752,6 +756,32 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(500);
 		}
 		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
+	}
+	
+	public void setServiePriceAndQuantity(String serviceName, String price, String quantity) {
+		WebElement servicespopup = clickAddServicesIcon();		
+		WebElement servicerow =  getSelectedServiceRow(serviceName);
+		
+		servicerow.findElement(By.xpath(".//input[@class='k-formatted-value price-service k-input']")).click();
+		servicerow.findElement(By.xpath(".//input[@class='price-service k-input']")).clear();
+		servicerow.findElement(By.xpath(".//input[@class='price-service k-input']")).sendKeys(price);
+				
+		servicerow.findElement(By.xpath(".//input[@class='k-formatted-value quantity-service k-input']")).click();
+		servicerow.findElement(By.xpath(".//input[@class='quantity-service k-input']")).clear();
+		servicerow.findElement(By.xpath(".//input[@class='quantity-service k-input']")).sendKeys(quantity);
+		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
+	}
+	
+	public WebElement getSelectedServiceRow(String serviceName) {
+		WebElement servicerow = null;
+		WebElement servicespopup = driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"));
+		List<WebElement> selectedservices = servicespopup.findElements(By.xpath(".//*[@class='container-service container-service-selected']"));
+		for (WebElement srvrow : selectedservices)
+			if (srvrow.findElements(By.xpath(".//span[text()='" + serviceName + "']")).size() > 0) {
+				servicerow = srvrow;
+				break;
+			}
+		return servicerow;
 	}
 
 	public boolean checkTimeOfLastDescription() {

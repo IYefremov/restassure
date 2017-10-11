@@ -90,7 +90,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/..")));
 				appiumdriver.findElementByAccessibilityId(customer).click();
 		}
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']")).click();
+		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	
 	public void selectCustomerWithoutEditing(String customer) {

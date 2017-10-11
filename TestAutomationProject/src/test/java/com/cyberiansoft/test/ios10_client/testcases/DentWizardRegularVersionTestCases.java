@@ -3906,7 +3906,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
-			RegularVehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(UtilConstants.enterpriseworkordertype);
+			myworkordersscreen.selectWorkOrderType(UtilConstants.enterpriseworkordertype);
+			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.selectNextScreen(RegularEnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption());

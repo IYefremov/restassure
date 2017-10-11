@@ -3,9 +3,11 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -36,6 +38,9 @@ public class RegularTeamWorkOrdersScreen extends RegularMyWorkOrdersScreen {
 	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;
+	
+	@iOSFindBy(accessibility = "Approve")
+    private IOSElement approvebtn;
 	
 	public RegularTeamWorkOrdersScreen(AppiumDriver driver) {
 		super(driver);
@@ -99,6 +104,19 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
 		Helpers.waitABit(500);
 		selectWorkOrderType(wotype);
+	}
+	
+	public void selectWorkOrderForApprove(String wonumber) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersTable"))); 
+		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther")).click();
+		
+	}
+	
+	public void approveWorkOrder(String wo, String employee, String pwd) {
+		selectWorkOrderForApprove(wo);
+		selectEmployeeAndTypePassword(employee, pwd);
+		approvebtn.click();
 	}
 
 

@@ -16,10 +16,12 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
@@ -58,10 +60,10 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public RegularHomeScreen clickHomeButton() throws InterruptedException {
-		Thread.sleep(1000);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		//wait.until(ExpectedConditions.visibilityOf(backbtn)).click();
-		backbtn.click();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Back"))).click();
+		//backbtn.click();
 		Thread.sleep(1000);
 		return new RegularHomeScreen(appiumdriver);
 	}
@@ -71,12 +73,10 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 			clickChangeScreen();
 		}
 		savebtn.click();
-		Helpers.waitABit(1000);
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void cancelOrder() {

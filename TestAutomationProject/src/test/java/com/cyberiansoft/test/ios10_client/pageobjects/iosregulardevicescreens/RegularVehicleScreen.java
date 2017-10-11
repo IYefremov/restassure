@@ -14,9 +14,11 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -108,6 +110,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
 	}
 
 	public static String getVehicleScreenCaption() {
@@ -191,7 +195,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getInspectionNumber() {
-		Helpers.waitABit(500);
+
 		return getInspectionNumberLabel().getText();
 	}
 

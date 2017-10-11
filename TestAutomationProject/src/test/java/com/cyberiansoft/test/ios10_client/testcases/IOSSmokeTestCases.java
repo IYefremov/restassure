@@ -6,7 +6,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 
 import java.io.File;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -64,13 +62,10 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
@@ -2147,7 +2142,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
-		//vehiclescreeen.setYear(_year);
+		vehiclescreeen.setYear(_year);
 		Thread.sleep(2000);
 		vehiclescreeen.setMileage(mileage);
 		vehiclescreeen.setFuelTankLevel(fueltanklevel);
@@ -3170,8 +3165,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddAppointmentButton();
 		servicerequestsscreen.selectTodayFromAppointmet();
 		servicerequestsscreen.selectTodayToAppointmet();
-		final String fromapp = servicerequestsscreen.getFromAppointmetValue();
-		final String toapp = servicerequestsscreen.getToAppointmetValue();
+		//final String fromapp = servicerequestsscreen.getFromAppointmetValue();
+		//final String toapp = servicerequestsscreen.getToAppointmetValue();
 		
 		servicerequestsscreen.setSubjectAppointmet("SR-APP");
 		servicerequestsscreen.setAddressAppointmet("Maidan");
@@ -3248,8 +3243,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddAppointmentButton();
 		servicerequestsscreen.selectTodayFromAppointmet();
 		servicerequestsscreen.selectTodayToAppointmet();
-		final String fromapp = servicerequestsscreen.getFromAppointmetValue();
-		final String toapp = servicerequestsscreen.getToAppointmetValue();
+		//final String fromapp = servicerequestsscreen.getFromAppointmetValue();
+		//final String toapp = servicerequestsscreen.getToAppointmetValue();
 			
 		servicerequestsscreen.setSubjectAppointmet(srappsubject);
 		servicerequestsscreen.setAddressAppointmet(srappaddress);
@@ -7056,7 +7051,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("Close"))
 				.click();
-		final String wonum = vehiclescreeen.getInspectionNumber();
+	
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setYear(_year);
@@ -8028,8 +8023,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 42178:WO: HD - Verify that Cancel message is shown for New/Existing WO", 
 			description = "Verify that Cancel message is shown for New/Existing WO")
 	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() throws Exception {
-		
-		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();

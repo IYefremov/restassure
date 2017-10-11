@@ -268,6 +268,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	}
 
 	public void setSearchInvoiceNumber(String invoicenum) {
+		waitUntilElementIsClickable(searchinvoicenofld.getWrappedElement());
 		clearAndType(searchinvoicenofld, invoicenum);
 	}
 

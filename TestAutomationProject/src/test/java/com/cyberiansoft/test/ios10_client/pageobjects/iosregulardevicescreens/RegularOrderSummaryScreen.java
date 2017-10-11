@@ -65,9 +65,8 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(1000);
 	}
 
-	public RegularInvoiceInfoScreen selectDefaultInvoiceType() {
+	public void selectDefaultInvoiceType() {
 		defaultinvoicetype.click();
-		return new RegularInvoiceInfoScreen(appiumdriver);
 	}
 	
 	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
