@@ -443,7 +443,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
-	public void checkMonitorReportsServiceCount(){
+	public void checkMonitorReportsServiceCount() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
