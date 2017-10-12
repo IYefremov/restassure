@@ -574,9 +574,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		String mainWindow = driver.getWindowHandle();
 		scrollWindowDown(300);
 		Actions act = new Actions(driver);
-		act.moveToElement(selectBTN).click().build().perform();
 		
 		if (string.equals("Edit") || string.equals("Print preview (server)")) {
+			act.moveToElement(selectBTN).click().build().perform();
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			Set frames = driver.getWindowHandles();
 			Thread.sleep(10000);
@@ -586,6 +586,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 		
 		 else if (string.equals("Pay")) {
+			 act.moveToElement(selectBTN).click().build().perform();
 			 try{
 				ivoiceOptions.findElement(By.linkText(string)).click();
 				Thread.sleep(1000);
@@ -599,10 +600,13 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}
 		else 
 			if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
+				act.moveToElement(selectBTN).click().build().perform();
 				try{
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 				}catch(Exception e){
+					try{
 					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+					}catch(Exception ex){}
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 				}
 				Thread.sleep(1000);
@@ -622,6 +626,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				return mainWindow;
 			}
 			else if((string.equals("Email Activity") && !swichArrow)){
+				act.moveToElement(selectBTN).click().build().perform();
 				try{
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 				}catch(Exception e){}
@@ -638,19 +643,21 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				
 			}
 		 else if (string.equals("Download JSON")) {
+			 act.moveToElement(selectBTN).click().build().perform();
 			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
 			Thread.sleep(3000);
 			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 			return mainWindow;
 		} else if ((string.equals("Send Email") && swichArrow) || (string.equals("Send Custom Email") && swichArrow)) {
-			Thread.sleep(2000);
+			act.moveToElement(selectBTN).click().build().perform();
+			Thread.sleep(1000);
 			try {
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
 			} catch (Exception e) {
 			}
 			try {
 				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
+						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")));
 				Thread.sleep(500);
 				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
@@ -665,6 +672,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				return (String) frames.iterator().next();
 			}
 		} else {
+			act.moveToElement(selectBTN).click().build().perform();
 			Thread.sleep(2000);
 			try {
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
@@ -672,8 +680,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}
 			try {
 				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]"))).click();
+//				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
 			}
 			Thread.sleep(3000);

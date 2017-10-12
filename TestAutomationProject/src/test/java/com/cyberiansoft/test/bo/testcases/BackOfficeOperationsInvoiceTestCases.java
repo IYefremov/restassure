@@ -675,7 +675,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
+	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -722,7 +722,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();
 	}
 
-	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice")
+	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditChangeInvoice() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -752,7 +752,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectActionForFirstInvoice("Download JSON", false);
 	}
 
-	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info")
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditTechInfo() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -766,7 +766,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 
-	@Test(testName = "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split")
+	@Test(testName = "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditRecalcTechSplit() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -780,7 +780,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 
-	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity")
+	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSentMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -798,7 +798,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
 	}
 
-	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity")
+	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -815,7 +815,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
 	}
 
-	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info")
+	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditInternalTechInfo() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -891,7 +891,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 
-	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay")
+	@Test(testName = "Test Case 43691:Operation - Invoice: Edit - Pay", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditPay() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -909,11 +909,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectActionForFirstInvoice("Pay", false);
 		invoicespage.checkPayBoxContent();
 		invoicespage.clickFindButton();
+		try{
 		invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
-
+		}catch(Exception e){}
 	}
 
-	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log")
+	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditAuditLog() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
