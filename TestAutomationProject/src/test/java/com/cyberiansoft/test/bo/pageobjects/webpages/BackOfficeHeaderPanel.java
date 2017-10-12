@@ -46,6 +46,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 	
+	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Timesheets']")
+	private WebElement timesheetstab;
+	
 	public BackOfficeHeaderPanel(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -130,6 +133,13 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 
 	public void refresh() {
 		driver.navigate().refresh();
+	}
+
+	public TimesheetsWebPage clickTimesheetsLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(timesheetstab)).click();
+		return PageFactory.initElements(
+				driver, TimesheetsWebPage.class);
+		
 	}
 
 }

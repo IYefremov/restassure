@@ -572,7 +572,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public String selectActionForFirstInvoice(String string, boolean swichArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
-		scrollWindowDown(100);
+		scrollWindowDown(300);
 		Actions act = new Actions(driver);
 		act.moveToElement(selectBTN).click().build().perform();
 		
@@ -622,7 +622,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				return mainWindow;
 			}
 			else if((string.equals("Email Activity") && !swichArrow)){
+				try{
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+				}catch(Exception e){}
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
 				Thread.sleep(200);
@@ -671,10 +673,6 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			try {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-				
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));	
-				Thread.sleep(300);
 				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
 			}
@@ -700,7 +698,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		try {
 			Actions act = new Actions(driver);
 			act.moveToElement(selectBTN).click().build().perform();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid")));
+			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
 			act.moveToElement(selectBTN).click().build().perform();
 		} catch (TimeoutException e) {
 			return false;

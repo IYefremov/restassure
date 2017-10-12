@@ -105,7 +105,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
 	}
 
-	//@Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add PO is present and payment is added", description = "Operations: Invoice editor - verify Add PO is present and payment is added")
+	// @Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add
+	// PO is present and payment is added", description = "Operations: Invoice
+	// editor - verify Add PO is present and payment is added")
 	public void testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded() throws Exception {
 
 		final String po = "#123";
@@ -151,7 +153,11 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeNewTab(mainWindowHandle);
 	}
 
-	//@Test(testName = "Test Case 24751:Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved")
+	// @Test(testName = "Test Case 24751:Operations: Invoice editor - verify
+	// that 'Approve invoice after payment' checkbox is disabled after checked
+	// it and Invoice is Approved", description = "Operations: Invoice editor -
+	// verify that 'Approve invoice after payment' checkbox is disabled after
+	// checked it and Invoice is Approved")
 	public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved()
 			throws Exception {
 
@@ -234,7 +240,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	}
 
-	//@Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes", description = "Operation - Invoice: Edit - Click here to edit notes")
+	// @Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here
+	// to edit notes", description = "Operation - Invoice: Edit - Click here to
+	// edit notes")
 	public void testOperationInvoiceEditClickHereToEditNotes() throws Exception {
 
 		final String invoicenumber = "I-000-00243";
@@ -352,18 +360,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.selectSearchStatus("New");
 		workorderspage.clickFindButton();
-		
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.checkFirstWorkOrderCheckBox();
 		workorderspage.addInvoiceDescription("test");
 		workorderspage.clickCreateInvoiceButton();
-		
+
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		if (invoicenumber.equals("")) {
 			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
 			workorderspage.setSearchOrderNumber(wonum);
@@ -413,23 +421,23 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		
+
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.checkFirstWorkOrderCheckBox();
 		workorderspage.addInvoiceDescription("test");
 		workorderspage.clickCreateInvoiceButton();
-		
+
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		if (invoicenumber.equals("")) {
 			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
 			workorderspage.setSearchOrderNumber(wonum);
@@ -483,18 +491,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.checkFirstWorkOrderCheckBox();
 		workorderspage.addInvoiceDescription("test");
 		workorderspage.clickCreateInvoiceButton();
-		
+
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		if (invoicenumber.equals("")) {
 			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
 			workorderspage.setSearchOrderNumber(wonum);
@@ -548,18 +556,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.checkFirstWorkOrderCheckBox();
 		workorderspage.addInvoiceDescription("test");
 		workorderspage.clickCreateInvoiceButton();
-		
+
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		if (invoicenumber.equals("")) {
 			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
 			workorderspage.setSearchOrderNumber(wonum);
@@ -613,18 +621,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.selectSearchStatus("New");
 		workorderspage.clickFindButton();
-		
+
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.checkFirstWorkOrderCheckBox();
 		workorderspage.addInvoiceDescription("test");
 		workorderspage.clickCreateInvoiceButton();
-		
+
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
-		
+
 		if (invoicenumber.equals("")) {
 			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
 			workorderspage.setSearchOrderNumber(wonum);
@@ -677,12 +685,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 
 		invoicespage.clickFindButton();
-			invoicespage.selectActionForFirstInvoice("Mark as Paid", false);
-			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.firstInvoiceMarkedAsPaid());
+		invoicespage.selectActionForFirstInvoice("Mark as Paid", false);
+		invoicespage.clickFindButton();
+		Assert.assertTrue(invoicespage.firstInvoiceMarkedAsPaid());
 	}
 
-	//@Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle Info", retryAnalyzer = Retry.class)
+	// @Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle
+	// Info", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditVehicleInfo() throws InterruptedException, AWTException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -835,13 +844,14 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	}
 
-	//@Test(testName = "Test Case 29198:Operation - Invoice: Year/Make/Model Search")
+	// @Test(testName = "Test Case 29198:Operation - Invoice: Year/Make/Model
+	// Search")
 	public void checkOperationInvoiceYearMakeModelSearch() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		//TODO bug
+		// TODO bug
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
@@ -890,6 +900,11 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		try {
+			invoicespage.clickFindButton();
+			invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
+		} catch (Exception e) {
+		}
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Pay", false);
 		invoicespage.checkPayBoxContent();
@@ -923,9 +938,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkInvoicesSearchFields());
 		Assert.assertTrue(invoicespage.checkInvoicesSearchResults());
 	}
-	
+
 	@Test(testName = "Test Case 64968:Operations - Invoice: Export")
-	public void checkOperationsInvoiceExport() throws InterruptedException{
+	public void checkOperationsInvoiceExport() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -934,7 +949,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectIvoicesFromTop(3);
 		String mainWindow = invoicespage.getMainWindow();
 		invoicespage.clickExportButton();
-		ExportInvoicesWebPage exportInvoicesPage= invoicespage.switchToExportInvoicesWindow(mainWindow);
+		ExportInvoicesWebPage exportInvoicesPage = invoicespage.switchToExportInvoicesWindow(mainWindow);
 		Assert.assertTrue(exportInvoicesPage.allInvoicesAreAbleToExport());
 	}
 }

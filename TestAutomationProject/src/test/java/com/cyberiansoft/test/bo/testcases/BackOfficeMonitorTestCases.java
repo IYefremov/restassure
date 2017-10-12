@@ -485,5 +485,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() == 1);
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
+		
 	}
 }

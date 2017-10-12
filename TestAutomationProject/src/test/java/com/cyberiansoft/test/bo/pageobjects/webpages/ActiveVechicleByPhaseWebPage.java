@@ -206,4 +206,21 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 			return false;
 		}
 	}
+
+	public boolean checkGrid() {
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("WO Date")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("WO No")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("VIN")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Year")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Make")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Model")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Stock#")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Phase")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Phase status")));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
