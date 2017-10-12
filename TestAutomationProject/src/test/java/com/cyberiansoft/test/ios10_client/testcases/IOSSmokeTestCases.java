@@ -40,6 +40,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PriceMa
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.QuestionsPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.QuestionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEmployeePopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEnvironmentPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestsScreen;
@@ -141,12 +142,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//System.out.println("+++" + appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
-		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		/*appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriverInicialize(buildtype);
+		*/
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		
+		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		//LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);

@@ -748,10 +748,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void addServicesToServiceRequest(String[] services) {
 		WebElement servicespopup = clickAddServicesIcon();
 		for (String srv : services) {
-			driver.findElement(By.id("Card_comboService_Input")).click();
+			System.out.println("+++" + srv);
+			//driver.findElement(By.id("Card_comboService_Input")).click();
 			driver.findElement(By.id("Card_comboService_Input")).clear();
 			driver.findElement(By.id("Card_comboService_Input")).sendKeys(srv);
-			driver.findElement(By.id("Card_comboService_DropDown")).findElement(By.xpath(".//ul/li[text()='" + srv + "']")).click();
+			driver.findElement(By.id("Card_comboService_DropDown")).findElement(By.name("serviceCheckbox")).click();
 			driver.findElement(By.id("Card_btnAddServiceToList")).click();
 			waitABit(500);
 		}

@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectEnvironmentScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
@@ -126,7 +127,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//appiumdriverInicialize();
 		//appiumdriver.installApp(app.getAbsolutePath());
 		//appiumdriver.launchApp();
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen(appiumdriver);
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		
+		//LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
@@ -707,6 +711,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 			inpections[i] = vehiclescreeen.getInspectionNumber();
 			vehiclescreeen.clickSaveButton();
+			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		}
 
 		myinspectionsscreen.clickActionButton();
@@ -2801,7 +2806,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		visualinteriorscreen.assertVisualPriceIsCorrect("$80.00");
 		
 		visualinteriorscreen.clickSaveButton();
-		Thread.sleep(8000);
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		myinspectionsscreen.selectNextScreen("Default");
 		pricematrix = new RegularPriceMatrixScreen(appiumdriver);
@@ -2893,10 +2898,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectSummaryRequestAction();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Thread.sleep(3000);
-		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
-		myinspectionsscreen.assertInspectionExists(inspectnumber);
-		myinspectionsscreen.clickHomeButton();
+		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
+		teaminspectionsscreen.assertInspectionExists(inspectnumber);
+		teaminspectionsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();
@@ -4804,10 +4808,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectSummaryRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Thread.sleep(8000);
-		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
-		myinspectionsscreen.assertInspectionExists(inspnumber);
-		myinspectionsscreen.clickHomeButton();
+		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
+		teaminspectionsscreen.assertInspectionExists(inspnumber);
+		teaminspectionsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();
@@ -6234,16 +6237,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectSummaryRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Thread.sleep(3000);
-		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
+		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
 		for (String inspectnumber : inspnumbers)
-			myinspectionsscreen.assertInspectionExists(inspectnumber);
+			teaminspectionsscreen.assertInspectionExists(inspectnumber);
 		
-		myinspectionsscreen.clickHomeButton();
-		Thread.sleep(1000);
+		teaminspectionsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
-
-		
+	
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		Thread.sleep(5000);
