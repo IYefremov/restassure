@@ -21,7 +21,7 @@
     <parameter name="selenium.browser" value="chrome" />
     	<classes>   
     	
-    	  <!-- 		
+    	  <!-- 	 --> 	
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>            
 			    
@@ -41,12 +41,12 @@
     		</class> 
     		  <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases">
     		</class>
-       --> 
+      
       
 	 	 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
 			</class>     	
 	   
-	  <!--
+	 
 		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
 			</class>	  
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
@@ -61,7 +61,7 @@
       		</class>
    
    
-  		   --> 
+  		 <!--   --> 
     </classes>
   </test> 
   
