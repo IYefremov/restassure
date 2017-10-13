@@ -2,6 +2,9 @@ package com.cyberiansoft.test.vnext.builder;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -36,7 +39,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         public SwipeableWebDriver build() {
         	PLATFORM_NAME = MobilePlatform.ANDROID;
         	File appDir = new File("./data/");
-    	    File app = new File(appDir, "ReconPro.apk");
+    	    File app = new File(appDir, "Repair360Android.apk");
     	    appiumcap = new DesiredCapabilities();
 
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
@@ -48,6 +51,8 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability("session-override",true);
     		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
     		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+    		//appiumcap.setCapability(MobileCapabilityType.APP,
+    		//		"http://amtqc.cyberiansoft.net/Uploads/Repair360Android_1003.app.zip");
             return new SwipeableWebDriver(endpoint, appiumcap);
 
         }
@@ -84,9 +89,12 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         DesiredCapabilities appiumcap = new DesiredCapabilities();
 
         public SwipeableWebDriver build() {
+        	DateTimeFormatter dateFormat =
+                    DateTimeFormatter.ofPattern("MMdd");
+    		LocalDate date = LocalDate.now();
         	PLATFORM_NAME = MobilePlatform.IOS;
-        	File appDir = new File("/Users/kolin/Documents");
-    	    File app = new File(appDir, "Repair360_0328.app.zip");
+        	//File appDir = new File("/Users/kolin/Documents");
+    	    //File app = new File(appDir, "Repair360_0328.app.zip");
     		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
     		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSRegularDeviceInfo.getInstance().getPlatformVersion());
     		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
@@ -103,7 +111,8 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSRegularDeviceInfo.getInstance().getDeviceName());
     		
-    		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+    		appiumcap.setCapability(MobileCapabilityType.APP,
+    				"http://amtqc.cyberiansoft.net/Uploads/Repair360_" + date.format(dateFormat) + ".app.zip");
 
             return new SwipeableWebDriver(endpoint, appiumcap);
 

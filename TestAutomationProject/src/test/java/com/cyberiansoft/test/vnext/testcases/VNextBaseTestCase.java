@@ -42,6 +42,7 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextTeamEditionVerificationScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.AppDownloader;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
@@ -79,11 +80,15 @@ public class VNextBaseTestCase {
 	
 	@BeforeSuite
 	@Parameters({ "selenium.browser", "device.platform" })
-	public void startServer(String browser, String devplatform) throws MalformedURLException {
+	public void startServer(String browser, String devplatform) throws IOException {
 		
 		//AppiumServiceBuilder builder = new AppiumServiceBuilder().withArgument(GeneralServerFlag.LOG_LEVEL, "error");
 	       // service = builder.build();
 	        //service.start();	
+		//AppDownloader.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360Android_1003.app.zip"), new File("./data/"));
+		//waitABit(4000);
+		
+		
 			deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 	       
 			deviceplatform = devplatform;

@@ -25,7 +25,7 @@ import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
 	@Test(testName= "Test Case 64246:Verify user can create Inspection in status 'New',"
-			+ "Test Case 64246:Verify user can create Inspection in status 'New',"
+			+ "Test Case 64249:Verify user can approve Inspection after creating,"
 			+ "Verify user can create Inspection in status 'New'", 
 			description = "Verify user can approve Inspection after creating")
 	public void testVerifyUserCanApproveInspectionAfterCreating() {

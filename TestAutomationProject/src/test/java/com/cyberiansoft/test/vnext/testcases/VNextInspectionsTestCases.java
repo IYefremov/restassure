@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -96,11 +97,6 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreenLeft();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.clickSaveButton();
@@ -123,8 +119,13 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickHardwareBackButton();
+		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();

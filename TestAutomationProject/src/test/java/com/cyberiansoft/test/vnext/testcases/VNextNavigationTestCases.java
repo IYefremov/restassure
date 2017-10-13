@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -111,7 +112,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
 		vehicleinfoscreen.clickScreenForwardButton();
-
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		claiminfoscreen.clickScreenForwardButton();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		for (int i = 0; i < damageTypes.length; i++) {
 			visualscreen.selectDefaultDamage(damageTypes[i]);

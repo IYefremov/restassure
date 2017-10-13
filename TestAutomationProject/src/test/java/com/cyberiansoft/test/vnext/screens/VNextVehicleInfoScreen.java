@@ -240,11 +240,14 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(1000);	
+		waitABit(1000);
 		swipeScreenLeft();
-		new VNextVisualScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		claiminfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		waitABit(1000);	
-		swipeScreenLeft();
+		visualscreen.swipeScreenLeft();
 		//new VNextVisualScreen(appiumdriver);
 		//swipeScreenLeft();
 		//new VNextVisualScreen(appiumdriver);

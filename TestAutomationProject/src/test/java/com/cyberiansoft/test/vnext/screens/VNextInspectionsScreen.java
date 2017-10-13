@@ -115,6 +115,12 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspcell;
 	}
 	
+	public boolean isNotesIconPresentForInspection(String inspectionnumber) {
+		WebElement inspcell = getInspectionCell(inspectionnumber);
+		return inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
+	}
+	
+	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + inspnumber + "']")));
 		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);

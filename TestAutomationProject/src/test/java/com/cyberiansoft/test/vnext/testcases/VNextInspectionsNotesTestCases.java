@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
@@ -563,6 +564,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickAddServiceButton();
 		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
@@ -582,7 +586,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickDamageCancelEditingButton();
-		inspectionsscreen = visualscreen.saveInspectionViaMenu();
+		inspectionsscreen = visualscreen.saveInspectionViaMenu();		
 		homescreen = inspectionsscreen.clickBackButton();
 		
 		homescreen.waitABit(30000);

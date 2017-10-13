@@ -118,7 +118,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
 		waitABit(2000);
-		swipeScreensRight(2);
+		swipeScreensRight(3);
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();

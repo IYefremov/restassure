@@ -14,6 +14,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -860,6 +861,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(testVIN);
 		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(selectdamage);
@@ -899,6 +903,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(testVIN);
+		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		inspinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickAddServiceButton();
@@ -1031,6 +1038,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickAddServiceButton();
