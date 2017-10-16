@@ -38,10 +38,13 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(phonevereficationscreren));
 	}
 	
-	public void setDeviceRegistrationCode(String regcode) {
-		setValue(regfld, regcode);
-		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+	public void setDeviceRegistrationCode(String regcode) {	
+		tap(regfld);
+		appiumdriver.getKeyboard().pressKey(regcode);
 		appiumdriver.hideKeyboard();
+		//setValue(regfld, regcode);
+		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		//appiumdriver.hideKeyboard();
 	    //switchToWebViewContext();
 		log(LogStatus.INFO, "Set registration code: " + regcode);
 	}

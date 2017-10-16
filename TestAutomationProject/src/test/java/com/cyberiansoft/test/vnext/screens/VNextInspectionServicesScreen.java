@@ -38,6 +38,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
+		waitABit(2000);
 		if (checkHelpPopupPresence())
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));

@@ -92,6 +92,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         	DateTimeFormatter dateFormat =
                     DateTimeFormatter.ofPattern("MMdd");
     		LocalDate date = LocalDate.now();
+    		date = date.minusDays(3);
         	PLATFORM_NAME = MobilePlatform.IOS;
         	//File appDir = new File("/Users/kolin/Documents");
     	    //File app = new File(appDir, "Repair360_0328.app.zip");
@@ -110,7 +111,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability("bundleId", "com.automobiletechnologies.repair360");
     		appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSRegularDeviceInfo.getInstance().getDeviceName());
-    		
+    		//appiumcap.setCapability("connectHardwareKeyboard", true);
     		appiumcap.setCapability(MobileCapabilityType.APP,
     				"http://amtqc.cyberiansoft.net/Uploads/Repair360_" + date.format(dateFormat) + ".app.zip");
 

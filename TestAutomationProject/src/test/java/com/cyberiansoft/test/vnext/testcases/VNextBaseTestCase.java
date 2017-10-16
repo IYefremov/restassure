@@ -44,6 +44,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.AppDownloader;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
+
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
@@ -60,6 +61,7 @@ import io.appium.java_client.android.HasNetworkConnection;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.remote.MobilePlatform;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 
@@ -141,16 +143,16 @@ public class VNextBaseTestCase {
 	public void switchToWebViewContext() {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		List<String> handlesList = new ArrayList(contextNames);
-		System.out.println("+++" + handlesList.size());
+		/*System.out.println("+++" + handlesList.size());
 		for (String handles : handlesList) {
 			System.out.println("+++" + handles);
 			if (handles.contains("com.automobiletechnologies.repair360"))
 				appiumdriver.context(handles);
-		}
-		/*if (handlesList.size() > 2)
+		}*/
+		if (handlesList.size() > 2)
 			appiumdriver.context(handlesList.get(2));
 		else
-			appiumdriver.context(handlesList.get(1));*/
+			appiumdriver.context(handlesList.get(1));
 	}
 
 	public void switchApplicationContext(String appcontext) {
@@ -227,14 +229,13 @@ public class VNextBaseTestCase {
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		registrationinformationdlg.waitABit(10*1000);
-		
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-
-		switchToWebViewContext();
-		
+		registrationinformationdlg.waitABit(15*1000);
+		if (VNextAppiumDriverBuilder.getPlatformName().equals(MobilePlatform.ANDROID)) {
+			switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+			appiumdriver.closeApp();
+			appiumdriver.launchApp();
+			switchToWebViewContext();
+		}
 		
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));

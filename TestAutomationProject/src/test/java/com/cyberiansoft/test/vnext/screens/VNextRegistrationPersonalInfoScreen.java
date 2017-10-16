@@ -52,9 +52,9 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		selectPhoneNumberCountryCode(countrycode);
 		setPhoneNumber(phonenumber);
 		setEmail(usermail);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.hideKeyboard();
-	    switchToWebViewContext();
+		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		//appiumdriver.hideKeyboard();
+	    //switchToWebViewContext();
 	}
 	
 	public void selectPhoneNumberCountryCode(String countrycode) {
@@ -65,23 +65,32 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	public void setFirstName(String firstname) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions. visibilityOf(firstnamefld));
-		firstnamefld.clear();
-		firstnamefld.sendKeys(firstname);
+		tap(firstnamefld);
+		appiumdriver.getKeyboard().pressKey(firstname);
+		//firstnamefld.clear();
+		//firstnamefld.sendKeys(firstname);
 	}
 	
 	public void setLastName(String lastname) {
-		lastnamefld.clear();
-		lastnamefld.sendKeys(lastname);
+		tap(lastnamefld);
+		appiumdriver.getKeyboard().pressKey(lastname);
+		//lastnamefld.clear();
+		//lastnamefld.sendKeys(lastname);
 	}
 	
 	public void setPhoneNumber(String phonenumber) {
-		phonenumberfld.clear();
-		phonenumberfld.sendKeys(phonenumber);
+		tap(phonenumberfld);
+		appiumdriver.getKeyboard().pressKey(phonenumber);
+		//phonenumberfld.clear();
+		//phonenumberfld.sendKeys(phonenumber);
 	}
 	
 	public void setEmail(String usermail) {
-		emailfld.clear();
-		emailfld.sendKeys(usermail);
+		tap(emailfld);
+		appiumdriver.getKeyboard().pressKey(usermail);
+		appiumdriver.hideKeyboard();
+		//emailfld.clear();
+		//emailfld.sendKeys(usermail);
 	}
 	
 	public void clickDoneButton() {
