@@ -142,10 +142,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//System.out.println("+++" + appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
-		/*appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriverInicialize(buildtype);
-		*/
+		
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
 		

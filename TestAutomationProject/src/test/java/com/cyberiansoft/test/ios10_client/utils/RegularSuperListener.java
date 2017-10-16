@@ -103,7 +103,7 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	
 	@Override
 	public void onTestFailure(ITestResult result) {
-		/*AppiumDriver appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
+		AppiumDriver appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
 	        testlogger= iOSLogger.getTestLogerInstance();
 	        if (appiumdriver != null) {
 	        	try {
@@ -132,17 +132,17 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 			}
         	extentreport = iOSLogger.getInstance();
         	extentreport.endTest(testlogger);
-        	extentreport.flush();*/
+        	extentreport.flush();
 	}
 	
 	@Override
 	public void onTestSkipped(ITestResult result) {
-        /*testlogger= iOSLogger.getTestLogerInstance();
+        testlogger= iOSLogger.getTestLogerInstance();
 		System.out.println("test method " + getTestMethodName(result) + " skipped");
 		testlogger.log(LogStatus.SKIP , "Test Case Skipped", getTestName(result) + " skipped");
 		extentreport = iOSLogger.getInstance();
 		extentreport.endTest(testlogger);
-		extentreport.flush();*/
+		extentreport.flush();
 	}
 	
 	@Override

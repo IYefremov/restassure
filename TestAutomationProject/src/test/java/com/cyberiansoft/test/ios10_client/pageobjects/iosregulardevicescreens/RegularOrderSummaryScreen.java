@@ -109,7 +109,6 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void clickSave() {

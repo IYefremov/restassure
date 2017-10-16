@@ -5756,7 +5756,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.clickSaveButton();
-		
+		myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		homescreen = myworkordersscreen.clickHomeButton();
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickSearchButton();
