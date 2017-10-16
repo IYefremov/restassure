@@ -61,16 +61,16 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_tbName")
 	WebElement ruleNameEdit2;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
 	WebElement sendFromCalendarBTN;
-	
-	@FindBy(id ="ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
 	WebElement calendsrIcon;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_calendar_Top")
 	WebElement calendarPage;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_dateInput")
 	WebElement addProfileDateField;
 
@@ -98,7 +98,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 		documentTypeDropDown.click();
-		
+
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(documentType))
 				.findFirst().get().click();
@@ -109,12 +109,12 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
-		
+
 		sendFromCalendarBTN.click();
 		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
 		Thread.sleep(2000);
 	}
-	
+
 	public void fillProfileDetails(String name, String entityType) throws InterruptedException {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
@@ -123,14 +123,13 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
-		
-		
+
 		LocalDateTime date = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		addProfileDateField.sendKeys(formatter.format(date));
-		
-//		calendsrIcon.click();
-//		calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
+
+		// calendsrIcon.click();
+		// calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
 		Thread.sleep(2000);
 	}
 
@@ -140,23 +139,29 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public void clickProfileDetailsBox(String button) throws InterruptedException {
-		if (button.equals("Cancel")){
-			try{
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel"))).click();
-			}catch(Exception e){
+		if (button.equals("Cancel")) {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(
+						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel")))
+						.click();
+			} catch (Exception e) {
 				Thread.sleep(2000);
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel"))).click();
+				wait.until(ExpectedConditions.elementToBeClickable(
+						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel")))
+						.click();
 			}
-		}
-		else if (button.equals("Insert")){	
-			try{
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate"))).click();
-			}catch(Exception e){
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate"))).click();
+		} else if (button.equals("Insert")) {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(
+						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate")))
+						.click();
+			} catch (Exception e) {
+				wait.until(ExpectedConditions.elementToBeClickable(
+						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate")))
+						.click();
 				Thread.sleep(2000);
 			}
-		}
-		else
+		} else
 			Assert.assertTrue(false, "Wrong button");
 		waitForLoading();
 	}
@@ -186,8 +191,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public boolean checkEntryByName(String name) throws InterruptedException {
 		try {
-			wait.until(
-					ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
 			return true;
 		} catch (TimeoutException e) {
 			return false;
@@ -215,6 +219,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public void clickAddRuleToFirstProfile() throws InterruptedException {
 		Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id(
+				"ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl00_AddNewRecordButton")));
 		driver.findElement(
 				By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl00_AddNewRecordButton"))
 				.click();
@@ -226,11 +232,10 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		addRuleNameField.sendKeys(name);
 
 		addRuleEntityTypeDropDown.click();
-		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
-				.get().click();
-	
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList"))).findElements(By.tagName("li"))
+				.stream().filter(e -> e.getText().equals(entityType)).findFirst().get().click();
+
 		waitForLoading();
 		waitABit(2000);
 		if (filterType.equals("Include Selected"))
@@ -239,11 +244,10 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 							.selectByIndex(1);
 		;
 	}
-	
+
 	public void fillFilterRuleBox(String name, String filterType) {
 		addRuleNameField.clear();
 		addRuleNameField.sendKeys(name);
-
 
 		waitForLoading();
 

@@ -21,6 +21,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.SubscriptionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TrendingReportWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrdersWebPage;
+import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 
 public class BackOfficeMonitorTestCases extends BaseTestCase {
@@ -442,7 +443,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		subscriptionsPege.clickOkAddPopUpButton();
 	}
 	
-	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
+	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count", retryAnalyzer = Retry.class)
 	public void checkMonitorReportsServiceCount() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -493,8 +494,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
 		activeVechicleByPhasePage.clickFindButton();
 		
-		@SuppressWarnings("unused")
-		int rows = activeVechicleByPhasePage.countRowsInResultTable();
+//		@SuppressWarnings("unused")
+//		int rows = activeVechicleByPhasePage.countRowsInResultTable();
 
 		
 	}

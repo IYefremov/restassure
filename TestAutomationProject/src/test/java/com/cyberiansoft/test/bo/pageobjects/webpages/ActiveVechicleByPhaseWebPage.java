@@ -136,6 +136,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 	}
 
 	public void setStatuses2(String... statuses) throws InterruptedException {
+		Thread.sleep(2500);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus2_Input")).click();
 		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> {
@@ -209,6 +210,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	public boolean checkGrid() {
 		try {
+			Thread.sleep(3000);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO Date']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO No']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='VIN']")));

@@ -63,10 +63,12 @@ public class ServiceCountWebPage extends BaseWebPage {
 			}
 			Thread.sleep(1500);
 			calendarDateFromBTN.click();
+			Thread.sleep(1500);
 			wait.until(ExpectedConditions.presenceOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_calendar_Top")));
 			Thread.sleep(1500);
 			calendarDateToBTN.click();
+			Thread.sleep(1500);
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateTo_calendar_Top")));
 

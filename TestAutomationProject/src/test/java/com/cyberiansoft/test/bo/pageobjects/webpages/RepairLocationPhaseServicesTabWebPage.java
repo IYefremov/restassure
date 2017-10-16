@@ -139,6 +139,9 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	}
 	
 	public void clickAssignToSelectedservicesButton() {
+		try{
+			driver.switchTo().alert().accept();
+		}catch(Exception e){}
 		clickAndWait(assignselectedservicesbtn);
 	}
 
