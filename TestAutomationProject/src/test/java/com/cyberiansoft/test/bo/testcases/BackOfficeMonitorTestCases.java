@@ -471,7 +471,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases")
-	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases(){
+	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
@@ -486,6 +486,16 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
 		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
+		
+		activeVechicleByPhasePage.setPhase1("PDR Station");
+		activeVechicleByPhasePage.setStatuses1("Active");
+		activeVechicleByPhasePage.setPhase2("PDI");
+		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+		activeVechicleByPhasePage.clickFindButton();
+		
+		@SuppressWarnings("unused")
+		int rows = activeVechicleByPhasePage.countRowsInResultTable();
+
 		
 	}
 }

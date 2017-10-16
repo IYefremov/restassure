@@ -1080,7 +1080,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		appointmentFromTime.sendKeys("6:00 AM");
 		appointmentToTime.sendKeys("7:00 AM");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("gvTechnicians"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("gvTechnicians")));
+		//wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("gvTechnicians"))));
 		
 		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbTechnician_Input")).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))

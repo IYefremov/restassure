@@ -209,18 +209,26 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	public boolean checkGrid() {
 		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("WO Date")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("WO No")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("VIN")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Year")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Make")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Model")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Stock#")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Phase")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Phase status")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO Date']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO No']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='VIN']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Year']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Make']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Model']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Stock#']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Parts Order']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='PDR Station']")));
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public int countRowsInResultTable() {
+		List<WebElement> rows = driver.findElements(By.xpath("//td[cosplan='4']")).get(1).findElements(By.tagName("tr"));
+		rows.remove(0);
+		rows.remove(0);
+		rows.remove(0);
+		return rows.size();
 	}
 }
