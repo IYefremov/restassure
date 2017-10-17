@@ -30,6 +30,9 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement invoicenumberfld;
 	
+	@FindBy(xpath="//div[@class='invoce-info-container']")
+	private WebElement invoiceinfopanel;
+	
 	public VNextInvoiceInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -85,6 +88,10 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public String getInvoiceNumber() {
 		return invoicenumberfld.getText().trim();
+	}
+	
+	public boolean isWorkOrderSelectedForInvoice(String wonumber) {
+		return invoiceinfopanel.findElements(By.xpath(".//div[text()='" + wonumber + "']")).size() > 0;
 	}
 
 }

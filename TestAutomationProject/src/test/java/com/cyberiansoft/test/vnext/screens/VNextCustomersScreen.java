@@ -50,7 +50,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
-
+		waitABit(1000);
 		//if (appiumdriver.findElements(By.xpath("//div[@class='help-button' and text()='OK, got it']")).size() > 0)
 			//if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 		if (checkHelpPopupPresence())		
@@ -113,7 +113,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isCustomerExists(String customer) {
-		return customerslist.findElements(By.xpath(".//div[text()='" + customer + "']")).size() > 0;
+		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;
 		
 	}
 	

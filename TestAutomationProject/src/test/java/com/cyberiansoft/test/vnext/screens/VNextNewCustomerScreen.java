@@ -82,6 +82,12 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		clickSaveCustomerButton();
 	}
 	
+	public void createNewCustomer(String firstname, String lastname) {
+		setCustomerFirstName(firstname);
+		setCustomerLastName(lastname);
+		clickSaveCustomerButton();
+	}
+	
 	public void setCustomerFirstName(String firstname) {
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname);

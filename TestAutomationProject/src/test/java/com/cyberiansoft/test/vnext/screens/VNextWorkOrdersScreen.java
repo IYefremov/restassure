@@ -27,6 +27,9 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_createInvoice']")
 	private WebElement createinvoicemenu;
 	
+	@FindBy(xpath="//*[@action='multiselect-actions-create-invoice']")
+	private WebElement createinvoiceicon;
+	
 	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -45,10 +48,18 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		return workorderslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
 	}
 	
-	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String workordernumber) {
-		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + workordernumber + "']")));
-		log(LogStatus.INFO, "Tap on Work order: " + workordernumber);
+	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String wonumber) {
+		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + wonumber + "']")));
+		log(LogStatus.INFO, "Tap on Work order: " + wonumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
+	}
+	
+	public void selectWorkOrder(String wonumber) {
+		WebElement workordercell = getWorkOrderCell(wonumber);
+		if (workordercell != null)
+			tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+		else
+			Assert.assertTrue(false, "Can't find work order: " + wonumber);
 	}
 	
 	public VNextHomeScreen clickBackButton() {
@@ -93,6 +104,11 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public void clickCreateInvoiceMenuItem() {
 		tap(createinvoicemenu);
 		log(LogStatus.INFO, "Click Create Invoice menu item");
+	}
+	
+	public void clickCreateInvoiceIcon() {
+		tap(createinvoiceicon);
+		log(LogStatus.INFO, "Click Create Invoice icon");
 	}
 
 }

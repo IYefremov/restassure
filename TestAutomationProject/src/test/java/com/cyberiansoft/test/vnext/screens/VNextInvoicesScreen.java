@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +29,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(invoicesscreen));
+		waitABit(1000);
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
@@ -41,13 +43,38 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public String getInvoiceStatusValue(String invoicenumber) {
-		String inspstatus = null;
+		String invoicecell = null;
 		WebElement inspcell = getInvoiceCell(invoicenumber);
 		if (inspcell != null)
-			inspstatus = inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-status')]")).getText();
+			invoicecell = inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-status')]")).getText();
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
-		return inspstatus;
+		return invoicecell;
+	}
+	
+	public ArrayList<String> getInvoiceWorkOrders(String invoicenumber) {
+		ArrayList<String> workOrders = new ArrayList<String>();
+		WebElement invoicecell = getInvoiceCell(invoicenumber);
+		expandInvoiceDetails(invoicenumber);
+		if (invoicecell != null) {
+			List<WebElement> wocells = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+					findElements(By.xpath(".//span[@class='entity-item-order-number']"));
+			for (WebElement wocell : wocells) {
+				workOrders.add( wocell.getText().trim().replace(",", ""));
+			}
+		}
+		else
+			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+		return workOrders;
+	}
+	
+	public void expandInvoiceDetails(String invoicenumber) {
+		WebElement invoicecell = getInvoiceCell(invoicenumber);
+		if (!invoicecell.getAttribute("class").contains("expanded")) {
+			tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
+		}
+		else
+			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 	}
 	
 	public WebElement getInvoiceCell(String invoicenumber) {

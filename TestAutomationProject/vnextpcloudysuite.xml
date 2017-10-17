@@ -95,6 +95,8 @@
           <include name="testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO" /> 
           <include name="testVerifyUserCanCreateRepair360Edition" />  
           <include name="testVerifyUserCanCreateRepair360FreeEdition" /> 
+          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiition" /> 
+          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree" />
       </methods>
       </class>
     </classes>
