@@ -2,6 +2,9 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -85,6 +88,9 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	
 	@FindBy(id="VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
 	private WebElement contentTable;
+	
+	@FindBy(id="ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_dateInput")
+	private WebElement fromDateField;
 
 	public TechnicianCommissionsWebPage(WebDriver driver) {
 		super(driver);
@@ -250,6 +256,8 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 				ascFilterBTN.click();
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
 
+				allNames.clear();
+				
 				counter = 4;
 				while(true){
 					try{
@@ -259,17 +267,25 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 						break;
 					}
 				}
-				results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
-				
-				firstResultAfterSort = results.get(0);
-				lastResultAfterSort = results.get(results.size() - 1);
-				if (!firstResultBeforeSort.equals(lastResultAfterSort)
-						&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
-					return false;
-				}
+//				results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+//				
+//				firstResultAfterSort = results.get(0);
+//				lastResultAfterSort = results.get(results.size() - 1);
+//				
+//				if (!firstResultBeforeSort.equals(lastResultAfterSort)
+//						&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
+//					return false;
+//				}
 			}
 		}
 
 		return true;
+	}
+
+	public void setSearchFromDate() {
+		LocalDateTime date = LocalDateTime.of(2017, 9, 1, 0, 0);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		fromDateField.clear();
+		fromDateField.sendKeys(date.format(formatter));
 	}
 }

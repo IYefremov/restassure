@@ -41,6 +41,7 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		ReportsWebPage reportsPage = backofficeheader.clickReportsLink();
 		TechnicianCommissionsWebPage technishialCommissionsPage = reportsPage.clickTechnicianCommissionsLink();
+		technishialCommissionsPage.setSearchFromDate();
 		technishialCommissionsPage.clickSearchBTN();
 		Assert.assertTrue(technishialCommissionsPage.checkSortAbility());
 		technishialCommissionsPage.clickOnLastSearchResult();
