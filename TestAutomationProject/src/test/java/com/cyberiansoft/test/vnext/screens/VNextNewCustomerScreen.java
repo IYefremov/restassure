@@ -67,6 +67,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
+		waitABit(1000);
 	}
 	
 	public void createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 

@@ -23,6 +23,8 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 	}
 	
 	public WebElement getPriceMatrixesList() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(pricematrixesscreen.findElement(By.xpath(".//div[contains(@class, 'list-block')]"))));
 		return pricematrixesscreen.findElement(By.xpath(".//div[contains(@class, 'list-block')]"));
 	}
 	

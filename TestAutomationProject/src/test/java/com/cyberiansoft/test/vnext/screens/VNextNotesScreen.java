@@ -51,6 +51,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='notes']")));
+		waitABit(1000);
 	}
 	
 	public List<WebElement> getListOfQuickNotes() {

@@ -69,8 +69,8 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	}
 	
 	public void setNewUserCompanyName(String usercompanyname) {
-		usercompanynamefld.clear();
-		usercompanynamefld.sendKeys(usercompanyname);
+		usercompanynamefld.click();
+		appiumdriver.getKeyboard().sendKeys(usercompanyname);
 		appiumdriver.hideKeyboard();
 	}
 	

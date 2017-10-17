@@ -35,6 +35,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
+		waitABit(1000);
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
