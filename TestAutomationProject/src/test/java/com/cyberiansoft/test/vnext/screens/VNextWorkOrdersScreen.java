@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -58,9 +59,34 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public void selectWorkOrder(String wonumber) {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null)
-			tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
+				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+	}
+	
+	public void unselectWorkOrder(String wonumber) {
+		WebElement workordercell = getWorkOrderCell(wonumber);
+		if (workordercell != null)
+			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
+				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+		else
+			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+	}
+	
+	public boolean isWorkOrderSelected(String wonumber) {
+		boolean selected = false;
+		WebElement workordercell = getWorkOrderCell(wonumber);
+		if (workordercell != null)
+			selected = workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked").equals("true");
+		else
+			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+		return selected;
+	}
+	
+	public int getNumberOfSelectedWorkOrders() {
+		//if (StringUtils.isNumeric(String str))
+		return Integer.parseInt(workordersscreen.findElement(By.xpath(".//span[@class='selected-items-counter']")).getText());
 	}
 	
 	public VNextHomeScreen clickBackButton() {

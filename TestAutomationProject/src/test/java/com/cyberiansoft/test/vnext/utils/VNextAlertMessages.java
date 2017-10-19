@@ -17,5 +17,6 @@ public class VNextAlertMessages {
 	public static String YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE = "Your email message has been added to the queue";
 	public static String YOUR_FEEDBACK_HAS_BEEN_SENT = "Thank you! Your feedback has been sent";
 	public static String PLEASE_DOMT_LEAVE_SIGNATURE_FIELD_EMPTY = "Please don't leave signature field empty if you want to approve inspection";
+	public static String CANCEL_CREATING_INVOICE = "Any unsaved changes will be lost. Are you sure you want to stop creating this Invoice?";
 	
 }

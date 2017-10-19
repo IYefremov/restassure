@@ -224,7 +224,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(newcustomerscreen.getCustomerCity(), customercity);
 		Assert.assertEquals(newcustomerscreen.getCustomerZIP(), customerzip);
 		customersscreen = newcustomerscreen.clickBackButton();
-		homescreen = customersscreen.clickBackButton();
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	@Test(testName= "Test Case Archive Inspection", 

@@ -67,7 +67,8 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		customersscreen.searchCustomerByName(wholesalecustomerNonExists);
 		Assert.assertTrue(customersscreen.isNothingFoundCaptionDisplayed());
 		customersscreen.clickCancelSearchButton();
-		homescreen = customersscreen.clickBackButton();
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	@Test(testName= "Test Case 63629:Verify user can select Wholesale customer when create Inspection", 

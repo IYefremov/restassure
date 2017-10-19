@@ -60,7 +60,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
 		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
-		homescreen = customersscreen.clickBackButton();
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 		homescreen.waitABit(45000);
 		initiateWebDriver();
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
@@ -101,7 +102,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		setNetworkOn();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
-		homescreen = customersscreen.clickBackButton();
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 		homescreen.waitABit(1000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
@@ -119,8 +121,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
 		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
-		homescreen = customersscreen.clickBackButton();
-		
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	@Test(testName= "vNext - Verify new customer is available after DB update", 
@@ -143,7 +145,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
-		homescreen = customersscreen.clickBackButton();
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 		homescreen.waitABit(20000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
@@ -161,8 +164,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
 		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
-		homescreen = customersscreen.clickBackButton();
-		
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	public void deleteCustomerOnBackOffice(String firstName, String lastName) {

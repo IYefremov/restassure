@@ -117,10 +117,9 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		
 	}
 	
-	public VNextHomeScreen clickBackButton() {
+	public void clickBackButton() {
 		clickScreenBackButton();
 		log(LogStatus.INFO, "Click Customers screen Back button");
-		return new VNextHomeScreen(appiumdriver);
 	}
 	
 	public void switchToRetailMode() {

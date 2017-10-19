@@ -84,7 +84,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public void clickSaveInvoiceButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Click Invoice Save button");	
+		log(LogStatus.INFO, "Click Invoice Info screen Save button");	
 	}
 	
 	public String getInvoiceNumber() {
@@ -93,6 +93,11 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public boolean isWorkOrderSelectedForInvoice(String wonumber) {
 		return invoiceinfopanel.findElements(By.xpath(".//div[text()='" + wonumber + "']")).size() > 0;
+	}
+	
+	public void clickInvoiceInfoBackButton() {
+		clickScreenBackButton();
+		log(LogStatus.INFO, "Click Invoice Info screen Back button");	
 	}
 
 }

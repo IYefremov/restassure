@@ -28,7 +28,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@type='email']")
 	private WebElement emailfld;
 	
-	@FindBy(xpath="//a[contains(@data-bind, 'navigateNext')]/span/i")
+	@FindBy(xpath="//*[@data-automation-id='next']")
 	private WebElement donebtn;
 	
 	@FindBy(xpath="//button[@class='btn btn-red']")
