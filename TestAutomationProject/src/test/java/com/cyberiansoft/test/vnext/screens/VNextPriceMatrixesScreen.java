@@ -20,6 +20,7 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(pricematrixesscreen));
+		waitABit(1000);
 	}
 	
 	public WebElement getPriceMatrixesList() {

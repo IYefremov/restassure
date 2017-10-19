@@ -70,13 +70,15 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserPaymentInfoName(String userpaymentname) {
-		usernamefld.click();
-		usernamefld.sendKeys(userpaymentname);
+		tap(usernamefld);
+		appiumdriver.getKeyboard().sendKeys(userpaymentname);
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void setUserPaymentCardNumber(String usercardnumber) {
-		cardnumberfld.click();
-		cardnumberfld.sendKeys(usercardnumber);
+		tap(cardnumberfld);
+		appiumdriver.getKeyboard().sendKeys(usercardnumber);
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public void setUserPaymentExpirationDate(String expmonth, String expyear) {
@@ -87,9 +89,9 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserPaymentSecurityCode(String securitycode) {
-		securitycodefld.click();
-		securitycodefld.sendKeys(securitycode);
-		appiumdriver.hideKeyboard();
+		tap(securitycodefld);
+		appiumdriver.getKeyboard().sendKeys(securitycode);
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public void clickUseRegistrationAddress() {

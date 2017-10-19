@@ -196,6 +196,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
+			waitABit(1000);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 			wait.until(ExpectedConditions.elementToBeClickable(servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']"))));
 			servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).clear();

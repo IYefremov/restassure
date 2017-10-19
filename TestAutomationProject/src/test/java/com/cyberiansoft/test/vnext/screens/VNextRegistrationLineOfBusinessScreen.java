@@ -28,15 +28,18 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(businesstypescreen));
+		waitABit(1000);
 	}
 
 	public void selectEdition(String businessedition) {
-		tap(editionfld);		
+		tap(editionfld);	
+		waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + businessedition + "']")));
 	}
 	
 	public void selectLineOfBusiness(String lineofbusiness) {
 		tap(businesstypefld);
+		waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + lineofbusiness + "']")));
 	}
 	

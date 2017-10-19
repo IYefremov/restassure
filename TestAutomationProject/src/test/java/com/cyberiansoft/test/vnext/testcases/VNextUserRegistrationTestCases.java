@@ -256,6 +256,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
+		registrationoverviewlegalinfoscreen.waitABit(1000);
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		/*

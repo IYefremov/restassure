@@ -30,10 +30,12 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(emailscreen));
+		waitABit(1000);
 	}
 	
 	public void sentToEmailAddress(String emailaddress) {
 		tap(toemailpanel.findElement(By.xpath(removemailbtn)));
+		waitABit(1000);
 		toemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		toemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(emailaddress);
 		log(LogStatus.INFO, "Set Send Email To: " + emailaddress);

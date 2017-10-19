@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -204,6 +205,8 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customerstate.length() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statecell));
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",statecell);
 			tap(statecell);
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statespage));

@@ -44,6 +44,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(registrationoverviewlegalinfoscreen));
+		waitABit(3000);
 	}
 	
 	public String getPaymentPriceValue() {

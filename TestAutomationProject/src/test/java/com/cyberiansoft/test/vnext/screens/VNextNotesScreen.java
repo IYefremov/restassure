@@ -12,10 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.remote.MobilePlatform;
 
 public class VNextNotesScreen extends VNextBaseScreen {
 	
@@ -135,54 +137,31 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void addImageToNotesFromGallery() {
-		//clickGalleryIcon();
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		waitABit(3000);
-		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
-		else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
+		if (VNextAppiumDriverBuilder.getPlatformName().equals(MobilePlatform.ANDROID)) {
+			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			waitABit(3000);
+			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
+				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
+			else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
+				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
 		
-		waitABit(1000);
-		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
-		else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
-		waitABit(4000);
-		/*if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']")).size() > 0)
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']")).click();
-		//else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='RECENT']")).size() > 0)
-		//	appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='RECENT']")).click();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='Recent']"))).click();
-		waitABit(1000);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).click();
-		
-		if (appiumdriver.findElements(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).size() > 0) {
-			new TouchAction(appiumdriver).press(appiumdriver.findElement(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView"))).waitAction(500).release().perform();
-			System.out.println("+++++" + appiumdriver.findElements(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).size());
-			appiumdriver.findElement(MobileBy.xpath("//android.widget.GridView/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView")).click();
-			
-		
-		}
-		else if (appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).size() > 0) {
-			List<WebElement> imgs = appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView"));
-			for (WebElement im : imgs)
-				new TouchAction(appiumdriver).press(im).waitAction(500).release().perform();
-			System.out.println("+++++" + appiumdriver.findElements(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).size());
-			appiumdriver.findElement(MobileBy.xpath("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView")).click();
-			
-		}
-		waitABit(3000);
-		*/
+			waitABit(1000);
+			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
+				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
+			else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
+				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
+			waitABit(4000);
 
-		appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
-		waitABit(10000);
-		appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
-		
-		switchToWebViewContext();
-		waitABit(3000);
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
+			waitABit(10000);
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
+			
+			switchToWebViewContext();
+			waitABit(3000);
+		} else {
+			addFakeImageNote();
+			waitABit(3000);
+		}
 	}
 	
 	public int getNumberOfAddedNotesPictures() {

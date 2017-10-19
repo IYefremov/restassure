@@ -49,6 +49,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(personalinfouserscreen));
+		waitABit(2000);
 	}
 	
 	public void setNewUserPersonaInfo(String newusercompanyname, String userstate) {
@@ -69,31 +70,34 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	}
 	
 	public void setNewUserCompanyName(String usercompanyname) {
-		usercompanynamefld.click();
+		tap(usercompanynamefld);
 		appiumdriver.getKeyboard().sendKeys(usercompanyname);
 		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserAddress1(String address1line) {
-		adress1fld.clear();
-		adress1fld.sendKeys(address1line + "\n");
+		tap(adress1fld);
+		appiumdriver.getKeyboard().sendKeys(address1line);
+		appiumdriver.hideKeyboard();
+		//adress1fld.clear();
+		//adress1fld.sendKeys(address1line + "\n");
 	}
 	
 	public void setNewUserAddress2(String address2line) {
-		adress2fld.clear();
-		adress2fld.sendKeys(address2line);
+		tap(adress2fld);
+		appiumdriver.getKeyboard().sendKeys(address2line);
 		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserCity(String usercity) {
-		cityfld.clear();
-		cityfld.sendKeys(usercity);
+		tap(cityfld);
+		appiumdriver.getKeyboard().sendKeys(usercity);
 		appiumdriver.hideKeyboard();
 	}
 	
 	public void setNewUserZIP(String userzipcode) {
-		zipfld.clear();
-		zipfld.sendKeys(userzipcode);
+		tap(zipfld);
+		appiumdriver.getKeyboard().sendKeys(userzipcode);
 		appiumdriver.hideKeyboard();
 	}
 	
