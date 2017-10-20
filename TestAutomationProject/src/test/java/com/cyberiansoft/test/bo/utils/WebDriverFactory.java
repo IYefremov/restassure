@@ -35,9 +35,12 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			InternetExplorerDriverManager.getInstance().arch32().setup();
+			//InternetExplorerDriverManager.getInstance().arch32().setup();
+	        //DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 
-	         DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
+			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
+	         System.setProperty("webdriver.ie.driver", PATH_TO_IE_DRIVER);
+
 	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
 	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
 	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
@@ -50,15 +53,8 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setJavascriptEnabled(true);
 	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
-			
-//			IEDesiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);	
-//			IEDesiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
-//			IEDesiredCapabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
-//			IEDesiredCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,true);
 			webcap = DesiredCapabilities.internetExplorer();
 			webdriver = new RemoteWebDriver(IEDesiredCapabilities);
-
-			//webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
 			webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
 			break;
 		case "chrome":
