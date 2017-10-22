@@ -35,11 +35,11 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			//InternetExplorerDriverManager.getInstance().arch32().setup();
-	        //DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
+			InternetExplorerDriverManager.getInstance().arch64().setup();
+	        DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 
-			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
-	         System.setProperty("webdriver.ie.driver", PATH_TO_IE_DRIVER);
+//			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
+//	         System.setProperty("webdriver.ie.driver", PATH_TO_IE_DRIVER);
 
 	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
 	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");

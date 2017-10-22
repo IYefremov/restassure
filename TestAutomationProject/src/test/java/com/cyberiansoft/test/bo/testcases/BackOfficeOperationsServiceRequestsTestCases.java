@@ -2034,6 +2034,72 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setVehicleInfo(randonStock, "123");
 		serviceRequestsWebPage.clickDoneButton();
 		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
-		
+	}
+	
+	@Test(testName = "Test Case 66190:Operation - Service Request - Undo Rejected")
+	public void testServicerequestUndoReject() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ServiceRequestTypesWebPage serviceRequestTypesPage = companypage.clickServiceRequestTypesLink();
+		serviceRequestTypesPage.clickEditServiceRequestType("Vit_All_Services");
+		Assert.assertTrue(serviceRequestTypesPage.isAllowUndoRejectChecked());
+		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.makeSearchPanelVisible();
+		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
+		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue("Vit_All_Services");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickGeneralInfoEditButton();		
+		serviceRequestsWebPage.setServiceRequestGeneralInfo("Default team", "Vitaliy Kupchynskyy", "D525", "Dfg 25");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("Alex SASHAZ");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.setServiceRequestVIN("1HGCG55691A267167");
+		serviceRequestsWebPage.decodeAndVerifyServiceRequestVIN("Honda", "Accord");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.clickClaimInfoEditButton();
+		serviceRequestsWebPage.selectServiceRequesInsurance("Oranta");
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.setServiceRequestLabel("test");
+		serviceRequestsWebPage.setServiceRequestDescription("test");
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.makeSearchPanelVisible();
+		serviceRequestsWebPage.setSearchFreeText("Alex SASHAZ");
+		serviceRequestsWebPage.clickFindButton();
+		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
+		serviceRequestsWebPage.clickRejectUndoButton();
+		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+	}
+	
+	@Test(testName = "Test Case 65611:Operation - Service Request - Adviser Listing")
+	public void testServicerequestAdviserListing() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickCustomerEditButton();
+		serviceRequestsWebPage.selectServiceRequestCustomer("001 - Test Company");
+		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOfServiceAdvisorsByFilter("tes"));
+		serviceRequestsWebPage.clickDoneButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsWebPage.getkServiceAdvisorName() , "_Test _Test");
+	}
+	
+	//TODO
+	@Test(testName = "Test Case 65521:Operation - Service Request - Services add notes")
+	public void testServicerequestServicesAddNotes() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue("Zak_Request_Type");
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickServiceEditButton();
+		serviceRequestsWebPage.addServicesToServiceRequest("Zak_Money_Multiple","Zak_Labor_Multiple");
+		serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertTrue(serviceRequestsWebPage.checkAddedServices("Zak_Money_Multiple","Zak_Labor_Multiple"));
 	}
 }

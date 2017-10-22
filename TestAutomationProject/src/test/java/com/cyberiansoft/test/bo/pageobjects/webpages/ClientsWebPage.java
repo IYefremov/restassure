@@ -272,7 +272,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		for (WebElement clientstablerow : clientstablerows) {
 			waitABit(1500);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
-			waitABit(2000);
+			waitABit(4000);
 			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
 			//if (clientstablerow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {
@@ -293,7 +293,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public NewClientDialogWebPage clickEditClient(String clientname) throws InterruptedException {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();

@@ -45,6 +45,9 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement newservicerequesttypecancelbtn;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbAllowUndoReject")
+	private WebElement allowUndoCheckBox;
+
 	public ServiceRequestTypesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -164,7 +167,9 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public void clickErrorWithBLockingRadioButton() throws InterruptedException {
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2"))).click();
+		wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2")))
+				.click();
 	}
 
 	public void clickEditServiceRequestTypeOkButton() throws InterruptedException {
@@ -175,21 +180,22 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void selectStockRoVinOptions() {
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN"))
-				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).getAttribute("class")
+				.equals(" rfdCheckboxUnchecked")) {
 			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
 		}
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock"))
-				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).getAttribute("class")
+				.equals(" rfdCheckboxUnchecked")) {
 			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).click();
 		}
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO"))
-				.getAttribute("class").equals(" rfdCheckboxUnchecked")) {
+		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).getAttribute("class")
+				.equals(" rfdCheckboxUnchecked")) {
 			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
 		}
 	}
 
-	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) throws InterruptedException {
+	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype)
+			throws InterruptedException {
 		// String mainWindow = driver.getWindowHandle();
 		List<WebElement> rows = getServiceRequestTypesTableRows();
 		for (WebElement row : rows) {
@@ -217,7 +223,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 			}
 		}
 	}
-	
+
 	public void clickNoneRadioButton() {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")).click();
 	}
@@ -227,16 +233,23 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void selectOption(String optionName) {
-		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
-		if(option.getAttribute("class").equals(" rfdCheckboxUnchecked")){
+		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb" + optionName));
+		if (option.getAttribute("class").equals("CheckboxUnchecked")) {
 			option.click();
 		}
 	}
-	
+
 	public void unselectOption(String optionName) {
-		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb"+optionName));
-		if(option.getAttribute("class").equals(" rfdCheckboxChecked")){
+		WebElement option = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chb" + optionName));
+		if (option.getAttribute("class").equals("CheckboxChecked")) {
 			option.click();
 		}
+	}
+
+	public boolean isAllowUndoRejectChecked() {
+		System.out.println(allowUndoCheckBox.getAttribute("checked"));
+		if (Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked")))
+			return true;
+		return false;
 	}
 }
