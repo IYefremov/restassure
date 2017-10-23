@@ -23,18 +23,17 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		try{
 		loginpage.UserLogin(userName, userPassword);
 		Thread.sleep(2000);
-		}catch(Exception e){}
 	}
 	
-//	@AfterMethod
-//	public void BackOfficeLogout() throws InterruptedException {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-//				BackOfficeHeaderPanel.class);
-//		backofficeheader.clickLogout();
-//	}	
+	@AfterMethod
+	public void BackOfficeLogout() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		backofficeheader.clickLogout();
+		backofficeheader.refresh();
+	}	
 
 	@Test(description = "Test Case 15135:All Users - Search")
 	public void testAllUsersSearch() throws Exception {
