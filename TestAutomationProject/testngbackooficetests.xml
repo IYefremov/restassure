@@ -106,11 +106,9 @@
 <!-- --><test name="Back Office Test Cases - IE" preserve-order="true">
     <parameter name="selenium.browser" value="ie" />
     <classes>  
-    <!-- -->
+    <!-- 
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
- 			</class>   
- 			
- 			  <!-- 
+ 			</class>     
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
   			</class>  
   			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
@@ -129,8 +127,16 @@
     		</class>
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
     		</class> 
+    		-->
+    		
        		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-      		</class> 
+       		<methods>
+       		<include name="testAllEmployeesSearch"/>
+       		<include name="testAllUsersSearch"/>
+       		</methods>
+      		</class>
+      		
+      		 <!-- 
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       		</class>   
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">

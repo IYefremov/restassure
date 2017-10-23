@@ -61,7 +61,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 			for (String activeHandle : driver.getWindowHandles())
 				driver.switchTo().window(activeHandle);	
 		}
-		File failReason = new File("C:\\fails\\tests.txt");
 		driver.switchTo().defaultContent();
 		waitABit(1000);
 		WebElement element = driver.findElement(By.id("__clockTime"));
@@ -70,12 +69,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
 		}catch(Exception e){
-			try {
-				FileWriter writer = new FileWriter(failReason);
-				writer.write(this.getClass().getEnclosingMethod().getName() + "\n");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			
 		}
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);

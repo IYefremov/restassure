@@ -102,7 +102,7 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 		return employeestable.getTableRows();
 	}
 	
-	public void  verifyProfilesLinkWorks() {
+	public void  verifyProfilesLinkWorks() throws InterruptedException {
 		driver.findElement(By.xpath("//a[text()='Profiles']")).click();
 		waitForNewTab();
 		Set<String> handles = driver.getWindowHandles();
@@ -112,6 +112,7 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gvEmployee_ctl00"))).isDisplayed();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00"))).isDisplayed();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_EmployeeCommissions_gv_ctl00"))).isDisplayed();
