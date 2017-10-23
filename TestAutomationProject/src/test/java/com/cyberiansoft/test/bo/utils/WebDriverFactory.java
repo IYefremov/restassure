@@ -35,7 +35,7 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			InternetExplorerDriverManager.getInstance().arch64().setup();
+			InternetExplorerDriverManager.getInstance().arch32().setup();
 	        DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 
 //			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
@@ -55,7 +55,8 @@ public class WebDriverFactory {
 	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
 			webcap = DesiredCapabilities.internetExplorer();
 			webdriver = new RemoteWebDriver(IEDesiredCapabilities);
-			webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
+			//webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
+			//webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
 			break;
 		case "chrome":
 			ChromeDriverManager.getInstance().setup();
