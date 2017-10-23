@@ -35,7 +35,7 @@ public class WebDriverFactory {
 			webdriver = new FirefoxDriver(webcap);
 			break;
 		case "ie":
-			InternetExplorerDriverManager.getInstance().arch32().setup();
+			InternetExplorerDriverManager.getInstance().arch64().setup();
 	        DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 
 //			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
