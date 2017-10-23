@@ -37,6 +37,7 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 //		wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
 //		wait.until(ExpectedConditions.visibilityOf(loginbtn));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		driver.navigate().refresh();
 		clearAndType(usernamefld, userName);
 		clearAndType(userpasswordfld, userPassword);
 		executor.executeScript("arguments[0].click();", loginbtn);
@@ -46,5 +47,7 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 	public WebElement getLoginButton() {
 		return loginbtn;
 	}
+	
+	
 
 }

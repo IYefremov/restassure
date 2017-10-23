@@ -32,7 +32,6 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		backofficeheader.refresh();
 	}	
 
 	@Test(description = "Test Case 15135:All Users - Search")
