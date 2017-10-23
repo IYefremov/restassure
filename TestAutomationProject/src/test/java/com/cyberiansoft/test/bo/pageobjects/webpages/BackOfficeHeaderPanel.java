@@ -73,12 +73,13 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		}
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
-		try{
-		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
-		}catch(TimeoutException e){
-			driver.navigate().refresh();
-			wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		
 	}
 	
 	public OperationsWebPage clickOperationsLink() throws InterruptedException {

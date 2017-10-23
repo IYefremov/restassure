@@ -103,14 +103,15 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	}
 	
 	public void  verifyProfilesLinkWorks() throws InterruptedException {
+		String parent = driver.getWindowHandle();
 		driver.findElement(By.xpath("//a[text()='Profiles']")).click();
 		waitForNewTab();
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
+			String newwin = "";
+			for(String window:driver.getWindowHandles()){
+				if(!window.equals(parent)){
+					newwin = window;
+				}
+			}
 			driver.switchTo().window(newwin);
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gvEmployee_ctl00"))).isDisplayed();
@@ -119,7 +120,6 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
-		}
 	}
 	
 	public void verifySearchResultsByApplication(String appname) {
