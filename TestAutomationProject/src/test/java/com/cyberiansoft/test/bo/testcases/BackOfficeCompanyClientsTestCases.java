@@ -614,7 +614,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientMonManagReadOnlyChkbox();
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("test@cyberiansoft.com", "test", "automation");
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");

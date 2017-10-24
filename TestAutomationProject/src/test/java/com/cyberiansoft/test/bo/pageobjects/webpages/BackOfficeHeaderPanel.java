@@ -63,9 +63,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		}
 		driver.switchTo().defaultContent();
 		waitABit(1000);
-		WebElement element = driver.findElement(By.id("__clockTime"));
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].scrollIntoView();", element); 
+//		WebElement element = driver.findElement(By.id("__clockTime"));
+//		JavascriptExecutor js = (JavascriptExecutor)driver;
+//		js.executeScript("arguments[0].scrollIntoView();", element); 
 		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
 		}catch(Exception e){
