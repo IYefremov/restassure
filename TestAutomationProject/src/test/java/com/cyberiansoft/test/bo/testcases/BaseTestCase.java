@@ -158,6 +158,7 @@ public class BaseTestCase {
 		browsertype = browser;
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
+		webdriver.navigate().refresh();
 	}
 
 	public static WebElement wait(By locator) {
