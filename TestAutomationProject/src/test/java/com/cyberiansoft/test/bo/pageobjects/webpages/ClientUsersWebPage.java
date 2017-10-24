@@ -86,12 +86,14 @@ public class ClientUsersWebPage extends BaseWebPage {
 		String mainWindow = "";
 		String thisWindow = driver.getWindowHandle();
 		for (String window : driver.getWindowHandles()) {
-			if(!window.equals(thisWindow))
+			if (!window.equals(thisWindow))
 				mainWindow = window;
 		}
 		driver.switchTo().window(thisWindow).close();
 		driver.switchTo().window(mainWindow);
 		driver.switchTo().defaultContent();
 	}
+
+	
 
 }

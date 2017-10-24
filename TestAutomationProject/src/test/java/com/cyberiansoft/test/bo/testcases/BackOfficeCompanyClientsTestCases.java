@@ -595,4 +595,19 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientContactsWebPage3.closePage();
 	}
 	
+	@Test(testName= "Test Case 66217:Company - Clients User : Add Client")
+	public void testClientUserAddClient() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+	}
+	
 }

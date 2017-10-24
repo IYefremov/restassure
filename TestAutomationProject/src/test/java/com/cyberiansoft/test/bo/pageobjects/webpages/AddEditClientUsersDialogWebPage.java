@@ -7,6 +7,7 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -323,7 +324,32 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	}
 	
 	
-	
+	public boolean checkAddUserPopUp() {
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbEmail")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbFirstName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbLastName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbCompany")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbAddress")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbCity")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_countryState_ddlCountry_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_countryState_ddlState_Input")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbZip")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbPhone")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbAccountingID")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_cbAllowSupportTickets")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbComments")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_cblRoles")));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean checkAllPossibleValidators() {
+		
+		return false;
+	}
 	
 	
 

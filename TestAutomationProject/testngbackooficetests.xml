@@ -108,7 +108,10 @@
     <classes>  
     <!-- -->
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+    	
  			</class>     
+ 			
+ 			  <!-- 
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
   			</class>  
   			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
@@ -127,12 +130,8 @@
     		</class>
     		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
     		</class> 
-    		
-    		
        		<class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       		</class>
-      		
-      		
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
       		</class>   
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
@@ -141,7 +140,7 @@
       		</class>
       <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
       </class>
-   <!--    -->
+    -->
     </classes>
   </test>    
   <!--<test name="Back Office Test Cases - IE" preserve-order="true">
