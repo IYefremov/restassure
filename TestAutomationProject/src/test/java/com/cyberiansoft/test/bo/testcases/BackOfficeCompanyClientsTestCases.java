@@ -601,13 +601,24 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickClientMonManagReadOnlyChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("test@cyberiansoft.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
 	}
 	
 }

@@ -20,7 +20,7 @@ public class WebDriverInstansiator {
     }
 
     public static WebDriverWait getWait(){
-    WebDriverWait wait = new WebDriverWait(WebDriverInstansiator.getDriver() , 30);
+    WebDriverWait wait = new WebDriverWait(WebDriverInstansiator.getDriver() , 50);
     return wait;
     }
     

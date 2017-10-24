@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -76,6 +77,9 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 //	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_cblRoles_2")
 	@FindBy(xpath = "//label[text()='Client Monitor Manager']")
 	private WebElement clientmonmanagchkbox;
+	
+	@FindBy(xpath = "//label[text()='Client Monitor Manager - Read Only']")
+	private WebElement clientMonManagReadOnlyChkbox;
 	
 //	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_cblRoles_3")
 	@FindBy(xpath = "//label[text()='Client Inspector']")
@@ -346,11 +350,43 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 		}
 	}
 
+//	public ClientUsersWebPage createUserWithRequiredFields(String useremail,  String userfstname, 
+//			String userlstname, String ... roles){
+//		
+//		setUserEmail(useremail);
+//		setUserFirstName(userfstname);
+//		setUserLastName(userlstname);
+//		clickButtonOk();
+//		for(String role:roles){
+//			switch(role){
+//			case "Client Monitor Manager - Read Only":
+//				Actions act = new Actions(driver);
+//				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='Client Monitor Manager - Read Only']"))).click();
+//				break;
+//			}
+//		}
+// 
+//		return PageFactory.initElements(
+//				driver, ClientUsersWebPage.class);
+//	}
+	
 	public boolean checkAllPossibleValidators() {
-		
+		try{
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_RequiredFieldValidator1")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_vFirstName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_vLastName")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_rqRoles")));
+		return true;	
+		}catch(Exception e){
 		return false;
+		}
 	}
 	
-	
+	public void clickClientMonManagReadOnlyChkbox(){
+		if (!isClientMonManagChkboxChecked()){
+			clickAndWait(clientMonManagReadOnlyChkbox);
+		}
+	}
+
 
 }

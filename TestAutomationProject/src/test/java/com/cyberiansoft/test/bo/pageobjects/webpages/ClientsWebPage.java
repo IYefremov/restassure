@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -441,5 +442,12 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public void closeClientServicesTab(String mainWindowHandle) {
 		driver.close();
 		driver.switchTo().window(mainWindowHandle);
+	}
+
+	public void scrollDownToText(String text) throws InterruptedException {
+		WebElement element = driver.findElement(By.xpath("//td[text()='"+text+"']"));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView();", element);
+		Thread.sleep(500); 
 	}
 }

@@ -94,6 +94,13 @@ public class ClientUsersWebPage extends BaseWebPage {
 		driver.switchTo().defaultContent();
 	}
 
-	
+	public void clickResendButton() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_lbMsg")));
+		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl04_btnResend")).click();
+		driver.switchTo().alert().accept();
+		Thread.sleep(1000);
+		wait.until(
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+	}
 
 }
