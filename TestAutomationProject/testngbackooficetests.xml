@@ -109,6 +109,10 @@
     
     <!-- -->
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+    <methods>
+    <include name="testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient"/>
+    <include name="testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForExistingClient"/>
+    </methods>
  			</class>
      
     		

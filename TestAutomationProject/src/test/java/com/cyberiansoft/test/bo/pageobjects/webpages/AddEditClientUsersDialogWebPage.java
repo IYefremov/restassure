@@ -99,6 +99,8 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	@FindBy(id = "ctl00_Content_ctl01_ctl02_BtnCancel")
 	private WebElement buttoncnsl;
 	
+
+	
 	public AddEditClientUsersDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	

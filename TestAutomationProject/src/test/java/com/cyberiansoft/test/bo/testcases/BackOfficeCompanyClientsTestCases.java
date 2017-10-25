@@ -621,4 +621,133 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 	
+	@Test(testName= "Test Case 66215:Company - Clients User : Sales Person Monitor Manager")
+	public void testClientUserSalesPersonMonitorManager() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickSalesPersonMonManagChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
+	}
+	
+	@Test(testName= "Test Case 66214:Company - Clients User : SalesPerson")
+	public void testClientUserSalesPerson() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickSalesPersonChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
+	}
+	
+	@Test(testName= "Test Case 66213:Company - Clients User : Client Inspector")
+	public void testClientUserClientInspector() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickClientInspectChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
+	}
+	
+	@Test(testName= "Test Case 66212:Company - Clients User : Client Monitor Manager")
+	public void testClientUserClientMonitorManager() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickClientMonManagChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
+	}
+	
+	@Test(testName= "Test Case 66211:Company - Clients User : ClientAccountant")
+	public void testClientUserClientAccountant() throws InterruptedException{
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companypage.clickClientsLink();
+		clientspage.scrollDownToText("000 15.11 Companey");
+		ClientUsersWebPage  clientUsersWebPage =
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+			clientUsersWebPage.clickDeleteClientUser( "test");
+		}
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickClientAccountChkbox();
+		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser("test");
+		clientUsersWebPage1.closePage();
+	}
 }
