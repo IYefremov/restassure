@@ -225,6 +225,9 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		}
 
 		List<String> results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+		if(results.size() == 0){
+			return true;
+		}
 		String firstResultBeforeSort = results.get(0);
 		String lastResultBeforeSort = results.get(results.size() - 1);
 
