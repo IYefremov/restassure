@@ -5,9 +5,11 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -99,7 +101,8 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	@FindBy(id = "ctl00_Content_ctl01_ctl02_BtnCancel")
 	private WebElement buttoncnsl;
 	
-
+	@FindBy(id ="ctl00_Content_ctl01_ctl01_Card_cblRoles")
+	private WebElement rolesBoxes;
 	
 	public AddEditClientUsersDialogWebPage(WebDriver driver) {
 		super(driver);
@@ -388,6 +391,17 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 		if (!isClientMonManagChkboxChecked()){
 			clickAndWait(clientMonManagReadOnlyChkbox);
 		}
+	}
+
+	public boolean checkIfOtherCheckBoxesRolesAvailable() {
+			List<WebElement>allUnselectedRoles = rolesBoxes.findElements(By.className("rfdCheckboxUnchecked"));
+			for(WebElement role:allUnselectedRoles){
+				System.out.println(role.getAttribute("class"));
+				if(role.getAttribute("class").equals(" rfdCheckboxUnchecked rfdInputDisabled")){
+					return false;
+				}
+			}
+			return true;
 	}
 
 

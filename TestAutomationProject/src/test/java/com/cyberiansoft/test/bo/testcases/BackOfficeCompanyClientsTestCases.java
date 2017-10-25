@@ -613,6 +613,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientMonManagReadOnlyChkbox();
+		Assert.assertFalse(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
@@ -639,6 +640,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickSalesPersonMonManagChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
@@ -665,6 +667,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickSalesPersonChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
@@ -691,6 +694,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientInspectChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
@@ -717,6 +721,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientMonManagChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
@@ -743,6 +748,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientAccountChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
