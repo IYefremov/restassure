@@ -61,7 +61,7 @@ public class MailChecker {
 	
 	
 	public static Folder getInboxMailMessages(Store store) {
-		Folder folderInbox = null;
+		/*Folder folderInbox = null;
 		try {
 			folderInbox = store.getFolder("INBOX");
 			folderInbox.open(Folder.READ_WRITE);					
@@ -70,8 +70,33 @@ public class MailChecker {
             ex.printStackTrace();
 		}
 		
-		return folderInbox;
-		
+		return folderInbox;*/
+		Folder folderAll = null;
+		try {
+			Folder[] f = store.getDefaultFolder().list();
+			for(Folder fd:f){
+			    Folder t[]=fd.list();
+			    for(Folder f1:t) {
+			    	System.out.println("==========" + f1.getName());
+			    }
+			    for(Folder f1:t)
+			    	if  (f1.getName().equals("All Mail")) {
+			    		try {
+			    			folderAll = f1;
+			    			folderAll.open(Folder.READ_WRITE);					
+			    		} catch (MessagingException ex) {
+			                System.out.println("No provider.");
+			                ex.printStackTrace();
+			    		}
+			    		break;
+			    	}
+			        
+			    }
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return folderAll;
 	}
 	
 	public static Folder getSpamMailMessages(Store store) {
@@ -80,6 +105,9 @@ public class MailChecker {
 			Folder[] f = store.getDefaultFolder().list();
 			for(Folder fd:f){
 			    Folder t[]=fd.list();
+			    for(Folder f1:t) {
+			    	System.out.println("==========" + f1.getName());
+			    }
 			    for(Folder f1:t)
 			    	if  (f1.getName().equals("Spam")) {
 			    		try {

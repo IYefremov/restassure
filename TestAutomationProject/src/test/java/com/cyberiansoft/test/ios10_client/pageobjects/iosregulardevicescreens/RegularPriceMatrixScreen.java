@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -191,7 +192,15 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickServicesButton() {
-		servicesbtn.click();
+		List<WebElement> serviesbtns = appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElements(By.name("Services"));
+		
+		for(WebElement srvcbtn : serviesbtns){
+			if (srvcbtn.isDisplayed())
+				srvcbtn.click();
+		}
+		
+		//appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(By.name("Services")).click();
+		//servicesbtn.click();
 	}	
 	
 	public void clickBackButton() {

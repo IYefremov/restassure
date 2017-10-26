@@ -71,8 +71,12 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	
 	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
 		Helpers.waitABit(1000);
-		swipeToElement(appiumdriver.
+		if (!appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']")).isDisplayed()) {
+			swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']/..")));
+			appiumdriver.findElementByName(invoicetype).click();
+		}
 		appiumdriver.findElementByName(invoicetype).click();
 		return new RegularInvoiceInfoScreen(appiumdriver);
 	}

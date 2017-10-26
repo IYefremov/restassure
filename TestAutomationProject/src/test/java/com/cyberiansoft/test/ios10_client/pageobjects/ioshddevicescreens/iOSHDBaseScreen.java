@@ -61,7 +61,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(savebtn).waitAction(Duration.ofSeconds(1)).release().perform();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 		Helpers.waitABit(500);

@@ -73,7 +73,7 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	
 	public void saveSelectedServicePart() throws InterruptedException {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Part']/XCUIElementTypeButton[@name='Save']")).click();	
-		Helpers.waitABit(500);
+		Helpers.waitABit(1000);
 	}
 	
 	public WebElement getTableParentCell(String cellname) {

@@ -92,12 +92,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void setServicePriceValue(String _price)	 {
 		
-		/*WebElement pricefld = null;
+		WebElement pricefld = null;
 		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
 		for (WebElement prc : priceflds)
 			if (prc.isDisplayed())
-				pricefld = prc;*/
-		WebElement par = getTableParentCell("Price");
+				prc.click();
+		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		appiumdriver.getKeyboard().sendKeys(_price + "\n");
+		/*WebElement par = getTableParentCell("Price");
 		
 		
 		par.findElement(
@@ -106,7 +109,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 				By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		par.findElement(
 				By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_price + "\n");
-		
+		*/
 		//IOSElement prf = (IOSElement) pricefld.findElement(
 		//		By.xpath("//XCUIElementTypeTextField[1]"));
 		//prf.setValue(value);
@@ -238,11 +241,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			if (sv.isDisplayed())
 				sv.click();*/
 		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
-		for (WebElement nv : navbars)
-			if (nv.findElements(By.name("Save")).size() > 0) {
+		for (WebElement nv : navbars) {
+			if(nv.isDisplayed()) {
+			//if (nv.findElements(By.name("Save")).size() > 0) {
 				nv.findElement(By.name("Save")).click();
 				break;
 			}
+		}
 		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		/*if (appiumdriver.findElementsByAccessibilityId("Save").size() > 1)
 			((IOSElement) appiumdriver.findElementsByAccessibilityId("Save").get(1)).click();

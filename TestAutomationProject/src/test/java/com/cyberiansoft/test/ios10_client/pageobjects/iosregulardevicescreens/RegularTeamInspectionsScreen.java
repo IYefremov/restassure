@@ -106,6 +106,27 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 		toolbardonebtn.click();
 	}
 	
+	public void selectInspectionForApprove(String inspnumber) {
+		clickOnInspection(inspnumber);
+		clickApproveInspectionButton();
+	}
 	
+	protected void clickApproveInspectionButton() {
+		approvepopupmenu.click();
+		Helpers.waitABit(1000);
+	}
+	
+	public void assertInspectionIsApproved(String inspnumber) {
+		Assert.assertTrue(inspectiontable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked"));
+	}
+	
+	public String getFirstInspectionAprovedPriceValue() {
+		return inspectiontable.findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");	
+	}
+	
+	public String getFirstInspectionPriceValue() {
+		return inspectiontable.findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
+		//return firstinspectionprice.getAttribute("label");
+	}
 
 }

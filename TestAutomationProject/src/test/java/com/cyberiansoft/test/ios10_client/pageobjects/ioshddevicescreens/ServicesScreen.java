@@ -191,8 +191,12 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
-		appiumdriver.findElementByAccessibilityId(servicename).click();
-		
+		if (!appiumdriver.findElementByAccessibilityId(servicename).isDisplayed()) {
+			swipeTableUp(appiumdriver.findElementByAccessibilityId(servicename),
+					appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']")));
+			appiumdriver.findElementByAccessibilityId(servicename).click();
+		}
+		//appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + 
 				servicename + "']/XCUIElementTypeButton[@name='custom detail button']"))).waitAction(Duration.ofSeconds(1)).release().perform();

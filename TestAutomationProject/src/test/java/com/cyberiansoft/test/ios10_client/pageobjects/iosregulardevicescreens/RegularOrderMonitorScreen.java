@@ -138,6 +138,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
+		//appiumdriver.findElementByAccessibilityId("Close icon").click();
 		servicedetailsdonebtn.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 40);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));

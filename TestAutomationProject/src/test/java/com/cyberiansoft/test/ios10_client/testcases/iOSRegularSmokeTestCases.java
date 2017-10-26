@@ -2279,7 +2279,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
 		claimscreen.selectInsuranceCompany("USG");	
 		claimscreen.clickSaveButton();
-		Thread.sleep(1000);
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		Thread.sleep(1000);
@@ -6329,7 +6329,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveButton();
-		
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
