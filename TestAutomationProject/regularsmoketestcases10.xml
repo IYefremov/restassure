@@ -17,29 +17,8 @@
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularSmokeTestCases">
-        <methods> 
-
-       
-        
-        <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" /> 
-        <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" /> 
-    <include name="testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed" />
-    <include name="testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected" />     
-<include name="testWOVerifyThatCancelMessageIsShownForNewOrExistingWO" />
-<include name="testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice" />
-<include name="testWOVerifyThatSearchBarIsPresentForServicePackScreen" />
-<include name="testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet" />
-           
-          
-          
-          
-        <include name="testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit" />
-        <include name="testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown" /> 
-        <include name="testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians" /> 
-        <include name="testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF" /> 
-        <include name="testWOVerifyThatValidationIsPresentForVehicleTrimField" /> 
-        
-        <!--<include name="testGetDeviceRegistrationCode" />
+        <methods>     
+		  <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  -->
           <include name="testUpdateDatabase" /> 
           <include name="testUpdateVIN" />
@@ -155,11 +134,21 @@
           <include name="testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone" />
           <include name="testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
           <include name="testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO" />
+          <include name="testWOVerifyThatValidationIsPresentForVehicleTrimField" /> 
+          <include name="testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF" /> 
+          <include name="testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians" />
+          <include name="testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown" /> 
+          <include name="testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit" />
+          <include name="testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet" />
+          <include name="testWOVerifyThatSearchBarIsPresentForServicePackScreen" />
+          <include name="testWOVerifyThatCancelMessageIsShownForNewOrExistingWO" />
+          <include name="testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed" />
+          <include name="testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected" /> 
+          <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" />
+          <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" /> 
+          
           
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
-          
-          
-          
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />--> 
         </methods>
       </class>
