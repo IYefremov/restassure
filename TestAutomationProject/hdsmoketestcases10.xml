@@ -35,7 +35,7 @@
           <include name="testCreateInspectionFromWO" /> 
           <include name="testCreateInvoiceWithTwoWOsAndCopyVehicle" />
           <include name="testCreateInspectionFromInvoiceWithTwoWOs" /> 
-           <include name="testCreateInvoiceFromWOInMyWOsList" />
+          <include name="testCreateInvoiceFromWOInMyWOsList" />
           <include name="testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode" /> 
           <include name="testDontAlowToChangeBilledOrders" /> 
           <include name="testChangeCustomerForInvoice" /> 
@@ -138,7 +138,20 @@
           <include name="testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne" />
           <include name="testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone" />
           <include name="testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
-
+		  <include name="testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO" />
+		  <include name="testWOVerifyThatValidationIsPresentForVehicleTrimField" />
+		  <include name="testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF" /> 
+		  <include name="testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians" /> 
+		  <include name="testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown" />
+		  <include name="testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit" />
+		  <include name="testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet" />
+		  <include name="testWOVerifyThatSearchBarIsPresentForServicePackScreen" />
+		  <include name="testWOVerifyThatCancelMessageIsShownForNewOrExistingWO" /> 
+		  <include name="testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed" />
+		  <include name="testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected" />  
+		  <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" />
+		  <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" />
+		    
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>
       </class>
