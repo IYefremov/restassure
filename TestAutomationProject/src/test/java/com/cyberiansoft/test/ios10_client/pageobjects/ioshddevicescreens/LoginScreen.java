@@ -37,7 +37,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 	public LoginScreen(AppiumDriver driver) {
 		super(driver);
 		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), LoginScreen.class);
 	}
 	
 	public void assertRegisterButtonIsValidCaption() {

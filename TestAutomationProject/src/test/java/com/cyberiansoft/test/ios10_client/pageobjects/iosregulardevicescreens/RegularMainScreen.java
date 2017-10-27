@@ -44,7 +44,7 @@ public class RegularMainScreen {
 
 	public RegularMainScreen(AppiumDriver driver) {
 		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), RegularMainScreen.class);
 	}
 	
 	public void updateDatabase() throws InterruptedException {

@@ -59,7 +59,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
 	public RegularHomeScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), RegularHomeScreen.class);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
