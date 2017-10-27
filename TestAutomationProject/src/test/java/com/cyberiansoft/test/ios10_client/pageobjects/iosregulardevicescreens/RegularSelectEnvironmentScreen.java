@@ -18,7 +18,7 @@ public class RegularSelectEnvironmentScreen extends iOSRegularBaseScreen{
 	
 	public RegularSelectEnvironmentScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), RegularSelectEnvironmentScreen.class);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Environments"))); 

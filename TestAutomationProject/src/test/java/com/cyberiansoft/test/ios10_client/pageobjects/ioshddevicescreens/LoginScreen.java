@@ -15,9 +15,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class LoginScreen extends iOSHDBaseScreen {
-
-	private AppiumDriver appiumdriver;
-	
 	
 	@iOSFindBy(accessibility = "CodeField1")
     private IOSElement firstcode;
@@ -36,8 +33,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 	
 	public LoginScreen(AppiumDriver driver) {
 		super(driver);
-		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), LoginScreen.class);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 	
 	public void assertRegisterButtonIsValidCaption() {
