@@ -47,7 +47,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public iOSHDBaseScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), iOSHDBaseScreen.class);
 	}
 	
 	public HomeScreen clickHomeButton() {
