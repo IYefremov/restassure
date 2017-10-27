@@ -56,7 +56,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	
 	public iOSRegularBaseScreen(AppiumDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), iOSRegularBaseScreen.class);
 	}
 	
 	public RegularHomeScreen clickHomeButton() throws InterruptedException {
