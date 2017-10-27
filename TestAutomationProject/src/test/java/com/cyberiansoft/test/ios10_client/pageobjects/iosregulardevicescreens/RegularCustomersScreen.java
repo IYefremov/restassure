@@ -78,7 +78,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	public void selectFirstCustomerWithoutEditing()
 			throws InterruptedException {
 		Thread.sleep(2000);
-		element(MobileBy.xpath("//UIATableView[1]/UIATableCell[1]"))
+		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[1]"))
 				.click();
 		selectpopupmenu.click();
 	}
@@ -117,7 +117,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean customerIsPresent(String customer) {	
-		return element(MobileBy.AccessibilityId(customer)).isDisplayed();
+		return appiumdriver.findElement(MobileBy.AccessibilityId(customer)).isDisplayed();
 	}
 
 }

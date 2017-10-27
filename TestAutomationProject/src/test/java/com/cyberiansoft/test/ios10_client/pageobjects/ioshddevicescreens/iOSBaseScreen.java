@@ -55,7 +55,7 @@ public class iOSBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	private MobileElement w(WebElement element) {
+	/*private MobileElement w(WebElement element) {
 		return (MobileElement) element;
 	}
 	
@@ -66,7 +66,7 @@ public class iOSBaseScreen {
 		}
 
 		return list;
-	}
+	}*/
 	
 	protected boolean elementExists(By locator) {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
@@ -89,7 +89,7 @@ public class iOSBaseScreen {
 		return By.xpath("//UIAStaticText[" + xpathIndex + "]");
 	}
 	
-	public MobileElement text(String text) {
+	/*public MobileElement text(String text) {
 		return element(for_text(text));
 	}
 	
@@ -99,7 +99,7 @@ public class iOSBaseScreen {
 	
 	public List<MobileElement> elements(By locator) {
 		return w(appiumdriver.findElements(locator));
-	}
+	}*/
 	
 	public By for_text(String text) {
 		String up = text.toUpperCase();
