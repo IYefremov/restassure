@@ -50,9 +50,8 @@ public class iOSBaseScreen {
     private IOSElement changescreenbtn;
 	
 	public iOSBaseScreen(AppiumDriver driver) {
-		System.out.println("====11" + driver == null);
 		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
