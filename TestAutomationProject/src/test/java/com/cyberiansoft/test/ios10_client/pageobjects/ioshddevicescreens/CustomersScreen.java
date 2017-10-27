@@ -106,7 +106,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	public void selectFirstCustomerWithoutEditing()
 			throws InterruptedException {
 		Thread.sleep(2000);
-		element(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]"))
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]"))
 				.click();
 		selectpopupmenu.click();
 	}
