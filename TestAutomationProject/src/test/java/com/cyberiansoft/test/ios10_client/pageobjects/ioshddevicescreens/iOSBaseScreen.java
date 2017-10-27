@@ -51,7 +51,7 @@ public class iOSBaseScreen {
 	
 	public iOSBaseScreen(AppiumDriver driver) {
 		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
