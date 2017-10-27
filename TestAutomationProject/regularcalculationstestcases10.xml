@@ -10,9 +10,9 @@
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <!--<parameter name="license.name" value="Mac mini_olkr"  />-->
   <parameter name="license.name" value="Vit_Ipad"  />
-  <!--<listeners>
+  <listeners>
 		<listener class-name="com.cyberiansoft.test.ios10_client.utils.RegularSuperListener"/>
-  </listeners>-->
+  </listeners>
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
