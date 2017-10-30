@@ -47,7 +47,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability("bundleId", IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 	    		appiumcap.setCapability(MobileCapabilityType.UDID, IOSHDDeviceInfo.getInstance().getDeviceUDID());
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSHDDeviceInfo.getInstance().getDeviceName());
-	    		appiumcap.setCapability("useNewWDA", false);
+	    		//appiumcap.setCapability("useNewWDA", false);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
 	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + date.format(dateFormat) + ".app.zip");
 				return appiumcap;
