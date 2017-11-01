@@ -1223,7 +1223,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDocumentsContent());
 		Assert.assertTrue(serviceRequestsWebPage.checkDocumentDownloadingInLC());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
-		serviceRequestsWebPage.addImage();
+	//	serviceRequestsWebPage.addImage();
 	}
 
 	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
