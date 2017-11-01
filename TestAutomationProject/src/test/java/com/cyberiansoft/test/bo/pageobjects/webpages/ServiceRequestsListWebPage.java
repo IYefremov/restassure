@@ -197,7 +197,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(className = "spanNote")
 	private List<WebElement> oldDescriptions;
 
-	@FindBy(id = "linkDocs")
+	@FindBy(className = "description-reason")
 	private WebElement descriptionDocuments;
 
 	@FindBy(id = "linkAnswers")
@@ -892,6 +892,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean checkIfDescriptionIconsVisible() {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		boolean documentShown;
 		boolean answerShown;
 		documentShown = descriptionDocuments.findElement(By.tagName("i")).getAttribute("style")
@@ -903,16 +905,16 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkServiceRequestDocumentIcon() {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-
-		if (descriptionDocuments.findElement(By.tagName("i")).getAttribute("style").equals("display : none;"))
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+		
+		if (driver.findElement(By.xpath("//div[contains(@class, 'description-reason')]")).findElement(By.tagName("i")).getAttribute("style").equals("display : none;"))
 			return false;
 		return true;
 	}
 
 	public void clickDocumentButton() {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		String oldWindow = driver.getWindowHandle();
 		descriptionDocuments.findElement(By.tagName("i")).click();
@@ -936,11 +938,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean clickAddImageBTN() {
-		// try {
-		// documentContent.findElement(By.className("add")).click();
-		// } catch (Exception e) {
 		driver.findElement(By.className("add")).click();
-		// }
 		try {
 			updateWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_Content_ctl01_ctl02_BtnOk")));
 			updateWait
@@ -1042,7 +1040,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void setCustomer(String customer) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		serviceRequestInfoBlocks.get(1).click();
 		customerName.click();
@@ -1053,7 +1051,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(1))).click();
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 		Thread.sleep(2000);
@@ -1114,7 +1112,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(String startDate, String endDate)
 			throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		addAppointmentBTNfromSRedit.click();
 
 		Thread.sleep(1000);
@@ -1197,7 +1195,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkShowHideTeches(String startDate, String endDate) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		addAppointmentBTNfromSRedit.click();
 
 		appointmentFromDateSRedit.clear();
@@ -1346,9 +1344,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void setSuggestedStartDate(String startDate) throws InterruptedException {
-
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		serviceRequestInfoBlocks.get(0).click();
 		suggestedStart.sendKeys(startDate);
@@ -1360,7 +1357,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		addAppointmentBTNfromSRedit.click();
 
 		Thread.sleep(1000);
@@ -1748,7 +1745,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkLifeCycleBTN() {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		driver.findElement(By.id("Card_srLifeCycle")).click();
 		waitABit(1000);
 		return driver.getWindowHandles().size() == 2;
@@ -1756,7 +1753,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void addAppointmentWithoutDescription(String startDate, String toDate) throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		addAppointmentBTNfromSRedit.click();
 		appointmentFromDateSRedit.clear();
@@ -1778,7 +1775,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkLifeCycleDate() throws InterruptedException {
 		String parentFrame = driver.getWindowHandle();
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		Thread.sleep(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("Card_srLifeCycle"))).click();
 		Set windows = driver.getWindowHandles();
@@ -1798,7 +1795,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void goToLifeCycle() {
 		String parentFrame = driver.getWindowHandle();
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 		driver.findElement(By.id("Card_srLifeCycle")).click();
 		Set windows = driver.getWindowHandles();
 		driver.close();
@@ -1981,7 +1978,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void addAppointmentWithTechnisian(String startDate, String endDate, String string)
 			throws InterruptedException {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		addAppointmentBTNfromSRedit.click();
 		appointmentFromDateSRedit.clear();
@@ -2025,7 +2022,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void selectSREditFrame() {
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 	}
 
 	public boolean checkTestEmails() throws InterruptedException {

@@ -738,7 +738,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
 	}
 
-	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
+	//@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
 	public void checkOperationInvoiceDownloadJSON() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
