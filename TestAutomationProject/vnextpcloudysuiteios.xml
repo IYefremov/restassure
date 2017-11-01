@@ -17,7 +17,6 @@
         <methods>                   
           <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection" />
           <include name="testSendMessageFromTheQueueInManualModeSuccessPath" />
-          <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
@@ -35,13 +34,12 @@
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
       	 </methods>
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
       	<methods>  
       	  <include name="testAddTextNotesForServiceInTheList" />
       	  <include name="testSaveTextNoteOnTappingBackButtonEstimationLevel" />
       	  <include name="testAddSeveralQuickNotesForServiceInTheList" />
-      	  <include name="testClearTextNotesForServiceInTheList" /> 
       	  <include name="testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel" /> 	
       	  <include name="testCreateInspectionWithBreakageServiceImageNotes" />
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
@@ -55,7 +53,6 @@
           <include name="testEditInspectionVehicleInfo" /> 
           <include name="testCreateCustomerAlongWithInspection" />              
           <include name="testNavigateBySwipeThroughWizardStepsForInspeciton" />
-          <include name="testNavigateThroughWizardStepsForInspectionByHardwareBackButton" />
           <include name="testEditInspectionVehicleInfo" />
           <include name="testArchiveInspection" />
         </methods>
@@ -64,7 +61,6 @@
      	<methods>        
      	  <include name="testVerifyNewCustomerIsAvailableAfterDBUpdate" />           
           <include name="testCreateNewCustomerWithEmptyFirstNameAndLastName" />
-          <include name="testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate" />
         </methods>
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrdersTestCases">
@@ -80,14 +76,12 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextNavigationTestCases">
      <methods>                   
-          <include name="testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid" />
-          <include name="testNavigatingByActionScreenForAndroid" />
           <include name="testVerifyActionScreenWorksCorrectly" />
       </methods>
-      </class>
+      </class>-->
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   
-          <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
+          <!--<include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />-->
           <include name="testVerifyCreatingBOWithTechnicianEdition_PDR" />
           <include name="testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone" />
           <include name="testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail" />

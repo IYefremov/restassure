@@ -83,6 +83,11 @@ public abstract class AppiumDriverBuilder<SELF, DRIVER> {
 
         return (SELF) this;
     }
+    
+    public SELF againstHost(URL serverURL){
+        this.endpoint = serverURL;
+        return (SELF) this;
+    }
 
     public abstract DRIVER newInstance();
 

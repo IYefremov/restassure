@@ -92,7 +92,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         	DateTimeFormatter dateFormat =
                     DateTimeFormatter.ofPattern("MMdd");
     		LocalDate date = LocalDate.now();
-    		date = date.minusDays(3);
+    		date = date.minusDays(6);
         	PLATFORM_NAME = MobilePlatform.IOS;
         	//File appDir = new File("/Users/kolin/Documents");
     	    //File app = new File(appDir, "Repair360_0328.app.zip");

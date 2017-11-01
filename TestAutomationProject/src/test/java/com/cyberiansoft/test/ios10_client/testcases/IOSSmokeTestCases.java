@@ -133,7 +133,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		regCode = devicespage.getFirstRegCodeInTable();
 
 		getWebDriver().quit();
-		Thread.sleep(2000);
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
@@ -5121,8 +5120,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		Thread.sleep(3000);
-		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		servicerequestsscreen.selectWOType (iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -5205,12 +5203,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		Thread.sleep(5000);
+		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		Thread.sleep(3000);
-		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.INSP_FOR_CALC);
+		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String inspnumber = vehiclescreeen.getInspectionNumber();
