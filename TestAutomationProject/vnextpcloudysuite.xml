@@ -8,7 +8,7 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-    <!--<class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+    <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
@@ -48,7 +48,7 @@
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
-      </class>-->
+      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
         <methods>   
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
