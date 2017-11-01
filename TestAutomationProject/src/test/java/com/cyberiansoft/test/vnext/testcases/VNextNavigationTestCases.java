@@ -39,6 +39,8 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 			description = "Verify user can navigate by action screen in Inspections for Android")
 	public void testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid() { 
 		
+		final String insuranceCompany = "Test Insurance Company";
+		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
@@ -70,8 +72,10 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
-		
-		vehicleinfoscreen.changeScreen("Services");
+		vehicleinfoscreen.changeScreen("Claim");
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
+		claiminfoscreen.changeScreen("Services");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		Assert.assertTrue(inspservicesscreen.isServiceSelected("Facility Fee"));
 		Assert.assertTrue(inspservicesscreen.isServiceSelected("Other"));

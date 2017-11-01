@@ -81,7 +81,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(vinfld));
 		setValue(vinfld, vinnumber);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set VIN: " + vinnumber);
 	}
 	

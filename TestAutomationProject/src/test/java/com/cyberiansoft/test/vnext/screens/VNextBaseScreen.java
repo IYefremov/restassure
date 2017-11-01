@@ -13,8 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
-import org.openqa.selenium.interactions.touch.TouchActions;
-import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,7 +44,7 @@ public class VNextBaseScreen {
 		//new TouchActions(appiumdriver).singleTap(element).perform();
 		
 		if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
-			Action tapAction = new SingleTapAction(appiumdriver.getTouch(), (Locatable) element);
+			Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
 			CompositeAction action = new CompositeAction();
 			action.addAction(tapAction).perform();
 		} else {
@@ -59,8 +57,11 @@ public class VNextBaseScreen {
 	}
 	
 	public void setValue(WebElement element, String value) {
+		tap(element);
 		element.clear();
-		element.sendKeys(value);
+		appiumdriver.getKeyboard().sendKeys(value);
+		appiumdriver.hideKeyboard();
+		//element.sendKeys(value);
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {

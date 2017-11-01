@@ -1,6 +1,21 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.CompositeAction;
+import org.openqa.selenium.interactions.touch.SingleTapAction;
+import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +24,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+
+import io.appium.java_client.android.Activity;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileBrowserType;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 
 public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
@@ -33,6 +53,9 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//button[@class='btn btn-red']")
 	private WebElement clearuserbtn;
+	
+	@FindBy(xpath="//*[@data-automation-id='register-with-code']")
+	private WebElement ihaveregcodelink;
 	
 	public VNextRegistrationPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -87,6 +110,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void setEmail(String usermail) {
 		tap(emailfld);
+		emailfld.clear();
 		appiumdriver.getKeyboard().pressKey(usermail);
 		appiumdriver.hideKeyboard();
 		//emailfld.clear();
@@ -100,5 +124,9 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickClearUserButton() {
 		tap(clearuserbtn);
+	}
+	
+	public void clickIHaveRigistrationCodeLink() {
+		tap(ihaveregcodelink);
 	}
 }

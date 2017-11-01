@@ -16,6 +16,7 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 		setUp();	
 		resetApp();
 		registerTeamEdition();
+		//registerDevice();
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 		VNextHomeScreen homecreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
 	}

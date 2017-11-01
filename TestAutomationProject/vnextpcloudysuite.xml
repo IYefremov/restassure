@@ -8,7 +8,7 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-    <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+    <!--<class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
@@ -34,6 +34,7 @@
           <include name="testCreateInspectionWithNegativePrice" />
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
+          <include name="testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
@@ -47,7 +48,7 @@
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
-      </class>
+      </class>-->
      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
         <methods>   
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
@@ -84,6 +85,8 @@
           <include name="testNavigatingByActionScreenForAndroid" />
           <include name="testVerifyActionScreenWorksCorrectly" />
       </methods>
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   

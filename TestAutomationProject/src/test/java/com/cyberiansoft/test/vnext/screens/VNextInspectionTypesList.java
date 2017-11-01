@@ -15,7 +15,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextInspectionTypesList extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[contains(@class, 'page entity-types')]")
+	@FindBy(xpath="//div[@data-page='entity-types']")
 	private WebElement insptypeslist;
 	
 	public VNextInspectionTypesList(SwipeableWebDriver appiumdriver) {

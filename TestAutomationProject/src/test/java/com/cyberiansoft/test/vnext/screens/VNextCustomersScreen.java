@@ -17,10 +17,10 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[contains(@class, 'page customers customers-list')]")
+	@FindBy(xpath="//div[contains(@data-page, 'list')]")
 	private WebElement customersscreen;
 	
-	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
+	@FindBy(xpath="//div[contains(@class, 'list-block-search')]")
 	private WebElement customerslist;
 	
 	@FindBy(xpath="//a[@action='select-customer']")
@@ -58,20 +58,20 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {		
-		if (customerslist.findElements(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")).size() > 0) {
-			WebElement elem = customerslist.findElement(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']"));	
+		if (customerslist.findElements(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")).size() > 0) {
+			WebElement elem = customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
 			
 		} else {
-			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name']"));
+			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name']"));
 			WebElement elem = ctmrs.get(ctmrs.size()-1);
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//a[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
 			//waitABit(1000);
 
 		}

@@ -36,7 +36,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 600);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='OK']")));
-		wait = new WebDriverWait(appiumdriver, 600);
+		wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
 		log(LogStatus.INFO, "Tap Information Dialog OK Button");
@@ -100,6 +100,36 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public String clickInformationDialogDontSaveButtonAndGetMessage() {
 		String msg = getInformationDialogMessage();
 		clickInformationDialogCancelButton();
+		return msg;
+	}
+	
+	public void clickInformationDialogVoidButton() {
+		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Void']")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='Void']"))));
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Void']")));
+		log(LogStatus.INFO, "Tap Information Dialog Void Button");
+	}
+	
+	public void clickInformationDialogDontVoidButton() {
+		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
+		tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
+		log(LogStatus.INFO, "Tap Information Dialog Don't Void Button");
+	}
+	
+	public String clickInformationDialogVoidButtonAndGetMessage() {
+		String msg = getInformationDialogMessage();
+		clickInformationDialogVoidButton();
+		return msg;
+	}
+	
+	public String clickInformationDialogDontVoidButtonAndGetMessage() {
+		String msg = getInformationDialogMessage();
+		clickInformationDialogDontVoidButton();
 		return msg;
 	}
 

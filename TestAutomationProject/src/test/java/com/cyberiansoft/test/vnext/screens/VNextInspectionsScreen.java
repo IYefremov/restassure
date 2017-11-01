@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextInspectionsScreen extends VNextBaseScreen {
@@ -26,11 +27,27 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@data-autotests-id='inspections-list']")
 	private WebElement inspectionslist;
 	
+	@FindBy(xpath="//*[@action='my']")
+	private WebElement myinspectiontab;
+	
+	@FindBy(xpath="//*[@action='team']")
+	private WebElement teaminspectiontab;
+	
+	@FindBy(xpath="//*[@data-automation-id='search-icon']")
+	private WebElement searchbtn;
+	
+	@FindBy(xpath="//*[@data-automation-id='search-input']")
+	private WebElement searchfld;
+	
+	@FindBy(xpath="//*[@data-automation-id='search-cancel']")
+	private WebElement cancelsearchbtn;
+	
+	final public static int MAX_NUMBER_OF_INPECTIONS = 50;
+	
 	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(addinspectionbtn));
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		waitABit(1000);
 	}
@@ -51,6 +68,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
+	public boolean isAddInspectionButtonVisible() {
+		return inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")).isDisplayed();
+	}
+	
 	public VNextHomeScreen clickBackButton() {
 		clickScreenBackButton();
 		log(LogStatus.INFO, "Tap Inspections Screen Back button");
@@ -62,11 +83,18 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		customersscreen.selectCustomer("Retail Automation");
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN("TESTVINN");
-		return inspinfoscreen.saveInspectionViaMenu();
+		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		return claiminfoscreen.saveInspectionViaMenu();
 	}
 	
 	public String getFirstInspectionNumber() {
 		return inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
+	}
+	
+	public String getInspectionNumberValue(WebElement inspcell) {
+		return inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-name')]")).getText();
 	}
 	
 	public String getInspectionCustomerValue(String inspectionnumber) {
@@ -77,6 +105,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		else
 			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
 		return inspcustomer;
+	}
+	
+	public String getInspectionCustomerValue(WebElement inspcell) {
+		return inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
 	}
 	
 	public String getInspectionStatusValue(String inspectionnumber) {
@@ -143,7 +175,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public List<WebElement> getInspectionsList() {
-		return inspectionslist.findElements(By.xpath("./ul/li"));
+		return inspectionslist.findElements(By.xpath("./div[@class='entity-item accordion-item']"));
+	}
+	
+	public int getNumberOfInspectionsOnTheScreen() {
+		return getInspectionsList().size();
 	}
 	
 	public VNextInspectionsScreen archiveInspection(String inspnumber) {
@@ -153,5 +189,51 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public boolean isInspectionExists(String inspnumber) {
 		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + inspnumber + "']")).size() > 0;
+	}
+	
+	public void switchToTeamInspectionsView() {
+		tap(teaminspectiontab);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading inspections']"))));
+		log(LogStatus.INFO, "Switch to Team Inspections view");
+	}
+	
+	public boolean isTeamInspectionsViewActive() {
+		return teaminspectiontab.getAttribute("class").contains("active");
+	}
+	
+	public void switchToMyInspectionsView() {
+		tap(myinspectiontab);
+		log(LogStatus.INFO, "Switch to My Inspections view");
+	}
+	
+	public boolean isMyInspectionsViewActive() {
+		return myinspectiontab.getAttribute("class").contains("active");
+	}
+	
+	public void searchInpectionByFreeText(String searchtext) {
+		clickSearchButton();
+		setSearchText(searchtext);
+		
+	}
+	
+	public void clickSearchButton() {
+		tap(searchbtn);
+		log(LogStatus.INFO, "Click Search Button");
+	}
+	
+	public void setSearchText(String searchtext) {
+		tap(searchfld);
+		searchfld.clear();
+		appiumdriver.getKeyboard().sendKeys(searchtext);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		appiumdriver.pressKeyCode(66);
+		switchToWebViewContext();
+		log(LogStatus.INFO, "Set Search Text: " + searchtext);
+	}
+	
+	public void clickCancelSearchButton() {
+		tap(cancelsearchbtn);
+		log(LogStatus.INFO, "Click Cancel Search Button");
 	}
 }

@@ -1139,4 +1139,41 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
+	
+	@Test(testName= "Test Case 47440:vNext - Verify services are saved correctly when saving inspection from Visual screen", 
+			description = "Verify services are saved correctly when saving inspection from Visual screen")
+	public void testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen() {
+		
+		final String[] selectdamages = { "Miscellaneous", "Dent Repair" };
+		final String[] selectedservices = { "Prior Damage", "Dent Repair" };
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		claiminfoscreen.swipeScreenLeft();
+		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		for (int i = 0; i < selectdamages.length; i++) {
+			visualscreen.clickAddServiceButton();;
+			visualscreen.clickDefaultDamageType(selectdamages[i]);
+			if (i==0)
+				visualscreen.clickCarImage();
+			else
+				visualscreen.clickCarImageSecondTime();
+			visualscreen.waitABit(1000);
+		}
+		visualscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);	
+		for (int i = 0; i < selectedservices.length; i++) {
+			Assert.assertTrue(inspservicesscreen.isServiceSelected(selectedservices[i]));
+		}
+		
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		homescreen = inspectionsscreen.clickBackButton();
+	}
 }

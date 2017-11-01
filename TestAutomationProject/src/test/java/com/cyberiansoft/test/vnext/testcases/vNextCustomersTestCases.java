@@ -41,6 +41,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customeraddress = "Test address street, 1";
 		final String customercountry = "Mexico";
 		final String customerstate = "Colima";
+		final String customerstateShort = "CL";
 		
 		deleteCustomerOnBackOffice(companyname, "");
 
@@ -58,7 +59,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), WordUtils.capitalize(customeraddress));
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -92,6 +93,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customeraddress = "";
 		final String customercountry = "Germany";
 		final String customerstate = "Saarland";
+		final String customerstateShort = "SL";
 		
 		deleteCustomerOnBackOffice(firstname, lastname);
 		
@@ -119,7 +121,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -137,6 +139,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		final String customeraddress = "";
 		final String customercountry = "Germany";
 		final String customerstate = "Saarland";
+		final String customerstateShort = "SL";
 		
 		deleteCustomerOnBackOffice(firstname, lastname);
 		
@@ -162,7 +165,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);

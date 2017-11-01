@@ -35,8 +35,9 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setPolicyNumber(String policynum) {
-		policyfld.clear();
-		policyfld.sendKeys(policynum);
+		tap(policyfld);
+		appiumdriver.getKeyboard().sendKeys(policynum);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set Policy Number : " + policynum);
 	}
 	
@@ -49,8 +50,9 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setClaimNumber(String claimnum) {
-		claimfld.clear();
-		claimfld.sendKeys(claimnum);
+		tap(claimfld);
+		appiumdriver.getKeyboard().sendKeys(claimnum);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set Claim Number : " + claimnum);
 	}
 	

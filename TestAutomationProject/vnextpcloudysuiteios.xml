@@ -33,6 +33,7 @@
           <include name="testCreateInspectionWithNegativePrice" />
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
+          <include name="testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">

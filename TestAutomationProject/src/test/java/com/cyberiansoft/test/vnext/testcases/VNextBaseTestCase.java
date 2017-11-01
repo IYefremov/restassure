@@ -308,17 +308,28 @@ public class VNextBaseTestCase {
 		getWebDriver().quit();
 		
 		switchToWebViewContext();
+		
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		regscreen.clickIHaveRigistrationCodeLink();
+		regscreen.waitABit(5*1000);
+		
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
+
+		switchToWebViewContext();
+		
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regCode);
 		verificationscreen.clickVerifyButton(); 
 		
 		verificationscreen.waitABit(10*1000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		//appiumdriver.closeApp();
-		//appiumdriver.launchApp();
+		appiumdriver.closeApp();
+		appiumdriver.launchApp();
 		switchToWebViewContext();
 		
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();

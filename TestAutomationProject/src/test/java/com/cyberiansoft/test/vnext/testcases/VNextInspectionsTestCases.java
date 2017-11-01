@@ -19,6 +19,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 	
 	final String testcustomer = "Retail Automation";
 	final String testVIN = "1FMCU0DG4BK830800";
+	final String testInsurenceCompany = "Test Insurance Company";
 	
 	@Test(testName= "Test Case 43325:vNext - Verify VIN is decoded correctly for Inspection", 
 			description = "Verify VIN is decoded correctly for Inspection")
@@ -162,7 +163,10 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		inspectionsscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
+		inspectionsscreen = claiminfoscreen.saveInspectionViaMenu();
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
 		vehicleinfoscreen.setVIN(newVIN);
 		vehicleinfoscreen.setMilage(milage);
@@ -211,6 +215,11 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getCustomercontextValue(), customer);
 		final String inspnum = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
+		claiminfoscreen.swipeScreenRight();
+		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspectionsscreen = vehicleinfoscreen.saveInspectionfromFirstScreen();
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnum);
 		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer);
@@ -239,7 +248,10 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(testVIN);
 		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
-		inspectionsscreen = inspinfoscreen.saveInspectionViaMenu();
+		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
+		inspectionsscreen = claiminfoscreen.saveInspectionViaMenu();
 		
 		inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
 		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber));

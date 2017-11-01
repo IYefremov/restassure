@@ -8,9 +8,11 @@ import org.testng.annotations.Test;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -22,8 +24,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	ArrayList<String> workOrders = new ArrayList<String>();
 	
 	
-	//@Test(testName= "Test Case 65591:Verify user can create Invoice from multiply WO", 
-	//		description = "Verify user can create Invoice from multiply WO")
+	@Test(testName= "Test Case 65591:Verify user can create Invoice from multiply WO", 
+			description = "Verify user can create Invoice from multiply WO")
 	public void testVerifyUserCanCreateInvoiceFromMultiplyWO() {
 		
 		final String ponumber = "123po";
@@ -61,8 +63,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	}
 
 	
-	//@Test(testName= "Test Case 65640:Verify user can't create Invoice with Multiple WO and different Customers", 
-	//		description = "Verify user can't create Invoice with Multiple WO and different Customers")
+	@Test(testName= "Test Case 65640:Verify user can't create Invoice with Multiple WO and different Customers", 
+			description = "Verify user can't create Invoice with Multiple WO and different Customers")
 	public void testVerifyUserCantCreateInvoiceWithMultipleWOAndDifferentCustomers() {
 		
 		final String ponumber = "123po";
@@ -112,8 +114,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		invoicesscreen.clickBackButton();
 	}
 	
-	//@Test(testName= "Test Case 65645:Verify user can create Invoice with a few WO", 
-	//		description = "Verify user can create Invoice with a few WO")
+	@Test(testName= "Test Case 65645:Verify user can create Invoice with a few WO", 
+			description = "Verify user can create Invoice with a few WO")
 	public void testVerifyUserCantCreateInvoiceWithAFewWO() {
 		
 		final String ponumber = "123po";
@@ -166,8 +168,10 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	}
 	
 
-	@Test(testName= "Test Case 65646:Verify user can cancel creating Invoice with Multiply WO on 'Info' screen", 
-			description = "Verify user can cancel creating Invoice with Multiply WO on 'Info' screen")
+	@Test(testName= "Test Case 65646:Verify user can cancel creating Invoice with Multiply WO on 'Info' screen, "
+			+ "Test Case 65647:Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen", 
+			description = "Verify user can cancel creating Invoice with Multiply WO on 'Info' screen, "
+					+ "Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen")
 	public void testVerifyUserCanCancelCreatingInvoiceWithMultiplyWOOnInfoScreen() {
 		
 		final String ponumber = "123po";
@@ -231,5 +235,103 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.unselectWorkOrder(wonumber);
 		}
 		workordersscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 66102:Verify total amount displays for all selected WO with same customer", 
+			description = "Verify total amount displays for all selected WO with same customer")
+	public void testVerifyTotalAmountDisplaysForAllSelectedWOWithTheSameCustomer() {
+		
+		final String ponumber = "123po";
+		final String serviceName = "Bumper Repair";
+		final String[] servicePrices = { "10", "14.50", "12.50" };
+		final String totalAmount = "$37.00";
+		ArrayList<String> workOrders = new ArrayList<String>();
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		for (String servicePrice : servicePrices) {
+			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+			customersscreen.selectCustomer(testcustomer);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(testVIN);
+			vehicleinfoscreen.swipeScreenLeft();
+			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+			selectservicesscreen.selectService(serviceName);
+			selectservicesscreen.clickSaveSelectedServicesButton();	
+			servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			servicesscreen.setServiceAmountValue(serviceName, servicePrice);			
+			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
+			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		}
+
+		for (String wonumber : workOrders) {
+			workordersscreen.selectWorkOrder(wonumber);
+		}
+		workordersscreen.clickCreateInvoiceIcon();
+		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
+		for (String wonumber : workOrders) {
+			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+		}
+		invoiceinfoscren.setInvoicePONumber(ponumber);
+		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 66113:Verify total amount for selected WO with different customers", 
+			description = "Verify total amount for selected WO with different customers")
+	public void testVerifyTotalAmountDisplaysForAllSelectedWOWithDifferentCustomers() {
+		
+		final String ponumber = "123po";
+		ArrayList<String> workOrders = new ArrayList<String>();
+		final String[] testcustomers = { "Custonmer1", "Custonmer2", "Custonmer3" };
+		final String serviceName = "Bumper Repair";
+		final String[] servicePrices = { "10", "14.50", "12.50" };
+		final String totalAmount = "$14.50";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+		for (String customer : testcustomers) {
+			if (!customersscreen.isCustomerExists("Test " + customer)) {
+				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+				newcustomerscreen.createNewCustomer("Test", customer);
+				customersscreen = new VNextCustomersScreen(appiumdriver);
+			}
+		}
+		customersscreen.clickBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		for (int i = 0; i < testcustomers.length; i++) {
+			customersscreen = workordersscreen.clickAddWorkOrderButton();
+			customersscreen.selectCustomer("Test " + testcustomers[i]);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(testVIN);
+			vehicleinfoscreen.swipeScreenLeft();
+			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
+			selectservicesscreen.selectService(serviceName);
+			selectservicesscreen.clickSaveSelectedServicesButton();	
+			servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			servicesscreen.setServiceAmountValue(serviceName, servicePrices[i]);			
+			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
+			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		}
+		
+		workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
+		for (String wonumber : workOrders) {
+			workordersscreen.selectWorkOrder(wonumber);
+		}
+		workordersscreen.clickCreateInvoiceIcon();
+		customersscreen = new VNextCustomersScreen(appiumdriver);
+		customersscreen.selectCustomer("Test " + testcustomers[1]);
+		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
+		for (String wonumber : workOrders) {
+			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+		}
+		invoiceinfoscren.setInvoicePONumber(ponumber);
+		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		invoicesscreen.clickBackButton();
 	}
 }
