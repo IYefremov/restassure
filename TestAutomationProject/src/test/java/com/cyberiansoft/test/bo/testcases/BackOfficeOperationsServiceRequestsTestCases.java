@@ -928,7 +928,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDocumentButton();
 		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
-		serviceRequestsWebPage.addImage();
+		//serviceRequestsWebPage.addImage();
 
 	}
 
