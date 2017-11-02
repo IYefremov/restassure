@@ -109,8 +109,13 @@
     
     <!-- -->
     <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+    <methods>
+    <include name="testClientUserAddClient"/>
+    </methods>
  			</class>
- 			
+
+ 			<!--
+
  			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
       		</class> 
  			 <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases">
@@ -132,6 +137,9 @@
 			</class>       
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
 			</class>	 
+			</class>	
+			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">  
+			</class> 
 			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
  			</class>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
