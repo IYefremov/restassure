@@ -39,7 +39,6 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 				appiumcap.setCapability("nativeWebTap", true);
 				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOSHDDeviceInfo.getInstance().getAutomationName()); 
-				appiumcap.setCapability("appiumVersion", "1.6.1");
 			
 				appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
 				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, IOSHDDeviceInfo.getInstance().getNewCommandTimeout());
@@ -47,7 +46,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability("bundleId", IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 	    		appiumcap.setCapability(MobileCapabilityType.UDID, IOSHDDeviceInfo.getInstance().getDeviceUDID());
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSHDDeviceInfo.getInstance().getDeviceName());
-	    		appiumcap.setCapability("useNewWDA", false);
+	    		appiumcap.setCapability("useNewWDA", true);
 	    		appiumcap.setCapability("preventWDAAttachments", true);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
 	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + date.format(dateFormat) + ".app.zip");
