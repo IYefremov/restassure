@@ -114,7 +114,7 @@ public class BaseTestCase {
 		 
 		 service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
 				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
-				 .withArgument(LOG_LEVEL, "error").build();
+				 /*.withArgument(LOG_LEVEL, "error")*/.build();
 	        service.start();
 
 	        if (service == null || !service.isRunning()) {
