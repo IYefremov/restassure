@@ -44,7 +44,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, IOSHDDeviceInfo.getInstance().getNewCommandTimeout());
 	
 				appiumcap.setCapability("bundleId", IOSHDDeviceInfo.getInstance().getDeviceBundleId());
-	    		appiumcap.setCapability(MobileCapabilityType.UDID, IOSHDDeviceInfo.getInstance().getDeviceUDID());
+	    		//appiumcap.setCapability(MobileCapabilityType.UDID, IOSHDDeviceInfo.getInstance().getDeviceUDID());
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSHDDeviceInfo.getInstance().getDeviceName());
 	    		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
 	    		appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8200);
@@ -64,9 +64,10 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, IOSRegularDeviceInfo.getInstance().getNewCommandTimeout());
 	
 				appiumcap.setCapability("bundleId", IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-	    		appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());
+	    		//appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSRegularDeviceInfo.getInstance().getDeviceName());
-	    		
+	    		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+	    		appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8200);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
 	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_" + date.format(dateFormat) + ".app.zip");
 	     
