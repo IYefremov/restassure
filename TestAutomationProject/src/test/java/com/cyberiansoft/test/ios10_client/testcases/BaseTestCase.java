@@ -155,7 +155,8 @@ public class BaseTestCase {
 			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
 			appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
 		else
-			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
+			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
+			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}
