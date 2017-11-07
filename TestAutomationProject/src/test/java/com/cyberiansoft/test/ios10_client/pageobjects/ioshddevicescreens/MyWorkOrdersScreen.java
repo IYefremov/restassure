@@ -253,15 +253,31 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {		
 		selectWorkOrder(wonumber);
+		if (!techrevenuebtn.isDisplayed()) {
+			swipeTableUp(appiumdriver.
+					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/.."),
+					appiumdriver.
+					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/../.."));
+			techrevenuebtn.click();
+		}
 		techrevenuebtn.click();
+		
+		
 		Helpers.waitABit(1000);
 		return new TechRevenueScreen(appiumdriver);
 	}
 	
 	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {		
 		selectWorkOrder(wo);
+		if (!techniciansmenubtn.isDisplayed()) {
+			swipeTableUp(appiumdriver.
+					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/.."),
+					appiumdriver.
+					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/../.."));
+			techniciansmenubtn.click();
+		}
 		techniciansmenubtn.click();
-		Helpers.waitABit(1500);
+		Helpers.waitABit(2000);
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

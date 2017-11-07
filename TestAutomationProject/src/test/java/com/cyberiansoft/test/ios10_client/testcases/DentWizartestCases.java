@@ -27,6 +27,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderMo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderSummaryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.QuestionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEnvironmentPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SettingsScreen;
@@ -91,9 +92,8 @@ public class DentWizartestCases extends BaseTestCase {
 		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriverInicialize(buildtype);
-		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
-		//appiumdriver.launchApp();
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
