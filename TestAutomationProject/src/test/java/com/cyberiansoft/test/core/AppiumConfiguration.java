@@ -66,7 +66,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability("bundleId", IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 	    		//appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSRegularDeviceInfo.getInstance().getDeviceName());
-	    		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
+	    		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
 	    		appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8200);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
 	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_" + date.format(dateFormat) + ".app.zip");
