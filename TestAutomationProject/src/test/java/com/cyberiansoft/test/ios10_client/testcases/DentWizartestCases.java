@@ -899,7 +899,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 		selectedservicescreen.selectTechniciansEvenlyView();
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1114,11 +1114,11 @@ public class DentWizartestCases extends BaseTestCase {
 				"%85.00");
 
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "15");
 
-		alerttext = selectedservicescreen.saveSelectedServiceDetailsWithAlert();
+		alerttext = selectedservicescreen.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1206,7 +1206,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "45");	
 		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%36.00");
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Split amount should be equal to total amount."));
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "80");	
 		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%64.00");
@@ -1474,7 +1474,7 @@ public class DentWizartestCases extends BaseTestCase {
 				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianC),
 				"%33.33");
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1786,12 +1786,12 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianA,
 				"70");
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
 
 		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB,
 				"30");
-		alerttext = selectedservicescreen.saveSelectedServiceDetailsWithAlert();
+		alerttext = selectedservicescreen.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1920,7 +1920,7 @@ public class DentWizartestCases extends BaseTestCase {
 				PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "285");
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Split amount should be equal to total amount."));
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "40");
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2706,10 +2706,12 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectTechniciansCustomView();
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
 		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		selectedservicescreen.typeTechnicianValue("30");
+		//selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB, "30");
 		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "70");
-		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB, "30");
+		
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -2808,7 +2810,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB), "%50.00");
 
 		String alerttext = selectedservicescreen
-				.saveSelectedServiceDetailsWithAlert();
+				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);

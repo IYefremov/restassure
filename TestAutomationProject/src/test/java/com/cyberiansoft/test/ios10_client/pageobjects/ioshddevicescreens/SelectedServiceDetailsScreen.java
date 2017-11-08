@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -261,6 +263,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		saveSelectedServiceDetails();
 		return Helpers.getAlertTextAndAccept();
 	}
+	
+	public String saveTechnociansViewWithAlert()
+			throws InterruptedException {
+		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
+		return Helpers.getAlertTextAndAccept();
+	}
 
 	public void selectTechniciansCustomView() {
 		technitianscustomview.click();
@@ -385,16 +393,23 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void setTechnicianCustomPercentageValue(String technician,
 			String percentage) {
-		IOSElement techsplittable =  getTechnicianSplitTable();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		if (techsplittable.findElementsByXPath("//XCUIElementTypeCell[contains(@name, '"
-				+ technician + "')]/XCUIElementTypeTextField[1]").size() > 0)
-			techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-					+ technician + "')]/XCUIElementTypeTextField[1]").clear();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeCell[contains(@name, '"
+					+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']"))).click();; 
+		//appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
+		//			+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
+					+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']").clear();
+		//}
+		typeTechnicianValue(percentage);
+
+	}
+	
+	public void typeTechnicianValue(String percentage) {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(1000);
-
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
