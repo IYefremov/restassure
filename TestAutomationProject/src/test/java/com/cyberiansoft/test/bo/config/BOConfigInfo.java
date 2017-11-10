@@ -14,7 +14,7 @@ public class BOConfigInfo {
     private BOConfigInfo() {
     	props = new Properties();
     	File file =
-                new File("src/test/java/com/cyberiansoft/test/bo/config/boenvironment.properties");
+                new File("src/test/java/com/cyberiansoft/test/bo/config/backofice.properties");
         try {
         	FileInputStream fileInput = new FileInputStream(file);
 			props.load(fileInput);
