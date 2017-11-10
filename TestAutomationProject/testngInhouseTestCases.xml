@@ -1,0 +1,17 @@
+<suite name="Inhouse test cases" verbose="10" configfailurepolicy="continue">
+    <parameter name="selenium.host" value="localhost"/>
+    <parameter name="selenium.port" value="3737"/>
+    <parameter name="backoffice.url" value="https://sc.cyberianconcepts.com"/>
+
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.inhouse.utils.TestListener"/>
+    </listeners>
+
+    <test name="Inhouse tests Chrome" preserve-order="true">
+        <parameter name="selenium.browser" value="chrome" />
+
+        <classes>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
+        </classes>
+    </test>
+</suite>
