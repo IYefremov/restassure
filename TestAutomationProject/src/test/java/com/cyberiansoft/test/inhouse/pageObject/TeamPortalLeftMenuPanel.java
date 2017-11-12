@@ -23,6 +23,13 @@ public class TeamPortalLeftMenuPanel extends BasePage {
                             TeamPortalClientQuotesPage.class);
                 }catch(TimeoutException ex){}
                 break;
+            case "Categories":
+                try {
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-toggle btn-add-category']")));
+                    return PageFactory.initElements(driver,
+                            TeamPortalCategoriesPage.class);
+                }catch(TimeoutException ex){}
+                break;
         }
         return  null;
     }
