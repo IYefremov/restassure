@@ -51,9 +51,12 @@ public class LoginScreen extends iOSHDBaseScreen {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(firstcode).waitAction(Duration.ofSeconds(1)).release().perform();
 		firstcode.click();
-		firstcode.setValue(regCode.substring(0, 4));
+		firstcode.sendKeys(regCode.substring(0, 4));
+		secondcode.sendKeys(regCode.substring(5, 9));
+		thirdcode.sendKeys(regCode.substring(10, 14));
+		/*firstcode.setValue(regCode.substring(0, 4));
 		secondcode.setValue(regCode.substring(5, 9));
-		thirdcode.setValue(regCode.substring(10, 14));
+		thirdcode.setValue(regCode.substring(10, 14));*/
 		//thirdcode.click();
 		action = new TouchAction(appiumdriver);
 		action.press(registerbtn).waitAction(Duration.ofSeconds(1)).release().perform();	
