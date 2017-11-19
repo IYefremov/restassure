@@ -394,8 +394,14 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	}
 
 	public boolean checkIfOtherCheckBoxesRolesAvailable() {
-			return rolesBoxes.findElements(By.className("rfdInputDisabled")).size() != 6;
-
+			List<WebElement>allUnselectedRoles = rolesBoxes.findElements(By.className("rfdCheckboxUnchecked"));
+			for(WebElement role:allUnselectedRoles){
+				System.out.println(role.getAttribute("class"));
+				if(role.getAttribute("class").equals(" rfdCheckboxUnchecked rfdInputDisabled")){
+					return false;
+				}
+			}
+			return true;
 	}
 
 

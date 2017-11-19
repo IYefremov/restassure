@@ -598,7 +598,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				return mainWindow;
 			}
-		else if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
+		else 
+			if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
 				act.moveToElement(selectBTN).click().build().perform();
 				try{
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();

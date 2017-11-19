@@ -88,7 +88,6 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	}
 	
 	public RepairLocationManagersTabWebPage clickUpdateManagersButton() {
-		waitABit(1500);
 		clickAndWait(updateemployeesbtn);
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Managers have been updated for this Repair Location']"))));
 		return PageFactory.initElements(
