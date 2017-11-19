@@ -68,9 +68,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 //		js.executeScript("arguments[0].scrollIntoView();", element); 
 		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		}catch(Exception e){
-			
-		}
+		}catch(Exception e){}
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
 		try {
