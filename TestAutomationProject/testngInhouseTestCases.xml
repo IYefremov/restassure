@@ -8,10 +8,15 @@
     </listeners>
 
     <test name="Inhouse tests Chrome" preserve-order="true">
-        <parameter name="selenium.browser" value="chrome" />
+        <parameter name="selenium.browser" value="chrome"/>
 
         <classes>
-            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases">
+                <methods>
+                <include name="testUserCanPayAgreementFromMailLink"/>
+            </methods>
+            </class>
+
         </classes>
     </test>
 </suite>

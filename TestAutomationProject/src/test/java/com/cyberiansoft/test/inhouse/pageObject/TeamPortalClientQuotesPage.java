@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -194,9 +194,12 @@ public class TeamPortalClientQuotesPage extends BasePage {
     }
 
     public void searchUser(String searchValue) throws InterruptedException {
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
         searchField.clear();
         searchField.sendKeys(searchValue);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
         Thread.sleep(500);
         wait.until(ExpectedConditions.invisibilityOf(processingBar));
@@ -230,7 +233,7 @@ public class TeamPortalClientQuotesPage extends BasePage {
         js.executeScript("document.body.style.zoom='100%';");
     }
 
-    public void clickAgreementBTN(String agreementIdentefier) {
+    public void clickAddAgreementBTN(String agreementIdentefier) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentefier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
     }
@@ -291,10 +294,10 @@ public class TeamPortalClientQuotesPage extends BasePage {
     }
 
     public boolean checkAgreementByName(String s) {
-        try{
+        try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']")));
             return true;
-        }catch(TimeoutException e){
+        } catch (TimeoutException e) {
             return false;
         }
 
@@ -308,5 +311,19 @@ public class TeamPortalClientQuotesPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", updateClientBTN.get(3));
         Thread.sleep(500);
+    }
+
+    public BasePage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
+        Thread.sleep(1500);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-potential-client_processing")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
+                findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")).click();
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='agreement-statuses']")));
+            return PageFactory.initElements(driver,
+                    TeamPortalClientQuotesDetailPage.class);
+        } catch (TimeoutException e) {
+            return null;
+        }
     }
 }

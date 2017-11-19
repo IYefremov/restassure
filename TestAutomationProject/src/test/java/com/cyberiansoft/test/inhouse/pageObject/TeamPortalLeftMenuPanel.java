@@ -12,7 +12,8 @@ public class TeamPortalLeftMenuPanel extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public BasePage clickOnMenu(String menuName) {
+    public BasePage clickOnMenu(String menuName) throws InterruptedException {
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='"+menuName+"']")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+menuName+"']"))).click();
         switch (menuName){

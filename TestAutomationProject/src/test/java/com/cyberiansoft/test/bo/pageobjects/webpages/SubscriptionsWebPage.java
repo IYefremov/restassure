@@ -79,6 +79,7 @@ public class SubscriptionsWebPage extends BaseWebPage {
 	}
 
 	public void setSubscriptionPopUpPhase1(String phase) throws InterruptedException {
+		waitABit(2000);
 		driver.findElement(By.id("ctl00_Content_ctl01_ctl01_Card_comboPhase_Input")).click();
 		Thread.sleep(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
