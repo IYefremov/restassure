@@ -112,7 +112,7 @@ public class BaseTestCase {
 		 */
 		//appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
 		 
-		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+		/*service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
 				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				 .withArgument(LOG_LEVEL, "error")
 				 .build();
@@ -120,7 +120,7 @@ public class BaseTestCase {
 
 	        if (service == null || !service.isRunning()) {
 	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-	        }
+	        }*/
 		
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
