@@ -149,6 +149,8 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
         clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
 
         leftMenuPanel.clickOnMenu("Client Management");
         page = leftMenuPanel.clickOnMenu("Client Quotes");
@@ -191,6 +193,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
         TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        clientQuotesDetailPage.clickDiscountBTN();
+        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
+        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
         clientQuotesDetailPage.clickFinalizeAgreementBTN();
         clientQuotesDetailPage.clickSendNotificationButton();
         Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
@@ -234,6 +243,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
         TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        clientQuotesDetailPage.clickDiscountBTN();
+        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
+        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
         clientQuotesDetailPage.clickFinalizeAgreementBTN();
         clientQuotesDetailPage.clickSendNotificationButton();
         //TODO when dates will be shown correct
@@ -279,14 +295,32 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
         TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        clientQuotesDetailPage.clickDiscountBTN();
+        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.1 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
+        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
         clientQuotesDetailPage.clickFinalizeAgreementBTN();
         clientQuotesDetailPage.clickSendNotificationButton();
-
         Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
         String link = clientQuotesDetailPage.getAgreementApproveLink();
         page = clientQuotesDetailPage.goToAgreemntApprovmentPageFromEmail(link);
         Assert.assertTrue(page instanceof TeamPortalAgreementApprovePage);
         TeamPortalAgreementApprovePage agreementApprovePage = (TeamPortalAgreementApprovePage)page;
+        agreementApprovePage.fillClientInfo("Anastasia","Maksimova","automationCompany");
+        Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
+        agreementApprovePage.clickAgreeWithTermsAndConditionsBTN();
+        agreementApprovePage.clickAcceptAgreementBTN();
+        agreementApprovePage.fillFeesPayment("4242424242424242","10","2026","123");
+        agreementApprovePage.clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
+        agreementApprovePage.clickCancelPayBTN();
+        agreementApprovePage.clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
+        agreementApprovePage.clickApprovePayBTN();
+        agreementApprovePage.goToPreviousPage();
 
         leftMenuPanel.clickOnMenu("Client Management");
         page = leftMenuPanel.clickOnMenu("Client Quotes");
