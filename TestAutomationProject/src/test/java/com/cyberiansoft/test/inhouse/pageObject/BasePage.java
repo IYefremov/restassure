@@ -34,4 +34,8 @@ public abstract class BasePage {
                     BasePage.class);
         }
     }
+
+    public void goToPreviousPage() {
+        driver.navigate().back();
+    }
 }
