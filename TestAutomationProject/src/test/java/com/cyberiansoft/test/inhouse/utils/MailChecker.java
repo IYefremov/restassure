@@ -49,7 +49,7 @@ public class MailChecker {
 	}
 	
 	
-	public static Folder getInboxMailMessages(Store store) {
+	public static Folder getInboxMailMessagesFromSpam(Store store) {
 		/*Folder folderInbox = null;
 		try {
 			folderInbox = store.getFolder("INBOX");
@@ -68,20 +68,8 @@ public class MailChecker {
 			    for(Folder f1:t) {
 			    	System.out.println("==========" + f1.getName());
 			    }
-			    for(Folder f1:t)
-			    	if  (f1.getName().equals("All Mail")) {
-			    		try {
-			    			folderAll = f1;
-			    			folderAll.open(Folder.READ_WRITE);					
-			    		} catch (MessagingException ex) {
-			                System.out.println("No provider.");
-			                ex.printStackTrace();
-			    		}
-			    		break;
-			    	}
-
 				for(Folder f1:t)
-					if  (f1.getName().equals("Вся почта")) {
+					if  (f1.getName().equals("Спам")) {
 						try {
 							folderAll = f1;
 							folderAll.open(Folder.READ_WRITE);
@@ -91,7 +79,6 @@ public class MailChecker {
 						}
 						break;
 					}
-			        
 			    }
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
@@ -232,7 +219,7 @@ public class MailChecker {
     	Message requiredmessage = null;
     	
     	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-4; i--) {
+    		for (int i=0; i<foundMessages.length; i++) {
     			Message message = foundMessages[i];
                 Address[] froms = message.getFrom();
                 String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
@@ -264,7 +251,7 @@ public class MailChecker {
     	try {
     		Store store = loginToGMailBox(userName, password);
             
-            Folder folderInbox = getInboxMailMessages(store);
+            Folder folderInbox = getInboxMailMessagesFromSpam(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
 			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
@@ -354,7 +341,7 @@ public class MailChecker {
     	try {
     		Store store = loginToGMailBox(userName, password);
             
-            Folder folderInbox = getInboxMailMessages(store);
+            Folder folderInbox = getInboxMailMessagesFromSpam(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
 			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
@@ -379,12 +366,12 @@ public class MailChecker {
         return val; 	
     }
     
-    public static String searchEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
+    public static String searchEmailAndGetMailMessageFromSpam(String userName, String password, final String subjectKeyword, final String fromEmail) {
     	String mailmessage = "";
     	try {
     		Store store = loginToGMailBox(userName, password);
             
-            Folder folderInbox = getInboxMailMessages(store);
+            Folder folderInbox = getInboxMailMessagesFromSpam(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
 			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
@@ -447,7 +434,7 @@ public class MailChecker {
     	return mailmessage;
     }
     
-    public static String getMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static String getMailMessageFromSpam(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
     	String mailmessage = "";
 		for (int i=0; i < 3; i++) {
 			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
@@ -458,35 +445,13 @@ public class MailChecker {
 					e.printStackTrace();
 				}
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(userName, password, subjectKeyword, fromEmail);
 				if (mailmessage.length() > 3) {
 					break;
 				}				
 			}
 		}
     	return mailmessage; 
-    }
-    
-    public static boolean getKayakoFeedbackMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	String mailmessage = "";
-    	boolean kayakoMailRecieved = false;
-		for (int i=0; i < 15; i++) {
-			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
-				try {
-					Thread.sleep(60*1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
-				if (mailmessage.length() > 3) {
-					kayakoMailRecieved = true;
-					break;
-				}				
-			}
-		}
-    	return kayakoMailRecieved; 
     }
     
     public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
@@ -497,15 +462,15 @@ public class MailChecker {
     	return mailmessage; 
     }
     
-    public static String getUserRegistrationURL() throws IOException {
+    public static String getUserRegistrationURLFromSpam() throws IOException {
     	
-		String mailmessage = getUserMailContent();
+		String mailmessage = getUserMailContentFromSpam();
 		String confirmationurl = "";
 		confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		return confirmationurl;
     }
     
-    public static String getUserMailContent() throws IOException {
+    public static String getUserMailContentFromSpam() throws IOException {
     	
     	final String usermail = "automationvozniuk@gmail.com";
     	final String usermailpsw = "55555!!!";
@@ -518,7 +483,7 @@ public class MailChecker {
 			if (!MailChecker.searchEmail(usermail, usermailpsw, usermailtitle, sendermail, mailcontainstext)) {
 				waitABit(60*500);
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(usermail, usermailpsw, usermailtitle, sendermail);
+				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(usermail, usermailpsw, usermailtitle, sendermail);
 				break;
 			}
 		}
