@@ -15,8 +15,6 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizartestCases">
         <methods>
-        <include name="testQuickQuoteOptionForRetailHail" />
-        
         
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />   -->      
