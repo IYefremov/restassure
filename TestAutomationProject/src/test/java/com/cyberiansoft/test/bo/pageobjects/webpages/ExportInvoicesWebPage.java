@@ -26,10 +26,12 @@ public class ExportInvoicesWebPage extends BaseWebPage {
 		return driver.findElement(By.id("ctl00_Main_report_ctl05_ctl00_TotalPages")).getText();
 	}
 
-	public boolean allInvoicesAreAbleToExport() {
+	public boolean allInvoicesAreAbleToExport() throws InterruptedException {
+		Thread.sleep(20000);
 		int invoicesPages = Integer.parseInt(driver.findElement(By.id("ctl00_Main_report_ctl05_ctl00_TotalPages")).getText());
 		for(int i =0; i<invoicesPages; i++){
 			exportButton.click();
+			Thread.sleep(10000);
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Word')]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Excel')]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'PDF')]")));

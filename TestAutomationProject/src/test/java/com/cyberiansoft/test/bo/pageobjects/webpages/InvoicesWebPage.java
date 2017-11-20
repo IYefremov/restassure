@@ -948,8 +948,8 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 //		return true;
 	}
 
-	public boolean checkAuditLogWindowContent(String auditLogWindow) {
-
+	public boolean checkAuditLogWindowContent(String auditLogWindow) throws InterruptedException {
+Thread.sleep(3000);
 		String mainWindow = "";
 		Set<String> windows = driver.getWindowHandles();
 		for (String window : windows) {
