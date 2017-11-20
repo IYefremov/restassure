@@ -29,25 +29,7 @@ public class iOSBaseScreen {
 	
 	protected AppiumDriver appiumdriver;
 	//final String uipickerxpath = ".popover().pickers()[0]";
-	final String uipickerxpath = "//XCUIElementTypePicker";
-	
-	@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"]")
-    private IOSElement backbtn;
-	
-	@iOSFindBy(accessibility  = "Save")
-    private IOSElement savebtn;
-	
-	@iOSFindBy(accessibility  = "Cancel")
-    private IOSElement cancelbtn;
-	
-	@iOSFindBy(xpath = uipickerxpath)
-    private IOSElement picker;
-	
-	@iOSFindBy(xpath = uipickerxpath + "/XCUIElementTypePickerWheel[1]")
-    private IOSElement pickerwheel;
-	
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[4]")
-    private IOSElement changescreenbtn;
+	//final String uipickerxpath = "//XCUIElementTypePicker";
 	
 	public iOSBaseScreen(AppiumDriver driver) {
 		appiumdriver = driver;
@@ -236,5 +218,6 @@ public class iOSBaseScreen {
 
 	public void hideKeyboard() {
 		appiumdriver.hideKeyboard();
+		Helpers.waitABit(1000);
 	}
 }

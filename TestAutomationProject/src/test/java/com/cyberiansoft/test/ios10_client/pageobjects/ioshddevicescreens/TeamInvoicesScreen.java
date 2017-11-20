@@ -7,14 +7,13 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
-public class TeamInvoicesScreen extends MyInvoicesScreen {
-	
-	@iOSFindBy(accessibility  = "Print")
-    private IOSElement printmenu;
+public class TeamInvoicesScreen extends iOSHDBaseScreen {
 	
 	public TeamInvoicesScreen(AppiumDriver driver) {
 		super(driver);
@@ -36,7 +35,7 @@ public class TeamInvoicesScreen extends MyInvoicesScreen {
 	}
 	
 	public PrintSelectorPopup clickPrintPopup() {
-		printmenu.click();
+		appiumdriver.findElementByAccessibilityId("Print").click();
 		return new PrintSelectorPopup(appiumdriver);
 	}
 	
@@ -51,6 +50,19 @@ public class TeamInvoicesScreen extends MyInvoicesScreen {
 	public boolean isInvoicePrintButtonExists(String invoicenumber) {
 		Helpers.waitABit(2000);
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoicenumber + "']/XCUIElementTypeImage[@name='INVOICE_PRINTED']").size() > 0;
+	}
+	
+	public void clickChangePOPopup() {
+		appiumdriver.findElementByAccessibilityId("Change PO#").click();
+	}
+	
+	public void changePO(String newpo) {
+		Helpers.waitABit(500);
+		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='PO#']/..");
+		par.findElement(By.className("XCUIElementTypeTextField")).clear();
+		par.findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(newpo);
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
 }

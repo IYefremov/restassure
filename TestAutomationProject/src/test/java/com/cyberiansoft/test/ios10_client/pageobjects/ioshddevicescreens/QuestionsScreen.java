@@ -23,9 +23,6 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class QuestionsScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIANavigationBar[1]/UIAButton[@name=\"Close\"]")
-    private IOSElement capturedonebtn;
-	
 	public QuestionsScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
@@ -139,7 +136,7 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 		String elementname = question + "_Image_Cell";
 		appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + elementname  + "\"]").click();
 		Helpers.makeCapture();
-		capturedonebtn.click();
+		appiumdriver.findElementByName("Done").click();
 	}
 
 	public void drawSignature() throws InterruptedException {

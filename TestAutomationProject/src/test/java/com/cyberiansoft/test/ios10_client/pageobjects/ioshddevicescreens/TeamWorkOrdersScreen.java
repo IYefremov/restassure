@@ -2,8 +2,12 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -16,7 +20,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
-	@iOSFindBy(accessibility  = "Monitor")
+	/*@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
 	
 	@iOSFindBy(accessibility = "Search")
@@ -32,12 +36,14 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
     private IOSElement locationfld;
 	
 	@iOSFindBy(accessibility = "Save")
-    private IOSElement searccsavebtn;
+    private IOSElement searccsavebtn;*/
 	
 	public TeamWorkOrdersScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Team Work Orders"))); 
 	}
 	
 	public void clickOnWO(String wonumber) {
@@ -45,12 +51,12 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}
 	
 	public OrderMonitorScreen selectWOMonitor() {
-		womonitor.click();
+		appiumdriver.findElementByAccessibilityId("Monitor").click();
 		return new OrderMonitorScreen(appiumdriver);
 	}
 	
 	public void selectEditWO() {
-		editmanu.click();
+		appiumdriver.findElementByAccessibilityId("Edit").click();
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
@@ -65,20 +71,20 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}
 	
 	public void clickiCreateInvoiceButton()  {
-		invoicenewbtn.click();		
+		appiumdriver.findElementByAccessibilityId("invoice new").click();		
 	}	
 	
 	public void clickSearchButton() {
-		searchbtn.click();
+		appiumdriver.findElementByAccessibilityId("Search").click();
 	}
 	
 	public void clickSearchSaveButton() {
-		searccsavebtn.click();
+		appiumdriver.findElementByAccessibilityId("Save").click();
 		Helpers.waitABit(2000);
 	}
 	
 	public void selectSearchLocation(String _location) {
-		locationfld.click();
+		appiumdriver.findElementByAccessibilityId("Location").click();
 		appiumdriver.findElementByName(_location).click();
 	}
 	

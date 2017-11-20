@@ -17,7 +17,9 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>  
-        
+        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" /> 
+
+        <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" /> 
         
         <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" /> 
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   

@@ -21,7 +21,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Draft")
+	/*@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
 	@iOSFindBy(accessibility = "Final")
@@ -43,7 +43,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
     private IOSElement savebtn;
 	
 	@iOSFindBy(accessibility  = "Cancel")
-    private IOSElement cancelbtn;
+    private IOSElement cancelbtn;*/
 
 	public InvoiceInfoScreen(AppiumDriver driver) {
 		super(driver);
@@ -58,25 +58,20 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickSaveAsDraft()  {
+		appiumdriver.findElementByAccessibilityId("Save").click();
+		appiumdriver.findElementByAccessibilityId("Draft").click();
 		clickSaveButton();
-		draftalertbtn.click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
-		Helpers.waitABit(2000);
 	}
 
 	public void clickSaveAsFinal() {
 		clickSaveButton();
-		finalalertbtn.click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
+		appiumdriver.findElementByAccessibilityId("Final").click();
+		clickSaveButton();
 		Helpers.waitABit(500);
 	}
 	
 	public String getInvoicePOValue() {
-		return setpofld.getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("txtPO").getAttribute("value");
 	}
 
 	public void setPO(String _po) {
@@ -86,7 +81,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setPOWithoutHidingkeyboard(String _po) {
-		setpofld.setValue(_po);
+		((IOSElement) appiumdriver.findElementByAccessibilityId("txtPO")).setValue(_po);
 	}
 
 	public void assertWOIsSelected(String wonumber) {
@@ -94,7 +89,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickFirstWO() {
-		invoicewostable.findElementByXPath("//XCUIElementTypeCell[1]").click();
+		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[1]").click();
 		Helpers.waitABit(1000);
 	}
 	
@@ -104,7 +99,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
 	public void addWorkOrder(String wonumber) {
 		Helpers.waitABit(2000);
-		invoicewostable.findElementByXPath("//XCUIElementTypeCell[2]").click();
+		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[2]").click();
 		//appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
 						+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
@@ -125,7 +120,7 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	//}
 
 	public void clickCancelButton() {
-		cancelbtn.click();
+		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
 	public void cancelInvoice() {
@@ -134,11 +129,11 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickInvoicePayButton() {
-		invoicepaybtn.click();
+		appiumdriver.findElementByAccessibilityId("action pay").click();
 	}
 	
 	public void changePaynentMethodToCashNormal() {
-		cashnormalbtn.click();
+		appiumdriver.findElementByAccessibilityId("cash normal").click();
 	}
 	
 	public void setCashCheckAmountValue(String amountvalue) {

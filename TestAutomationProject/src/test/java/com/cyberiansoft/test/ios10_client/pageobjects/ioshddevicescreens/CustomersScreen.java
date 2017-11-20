@@ -1,18 +1,18 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -20,7 +20,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class CustomersScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility  = "btnWholesale")
+	/*@iOSFindBy(accessibility  = "btnWholesale")
     private IOSElement btnwholesale;
 	
 	@iOSFindBy(accessibility  = "btnRetail")
@@ -42,7 +42,7 @@ public class CustomersScreen extends iOSHDBaseScreen {
     private IOSElement editpopupmenu;
 	
 	@iOSFindBy(accessibility  = "Select")
-    private IOSElement selectpopupmenu;
+    private IOSElement selectpopupmenu;*/
 	
 	public CustomersScreen(AppiumDriver driver) {
 		super(driver);
@@ -51,27 +51,30 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	}
 
 	public void swtchToRetailMode() {
-		if (appiumdriver.findElementsByAccessibilityId("btnWholesale").size() > 0)
-			btnwholesale.click();
+		if (elementExists("btnWholesale"))
+			appiumdriver.findElementByAccessibilityId("btnWholesale").click();
 	}
 
 	public void swtchToWholesaleMode() {
-		if (appiumdriver.findElementsByAccessibilityId("btnRetail").size() > 0)
-			btnretail.click();
+		if (elementExists("btnRetail"))
+			appiumdriver.findElementByAccessibilityId("btnRetail").click();
 	}
 
 	public AddCustomerScreen clickAddCustomersButton() {
-		addcustomerbtn.click();
+		appiumdriver.findElementByAccessibilityId("Add").click();
 		return new AddCustomerScreen(appiumdriver);				
 	}
 
-	public void searchCustomer(String customer)
-			throws InterruptedException {
-		if (appiumdriver.findElementsByAccessibilityId("ClientsView").size() > 0) {
-			searchbtn.click();
+	public void searchCustomer(String customer) {
+		
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Customers"))); 
+		if (elementExists("ClientsView")) {
+			appiumdriver.findElementByAccessibilityId("btnSearch").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-			closesearchbtn.click();
+			appiumdriver.findElementByAccessibilityId("Close").click();
 		} else {
 			
 			appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
@@ -79,44 +82,23 @@ public class CustomersScreen extends iOSHDBaseScreen {
 			Helpers.waitABit(1000);
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 		}
-		Helpers.waitABit(1000);
 	}
 
 	public AddCustomerScreen selectFirstCustomerToEdit() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
-		editpopupmenu.click();
+		appiumdriver.findElementByAccessibilityId("Edit").click();
 		return new AddCustomerScreen(appiumdriver);
 	}
 	
 	public void clickOnCustomer(String customer) {
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
-
-	public void selectCustomer(String customer)
-			throws InterruptedException {
+	
+	public void selectCustomerWithoutEditing(String customer) {
+		if (!appiumdriver.findElement(MobileBy.AccessibilityId(customer)).isDisplayed())
+			searchCustomer(customer);
 		clickOnCustomer(customer);
-		selectpopupmenu.click();
-		/*element(
-				MobileBy.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\"Select\"]"))
-				.click();*/
-	}
-	
-	
-
-	public void selectFirstCustomerWithoutEditing()
-			throws InterruptedException {
-		Thread.sleep(2000);
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]"))
-				.click();
-		selectpopupmenu.click();
-	}
-	
-	public void selectCustomerWithoutEditing(String customer)
-			throws InterruptedException {
-		Helpers.waitABit(2000);
-		searchCustomer(customer);
-		clickOnCustomer(customer);
-		selectpopupmenu.click();
+		appiumdriver.findElementByAccessibilityId("Select").click();
 	}
 
 	public void assertCustomerDoesntExists(String customer) {

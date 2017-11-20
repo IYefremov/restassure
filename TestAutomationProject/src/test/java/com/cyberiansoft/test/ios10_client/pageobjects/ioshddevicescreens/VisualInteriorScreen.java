@@ -23,7 +23,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	@iOSFindBy(accessibility  = "Custom")
+	/*@iOSFindBy(accessibility  = "Custom")
     private IOSElement customtab;
 	
 	@iOSFindBy(accessibility  = "Quantity")
@@ -36,7 +36,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
     private IOSElement toolbarvisualpricevalue;
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[8]")
-    private IOSElement toolbarpricevalue;
+    private IOSElement toolbarpricevalue;*/
 	
 	
 	@iOSFindBy(accessibility = "Save")
@@ -49,7 +49,7 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void switchToCustomTab() {
-		customtab.click();
+		appiumdriver.findElementByAccessibilityId("Custom").click();
 	}
 
 	public void selectService(String _service) {
@@ -62,8 +62,10 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
+		IOSElement quantityfld = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
 		quantityfld.click();
-		quantityfldvalue.setValue("");
+		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue("");
+		//quantityfldvalue.setValue("");
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}

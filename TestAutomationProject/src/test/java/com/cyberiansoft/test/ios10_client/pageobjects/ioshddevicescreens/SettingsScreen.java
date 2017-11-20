@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
@@ -11,16 +12,18 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class SettingsScreen extends iOSHDBaseScreen {
 	
+	private By inspectionsinglepagetoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[3]");
+	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[3]")
+    //private IOSElement inspectionsinglepagetoggle;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[3]")
-    private IOSElement inspectionsinglepagetoggle;
+	private By duplicatestoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[1]");	
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[1]")
+	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[1]")	
+    //private IOSElement duplicatestoggle;
 	
-    private IOSElement duplicatestoggle;
-	
-	@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]")
-    private IOSElement showtopcustomerstoggle;
+	private By showtopcustomerstoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]");	
+	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]")
+    //private IOSElement showtopcustomerstoggle;
 	
 	public SettingsScreen(AppiumDriver driver) {
 		super(driver);
@@ -29,33 +32,39 @@ public class SettingsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setInspectionToSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("0"))
-			inspectionsinglepagetoggle.click();
+		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(inspectionsinglepagetoggle);
+		if (singlepagetoggle.getAttribute("value").equals("0"))
+			singlepagetoggle.click();
 	}
 
 	public void setInspectionToNonSinglePageInspection() {
-		if (inspectionsinglepagetoggle.getAttribute("value").equals("1"))
-			inspectionsinglepagetoggle.click();
+		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(inspectionsinglepagetoggle);
+		if (singlepagetoggle.getAttribute("value").equals("1"))
+			singlepagetoggle.click();
 	}
 
 	public void setCheckDuplicatesOn() {
-		if (duplicatestoggle.getAttribute("value").equals("0"))
-			duplicatestoggle.click();
+		IOSElement dublicates = (IOSElement) appiumdriver.findElement(duplicatestoggle);
+		if (dublicates.getAttribute("value").equals("0"))
+			dublicates.click();
 	}
 
 	public void setCheckDuplicatesOff() {
-		if (duplicatestoggle.getAttribute("value").equals("1"))
-			duplicatestoggle.click();
+		IOSElement dublicates = (IOSElement) appiumdriver.findElement(duplicatestoggle);
+		if (dublicates.getAttribute("value").equals("1"))
+			dublicates.click();
 	}
 	
 	public void setShowTopCustomersOn() {
-		if (showtopcustomerstoggle.getAttribute("value").equals("0"))
-			showtopcustomerstoggle.click();
+		IOSElement showtopcustomerstogle = (IOSElement) appiumdriver.findElement(showtopcustomerstoggle);
+		if (showtopcustomerstogle.getAttribute("value").equals("0"))
+			showtopcustomerstogle.click();
 	}
 	
 	public void setShowTopCustomersOff() {
-		if (showtopcustomerstoggle.getAttribute("value").equals("1"))
-			showtopcustomerstoggle.click();
+		IOSElement showtopcustomerstogle = (IOSElement) appiumdriver.findElement(showtopcustomerstoggle);
+		if (showtopcustomerstogle.getAttribute("value").equals("1"))
+			showtopcustomerstogle.click();
 	}
 
 }

@@ -3,6 +3,8 @@ package com.cyberiansoft.test.ios10_client.utils;
 import io.appium.java_client.AppiumDriver;
 
 import java.net.MalformedURLException;
+import java.time.Duration;
+import java.time.Instant;
 
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -24,7 +26,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	private Object currentClass;
 	private ExtentReports extentreport;
 	private ExtentTest testlogger;
-	//private HomeScreen homescreen;
+	Instant star = Instant.now();
 	
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
@@ -43,10 +45,11 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 			((AndroidBaseTestCase) currentClass).setExtentReport(extentreport);
 		}*/
 
-		//System.out.println("+++++++++++"  +   method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(org.testng.annotations.Test.class).testName());
-		//if  (method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(org.testng.annotations.Test.class) != null) {
-		//	testName = method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(org.testng.annotations.Test.class).testName();
-		//}
+		star = Instant.now();
+		/*if  (method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(org.testng.annotations.Test.class) != null) {
+			System.out.println("+++++++++++"  +   method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(org.testng.annotations.Test.class).testName());
+			star = Instant.now();
+		}*/
 		//testDescription = method.getTestMethod().getDescription();
 		//ExtentReports extent = ((AndroidBaseTestCase) currentClass).getExtentReport();
 		//testlogger = extentreport.startTest(method.getTestMethod().getMethodName(), method.getTestMethod().getDescription());
@@ -73,6 +76,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
         		extentreport.endTest(testlogger);
         		extentreport.flush();
         	}
+        	
         }
 		
 		
@@ -154,6 +158,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 		extentreport = iOSLogger.getInstance();
 		extentreport.endTest(testlogger);
 		extentreport.flush();
+		System.out.println("Diff: " + Duration.between(star, Instant.now()).toMillis()/1000);
 	}
 
 	

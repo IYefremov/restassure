@@ -11,6 +11,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -36,25 +37,25 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	public final static String SEVERE_SEVERITY = "Severe (76-100 Dents)";
 	public final static String QUICK_QUOTE_SEVERITY = "Quick Quote";
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Price\"]")
-    private IOSElement pricecell;
+	//@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Price\"]")
+    //private IOSElement pricecell;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Time\"]")
-    private IOSElement timecell;
+	//@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Time\"]")
+    //private IOSElement timecell;
 	
-	@iOSFindBy(uiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
-    private IOSElement pricevaluefld;
+	//@iOSFindBy(uiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
+    //private IOSElement pricevaluefld;
 	
-	@iOSFindBy(accessibility = "Notes")
-    private IOSElement notescell;
+	//@iOSFindBy(accessibility = "Notes")
+    //private IOSElement notescell;
 	
-	@iOSFindBy(accessibility = "Technicians")
-    private IOSElement technicianscell;
+	//@iOSFindBy(accessibility = "Technicians")
+    //private IOSElement technicianscell;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
-    private IOSElement technicianscellvalue;
+	//@iOSFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
+   // private IOSElement technicianscellvalue;
 	
-	@iOSFindBy(accessibility  = "Compose")
+	/*@iOSFindBy(accessibility  = "Compose")
     private IOSElement composecell;
 	
 	@iOSFindBy(accessibility = "Clear")
@@ -64,7 +65,7 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
     private IOSElement savebtn;
 	
 	@iOSFindBy(accessibility = "Cancel")
-    private IOSElement cancelbtn;
+    private IOSElement cancelbtn;*/
 	
 	public PriceMatrixScreen(AppiumDriver driver) {
 		super(driver);
@@ -80,24 +81,21 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 
 	public void setSizeAndSeverity(String size, String severity) {
-		appiumdriver.findElementByAccessibilityId("Size").click();
-		appiumdriver.findElementByAccessibilityId(size).click();
-		if (appiumdriver.findElementsByAccessibilityId(severity).size() > 2)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId(severity).get(2)).click();
-		else
-			appiumdriver.findElementByAccessibilityId(severity).click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
-		Helpers.waitABit(500);
+		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Size")).click();
+		appiumdriver.findElementByAccessibilityId("tableSize").findElement(MobileBy.AccessibilityId(size)).click();
+		appiumdriver.findElementByAccessibilityId("tableSeverity").findElement(MobileBy.AccessibilityId(severity)).click();
+		appiumdriver.findElementByAccessibilityId("Size & Severity").findElement(By.name("Save")).click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
 	}
 
 	public void setPrice(String price) {
-		pricecell.click();
+		appiumdriver.findElementByAccessibilityId("Price").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
 		Helpers.waitABit(500);
 	}
 	
 	public void setTime(String timevalue) {
-		timecell.click();
+		appiumdriver.findElementByAccessibilityId("Time").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
 		Helpers.waitABit(500);
 	}
@@ -115,8 +113,9 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectDiscaunt(String discaunt) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
-				+ discaunt + "']/XCUIElementTypeButton[@name='unselected']").click();
+		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).findElement(By.name("unselected")).click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
+		//		+ discaunt + "']/XCUIElementTypeButton[@name='unselected']").click();
 	}
 
 	public void clickDiscaunt(String discaunt) {
@@ -128,14 +127,16 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public void switchOffOption(String optionname) {
-		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
-			((IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']")).click();
-		Helpers.waitABit(1000);
+		IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
+		if (switcher.getAttribute("value").equals("1"))
+		//if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
+			switcher.click();
 	}
 	
 	public String getDiscauntPriceAndValue(String discaunt) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
-						+ discaunt + "']").getAttribute("label");
+		return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).getAttribute("label");
+		//return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
+		//				+ discaunt + "']").getAttribute("label");
 	}
 	
 	public boolean isDiscauntPresent(String discaunt) {
@@ -144,42 +145,43 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isPriceMatrixSelected(String pricematrix) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixVehiclePartList']/XCUIElementTypeCell[@name='"
-						+ pricematrix + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
+		IOSElement pricematrixesVPList = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList");
+		return pricematrixesVPList.findElementByAccessibilityId(pricematrix).findElementByAccessibilityId("selected").isDisplayed();
 	}
 
 	public void assertNotesExists() {
-		Assert.assertTrue(notescell.isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Notes").isDisplayed());
 	}
 
 	public void assertTechniciansExists() {
-		Assert.assertTrue(technicianscell.isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed());
 	}
 
 	public String getTechniciansValue() {
-		return technicianscellvalue.getAttribute("name");
+		return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails")
+		.findElement(By.xpath("//XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]"))
+		.getAttribute("name");
 	}
 
 	public void clickOnTechnicians() {
-		technicianscell.click();
+		appiumdriver.findElementByAccessibilityId("Technicians").click();
 	}
 	
 	public void clickNotesButton() {
-		composecell.click();
+		appiumdriver.findElementByAccessibilityId("Compose").click();
 	}
 
 	public void clickSaveButton() {
-		savebtn.click();
+		appiumdriver.findElementByAccessibilityId("Save").click();
 		Helpers.waitABit(2000);
 	}
 
 	public void clickCancelButton() {
-		cancelbtn.click();
+		appiumdriver.findElementByAccessibilityId("Camcel").click();
 	}
 	
 	public void clearVehicleData() {
-		clearvehiclepartdatabtn.click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("Clear").click();
 		String msg = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}

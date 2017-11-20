@@ -10,9 +10,11 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -20,7 +22,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Change Status")
+	/*@iOSFindBy(accessibility = "Change Status")
     private IOSElement phasestatuscell;
 	
 	@iOSFindBy(accessibility = "Service Status")
@@ -51,7 +53,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
     private IOSElement servicesbtn;
 	
 	@iOSFindBy(accessibility = "Active")
-    private IOSElement activecaption;
+    private IOSElement activecaption;*/
 	
 	public OrderMonitorScreen(AppiumDriver driver) {
 		super(driver);
@@ -60,8 +62,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPanel(String panelname) {
-		appiumdriver.findElementByName(panelname).click();
-		Helpers.waitABit(1500);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(panelname))).click(); 
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {
@@ -77,7 +79,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void verifyPanelStatusInPopup(String panelname, String status) {
-		appiumdriver.findElementByName(panelname).click();
+		//appiumdriver.findElementByName(panelname).click();
 		WebElement par = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='Service Status']/.."));
 		Assert.assertTrue(par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value").equals(status));
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
@@ -85,7 +87,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void setCompletedServiceStatus() throws InterruptedException {
 		clickServiceStatusCell();
-		completedcell.click();
+		appiumdriver.findElementByAccessibilityId("Completed").click();
 		Thread.sleep(2000);
 		//clickBackButton();
 	}
@@ -100,11 +102,11 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickChangeStatusCell() {
-		phasestatuscell.click();
+		appiumdriver.findElementByAccessibilityId("Change Status").click();
 	}
 	
 	public void clickServiceStatusCell() {
-		servicestatuscell.click();
+		appiumdriver.findElementByAccessibilityId("Service Status").click();
 	}
 	
 	
@@ -114,13 +116,13 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
-		servicedetailsdonebtn.click();
+		appiumdriver.findElementByAccessibilityId("Done icon").click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public boolean isStartServiceButtonPresent() {
-		return startservicebtn.isDisplayed();
+		return appiumdriver.findElementByAccessibilityId("Start Service").isDisplayed();
 	}
 	
 	public boolean isStartPhaseButtonPresent() {
@@ -159,7 +161,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickStartService() throws InterruptedException {
-		startservicebtn.click();
+		appiumdriver.findElementByAccessibilityId("Start Service").click();
 		Thread.sleep(3000);
 	}
 	
@@ -172,7 +174,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public TeamWorkOrdersScreen clickBackButton() {
-		backbtn.click();
+		appiumdriver.findElementByAccessibilityId("Back").click();
 		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 	

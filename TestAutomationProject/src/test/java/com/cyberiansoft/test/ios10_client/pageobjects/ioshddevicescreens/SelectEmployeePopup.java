@@ -16,8 +16,8 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class SelectEmployeePopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Enter password here")
-    private IOSElement securefld;
+	//@iOSFindBy(accessibility = "Enter password here")
+    //private IOSElement securefld;
 	
 	public SelectEmployeePopup(AppiumDriver driver) {
 		super(driver);
@@ -27,13 +27,12 @@ public class SelectEmployeePopup extends iOSHDBaseScreen {
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {
 		selectEmployee(employee);
-		securefld.setValue(password);
+		((IOSElement) appiumdriver.findElement(MobileBy.AccessibilityId("Enter password here"))).setValue(password);
 		Helpers.acceptAlert();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void selectEmployee(String employee) {

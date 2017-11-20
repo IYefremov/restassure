@@ -12,9 +12,11 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -27,7 +29,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	private By btnwholesale = By.name("btnWholesale");
 	private By btnretail = By.name("btnRetail");
 	
-	@iOSFindBy(accessibility = "Add")
+	/*@iOSFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
 	
 	@iOSFindBy(accessibility  = "Discard")
@@ -55,12 +57,12 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
     private IOSElement discardmenu;
 	
 	@iOSFindBy(accessibility  = "Notes")
-    private IOSElement notesmenu;
+    private IOSElement notesmenu;*/
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")
-    private IOSElement firswointable;
+	//@iOSFindBy(xpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")
+    //private IOSElement firswointable;
 	
-	@iOSFindBy(accessibility = "Share")
+	/*@iOSFindBy(accessibility = "Share")
     private IOSElement sharebtn;
 	
 	@iOSFindBy(accessibility = "filter")
@@ -85,7 +87,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
     private IOSElement techniciansmenubtn;
 	
 	@iOSFindBy(accessibility  = "Service Request")
-    private IOSElement servicerequestbtn;
+    private IOSElement servicerequestbtn;*/
 
 	public MyWorkOrdersScreen(AppiumDriver driver) {
 		super(driver);
@@ -93,40 +95,36 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	public void clickAddOrderButton() {	
-		addinspbtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
+	public void clickAddOrderButton() {			
+		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.AccessibilityId("Add")).click();
+		if (elementExists("Discard"))
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		Helpers.waitABit(1000);
 	}
 	
 	public IOSElement getAddOrderButton() {	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(addinspbtn));
-		return addinspbtn;
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		return (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Add"))); 
 	}
 
 	public void selectFirstOrder() {
-		firswointable.click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
 	}
 
 	public void selectCopyServices() {
-		copyservicesmenu.click();
+		appiumdriver.findElementByAccessibilityId("Copy Services").click();
 	}
 	
 	public void selectCopyVehicle() {
-		copyvehiclemenu.click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("Copy Vehicle").click();
 	}
 	
 	public void clickChangeCustomerPopupMenu() {
-		changecustomermenu.click();
+		appiumdriver.findElementByAccessibilityId("Change Customer").click();
 		Helpers.waitABit(1000);
 	}
 	
 	public void clickDetailspopupMenu() {
-		detailsmenu.click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("Details").click();
 	}
 	
 	public void selectCustomer(String customer) {
@@ -194,14 +192,14 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickActionButton() {
-		sharebtn.click();		
+		appiumdriver.findElementByAccessibilityId("Share").click();		
 	}
 	
 	public void clickFilterButton() {
 		if (appiumdriver.findElementsByAccessibilityId("filter").size() < 1)
 			appiumdriver.findElementByAccessibilityId("filter pressed").click();
 		else
-			filterbtn.click();		
+			appiumdriver.findElementByAccessibilityId("filter").click();		
 		//filterbtn.click();		
 	}
 	
@@ -212,25 +210,23 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickDoneButton() {
-		donebtn.click();		
+		appiumdriver.findElementByAccessibilityId("Done").click();		
 	}
 	
 	public void clickDeleteButton() {
-		deletebtn.click();
+		appiumdriver.findElementByAccessibilityId("Delete").click();
 	}
 	
 	public boolean isAutosavedWorkOrderExists() {	
 		return elementExists(autosavedworkorder);
 	}
 	
-	public void selectWorkOrderForAction(String wo) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='" + wo
-						+ "']/XCUIElementTypeOther").click();
+	public void selectWorkOrderForAction(String woNumber) {
+		appiumdriver.findElementByAccessibilityId(woNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 	
-	public SelectEmployeePopup clickWorkOrderForApproveButton(String wo) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='" + wo
-						+ "']/XCUIElementTypeOther").click();
+	public SelectEmployeePopup clickWorkOrderForApproveButton(String woNumber) {
+		appiumdriver.findElementByAccessibilityId(woNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 		return new SelectEmployeePopup(appiumdriver);
 	}
 	
@@ -247,20 +243,19 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void selectWorkOrderForEidt(String wonumber) {		
 		selectWorkOrder(wonumber);
-		editbtn.click();
-		Helpers.waitABit(2000);
+		appiumdriver.findElementByAccessibilityId("Edit").click();
 	}
 	
 	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {		
 		selectWorkOrder(wonumber);
-		if (!techrevenuebtn.isDisplayed()) {
+		if (!appiumdriver.findElementByAccessibilityId("Tech Revenue").isDisplayed()) {
 			swipeTableUp(appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/.."),
 					appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/../.."));
-			techrevenuebtn.click();
+			appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 		}
-		techrevenuebtn.click();
+		appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 		
 		
 		Helpers.waitABit(1000);
@@ -269,53 +264,51 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {		
 		selectWorkOrder(wo);
-		if (!techniciansmenubtn.isDisplayed()) {
+		if (!appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed()) {
 			swipeTableUp(appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/.."),
 					appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/../.."));
-			techniciansmenubtn.click();
+			appiumdriver.findElementByAccessibilityId("Technicians").click();
 		}
-		techniciansmenubtn.click();
-		Helpers.waitABit(2000);
+		appiumdriver.findElementByAccessibilityId("Technicians").click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	
 	public void selectWorkOrderForCopyVehicle(String wonumber) {
 		selectWorkOrder(wonumber);
-		copyvehiclemenu.click();
+		appiumdriver.findElementByAccessibilityId("Copy Vehicle").click();
 	}
 	
 	public void selectWorkOrderForAddingNotes(String wonumber) {
 		selectWorkOrder(wonumber);
-		notesmenu.click();
+		appiumdriver.findElementByAccessibilityId("Notes").click();
 	}
 	
 	public void selectWorkOrderForCopyServices(String wo) {
 		selectWorkOrder(wo);
-		copyservicesmenu.click();
+		appiumdriver.findElementByAccessibilityId("Copy Services").click();
 	}
 	
 	public void selectWorkOrderNewInspection(String wo) {
 		selectWorkOrder(wo);
-		newinspectionmenu.click();
-		Helpers.waitABit(500);
+		appiumdriver.findElementByAccessibilityId("New Inspection").click();
 	}
 	
 	public void selectContinueWorkOrder(String wo) {
 		selectWorkOrder(wo);
-		continuemenu.click();
+		appiumdriver.findElementByAccessibilityId("Continue").click();
 	}
 	
 	public void selectDiscardWorkOrder(String wo) {
 		selectWorkOrder(wo);
-		discardmenu.click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
 
 	public void clickCreateInvoiceIconForWO(String wonumber) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonUnchecked\")]")).click();
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
+		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonUnchecked\")]")).click();
+		//Helpers.waitABit(1000);
 		//appiumdriver.findElement(MobileBy.xpath("//UIATableView[@name=\"MyWorkOrdersTable\"]/UIATableCell[@name = \"" + wo + "\"]/UIAButton[@name=\"EntityInfoButtonUnchecked\"]")).click();
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[\"MyWorkOrdersTable\"].cells()[\"" + wo + "\"].buttons()[\"EntityInfoButtonUnchecked\"]")).click();
 	}
@@ -326,19 +319,17 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 
 	public boolean woExists(String wonumber) {
-		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		return appiumdriver.findElementsByAccessibilityId(wonumber).size() > 0;
+		return elementExists(wonumber);
 	}
 
 	public void clickInvoiceIcon() {
-		newinvoice.click();
+		appiumdriver.findElementByAccessibilityId("invoice new").click();
 	}
 
 	public InvoiceInfoScreen selectInvoiceType(String invoicetype) {
 		/*appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
 						+ invoicetype + "\")]/UIAStaticText[1]").click();*/
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
-		Helpers.waitABit(1000);
 		return new InvoiceInfoScreen(appiumdriver);
 	}
 
@@ -351,22 +342,14 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		WebElement wostable = null;
-		
-		List<WebElement> tbls = appiumdriver.findElementsByAccessibilityId("OrderTypeSelector");
-		for (WebElement tb : tbls) {
-			if (tb.getAttribute("type").equals("XCUIElementTypeTable")) {
-				wostable = tb;
-				break;
-			}
-		}
-		if (!appiumdriver.findElementByAccessibilityId(workordertype).isDisplayed()) {
-			swipeTableUp(appiumdriver.findElementByAccessibilityId(workordertype),
+		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
+
+		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
+			swipeTableUp(wostable.findElementByAccessibilityId(workordertype),
 					wostable);
-			appiumdriver.findElementByAccessibilityId(workordertype).click();
+			wostable.click();
 		}
-		appiumdriver.findElementByAccessibilityId(workordertype).click();
-		Helpers.waitABit(1000);
+		wostable.findElementByAccessibilityId(workordertype).click();
 		return new VehicleScreen(appiumdriver);
 	}
 
@@ -376,7 +359,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void setFilterBilling(String billing)  {
 		appiumdriver.findElementByName("Billing").click();
-		Helpers.waitABit(500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + billing + "']").click();
 	}
 	
@@ -389,7 +371,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickServiceRequestButton() {
-		servicerequestbtn.click();
+		appiumdriver.findElementByAccessibilityId("Service Request").click();
 	}
 	
 	public boolean isWorkOrderHasApproveIcon(String wonumber) {

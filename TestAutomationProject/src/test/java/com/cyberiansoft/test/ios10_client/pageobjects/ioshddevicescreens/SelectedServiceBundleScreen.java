@@ -18,14 +18,14 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
+	/*@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
 	private IOSElement cancelbundlepopupbtn;
 	
 	@iOSFindBy(accessibility = "services")
 	private IOSElement tollbarservicesbtn;
 	
 	@iOSFindBy(accessibility = "Close")
-	private IOSElement tollbarcloseservicesbtn;
+	private IOSElement tollbarcloseservicesbtn;*/
 	
 	public SelectedServiceBundleScreen(AppiumDriver driver) {
 		super(driver);
@@ -34,32 +34,36 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertBundleIsSelected(String bundle) {
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"selected\"]")).isDisplayed());
+		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("selected")).isDisplayed());
 	}
 
 	public void assertBundleIsNotSelected(String bundle) {
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"unselected\"]")).isDisplayed());
+		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).isDisplayed());
 		
 	}
 
 	public void selectBundle(String bundle) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"unselected\"]")).click();
+		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
+		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 
 	public void openBundleInfo(String bundle) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name=\"custom detail button\"]")).click();
+		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
+		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
 	}
 	
 	public void clickCancelBundlePopupButton() {
-		cancelbundlepopupbtn.click();
+		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(By.name("Cancel")).click();
 	}
 	
 	public void clickServicesIcon() {
-		tollbarservicesbtn.click();
+		appiumdriver.findElementByAccessibilityId("services").click();
 	}
 	
 	public void clickCloseServicesPopup() {
-		tollbarcloseservicesbtn.click();
+		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
 	public boolean isBundleServiceExists(String bundle) {
@@ -72,9 +76,7 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		
 		List<WebElement> elems = appiumdriver.findElementsByAccessibilityId("Bundle service amount");
 		for (WebElement el : elems) {
-			System.out.println("++++" + el.getAttribute("value"));
 			if (el.getAttribute("value").equals("")) {
-				System.out.println("++++" + el.getAttribute("value"));
 				el.findElement(By.xpath(".//UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]")).clear();
 				el.findElement(By.xpath(".//UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]")).click();
 			}

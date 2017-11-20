@@ -12,11 +12,11 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility  = "window screen")
-    private IOSElement windowscreen;
+	//@iOSFindBy(accessibility  = "window screen")
+    //private IOSElement windowscreen;
 	
-	@iOSFindBy(accessibility  = "notes")
-    private IOSElement signatureelement;
+	//@iOSFindBy(accessibility  = "notes")
+   // private IOSElement signatureelement;
 	
 	
 	public SinglePageInspectionScreen(AppiumDriver driver) {
@@ -31,17 +31,17 @@ public class SinglePageInspectionScreen extends iOSHDBaseScreen {
 	
 	public void expandToFullScreeenSevicesSection() throws InterruptedException {
 		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 	
 	public void expandToFullScreeenQuestionsSection() throws InterruptedException {
 		appiumdriver.findElementByXPath("//XCUIElementTypeOther[3]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 	
 	public void collapseFullScreen() throws InterruptedException {
-		windowscreen.click();
-		Thread.sleep(2000);
+		appiumdriver.findElementByAccessibilityId("window screen").click();
+		Thread.sleep(1000);
 	}
 	
 	public boolean isSignaturePresent() {

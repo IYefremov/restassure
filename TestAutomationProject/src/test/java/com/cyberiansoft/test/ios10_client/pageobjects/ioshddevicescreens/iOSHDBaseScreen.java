@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -23,27 +24,18 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
-	//final String uipickerxpath = ".popover().pickers()[0]";
-	final String uipickerxpath = "//UIAPicker";
 	
 	//@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"].withValueForKey(1, \"isVisible\")")
-	@iOSFindBy(accessibility = "Back")
-	private IOSElement backbtn;
+	//@iOSFindBy(accessibility = "Back")
+	//private IOSElement backbtn;
 	
-	@iOSFindBy(accessibility  = "Save")
+	/*@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(accessibility  = "Cancel")
-    private IOSElement cancelbtn;
+    private IOSElement cancelbtn;*/
+
 	
-	@iOSFindBy(xpath = uipickerxpath)
-    private IOSElement picker;
-	
-	@iOSFindBy(xpath = uipickerxpath + "/UIAPickerWheel[1]")
-    private IOSElement pickerwheel;
-	
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[4]")
-    private IOSElement changescreenbtn;
 	
 	public iOSHDBaseScreen(AppiumDriver driver) {
 		super(driver);
@@ -52,14 +44,22 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public HomeScreen clickHomeButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(backbtn).waitAction(Duration.ofSeconds(1)).release().perform();
-		Helpers.waitABit(1000);
+		action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new HomeScreen(appiumdriver);		
 	}
 	
+	public boolean elementExists(String elementName) {
+		boolean exists = false;
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		exists =  appiumdriver.findElementsByAccessibilityId(elementName).size() > 0;
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return exists;
+	}
+	
+	
 	public void clickSaveButton() {
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(savebtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId("Save")).waitAction(Duration.ofSeconds(1)).release().perform();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -73,17 +73,17 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancelButton() {
-		cancelbtn.click();		
+		appiumdriver.findElementByAccessibilityId("Cancel").click();		
 	}
 	
 	public void selectNextScreen(String screenname) {
-		Helpers.waitABit(500);
 		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
-		navbar.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
+		navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
+		//navbar.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId(screenname)).waitAction(Duration.ofSeconds(1)).release().perform();
+		//action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(screenname).click();
-		Helpers.waitABit(1000);
 	}
 	
 	public WebElement waitUntilVisible(String xpath) {
@@ -136,23 +136,18 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		boolean found = false;
-		Helpers.waitABit(1000);
 		//selectUIAPickerValue(year);
 		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 		int  xx = picker.getSize().getWidth()/2;
 		int yy = (int) (picker.getSize().getHeight()*0.75);
 
-		//170-210
 		while (!found) {
 			found = pickerwhl.getAttribute("value").contains(value);
 			if (!found) {
 				
 				TouchAction action = new TouchAction(appiumdriver);
 				action.tap(picker, xx, yy).perform();
-				
-				
-				Helpers.waitABit(1000);
 				
 			} else {
 				break;

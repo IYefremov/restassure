@@ -118,8 +118,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -160,8 +160,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -188,8 +188,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -239,8 +239,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Right Front Wheel" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -380,8 +380,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Roof" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -467,8 +467,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.wizprotrackerrouteworkordertype);
@@ -521,8 +521,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.wizprotrackerrouteworkordertype);
@@ -599,8 +599,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -643,8 +643,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Left Rear Door" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -682,8 +682,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -711,8 +711,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -735,8 +735,8 @@ public class DentWizartestCases extends BaseTestCase {
 	
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.wizardprotrackerrouteinspectiondertype);
@@ -767,8 +767,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.routecanadaworkordertype);
@@ -834,8 +834,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
@@ -884,8 +884,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Left Rear Door", "Roof" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1027,8 +1027,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Sunroof" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1091,8 +1091,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Trunk Lid" };
 		 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1173,8 +1173,8 @@ public class DentWizartestCases extends BaseTestCase {
 				"Trunk Lid" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1270,8 +1270,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1311,8 +1311,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1383,8 +1383,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1443,8 +1443,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1558,8 +1558,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1649,8 +1649,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1717,8 +1717,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String validzip = "83707";
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1759,8 +1759,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1871,8 +1871,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -1988,8 +1988,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2055,8 +2055,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2137,8 +2137,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2244,8 +2244,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2378,8 +2378,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2443,8 +2443,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2519,8 +2519,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Roof" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2564,8 +2564,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
@@ -2603,15 +2603,15 @@ public class DentWizartestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		
 		customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.assertInspectionExists(inspectioncustomer);
 		myinspectionsscreen.clickHomeButton();
 		
 		customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		homescreen = new HomeScreen(appiumdriver);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.assertInspectionDoesntExists(inspectioncustomer);
@@ -2628,8 +2628,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String totalsumm = "$3,738.00";
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2693,8 +2693,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2794,8 +2794,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Left Fender", "Left Front Door", "Left Quarter Panel", "Left Rear Door", "Left Roof Rail" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2876,8 +2876,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehiclepartspaint = {  "Left Rear Door", "Right Fender" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -2953,8 +2953,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3002,8 +3002,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
@@ -3049,8 +3049,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3104,8 +3104,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3210,8 +3210,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3292,8 +3292,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3405,8 +3405,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3440,8 +3440,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3480,8 +3480,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
@@ -3560,8 +3560,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3622,8 +3622,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(UtilConstants.wizardprotrackerservicedriveworkordertype);
@@ -3671,8 +3671,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Left Fender", "Left Roof Rail", "Right Fender" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3729,8 +3729,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
@@ -3817,8 +3817,8 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.clickActionButton();
 		for (int i = 0; i< 4; i++) {
@@ -3841,8 +3841,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Left Fender", "Right Fender"};
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(_customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(_customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3899,8 +3899,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehiclepartswheel = { "Right Front Wheel", "Right Rear Wheel" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -3977,8 +3977,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4010,8 +4010,8 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4087,8 +4087,8 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -4169,8 +4169,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4247,8 +4247,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4316,8 +4316,8 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4362,8 +4362,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
@@ -4397,8 +4397,8 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts = { "Left Front Wheel", "Left Rear Wheel" };
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.searchCustomer(customer);
-		customersscreen.selectFirstCustomerWithoutEditing();
+		customersscreen.selectCustomerWithoutEditing(customer);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 		myworkordersscreen.clickAddOrderButton();
