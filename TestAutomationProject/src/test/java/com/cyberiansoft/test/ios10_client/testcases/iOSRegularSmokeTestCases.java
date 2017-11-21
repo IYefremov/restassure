@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import io.appium.java_client.MobileBy;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -123,6 +125,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriverInicialize(buildtype);
+		//appiumdriver.installApp(appPath);
 		//appiumdriver.removeApp(bundleid);
 		//appiumdriverInicialize();
 		//appiumdriver.installApp(app.getAbsolutePath());
@@ -1991,8 +1994,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		//Create WO1
+		Instant star = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		System.out.println("Diff: " + Duration.between(star, Instant.now()).toMillis());
 		myworkordersscreen.clickAddOrderButton();
+		System.out.println("Diff: " + Duration.between(star, Instant.now()).toMillis());
 		customersscreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE) ;
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);

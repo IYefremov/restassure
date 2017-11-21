@@ -4902,6 +4902,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
 		servicerequestsscreen.clickCancelCloseReasonDialog();
+		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -5079,6 +5080,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mywoscreen.woExists(wonumber);
 		mywoscreen.clickServiceRequestButton();
 		servicerequestsscreen.clickHomeButton();
+		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -7263,6 +7265,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			}
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
+			servicesscreen.cancelSearchAvailableService();
 		}
 
 		for (String serviceadd : servicestoadd) {
@@ -7831,7 +7834,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.searchServiceToSelect(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE);
 		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE);
 		servicesscreen.selectServiceSubSrvice(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE, "Wash partly");
-		
+		servicesscreen.cancelSearchAvailableService();
 		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE);
 		servicesscreen.selectServiceSubSrvice(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE, "Wash whole");
 		Assert.assertTrue(servicesscreen.isServiceWithSubSrviceSelected(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE, "Wash partly"));

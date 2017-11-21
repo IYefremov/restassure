@@ -67,20 +67,11 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Stock#")
     private IOSElement stockfld;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Stock#\"]/UIATextField")
-    private IOSElement stockfldvalue;
-	
 	@iOSFindBy(accessibility = "RO#")
     private IOSElement rofld;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"RO#\"]/UIATextField")
-    private IOSElement rofldvalue;
-	
 	@iOSFindBy(accessibility = "PO#")
     private IOSElement pofld;
-	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"PO#\"]/UIATextField")
-    private IOSElement pofldvalue;
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
     private IOSElement inspnumberlabel;
@@ -127,27 +118,37 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(1500);
+
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		System.out.println("+++" + closebtns.size());
 		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed())
+			if (closebtn.isDisplayed()) {
 				closebtn.click();
+				break;
+			}
 		
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		System.out.println("+++" + closebtns.size());
 		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed())
+			if (closebtn.isDisplayed()) {
 				closebtn.click();
+				break;
+			}
+		}
 		
-		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed())
-				closebtn.click();
+		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
+			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+			System.out.println("+++" + closebtns.size());
+			for (IOSElement closebtn : closebtns)
+				if (closebtn.isDisplayed()) {
+					closebtn.click();
+					break;
+				}
+			}
 		
-		/*if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(0)).click();
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Close").click();
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Close").click();*/
+
 		Helpers.waitABit(500);
 	}
 	
