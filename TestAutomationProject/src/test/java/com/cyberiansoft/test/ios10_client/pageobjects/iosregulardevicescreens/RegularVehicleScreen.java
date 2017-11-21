@@ -121,7 +121,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(1500);
 
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		System.out.println("+++" + closebtns.size());
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				closebtn.click();
@@ -130,7 +129,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		System.out.println("+++" + closebtns.size());
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				closebtn.click();
@@ -140,7 +138,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
 			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-			System.out.println("+++" + closebtns.size());
 			for (IOSElement closebtn : closebtns)
 				if (closebtn.isDisplayed()) {
 					closebtn.click();
