@@ -127,6 +127,9 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public void refresh() {
+		try{
+			driver.switchTo().alert().accept();
+		}catch(Exception e){}
 		driver.navigate().refresh();
 	}
 
