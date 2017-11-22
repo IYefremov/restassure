@@ -9,7 +9,7 @@
   <parameter name="ios.build" value="ReconPro_0113.app.zip"  />
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <!--<parameter name="license.name" value="Mac mini_olkr"  />-->
-  <parameter name="license.name" value="Vit_Ipad"  />
+  <parameter name="license.name" value="AutomationCalculations_Regular"  />
   <listeners>
 		<listener class-name="com.cyberiansoft.test.ios10_client.utils.RegularSuperListener"/>
   </listeners>
