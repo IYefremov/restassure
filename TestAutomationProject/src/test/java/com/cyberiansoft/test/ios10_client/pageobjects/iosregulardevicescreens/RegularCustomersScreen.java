@@ -18,7 +18,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "btnWholesale")
+	/*@iOSFindBy(accessibility = "btnWholesale")
     private IOSElement btnwholesale;
 	
 	@iOSFindBy(accessibility = "btnRetail")
@@ -40,7 +40,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
     private IOSElement selectpopupmenu;
 	
 	@iOSFindBy(accessibility = "Top Customers")
-	private List<IOSElement> topcustomers;
+	private List<IOSElement> topcustomers;*/
 	
 	public RegularCustomersScreen(AppiumDriver driver) {
 		super(driver);
@@ -50,13 +50,13 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 
 	public void swtchToRetailMode() {
 		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnWholesale")).size() > 0) {
-			btnwholesale.click();
+			appiumdriver.findElement(MobileBy.AccessibilityId("btnWholesale")).click();
 		}
 	}
 
 	public void swtchToWholesaleMode() {
 		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnRetail")).size() > 0) {
-			btnretail.click();
+			appiumdriver.findElement(MobileBy.AccessibilityId("btnRetail")).click();
 		}
 	}
 
@@ -71,7 +71,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	}*/
 	
 	public RegularAddCustomerScreen clickAddCustomersButton() {
-		addcustomerbtn.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Add")).click();
 		return new RegularAddCustomerScreen(appiumdriver);				
 	}
 
@@ -80,7 +80,7 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 		Thread.sleep(2000);
 		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[1]"))
 				.click();
-		selectpopupmenu.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Select")).click();
 	}
 	
 	public void selectCustomer(String customer) {
@@ -95,12 +95,12 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
 	public void selectCustomerWithoutEditing(String customer) {
 		selectCustomer(customer);
-		selectpopupmenu.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Select")).click();
 	}
 	
 	public RegularAddCustomerScreen selectCustomerToEdit(String customer) {
 		selectCustomer(customer);
-		editpopupmenu.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Edit")).click();
 		return new RegularAddCustomerScreen(appiumdriver);
 	}
 

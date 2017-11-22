@@ -31,7 +31,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
     private IOSElement makecustombtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	/*@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
 	@iOSFindBy(accessibility = "Advisor")
@@ -71,7 +71,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
     private IOSElement rofld;
 	
 	@iOSFindBy(accessibility = "PO#")
-    private IOSElement pofld;
+    private IOSElement pofld;*/
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
     private IOSElement inspnumberlabel;
@@ -208,7 +208,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void seletAdvisor(String advisor) {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
-		advisorfld.click();
+		appiumdriver.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
 	
@@ -254,25 +254,25 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setColor(String color) {
-		colorfld.click();
+		appiumdriver.findElementByAccessibilityId("Color").click();
 		appiumdriver.findElementByAccessibilityId(color).click();
 		Helpers.waitABit(1000);
 	}
 	
 	public void setMileage(String mileage) throws InterruptedException {
-		mileagefld.click();
+		appiumdriver.findElementByAccessibilityId("Mileage").click();
 		Helpers.keyboadrType(mileage);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel) throws InterruptedException {
-		fueltanklevelfld.click();
+		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
 		Helpers.keyboadrType(fueltanklevel);
 		//element(
 			//	MobileBy.name("Fuel Tank Level")).setValue(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) throws InterruptedException {
-		licenseplatefld.click();
+		appiumdriver.findElementByAccessibilityId("License Plate").click();
 		Helpers.keyboadrType(licplate);
 	}
 
@@ -284,25 +284,24 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public void selectLocation(String _location) {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Location']")));
-		
-		IOSTouchAction iostouch = new IOSTouchAction(appiumdriver);
-		iostouch.tap(appiumdriver.findElementByAccessibilityId("Location")).perform();
-		appiumdriver.findElementByAccessibilityId("Location").click();
+		if (!table.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
+			swipeToElement(table.findElement(MobileBy.AccessibilityId("Location")));
+			table.findElement(MobileBy.AccessibilityId("Location")).click();
+		}
+		table.findElement(MobileBy.AccessibilityId("Location")).click();
 		//WebElement par = getVehicleInfoTableParentNode("Location");
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField")).click();
-		Helpers.waitABit(1000);
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
 	public void setType(String _type) throws InterruptedException {
-		typefld.click();
+		appiumdriver.findElementByAccessibilityId("Type").click();
 		//selectUIAPickerValue(_type);
 		toolbardonebtn.click();
 	}
 	
 	public void setYear(String year) throws InterruptedException {
-		yearfld.click();
+		appiumdriver.findElementByAccessibilityId("Year").click();
 		Thread.sleep(1000);
 		selectUIAPickerValue(year);
 		toolbardonebtn.click();
@@ -311,17 +310,17 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setTrim(String trimvalue) throws InterruptedException {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
-		trimfld.click();
-		trimfld.click();
+		appiumdriver.findElementByAccessibilityId("Trim").click();
+		appiumdriver.findElementByAccessibilityId("Trim").click();
 		Thread.sleep(1000);
 		selectUIAPickerValue(trimvalue);
 		toolbardonebtn.click();
 	}
 
 	public void clickTech() {
-		if (!techfld.isDisplayed())
+		if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeCell[@name='Tech']")));
-		techfld.click();
+		appiumdriver.findElementByAccessibilityId("Tech").click();
 	}
 
 	public void setStock(String stock) {
@@ -341,7 +340,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setPO(String po) throws InterruptedException {
-		pofld.click();
+		appiumdriver.findElementByAccessibilityId("PO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);

@@ -21,7 +21,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "Customers")
+	/*@iOSFindBy(accessibility = "Customers")
     private IOSElement customersbtn;
 	
 	@iOSFindBy(accessibility = "My Inspections")
@@ -55,7 +55,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
     private IOSElement settingstsbtn;
 	
 	@iOSFindBy(accessibility = "logout")
-    private IOSElement logoutbtn;
+    private IOSElement logoutbtn;*/
 	
 	public RegularHomeScreen(AppiumDriver driver) {
 		super(driver);
@@ -63,98 +63,87 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	final static String scrollviewxpath = "//UIAScrollView[1]";
-
 	public RegularCustomersScreen clickCustomersButton() {	
-		if(!customersbtn.isDisplayed()) {
+		if(!appiumdriver.findElementByAccessibilityId("Customers").isDisplayed()) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.press(customersbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+			action.press(appiumdriver.findElementByAccessibilityId("Customers")).waitAction(Duration.ofSeconds(1)).release().perform();
 		}
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(customersbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId("Customers")).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new RegularCustomersScreen(appiumdriver);
 	}
 
 	public RegularMyInspectionsScreen clickMyInspectionsButton() {
-		if(!myinspectionsbtn.isDisplayed()) {
+		if(!appiumdriver.findElementByAccessibilityId("My Inspections").isDisplayed()) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.press(myinspectionsbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+			action.press(appiumdriver.findElementByAccessibilityId("My Inspections")).waitAction(Duration.ofSeconds(1)).release().perform();
 		}
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(myinspectionsbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		action.press(appiumdriver.findElementByAccessibilityId("My Inspections")).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new RegularMyInspectionsScreen(appiumdriver);
 	}
 	
 	public RegularTeamInspectionsScreen clickTeamInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(teaminspectionsbtn));
-		teaminspectionsbtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Inspections")));
+		appiumdriver.findElementByAccessibilityId("Team Inspections").click();
 		return new RegularTeamInspectionsScreen(appiumdriver);
 	}
 
 	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(myworkordersbtn));
-		myworkordersbtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Work Orders")));
+		appiumdriver.findElementByAccessibilityId("My Work Orders").click();
 		return new RegularMyWorkOrdersScreen(appiumdriver);
 	}
 	
 	public RegularCarHistoryScreen clickCarHistoryButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(carhistorybtn));
-		carhistorybtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Car History")));
+		appiumdriver.findElementByAccessibilityId("Car History").click();
 		return new RegularCarHistoryScreen(appiumdriver);
 	}
 
 	public RegularMyInvoicesScreen clickMyInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(myinvoicesbtn));
-		myinvoicesbtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Invoices")));
+		appiumdriver.findElementByAccessibilityId("My Invoices").click();
 		return new RegularMyInvoicesScreen(appiumdriver);
 	}
 	
 	public RegularTeamInvoicesScreen clickTeamInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(teaminvoicesbtn));
-		teaminvoicesbtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Invoices")));
+		appiumdriver.findElementByAccessibilityId("Team Invoices").click();
 		return new RegularTeamInvoicesScreen(appiumdriver);
 	}
 
 	public RegularServiceRequestsScreen clickServiceRequestsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
-		servicerequestsbtn.click();
-		Helpers.waitABit(500);
-		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
-		}
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
+		appiumdriver.findElementByAccessibilityId("Service Requests").click();
 		return new RegularServiceRequestsScreen(appiumdriver);
 	}
 	
 	public void clickStatusButton() {
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		//wait.until(ExpectedConditions.elementToBeClickable(statustsbtn));
-		statustsbtn.click();
+		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 	
 	public RegularTeamWorkOrdersScreen clickTeamWorkordersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(temworkorderstsbtn));
-		temworkorderstsbtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Work Orders")));
+		appiumdriver.findElementByAccessibilityId("Team Work Orders").click();
 		Helpers.waitABit(1000);
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 
 	public RegularSettingsScreen clickSettingsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
 		swipeScreenUp();
-		settingstsbtn.click();
+		appiumdriver.findElementByAccessibilityId("Settings").click();
 		return new RegularSettingsScreen(appiumdriver);
 	}	
 	
@@ -173,7 +162,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularMainScreen clickLogoutButton() {
-		logoutbtn.click();
+		appiumdriver.findElementByAccessibilityId("logout").click();
 		return new RegularMainScreen(appiumdriver);
 	}
 

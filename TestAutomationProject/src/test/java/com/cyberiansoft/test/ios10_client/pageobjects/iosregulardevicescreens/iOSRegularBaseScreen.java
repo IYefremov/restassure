@@ -113,9 +113,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void selectNextScreen(String screenname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(changescreenbtn)).click();
-		Helpers.waitABit(500);
+		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
 		if (! appiumdriver.findElementByAccessibilityId(screenname).isDisplayed()) {
 			swipeToElement(appiumdriver.
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
