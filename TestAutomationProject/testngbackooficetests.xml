@@ -20,13 +20,9 @@
     <test name="Back Office Test Cases - Chrome" preserve-order="true">
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
-
-            <!---->
-
-
+            <!--
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
             </class>
-
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
             </class>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
@@ -49,18 +45,21 @@
             </class>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
             </class>
-               <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-               </class>
+            -->
 
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-              
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
+                <methods>
+                        </methods>
             </class>
 
-                        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-                        </class>
-                        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-                        </class>
-            <!--     -->
+            <!--
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
+            </class>
+               -->
         </classes>
     </test>
 
