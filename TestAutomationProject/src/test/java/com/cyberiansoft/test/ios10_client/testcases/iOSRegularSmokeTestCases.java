@@ -2273,7 +2273,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE);
-		Thread.sleep(1000);
 		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);

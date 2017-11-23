@@ -16,9 +16,11 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Helpers {
@@ -176,8 +178,11 @@ public abstract class Helpers {
 
 	public static void waitForAlert() {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(driver, 300);
-		wait.until(ExpectedConditions.alertIsPresent());
+		//WebDriverWait wait = new WebDriverWait(driver, 300);
+		//wait.until(ExpectedConditions.alertIsPresent());
+		FluentWait<WebDriver> wait = new WebDriverWait(driver, 300);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeAlert"))); 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 

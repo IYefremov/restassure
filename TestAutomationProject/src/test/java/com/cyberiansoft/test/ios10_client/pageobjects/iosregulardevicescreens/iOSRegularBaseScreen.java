@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -33,38 +34,24 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	//final String uipickerxpath = ".popover().pickers()[0]";
 	final String uipickerxpath = "//XCUIElementTypePicker";
 	
-	//@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@visible=\"true\" and @name=\"Back\"]")
-    //private IOSElement backbtn;
-	
-	@iOSFindBy(accessibility = "Back")
-    private IOSElement backbtn;
-	
-	@iOSFindBy(accessibility = "Save")
-    private IOSElement savebtn;
-	
-	@iOSFindBy(accessibility = "Cancel")
-    private IOSElement cancelbtn;
-	
-	@iOSFindBy(xpath = uipickerxpath)
-    private IOSElement picker;
-	
-	@iOSFindBy(className = "UIAPickerWheel")
-    private IOSElement pickerwheel;
-	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[1]/XCUIElementTypeButton[2]")
-    private IOSElement changescreenbtn;
-	
 	public iOSRegularBaseScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), iOSRegularBaseScreen.class);
+	}
+		
+	public boolean elementExists(String elementName) {
+		boolean exists = false;
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		exists =  appiumdriver.findElementsByAccessibilityId(elementName).size() > 0;
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return exists;
 	}
 	
 	public RegularHomeScreen clickHomeButton() throws InterruptedException {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Back"))).click();
-		//backbtn.click();
-		Thread.sleep(1000);
+		
 		return new RegularHomeScreen(appiumdriver);
 	}
 	
@@ -72,7 +59,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		if (appiumdriver.findElements(MobileBy.AccessibilityId("Save")).size() < 1) {
 			clickChangeScreen();
 		}
-		savebtn.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -87,12 +74,11 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
-		Helpers.waitABit(1000);
-		cancelbtn.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 	
 	public void clickChangeScreen() {
-		changescreenbtn.click();
+		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
 		Helpers.waitABit(1000);
 	}
 	
@@ -133,7 +119,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		int clicks = 0;
 		
 		WebElement picker = appiumdriver.findElementByClassName("XCUIElementTypePicker");
-		while (!(pickerwheel.getAttribute("value").contains(value))) {
+		while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
 			action.tap(picker.getSize().getWidth()/2, picker
 					.getLocation().getY() + picker.getSize().getHeight()/2+40).perform();
