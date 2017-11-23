@@ -2012,7 +2012,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkEmails(String message) throws InterruptedException {
 		boolean flag1 = false;
 		Thread.sleep(20000);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 7; i++) {
 			try {
 				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!", message,
 						"reconpro+main@cyberiansoft.com").isEmpty()) {
