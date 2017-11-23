@@ -554,8 +554,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void switchToServiceRequestInfoFrame() {
-		driver.switchTo()
-				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		waitABit(3000);
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+//		driver.switchTo()
+//				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 	}
 
 	public WebElement getGeneralInfoEditButton() {
@@ -653,6 +656,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickDoneButton() {
+		waitABit(2000);
 		List<WebElement> donebtns = driver.findElements(donebtn);
 		for (WebElement donebtn : donebtns) {
 			if (donebtn.isDisplayed()) {
