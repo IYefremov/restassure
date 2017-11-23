@@ -29,19 +29,19 @@ import javax.mail.search.SearchTerm;
 import org.apache.commons.lang3.StringUtils;
 
 public class MailChecker {
-	
-	public static Store loginToGMailBox(String userName,String password) {
-		Properties properties = new Properties();
-		Store store = null;
+
+    public static Store loginToGMailBox(String userName, String password) {
+        Properties properties = new Properties();
+        Store store = null;
         // server setting
         properties.put("mail.imap.host", "imap.gmail.com");
         properties.put("mail.imap.port", 993);
         // SSL setting
-        properties.setProperty("mail.imap.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        properties.setProperty("mail.imap.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         properties.setProperty("mail.imap.socketFactory.fallback", "false");
-        properties.setProperty("mail.imap.socketFactory.port",String.valueOf(993));
+        properties.setProperty("mail.imap.socketFactory.port", String.valueOf(993));
         Session session = Session.getDefaultInstance(properties);
-       
+
         System.out.println("Connected to Email server.");
         try {
             // connects to the message store
@@ -55,13 +55,13 @@ public class MailChecker {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-		
-		return store;
-	}
-	
-	
-	public static Folder getInboxMailMessages(Store store) {
-		/*Folder folderInbox = null;
+
+        return store;
+    }
+
+
+    public static Folder getInboxMailMessages(Store store) {
+        /*Folder folderInbox = null;
 		try {
 			folderInbox = store.getFolder("INBOX");
 			folderInbox.open(Folder.READ_WRITE);					
@@ -71,67 +71,79 @@ public class MailChecker {
 		}
 		
 		return folderInbox;*/
-		Folder folderAll = null;
-		try {
-			Folder[] f = store.getDefaultFolder().list();
-			for(Folder fd:f){
-			    Folder t[]=fd.list();
-			    for(Folder f1:t) {
-			    	System.out.println("==========" + f1.getName());
-			    }
-			    for(Folder f1:t)
-			    	if  (f1.getName().equals("All Mail")) {
-			    		try {
-			    			folderAll = f1;
-			    			folderAll.open(Folder.READ_WRITE);					
-			    		} catch (MessagingException ex) {
-			                System.out.println("No provider.");
-			                ex.printStackTrace();
-			    		}
-			    		break;
-			    	}
-			        
-			    }
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return folderAll;
-	}
-	
-	public static Folder getSpamMailMessages(Store store) {
-		Folder folderSpam = null;
-		try {
-			Folder[] f = store.getDefaultFolder().list();
-			for(Folder fd:f){
-			    Folder t[]=fd.list();
-			    for(Folder f1:t) {
-			    	System.out.println("==========" + f1.getName());
-			    }
-			    for(Folder f1:t)
-			    	if  (f1.getName().equals("Spam")) {
-			    		try {
-			    			folderSpam = f1;
-			    			folderSpam.open(Folder.READ_WRITE);					
-			    		} catch (MessagingException ex) {
-			                System.out.println("No provider.");
-			                ex.printStackTrace();
-			    		}
-			    		break;
-			    	}
-			        
-			    }
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return folderSpam;
-		
-	}
-	
+        Folder folderAll = null;
+        try {
+            Folder[] f = store.getDefaultFolder().list();
+            for (Folder fd : f) {
+                Folder t[] = fd.list();
+                for (Folder f1 : t) {
+                    System.out.println("==========" + f1.getName());
+                }
+                for (Folder f1 : t) {
+                    if (f1.getName().equals("All Mail")) {
+                        try {
+                            folderAll = f1;
+                            folderAll.open(Folder.READ_WRITE);
+                        } catch (MessagingException ex) {
+                            System.out.println("No provider.");
+                            ex.printStackTrace();
+                        }
+                        break;
+                    }
+
+                    if (f1.getName().equals("Вся почта")) {
+                        try {
+                            folderAll = f1;
+                            folderAll.open(Folder.READ_WRITE);
+                        } catch (MessagingException ex) {
+                            System.out.println("No provider.");
+                            ex.printStackTrace();
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return folderAll;
+    }
+
+    public static Folder getSpamMailMessages(Store store) {
+        Folder folderSpam = null;
+        try {
+            Folder[] f = store.getDefaultFolder().list();
+            for (Folder fd : f) {
+                Folder t[] = fd.list();
+                for (Folder f1 : t) {
+                    System.out.println("==========" + f1.getName());
+                }
+                for (Folder f1 : t)
+                    if (f1.getName().equals("Spam")) {
+                        try {
+                            folderSpam = f1;
+                            folderSpam.open(Folder.READ_WRITE);
+                        } catch (MessagingException ex) {
+                            System.out.println("No provider.");
+                            ex.printStackTrace();
+                        }
+                        break;
+                    }
+
+            }
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return folderSpam;
+
+    }
+
     /**
      * Searches for e-mail messages containing the specified keyword in
      * Subject field.
+     *
      * @param host
      * @param port
      * @param userName
@@ -139,20 +151,21 @@ public class MailChecker {
      * @param keyword
      * @throws IOException
      */
-	@SuppressWarnings("unused")
-	private static boolean textIsHtml = false;
+    @SuppressWarnings("unused")
+    private static boolean textIsHtml = false;
+
     /**
      * Return the primary text content of the message.
      */
-    public static String getText(Part p) throws MessagingException,IOException {
+    public static String getText(Part p) throws MessagingException, IOException {
         if (p.isMimeType("text/*")) {
-            String s = (String)p.getContent();
+            String s = (String) p.getContent();
             textIsHtml = p.isMimeType("text/html");
             return s;
         }
         if (p.isMimeType("multipart/alternative")) {
             // prefer html text over plain text
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             String text = null;
             for (int i = 0; i < mp.getCount(); i++) {
                 Part bp = mp.getBodyPart(i);
@@ -170,7 +183,7 @@ public class MailChecker {
             }
             return text;
         } else if (p.isMimeType("multipart/*")) {
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             for (int i = 0; i < mp.getCount(); i++) {
                 String s = getText(mp.getBodyPart(i));
                 if (s != null)
@@ -179,353 +192,351 @@ public class MailChecker {
         }
         return null;
     }
-    
-    public static boolean findMailWithMessageText(Message[] foundMessages, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
-    	boolean val = false;
-    	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-3; i--) {
-    			Message message = foundMessages[i];
-    			Address[] froms = message.getFrom();
-    			String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
-    			if(message.getSubject()==null){
-    				continue;
-    			}
-    			Date date = new Date();//Getting Present date from the system
-    			long diff = date.getTime()-message.getReceivedDate().getTime();//Get The difference between two dates
-    			long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
 
-    			System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
-            
-             	System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
-             	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
-             	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
-             	
-             	if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && getText(message).contains(bodySearchText) && diffMinutes<=10) {
-             		String subject = message.getSubject();
-             		// System.out.println(getText(message));
-             		System.out.println("Found message #" + i + ": ");
-             		System.out.println("At "+ i + " :"+ "Subject:"+ subject);
-             		System.out.println("From: "+ email +" on : "+message.getReceivedDate());
-             		if (getText(message).contains(bodySearchText)== true) {
-             			System.out.println("Message contains the search text "+bodySearchText);
-             			val=true;
-             		}
-             		else{
-             			val=false;
-             		}
-             		break;
-             	}
-           
-    		}
-    	} catch (IOException ex) {
+    public static boolean findMailWithMessageText(Message[] foundMessages, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
+        boolean val = false;
+        try {
+            for (int i = foundMessages.length - 1; i >= foundMessages.length - 3; i--) {
+                Message message = foundMessages[i];
+                Address[] froms = message.getFrom();
+                String email = froms == null ? null : ((InternetAddress) froms[0]).getAddress();
+                if (message.getSubject() == null) {
+                    continue;
+                }
+                Date date = new Date();//Getting Present date from the system
+                long diff = date.getTime() - message.getReceivedDate().getTime();//Get The difference between two dates
+                long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
+
+                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" + diffMinutes);
+
+                System.out.println("Current " + i + " :" + "Subject:" + message.getSubject());
+                System.out.println("Current " + i + " :" + "Subject:" + email);
+                System.out.println("Current " + i + " :" + "Subject:" + email);
+
+                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && getText(message).contains(bodySearchText) && diffMinutes <= 10) {
+                    String subject = message.getSubject();
+                    // System.out.println(getText(message));
+                    System.out.println("Found message #" + i + ": ");
+                    System.out.println("At " + i + " :" + "Subject:" + subject);
+                    System.out.println("From: " + email + " on : " + message.getReceivedDate());
+                    if (getText(message).contains(bodySearchText) == true) {
+                        System.out.println("Message contains the search text " + bodySearchText);
+                        val = true;
+                    } else {
+                        val = false;
+                    }
+                    break;
+                }
+
+            }
+        } catch (IOException ex) {
             System.out.println("IOException.");
             ex.printStackTrace();
         } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-       return val;
+        return val;
     }
-    
+
     public static Message findMessage(Message[] foundMessages, final String subjectKeyword, final String fromEmail) {
-    	Message requiredmessage = null;
-    	
-    	try {
-    		for (int i=foundMessages.length-1 ; i>=foundMessages.length-4; i--) {
-    			Message message = foundMessages[i];
+        Message requiredmessage = null;
+
+        try {
+            for (int i = foundMessages.length - 1; i >= foundMessages.length - 4; i--) {
+                Message message = foundMessages[i];
                 Address[] froms = message.getFrom();
-                String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
-                if(message.getSubject()==null){
-                	continue;
+                String email = froms == null ? null : ((InternetAddress) froms[0]).getAddress();
+                if (message.getSubject() == null) {
+                    continue;
                 }
                 Date date = new Date();//Getting Present date from the system
-                long diff = date.getTime()-message.getReceivedDate().getTime();//Get The difference between two dates
+                long diff = date.getTime() - message.getReceivedDate().getTime();//Get The difference between two dates
                 long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
-         
-                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
-                System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
-                System.out.println("Current "+ i + " :"+ "Subject:"+ email); 
-            	System.out.println(message.getSubject());
-                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=10) {
-                	requiredmessage = message;
+
+                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" + diffMinutes);
+                System.out.println("Current " + i + " :" + "Subject:" + message.getSubject());
+                System.out.println("Current " + i + " :" + "Subject:" + email);
+                System.out.println(message.getSubject());
+                if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes <= 15) {
+                    requiredmessage = message;
                 }
-    		}
-    		
-    	} catch (MessagingException ex) {
+            }
+
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-    	return requiredmessage;
+        return requiredmessage;
     }
-    
-    public static boolean searchEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	boolean val = false;	
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+
+    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+        boolean val = false;
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderInbox = getInboxMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             Message[] foundMessages = folderInbox.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
             // disconnect
             folderInbox.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
         return val;
-   }
-    
-    public static boolean searchSpamEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	boolean val = false;	
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+    }
+
+    public static boolean searchSpamEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+        boolean val = false;
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderSpam = getSpamMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm); 
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             System.out.println("Is open: " + folderSpam.isOpen());
             Message[] foundMessages = folderSpam.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
             // disconnect
             folderSpam.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
         return val;
-   }
-    
+    }
+
 
     public static boolean downloadMessageAttachment(Message message, String attachmentfilename) {
-    	boolean downloaded = false;
-    	try {
-    		List<File> attachments = new ArrayList<File>();
-    		Multipart multipart = (Multipart) message.getContent();
-    		for (int j = 0; j < multipart.getCount(); j++) {
-    			BodyPart bodyPart = multipart.getBodyPart(j);
-    			if(!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) &&
-    				!StringUtils.isNotBlank(bodyPart.getFileName())) {
-    					continue; // dealing with attachments only
-    				} 
-    			InputStream is = bodyPart.getInputStream();
-    			File f = new File(bodyPart.getFileName());
-    			FileOutputStream fos = new FileOutputStream(f);
-    			byte[] buf = new byte[4096];
-    			int bytesRead;
-    			while((bytesRead = is.read(buf))!=-1) {
-    				fos.write(buf, 0, bytesRead);
-    			}
-    			fos.close();
-    			attachments.add(f);
-    			downloaded = true;
-    			break;
-    		}
-    	} catch (MessagingException ex) {
+        boolean downloaded = false;
+        try {
+            List<File> attachments = new ArrayList<File>();
+            Multipart multipart = (Multipart) message.getContent();
+            for (int j = 0; j < multipart.getCount(); j++) {
+                BodyPart bodyPart = multipart.getBodyPart(j);
+                if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) &&
+                        !StringUtils.isNotBlank(bodyPart.getFileName())) {
+                    continue; // dealing with attachments only
+                }
+                InputStream is = bodyPart.getInputStream();
+                File f = new File(bodyPart.getFileName());
+                FileOutputStream fos = new FileOutputStream(f);
+                byte[] buf = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = is.read(buf)) != -1) {
+                    fos.write(buf, 0, bytesRead);
+                }
+                fos.close();
+                attachments.add(f);
+                downloaded = true;
+                break;
+            }
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         } catch (IOException ex) {
             System.out.println("IOException.");
             ex.printStackTrace();
         }
-    	return downloaded;
-	}
-    
-    
+        return downloaded;
+    }
+
+
     public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) throws IOException {
-    	
-    	boolean val = false;	
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+
+        boolean val = false;
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderInbox = getInboxMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             Message[] foundMessages = folderInbox.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             //val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
-            if (message != null)        
-            	val = downloadMessageAttachment(message, attachmentfilename);
-            
+            if (message != null)
+                val = downloadMessageAttachment(message, attachmentfilename);
+
             // disconnect
             folderInbox.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-        return val; 	
+        return val;
     }
-    
+
     public static String searchEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
-    	String mailmessage = "";
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+        String mailmessage = "";
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderInbox = getInboxMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             Message[] foundMessages = folderInbox.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
-            if (message != null)        
-            	mailmessage = getText(message);
-            
+            if (message != null)
+                mailmessage = getText(message);
+
             //message.setFlag(Flags.Flag.SEEN, true);
             message.setFlag(Flags.Flag.DELETED, true);
             // disconnect
             folderInbox.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         } catch (IOException e) {
-        	System.out.println("IOException.");
+            System.out.println("IOException.");
             e.printStackTrace();
-		}	
-    	return mailmessage;
+        }
+        return mailmessage;
     }
-    
+
     public static String searchSpamEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
-    	String mailmessage = "";
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+        String mailmessage = "";
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderInbox = getSpamMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             Message[] foundMessages = folderInbox.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
-            if (message != null)        
-            	mailmessage = getText(message);
-            
+            if (message != null)
+                mailmessage = getText(message);
+
             //message.setFlag(Flags.Flag.SEEN, true);
             message.setFlag(Flags.Flag.DELETED, true);
             // disconnect
             folderInbox.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         } catch (IOException e) {
-        	System.out.println("IOException.");
+            System.out.println("IOException.");
             e.printStackTrace();
-		}	
-    	return mailmessage;
+        }
+        return mailmessage;
     }
-    
-    public static String getMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	String mailmessage = "";
-		for (int i=0; i < 3; i++) {
-			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
-				try {
-					Thread.sleep(60*1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
-				if (mailmessage.length() > 3) {
-					break;
-				}				
-			}
-		}
-    	return mailmessage; 
+
+    public static String getMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+        String mailmessage = "";
+        for (int i = 0; i < 3; i++) {
+            if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+                try {
+                    Thread.sleep(60 * 1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else {
+                mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+                if (mailmessage.length() > 3) {
+                    break;
+                }
+            }
+        }
+        return mailmessage;
     }
-    
-    public static boolean getKayakoFeedbackMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	String mailmessage = "";
-    	boolean kayakoMailRecieved = false;
-		for (int i=0; i < 15; i++) {
-			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
-				try {
-					Thread.sleep(60*1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
-				if (mailmessage.length() > 3) {
-					kayakoMailRecieved = true;
-					break;
-				}				
-			}
-		}
-    	return kayakoMailRecieved; 
+
+    public static boolean getKayakoFeedbackMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+        String mailmessage = "";
+        boolean kayakoMailRecieved = false;
+        for (int i = 0; i < 15; i++) {
+            if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+                try {
+                    Thread.sleep(60 * 1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else {
+                mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+                if (mailmessage.length() > 3) {
+                    kayakoMailRecieved = true;
+                    break;
+                }
+            }
+        }
+        return kayakoMailRecieved;
     }
-    
-    public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
-    	String mailmessage = "";
-		if (MailChecker.searchSpamEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
-			mailmessage = MailChecker.searchSpamEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);			
-		}
-    	return mailmessage; 
+
+    public static String getSpamMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+        String mailmessage = "";
+        if (MailChecker.searchSpamEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
+            mailmessage = MailChecker.searchSpamEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
+        }
+        return mailmessage;
     }
-    
+
     public static String getUserRegistrationURL() throws IOException {
-    	
-		String mailmessage = getUserMailContent();
-		String confirmationurl = "";
-		confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-		return confirmationurl;
+
+        String mailmessage = getUserMailContent();
+        String confirmationurl = "";
+        confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
+        return confirmationurl;
     }
-    
+
     public static String getUserMailContent() throws IOException {
-    	
-    	final String usermail = "test.cyberiansoft@gmail.com";
-    	final String usermailpsw = "ZZzz11!!";
-    	final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
-    	final String sendermail = "Repair360-qc@cyberianconcepts.com";
-    	final String mailcontainstext = "complete the registration process";
-    	
-		String mailmessage = "";
-		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail(usermail, usermailpsw, usermailtitle, sendermail, mailcontainstext)) {
-				waitABit(60*500);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessage(usermail, usermailpsw, usermailtitle, sendermail);	
-				break;
-			}
-		}
-		return mailmessage;
+
+        final String usermail = "test.cyberiansoft@gmail.com";
+        final String usermailpsw = "ZZzz11!!";
+        final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
+        final String sendermail = "Repair360-qc@cyberianconcepts.com";
+        final String mailcontainstext = "complete the registration process";
+
+        String mailmessage = "";
+        for (int i = 0; i < 4; i++) {
+            if (!MailChecker.searchEmail(usermail, usermailpsw, usermailtitle, sendermail, mailcontainstext)) {
+                waitABit(60 * 500);
+            } else {
+                mailmessage = MailChecker.searchEmailAndGetMailMessage(usermail, usermailpsw, usermailtitle, sendermail);
+                break;
+            }
+        }
+        return mailmessage;
     }
-    
-    
-    
+
+
     public static void waitABit(int milliseconds) {
         if (milliseconds > 0) {
             try {
@@ -536,5 +547,5 @@ public class MailChecker {
             }
         }
     }
-    
+
 }
