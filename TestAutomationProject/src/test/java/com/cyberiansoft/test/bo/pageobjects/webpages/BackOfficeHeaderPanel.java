@@ -62,22 +62,14 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 				driver.switchTo().window(activeHandle);	
 		}
 		driver.switchTo().defaultContent();
+		WebElement element = driver.findElement(By.tagName("header"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element);
 		waitABit(1000);
-//		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("__clockTime")));
-//		JavascriptExecutor js = (JavascriptExecutor)driver;
-//		js.executeScript("arguments[0].scrollIntoView();", element); 
-		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		}catch(Exception e){
-			
-		}
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
 				BackOfficeLoginWebPage.class);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		waitABit(2000);
 		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
 		
 	}
