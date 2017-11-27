@@ -722,6 +722,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public String getVINValueForSelectedServiceRequest() {
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String VINValue = driver.findElement(By.xpath("//span[@data-for='Card_vehicleVin']")).getText();
 		driver.switchTo().defaultContent();
@@ -729,6 +730,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public String getCustomerValueForSelectedServiceRequest() {
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String clientname = driver.findElement(By.xpath("//span[@data-for='Card_hdnFullClientName']")).getText();
 		driver.switchTo().defaultContent();
@@ -736,6 +738,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public String getEmployeeValueForSelectedServiceRequest() {
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		String employee = driver.findElement(By.xpath("//span[@data-for='Card_hdnEmployeeFullName']")).getText();
 		driver.switchTo().defaultContent();
@@ -743,6 +746,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean isServiceIsPresentForForSelectedServiceRequest(String servicename) {
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame((WebElement) driver.findElement(By.tagName("iframe")));
 		boolean exists = driver.findElement(By.xpath("//span[contains(text(), '" + servicename + "')]")).isDisplayed();
 		driver.switchTo().defaultContent();

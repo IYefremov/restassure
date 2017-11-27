@@ -42,8 +42,9 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void selectInspectionForAction(String inspnumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamInspectionsTable"))); 
-		inptable.findElementByAccessibilityId(inspnumber).findElementByClassName("XCUIElementTypeOther").click();
+		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))); 
+		appiumdriver.findElementByAccessibilityId("TeamInspectionsTable").findElement(MobileBy.
+				AccessibilityId(inspnumber)).click();
 	}
 	
 	public void clickOnInspection(String inspnumber) {

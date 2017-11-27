@@ -78,8 +78,10 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickChangeScreen() {
-		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
-		Helpers.waitABit(1000);
+		if (elementExists("WizardStepsButton")) 
+			appiumdriver.findElementByAccessibilityId("WizardStepsButton").click();
+		else
+			appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
 	}
 	
 	public void acceptAlertByCoords() {
@@ -99,7 +101,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void selectNextScreen(String screenname) {
-		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
+		clickChangeScreen();
 		if (! appiumdriver.findElementByAccessibilityId(screenname).isDisplayed()) {
 			swipeToElement(appiumdriver.
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
