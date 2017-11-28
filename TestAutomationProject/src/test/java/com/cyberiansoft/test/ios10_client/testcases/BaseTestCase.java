@@ -11,6 +11,7 @@ import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LE
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -112,15 +113,15 @@ public class BaseTestCase {
 		 */
 		//appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
 		 
-		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+		/*service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
 				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
-				 //.withArgument(LOG_LEVEL, "error")
+				 .withArgument(LOG_LEVEL, "error")
 				 .build();
 	        service.start();
 
 	        if (service == null || !service.isRunning()) {
 	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-	        }
+	        }*/
 		
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
@@ -155,8 +156,12 @@ public class BaseTestCase {
 			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
 			appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
 		else
-			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
-			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
+			try {
+				appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(new URL("http://127.0.0.1:4900/wd/hub")).newInstance();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}

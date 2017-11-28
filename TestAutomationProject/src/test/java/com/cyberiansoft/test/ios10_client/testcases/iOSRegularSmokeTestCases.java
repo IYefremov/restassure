@@ -20,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.License
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectEnvironmentScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectWorkOrderTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
@@ -3675,7 +3676,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.verifyServiceStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		Helpers.waitABit(2000);
 		teamworkordersscreen.clickHomeButton();
 	}	
 	
@@ -5378,8 +5378,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.approveInspectionApproveAllAndSignature();
 		
 		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber);
-		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
-		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		RegularSelectWorkOrderTypeScreen selectWOTypescreen = new RegularSelectWorkOrderTypeScreen(appiumdriver);
+		selectWOTypescreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		servicesscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.searchServiceByName("3/4\" - Penny Size");

@@ -141,6 +141,8 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectService(String servicename) {
+		if (elementExists("Clear text"))
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
 		IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
 				findElement(MobileBy.AccessibilityId(servicename));
 		if (!servicecell.isDisplayed()) {

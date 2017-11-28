@@ -92,8 +92,8 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 
 	public static void tapExterior() throws InterruptedException {
-		Thread.sleep(1000);
-		Helpers.tapExterior(50, 50);
+		Thread.sleep(2000);
+		Helpers.tapExterior(150, 150);
 	}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {

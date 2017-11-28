@@ -345,13 +345,23 @@ public abstract class Helpers {
 	}
 
 	public static void tapExterior(int x, int y) throws InterruptedException {
-		TouchAction action = new TouchAction(driver);
-		/*WebElement element = driver
-				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[2]");*/
+		/*TouchAction action = new TouchAction(driver);
+
 		MobileElement element = (MobileElement) driver
 				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		action.tap(element, x, y).perform();
+		Thread.sleep(1000);*/
+		
+		TouchAction action = new TouchAction(driver);
+		MobileElement element = element(By.xpath("//XCUIElementTypeImage"));
+		
+		//int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
+		//int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
+		action.tap(element, x, y).perform();
+		
+		//element.tap(1, x, y, 1000);
 		Thread.sleep(1000);
+		
 		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
 		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
