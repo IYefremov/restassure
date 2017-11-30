@@ -38,4 +38,9 @@ public abstract class BasePage {
     public void goToPreviousPage() {
         driver.navigate().back();
     }
+
+    public void refreshPage() throws InterruptedException {
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+    }
 }

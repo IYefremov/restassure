@@ -31,6 +31,13 @@ public class TeamPortalLeftMenuPanel extends BasePage {
                             TeamPortalCategoriesPage.class);
                 }catch(TimeoutException ex){}
                 break;
+            case "Client Segments":
+                try {
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchClient")));
+                    return PageFactory.initElements(driver,
+                            TeamPortalClientSegmentsPage.class);
+                }catch(TimeoutException ex){}
+                break;
         }
         return  null;
     }
