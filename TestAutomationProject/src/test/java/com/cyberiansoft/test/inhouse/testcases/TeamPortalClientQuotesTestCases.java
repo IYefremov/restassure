@@ -265,7 +265,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
 
 
-    
+
 
     @Test(testName = "Test Case 66656:Verify user can pay agreement from mail link.", dataProvider = "provideNewClientData")
     public void testUserCanPayAgreementFromMailLink(String name, String nickname, String address, String address2, String zip,
