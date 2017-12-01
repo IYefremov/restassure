@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,10 +44,12 @@ public class VNextBaseScreen {
 		waitABit(300);
 		//new TouchActions(appiumdriver).singleTap(element).perform();
 		
+		
 		if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
-			Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
+			new TouchActions(appiumdriver).singleTap(element).perform();
+			/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
 			CompositeAction action = new CompositeAction();
-			action.addAction(tapAction).perform();
+			action.addAction(tapAction).perform();*/
 		} else {
 			int xx = element.getLocation().getX() + element.getSize().getWidth()/2;
 			int yy = element.getLocation().getY() + element.getSize().getHeight()/2;

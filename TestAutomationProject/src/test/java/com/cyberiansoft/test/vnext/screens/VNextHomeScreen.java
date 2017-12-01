@@ -19,14 +19,14 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	private WebElement customerslist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Inspections']")
-	@FindBy(xpath="//a[@class='tile-link tile-item inspections-tile']")
+	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item inspections-tile']")
 	private WebElement inspectionslist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
-	@FindBy(xpath="//a[@class='tile-link tile-item work-orders-tile']")
+	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item work-orders-tile']")
 	private WebElement workorderslist;
 	
-	@FindBy(xpath="//a[@class='tile-link tile-item invoices-tile']")
+	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item invoices-tile']")
 	private WebElement invoiceslist;
 	
 	@FindBy(xpath="//a[@class='tile-link tile-item more-tile']")
@@ -49,16 +49,27 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='logout']/i")
 	private WebElement logoutbtn;
 	
+	@FindBy(xpath="//div[@class='speed-dial']/a[@class='floating-button color-red']")
+	private WebElement addbtn;
 	
+	@FindBy(xpath="//a[@action='new_order']")
+	private WebElement newworkorderbtn;
+	
+	@FindBy(xpath="//a[@action='new_inspection']")
+	private WebElement newinspectionbtn;
 	
 	public VNextHomeScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
-		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+		//if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0) {
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+				waitABit(5000);
+			//}
+		}
+		
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.visibilityOf(customerslist));
 		
@@ -71,6 +82,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
+		//waitABit(2000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(workorderslist));
 		tap(workorderslist);
 		log(LogStatus.INFO, "Tap Work Orders menu item");
 		return new VNextWorkOrdersScreen(appiumdriver);
@@ -117,12 +131,15 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isQueueMessageVisible() {
-		return appiumdriver.findElementByXPath(quemessagexpath).isDisplayed();
+		//System.out.println("+++" + appiumdriver.findElementByXPath(quemessagexpath).isDisplayed());
+		System.out.println("+++" + appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed());
+		
+		return appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed();
 	}
 	
 	public void waitUntilQueueMessageInvisible() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOf(queuemessage));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByXPath("//*[@action='messager-send']")));
 	}
 	
 	public VNextLoginScreen clickLogoutButton() {
@@ -147,4 +164,22 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		return appiumdriver.findElement(By.xpath("//div[@class='upgrade-image' and @action='ad']")).isDisplayed();
 	}
 
+	public void clickAddButton() {
+		tap(addbtn);
+		log(LogStatus.INFO, "Tap Home screen Add button");
+	}
+	
+	public VNextCustomersScreen clickNewWorkOrderPopupMenu() {
+		clickAddButton();
+		tap(newworkorderbtn);
+		log(LogStatus.INFO, "Tap New Work Order menu button");
+		return new VNextCustomersScreen(appiumdriver);
+	}
+	
+	public VNextCustomersScreen clickNewInspectionPopupMenu() {
+		clickAddButton();
+		tap(newinspectionbtn);
+		log(LogStatus.INFO, "Tap New Inspection menu button");
+		return new VNextCustomersScreen(appiumdriver);
+	}
 }

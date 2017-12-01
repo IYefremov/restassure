@@ -113,8 +113,12 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isCustomerExists(String customer) {
-		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;
-		
+		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;		
+	}
+	
+	public boolean isCustomerExists(String customerFirstName, String customerLastName) {
+		String customer = customerFirstName + " " + customerLastName;
+		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;		
 	}
 	
 	public void clickBackButton() {

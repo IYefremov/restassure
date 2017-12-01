@@ -83,7 +83,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 			checkboxUnselect(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']")));
 		waitABit(1000);
 		searchservicespanel.findElement(By.xpath(".//button[@type='submit']")).click();
-		waitABit(500);
+		waitABit(1500);
 	}
 	
 	public void advancedSearchServiceByServiceType(String servicetype) {
@@ -98,9 +98,10 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable((WebElement) advserchcmb.
 		findElement(By.xpath(".//li/span[text()='" + servicetype + "']")))).click();
+		waitABit(500);
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//button[@type='submit']")))).click();
-		waitABit(500);
+		waitABit(1500);
 	}
 	
 	public void openAdvancedSearchPanel() {
@@ -200,7 +201,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.elementToBeClickable(addservicebtn));
-		waitABit(500);
+		waitABit(1000);
 	}
 	
 	public void clickDeleteServiceButton(WebElement tablerow) {

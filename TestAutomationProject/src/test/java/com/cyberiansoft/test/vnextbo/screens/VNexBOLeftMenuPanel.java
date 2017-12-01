@@ -70,6 +70,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	public VNexBOServicesWebPage selectServicesMenu() {
 		selectMenuItem(servicesmenu, SETTINGS_MAINMENU_ITEM);
+		waitABit(3000);
 		return PageFactory.initElements(
 				driver, VNexBOServicesWebPage.class);
 	}

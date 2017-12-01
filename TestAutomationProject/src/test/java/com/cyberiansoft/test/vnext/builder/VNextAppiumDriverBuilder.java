@@ -50,7 +50,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
     		appiumcap.setCapability("session-override",true);
     		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
-    		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+    		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
     		//appiumcap.setCapability(MobileCapabilityType.APP,
     		//		"http://amtqc.cyberiansoft.net/Uploads/Repair360Android_1003.app.zip");
             return new SwipeableWebDriver(endpoint, appiumcap);

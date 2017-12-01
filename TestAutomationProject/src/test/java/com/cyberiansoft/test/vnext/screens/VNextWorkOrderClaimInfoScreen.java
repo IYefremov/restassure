@@ -10,28 +10,31 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
+public class VNextWorkOrderClaimInfoScreen extends VNextBaseInspectionsScreen {
 	
-	@FindBy(name="Estimations.PolicyNumber")
+	@FindBy(xpath="//*[@data-autotests-id='orders-claim-info-form']")
+	private WebElement claiminfoform;
+	
+	@FindBy(name="Orders.PolicyNumber")
 	private WebElement policyfld;
 	
-	@FindBy(name="Estimations.OtherInsuranceName")
+	@FindBy(name="Orders.OtherInsuranceName")
 	private WebElement insurancecompanyfld;
 	
-	@FindBy(name="Estimations.ClaimNumber")
+	@FindBy(name="Orders.ClaimNumber")
 	private WebElement claimfld;
 	
-	@FindBy(name="Estimations.Deductible")
+	@FindBy(name="Orders.Deductible")
 	private WebElement deductiblefld;
 	
-	@FindBy(name="Estimations.AccidentDate")
+	@FindBy(name="oOrders.AccidentDate")
 	private WebElement accidentdatefld;
 	
-	public VNextClaimInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextWorkOrderClaimInfoScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(policyfld));
+		wait.until(ExpectedConditions.visibilityOf(claiminfoform));
 	}
 	
 	public void setPolicyNumber(String policynum) {
@@ -67,11 +70,9 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	public void selectInsuranceCompany (String insuranceCompany) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(insurancecompanyfld));
-		/*tap(appiumdriver.findElement(By.xpath("//*[@action='company']/a")));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='company']/a")));
 		VNextBaseScreenWithListSelection listscreen = new VNextBaseScreenWithListSelection(appiumdriver);
-		listscreen.selectListItem(insuranceCompany);*/
-		insurancecompanyfld.sendKeys(insuranceCompany);
-		appiumdriver.hideKeyboard();
+		listscreen.selectListItem(insuranceCompany);
 		log(LogStatus.INFO, "Select Insurance Company: " + insuranceCompany);
 	}
 	
@@ -101,4 +102,5 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	public String getAccidentDateValue() {
 		return accidentdatefld.getAttribute("value");
 	}
+
 }

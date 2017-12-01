@@ -84,6 +84,15 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 		return new VNextPriceMatrixesScreen(appiumdriver);
 	}
 	
+	public VNextVehiclePartsScreen openSelectedMatrixServiceDetails(String matrixservicename) {
+		WebElement servicerow = getServiceListItem(matrixservicename);
+		if (servicerow != null)
+			tap(servicerow.findElement(By.xpath(".//div[@class='item-title' and text()='" + matrixservicename + "']")));
+		else
+			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
+		return new VNextVehiclePartsScreen(appiumdriver);
+	}
+	
 	public VNextServiceDetailsScreen openServiceDetails(String servicename) {
 		WebElement servicerow = getServiceListItem(servicename);
 		if (servicerow != null)

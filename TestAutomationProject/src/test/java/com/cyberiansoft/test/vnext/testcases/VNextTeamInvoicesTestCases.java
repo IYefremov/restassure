@@ -11,6 +11,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
+import com.cyberiansoft.test.vnext.screens.VNextChangeInvoicePONumberDialog;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -35,7 +36,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanCreateInvoiceInStatusNew() {
 		
 		final String vinnumber = "TEST";
-		final String customer = "Anastasia";
+		final String customer = "Test Test";
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -91,7 +92,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanVoidInvoice() {
 		
 		final String vinnumber = "TEST";
-		final String customer = "Anastasia";
+		final String customer = "Test Test";
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -161,5 +162,204 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				WebConstants.InvoiceStatuses.INVOICESTATUS_VOID.getName());
 		getWebDriver().quit();
 	}
+	
+	@Test(testName= "Test Case 67279:Verify saved PO displays on 'Change PO#' pop-up, "
+			+ "Test Case 67281:Verify PO# is not changed if user click 'don't save', "
+			+ "Test Case 67280:Verify PO# is saved if user save changes, "
+			+ "Test Case 67282:Verify user can't pass >50 symbols on PO field", 
+			description = "Verify saved PO displays on 'Change PO#' pop-up,"
+					+ "Test Case 67281:Verify PO# is not changed if user click 'don't save', "
+					+ "Test Case 67280:Verify PO# is saved if user save changes, "
+					+ "Verify user can't pass >50 symbols on PO field")
+	public void testVerifySavedPODisplaysOnCChangePONumberPopup() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "ABC123";
+		final String newponumber = "123TEST";
+		final String longponumber = "12345678901234567890123456789012345678901234567890123";
+		
 
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		changeinvoiceponumberdialog.setInvoicePONumber(newponumber);
+		changeinvoiceponumberdialog.clickDontSaveButton();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), ponumber);
+		
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		invoicesscreen = changeinvoiceponumberdialog.changeInvoicePONumber(newponumber);
+		Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), newponumber);
+		
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		invoicesscreen = changeinvoiceponumberdialog.changeInvoicePONumber(longponumber);
+		Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), longponumber.substring(0, 50) );
+		invoicesscreen.clickBackButton();
+	}
+
+	@Test(testName= "Test Case 67283:Verify we hide popup and keyboard if user click hardware back button", 
+			description = "Verify we hide popup and keyboard if user click hardware back button")
+	public void testVerifyWeHidePopupAndKeyboardIfUserClickHardwareBackButton() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "ABC123";
+		
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		changeinvoiceponumberdialog.clickHardwareBackButton();
+		changeinvoiceponumberdialog.clickHardwareBackButton();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67284:Verify on action 'Change PO#' user can't erase PO#, "
+			+ "Test Case 67285:Verify 'PO#' is capitalized, "
+			+ "Test Case 67286:Verify Change PO is available only if option 'PO Visible' = YES on invoice type", 
+			description = "Verify on action 'Change PO#' user can't erase PO#, "
+					+ "Verify 'PO#' is capitalized, "
+					+ "Verify Change PO is available only if option 'PO Visible' = YES on invoice type")
+	public void testVerifyOnActionChangePONumberUserCantErasePONumber() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar2";
+		final String ponumber = "ABC123";
+		final String newponumber = "abcd123";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		changeinvoiceponumberdialog.setInvoicePONumber(newponumber);
+		changeinvoiceponumberdialog.clickDontSaveButton();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), ponumber);
+		
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		changeinvoiceponumberdialog.setInvoicePONumber("");
+		changeinvoiceponumberdialog.clickSaveButton();
+		Assert.assertTrue(changeinvoiceponumberdialog.isPONUmberShouldntBeEmptyErrorAppears());
+		invoicesscreen = changeinvoiceponumberdialog.changeInvoicePONumber(newponumber);
+		
+		Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), newponumber.toUpperCase());
+		
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67287:Verify Change PO is not available if option 'PO Visible' = NO on invoice type", 
+			description = "Verify Change PO is not available if option 'PO Visible' = NO on invoice type")
+	public void testVerifyChangePOIsNotAvailableIfOptionPOVisibleEqualsNOOnInvoiceType() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar_auto";
+		final String ponumber = "ABC123";
+
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		Assert.assertFalse(invoicemenuscreen.isInvoiceChangePONumberMenuItemExists());
+		invoicesscreen = invoicemenuscreen.clickCloseInvoiceMenuButton();
+		
+		invoicesscreen.clickBackButton();
+	}
 }

@@ -34,7 +34,8 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	}
 	
 	public void sentToEmailAddress(String emailaddress) {
-		tap(toemailpanel.findElement(By.xpath(removemailbtn)));
+		if (toemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
+			tap(toemailpanel.findElement(By.xpath(removemailbtn)));
 		waitABit(1000);
 		toemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		toemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(emailaddress);
@@ -59,6 +60,8 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
+		VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
+		informationdialog.clickInformationDialogOKButton();
 		log(LogStatus.INFO, "Tap on Send Emails button");
 	}
 

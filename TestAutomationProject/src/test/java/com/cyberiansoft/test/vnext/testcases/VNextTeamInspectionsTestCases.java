@@ -14,13 +14,20 @@ import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
@@ -100,7 +107,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		Assert.assertFalse(inspmenuscreen.isApproveMenuPresent());
 		Assert.assertTrue(inspmenuscreen.isCreateWorkOrderMenuPresent());
-		inspectionscreen = inspmenuscreen.clickCloseInspectionMenuButton();
+		inspmenuscreen.clickCloseInspectionMenuButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
@@ -396,7 +404,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 	
 	@Test(testName= "Test Case 66858:Verify user can view Team Inspection", 
 			description = "Verify user can view Team Inspection")
-	public void testVVerifyUserCanViewTeamInspection() {
+	public void testVerifyUserCanViewTeamInspection() {
 		
 		final String wholesalecustomer = "001 - Test Company";
 		final String inspType = "anastasia type";
@@ -421,6 +429,418 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		viewscreen.clickScreenBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67290:Verify user can create Team Inspection", 
+			description = "Verify user can create Team Inspection")
+	public void testVerifyUserCanCreateTeamInspection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+			
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send option", 
+			description = "Verify saving team inspection online doesn't affected to Settings > Manual send option")
+	public void testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
+		homescreen = settingsscreen.setManualSendOn().clickBackButton();		
+		
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.switchToMyInspectionsView();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		homescreen = inspectionscreen.clickBackButton();
+		
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
+		
+		inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToTeamInspectionsView();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67326:Verify user can edit Team Inspection", 
+			description = "Verify user can edit Team Inspection")
+	public void testVerifyUserCanEditTeamInspection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String newVIN = "1FMCU0DG4BK830800";
+		final String _make = "Ford";
+		final String _model = "Escape";
+		final String _year = "2011";
+		final String licPlate = "123";
+		final String mileage = "100000";
+		final String stockNumber = "123ABC";
+		final String roNumber = "123ASD";
+		final String insuranceCompany = "Miami Beach Insurance";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
+		vehicleinfoscreen.setVIN(newVIN);
+		//vehicleinfoscreen.selectModelColor(color);
+		vehicleinfoscreen.setLicPlate(licPlate);
+		vehicleinfoscreen.setMilage(mileage);
+		vehicleinfoscreen.setStockNo(stockNumber);
+		vehicleinfoscreen.setRoNo(roNumber);
+		vehicleinfoscreen.changeScreen("Claim");
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
+		claiminfoscreen.saveInspectionViaMenu();
+		
+		vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
+		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), newVIN);
+		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
+		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
+		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
+		Assert.assertEquals(vehicleinfoscreen.getLicPlate(), licPlate);
+		Assert.assertEquals(vehicleinfoscreen.getMilage(), mileage);
+		Assert.assertEquals(vehicleinfoscreen.getStockNo(), stockNumber);
+		Assert.assertEquals(vehicleinfoscreen.getRoNo(), roNumber);
+		vehicleinfoscreen.changeScreen("Claim");
+		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), insuranceCompany);
+		claiminfoscreen.cancelInspection();
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67743:Verify user can add Notes for Team Inspection, "
+			+ "Test Case 67744:Verify User can edit Notes from Team Inspection list, "
+			+ "Test Case 67746:Verify Notes changes is saved after DB update", 
+			description = "Verify user can add Notes for Team Inspection, "
+					+ "Verify User can edit Notes from Team Inspection list, "
+					+ "Verify Notes changes is saved after DB update")
+	public void testVerifyUserAddNotesForTeamInspection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String quicknote = "AB note";
+		final String notetext = "new notes";
+		final String quicknotenew = "1 note";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.addQuickNote(quicknote);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), quicknote);
+		notesscreen.setNoteText(notetext);
+		notesscreen.addQuickNote(quicknotenew);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
+		
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+		
+
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
+		inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
+		
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, "
+			+ "Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team", 
+			description = "Verify Notes displays on Team Inspection list after adding on My Inspection list, "
+					+ "Verify Notes icon displays if user add Notes for Inspection My/Team")
+	public void testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String quicknote = "AB note";
+		final String notetext = "new notes";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.setNoteText(notetext);
+		notesscreen.addQuickNote(quicknote);
+		notesscreen.addFakeImageNote();
+		notesscreen.addFakeImageNote();
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
+		inspectionscreen.switchToTeamInspectionsView();
+			
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, "
+			+ "Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team, "
+			+ "Test Case 67750:Verify saving text note on tapping 'Back' button", 
+			description = "Verify Notes displays on Team Inspection list after adding on My Inspection list, "
+					+ "Verify Notes icon displays if user add Notes for Inspection My/Team, "
+					+ "Verify saving text note on tapping 'Back' button")
+	public void testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String quicknote = "AB note";
+		final String notetext = "new notes";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.setNoteText(notetext);
+		notesscreen.addQuickNote(quicknote);
+		notesscreen.addFakeImageNote();
+		notesscreen.addFakeImageNote();
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
+		inspectionscreen.switchToMyInspectionsView();
+			
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 67749:Verify saving text note on tapping hardware 'Back' button",
+			description = "Verify saving text note on tapping hardware 'Back' button")
+	public void testVerifySavingTextNoteOnTappingHardwareBackButton() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String quicknote = "AB note";
+		final String notetext = "new notes";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.setNoteText(notetext);
+		notesscreen.addQuickNote(quicknote);
+		notesscreen.addFakeImageNote();
+		notesscreen.addFakeImageNote();
+		notesscreen.clickHardwareBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
+			
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet", 
+			description = "Verify sending >100 messages after reconnect Internet")
+	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		final int fakeimagescount = 50;
+		final String imagesummaryvalue = "+47";
+		final String[] services = { "Battery Installation", "Aluminum Panel", "Damage Service" };
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		setNetworkOff();
+		homescreen.waitABit(13000);		
+		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
+		homescreen = settingsscreen.setManualSendOn().clickBackButton();
+		
+		VNextCustomersScreen customersscreen = homescreen.clickNewInspectionPopupMenu();
+		
+		//VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		//VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(vinnumber);
+		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
+		inspinfoscreen.swipeScreenLeft();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
+		claiminfoscreen.swipeScreenLeft();		
+		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectServicesScreen selectedservicesscreen = inspservicesscreen.clickAddServicesButton();
+		for (String srv : services) {			
+			VNextServiceDetailsScreen servicedetailsscreen = selectedservicesscreen.openServiceDetails(srv);
+			VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+			for (int i = 0; i < fakeimagescount; i++)
+				notesscreen.addFakeImageNote();
+			notesscreen.clickScreenBackButton();
+			servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			selectedservicesscreen = new VNextSelectServicesScreen(appiumdriver);
+		}
+		selectedservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		//inspservicesscreen.selectAllServices();
+		
+		inspservicesscreen.saveInspectionViaMenu();
+		inspservicesscreen.clickScreenBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.clickUpdateAppdata();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogStartSyncButton();
+		waitABit(10000);
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		setNetworkOn();	
+		statusscreen.clickUpdateAppdata();	
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogStartSyncButton();
+		waitABit(10000);
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		
+		homescreen = statusscreen.clickBackButton();
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		Assert.assertTrue(inspectionsscreen.isInspectionExists(inspnumber));
+		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
+		inspinfoscreen.swipeScreenLeft();
+		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+
+		claiminfoscreen.swipeScreenLeft();		
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		for (String srv : services) {	
+			inspservicesscreen.isServiceSelected(srv);
+			Assert.assertEquals(inspservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
+		}
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		inspservicesscreen.clickScreenBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	public String createSimpleInspection(String inspcustomer, String insptype, String vinnumber) {

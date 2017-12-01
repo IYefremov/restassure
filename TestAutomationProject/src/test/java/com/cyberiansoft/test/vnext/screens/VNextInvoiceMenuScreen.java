@@ -20,9 +20,14 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_voidInvoice']")
 	private WebElement voidinvoicebtn;
 	
+	@FindBy(xpath="//a[@handler='_changePO']")
+	private WebElement invoicechangeponumbtn;
+	
 	@FindBy(xpath="//div[@data-menu='popup']")
 	private WebElement invoicemenuscreen;
 	
+	@FindBy(xpath="//div[@class='close-popup close-actions']")
+	private WebElement closebtn;
 	
 	public VNextInvoiceMenuScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -52,6 +57,24 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(voidinvoicebtn));
 		tap(voidinvoicebtn);
 		log(LogStatus.INFO, "Tap on Void Invoice Menu");
+	}
+	
+	public VNextChangeInvoicePONumberDialog clickInvoiceChangePONumberMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(invoicechangeponumbtn));
+		tap(invoicechangeponumbtn);
+		log(LogStatus.INFO, "Tap on Void Invoice Menu");
+		return new VNextChangeInvoicePONumberDialog(appiumdriver);
+	}
+	
+	public boolean isInvoiceChangePONumberMenuItemExists() {
+		return invoicechangeponumbtn.isDisplayed();
+	}
+	
+	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
+		tap(closebtn);
+		log(LogStatus.INFO, "Tap on Close Invoice Menu button");
+		return new VNextInvoicesScreen(appiumdriver);
 	}
 
 }

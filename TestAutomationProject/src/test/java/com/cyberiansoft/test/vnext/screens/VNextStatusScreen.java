@@ -29,8 +29,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	}
 	
 	public void updateMainDB() {
-		tap(updatemaindbbtn);
-		log(LogStatus.INFO, "Tap Update Main DB button");
+		clickUpdateAppdata();
 		waitABit(10000);
 		/*WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.invisibilityOf(
@@ -42,6 +41,12 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		//waitABit(30000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
+	}
+	
+	public void clickUpdateAppdata() {
+		tap(updatemaindbbtn);
+		log(LogStatus.INFO, "Tap Update Main DB button");
+		
 	}
 	
 	public VNextHomeScreen clickBackButton() {

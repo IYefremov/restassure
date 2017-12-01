@@ -22,7 +22,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@action='add']")
 	private WebElement addwobtn;
 	
-	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
+	@FindBy(xpath="//*[@data-autotests-id='work orders-list']")
 	private WebElement workorderslist;
 	
 	@FindBy(xpath="//a[@handler='_createInvoice']")
@@ -74,14 +74,18 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
 	}
 	
-	public boolean isWorkOrderSelected(String wonumber) {
+	public boolean isWorkOrderSelected(String woNumber) {
 		boolean selected = false;
-		WebElement workordercell = getWorkOrderCell(wonumber);
+		WebElement workordercell = getWorkOrderCell(woNumber);
 		if (workordercell != null)
 			selected = workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked").equals("true");
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.assertTrue(false, "Can't find work order: " + woNumber);
 		return selected;
+	}
+	
+	public boolean isWorkOrderExists(String woNumber) {
+		return workorderslist.findElements(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + woNumber + "']")).size() > 0;
 	}
 	
 	public int getNumberOfSelectedWorkOrders() {
@@ -107,7 +111,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public WebElement getWorkOrderCell(String wonumber) {
 		WebElement wocell = null;
-		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//a[@class='entity-item accordion-item']"));
+		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
 		for (WebElement workordercell : workorders)
 			if (workordercell.findElements(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + wonumber + "']")).size() > 0) {
 				wocell = workordercell;

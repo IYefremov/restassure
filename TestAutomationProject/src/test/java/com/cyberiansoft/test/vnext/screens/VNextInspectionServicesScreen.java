@@ -78,6 +78,18 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		return serviceprice;
 	}
 	
+	public String getSelectedServiceImageSummaryValue(String servicename) {
+		String imagesammary = "";
+		WebElement servicerow = getSelectedServiceListItem(servicename);
+		if (servicerow != null) {
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+			imagesammary = servicerow.findElement(By.xpath(".//div[@class='img-item summary-item']")).getText().trim();
+		} else
+			Assert.assertTrue(false, "Can't find service: " + servicename);
+		return imagesammary;
+	}
+	
 	public String getSelectedServicePriceMatrixValue(String servicename) {
 		String pricematrixname = "";
 		WebElement servicerow = getSelectedServiceListItem(servicename);
@@ -232,8 +244,20 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		return new VNextNotesScreen(appiumdriver);
 	}
 	
+	public VNextNotesScreen clickServiceNotesOptionFromAllServicesList(String serviceName) {
+		WebElement servicecell = getUnselectedServiceListItem(serviceName);
+		if (servicecell != null) {
+			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicecell);
+			waitABit(1000);
+			tap(servicecell.findElement(By.xpath(".//*[@action='notes']")));
+		} else
+			Assert.assertTrue(false, "Can't find service: " + serviceName);	
+		return new VNextNotesScreen(appiumdriver);
+	}
+	
 	public List<WebElement> getAllServicesListItems() {	
-		return allserviceslist.findElements(By.xpath(".//div[@action='tap-item']"));
+		return allserviceslist.findElements(By.xpath(".//div[contains(@class, 'checked-accordion-item')]"));
 	}
 	
 	public String getUnselectedServiceListItemName(WebElement srvlistitem) {
@@ -257,6 +281,18 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			tap(servicerow.findElement(By.xpath(".//input[@action='check-item']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
+	}
+	
+	public void selectAllServices() {
+		int count =  50;
+		int selected = 0;
+		List<WebElement> servicerows = getAllServicesListItems();
+		for (WebElement servicerow : servicerows) {
+			tap(servicerow.findElement(By.xpath(".//input[@action='check-item']")));
+			selected++;
+			if (selected > count)
+				break;
+		}
 	}
 
 }

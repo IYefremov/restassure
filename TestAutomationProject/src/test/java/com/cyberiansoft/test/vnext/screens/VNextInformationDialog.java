@@ -24,7 +24,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public VNextInformationDialog(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg));
 	}
 	
@@ -36,7 +36,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 600);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='OK']")));
-		wait = new WebDriverWait(appiumdriver, 5);
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
 		log(LogStatus.INFO, "Tap Information Dialog OK Button");
@@ -77,6 +77,19 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public void clickInformationDialogArchiveButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Archive']")));
 		log(LogStatus.INFO, "Tap Information Dialog Archive Button");
+	}
+	
+	public void clickInformationDialogDeleteButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Delete']")));
+		log(LogStatus.INFO, "Tap Information Dialog Delete Button");
+	}
+	
+	public void clickInformationDialogDontDeleteButton() {
+		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
+		tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
+		log(LogStatus.INFO, "Tap Information Dialog Don't Delete Button");
 	}
 	
 	public String clickInformationDialogOKButtonAndGetMessage() {
@@ -131,6 +144,11 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		String msg = getInformationDialogMessage();
 		clickInformationDialogDontVoidButton();
 		return msg;
+	}
+	
+	public void clickInformationDialogStartSyncButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Start sync']")));
+		log(LogStatus.INFO, "Tap Information Dialog Start sync Button");
 	}
 
 }

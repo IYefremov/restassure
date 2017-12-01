@@ -84,6 +84,23 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		clickSaveCustomerButton();
 	}
 	
+	public void createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 
+			String customerphone, String customeraddress1, String customeraddress2, String customercity, 
+			String customercountry, String customerstate, String customerzip) {
+		setCustomerFirstName(firstname);
+		setCustomerLastName(lastname);
+		setCustomerCompanyName(companyname);
+		setCustomerEmail(customeremail);
+		setCustomerPhone(customerphone);
+		setCustomerAddress(customeraddress1);
+		setCustomerAddress2(customeraddress2);
+		setCustomerCity(customercity);
+		selectCustomerCountry(customercountry);
+		selectCustomerState(customerstate);
+		setCustomerZIP(customerzip);
+		clickSaveCustomerButton();
+	}
+	
 	public void createNewCustomer(String firstname, String lastname) {
 		setCustomerFirstName(firstname);
 		setCustomerLastName(lastname);
@@ -153,6 +170,14 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			addressfld.clear();
 			addressfld.sendKeys(customeraddress);
 			log(LogStatus.INFO, "Set customer Address: " + customeraddress);
+		}
+	}
+	
+	public void setCustomerAddress2(String customeraddress2) {
+		if (customeraddress2.length() > 0) {
+			address2fld.clear();
+			address2fld.sendKeys(customeraddress2);
+			log(LogStatus.INFO, "Set customer Address 2: " + customeraddress2);
 		}
 	}
 	

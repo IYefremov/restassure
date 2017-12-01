@@ -58,7 +58,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen = inspectionsscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
 		homescreen.clickQueueMessageIcon();
-		homescreen.waitABit(3000);
+		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
@@ -75,7 +75,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		setNetworkOn();
-		homescreen.waitABit(20000);
+		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	

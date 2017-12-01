@@ -193,8 +193,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public void switchToTeamInspectionsView() {
 		tap(teaminspectiontab);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading inspections']"))));
+		if (appiumdriver.findElements(By.xpath("//*[text()='Loading inspections']")).size() > 0) {
+			try {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading inspections']"))));
+			} catch (NoSuchElementException e) {
+				//do nothing
+			}
+		}
 		log(LogStatus.INFO, "Switch to Team Inspections view");
 	}
 	

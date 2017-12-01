@@ -36,6 +36,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_approve']")
 	private WebElement approveinspectionbtn;
 	
+	@FindBy(xpath="//a[@handler='_deleteWorkOrder']")
+	private WebElement deleteorderbtn;
+	
 	@FindBy(xpath="//div[@class='actions-layer popup tablet-fullscreen modal-in']")
 	private WebElement inspectionsmenuscreen;
 	
@@ -122,9 +125,25 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		return new VNextViewScreen(appiumdriver);
 	}
 
-	public VNextInspectionsScreen clickCloseInspectionMenuButton() {
+	public void clickCloseInspectionMenuButton() {
 		tap(closebtn);
 		log(LogStatus.INFO, "Tap on Close Inspection Menu button");
-		return new VNextInspectionsScreen(appiumdriver);
+		//return new VNextInspectionsScreen(appiumdriver);
+	}
+	
+	public boolean isDeleteWorkOrderMenuButtonExists() {
+		return appiumdriver.findElement(By.xpath("//a[@handler='_deleteWorkOrder']")).isDisplayed();
+	}
+	
+	public void clickDeleteWorkOrderMenuButton() {
+		tap(deleteorderbtn);
+		log(LogStatus.INFO, "Tap on Delete Work Order Menu button");
+	}
+	
+	public VNextWorkOrdersScreen deleteWorkOrder() {
+		clickDeleteWorkOrderMenuButton();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogDeleteButton();	
+		return new VNextWorkOrdersScreen(appiumdriver);
 	}
 }

@@ -20,10 +20,13 @@ import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
@@ -1175,5 +1178,72 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet", 
+			description = "Verify sending >100 messages after reconnect Internet")
+	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
+		
+		final int fakeimagescount = 50;
+		final String imagesummaryvalue = "+47";
+		final String[] services = { "Bumper Repair", "Facility Fee", "Aluminum Upcharge" };
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		setNetworkOff();
+		homescreen.waitABit(13000);		
+		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
+		homescreen = settingsscreen.setManualSendOn().clickBackButton();
+		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		inspinfoscreen.setVIN(testVIN);
+		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
+		VNextInspectionServicesScreen inspservicesscreen =inspinfoscreen.goToInspectionServicesScreen();
+		VNextSelectServicesScreen selectedservicesscreen = inspservicesscreen.clickAddServicesButton();
+		for (String srv : services) {			
+			VNextServiceDetailsScreen servicedetailsscreen = selectedservicesscreen.openServiceDetails(srv);
+			VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+			for (int i = 0; i < fakeimagescount; i++)
+				notesscreen.addFakeImageNote();
+			notesscreen.clickScreenBackButton();
+			servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+			servicedetailsscreen.clickServiceDetailsDoneButton();
+			selectedservicesscreen = new VNextSelectServicesScreen(appiumdriver);
+		}
+		selectedservicesscreen.clickSaveSelectedServicesButton();
+		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		//inspservicesscreen.selectAllServices();
+		
+		inspservicesscreen.saveInspectionViaMenu();
+		inspservicesscreen.clickScreenBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.clickUpdateAppdata();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogStartSyncButton();
+		waitABit(10000);
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		setNetworkOn();	
+		statusscreen.clickUpdateAppdata();	
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogStartSyncButton();
+		waitABit(10000);
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		
+		homescreen = statusscreen.clickBackButton();
+		inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		Assert.assertTrue(inspectionsscreen.isInspectionExists(inspnumber));
+		inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
+		inspservicesscreen =inspinfoscreen.goToInspectionServicesScreen();
+		for (String srv : services) {	
+			inspservicesscreen.isServiceSelected(srv);
+			Assert.assertEquals(inspservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
+		}
+		inspectionsscreen = inspservicesscreen.cancelInspection();
+		inspservicesscreen.clickScreenBackButton();
+		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 }

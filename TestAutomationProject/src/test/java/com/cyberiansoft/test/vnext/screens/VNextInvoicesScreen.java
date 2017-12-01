@@ -68,6 +68,19 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		return workOrders;
 	}
 	
+	public String getInvoicePONumberValue(String invoicenumber) {
+		String poNumber = "";
+		WebElement invoicecell = getInvoiceCell(invoicenumber);
+		expandInvoiceDetails(invoicenumber);
+		if (invoicecell != null) {
+			poNumber = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
+			poNumber = poNumber.substring(3, poNumber.length()).trim();
+		} else
+			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+		return poNumber;
+	}
+	
 	public void expandInvoiceDetails(String invoicenumber) {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		if (!invoicecell.getAttribute("class").contains("expanded")) {

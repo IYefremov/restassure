@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +18,7 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	@FindBy(id = "dialogModal")
 	private WebElement confirmdialog;
 	
-	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'text: text,')]")
+	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'html: html,')]")
 	private WebElement confirmdialogmessage;
 	
 	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")
@@ -42,7 +44,12 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public String getConfirmationDialogMessage() {
-		return confirmdialogmessage.getText();
+		String confirmMessage  = null;
+		List<WebElement> msgs = driver.findElements(By.xpath("//div[@class='modal-body']/div[@class='modal-body__content']/div"));
+		for (WebElement msg : msgs)
+			if (!msg.getText().equals(""))
+				confirmMessage = msg.getText();
+		return confirmMessage;
 	}
 	
 	public String clickYesAndGetConfirmationDialogMessage() {

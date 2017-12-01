@@ -59,7 +59,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), WordUtils.capitalize(customeraddress));
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -121,7 +121,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -150,7 +150,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
-		homescreen.waitABit(20000);
+		homescreen.waitABit(30000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
@@ -165,7 +165,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);

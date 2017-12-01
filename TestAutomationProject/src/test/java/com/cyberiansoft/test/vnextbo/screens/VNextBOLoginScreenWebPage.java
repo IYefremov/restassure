@@ -44,7 +44,7 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 		clearAndType(emailfld, username);
 		clearAndType(passwordfld, userpsw);
 		click(loginbtn);
-		waitABit(1000);
+		waitABit(2000);
 		return PageFactory.initElements(
 				driver, VNextBOHeaderPanel.class); 
 	}

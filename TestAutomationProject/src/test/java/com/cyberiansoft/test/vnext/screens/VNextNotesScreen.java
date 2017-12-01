@@ -167,7 +167,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public int getNumberOfAddedNotesPictures() {
 		if (!(servicenotessscreen.findElements(By.xpath(".//div[@class='accordion-item accordion-item-pictures accordion-item-expanded']")).size() > 0))
 			tap(servicenotessscreen.findElement(By.xpath(".//div[@class='accordion-item accordion-item-pictures']")));
-		return servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElements(By.xpath(".//div[@class='img-item' and @action='fullscreen']")).size();
+		return servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElements(By.xpath(".//div[contains(@class, 'img-item') and @action='fullscreen']")).size();
 	}
 	
 }

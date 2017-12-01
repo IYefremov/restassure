@@ -17,7 +17,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='employees']")
 	private WebElement loginscreen;
 	
-	@FindBy(xpath="//div[@class='list-block list-block-search searchbar-found virtual-list']")
+	@FindBy(xpath="//div[@data-autotests-id='employees-list']")
 	private WebElement userslist;
 	
 	@FindBy(xpath="//a[@action='main-db']/i")

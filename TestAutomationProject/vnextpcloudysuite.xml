@@ -17,7 +17,7 @@
         <methods>                   
           <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection" />
           <include name="testSendMessageFromTheQueueInManualModeSuccessPath" />
-          <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
+          <!--<include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" />--> 
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
@@ -35,6 +35,7 @@
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
           <include name="testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen" />
+          <include name="testVerifySendingMoreThen100MessagesAfterReconnectInternet" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">

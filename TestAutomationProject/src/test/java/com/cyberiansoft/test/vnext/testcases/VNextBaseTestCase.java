@@ -143,16 +143,16 @@ public class VNextBaseTestCase {
 	public void switchToWebViewContext() {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		List<String> handlesList = new ArrayList(contextNames);
-		/*System.out.println("+++" + handlesList.size());
+		System.out.println("+++" + handlesList.size());
 		for (String handles : handlesList) {
 			System.out.println("+++" + handles);
 			if (handles.contains("com.automobiletechnologies.repair360"))
 				appiumdriver.context(handles);
-		}*/
-		if (handlesList.size() > 2)
+		}
+		/*if (handlesList.size() > 2)
 			appiumdriver.context(handlesList.get(2));
 		else
-			appiumdriver.context(handlesList.get(1));
+			appiumdriver.context(handlesList.get(1));*/
 	}
 
 	public void switchApplicationContext(String appcontext) {
@@ -237,7 +237,7 @@ public class VNextBaseTestCase {
 			switchToWebViewContext();
 		}
 		
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 340);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
@@ -290,7 +290,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void registerTeamEdition() {
-		final String searchlicensecriteria = "Anastasia_android";
+		final String searchlicensecriteria = "Automation_android";
 
 		initiateWebDriver();
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Devices.aspx");
@@ -329,7 +329,7 @@ public class VNextBaseTestCase {
 		appiumdriver.launchApp();
 		switchToWebViewContext();
 		
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
@@ -360,6 +360,8 @@ public class VNextBaseTestCase {
 	public void setNetworkOff() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		((HasNetworkConnection) appiumdriver).setConnection(Connection.AIRPLANE);
+		appiumdriver.setConnection(Connection.NONE);
+		appiumdriver.setConnection(Connection.AIRPLANE);
 	    switchToWebViewContext();
 	    //switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
@@ -401,12 +403,12 @@ public class VNextBaseTestCase {
 		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
 		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
 		deviceplatform = devplatform;
-		int deviceBookDuration = 60;
+		int deviceBookDuration = 10;
 		
 		PCloudyAppiumSession pCloudySession;
 		
-		//Connector con = new Connector("https://device.pcloudy.com/api/");
-		Connector con = new Connector("https://us.pcloudy.com/api");
+		Connector con = new Connector("https://device.pcloudy.com/api/");
+		//Connector con = new Connector("https://us.pcloudy.com/api");
 		
 		
 		// User Authentication over pCloudy
@@ -414,7 +416,7 @@ public class VNextBaseTestCase {
 
 		// Select apk in pCloudy Cloud Drive
 		File appDir = new File("./data/");
-	    File fileToBeUploaded = new File(appDir, "ReconPro.apk");
+	    File fileToBeUploaded = new File(appDir, "Repair360Android.apk");
 	    
 	    //PDriveFileDTO alreadyUploadedApp = con.getAvailableAppIfUploaded(authToken, fileToBeUploaded.getName());
 	    System.out.println("Uploading App: " + fileToBeUploaded.getAbsolutePath());
@@ -424,9 +426,12 @@ public class VNextBaseTestCase {
 		//alreadyUploadedApp.file = uploadedApp.file;
 
 		ArrayList<MobileDevice> selectedDevices = new ArrayList<>();
-		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS8_Android_7.0.0", 149, "GalaxyS8", "Galaxy S8", "android", "7.0.0", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS8_Android_7.0.0", 149, "GalaxyS8", "Galaxy S8", "android", "7.0.0", "Samsung")); 
 		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS8Plus_Android_7.0.0", 148, "GalaxyS8Plus", "Galaxy S8 +", "android", "7.0.0", "Samsung")); 
-		
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6Edge_Android_6.0.1", 151, "GalaxyS6Edge", "S6 Edge", "android", "6.0.1", "Samsung")); 
+		//selectedDevices.add(MobileDevice.getNew("Lg_G5_Android_7.0.0", 162, "G5", "G5", "android", "7.0.0", "Lg")); 
+		//selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyA5_Android_7.0.0", 355, "GalaxyA5", "Galaxy A5", "android", "7.0.0", "Samsung")); 
+		selectedDevices.add(MobileDevice.getNew("Samsung_GalaxyS6_Android_7.0.0", 348, "GalaxyS6", "Galaxy S6", "android", "7.0.0", "Samsung"));
 		// Book the selected devices in pCloudy
 		String sessionName = "Appium Session " + new Date();
 		BookingDtoDevice bookedDevice = con.AppiumApis().bookDevicesForAppium(authToken, selectedDevices, deviceBookDuration, sessionName)[0];
