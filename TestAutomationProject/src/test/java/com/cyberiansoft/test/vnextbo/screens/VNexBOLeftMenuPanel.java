@@ -32,6 +32,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//span[@data-id='users']")
 	private WebElement usersmenu;
 	
+	@FindBy(xpath = "//*[@data-automation-id='orders']")
+	private WebElement repairordersmenu;
+	
+	private static String MONITOR_MAINMENU_ITEM = "Monitor";
 	private static String OPERATIONS_MAINMENU_ITEM = "Operations";
 	private static String SETTINGS_MAINMENU_ITEM = "Settings";
 	
@@ -60,6 +64,12 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 		selectMenuItem(usersmenu, SETTINGS_MAINMENU_ITEM);
 		return PageFactory.initElements(
 				driver, VNexBOUsersWebPage.class);
+	}
+	
+	public VNextRepairOrdersWebPage selectRepairOrdersMenu() {
+		selectMenuItem(repairordersmenu, MONITOR_MAINMENU_ITEM);
+		return PageFactory.initElements(
+				driver, VNextRepairOrdersWebPage.class);
 	}
 	
 	public boolean isUsersMenuItemExists() {

@@ -478,6 +478,24 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public String getWOForFirstServiceRequestFromList() {
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemWO']")).getText();
 	}
+	
+	public WebElement getServiceRequestCellBySRNumber(String srNumber) {
+		WebElement srcell = null;
+		List<WebElement> servicerequestscells = servicerequestslist.findElements(By.xpath("./div[contains(@class,'item')]"));
+		for (WebElement servicerequestcell : servicerequestscells)
+			if (servicerequestcell.findElement(By.xpath(".//span[@class='itemSrNo']/b")).getText().trim().contains(srNumber)) {
+				srcell = servicerequestcell;
+				break;
+			}
+				
+				
+		return srcell;
+	}
+	
+	public String getWOForServiceRequestFromList(String srNumber) {
+		WebElement srcell = getServiceRequestCellBySRNumber(srNumber);
+		return srcell.findElement(By.xpath(".//span[@class='itemWO']")).getText();
+	}
 
 	public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insurancecompany)
 			throws InterruptedException {
