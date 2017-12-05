@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.monitorlite.testcases;
 
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,21 +13,27 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextRepairOrdersWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrderDetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrdersWebPage;
 
 public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@BeforeMethod
-	public void BackOfficeLogin() throws InterruptedException {
+	public void BackOfficeLogin() {
+		//WebDriverInstansiator.setDriver("chrome");
+		//webdriver = WebDriverInstansiator.getDriver();
+		//webdriver.navigate().refresh();
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+		/*BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
-				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());*/
 	}
 
-	//@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		try {
+	@AfterMethod
+	public void BackOfficeLogout() {
+		webdriver.manage().deleteAllCookies();
+		//webdriver.quit();
+		/*try {
 			webdriver.switchTo().alert().accept();
 		} catch (NoAlertPresentException e) {
 
@@ -39,11 +44,14 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		}catch(Exception e){
 			backofficeheader.refresh();
 			backofficeheader.clickLogout();
-		}
+		}*/
 	}
 
-	@Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")
-	public void testOperationNewServiceRequestAppointmentRetail() throws InterruptedException {
+	@Test(testName = "Test Case 68402:MonitorLite: Create SR on classic BO, "
+			+ "Test Case 68404:Repair Orders: Start WO on the List", 
+			description = "MonitorLite: Create SR on classic BO, "
+					+ "Repair Orders: Start WO on the List")
+	public void testRepairOrdersStartWOOnTheList() throws InterruptedException {
 
 		final String srCustomer = "Test";
 		final String VIN = "1GNEK13R4TJ423282";
@@ -52,6 +60,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		final String[] servicesprices = { "100", "150" };
 		final String servicesquantity = "1";
 		final String woActivePhaseStatus = "Not Started";
+		final String woActivePhaseStatusNEW = "QC";
+		final String woDaysInProgress = "Days in progress 0";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -87,32 +97,232 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		
-		VNextRepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
 		repairorderspage.searchRepairOrderByNumber(srWONumber);
 		
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(srWONumber));
 		Assert.assertEquals(repairorderspage.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatus);
+		repairorderspage.clickStartRoForWorkOrder(srWONumber);
+		Assert.assertEquals(repairorderspage.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatusNEW);
+		Assert.assertEquals(repairorderspage.getWorkOrderDaysInProgressValue(srWONumber), woDaysInProgress);
 		
+	}
+	
+	@Test(testName = "Test Case 68405:Repair Orders: Complete WO on the List", 
+			description = "Repair Orders: Complete WO on the List")
+	public void testRepairOrdersCompleteWOOnTheList() throws InterruptedException {
+
+		final String srCustomer = "Test";
+		final String VIN = "1GNEK13R4TJ423282";
+
+		final String[] services = { "Glass Repair", "Bumper Repair" };
+		final String[] servicesprices = { "100", "150" };
+		final String servicesquantity = "1";
+		final String woActivePhaseStatus = "Not Started";
+		final String woHalfCopleteValue = "50%";
+		final String woCopleteValue = "100%";
+		final String woCompletedPhaseStatus = "Completed";
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.clickAddServiceRequestButton();
+
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.addServicesToServiceRequest(services);
+		for (int i = 0; i < services.length; i++)
+			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
 		
-		/*servicerequestslistpage.makeSearchPanelVisible();		
-		servicerequestslistpage.setSearchFreeText(newservicerequest);
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
-				.clickAddAppointmentToFirstServiceRequestFromList();
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
-		appointmentpopup.setStartTimeValue("8:00 AM");
-		appointmentpopup.setEndTimeValue("8:40 AM");
-		Thread.sleep(1000);
-		Assert.assertEquals(appointmentpopup.getSubjectValue(), newservicerequest);
-		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
-		Assert.assertEquals(appointmentpopup.getTechnicianFieldValue(), "All");
-		String appointmentfromdate = appointmentpopup.getFromDateValue();
-		String appointmentstarttime = appointmentpopup.getStartTimeValue();
-		appointmentpopup.clickAddAppointment();
-		Thread.sleep(3000);
-		servicerequestslistpage
-				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);*/
+		servicerequestslistpage.saveNewServiceRequest();
+		
+		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		
+		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+
+		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		
+		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		repairorderspage.searchRepairOrderByNumber(srWONumber);
+		
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(srWONumber));
+		Assert.assertEquals(repairorderspage.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatus);
+		repairorderspage.clickStartRoForWorkOrder(srWONumber);
+		for (int i = 0 ; i < services.length; i++) {
+			repairorderspage.completeWorkOrderServiceStatus(srWONumber, services[i]);
+			if (i ==0)
+				Assert.assertEquals(repairorderspage.getCompletedWorkOrderValue(srWONumber), woHalfCopleteValue);
+		}
+		Assert.assertEquals(repairorderspage.getCompletedWorkOrderValue(srWONumber), woCopleteValue);
+		Assert.assertEquals(repairorderspage.getWorkOrderActivePhaseValue(srWONumber), woCompletedPhaseStatus);
+		
+	}
+	
+	@Test(testName = "Test Case 68406:Repair Orders: Start WO on the Order Details", 
+			description = "Repair Orders: Start WO on the Order Details")
+	public void testRepairOrdersStartWOOnTheOrderDetails() throws InterruptedException {
+
+		final String srCustomer = "Test";
+		final String VIN = "1GNEK13R4TJ423282";
+
+		final String[] services = { "Glass Repair", "Bumper Repair" };
+		final String[] servicesprices = { "100", "150" };
+		final String servicesquantity = "1";
+		final String woActivePhaseStatus = "Not Started";
+		final String serviceQueuedStatus = "Queued";
+		
+		final String woActivePhaseStatusNEW = "QC";
+		final String serviceActiveStatus = "Active";
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.clickAddServiceRequestButton();
+
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.addServicesToServiceRequest(services);
+		for (int i = 0; i < services.length; i++)
+			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		
+		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		
+		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+
+		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		
+		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		repairorderspage.searchRepairOrderByNumber(srWONumber);
+		
+		VNextBORepairOrderDetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
+		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
+		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
+		rodetailspage.expandRepairOrderServiceDetailsTable();
+		for (int i = 0; i < services.length; i++)
+			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);		
+		rodetailspage.clickStartOrderButton();
+		
+		Assert.assertFalse(rodetailspage.isStartOrderButtonVisible());
+		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);		
+		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
+		rodetailspage.expandRepairOrderServiceDetailsTable();
+		for (int i = 0; i < services.length; i++)
+			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceActiveStatus);		
+	}
+	
+	@Test(testName = "Test Case 68407:Repair Orders: Complete WO on the Order Details", 
+			description = "Repair Orders: Complete WO on the Order Details")
+	public void testRepairOrdersCompleteWOOnTheOrderDetails() throws InterruptedException {
+
+		final String srCustomer = "Test";
+		final String VIN = "1GNEK13R4TJ423282";
+
+		final String[] services = { "Glass Repair", "Bumper Repair" };
+		final String[] servicesprices = { "100", "150" };
+		final String servicesquantity = "1";
+		final String woActivePhaseStatus = "Not Started";
+		final String serviceQueuedStatus = "Queued";
+		
+		final String woActivePhaseStatusNEW = "QC";
+		final String serviceActiveStatus = "Active";
+		
+		final String woHalfCopleteValue = "50%";
+		final String woCopleteValue = "100%";
+		final String woCompletedPhaseStatus = "Completed";
+
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage.clickAddServiceRequestButton();
+
+		servicerequestslistpage.clickCustomerEditButton();
+		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.clickVehicleInforEditButton();
+		servicerequestslistpage.setServiceRequestVIN(VIN);
+		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		servicerequestslistpage.clickDoneButton();
+
+		servicerequestslistpage.addServicesToServiceRequest(services);
+		for (int i = 0; i < services.length; i++)
+			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+		
+		servicerequestslistpage.saveNewServiceRequest();
+		
+		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
+		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		
+		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+
+		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
+		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+				VNextBOLoginScreenWebPage.class);
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
+		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		
+		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		repairorderspage.searchRepairOrderByNumber(srWONumber);
+		
+		VNextBORepairOrderDetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
+		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
+		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
+		rodetailspage.expandRepairOrderServiceDetailsTable();
+		for (int i = 0; i < services.length; i++)
+			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);		
+		rodetailspage.clickStartOrderButton();
+		
+		rodetailspage.expandRepairOrderServiceDetailsTable();
+		for (int i = 0 ; i < services.length; i++) {
+			rodetailspage.changeStatusForrepairorderService(services[i], woCompletedPhaseStatus);
+			if (i ==0) {
+				Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);		
+				Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
+				Assert.assertEquals(rodetailspage.getRepairOrderCompletedValue(), woHalfCopleteValue);
+			}
+		}
+
+		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woCompletedPhaseStatus);		
+		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), woCompletedPhaseStatus);
+		Assert.assertEquals(rodetailspage.getRepairOrderCompletedValue(), woCopleteValue);
+		rodetailspage.expandRepairOrderServiceDetailsTable();
+		for (int i = 0; i < services.length; i++)
+			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), woCompletedPhaseStatus);		
 	}
 
 }

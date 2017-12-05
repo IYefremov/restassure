@@ -66,10 +66,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 				driver, VNexBOUsersWebPage.class);
 	}
 	
-	public VNextRepairOrdersWebPage selectRepairOrdersMenu() {
+	public VNextBORepairOrdersWebPage selectRepairOrdersMenu() {
 		selectMenuItem(repairordersmenu, MONITOR_MAINMENU_ITEM);
 		return PageFactory.initElements(
-				driver, VNextRepairOrdersWebPage.class);
+				driver, VNextBORepairOrdersWebPage.class);
 	}
 	
 	public boolean isUsersMenuItemExists() {

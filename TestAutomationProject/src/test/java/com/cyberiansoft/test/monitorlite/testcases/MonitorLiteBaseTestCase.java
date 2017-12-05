@@ -2,12 +2,15 @@ package com.cyberiansoft.test.monitorlite.testcases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
+import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 
 
 public class MonitorLiteBaseTestCase {
@@ -22,7 +25,10 @@ public class MonitorLiteBaseTestCase {
 		browsertype = browser;
 		WebDriverInstansiator.setDriver(browser);
 		webdriver = WebDriverInstansiator.getDriver();
-		webdriver.navigate().refresh();
+		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 	}
 	
 	public WebDriver getWebDriver() {
@@ -31,12 +37,6 @@ public class MonitorLiteBaseTestCase {
 	
 	public void webdriverGotoWebPage(String url) {
 		webdriver.get(url);
-	}
-
-	@AfterMethod
-	public void cookieCleaner(){
-		webdriver.get("https://reconpro.cyberianconcepts.com/");
-		webdriver.manage().deleteAllCookies();
 	}
 	
 	@AfterClass
