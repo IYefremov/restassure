@@ -95,7 +95,7 @@ public class VNextBaseTestCase {
 	       
 			deviceplatform = devplatform;
 			if (deviceplatform.contains("ios"))
-				appiumdriver = VNextAppiumDriverBuilder.forIOS().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
+				appiumdriver = VNextAppiumDriverBuilder.forIOS().withEndpoint(new URL("http://127.0.0.1:4900/wd/hub")).build();
 			else {
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
 				appiumdriver.removeApp("com.automobiletechnologies.repair360_devstage");
