@@ -41,7 +41,7 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	public void setDeviceRegistrationCode(String regcode) {	
 		tap(regfld);
 		appiumdriver.getKeyboard().pressKey(regcode);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 		//setValue(regfld, regcode);
 		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		//appiumdriver.hideKeyboard();

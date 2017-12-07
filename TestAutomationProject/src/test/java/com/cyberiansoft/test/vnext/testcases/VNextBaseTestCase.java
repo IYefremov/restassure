@@ -219,13 +219,13 @@ public class VNextBaseTestCase {
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, phonenumber, userregmail);
-		regscreen.waitABit(7000);
+		regscreen.waitABit(3000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
 		else
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userregmail).replaceAll("\"", ""));		
-		verificationscreen.clickVerifyButton(); 
+		verificationscreen.clickVerifyButton();
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
