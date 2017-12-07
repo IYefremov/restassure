@@ -113,6 +113,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, IOSRegularDeviceInfo.getInstance().getDeviceName());
     		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
     		appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8100);
+    		appiumcap.setCapability(IOSMobileCapabilityType.SHOW_XCODE_LOG, true);
     		//appiumcap.setCapability("connectHardwareKeyboard", true);
     		appiumcap.setCapability(MobileCapabilityType.APP,
     				"http://amtqc.cyberiansoft.net/Uploads/Repair360_" + date.format(dateFormat) + ".app.zip");
