@@ -144,15 +144,15 @@ public class VNextBaseTestCase {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		List<String> handlesList = new ArrayList(contextNames);
 		System.out.println("+++" + handlesList.size());
-		for (String handles : handlesList) {
+		/*for (String handles : handlesList) {
 			System.out.println("+++" + handles);
 			if (handles.contains("com.automobiletechnologies.repair360"))
 				appiumdriver.context(handles);
-		}
-		/*if (handlesList.size() > 2)
+		}*/
+		if (handlesList.size() > 2)
 			appiumdriver.context(handlesList.get(2));
 		else
-			appiumdriver.context(handlesList.get(1));*/
+			appiumdriver.context(handlesList.get(1));
 	}
 
 	public void switchApplicationContext(String appcontext) {

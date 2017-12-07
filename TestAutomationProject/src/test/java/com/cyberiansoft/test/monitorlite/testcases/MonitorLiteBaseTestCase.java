@@ -23,12 +23,8 @@ public class MonitorLiteBaseTestCase {
 	public void setUp(String browser, String bundleid) throws Exception {
 		
 		browsertype = browser;
-		WebDriverInstansiator.setDriver(browser);
-		webdriver = WebDriverInstansiator.getDriver();
-		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
-				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
+		//WebDriverInstansiator.setDriver(browser);
+		//webdriver = WebDriverInstansiator.getDriver();
 	}
 	
 	public WebDriver getWebDriver() {

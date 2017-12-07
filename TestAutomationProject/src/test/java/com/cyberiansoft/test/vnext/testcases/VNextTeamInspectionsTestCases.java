@@ -759,6 +759,51 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
+	@Test(testName= "Test Case 67751:Verify quick notes are added as new lines of text",
+			description = "Verify quick notes are added as new lines of text")
+	public void testVerifyQuickNotesAreAddedAsNewLinesOfText() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final String[] quicknotes = { "1 note", "AB note" };
+		final String notetext = "new notes";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.setNoteText(notetext);
+		for (String quicknote: quicknotes)
+			notesscreen.addQuickNote(quicknote);
+		
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+			
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		String notesfinal = notetext + "\n";
+		for (String quicknote: quicknotes)
+			notesfinal = notesfinal + quicknote + "\n";
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notesfinal.trim());
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
 	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet", 
 			description = "Verify sending >100 messages after reconnect Internet")
 	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {

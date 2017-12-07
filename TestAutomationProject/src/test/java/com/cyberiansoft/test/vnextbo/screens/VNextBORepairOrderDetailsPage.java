@@ -69,7 +69,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	}
 	
 	public void changeStatusForrepairorderService(String serviceName, String newStatus) {
-		waitABit(1000);
+		waitABit(2000);
 		WebElement servicerow = getRepairOrderServiceColumn(serviceName);
 		new WebDriverWait(driver, 10)
 		  .until(ExpectedConditions.visibilityOf(servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")))).click();

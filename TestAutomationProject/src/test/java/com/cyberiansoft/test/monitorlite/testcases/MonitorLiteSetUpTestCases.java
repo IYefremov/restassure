@@ -10,6 +10,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
+import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -20,19 +21,19 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@BeforeMethod
 	public void BackOfficeLogin() {
-		//WebDriverInstansiator.setDriver("chrome");
-		//webdriver = WebDriverInstansiator.getDriver();
+		WebDriverInstansiator.setDriver("chrome");
+		webdriver = WebDriverInstansiator.getDriver();
 		//webdriver.navigate().refresh();
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
-		/*BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
-				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());*/
+				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 	}
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		webdriver.manage().deleteAllCookies();
-		//webdriver.quit();
+		//webdriver.manage().deleteAllCookies();
+		webdriver.quit();
 		/*try {
 			webdriver.switchTo().alert().accept();
 		} catch (NoAlertPresentException e) {
