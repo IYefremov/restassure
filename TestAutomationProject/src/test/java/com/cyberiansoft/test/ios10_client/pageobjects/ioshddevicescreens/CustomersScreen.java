@@ -95,7 +95,8 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectCustomerWithoutEditing(String customer) {
-		if (!appiumdriver.findElement(MobileBy.AccessibilityId(customer)).isDisplayed())
+		
+		if (!elementExists(customer))
 			searchCustomer(customer);
 		clickOnCustomer(customer);
 		appiumdriver.findElementByAccessibilityId("Select").click();
