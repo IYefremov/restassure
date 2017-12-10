@@ -85,7 +85,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void assertServicePriceValue(String expectedprice) {
-		WebElement pricefld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Price")).findElementByClassName("XCUIElementTypeTextField");
+		IOSElement pricecell = null;
+		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
+		for (WebElement prc : priceflds)
+			if (prc.isDisplayed()) {
+				pricecell = (IOSElement) prc;
+				break;
+			}
+		IOSElement pricefld = (IOSElement) pricecell.findElementByClassName("XCUIElementTypeTextField");
 		Assert.assertEquals(pricefld.getText(), expectedprice);
 	}
 
@@ -98,8 +105,10 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		WebElement pricefld = null;
 		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
 		for (WebElement prc : priceflds)
-			if (prc.isDisplayed())
+			if (prc.isDisplayed()) {
 				prc.click();
+				break;
+			}
 		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Clear text").click();
 		appiumdriver.getKeyboard().sendKeys(_price + "\n");
@@ -381,11 +390,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeCell[contains(@name, '"
-					+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']"))).click();; 
-		//appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-		//			+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']").click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-					+ technician + "')]/XCUIElementTypeTextField[@name='TechnicianSplitsCell_Amount']").clear();
+					+ technician + "')]"))).click();
+		if (appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
+				+ technician + "')]").findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
+			appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
+					+ technician + "')]").findElement(MobileBy.AccessibilityId("Clear text")).click();
 		//}
 		typeTechnicianValue(percentage);
 

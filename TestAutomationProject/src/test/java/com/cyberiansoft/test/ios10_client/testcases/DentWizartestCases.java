@@ -2150,7 +2150,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
 		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2164,7 +2164,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
-		servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
@@ -2172,7 +2172,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
-		servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
 		servicesscreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -2257,7 +2257,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -2271,7 +2271,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.clickServiceTypesButton();
 		
 		
-		servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
 		servicesscreen.selectService(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
@@ -2285,7 +2285,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
 		servicesscreen.selectService(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -3305,7 +3305,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
 		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
@@ -3329,7 +3329,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
 
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
-		servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.LEATHERREPAIR_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow2));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow2)));
@@ -3347,7 +3347,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow3), ExcelUtils.getModel(testcaserow3), ExcelUtils.getYear(testcaserow3));
 
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
-		servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow3));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow3)));
@@ -3509,6 +3509,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.clickServiceTypesButton();
 		
 		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesscreen.searchAvailableService("Scratch (Exterior)");
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Scratch (Exterior)");
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -3631,14 +3632,14 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));

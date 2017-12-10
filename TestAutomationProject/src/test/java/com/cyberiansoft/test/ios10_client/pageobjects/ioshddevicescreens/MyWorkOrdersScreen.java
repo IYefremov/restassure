@@ -347,9 +347,10 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
 			swipeTableUp(wostable.findElementByAccessibilityId(workordertype),
 					wostable);
-			wostable.click();
+			wostable.findElementByAccessibilityId(workordertype).click();
 		}
-		wostable.findElementByAccessibilityId(workordertype).click();
+		if (appiumdriver.findElementsByAccessibilityId(workordertype).size() > 0)
+			appiumdriver.findElementByAccessibilityId(workordertype).click();
 		return new VehicleScreen(appiumdriver);
 	}
 
