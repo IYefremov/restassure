@@ -995,7 +995,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		
 		vehiclescreeen.setMakeAndModel(_make, _model);
@@ -1246,7 +1246,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -1340,7 +1340,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
@@ -1456,7 +1456,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -1499,7 +1499,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -1599,7 +1599,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -1693,7 +1693,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -1831,7 +1831,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 				vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -2020,7 +2020,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -2096,7 +2096,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)
@@ -3057,7 +3057,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 	
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -3134,7 +3134,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();
 				
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -6946,7 +6946,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
-				MobileBy.name("The VIN is invalid.")).isDisplayed());
+				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
 		alert.findElementByAccessibilityId("Close").click();	
 		List<MobileElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (MobileElement closebtn : closebtns)

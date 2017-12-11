@@ -3572,7 +3572,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreeen.setRO(ExcelUtils.getRO(testcaserow));
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.selectService(UtilConstants.INTERIORPLASTIC_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIORPLASTIC_SERVICE);
 		servicesscreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
 		
 		servicesscreen.selectNextScreen(OrderSummaryScreen
