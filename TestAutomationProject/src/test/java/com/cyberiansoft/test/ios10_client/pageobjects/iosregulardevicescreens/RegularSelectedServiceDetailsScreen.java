@@ -379,7 +379,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void changeAmountOfBundleService(String newamount) {
 		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeButton[3]").click();
 		Helpers.waitABit(300);
-		IOSElement amountfld = (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTextField");
+		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();

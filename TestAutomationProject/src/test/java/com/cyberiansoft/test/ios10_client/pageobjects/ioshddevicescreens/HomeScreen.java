@@ -121,11 +121,11 @@ public class HomeScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
 		appiumdriver.findElementByAccessibilityId("Service Requests").click();
-		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
+		/*if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
 		}
-		Helpers.waitABit(500);
+		Helpers.waitABit(500);*/
 		return new ServiceRequestsScreen(appiumdriver);
 	}
 	
