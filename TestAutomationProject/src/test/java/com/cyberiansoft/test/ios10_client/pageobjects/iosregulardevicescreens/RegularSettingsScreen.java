@@ -30,32 +30,36 @@ public class RegularSettingsScreen extends iOSRegularBaseScreen {
 
 	public void setCheckDuplicatesOn() {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
-		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']/..")));
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']/..")));
 		
-		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).getAttribute("value").equals("false")) {
-			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).click();
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']")).getAttribute("value").equals("0")) {
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']")).click();
 		}
 	}
 
 	public void setCheckDuplicatesOff() {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
-		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']/..")));
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']/..")));
 		
-		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).getAttribute("value").equals("true")) {
-			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check duplicates']")).click();
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']")).getAttribute("value").equals("1")) {
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Check VIN duplicates']")).click();
 		}
 	}
 	
 	public void setShowTopCustomersOn() {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
-		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("false"))
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("0")) {
 			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).click();
+			
+		}
 	}
 	
 	public void setShowTopCustomersOff() {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
-		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("true"))
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).getAttribute("value").equals("1")) {
+			//swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']/..")));
 			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Top customers']")).click();
+		}
 	}
 
 	public void setShowAllServicesOn() {
@@ -67,7 +71,7 @@ public class RegularSettingsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setShowAllServicesOff() {
-		if (showallservicestoggle.getAttribute("value").equals("true"))
+		if (showallservicestoggle.getAttribute("value").equals("1"))
 			showallservicestoggle.click();
 	}
 }

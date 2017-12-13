@@ -399,12 +399,16 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {		
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
-		swipeToElement(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='VehiclePartSelectorView']/XCUIElementTypeCell[@name='" +
-				vehiclepart + "']")));
-		Helpers.waitABit(300);
-		table.findElementByAccessibilityId(vehiclepart).click();
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable[@name='VehiclePartSelectorView']/XCUIElementTypeCell[@name='" +
-				vehiclepart + "']/XCUIElementTypeButton[@label='selected']")).size() > 0);
+		if (!table.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
+			swipeToElement(table.findElement(MobileBy.AccessibilityId(vehiclepart)));
+			table.findElementByAccessibilityId(vehiclepart).click();
+		}
+
+		if (appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
+				MobileBy.AccessibilityId(vehiclepart)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0)
+			table.findElementByAccessibilityId(vehiclepart).click();
+		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
+				MobileBy.AccessibilityId(vehiclepart)).findElements(MobileBy.AccessibilityId("selected")).size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {

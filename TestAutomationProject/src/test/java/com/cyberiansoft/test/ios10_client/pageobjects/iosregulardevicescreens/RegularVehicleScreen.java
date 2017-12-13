@@ -113,12 +113,16 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		clickSaveButton();
 		return Helpers.getAlertTextAndAccept();
 	}
-
-	public void setVIN(String vin)  {
+	
+	public void setVINValue(String vin)  {
 		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(1500);
+	}
+
+	public void setVIN(String vin)  {
+		setVINValue(vin);
 
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
@@ -177,8 +181,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void verifyExistingWorkOrdersDialogAppears() throws InterruptedException {
-		
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Existing work orders were found for this vehicle").isDisplayed());
+		Assert.assertTrue(appiumdriver.findElements(MobileBy.iOSNsPredicateString("value BEGINSWITH 'Existing work orders were found'")).size() > 0);
 		appiumdriver.findElementByAccessibilityId("Close")
 				.click();
 	}

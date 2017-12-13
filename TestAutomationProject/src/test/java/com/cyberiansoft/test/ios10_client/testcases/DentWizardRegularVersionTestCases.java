@@ -147,7 +147,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 			customersscreen.assertTopCustomersExists();
 			Assert.assertTrue(customersscreen.customerIsPresent(UtilConstants.TEST_CUSTOMER_FOR_TRAINING));
-			Assert.assertTrue(customersscreen.customerIsPresent(customer));
 			customersscreen.clickHomeButton();
 			
 			homescreen.clickSettingsButton();
@@ -178,8 +177,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
 					0, 11));
 			Thread.sleep(2000);
-			vehiclescreeen.setVIN(ExcelUtils.getVIN(tcrow).substring(11, 17));
-			vehiclescreeen.verifyExistingWorkOrdersDialogAppears();		
+			vehiclescreeen.setVINValue(ExcelUtils.getVIN(tcrow).substring(11, 17));
+			vehiclescreeen.verifyExistingWorkOrdersDialogAppears();	
+			if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
+				appiumdriver.findElementByAccessibilityId("Close").click();
 			vehiclescreeen.clickSaveButton();
 			myworkordersscreen.clickHomeButton();
 			homescreen.clickSettingsButton();

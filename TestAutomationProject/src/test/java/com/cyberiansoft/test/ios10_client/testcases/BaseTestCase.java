@@ -153,11 +153,11 @@ public class BaseTestCase {
 		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		this.buildtype = buildtype;
 		if (buildtype.toLowerCase().equals("hd"))
-			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
-			appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
+			appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
+			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
 		else
-			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
-			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(new URL("http://127.0.0.1:4900/wd/hub")).newInstance();
+			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
+			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}
