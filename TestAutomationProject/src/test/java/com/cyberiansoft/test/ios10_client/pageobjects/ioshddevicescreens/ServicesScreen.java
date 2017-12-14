@@ -205,7 +205,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		}
 		//appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId("BundleItemsView")).findElement(MobileBy.AccessibilityId(servicename))
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("custom detail button"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
@@ -213,7 +213,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public SelectedServiceDetailsScreen selectBundleServiceDetails(String servicename) {
 		appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId("BundleItemsView")).findElement(MobileBy.AccessibilityId(servicename))
+		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("unselected"))).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}

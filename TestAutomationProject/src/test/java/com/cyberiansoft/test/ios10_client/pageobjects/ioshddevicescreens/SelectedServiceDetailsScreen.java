@@ -134,7 +134,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartValue() {
-		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Service Part")).findElementByClassName("XCUIElementTypeTextField");	
+		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Service Part")).findElementsByClassName("XCUIElementTypeStaticText").get(1);	
 		return servicepartfld.getAttribute("value");
 	}
 
@@ -204,10 +204,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void selectBundle(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		IOSElement bundleview = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"))); 
-		Helpers.waitABit(1000);
-		//System.out.println("+++" + appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='Dye']")).size());
-		bundleview.findElement(MobileBy.AccessibilityId(bundle))
-		.findElement(MobileBy.AccessibilityId("unselected")).click();
+		//Helpers.waitABit(1000);
+		IOSElement bundleitem = (IOSElement) appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']"));
+		bundleitem.findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 	
 	public void changeBundleQuantity(String bundle, String _quantity) throws InterruptedException {
