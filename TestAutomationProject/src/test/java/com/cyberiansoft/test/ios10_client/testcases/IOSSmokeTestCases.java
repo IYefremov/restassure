@@ -304,7 +304,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectFirstInspection();
-		VehicleScreen vehiclescreeen = myinspectionsscreen.clickEditInspectionButton();
+		myinspectionsscreen.clickEditInspectionButton();
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		NotesScreen notesscreen = vehiclescreeen.clickNotesButton();
 		notesscreen.setNotes(_notes1);
 		//notesscreen.clickDoneButton();
@@ -2390,7 +2391,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.clickSaveButton();
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
 		myworkordersscreen.openWorkOrderDetails(wonumber);
-		
+		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicesscreen.clickCancelButton();	
 		myworkordersscreen.clickHomeButton();
@@ -2445,7 +2446,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
 		myworkordersscreen.openWorkOrderDetails(wonumber);
-		
+		vehiclescreeen = new VehicleScreen(appiumdriver); 
 		Assert.assertEquals(vehiclescreeen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicesscreen.clickCancelButton();	
 		myworkordersscreen.clickHomeButton();
@@ -2504,7 +2505,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.openWorkOrderDetails(wonumber);		
+		myworkordersscreen.openWorkOrderDetails(wonumber);	
+		vehiclescreeen =  new VehicleScreen(appiumdriver);
 		Assert.assertTrue(vehiclescreeen.getWorkOrderCustomer().contains(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER));
 		servicesscreen.clickCancelButton();		
 		myworkordersscreen.clickHomeButton();
@@ -4425,7 +4427,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		element(
 				MobileBy.name("No"))
 				.click();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
@@ -4438,11 +4440,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String inspectnumber = servicerequestsscreen.getInspectionNumber();
 		servicesscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		servicesscreen.clickSaveAsFinal();
-		Thread.sleep(3000);
+		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectSummaryRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.assertInspectionExists(inspectnumber);
 		myinspectionsscreen.clickActionButton();
@@ -4455,9 +4457,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);		
 		approveinspscreen.approveInspectionWithSelectionAndSignature(inspectnumber);
 		myinspectionsscreen.clickBackServiceRequest();
-		Thread.sleep(3000);
+		
 		servicerequestsscreen.clickHomeButton();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();
 		boolean onhold = false;
 		for (int i= 0; i < 7; i++) {
@@ -5432,7 +5434,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(3000);
 		myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		Assert.assertTrue(myinspectionsscreen.isInspectionApproveButtonExists(inspectionnumber));
-		myinspectionsscreen.clickHomeButton();
+		myinspectionsscreen.clickServiceRequestButton();
 		servicerequestsscreen.clickHomeButton();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickHomeButton();

@@ -1,6 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 import java.awt.event.KeyEvent;
 import java.time.Duration;
@@ -12,6 +15,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
@@ -95,7 +99,9 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public VehicleScreen(AppiumDriver driver) {		
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		//appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleTable")));
 	}
 
 	public static String getVehicleScreenCaption() {
@@ -299,12 +305,28 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setYear(String year) {
 		
 		appiumdriver.findElementByAccessibilityId("Year").click();
-		selectUIAPickerValue(year);
+
+		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
+		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		//picker.setValue(year);
+		pickerwhl.setValue(year);
 		
-		if (appiumdriver.findElementsByAccessibilityId("Done").size() > 1)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Done").get(1)).click();
+		IOSElement donebtn = (IOSElement) appiumdriver.findElementByAccessibilityId("StringPicker_Done");
+		
+		new TouchAction(appiumdriver).tap(tapOptions().withElement(element(donebtn))).perform();
+		/*if (appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").size() > 1)
+			donebtn = ((IOSElement) appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").get(1));
 		else
-			appiumdriver.findElementByAccessibilityId("Done").click();
+			donebtn = (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeButton[@label='Done']");*/
+		
+		//IOSTouchAction iosTouchAction = new IOSTouchAction(appiumdriver);
+		//iosTouchAction.tap(xx,yy).perform();
+		
+		/*if (appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").size() > 1)
+			((IOSElement) appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").get(1)).click();
+		else
+			appiumdriver.findElementByXPath("//XCUIElementTypeButton[@label='Done']").click();*/
+			
 	}
 	
 	public void setTrim(String trimvalue) {

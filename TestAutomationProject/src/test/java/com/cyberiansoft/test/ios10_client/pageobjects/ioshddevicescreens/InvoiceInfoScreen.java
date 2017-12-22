@@ -108,7 +108,9 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getInvoiceNumber() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-00\")]").getAttribute("value");
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByIosNsPredicate("name contains 'I-00'").getAttribute("value");
+		//return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-00\")]").getAttribute("value");
 	}
 	
 	public String getInvoiceCustomer() {

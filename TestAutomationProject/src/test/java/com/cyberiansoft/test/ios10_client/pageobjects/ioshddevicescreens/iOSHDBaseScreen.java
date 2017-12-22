@@ -43,8 +43,10 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public HomeScreen clickHomeButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(Duration.ofSeconds(1)).release().perform();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new HomeScreen(appiumdriver);		
 	}
 	
@@ -58,8 +60,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
 	public void clickSaveButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Save")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId("Save").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -80,8 +81,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
 		navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
 		//navbar.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(screenname)).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId(screenname).click();
 		//action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(screenname).click();
 	}
@@ -163,8 +163,13 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	public void swipeScreenUp() {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
         HashMap<String, String> swipeObject = new HashMap<String, String>();
-        swipeObject.put("direction", "down");
+        swipeObject.put("direction", "up");
         js.executeScript("mobile:swipe", swipeObject);
+        
+        /*js = (JavascriptExecutor) appiumdriver;
+        swipeObject = new HashMap<String, String>();
+        swipeObject.put("direction", "up");
+        js.executeScript("mobile:swipe", swipeObject);*/
 	}
 	
 	public void swipeTableUp(WebElement tableCell, WebElement table) {
@@ -185,4 +190,5 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		
 		
 	}
+	
 }

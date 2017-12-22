@@ -2317,7 +2317,7 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.verifyPanelsStatuses(" Paint - Full Bumper", "Active");
 		
 		ordermonitorscreen.clickServicesButton();
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
 		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
