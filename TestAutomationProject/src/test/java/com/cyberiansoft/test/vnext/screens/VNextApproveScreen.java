@@ -47,12 +47,12 @@ public class VNextApproveScreen extends VNextBaseScreen {
 		int xx = drawcanvas.getLocation().getX();
 
 		int yy = drawcanvas.getLocation().getY();
-		TouchActions action = new TouchActions(appiumdriver);
+		/**TouchActions action = new TouchActions(appiumdriver);
 		try {
 		action.down(xx + 100,yy + 100).perform();
 		} catch (NullPointerException e) {
 			//do nothing
-		}
+		}*/
 
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(xx + 100,yy + 100).waitAction(300).moveTo(xx + 200, yy + 200).release().perform();

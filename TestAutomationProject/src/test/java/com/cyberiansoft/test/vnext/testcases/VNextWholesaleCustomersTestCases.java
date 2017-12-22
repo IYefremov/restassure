@@ -4,11 +4,9 @@ import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;

@@ -35,7 +35,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@type='search']")
 	private WebElement searchfld;
 	
-	@FindBy(xpath="//*[@class='searchbar-cancel']")
+	@FindBy(xpath="//*[@data-autotests-id='search-cancel']")
 	private WebElement cancelsearchbtn;
 	
 	@FindBy(xpath="//*[@action='select-retail']")
@@ -137,8 +137,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void searchCustomerByName(String customername) {
-		tap(searchbtn);
-		typeSearchParameters(customername);
+ 		typeSearchParameters(customername);
 		
 	}
 	
@@ -152,6 +151,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void typeSearchParameters(String searchtxt) {
+		tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
 		searchfld.clear();
 		searchfld.sendKeys(searchtxt);
 		appiumdriver.hideKeyboard();

@@ -87,8 +87,14 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		getWebDriver().quit();
 	}
 	
-	@Test(testName= "Test Case 66780:Verify user can void Invoice", 
-			description = "Verify user can void Invoice")
+	@Test(testName= "Test Case 66780:Verify user can void Invoice, "
+			+ "Test Case 66781:Verify user can Cancel Voiding Invoices, "
+			+ "Test Case 66782:Update DB after Voiting Invoice, "
+			+ "Test Case 66783:Verify Invoice status on BO after Voiding Invoice", 
+			description = "Verify user can void Invoice, "
+					+ "Verify user can Cancel Voiding Invoices, "
+					+ "Update DB after Voiting Invoice, "
+					+ "Verify Invoice status on BO after Voiding Invoice")
 	public void testVerifyUserCanVoidInvoice() {
 		
 		final String vinnumber = "TEST";

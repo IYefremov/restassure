@@ -191,7 +191,9 @@ public class VNextBaseScreen {
 	}
 	
 	public void changeScreen(String screenName) {
-		clickScreenTitleCaption();		
+		clickScreenTitleCaption();	
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
 		waitABit(1000);
 		log(LogStatus.INFO, "Change screen to: " + screenName);
@@ -203,8 +205,8 @@ public class VNextBaseScreen {
 	
 	public void clickScreenTitleCaption() {
 		tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		//wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		log(LogStatus.INFO, "Click Screen Title Caption");
 	}
 }

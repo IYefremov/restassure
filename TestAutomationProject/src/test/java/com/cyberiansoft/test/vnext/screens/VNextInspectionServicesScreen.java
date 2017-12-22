@@ -21,7 +21,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//a[@action='add']")
 	private WebElement addservicesbtn;
 	
-	@FindBy(xpath="//span[@action='save']")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 	
 	@FindBy(xpath="//div[contains(@class, 'services-list-block')]")

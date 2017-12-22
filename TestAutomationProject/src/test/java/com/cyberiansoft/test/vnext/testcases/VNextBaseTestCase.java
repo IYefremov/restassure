@@ -114,7 +114,7 @@ public class VNextBaseTestCase {
 	
 	public void setUp() {
 		waitABit(8000);
-	   // switchApplicationContext(AppContexts.WEB_CONTEXT);
+		
 	}
 	
 	public SwipeableWebDriver getAppiumDriver() {
@@ -372,7 +372,7 @@ public class VNextBaseTestCase {
 			Connection networkConnection = ((HasNetworkConnection) appiumdriver).getConnection();
 			if (networkConnection.equals(Connection.AIRPLANE) ) {
 				((HasNetworkConnection) appiumdriver).setConnection(Connection.ALL);		
-				waitABit(5000);
+				waitABit(10000);
 			}
 			switchToWebViewContext();
 		}

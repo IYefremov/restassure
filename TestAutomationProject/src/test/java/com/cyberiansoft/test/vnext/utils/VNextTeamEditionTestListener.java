@@ -17,7 +17,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 
-public class VNextTestListener extends TestListenerAdapter implements IInvokedMethodListener  {
+public class VNextTeamEditionTestListener extends TestListenerAdapter implements IInvokedMethodListener  {
 	private Object currentClass;
 	
 	@Override
@@ -50,7 +50,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    	((VNextBaseTestCase) currentClass).setUp();
 	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
 	    	try {
-	    		((VNextBaseTestCase) currentClass).registerDevice();
+	    		((VNextBaseTestCase) currentClass).registerTeamEdition();
 	    	} catch (Exception e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
@@ -61,7 +61,10 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
 	    	}
+	    	VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+			loginscreen.userLogin("Oksi Employee", "1111");
 	    }
+	    
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	

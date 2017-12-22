@@ -46,10 +46,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
+		waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
-		waitABit(1000);
+		
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
@@ -69,7 +70,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isAddInspectionButtonVisible() {
-		return inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")).isDisplayed();
+		return inspectionsscreen.findElement(By.xpath(".//a[@action='add']")).isDisplayed();
 	}
 	
 	public VNextHomeScreen clickBackButton() {
@@ -119,6 +120,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		else
 			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
 		return inspstatus;
+	}
+	
+	public VNextInspectionsMenuScreen clickOnFirstInspectionWithStatus(String inspStatus) {
+		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-status') and text()='" + inspStatus + "']")));
+		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
 	
 	public String getFirstInspectionPrice() {
@@ -232,6 +238,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		tap(searchfld);
 		searchfld.clear();
 		appiumdriver.getKeyboard().sendKeys(searchtext);
+		appiumdriver.hideKeyboard();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.pressKeyCode(66);
 		switchToWebViewContext();

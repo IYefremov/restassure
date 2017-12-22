@@ -66,7 +66,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		//if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0) {
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-				waitABit(5000);
+				waitABit(10000);
 			//}
 		}
 		

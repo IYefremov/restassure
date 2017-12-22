@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,6 +31,12 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='multiselect-actions-create-invoice']")
 	private WebElement createinvoiceicon;
+	
+	@FindBy(xpath="//*[@action='my']")
+	private WebElement myworkorderstab;
+	
+	@FindBy(xpath="//*[@action='team']")
+	private WebElement teamworkorderstab;
 	
 	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -140,6 +147,32 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public void clickCreateInvoiceIcon() {
 		tap(createinvoiceicon);
 		log(LogStatus.INFO, "Click Create Invoice icon");
+	}
+	
+	public void switchToTeamWorkordersView() {
+		tap(teamworkorderstab);
+		if (appiumdriver.findElements(By.xpath("//*[text()='Loading work orders']")).size() > 0) {
+			try {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading work orders']"))));
+			} catch (NoSuchElementException e) {
+				//do nothing
+			}
+		}
+		log(LogStatus.INFO, "Switch to Team Work Orders view");
+	}
+	
+	public boolean isTeamWorkordersViewActive() {
+		return teamworkorderstab.getAttribute("class").contains("active");
+	}
+	
+	public void switchToMyWorkordersView() {
+		tap(myworkorderstab);
+		log(LogStatus.INFO, "Switch to My Work Orders view");
+	}
+	
+	public boolean isMyWorkordersViewActive() {
+		return myworkorderstab.getAttribute("class").contains("active");
 	}
 
 }
