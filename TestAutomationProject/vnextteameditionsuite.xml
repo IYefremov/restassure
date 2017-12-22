@@ -1,0 +1,27 @@
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="chrome" />
+  <parameter name="device.platform" value="android"  />
+  <listeners>
+		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>
+  </listeners>
+  <test name="Tests for VNext client" preserve-order="true">
+    <classes>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfotestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoicesTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases">
+      </class>
+    </classes>
+  </test>
+</suite>
