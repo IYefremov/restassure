@@ -15,7 +15,8 @@ public class BaseTestCaseWithDeviceRegistrationAndExistingUserLogin extends VNex
 		setUp();	
 		setNetworkOn();
 		resetApp();
-		registerDevice("Osmak.oksana+917@gmail.com", "9176361455");
+		registerDevice("osmak.oksana+408@gmail.com", "978385064");
+		//registerDevice("Osmak.oksana+917@gmail.com", "9176361455");
 		VNextHomeScreen homecreen = new VNextHomeScreen(appiumdriver);
 	}
 

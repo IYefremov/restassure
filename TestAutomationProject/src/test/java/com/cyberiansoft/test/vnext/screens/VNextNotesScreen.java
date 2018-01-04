@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -170,4 +172,34 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		return servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElements(By.xpath(".//div[contains(@class, 'img-item') and @action='fullscreen']")).size();
 	}
 	
+	public void deletePictureFromNotes() {
+		if (!(servicenotessscreen.findElements(By.xpath(".//div[@class='accordion-item accordion-item-pictures accordion-item-expanded']")).size() > 0))
+			tap(servicenotessscreen.findElement(By.xpath(".//div[@class='accordion-item accordion-item-pictures']")));
+		tap(servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElement(By.xpath(".//div[contains(@class, 'img-item') and @action='fullscreen']")));
+		tap(servicenotessscreen.findElement(By.xpath(".//*[@action='remove']")));
+		VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
+		informationdialog.clickInformationDialogRemoveButton();
+	}
+	
+	public ArrayList<String> addNumberOfQuickNotes(int quickNotesNumber) {
+		ArrayList<String> addednotes = new ArrayList<String>();
+		for (int i = 0; i < quickNotesNumber; i++) {
+			if (!quicknotescontent.getAttribute("class").contains("accordion-item-expanded"))
+				tap(quicknotescontent);
+			appiumdriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+			if (servicenotessscreen.findElements(By.xpath("//*[@action='show-more']")).size() > 0)
+				tap(servicenotessscreen.findElement(By.xpath("//*[@action='show-more']")));
+			appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			List<WebElement> quicknotes = servicenotessscreen.findElements(By.xpath("//*[@action='quick-note']"));
+			if (i < quicknotes.size()) {
+				JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+				je.executeScript("arguments[0].scrollIntoView(true);",quicknotes.get(i));
+				tap(quicknotes.get(i));
+				addednotes.add(quicknotes.get(i).getText().trim());
+			}
+		}
+		return addednotes;
+	}
+	
 }
+

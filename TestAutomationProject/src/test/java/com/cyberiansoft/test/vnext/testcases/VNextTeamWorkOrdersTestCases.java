@@ -24,7 +24,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can delete WO if 'Allow Delete=ON'")
 	public void testVerifyUserCanDeleteWOIfAllowDeleteON() { 
 	
-		final String testcustomer = "Test Test";
+		final String testcustomer = "001 - Test Company";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		
@@ -65,7 +65,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can't delete WO if 'Allow Delete=OFF'")
 	public void testVerifyUserCantDeleteWOIfAllowDeleteOFF() { 
 	
-		final String testcustomer = "Test Test";
+		final String testcustomer = "001 - Test Company";
 		final String workorderType = "Kramar_auto2";
 		final String vinnumber = "TEST";
 		final String insuranceCompany = "Miami Beach Insurance";

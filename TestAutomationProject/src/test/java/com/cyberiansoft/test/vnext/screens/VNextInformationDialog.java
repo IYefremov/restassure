@@ -84,6 +84,11 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		log(LogStatus.INFO, "Tap Information Dialog Delete Button");
 	}
 	
+	public void clickInformationDialogRemoveButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[text()='Remove']")));
+		log(LogStatus.INFO, "Tap Information Dialog Save Button");
+	}
+	
 	public void clickInformationDialogDontDeleteButton() {
 		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

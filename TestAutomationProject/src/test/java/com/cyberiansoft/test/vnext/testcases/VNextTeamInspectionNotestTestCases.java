@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.util.ArrayList;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -220,6 +222,45 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
+	@Test(testName= "Test Case 67754:Verify user can add several Quick notes",
+			description = "Verify user can add several Quick notes")
+	public void testVerifyUserCanAddSeveralQuickNotes() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		ArrayList<String> addednotes = notesscreen.addNumberOfQuickNotes(10);
+		
+		
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+			
+		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		for (String quicknote: addednotes)
+			Assert.assertTrue(notesscreen.getSelectedNotes().contains(quicknote));
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
 	@Test(testName= "Test Case 67749:Verify saving text note on tapping hardware 'Back' button",
 			description = "Verify saving text note on tapping hardware 'Back' button")
 	public void testVerifySavingTextNoteOnTappingHardwareBackButton() {
@@ -263,5 +304,46 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
 	}
+	
+	@Test(testName= "Test Case 67752:Verify user can remove pictures from Notes",
+			description = "Verify user can remove pictures from Notes")
+	public void testVerifyUserCanRemovePicturesFromNotes() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		
+		final int numberOfImages = 3;
+		final String quicknote = "AB note";
+		
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
+		notesscreen.addQuickNote(quicknote);
+		for (int i = 0; i < numberOfImages; i++)
+			notesscreen.addFakeImageNote();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImages);
+		notesscreen.deletePictureFromNotes();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImages-1);
+		notesscreen.clickNotesBackButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		
+		homescreen = inspectionscreen.clickBackButton();
+	}
+	
+	
 
 }

@@ -37,6 +37,8 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
 	public void clickNoButton() {
 		nobtn.click();
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.invisibilityOf(confirmdialog));
 	}
 	
 	public void clickYesButton() {

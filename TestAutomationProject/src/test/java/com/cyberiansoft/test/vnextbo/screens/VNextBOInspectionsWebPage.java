@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
@@ -31,6 +32,9 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsPrintButton']")
 	private WebElement printinspectionicon;
+	
+	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
+	private WebElement approveinspectionicon;
 	
 	@FindBy(id = "inspections-search")
 	private WebElement searchinspectionspanel;
@@ -58,6 +62,27 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void selectInspectionInTheList(String inspnumber) {
 		inspectionslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
 		waitABit(4000);
+	}
+	
+	private WebElement getInspectionCell(String inspnumber) {
+		WebElement inspcell = null;
+		List<WebElement> inspcells = inspectionslist.findElements(By.xpath("./li[@role='option']"));
+		for (WebElement cell : inspcells)
+			if (cell.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b")).getText().trim().equals(inspnumber)) {
+				inspcell = cell;
+				break;
+			}
+		return inspcell;
+	}
+	
+	public String getInspectionStatus(String inspnumber) {
+		String inspstatus = "";
+		WebElement inspcell = getInspectionCell(inspnumber);
+		if (inspcell != null)
+			inspstatus = inspcell.findElement(By.xpath(".//div[@class='entity-list__item__status__label']")).getText().trim(); 
+		else
+			Assert.assertTrue(false, "Can't find inpection: " + inspnumber);
+		return inspstatus;
 	}
 		
 	public boolean isServicePresentForSelectedInspection(String servicename) {
@@ -106,6 +131,65 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
 		waitABit(500);
 		return exists;		
+	}
+	
+	public void clickInspectionApproveButton() {
+		new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.elementToBeClickable(approveinspectionicon)).click();
+	}
+	
+	public boolean isInspectionApproveButtonVisible() {
+		return approveinspectionicon.isDisplayed();
+	}
+	
+	public void approveInspection(String approveNotes) {
+		String parent = driver.getWindowHandle();
+		clickInspectionApproveButton();
+		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(driver);
+		confirmdialog.clickYesButton();
+		waitForNewTab();
+		String newwin = "";
+		for(String window:driver.getWindowHandles()){
+			if(!window.equals(parent)){
+				newwin = window;
+			}
+		}
+		driver.switchTo().window(newwin);
+		driver.findElement(By.xpath("//p/button[@class='btn icon ok']")).click();
+		driver.findElement(By.name("txtAreaNotes")).sendKeys(approveNotes);
+		driver.findElement(By.xpath("//tr/td/button[@class='btn icon ok']")).click();
+		waitABit(5000);
+		driver.close();
+		driver.switchTo().window(parent);
+		driver.navigate().refresh();
+	}
+	
+	public void declineInspection(String approveNotes) {
+		String parent = driver.getWindowHandle();
+		clickInspectionApproveButton();
+		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(driver);
+		confirmdialog.clickYesButton();
+		waitForNewTab();
+		String newwin = "";
+		for(String window:driver.getWindowHandles()){
+			if(!window.equals(parent)){
+				newwin = window;
+			}
+		}
+		driver.switchTo().window(newwin);
+		driver.findElement(By.xpath("//p/button[@class='btn icon cancel']")).click();
+		driver.findElement(By.name("txtDeclineNotes")).sendKeys(approveNotes);
+		List<WebElement> declinebtns = driver.findElements(By.xpath("//tr/td/button[@class='btn icon cancel']"));
+		for (WebElement btn : declinebtns)
+			if (btn.isDisplayed()) {
+				btn.click();
+				break;
+			}
+		//driver.findElement(By.xpath("//tr/td/button[@class='btn icon cancel']")).click();
+		waitABit(5000);
+		driver.close();
+		driver.switchTo().window(parent);
+		driver.navigate().refresh();
 	}
 	
 	public boolean isImageLegendContainsBreakageIcon(String brackageicontype) {

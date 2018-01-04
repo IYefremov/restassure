@@ -244,7 +244,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void registerDevice(String userMail, String userPhone) throws Exception {
-		String phonecountrycode = "1";
+		String phonecountrycode = "380";
 		                      
 		
 		
