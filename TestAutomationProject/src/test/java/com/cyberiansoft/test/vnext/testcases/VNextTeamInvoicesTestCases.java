@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
@@ -16,11 +15,10 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
@@ -366,6 +364,142 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertFalse(invoicemenuscreen.isInvoiceChangePONumberMenuItemExists());
 		invoicesscreen = invoicemenuscreen.clickCloseInvoiceMenuButton();
 		
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68777:Verify user can refresh deleted pictures from My Invoice list, "
+			+ "Test Case 68778:Verify user can refresh picture for Invoice without pictures", 
+			description = "Verify user can refresh deleted pictures from My Invoice list, "
+					+ "Verify user can refresh picture for Invoice without pictures")
+	public void testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int numberOfImageNotes = 4;
+		final int numberOfImageToDelete = 2;
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		invoicemenuscreen.refreshInvoicePictures();
+		
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);		
+		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		
+		for (int i = 0; i < numberOfImageNotes; i++)
+			notesscreen.addFakeImageNote();
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		for (int i = 0; i < numberOfImageToDelete; i++)
+			notesscreen.deletePictureFromNotes();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		invoicemenuscreen.refreshInvoicePictures();
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68781:Verify deleted pictures doesn't displays after updating application DB (My Invoice list)", 
+			description = "Verify deleted pictures doesn't displays after updating application DB (My Invoice list)")
+	public void testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int numberOfImageNotes = 4;
+		final int numberOfImageToDelete = 2;
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
+		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		
+		for (int i = 0; i < numberOfImageNotes; i++)
+			notesscreen.addFakeImageNote();
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		for (int i = 0; i < numberOfImageToDelete; i++)
+			notesscreen.deletePictureFromNotes();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		homescreen = invoicesscreen.clickBackButton();
+
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
+		
+		invoicesscreen = homescreen.clickInvoicesMenuItem();
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();
 	}
 }

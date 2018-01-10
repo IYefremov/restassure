@@ -23,6 +23,12 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_changePO']")
 	private WebElement invoicechangeponumbtn;
 	
+	@FindBy(xpath="//a[@handler='_notes']")
+	private WebElement invoicenotesbtn;
+	
+	@FindBy(xpath="//a[@handler='_refreshPictures']")
+	private WebElement invoicerfreshpicturesbtn;
+	
 	@FindBy(xpath="//div[@data-menu='popup']")
 	private WebElement invoicemenuscreen;
 	
@@ -63,8 +69,29 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(invoicechangeponumbtn));
 		tap(invoicechangeponumbtn);
-		log(LogStatus.INFO, "Tap on Void Invoice Menu");
+		log(LogStatus.INFO, "Tap on Change PO Number Menu");
 		return new VNextChangeInvoicePONumberDialog(appiumdriver);
+	}
+	
+	public VNextNotesScreen clickInvoiceNotesMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(invoicenotesbtn));
+		tap(invoicenotesbtn);
+		log(LogStatus.INFO, "Tap on Invoice Notes Menu");
+		return new VNextNotesScreen(appiumdriver);
+	}
+	
+	public void clickInvoiceRefreshPicturesMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(invoicerfreshpicturesbtn));
+		tap(invoicerfreshpicturesbtn);
+		log(LogStatus.INFO, "Tap on Invoice Refresh Pictures Menu");
+	}
+	
+	public void refreshInvoicePictures() {
+		clickInvoiceRefreshPicturesMenuItem();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
 	}
 	
 	public boolean isInvoiceChangePONumberMenuItemExists() {

@@ -27,7 +27,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(invoiceslist));
 		waitABit(1000);
 	}
