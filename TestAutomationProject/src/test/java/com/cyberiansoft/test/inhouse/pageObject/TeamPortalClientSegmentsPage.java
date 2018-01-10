@@ -36,7 +36,7 @@ public class TeamPortalClientSegmentsPage  extends BasePage {
     }
 
     public void setAttributeValue(String attName, String attValue) throws InterruptedException {
-        Thread.sleep(500);
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//td[contains(text(),'"+attName+"')]")).findElement(By.xpath(".."))
         .findElements(By.tagName("td")).get(1).findElement(By.className("empty-attribute-value")).click();
         Thread.sleep(500);
@@ -51,5 +51,10 @@ public class TeamPortalClientSegmentsPage  extends BasePage {
                 .findElements(By.tagName("td")).get(1).findElement(By.xpath("//span[@class='attribute-value truncate']"))
                 .getText().equals(attValue);
 
+    }
+
+    public boolean checkClientyName(String clientName) throws InterruptedException {
+        Thread.sleep(2000);
+        return driver.findElement(By.className("sorting_1")).getText().equals(clientName);
     }
 }

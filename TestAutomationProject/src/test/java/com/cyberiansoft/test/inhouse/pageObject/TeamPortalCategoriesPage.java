@@ -51,6 +51,7 @@ public class TeamPortalCategoriesPage extends BasePage {
     public void setCategory(String category) throws InterruptedException {
         Thread.sleep(1000);
         inputFields.get(0).sendKeys(category);
+
     }
 
     public void clickSubmitCategoryButton() throws InterruptedException {
@@ -104,8 +105,10 @@ public class TeamPortalCategoriesPage extends BasePage {
         storedProcedureNameField.sendKeys(procedureName);
     }
 
-    public void clickAddAttributeButton(){
+    public void clickAddAttributeButton() throws InterruptedException {
         addAttributeInCreationWindow.click();
+        Thread.sleep(3000);
+
     }
 
     public boolean checkAttributeByName(String categoryName ,String attName) throws InterruptedException {

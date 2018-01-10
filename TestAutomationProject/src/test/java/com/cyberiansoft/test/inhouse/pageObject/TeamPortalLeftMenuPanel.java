@@ -38,6 +38,20 @@ public class TeamPortalLeftMenuPanel extends BasePage {
                             TeamPortalClientSegmentsPage.class);
                 }catch(TimeoutException ex){}
                 break;
+            case "Organizations Rules":
+                try {
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[text()='Organization Name']")));
+                    return PageFactory.initElements(driver,
+                            OrganizationsRulesPage.class);
+                }catch(TimeoutException ex){}
+                break;
+            case "Accounts Rules":
+                try {
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Accounts Rules')]")));
+                    return PageFactory.initElements(driver,
+                            TeamPortalAccountsRulesPage.class);
+                }catch(TimeoutException ex){}
+                break;
         }
         return  null;
     }
