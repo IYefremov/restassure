@@ -205,9 +205,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals("1", servicespage.getGoToPageFieldValue());
 
 		servicespage.setPageSize("999");
-		Assert.assertEquals(servicespage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(servicespage.getServicesTableRowsCount()));
+		Assert.assertEquals(new Integer(25), Integer.valueOf(servicespage.getServicesTableRowsCount()));
 
-		servicespage.makeSearchPanelVisible();
+//		servicespage.makeSearchPanelVisible();
 		servicespage.selectSearchServiceType(servicetype);
 		servicespage.selectSearchPriceType(pricetype);
 		servicespage.setServiceSearchCriteria(servicename.substring(0, 4).toLowerCase());
@@ -513,7 +513,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		ServicesWebPage servicespage = companypage.clickServicesLink();
-		servicespage.makeSearchPanelVisible();
+//		servicespage.makeSearchPanelVisible();
 		servicespage.setServiceSearchCriteria(servicename);
 		servicespage.clickFindButton();
 

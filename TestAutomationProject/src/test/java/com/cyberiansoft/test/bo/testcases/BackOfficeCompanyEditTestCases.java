@@ -474,7 +474,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 	}
 
-	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit", retryAnalyzer=Retry.class)
+	@Test(testName = "Test Case 28321:Company - Services: Edit", description = "Company - Services : Edit")
 	public void testCompanyServicesEdit() throws Exception {
 
 		final String servicename = "Test Bundle Service";
@@ -493,7 +493,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServicesWebPage servicespage = companypage.clickServicesLink();
-		servicespage.makeSearchPanelVisible();
+	//	servicespage.makeSearchPanelVisible();
 		servicespage.setServiceSearchCriteria(servicename);
 		servicespage.clickFindButton();
 

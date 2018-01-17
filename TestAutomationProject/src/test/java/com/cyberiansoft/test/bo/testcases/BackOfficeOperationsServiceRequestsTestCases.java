@@ -2086,7 +2086,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsWebPage.getkServiceAdvisorName() , "_Test _TesW");
+		Assert.assertEquals(serviceRequestsWebPage.getkServiceAdvisorName() , "_TesW _TesW");
 	}
 	
 	//TODO

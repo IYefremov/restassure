@@ -102,7 +102,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchAmountTo(amountto);
 		invoicespage.clickFindButton();
 		Thread.sleep(1000);
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
+		Assert.assertEquals(Integer.valueOf(4), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
 	}
 
 	// @Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add
@@ -311,12 +311,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
 
-	@Test(testName = "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", description = "Operation - Invoice : Sent Custom mail in Mail Activity", retryAnalyzer = Retry.class)
+	//@Test(testName = "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity", description = "Operation - Invoice : Sent Custom mail in Mail Activity"/*, retryAnalyzer = Retry.class*/)
 	public void testOperationInvoiceSentCustomMailInMailActivity() throws Exception {
 
 		final String usermail = "olexandr.kramar@cyberiansoft.com";
 		final String message = "Mail Message";
-		final String invoicenumber = "I-000-00242";
+		final String invoicenumber = "I-223-00005";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -780,7 +780,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 
-	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity", retryAnalyzer = Retry.class)
+	@Test(testName = "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity"/*, retryAnalyzer = Retry.class*/)
 	public void checkOperationInvoiceSentMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -791,9 +791,15 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailWindow);
-		invoicespage.selectActionForFirstInvoice("Send Email", true);
+		invoicespage.refreshPage();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.clickFindButton();
+		invoicespage.selectActionForFirstInvoice("Send Email", false);
 		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
 		invoicespage.setEmailAndSend("test123@domain.com");
+		invoicespage.refreshPage();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.clickFindButton();
 		emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
 	}
@@ -808,8 +814,14 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickFindButton();
 		String emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
-		String emailWindow = invoicespage.selectActionForFirstInvoice("Send Custom Email", true);
+		invoicespage.refreshPage();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.clickFindButton();
+		String emailWindow = invoicespage.selectActionForFirstInvoice("Send Custom Email", false);
 		invoicespage.setCustomEmailAndSend("test123@domain.com", emailWindow);
+		invoicespage.refreshPage();
+		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.clickFindButton();
 		emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
 		Assert.assertTrue(emailActivities < emailActivitiesAfter);
@@ -927,7 +939,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 
-	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation")
+	@Test(testName = "Test Case 60615:Operation - Invoice: Search operation", retryAnalyzer=Retry.class)
 	public void checkOperationInvoiceSearchOperation() throws InterruptedException, AWTException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
