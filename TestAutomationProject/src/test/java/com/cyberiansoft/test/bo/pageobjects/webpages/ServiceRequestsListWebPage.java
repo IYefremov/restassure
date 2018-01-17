@@ -359,6 +359,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickFindButton() {
+		try{
+			driver.switchTo().alert().accept();
+		}catch (Exception e){}
 		waitABit(1000);
 		clickAndWait(findbtn);
 	}
@@ -366,8 +369,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void clickAddServiceRequestButton() {
 		waitABit(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
+		waitABit(4000);
 		click(addservicerequestbtn);
-		waitABit(1000);
+		waitABit(3000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		driver.switchTo()
@@ -424,9 +428,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void rejectFirstServiceRequestFromList() {
+		waitABit(8000);
 		Actions builder = new Actions(driver);
-		builder.moveToElement(getFirstServiceRequestFromList()).perform();
-		getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Reject']")).click();
+		builder.moveToElement(getFirstServiceRequestFromList())
+		.moveToElement(getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Reject']"))).click().perform();
+
+		//getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Reject']")).click();
 		try {
 			driver.switchTo().alert().accept();
 		} catch (NoAlertPresentException e) {
@@ -440,6 +447,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		builder.moveToElement(getFirstServiceRequestFromList(), 10, 10).click().perform();
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browsername = cap.getBrowserName();
+		waitABit(4000);
 		if (browsername.equalsIgnoreCase("internet explorer"))
 			return getFirstServiceRequestFromList().findElements(By.xpath(".//a[@class='command-accept ']")).size() > 0;
 
@@ -1999,7 +2007,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void setServiceRequestGeneralInfo(String _assignedto) throws InterruptedException {
 		setServiceRequestGeneralInfoAssignedTo(_assignedto);
 		driver.findElement(By.id("Card_ddlClientsAssignedTo_Arrow")).click();
-		Thread.sleep(2000);
+		Thread.sleep(7000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("divGeneralButtonsDone"))).click();
 	}
 
