@@ -30,11 +30,11 @@ public class ServicesWebPage extends WebPageWithPagination {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
 	private WebTable servicestable;
-	
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvDeleted_ctl00")
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00__0")
 	private WebTable archivedservicestable;
 	
-	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Active']")
+	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Active - ALL']")
 	private WebElement activetab;
 	
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Archived']")
@@ -44,23 +44,23 @@ public class ServicesWebPage extends WebPageWithPagination {
 	private WebElement addservicebtn;
 	
 	//Search Panel
-	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_Input")
+
+ 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_comboType_Input")
 	private ComboBox searchservicetypecbx;
-	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_DropDown")
+
+  	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_comboType_DropDown")
 	private DropDown searchservicetypedd;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboPriceType_Input")
+	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_comboPriceType_Input")
 	private ComboBox searchpricetypecbx;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboPriceType_DropDown")
+	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_comboPriceType_DropDown")
 	private DropDown searchpricetypedd;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
+	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_tbSearch")
 	private TextField searchservicefld;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")
+	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_BtnFind")
 	private WebElement findbtn;
 	
 	@FindBy(xpath = "//div[@class='rgWrap rgInfoPart']")
@@ -114,7 +114,9 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithArchivedService(String servicename) {
 		List<WebElement> employeestablerows = getArchivedServicesTableRows();
 		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td[3]")).getText().equals(servicename)) {
+			System.out.println(employeestablerow.findElement(By.xpath(".//td[4]")).getText());
+			System.out.println(employeestablerow.findElement(By.xpath(".//td[3]")).getText());
+			if (employeestablerow.findElement(By.xpath(".//td[4]")).getText().equals(servicename)) {
 				return employeestablerow;
 			}
 		}
@@ -162,7 +164,8 @@ public class ServicesWebPage extends WebPageWithPagination {
 		clickAndWait(activetab);
 	}
 
-	public void archiveService(String servicename) {
+	public void archiveService(String servicename) throws InterruptedException {
+		Thread.sleep(2000);
 		activetab.click();
 		WebElement row = getTableRowWithActiveService(servicename);
 		if (row != null) {
@@ -172,6 +175,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public void unarchiveService(String servicename) {
+		waitABit(1000);
 		WebElement row = getTableRowWithArchivedService(servicename);
 		if (row != null) {
 			restoreTableRow(row);
@@ -186,10 +190,10 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isArchivedServiceExists(String servicename) {
+		waitABit(1500);
 		wait.until(ExpectedConditions.visibilityOf(archivedservicestable.getWrappedElement()));
-		this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		boolean exists =  archivedservicestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		waitABit(1500);
+		boolean exists =  archivedservicestable.getWrappedElement().findElements(By.xpath("//td[text()='" + servicename + "']")).size() > 0;
 		return exists;
 	}
 	

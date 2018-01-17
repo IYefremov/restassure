@@ -412,6 +412,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void acceptFirstServiceRequestFromList() throws InterruptedException {
+		waitABit(4000);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList())
 				.moveToElement(getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']"))).click()

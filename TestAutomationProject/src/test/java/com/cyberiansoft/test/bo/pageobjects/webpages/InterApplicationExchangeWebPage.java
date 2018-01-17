@@ -276,7 +276,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		}
 	}
 
-	public void clickAddRuleBox(String button) {
+	public void clickAddRuleBox(String button) throws InterruptedException {
 		if (button.equals("Cancel"))
 			driver.findElement(
 					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel"))
@@ -287,6 +287,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 					.click();
 		else
 			Assert.assertTrue(false, "Wrong button");
+		Thread.sleep(5000);
 		waitForLoading();
 	}
 
