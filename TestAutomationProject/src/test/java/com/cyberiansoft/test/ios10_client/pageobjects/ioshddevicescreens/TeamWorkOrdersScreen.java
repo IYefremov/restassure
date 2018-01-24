@@ -14,6 +14,7 @@ import org.testng.Assert;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -88,10 +89,18 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		appiumdriver.findElementByName(_location).click();
 	}
 	
-	public void setSearchType(String wotype)  {
+	public void setSearchType(String workordertype)  {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
 		Helpers.waitABit(500);
-		selectWorkOrderType(wotype);
+		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
+
+		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
+			swipeTableUp(wostable.findElementByAccessibilityId(workordertype),
+					wostable);
+			wostable.findElementByAccessibilityId(workordertype).click();
+		}
+		//if (appiumdriver.findElementsByAccessibilityId(workordertype).size() > 0)
+		//	appiumdriver.findElementByAccessibilityId(workordertype).click();
 	}
 
 }

@@ -119,12 +119,15 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
-		
+		/*IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
+		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		pickerwhl.setValue(value);*/
 		WebElement picker = appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
 			action.tap(picker.getSize().getWidth()/2, picker
 					.getLocation().getY() + picker.getSize().getHeight()/2+40).perform();
+			Helpers.waitABit(5000);
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
@@ -139,7 +142,10 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 			//System.out.println("+++++1" + (elementtoswipe.getLocation().getY() > screenheight));
 			//System.out.println("+++++2" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.80));
 			//System.out.println("+++++3" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.90));
-			if ((elementtoswipe.getLocation().getY() > screenheight)) {
+			if (elementtoswipe.isDisplayed()) {
+				swipe = false;
+				break;
+			} else if ((elementtoswipe.getLocation().getY() > screenheight)) {
 			//if (!elementtoswipe.isDisplayed())
 				/*JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
 		        HashMap scrollObject = new HashMap<>();

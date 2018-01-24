@@ -21,6 +21,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -131,13 +133,13 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 
 	public void searchServiceByName(String servicename) {
 		if (elementExists(MobileBy.AccessibilityId("Clear text")))
-				appiumdriver.findElementByAccessibilityId("Clear text").click();
-		else
+				appiumdriver.findElementByAccessibilityId("Cancel").click();
+		//else
 			appiumdriver.findElementByAccessibilityId("Search").click();
 		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 		
 		//appiumdriver.findElementByAccessibilityId("Search").sendKeys(servicename + "\n");
-		Helpers.waitABit(500);
+		Helpers.waitABit(1500);
 	}
 	
 	public void selectService(String servicename) {
@@ -185,8 +187,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 			if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
 				searchServiceByName(servicename);
 		}*/
-		TouchAction action = new TouchAction(appiumdriver);
-		action.tap(servicecell.getLocation().getX()+2, servicecell.getLocation().getY()+2).perform();
+		servicecell.click();
+	//	TouchAction action = new TouchAction(appiumdriver);
+		//action.tap(element(servicecell,  servicecell.getLocation().getX()+2, servicecell.getLocation().getY()+2)).perform();
 		
 		
 		

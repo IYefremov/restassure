@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -85,12 +88,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeOther/XCUIElementTypeStaticText")
-	private IOSElement navbarworkordercustomercaption;
-	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='VehicleInfoView']/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
-	private IOSElement navbarinspectioncustomercaption;
-	
 	@iOSFindBy(accessibility = "Compose")
     private IOSElement composebtn;
 	
@@ -128,16 +125,19 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				closebtn.click();
+				
 				break;
 			}
 		
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed()) {
+			closebtn.click();
+			/*if (closebtn.isDisplayed()) {
 				closebtn.click();
+				
 				break;
-			}
+			}*/
 		}
 		
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
@@ -145,6 +145,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 			for (IOSElement closebtn : closebtns)
 				if (closebtn.isDisplayed()) {
 					closebtn.click();
+					
 					break;
 				}
 			}
@@ -187,7 +188,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public IOSElement getInspectionNumberLabel() {
-		return regularinspnumberlabel;
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return (IOSElement) toolbar.findElementByIosNsPredicate("name CONTAINS 'E-'");
+		//return regularinspnumberlabel;
 	}
 	
 	public String getWorkOrderTypeValue() {
@@ -199,6 +202,12 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 
 		return getInspectionNumberLabel().getText();
 	}
+	
+	public String getWorkOrderNumber() {
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByIosNsPredicate("name CONTAINS 'O-'").getText();
+	}
+
 
 	public void setMakeAndModel(String make, String model) {
 		
@@ -305,9 +314,13 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public void setYear(String year) throws InterruptedException {
 		appiumdriver.findElementByAccessibilityId("Year").click();
-		Thread.sleep(1000);
 		selectUIAPickerValue(year);
-		toolbardonebtn.click();
+		//((IOSElement) appiumdriver.findElementsByAccessibilityId("Year").get(1)).click();
+		new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId("Done").getLocation().getX(), 
+				appiumdriver.findElementByAccessibilityId("Done").getLocation().getY()).perform();
+		
+		TouchAction perform = new TouchAction(appiumdriver).tap(tapOptions().withElement(element(appiumdriver.findElementByAccessibilityId("Done")))).perform();
+		
 	}
 	
 	public void setTrim(String trimvalue) throws InterruptedException {
@@ -351,13 +364,12 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public String getWorkOrderCustomer() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(navbarinspectioncustomercaption));
-		return navbarinspectioncustomercaption.getAttribute("value");
+		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
 	}
 	
 	public String getInspectionCustomer() {
-		Helpers.waitABit(500);
-		return navbarinspectioncustomercaption.getAttribute("value");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
 	}
 
 	public RegularNotesScreen clickNotesButton() {

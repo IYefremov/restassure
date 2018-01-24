@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static java.time.Duration.ofSeconds;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -43,10 +44,11 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public HomeScreen clickHomeButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
+		appiumdriver.findElementByAccessibilityId("Back").click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
 		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(Duration.ofSeconds(1)).release().perform();
+		//action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(waitOptions(ofSeconds(2))).release().perform();
 		return new HomeScreen(appiumdriver);		
 	}
 	
@@ -178,7 +180,10 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		
 		while (swipe) {
 			//if (!tableCell.isDisplayed()) {
-			if ((tableCell.getLocation().getY()*0.9 > tableHeight)) {
+			if (tableCell.isDisplayed()) {
+				swipe = false;
+				break;
+			} else if ((tableCell.getLocation().getY()*0.9 > tableHeight)) {
 				JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
 				HashMap<String, String> scrollObject = new HashMap<String, String>();
 				scrollObject.put("direction", "up");

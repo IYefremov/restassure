@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
@@ -114,12 +115,12 @@ public class iOSBaseScreen {
 	public void waitForAlert() {
 		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
-		wait.until(ExpectedConditions.alertIsPresent());
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeAlert")));
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void acceptAlert() {
-		waitForAlert();
+		//waitForAlert();
 		Alert alert = appiumdriver.switchTo().alert();
 		alert.accept();
 	}

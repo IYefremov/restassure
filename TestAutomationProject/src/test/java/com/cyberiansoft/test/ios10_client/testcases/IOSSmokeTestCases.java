@@ -6,15 +6,12 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 
 import java.io.File;
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -3748,8 +3745,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickOnWO(wonum);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		Thread.sleep(3000);
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
-		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
+        Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
@@ -4488,7 +4484,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
@@ -4537,7 +4533,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		final String[] servicestoadd = { "VPS1", "Dye" };
 		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
 		

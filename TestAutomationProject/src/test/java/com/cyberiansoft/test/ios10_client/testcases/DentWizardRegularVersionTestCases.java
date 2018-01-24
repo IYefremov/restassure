@@ -555,7 +555,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
@@ -600,7 +600,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myinspectionsscreen.assertInspectionIsApproved(insptoapprove);
 			myinspectionsscreen.selectInspectionType (insptoapprove);
 			myinspectionsscreen.clickCreateWOButton();
-			String wonumber2 = vehiclescreeen.getInspectionNumber();
+			String wonumber2 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption());
@@ -821,7 +821,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String inspnum = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
 			//myinspectionsscreen.clickCreateWOButton();
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption());
@@ -836,7 +836,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickCancel();
 			
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
-			String wonumber2 = vehiclescreeen.getInspectionNumber();
+			String wonumber2 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());			
 			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption());
@@ -2108,7 +2108,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
@@ -2408,7 +2408,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.DETAIL_SERVICE );
@@ -3145,7 +3145,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wonum = vehiclescreeen.getInspectionNumber();
+			String wonum = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
@@ -3555,7 +3555,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myinspectionsscreen.selectInspection(inspnum);
 			
 			myinspectionsscreen.clickCreateWOButton();
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			servicesscreen.assertTotalAmauntIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
@@ -3747,7 +3747,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
 			
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);			
 			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00");
@@ -3871,7 +3871,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wonumber = vehiclescreeen.getInspectionNumber();
+			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);

@@ -100,20 +100,23 @@ public class HomeScreen extends iOSHDBaseScreen {
 
 	public MyInvoicesScreen clickMyInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Invoices")));
-		appiumdriver.findElementByAccessibilityId("My Invoices").click();
-		return new MyInvoicesScreen(appiumdriver);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
+		appiumdriver.findElementByAccessibilityId("Invoices").click();
+		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
+		myinvoicesscreen.switchToLocalInvoicesView();
+		return myinvoicesscreen;
 	}
 	
 	public TeamInvoicesScreen clickTeamInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Invoices")));
-		appiumdriver.findElementByAccessibilityId("Team Invoices").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
+		appiumdriver.findElementByAccessibilityId("Invoices").click();
+		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
+		myinvoicesscreen.switchToOnlineInvoicesView();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 		return new TeamInvoicesScreen(appiumdriver);
 	}
 

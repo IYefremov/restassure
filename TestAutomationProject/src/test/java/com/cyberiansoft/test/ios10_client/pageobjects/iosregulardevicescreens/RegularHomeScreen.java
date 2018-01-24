@@ -106,15 +106,19 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 
 	public RegularMyInvoicesScreen clickMyInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Invoices")));
-		appiumdriver.findElementByAccessibilityId("My Invoices").click();
-		return new RegularMyInvoicesScreen(appiumdriver);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
+		appiumdriver.findElementByAccessibilityId("Invoices").click();
+		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
+		invoicesscreen.switchToLocalInvoicesView();
+		return invoicesscreen;
 	}
 	
 	public RegularTeamInvoicesScreen clickTeamInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Invoices")));
-		appiumdriver.findElementByAccessibilityId("Team Invoices").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
+		appiumdriver.findElementByAccessibilityId("Invoices").click();
+		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
+		invoicesscreen.switchToOnlineInvoicesView();
 		return new RegularTeamInvoicesScreen(appiumdriver);
 	}
 
@@ -149,14 +153,16 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
 	public void updateDatabase() {
 		Helpers.setTimeOut(180);
-		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeButton[1]").click();
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		toolbar.findElementsByClassName("XCUIElementTypeButton").get(0).click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 	
 	public void updateVIN() {
 		Helpers.setTimeOut(60);
-		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeButton[2]").click();
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		toolbar.findElementsByClassName("XCUIElementTypeButton").get(1).click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
