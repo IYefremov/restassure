@@ -17,7 +17,7 @@
         <methods>                   
           <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection" />
           <include name="testSendMessageFromTheQueueInManualModeSuccessPath" />
-          <!--<include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" />--> 
+          <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
@@ -88,6 +88,8 @@
       </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionApproveOnBOTestCases">
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   

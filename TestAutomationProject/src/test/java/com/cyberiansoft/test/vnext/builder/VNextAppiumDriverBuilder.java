@@ -39,8 +39,8 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
 
         public SwipeableWebDriver build() {
         	PLATFORM_NAME = MobilePlatform.ANDROID;
-        	/*File appDir = new File("./data/");
-    	    File app = new File(appDir, "Repair360Android.apk");*/
+        	//File appDir = new File("./data/");
+    	    //File app = new File(appDir, "Repair360Android.apk");
     	    appiumcap = new DesiredCapabilities();
 
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 

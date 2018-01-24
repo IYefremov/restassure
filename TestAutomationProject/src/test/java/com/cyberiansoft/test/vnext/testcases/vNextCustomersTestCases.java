@@ -1,14 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.io.IOException;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
@@ -16,7 +12,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
@@ -50,16 +45,16 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
-		customersscreen.selectCustomerByCompanyName(WordUtils.capitalize(companyname));
+		customersscreen.selectCustomerByCompanyName(companyname);
 		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), lastname);
 		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), companyname);
 		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), customeremail);
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
-		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), WordUtils.capitalize(customeraddress));
+		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), upperCaseAllFirst(customeraddress));
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -121,7 +116,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -165,7 +160,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), customerphone);
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), customercountry);
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstate);
+		Assert.assertEquals(newcustomerscreen.getCustomerState(), customerstateShort);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -197,5 +192,19 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertFalse(clientspage.isClientExistsInTable(customerDelete));
 		webdriver.quit();
 	}
+	
+	public String upperCaseAllFirst(String value) {
+
+        char[] array = value.toCharArray();
+        array[0] = Character.toUpperCase(array[0]);
+
+        // Uppercase all letters that follow a whitespace character.
+        for (int i = 1; i < array.length; i++) {
+            if (Character.isWhitespace(array[i - 1])) {
+                array[i] = Character.toUpperCase(array[i]);
+            }
+        }
+        return new String(array);
+    }
 
 }

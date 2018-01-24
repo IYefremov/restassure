@@ -48,7 +48,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		
 	}

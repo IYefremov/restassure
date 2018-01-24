@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,7 +41,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_deleteWorkOrder']")
 	private WebElement deleteorderbtn;
 	
-	@FindBy(xpath="//div[@class='actions-layer popup tablet-fullscreen modal-in']")
+	@FindBy(xpath="//body/div[@data-menu='popup']")
 	private WebElement inspectionsmenuscreen;
 	
 	@FindBy(xpath="//div[@class='close-popup close-actions']")
@@ -126,7 +128,12 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	}
 
 	public void clickCloseInspectionMenuButton() {
-		tap(closebtn);
+		List<WebElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='close-popup close-actions']"));
+		for (WebElement closebtn : closebtns)
+			if (closebtn.isDisplayed()) {
+				tap(closebtn);
+				break;
+			}
 		log(LogStatus.INFO, "Tap on Close Inspection Menu button");
 		//return new VNextInspectionsScreen(appiumdriver);
 	}

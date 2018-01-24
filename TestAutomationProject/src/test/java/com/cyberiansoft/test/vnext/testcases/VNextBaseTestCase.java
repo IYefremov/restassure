@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -114,7 +115,7 @@ public class VNextBaseTestCase {
 	
 	public void setUp() {
 		waitABit(8000);
-		
+		setNetworkOn();
 	}
 	
 	public SwipeableWebDriver getAppiumDriver() {
@@ -219,7 +220,7 @@ public class VNextBaseTestCase {
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, phonenumber, userregmail);
-		regscreen.waitABit(3000);
+		regscreen.waitABit(6000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
@@ -358,22 +359,43 @@ public class VNextBaseTestCase {
 	}
 	
 	public void setNetworkOff() {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		((HasNetworkConnection) appiumdriver).setConnection(Connection.AIRPLANE);
-		appiumdriver.setConnection(Connection.NONE);
-		appiumdriver.setConnection(Connection.AIRPLANE);
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		try {
+			Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.wifi --es setstatus disable");
+			Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.data_connection --es setstatus disable");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//((HasNetworkConnection) appiumdriver).setConnection(Connection.AIRPLANE);
+		//appiumdriver.setConnection(Connection.NONE);
+		//appiumdriver.setConnection(Connection.AIRPLANE);
 	    switchToWebViewContext();
 	    //switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
 	public void setNetworkOn() {
 		if (deviceplatform.contains("android")) {
-			switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
-			Connection networkConnection = ((HasNetworkConnection) appiumdriver).getConnection();
+			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			try {
+				Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.wifi --es setstatus enable");
+				Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.data_connection --es setstatus enable");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			/*Connection networkConnection = ((HasNetworkConnection) appiumdriver).getConnection();
 			if (networkConnection.equals(Connection.AIRPLANE) ) {
+				try {
 				((HasNetworkConnection) appiumdriver).setConnection(Connection.ALL);		
-				waitABit(10000);
-			}
+				waitABit(5000);
+				} catch (WebDriverException e) {
+				//todo
+				}
+				
+			}*/
 			switchToWebViewContext();
 		}
 	}

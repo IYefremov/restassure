@@ -58,20 +58,20 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {		
-		if (customerslist.findElements(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")).size() > 0) {
-			WebElement elem = customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']"));	
+		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")).size() > 0) {
+			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
 			
 		} else {
-			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name']"));
+			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name']"));
 			WebElement elem = ctmrs.get(ctmrs.size()-1);
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@class='list-item']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
 			//waitABit(1000);
 
 		}
@@ -97,12 +97,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextNewCustomerScreen clickAddCustomerButton() {
-		List<WebElement> addbtns = customersscreen.findElements(By.xpath(".//a[@action='add' and @data-text='Create new customer']"));
+		tap(customersscreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
+		/*List<WebElement> addbtns = customersscreen.findElements(By.xpath(".//a[@action='add' and @data-text='Create new customer']"));
 		for (WebElement addbtn : addbtns) {
 			if (addbtn.isDisplayed())
 				tap(addbtn);
-		}
-		//tap(customersscreen.findElement(By.xpath(".//a[@action='add']")));
+		}*/
+		tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
 		log(LogStatus.INFO, "Click Add customer button");
 		return new VNextNewCustomerScreen(appiumdriver);	
 	}

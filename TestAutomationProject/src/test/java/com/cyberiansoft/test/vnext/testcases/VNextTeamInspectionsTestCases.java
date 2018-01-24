@@ -82,14 +82,14 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify Team Inspection displays on the screen")
 	public void testVerifyTeamInspectionDisplaysOnTheScreen() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final String wholesalecustomer = "Test Test";
 		final String inspType = "anastasia type";
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
+		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(wholesalecustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);

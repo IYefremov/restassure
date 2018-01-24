@@ -24,6 +24,12 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='add']")
 	private WebElement addinvoicebtn;
 	
+	@FindBy(xpath="//*[@action='my']")
+	private WebElement myinvoicestab;
+	
+	@FindBy(xpath="//*[@action='team']")
+	private WebElement teaminvoicestab;
+	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -131,6 +137,32 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
 		return woscreeen;
+	}
+	
+	public void switchToTeamInvoicesView() {
+		tap(teaminvoicestab);
+		if (appiumdriver.findElements(By.xpath("//*[text()='Loading invoices']")).size() > 0) {
+			try {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading work orders']"))));
+			} catch (NoSuchElementException e) {
+				//do nothing
+			}
+		}
+		log(LogStatus.INFO, "Switch to Team Invoices view");
+	}
+	
+	public boolean isTeamInvoicesViewActive() {
+		return teaminvoicestab.getAttribute("class").contains("active");
+	}
+	
+	public void switchToMyInvoicesView() {
+		tap(myinvoicestab);
+		log(LogStatus.INFO, "Switch to My Invoices view");
+	}
+	
+	public boolean isMyInvoicesViewActive() {
+		return myinvoicestab.getAttribute("class").contains("active");
 	}
 
 }

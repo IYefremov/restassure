@@ -502,4 +502,171 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();
 	}
+
+	@Test(testName= "Test Case 68785:Verify user can refresh deleted pictures after approving Invoice", 
+			description = "Verify user can refresh deleted pictures after approving Invoice")
+	public void testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int numberOfImageNotes = 4;
+		final int numberOfImageToDelete = 2;
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
+		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		
+		for (int i = 0; i < numberOfImageNotes; i++)
+			notesscreen.addFakeImageNote();
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		for (int i = 0; i < numberOfImageToDelete; i++)
+			notesscreen.deletePictureFromNotes();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		VNextApproveScreen approvescreen = invoicemenuscreen.clickApproveInvoiceMenuItem();
+		approvescreen.drawSignature();
+		approvescreen.saveApprovedInspection();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		invoicemenuscreen.refreshInvoicePictures();
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImageNotes);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68926:Verify user can add Notes for Team Invoice", 
+			description = "Verify user can add Notes for Team Invoice")
+	public void testVerifyUserCanAddNotesForTeamInvoice() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final String notetext = "Test";
+		final String quicknote = "1 note";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen.switchToTeamInvoicesView();
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
+		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		notesscreen.setNoteText(notetext);
+		notesscreen.addQuickNote(quicknote);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
+		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
+		notesscreen.clickScreenBackButton();
+		
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.switchToMyInvoicesView();
+		invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 68664:Verify user doesn't see Invoice with Team Sharing = NO", 
+			description = "Verify user doesn't see Invoice with Team Sharing = NO")
+	public void testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO() {
+		
+		final String vinnumber = "TEST";
+		final String customer = "Test Test";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar2";
+		final String ponumber = "12345";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(customer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+		
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		invoicesscreen.switchToTeamInvoicesView();
+		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+		invoicesscreen.switchToMyInvoicesView();
+		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+	}
 }

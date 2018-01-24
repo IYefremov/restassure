@@ -23,6 +23,9 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen));
+		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
+			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		}
 	}
 	
 	public WebElement getVehiclePartsList() {
