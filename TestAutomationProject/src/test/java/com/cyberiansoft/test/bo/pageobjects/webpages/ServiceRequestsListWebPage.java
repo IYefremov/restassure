@@ -360,6 +360,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void clickFindButton() {
 		try{
+			waitABit(1000);
 			driver.switchTo().alert().accept();
 		}catch (Exception e){}
 		waitABit(1000);
@@ -696,12 +697,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean saveNewServiceRequest() {
 		try {
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			waitABit(3000);
+			wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 			click(saveservicerequestbutton);
+			waitABit(3000);
 			driver.switchTo().defaultContent();
 			waitUntilPageReloaded();
 			return true;
@@ -1116,11 +1115,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean addAppointmentFromSRlist(String fromDate, String toDate, String technician) {
-
+waitABit(3000);
 		appointmentCalendarIcon.click();
 
 		appointmentFromDate.clear();
 		appointmentToDate.clear();
+		waitABit(1000);
+
 		appointmentFromTime.clear();
 		appointmentToTime.clear();
 
@@ -2013,10 +2014,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void addAppointmentWithTechnisian(String startDate, String endDate, String string)
 			throws InterruptedException {
+		waitABit(3000);
+
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
 
 		addAppointmentBTNfromSRedit.click();
+		waitABit(2000);
 		appointmentFromDateSRedit.clear();
 		appointmentFromTimeSRedit.clear();
 		appointmentToDateSRedit.clear();

@@ -215,18 +215,26 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public void deleteClient(String clientname) {
-		WebElement clientstablerow = getTableRowWithClient(clientname);
-		if (clientstablerow != null) {
-			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
-			wait.until(ExpectedConditions.alertIsPresent());
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-			waitABit(300);
+//		WebElement clientstablerow = getTableRowWithClient(clientname);
+//		if (clientstablerow != null) {
+//			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
+//			wait.until(ExpectedConditions.alertIsPresent());
+//			Alert alert = driver.switchTo().alert();
+//			alert.accept();
+//			waitABit(300);
+//			wait.until(
+//					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//		} else {
+//			Assert.assertTrue(false, "Can't find client: " + clientname);
+//		}
+
+        driver.findElement(By.xpath("//td[text()='"+clientname+"']")).findElement(By.xpath(".."))
+                .findElements(By.tagName("td")).get(1).findElement(By.tagName("input")).click();
+
+        driver.switchTo().alert().accept();
+			waitABit(500);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} else {
-			Assert.assertTrue(false, "Can't find client: " + clientname);
-		}
 	}
 
 	public void restoreClient(String clientname) throws InterruptedException {

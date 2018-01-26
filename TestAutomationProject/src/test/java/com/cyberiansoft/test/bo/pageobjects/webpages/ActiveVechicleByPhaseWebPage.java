@@ -218,7 +218,6 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Make']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Model']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Stock#']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Parts Order']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='PDR Station']")));
 			return true;
 		} catch (Exception e) {

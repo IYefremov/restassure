@@ -175,12 +175,19 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 	
 	public void unarchiveService(String servicename) {
-		waitABit(1000);
-		WebElement row = getTableRowWithArchivedService(servicename);
-		if (row != null) {
-			restoreTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicename + " service");			
+//		waitABit(1000);
+//		WebElement row = getTableRowWithArchivedService(servicename);
+//		if (row != null) {
+//			restoreTableRow(row);
+//		} else
+//			Assert.assertTrue(false, "Can't find " + servicename + " service");
+		waitABit(3000);
+		driver.findElement(By.xpath("//td[text()='"+servicename+"']")).findElement(By.xpath(".."))
+				.findElement(By.xpath("//input[@alt='Restore']")).click();
+		driver.switchTo().alert().accept();
+		waitABit(3000);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+
 	}
 	
 	public boolean isActiveServiceExists(String servicename) {

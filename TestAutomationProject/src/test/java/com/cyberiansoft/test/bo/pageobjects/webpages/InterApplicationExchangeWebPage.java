@@ -292,6 +292,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public boolean checkRuleByName(String name) throws InterruptedException {
+		waitABit(4000);
 		try {
 			wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
