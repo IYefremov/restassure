@@ -1478,7 +1478,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
+		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails() ||serviceRequestsWebPage.checkEmails("was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
@@ -1672,7 +1672,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
+		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created")||serviceRequestsWebPage.checkTestEmails());
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");

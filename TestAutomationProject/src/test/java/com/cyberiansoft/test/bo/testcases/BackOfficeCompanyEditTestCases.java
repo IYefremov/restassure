@@ -1344,7 +1344,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
-		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		interApplicationExchangePage.clickAddRuleBox("Cancel");        //Include Selected Services (Services Include Selected)
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
 		
 		interApplicationExchangePage.clickAddRuleToFirstProfile();

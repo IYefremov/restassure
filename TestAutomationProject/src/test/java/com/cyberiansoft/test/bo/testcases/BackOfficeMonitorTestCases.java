@@ -45,51 +45,52 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		backofficeheader.clickLogout();
 		Thread.sleep(3000);
 		}catch(Exception e){
+			Thread.sleep(3000);
 			backofficeheader.refresh();
 			backofficeheader.clickLogout();
 		}
 	}
-	
+
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
 	public void testMonitorRepairOrderSearch() throws Exception {
 
 		final String wonumber = "O-000-149273";
-		
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
+
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.repairOrdersTableIsVisible();
 		repairorderspage.verifyRepairOrdersTableColumnsAreVisible();
-		
+
 		repairorderspage.selectSearchLocation("Default Location");
 		repairorderspage.selectSearchTimeframe("Last Year");
 		repairorderspage.clickFindButton();
 		Assert.assertEquals("1", repairorderspage.getCurrentlySelectedPageNumber());
 		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
-		
+
 		String lastpagenumber = repairorderspage.getLastPageNumber();
 		repairorderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, repairorderspage.getGoToPageFieldValue());
-		
+
 		repairorderspage.clickGoToFirstPage();
 		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
-		
+
 		repairorderspage.clickGoToNextPage();
 		Assert.assertEquals("2", repairorderspage.getGoToPageFieldValue());
-		
+
 		repairorderspage.clickGoToPreviousPage();
 		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
-		
+
 		repairorderspage.setPageSize("1");
 		Assert.assertEquals(1, repairorderspage.getRepairOrdersTableRowCount());
 		//String numberofrows = repairorderspage.getLastPageNumber();
-		
+
 		repairorderspage.setPageSize("999");
-		Assert.assertEquals(new Integer(25), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
-		
+		Assert.assertEquals(new Integer(50), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
+
 		repairorderspage.selectSearchLocation("Default Location");
 		Thread.sleep(1000);
 		repairorderspage.selectSearchCustomer("000 15.11 Companey");
@@ -99,9 +100,9 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
 		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
 		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("000 15.11 Companey", "1GCPKSE70CF109506");
-		
+
 	}
-	
+
 	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
 	public void testMonitorVendorOrdersSearch() throws Exception {
 
@@ -110,15 +111,15 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		final String VIN = "1GCPKSE70CF109506";
 		final String vendor = "Test Team";
 		final String deflocation = "Default Location";
-		
+
 		final String servicestatus = "All Services";
 		final String employee = "Oksi Manager";
-		
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
+
 		VendorOrdersWebPage vendororderspage = monitorpage.clickVendorOrdersLink();
 		vendororderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		vendororderspage.selectSearchServiceStatus(servicestatus);
@@ -127,25 +128,25 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		vendororderspage.verifyVendorOrdersTableColumnsAreVisible();
 		Assert.assertEquals("1", vendororderspage.getCurrentlySelectedPageNumber());
 		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
-		
+
 		String lastpagenumber = vendororderspage.getLastPageNumber();
 		vendororderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, vendororderspage.getGoToPageFieldValue());
-		
+
 		vendororderspage.clickGoToFirstPage();
 		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
-		
+
 		vendororderspage.clickGoToNextPage();
 		Assert.assertEquals("2", vendororderspage.getGoToPageFieldValue());
-		
+
 		vendororderspage.clickGoToPreviousPage();
 		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
-		
+
 		vendororderspage.setPageSize("1");
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
-		
+
 		vendororderspage.setPageSize("999");
-		Assert.assertEquals(new Integer(25), Integer.valueOf(vendororderspage.getRepairOrdersTableRowCount()));
+		Assert.assertEquals(new Integer(50), Integer.valueOf(vendororderspage.getRepairOrdersTableRowCount()));
 		
 		vendororderspage.selectSearchLocation(deflocation);
 		vendororderspage.selectSearchVendor(vendor);

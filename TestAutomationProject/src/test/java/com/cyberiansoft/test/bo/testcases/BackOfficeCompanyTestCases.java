@@ -205,7 +205,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals("1", servicespage.getGoToPageFieldValue());
 
 		servicespage.setPageSize("999");
-		Assert.assertEquals(new Integer(25), Integer.valueOf(servicespage.getServicesTableRowsCount()));
+		Assert.assertEquals(new Integer(50), Integer.valueOf(servicespage.getServicesTableRowsCount()));
 
 //		servicespage.makeSearchPanelVisible();
 		servicespage.selectSearchServiceType(servicetype);
