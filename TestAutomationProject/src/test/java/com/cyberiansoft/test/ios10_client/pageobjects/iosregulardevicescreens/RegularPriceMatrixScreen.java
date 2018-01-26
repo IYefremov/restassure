@@ -215,8 +215,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
-		
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText")).getAttribute("value");
+		return appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 
 	public String getInspectionSubTotalPrice() {

@@ -377,7 +377,13 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeButton[3]").click();
+		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
+		for (WebElement btn : toolbarbtns)
+			if (btn.getAttribute("name").contains("$")) {
+				btn.click();
+				break;
+			}
+		//appiumdriver .findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeButton[3]").click();
 		Helpers.waitABit(300);
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();

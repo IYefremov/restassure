@@ -132,9 +132,10 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	}
 
 	public void searchServiceByName(String servicename) {
-		if (elementExists(MobileBy.AccessibilityId("Clear text")))
-				appiumdriver.findElementByAccessibilityId("Cancel").click();
+		//if (elementExists(MobileBy.AccessibilityId("Clear text")))
+			//	appiumdriver.findElementByAccessibilityId("Cancel").click();
 		//else
+		appiumdriver.findElementByAccessibilityId("Search").clear();
 			appiumdriver.findElementByAccessibilityId("Search").click();
 		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 		
@@ -179,7 +180,9 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	
 	public void selectSubService(String servicename) {
-		searchServiceByName(servicename);
+		if (!appiumdriver.findElementByClassName("XCUIElementTypeTable").
+				findElement(MobileBy.AccessibilityId(servicename)).isDisplayed())
+			searchServiceByName(servicename);
 		IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
 				findElement(MobileBy.AccessibilityId(servicename)).
 				findElement(MobileBy.AccessibilityId("unselected"));
