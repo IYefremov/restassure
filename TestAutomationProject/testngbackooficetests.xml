@@ -25,10 +25,10 @@
         <classes>
 
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-               
+
             </class>
 
-            <!--
+
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
             </class>
              <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
@@ -61,7 +61,7 @@
                        </class>
                        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
                        </class>
-                             -->
+            <!--        -->
         </classes>
     </test>
 
