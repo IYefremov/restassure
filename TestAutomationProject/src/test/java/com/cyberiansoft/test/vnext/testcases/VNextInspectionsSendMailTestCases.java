@@ -41,7 +41,6 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			description = "Verify correct Customer Info is shown on Printing")
 	public void testVerifyCorrectCustomerInfoIsShownOnPrinting() throws IOException {
 
-		final String inspType = "anastasia type";
 		final String vinnumber = "TEST";
 		String customer = customerFirstName + " " + customerLastName;
 		
@@ -63,7 +62,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(customereMail);
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 		
@@ -144,7 +143,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(customereMail);
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 		
@@ -227,7 +226,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(customereMail);
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 		
@@ -304,7 +303,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		//inspectionscreen.switchToTeamInspectionsView();
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(customereMail);
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 		

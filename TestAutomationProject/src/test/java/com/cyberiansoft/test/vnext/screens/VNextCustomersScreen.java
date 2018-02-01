@@ -17,7 +17,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[contains(@data-page, 'list')]")
+	@FindBy(xpath="//div[@data-page='customers-list']")
 	private WebElement customersscreen;
 	
 	@FindBy(xpath="//div[contains(@class, 'list-block-search')]")

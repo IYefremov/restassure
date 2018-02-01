@@ -56,9 +56,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
 		ArrayList<String> wonumbers = invoicesscreen.getInvoiceWorkOrders(invoiceNumber);
 		Assert.assertEquals(wonumbers.size(), workOrders.size());
-		for (String wonumber : wonumbers) {
-			Assert.assertTrue(workOrders.contains(wonumber));
-		} 
+		for (String wonumber : wonumbers)
+			Assert.assertTrue(workOrders.contains(wonumber.trim()));
 		invoicesscreen.clickBackButton();
 	}
 

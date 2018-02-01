@@ -310,7 +310,7 @@ public class VNextBaseTestCase {
 		
 		switchToWebViewContext();
 		
-		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
+		/*VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.clickIHaveRigistrationCodeLink();
 		regscreen.waitABit(5*1000);
 		
@@ -318,7 +318,7 @@ public class VNextBaseTestCase {
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
 
-		switchToWebViewContext();
+		switchToWebViewContext();*/
 		
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regCode);

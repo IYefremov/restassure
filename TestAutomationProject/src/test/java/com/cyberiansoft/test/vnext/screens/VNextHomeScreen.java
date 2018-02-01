@@ -63,7 +63,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
-		if (appiumdriver.findElementsByXPath("//div[@class='intercom-chat-dismiss-button-mobile']").size() > 0)
+		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
 			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
 		//if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0) {
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
@@ -71,9 +71,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 				//waitABit(10000);
 			//}
 		}
-		
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(customerslist));
 		
 	}
 	
@@ -133,9 +130,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isQueueMessageVisible() {
-		//System.out.println("+++" + appiumdriver.findElementByXPath(quemessagexpath).isDisplayed());
-		System.out.println("+++" + appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed());
-		
 		return appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed();
 	}
 	

@@ -156,6 +156,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE);
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
+		Assert.assertTrue(inspectionsscreen.isEmailSentIconPresentForInspection(inspnumber));
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 

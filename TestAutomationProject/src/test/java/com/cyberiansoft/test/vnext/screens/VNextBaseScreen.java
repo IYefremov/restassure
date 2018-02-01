@@ -209,4 +209,12 @@ public class VNextBaseScreen {
 		//wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		log(LogStatus.INFO, "Click Screen Title Caption");
 	}
+	
+	public boolean elementExists(String xpath) {
+		boolean exists = false;
+		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		exists =  appiumdriver.findElementsByXPath(xpath).size() > 0;
+		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return exists;
+	}
 }

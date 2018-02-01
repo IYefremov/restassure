@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -63,11 +64,11 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);
 		if (invoicecell != null) {
-			List<WebElement> wocells = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
-					findElements(By.xpath(".//span[@class='entity-item-order-number']"));
-			for (WebElement wocell : wocells) {
-				workOrders.add( wocell.getText().trim().replace(",", ""));
-			}
+			String wos = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+					findElement(By.xpath(".//div[@class='truncate']")).getText().trim();
+			List<String> wosarray = Arrays.asList(wos.split(","));
+			for (String wonumber : wosarray)
+				workOrders.add(wonumber);
 		}
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);

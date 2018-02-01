@@ -4,9 +4,14 @@ import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -24,13 +29,17 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		final String wholesalecustomer = "Test_Wholesale_BO";
 		
 		initiateWebDriver();
-		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Clients.aspx");
 
+		initiateWebDriver();
+		webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin("olexandr.kramar@cyberiansoft.com", "test12345");
-		ClientsWebPage clientspage = PageFactory.initElements(webdriver,
-				ClientsWebPage.class);
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserUserName(), BOConfigInfo.getInstance().getUserUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		
+		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.searchClientByName(wholesalecustomer);
 		if (clientspage.isClientExistsInTable(wholesalecustomer))
 			clientspage.deleteClient(wholesalecustomer);

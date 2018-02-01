@@ -6,8 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextEmailScreen extends VNextBaseScreen {
@@ -60,9 +62,16 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
-		VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
-		informationdialog.clickInformationDialogOKButton();
+		//VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
+		//informationdialog.clickInformationDialogOKButton();
 		log(LogStatus.INFO, "Tap on Send Emails button");
+	}
+	
+	public void sendEmail() {
+		clickSendEmailsButton();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
+		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE);
 	}
 
 }

@@ -49,7 +49,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));
 		
 	}
 	
@@ -158,6 +158,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
 	}
 	
+	public boolean isEmailSentIconPresentForInspection(String inspectionnumber) {
+		WebElement inspcell = getInspectionCell(inspectionnumber);
+		return inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_email_sent']")).size() > 0;
+	}
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'entity-item-name') and text()='" + inspnumber + "']")));
@@ -198,10 +202,12 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamInspectionsView() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.visibilityOf(teaminspectiontab));
 		tap(teaminspectiontab);
 		if (appiumdriver.findElements(By.xpath("//*[text()='Loading inspections']")).size() > 0) {
 			try {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+			wait = new WebDriverWait(appiumdriver, 5);
 			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading inspections']"))));
 			} catch (NoSuchElementException e) {
 				//do nothing

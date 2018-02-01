@@ -106,7 +106,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))
 			emailscreen.sentToEmailAddress(usermail);
 		
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		emailscreen.waitABit(60*1000);
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
 		
@@ -299,7 +299,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))
 			emailscreen.sentToEmailAddress(usermail);
 		
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionsscreen.clickBackButton();
 	}

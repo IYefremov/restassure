@@ -3,12 +3,21 @@ package com.cyberiansoft.test.vnext.testcases;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
@@ -101,6 +110,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
@@ -155,6 +165,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
+		System.out.println("+++++" + inspnumber);
 		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
@@ -232,8 +243,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 67290:Verify user can create Team Inspection", 
-			description = "Verify user can create Team Inspection")
+	@Test(testName= "Test Case 67290:Verify user can create Team Inspection, "
+			+ "Test Case 67291:Verify Team Inspection save into mobile device and BO immediately if internet connection is available", 
+			description = "Verify user can create Team Inspection, "
+					+ "Verify Team Inspection save into mobile device and BO immediately if internet connection is available")
 	public void testVerifyUserCanCreateTeamInspection() {
 		
 		final String wholesalecustomer = "001 - Test Company";
@@ -252,8 +265,61 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));			
+		homescreen = inspectionscreen.clickBackButton();
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
+	}
+	
+	@Test(testName= "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+			+ "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet", 
+			description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+					+ "Verify Inspection displays on the list after DB update and after reconnect Internet")
+	public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		setNetworkOff();
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.clickSaveInspectionMenuButton();
+		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+	
+		homescreen = inspectionscreen.clickBackButton();
+		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+		setNetworkOn();
+		homescreen.waitUntilQueueMessageInvisible();
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
+		inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));	
+		inspectionscreen.switchToMyInspectionsView();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));	
+		homescreen = inspectionscreen.clickBackButton();
+		
+		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+		statusscreen.updateMainDB();
+		homescreen = statusscreen.clickBackButton();
+		
+		inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
-			
+		inspectionscreen.switchToMyInspectionsView();
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
@@ -295,9 +361,84 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
 	}
+
+	@Test(testName= "Test Case 67330:Verify user can edit Inspection if we have no internet connection", 
+			description = "Verify user can edit Inspection if we have no internet connection")
+	public void testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		final String newvinnumber = "TEST456";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();
+		setNetworkOff();
+		vehicleinfoscreen.setVIN(newvinnumber);
+		vehicleinfoscreen.clickSaveInspectionMenuButton();
+		vehicleinfoscreen.waitABit(4000);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.switchToMyInspectionsView();
+		homescreen = inspectionscreen.clickBackButton();
+		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+		setNetworkOn();
+		homescreen.waitUntilQueueMessageInvisible();
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
+	}
 	
-	@Test(testName= "Test Case 67326:Verify user can edit Team Inspection", 
-			description = "Verify user can edit Team Inspection")
+	@Test(testName= "Test Case 67331:Verify user can edit 'My inspections' if we have no internet connection", 
+			description = "Verify user can edit 'My inspections' if we have no internet connection")
+	public void testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection() {
+		
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "O_Kramar";
+		final String vinnumber = "123";
+		final String newvinnumber = "TEST456";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		inspectionscreen.switchToTeamInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(wholesalecustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		inspectionscreen.switchToMyInspectionsView();
+		setNetworkOff();
+		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();		
+		vehicleinfoscreen.setVIN(newvinnumber);
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		homescreen = inspectionscreen.clickBackButton();
+		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+		setNetworkOn();
+		homescreen.waitUntilQueueMessageInvisible();
+		Assert.assertFalse(homescreen.isQueueMessageVisible());
+	}
+	
+	@Test(testName= "Test Case 67326:Verify user can edit Team Inspection, "
+			+ "Test Case 67332:Verify immediately saving on BO if user edit Team Inspection", 
+			description = "Verify user can edit Team Inspection, "
+					+ "Verify immediately saving on BO if user edit Team Inspection")
 	public void testVerifyUserCanEditTeamInspection() {
 		
 		final String wholesalecustomer = "001 - Test Company";
@@ -354,6 +495,20 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), insuranceCompany);
 		claiminfoscreen.cancelInspection();
 		homescreen = inspectionscreen.clickBackButton();
+		
+		
+		initiateWebDriver();
+		webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserUserName(), BOConfigInfo.getInstance().getUserUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
+		inspectionspage.searchInspectionByNumber(inspnumber);
+		inspectionspage.verifyVINIsPresentForInspection(inspnumber, newVIN);
+		webdriver.quit();
 	}
 	
 	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet", 
@@ -439,6 +594,24 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		inspservicesscreen.clickScreenBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
+	}
+	
+	@Test(testName= "Test Case 67756:Verify message 'Your email message has been added to the queue.' displays after sending", 
+			description = "Verify message 'Your email message has been added to the queue.' displays after sending")
+	public void testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending() {
+		
+		final String customereMail = "test.cyberiansoft@gmail.com";
+		final String wholesalecustomer = "001 - Test Company";
+		final String inspType = "Insp_type_approv_req";
+		final String vinnumber = "TEST";
+
+		final String inspnumber = createSimpleInspection(wholesalecustomer, inspType, vinnumber);
+		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
+		emailscreen.sentToEmailAddress(customereMail);
+		emailscreen.sendEmail();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.clickBackButton();	
 	}
 	
 	public String createSimpleInspection(String inspcustomer, String insptype, String vinnumber) {

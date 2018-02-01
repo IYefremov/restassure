@@ -516,6 +516,25 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 		}
 		return totalapproved;
 	}
+	
+	public void verifyVINIsPresentForInspection(String inspnumber, String VIN) {
+		clickInspectionLink(inspnumber);
+		waitForNewTab();
+		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
+		Set<String> handles = driver.getWindowHandles();
+		Iterator<String> it = handles.iterator();
+		// iterate through your windows
+		while (it.hasNext()) {
+			String parent = it.next();
+			String newwin = it.next();
+			driver.switchTo().window(newwin);
+			waitABit(5000);
+			Assert.assertTrue(driver.findElements(By.xpath("//div[text()='" + VIN + "']")).size() > 0);
+			driver.close();
+			driver.switchTo().window(parent);
+		}
+
+	}
 
 	public String getInspectionAmountApproved(String inspnumber) {
 		String amaounapproved = "";

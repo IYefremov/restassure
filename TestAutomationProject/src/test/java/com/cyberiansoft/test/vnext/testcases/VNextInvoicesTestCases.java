@@ -207,7 +207,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))
 			emailscreen.sentToEmailAddress(usermail);
 		
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		emailscreen.waitABit(60*1000);
 		boolean search = false;
 		final String inspectionreportfilenname = invoicenumbertc48094 + ".pdf";
@@ -357,7 +357,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))
 			emailscreen.sentToEmailAddress(usermail);
 		
-		emailscreen.clickSendEmailsButton();
+		emailscreen.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();		
 	}
