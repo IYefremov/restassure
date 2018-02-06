@@ -296,7 +296,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		Assert.assertEquals(firstname + " " + lastname, serviceadvisorspage.getTableServiceAdvisorFullName(firstname, lastname));
 		Assert.assertEquals(email, serviceadvisorspage.getTableServiceAdvisorEmail(firstname, lastname));
-		Assert.assertEquals("..., AZ", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
+		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(firstname, lastname).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(firstname, lastname).trim());
 		Assert.assertEquals(role, serviceadvisorspage.getTableServiceAdvisorRoles(firstname, lastname));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(firstname, lastname).trim());

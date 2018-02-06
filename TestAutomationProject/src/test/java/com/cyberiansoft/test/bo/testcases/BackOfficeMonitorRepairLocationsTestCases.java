@@ -375,7 +375,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
 		final String repairlocationtomezone = "Pacific Standard Time";
-		final String _team = "Team 1";
+		final String _team = "Default team";
 		final String manager = "Marta Moe";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,

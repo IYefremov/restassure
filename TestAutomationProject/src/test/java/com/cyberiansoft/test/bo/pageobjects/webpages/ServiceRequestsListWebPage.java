@@ -2049,7 +2049,7 @@ waitABit(3000);
 		Thread.sleep(20000);
 		for (int i = 0; i < 7; i++) {
 			try {
-				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!", message,
+				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!", message,
 						"reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1 = true;
 					break;
@@ -2071,7 +2071,7 @@ waitABit(3000);
 		for (int i = 0; i < 5; i++) {
 			try {
 				Thread.sleep(40000);
-				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "55555!!!",
+				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
 						"test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1 = true;
 				}

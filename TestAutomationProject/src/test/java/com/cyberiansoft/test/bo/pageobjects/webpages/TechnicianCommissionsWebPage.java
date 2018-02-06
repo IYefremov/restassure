@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -145,9 +146,9 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + technician + "']")));
 		driver.findElement(By.xpath("//li[text()='" + technician + "']")).click();
 	}
-
-	public void selectSearchTimeframe(String timeframe) {
-		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe);
+	
+	public void selectSearchTimeframe(WebConstants.TimeFrameValues timeframe) { 
+		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
 	}
 
 	public void setSearchInvoice(String invoicenumber) {

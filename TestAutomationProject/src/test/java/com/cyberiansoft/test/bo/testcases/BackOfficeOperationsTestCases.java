@@ -46,12 +46,16 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 	@Test(description = "Test Case 15295:Operations - Technician Commision: Search")
 	public void testOperationTechnicianCommisionSearch() throws Exception {
+		
+		final String invoicenumber = "I-000-00646";
+		final String status = "New";
+		final String tech = "1111 2222";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		TechnicianCommissionsWebPage techcommissionpage = operationspage.clickTechnicianCommissionsLink();
-		techcommissionpage.selectSearchTimeframe("Last Year");
+		techcommissionpage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		techcommissionpage.clickFindButton();
 		techcommissionpage.verifyInvoicesTableColumnsAreVisible();
 
@@ -80,20 +84,22 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		techcommissionpage.verifySearchFieldsAreVisible();
 
-		techcommissionpage.selectSearchStatus("New");
-		techcommissionpage.selectSearchTechnician("1111 2222");
-		techcommissionpage.setSearchInvoice("I-000-00243");
+		techcommissionpage.selectSearchStatus(status);
+		techcommissionpage.selectSearchTechnician(tech);
+		techcommissionpage.setSearchInvoice(invoicenumber);
 		techcommissionpage.clickFindButton();
 
 		Assert.assertEquals(Integer.valueOf(1),
 				Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
-		techcommissionpage.verifySearchResults("I-000-00243");
+		techcommissionpage.verifySearchResults(invoicenumber);
 	}
 
 	@Test(description = "Test Case 15386:Operations - Work Orders: Search")
 	public void testOperationWorkOrdersSearch() throws Exception {
 
-		final String wonum = "O-000-147891";
+		final String wonum = "O-000-148090";
+		final String _package = "ALM - Recon Facility";
+		final String status = "New";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -130,8 +136,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.verifySearchFieldsAreVisible();
 
-		wopage.selectSearchPackage("VD_SP_TEST");
-		wopage.selectSearchStatus("New");
+		wopage.selectSearchPackage(_package);
+		wopage.selectSearchStatus(status);
 		wopage.setSearchOrderNumber(wonum);
 		wopage.unselectInvoiceFromDeviceCheckbox();
 		wopage.clickFindButton();
@@ -225,7 +231,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		final String timeframe = "Last Year";
 
-		final String inspnum = "E-062-00050";
+		final String inspnum = "E-062-00119";
 		final String customer = "000 My Company";
 
 		final String inspstatus = "Approved";
@@ -341,7 +347,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		final String srtype = "Vit_All_Services";
 
 		final String teamname = "Default team";
-		final String textsearchparameter = "001 - Test Company";
+		final String textsearchparameter = "Alex SASHAZ";
 		final String newservicerequest = "Alex SASHAZ";
 
 		final String assignedto = "Igor Baluev";
