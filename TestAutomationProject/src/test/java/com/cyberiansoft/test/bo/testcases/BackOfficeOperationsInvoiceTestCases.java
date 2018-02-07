@@ -369,7 +369,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
-		workorderspage.selectSearchStatus("All");
+		workorderspage.setSearchOrderNumber(wonum);
+		workorderspage.selectSearchStatus("All");		
 		workorderspage.clickFindButton();
 
 		if (invoicenumber.equals("")) {
@@ -630,6 +631,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
 		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
 
+		workorderspage.setSearchOrderNumber(wonum);
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 

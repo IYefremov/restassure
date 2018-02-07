@@ -94,7 +94,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void fillProfileDetails(String name, String documentType, String entityType) throws InterruptedException {
+	public void fillProfileDetails(String name, String documentType, String entityType) {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 		documentTypeDropDown.click();
@@ -109,13 +109,13 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
 				.get().click();
-
-		sendFromCalendarBTN.click();
+		waitABit(500);
+		wait.until(ExpectedConditions.elementToBeClickable(sendFromCalendarBTN)).click();
 		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
-		Thread.sleep(2000);
+		waitABit(2000);
 	}
 
-	public void fillProfileDetails(String name, String entityType) throws InterruptedException {
+	public void fillProfileDetails(String name, String entityType) {
 		profileDetailsName.clear();
 		profileDetailsName.sendKeys(name);
 
@@ -130,7 +130,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 		// calendsrIcon.click();
 		// calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
-		Thread.sleep(2000);
+		waitABit(2000);
 	}
 
 	public void fillProfileDetailsEdit(String name) {

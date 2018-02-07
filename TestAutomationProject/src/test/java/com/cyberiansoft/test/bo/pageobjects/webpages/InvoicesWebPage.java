@@ -632,11 +632,12 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				}catch(Exception e){}
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//span[contains(text(), '" + string + "')]")));
-				Thread.sleep(200);
-				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
+				waitABit(1000);
+				wait.until(ExpectedConditions
+						.elementToBeClickable(driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")))).click();
 		
 					Set frames = driver.getWindowHandles();
-					Thread.sleep(10000);
+					waitABit(10000);
 					frames.remove(mainWindow);
 					driver.switchTo().window((String) frames.iterator().next());
 					return (String) frames.iterator().next();
@@ -1073,7 +1074,7 @@ Thread.sleep(3000);
 		return true;
 	}
 
-	public boolean checkInvoicesSearchResults() throws InterruptedException {
+	public boolean checkInvoicesSearchResults() {
 		try {
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
@@ -1084,6 +1085,7 @@ Thread.sleep(3000);
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Arrow")))
 					.click();
+			waitABit(500);
 
 			wait.until(ExpectedConditions
 					.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
@@ -1120,7 +1122,7 @@ Thread.sleep(3000);
 			wait.until(
 					ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")))
 					.click();
-			Thread.sleep(1000);
+			waitABit(1000);
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 
