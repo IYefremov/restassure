@@ -191,7 +191,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 	}
 
 	public int countLocationsInResultTable() {
-		System.out.println(driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size());
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_report_fixedTable"))));
 		return driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size();
 	}
 

@@ -466,7 +466,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 1);
+		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
 		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
@@ -483,7 +483,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 1);
+		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
 		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
