@@ -70,17 +70,21 @@ public class HomeScreen extends iOSHDBaseScreen {
 
 	public MyInspectionsScreen clickMyInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Inspections")));
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(myinspectionsbtn).waitAction(300).release().perform();
-		appiumdriver.findElementByAccessibilityId("My Inspections").click();
-		return new MyInspectionsScreen(appiumdriver);
+		appiumdriver.findElementByAccessibilityId("Inspections").click();
+		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
+		inspectionsscreen.switchToLocalInspectionsView();
+		return inspectionsscreen;
 	}
 	
 	public TeamInspectionsScreen clickTeamInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Inspections")));
-		appiumdriver.findElementByAccessibilityId("Team Inspections").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
+		appiumdriver.findElementByAccessibilityId("Inspections").click();
+		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
+		inspectionsscreen.switchToLocalInspectionsView();
 		return new TeamInspectionsScreen(appiumdriver);
 	}
 

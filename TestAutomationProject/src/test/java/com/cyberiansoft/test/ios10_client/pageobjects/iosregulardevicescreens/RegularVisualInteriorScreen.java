@@ -63,18 +63,9 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
-		Helpers.waitABit(2000);
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Quantity']//XCUIElementTypeTextField[1]")).clear();
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Quantity']//XCUIElementTypeTextField[1]")).sendKeys(_quantity + "\n");
-		/*pricefld.click();
-		Helpers.keyboadrType("\n");
-		quantityfld.click();
-		Thread.sleep(2000);
-		quantityfld.click();
-		Helpers.keyboadrType("\n");
-		quantityfld.click();
-		appiumdriver.findElementByAccessibilityId("Clear text").click();
-		Helpers.keyboadrType(_quantity + "\n");*/
+		IOSElement quantityrow = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
+		quantityrow.findElementByClassName("XCUIElementTypeTextField").clear();
+		quantityrow.findElementByClassName("XCUIElementTypeTextField").sendKeys(_quantity);
 	}
 
 	public void saveCarServiceDetails() {

@@ -220,7 +220,10 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public void searchAvailableService(String servicename) {
 		IOSElement searchfld = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")); 
-		searchfld.click();
+		
+		if (elementExists("Clear text"))
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		//searchfld.click();
 		searchfld.clear();
 		searchfld.setValue(servicename);
 		/*((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);

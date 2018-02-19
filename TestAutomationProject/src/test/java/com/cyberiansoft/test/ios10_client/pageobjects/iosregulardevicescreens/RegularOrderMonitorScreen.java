@@ -68,12 +68,11 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']"))); 
 		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']").click();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		//MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//UIATableView/UIATableCell[contains(@name, \""
-		//		+ panelname
-		//		+ "\")]")));
-		//element.click();
-		//return element.getAttribute("name");
+	}
+	
+	public void selectPanelToChangeStatus(String panelname) {
+		selectPanel(panelname);
+		appiumdriver.findElementByAccessibilityId("Change Status").click();
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {

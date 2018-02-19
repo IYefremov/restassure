@@ -35,9 +35,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	@iOSFindBy(accessibility = "Questions")
     private IOSElement questionsfld;
-	
-	@iOSFindBy(xpath = "//UIAToolbar[1]/UIAButton[@name=\"Remove\"]")
-    private IOSElement removeservice;
+
 	
 	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
     private IOSElement quantityfld;
@@ -263,7 +261,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void removeService() throws InterruptedException {
-		removeservice.click();
+		appiumdriver.findElementByAccessibilityId("Remove").click();
 		Helpers.acceptAlertIfExists();
 	}
 
@@ -304,7 +302,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getServiceDetailsTotalValue() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]").getAttribute("value");
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
 	}
 	
 	
@@ -427,9 +426,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getServiceDetailsPriceValue() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))));
-		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]").getAttribute("value");
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 	}
 	
 	//Service Parts /////////

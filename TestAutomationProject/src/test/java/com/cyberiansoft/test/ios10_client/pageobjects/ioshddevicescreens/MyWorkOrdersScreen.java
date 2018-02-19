@@ -338,7 +338,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		return Helpers.getAlertTextAndAccept();
 	}
 
-	public VehicleScreen selectWorkOrderType(String workordertype) {
+	public void selectWorkOrderType(String workordertype) {
 
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Discard").click();
@@ -351,7 +351,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		}
 		if (appiumdriver.findElementsByAccessibilityId(workordertype).size() > 0)
 			appiumdriver.findElementByAccessibilityId(workordertype).click();
-		return new VehicleScreen(appiumdriver);
 	}
 
 	public  void selectWorkOrderJob(String job) {

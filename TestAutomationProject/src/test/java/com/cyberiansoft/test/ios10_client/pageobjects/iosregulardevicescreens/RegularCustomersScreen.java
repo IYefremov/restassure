@@ -85,10 +85,23 @@ public class RegularCustomersScreen extends iOSRegularBaseScreen {
 	
 	public void selectCustomer(String customer) {
 
-		if (!appiumdriver.findElementByAccessibilityId(customer).isDisplayed()) {
+		if (!appiumdriver.findElementByAccessibilityId(customer).isDisplayed()) {			
 			swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypeTable").
 					findElement(By.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/..")));
 				appiumdriver.findElementByAccessibilityId(customer).click();
+		} else
+			appiumdriver.findElementByAccessibilityId(customer).click();
+	}
+	
+	public void selectOnlineCustomer(String customer) {
+		appiumdriver.findElementByAccessibilityId("Online").click();
+		Helpers.waitABit(2000);
+		if (!elementExists(customer)) {	
+			appiumdriver.findElementByAccessibilityId("Search").click();
+			IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
+			searchfld.click();
+			searchfld.sendKeys(customer + "\n");
+			
 		}
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}

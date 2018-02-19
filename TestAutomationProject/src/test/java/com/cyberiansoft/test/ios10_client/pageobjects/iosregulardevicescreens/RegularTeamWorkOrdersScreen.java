@@ -74,6 +74,7 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
+		Helpers.waitABit(500);
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
 	}
 	
@@ -100,6 +101,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}
 	
 	public void selectSearchLocation(String _location) {
+		Helpers.waitABit(500);
 		locationfld.click();
 		Helpers.waitABit(500);
 		appiumdriver.findElementByName(_location).click();
@@ -137,8 +139,8 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 			iostouch.tap(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']"))).perform();
 		}
-		appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
+		//appiumdriver.
+		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
 	}
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {

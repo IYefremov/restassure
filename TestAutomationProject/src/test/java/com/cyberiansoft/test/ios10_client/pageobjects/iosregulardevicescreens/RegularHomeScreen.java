@@ -64,29 +64,27 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularCustomersScreen clickCustomersButton() {	
-		if(!appiumdriver.findElementByAccessibilityId("Customers").isDisplayed()) {
-			TouchAction action = new TouchAction(appiumdriver);
-			action.press(appiumdriver.findElementByAccessibilityId("Customers")).waitAction(Duration.ofSeconds(1)).release().perform();
-		}
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Customers")).waitAction(Duration.ofSeconds(1)).release().perform();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Customers")));
+		appiumdriver.findElementByAccessibilityId("Customers").click();
 		return new RegularCustomersScreen(appiumdriver);
 	}
 
 	public RegularMyInspectionsScreen clickMyInspectionsButton() {
-		if(!appiumdriver.findElementByAccessibilityId("My Inspections").isDisplayed()) {
-			TouchAction action = new TouchAction(appiumdriver);
-			action.press(appiumdriver.findElementByAccessibilityId("My Inspections")).waitAction(Duration.ofSeconds(1)).release().perform();
-		}
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("My Inspections")).waitAction(Duration.ofSeconds(1)).release().perform();
-		return new RegularMyInspectionsScreen(appiumdriver);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
+		appiumdriver.findElementByAccessibilityId("Inspections").click();
+		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);  
+		myinspectionsscreen.switchToLocalInspectionsView();
+		return myinspectionsscreen;
 	}
 	
 	public RegularTeamInspectionsScreen clickTeamInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Inspections")));
-		appiumdriver.findElementByAccessibilityId("Team Inspections").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
+		appiumdriver.findElementByAccessibilityId("Inspections").click();
+		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver); 
+		myinspectionsscreen.switchToOnlineInspectionsView();
 		return new RegularTeamInspectionsScreen(appiumdriver);
 	}
 

@@ -505,7 +505,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		getWebDriver().quit();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen(appiumdriver);
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		//LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.registeriOSDevice(regCode);
 		Thread.sleep(2000);
 		mainscreen.userLogin(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1733,7 +1735,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	public void testBugWithCrashOnCopyVehicle() throws Exception {
 
 		final String vin = "SHDHBEVDHDHDGDVDG";
-		final String vehicleinfo = "Black, 2012, BMW, 323i U";
+		final String vehicleinfo = "Black, BMW, 323i U";
 		
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -2903,7 +2905,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
@@ -2950,7 +2952,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myworkordersscreen.isAutosavedWorkOrderExists());
 		myworkordersscreen.selectContinueWorkOrder(wonumber);
 		Thread.sleep(1000);
-		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
+		Assert.assertEquals(vehiclescreeen.getWorkOrderNumber(), wonumber);
 		
 		resrtartApplication();
 		mainscreen = new RegularMainScreen(appiumdriver);
@@ -3105,7 +3107,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);		
-		servicerequestsscreen.selectSummaryRequestAction();	
+		servicerequestsscreen.selectDetailsRequestAction();	
 		Thread.sleep(3000);
 		//String summaryapp = servicerequestsscreen.getSummaryAppointmentsInformation();
 		String expectedsummaryapp = "Subject: " + srappsubject + ", In: " + fromapp + ", Out: " + toapp + ", Location: " + srappaddress 
@@ -3297,7 +3299,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehiclescreeen.selectLocation("Test Location ZZZ");
-		String wonum = vehiclescreeen.getInspectionNumber();
+		String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen("Package_for_Monitor");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -3339,7 +3341,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehiclescreeen.selectLocation("Test Location ZZZ");
-		String wonum = vehiclescreeen.getInspectionNumber();
+		String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen("Package_for_Monitor");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -3403,7 +3405,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehiclescreeen.selectLocation("Test Location ZZZ");
-		String wonum = vehiclescreeen.getInspectionNumber();
+		String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen("Package_for_Monitor");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -3479,7 +3481,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehiclescreeen.selectLocation("Test Location ZZZ");
-		String wonum = vehiclescreeen.getInspectionNumber();
+		String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen("Package_for_Monitor");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -3567,9 +3569,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickSearchSaveButton();
 		Thread.sleep(3000);
 		teamworkordersscreen.clickOnWO(wonum);
-		System.out.println("++++" + wonum);
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.VPS1_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.VPS1_SERVICE);
 		ordermonitorscreen.clickServiceDetailsDoneButton();
 		
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
@@ -3601,7 +3602,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehiclescreeen.selectLocation("Test Location ZZZ");
-		String wonum = vehiclescreeen.getInspectionNumber();
+		String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen("Package_for_Monitor");
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -3751,26 +3752,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickStartService();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
 		//ordermonitorscreen.clickServiceDetailsDoneButton();
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
 		
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
 		ordermonitorscreen.clickPhaseStatusCell();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, "Order Monitor It is impossible to change phase status until you start phase.");
 		ordermonitorscreen.clickStartPhase();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.setCompletedPhaseStatus();
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
 		
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.TEST_TAX_SERVICE);
+		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		Assert.assertFalse(ordermonitorscreen.isServiceStartDateExists());
 		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.TEST_TAX_SERVICE, "Completed");
 		
@@ -3915,7 +3916,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawApprovalSignature ();
-		approveinspscreen.clickDoneButton();
+		//approveinspscreen.clickDoneButton();
 		myinvoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
 		
 		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumberapproveon));
@@ -3953,7 +3954,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawApprovalSignature ();
-		approveinspscreen.clickDoneButton();
+		//approveinspscreen.clickDoneButton();
 		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumbeapprovaloff));	
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -4073,7 +4074,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveAsFinal();
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		Thread.sleep(3000);
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
@@ -4122,7 +4123,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
@@ -4172,7 +4173,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		final String[] servicestoadd = { "VPS1", "Dye" };
 		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
 		
@@ -4725,7 +4726,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
 		Helpers.elementExists(wonumber);
 		servicerequestsscreen.clickHomeButton();
@@ -4812,7 +4813,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
 		teaminspectionsscreen.assertInspectionExists(inspnumber);
@@ -5072,7 +5073,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveAsDraft();		
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		Thread.sleep(5000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
@@ -5135,6 +5136,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
+		servicesscreen.clickCancelButton();
 		servicesscreen.clickSaveAsFinal();
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
@@ -6006,7 +6008,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.clickBackButton();
 		
 		servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickCancelButton();
+		//servicesscreen.clickCancelButton();
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
@@ -6074,7 +6076,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_MONITOR_DEVICE);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		final String wonum = vehiclescreeen.getInspectionNumber();
+		final String wonum = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -6242,7 +6244,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.clickSaveButton();
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
 		for (String inspectnumber : inspnumbers)
@@ -6253,25 +6255,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		Thread.sleep(5000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_DELAY_START);
-		Thread.sleep(2000);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
-		wonumbers.add(vehiclescreeen.getInspectionNumber());
+		wonumbers.add(vehiclescreeen.getWorkOrderNumber());
 		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.clickSaveButton();
-		Helpers.waitABit(3000);
 		
+		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver); 
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		Thread.sleep(5000);
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_MONITOR_DEVICE);
 		Thread.sleep(2000);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
-		wonumbers.add(vehiclescreeen.getInspectionNumber());
+		wonumbers.add(vehiclescreeen.getWorkOrderNumber());
 		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
@@ -6280,14 +6280,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(3000);
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
-		Thread.sleep(3000);
-		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+		RegularTeamWorkOrdersScreen teamworkordersscreen = new RegularTeamWorkOrdersScreen(appiumdriver);
 		for (String wonumber : wonumbers)
-			Assert.assertTrue(myworkordersscreen.woExists(wonumber));
+			Assert.assertTrue(teamworkordersscreen.woExists(wonumber));
 		
-		myworkordersscreen.clickHomeButton();
+		teamworkordersscreen.clickHomeButton();
 		Thread.sleep(1000);
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
@@ -7428,7 +7427,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -7491,7 +7490,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -7550,7 +7549,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -7614,7 +7613,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		String startDate = LocalDate.now().plusDays(1).format(formatter);

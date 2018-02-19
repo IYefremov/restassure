@@ -20,7 +20,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "TeamInspectionsTable")
+	@iOSFindBy(accessibility = "InspectionsTable")
 	private IOSElement inspectiontable;
 	
 	@iOSFindBy(accessibility = "Edit")
@@ -37,13 +37,13 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamInspectionsTable"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionsTable"))); 
 	}
 	
 	public void selectInspectionForAction(String inspnumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))); 
-		appiumdriver.findElementByAccessibilityId("TeamInspectionsTable").findElement(MobileBy.
+		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
 				AccessibilityId(inspnumber)).click();
 	}
 	

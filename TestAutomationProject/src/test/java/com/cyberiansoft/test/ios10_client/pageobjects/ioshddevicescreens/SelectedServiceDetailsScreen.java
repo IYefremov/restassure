@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -408,7 +409,20 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[3]").click();
+		MobileElement toolbar = null;
+		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		for (MobileElement tbr : toolbars)
+			if (tbr.isDisplayed()) {
+				toolbar = tbr;
+				break;
+			}
+		List<MobileElement> buttons = toolbar.findElementsByClassName("XCUIElementTypeButton");
+		for (MobileElement btn : buttons)
+			if (btn.getText().contains("$")) {
+				btn.click();
+				break;
+			}
+		
 		IOSElement bundlealert = (IOSElement) appiumdriver.findElementByAccessibilityId("Bundle service amount");
 		IOSElement amountfld = (IOSElement) bundlealert.findElementByClassName("XCUIElementTypeTextField");
 		amountfld.clear();
@@ -483,11 +497,25 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getServiceDetailsPriceValue() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]").getAttribute("value");
+		MobileElement toolbar = null;
+		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		for (MobileElement tbr : toolbars)
+			if (tbr.isDisplayed()) {
+				toolbar = tbr;
+				break;
+			}
+		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 	}
 	
 	public String getServiceDetailsTotalValue() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]").getAttribute("value");
+		MobileElement toolbar = null;
+		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		for (MobileElement tbr : toolbars)
+			if (tbr.isDisplayed()) {
+				toolbar = tbr;
+				break;
+			}
+		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
 	}
 	
 	public String getServiceDetailsFieldValue(String fieldname) {

@@ -64,9 +64,9 @@ public class RegularSettingsScreen extends iOSRegularBaseScreen {
 
 	public void setShowAllServicesOn() {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
-		swipeToElement(table.findElements(By.xpath("//XCUIElementTypeSwitch[@name='Show all services']/..")).get(1));
-		IOSElement option = ((IOSElement) table.findElements(By.xpath("//XCUIElementTypeSwitch[@name='Show all services']")).get(1));
-		if (option.getAttribute("value").equals("false"))
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Inspections_ShowAllServices']/..")));
+		IOSElement option = ((IOSElement) table.findElement(By.name("Inspections_ShowAllServices")));
+		if (option.getAttribute("value").equals("0"))
 			option.click();
 	}
 	

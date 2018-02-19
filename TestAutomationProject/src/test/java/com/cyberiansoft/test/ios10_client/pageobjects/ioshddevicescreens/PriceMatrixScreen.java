@@ -191,7 +191,8 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getPriceMatrixVehiclePartTotalPrice() {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeStaticText[1]")).getAttribute("value");
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 	}
 
 

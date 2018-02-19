@@ -49,7 +49,9 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 			throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin + "\n");		
+		IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
+		searchfld.click();
+		searchfld.sendKeys(vin + "\n");	
 	}
 	
 	public void clickCancelSearchButton() throws InterruptedException {
@@ -62,7 +64,9 @@ public class RegularCarHistoryScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
 	}
 	
-	public void clickCarHistoryRowByVehicleInfo(String vehicleinfo) {		
+	public void clickCarHistoryRowByVehicleInfo(String vehicleinfo) {	
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(vehicleinfo)));
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")).click();
 		//appiumdriver.tap(1, appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")), 200);
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();

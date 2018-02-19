@@ -458,7 +458,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.SPECIFIC_CLIENT_TEST_WO1);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.SPECIFIC_CLIENT_TEST_WO1);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -527,7 +528,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.saveWorkOrder();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
@@ -621,7 +623,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectFirstOrder();
 		myworkordersscreen.selectCopyServices();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.SPECIFIC_CLIENT_TEST_WO1);
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.SPECIFIC_CLIENT_TEST_WO1);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -1239,8 +1242,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -1287,8 +1290,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);
 		//Assert.assertEquals(vehiclescreeen.getYear(), _year);
@@ -1333,8 +1336,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -1449,8 +1452,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickAddOrderButton();
 		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -1492,8 +1495,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//Create WO2
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -1592,8 +1595,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickAddOrderButton();
 		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -1686,8 +1689,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -2013,8 +2016,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -2089,8 +2092,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(element(
@@ -2138,8 +2141,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);
 		//Assert.assertEquals(vehiclescreeen.getYear(), _year);
@@ -2969,7 +2972,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(newsrnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.assertInspectionExists(inspectnumber);
@@ -3175,7 +3178,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);		
-		servicerequestsscreen.selectSummaryRequestAction();	
+		servicerequestsscreen.selectDetailsRequestAction();	
 		//String summaryapp = servicerequestsscreen.getSummaryAppointmentsInformation();
 		Assert.assertTrue(servicerequestsscreen.isSRSummaryAppointmentsInformation());
 		
@@ -4438,7 +4441,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveAsFinal();
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		//Thread.sleep(3000);
 		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
@@ -4520,7 +4523,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertFalse(servicerequestsscreen.isRejectActionExists());
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 	}
@@ -4573,7 +4576,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertFalse(servicerequestsscreen.isRejectActionExists());
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 		
@@ -5073,7 +5076,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		MyWorkOrdersScreen mywoscreen = servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
 		mywoscreen.woExists(wonumber);
 		mywoscreen.clickServiceRequestButton();
@@ -5159,7 +5162,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		}
 		Thread.sleep(3000);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		Thread.sleep(3000);
 		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
@@ -5418,7 +5421,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveAsDraft();
 				
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		Thread.sleep(3000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		Thread.sleep(3000);
@@ -6598,7 +6601,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.clickSaveButton();
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 
 		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
@@ -6634,7 +6637,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectSummaryRequestAction();
+		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
 		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		for (String wonumber : wonumbers)
@@ -6993,8 +6996,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomerWithoutEditing(retailcustomer);
-		vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);		
 		//Assert.assertEquals(vehiclescreeen.getYear(), _year);
@@ -7506,8 +7509,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		VehicleScreen vehiclescreeen = myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_VIN_ONLY);
-		
+		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_VIN_ONLY);
+		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
 		vehiclescreeen.clickVINField();
