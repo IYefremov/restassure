@@ -22,6 +22,7 @@ import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.search.FlagTerm;
 import javax.mail.search.OrTerm;
 import javax.mail.search.SearchTerm;
@@ -91,7 +92,7 @@ public class MailChecker {
                         break;
                     }
 
-                    if (f1.getName().equals("Вся почта")) {
+                    if (f1.getName().equals("INBOX")) {
                         try {
                             folderAll = f1;
                             folderAll.open(Folder.READ_WRITE);
@@ -257,9 +258,9 @@ public class MailChecker {
                 System.out.println("Difference in Minutes b/w present time & Email Recieved time :" + diffMinutes);
                 System.out.println("Current " + i + " :" + "Subject:" + message.getSubject());
                 System.out.println("Current " + i + " :" + "Subject:" + email);
-                System.out.println(message.getSubject());
                 if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes <= 15) {
                     requiredmessage = message;
+                    break;
                 }
             }
 
@@ -323,6 +324,47 @@ public class MailChecker {
         return val;
     }
 
+    public static boolean isMessageAttachmentExists(Message message, String attachmentfilename) {
+        boolean exists = false;
+        try {
+            Multipart multipart = (Multipart) message.getContent();
+            for (int j = 0; j < multipart.getCount(); j++) {
+                BodyPart bodyPart = multipart.getBodyPart(j);
+                if (bodyPart.getContentType().contains("MIXED")) {
+                	Multipart multipart1 = (Multipart) bodyPart.getContent();
+                	for (int k = 0; k < multipart1.getCount(); k++) {
+                		BodyPart bodyPart1 = multipart1.getBodyPart(k);
+                		if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart1.getDisposition()) &&
+                                !StringUtils.isNotBlank(bodyPart1.getFileName())) {
+                            continue; // dealing with attachments only
+                        }
+                		if (bodyPart1.getFileName().equals(attachmentfilename)) {                   
+                			exists = true;
+                			break;
+                		}
+                	}
+                } else if ((bodyPart.getDisposition() != null) && 
+                        (bodyPart.getDisposition().equals(Part.ATTACHMENT) || bodyPart.getDisposition().equals(Part.INLINE) ) 
+                    ){
+                        // Check if plain            	 
+                        MimeBodyPart mbp = (MimeBodyPart)bodyPart;
+                        if (!mbp.isMimeType("text/plain")) {
+                        	if (bodyPart.getFileName().equals(attachmentfilename)) {                   
+                    			exists = true;
+                    			break;
+                    		}
+                        }
+                    }
+            }
+        } catch (MessagingException ex) {
+            System.out.println("Could not connect to the message store.");
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            System.out.println("IOException.");
+            ex.printStackTrace();
+        }
+        return exists;
+    }
 
     public static boolean downloadMessageAttachment(Message message, String attachmentfilename) {
         boolean downloaded = false;
@@ -331,11 +373,67 @@ public class MailChecker {
             Multipart multipart = (Multipart) message.getContent();
             for (int j = 0; j < multipart.getCount(); j++) {
                 BodyPart bodyPart = multipart.getBodyPart(j);
-                if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) &&
+                if (bodyPart.getContentType().contains("MIXED")) {
+                	Multipart multipart1 = (Multipart) bodyPart.getContent();
+                	for (int k = 0; k < multipart1.getCount(); k++) {
+                		BodyPart bodyPart1 = multipart1.getBodyPart(k);
+                		if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart1.getDisposition()) &&
+                                !StringUtils.isNotBlank(bodyPart1.getFileName())) {
+                            continue; // dealing with attachments only
+                        }
+                        InputStream is = bodyPart1.getInputStream();
+                        File f = new File(bodyPart1.getFileName());
+                        FileOutputStream fos = new FileOutputStream(f);
+                        byte[] buf = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = is.read(buf)) != -1) {
+                            fos.write(buf, 0, bytesRead);
+                        }
+                        fos.close();
+                        attachments.add(f);
+                        downloaded = true;
+                        break;
+                	}
+                } else if ((bodyPart.getDisposition() != null) && 
+                        (bodyPart.getDisposition().equals(Part.ATTACHMENT) || bodyPart.getDisposition().equals(Part.INLINE) ) 
+                    ){
+                        // Check if plain            	 
+                        MimeBodyPart mbp = (MimeBodyPart)bodyPart;
+                        if (!mbp.isMimeType("text/plain")) {
+                        	InputStream is = bodyPart.getInputStream();
+                            File f = new File(bodyPart.getFileName());
+                            FileOutputStream fos = new FileOutputStream(f);
+                            byte[] buf = new byte[4096];
+                            int bytesRead;
+                            while ((bytesRead = is.read(buf)) != -1) {
+                                fos.write(buf, 0, bytesRead);
+                            }
+                            fos.close();
+                            attachments.add(f);
+                            downloaded = true;
+                            break;
+                        }
+                    }
+                /*else if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) &&
                         !StringUtils.isNotBlank(bodyPart.getFileName())) {
-                    continue; // dealing with attachments only
-                }
-                InputStream is = bodyPart.getInputStream();
+                	System.out.println("bodyPart disp2 " + bodyPart.getDisposition());
+                    System.out.println("bodyPart getFileName2 " + bodyPart.getFileName());
+                    System.out.println("bodyPart ContentType2 " + bodyPart.getContentType());
+                	InputStream is = bodyPart.getInputStream();
+                    File f = new File(bodyPart.getFileName());
+                    FileOutputStream fos = new FileOutputStream(f);
+                    byte[] buf = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = is.read(buf)) != -1) {
+                        fos.write(buf, 0, bytesRead);
+                    }
+                    fos.close();
+                    attachments.add(f);
+                    downloaded = true;
+                    break;
+                    //continue; // dealing with attachments only
+                }*/
+                /*InputStream is = bodyPart.getInputStream();
                 File f = new File(bodyPart.getFileName());
                 FileOutputStream fos = new FileOutputStream(f);
                 byte[] buf = new byte[4096];
@@ -346,7 +444,7 @@ public class MailChecker {
                 fos.close();
                 attachments.add(f);
                 downloaded = true;
-                break;
+                break;*/
             }
         } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
@@ -377,8 +475,41 @@ public class MailChecker {
             System.out.println("Total Messages Found :" + foundMessages.length);
             //val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
+            
             if (message != null)
                 val = downloadMessageAttachment(message, attachmentfilename);
+
+            // disconnect
+            folderInbox.close(false);
+            store.close();
+        } catch (MessagingException ex) {
+            System.out.println("Could not connect to the message store.");
+            ex.printStackTrace();
+        }
+        return val;
+    }
+    
+    public static boolean searchEmailAndVerifyAttachmentExists(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) throws IOException {
+
+        boolean val = false;
+        try {
+            Store store = loginToGMailBox(userName, password);
+
+            Folder folderInbox = getInboxMailMessages(store);
+            //create a search term for all "unseen" messages
+            Flags seen = new Flags(Flags.Flag.SEEN);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
+            Message[] foundMessages = folderInbox.search(searchTerm);
+            System.out.println("Total Messages Found :" + foundMessages.length);
+            //val = findMailWithMessageText(foundMessages, subjectKeyword, fromEmail, bodySearchText);
+            Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
+            
+            if (message != null)
+                val = isMessageAttachmentExists(message, attachmentfilename);
 
             // disconnect
             folderInbox.close(false);

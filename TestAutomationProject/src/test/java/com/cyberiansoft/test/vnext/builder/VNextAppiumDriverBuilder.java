@@ -39,21 +39,21 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
 
         public SwipeableWebDriver build() {
         	PLATFORM_NAME = MobilePlatform.ANDROID;
-        	//File appDir = new File("./data/");
-    	    //File app = new File(appDir, "Repair360Android.apk");
+        	File appDir = new File("./data/");
+    	    File app = new File(appDir, "Repair360Android.apk");
     	    appiumcap = new DesiredCapabilities();
 
     		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
     		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
     		appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-    		//appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+    		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
     		appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
     		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
     		appiumcap.setCapability("session-override",true);
     		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
     		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-    		appiumcap.setCapability(MobileCapabilityType.APP,
-    				"http://amtqc.cyberiansoft.net/Uploads/android-debug.apk");
+    		//appiumcap.setCapability(MobileCapabilityType.APP,
+    		//		"http://amtqc.cyberiansoft.net/Uploads/android-debug.apk");
             return new SwipeableWebDriver(endpoint, appiumcap);
 
         }

@@ -50,7 +50,7 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	    	((VNextBaseTestCase) currentClass).setUp();
 	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
 	    	try {
-	    		((VNextBaseTestCase) currentClass).registerTeamEdition();
+	    		((VNextBaseTestCase) currentClass).registerTeamEdition("Automation_android");
 	    	} catch (Exception e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();

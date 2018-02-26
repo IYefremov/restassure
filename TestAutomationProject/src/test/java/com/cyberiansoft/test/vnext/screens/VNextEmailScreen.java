@@ -30,8 +30,8 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	public VNextEmailScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(emailscreen));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='email']")));
 		waitABit(1000);
 	}
 	
@@ -67,11 +67,11 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		log(LogStatus.INFO, "Tap on Send Emails button");
 	}
 	
-	public void sendEmail() {
+	public String sendEmail() {
 		clickSendEmailsButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE);
+		return informationdlg.clickInformationDialogOKButtonAndGetMessage();
+		
 	}
 
 }

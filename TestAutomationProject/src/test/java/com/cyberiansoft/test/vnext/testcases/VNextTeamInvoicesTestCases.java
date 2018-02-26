@@ -1,5 +1,16 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.function.Supplier;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,21 +20,31 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextChangeInvoicePONumberDialog;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextWorkOrderSummaryScreen;
+import com.cyberiansoft.test.vnext.screens.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import com.google.common.base.Suppliers;
+
+import io.appium.java_client.ScreenshotState;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -668,5 +689,218 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
 		invoicesscreen.switchToMyInvoicesView();
 		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+	}
+	
+	@Test(testName= "Test Case 71740:R360 client: Verify email Invoice for multiple items with the same customer", 
+			description = "Verify email Invoice for multiple items with the same customer")
+	public void testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer() throws IOException {
+		
+		final String vinnumber = "TEST";
+		final String customer = "RetailCustomer RetailLast";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int invoicesToCreate = 3;
+		ArrayList<String> invoices = new ArrayList<String>();
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		for (int i = 0; i < invoicesToCreate; i ++) {
+			VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+			workordersscreen.switchToTeamWorkordersView();
+			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+			customersscreen.switchToRetailMode();
+			if (!customersscreen.isCustomerExists(customer)) {
+					VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+					newcustomerscreen.createNewCustomer("RetailCustomer", "RetailLast");
+			} else {
+				customersscreen.selectCustomer(customer);
+			}
+
+			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(appiumdriver);
+			wotypeslist.selectWorkOrderType(wotype);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(vinnumber);
+			vehicleinfoscreen.swipeScreensLeft(3);
+			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+			wosummaryscreen.clickCreateInvoiceOption();
+			wosummaryscreen.clickWorkOrderSaveButton();
+		
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(invoiceType);
+			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+			invoiceinfoscreen.setInvoicePONumber(ponumber);
+			invoices.add(invoiceinfoscreen.getInvoiceNumber());
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			homescreen = invoicesscreen.clickBackButton();
+		}
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		for (String invoiceNumber : invoices)
+			invoicesscreen.selectInvoice(invoiceNumber);
+		invoicesscreen.clickOnSelectedInvoicesMailButton();
+		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		final String msg = emailscren.sendEmail();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.unselectAllSelectedInvoices();
+		homescreen = invoicesscreen.clickBackButton();
+		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
+		final int iterations = 7;
+		int currentIteration = 0;
+		for (String invoiceNumber : invoices) {
+			boolean found = false;
+			for (int i = 0; i < iterations; i++)
+				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
+						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
+					emailscren.waitABit(45*1000);
+			} else {
+				found = true;
+				break;
+			}
+			Assert.assertTrue(found, "Can't find mail with " + invoiceNumber + " invoice");
+				
+		}
+	}
+	
+	@Test(testName= "Test Case 71752:R360 client: Verify Cancel Email invoice", 
+			description = "Verify Cancel Email invoice")
+	public void testVerifyCancelEmailInvoice() throws IOException {
+		
+		final String vinnumber = "TEST";
+		final String customer = "RetailCustomer RetailLast";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int invoicesToCreate = 3;
+		ArrayList<String> invoices = new ArrayList<String>();
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		for (int i = 0; i < invoicesToCreate; i ++) {
+			VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+			workordersscreen.switchToTeamWorkordersView();
+			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+			customersscreen.switchToRetailMode();
+			if (!customersscreen.isCustomerExists(customer)) {
+					VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+					newcustomerscreen.createNewCustomer("RetailCustomer", "RetailLast");
+			} else {
+				customersscreen.selectCustomer(customer);
+			}
+
+			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(appiumdriver);
+			wotypeslist.selectWorkOrderType(wotype);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(vinnumber);
+			vehicleinfoscreen.swipeScreensLeft(3);
+			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+			wosummaryscreen.clickCreateInvoiceOption();
+			wosummaryscreen.clickWorkOrderSaveButton();
+		
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(invoiceType);
+			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+			invoiceinfoscreen.setInvoicePONumber(ponumber);
+			invoices.add(invoiceinfoscreen.getInvoiceNumber());
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			homescreen = invoicesscreen.clickBackButton();
+		}
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		for (String invoiceNumber : invoices)
+			invoicesscreen.selectInvoice(invoiceNumber);
+		invoicesscreen.clickOnSelectedInvoicesMailButton();
+		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
+		emailscren.clickHardwareBackButton();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.unselectAllSelectedInvoices();
+		homescreen = invoicesscreen.clickBackButton();
+	}
+	
+	@Test(testName= "Test Case 71753:R360 client: Verify email Invoice with different customer", 
+			description = "Verify email Invoice with different customer")
+	public void testVerifyEmailInvoiceWithDifferentCustomer() throws IOException {
+		
+		final String vinnumber = "TEST";
+		final String customer1 = "RetailCustomer RetailLast";
+		final String customer2 = "RetailCustomer2 RetailLast2";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+		
+		final int invoicesToCreate = 3;
+		String[] invoices = new String[invoicesToCreate];
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+	
+		for (int i = 0; i < invoices.length; i ++) {
+			VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+			workordersscreen.switchToTeamWorkordersView();
+			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+			customersscreen.switchToRetailMode();
+			if (i == 0) {
+				if (!customersscreen.isCustomerExists(customer1)) {
+					VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+					newcustomerscreen.createNewCustomer("RetailCustomer", "RetailLast");
+				} else {
+					customersscreen.selectCustomer(customer1);
+				}
+			} else {
+				if (!customersscreen.isCustomerExists(customer2)) {
+					VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+					newcustomerscreen.createNewCustomer("RetailCustomer2", "RetailLast2");
+				} else {
+					customersscreen.selectCustomer(customer2);
+				}
+			}
+
+			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(appiumdriver);
+			wotypeslist.selectWorkOrderType(wotype);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(vinnumber);
+			vehicleinfoscreen.swipeScreensLeft(3);
+			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+			wosummaryscreen.clickCreateInvoiceOption();
+			wosummaryscreen.clickWorkOrderSaveButton();
+		
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(invoiceType);
+			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+			invoiceinfoscreen.setInvoicePONumber(ponumber);
+			invoices[i] = invoiceinfoscreen.getInvoiceNumber();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			homescreen = invoicesscreen.clickBackButton();
+		}
+		
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		for (String invoiceNumber : invoices)
+			invoicesscreen.selectInvoice(invoiceNumber);
+		invoicesscreen.clickOnSelectedInvoicesMailButton();
+		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(customer2);	
+		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
+		System.out.println("+++++" + emailscren.getToEmailFieldValue());
+		//emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		final String msg = emailscren.sendEmail();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		invoicesscreen.unselectAllSelectedInvoices();
+		homescreen = invoicesscreen.clickBackButton();
+		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
+		final int iterations = 7;
+		int currentIteration = 0;
+		for (int i = 1; i < invoices.length; i ++) {
+			boolean found = false;
+			for (int j = 0; j < iterations; j++)
+				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
+						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
+					emailscren.waitABit(45*1000);
+			} else {
+				found = true;
+				break;
+			}
+			Assert.assertTrue(found, "Can't find mail with " + invoices[i] + " invoice");
+				
+		}
 	}
 }

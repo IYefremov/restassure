@@ -11,9 +11,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PressesKeyCode;
 import io.appium.java_client.android.HasNetworkConnection;
+import io.appium.java_client.screenrecording.CanRecordScreen;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class SwipeableWebDriver extends AppiumDriver implements HasTouchScreen, PressesKeyCode, HasNetworkConnection {
+public class SwipeableWebDriver extends AppiumDriver implements HasTouchScreen, PressesKeyCode, HasNetworkConnection, CanRecordScreen {
 	public RemoteTouchScreen touch;
 	
 	public SwipeableWebDriver(URL url, Capabilities caps) {

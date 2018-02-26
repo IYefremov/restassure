@@ -16,7 +16,7 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 	public void testVerifyPasswordDialogIsShownWhenUserSelectsAnEmployeeFromTheList() {
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 		loginscreen.selectEmployee(testEmployee);
-		loginscreen.tapCancelButton();	
+		loginscreen.tapLoginDialogCancelButton();	
 	}
 	
 	@Test(testName= "Test Case 35902:vNext - Log in with incorrect password", description = "Log in with incorrect password")

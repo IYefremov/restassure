@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.screens;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -31,10 +30,13 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='team']")
 	private WebElement teaminvoicestab;
 	
+	@FindBy(xpath="//*[@action='hide-multiselect-actions']")
+	private WebElement cancelselectedinvoices;
+	
 	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOf(invoiceslist));
 		waitABit(1000);
 	}
@@ -113,6 +115,12 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		return invoiceslist.findElements(By.xpath(".//div[@class='entity-item-text entity-item-name' and text()='" + invoicenumber + "']")).size() > 0;
 	}
 	
+	public void unselectAllSelectedInvoices() {
+		if (cancelselectedinvoices.isDisplayed())
+			tap(cancelselectedinvoices);
+		log(LogStatus.INFO, "Click unselect all Selected Invoices button");
+	}
+	
 	public VNextHomeScreen clickBackButton() {
 		clickScreenBackButton();
 		log(LogStatus.INFO, "Click Invoices screen Back button");
@@ -121,7 +129,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
 		tap(invoiceslist.findElement(By.xpath(".//div[@class='entity-item-text entity-item-name' and text()='" + invoicenumber + "']")));
-		log(LogStatus.INFO, "Tap VNextInvoiceMenuScreen Invoice: " + invoicenumber);
+		log(LogStatus.INFO, "Tap on Invoice: " + invoicenumber);
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
 	
@@ -164,6 +172,20 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public boolean isMyInvoicesViewActive() {
 		return myinvoicestab.getAttribute("class").contains("active");
+	}
+	
+	public void selectInvoice(String invoiceNumber) {
+		WebElement invoicecell = getInvoiceCell(invoiceNumber);
+		if (invoicecell != null)
+			if (invoicecell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
+				tap(invoicecell.findElement(By.xpath(".//input[@type='checkbox']")));
+		else
+			Assert.assertTrue(false, "Can't find invoice: " + invoiceNumber);
+	}
+	
+	public void clickOnSelectedInvoicesMailButton() {
+		tap(appiumdriver.findElement(By.xpath(".//*[@action='multiselect-actions-send-email']")));
+		log(LogStatus.INFO, "Tap selected invoices Mail Button");
 	}
 
 }

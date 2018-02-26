@@ -33,6 +33,14 @@ public class TeamPortalLoginPage extends BasePage {
         emailField.sendKeys("vozniuk@cyberiansoft.com");
         loginNextBTN.click();
         passwordBlock.findElement(By.tagName("input")).sendKeys("Viperpiper1");
+        
+        
+        try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         passwordNextBTN.click();
     }
 }

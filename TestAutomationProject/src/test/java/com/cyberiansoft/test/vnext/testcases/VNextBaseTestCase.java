@@ -1,10 +1,15 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -46,6 +51,7 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.AppDownloader;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 
+import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
@@ -99,7 +105,7 @@ public class VNextBaseTestCase {
 				appiumdriver = VNextAppiumDriverBuilder.forIOS().withEndpoint(new URL("http://127.0.0.1:4900/wd/hub")).build();
 			else {
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
-				appiumdriver.removeApp("com.automobiletechnologies.repair360_devstage");
+				appiumdriver.removeApp("com.automobiletechnologies.ReconProClient");
 				appiumdriver.quit();
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();
 			
@@ -144,7 +150,6 @@ public class VNextBaseTestCase {
 	public void switchToWebViewContext() {
 		Set<String> contextNames = appiumdriver.getContextHandles();
 		List<String> handlesList = new ArrayList(contextNames);
-		System.out.println("+++" + handlesList.size());
 		/*for (String handles : handlesList) {
 			System.out.println("+++" + handles);
 			if (handles.contains("com.automobiletechnologies.repair360"))
@@ -290,8 +295,9 @@ public class VNextBaseTestCase {
 		informationdlg.clickInformationDialogOKButton();
 	}
 	
-	public void registerTeamEdition() {
-		final String searchlicensecriteria = "Automation_android";
+	public void registerTeamEdition(String licenseName) {
+		//final String searchlicensecriteria = "Automation_android";
+		//final String searchlicensecriteria = "AutoTests";
 
 		initiateWebDriver();
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Devices.aspx");
@@ -303,7 +309,7 @@ public class VNextBaseTestCase {
 		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
 				ActiveDevicesWebPage.class);
 
-		devicespage.setSearchCriteriaByName(searchlicensecriteria);
+		devicespage.setSearchCriteriaByName(licenseName);
 		String regCode = devicespage.getFirstRegCodeInTable();
 
 		getWebDriver().quit();
@@ -320,11 +326,14 @@ public class VNextBaseTestCase {
 
 		switchToWebViewContext();*/
 		
+		System.out.println("Registration code:" + regCode);
+		
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regCode);
 		verificationscreen.clickVerifyButton(); 
 		
-		verificationscreen.waitABit(10*1000);
+
+		verificationscreen.waitABit(20*1000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
@@ -342,6 +351,43 @@ public class VNextBaseTestCase {
 	}
 	
 	public void resetApp() {
+		
+		
+		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		 try {
+			 appiumdriver.startRecordingScreen(
+	                    new AndroidStartScreenRecordingOptions()
+	                            .withTimeLimit(Duration.ofSeconds(5))
+	            );
+	        } catch (WebDriverException e) {
+	            if (e.getMessage().toLowerCase().contains("emulator")) {
+	                // screen recording only works on real devices
+	                return;
+	            }
+	}
+		 
+		 waitABit(10*1000);
+		 System.out.println("++++" + (appiumdriver == null));
+		 String videofile = appiumdriver.stopRecordingScreen();
+			System.out.println("++++" + videofile.isEmpty());
+			byte[] data = Base64.getDecoder().decode(videofile);
+			try (OutputStream stream = new FileOutputStream("c:/Logs/abc.avi")) {
+			    stream.write(data);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
+		 switchToWebViewContext();
+		
+		
+		
+		
+		
+		
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.resetApp();
 		waitABit(30*1000);
