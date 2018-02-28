@@ -624,7 +624,7 @@ public class InspectionsWebPage extends WebPageWithTimeframeFilter {
 			act.click(getTableRowWithInspection(inspectionnumber)
 					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspectionnumber + " invoice");
+			Assert.assertTrue(false, "Can't find " + inspectionnumber + " incpection");
 		}
 	}
 
