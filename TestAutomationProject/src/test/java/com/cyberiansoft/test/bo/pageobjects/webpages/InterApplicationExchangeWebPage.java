@@ -20,31 +20,31 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboDocType_Input")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboDocType_Input')]")
 	WebElement documentTypeDropDown;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboEntityType_Input")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
 	WebElement entityTypeDropDown;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10__0:0_0")
 	WebElement firstEntry;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_tbName")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
 	WebElement profileDetailsName;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl05_EditFormControl_tbName")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
 	WebElement profileDetailsNameEdit;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10")
+	@FindBy(xpath = "//table[@class='rgDetailTable detail-table']")
 	WebElement entriesTable;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_tbName")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
 	WebElement addRuleNameField;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboEntityType_Input")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
 	WebElement addRuleEntityTypeDropDown;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")
+	@FindBy(xpath = "//*[contains(@id, 'EditFormControl_comboIncludeType')]")
 	WebElement addRuleFilterTypeDropDOwn;
 
 	@FindBy(xpath = "//select[@name='ctl00$ctl00$Content$Main$gvSharing$ctl00$ctl06$Detail10$ctl06$Detail10$ctl02$ctl02$EditFormControl$lbItems_helper1']")
@@ -56,11 +56,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10")
 	WebElement rulesTable;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl07_EditFormControl_tbName")
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
 	WebElement ruleNameEdit1;
-
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_tbName")
-	WebElement ruleNameEdit2;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
 	WebElement sendFromCalendarBTN;
@@ -140,43 +137,18 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public void clickProfileDetailsBox(String button) throws InterruptedException {
 		if (button.equals("Cancel")) {
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel")))
-						.click();
-			} catch (Exception e) {
-				Thread.sleep(2000);
-				wait.until(ExpectedConditions.elementToBeClickable(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel")))
-						.click();
-			}
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
 		} else if (button.equals("Insert")) {
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate")))
-						.click();
-			} catch (Exception e) {
-				wait.until(ExpectedConditions.elementToBeClickable(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate")))
-						.click();
-				Thread.sleep(2000);
-			}
-		} else
-			Assert.assertTrue(false, "Wrong button");
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
+		}
 		waitForLoading();
 	}
 
 	public void clickProfileEditBox(String button) {
 		if (button.equals("Cancel"))
-			driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl05_EditFormControl_btnCancel"))
-					.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
 		else if (button.equals("Update"))
-			driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl05_EditFormControl_btnUpdate"))
-					.click();
-		else
-			Assert.assertTrue(false, "Wrong button");
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
 		waitForLoading();
 	}
 
@@ -219,11 +191,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public void clickAddRuleToFirstProfile() throws InterruptedException {
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.id(
-				"ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl00_AddNewRecordButton")));
-		driver.findElement(
-				By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl00_AddNewRecordButton"))
-				.click();
+		entriesTable.findElement(By.xpath(".//table[@class='rgDetailTable detail-table']")).findElement(By.xpath(".//input[contains(@id, 'AddNewRecordButton')]")).click();
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'AddNewRecordButton')]"))).click();
 		waitForLoading();
 	}
 
@@ -232,8 +201,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		addRuleNameField.sendKeys(name);
 
 		addRuleEntityTypeDropDown.click();
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList"))).findElements(By.tagName("li"))
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]/div/ul"))).findElements(By.tagName("li"))
 				.stream().filter(e -> e.getText().equals(entityType)).findFirst().get().click();
 
 		waitForLoading();
@@ -278,15 +246,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public void clickAddRuleBox(String button) throws InterruptedException {
 		if (button.equals("Cancel"))
-			driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnCancel"))
-					.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
 		else if (button.equals("Insert"))
-			driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_btnUpdate"))
-					.click();
-		else
-			Assert.assertTrue(false, "Wrong button");
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
 		Thread.sleep(5000);
 		waitForLoading();
 	}
@@ -304,43 +266,16 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public void clickEditRuleBox(String button) {
-		if (button.equals("Cancel")) {
-			try {
-				driver.findElement(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_btnCancel"))
-						.click();
-			} catch (Exception e) {
-				driver.findElement(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl07_EditFormControl_btnCancel"))
-						.click();
-			}
-		} else if (button.equals("Update")) {
-			try {
-				driver.findElement(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_btnUpdate"))
-						.click();
-			} catch (Exception e) {
-				driver.findElement(
-						By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl07_EditFormControl_btnUpdate"))
-						.click();
-			}
-		} else
-			Assert.assertTrue(false, "Wrong button");
+		if (button.equals("Cancel"))
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
+		else if (button.equals("Update"))
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
 		waitForLoading();
 	}
 
 	public void fillRuleBoxEdit(String name) throws InterruptedException {
-		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id(
-					"ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl07_EditFormControl_tbName")));
-			ruleNameEdit1.clear();
-			ruleNameEdit1.sendKeys(name);
-		} catch (TimeoutException e) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id(
-					"ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl05_EditFormControl_tbName")));
-			ruleNameEdit2.clear();
-			ruleNameEdit2.sendKeys(name);
-		}
+		wait.until(ExpectedConditions.elementToBeClickable(ruleNameEdit1)).clear();
+		ruleNameEdit1.sendKeys(name);
 	}
 
 	public void deleteRule(String ruleName) {
