@@ -30,7 +30,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -221,7 +220,7 @@ public class VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		registrationinformationdlg.waitABit(15*1000);
-		if (VNextAppiumDriverBuilder.getPlatformName().equals(MobilePlatform.ANDROID)) {
+		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 			DriverBuilder.getInstance().getAppiumDriver().launchApp();

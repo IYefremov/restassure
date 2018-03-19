@@ -23,6 +23,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
@@ -36,6 +37,7 @@ public class DriverBuilder {
 	private ThreadLocal<String> sessionId = new ThreadLocal<String>();
     private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
     private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
+    private ThreadLocal<MobilePlatform> mobilePlatform = new ThreadLocal<MobilePlatform>();
 	
 	private DriverBuilder() {
 	}
@@ -147,16 +149,32 @@ public class DriverBuilder {
 			case ANDROID:
 				mobileDriver.set(new AndroidDriver<MobileElement>(appiumURL,
 						appiumcap));
+				sessionId.set(((AndroidDriver<MobileElement>)
+						mobileDriver.get()).getSessionId().toString());
+				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
+				this.mobilePlatform.set(mobilePlatform);
 				break;
 			case IOS_HD:
 				mobileDriver.set(new IOSDriver<MobileElement>(appiumURL,
 						appiumcap));
+				sessionId.set(((IOSDriver<MobileElement>)
+						mobileDriver.get()).getSessionId().toString());
+				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
+				this.mobilePlatform.set(mobilePlatform);
 				break;
 			case IOS_REGULAR:
 				mobileDriver.set(new IOSDriver<MobileElement>(appiumURL,
 						appiumcap));
+				sessionId.set(((IOSDriver<MobileElement>)
+						mobileDriver.get()).getSessionId().toString());
+				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
+				this.mobilePlatform.set(mobilePlatform);
 				break;	
 		}
+	}
+	
+	public MobilePlatform getMobilePlatform() {
+		return this.mobilePlatform.get();
 	}
 	
 	public final URL getLocalHostAppiumURL() {

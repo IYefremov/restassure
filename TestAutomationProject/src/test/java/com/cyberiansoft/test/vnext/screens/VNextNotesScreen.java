@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -141,7 +141,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void addImageToNotesFromGallery() {
-		if (VNextAppiumDriverBuilder.getPlatformName().equals(MobilePlatform.ANDROID)) {
+		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
 			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			waitABit(3000);
 			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
