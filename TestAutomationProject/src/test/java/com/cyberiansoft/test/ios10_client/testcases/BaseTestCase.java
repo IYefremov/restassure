@@ -32,10 +32,10 @@ import org.testng.annotations.Parameters;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
-import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.core.AppiumDriverBuilder;
 import com.cyberiansoft.test.core.AppiumDriverBuilder.AndroidDriverBuilder;
 import com.cyberiansoft.test.core.AppiumDriverBuilder.IOSDriverBuilder;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -123,8 +123,8 @@ public class BaseTestCase {
 	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
 	        }
 		
-		WebDriverInstansiator.setDriver(browser);
-		webdriver = WebDriverInstansiator.getDriver();
+	        DriverBuilder.getInstance().setDriver(browser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 
 	public static WebElement wait(By locator) {
@@ -133,8 +133,8 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		WebDriverInstansiator.setDriver("chrome");
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver("chrome");
+		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//webdriver = new ChromeDriver();

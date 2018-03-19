@@ -1,16 +1,9 @@
 package com.cyberiansoft.test.monitorlite.testcases;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
-import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 
 
 public class MonitorLiteBaseTestCase {

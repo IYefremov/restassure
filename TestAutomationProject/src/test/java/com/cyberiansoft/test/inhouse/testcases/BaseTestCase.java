@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.inhouse.utils.WebDriverInstansiator;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
+
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +25,8 @@ public class BaseTestCase {
 	@Parameters({ "selenium.browser" })
 	public void setUp(String browser) throws Exception {
 		browsertype = browser;
-		WebDriverInstansiator.setDriver(browser);
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver(browser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.navigate().refresh();
 	}
 

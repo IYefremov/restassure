@@ -26,7 +26,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.QuestionsSectionDialogWebPa
 import com.cyberiansoft.test.bo.pageobjects.webpages.SendInspectionCustomEmailTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
-import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;

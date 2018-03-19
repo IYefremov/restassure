@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +26,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -112,8 +110,8 @@ public class VNextBaseTestCase {
 	}
 	
 	public void initiateWebDriver() {
-		WebDriverInstansiator.setDriver(defaultbrowser);
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 	
 	public void setUp() {
@@ -170,8 +168,8 @@ public class VNextBaseTestCase {
 	}
 	
 	public String getDeviceRegistrationCode(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) {
-		WebDriverInstansiator.setDriver(defaultbrowser);
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -283,8 +281,8 @@ public class VNextBaseTestCase {
 		//final String searchlicensecriteria = "Automation_android";
 		//final String searchlicensecriteria = "AutoTests";
 
-		WebDriverInstansiator.setDriver(defaultbrowser);
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Devices.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,

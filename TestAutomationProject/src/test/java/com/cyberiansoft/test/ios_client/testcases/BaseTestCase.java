@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios_client.testcases;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -26,20 +25,16 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.HomeScreen;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
-import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
@@ -151,8 +146,8 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		WebDriverInstansiator.setDriver(browser);
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver(browser);
+		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 
 	public static WebElement wait(By locator) {
@@ -161,8 +156,8 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		WebDriverInstansiator.setDriver("firefox");
-		webdriver = WebDriverInstansiator.getDriver();
+		DriverBuilder.getInstance().setDriver("firefox");
+		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);
 		//webdriver = new ChromeDriver();
