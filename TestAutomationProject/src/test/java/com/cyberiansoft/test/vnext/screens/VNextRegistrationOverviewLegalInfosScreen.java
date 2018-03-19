@@ -15,10 +15,10 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	@FindBy(id="final-view")
 	private WebElement registrationoverviewlegalinfoscreen;
 	
-	@FindBy(xpath="//span[text()='Terms and Conditions']")
+	@FindBy(xpath="//span[text()='I agree to Terms and Conditions']")
 	private WebElement termsandconditionslink;
 	
-	@FindBy(xpath="//span[text()='Payment Terms']")
+	@FindBy(xpath="//span[text()='I agree to Payment Terms']")
 	private WebElement paymenttermslink;
 	
 	@FindBy(xpath="//button[contains(@data-bind, 'termsAndConditions.agree')]")
@@ -63,8 +63,8 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickTermsAndConditionsLink() {
-		waitABit(4000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		waitABit(10000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(termsandconditionslink));
 		tap(termsandconditionslink);
 		

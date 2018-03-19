@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextHomeScreen extends VNextBaseScreen {
@@ -144,7 +145,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		return new VNextLoginScreen(appiumdriver);
 	}
 	
-	public VNextVehicleInfoScreen openCreateWOWizard(String testcustomer) {
+	public VNextVehicleInfoScreen openCreateWOWizard(VNextCustomer testcustomer) {
 		VNextWorkOrdersScreen workordersscreen = clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);

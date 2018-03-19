@@ -52,7 +52,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         return new Object[][]{
                 {"CompanyAutomation", "Nock for company", "Address 1", "Address 2", "123AB", "United States",
                         "California", "LA", "+380963665214", "+380963665214", "Test", "User",
-                        "Job title", "automationvozniuk@gmail.com"}
+                        "Job title", "test.cyberiansoft@gmail.com"}
 
         };
     }

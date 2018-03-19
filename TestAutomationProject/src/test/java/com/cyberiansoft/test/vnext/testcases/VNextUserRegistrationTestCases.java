@@ -257,7 +257,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
 		registrationoverviewlegalinfoscreen.waitABit(1000);
-		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
+		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		/*
 		verificationscreen = new VNextVerificationScreen(appiumdriver);
@@ -506,8 +506,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		regscreen.setEmail(userregmail);
 		regscreen.setPhoneNumber("3127641152");
 		regscreen.clickDoneButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Phone number or email address doesn't match the user's account information.");		
+		VNextPhoneMismatchDialog phonemismatchdialog = new VNextPhoneMismatchDialog(appiumdriver);		
+		Assert.assertEquals(phonemismatchdialog.getInformationDialogBodyMessage(), "Warning\nPhone doesn't match this email Email me my phone number");	
+		phonemismatchdialog.clickEmailMeMyPhoneButton();
 	}
 	
 	@Test(testName= "Test Case 54272:vNext: User can't create password for IBS after creating password for vNext BO", 
@@ -614,7 +615,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String newuseraddress2 = "Address2";
 		final String newusercity = "LA";
 		final String newuserzip = "5214BA63";
-		final String newusercountry = "United States";
+		final String newusercountry = "United States of America";
+		final String newusercountryselected = "United States";
 		final String newuserstate = "California";
 		final String userpaymentname = newuserfirstname + " " + newuserlastname;
 		final String  usercardnumber = "4242424242424242";
@@ -679,7 +681,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationpaymentinfoscreen.getUserAddress2Value(), newuseraddress2);
 		Assert.assertEquals(registrationpaymentinfoscreen.getUserCityValue(), newusercity);
 		Assert.assertEquals(registrationpaymentinfoscreen.getUserZipValue(), newuserzip);
-		Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountry);
+		Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountryselected);
 		Assert.assertEquals(registrationpaymentinfoscreen.getUserStateValue(), newuserstate);
 		registrationpaymentinfoscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
@@ -694,15 +696,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
-		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
+		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
-		registrationoverviewlegalinfoscreen.waitABit(10000);
+		registrationoverviewlegalinfoscreen.waitABit(25000);
+		
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
-
 		switchToWebViewContext();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
@@ -756,7 +759,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String newuseraddress2 = "Address2";
 		final String newusercity = "LA";
 		final String newuserzip = "5214BA63";
-		final String newusercountry = "United States";
+		final String newusercountry = "United States of America";
+		final String newusercountryselected = "United States";
 		final String newuserstate = "California";
 		
 		final String boeditionname = "Repair360 Free";
@@ -815,7 +819,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getCityValue(), newusercity);
 		Assert.assertEquals(registrationoverviewscreen.getZipValue(), newuserzip);
 		Assert.assertEquals(registrationoverviewscreen.getStateValue(), newuserstate);
-		Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountry);
+		Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountryselected);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
@@ -941,11 +945,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
 		statusscreen = feedbackscreen.clickSendButton();
 		homescreen = statusscreen.clickBackButton();
-		
-		
+			
 		Assert.assertTrue(MailChecker.getKayakoFeedbackMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Test Feedback Repair360", "info@reconprofree.com", "You can check the status of or update this ticket online at"));
-		
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Test Feedback Repair360", "info@reconprofree.com", "You can check the status of or update this ticket online at"));		
 	}
 	
 	@Test(testName= "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)", 
@@ -1019,7 +1021,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
-		registrationoverviewlegalinfoscreen.waitABit(10000);
+		registrationoverviewlegalinfoscreen.waitABit(25000);
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();

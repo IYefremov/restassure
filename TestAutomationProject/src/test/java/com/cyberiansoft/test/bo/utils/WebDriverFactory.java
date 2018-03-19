@@ -67,7 +67,7 @@ public class WebDriverFactory {
 			SafariOptions safariOpts = new SafariOptions();
 		    DesiredCapabilities cap = DesiredCapabilities.safari();
 
-		    safariOpts.setUseCleanSession(true);
+		    //safariOpts.useCleanSession(true);
 		    cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		    cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, "dismiss");
 		    cap.setCapability(SafariOptions.CAPABILITY, safariOpts);

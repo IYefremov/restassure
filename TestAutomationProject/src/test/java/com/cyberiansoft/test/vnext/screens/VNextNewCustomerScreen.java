@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class VNextNewCustomerScreen extends VNextBaseScreen {
@@ -71,41 +72,32 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		waitABit(1000);
 	}
 	
-	public void createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 
-			String customerphone, String customeraddress, String customercountry, String customerstate) {
-		setCustomerFirstName(firstname);
-		setCustomerLastName(lastname);
-		setCustomerCompanyName(companyname);
-		setCustomerEmail(customeremail);
-		setCustomerPhone(customerphone);
-		setCustomerAddress(customeraddress);
-		selectCustomerCountry(customercountry);
-		selectCustomerState(customerstate);
+	public void createNewCustomer(VNextRetailCustomer retailCustomer) {
+		if (retailCustomer.getFirstName() != null )
+			setCustomerFirstName(retailCustomer.getFirstName());
+		if (retailCustomer.getLastName() != null )
+			setCustomerLastName(retailCustomer.getLastName());
+		if (retailCustomer.getCompany() != null )
+			setCustomerCompanyName(retailCustomer.getCompany());
+		if (retailCustomer.getMailAddress() != null)
+			setCustomerEmail(retailCustomer.getMailAddress());
+		if (retailCustomer.getCustomerPhone() != null)
+			setCustomerPhone(retailCustomer.getCustomerPhone());
+		if (retailCustomer.getCustomerAddress1() != null)
+			setCustomerAddress(retailCustomer.getCustomerAddress1());
+		if (retailCustomer.getCustomerAddress2() != null)
+			setCustomerAddress2(retailCustomer.getCustomerAddress2());
+		if (retailCustomer.getCustomerCity() != null)
+			setCustomerCity(retailCustomer.getCustomerCity());
+		if (retailCustomer.getCustomerCountry() != null)
+			selectCustomerCountry(retailCustomer.getCustomerCountry());
+		if (retailCustomer.getCustomerState() != null)
+			selectCustomerState(retailCustomer.getCustomerState());
+		if (retailCustomer.getCustomerZip() != null)
+			setCustomerZIP(retailCustomer.getCustomerZip());
 		clickSaveCustomerButton();
 	}
-	
-	public void createNewCustomer(String firstname, String lastname, String companyname, String customeremail, 
-			String customerphone, String customeraddress1, String customeraddress2, String customercity, 
-			String customercountry, String customerstate, String customerzip) {
-		setCustomerFirstName(firstname);
-		setCustomerLastName(lastname);
-		setCustomerCompanyName(companyname);
-		setCustomerEmail(customeremail);
-		setCustomerPhone(customerphone);
-		setCustomerAddress(customeraddress1);
-		setCustomerAddress2(customeraddress2);
-		setCustomerCity(customercity);
-		selectCustomerCountry(customercountry);
-		selectCustomerState(customerstate);
-		setCustomerZIP(customerzip);
-		clickSaveCustomerButton();
-	}
-	
-	public void createNewCustomer(String firstname, String lastname) {
-		setCustomerFirstName(firstname);
-		setCustomerLastName(lastname);
-		clickSaveCustomerButton();
-	}
+
 	
 	public void setCustomerFirstName(String firstname) {
 		firstnamefld.clear();
@@ -214,7 +206,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(countrycell);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(countriespage));
-			tap(countriespage.findElement(By.xpath(".//li/a[@class='list-select-item' and contains(text(), '" + customercountry + "')]")));
+			tap(countriespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customercountry + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 			log(LogStatus.INFO, "Select customer Country: " + customercountry);
@@ -235,7 +227,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(statecell);
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statespage));
-			tap(statespage.findElement(By.xpath(".//li/a[@action='select-item' and contains(text(), '" + customerstate + "')]")));
+			tap(statespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customerstate + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 			log(LogStatus.INFO, "Select customer State: " + customerstate);

@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -24,7 +25,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can delete WO if 'Allow Delete=ON'")
 	public void testVerifyUserCanDeleteWOIfAllowDeleteON() { 
 	
-		final String testcustomer = "Test Test";
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		
@@ -66,7 +67,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can't delete WO if 'Allow Delete=OFF'")
 	public void testVerifyUserCantDeleteWOIfAllowDeleteOFF() { 
 	
-		final String testcustomer = "Test Test";
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String workorderType = "Kramar_auto2";
 		final String vinnumber = "TEST";
 		final String insuranceCompany = "Miami Beach Insurance";
@@ -144,7 +145,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can create WO from Team Inspection")
 	public void testVerifyUserCanCreateWOFromTeamInspection() { 
 	
-		final String inspcustomer = "Test Test";
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insptype = "O_Kramar2";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
@@ -155,7 +156,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
-		customersscreen.selectCustomer(inspcustomer);
+		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(insptype);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -215,7 +216,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify all selected services from Inspection displays when user create WO")
 	public void testVerifyAllSelectedServicesFromInspectionDisplaysWhenUserCreateWO() { 
 	
-		final String inspcustomer = "Test Test";
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
@@ -226,7 +227,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
-		customersscreen.selectCustomer(inspcustomer);
+		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(insptype);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -269,7 +270,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 					+ "Verify deleted WO doesn't displays in Team/My WO list")
 	public void testVerifyUserCanDeleteWOIfThisWOWasCreatedFromTeamInspectionScreen() { 
 	
-		final String inspcustomer = "Test Test";
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");;
 		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
@@ -279,7 +280,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
-		customersscreen.selectCustomer(inspcustomer);
+		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(insptype);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);

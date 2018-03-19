@@ -50,8 +50,10 @@ public class TeamPortalAccountsRulesPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickAddNewAccountRuleButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(addNewAccountRule)).click();
+    public void clickAddNewAccountRuleButton() throws InterruptedException {
+    	if (driver.findElements(By.xpath("//*[@class='fa fa-refresh fa-spin']")).size() > 0)
+    		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//*[@class='fa fa-refresh fa-spin']"))));   	
+    	wait.until(ExpectedConditions.elementToBeClickable(addNewAccountRule)).click();
     }
 
     public void createNewRule(String organization, String condition, String order, String description, boolean dropdown) throws InterruptedException {

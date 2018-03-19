@@ -21,7 +21,7 @@ public abstract class BasePage {
         driver.manage().timeouts().pageLoadTimeout(SLEEP_TIMEOUT_IN_SEC * 4, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC * 2, TimeUnit.SECONDS);
 
-        wait = new WebDriverWait(driver, 20, 250);
+        wait = new WebDriverWait(driver, 60, 250);
     }
 
     public BasePage goToAgreemntApprovmentPageFromEmail(String link) {

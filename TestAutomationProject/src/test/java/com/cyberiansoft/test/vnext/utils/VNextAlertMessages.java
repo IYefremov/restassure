@@ -16,6 +16,8 @@ public class VNextAlertMessages {
 	public static String ALL_DATABASES_ARE_DOWNLOADED_SECCESSFULY = "Data has been successfully downloaded";
 	public static String YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE = "Your email message has been added to the queue";
 	public static String YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE = "Your email messages have been added to the queue";
+	public static String THE_TO_BOX_IS_EMPTY = "The TO box is empty. Please specify at least one recipient.";
+	public static String THE_EMAIL_ADDRESS_IS_NOT_VALID = "The email address %s is not valid. Please enter a valid email address.";
 	public static String YOUR_FEEDBACK_HAS_BEEN_SENT = "Thank you! Your feedback has been sent";
 	public static String PLEASE_DOMT_LEAVE_SIGNATURE_FIELD_EMPTY = "Please don't leave signature field empty if you want to approve Inspection";
 	public static String CANCEL_CREATING_INVOICE = "Any unsaved changes will be lost. Are you sure you want to stop creating this Invoice?";

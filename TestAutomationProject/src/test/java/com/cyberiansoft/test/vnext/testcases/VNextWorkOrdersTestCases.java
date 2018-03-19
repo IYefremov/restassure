@@ -10,10 +10,11 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String testcustomer = "Oksana Osmak";
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Oksana", "Osmak");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 43334:vNext - Show selected services after WO is saved", 

@@ -49,7 +49,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		WebElement vpcell = null;
 		List<WebElement> vehicleparts = getVehiclePartsList().findElements(By.xpath(".//div[@action='select-item']"));
 		for (WebElement vehiclepartcell : vehicleparts) {
-			if (vehiclepartcell.findElements(By.xpath(".//div[@class='item-title' and text()='" + vehiclepartname + "']")).size() > 0) {
+			if (vehiclepartcell.findElements(By.xpath(".//div[@class='checkbox-list-title' and text()='" + vehiclepartname + "']")).size() > 0) {
 				vpcell = vehiclepartcell;
 				break;
 			}

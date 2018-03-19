@@ -30,17 +30,18 @@ public class TeamPortalLoginPage extends BasePage {
 
     public void loginByGmail() {
         loginGmailBTN.click();
-        emailField.sendKeys("vozniuk@cyberiansoft.com");
-        loginNextBTN.click();
-        passwordBlock.findElement(By.tagName("input")).sendKeys("Viperpiper1");
-        
-        
-        try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        passwordNextBTN.click();
+        if (driver.findElements(By.id("identifierId")).size() > 0) {
+        	emailField.sendKeys("test.cyberiansoft@gmail.com");
+        	loginNextBTN.click();
+        	passwordBlock.findElement(By.tagName("input")).sendKeys("ZZzz11!!");
+
+        	try {
+        		Thread.sleep(2000);
+        	} catch (InterruptedException e) {
+        		// TODO Auto-generated catch block
+        		e.printStackTrace();
+        	}
+        	passwordNextBTN.click();
+        }
     }
 }

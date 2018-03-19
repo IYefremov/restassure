@@ -11,6 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.vnext.utils.VNextCustomer;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -50,20 +52,20 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
-		waitABit(1000);
+		waitABit(1500);
 		//if (appiumdriver.findElements(By.xpath("//div[@class='help-button' and text()='OK, got it']")).size() > 0)
 			//if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
-	public void selectCustomer(String customer) {		
-		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")).size() > 0) {
-			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']"));	
+	public void selectCustomer(VNextCustomer customer) {
+		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
+			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
 			
 		} else {
 			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name']"));
@@ -71,21 +73,12 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
 			//waitABit(1000);
 
 		}
-		log(LogStatus.INFO, "Select customer " + customer);
+		log(LogStatus.INFO, "Select customer " + customer.getFullName());
 	}
-	
-	/*public void selectCustomerByCustomerAddress(String customeraddress) {
-		WebElement elem = customerslist.findElement(By.xpath(".//div[@class='list-item-text list-item-address' and contains(text(), '" + customeraddress + "')]"));	
-		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-		je.executeScript("arguments[0].scrollIntoView(true);",elem);			
-		tap(customerslist.findElement(By.xpath(".//div[@class='list-item-text list-item-address' and contains(text(), '" + customeraddress + "')]")));
-		waitABit(1000);
-		log(LogStatus.INFO, "Select customer by Address " + customeraddress);
-	}*/
 	
 	public void selectCustomerByCompanyName(String customercompany) {
 		WebElement elem = customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));	
@@ -113,13 +106,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		
 	}
 	
-	public boolean isCustomerExists(String customer) {
-		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;		
-	}
-	
-	public boolean isCustomerExists(String customerFirstName, String customerLastName) {
-		String customer = customerFirstName + " " + customerLastName;
-		return customerslist.findElements(By.xpath(".//p[text()='" + customer + "']")).size() > 0;		
+	public boolean isCustomerExists(VNextCustomer customer) {
+		return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;		
 	}
 	
 	public void clickBackButton() {

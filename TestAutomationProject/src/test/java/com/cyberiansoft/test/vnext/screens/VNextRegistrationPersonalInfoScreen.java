@@ -1,34 +1,20 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.CompositeAction;
-import org.openqa.selenium.interactions.touch.SingleTapAction;
-import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static io.appium.java_client.touch.offset.PointOption.point;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 
-import io.appium.java_client.android.Activity;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileBrowserType;
-import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.TouchAction;
+
 
 
 public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
@@ -81,8 +67,26 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void selectPhoneNumberCountryCode(String countrycode) {
-		Select sel = new Select(phonenumberselect);
-		sel.selectByValue(countrycode);
+		final String contrycodeXPath = "//li/a/span[contains(text(), '(+" + countrycode + ")')]";
+		tap(appiumdriver.findElement(By.xpath("//*[@data-name='phone']/i")));
+		if (!appiumdriver.findElement(By.xpath(contrycodeXPath)).isDisplayed()) {
+			/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			new TouchAction(appiumdriver).longPress(point(appiumdriver.manage().window().getSize().getWidth()-230,appiumdriver.manage().window().getSize().getHeight()-330))
+			.moveTo(point(appiumdriver.manage().window().getSize().getWidth()-630,appiumdriver.manage().window().getSize().getHeight()-830)).release().perform();
+			switchToWebViewContext();
+			WebElement elem = appiumdriver.findElement(By.xpath("//li/a/span[contains(text(), '(+" + countrycode + ")')]"));	
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",elem);*/
+			String datauid = appiumdriver.findElement(By.xpath("//li/a/span[contains(text(), '(+" + countrycode + "')]/../..")).getAttribute("data-uid");
+			if (appiumdriver instanceof JavascriptExecutor)
+				try {
+					((JavascriptExecutor)appiumdriver).executeScript("$('body').trigger('scrollto', $('[data-uid="+ datauid + "]'))");
+				} catch (WebDriverException e) {
+			    	//for some reason JS code is crashed but scrolled
+			    }
+		}
+			
+		tap(appiumdriver.findElement(By.xpath(contrycodeXPath)));
 	}
 	
 	public void setFirstName(String firstname) {

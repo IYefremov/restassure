@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOAdvancedSearchInspectionDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -45,6 +46,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 			description="Create Inspection with populated vehicle info for current day")
 	public void testCreateInspectionWithPopulatedVehicleInfoForCurrentDay() {
  		
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";
@@ -65,7 +67,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer("Retail Automation");
+		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);
@@ -114,6 +116,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 			description="Create Archived Inspection with full populated vehicle info for current day")
 	public void testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay() {
  		
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";
@@ -134,7 +137,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer("Retail Automation");
+		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);

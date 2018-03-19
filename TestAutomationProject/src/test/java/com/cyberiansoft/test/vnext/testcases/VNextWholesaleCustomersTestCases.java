@@ -9,9 +9,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -19,6 +17,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -26,7 +25,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify created on BO Wholesale customer displays in the list")
 	public void testVerifyCreatedOnBOWholesaleCustomerDisplaysInTheList() {
 		
-		final String wholesalecustomer = "Test_Wholesale_BO";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("Test_Wholesale_BO");
 		
 		initiateWebDriver();
 
@@ -40,11 +39,11 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		
 		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.searchClientByName(wholesalecustomer);
-		if (clientspage.isClientExistsInTable(wholesalecustomer))
-			clientspage.deleteClient(wholesalecustomer);
+		clientspage.searchClientByName(wholesalecustomer.getCompany());
+		if (clientspage.isClientExistsInTable(wholesalecustomer.getFullName()))
+			clientspage.deleteClient(wholesalecustomer.getFullName());
 		NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
-		newclientpage.createWholesaleClient(wholesalecustomer);
+		newclientpage.createWholesaleClient(wholesalecustomer.getCompany());
 		getWebDriver().quit();
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -54,7 +53,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.searchCustomerByName(wholesalecustomer);
+		customersscreen.searchCustomerByName(wholesalecustomer.getCompany());
 		customersscreen.selectCustomer(wholesalecustomer);
 		VNextNewCustomerScreen newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
 		//newcustomerscreen.g
@@ -82,7 +81,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify user can select Wholesale customer when create Inspection")
 	public void testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "AppendToRO";
 		final String vinnumber = "TEST";
 

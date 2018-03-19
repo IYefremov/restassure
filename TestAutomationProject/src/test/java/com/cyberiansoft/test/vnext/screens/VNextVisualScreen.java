@@ -29,8 +29,14 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//a[@class='floating-button color-red']")
 	private WebElement adddamagesbtn;
 	
-	@FindBy(xpath="//div[@class='speed-dial-buttons']")
+	@FindBy(xpath="//div[@class='list-block breakage-types']")
 	private WebElement damagetypeslist;
+	
+	@FindBy(xpath="//*[@data-tab='default']")
+	private WebElement defaulttab;
+	
+	@FindBy(xpath="//*[@data-tab='custom']")
+	private WebElement customtab;
 	
 	public VNextVisualScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
@@ -44,9 +50,10 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		
 	}
 
-	public void clickAddServiceButton() {		
+	public VNextSelectDamagesScreen clickAddServiceButton() {		
 		tap(adddamagesbtn);
 		log(LogStatus.INFO, "Tap Add Service button");
+		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	
 	public void selectDefaultDamage(String damageType) {
@@ -113,6 +120,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
+		tap(defaulttab);
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
 		log(LogStatus.INFO, "Tap Damage Type: " + damagetype);
 		return new VNextVisualScreen(appiumdriver);

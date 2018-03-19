@@ -1,16 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -20,7 +13,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -36,9 +28,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.utils.WebDriverInstansiator;
-import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
-import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder.AndroidDriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
@@ -48,7 +38,6 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
 import com.cyberiansoft.test.vnext.screens.VNextTeamEditionVerificationScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.cyberiansoft.test.vnext.utils.AppDownloader;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 
 import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
@@ -225,7 +214,7 @@ public class VNextBaseTestCase {
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, phonenumber, userregmail);
-		regscreen.waitABit(6000);
+		regscreen.waitABit(15000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
@@ -351,43 +340,6 @@ public class VNextBaseTestCase {
 	}
 	
 	public void resetApp() {
-		
-		
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		 try {
-			 appiumdriver.startRecordingScreen(
-	                    new AndroidStartScreenRecordingOptions()
-	                            .withTimeLimit(Duration.ofSeconds(5))
-	            );
-	        } catch (WebDriverException e) {
-	            if (e.getMessage().toLowerCase().contains("emulator")) {
-	                // screen recording only works on real devices
-	                return;
-	            }
-	}
-		 
-		 waitABit(10*1000);
-		 System.out.println("++++" + (appiumdriver == null));
-		 String videofile = appiumdriver.stopRecordingScreen();
-			System.out.println("++++" + videofile.isEmpty());
-			byte[] data = Base64.getDecoder().decode(videofile);
-			try (OutputStream stream = new FileOutputStream("c:/Logs/abc.avi")) {
-			    stream.write(data);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 
-		 switchToWebViewContext();
-		
-		
-		
-		
-		
-		
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.resetApp();
 		waitABit(30*1000);

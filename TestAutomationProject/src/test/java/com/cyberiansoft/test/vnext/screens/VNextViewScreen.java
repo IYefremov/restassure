@@ -18,7 +18,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 	public VNextViewScreen(SwipeableWebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));

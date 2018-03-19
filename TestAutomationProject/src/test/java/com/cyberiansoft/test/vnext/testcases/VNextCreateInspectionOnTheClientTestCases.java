@@ -19,13 +19,13 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -33,7 +33,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String testcustomer = "Retail Automation";
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 	final String VIN = "19UUA66278A050105";
 	
 	String inspnumbertc47229 = "";
@@ -195,20 +195,15 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			description = "Create Inspection with full populated customer info")
 	public void testCreateInspectionWhithFullPopulatedCustomerInfo() {
 		
-		final String firstname = "CustomerFirstName";
-		final String lastname = "CustomerLastName";
-		final String companyname = "";
-		final String customeremail = "osmak.oksana+408222@gmail.com";
-		final String customerphone = "978385064";
-		final String customeraddress = "";
-		final String customercountry = "";
-		final String customerstate = "";
+		VNextRetailCustomer testcustomer = new VNextRetailCustomer("CustomerFirstName", "CustomerLastName");
+		testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
+		testcustomer.setCustomerPhone("978385064");
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
+		newcustomerscreen.createNewCustomer(testcustomer);
 		
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);
@@ -223,20 +218,16 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			description = "Create Inspection with customer with First name only")
 	public void testCreateInspectionWhithCustomerWithFirstNameOnly() {
 		
-		final String firstname = "CustomerFirstName";
-		final String lastname = "";
-		final String companyname = "";
-		final String customeremail = "osmak.oksana+408222@gmail.com";
-		final String customerphone = "978385064";
-		final String customeraddress = "";
-		final String customercountry = "";
-		final String customerstate = "";
+		VNextRetailCustomer testcustomer = new VNextRetailCustomer();
+		testcustomer.setFirstName("CustomerFirstName");	
+		testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
+		testcustomer.setCustomerPhone("978385064");
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.createNewCustomer(firstname, lastname, companyname, customeremail, customerphone, customeraddress, customercountry, customerstate);
+		newcustomerscreen.createNewCustomer(testcustomer);
 		
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);

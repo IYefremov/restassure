@@ -12,7 +12,9 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -22,7 +24,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify user can approve Inspection after creating")
 	public void testVerifyUserCanApproveInspectionAfterCreating() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -44,7 +46,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify 'Clean' icon work correctly")
 	public void testVerifyCleanIconWorkCorrectly() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -70,7 +72,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify user can create WO only for Approved Inspections")
 	public void testVerifyUserCanCreateWOOnlyForApprovedInspections() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -93,7 +95,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	public String createSimpleInspection(String inspcustomer, String insptype, String vinnumber) {
+	public String createSimpleInspection(VNextCustomer inspcustomer, String insptype, String vinnumber) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();

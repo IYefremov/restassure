@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -18,14 +18,14 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesVehicleInfoS
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesWebPage;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String testcustomer = "111 111";
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("111", "111");
 	final String inspectiontype = "Lily_with_service Package";
 	
 	@Parameters({ "user.name", "user.psw"})

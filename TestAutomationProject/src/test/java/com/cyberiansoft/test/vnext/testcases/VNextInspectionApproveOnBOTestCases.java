@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -39,12 +40,13 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		//	description="Create Inspection with populated vehicle info for current day")
 	public void createInspectionWithPopulatedVehicleInfoForCurrentDay() {
  		
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";
 		final String deductibleValue = "122";
 		
-		final String percservices = "Aluminum Upcharge"; 
+		//final String percservices = "Aluminum Upcharge"; 
 		final String moneyservices = "Dent Repair"; 
 		final String matrixservice = "Hail Dent Repair";
 		final String matrixsubservice = "State Farm";
@@ -54,12 +56,12 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		final String vehiclepartsize = "Dime";	
 		final String vehiclepartseverity = "Light 6 to 15";	
 		final String additionalservice = "Aluminum Upcharge";
-		final String insppriceexp = "267.81";
+		final String insppriceexp = "214.25";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer("Retail Automation");
+		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);
@@ -81,7 +83,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspinfoscreen.swipeScreensLeft(2);
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(percservices);
+		//selectservicesscreen.selectService(percservices);
 		selectservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
@@ -117,6 +119,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
+		loginpage.waitABit(1000*15);
 		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -148,6 +151,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
+		loginpage.waitABit(1000*15);
 		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -170,6 +174,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 			description="Verify Archived Inspection can't be approved")
 	public void testVerifyArchivedInspectionCantBeApproved() {
  		
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";
@@ -192,7 +197,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer("Retail Automation");
+		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);
@@ -241,6 +246,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
+		loginpage.waitABit(1000*15);
 		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,

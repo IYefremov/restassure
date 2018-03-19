@@ -45,7 +45,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		String invoiceprice = null;
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		if (invoicecell != null)
-			invoiceprice = invoicecell.findElement(By.xpath(".//div[@class='entity-item-currency']")).getText();
+			invoiceprice = invoicecell.findElement(By.xpath(".//div[@class='checkbox-list-title checkbox-list-bold']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 		return invoiceprice;	
@@ -55,7 +55,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		String invoicecell = null;
 		WebElement inspcell = getInvoiceCell(invoicenumber);
 		if (inspcell != null)
-			invoicecell = inspcell.findElement(By.xpath(".//div[contains(@class, 'entity-item-status')]")).getText();
+			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status-')]")).getText();
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 		return invoicecell;
@@ -103,7 +103,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		WebElement invoicecell = null;
 		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
 		for (WebElement invcell : invoices)
-			if (invcell.findElements(By.xpath(".//div[@class='entity-item-text entity-item-name' and text()='" + invoicenumber + "']")).size() > 0) {
+			if (invcell.findElements(By.xpath(".//div[@class='checkbox-list-title' and text()='" + invoicenumber + "']")).size() > 0) {
 				invoicecell = invcell;
 				break;
 			}
@@ -112,7 +112,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isInvoiceExists(String invoicenumber) {
-		return invoiceslist.findElements(By.xpath(".//div[@class='entity-item-text entity-item-name' and text()='" + invoicenumber + "']")).size() > 0;
+		return invoiceslist.findElements(By.xpath(".//div[@class='checkbox-list-title' and text()='" + invoicenumber + "']")).size() > 0;
 	}
 	
 	public void unselectAllSelectedInvoices() {
@@ -128,7 +128,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
-		tap(invoiceslist.findElement(By.xpath(".//div[@class='entity-item-text entity-item-name' and text()='" + invoicenumber + "']")));
+		tap(invoiceslist.findElement(By.xpath(".//div[@class='checkbox-list-title' and text()='" + invoicenumber + "']")));
 		log(LogStatus.INFO, "Tap on Invoice: " + invoicenumber);
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}

@@ -14,10 +14,11 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String testcustomer = "Retail Automation";
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	final String testInsurenceCompany = "Test Insurance Company";
 	
@@ -192,20 +193,19 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 			description = "Create customer along with Inspection")
 	public void testCreateCustomerAlongWithInspection() { 
 		
-		final String firstname = "Eric";
-		final String lastname = "Burn";
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Eric", "Burn");
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";
 		final String customeremail = "osmak.oksana+408222@gmail.com";
-		final String customer = firstname + " " + lastname;
+		
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.setCustomerFirstName(firstname);
-		newcustomerscreen.setCustomerLastName(lastname);
+		newcustomerscreen.setCustomerFirstName(customer.getFirstName());
+		newcustomerscreen.setCustomerLastName(customer.getLastName());
 		newcustomerscreen.setCustomerEmail(customeremail);
 		newcustomerscreen.setCustomerAddress(customeraddress);
 		newcustomerscreen.setCustomerCity(customercity);
@@ -213,7 +213,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		newcustomerscreen.clickSaveCustomerButton();
 		newcustomerscreen.waitABit(7000);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		Assert.assertEquals(vehicleinfoscreen.getCustomercontextValue(), customer);
+		Assert.assertEquals(vehicleinfoscreen.getCustomercontextValue(), customer.getFullName());
 		final String inspnum = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
@@ -227,8 +227,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.selectCustomer(customer);
 		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
-		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), firstname);
-		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), lastname);
+		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), customer.getFirstName());
+		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), customer.getLastName());
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);
 		Assert.assertEquals(newcustomerscreen.getCustomerCity(), customercity);
 		Assert.assertEquals(newcustomerscreen.getCustomerZIP(), customerzip);

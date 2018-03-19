@@ -35,6 +35,7 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 	public void setInvoicePONumber(String poNumber) {
 		changeponumberfld.clear();
 		changeponumberfld.sendKeys(poNumber);
+		appiumdriver.hideKeyboard();
 		log(LogStatus.INFO, "Set Invoice PO Number: " + poNumber);
 	}
 	

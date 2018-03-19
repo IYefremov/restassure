@@ -1,8 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,6 +9,7 @@ import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -19,7 +17,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen visible for Inspection if 'Claim Info = ON'")
 	public void testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
@@ -50,7 +48,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen is not visible for Inspection if 'Claim Info = OFF'")
 	public void testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar2";
 		final String vinnumber = "TEST";
 
@@ -75,7 +73,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen visible for WO if 'Claim Info = ON'")
 	public void testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
@@ -106,7 +104,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen is not visible for WO if 'Claim Info = OFF'")
 	public void testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF() {
 		
-		final String wholesalecustomer = "001 - Test Company";
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar2";
 		final String vinnumber = "TEST";
 

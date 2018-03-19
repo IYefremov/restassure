@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
@@ -13,7 +14,6 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
@@ -21,38 +21,42 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String customerFirstName = "Customer";
-	final String customerLastName = "MailInspection";
-	final String customerCompanyName = "CompanyMailInspection";
-	final String customerAddress1 = "Test Address Street, 1";	
-	final String customerAddress2 = "Addreess2";
-	final String customereMail = "test.cyberiansoft@gmail.com";
-	final String customerPhone = "444-51-09";
-	final String customerCity = "Lviv";
-	final String customerCountry = "Mexico";
-	final String customerState = "Colima";
-	final String customerZIP = "79031";
+	
+	
+	VNextRetailCustomer testcustomer = new VNextRetailCustomer("Customer", "MailInspection");
 	final String customerstateShort = "CL";
+	
+	@BeforeMethod
+	public void initTestCustomer() {
+		testcustomer.setCompanyName("CompanyMailInspection");
+		testcustomer.setMailAddress("test.cyberiansoft@gmail.com");
+		testcustomer.setCustomerAddress1("Test Address Street, 1");
+		testcustomer.setCustomerAddress2("Addreess2");
+		testcustomer.setCustomerPhone("444-51-09");
+		testcustomer.setCustomerCity("Lviv");
+		testcustomer.setCustomerCountry("Mexico");
+		testcustomer.setCustomerState("Colima");
+		testcustomer.setCustomerZip("79031");		
+	}
 	
 	@Test(testName= "Test Case 66998:Verify correct Customer Info is shown on Printing", 
 			description = "Verify correct Customer Info is shown on Printing")
 	public void testVerifyCorrectCustomerInfoIsShownOnPrinting() throws IOException {
 
 		final String vinnumber = "TEST";
-		String customer = customerFirstName + " " + customerLastName;
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(customer)) {
+		if (!customersscreen.isCustomerExists(testcustomer)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(customerFirstName, customerLastName, customerCompanyName, customereMail, 
-					customerPhone, customerAddress1, customerAddress2, customerCity, customerCountry, customerState, customerZIP);
+			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(customer);
+			customersscreen.selectCustomer(testcustomer);
 		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -61,7 +65,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(customereMail);
+		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
@@ -84,11 +88,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		if (search) {
 			File pdfdoc = new File(inspectionreportfilenname);
 			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(customer));
-			Assert.assertTrue(pdftext.contains(customerAddress1));
-			Assert.assertTrue(pdftext.contains(customerAddress2));
-			Assert.assertTrue(pdftext.contains(customerCity));
-			Assert.assertTrue(pdftext.contains(customerZIP));
+			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
 		} else {
 			Assert.assertTrue(search, "Can't find email with " + inspnumber + " inspection");
@@ -100,7 +104,6 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 	public void testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting() throws IOException {
 
 		final String vinnumber = "TEST";
-		String customer = customerFirstName + " " + customerLastName;
 		
 		final String matrixservice = "Hail Dent Repair";
 		final String pricematrix = "Progressive";
@@ -110,12 +113,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(customer)) {
+		if (!customersscreen.isCustomerExists(testcustomer)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(customerFirstName, customerLastName, customerCompanyName, customereMail, 
-					customerPhone, customerAddress1, customerAddress2, customerCity, customerCountry, customerState, customerZIP);
+			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(customer);
+			customersscreen.selectCustomer(testcustomer);
 		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -142,7 +144,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = servicesscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(customereMail);
+		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
@@ -164,11 +166,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		if (search) {
 			File pdfdoc = new File(inspectionreportfilenname);
 			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(customer));
-			Assert.assertTrue(pdftext.contains(customerAddress1));
-			Assert.assertTrue(pdftext.contains(customerAddress2));
-			Assert.assertTrue(pdftext.contains(customerCity));
-			Assert.assertTrue(pdftext.contains(customerZIP));
+			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
 			Assert.assertTrue(pdftext.contains(matrixservice));
 			Assert.assertFalse(pdftext.contains(vehiclepartname));
@@ -183,7 +185,6 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 	public void testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting() throws IOException {
 
 		final String vinnumber = "TEST";
-		String customer = customerFirstName + " " + customerLastName;
 		
 		final String matrixservice = "Hail Dent Repair";
 		final String pricematrix = "Progressive";
@@ -193,12 +194,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(customer)) {
+		if (!customersscreen.isCustomerExists(testcustomer)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(customerFirstName, customerLastName, customerCompanyName, customereMail, 
-					customerPhone, customerAddress1, customerAddress2, customerCity, customerCountry, customerState, customerZIP);
+			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(customer);
+			customersscreen.selectCustomer(testcustomer);
 		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -225,7 +225,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = servicesscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(customereMail);
+		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
@@ -247,11 +247,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		if (search) {
 			File pdfdoc = new File(inspectionreportfilenname);
 			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(customer));
-			Assert.assertTrue(pdftext.contains(customerAddress1));
-			Assert.assertTrue(pdftext.contains(customerAddress2));
-			Assert.assertTrue(pdftext.contains(customerCity));
-			Assert.assertTrue(pdftext.contains(customerZIP));
+			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
 			Assert.assertTrue(pdftext.contains(matrixservice));
 			Assert.assertFalse(pdftext.contains(vehiclepartname));
@@ -266,7 +266,6 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 	public void testValidateQuantityColumnIsShownOnDevicePrintoutFormForMoneyServices() throws IOException {
 
 		final String vinnumber = "TEST";
-		String customer = customerFirstName + " " + customerLastName;
 		
 		final String[] moneyservices = { "Dent Repair", "Bumper Repair" };
 		final String[] moneyservicesprices = { "10", "0.99" };
@@ -277,12 +276,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(customer)) {
+		if (!customersscreen.isCustomerExists(testcustomer)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(customerFirstName, customerLastName, customerCompanyName, customereMail, 
-					customerPhone, customerAddress1, customerAddress2, customerCity, customerCountry, customerState, customerZIP);
+			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(customer);
+			customersscreen.selectCustomer(testcustomer);
 		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -302,7 +300,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = servicesscreen.saveInspectionViaMenu();
 		//inspectionscreen.switchToTeamInspectionsView();
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(customereMail);
+		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();

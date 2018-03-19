@@ -33,6 +33,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -40,7 +41,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Dent Repair", "Double Panel" };
-	final String testcustomer = "Retail Automation";
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 
@@ -921,8 +922,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		
-		visualscreen.clickAddServiceButton();
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
+		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+		//VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -1143,8 +1144,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 47440:vNext - Verify services are saved correctly when saving inspection from Visual screen", 
-			description = "Verify services are saved correctly when saving inspection from Visual screen")
+	//@Test(testName= "Test Case 47440:vNext - Verify services are saved correctly when saving inspection from Visual screen", 
+	//		description = "Verify services are saved correctly when saving inspection from Visual screen")
 	public void testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen() {
 		
 		final String[] selectdamages = { "Miscellaneous", "Dent Repair" };

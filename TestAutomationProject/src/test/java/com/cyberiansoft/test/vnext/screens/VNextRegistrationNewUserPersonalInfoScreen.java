@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -105,6 +107,15 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		tap(countryfld);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(countriespage));
+		
+		String datauid = countriespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + usercountry + "']/../..")).getAttribute("data-uid");
+		if (appiumdriver instanceof JavascriptExecutor)
+			try {
+				((JavascriptExecutor)appiumdriver).executeScript("$('body').trigger('scrollto', $('[data-uid="+ datauid + "]'))");
+			} catch (WebDriverException e) {
+		    	//for some reason JS code is crashed but scrolled
+		    }
+		
 		tap(countriespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + usercountry + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
@@ -112,8 +123,10 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	}
 	
 	public void selectNewUserState(String userstate) {
-		tap(statefld);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(statefld));
+		tap(statefld);
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(statespage));
 		tap(statespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + userstate + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);

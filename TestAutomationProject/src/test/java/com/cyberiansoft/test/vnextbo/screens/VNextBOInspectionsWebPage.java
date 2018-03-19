@@ -60,7 +60,9 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public void selectInspectionInTheList(String inspnumber) {
-		inspectionslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
+		new WebDriverWait(driver, 15)
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']"))).click();
+		//inspectionslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
 		waitABit(4000);
 	}
 	
@@ -155,16 +157,17 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			}
 		}
 		driver.switchTo().window(newwin);
-		driver.findElement(By.xpath("//p/button[@class='btn icon ok']")).click();
-		driver.findElement(By.name("txtAreaNotes")).sendKeys(approveNotes);
-		driver.findElement(By.xpath("//tr/td/button[@class='btn icon ok']")).click();
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes2"))));
+		driver.findElement(By.name("txtAreaNotes2")).sendKeys(approveNotes);
+		driver.findElement(By.xpath("//div/button[@class='btn icon ok middle' and @value='4']")).click();
 		waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parent);
 		driver.navigate().refresh();
 	}
 	
-	public void declineInspection(String approveNotes) {
+	public void declineInspection(String declineNotes) {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
 		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(driver);
@@ -177,15 +180,14 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			}
 		}
 		driver.switchTo().window(newwin);
-		driver.findElement(By.xpath("//p/button[@class='btn icon cancel']")).click();
-		driver.findElement(By.name("txtDeclineNotes")).sendKeys(approveNotes);
-		List<WebElement> declinebtns = driver.findElements(By.xpath("//tr/td/button[@class='btn icon cancel']"));
-		for (WebElement btn : declinebtns)
-			if (btn.isDisplayed()) {
-				btn.click();
-				break;
-			}
-		//driver.findElement(By.xpath("//tr/td/button[@class='btn icon cancel']")).click();
+		new WebDriverWait(driver, 60)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes2"))));
+		List<WebElement> serviceschkboxes = driver.findElements(By.name("cbService"));
+		for (WebElement serviceschkbox : serviceschkboxes)
+			serviceschkbox.click();
+		driver.findElement(By.xpath("//div/button[@class='btn icon cancel middle' and @value='2']")).click();
+		driver.findElement(By.name("txtAreaNotes2")).sendKeys(declineNotes);
+		driver.findElement(By.xpath("//button[@id='btnGeneralApprove']")).click();
 		waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parent);
