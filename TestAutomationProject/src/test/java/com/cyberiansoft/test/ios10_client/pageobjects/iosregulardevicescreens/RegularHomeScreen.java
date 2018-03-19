@@ -90,8 +90,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 
 	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("My Work Orders")));
-		appiumdriver.findElementByAccessibilityId("My Work Orders").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
+		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.switchToLocalWorkOrdersView();
 		return new RegularMyWorkOrdersScreen(appiumdriver);
 	}
 	
@@ -135,9 +136,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
 	public RegularTeamWorkOrdersScreen clickTeamWorkordersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Work Orders")));
-		appiumdriver.findElementByAccessibilityId("Team Work Orders").click();
-		Helpers.waitABit(1000);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
+		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.switchToOnlineWorkOrdersView();
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 

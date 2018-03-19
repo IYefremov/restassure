@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -13,6 +15,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -73,7 +76,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		clickSaveButton();
 		appiumdriver.findElementByAccessibilityId("Final").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 	}
@@ -186,8 +189,16 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isServiceWithSubSrviceSelected(String servicename, String servicesubsrvicename) {
+		boolean found = false;
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).findElementsByAccessibilityId(servicesubsrvicename).size() > 0;
+		List<MobileElement> services = selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(servicename);
+		for (MobileElement serv : services)
+			if (serv.findElementsByAccessibilityId(servicesubsrvicename).size() > 0) {
+				found = true;
+				break;
+			}				
+		return found;
+		
 	}
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
@@ -199,9 +210,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
 		if (!appiumdriver.findElementByAccessibilityId(servicename).isDisplayed()) {
-			swipeTableUp(appiumdriver.findElementByAccessibilityId(servicename),
-					appiumdriver.findElement(MobileBy.AccessibilityId("BundleItemsView")));
-			appiumdriver.findElementByAccessibilityId(servicename).click();
+			scrollToElement(servicename);
+	        //appiumdriver.findElementByAccessibilityId(servicename).click();
 		}
 		//appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
@@ -221,8 +231,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	public void searchAvailableService(String servicename) {
 		IOSElement searchfld = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")); 
 		
-		if (elementExists("Clear text"))
-			appiumdriver.findElementByAccessibilityId("Clear text").click();
+		//if (elementExists("Clear text"))
+		//	appiumdriver.findElementByAccessibilityId("Clear text").click();
 		//searchfld.click();
 		searchfld.clear();
 		searchfld.setValue(servicename);

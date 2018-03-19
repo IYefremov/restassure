@@ -217,7 +217,8 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Delete").click();
 	}
 	
-	public boolean isAutosavedWorkOrderExists() {	
+	public boolean isAutosavedWorkOrderExists() {
+		Helpers.waitABit(1500);
 		return elementExists(autosavedworkorder);
 	}
 	
@@ -402,5 +403,18 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public String getFirstWorkOrderNumberValue() {		
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
+	}
+	
+	public void switchToLocalMyOrdersView() {
+		appiumdriver.findElementByAccessibilityId("My").click();		
+	}
+	
+	public void switchToTeamWorkOrdersView() {
+		appiumdriver.findElementByAccessibilityId("Team").click();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 	}
 }

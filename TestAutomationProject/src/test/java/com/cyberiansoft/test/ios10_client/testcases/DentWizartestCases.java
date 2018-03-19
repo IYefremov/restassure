@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
-import java.net.MalformedURLException;
-
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -89,7 +87,8 @@ public class DentWizartestCases extends BaseTestCase {
 		//System.out.println("+++" + appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
-		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		//if (appiumdriver.isAppInstalled(IOSHDDeviceInfo.getInstance().getDeviceBundleId()))
+				appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriverInicialize(buildtype);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
@@ -105,7 +104,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@BeforeMethod
-	public void restartApps() throws MalformedURLException, InterruptedException {
+	public void restartApps() throws InterruptedException {
 		//resrtartApplication();	
 		//MainScreen mainscr = new MainScreen(appiumdriver);
 		//homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
@@ -1108,8 +1107,17 @@ public class DentWizartestCases extends BaseTestCase {
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
+		//IOSStartScreenRecordingOptions stratrec = IOSStartScreenRecordingOptions.startScreenRecordingOptions();
+		//stratrec.withVideoQuality(IOSStartScreenRecordingOptions.VideoQuality.HIGH).withVideoType(IOSStartScreenRecordingOptions.VideoType.H264).build();
+		//MobileCommand.startRecordingScreenCommand(stratrec);
+		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
+		//IOSStopScreenRecordingOptions stoprec = IOSStopScreenRecordingOptions.stopScreenRecordingOptions();
+		//ScreenRecordingUploadOptions upl = ScreenRecordingUploadOptions.uploadOptions().withRemotePath("/Users/kolin/Downloads/photos");
+		//stoprec.withUploadOptions(upl).build();
+		//MobileCommand.stopRecordingScreenCommand(stoprec);
+		
 		myworkordersscreen.clickAddOrderButton();
 		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
@@ -1162,9 +1170,9 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
 		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "50");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%45.46");
+		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%45.45");
 		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "60");		
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%54.54");
+		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%54.55");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -3108,7 +3116,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_VINIL_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.68 x 1.00");
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00");
 		
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
@@ -3121,7 +3129,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE, "$36.97 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.68 x 1.00");
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00");
 		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.WHEELCOVER2_SUBSERVICE, "$45.00 x 1.00");
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
@@ -3558,6 +3566,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.checkPreexistingDamage();
 		selectedservicescreen.saveSelectedServiceDetails();	
+		servicesscreen.cancelSearchAvailableService();
 		servicesscreen.assertTotalAmauntIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		servicesscreen.clickSaveButton();
 
@@ -3732,7 +3741,7 @@ public class DentWizartestCases extends BaseTestCase {
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
 		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_LEATHER_SERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CRT_2_RPR_LTHR_SUBSERVICE);
-		Assert.assertEquals(selectedservicescreen.getAdjustmentsValue(), "-$14.47");
+		Assert.assertEquals(selectedservicescreen.getAdjustmentsValue(), "-$14.48");
 		selectedservicescreen.setServiceQuantityValue("3.00");
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
@@ -3770,7 +3779,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Fender" };
 		final String[] vehiclepartspaint = { "Hood", "Left Fender" };
-		 
+
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -3978,6 +3987,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.assertServicePriceValue(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen.cancelSearchAvailableService();
 		servicesscreen.clickServiceTypesButton();
 				
 		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);

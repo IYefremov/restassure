@@ -187,13 +187,20 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 				JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
 				HashMap<String, String> scrollObject = new HashMap<String, String>();
 				scrollObject.put("direction", "up");
+				//scrollObject.put("element", ((IOSElement) table).getId());
 				scrollObject.put("element", ((IOSElement) table).getId());
 				js.executeScript("mobile: swipe", scrollObject);
 			} else
 				swipe = false;
 		}
-		
-		
 	}
+		
+		public void scrollToElement(String elementValue) {
+			JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+	        HashMap scrollObject = new HashMap<>();
+	        scrollObject.put("predicateString", "value == '" + elementValue + "'");
+	        js.executeScript("mobile: scroll", scrollObject);
+		
+		}
 	
 }

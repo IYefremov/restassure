@@ -3014,7 +3014,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen("Zayats Section1");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		Helpers.waitABit(30*1000);
+		Helpers.waitABit(40*1000);
 		resrtartApplication();
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3748,6 +3748,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickOnWO(wonum);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		Thread.sleep(3000);
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
         Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
@@ -3777,7 +3778,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
-		
+		Thread.sleep(3000);
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		Thread.sleep(1000);
 		teamworkordersscreen.clickHomeButton();
@@ -5288,6 +5289,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			selectedservicedetailscreen.saveSelectedServiceDetails();
 		}
 		servicesscreen.cancelOrder();
+		myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -5477,6 +5479,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
 		pricematrix.selectDiscaunt("Test service zayats");
 		pricematrix.clickSaveButton();
+		servicesscreen.cancelSearchAvailableService();
 		
 		servicesscreen.searchAvailableService(iOSInternalProjectConstants.SR_S4_BUNDLE);
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);	
@@ -6200,7 +6203,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
 		invoiceinfoscreen.clickInvoicePayButton();
-		invoiceinfoscreen.changePaynentMethodToCashNormal();
+		//invoiceinfoscreen.changePaynentMethodToCashNormal();
 		invoiceinfoscreen.setCashCheckAmountValue(cashcheckamount);
 		invoiceinfoscreen.clickInvoicePayDialogButon();
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
@@ -6295,7 +6298,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
 		invoiceinfoscreen.clickInvoicePayButton();
-		invoiceinfoscreen.changePaynentMethodToCashNormal();
+		//invoiceinfoscreen.changePaynentMethodToCashNormal();
 		invoiceinfoscreen.setCashCheckAmountValue(cashcheckamount);
 		invoiceinfoscreen.clickInvoicePayDialogButon();
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
@@ -7593,6 +7596,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen.cancelSearchAvailableService();
 		servicesscreen.cancelOrder();
 		homescreen =  myworkordersscreen.clickHomeButton();
 	}
@@ -7966,7 +7970,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -8029,7 +8033,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -8087,7 +8091,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		webdriverInicialize();
 		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
@@ -8150,7 +8154,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
-		final String _model = "Town & Country";
+		final String _model = "Town and Country";
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		String startDate = LocalDate.now().plusDays(1).format(formatter);

@@ -136,7 +136,7 @@ public class BaseTestCase {
 		WebDriverInstansiator.setDriver("chrome");
 		webdriver = WebDriverInstansiator.getDriver();
 		webdriver.manage().window().maximize();
-		webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);
+		webdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//webdriver = new ChromeDriver();
 	}
 
@@ -180,6 +180,7 @@ public class BaseTestCase {
 	}
 
 	public void webdriverGotoWebPage(String url) {
+		webdriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		webdriver.get(url);
 	}
 

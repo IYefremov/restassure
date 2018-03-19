@@ -9,6 +9,10 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static java.time.Duration.ofSeconds;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -471,7 +475,18 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectVehiclePart(String vehiclepart) {
-		WebElement vehiclepartstable = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
+		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
+		/*if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
+			swipeTableUp(vehiclepartstable.findElementByAccessibilityId(vehiclepart),
+					vehiclepartstable);
+		}
+		vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
+		if (vehiclepartstable.findElement(MobileBy.name(vehiclepart)).findElementByClassName("XCUIElementTypeButton").getAttribute("name").equals("unselected")) {
+			//vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
+			//vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
+			new TouchAction(appiumdriver).press(vehiclepartstable.findElement(MobileBy.name(vehiclepart)))
+	                .waitAction(waitOptions(ofSeconds(2))).release().perform();
+		}*/
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(Duration.ofSeconds(1)).release().perform();
 		Assert.assertTrue(vehiclepartstable.findElement(MobileBy.name(vehiclepart)).findElements(MobileBy.name("selected")).size() > 0);

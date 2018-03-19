@@ -75,7 +75,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		//action.press(myinspectionsbtn).waitAction(300).release().perform();
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		inspectionsscreen.switchToLocalInspectionsView();
+		inspectionsscreen.switchToMyInspectionsView();
 		return inspectionsscreen;
 	}
 	
@@ -84,15 +84,24 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		inspectionsscreen.switchToLocalInspectionsView();
+		inspectionsscreen.switchToTeamInspectionsView();
 		return new TeamInspectionsScreen(appiumdriver);
 	}
 
 	public MyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("My Work Orders"))); 
-		appiumdriver.findElementByAccessibilityId("My Work Orders").click();
-		return new MyWorkOrdersScreen(appiumdriver);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
+		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.switchToLocalMyOrdersView();
+		return myworkordersscreen;		
+	}
+	
+	public TeamWorkOrdersScreen clickTeamWorkordersButton() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
+		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
+		myworkordersscreen.switchToTeamWorkOrdersView();		
+		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 	
 	public CarHistoryScreen clickCarHistoryButton() {
@@ -107,7 +116,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
-		myinvoicesscreen.switchToLocalInvoicesView();
+		myinvoicesscreen.switchToMyInvoicesView();
 		return myinvoicesscreen;
 	}
 	
@@ -116,7 +125,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
-		myinvoicesscreen.switchToOnlineInvoicesView();
+		myinvoicesscreen.switchToTeameInvoicesView();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -140,17 +149,6 @@ public class HomeScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status")));
 		appiumdriver.findElementByAccessibilityId("Status").click();
-	}
-	
-	public TeamWorkOrdersScreen clickTeamWorkordersButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team Work Orders")));
-		appiumdriver.findElementByAccessibilityId("Team Work Orders").click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
-		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 
 	public SettingsScreen clickSettingsButton() {

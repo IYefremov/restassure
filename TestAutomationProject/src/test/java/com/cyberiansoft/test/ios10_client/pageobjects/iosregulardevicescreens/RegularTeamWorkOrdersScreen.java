@@ -50,11 +50,11 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("MyWorkOrdersTable")));
 	}
 	
 	public void clickCreateInvoiceForWO(String wonumber) {
-		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
+		WebElement table = appiumdriver.findElementByAccessibilityId("MyWorkOrdersTable");
 		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
 						+ wonumber + "']/XCUIElementTypeOther")).click();
 	}
@@ -115,7 +115,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	
 	public void selectWorkOrderForApprove(String wonumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersTable"))); 
+		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("MyWorkOrdersTable"))); 
 		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther")).click();
 		
 	}

@@ -139,9 +139,10 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setCashCheckAmountValue(String amountvalue) {
-		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='Cash / Check']/..");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(amountvalue);
+		appiumdriver.findElementByAccessibilityId("Payment_Tab_Cash").click();
+		//IOSElement par = (IOSElement) appiumdriver.findElementsByAccessibilityId("InvoicePaymentView").get(1);
+		appiumdriver.findElementByAccessibilityId("Payment_Cash_Amount").clear();
+		appiumdriver.findElementByAccessibilityId("Payment_Cash_Amount").sendKeys(amountvalue);
 	}
 	
 	public void clickInvoicePayDialogButon() {

@@ -44,7 +44,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Team Work Orders"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersPageTableLeft"))); 
 	}
 	
 	public void clickOnWO(String wonumber) {

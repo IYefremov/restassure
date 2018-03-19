@@ -74,8 +74,16 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
+		if (!appiumdriver.findElementByAccessibilityId(pricematrix).isDisplayed()) {
+			swipeTableUp(appiumdriver.findElementByAccessibilityId(pricematrix),
+					appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList"));
+			//appiumdriver.findElementByAccessibilityId(wotype).click();
+		}
+		appiumdriver.findElementByAccessibilityId(pricematrix).click();
+		Helpers.waitABit(1000);
+		
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + pricematrix + "']").click();
 
 	}

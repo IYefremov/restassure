@@ -20,7 +20,7 @@ public class AppiumConfiguration {
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
 		LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
-		//date = date.minusDays(3);
+		date = date.minusDays(1);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
