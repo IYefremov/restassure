@@ -17,6 +17,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
@@ -32,6 +33,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
@@ -50,6 +52,7 @@ public class BaseTestCase {
 	protected TestUser testuser;
 	protected String userpsw;
 	protected static ExtentTest testlogger;
+	protected BrowserType browsertype;
 	
 	//final String bundleid = "com.automobiletechnologies.reconprohd";
 	String bundleid = "";
@@ -146,7 +149,14 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		DriverBuilder.getInstance().setDriver(browser);
+		
+		for (BrowserType browserTypeEnum : BrowserType.values()) { 
+            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
+                this.browsertype = browserTypeEnum; 
+                return; 
+            } 
+        } 
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 
@@ -156,7 +166,7 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		DriverBuilder.getInstance().setDriver("firefox");
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);

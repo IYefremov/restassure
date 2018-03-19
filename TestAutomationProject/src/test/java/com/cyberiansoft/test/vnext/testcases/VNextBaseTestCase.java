@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -26,6 +27,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -63,12 +65,12 @@ public class VNextBaseTestCase {
 	protected DesiredCapabilities appiumcap;
 	protected static AppiumDriverLocalService service;
 	protected String regcode = "";
-	protected static String defaultbrowser;
 	protected static String deviceofficeurl;
 	protected static String deviceuser;
 	protected static String devicepsw;
 	protected static String deviceplatform;
 	protected static boolean buildproduction;
+	protected BrowserType browsertype;
 	
 	@BeforeSuite
 	@Parameters({ "selenium.browser", "device.platform" })
@@ -100,7 +102,12 @@ public class VNextBaseTestCase {
 				appiumdriver = VNextAppiumDriverBuilder.forAndroid().withEndpoint(new URL("http://127.0.0.1:4723/wd/hub")).build();*/
 			
 			}
-			defaultbrowser = browser;
+			for (BrowserType browserTypeEnum : BrowserType.values()) { 
+	            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
+	                this.browsertype = browserTypeEnum; 
+	                return; 
+	            } 
+	        } 
 			deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
 			devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
 			if (VNextConfigInfo.getInstance().getBuildProductionAttribute().equals("true"))
@@ -110,7 +117,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public void initiateWebDriver() {
-		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 	
@@ -168,7 +175,7 @@ public class VNextBaseTestCase {
 	}
 	
 	public String getDeviceRegistrationCode(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) {
-		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -281,7 +288,7 @@ public class VNextBaseTestCase {
 		//final String searchlicensecriteria = "Automation_android";
 		//final String searchlicensecriteria = "AutoTests";
 
-		DriverBuilder.getInstance().setDriver(defaultbrowser);
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Admin/Devices.aspx");
 
@@ -400,7 +407,7 @@ public class VNextBaseTestCase {
 	
 	public void webdriverGotoWebPage(String url) {
 		webdriver.get(url);
-		if (defaultbrowser.equals("ie")) {
+		if (browsertype.getBrowserTypeString().equals("ie")) {
 			if (webdriver.findElements(By.id("overridelink")).size() > 0) {
 				webdriver.navigate().to("javascript:document.getElementById('overridelink').click()");
 			}

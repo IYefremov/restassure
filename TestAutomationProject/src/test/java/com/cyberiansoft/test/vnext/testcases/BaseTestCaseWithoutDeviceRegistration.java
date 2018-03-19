@@ -11,7 +11,6 @@ public class BaseTestCaseWithoutDeviceRegistration extends VNextBaseTestCase {
 	@BeforeClass(description = "Setting up new suite")
 	@Parameters({ "user.name", "user.psw", "device.license", "selenium.browser"})	
 	public void settingUp(String deviceuser, String devicepsw, String licensename, String defbrowser) {
-		defaultbrowser = defbrowser;
 		setUp();
 		setNetworkOn();
 		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);

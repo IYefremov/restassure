@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -16,10 +15,8 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceContractTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceContractsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TechnicianCommissionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.VendorBillsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderInfoTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 
@@ -66,7 +63,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		Assert.assertEquals(1, techcommissionpage.getTechnicianCommissionsTableRowCount());
 
 		String lastpagenumber = techcommissionpage.getLastPageNumber();
-		techcommissionpage.clickGoToLastPage(browsertype);
+		techcommissionpage.clickGoToLastPage(browsertype.getBrowserTypeString());
 		Assert.assertEquals(lastpagenumber, techcommissionpage.getGoToPageFieldValue().replace(",", ""));
 
 		techcommissionpage.clickGoToFirstPage();
@@ -118,7 +115,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		Assert.assertEquals(1, wopage.getWorkOrdersTableRowCount());
 
 		String lastpagenumber = wopage.getLastPageNumber();
-		wopage.clickGoToLastPage(browsertype);
+		wopage.clickGoToLastPage(browsertype.getBrowserTypeString());
 		Assert.assertEquals(lastpagenumber, wopage.getGoToPageFieldValue().replace(",", ""));
 
 		wopage.clickGoToFirstPage();
@@ -216,10 +213,10 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		webdriver.navigate().back();
 		Thread.sleep(1000);
 		servicecontractspage.clickContractDataButton();
-		servicecontractspage.verifyDropDownMenuIsOpened(browsertype);
+		servicecontractspage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
 
 		servicecontractspage.clickClaimDataButton();
-		servicecontractspage.verifyDropDownMenuIsOpened(browsertype);
+		servicecontractspage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
 
 		servicecontractspage.clickPortfolioButton();
 		Thread.sleep(2000);
@@ -254,7 +251,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		Assert.assertEquals(1, inpectionspage.getInspectionsTableRowCount());
 
 		String lastpagenumber = inpectionspage.getLastPageNumber();
-		inpectionspage.clickGoToLastPage(browsertype);
+		inpectionspage.clickGoToLastPage(browsertype.getBrowserTypeString());
 
 		inpectionspage.clickGoToFirstPage();
 		Assert.assertEquals("1", inpectionspage.getGoToPageFieldValue());

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
@@ -31,7 +33,7 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	public String browsertype;
+	public BrowserType browsertype;
 	protected File app;
 	String bundleid = "";
 	
@@ -140,7 +142,13 @@ public class BaseTestCase {
 		app = new File(appDir, "ReconPro_0810.app.zip");
 		appiumcap.setCapability("app", app.getAbsolutePath());
 		
-		browsertype = browser;
+		for (BrowserType browserTypeEnum : BrowserType.values()) { 
+            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
+                this.browsertype = browserTypeEnum; 
+                return; 
+            } 
+        } 
+
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.navigate().refresh();

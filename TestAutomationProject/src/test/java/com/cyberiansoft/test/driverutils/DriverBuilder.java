@@ -17,6 +17,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 
 import io.appium.java_client.AppiumDriver;
@@ -51,11 +52,11 @@ public class DriverBuilder {
     }
 	
 	
-	public final void setDriver(String browserName) {
+	public final void setDriver(BrowserType browserType) {
 		
 		DesiredCapabilities webcap = null;
-		switch (browserName) {
-		case "firefox":
+		switch (browserType) {
+		case FIREFOX:
 			FirefoxDriverManager.getInstance().setup();
 			webcap = DesiredCapabilities.firefox();
 			FirefoxOptions ffOpts = new FirefoxOptions();
@@ -69,7 +70,7 @@ public class DriverBuilder {
 
             webDriver.set(new FirefoxDriver(ffOpts.merge(webcap)));
 			break;
-		case "ie":
+		case IE:
 			InternetExplorerDriverManager.getInstance().arch64().setup();
 	        DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
 
@@ -92,12 +93,12 @@ public class DriverBuilder {
 			//webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
 			//webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
 			break;
-		case "chrome":
+		case CHROME:
 			ChromeDriverManager.getInstance().setup();
 			webcap =  DesiredCapabilities.chrome();
 			webDriver.set(new ChromeDriver());
 			break;
-		case "safari":
+		case SAFARI:
 			SafariOptions safariOpts = new SafariOptions();
 			webcap = DesiredCapabilities.safari();
 

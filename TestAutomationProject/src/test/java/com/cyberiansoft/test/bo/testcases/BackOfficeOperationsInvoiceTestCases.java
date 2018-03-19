@@ -76,7 +76,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		String numberofrows = invoicespage.getLastPageNumber();
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
-		invoicespage.clickGoToLastPage(browsertype);
+		invoicespage.clickGoToLastPage(browsertype.getBrowserTypeString());
 		Assert.assertEquals(lastpagenumber, invoicespage.getGoToPageFieldValue());
 
 		invoicespage.clickGoToFirstPage();

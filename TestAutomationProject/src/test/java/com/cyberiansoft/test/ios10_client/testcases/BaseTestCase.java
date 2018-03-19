@@ -16,6 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
@@ -33,6 +34,7 @@ import org.testng.annotations.Parameters;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.core.AppiumDriverBuilder;
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.AppiumDriverBuilder.AndroidDriverBuilder;
 import com.cyberiansoft.test.core.AppiumDriverBuilder.IOSDriverBuilder;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -47,7 +49,7 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	
+	protected BrowserType browsertype;
 	protected TestUser testuser;
 	protected String userpsw;
 	protected static ExtentTest testlogger;
@@ -122,8 +124,13 @@ public class BaseTestCase {
 	        if (service == null || !service.isRunning()) {
 	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
 	        }
-		
-	        DriverBuilder.getInstance().setDriver(browser);
+	        for (BrowserType browserTypeEnum : BrowserType.values()) { 
+	            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
+	                this.browsertype = browserTypeEnum; 
+	                return; 
+	            } 
+	        } 
+	        DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 	}
 
@@ -133,7 +140,7 @@ public class BaseTestCase {
 
 	public void webdriverInicialize() throws Exception {
 
-		DriverBuilder.getInstance().setDriver("chrome");
+		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriver.manage().window().maximize();
 		webdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

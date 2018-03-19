@@ -10,6 +10,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
@@ -21,7 +22,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@BeforeMethod
 	public void BackOfficeLogin() {
-		DriverBuilder.getInstance().setDriver("chrome");
+		DriverBuilder.getInstance().setDriver(BrowserType.CHROME);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		//webdriver.navigate().refresh();
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
