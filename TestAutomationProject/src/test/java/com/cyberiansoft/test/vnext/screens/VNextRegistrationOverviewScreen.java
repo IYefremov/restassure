@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	
 	@FindBy(id="summary-view")
@@ -48,7 +51,7 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.countryText']")
 	private WebElement countryfld;
 	
-	public VNextRegistrationOverviewScreen(SwipeableWebDriver appiumdriver) {
+	public VNextRegistrationOverviewScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

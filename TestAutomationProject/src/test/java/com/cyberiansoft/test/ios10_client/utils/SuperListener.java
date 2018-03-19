@@ -143,7 +143,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		//currentClass = result.getInstance();
-        //SwipeableWebDriver appiumdriver = ((AndroidBaseTestCase) currentClass).getAppiumDriver();
+        //AppiumDriver<MobileElement> appiumdriver = ((AndroidBaseTestCase) currentClass).getAppiumDriver();
         testlogger= iOSLogger.getTestLogerInstance();
 		System.out.println("test method " + getTestMethodName(result) + " skipped");
 		testlogger.log(LogStatus.SKIP , "Test Case Skipped", getTestName(result) + " skipped");
@@ -292,7 +292,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		//currentClass = result.getInstance();
-        //SwipeableWebDriver appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
+        //AppiumDriver<MobileElement> appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
         testlogger= ((BaseTestCase) currentClass).getExtentTest();
 		System.out.println("test method " + getTestMethodName(result) + " skipped");
 		testlogger.log(LogStatus.SKIP , "Test Case Skipped", getTestName(result) + " skipped");

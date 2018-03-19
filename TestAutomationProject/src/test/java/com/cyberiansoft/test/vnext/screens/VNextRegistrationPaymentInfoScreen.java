@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(id="payment-info-view")
@@ -54,7 +57,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[contains(@data-bind, 'selectedStateText')]")
 	private WebElement statefld;
 	
-	public VNextRegistrationPaymentInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextRegistrationPaymentInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

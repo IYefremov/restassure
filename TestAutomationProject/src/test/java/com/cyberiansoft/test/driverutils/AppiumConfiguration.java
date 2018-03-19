@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.core;
+package com.cyberiansoft.test.driverutils;
 
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
+import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
+
 
 public class AppiumConfiguration {
 
@@ -24,7 +28,7 @@ public class AppiumConfiguration {
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
-				File appDir = new File("./data/");
+	        	File appDir = new File("./data/");
 	    	    File app = new File(appDir, "Repair360Android.apk");
 	    	    appiumcap = new DesiredCapabilities();
 

@@ -12,9 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.vnext.utils.VNextCustomer;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
@@ -46,7 +47,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='select-wholesale']")
 	private WebElement wholesalecustomertab;
 	
-	public VNextCustomersScreen(SwipeableWebDriver appiumdriver) {
+	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		//PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);

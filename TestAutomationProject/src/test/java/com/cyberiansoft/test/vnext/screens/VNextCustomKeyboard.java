@@ -9,12 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextCustomKeyboard extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='keypad']")
 	private WebElement keyboard;
 	
-	public VNextCustomKeyboard(SwipeableWebDriver appiumdriver) {
+	public VNextCustomKeyboard(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

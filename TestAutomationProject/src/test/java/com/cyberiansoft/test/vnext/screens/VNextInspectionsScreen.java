@@ -17,6 +17,10 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
 public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[contains(@class, 'page inspections-list')]")
@@ -45,7 +49,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 	
-	public VNextInspectionsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
@@ -246,7 +250,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		appiumdriver.getKeyboard().sendKeys(searchtext);
 		appiumdriver.hideKeyboard();
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		appiumdriver.pressKeyCode(66);
+		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
 		switchToWebViewContext();
 		log(LogStatus.INFO, "Set Search Text: " + searchtext);
 	}

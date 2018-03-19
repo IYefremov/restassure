@@ -9,15 +9,18 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
-import com.cyberiansoft.test.vnext.screens.SwipeableWebDriver;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 
-public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWebDriver> {
+public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends AppiumDriver<MobileElement>> {
 
 	private static String PLATFORM_NAME;
 	
@@ -33,11 +36,11 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         return new AndroidDriverBuilder();
     }
 
-    public static class AndroidDriverBuilder extends VNextAppiumDriverBuilder<AndroidDriverBuilder, SwipeableWebDriver> {
+    public static class AndroidDriverBuilder extends VNextAppiumDriverBuilder<AndroidDriverBuilder, AndroidDriver<MobileElement>> {
 
         DesiredCapabilities appiumcap = new DesiredCapabilities();
 
-        public SwipeableWebDriver build() {
+        public AndroidDriver<MobileElement> build() {
         	PLATFORM_NAME = MobilePlatform.ANDROID;
         	File appDir = new File("./data/");
     	    File app = new File(appDir, "Repair360Android.apk");
@@ -55,11 +58,11 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
     		//appiumcap.setCapability(MobileCapabilityType.APP,
     		//		"http://amtqc.cyberiansoft.net/Uploads/android-debug.apk");
-            return new SwipeableWebDriver(endpoint, appiumcap);
+            return new AndroidDriver<>(endpoint, appiumcap);
 
         }
         
-        public SwipeableWebDriver buildForPCloudy(String deviceName, String browserName) {
+        public AndroidDriver<MobileElement> buildForPCloudy(String deviceName, String browserName) {
         	PLATFORM_NAME = MobilePlatform.ANDROID;
     	    appiumcap = new DesiredCapabilities();
 
@@ -76,7 +79,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
              //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
     	    appiumcap.setCapability("rotatable", true); 
              
-            return new SwipeableWebDriver(endpoint, appiumcap);
+            return new AndroidDriver<>(endpoint, appiumcap);
 
         }
 
@@ -86,11 +89,11 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
         return new IOSDriverBuilder();
     }
     
-    public static class IOSDriverBuilder extends VNextAppiumDriverBuilder<IOSDriverBuilder, SwipeableWebDriver> {
+    public static class IOSDriverBuilder extends VNextAppiumDriverBuilder<IOSDriverBuilder, IOSDriver<MobileElement>> {
 
         DesiredCapabilities appiumcap = new DesiredCapabilities();
 
-        public SwipeableWebDriver build() {
+        public IOSDriver<MobileElement> build() {
         	DateTimeFormatter dateFormat =
                     DateTimeFormatter.ofPattern("MMdd");
     		LocalDate date = LocalDate.now();
@@ -119,7 +122,7 @@ public abstract class VNextAppiumDriverBuilder<SELF, DRIVER extends SwipeableWeb
     		appiumcap.setCapability(MobileCapabilityType.APP,
     				"http://amtqc.cyberiansoft.net/Uploads/Repair360_" + date.format(dateFormat) + ".app.zip");
 
-            return new SwipeableWebDriver(endpoint, appiumcap);
+            return new IOSDriver<>(endpoint, appiumcap);
 
         }
 

@@ -13,6 +13,9 @@ import org.testng.Assert;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextSelectServicesScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='center' and text()='Select Services']")
@@ -21,7 +24,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='services-add']")
 	private WebElement selectservicesscreen;
 	
-	public VNextSelectServicesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextSelectServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

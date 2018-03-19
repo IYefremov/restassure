@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextWorkOrderClaimInfoScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='orders-claim-info-form']")
@@ -30,7 +33,7 @@ public class VNextWorkOrderClaimInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="oOrders.AccidentDate")
 	private WebElement accidentdatefld;
 	
-	public VNextWorkOrderClaimInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextWorkOrderClaimInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

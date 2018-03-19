@@ -16,6 +16,9 @@ import org.testng.Assert;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-autotests-id='invoices-list']")
@@ -33,7 +36,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='hide-multiselect-actions']")
 	private WebElement cancelselectedinvoices;
 	
-	public VNextInvoicesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);

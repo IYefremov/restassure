@@ -12,6 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//a[@handler='_view']")
@@ -47,7 +50,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='close-popup close-actions']")
 	private WebElement closebtn;
 	
-	public VNextInspectionsMenuScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInspectionsMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -128,7 +131,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	}
 
 	public void clickCloseInspectionMenuButton() {
-		List<WebElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='close-popup close-actions']"));
+		List<MobileElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='close-popup close-actions']"));
 		for (WebElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				tap(closebtn);

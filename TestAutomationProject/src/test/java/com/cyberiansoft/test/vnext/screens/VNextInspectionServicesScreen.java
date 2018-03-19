@@ -13,6 +13,9 @@ import org.testng.Assert;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//div[@data-page='services-list']")
@@ -33,7 +36,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//*[@data-autotests-id='all-services']")
 	private WebElement allserviceslist;
 
-	public VNextInspectionServicesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInspectionServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

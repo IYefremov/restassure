@@ -12,6 +12,9 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//span[@action='save']")
@@ -23,7 +26,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='details']")
 	private WebElement servicedetailssscreen;
 	
-	public VNextServiceDetailsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//a[@action='email']/i")
@@ -35,7 +38,7 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='close-popup close-actions']")
 	private WebElement closebtn;
 	
-	public VNextInvoiceMenuScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInvoiceMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

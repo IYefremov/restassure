@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextSettingsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//input[@action='manual-update']")
@@ -17,7 +20,7 @@ public class VNextSettingsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@class='link icon-only back']")
 	private WebElement backbtn;
 	
-	public VNextSettingsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextSettingsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

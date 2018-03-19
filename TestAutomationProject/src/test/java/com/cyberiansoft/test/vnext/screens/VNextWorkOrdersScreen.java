@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -14,6 +13,9 @@ import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
@@ -38,7 +40,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='team']")
 	private WebElement teamworkorderstab;
 	
-	public VNextWorkOrdersScreen(SwipeableWebDriver appiumdriver) {
+	public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextEmailMismatchDialog extends VNextBaseScreen {
 	
 	@FindBy(id="email-mismatch")
@@ -18,7 +21,7 @@ public class VNextEmailMismatchDialog extends VNextBaseScreen {
 	@FindBy(xpath="//button[text()='Text me my email address']")
 	private WebElement textmailbtn;
 	
-	public VNextEmailMismatchDialog(SwipeableWebDriver appiumdriver) {
+	public VNextEmailMismatchDialog(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

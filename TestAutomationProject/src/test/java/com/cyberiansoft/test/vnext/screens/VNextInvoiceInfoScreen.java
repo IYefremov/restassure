@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='info']")
@@ -36,7 +39,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='invoce-info-container']")
 	private WebElement invoiceinfopanel;
 	
-	public VNextInvoiceInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextInvoiceInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

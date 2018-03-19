@@ -13,6 +13,8 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 
 public class VNextVisualScreen extends VNextBaseInspectionsScreen {
@@ -38,7 +40,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//*[@data-tab='custom']")
 	private WebElement customtab;
 	
-	public VNextVisualScreen(SwipeableWebDriver appiumdriver) {
+	public VNextVisualScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -115,7 +117,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		log(LogStatus.INFO, "Tap Damage Cancel Editing button");
 	}
 	
-	public List<WebElement> getImageMarkers() {
+	public List<MobileElement> getImageMarkers() {
 		return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img"));
 	}
 	

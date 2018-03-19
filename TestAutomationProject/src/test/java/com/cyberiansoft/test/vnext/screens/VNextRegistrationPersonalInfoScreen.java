@@ -3,17 +3,15 @@ package com.cyberiansoft.test.vnext.screens;
 import org.openqa.selenium.By;import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static io.appium.java_client.touch.offset.PointOption.point;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
 
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 
 
@@ -43,7 +41,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@data-automation-id='register-with-code']")
 	private WebElement ihaveregcodelink;
 	
-	public VNextRegistrationPersonalInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextRegistrationPersonalInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		//VNextRegistrationPersonalInfoScreen.WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

@@ -10,6 +10,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -44,7 +45,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			clientspage.deleteClient(wholesalecustomer.getFullName());
 		NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
 		newclientpage.createWholesaleClient(wholesalecustomer.getCompany());
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();

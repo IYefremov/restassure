@@ -38,6 +38,8 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
+import io.appium.java_client.MobileElement;
+
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Dent Repair", "Double Panel" };
@@ -875,7 +877,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		visualscreen.waitABit(1000);
 		
 		for (int i =0 ; i <  quantities.length; i++) {
-			List<WebElement> damagemarkers =  visualscreen.getImageMarkers();
+			List<MobileElement> damagemarkers =  visualscreen.getImageMarkers();
 			VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker(damagemarkers.get(i));
 			servicedetailsscreen.setServiceAmountValue(amounts[i]);
 			servicedetailsscreen.setServiceQuantityValue(quantities[i]);

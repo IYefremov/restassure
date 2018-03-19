@@ -10,53 +10,52 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.CompositeAction;
-import org.openqa.selenium.interactions.touch.SingleTapAction;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
-import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextBaseScreen {
 
-	SwipeableWebDriver appiumdriver;
+	AppiumDriver<MobileElement> appiumdriver;
 	ExtentTest testReporter;
 	
 	@FindBy(xpath="//*[@data-autotests-id='change-screen-popover']")
 	private WebElement changescrenpopover;
 
-	public VNextBaseScreen(SwipeableWebDriver driver) {
+	public VNextBaseScreen(AppiumDriver<MobileElement> driver) {
 		this.appiumdriver = driver;
 		testReporter = ExtentReportFactory.getTest();
 	}
 	
 	public void tap(WebElement element) {
 		waitABit(300);
+		element.click();
 		//new TouchActions(appiumdriver).singleTap(element).perform();
+		/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
+		CompositeAction action = new CompositeAction();
+		action.addAction(tapAction).perform();*/
 		
-		
-		if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
+		/*if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
 			new TouchActions(appiumdriver).singleTap(element).perform();
-			/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
-			CompositeAction action = new CompositeAction();
-			action.addAction(tapAction).perform();*/
+			
 		} else {
 			int xx = element.getLocation().getX() + element.getSize().getWidth()/2;
 			int yy = element.getLocation().getY() + element.getSize().getHeight()/2;
 			
 			new TouchAction(appiumdriver).tap(xx, yy).perform();
 		}		
-		waitABit(300);
+		waitABit(300);*/
+		
 	}
 	
 	public void setValue(WebElement element, String value) {
@@ -80,7 +79,7 @@ public class VNextBaseScreen {
 	
 	public void clickHardwareBackButton() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
+		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
 		//appiumdriver.navigate().back();
 		try {
 			appiumdriver.hideKeyboard();
@@ -148,7 +147,7 @@ public class VNextBaseScreen {
 	
 	public void switchToWebViewContext() {
 		Set<String> contextNames = appiumdriver.getContextHandles();
-		List<String> handlesList = new ArrayList(contextNames);
+		List<String> handlesList = new ArrayList<String>(contextNames);
 		if (handlesList.size() > 2)
 			appiumdriver.context(handlesList.get(2));
 		else

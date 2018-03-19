@@ -17,6 +17,9 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 
 public class VNextLoginScreen extends VNextBaseScreen {
 	
@@ -50,7 +53,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@data-autotests-id='search-cancel']")
 	private WebElement cancelsearchbtn;
 	
-	public VNextLoginScreen(SwipeableWebDriver appiumdriver) {
+	public VNextLoginScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

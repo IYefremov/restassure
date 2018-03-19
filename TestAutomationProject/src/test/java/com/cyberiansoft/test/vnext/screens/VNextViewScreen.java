@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class VNextViewScreen extends VNextBaseScreen {
@@ -15,7 +17,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='view']")
 	private WebElement viewscreen;
 	
-	public VNextViewScreen(SwipeableWebDriver appiumdriver) {
+	public VNextViewScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

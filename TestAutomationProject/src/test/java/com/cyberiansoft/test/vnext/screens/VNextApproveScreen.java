@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 
 public class VNextApproveScreen extends VNextBaseScreen {
@@ -26,7 +28,7 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 	
-	public VNextApproveScreen(SwipeableWebDriver appiumdriver) {
+	public VNextApproveScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

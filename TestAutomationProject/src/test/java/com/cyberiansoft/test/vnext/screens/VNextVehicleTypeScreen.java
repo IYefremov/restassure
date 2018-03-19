@@ -10,13 +10,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextVehicleTypeScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='list-block']")
 	private WebElement typeslist;
 
 	
-	public VNextVehicleTypeScreen(SwipeableWebDriver appiumdriver) {
+	public VNextVehicleTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

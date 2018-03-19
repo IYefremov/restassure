@@ -14,6 +14,9 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 
 public class VNextFeedbackScreen extends VNextBaseScreen {
 	
@@ -41,7 +44,7 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='send']")
 	private WebElement sendbtn;
 	
-	public VNextFeedbackScreen(SwipeableWebDriver appiumdriver) {
+	public VNextFeedbackScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		waitABit(3000);

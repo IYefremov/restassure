@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextEmailVerificationScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-page='email-verification']")
@@ -17,7 +20,7 @@ public class VNextEmailVerificationScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='activate']")
 	private WebElement activatebtn;
 	
-	public VNextEmailVerificationScreen(SwipeableWebDriver appiumdriver) {
+	public VNextEmailVerificationScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

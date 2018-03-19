@@ -10,6 +10,9 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='estimation-number']")
@@ -33,7 +36,7 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//span[@action='save']")
 	private WebElement savebtn;
 	
-	public VNextBaseInspectionsScreen(SwipeableWebDriver appiumdriver) {
+	public VNextBaseInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 	}

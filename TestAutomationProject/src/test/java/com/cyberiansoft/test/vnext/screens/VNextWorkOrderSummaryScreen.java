@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextWorkOrderSummaryScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(xpath="//div[@data-page='summary']")
@@ -20,7 +23,7 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 
-	public VNextWorkOrderSummaryScreen(SwipeableWebDriver appiumdriver) {
+	public VNextWorkOrderSummaryScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

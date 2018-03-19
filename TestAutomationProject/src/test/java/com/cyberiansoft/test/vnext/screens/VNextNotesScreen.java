@@ -18,7 +18,9 @@ import com.cyberiansoft.test.vnext.builder.VNextAppiumDriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobilePlatform;
 
 public class VNextNotesScreen extends VNextBaseScreen {
@@ -50,7 +52,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	@FindBy(id="notes-pictures")
 	private WebElement notespicturesframe;
 	
-	public VNextNotesScreen(SwipeableWebDriver appiumdriver) {
+	public VNextNotesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

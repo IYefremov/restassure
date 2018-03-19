@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
 	@FindBy(id="final-view")
@@ -39,7 +42,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[text()='Pay now!']")
 	private WebElement paynowbtn;
 	
-	public VNextRegistrationOverviewLegalInfosScreen(SwipeableWebDriver appiumdriver) {
+	public VNextRegistrationOverviewLegalInfosScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

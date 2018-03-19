@@ -12,8 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
@@ -65,7 +67,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
 	
-	public VNextVehicleInfoScreen(SwipeableWebDriver appiumdriver) {
+	public VNextVehicleInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -160,7 +162,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 		tap(appiumdriver.findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
-		List<WebElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='right']/a[@class='link close-picker']"));
+		List<MobileElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='right']/a[@class='link close-picker']"));
 		for (WebElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				tap(closebtn);

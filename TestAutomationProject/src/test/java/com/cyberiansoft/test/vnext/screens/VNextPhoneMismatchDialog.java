@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextPhoneMismatchDialog extends VNextBaseScreen {
 	
 	@FindBy(id="phone-mismatch")
@@ -18,7 +21,7 @@ public class VNextPhoneMismatchDialog extends VNextBaseScreen {
 	@FindBy(xpath="//button[text()='Email me my phone number']")
 	private WebElement emailmephonebtn;
 	
-	public VNextPhoneMismatchDialog(SwipeableWebDriver appiumdriver) {
+	public VNextPhoneMismatchDialog(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

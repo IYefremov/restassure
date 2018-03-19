@@ -13,6 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+
 public class VNextInformationDialog extends VNextBaseScreen {
 	
 	@FindBy(xpath="//body/div[contains(@class, 'modal-in')]")
@@ -21,7 +24,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	@FindBy(xpath="//div[@class='modal-text']")
 	private WebElement modaldlgmsg;
 	
-	public VNextInformationDialog(SwipeableWebDriver appiumdriver) {
+	public VNextInformationDialog(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
