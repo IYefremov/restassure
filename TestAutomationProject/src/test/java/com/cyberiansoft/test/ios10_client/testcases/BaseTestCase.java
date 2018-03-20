@@ -33,10 +33,8 @@ import org.testng.annotations.Parameters;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
-import com.cyberiansoft.test.core.AppiumDriverBuilder;
 import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.core.AppiumDriverBuilder.AndroidDriverBuilder;
-import com.cyberiansoft.test.core.AppiumDriverBuilder.IOSDriverBuilder;
+import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -160,12 +158,16 @@ public class BaseTestCase {
 		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		this.buildtype = buildtype;
 		if (buildtype.toLowerCase().equals("hd"))
-			appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
+			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD, service.getUrl());
+			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
 			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
 		else
+			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR, service.getUrl());
 			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
-			appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
+			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
+		appiumdriver = (IOSDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
+		
 		Helpers.init(appiumdriver);
 	}
 	

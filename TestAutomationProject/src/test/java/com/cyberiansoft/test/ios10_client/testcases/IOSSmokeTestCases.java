@@ -119,7 +119,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		final String searchlicensecriteria = "Ios_automation";
 
-		//webdriverInicialize();
+		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
