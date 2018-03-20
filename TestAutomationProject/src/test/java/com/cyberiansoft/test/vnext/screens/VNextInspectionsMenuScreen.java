@@ -17,32 +17,35 @@ import io.appium.java_client.MobileElement;
 
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//a[@handler='_view']")
+	@FindBy(xpath="//a[@data-name='view']")
 	private WebElement viewinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_edit']/span")
+	@FindBy(xpath="//a[@data-name='edit']")
 	private WebElement editinspectionbtn;
 	
 	@FindBy(xpath="//a[@handler='_createOrder']")
 	private WebElement createwoinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_notes']")
+	@FindBy(xpath="//a[@data-name='notes']")
 	private WebElement notesinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_refreshPictures']")
+	@FindBy(xpath="//a[@data-name='refresh']")
 	private WebElement refreshpicturesinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_email']")
+	@FindBy(xpath="//a[@data-name='email']")
 	private WebElement emailinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_archive']")
+	@FindBy(xpath="//a[@data-name='archive']")
 	private WebElement archiveinspectionbtn;
 	
-	@FindBy(xpath="//a[@handler='_approve']")
+	@FindBy(xpath="//a[@data-name='approve']")
 	private WebElement approveinspectionbtn;
 	
 	@FindBy(xpath="//a[@handler='_deleteWorkOrder']")
 	private WebElement deleteorderbtn;
+	
+	@FindBy(xpath="//a[@data-name='addSupplement']")
+	private WebElement addsupplementbtn;
 	
 	@FindBy(xpath="//body/div[@data-menu='popup']")
 	private WebElement inspectionsmenuscreen;
@@ -128,6 +131,14 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		waitABit(3000);
 		log(LogStatus.INFO, "Tap on View Inspection Menu");
 		return new VNextViewScreen(appiumdriver);
+	}
+	
+	public VNextVehicleInfoScreen clickAddSupplementInspectionMenuItem() {			
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(addsupplementbtn));
+		tap(addsupplementbtn);	
+		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
+		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 
 	public void clickCloseInspectionMenuButton() {

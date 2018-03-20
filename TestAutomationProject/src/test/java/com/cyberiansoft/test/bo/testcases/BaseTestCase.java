@@ -201,10 +201,6 @@ public class BaseTestCase {
 		}
 	}
 
-	public WebDriver getWebDriver() {
-		return webdriver;
-	}
-
 	@AfterMethod
 	public void cookieCleaner(){
 		webdriver.get("https://reconpro.cyberianconcepts.com/");

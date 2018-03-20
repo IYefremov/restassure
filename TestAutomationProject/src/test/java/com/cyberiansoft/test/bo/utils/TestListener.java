@@ -9,14 +9,12 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.TestListenerAdapter;
 
-import com.cyberiansoft.test.bo.testcases.BaseTestCase;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 
 
 public class TestListener extends TestListenerAdapter  implements IInvokedMethodListener  {
@@ -32,7 +30,7 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
 	
 	@Override
 	public void onTestFailure(ITestResult result) {
-	        WebDriver driver = ((BaseTestCase) currentClass).getWebDriver();
+	        WebDriver driver = DriverBuilder.getInstance().getDriver();
 	        if (driver != null) {
 	        	createScreenshot(driver, "report/", getTestMethodName(result));
 	        }
@@ -40,7 +38,7 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
 	
 	@Override
 	public void onTestSkipped (ITestResult result) {
-	        WebDriver driver = ((BaseTestCase) currentClass).getWebDriver();
+	        WebDriver driver = DriverBuilder.getInstance().getDriver();
 	        if (driver != null) {
 	        	//createScreenshot(driver, "report/", "skipped" + getTestMethodName(result));
 	        }
