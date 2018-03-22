@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -44,11 +45,11 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		waitABit(1000);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		verificationscreen.clickVerifyButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);   
 	}
 	
@@ -63,10 +64,10 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
 		waitABit(5*1000);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
 		Assert.assertTrue(verificationscreen.isDownloadAgainButtonAppears());
 		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
@@ -82,7 +83,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
 		waitABit(5*1000);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		
@@ -92,7 +93,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 	
@@ -107,10 +108,10 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
 		waitABit(5*1000);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);
 		verificationscreen.clickDownloadAgainButton();
 		

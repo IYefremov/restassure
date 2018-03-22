@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -199,7 +200,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<WebElement> inspections = inspectionscreen.getInspectionsList();
 		for (WebElement inspcell : inspections) {
-			Assert.assertEquals(inspectionscreen.getInspectionCustomerValue(inspcell), wholesalecustomer);
+			Assert.assertEquals(wholesalecustomer.getFullName(), inspectionscreen.getInspectionCustomerValue(inspcell));
 		}
 		final String inspSubNumber = inspnumber.substring(6, inspnumber.length());
 		inspectionscreen.setSearchText(inspSubNumber);
@@ -282,7 +283,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String vinnumber = "123";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -302,7 +303,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 	
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 		inspectionscreen = homescreen.clickInspectionsMenuItem();		
@@ -386,7 +387,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();		
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		vehicleinfoscreen.setVIN(newvinnumber);
 		vehicleinfoscreen.clickSaveInspectionMenuButton();
 		vehicleinfoscreen.waitABit(4000);
@@ -396,7 +397,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -423,7 +424,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		inspectionscreen.switchToMyInspectionsView();
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();		
@@ -431,7 +432,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -524,7 +525,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String[] services = { "Battery Installation", "Aluminum Panel", "Damage Service" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		homescreen.waitABit(13000);		
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
@@ -571,7 +572,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		setNetworkOn();	
+		AppiumAndroidUtils.setNetworkOn();	
 		statusscreen.clickUpdateAppdata();	
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();

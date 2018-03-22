@@ -64,7 +64,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		final String searchlicensecriteria = "Mac mini_olkr";
 		
-		//webdriverInicialize();
+		webdriverInicialize();
 		webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,

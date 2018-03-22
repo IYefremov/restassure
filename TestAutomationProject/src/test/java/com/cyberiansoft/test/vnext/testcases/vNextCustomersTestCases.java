@@ -5,6 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
@@ -89,11 +90,11 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(testcustomer);
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);

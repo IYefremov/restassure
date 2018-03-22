@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
@@ -30,9 +31,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
-		inspectionsscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
-		inspectionsscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
@@ -67,10 +68,10 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
 		vehicleinfoscreen.clickMenuButton();
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.clickScreenTitleCaption();
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
 		vehicleinfoscreen.changeScreen("Claim");

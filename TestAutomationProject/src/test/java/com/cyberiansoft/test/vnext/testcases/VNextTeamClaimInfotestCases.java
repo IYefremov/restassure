@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -63,7 +64,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		vehicleinfoscreen.setVIN(vinnumber);
 		vehicleinfoscreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleinfoscreen.isScreenPresentInChangeScreenPopoverList("Claim"));
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		
 		inspectionscreen = vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionscreen.clickBackButton();
@@ -119,7 +120,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		vehicleinfoscreen.setVIN(vinnumber);
 		vehicleinfoscreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleinfoscreen.isScreenPresentInChangeScreenPopoverList("Claim"));
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		
 		inspectionscreen = vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionscreen.clickBackButton();

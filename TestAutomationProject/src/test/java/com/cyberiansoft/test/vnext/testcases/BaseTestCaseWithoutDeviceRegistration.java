@@ -4,6 +4,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 
 public class BaseTestCaseWithoutDeviceRegistration extends VNextBaseTestCase {
@@ -12,13 +13,13 @@ public class BaseTestCaseWithoutDeviceRegistration extends VNextBaseTestCase {
 	@Parameters({ "user.name", "user.psw", "device.license", "selenium.browser"})	
 	public void settingUp(String deviceuser, String devicepsw, String licensename, String defbrowser) {
 		setUp();
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 	
 	@AfterClass(description = "Setting up new suite")
 	public void tearDown() throws Exception {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		appiumdriver.resetApp();	
 	}
 

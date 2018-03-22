@@ -1,12 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -15,14 +11,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 
 public class VNextBaseScreen {
 
@@ -66,40 +59,11 @@ public class VNextBaseScreen {
 		//element.sendKeys(value);
 	}
 	
-	public void tapListElement(WebElement scrollablelist, String value) {
-		while (scrollablelist.findElements(By.xpath(".//div[text()='" + value + "']")).size() < 1) {
-			swipingVertical();
-			
-		}		
+	public void tapListElement(WebElement scrollablelist, String value) {			
 		WebElement elem = scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']"));	
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);
 		tap(scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']")));
-	}
-	
-	public void clickHardwareBackButton() {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
-		//appiumdriver.navigate().back();
-		try {
-			appiumdriver.hideKeyboard();
-            } catch (Exception e) {
-            }
-		switchToWebViewContext();
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-		log(LogStatus.INFO, "Click Hardware Back Button");
-	}
-	
-	public void swipingVertical() {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		Dimension size = appiumdriver.manage().window().getSize();
-		int starty = (int) (size.height * 0.75);
-		int endy = (int) (size.height * 0.25);
-		int startx = size.width / 2;
-		//appiumdriver.swipe(startx, starty, startx, endy, 2000);
-		waitABit(4000);
-		switchToWebViewContext();
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
 	}
 	
 	public void swipeScreenLeft() {	
@@ -143,24 +107,6 @@ public class VNextBaseScreen {
 	public void swipeScreensRight(int screensnumber) {
 		for (int i = 0; i < screensnumber; i++) 
 			swipeScreenRight();	
-	}
-	
-	public void switchToWebViewContext() {
-		Set<String> contextNames = appiumdriver.getContextHandles();
-		List<String> handlesList = new ArrayList<String>(contextNames);
-		if (handlesList.size() > 2)
-			appiumdriver.context(handlesList.get(2));
-		else
-			appiumdriver.context(handlesList.get(1));
-	}
-	
-	public void switchApplicationContext(String appcontext) {
-		Set<String> contextNames = appiumdriver.getContextHandles();
-		for (String contextName : contextNames) {
-			if (contextName.contains(appcontext)) {
-				appiumdriver.context(contextName);			
-			}
-		}
 	}	
 	
 	public void waitABit(int milliseconds) {

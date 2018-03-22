@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -213,12 +214,12 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-		vehiclepartinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
-		vehiclepartinfoscreen.clickHardwareBackButton();
-		vehiclepartinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);

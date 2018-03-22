@@ -58,5 +58,13 @@ public class VNextUserRegistrationInfo {
 	public String getFreePhonesSiteURL() {
 	      return props.getProperty("freephone.serviceurl");
 	}
+	
+	public String getDeviceEmployeeName() {
+	      return props.getProperty("employee.name");
+	}
+	
+	public String getDeviceEmployeePassword() {
+	      return props.getProperty("employee.password");
+	}
 
 }

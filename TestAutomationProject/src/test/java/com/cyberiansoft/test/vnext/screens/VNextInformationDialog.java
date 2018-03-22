@@ -37,7 +37,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	
 	public void clickInformationDialogOKButton() {
 		appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 600);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='OK']")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
@@ -66,7 +67,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			description = "Send messages automatically from the queue in Automatic Mode after reconnect to network")
 	public void testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		homescreen.waitABit(13000);
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
@@ -74,7 +75,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		for (int i = 0; i < 4; i++)
 			inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -83,7 +84,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			description = "Send message from the queue in Automatic Mode (fail path)")
 	public void testSendMessageFromTheQueueInAutomaticModeFailPath() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -92,7 +93,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen.clickQueueMessageIcon();
 		homescreen.waitABit(3000);
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		setNetworkOn();
+		AppiumAndroidUtils.setNetworkOn();
 	}
 	
 }

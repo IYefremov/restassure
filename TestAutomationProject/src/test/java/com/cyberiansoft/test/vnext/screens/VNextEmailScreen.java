@@ -91,6 +91,8 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
+		waitABit(2000);
+		tap(sendbtn);
 		//VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
 		//informationdialog.clickInformationDialogOKButton();
 		log(LogStatus.INFO, "Tap on Send Emails button");

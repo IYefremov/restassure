@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -117,7 +118,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void addCameraPictureToNote() {
 		selectNotesPicturesTab();
 		clickCameraIcon();
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		waitABit(8000);
 		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
 		waitABit(8000);
@@ -126,7 +127,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		else
 			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'ok')]")).click();
 		waitABit(4000);
-		switchApplicationContext(AppContexts.WEB_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		Assert.assertTrue(isPictureaddedToNote());
 		log(LogStatus.INFO, "Add Camera picture to Note");
 	}
@@ -142,7 +143,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	public void addImageToNotesFromGallery() {
 		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
-			switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			waitABit(3000);
 			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
@@ -160,7 +161,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 			waitABit(10000);
 			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
 			
-			switchToWebViewContext();
+			AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 			waitABit(3000);
 		} else {
 			addFakeImageNote();

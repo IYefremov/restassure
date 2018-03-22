@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
@@ -75,17 +76,17 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void clickCarImageSecondTime() {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		waitABit(300);
 		TouchAction tch = new TouchAction(appiumdriver);
 		tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3) ).perform();
 		waitABit(300);	
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Tap on Car image");
 	}
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		waitABit(300);
 		
 		for (int i = 0; i < touchTimes; i++) {
@@ -94,7 +95,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 			waitABit(1000);
 		}
 		
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Tap on Car image");
 	}
 	

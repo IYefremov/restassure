@@ -1,14 +1,8 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -47,22 +42,13 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmPasswordWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextPaymentInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextUpgradeInfoWebPage;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.Activity;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
@@ -81,12 +67,12 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() throws IOException {		
 		setUp();
-		setNetworkOn();		
+		AppiumAndroidUtils.setNetworkOn();		
 	}
 	
 	@AfterClass(description = "Setting up new suite")
 	public void tearDown() throws Exception {
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		//appiumdriver.resetApp();	
 	}
 	
@@ -150,7 +136,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
 		registrationoverviewlegalinfoscreen.waitABit(30*1000);			
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 				
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
@@ -424,7 +410,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);		
 		resetApp();
 		waitABit(10*1000);
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
@@ -490,7 +476,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);
 		resetApp();
 		waitABit(10*1000);
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
@@ -564,7 +550,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
 		registrationoverviewlegalinfoscreen.waitABit(60*1000);			
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 				
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
@@ -700,10 +686,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		registrationoverviewlegalinfoscreen.waitABit(25000);
 		
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
@@ -827,11 +813,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
 		registrationoverviewlegalinfoscreen.waitABit(10000);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
 
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -927,11 +913,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
 		registrationoverviewlegalinfoscreen.waitABit(15000);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
 
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -1022,11 +1008,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
 		registrationoverviewlegalinfoscreen.waitABit(25000);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
 
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -1167,11 +1153,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		
 		registrationoverviewlegalinfoscreen.waitABit(10000);
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		appiumdriver.closeApp();
 		appiumdriver.launchApp();
 
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);

@@ -140,6 +140,10 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
+	
+	public boolean isAddSupplementInspectionMenuItemPresent() {			
+		return addsupplementbtn.isDisplayed();
+	}
 
 	public void clickCloseInspectionMenuButton() {
 		List<MobileElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='close-popup close-actions']"));

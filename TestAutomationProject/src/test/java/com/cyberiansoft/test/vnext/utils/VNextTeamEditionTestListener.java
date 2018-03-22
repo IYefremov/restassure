@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.vnext.utils;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
@@ -8,6 +11,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -47,8 +51,8 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	    testReporter.log(LogStatus.FAIL, getTestMethodName(result));
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
 	    
-	    if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
-	    	((VNextBaseTestCase) currentClass).setNetworkOn();
+	   // if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
+	    	AppiumAndroidUtils.setNetworkOn();
 	    	((VNextBaseTestCase) currentClass).resetApp();
 	    	((VNextBaseTestCase) currentClass).setUp();
 	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
@@ -66,7 +70,7 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	    	}
 	    	VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 			loginscreen.userLogin("Oksi Employee", "1111");
-	    }
+	   // }
 	    
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}

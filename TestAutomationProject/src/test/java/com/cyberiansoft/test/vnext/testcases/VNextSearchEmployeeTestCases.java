@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 
 public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch {
@@ -120,7 +121,7 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		
 		loginscreen.selectEmployee(searchCriteriaEmployee);	
 		Assert.assertTrue(loginscreen.isUserLoginPasswordDialogVisible());
-		loginscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		Assert.assertFalse(loginscreen.isUserLoginPasswordDialogVisible());
 	}
 	

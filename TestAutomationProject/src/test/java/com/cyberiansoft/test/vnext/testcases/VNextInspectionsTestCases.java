@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -125,9 +126,9 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		visualscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
-		claiminfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
@@ -135,7 +136,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehicleinfoscreen.waitABit(3000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();

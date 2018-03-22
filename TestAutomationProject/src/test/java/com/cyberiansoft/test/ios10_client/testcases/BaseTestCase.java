@@ -11,7 +11,6 @@ import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LE
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +35,6 @@ import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 

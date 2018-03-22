@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
@@ -381,9 +382,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.clickCancelInspectionMenuItem();
 		informationdlg = new VNextInformationDialog(appiumdriver);
-		vehicleinfoscreen.clickHardwareBackButton();
-		vehicleinfoscreen.clickHardwareBackButton();
-		vehicleinfoscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
@@ -430,7 +431,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		for (String srv : allservicestxt) {
 			Assert.assertTrue(servicestxt.contains(srv));
 		}
-		selectservicecreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -1192,7 +1193,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String[] services = { "Bumper Repair", "Facility Fee", "Aluminum Upcharge" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		setNetworkOff();
+		AppiumAndroidUtils.setNetworkOff();
 		homescreen.waitABit(13000);		
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
@@ -1228,7 +1229,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		setNetworkOn();	
+		AppiumAndroidUtils.setNetworkOn();	
 		statusscreen.clickUpdateAppdata();	
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();

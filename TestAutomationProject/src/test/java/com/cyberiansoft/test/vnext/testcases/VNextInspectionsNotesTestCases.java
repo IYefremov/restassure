@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -67,7 +68,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (int i =0; i< 3; i++) {
 			notesscreen.addQuickNote(notes.get(i));
 		}
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -107,7 +108,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (int i =0; i< 3; i++) {
 			notesscreen.addQuickNote(notes.get(i));
 		}
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -153,7 +154,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
 		String msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		infodialog = new VNextInformationDialog(appiumdriver);
 		msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
@@ -198,11 +199,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
 		String msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		infodialog = new VNextInformationDialog(appiumdriver);
 		msg = infodialog.getInformationDialogMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.clickNotesBackButton();
 		
@@ -232,7 +233,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		for (int i=0; i<9; i++) {
 			VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
-			notesscreen.clickHardwareBackButton();
+			AppiumAndroidUtils.clickHardwareBackButton();
 			
 			inspservicesscreen.swipeScreenLeft();
 		}
@@ -410,7 +411,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		notesscreen.setNoteText(notetextvalid);
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
@@ -436,7 +437,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesscreen.addCameraPictureToNote();
 		waitABit(2000);
 		notesscreen.selectNotesTextTab();
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
@@ -503,7 +504,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
     		notes.add(note.getText());
 		for (int i = 0; i < 3; i++) 
 			notesscreen.addQuickNote(notes.get(i));
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -513,7 +514,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
 		notesscreen.clickClearNotesButton();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
-		notesscreen.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);

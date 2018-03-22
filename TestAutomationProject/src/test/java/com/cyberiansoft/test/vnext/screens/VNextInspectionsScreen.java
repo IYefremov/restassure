@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
@@ -54,7 +55,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(inspectionsscreen));
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
@@ -249,9 +252,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		searchfld.clear();
 		appiumdriver.getKeyboard().sendKeys(searchtext);
 		appiumdriver.hideKeyboard();
-		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
-		switchToWebViewContext();
+		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Set Search Text: " + searchtext);
 	}
 	

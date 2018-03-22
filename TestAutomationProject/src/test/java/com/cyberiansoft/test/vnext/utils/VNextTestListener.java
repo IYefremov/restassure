@@ -8,6 +8,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -47,7 +48,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
 	    
 	    if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
-	    	((VNextBaseTestCase) currentClass).setNetworkOn();
+	    	AppiumAndroidUtils.setNetworkOn();
 	    	((VNextBaseTestCase) currentClass).resetApp();
 	    	((VNextBaseTestCase) currentClass).setUp();
 	    	//((VNextBaseTestCase) currentClass).setNetworkOn();

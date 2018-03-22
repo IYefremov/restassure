@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
@@ -275,8 +276,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
-		changeinvoiceponumberdialog.clickHardwareBackButton();
-		changeinvoiceponumberdialog.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();
 	}
@@ -803,7 +804,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		homescreen = invoicesscreen.clickBackButton();
@@ -1219,7 +1220,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.clickHardwareBackButton();
+		AppiumAndroidUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.switchToMyInvoicesView();

@@ -29,8 +29,6 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("Test_Wholesale_BO");
 		
 		initiateWebDriver();
-
-		initiateWebDriver();
 		webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);

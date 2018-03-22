@@ -35,7 +35,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='search']")
 	private WebElement searchbtn;
 	
-	@FindBy(xpath="//input[@type='search']")
+	@FindBy(xpath="//*[@data-autotests-id='search-input']")
 	private WebElement searchfld;
 	
 	@FindBy(xpath="//*[@data-autotests-id='search-cancel']")
@@ -48,14 +48,11 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	private WebElement wholesalecustomertab;
 	
 	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		//PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		super(appiumdriver);	
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
 		waitABit(1500);
-		//if (appiumdriver.findElements(By.xpath("//div[@class='help-button' and text()='OK, got it']")).size() > 0)
-			//if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
@@ -142,8 +139,11 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public void typeSearchParameters(String searchtxt) {
 		tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
-		searchfld.clear();
-		searchfld.sendKeys(searchtxt);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(searchfld));
+		appiumdriver.getKeyboard().sendKeys(searchtxt);
+		//searchfld.clear();
+		//searchfld.sendKeys(searchtxt);
 		appiumdriver.hideKeyboard();
 	}
 	

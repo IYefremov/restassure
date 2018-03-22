@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -7,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
@@ -33,14 +36,9 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	public void updateMainDB() {
 		clickUpdateAppdata();
 		waitABit(10000);
-		/*WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.invisibilityOf(
-				appiumdriver.findElement(By.xpath("//*[text()='Waiting for application data']"))));
-		wait = new WebDriverWait(appiumdriver, 60);
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOf(
-				appiumdriver.findElement(By.xpath("//*[text()='Downloading application data']"))));*/
-		//waitABit(30000);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
+				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}
