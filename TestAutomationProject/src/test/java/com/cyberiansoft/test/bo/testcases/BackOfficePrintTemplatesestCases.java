@@ -27,6 +27,10 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.QuestionsSectionDialogWebPa
 import com.cyberiansoft.test.bo.pageobjects.webpages.SendInspectionCustomEmailTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
@@ -828,9 +832,11 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		activedevicespage.setSearchCriteriaByName(licensename);
 		String regCode = activedevicespage.getFirstRegCodeInTable();
 		
-		appiumdriverInicialize();
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		appiumdriver.removeApp(bundleid);
-		appiumdriverInicialize();
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);

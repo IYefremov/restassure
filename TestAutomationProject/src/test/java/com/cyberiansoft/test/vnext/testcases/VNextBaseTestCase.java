@@ -20,6 +20,7 @@ import org.testng.annotations.BeforeSuite;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -240,7 +241,7 @@ public class VNextBaseTestCase {
 		
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
-		webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -284,15 +285,6 @@ public class VNextBaseTestCase {
 		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogOKButton();
-	}
-	
-	public void webdriverGotoWebPage(String url) {
-		DriverBuilder.getInstance().getDriver().get(url);
-		if (browsertype.getBrowserTypeString().equals("ie")) {
-			if (webdriver.findElements(By.id("overridelink")).size() > 0) {
-				webdriver.navigate().to("javascript:document.getElementById('overridelink').click()");
-			}
-		}
 	}
 	
 	/////////////////////////////

@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
@@ -154,7 +155,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		}
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(newbourl);
+		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
 		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
@@ -269,7 +270,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		}
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(newbourl);
+		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
 		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
@@ -567,7 +568,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		}
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(newbourl);
+		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
 		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
@@ -583,7 +584,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);	
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(ibsurl);
+		WebDriverUtils.webdriverGotoWebPage(ibsurl);
 		IBSLoginWebPage ibsloginpage = PageFactory.initElements(
 				webdriver, IBSLoginWebPage.class);
 		ibsloginpage.UserLogin(userregmail, confirmpsw);
@@ -1026,7 +1027,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		}
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(newbourl);
+		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
 		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();

@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
@@ -34,6 +33,7 @@ import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -41,18 +41,18 @@ import com.relevantcodes.extentreports.ExtentTest;
 public class BaseTestCase {
 
 	private ScreenRecorder screenRecorder;
-	protected IOSDriver<MobileElement> appiumdriver;
+	protected AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
 	protected static BrowserType browsertype;
+	protected static MobilePlatform mobilePlatform;
 	protected TestUser testuser;
 	protected String userpsw;
 	protected static ExtentTest testlogger;
 	
 	protected static AppiumDriverLocalService service;
 	String bundleid = "";
-	String buildtype = "";
 	
 	public void setTestLogger(ExtentTest logger) {
 		testlogger = logger;
@@ -112,22 +112,7 @@ public class BaseTestCase {
 		return Helpers.wait(locator);
 	}
 
-	public void webdriverInicialize() throws Exception {
-
-		DriverBuilder.getInstance().setDriver(browsertype);
-		webdriver = DriverBuilder.getInstance().getDriver();
-		webdriver.manage().window().maximize();
-		webdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		//webdriver = new ChromeDriver();
-	}
-
-	public void appiumdriverInicialize(String buildtype)  {
-		/*try {
-			appiumdriver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"),
-					appiumcap);
-		} catch (MalformedURLException e) {			
-			e.printStackTrace();
-		}*/
+	/*public void appiumdriverInicialize(String buildtype)  {
 		//appiumdriver = new IOSDriver<>(service.getUrl(), appiumcap);
 		//appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
 
@@ -145,11 +130,7 @@ public class BaseTestCase {
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		
 		Helpers.init(appiumdriver);
-	}
-	
-	public IOSDriver<MobileElement> getAppiumDriver() {
-		return appiumdriver;
-	}
+	}*/
 	
 	public String createScreenshot(WebDriver driver, String loggerdir) {
 		WebDriver driver1 = new Augmenter().augment(appiumdriver);
@@ -162,11 +143,6 @@ public class BaseTestCase {
 			e.printStackTrace();
 		}
 		return "myscreen" + uuid + ".jpeg";
-	}
-
-	public void webdriverGotoWebPage(String url) {
-		webdriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-		webdriver.get(url);
 	}
 
 	@AfterSuite
@@ -184,7 +160,8 @@ public class BaseTestCase {
 		try {
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		} catch (NoSuchSessionException e) {
-			appiumdriverInicialize(buildtype);
+			AppiumInicializator.getInstance().initAppium(mobilePlatform);
+			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		}
 		Helpers.waitABit(7000);
 		try {

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 import java.net.MalformedURLException;
 import java.time.Duration;
@@ -12,6 +13,9 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios_client.utils.LogAssertions;
@@ -60,7 +64,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {    
         if ((method.getTestMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(org.testng.annotations.BeforeClass.class)) 
         		&& (method.getTestResult().getStatus()==2)) {
-        	AppiumDriver appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
+        	AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
         	
         	if (appiumdriver != null) {
         		testlogger = extentreport.startTest(method.getTestMethod().getMethodName());
@@ -109,13 +113,14 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	
 	@Override
 	public void onTestFailure(ITestResult result) {
-		AppiumDriver appiumdriver = ((BaseTestCase) currentClass).getAppiumDriver();
+		AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
 	        testlogger= iOSLogger.getTestLogerInstance();
 	        if (appiumdriver != null) {
 	        	try {
 	        		testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));        
 	        	} catch (Exception e) {
-					((BaseTestCase) currentClass).appiumdriverInicialize("hd");
+	        		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+	    			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 	        	}
 	        	
 	        }
@@ -128,8 +133,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
         	MainScreen mainscr = new MainScreen(appiumdriver);
     		try {
     			TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
-    			HomeScreen homescreen = new HomeScreen(appiumdriver);
-    			homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
+    			HomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
     			
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

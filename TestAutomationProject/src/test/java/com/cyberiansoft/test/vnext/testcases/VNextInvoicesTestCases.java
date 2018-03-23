@@ -9,6 +9,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
@@ -436,7 +437,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
 	public void testVerifyCustomerInfoOnInvoiceDetail(String bourl, String username, String userpsw) {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(bourl);
+		WebDriverUtils.webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(username, userpsw);
@@ -453,7 +454,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
 	public void testVerifyTextNoteOnInvoiceDetail(String bourl, String username, String userpsw) {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(bourl);
+		WebDriverUtils.webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(username, userpsw);

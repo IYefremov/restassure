@@ -37,9 +37,12 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
@@ -52,11 +55,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		private String regCode;
 		private final String customer = "Abc Rental Center";
 		public RegularHomeScreen homescreen;
-		private final String buildtype = "regular";
 		
 		@BeforeClass
 		@Parameters({ "backoffice.url", "user.name", "user.psw" })
 		public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
+			mobilePlatform = MobilePlatform.IOS_REGULAR;
 			initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 			testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
 			testRegisterationiOSDdevice();
@@ -71,7 +74,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String searchlicensecriteria = "Vitaly_Ipad_HD";
 			
 			//webdriverInicialize();
-			webdriverGotoWebPage(backofficeurl);
+			WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 					BackOfficeLoginWebPage.class);
@@ -88,10 +91,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 		//@Test(description = "Register iOS Ddevice")
 		public void testRegisterationiOSDdevice() throws Exception {		
-			appiumdriverInicialize(buildtype);	
+			appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());	
 			appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 			appiumdriver.quit();
-			appiumdriverInicialize(buildtype);
+			appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 			RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen(appiumdriver);
 			LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 			loginscreen.assertRegisterButtonIsValidCaption();

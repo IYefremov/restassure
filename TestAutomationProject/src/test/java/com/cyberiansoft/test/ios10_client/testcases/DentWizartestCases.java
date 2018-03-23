@@ -31,10 +31,14 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Service
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.VehicleScreen;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -47,11 +51,11 @@ public class DentWizartestCases extends BaseTestCase {
 	private String regCode;
 	private final String customer = "Abc Rental Center";
 	public HomeScreen homescreen;
-	private final String buildtype = "hd";
 	
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
+		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
 		testRegisterationiOSDdevice();
@@ -64,8 +68,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		final String searchlicensecriteria = "Mac mini_olkr";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -82,7 +86,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 	//@Test(description = "Register iOS Ddevice")
 	public void testRegisterationiOSDdevice() throws Exception {		
-		appiumdriverInicialize(buildtype);	
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());	
 		//appiumdriver.removeApp(bundleid);
 		//System.out.println("+++" + appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
@@ -90,7 +95,8 @@ public class DentWizartestCases extends BaseTestCase {
 		//if (appiumdriver.isAppInstalled(IOSHDDeviceInfo.getInstance().getDeviceBundleId()))
 				appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
-		appiumdriverInicialize(buildtype);
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 		loginscreen.assertRegisterButtonIsValidCaption();

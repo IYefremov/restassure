@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -594,7 +595,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		BaseUtils.waitABit(30000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(deviceuser, devicepsw);
@@ -644,7 +645,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		BaseUtils.waitABit(30000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(deviceuser, devicepsw);
@@ -705,7 +706,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		BaseUtils.waitABit(30000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(deviceuser, devicepsw);

@@ -48,6 +48,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTechRevenueScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVisualInteriorScreen;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -69,7 +70,10 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios_client.utils.UtilConstants;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 import com.cyberiansoft.test.ios_client.utils.iOSLogger;
 import com.relevantcodes.extentreports.LogStatus;
@@ -78,7 +82,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	private String regCode;
 	private RegularHomeScreen homescreen;
-	private final String buildtype = "regular";
 	
 	private final String firstname = "supermy12";
 	private final String firstnamenew = "supernewmy12";
@@ -95,6 +98,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) throws Exception {
+		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
 		testRegisterationiOSDdevice();
@@ -104,8 +108,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	public void testGetDeviceRegistrationCode(String backofficeurl,
 			String userName, String userPassword, String licensename) throws Exception {
 
-		//webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -122,10 +126,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
-		appiumdriverInicialize(buildtype);	
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());	
 		appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
-		appiumdriverInicialize(buildtype);
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		//appiumdriver.installApp(appPath);
 		//appiumdriver.removeApp(bundleid);
 		//appiumdriverInicialize();
@@ -224,8 +230,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	public void testDeleteRetailCustomer(String backofficeurl, String userName,
 			String userPassword) throws Exception {
 
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Admin/Clients.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Admin/Clients.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -490,8 +496,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		LicensesScreen licensesscreen = mainscreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -824,8 +830,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		
 
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -880,8 +886,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		Helpers.waitABit(10000);
 
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -917,8 +923,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String price = "314.15";
 
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequests.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequests.aspx");
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
@@ -966,8 +972,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
 
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -1082,8 +1088,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10*1000);
 	
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -4125,8 +4131,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -4177,8 +4183,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String[] servicestoadd = { "VPS1", "Dye" };
 		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -4216,8 +4222,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCancelAction();
 		servicerequestsscreen.clickHomeButton();
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -5718,8 +5724,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
 		Thread.sleep(10000);
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -5847,8 +5853,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = myinvoicesscreen.clickHomeButton();
 		Helpers.waitABit(10000);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -5947,8 +5953,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 		Helpers.waitABit(10000);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -6034,8 +6040,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		Helpers.waitABit(5000);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -6147,8 +6153,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -6767,8 +6773,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.clickSaveAsFinal();
 		Helpers.waitABit(10000);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -6836,8 +6842,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = myworkordersscreen.clickHomeButton();
 		Helpers.waitABit(10000);
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -7429,8 +7435,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -7492,8 +7498,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -7551,8 +7557,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -7619,8 +7625,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String startDate = LocalDate.now().plusDays(1).format(formatter);
 		String endDate = LocalDate.now().plusDays(2).format(formatter);
 	
-		webdriverInicialize();
-		webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);

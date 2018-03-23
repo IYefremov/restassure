@@ -3,7 +3,6 @@ package com.cyberiansoft.test.bo.testcases;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -13,7 +12,6 @@ import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSIO
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -37,11 +35,12 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 public class BaseTestCase {
 
 	private ScreenRecorder screenRecorder;
-	protected IOSDriver<MobileElement> appiumdriver;
+	protected AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
 	protected static BrowserType browsertype;
+	protected static MobilePlatform mobilePlatform = MobilePlatform.IOS_REGULAR;
 	protected File app;
 	String bundleid = "";
 	protected static AppiumDriverLocalService service;
@@ -96,15 +95,6 @@ public class BaseTestCase {
 
 	public static WebElement wait(By locator) {
 		return Helpers.wait(locator);
-	}
-	
-
-	public void appiumdriverInicialize() throws Exception {
-		DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD, service.getUrl());
-		
-		appiumdriver = (IOSDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver();
-		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
-		Helpers.init(appiumdriver);
 	}
 
 	@AfterMethod

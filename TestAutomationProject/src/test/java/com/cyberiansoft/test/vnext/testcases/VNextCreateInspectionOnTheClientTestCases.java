@@ -10,6 +10,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
@@ -304,7 +305,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 	public void testVerifyDisplayingInspectionWhichContainsBreakageServiceWithBigQuantity(String bourl, String username, String userpsw) {
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(bourl);
+		WebDriverUtils.webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(username, userpsw);
@@ -328,7 +329,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		final String insppriceexp = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(bourl);
+		WebDriverUtils.webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(username, userpsw);
@@ -351,7 +352,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		final String firstname = "CustomerFirstName";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriverGotoWebPage(bourl);
+		WebDriverUtils.webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(username, userpsw);

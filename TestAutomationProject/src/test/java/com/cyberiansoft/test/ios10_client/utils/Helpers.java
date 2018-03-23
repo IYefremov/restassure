@@ -25,17 +25,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Helpers {
 
-	private static AppiumDriver driver;
+	private static AppiumDriver<MobileElement> driver;
 	private static WebDriverWait driverWait;
 
 	/**
 	 * Initialize the webdriver. Must be called before using any helper methods.
 	 * *
 	 */
-	public static void init(AppiumDriver webDriver) {
-		driver = webDriver;
+	public static void init(AppiumDriver<MobileElement> appiumbDriver) {
+		driver = appiumbDriver;
 		int timeoutInSeconds = 240;
-		driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
+		driverWait = new WebDriverWait(driver, timeoutInSeconds);
 	}
 
 	/**
@@ -65,24 +65,10 @@ public abstract class Helpers {
 	}
 
 	/**
-	 * Return a list of elements by locator *
-	 */
-	public static List<MobileElement> elements(By locator) {
-		return w(driver.findElements(locator));
-	}
-
-	/**
 	 * Press the back button *
 	 */
 	public static void back() {
 		driver.navigate().back();
-	}
-
-	/**
-	 * Return a list of elements by tag name *
-	 */
-	public static List<MobileElement> tags(String tagName) {
-		return elements(for_tags(tagName));
 	}
 
 	/**

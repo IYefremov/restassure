@@ -22,6 +22,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -33,20 +34,23 @@ import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 
 public class NewTestCases extends BaseTestCase {
 
 	private String regCode;
 	private RegularHomeScreen homescreen;
-	private final String buildtype = "regular";
 	private String userLogin = "User";
 	private String userPassword = "1111";
 
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) throws Exception {
+		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(userLogin, userPassword);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
 		testRegisterationiOSDdevice();
@@ -56,7 +60,7 @@ public class NewTestCases extends BaseTestCase {
 	public void testGetDeviceRegistrationCode(String backofficeurl,
 			String userName, String userPassword, String licensename) throws Exception {
 
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -72,10 +76,12 @@ public class NewTestCases extends BaseTestCase {
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
-		appiumdriverInicialize(buildtype);	
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());	
 		appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
-		appiumdriverInicialize(buildtype);
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
@@ -263,8 +269,8 @@ public class NewTestCases extends BaseTestCase {
 		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.clickHomeButton();
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -303,8 +309,8 @@ public class NewTestCases extends BaseTestCase {
 		final String servicePrice = "1";
 		final String serviceQuantity = "3";
 		
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -360,8 +366,8 @@ public class NewTestCases extends BaseTestCase {
 		LicensesScreen licensesscreen = mainscreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
-		webdriverInicialize();
-		webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
