@@ -12,7 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
@@ -52,7 +53,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));
@@ -62,7 +63,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
 		tap(inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
 		if (inspectionsscreen.findElements(By.xpath(".//a[@action='add']/i")).size() > 0)
@@ -252,9 +253,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		searchfld.clear();
 		appiumdriver.getKeyboard().sendKeys(searchtext);
 		appiumdriver.hideKeyboard();
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Set Search Text: " + searchtext);
 	}
 	

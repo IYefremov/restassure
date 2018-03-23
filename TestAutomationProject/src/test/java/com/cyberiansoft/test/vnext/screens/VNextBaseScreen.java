@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -31,7 +32,7 @@ public class VNextBaseScreen {
 	}
 	
 	public void tap(WebElement element) {
-		waitABit(300);
+		BaseUtils.waitABit(300);
 		element.click();
 		//new TouchActions(appiumdriver).singleTap(element).perform();
 		/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
@@ -70,7 +71,7 @@ public class VNextBaseScreen {
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swipeleft')");
 		log(LogStatus.INFO, "Swipe To Next Screen");
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public void swipeScreensLeft(int screensnumber) {		
@@ -87,7 +88,7 @@ public class VNextBaseScreen {
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swiperight');");		
 		log(LogStatus.INFO, "Swipe Back To Previous Screen");
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 	}
 	
 	public void clickScreenBackButton() {
@@ -108,15 +109,6 @@ public class VNextBaseScreen {
 		for (int i = 0; i < screensnumber; i++) 
 			swipeScreenRight();	
 	}	
-	
-	public void waitABit(int milliseconds) {
-		try {
-			Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public void log(LogStatus logstatus, String logmessage) {
 		if (testReporter != null)
@@ -140,7 +132,7 @@ public class VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		log(LogStatus.INFO, "Change screen to: " + screenName);
 	}
 	

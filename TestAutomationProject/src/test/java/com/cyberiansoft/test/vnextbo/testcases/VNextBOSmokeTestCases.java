@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
@@ -42,7 +43,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl,
 			String usernm, String userpsw) throws InterruptedException {
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		userName = usernm;
 		userPassword = userpsw;
 	}

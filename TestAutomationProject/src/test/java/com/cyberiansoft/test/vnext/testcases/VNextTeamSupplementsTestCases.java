@@ -1,8 +1,11 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -15,8 +18,17 @@ import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
-	@Test(testName= "Test Case 71996:Verify user can add supplement if Allow Supplements=ON", 
-			description = "Verify user can add supplement if Allow Supplements=ON")
+	private static final String DATA_FILE = "src\\test\\resources\\test-retail-user.json";
+	
+	@BeforeClass(description = "Setting up new suite")
+	public void settingUp() throws Exception {
+
+		JSONDataProvider.dataFile = DATA_FILE;
+		System.out.println("zzzzzzzzzzzzzzzzzzzz");
+	}
+	
+	//@Test(testName= "Test Case 71996:Verify user can add supplement if Allow Supplements=ON", 
+	//		description = "Verify user can add supplement if Allow Supplements=ON")
 	public void testVerifyUserCanAddSupplementIfAllowSupplementsSetToON() {
 		
 		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
@@ -45,8 +57,8 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 71997:Verify user can't create supplement if allow supplement=OFF", 
-			description = "Verify user can't create supplement if allow supplement=OFF")
+	//@Test(testName= "Test Case 71997:Verify user can't create supplement if allow supplement=OFF", 
+	//		description = "Verify user can't create supplement if allow supplement=OFF")
 	public void testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff() {
 		
 		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
@@ -73,15 +85,17 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 72585:Verify user can't add supplement when edit Inspection", 
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class,
+			testName= "Test Case 72585:Verify user can't add supplement when edit Inspection", 
 			description = "Verify user can't add supplement when edit Inspection")
-	public void testVerifyUserCanAddSupplementWhenEditInspection() {
+	public void testVerifyUserCanAddSupplementWhenEditInspection(String rowID,
+            String description, JSONObject testData) {
 		
 		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
-		final String inspType = "O_Kramar";
+		/*final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 		final String serviceName1 = "Battery Installation";
-		final String serviceName2 = "Labor";
+		final String serviceName2 = "Labor";*/
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -89,13 +103,13 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspType);
+		insptypeslist.selectInspectionType(testData.get("inspType").toString());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.setVIN(vinnumber);
+		vehicleinfoscreen.setVIN(testData.get("vinnumber").toString());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.selectService(serviceName1);	
+		inpsctionservicesscreen.selectService(testData.get("serviceName1").toString());	
 		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
 		
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
@@ -103,11 +117,11 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.setServiceAmountValue(serviceName1, "10");
+		inpsctionservicesscreen.setServiceAmountValue(testData.get("serviceName1").toString(), "10");
 		
-		inpsctionservicesscreen.selectService(serviceName2);
-		inpsctionservicesscreen.setServiceAmountValue(serviceName1, "20");
-		inpsctionservicesscreen.setServiceQuantityValue(serviceName1, "2");
+		inpsctionservicesscreen.selectService(testData.get("serviceName2").toString());
+		inpsctionservicesscreen.setServiceAmountValue(testData.get("serviceName1").toString(), "20");
+		inpsctionservicesscreen.setServiceQuantityValue(testData.get("serviceName1").toString(), "2");
 		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
 		inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		Assert.assertTrue(inspmenu.isAddSupplementInspectionMenuItemPresent());
@@ -116,14 +130,15 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 
-	@Test(testName= "Test Case 72586:Verify user can add supplement after approve Inspection", 
-			description = "Verify user can add supplement after approve Inspection")
-	public void testVerifyUserCanAddSupplementAfterApproveInspection() {
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class,
+			testName= "Test Case 72586:Verify user can add supplement after approve Inspection, "
+					+ "Test Case 72803:Verify Inspectin status changed to New after ceation supplement", 
+			description = "Verify user can add supplement after approve Inspection, "
+					+ "Verify Inspectin status changed to New after ceation supplement")
+	public void testVerifyUserCanAddSupplementAfterApproveInspection(String rowID,
+            String description, JSONObject testData) {
 		
 		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
-		final String inspType = "O_Kramar";
-		final String vinnumber = "TEST";
-		final String serviceName = "Battery Installation";;
 		 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -131,9 +146,9 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspType);
+		insptypeslist.selectInspectionType(testData.get("inspType").toString());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.setVIN(vinnumber);
+		vehicleinfoscreen.setVIN(testData.get("vinnumber").toString());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
@@ -148,8 +163,8 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickAddSupplementInspectionMenuItem();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.selectService(serviceName);
-
+		inpsctionservicesscreen.selectService(testData.get("serviceName").toString());
+		inpsctionservicesscreen.setServiceAmountValue(testData.get("serviceName").toString(), "50");
 		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), "New");
 		homescreen = inspectionscreen.clickBackButton();

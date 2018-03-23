@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 import io.appium.java_client.AppiumDriver;
@@ -121,7 +122,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickDoneButton() {
 		tap(donebtn);
-		waitABit(5000);
+		BaseUtils.waitABit(5000);
 	}
 	
 	public void clickClearUserButton() {

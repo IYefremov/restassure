@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 import io.appium.java_client.AppiumDriver;
@@ -25,7 +26,7 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	}
 	
 	public void clickKeyboardBackspaceButton() {
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		tap(keyboard.findElement(By.xpath(".//span[contains(@class, 'picker-keypad-delete')]")));		
 	}
 	

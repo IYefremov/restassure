@@ -2,9 +2,10 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import org.testng.annotations.BeforeClass;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 
 public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTestCase {
 	
@@ -15,8 +16,8 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 	public void settingUp() throws Exception {
 
 		setUp();	
-		AppiumAndroidUtils.setNetworkOn();
-		resetApp();
+		AppiumUtils.setNetworkOn();
+		VNextAppUtils.resetApp();
 		registerDevice();
 		VNextHomeScreen homecreen = new VNextHomeScreen(appiumdriver);
 	}

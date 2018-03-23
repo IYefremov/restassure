@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -47,7 +48,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(registrationoverviewlegalinfoscreen));
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 	}
 	
 	public String getPaymentPriceValue() {
@@ -56,7 +57,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
 	public void agreetermsAndconditions() {
 		clickTermsAndConditionsLink();
-		waitABit(5000);
+		BaseUtils.waitABit(5000);
 		clickIAgreeButton();
 	}
 	
@@ -66,7 +67,7 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	}
 	
 	public void clickTermsAndConditionsLink() {
-		waitABit(10000);
+		BaseUtils.waitABit(10000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(termsandconditionslink));
 		tap(termsandconditionslink);

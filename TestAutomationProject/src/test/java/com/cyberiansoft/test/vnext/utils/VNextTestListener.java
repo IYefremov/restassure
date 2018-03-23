@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.utils;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -8,7 +7,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -47,8 +46,8 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    testReporter.log(LogStatus.FAIL, getTestMethodName(result));
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
 	    
-	    if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
-	    	AppiumAndroidUtils.setNetworkOn();
+	    /*if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
+	    	AppiumUtils.setNetworkOn();
 	    	((VNextBaseTestCase) currentClass).resetApp();
 	    	((VNextBaseTestCase) currentClass).setUp();
 	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
@@ -64,7 +63,9 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
 	    	}
-	    }
+	    }*/
+	    AppiumUtils.setNetworkOn();
+	    VNextAppUtils.restartApp();
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.annotations.BeforeClass;
 
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 
 public class BaseTestCaseTeamEmployeeSearch extends VNextBaseTestCase {
 	
@@ -13,7 +14,7 @@ public class BaseTestCaseTeamEmployeeSearch extends VNextBaseTestCase {
 	public void settingUp() throws Exception {
 
 		setUp();	
-		resetApp();
+		VNextAppUtils.resetApp();
 		registerTeamEdition(VNextTeamRegistrationInfo.getInstance().getDeviceEmployeeSearchLicenseName());
 		//registerDevice();
 		//VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);

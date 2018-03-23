@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.testcases;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 
 import java.io.BufferedReader;
@@ -23,7 +24,7 @@ public class VNextWebServices extends BaseTestCase {
 	public void testSetupConfigurationToRunInvoiceListSuite(String backofficeurl,
 			String userName, String userPassword, String oldbourl) throws Exception {
 		
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		
 
 		

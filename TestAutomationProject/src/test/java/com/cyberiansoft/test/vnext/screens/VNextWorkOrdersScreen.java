@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -45,11 +46,11 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
-		waitABit(2000);		
+		BaseUtils.waitABit(2000);		
 		tap(addwobtn);
 		log(LogStatus.INFO, "Tap Add work order button");
 		return new VNextCustomersScreen(appiumdriver);

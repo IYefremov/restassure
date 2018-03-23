@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
@@ -23,7 +24,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl,
 			String userName, String userPassword) throws InterruptedException {
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);

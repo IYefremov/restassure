@@ -4,10 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 
 public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCaseWithoutDeviceRegistration {
 	
@@ -36,7 +38,8 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
+		VNextAppUtils.resetApp();
+		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 	
 	@Test(testName= "Test Case 36149:vNext - Verify interrupted DB download is supported with message, Test Case 36154:vNext - Close message shown for interrupted DB download", 
@@ -44,12 +47,12 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 	public void testVerifyInterruptedDBDownloadIsSupportedWithMessage() {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(regcode);
-		waitABit(1000);
-		AppiumAndroidUtils.setNetworkOff();
+		BaseUtils.waitABit(1000);
+		AppiumUtils.setNetworkOff();
 		verificationscreen.clickVerifyButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);   
 	}
 	
@@ -63,14 +66,15 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		verificationscreen.clickVerifyButton();
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
-		waitABit(5*1000);
-		AppiumAndroidUtils.setNetworkOff();
+		BaseUtils.waitABit(5*1000);
+		AppiumUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
 		Assert.assertTrue(verificationscreen.isDownloadAgainButtonAppears());
-		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
+		VNextAppUtils.resetApp();
+		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 	
 	@Test(testName= "Test Case 36156:vNext - Validate message appears in case of unsuccessful apply of 'Download Again' option", 
@@ -82,8 +86,8 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		verificationscreen.clickVerifyButton();
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
-		waitABit(5*1000);
-		AppiumAndroidUtils.setNetworkOff();
+		BaseUtils.waitABit(5*1000);
+		AppiumUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		
@@ -93,8 +97,9 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
-		AppiumAndroidUtils.setNetworkOn();
-		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
+		AppiumUtils.setNetworkOn();
+		VNextAppUtils.resetApp();
+		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 	
 	@Test(testName= "Test Case 36158:vNext - Verify user can start DB download again after download fail", 
@@ -107,11 +112,11 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		verificationscreen.clickVerifyButton();
 		Assert.assertTrue(verificationscreen.isDownloadDBProgressBarAppears());
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
-		waitABit(5*1000);
-		AppiumAndroidUtils.setNetworkOff();
+		BaseUtils.waitABit(5*1000);
+		AppiumUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);
 		verificationscreen.clickDownloadAgainButton();
 		
@@ -119,7 +124,8 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		Assert.assertTrue(verificationscreen.isDownloadVINProgressBarAppears());
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		restartAppAndGetNewRegCode(deviceofficeurl, deviceuser, devicepsw, licensename);
+		VNextAppUtils.resetApp();
+		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
 
 }

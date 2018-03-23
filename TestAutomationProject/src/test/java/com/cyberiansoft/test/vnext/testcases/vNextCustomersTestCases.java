@@ -5,11 +5,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -57,8 +59,9 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
-		homescreen.waitABit(45000);
-		initiateWebDriver();
+		BaseUtils.waitABit(45000);
+		
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -90,15 +93,15 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		AppiumAndroidUtils.setNetworkOff();
+		AppiumUtils.setNetworkOff();
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(testcustomer);
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
-		homescreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
@@ -139,7 +142,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
-		homescreen.waitABit(30000);
+		BaseUtils.waitABit(30000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
@@ -168,7 +171,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		else
 			customerDelete = firstName;
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);

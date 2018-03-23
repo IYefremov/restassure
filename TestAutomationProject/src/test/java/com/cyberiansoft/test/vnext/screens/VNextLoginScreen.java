@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.relevantcodes.extentreports.LogStatus;
@@ -71,7 +72,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 		selectEmployee(username);
 		setUserLoginPassword(userpsw);
 		tapLoginButton();
-		waitABit(300);
+		BaseUtils.waitABit(300);
 		VNextInformationDialog infrmdialog = new VNextInformationDialog(appiumdriver);
 		String msg = infrmdialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.ENTERED_PASSWORD_IS_INCORRECT);
@@ -113,7 +114,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	public void updateMainDB() {
 		tap(updatemaindbbtn);
 		log(LogStatus.INFO, "Tap Update Main DB button");
-		waitABit(10000);
+		BaseUtils.waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}
@@ -121,11 +122,11 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	public void searchEmployee(String searchText) {
 		if (!searchfld.isDisplayed())
 			searchicon.click();
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(searchfld)).clear();
 		searchfld.sendKeys(searchText + "\n");
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public int getNumberOfEmployeesInTheList() {

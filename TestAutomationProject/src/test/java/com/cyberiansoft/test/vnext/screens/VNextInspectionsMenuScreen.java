@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -63,9 +64,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	public VNextVehicleInfoScreen clickEditInspectionMenuItem() {			
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		tap(editinspectionbtn);
-		waitABit(4000);		
+		BaseUtils.waitABit(4000);		
 		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
@@ -90,7 +91,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(createwoinspectionbtn));
 		tap(createwoinspectionbtn);
-		waitABit(8000);
+		BaseUtils.waitABit(8000);
 		log(LogStatus.INFO, "Tap on Inspection Create Work Order Menu");
 	}
 	
@@ -128,7 +129,7 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(viewinspectionbtn));
 		tap(viewinspectionbtn);
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 		log(LogStatus.INFO, "Tap on View Inspection Menu");
 		return new VNextViewScreen(appiumdriver);
 	}

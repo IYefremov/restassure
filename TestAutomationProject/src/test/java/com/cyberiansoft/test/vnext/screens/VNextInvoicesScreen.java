@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -41,7 +42,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOf(invoiceslist));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
@@ -143,7 +144,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public VNextWorkOrdersScreen clickAddInvoiceButton() {	
 		tap(addinvoicebtn);
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		log(LogStatus.INFO, "Tap Add inspection button");
 		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)

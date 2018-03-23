@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
@@ -115,7 +116,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
  		
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -147,7 +148,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
  		
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -242,7 +243,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspectionsscreen.archiveInspection(archivedinspnumber);
 		homescreen = inspectionsscreen.clickBackButton();
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);

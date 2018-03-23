@@ -7,13 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
@@ -82,7 +84,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		homescreen = invoicesscreen.clickBackButton();
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com/Company/Invoices.aspx");
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -159,7 +161,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
 		homescreen = invoicesscreen.clickBackButton();
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage("https://reconpro.cyberianconcepts.com");
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -275,9 +277,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen = invoiceinfoscreen.saveInvoice();
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
-		AppiumAndroidUtils.clickHardwareBackButton();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();
 	}
@@ -745,7 +747,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			for (int i = 0; i < iterations; i++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
 						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					emailscren.waitABit(45*1000);
+					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
 				break;
@@ -804,7 +806,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		homescreen = invoicesscreen.clickBackButton();
@@ -885,7 +887,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
 						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
-					emailscren.waitABit(45*1000);
+					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
 				break;
@@ -959,7 +961,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
 						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					emailscren.waitABit(45*1000);
+					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
 				break;
@@ -1160,7 +1162,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			for (int i = 0; i < iterations; i++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
 						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					emailscren.waitABit(45*1000);
+					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
 				break;
@@ -1220,7 +1222,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.switchToMyInvoicesView();
@@ -1433,7 +1435,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
 						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
-					emailscren.waitABit(45*1000);
+					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
 				break;

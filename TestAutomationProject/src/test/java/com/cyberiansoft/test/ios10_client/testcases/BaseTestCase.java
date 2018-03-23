@@ -15,7 +15,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
@@ -32,6 +31,7 @@ import org.testng.annotations.Parameters;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -45,7 +45,7 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	protected BrowserType browsertype;
+	protected static BrowserType browsertype;
 	protected TestUser testuser;
 	protected String userpsw;
 	protected static ExtentTest testlogger;
@@ -74,22 +74,6 @@ public class BaseTestCase {
 		// Parameters for WebDriver
 		 
 		 this.bundleid =  bundleid;
-		 
-		 
-		 //service = AppiumDriverLocalService.buildDefaultService();
-		/* service = AppiumDriverLocalService
-					.buildService(new AppiumServiceBuilder()
-							.usingDriverExecutable(new File("/usr/local/bin/node"))
-							.withAppiumJS(
-									new File(
-											"/usr/local/lib/node_modules/appium/build/lib/main.js"))
-							.withIPAddress("127.0.0.1").usingPort(4723));
-
-	        service.start();
-
-	        if (service == null || !service.isRunning()) {
-	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-	        }*/
 
 		/*
 		 * GraphicsConfiguration gc = GraphicsEnvironment
@@ -109,8 +93,7 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		//appiumdriver = AndroidDriverBuilder.forIOS().againstLocalhost().newInstance();
-		 
+		
 		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
 				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				 .withArgument(LOG_LEVEL, "error")
@@ -120,12 +103,7 @@ public class BaseTestCase {
 	        if (service == null || !service.isRunning()) {
 	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
 	        }
-	        for (BrowserType browserTypeEnum : BrowserType.values()) { 
-	            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
-	                this.browsertype = browserTypeEnum; 
-	                return; 
-	            } 
-	        } 
+	        browsertype = BaseUtils.getBrowserType(browser);
 	        DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 	}
@@ -191,16 +169,12 @@ public class BaseTestCase {
 		webdriver.get(url);
 	}
 
-	public WebDriver getWebDriver() {
-		return webdriver;
-	}
-
 	@AfterSuite
 	public void tearDown() throws Exception {
-		if (webdriver != null)
-			webdriver.quit();
-		if (appiumdriver != null)
-			appiumdriver.quit();
+		if (DriverBuilder.getInstance().getDriver() != null)
+				DriverBuilder.getInstance().getDriver().quit();
+		if (DriverBuilder.getInstance().getAppiumDriver() != null)
+			DriverBuilder.getInstance().getAppiumDriver().quit();
 		if (service != null) {
             service.stop();
         }
@@ -208,13 +182,13 @@ public class BaseTestCase {
 	
 	public void resrtartApplication() throws MalformedURLException {
 		try {
-			appiumdriver.closeApp();
+			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		} catch (NoSuchSessionException e) {
 			appiumdriverInicialize(buildtype);
 		}
 		Helpers.waitABit(7000);
 		try {
-			appiumdriver.launchApp();
+			DriverBuilder.getInstance().getAppiumDriver().launchApp();
 			Helpers.waitABit(7000);
 		} catch (WebDriverException e) {
 			try {
@@ -222,7 +196,7 @@ public class BaseTestCase {
 			} catch (InterruptedException e1) {
 				// do nothing
 			}
-			appiumdriver.launchApp();
+			DriverBuilder.getInstance().getAppiumDriver().launchApp();
 			Helpers.waitABit(2000);
 		}
 	}

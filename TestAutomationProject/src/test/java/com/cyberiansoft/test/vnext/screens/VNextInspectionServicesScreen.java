@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -41,7 +42,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		if (checkHelpPopupPresence())
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
@@ -133,7 +134,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		swipeScreensRight(3);
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 
@@ -211,7 +212,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
-			waitABit(1000);
+			BaseUtils.waitABit(1000);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 			wait.until(ExpectedConditions.elementToBeClickable(servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']"))));
 			servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).clear();
@@ -252,7 +253,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		if (servicecell != null) {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
-			waitABit(1000);
+			BaseUtils.waitABit(1000);
 			tap(servicecell.findElement(By.xpath(".//*[@action='notes']")));
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);	

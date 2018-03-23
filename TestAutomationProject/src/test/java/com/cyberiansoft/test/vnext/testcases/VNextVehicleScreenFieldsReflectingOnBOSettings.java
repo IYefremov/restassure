@@ -16,6 +16,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesVehicleInfoSettingsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesWebPage;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
@@ -35,9 +36,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
-		
-		
-		initiateWebDriver();
+			
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -92,7 +92,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -148,7 +148,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -204,7 +204,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -259,7 +259,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -314,7 +314,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -369,7 +369,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -424,7 +424,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -479,7 +479,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);

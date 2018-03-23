@@ -3,7 +3,8 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
@@ -31,9 +32,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
@@ -68,10 +69,10 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
 		vehicleinfoscreen.clickMenuButton();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.clickScreenTitleCaption();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
 		vehicleinfoscreen.changeScreen("Claim");
@@ -128,7 +129,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 				visualscreen.clickCarImage();
 			else
 				visualscreen.clickCarImageSecondTime();
-			visualscreen.waitABit(1000);
+			BaseUtils.waitABit(1000);
 		}
 		Assert.assertEquals(visualscreen.getImageMarkers().size(), damageTypes.length);
 		

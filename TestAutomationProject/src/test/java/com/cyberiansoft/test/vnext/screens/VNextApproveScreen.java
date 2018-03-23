@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
@@ -57,12 +57,12 @@ public class VNextApproveScreen extends VNextBaseScreen {
 		//TouchActions action = new TouchActions(appiumdriver);
 		//action.down(xx + 100,yy + 100).perform();
 		
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		new TouchAction(appiumdriver).tap(xx+200, yy+200).perform();
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(300))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		/**TouchActions action = new TouchActions(appiumdriver);
 		try {
 		action.down(xx + 100,yy + 100).perform();

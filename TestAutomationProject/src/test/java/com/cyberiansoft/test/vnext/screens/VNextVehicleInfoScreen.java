@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -72,11 +73,11 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 	}
 	
 	public void setVIN (String vinnumber) {
@@ -243,13 +244,13 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		swipeScreenLeft();
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		claiminfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		waitABit(1000);	
+		BaseUtils.waitABit(1000);	
 		visualscreen.swipeScreenLeft();
 		//new VNextVisualScreen(appiumdriver);
 		//swipeScreenLeft();
@@ -263,7 +264,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextWorkOrderSummaryScreen goToWorkOrderSummaryScreen() {
-		waitABit(5000);
+		BaseUtils.waitABit(5000);
 		swipeScreensLeft(2);
 		//swipeScreenLeft();
 		//swipeScreenLeft(); 

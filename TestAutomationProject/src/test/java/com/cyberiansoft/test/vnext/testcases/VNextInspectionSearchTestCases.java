@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
@@ -191,7 +192,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -214,7 +215,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -237,7 +238,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -260,7 +261,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -283,7 +284,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -306,7 +307,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -329,7 +330,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String inspTotalPrice = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -353,7 +354,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		final String filterName = "test12345";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -385,7 +386,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String filterName = "test12345";
 		final String filterNameEdited = "test12345edited";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -418,7 +419,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		final String filterNameEdited = "test12345edited";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -449,7 +450,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String filterNameEdited = "test12345edited";
 		
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -473,9 +474,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 			dependsOnMethods = { "testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO" })
 	public void testVerifyPosibilityToResetInspectionSearchFilterOnBO() throws IOException {
 		
-		final String filterNameEdited = "test12345edited";
-		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("https://19176361455.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);

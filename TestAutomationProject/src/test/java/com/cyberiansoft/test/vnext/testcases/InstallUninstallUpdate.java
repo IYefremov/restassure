@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 
@@ -33,7 +33,7 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 	public void testCloseLogInDialogWithHardwareBackButton() {		
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 		loginscreen.selectEmployee(testEmployee);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		loginscreen.waitUserListVisibility();
 	}
 	

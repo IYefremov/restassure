@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -35,7 +36,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	
 	public void updateMainDB() {
 		clickUpdateAppdata();
-		waitABit(10000);
+		BaseUtils.waitABit(10000);
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));

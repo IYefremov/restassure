@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -32,7 +33,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 
 	public WebElement getServicesList() {	
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		return wait.until(ExpectedConditions.visibilityOf(selectservicesscreen.findElement(By.xpath(".//div[@class='services-list-block']"))));
 	}
@@ -75,7 +76,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 			tap(servicerow.findElement(By.xpath(".//input[@class='item-checked big-checkbox green']")));	
 		else
 			Assert.assertTrue(false, "Can't find service: " + servicename);
-		waitABit(5000);
+		BaseUtils.waitABit(5000);
 	}
 	
 	public VNextPriceMatrixesScreen openMatrixServiceDetails(String matrixservicename) {

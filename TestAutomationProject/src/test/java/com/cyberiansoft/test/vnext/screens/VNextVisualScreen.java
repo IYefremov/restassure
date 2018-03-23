@@ -9,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.relevantcodes.extentreports.LogStatus;
@@ -46,7 +47,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		
@@ -76,26 +77,26 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void clickCarImageSecondTime() {
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		waitABit(300);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		BaseUtils.waitABit(300);
 		TouchAction tch = new TouchAction(appiumdriver);
 		tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3) ).perform();
-		waitABit(300);	
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(300);	
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Tap on Car image");
 	}
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		waitABit(300);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		BaseUtils.waitABit(300);
 		
 		for (int i = 0; i < touchTimes; i++) {
 			TouchAction tch = new TouchAction(appiumdriver);
 			tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / (i+2)), Math.round(appiumdriver.manage().window().getSize().getHeight() / (i+2)) ).perform();
-			waitABit(1000);
+			BaseUtils.waitABit(1000);
 		}
 		
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		log(LogStatus.INFO, "Tap on Car image");
 	}
 	

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -73,7 +74,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		List<WebElement> addservs = additionalserviceslist.findElements(By.xpath(".//div[@class='accordion-item-toggle']"));
 		for (WebElement additinalservice : addservs) {
 			additinalservice.findElement(By.xpath(".//input[@action='select']")).click();
-			waitABit(500);
+			BaseUtils.waitABit(500);
 		}
 	}
 	

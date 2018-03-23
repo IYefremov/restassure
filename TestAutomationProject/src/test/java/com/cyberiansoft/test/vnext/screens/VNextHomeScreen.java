@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.relevantcodes.extentreports.LogStatus;
@@ -95,14 +96,14 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public VNextInvoicesScreen clickInvoicesMenuItem() {
 		tap(invoiceslist);
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInvoicesScreen(appiumdriver);
 	}
@@ -126,7 +127,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	public void clickQueueMessageIcon() {
 		tap(queuemessageicon);
 		log(LogStatus.INFO, "Tap Queue Message Icon");
-		waitABit(500);
+		BaseUtils.waitABit(500);
 	}
 	
 	public String getQueueMessageValue() {

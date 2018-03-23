@@ -1,8 +1,15 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +17,6 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,21 +28,23 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class BaseTestCase {
 
 	private ScreenRecorder screenRecorder;
-	protected AppiumDriver appiumdriver;
+	protected IOSDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	public BrowserType browsertype;
+	protected static BrowserType browsertype;
 	protected File app;
 	String bundleid = "";
-	
+	protected static AppiumDriverLocalService service;
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
@@ -46,65 +54,6 @@ public class BaseTestCase {
 	@BeforeClass
 	@Parameters({ "selenium.browser", "ios.bundleid" })
 	public void setUp(String browser, String bundleid) throws Exception {
-
-		// Parameters for WebDriver
-		/* System.setProperty("webdriver.chrome.driver",
-		 "/Users/Shared/chromedriver");
-		 if (browser.equalsIgnoreCase("chrome")) {
-			 //ChromeOptions options = new ChromeOptions();
-			 //options.addArguments("chrome.switches","--disable-extensions");
-			 webcap =  DesiredCapabilities.chrome();
-			 //webcap.setCapability(ChromeOptions.CAPABILITY, options);
-			 System.setProperty("webdriver.chrome.driver", "C:/chromedriver/chromedriver.exe");
-			 browsertype = "chrome";
-		 } else if (browser.equalsIgnoreCase("firefox")) {
-			 webcap = DesiredCapabilities.firefox();
-			 browsertype = "firefox";
-		 } else if (browser.equalsIgnoreCase("ie")) {
-			 System.setProperty("webdriver.ie.driver", "C:/iedriver/IEDriverServer.exe");
-			 browsertype = "ie";
-			 webcap = DesiredCapabilities.internetExplorer();
-			 //webcap.setCapability("nativeEvents", false); 
-			 
-			 webcap.setCapability("ignoreZoomSetting", true);
-		 } else {
-			 System.setProperty("webdriver.chrome.driver", "C:/chromedriver/chromedriver.exe");
-			 browsertype = "chrome";
-			 webcap = DesiredCapabilities.chrome(); 
-		 }
-		
-		
-		
-		// parameters for Appium iOS Driver
-		// File appDir = new File("/Users/vladimir/Downloads/");
-		// File app = new File(appDir, "ReconPro_HD.app");
-		appiumcap = new DesiredCapabilities();
-		appiumcap.setCapability(CapabilityType.BROWSER_NAME, "");
-		//appiumcap.setCapability(CapabilityType.VERSION, "7.1.1");
-		
-		//File appDir = new File("/Users/Shared/");
-	    //File app = new File(appDir, "ReconPro_HD.app");
-	    appiumcap.setCapability("deviceName","iPad mini 2");
-		appiumcap.setCapability("udid", "e80c0135055f336bd77e60483142facccb22b702");
-		appiumcap.setCapability("bundleid", "com.automobiletechnologies.reconprohd");
-		//appiumcap.setCapability("app", app.getAbsolutePath());
-		
-		// appiumcap.setCapability("app", app.getAbsolutePath());
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		cal.add(Calendar.DAY_OF_MONTH, -1);
-		final String appfileversion = dateFormat.format(cal.getTime())
-				.substring(5, 7)
-				+ dateFormat.format(cal.getTime()).substring(8, 10);
-
-		// appiumcap.setCapability("app",
-		//"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + appfileversion + ".app.zip");
-
-		appiumcap
-			.setCapability("app",
-						"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_0224.app.zip");
-
 		/*
 		 * GraphicsConfiguration gc = GraphicsEnvironment
 		 * .getLocalGraphicsEnvironment().getDefaultScreenDevice()
@@ -127,27 +76,18 @@ public class BaseTestCase {
 		 * out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		//webdriverInicialize() ;
 		
-		appiumcap = new DesiredCapabilities();
-		appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
-		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME,"iPad mini 2");
-		appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9.2");
-		appiumcap.setCapability("udid", "e80c0135055f336bd77e60483142facccb22b702");
-		appiumcap.setCapability("bundleid", this.bundleid);
-		
-		appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
-		appiumcap.setCapability("newCommandTimeout", "120");
-		File appDir = new File("./data/");
-		app = new File(appDir, "ReconPro_0810.app.zip");
-		appiumcap.setCapability("app", app.getAbsolutePath());
-		
-		for (BrowserType browserTypeEnum : BrowserType.values()) { 
-            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
-                this.browsertype = browserTypeEnum; 
-                return; 
-            } 
-        } 
+		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
+				 .withArgument(LOG_LEVEL, "error")
+				 .build();
+	        service.start();
+
+	    if (service == null || !service.isRunning()) {
+	    	throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
+	    }
+	    this.bundleid =  bundleid;		
+		browsertype = BaseUtils.getBrowserType(browser);
 
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
@@ -157,63 +97,29 @@ public class BaseTestCase {
 	public static WebElement wait(By locator) {
 		return Helpers.wait(locator);
 	}
-
-	/*public void webdriverInicialize() throws Exception {
-		System.setProperty("webdriver.ie.driver", "C:/iedriver/IEDriverServer.exe");
-
-		 if (browsertype.equalsIgnoreCase("chrome")) {
-
-			 webdriver = new ChromeDriver(webcap);
-		 } else if (browsertype.equalsIgnoreCase("firefox")) {
-			 webdriver = new FirefoxDriver();
-		 } else if (browsertype.equalsIgnoreCase("ie")) {
-			 webdriver = new InternetExplorerDriver();
-			 //webdriver = new RemoteWebDriver(
-				//		new URL("http://127.0.0.1:5555"), webcap);
-		 } else {
-			 webdriver = new ChromeDriver();
-		 }
-		
-		
-		//webdriver = new InternetExplorerDriver();
-		webdriver.manage().window().maximize();
-		webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		webdriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		//webdriver.manage().timeouts().implicitlyWait(8000, TimeUnit.SECONDS);
-		//webdriver = new ChromeDriver();
-	}*/
+	
 
 	public void appiumdriverInicialize() throws Exception {
-		appiumdriver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"),
-				appiumcap);
-
+		DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD, service.getUrl());
+		
+		appiumdriver = (IOSDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		Helpers.init(appiumdriver);
 	}
 
-	public void webdriverGotoWebPage(String url) {
-		webdriver.manage().window().maximize();
-		webdriver.get(url);
-		if (browsertype.equals("ie")) {
-			if (webdriver.findElements(By.id("overridelink")).size() > 0) {
-				webdriver.navigate().to("javascript:document.getElementById('overridelink').click()");
-			}
-		}
-	}
-
 	@AfterMethod
 	public void cookieCleaner(){
-		webdriver.get("https://reconpro.cyberianconcepts.com/");
-		webdriver.manage().deleteAllCookies();
+		DriverBuilder.getInstance().getDriver().get("https://reconpro.cyberianconcepts.com/");
+		DriverBuilder.getInstance().getDriver().manage().deleteAllCookies();
 	}
 	
 	@AfterClass
 	public void tearDown() throws Exception {
 
-		if (webdriver != null)
-			webdriver.quit();
-		if (appiumdriver != null)
-			appiumdriver.quit();
+		if (DriverBuilder.getInstance().getDriver() != null)
+			DriverBuilder.getInstance().getDriver().quit();
+		if (DriverBuilder.getInstance().getAppiumDriver() != null)
+			DriverBuilder.getInstance().getAppiumDriver().quit();
 	}
 
 }

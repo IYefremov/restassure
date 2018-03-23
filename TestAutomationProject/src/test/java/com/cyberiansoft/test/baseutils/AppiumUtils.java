@@ -13,7 +13,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
-public class AppiumAndroidUtils {
+public class AppiumUtils {
 	
 	public static void switchApplicationContext(AppContexts context) {
 		Set<String> contextNames = DriverBuilder.getInstance().getAppiumDriver().getContextHandles();

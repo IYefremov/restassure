@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -54,7 +55,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(personalinfouserscreen));
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 	}
 	
 	public void setNewUserPersonaInfo(String newusercompanyname, String userstate) {

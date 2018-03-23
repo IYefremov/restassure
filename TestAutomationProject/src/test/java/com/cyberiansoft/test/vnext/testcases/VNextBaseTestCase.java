@@ -18,7 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -98,18 +98,12 @@ public class VNextBaseTestCase {
 				buildproduction = false;
 	}
 	
-	public void initiateWebDriver() {
-		DriverBuilder.getInstance().setDriver(browsertype);
-		webdriver = DriverBuilder.getInstance().getDriver();
-	}
-	
 	public void setUp() {
-		waitABit(8000);
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 	}
 	
 	public String createScreenshot(WebDriver driver, String loggerdir, String testcasename) {
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		WebDriver driver1 = new Augmenter().augment(driver);
 		UUID uuid = UUID.randomUUID();
 		File file = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
@@ -119,7 +113,7 @@ public class VNextBaseTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		return testcasename + uuid + ".jpeg";
 	}
 	
@@ -166,14 +160,14 @@ public class VNextBaseTestCase {
 			phonenumber = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber();
 		}
 
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, phonenumber, userregmail);
-		regscreen.waitABit(15000);
+		BaseUtils.waitABit(15000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonenumber));
@@ -183,12 +177,12 @@ public class VNextBaseTestCase {
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		registrationinformationdlg.waitABit(15*1000);
+		BaseUtils.waitABit(15*1000);
 		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
-			AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
+			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 			DriverBuilder.getInstance().getAppiumDriver().launchApp();
-			AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		}
 		
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
@@ -209,14 +203,14 @@ public class VNextBaseTestCase {
 			webdriver.quit();*/
 		} 
 
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
 				phonecountrycode, userPhone, userMail);
-		regscreen.waitABit(7000);
+		BaseUtils.waitABit(7000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		if (buildproduction) 
 			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonecountrycode + userPhone));
@@ -227,13 +221,13 @@ public class VNextBaseTestCase {
 		
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		registrationinformationdlg.waitABit(10*1000);
+		BaseUtils.waitABit(10*1000);
 		
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		
 		
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
@@ -262,7 +256,7 @@ public class VNextBaseTestCase {
 
 		webdriver.quit();
 		
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		
 		/*VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.clickIHaveRigistrationCodeLink();
@@ -279,39 +273,17 @@ public class VNextBaseTestCase {
 		verificationscreen.clickVerifyButton(); 
 		
 
-		verificationscreen.waitABit(20*1000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
+		BaseUtils.waitABit(20*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		VNextDownloadDataScreen downloaddatascreen = new VNextDownloadDataScreen(appiumdriver);
 		downloaddatascreen.waitUntilDatabasesDownloaded();
 		//WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
 		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogOKButton();
-	}
-	
-	public void restartAppAndGetNewRegCode(String deviceofficeurl, String deviceuser, String devicepsw, String licensename) {
-		resetApp();
-		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
-	}
-	
-	public void resetApp() {
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		DriverBuilder.getInstance().getAppiumDriver().resetApp();
-		waitABit(30*1000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		//switchApplicationContext(AppContexts.WEB_CONTEXT);
-	}
-	
-	public void waitABit(int milliseconds) {
-		try {
-			Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public void webdriverGotoWebPage(String url) {

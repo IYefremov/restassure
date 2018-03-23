@@ -3,7 +3,8 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
@@ -67,15 +68,15 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			description = "Send messages automatically from the queue in Automatic Mode after reconnect to network")
 	public void testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		AppiumAndroidUtils.setNetworkOff();
-		homescreen.waitABit(13000);
+		AppiumUtils.setNetworkOff();
+		BaseUtils.waitABit(13000);
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		for (int i = 0; i < 4; i++)
 			inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -84,16 +85,16 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 			description = "Send message from the queue in Automatic Mode (fail path)")
 	public void testSendMessageFromTheQueueInAutomaticModeFailPath() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		AppiumAndroidUtils.setNetworkOff();
+		AppiumUtils.setNetworkOff();
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 		homescreen.clickQueueMessageIcon();
-		homescreen.waitABit(3000);
+		BaseUtils.waitABit(3000);
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		AppiumAndroidUtils.setNetworkOn();
+		AppiumUtils.setNetworkOn();
 	}
 	
 }

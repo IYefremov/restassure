@@ -28,5 +28,14 @@ public class BaseUtils {
         } 
 		return mobileplatform;
 	}
+	
+	public static void waitABit(int milliseconds) {
+		try {
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

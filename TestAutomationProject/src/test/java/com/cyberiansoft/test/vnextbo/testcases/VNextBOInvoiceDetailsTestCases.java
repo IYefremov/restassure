@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
@@ -43,7 +44,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		final String state = "California";
 		final String shiptozip = "79031";
 		
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(userName, userPassword);
@@ -58,7 +59,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 		
-		webdriverGotoWebPage(oldbourl);
+		WebDriverUtils.webdriverGotoWebPage(oldbourl);
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		oldloginpage.UserLogin(userName, userPassword);

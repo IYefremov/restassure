@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOServicesWebPage;
@@ -42,7 +43,7 @@ public class VNextBOServicestestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	public void BackOfficeLogin(String backofficeurl,
 			String usernm, String userpsw) {
-		webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		userName = usernm;
 		userPassword = userpsw;
 	}

@@ -13,7 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -58,7 +59,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='notes']")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public List<WebElement> getListOfQuickNotes() {
@@ -118,16 +119,16 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void addCameraPictureToNote() {
 		selectNotesPicturesTab();
 		clickCameraIcon();
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		waitABit(8000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		BaseUtils.waitABit(8000);
 		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
-		waitABit(8000);
+		BaseUtils.waitABit(8000);
 		if (appiumdriver.findElements(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).size() > 0)
 			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'btn_done')]")).click();
 		else
 			appiumdriver.findElement(By.xpath("//android.widget.ImageView[contains(@resource-id,'ok')]")).click();
-		waitABit(4000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(4000);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		Assert.assertTrue(isPictureaddedToNote());
 		log(LogStatus.INFO, "Add Camera picture to Note");
 	}
@@ -143,29 +144,29 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	public void addImageToNotesFromGallery() {
 		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
-			AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-			waitABit(3000);
+			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			BaseUtils.waitABit(3000);
 			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
 			else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
 		
-			waitABit(1000);
+			BaseUtils.waitABit(1000);
 			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
 			else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
-			waitABit(4000);
+			BaseUtils.waitABit(4000);
 
 			appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
-			waitABit(10000);
+			BaseUtils.waitABit(10000);
 			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
 			
-			AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-			waitABit(3000);
+			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+			BaseUtils.waitABit(3000);
 		} else {
 			addFakeImageNote();
-			waitABit(3000);
+			BaseUtils.waitABit(3000);
 		}
 	}
 	

@@ -33,6 +33,7 @@ import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 
 public class NewTestCases extends BaseTestCase {
@@ -66,7 +67,7 @@ public class NewTestCases extends BaseTestCase {
 
 		devicespage.setSearchCriteriaByName(licensename);
 		regCode = devicespage.getFirstRegCodeInTable();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		Thread.sleep(2000);
 	}
 
@@ -289,7 +290,7 @@ public class NewTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	
@@ -330,7 +331,7 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestslistpage.saveNewServiceRequest();
 		String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		homescreen = new RegularHomeScreen(appiumdriver);
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
@@ -372,7 +373,7 @@ public class NewTestCases extends BaseTestCase {
 		devicespage.setSearchCriteriaByName(licensename);
 		regCode = devicespage.getFirstRegCodeInTable();
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.registeriOSDevice(regCode);

@@ -10,11 +10,13 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -212,8 +214,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String inspnum = inspservicesscreen.getNewInspectionNumber();
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
-		homescreen.waitABit(30000);
-		initiateWebDriver();
+		BaseUtils.waitABit(30000);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get("http://capi.cyberianconcepts.com");
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -382,9 +384,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.clickCancelInspectionMenuItem();
 		informationdlg = new VNextInformationDialog(appiumdriver);
-		AppiumAndroidUtils.clickHardwareBackButton();
-		AppiumAndroidUtils.clickHardwareBackButton();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
@@ -397,7 +399,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	@Parameters({ "user.name", "user.psw" })
 	public void testShowAllAssignedToServicePackageServicesAsAvailableOnes(String deviceuser, String devicepsw) { 
 	
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -431,7 +433,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		for (String srv : allservicestxt) {
 			Assert.assertTrue(servicestxt.contains(srv));
 		}
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -713,7 +715,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amount);
 		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amountvalue);
@@ -755,7 +757,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amount);
 		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amountvalue);
@@ -787,7 +789,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amount);
 		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amount);
@@ -875,7 +877,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImageACoupleTimes(quantities.length);
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		
 		for (int i =0 ; i <  quantities.length; i++) {
 			List<MobileElement> damagemarkers =  visualscreen.getImageMarkers();
@@ -884,7 +886,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			servicedetailsscreen.setServiceQuantityValue(quantities[i]);
 			servicedetailsscreen.clickServiceDetailsDoneButton();
 			visualscreen = new VNextVisualScreen(appiumdriver);
-			visualscreen.waitABit(1000);
+			BaseUtils.waitABit(1000);
 		}
 		visualscreen.clickDamageCancelEditingButton();
 		Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspprice);
@@ -918,7 +920,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(dentamount);
 		servicedetailsscreen.setServiceQuantityValue(dentquantity);
@@ -1053,7 +1055,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(damagetype);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amount);
 		servicedetailsscreen.clickServiceDetailsDoneButton();
@@ -1172,7 +1174,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 				visualscreen.clickCarImage();
 			else
 				visualscreen.clickCarImageSecondTime();
-			visualscreen.waitABit(1000);
+			BaseUtils.waitABit(1000);
 		}
 		visualscreen.swipeScreenLeft();
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);	
@@ -1193,8 +1195,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String[] services = { "Bumper Repair", "Facility Fee", "Aluminum Upcharge" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		AppiumAndroidUtils.setNetworkOff();
-		homescreen.waitABit(13000);		
+		AppiumUtils.setNetworkOff();
+		BaseUtils.waitABit(13000);		
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -1226,14 +1228,14 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		statusscreen.clickUpdateAppdata();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();
-		waitABit(10000);
+		BaseUtils.waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		AppiumAndroidUtils.setNetworkOn();	
+		AppiumUtils.setNetworkOn();	
 		statusscreen.clickUpdateAppdata();	
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();
-		waitABit(10000);
+		BaseUtils.waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 		

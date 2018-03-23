@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -294,7 +294,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addQuickNote(quicknote);
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 			

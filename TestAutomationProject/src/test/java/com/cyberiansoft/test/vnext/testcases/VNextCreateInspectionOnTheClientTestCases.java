@@ -9,6 +9,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
@@ -72,7 +74,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(VIN);
-		vehicleinfoscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
@@ -107,7 +109,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			emailscreen.sentToEmailAddress(usermail);
 		
 		emailscreen.sendEmail();
-		emailscreen.waitABit(60*1000);
+		BaseUtils.waitABit(60*1000);
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
 		
 		Thread.sleep(60*1000);
@@ -162,7 +164,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(selectdamage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amountvalue);
 		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amountvalue);
@@ -260,7 +262,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(VIN);
-		vehicleinfoscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
@@ -301,7 +303,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
 	public void testVerifyDisplayingInspectionWhichContainsBreakageServiceWithBigQuantity(String bourl, String username, String userpsw) {
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -325,7 +327,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		
 		final String insppriceexp = "$ 267.81";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -348,7 +350,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 	public void testVerifyDisplayingInspectionWithCustomerWithFirstNameOnly(String bourl, String username, String userpsw) {
 		final String firstname = "CustomerFirstName";
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);

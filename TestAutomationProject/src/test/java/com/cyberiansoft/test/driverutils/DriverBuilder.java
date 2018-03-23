@@ -178,6 +178,11 @@ public class DriverBuilder {
 		return this.mobilePlatform.get();
 	}
 	
+	public String getBrowser() {
+		return this.sessionBrowser.get();
+	}
+	
+	
 	public final URL getLocalHostAppiumURL() {
 		URL defaultAppiumURL = null;
 		try {

@@ -86,10 +86,7 @@ public class JSONDataProvider {
     public static JSONObject extractData_JSON(String file) throws Exception {
     	File filejson =
                 new File(file);
-    	System.out.println("++++" + file);
-        FileReader reader = new FileReader(filejson);
-        
-        
+    	FileReader reader = new FileReader(filejson);
         JSONParser jsonParser = new JSONParser();
 
         return (JSONObject) jsonParser.parse(reader);

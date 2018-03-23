@@ -5,7 +5,6 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.ios.IOSTouchAction;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -24,14 +23,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Helpers {
 
-	private static AppiumDriver driver;
+	private static AppiumDriver<MobileElement> driver;
 	private static WebDriverWait driverWait;
 
 	/**
 	 * Initialize the webdriver. Must be called before using any helper methods.
 	 * *
 	 */
-	public static void init(AppiumDriver webDriver) {
+	public static void init(AppiumDriver<MobileElement>  webDriver) {
 		driver = webDriver;
 		int timeoutInSeconds = 240;
 		driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
@@ -66,9 +65,9 @@ public abstract class Helpers {
 	/**
 	 * Return a list of elements by locator *
 	 */
-	public static List<MobileElement> elements(By locator) {
+	/*public static List<MobileElement> elements(By locator) {
 		return w(driver.findElements(locator));
-	}
+	}*/
 
 	/**
 	 * Press the back button *
@@ -80,9 +79,9 @@ public abstract class Helpers {
 	/**
 	 * Return a list of elements by tag name *
 	 */
-	public static List<MobileElement> tags(String tagName) {
+	/*public static List<MobileElement> tags(String tagName) {
 		return elements(for_tags(tagName));
-	}
+	}*/
 
 	/**
 	 * Return a tag name locator *

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -52,7 +53,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
-		waitABit(1500);
+		BaseUtils.waitABit(1500);
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
@@ -83,7 +84,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);			
 		tap(customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		log(LogStatus.INFO, "Select customer by Address " + customercompany);
 	}
 	

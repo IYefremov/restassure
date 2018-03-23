@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -29,18 +30,18 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(businesstypescreen));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 
 	public void selectEdition(String businessedition) {
 		tap(editionfld);	
-		waitABit(500);
+		BaseUtils.waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + businessedition + "']")));
 	}
 	
 	public void selectLineOfBusiness(String lineofbusiness) {
 		tap(businesstypefld);
-		waitABit(500);
+		BaseUtils.waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + lineofbusiness + "']")));
 	}
 	

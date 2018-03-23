@@ -69,6 +69,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -132,7 +133,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		devicespage.setSearchCriteriaByName(searchlicensecriteria);
 		regCode = devicespage.getFirstRegCodeInTable();
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
@@ -255,7 +256,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		clientspage.deleteUserViaSearch(firstnamenew);
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		Thread.sleep(2000);
 
 		//resrtartApplication();		
@@ -443,7 +444,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		devicespage.setSearchCriteriaByName(license);
 		regCode = devicespage.getFirstRegCodeInTable();
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
@@ -804,7 +805,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		inspectionspage.approveInspectionByNumber(inpectionnumber);
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -867,7 +868,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		inspectionspage.approveInspectionLinebylineApprovalByNumber(
 				inpectionnumber, iOSInternalProjectConstants.DISC_EX_SERVICE1, iOSInternalProjectConstants.DYE_SERVICE);
 
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -911,7 +912,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestpage.setServiceTypeQuantity(iOSInternalProjectConstants.TEST_TAX_SERVICE, "1");
 		servicerequestpage.setServiceTypeQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "3");
 		servicerequestpage.clickSaveBtn();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 			
 		
 		resrtartApplication();
@@ -953,7 +954,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				webdriver, InspectionsWebPage.class);
 
 		inspectionspage.assertInspectionPrice(inspnumber, PricesCalculations.getPriceRepresentation(price));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	//Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device
@@ -1080,7 +1081,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	//Test Case 21582:Create Inspection from Service request
@@ -2180,7 +2181,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
@@ -4514,7 +4515,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		srlistwebpage.saveNewServiceRequest();
 		String srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		resrtartApplication();
 		MainScreen mainscr = new MainScreen(appiumdriver);
@@ -4567,7 +4568,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
 		
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		MainScreen mainscr = new HomeScreen(appiumdriver).clickLogoutButton();
 		mainscr.updateDatabase();
@@ -4607,7 +4608,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
 		
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		mainscr = new HomeScreen(appiumdriver).clickLogoutButton();
 		mainscr.updateDatabase();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -6097,7 +6098,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
 		Assert.assertEquals(inspectionspage.getInspectionStatus(inspnumber), "Approved");
 		Assert.assertEquals(inspectionspage.getInspectionApprovedTotal(inspnumber), "$2000.00");
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	@Test(testName="Test Case 51336:WO: HD - Verify that approve WO is working correct under Team WO", 
@@ -6235,7 +6236,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("PO/RO"), PricesCalculations.getPriceRepresentation("0"));
 		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("PO/RO"), "Back Office");
 		invoicepayments.closeNewTab(mainWindowHandle);
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 
@@ -6331,7 +6332,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
 		invoicepayments.closeNewTab(mainWindowHandle);
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	@Test(testName="Test Case 27741:Invoices: HD - Verify that payment is send to BO when PO# is changed under Team invoice", 
@@ -6416,7 +6417,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
 		invoicepayments.closeNewTab(mainWindowHandle);
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in,"
@@ -6527,7 +6528,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vendororderservicespage.changeRepairOrderServiceVendor(iOSInternalProjectConstants.DYE_SERVICE, "Device Team");
 		vendororderservicespage.waitABit(1000);
 		Assert.assertEquals(vendororderservicespage.getRepairOrderServiceTechnician(iOSInternalProjectConstants.DYE_SERVICE), "Oksi User");
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 			
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(wonum);		
@@ -7039,7 +7040,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	
@@ -7996,7 +7997,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		
 		homescreen = new HomeScreen(appiumdriver);
@@ -8059,7 +8060,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		
 		homescreen = new HomeScreen(appiumdriver);
@@ -8117,7 +8118,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		
 		homescreen = new HomeScreen(appiumdriver);
@@ -8191,7 +8192,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(servicerequestslistpage.addAppointmentFromSRlist(startDate, endDate, "Employee Simple 20%"));
-		getWebDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 		
 		
 		homescreen = new HomeScreen(appiumdriver);

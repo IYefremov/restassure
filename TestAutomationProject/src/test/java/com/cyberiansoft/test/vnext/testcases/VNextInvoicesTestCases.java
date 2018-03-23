@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
@@ -144,7 +146,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumbertc46415), "$0.00");
 		homescreen = invoicesscreen.clickBackButton();
-		homescreen.waitABit(60*1000);
+		BaseUtils.waitABit(60*1000);
 	}
 	
 	@Test(testName= "Test Case 48094:vNext mobile: Create Invoice which contains price services with decimal quantity", 
@@ -170,7 +172,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		visualscreen.clickAddServiceButton();
 		visualscreen.clickDefaultDamageType(dentdamage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		servicedetailsscreen.setServiceAmountValue(amountvalue);
 		Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amountvalue);
@@ -208,12 +210,12 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 			emailscreen.sentToEmailAddress(usermail);
 		
 		emailscreen.sendEmail();
-		emailscreen.waitABit(60*1000);
+		BaseUtils.waitABit(60*1000);
 		boolean search = false;
 		final String inspectionreportfilenname = invoicenumbertc48094 + ".pdf";
 		for (int i= 0; i < 5; i++) {
 			if (!MailChecker.searchEmailAndGetAttachment(usermail, userpsw, "Invoice #" + invoicenumbertc48094 + " from ReconPro vNext Dev", "ReconPro@cyberiansoft.com", inspectionreportfilenname)) {
-				emailscreen.waitABit(30*1000); 
+				BaseUtils.waitABit(30*1000); 
 			} else {
 				
 				search = true;
@@ -229,7 +231,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 			Assert.assertTrue(search, "Can't find email with " + invoicenumbertc48094 + " inspection");
 		}
 
-		emailscreen.waitABit(60*1000);
+		BaseUtils.waitABit(60*1000);
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 	}
 	
@@ -433,7 +435,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	dependsOnMethods = { "testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity" })
 	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
 	public void testVerifyCustomerInfoOnInvoiceDetail(String bourl, String username, String userpsw) {
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -450,7 +452,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	dependsOnMethods = { "testCreateInvoiceWithTextNote" })
 	@Parameters({ "backofficecapi.url", "usercapi.name", "usercapi.psw"})
 	public void testVerifyTextNoteOnInvoiceDetail(String bourl, String username, String userpsw) {
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(bourl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);

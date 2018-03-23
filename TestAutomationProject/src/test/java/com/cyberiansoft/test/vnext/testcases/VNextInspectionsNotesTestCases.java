@@ -10,7 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -68,7 +70,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (int i =0; i< 3; i++) {
 			notesscreen.addQuickNote(notes.get(i));
 		}
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -108,7 +110,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (int i =0; i< 3; i++) {
 			notesscreen.addQuickNote(notes.get(i));
 		}
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -154,7 +156,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
 		String msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		infodialog = new VNextInformationDialog(appiumdriver);
 		msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
@@ -199,11 +201,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
 		String msg = infodialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		infodialog = new VNextInformationDialog(appiumdriver);
 		msg = infodialog.getInformationDialogMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.clickNotesBackButton();
 		
@@ -232,8 +234,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		
 		for (int i=0; i<9; i++) {
-			VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
-			AppiumAndroidUtils.clickHardwareBackButton();
+			inspservicesscreen.clickInspectionNotesOption();
+			AppiumUtils.clickHardwareBackButton();
 			
 			inspservicesscreen.swipeScreenLeft();
 		}
@@ -411,7 +413,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		notesscreen.setNoteText(notetextvalid);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
@@ -435,9 +437,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.addCameraPictureToNote();
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		notesscreen.selectNotesTextTab();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
@@ -463,7 +465,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.addCameraPictureToNote();
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		notesscreen.selectNotesTextTab();
 		notesscreen.clickNotesBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -504,7 +506,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
     		notes.add(note.getText());
 		for (int i = 0; i < 3; i++) 
 			notesscreen.addQuickNote(notes.get(i));
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -514,7 +516,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
 		notesscreen.clickClearNotesButton();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
@@ -575,7 +577,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
 		visualscreen.clickCarImage();
-		visualscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
@@ -590,8 +592,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		inspectionsscreen = visualscreen.saveInspectionViaMenu();		
 		homescreen = inspectionsscreen.clickBackButton();
 		
-		homescreen.waitABit(30000);
-		initiateWebDriver();
+		BaseUtils.waitABit(30000);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -640,8 +642,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
 		
-		homescreen.waitABit(30000);
-		initiateWebDriver();
+		BaseUtils.waitABit(30000);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -700,9 +702,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		homescreen = inspectionsscreen.clickBackButton();		
 		homescreen.waitUntilQueueMessageInvisible();
 		
-		homescreen.waitABit(30000);
+		BaseUtils.waitABit(30000);
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);

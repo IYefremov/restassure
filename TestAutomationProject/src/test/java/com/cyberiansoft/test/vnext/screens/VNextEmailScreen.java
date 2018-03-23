@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -39,13 +40,13 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='email']")));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public void clickToEmailAddressRemoveButton() {
 		if (toemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
 			tap(toemailpanel.findElement(By.xpath(removemailbtn)));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public void sentToEmailAddress(String emailaddress) {
@@ -58,7 +59,7 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	public void sentToCCEmailAddress(String ccemailaddress) {
 		if (ccemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
 			tap(ccemailpanel.findElement(By.xpath(removemailbtn)));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		ccemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		ccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(ccemailaddress);
 		log(LogStatus.INFO, "Set Send Email CC to: " + ccemailaddress);
@@ -67,7 +68,7 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	public void sentToBCCEmailAddress(String bccemailaddress) {
 		if (bccemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
 			tap(bccemailpanel.findElement(By.xpath(removemailbtn)));
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 		bccemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		bccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(bccemailaddress);
 		log(LogStatus.INFO, "Set Send Email BCC to: " + bccemailaddress);
@@ -91,7 +92,7 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		tap(sendbtn);
 		//VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
 		//informationdialog.clickInformationDialogOKButton();

@@ -1,9 +1,5 @@
 package com.cyberiansoft.test.vnext.utils;
 
-import java.io.FileInputStream;
-import java.util.Properties;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -11,11 +7,10 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -52,11 +47,11 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	    ExtentReportFactory.closeTest(getTestMethodName(result));
 	    
 	   // if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
-	    	AppiumAndroidUtils.setNetworkOn();
-	    	((VNextBaseTestCase) currentClass).resetApp();
-	    	((VNextBaseTestCase) currentClass).setUp();
-	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
-	    	try {
+	    	AppiumUtils.setNetworkOn();
+	    	
+	    	VNextAppUtils.restartApp();
+	    	
+	    	/*try {
 	    		((VNextBaseTestCase) currentClass).registerTeamEdition("Automation_android");
 	    	} catch (Exception e) {
 	    		// TODO Auto-generated catch block
@@ -69,7 +64,7 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	    		e.printStackTrace();
 	    	}
 	    	VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-			loginscreen.userLogin("Oksi Employee", "1111");
+			loginscreen.userLogin("Oksi Employee", "1111");*/
 	   // }
 	    
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);

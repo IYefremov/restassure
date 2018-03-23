@@ -12,7 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -42,6 +44,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
@@ -67,18 +70,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() throws IOException {		
 		setUp();
-		AppiumAndroidUtils.setNetworkOn();		
+		AppiumUtils.setNetworkOn();		
 	}
 	
 	@AfterClass(description = "Setting up new suite")
 	public void tearDown() throws Exception {
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		//appiumdriver.resetApp();	
 	}
 	
 	@BeforeMethod(description = "Setting up new suite")
 	public void resetApk() {
-		resetApp();
+		VNextAppUtils.resetApp();
 		setUp();
 	}
 	
@@ -109,9 +112,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -135,8 +138,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		registrationoverviewlegalinfoscreen.waitABit(30*1000);			
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(30*1000);			
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 				
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
@@ -150,7 +153,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		}
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
@@ -196,16 +199,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		regscreen.clickDoneButton();
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
@@ -216,7 +219,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
 		reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(2000);
+		BaseUtils.waitABit(2000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(appiumdriver);
 		registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
@@ -242,7 +245,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
-		registrationoverviewlegalinfoscreen.waitABit(1000);
+		BaseUtils.waitABit(1000);
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		/*
@@ -250,7 +253,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);
+		BaseUtils.waitABit(60*1000);
 			
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "PDR: REGISTRATION", fromEmail, bodySearchText + newuserfirstname + " " + newuserlastname);
@@ -265,7 +268,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		}
 
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
@@ -305,9 +308,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -328,9 +331,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		resetApp();
-		waitABit(10*1000);
+		BaseUtils.waitABit(60*1000);
+		VNextAppUtils.resetApp();
+		BaseUtils.waitABit(10*1000);
 
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
@@ -384,9 +387,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -407,10 +410,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);		
-		resetApp();
-		waitABit(10*1000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(60*1000);		
+		VNextAppUtils.resetApp();
+		BaseUtils.waitABit(10*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
@@ -450,9 +453,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -473,10 +476,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);
-		resetApp();
-		waitABit(10*1000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(60*1000);
+		VNextAppUtils.resetApp();
+		BaseUtils.waitABit(10*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
@@ -488,7 +491,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
 		mailmismatchdlg.clickTextEmailAddressButton();
 		
-		mailmismatchdlg.waitABit(1000*15);
+		BaseUtils.waitABit(1000*15);
 		regscreen.setEmail(userregmail);
 		regscreen.setPhoneNumber("3127641152");
 		regscreen.clickDoneButton();
@@ -526,9 +529,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -549,8 +552,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(60*1000);			
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(60*1000);			
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 				
 		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
@@ -563,7 +566,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		}
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
@@ -579,7 +582,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Welcome to Client Portal", "testuser+2329@cyberiansoft.com", "Hello " + userfirstname + " " + userlastname);
 		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);	
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(ibsurl);
 		IBSLoginWebPage ibsloginpage = PageFactory.initElements(
 				webdriver, IBSLoginWebPage.class);
@@ -636,16 +639,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		regscreen.clickDoneButton();
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
@@ -656,7 +659,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
 		reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(2000);
+		BaseUtils.waitABit(2000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(appiumdriver);
 		registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
@@ -684,12 +687,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreePaymentTerms();
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
-		registrationoverviewlegalinfoscreen.waitABit(25000);
+		BaseUtils.waitABit(25000);
 		
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		VNextAppUtils.restartApp();
 		
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
@@ -773,16 +773,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		regscreen.clickDoneButton();
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
@@ -812,12 +812,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 
-		registrationoverviewlegalinfoscreen.waitABit(10000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(10000);
+		VNextAppUtils.restartApp();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -882,16 +878,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		
 		regscreen.clickDoneButton();
-		waitABit(4000);
+		BaseUtils.waitABit(4000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -912,12 +908,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
-		registrationoverviewlegalinfoscreen.waitABit(15000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(15000);
+		VNextAppUtils.restartApp();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -977,16 +969,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		
 		regscreen.clickDoneButton();
-		waitABit(4000);
+		BaseUtils.waitABit(4000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
@@ -1007,12 +999,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		
-		registrationoverviewlegalinfoscreen.waitABit(25000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(25000);
+		VNextAppUtils.restartApp();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -1037,7 +1025,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
 		}
 		
-		initiateWebDriver();
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
 				webdriver, VNextBOApproveAccountWebPage.class);
@@ -1103,16 +1091,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);		
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		regscreen.clickDoneButton();
-		waitABit(3000);
+		BaseUtils.waitABit(3000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		waitABit(2000);
+		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
@@ -1123,7 +1111,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
 		reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
-		regscreen.waitABit(2000);
+		BaseUtils.waitABit(2000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(appiumdriver);
 		registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
@@ -1152,12 +1140,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
 		
-		registrationoverviewlegalinfoscreen.waitABit(10000);
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		appiumdriver.closeApp();
-		appiumdriver.launchApp();
-
-		AppiumAndroidUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(10000);
+		VNextAppUtils.restartApp();
+		
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);

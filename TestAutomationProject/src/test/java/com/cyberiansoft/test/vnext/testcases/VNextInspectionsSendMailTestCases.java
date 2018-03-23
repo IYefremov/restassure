@@ -7,7 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumAndroidUtils;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -79,7 +80,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
 					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
 					inspectionreportfilenname)) {
-				homescreen.waitABit(30*1000); 
+				BaseUtils.waitABit(30*1000); 
 			} else {
 				
 				search = true;
@@ -157,7 +158,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
 					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
 					inspectionreportfilenname)) {
-				homescreen.waitABit(30*1000); 
+				BaseUtils.waitABit(30*1000); 
 			} else {
 				
 				search = true;
@@ -214,12 +215,12 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
-		AppiumAndroidUtils.clickHardwareBackButton();
-		AppiumAndroidUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
 		selectservicesscreen.clickSaveSelectedServicesButton();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
@@ -238,7 +239,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
 					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
 					inspectionreportfilenname)) {
-				homescreen.waitABit(30*1000); 
+				BaseUtils.waitABit(30*1000); 
 			} else {
 				
 				search = true;
@@ -313,7 +314,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
 					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
 					inspectionreportfilenname)) {
-				homescreen.waitABit(30*1000); 
+				BaseUtils.waitABit(30*1000); 
 			} else {
 				
 				search = true;

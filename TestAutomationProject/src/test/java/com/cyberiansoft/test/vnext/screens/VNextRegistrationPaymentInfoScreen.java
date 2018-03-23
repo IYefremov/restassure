@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -99,7 +100,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	
 	public void clickUseRegistrationAddress() {
 		tap(useregistrationaddresschkbox);
-		waitABit(1000);
+		BaseUtils.waitABit(1000);
 	}
 	
 	public void clickDoneButton() {
