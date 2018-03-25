@@ -3,9 +3,11 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSONMainDProvider;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -13,6 +15,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
@@ -22,7 +25,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 	
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() throws Exception {
-
+		System.out.println("xxxxxxxxxxxxxxxxx");
 		JSONDataProvider.dataFile = DATA_FILE;
 		System.out.println("zzzzzzzzzzzzzzzzzzzz");
 	}
@@ -85,9 +88,9 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class,
-			testName= "Test Case 72585:Verify user can't add supplement when edit Inspection", 
-			description = "Verify user can't add supplement when edit Inspection")
+	//@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class,
+	//		testName= "Test Case 72585:Verify user can't add supplement when edit Inspection", 
+	//		description = "Verify user can't add supplement when edit Inspection")
 	public void testVerifyUserCanAddSupplementWhenEditInspection(String rowID,
             String description, JSONObject testData) {
 		
@@ -129,6 +132,15 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
 	}
+	
+	@Factory (dataProvider="fetchData_JSON", dataProviderClass=JSONMainDProvider.class)
+    public Object[] SolicitudEmpleo(JSONObject testData){
+		System.out.println("===============" + testData.get("testUserFirstName").toString());
+		System.out.println("===============" + testData.get("testUserLastName").toString());
+		System.out.println("===============" + testData.get("testVIN").toString());
+		System.out.println("===============" + testData.get("my"));
+		return new Object[] {testData.get("testUserFirstName").toString(), testData.get("testUserLastName").toString()};
+    }
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class,
 			testName= "Test Case 72586:Verify user can add supplement after approve Inspection, "
@@ -139,7 +151,13 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
             String description, JSONObject testData) {
 		
 		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
-		 		
+		 
+		System.out.println("++++++++++" + testData.get("inspType").toString());
+		JSONObject service = (JSONObject) testData.get("service");
+		System.out.println("++++++++++" + service.get("serviceName").toString());
+		System.out.println("++++++++++" + service.get("servicePrice").toString());
+		System.out.println("++++++++++" + service.get("my"));
+		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
@@ -163,8 +181,11 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickAddSupplementInspectionMenuItem();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.selectService(testData.get("serviceName").toString());
-		inpsctionservicesscreen.setServiceAmountValue(testData.get("serviceName").toString(), "50");
+		VNextSelectServicesScreen selectservicesscreen = inpsctionservicesscreen.clickAddServicesButton();
+		selectservicesscreen.selectService(service.get("serviceName").toString());
+		selectservicesscreen.clickSaveSelectedServicesButton();
+		inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inpsctionservicesscreen.setServiceAmountValue(service.get("serviceName").toString(), service.get("servicePrice").toString());
 		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), "New");
 		homescreen = inspectionscreen.clickBackButton();

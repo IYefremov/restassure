@@ -2,11 +2,6 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +28,7 @@ import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -50,8 +46,7 @@ public class BaseTestCase {
 	protected TestUser testuser;
 	protected String userpsw;
 	protected static ExtentTest testlogger;
-	
-	protected static AppiumDriverLocalService service;
+
 	String bundleid = "";
 	
 	public void setTestLogger(ExtentTest logger) {
@@ -93,16 +88,8 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		
-		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
-				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
-				 .withArgument(LOG_LEVEL, "error")
-				 .build();
-	        service.start();
-
-	        if (service == null || !service.isRunning()) {
-	            throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-	        }
+		 
+		 AppiumDriverServiceBuilder.getInstance().buildAppiumService();
 	        browsertype = BaseUtils.getBrowserType(browser);
 	        DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
@@ -151,8 +138,8 @@ public class BaseTestCase {
 				DriverBuilder.getInstance().getDriver().quit();
 		if (DriverBuilder.getInstance().getAppiumDriver() != null)
 			DriverBuilder.getInstance().getAppiumDriver().quit();
-		if (service != null) {
-            service.stop();
+		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null) {
+			AppiumDriverServiceBuilder.getInstance().getAppiumService().stop();
         }
 	}
 	

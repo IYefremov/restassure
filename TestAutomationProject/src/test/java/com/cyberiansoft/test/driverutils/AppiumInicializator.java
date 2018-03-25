@@ -3,7 +3,6 @@ package com.cyberiansoft.test.driverutils;
 import java.net.URL;
 
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -24,7 +23,10 @@ private static AppiumInicializator instance = null;
     }
 	
 	public AppiumDriver<MobileElement> initAppium(MobilePlatform mobilePlatform) {
-		DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null)
+			initAppium(mobilePlatform, AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
+		else
+			DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 		return DriverBuilder.getInstance().getAppiumDriver();
 	}
 	
