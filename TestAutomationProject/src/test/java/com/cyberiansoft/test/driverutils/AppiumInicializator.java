@@ -31,7 +31,7 @@ private static AppiumInicializator instance = null;
 	}
 	
 	public AppiumDriver<MobileElement> initAppium(MobilePlatform mobilePlatform, URL appiumURL) {
-		DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+		DriverBuilder.getInstance().setAppiumDriver(mobilePlatform, appiumURL);
 		return DriverBuilder.getInstance().getAppiumDriver();
 	}
 

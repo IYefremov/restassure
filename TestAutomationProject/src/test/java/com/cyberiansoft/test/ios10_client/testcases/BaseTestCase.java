@@ -90,9 +90,7 @@ public class BaseTestCase {
 		 */
 		 
 		 AppiumDriverServiceBuilder.getInstance().buildAppiumService();
-	        browsertype = BaseUtils.getBrowserType(browser);
-	        DriverBuilder.getInstance().setDriver(browsertype);
-		webdriver = DriverBuilder.getInstance().getDriver();
+	     browsertype = BaseUtils.getBrowserType(browser);
 	}
 
 	public static WebElement wait(By locator) {
