@@ -114,23 +114,28 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	@Override
 	public void onTestFailure(ITestResult result) {
 		AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
+		System.out.println("====================" + (appiumdriver == null));
 	        testlogger= iOSLogger.getTestLogerInstance();
 	        if (appiumdriver != null) {
 	        	try {
+	        		System.out.println("==================== " + "takescreenshot");
 	        		testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));        
 	        	} catch (Exception e) {
+	        		System.out.println("==================== " + "exception");
+	        		e.printStackTrace();
 	        		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 	    			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 	        	}
 	        	
 	        }
 	        try {
+	        	System.out.println("==================== " + "restart");
 				((BaseTestCase) currentClass).resrtartApplication();
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	MainScreen mainscr = new MainScreen(appiumdriver);
+        	MainScreen mainscr = new MainScreen(DriverBuilder.getInstance().getAppiumDriver());
     		try {
     			TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
     			HomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());

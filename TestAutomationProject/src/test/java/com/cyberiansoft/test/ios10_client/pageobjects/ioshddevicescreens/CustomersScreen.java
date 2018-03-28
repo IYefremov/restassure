@@ -71,13 +71,13 @@ public class CustomersScreen extends iOSHDBaseScreen {
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Customers"))); 
 		if (elementExists("ClientsView")) {
-			appiumdriver.findElementByAccessibilityId("btnSearch").click();
+			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 			appiumdriver.findElementByAccessibilityId("Close").click();
 		} else {
 			
-			appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Customers']/XCUIElementTypeButton[@name='Search']").click();
+			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 			Helpers.waitABit(1000);
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);

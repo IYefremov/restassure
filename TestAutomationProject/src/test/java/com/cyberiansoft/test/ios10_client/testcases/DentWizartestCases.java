@@ -95,7 +95,7 @@ public class DentWizartestCases extends BaseTestCase {
 		//if (appiumdriver.isAppInstalled(IOSHDDeviceInfo.getInstance().getDeviceBundleId()))
 				appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
