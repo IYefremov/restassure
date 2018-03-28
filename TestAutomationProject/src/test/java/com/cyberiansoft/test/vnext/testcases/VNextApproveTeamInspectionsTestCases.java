@@ -3,6 +3,8 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -12,9 +14,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
-import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -24,7 +24,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify user can approve Inspection after creating")
 	public void testVerifyUserCanApproveInspectionAfterCreating() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
+		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -46,7 +47,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify 'Clean' icon work correctly")
 	public void testVerifyCleanIconWorkCorrectly() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
+		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -72,7 +74,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			description = "Verify user can create WO only for Approved Inspections")
 	public void testVerifyUserCanCreateWOOnlyForApprovedInspections() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
+		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -95,7 +98,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	public String createSimpleInspection(VNextCustomer inspcustomer, String insptype, String vinnumber) {
+	public String createSimpleInspection(AppCustomer inspcustomer, String insptype, String vinnumber) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();

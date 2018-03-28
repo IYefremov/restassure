@@ -21,8 +21,8 @@ public class RetailCustomer implements AppCustomer {
 	private String customerZipCode;
 	
 	public RetailCustomer() {
-		this.setFirstName("");
-		this.setLastName("");	
+		this.firstName = "";
+		this.lastName = "";
 	}
 	
 	public RetailCustomer(String firstName, String lastName) {

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
@@ -32,14 +33,13 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	String invoicenumbertc48094 = "";

@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.utils.VNextCustomer;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
@@ -58,7 +58,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 	
-	public void selectCustomer(VNextCustomer customer) {
+	public void selectCustomer(AppCustomer customer) {
 		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
 			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
@@ -105,7 +105,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		
 	}
 	
-	public boolean isCustomerExists(VNextCustomer customer) {
+	public boolean isCustomerExists(AppCustomer customer) {
 		return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;		
 	}
 	

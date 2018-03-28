@@ -16,6 +16,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
@@ -36,7 +37,6 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -46,7 +46,7 @@ import io.appium.java_client.MobileElement;
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	final String[] servicesselect = { "Dent Repair", "Double Panel" };
-	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 37006:vNext - Show selected services after inspection is saved", 

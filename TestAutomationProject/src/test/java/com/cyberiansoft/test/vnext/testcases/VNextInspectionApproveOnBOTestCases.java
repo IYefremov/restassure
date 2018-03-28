@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -17,7 +18,6 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -41,7 +41,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		//	description="Create Inspection with populated vehicle info for current day")
 	public void createInspectionWithPopulatedVehicleInfoForCurrentDay() {
  		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+		final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";
@@ -175,7 +175,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 			description="Verify Archived Inspection can't be approved")
 	public void testVerifyArchivedInspectionCantBeApproved() {
  		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+		final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 		final String insurencecompany = "Test Insurance Company";
 		final String claimNumber = "qwerty";
 		final String policyNumber = "oops";

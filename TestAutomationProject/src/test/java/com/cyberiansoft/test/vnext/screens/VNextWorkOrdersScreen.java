@@ -57,11 +57,11 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public String getFirstWorkOrderNumber() {
-		return workorderslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-list-title')]")).getText();
+		return workorderslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
 	}
 	
 	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String wonumber) {
-		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + wonumber + "']")));
+		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
 		log(LogStatus.INFO, "Tap on Work order: " + wonumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
@@ -95,7 +95,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isWorkOrderExists(String woNumber) {
-		return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + woNumber + "']")).size() > 0;
+		return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + woNumber + "']")).size() > 0;
 	}
 	
 	public int getNumberOfSelectedWorkOrders() {
@@ -123,7 +123,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		WebElement wocell = null;
 		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
 		for (WebElement workordercell : workorders)
-			if (workordercell.findElements(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + wonumber + "']")).size() > 0) {
+			if (workordercell.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")).size() > 0) {
 				wocell = workordercell;
 				break;
 			}
@@ -133,7 +133,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public void clickCreateInvoiceFromWorkOrder(String wonumber) {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null) {
-			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + wonumber + "']")));
+			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
 			log(LogStatus.INFO, "Click on Work Order: " + wonumber);
 		}
 		else
@@ -153,7 +153,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamWorkordersView() {
-		tap(teamworkorderstab);
+		tap(new WebDriverWait(appiumdriver, 10).until(ExpectedConditions.visibilityOf(teamworkorderstab)));
 		if (appiumdriver.findElements(By.xpath("//*[text()='Loading work orders']")).size() > 0) {
 			try {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

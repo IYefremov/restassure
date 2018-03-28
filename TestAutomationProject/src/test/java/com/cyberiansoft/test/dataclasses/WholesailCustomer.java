@@ -1,20 +1,20 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WholesailCustomer implements AppCustomer {
 	
+	@JsonProperty("firstName")
 	private String firstName;
+	
+	@JsonProperty("lastName")
 	private String lastName;
+	
+	@JsonProperty("companyName")
 	private String companyName;
+	
+	@JsonProperty("mailAddress")
 	private String mailAddress;
-	
-	public WholesailCustomer(String companyName) {
-		this.setCompanyName(companyName);	
-	}
-	
-	public WholesailCustomer(String companyName, String mailAddress) {
-		this.setCompanyName(companyName);	
-		this.setMailAddress(mailAddress);
-	}
 
 	@Override
 	public String getMailAddress() {

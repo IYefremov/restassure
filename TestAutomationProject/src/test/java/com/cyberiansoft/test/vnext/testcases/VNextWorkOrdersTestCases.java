@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
@@ -10,11 +11,10 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Oksana", "Osmak");
+	final RetailCustomer testcustomer = new RetailCustomer("Oksana", "Osmak");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 43334:vNext - Show selected services after WO is saved", 

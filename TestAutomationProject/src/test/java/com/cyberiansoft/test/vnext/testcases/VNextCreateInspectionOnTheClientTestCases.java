@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
@@ -28,7 +29,6 @@ import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -36,7 +36,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final String VIN = "19UUA66278A050105";
 	
 	String inspnumbertc47229 = "";
@@ -198,7 +198,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			description = "Create Inspection with full populated customer info")
 	public void testCreateInspectionWhithFullPopulatedCustomerInfo() {
 		
-		VNextRetailCustomer testcustomer = new VNextRetailCustomer("CustomerFirstName", "CustomerLastName");
+		RetailCustomer testcustomer = new RetailCustomer("CustomerFirstName", "CustomerLastName");
 		testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
 		testcustomer.setCustomerPhone("978385064");
 		
@@ -221,7 +221,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			description = "Create Inspection with customer with First name only")
 	public void testCreateInspectionWhithCustomerWithFirstNameOnly() {
 		
-		VNextRetailCustomer testcustomer = new VNextRetailCustomer();
+		RetailCustomer testcustomer = new RetailCustomer();
 		testcustomer.setFirstName("CustomerFirstName");	
 		testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
 		testcustomer.setCustomerPhone("978385064");

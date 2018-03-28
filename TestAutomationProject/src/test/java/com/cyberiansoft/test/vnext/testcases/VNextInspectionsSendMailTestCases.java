@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
@@ -23,13 +24,12 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	
 	
-	VNextRetailCustomer testcustomer = new VNextRetailCustomer("Customer", "MailInspection");
+	RetailCustomer testcustomer = new RetailCustomer("Customer", "MailInspection");
 	final String customerstateShort = "CL";
 	
 	@BeforeMethod
