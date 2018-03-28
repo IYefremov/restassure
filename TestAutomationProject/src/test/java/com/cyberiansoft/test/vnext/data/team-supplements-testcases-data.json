@@ -1,0 +1,64 @@
+{
+	"testVerifyUserCanAddSupplementIfAllowSupplementsSetToON": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementIfAllowSupplementsSetToON.01",
+      "description": "Test Case 71996:Verify user can add supplement if Allow Supplements=ON",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "TEST"
+      },
+      "newVinNumber": "TESTNEW"
+    }
+  ],
+  
+    "testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff": [
+    {
+      "rowID": "testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff.01",
+      "description": "Test Case 71997:Verify user can't create supplement if allow supplement=OFF",
+      "inspType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "TEST"
+      }
+    }
+  ],
+
+	"testVerifyUserCanAddSupplementAfterApproveInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementAfterApproveInspection.01",
+      "description": "Test Case 72586:Verify user can add supplement after approve Inspection, Test Case 72803:Verify Inspectin status changed to New after ceation supplement",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "TEST"
+      },
+      "service": {"serviceName": "Battery Installation",
+      "servicePrice": "50",
+      "serviceStatus": "New"
+      }
+    }
+  ],
+  
+  	"testVerifySupplementWillNOTCreatedIfUserDontChangePriceOrQuantity": [
+    {
+      "rowID": "testVerifySupplementWillNOTCreatedIfUserDontChangePriceOrQuantity.01",
+      "description": "Test Case 72806:Verify supplement will NOT created if user don't change price or quantity",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "TEST"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
+  ],
+  
+  	"testVerifyUserCanAddSupplementWhenEditInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementWhenEditInspection.01",
+      "description": "Test Case 72585:Verify user can't add supplement when edit Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "TEST"
+      },
+      "services": [{"serviceName": "Battery Installation",
+      "servicePrice": "10",
+      }, {"serviceName": "Labor",
+      "servicePrice": "20",
+      "serviceQuantity": "2"
+      }]
+    }
+  ]
+}

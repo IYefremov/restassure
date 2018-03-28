@@ -15,6 +15,9 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
@@ -36,10 +39,7 @@ import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderSummaryScreen;
-import com.cyberiansoft.test.vnext.utils.VNextCustomer;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
-import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
@@ -52,7 +52,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					+ "Verify user can create Invoice in status 'New'")
 	public void testVerifyUserCanCreateInvoiceFromInspections() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String woType = "All_auto_Phases";
 		final String invoiceType = "O_Kramar2";
@@ -96,7 +96,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify Team Inspection displays on the screen")
 	public void testVerifyTeamInspectionDisplaysOnTheScreen() {
 		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
+		final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 		final String inspType = "anastasia type";
 		final String vinnumber = "TEST";
 
@@ -142,7 +142,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify user can create Inspection without Team Sharing")
 	public void testVerifyUserCanCreateInspectionWithoutTeamSharing() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "Anastasia_team";
 		final String vinnumber = "TEST";
 		final String insuranceCompany = "Oranta";
@@ -180,7 +180,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify only when user tap 'search' button we perform search and refresh team inspections list")
 	public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "anastasia type";
 		final String vinnumber = "TEST";
 
@@ -223,7 +223,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify user can view Team Inspection")
 	public void testVerifyUserCanViewTeamInspection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "anastasia type";
 		final String vinnumber = "TEST";
 
@@ -254,7 +254,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					+ "Verify Team Inspection save into mobile device and BO immediately if internet connection is available")
 	public void testVerifyUserCanCreateTeamInspection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 
@@ -281,7 +281,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					+ "Verify Inspection displays on the list after DB update and after reconnect Internet")
 	public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 
@@ -332,7 +332,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify saving team inspection online doesn't affected to Settings > Manual send option")
 	public void testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 
@@ -371,7 +371,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify user can edit Inspection if we have no internet connection")
 	public void testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		final String newvinnumber = "TEST456";
@@ -409,7 +409,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify user can edit 'My inspections' if we have no internet connection")
 	public void testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		final String newvinnumber = "TEST456";
@@ -446,7 +446,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					+ "Verify immediately saving on BO if user edit Team Inspection")
 	public void testVerifyUserCanEditTeamInspection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -520,7 +520,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify sending >100 messages after reconnect Internet")
 	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		final int fakeimagescount = 50;
@@ -606,7 +606,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 	public void testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending() {
 		
 		final String customereMail = "test.cyberiansoft@gmail.com";
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "Insp_type_approv_req";
 		final String vinnumber = "TEST";
 
@@ -619,7 +619,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();	
 	}
 	
-	public String createSimpleInspection(VNextCustomer inspcustomer, String insptype, String vinnumber) {
+	public String createSimpleInspection(AppCustomer inspcustomer, String insptype, String vinnumber) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToMyInspectionsView();

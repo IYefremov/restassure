@@ -1,6 +1,6 @@
-package com.cyberiansoft.test.vnext.utils;
+package com.cyberiansoft.test.dataclasses;
 
-public interface VNextCustomer {
+public interface AppCustomer {
 
 	public String getMailAddress();
 

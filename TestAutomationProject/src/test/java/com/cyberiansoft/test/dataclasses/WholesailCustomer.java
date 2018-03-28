@@ -1,17 +1,17 @@
-package com.cyberiansoft.test.vnext.utils;
+package com.cyberiansoft.test.dataclasses;
 
-public class VNextWholesailCustomer implements VNextCustomer {
+public class WholesailCustomer implements AppCustomer {
 	
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	private String companyName;
 	private String mailAddress;
 	
-	public VNextWholesailCustomer(String companyName) {
+	public WholesailCustomer(String companyName) {
 		this.setCompanyName(companyName);	
 	}
 	
-	public VNextWholesailCustomer(String companyName, String mailAddress) {
+	public WholesailCustomer(String companyName, String mailAddress) {
 		this.setCompanyName(companyName);	
 		this.setMailAddress(mailAddress);
 	}
@@ -28,22 +28,22 @@ public class VNextWholesailCustomer implements VNextCustomer {
 
 	@Override
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 
 	@Override
 	public void setLastName(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 
 	@Override
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 
 	@Override
 	public void setFirstName(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstname;
 	}
 	
 	@Override

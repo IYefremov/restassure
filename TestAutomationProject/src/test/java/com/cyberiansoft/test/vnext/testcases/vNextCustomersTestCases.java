@@ -11,13 +11,13 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 
 public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -31,7 +31,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			description = "Create new Customer with empty First Name and Last Name")
 	public void testCreateNewCustomerWithEmptyFirstNameAndLastName() throws InterruptedException {
 		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer();
+		final RetailCustomer testcustomer = new RetailCustomer();
 		testcustomer.setMailAddress("");
 		testcustomer.setCompanyName("AquaAuto");
 		testcustomer.setCustomerAddress1("Test address street, 1");
@@ -82,7 +82,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			description = "Verify customer created in Offline mode is available after DB update")
 	public void testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate() {
 		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Christofer", "Nolan");
+		final RetailCustomer testcustomer = new RetailCustomer("Christofer", "Nolan");
 		testcustomer.setMailAddress("cnolan@gmail.com");
 		testcustomer.setCompanyName("Toyota-Diamant");
 		testcustomer.setCustomerAddress1("");
@@ -125,7 +125,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			description = "Verify new customer is available after DB update")
 	public void testVerifyNewCustomerIsAvailableAfterDBUpdate() {
 		
-		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Test", "DBUpdateCustomer");
+		final RetailCustomer testcustomer = new RetailCustomer("Test", "DBUpdateCustomer");
 		testcustomer.setMailAddress("cnolan@gmail.com");
 		testcustomer.setCompanyName("Toyota-Diamant");
 		testcustomer.setCustomerAddress1("");

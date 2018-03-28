@@ -1,9 +1,15 @@
-package com.cyberiansoft.test.vnext.utils;
+package com.cyberiansoft.test.dataclasses;
 
-public class VNextRetailCustomer implements VNextCustomer {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class RetailCustomer implements AppCustomer {
 	
-	private String firstname;
-	private String lastname;
+	@JsonProperty("firstName")
+	private String firstName;
+	
+	@JsonProperty("lastName")
+	private String lastName;
+	
 	private String companyName;
 	private String mailAddress;
 	private String customerPhone;
@@ -14,45 +20,15 @@ public class VNextRetailCustomer implements VNextCustomer {
 	private String customerState;
 	private String customerZipCode;
 	
-	public VNextRetailCustomer() {
+	public RetailCustomer() {
 		this.setFirstName("");
-		this.setLastName("");		
+		this.setLastName("");	
 	}
 	
-	public VNextRetailCustomer(String firstName, String lastName) {
-		this.setFirstName(firstName);
-		this.setLastName(lastName);		
+	public RetailCustomer(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;	
 	}
-	
-	/*public VNextRetailCustomer(String firstName, String lastName, String customerMail) {
-		this.setFirstName(firstName);
-		this.setLastName(lastName);	
-		this.setMailAddress(customerMail);
-	}*/
-	
-	/*public VNextRetailCustomer(String firstName, String lastName, String companyName, String customerMail,
-			String customerPhone, String customerAddress, String customerCountry, String customerState) {
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setCompanyName(companyName);
-		this.setCustomerPhone(customerPhone);
-		this.setMailAddress(customerMail);
-		this.setCustomerAddress1(customerAddress);
-		this.setCustomerCountry(customerCountry);
-		this.setCustomerState(customerState);
-	}
-	
-	public VNextRetailCustomer(String firstName, String lastName, String companyName, String customerMail,
-			String customerPhone, String customerAddress1, String customerAddress2, String customerCountry, String customerState) {
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setCompanyName(companyName);
-		this.setCustomerPhone(customerPhone);
-		this.setMailAddress(customerMail);
-		this.setCustomerAddress1(customerAddress);
-		this.setCustomerCountry(customerCountry);
-		this.setCustomerState(customerState);
-	}*/
 
 	@Override
 	public String getMailAddress() {
@@ -66,27 +42,27 @@ public class VNextRetailCustomer implements VNextCustomer {
 
 	@Override
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 
 	@Override
 	public void setLastName(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 
 	@Override
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 
 	@Override
 	public void setFirstName(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstname;
 	}
 	
 	@Override
 	public String getFullName() {
-		return firstname + " " + lastname;
+		return firstName + " " + lastName;
 	}
 
 	@Override

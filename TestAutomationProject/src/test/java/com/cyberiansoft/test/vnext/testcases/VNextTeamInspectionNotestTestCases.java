@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -14,7 +15,6 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -26,7 +26,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify Notes changes is saved after DB update")
 	public void testVerifyUserAddNotesForTeamInspection() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -90,7 +90,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify Notes icon displays if user add Notes for Inspection My/Team")
 	public void testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -138,7 +138,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify saving text note on tapping 'Back' button")
 	public void testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -183,7 +183,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify quick notes are added as new lines of text")
 	public void testVerifyQuickNotesAreAddedAsNewLinesOfText() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -228,7 +228,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify user can add several Quick notes")
 	public void testVerifyUserCanAddSeveralQuickNotes() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -267,7 +267,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify saving text note on tapping hardware 'Back' button")
 	public void testVerifySavingTextNoteOnTappingHardwareBackButton() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -311,7 +311,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify user can remove pictures from Notes")
 	public void testVerifyUserCanRemovePicturesFromNotes() {
 		
-		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
+		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		

@@ -69,7 +69,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public int getQuantityOfSelectedService(String servicename) {
-		return addedserviceslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")).size();
+		return addedserviceslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")).size();
 	}
 	
 	public String getSelectedServicePriceValue(String servicename) {
@@ -107,7 +107,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	public WebElement getSelectedServiceListItem(String servicename) {
 		List<WebElement> services = getSelectedServicesListItems();
 		for (WebElement srv: services)
-			if (srv.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(servicename))
+			if (srv.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(servicename))
 				return srv;
 		return null;
 	}
@@ -117,13 +117,13 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
-		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
+		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
 		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
 	public VNextVehiclePartsScreen openMatrixServiceVehiclePartsScreen(String servicename) {
-		tap(addedserviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
+		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
 		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextVehiclePartsScreen(appiumdriver);
 	}
@@ -152,7 +152,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		WebElement servicecell = null;
 		List<WebElement> servitems = getSelectedServicesListItems();
 		for (WebElement servcell : servitems) {
-			if (servcell.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(serviceName)) {
+			if (servcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(serviceName)) {
 				servicecell = servcell;
 				break;
 			}
@@ -265,7 +265,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public String getUnselectedServiceListItemName(WebElement srvlistitem) {
-		return srvlistitem.findElement(By.xpath(".//div[@class='item-title']")).getText().trim();
+		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
 	}
 	
 	public WebElement getUnselectedServiceListItem(String serviceName) {
