@@ -1,18 +1,12 @@
 package com.cyberiansoft.test.dataprovider;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-
-import org.apache.poi.ss.formula.functions.T;
-import org.json.simple.JSONObject;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
+
+import java.io.*;
 
 public class JSonDataParser {
 	
