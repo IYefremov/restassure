@@ -54,7 +54,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	}
 	
 	public String getServiceListItemName(WebElement srvlistitem) {
-		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
+		return srvlistitem.findElement(By.xpath(".//div[@class='item-title']")).getText().trim();
 	}
 	
 	public void selectServices(String[] serviceslist) {
@@ -82,7 +82,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public VNextPriceMatrixesScreen openMatrixServiceDetails(String matrixservicename) {
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + matrixservicename + "']")));
+			tap(servicerow.findElement(By.xpath(".//div[@class='item-title' and text()='" + matrixservicename + "']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 		return new VNextPriceMatrixesScreen(appiumdriver);
@@ -91,7 +91,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public VNextVehiclePartsScreen openSelectedMatrixServiceDetails(String matrixservicename) {
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + matrixservicename + "']")));
+			tap(servicerow.findElement(By.xpath(".//div[@class='item-title' and text()='" + matrixservicename + "']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 		return new VNextVehiclePartsScreen(appiumdriver);
@@ -100,7 +100,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	public VNextServiceDetailsScreen openServiceDetails(String servicename) {
 		WebElement servicerow = getServiceListItem(servicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
+			tap(servicerow.findElement(By.xpath(".//div[@class='item-title' and text()='" + servicename + "']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + servicename);
 		return new VNextServiceDetailsScreen(appiumdriver);
@@ -118,7 +118,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 		String pricematrixname = "";
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText();
+			pricematrixname = servicerow.findElement(By.xpath(".//div[@class='item-subtitle']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 		return pricematrixname;

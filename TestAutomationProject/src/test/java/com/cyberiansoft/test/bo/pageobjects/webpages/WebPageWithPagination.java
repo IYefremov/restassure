@@ -134,7 +134,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
 	}
 	
-	public void clickGoToPreviousPage() throws InterruptedException {
+	public void clickGoToPreviousPage() {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();

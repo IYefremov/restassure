@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -30,16 +31,17 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.TimesheetTypesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 
+import java.lang.reflect.Method;
+
 public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	
 	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+	public void BackOfficeLogin(Method method) throws InterruptedException {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 		Thread.sleep(2000);
 	}
 	
@@ -51,7 +53,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Thread.sleep(3000);
 	}
 	
-	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD", description = "Company- Insurance Company: CRUD" )
+	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD",
+            description = "Company- Insurance Company: CRUD" )
 	public void testCompanyInsuranceCompanyCRUD() throws Exception {
 
 		final String insurancecompany = "testinsurancecompany";
@@ -186,7 +189,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
 	public void testCompanyJobsCRUD() throws Exception {
 
-		
 		final String _job = "Test job";
 		final String jobdesc = "Test job description";
 		final String customer = "001 - Test Company";
@@ -435,7 +437,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD")
-	public void testCompanyInvoiceTypeCRUD() throws Exception {
+	public void testCompanyInvoiceTypeCRUD() {
 
 
 		final String invoicetype = "test123CD";
@@ -723,7 +725,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 31504:Company - Service Packages: CRUD", description = "Company- Service Packages: CRUD")
-	public void testCompanyServicePackagesCRUD() throws Exception {
+	public void testCompanyServicePackagesCRUD() {
 
 		final String servicepackagename = "testpackage";
 		final String servicepackagetype = "Package";

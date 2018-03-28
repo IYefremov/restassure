@@ -1,49 +1,38 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.AddEditClientUsersContactsDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.AddEditClientUsersDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientContactsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientUsersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.bo.utils.Retry;
+import java.lang.reflect.Method;
 
+@SuppressWarnings("LossyEncoding")
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	
 	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+	public void backOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 	}
 	
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
 		Thread.sleep(3000);
-		
 	}
 	
 	@Test(description = "Test Case 15322:Company- Clients: Search")
 	public void testCompanyClientsSearch() throws Exception {
-
 		final String clientname = "IntCompany";
 		final String clienttype = "Wholesale";
 		
@@ -83,12 +72,11 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.setClientSearchCriteria(clientname.substring(0, 4).toLowerCase());
 		clientspage.clickFindButton();
 		
-		clientspage.isClientExistsInTable(clientname);
+		clientspage.isClientPresentInTable(clientname);
 	}	
 
-	@Test(testName = "Test Case 24158:Company - Clients: Verify that ’Notes’ are added on ‘Client Details’ screen and saved correctly for New Client", description = "Company - Clients: Verify that ’Notes’ are added on ‘Client Details’ screen and saved correctly for New Client")
+	@Test(testName = "Test Case 24158:Company - Clients: Verify that ï¿½Notesï¿½ are added on ï¿½Client Detailsï¿½ screen and saved correctly for New Client", description = "Company - Clients: Verify that ï¿½Notesï¿½ are added on ï¿½Client Detailsï¿½ screen and saved correctly for New Client")
 	public void testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient() throws Exception {
-
 		final String companyname = "NotesCompany";
 		final String companynote = "First note\nSecond note";
 		
@@ -99,7 +87,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
-		if (clientspage.isClientExistsInTable(companyname)) {
+		if (clientspage.isClientPresentInTable(companyname)) {
 			clientspage.deleteClient(companyname);
 		}
 		
@@ -116,10 +104,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		newclientdlg.clickCancelButton();
 		clientspage.deleteClient(companyname);
 		clientspage.searchClientByName(companyname);
-		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 	}
 	
-	@Test(testName = "Test Case 24159:Company - Clients: Verify that ’Notes’ are added on ‘Client Details’ screen and saved correctly for Existing Client", description = "Company - Clients: Verify that ’Notes’ are added on ‘Client Details’ screen and saved correctly for Existing Client")
+	@Test(testName = "Test Case 24159:Company - Clients: Verify that ï¿½Notesï¿½ are added on ï¿½Client Detailsï¿½ screen and saved correctly for Existing Client", description = "Company - Clients: Verify that ï¿½Notesï¿½ are added on ï¿½Client Detailsï¿½ screen and saved correctly for Existing Client")
 	public void testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForExistingClient() throws Exception {
 
 		final String companyname = "NotesCompany";
@@ -132,7 +120,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
-		if (clientspage.isClientExistsInTable(companyname)) {
+		if (clientspage.isClientPresentInTable(companyname)) {
 			clientspage.deleteClient(companyname);
 		}
 		
@@ -153,11 +141,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		clientspage.deleteClient(companyname);
 		clientspage.searchClientByName(companyname);
-		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 	}
-	
 
-	@Test(testName = "Test Case 24160:Company - Clients: Verify that added ‘Notes’ on ‘Client Details’ screen are visible as a popup on Clients grid", description = "Company - Clients: Verify that added ‘Notes’ on ‘Client Details’ screen are visible as a popup on Clients grid")
+	@Test(testName = "Test Case 24160:Company - Clients: Verify that added ï¿½Notesï¿½ on ï¿½Client Detailsï¿½ screen are visible as a popup on Clients grid", description = "Company - Clients: Verify that added ï¿½Notesï¿½ on ï¿½Client Detailsï¿½ screen are visible as a popup on Clients grid")
 	public void testCompanyClientsVerifyThatAddedNotesOnClientDetailsScreenAreVisibleAsAPopupOnClientsGrid() throws Exception {
 
 		final String companyname = "NotesCompany";
@@ -170,7 +157,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
-		if (clientspage.isClientExistsInTable(companyname)) {
+		if (clientspage.isClientPresentInTable(companyname)) {
 			clientspage.deleteClient(companyname);
 		}
 		
@@ -185,8 +172,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.deleteClient(companyname);
 		clientspage.searchClientByName(companyname);
-		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 	}
+
 	@Test(testName = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file", description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file")
 	public void testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile() throws Exception {
 
@@ -200,7 +188,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(companyname);
-		if (clientspage.isClientExistsInTable(companyname)) {
+		if (clientspage.isClientPresentInTable(companyname)) {
 			clientspage.deleteClient(companyname);
 		}
 		clientspage.importClients("Clients.csv");
@@ -210,7 +198,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 				
 		clientspage.deleteClient(companyname);
 		clientspage.searchClientByName(companyname);
-		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 	}
 	
 	@Test(testName = "Test Case 26725:Company- Clients: Archive", description = "Company- Clients: Archive")
@@ -228,7 +216,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		for (int i = 0; i < 3; i ++) {
 			clientspage.deleteClient(companyname);
 			clientspage.searchClientByName(companyname);
-			Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+			Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 		
 			clientspage.clickArchivedTab();
 			clientspage.searchClientByName(companyname);
@@ -238,7 +226,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 			clientspage.clickActiveTab();
 		
 			clientspage.searchClientByName(companyname);
-			Assert.assertTrue(clientspage.isClientExistsInTable(companyname));
+			Assert.assertTrue(clientspage.isClientPresentInTable(companyname));
 		}
 	}
 	
@@ -269,12 +257,12 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.searchClientByName(clientname);
 		
-		Assert.assertTrue(clientspage.isClientExistsInTable(clientname));
+		Assert.assertTrue(clientspage.isClientPresentInTable(clientname));
 		
 		ClientUsersWebPage  clientUsersWebPage = clientspage.
 				clickClientUsersLinkForClientOpenDialogWindow(clientname);
 		
-		if (clientUsersWebPage.isClientUserExistsInTable(userfstname, userlstname)){
+		if (clientUsersWebPage.isClientUserPresentInTable(userfstname, userlstname)){
 			clientUsersWebPage.clickDeleteClientUser(userfstname);
 		}
 			
@@ -286,7 +274,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 				createUserWithRequiredFields(useremail, userfstname, userlstname);
 		
       
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable(userfstname, userlstname));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(userfstname, userlstname));
 		
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage1 =  
 				clientUsersWebPage1.clickEditClientUser(userfstname);
@@ -330,7 +318,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage3.clickDeleteClientUser(userfstname);
  
 		
-		Assert.assertFalse(clientUsersWebPage3.isClientUserExistsInTable(userfstname, userlstname));
+		Assert.assertFalse(clientUsersWebPage3.isClientUserPresentInTable(userfstname, userlstname));
 		
 		clientUsersWebPage3.closePage();
  
@@ -355,7 +343,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.searchClientByName(companyname);
 		
-		if (clientspage.isClientExistsInTable(companyname)) {
+		if (clientspage.isClientPresentInTable(companyname)) {
 			clientspage.deleteClient(companyname);
 		}
 		
@@ -377,7 +365,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.deleteClient(companyname);
 		
-		Assert.assertFalse(clientspage.isClientExistsInTable(companyname));
+		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 		
 	}
 	
@@ -444,7 +432,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.searchClientByName(clientname);
 		
-		Assert.assertTrue(clientspage.isClientExistsInTable(clientname));
+		Assert.assertTrue(clientspage.isClientPresentInTable(clientname));
 		
 		clientspage.unclickContactVerifDisableChkbox();
 		
@@ -543,7 +531,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientspage.searchClientByName(clientname);
 		
-		Assert.assertTrue(clientspage.isClientExistsInTable(clientname));
+		Assert.assertTrue(clientspage.isClientPresentInTable(clientname));
 		
 		clientspage.unclickContactVerifDisableChkbox();
 		 
@@ -595,17 +583,19 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		
 		clientContactsWebPage3.closePage();
 	}
-	
+
 	@Test(testName= "Test Case 66217:Company - Clients User : Add Client")
 	public void testClientUserAddClient() throws InterruptedException{
+	    String clientName = "000 15.11 Companey";
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.scrollDownToText("000 15.11 Companey");
+		clientspage.scrollDownToText(clientName);
 		ClientUsersWebPage  clientUsersWebPage =
-				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+				clientspage.clickClientUsersLinkForClientOpenDialogWindow(clientName);
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -617,12 +607,12 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertFalse(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
 	}
-	
+
 	@Test(testName= "Test Case 66215:Company - Clients User : Sales Person Monitor Manager")
 	public void testClientUserSalesPersonMonitorManager() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -632,7 +622,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -644,7 +634,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
@@ -659,7 +649,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -671,7 +661,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
@@ -686,7 +676,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -698,7 +688,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
@@ -713,7 +703,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -725,7 +715,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
@@ -740,7 +730,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
-		if (clientUsersWebPage.isClientUserExistsInTable( "test", "automation")){
+		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
@@ -752,7 +742,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
-		Assert.assertTrue(clientUsersWebPage1.isClientUserExistsInTable("test", "automation"));
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();

@@ -15,7 +15,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
@@ -39,6 +38,7 @@ import com.cyberiansoft.test.vnext.screens.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -49,7 +49,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanCreateInvoiceInStatusNew() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -111,7 +111,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanVoidInvoice() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -193,7 +193,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifySavedPODisplaysOnCChangePONumberPopup() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "ABC123";
@@ -248,7 +248,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyWeHidePopupAndKeyboardIfUserClickHardwareBackButton() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "ABC123";
@@ -294,7 +294,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyOnActionChangePONumberUserCantErasePONumber() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar2";
 		final String ponumber = "ABC123";
@@ -347,7 +347,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyChangePOIsNotAvailableIfOptionPOVisibleEqualsNOOnInvoiceType() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar_auto";
 
@@ -388,7 +388,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -454,7 +454,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -522,7 +522,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -597,7 +597,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanAddNotesForTeamInvoice() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -650,7 +650,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO() {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("Test", "Test");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Test", "Test");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar2";
 		final String ponumber = "12345";
@@ -691,7 +691,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -763,7 +763,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyCancelEmailInvoice() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -818,8 +818,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailInvoiceWithDifferentCustomer() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-		final RetailCustomer customer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
+		final VNextRetailCustomer customer1 = new VNextRetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer2 = new VNextRetailCustomer("RetailCustomer2", "RetailLast2");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -903,7 +903,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailMyInvoiceWithPopulatedCCAddress() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -977,7 +977,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyToFieldIsRequiredToEmailMyInvoice() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1040,7 +1040,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailAddressIsValidatedOnEmailMyInvoiceList() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1104,7 +1104,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailTeamInvoiceForMultipleItemsWithTheSameCustomer() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1178,7 +1178,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyCancelEmailTeamInvoice() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1235,7 +1235,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyToFieldIsRequiredToEmailTeamInvoice() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1300,7 +1300,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailAddressIsValidatedOnEmailTeamInvoiceList() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer = new RetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("RetailCustomer", "RetailLast");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";
@@ -1364,8 +1364,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyEmailTeamInvoiceWithDifferentCustomer() throws IOException {
 		
 		final String vinnumber = "TEST";
-		final RetailCustomer customer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-		final RetailCustomer customer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
+		final VNextRetailCustomer customer1 = new VNextRetailCustomer("RetailCustomer", "RetailLast");
+		final VNextRetailCustomer customer2 = new VNextRetailCustomer("RetailCustomer2", "RetailLast2");
 		final String wotype = "O_Kramar";
 		final String invoiceType = "O_Kramar";
 		final String ponumber = "12345";

@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -32,83 +34,80 @@ import com.cyberiansoft.test.bo.utils.Retry;
 public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-								String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+	public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        String testUser = BOConfigInfo.getInstance().getUserName();
+        String testUserPassword = BOConfigInfo.getInstance().getUserPassword();WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
+        loginPage.UserLogin(testUser, testUserPassword);
 	}
 
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
+	public void BackOfficeLogout() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		Thread.sleep(3000);
 	}
 
 	@Test(description = "Test Case 15245:Company-Users: Search")
 	public void testCompanyUsersSearch() throws Exception {
 
-		final String userfirstname = "Delete";
-		final String userlastname = "Test";
+		final String userFirstName = "Delete";
+		final String userLastName = "Test";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
 
-		UsersWebPage userspage = companypage.clickUsersLink();
+		UsersWebPage usersPage = companyPage.clickUsersLink();
 
-		userspage.verifyTabsAreVisible();
-		userspage.verifyUsersTableColumnsAreVisible();
+		usersPage.verifyTabsAreVisible();
+		usersPage.verifyUsersTableColumnsAreVisible();
 
-		Assert.assertEquals("1", userspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", userspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", usersPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
 
-		userspage.setPageSize("1");
-		Assert.assertEquals(1, userspage.getUsersTableRowCount());
+		usersPage.setPageSize("1");
+		Assert.assertEquals(1, usersPage.getUsersTableRowCount());
 
-		String lastpagenumber = userspage.getLastPageNumber();
-		userspage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, userspage.getGoToPageFieldValue());
+		String lastpagenumber = usersPage.getLastPageNumber();
+		usersPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, usersPage.getGoToPageFieldValue());
 
-		userspage.clickGoToFirstPage();
+		usersPage.clickGoToFirstPage();
 		Thread.sleep(1000);
-		Assert.assertEquals("1", userspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
 
-		userspage.clickGoToNextPage();
-		Assert.assertEquals("2", userspage.getGoToPageFieldValue());
+		usersPage.clickGoToNextPage();
+		Assert.assertEquals("2", usersPage.getGoToPageFieldValue());
 
-		userspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", userspage.getGoToPageFieldValue());
+		usersPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
 
-		userspage.setPageSize("999");
-		Assert.assertEquals(userspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(userspage.getUsersTableRowCount()));
+		usersPage.setPageSize("999");
+		Assert.assertEquals(usersPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(usersPage.getUsersTableRowCount()));
 
-		List<String> usernamesact = userspage.getActiveUserNames();
-		userspage.clickArchivedTab();
-		Assert.assertEquals("", userspage.verifyUserNamesDuplicatesArchived(usernamesact));
-		userspage.clickActiveTab();
+		List<String> usernamesact = usersPage.getActiveUserNames();
+		usersPage.clickArchivedTab();
+		Assert.assertEquals("", usersPage.verifyUserNamesDuplicatesArchived(usernamesact));
+		usersPage.clickActiveTab();
 
-		userspage.makeSearchPanelVisible();
-		userspage.setSearchUserParameter(userfirstname);
-		userspage.clickFindButton();
-		userspage.archiveUser(userfirstname, userlastname);
-		userspage.clickArchivedTab();
-		Assert.assertTrue(userspage.isUserArchived(userfirstname, userlastname));
-		userspage.unarchiveUser(userfirstname, userlastname);
-		userspage.clickActiveTab();
-		Assert.assertTrue(userspage.isUserActive(userfirstname, userlastname));
+		usersPage.makeSearchPanelVisible();
+		usersPage.setSearchUserParameter(userFirstName);
+		usersPage.clickFindButton();
+		usersPage.archiveUser(userFirstName, userLastName);
+		usersPage.clickArchivedTab();
+		Assert.assertTrue(usersPage.isUserArchived(userFirstName, userLastName));
+		usersPage.unarchiveUser(userFirstName, userLastName);
+		usersPage.clickActiveTab();
+		Assert.assertTrue(usersPage.isUserActive(userFirstName, userLastName));
 
-		userspage.makeSearchPanelVisible();
-		userspage.setSearchUserParameter(userfirstname.substring(0, 4));
-		userspage.clickFindButton();
+		usersPage.makeSearchPanelVisible();
+		usersPage.setSearchUserParameter(userFirstName.substring(0, 4));
+		usersPage.clickFindButton();
 
-		Assert.assertTrue(Integer.valueOf(userspage.getUsersTableRowCount()) > 0);
-		userspage.isUserActive(userfirstname, userlastname);
+		Assert.assertTrue(Integer.valueOf(usersPage.getUsersTableRowCount()) > 0);
+		usersPage.isUserActive(userFirstName, userLastName);
 	}
 
 	@Test(description = "Test Case 15265:Company-Employees: Search")
@@ -580,6 +579,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		newinvoicetypedialog.clickCancelAddInvoiceTypeButton();
 	}
 
+	//todo
 	@Test(testName = "Test Case 24998:Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts", description = "Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts")
 	public void testCompanyPriceMatrixVerifyThatOnMatrixPanelAdminCanSeeInAvailableServicesOnlyServicesSelectedOnVehicleParts() throws Exception {
 
@@ -629,6 +629,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		vehiclepartspage.saveNewVehiclePart();
 	}
 
+	//todo
 	@Test(testName = "Test Case 25004:Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel", description = "Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel")
 	public void testCompanyPriceMatrixVerifyThatByDefaultAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel() throws Exception {
 

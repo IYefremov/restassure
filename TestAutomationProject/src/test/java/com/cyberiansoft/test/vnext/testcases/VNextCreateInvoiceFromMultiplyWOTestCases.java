@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -17,10 +16,11 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	ArrayList<String> workOrders = new ArrayList<String>();
 	
@@ -69,11 +69,11 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<String>();
-		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
+		final VNextRetailCustomer[] testcustomers = { new VNextRetailCustomer("Test", "Custonmer1"), new VNextRetailCustomer("Test", "Custonmer2"), new VNextRetailCustomer("Test", "Custonmer3") };
 				
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			if (!customersscreen.isCustomerExists(customer)) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(customer);
@@ -83,7 +83,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			customersscreen = workordersscreen.clickAddWorkOrderButton();
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -120,11 +120,11 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<String>();
-		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
+		final VNextRetailCustomer[] testcustomers = { new VNextRetailCustomer("Test", "Custonmer1"), new VNextRetailCustomer("Test", "Custonmer2"), new VNextRetailCustomer("Test", "Custonmer3") };
 				
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			if (!customersscreen.isCustomerExists(customer)) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(customer);
@@ -134,7 +134,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			for (int i = 0; i < 2; i++) {
 				customersscreen = workordersscreen.clickAddWorkOrderButton();
 				customersscreen.selectCustomer(customer);
@@ -176,11 +176,11 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<String>();
-		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
+		final VNextRetailCustomer[] testcustomers = { new VNextRetailCustomer("Test", "Custonmer1"), new VNextRetailCustomer("Test", "Custonmer2"), new VNextRetailCustomer("Test", "Custonmer3") };
 				
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			if (!customersscreen.isCustomerExists(customer)) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(customer);
@@ -190,7 +190,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			customersscreen = workordersscreen.clickAddWorkOrderButton();
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -285,14 +285,14 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<String>();
-		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
+		final VNextRetailCustomer[] testcustomers = { new VNextRetailCustomer("Test", "Custonmer1"), new VNextRetailCustomer("Test", "Custonmer2"), new VNextRetailCustomer("Test", "Custonmer3") };
 		final String serviceName = "Bumper Repair";
 		final String[] servicePrices = { "10", "14.50", "12.50" };
 		final String totalAmount = "$14.50";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		for (RetailCustomer customer : testcustomers) {
+		for (VNextRetailCustomer customer : testcustomers) {
 			if (!customersscreen.isCustomerExists(customer)) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(customer);

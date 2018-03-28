@@ -25,7 +25,7 @@ public class BaseTestCase {
 	
 	@BeforeClass
 	@Parameters({ "selenium.browser" })
-	public void setUp(String browser) throws Exception {
+	public void setUp(String browser) {
 		for (BrowserType browserTypeEnum : BrowserType.values()) { 
             if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) { 
                 this.browsertype = browserTypeEnum; 

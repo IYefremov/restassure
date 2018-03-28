@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -24,6 +25,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can delete WO if 'Allow Delete=ON'")
 	public void testVerifyUserCanDeleteWOIfAllowDeleteON() { 
 	
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		
@@ -65,6 +67,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can't delete WO if 'Allow Delete=OFF'")
 	public void testVerifyUserCantDeleteWOIfAllowDeleteOFF() { 
 	
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String workorderType = "Kramar_auto2";
 		final String vinnumber = "TEST";
 		final String insuranceCompany = "Miami Beach Insurance";
@@ -121,7 +124,14 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-		
+		/*vehicleinfoscreen.swipeScreenLeft();
+		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		servicesscreen.swipeScreenLeft();
+		VNextWorkOrderClaimInfoScreen claiminfoscreen = new VNextWorkOrderClaimInfoScreen(appiumdriver);
+		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
+		claiminfoscreen.setClaimNumber(claimNumber);
+		claiminfoscreen.setPolicyNumber(policyNumber);
+		VNextWorkOrdersScreen workordersscreen = claiminfoscreen.saveWorkOrderViaMenu();*/
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		
 		workordersscreen.switchToTeamWorkordersView();
@@ -135,6 +145,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can create WO from Team Inspection")
 	public void testVerifyUserCanCreateWOFromTeamInspection() { 
 	
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insptype = "O_Kramar2";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
@@ -205,6 +216,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify all selected services from Inspection displays when user create WO")
 	public void testVerifyAllSelectedServicesFromInspectionDisplaysWhenUserCreateWO() { 
 	
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
@@ -258,6 +270,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 					+ "Verify deleted WO doesn't displays in Team/My WO list")
 	public void testVerifyUserCanDeleteWOIfThisWOWasCreatedFromTeamInspectionScreen() { 
 	
+		final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");;
 		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";

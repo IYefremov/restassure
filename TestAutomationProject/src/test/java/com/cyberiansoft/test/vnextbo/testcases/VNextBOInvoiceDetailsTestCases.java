@@ -71,7 +71,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		final String fullcustomer = firstname + " " + lastname;
 		clientspage.searchClientByName(fullcustomer);
 		
-		if (!clientspage.isClientExistsInTable(fullcustomer)) {	
+		if (!clientspage.isClientPresentInTable(fullcustomer)) {
 			NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
 			newclientpage.setCompanyName(companyname);
 			newclientpage.setClientFirstName(firstname);

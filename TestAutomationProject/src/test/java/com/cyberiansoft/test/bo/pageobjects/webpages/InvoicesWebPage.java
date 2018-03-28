@@ -32,7 +32,7 @@ import com.cyberiansoft.test.bo.webelements.WebTable;
 import com.cyberiansoft.test.bo.utils.WebElementExt;
 import lombok.experimental.ExtensionMethod;
 
-@ExtensionMethod(WebElementExt.class)
+//@ExtensionMethod(WebElementExt.class)
 public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";

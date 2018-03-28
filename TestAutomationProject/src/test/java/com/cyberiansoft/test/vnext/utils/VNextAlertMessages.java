@@ -22,5 +22,4 @@ public class VNextAlertMessages {
 	public static String PLEASE_DOMT_LEAVE_SIGNATURE_FIELD_EMPTY = "Please don't leave signature field empty if you want to approve Inspection";
 	public static String CANCEL_CREATING_INVOICE = "Any unsaved changes will be lost. Are you sure you want to stop creating this Invoice?";
 	public static String ARE_YOU_SURE_YOU_WANT_VOID_INVOICE = "Are you sure you want to void\n%s?";
-	public static String NEW_SUPPLEMENT_WILL_NOT_BE_ADDED = "New supplement will not be added because you have not made any changes to services.";
 }

@@ -27,7 +27,7 @@ public class VNextDownloadDataScreen extends VNextBaseScreen {
 	}
 	
 	public void waitUntilDatabasesDownloaded() {
-		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 	}

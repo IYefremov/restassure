@@ -1,12 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,67 +11,72 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboDocType_Input')]")
-	WebElement documentTypeDropDown;
+	private WebElement documentTypeDropDown;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
-	WebElement entityTypeDropDown;
+	private WebElement entityTypeDropDown;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10__0:0_0")
-	WebElement firstEntry;
+	private WebElement firstEntry;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-	WebElement profileDetailsName;
+	private WebElement profileDetailsName;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-	WebElement profileDetailsNameEdit;
+	private WebElement profileDetailsNameEdit;
 
 	@FindBy(xpath = "//table[@class='rgDetailTable detail-table']")
-	WebElement entriesTable;
+    private WebElement entriesTable;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-	WebElement addRuleNameField;
+    private WebElement addRuleNameField;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
-	WebElement addRuleEntityTypeDropDown;
+    private WebElement addRuleEntityTypeDropDown;
 
 	@FindBy(xpath = "//*[contains(@id, 'EditFormControl_comboIncludeType')]")
-	WebElement addRuleFilterTypeDropDOwn;
+    private WebElement addRuleFilterTypeDropDOwn;
 
 	@FindBy(xpath = "//select[@name='ctl00$ctl00$Content$Main$gvSharing$ctl00$ctl06$Detail10$ctl06$Detail10$ctl02$ctl02$EditFormControl$lbItems_helper1']")
-	WebElement addRuleUsersList;
+    private WebElement addRuleUsersList;
 
 	@FindBy(xpath = "//select[@name='ctl00$ctl00$Content$Main$gvSharing$ctl00$ctl06$Detail10$ctl06$Detail10$ctl02$ctl02$EditFormControl$lbItems_helper2']")
-	WebElement addRuleSelectedUsersList;
+    private WebElement addRuleSelectedUsersList;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10")
-	WebElement rulesTable;
+    private WebElement rulesTable;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-	WebElement ruleNameEdit1;
+    private WebElement ruleNameEdit1;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
-	WebElement sendFromCalendarBTN;
+    private WebElement sendFromCalendarBTN;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
-	WebElement calendsrIcon;
+    private WebElement calendsrIcon;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_calendar_Top")
-	WebElement calendarPage;
+    private WebElement calendarPage;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_dateInput")
-	WebElement addProfileDateField;
+    private WebElement addProfileDateField;
+
+	@FindBy(xpath = "//table[@id='ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10']/tbody/tr")
+    private List<WebElement> rulesTableRows;
 
 	public InterApplicationExchangeWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public void clickTab(String tabName) throws InterruptedException {
+	public void clickTab(String tabName) {
 		driver.findElement(By.linkText(tabName)).click();
 		waitForLoading();
 	}
@@ -161,7 +161,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		return firstEntry.findElements(By.tagName("td")).get(3).getText();
 	}
 
-	public boolean checkEntryByName(String name) throws InterruptedException {
+	public boolean checkEntryByName(String name) {
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
 			return true;
@@ -174,10 +174,18 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		return entriesTable.findElements(By.tagName("tbody")).get(1).findElements(By.tagName("tr")).size();
 	}
 
-	public void deleteEnty(String entryName) {
-		entriesTable.findElements(By.tagName("tbody")).get(1).findElements(By.tagName("tr")).stream()
-				.filter(e -> e.findElements(By.tagName("td")).get(3).getText().equals(entryName)).findFirst().get()
-				.findElement(By.linkText("Delete")).click();
+	public void deleteEntry(String entryName) {
+		entriesTable.findElements(By.tagName("tbody"))
+                .get(1).findElements(By.tagName("tr"))
+                .stream()
+                .filter(e -> e.findElements(By.tagName("td"))
+                        .get(3)
+                        .getText()
+                        .equals(entryName))
+                .findFirst()
+                .get()
+                .findElement(By.linkText("Delete"))
+                .click();
 
 		driver.switchTo().alert().accept();
 		waitForLoading();
@@ -265,6 +273,21 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		}
 	}
 
+	public String getRuleNameByNumber(int number) {
+		waitABit(2000);
+		if (number > 0 && number  <= rulesTableRows.size()) {
+            try {
+                wait.until(ExpectedConditions.visibilityOfAllElements(rulesTableRows));
+                return driver
+                        .findElement(By.xpath("//table[@id='ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_" +
+                                "ctl06_Detail10']/tbody/tr[" + number + "]/td[3]")).getText();
+            } catch (TimeoutException ignored) {}
+        } else {
+		    Assert.fail("The ordinary number of the rule should be within the bounds of the rules table rows!");
+        }
+        return null;
+    }
+
 	public void clickEditRuleBox(String button) {
 		if (button.equals("Cancel"))
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
@@ -273,7 +296,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void fillRuleBoxEdit(String name) throws InterruptedException {
+	public void fillRuleBoxEdit(String name) {
 		wait.until(ExpectedConditions.elementToBeClickable(ruleNameEdit1)).clear();
 		ruleNameEdit1.sendKeys(name);
 	}

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
@@ -76,7 +76,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1000);
 	}
 	
-	public void createNewCustomer(RetailCustomer retailCustomer) {
+	public void createNewCustomer(VNextRetailCustomer retailCustomer) {
 		if (retailCustomer.getFirstName() != null )
 			setCustomerFirstName(retailCustomer.getFirstName());
 		if (retailCustomer.getLastName() != null )

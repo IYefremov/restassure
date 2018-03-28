@@ -16,17 +16,17 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesVehicleInfoSettingsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesWebPage;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final RetailCustomer testcustomer = new RetailCustomer("111", "111");
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("111", "111");
 	final String inspectiontype = "Lily_with_service Package";
 	
 	@Parameters({ "user.name", "user.psw"})

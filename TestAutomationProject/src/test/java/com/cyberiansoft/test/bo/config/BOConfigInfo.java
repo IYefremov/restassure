@@ -9,7 +9,7 @@ public class BOConfigInfo {
 	
 	private static BOConfigInfo _instance = null;
 
-    private Properties props = null;
+    private Properties props;
 
     private BOConfigInfo() {
     	props = new Properties();
@@ -39,11 +39,15 @@ public class BOConfigInfo {
 	      return props.getProperty("user.mail");
 	}
 	
-	public String getUserUserName() {
+	public String getUserName() {
 	      return props.getProperty("user.name");
 	}
 	
-	public String getUserUserPassword() {
+	public String getUserPassword() {
 	      return props.getProperty("user.password");
+	}
+
+	public String getDefaultBrowser() {
+		return props.getProperty("default.browser");
 	}
 }

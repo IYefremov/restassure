@@ -15,8 +15,8 @@ import org.testng.Assert;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
@@ -89,7 +89,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen createSimpleInspection() {	
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
-		customersscreen.selectCustomer(new RetailCustomer("Retail", "Automation"));
+		customersscreen.selectCustomer(new VNextRetailCustomer("Retail", "Automation"));
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspinfoscreen.setVIN("TESTVINN");
 		inspinfoscreen.swipeScreenLeft();
@@ -99,11 +99,11 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getFirstInspectionNumber() {
-		return inspectionslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
+		return inspectionslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-list-title')]")).getText();
 	}
 	
 	public String getInspectionNumberValue(WebElement inspcell) {
-		return inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
+		return inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-list-title')]")).getText();
 	}
 	
 	public String getInspectionCustomerValue(String inspectionnumber) {
@@ -136,14 +136,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getFirstInspectionPrice() {
-		return inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
+		return inspectionslist.findElement(By.xpath(".//div[@class='checkbox-list-title checkbox-list-bold']")).getText();
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
 		String inspprice = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
 		if (inspcell != null)
-			inspprice = inspcell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
+			inspprice = inspcell.findElement(By.xpath(".//div[@class='checkbox-list-title checkbox-list-bold']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
 		return inspprice;	
@@ -151,11 +151,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
 		WebElement inspcell = null;
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(inspectionslist));
 		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//div[@class='entity-item accordion-item']"));
 		for (WebElement invcell : inspections) {
-			if (invcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText().equals(inspectionnumber)) {
+			if (invcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-list-title')]")).getText().equals(inspectionnumber)) {
 				inspcell = invcell;
 				break;
 			}
@@ -164,13 +162,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionnumber) {
-		boolean notesPresent = false;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			notesPresent = inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
-		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return notesPresent;			
+		return inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
 	}
 	
 	public boolean isEmailSentIconPresentForInspection(String inspectionnumber) {
@@ -179,7 +172,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
-		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
+		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + inspnumber + "']")));
 		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
@@ -213,7 +206,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
-		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")).size() > 0;
+		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-list-title') and text()='" + inspnumber + "']")).size() > 0;
 	}
 	
 	public void switchToTeamInspectionsView() {

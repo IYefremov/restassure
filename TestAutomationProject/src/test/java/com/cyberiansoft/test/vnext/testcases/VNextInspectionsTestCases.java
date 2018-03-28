@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -17,10 +16,11 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.VNextRetailCustomer;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
+	final VNextRetailCustomer testcustomer = new VNextRetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	final String testInsurenceCompany = "Test Insurance Company";
 	
@@ -195,7 +195,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 			description = "Create customer along with Inspection")
 	public void testCreateCustomerAlongWithInspection() { 
 		
-		final RetailCustomer customer = new RetailCustomer("Eric", "Burn");
+		final VNextRetailCustomer customer = new VNextRetailCustomer("Eric", "Burn");
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";

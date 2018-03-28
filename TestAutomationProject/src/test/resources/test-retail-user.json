@@ -1,0 +1,24 @@
+{
+  "testVerifyUserCanAddSupplementAfterApproveInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementAfterApproveInspection.01",
+      "description": "Test Case 72586:Verify user can add supplement after approve Inspection",
+      "inspType": "O_Kramar",
+      "vinnumber": "TEST",
+      "service": {"serviceName": "Battery Installation",
+      "servicePrice": "50"
+      }
+    }
+  ],
+  
+  "testVerifyUserCanAddSupplementWhenEditInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementWhenEditInspection.01",
+      "description": "Test Case 72585:Verify user can't add supplement when edit Inspection",
+      "inspType": "O_Kramar",
+      "vinnumber": "TEST",
+      "serviceName1": "Battery Installation",
+      "serviceName2": "Labor"
+    }
+  ]
+}

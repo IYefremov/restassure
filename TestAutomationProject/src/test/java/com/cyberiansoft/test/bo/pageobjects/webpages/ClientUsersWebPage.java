@@ -36,7 +36,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 		return PageFactory.initElements(driver, AddEditClientUsersDialogWebPage.class);
 	}
 
-	public boolean isClientUserExistsInTable(String clientusername, String userlstname) {
+	public boolean isClientUserPresentInTable(String clientusername, String userlstname) {
 		boolean exists = clientuserstable.getWrappedElement()
 				.findElements(By.xpath(".//td/b[text()='" + clientusername + " " + userlstname + "']")).size() > 0;
 		return exists;
@@ -96,7 +96,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 
 	public void clickResendButton() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_lbMsg")));
-		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl04_btnResend")).click();
+		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl06_btnResend")).click();
 		driver.switchTo().alert().accept();
 		Thread.sleep(1000);
 		wait.until(

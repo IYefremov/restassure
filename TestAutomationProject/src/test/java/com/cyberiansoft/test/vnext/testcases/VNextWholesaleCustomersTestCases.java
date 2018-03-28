@@ -11,7 +11,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
@@ -21,6 +20,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.VNextWholesailCustomer;
 
 public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -28,20 +28,20 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify created on BO Wholesale customer displays in the list")
 	public void testVerifyCreatedOnBOWholesaleCustomerDisplaysInTheList() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer("Test_Wholesale_BO");
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("Test_Wholesale_BO");
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getUserUserName(), BOConfigInfo.getInstance().getUserUserPassword());
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.searchClientByName(wholesalecustomer.getCompany());
-		if (clientspage.isClientExistsInTable(wholesalecustomer.getFullName()))
+		if (clientspage.isClientPresentInTable(wholesalecustomer.getFullName()))
 			clientspage.deleteClient(wholesalecustomer.getFullName());
 		NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
 		newclientpage.createWholesaleClient(wholesalecustomer.getCompany());
@@ -82,7 +82,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify user can select Wholesale customer when create Inspection")
 	public void testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer("001 - Test Company");
+		final VNextWholesailCustomer wholesalecustomer = new VNextWholesailCustomer("001 - Test Company");
 		final String inspType = "AppendToRO";
 		final String vinnumber = "TEST";
 

@@ -277,16 +277,16 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public WebElement getTableRowWithClient(String clientname) {
-		List<WebElement> clientstablerows = getClientsTableRows();
-		for (WebElement clientstablerow : clientstablerows) {
+		List<WebElement> clientsTableRows = getClientsTableRows();
+		for (WebElement clientsTableRow : clientsTableRows) {
 			waitABit(500);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
 			waitABit(1500);
-			if (clientstablerow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
-					//if (clientstablerow.findElement(By.xpath(".//td[7]"))
+			if (clientsTableRow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
+					//if (clientsTableRow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {
-				return clientstablerow;
+				return clientsTableRow;
 			}
 		}
 		return null;
@@ -315,7 +315,6 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	// method for click on client users link and open new dialog window
 	public ClientUsersWebPage clickClientUsersLinkForClientOpenDialogWindow(String clientname) {
-
 		clickInspectionSelectExpandableMenu(clientname, "Client Users");
 		waitForNewTab();
 		String mainWindowHandle = driver.getWindowHandle();
@@ -324,12 +323,11 @@ public class ClientsWebPage extends WebPageWithPagination {
 				driver.switchTo().window(activeHandle);
 			}
 		}
-
 		return PageFactory.initElements(driver, ClientUsersWebPage.class);
 	}
 	
 	
-	public WebElement clickSelectButtonForClient(String clientname) {
+	private WebElement clickSelectButtonForClient(String clientname) {
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
 			Actions act = new Actions(driver);
@@ -340,22 +338,23 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return row;
 	}
 
-	public void clickInspectionSelectExpandableMenu(String clientname, String menuitem) {
-		WebElement row = clickSelectButtonForClient(clientname);
+	public void clickInspectionSelectExpandableMenu(String clientName, String menuItem) {
+		WebElement row = clickSelectButtonForClient(clientName);
 		if (row != null) {
 			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+
 			Actions act = new Actions(driver);
-			if (!getTableRowWithClient(clientname).findElement(By.xpath(".//span[text()='" + menuitem + "']"))
-					.isDisplayed()) {
-				act.moveToElement(getTableRowWithClient(clientname)
-						.findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
-			}
-			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithClient(clientname)
-					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
-			act.click(getTableRowWithClient(clientname)
-					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
+//			if (!getTableRowWithClient(clientName).findElement(By.xpath(".//span[text()='" + menuItem + "']"))
+//					.isDisplayed()) {
+//				act.moveToElement(getTableRowWithClient(clientName)
+//						.findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
+//			}
+			wait.until(ExpectedConditions.elementToBeClickable(getTableRowWithClient(clientName)
+					.findElement(By.xpath(".//span[text()='" + menuItem + "']"))));
+			act.click(getTableRowWithClient(clientName)
+					.findElement(By.xpath(".//span[text()='" + menuItem + "']"))).perform();
 		} else {
-			Assert.assertTrue(false, "Can't find " + clientname + " client");
+			Assert.assertTrue(false, "Can't find " + clientName + " client");
 		}
 	}
 
@@ -373,7 +372,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return PageFactory.initElements(driver, ClientContactsWebPage.class);
 	}
 
-	public boolean isClientExistsInTable(String clientname) {
+	public boolean isClientPresentInTable(String clientname) {
 		boolean exists = clientstable.getWrappedElement()
 				.findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
 		return exists;

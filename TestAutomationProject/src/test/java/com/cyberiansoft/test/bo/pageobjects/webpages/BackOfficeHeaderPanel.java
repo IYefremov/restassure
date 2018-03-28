@@ -78,7 +78,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 			e.printStackTrace();
 		}
 		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
-		
 	}
 	
 	public OperationsWebPage clickOperationsLink() {

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
@@ -26,38 +27,38 @@ import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.List;
-import java.util.UUID;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
-	String testuser = "";
-	String testuserpsw = "";
+	private String testUser;
+	private String testUserPassword;
 
 	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		testuser = userName;
-		testuserpsw = userPassword;
+	public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        testUser = BOConfigInfo.getInstance().getUserName();
+        testUserPassword = BOConfigInfo.getInstance().getUserPassword();
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(testUser, testUserPassword);
 	}
 
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
+	public void BackOfficeLogout() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
 	}
 
-	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit", description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
+            description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() throws InterruptedException {
 
 		final String srcompany = "Alex SASHAZ";
@@ -150,7 +151,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		backofficeheader.clickHomeLink();
 
 		backofficeheader.clickLogout();
-		loginpage.UserLogin(testuser, testuserpsw);
+		loginpage.UserLogin(testUser, testUserPassword);
 		companypage = backofficeheader.clickCompanyLink();
 		serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 		serviceadvisorspage.makeSearchPanelVisible();
@@ -298,11 +299,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		clientspage.searchClientByName(clientfirstname);
 
-		if (clientspage.isClientExistsInTable(retailcompanyname)) {
+		if (clientspage.isClientPresentInTable(retailcompanyname)) {
 			clientspage.deleteClient(retailcompanyname);
 		}
 
-		if (clientspage.isClientExistsInTable(retailcompanynameed)) {
+		if (clientspage.isClientPresentInTable(retailcompanynameed)) {
 			clientspage.deleteClient(retailcompanynameed);
 		}
 
@@ -657,7 +658,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.makeSearchPanelVisible();
 		clientspage.setClientSearchCriteria(clientname);
 		clientspage.clickFindButton();
-		if (clientspage.isClientExistsInTable(clientname)) {
+		if (clientspage.isClientPresentInTable(clientname)) {
 			clientspage.deleteClient(clientname);
 		}
 
@@ -715,7 +716,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -733,16 +734,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 	}
 	
 	@Test(testName = "Test Case 62296:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Teams")
@@ -754,7 +755,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
@@ -772,16 +773,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -819,7 +820,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
@@ -837,16 +838,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -884,7 +885,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
@@ -902,16 +903,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -949,7 +950,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
@@ -967,16 +968,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1013,7 +1014,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1031,16 +1032,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST (Work Order)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1078,7 +1079,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1096,29 +1097,29 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter, "The changes have not been applied");
 		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 	} 
-	
+
 	@Test(testName = "Test Case 62301:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Clients")
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleClients() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sending");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
-			}
+		if (interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1135,24 +1136,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
-		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
-		
-		interApplicationExchangePage.expandFirstCompanyProfile();
-		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Clients","Include Selected");
+        Assert.assertNotEquals(entryTextBefore, entryTextAfter, "The changes have not been applied");
+
+        interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
+
+        interApplicationExchangePage.expandFirstCompanyProfile();
+        String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
+        interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients",
+                "Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox("Cancel");
-		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Clients (Clients Include Selected)"));
-		
+		Assert.assertEquals(ruleByNumberBeforeChange, interApplicationExchangePage.getRuleNameByNumber(1),
+                "The rule has been added although the \"Cancel\" button was clicked");
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
@@ -1182,7 +1186,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
 		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1200,16 +1204,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1237,7 +1241,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Teams Include Selected)");
 	}
-	
+
 	@Test(testName = "Test Case 62303:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Employees")
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1246,9 +1250,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
-			}
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1265,24 +1269,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
-		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
+        String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
+        interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees",
+                "Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox("Cancel");
-		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Employees (Employees Include Selected)"));
-		
+        Assert.assertEquals(ruleByNumberBeforeChange, interApplicationExchangePage.getRuleNameByNumber(1),
+                "The rule has been added although the \"Cancel\" button was clicked");
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
@@ -1302,18 +1309,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Employees Include Selected)");
 	}
-	
+
 	@Test(testName = "Company: Inter Application Exchange Configuration - Sharing Estimate  Add Rule Services")
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleServices() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sending");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
-			}
+		if (interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1330,24 +1337,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
-		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+        String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
+        interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services",
+                "Services","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
-		interApplicationExchangePage.clickAddRuleBox("Cancel");        //Include Selected Services (Services Include Selected)
-		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
-		
+		interApplicationExchangePage.clickAddRuleBox("Cancel");
+		Assert.assertEquals(ruleByNumberBeforeChange, interApplicationExchangePage.getRuleNameByNumber(1),
+                "The rule has been added although the \"Cancel\" button was clicked");
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.clickAddRuleBox("Insert");
@@ -1366,7 +1376,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Services Include Selected)");
 	}
-	
+
 	@Test(testName = "Test Case 62305:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Vehicle Parts")
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1375,9 +1385,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
-			interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
-			}
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
@@ -1394,24 +1404,27 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("Estimate JST for Name (Estimation)");
+		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		
 		interApplicationExchangePage.expandFirstCompanyProfile();
-		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+        String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
+        interApplicationExchangePage.clickAddRuleToFirstProfile();
+		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts",
+                "Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox("Cancel");
-		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Vehicle Parts (Vehicle Parts Include Selected)"));
-		
+        Assert.assertEquals(ruleByNumberBeforeChange, interApplicationExchangePage.getRuleNameByNumber(1),
+                "The rule has been added although the \"Cancel\" button was clicked");
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
@@ -1438,10 +1451,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab("Sending");
-		interApplicationExchangePage.expandFirstCreatedCompany();		
+		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
-		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+		if (interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")) {
+		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1459,20 +1472,20 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 	}
 	
 	@Test(testName = "Test Case 62787:Company: Inter Application Exchange Configuration - Mapping Work Order Add Rule Clients")
-	public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleCLients() throws InterruptedException{
+	public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
@@ -1480,7 +1493,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
 		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
-			interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+			interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
@@ -1498,15 +1511,15 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillProfileDetailsEdit("test");
 		interApplicationExchangePage.clickProfileEditBox("Cancel");
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(entryTextBefore.equals(entryTextAfter));
+		Assert.assertEquals(entryTextBefore, entryTextAfter);
 		
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox("Update");
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
-		Assert.assertTrue(!entryTextBefore.equals(entryTextAfter));
+		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
 		
-		interApplicationExchangePage.deleteEnty("WO JST for Name (Work Order)");
+		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 	}
 }
