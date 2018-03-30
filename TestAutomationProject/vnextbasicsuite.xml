@@ -1,8 +1,9 @@
 <suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
-  <parameter name="selenium.browser" value="firefox" />
-  <parameter name="backoffice.url" value="https://vnext_dev.cyberianconcepts.com"  />  
+  <!--<parameter name="selenium.browser" value="firefox" />-->
+  <parameter name="selenium.browser" value="chrome"/>
+  <parameter name="backoffice.url" value="https://vnext_dev.cyberianconcepts.com"  />
   <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"  />
   <parameter name="user.psw" value="test12345"  />
   <parameter name="device.license" value="VNext Automation"  />

@@ -348,7 +348,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
@@ -396,7 +396,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
 		//
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);		
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
@@ -667,7 +667,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		for (int i = 0; i < 2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
 			customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-			myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
 			vehiclescreeen.setMakeAndModel(_make, _model);
@@ -732,7 +732,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		for (int i = 0; i < 2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
 			customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-			myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
 			vehiclescreeen.setMakeAndModel(_make, _model);
@@ -783,7 +783,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		String inpectionnumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.setVIN(VIN);
@@ -847,7 +847,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_LA_DA_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_LA_DA_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		String inpectionnumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.setVIN(VIN);
@@ -996,7 +996,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		
 		vehiclescreeen.setVINFieldValue(VIN);
@@ -1832,7 +1832,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.FOR_COPY_INSP_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.FOR_COPY_INSP_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		final String inspNumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.setVINFieldValue(VIN);
@@ -2214,7 +2214,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -2265,7 +2265,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -2328,7 +2328,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE);
 		Thread.sleep(1000);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
@@ -2798,7 +2798,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.VITALY_TEST_INSPTYPE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.VITALY_TEST_INSPTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
@@ -3060,7 +3060,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 			
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			
 		vehiclescreeen.setVINFieldValue(VIN);
@@ -3137,7 +3137,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 				
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 				
 		vehiclescreeen.setVINFieldValue(VIN);
@@ -3262,7 +3262,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 			
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter", "2014");
@@ -3807,7 +3807,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3843,7 +3843,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3881,7 +3881,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3923,7 +3923,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4358,7 +4358,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4383,7 +4383,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.waitServiceRequestsScreenLoaded();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4422,7 +4422,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_ALL_PHASES);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4713,7 +4713,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
@@ -4771,7 +4771,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4811,7 +4811,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4852,7 +4852,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4893,7 +4893,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4935,7 +4935,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -4980,7 +4980,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -5024,7 +5024,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_WO_ONLY);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_WO_ONLY);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -5044,7 +5044,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		servicerequestsscreen.selectWOType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		servicerequestsscreen.selectWOType (iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -5115,7 +5115,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_INSP_ONLY);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_INSP_ONLY);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -5132,7 +5132,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -5205,7 +5205,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX_APP_REQ);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX_APP_REQ);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -5280,7 +5280,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 
 		myinspectionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -5318,7 +5318,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType("Inspection_VIN_only");
+		myinspectionsscreen.selectInspectionType ("Inspection_VIN_only");
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.getVINField().click();
 		Assert.assertTrue(vehiclescreeen.getVINField().isDisplayed());
@@ -5345,7 +5345,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType("Inspection_for_auto_WO_line_appr");
+		myinspectionsscreen.selectInspectionType ("Inspection_for_auto_WO_line_appr");
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
@@ -5396,7 +5396,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_ALL_PHASES);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
@@ -5468,7 +5468,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -5575,7 +5575,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i < 3; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
-			myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
 			inspnumbers.add(vehiclescreeen.getInspectionNumber());
@@ -5634,7 +5634,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType("Inspection_group_service");
+		myinspectionsscreen.selectInspectionType ("Inspection_group_service");
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -5703,7 +5703,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -5768,7 +5768,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType("Inspection_direct_assign");
+		myinspectionsscreen.selectInspectionType ("Inspection_direct_assign");
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -5805,7 +5805,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -5873,7 +5873,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i <2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
-			myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
 			inspections.add(vehiclescreeen.getInspectionNumber());
@@ -5935,7 +5935,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i <2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
-			myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+			myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
 			VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(VIN);
 			inspections.add(vehiclescreeen.getInspectionNumber());
@@ -5997,7 +5997,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
@@ -6053,7 +6053,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -6585,7 +6585,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 				
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
+		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.SR_ALL_PHASES);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 				
 		vehiclescreeen.setVIN(VIN);
@@ -6680,7 +6680,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_SINGLE_PAGE);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_SINGLE_PAGE);
 		
 		Thread.sleep(1000);		
 		SinglePageInspectionScreen singlepageinspectionscreen = new SinglePageInspectionScreen(appiumdriver);
@@ -6752,7 +6752,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		myinspectionsscreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption());
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		
@@ -6892,7 +6892,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);		
 		vehiclescreeen.setVIN(VIN);
 		
@@ -7789,7 +7789,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_SERVICE_TYPE_WITH_OUT_REQUIRED);
+		myinspectionsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_SERVICE_TYPE_WITH_OUT_REQUIRED);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);		
 		vehiclescreeen.setVIN(VIN);
 		

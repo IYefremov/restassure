@@ -1,21 +1,18 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class ClientUsersWebPage extends BaseWebPage {
 
@@ -36,10 +33,9 @@ public class ClientUsersWebPage extends BaseWebPage {
 		return PageFactory.initElements(driver, AddEditClientUsersDialogWebPage.class);
 	}
 
-	public boolean isClientUserPresentInTable(String clientusername, String userlstname) {
-		boolean exists = clientuserstable.getWrappedElement()
-				.findElements(By.xpath(".//td/b[text()='" + clientusername + " " + userlstname + "']")).size() > 0;
-		return exists;
+	public boolean isClientUserPresentInTable(String clientUsername, String userFirstName) {
+        return clientuserstable.getWrappedElement()
+                .findElements(By.xpath(".//td/b[text()='" + clientUsername + " " + userFirstName + "']")).size() > 0;
 	}
 
 	public List<WebElement> getClientUsersTableRows() {

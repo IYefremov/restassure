@@ -34,7 +34,11 @@ public class BOConfigInfo {
 	public String getBackOfficeURL() {
 	      return props.getProperty("backoffice.url");
 	}
-	
+
+	public String getBackOfficeDemoURL() {
+	      return props.getProperty("backofficedemo.url");
+	}
+
 	public String getUserMail() {
 	      return props.getProperty("user.mail");
 	}
@@ -42,12 +46,22 @@ public class BOConfigInfo {
 	public String getUserName() {
 	      return props.getProperty("user.name");
 	}
+
+	public String getUserDemoName() {
+	      return props.getProperty("userdemo.name");
+	}
 	
 	public String getUserPassword() {
 	      return props.getProperty("user.password");
 	}
 
+	public String getUserDemoPassword() {
+	      return props.getProperty("userdemo.psw");
+	}
+
 	public String getDefaultBrowser() {
 		return props.getProperty("default.browser");
 	}
+
+
 }

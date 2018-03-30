@@ -1,54 +1,34 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ConfirmPasswordWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.EmployeesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InsuranceCompaniesWePpage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InterApplicationExchangeWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewEmployeeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewInvoiceTypeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewServiceDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceAdvisorsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.UsersWebPage;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
-
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
-	private String testUser;
-	private String testUserPassword;
+	private String userName;
+	private String userPassword;
 
 	@BeforeMethod
 	public void BackOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        testUser = BOConfigInfo.getInstance().getUserName();
-        testUserPassword = BOConfigInfo.getInstance().getUserPassword();
+        userName = BOConfigInfo.getInstance().getUserName();
+        userPassword = BOConfigInfo.getInstance().getUserPassword();
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(testUser, testUserPassword);
+        loginPage.UserLogin(userName, userPassword);
 	}
 
 	@AfterMethod
@@ -151,7 +131,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		backofficeheader.clickHomeLink();
 
 		backofficeheader.clickLogout();
-		loginpage.UserLogin(testUser, testUserPassword);
+		loginpage.UserLogin(userName, userPassword);
 		companypage = backofficeheader.clickCompanyLink();
 		serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 		serviceadvisorspage.makeSearchPanelVisible();
@@ -810,7 +790,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Teams Include Selected)");
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 62297:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Employees")
 	public void testCompanySharingWorkOrderAddRuleEmployees() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -875,7 +856,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Employees Include Selected)");
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 62295:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Clients")
 	public void testCompanySharingWorkOrderAddRuleClients() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -940,7 +922,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Clients Include Selected)");
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 62298:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Services")
 	public void testCompanySharingWorkOrderAddRuleServices () throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1004,7 +987,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Services Include Selected)");
 	}
-	
+
+	//todo test fails
 	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts")
 	public void testCompanySharingWorkOrderAddRuleVehicleParts() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

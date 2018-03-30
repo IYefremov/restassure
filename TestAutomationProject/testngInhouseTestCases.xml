@@ -2,6 +2,7 @@
     <parameter name="selenium.host" value="localhost"/>
     <parameter name="selenium.port" value="3737"/>
     <parameter name="backoffice.url" value="https://sc.cyberianconcepts.com"/>
+    <parameter name="selenium.browser" value="chrome"/>
 
     <listeners>
         <listener class-name="com.cyberiansoft.test.inhouse.utils.TestListener"/>
@@ -12,9 +13,9 @@
 
         <classes>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases">
-                <methods>
-                <include name="testUserCanPayAgreementFromMailLink"/>
-            </methods>
+                <!--  <methods>
+                <include name="testUserCanAddNewAccountsRules"/>
+            	</methods>-->
             </class>
 
         </classes>

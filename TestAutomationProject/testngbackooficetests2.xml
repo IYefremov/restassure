@@ -1,0 +1,60 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+    <parameter name="selenium.host" value="localhost"/>
+    <parameter name="selenium.port" value="3737"/>
+    <!--<parameter name="selenium.browser" value="firefox"/>-->
+    <parameter name="selenium.browser" value="chrome"/>
+    <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd"/>
+    <parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com/"/>
+    <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
+    <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"/>
+    <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"/>
+    <parameter name="user.psw" value="test12345"/>
+    <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"/>
+    <parameter name="userdemo.psw" value="111111"/>
+    <parameter name="setupengineer.name" value="testapp@i.ua"/>
+    <parameter name="setupengineer.psw" value="ReconPro"/>
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
+    </listeners>
+    <test name="Back Office Test Cases - Chrome" preserve-order="true">
+        <parameter name="selenium.browser" value="chrome"/>
+        <classes>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
+           <methods> 
+     <include name="testCompanyClientsVerifyThatAddedNotesOnClientDetailsScreenAreVisibleAsAPopupOnClientsGrid" />
+      </methods>
+            </class>
+           <!-- <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
+            </class>
+             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
+            </class>
+			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
+            </class>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
+            </class>-->
+            <!--        -->
+        </classes>
+    </test>
+</suite>

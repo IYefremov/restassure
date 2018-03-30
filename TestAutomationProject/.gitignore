@@ -1,0 +1,8 @@
+*.classpath
+*.project
+/.settings/
+/report/
+/Reports/
+/reportvnext/
+/target/
+/test-output/

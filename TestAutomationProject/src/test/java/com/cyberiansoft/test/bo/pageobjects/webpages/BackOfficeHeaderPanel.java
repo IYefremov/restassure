@@ -1,22 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class BackOfficeHeaderPanel extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
@@ -67,11 +57,8 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		try{
 		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		}catch(Exception e){
-			
-		}
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver,
-				BackOfficeLoginWebPage.class);
+		}catch(Exception ignored){}
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {

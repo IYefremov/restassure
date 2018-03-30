@@ -1,52 +1,32 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import org.junit.Assert;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.EmployeesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ExpensesTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InsuranceCompaniesWePpage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.JobsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewInvoiceTypeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.PriceMatricesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.QuestionsFormsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceAdvisorsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SuppliesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.TeamsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.UsersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VehiclePartsWebPage;
-import com.cyberiansoft.test.bo.utils.Retry;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 	@BeforeMethod
 	public void BackOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        String testUser = BOConfigInfo.getInstance().getUserName();
-        String testUserPassword = BOConfigInfo.getInstance().getUserPassword();WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(testUser, testUserPassword);
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 	}
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
 	}
 
@@ -314,7 +294,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		jobspage.clickFindButton();
 
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(jobspage.getJobsTableRowsCount()));
-		jobspage.isJobExists(_job);
+		jobspage.isJobPresent(_job);
 	}
 
 	@Test(description = "Test Case 17284:Company - Insurance Companies")
@@ -579,110 +559,86 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		newinvoicetypedialog.clickCancelAddInvoiceTypeButton();
 	}
 
-	//todo
 	@Test(testName = "Test Case 24998:Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts", description = "Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts")
-	public void testCompanyPriceMatrixVerifyThatOnMatrixPanelAdminCanSeeInAvailableServicesOnlyServicesSelectedOnVehicleParts() throws Exception {
+	public void testCompanyPriceMatrixVerifyThatOnMatrixPanelAdminCanSeeInAvailableServicesOnlyServicesSelectedOnVehicleParts() {
+        final String vehiclePart = "Vehicle Part 1";
+        final String priceMatrix = "Test Matrix mobile1";
+        final List<String> serviceNames = Arrays.asList("Test service zayats", "VPS1");
 
-		final String vehiclepart = "Vehicle Part 1";
-		final String pricematrix = "Test Matrix mobile1";
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+		VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
+		Assert.assertEquals(vehiclePart, vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
 
-		final String servicename1 = "Test service zayats";
-		final String servicename2 = "VPS1";
+        vehiclePartsPage.verifyThatAssignedServicesListIsEmpty();
+		companyPage = backOfficeHeader.clickCompanyLink();
+		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
+		Assert.assertEquals(0, vehiclePartsPage.getAssignedServicesList().size());
+		vehiclePartsPage.cancelNewVehiclePart();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		VehiclePartsWebPage vehiclepartspage = companypage.clickVehiclePartsLink();
-		vehiclepartspage.clickEditButtonForVehiclePart(vehiclepart);
-		Assert.assertEquals(vehiclepart, vehiclepartspage.getVehiclePartNameField().getAttribute("value"));
-		Assert.assertEquals(0, vehiclepartspage.getAssignedServicesList().size());
-		vehiclepartspage.cancelNewVehiclePart();
+		companyPage = backOfficeHeader.clickCompanyLink();
+		vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
+        serviceNames.forEach(vehiclePartsPage::assignServiceForVehiclePart);
+        vehiclePartsPage.saveNewVehiclePart();
 
-		companypage = backofficeheader.clickCompanyLink();
-		PriceMatricesWebPage pricematriceswebpage = companypage.clickPriceMatricesLink();
-		pricematriceswebpage.clickPricesForPriceMatrix(pricematrix);
-		vehiclepartspage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclepart);
-		Assert.assertEquals(0, vehiclepartspage.getAssignedServicesList().size());
-		vehiclepartspage.cancelNewVehiclePart();
+		companyPage = backOfficeHeader.clickCompanyLink();
+		pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
+		Assert.assertEquals(2, vehiclePartsPage.getAvailableServicesList().size());
+		serviceNames.forEach(vehiclePartsPage::selectAvailableServiceForVehiclePart);
+		vehiclePartsPage.cancelNewVehiclePart();
 
-		companypage = backofficeheader.clickCompanyLink();
-		vehiclepartspage = companypage.clickVehiclePartsLink();
-		vehiclepartspage.clickEditButtonForVehiclePart(vehiclepart);
-		vehiclepartspage.assignServiceForVehiclePart(servicename1);
-		vehiclepartspage.assignServiceForVehiclePart(servicename2);
-		vehiclepartspage.saveNewVehiclePart();
-
-		companypage = backofficeheader.clickCompanyLink();
-		pricematriceswebpage = companypage.clickPriceMatricesLink();
-		pricematriceswebpage.clickPricesForPriceMatrix(pricematrix);
-		vehiclepartspage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclepart);
-		Assert.assertEquals(2, vehiclepartspage.getAvailableServicesList().size());
-		vehiclepartspage.selectAvailableServiceForVehiclePart(servicename1);
-		vehiclepartspage.selectAvailableServiceForVehiclePart(servicename2);
-		vehiclepartspage.cancelNewVehiclePart();
-
-		companypage = backofficeheader.clickCompanyLink();
-		vehiclepartspage = companypage.clickVehiclePartsLink();
-		vehiclepartspage.clickEditButtonForVehiclePart(vehiclepart);
-		vehiclepartspage.unassignServiceForVehiclePart(servicename1);
-		vehiclepartspage.unassignServiceForVehiclePart(servicename2);
-		vehiclepartspage.saveNewVehiclePart();
+		companyPage = backOfficeHeader.clickCompanyLink();
+		vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
+        serviceNames.forEach(vehiclePartsPage::unassignServiceForVehiclePart);
+		vehiclePartsPage.saveNewVehiclePart();
 	}
 
-	//todo
 	@Test(testName = "Test Case 25004:Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel", description = "Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel")
-	public void testCompanyPriceMatrixVerifyThatByDefaultAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel() throws Exception {
+	public void testCompanyPriceMatrixVerifyThatByDefaultAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel() {
+        final List<String> serviceNames = Arrays.asList("Dye", "VPS1", "Wheel Repair1");
+        final List<String> damageSeverities = Arrays.asList("LIGHT", "MEDIUM");
+        final List<String> damageSizes = Arrays.asList("DIME", "NKL");
 
-		final String vehiclepart = "VP with assigned services";
+		final String vehiclePart = "VP with assigned services";
+		final String priceMatrix = "New Matrix with assigned services";
+		final String priceMatrixService = "Matrix Service";
+		final String priceMatrixVehiclePart = "VP with assigned services";
 
-		final String servicename1 = "Dye";
-		final String servicename2 = "VPS1";
-		final String servicename3 = "Wheel Repair1";
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+		VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
 
-		final String pricematrix = "New Matrix with assigned services";
-		final String pricematrixservice = "Matrix Service";
-		final String[] damagesevereties = {"LIGHT", "MEDIUM"};
-		final String[] damagesizes = {"DIME", "NKL"};
-		final String pricematrixvehiclepart = "VP with assigned services";
+		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
+		Assert.assertEquals(vehiclePart, vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
+		serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+		vehiclePartsPage.saveNewVehiclePart();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		VehiclePartsWebPage vehiclepartspage = companypage.clickVehiclePartsLink();
-
-		vehiclepartspage.clickEditButtonForVehiclePart(vehiclepart);
-		Assert.assertEquals(vehiclepart, vehiclepartspage.getVehiclePartNameField().getAttribute("value"));
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename1);
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename2);
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename3);
-//		Assert.assertEquals(3, vehiclepartspage.getAssignedServicesList().size());
-		vehiclepartspage.saveNewVehiclePart();
-
-		companypage = backofficeheader.clickCompanyLink();
-		PriceMatricesWebPage pricematriceswebpage = companypage.clickPriceMatricesLink();
+		companyPage = backOfficeHeader.clickCompanyLink();
+		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
 		pricematriceswebpage.clickAddPriceMarixButton();
-		pricematriceswebpage.setPriceMarixName(pricematrix);
-		pricematriceswebpage.selectPriceMarixService(pricematrixservice);
-		for (int i = 0; i < damagesevereties.length; i++) {
-			pricematriceswebpage.assignPriceMatrixDamageSeverity(damagesevereties[i]);
-		}
-		for (int i = 0; i < damagesizes.length; i++) {
-			pricematriceswebpage.assignPriceMatrixDamageSize(damagesizes[i]);
-		}
-		pricematriceswebpage.assignPriceMatrixVehiclePart(pricematrixvehiclepart);
+		pricematriceswebpage.setPriceMarixName(priceMatrix);
+		pricematriceswebpage.selectPriceMatrixService(priceMatrixService);
+		damageSeverities.forEach(pricematriceswebpage::assignPriceMatrixDamageSeverity);
+        damageSizes.forEach(pricematriceswebpage::assignPriceMatrixDamageSize);
+		pricematriceswebpage.assignPriceMatrixVehiclePart(priceMatrixVehiclePart);
 		pricematriceswebpage.saveNewPriceMatrix();
 
-		pricematriceswebpage.clickPricesForPriceMatrix(pricematrix);
-		vehiclepartspage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclepart);
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename1);
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename2);
-		vehiclepartspage.selectAssignedServiceForVehiclePart(servicename3);
-		Assert.assertEquals(3, vehiclepartspage.getAssignedServicesList().size());
-		Assert.assertEquals(0, vehiclepartspage.getAvailableServicesList().size());
-		vehiclepartspage.cancelNewVehiclePart();
+		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
+        serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
 
-		companypage = backofficeheader.clickCompanyLink();
-		pricematriceswebpage = companypage.clickPriceMatricesLink();
-		pricematriceswebpage.deletePriceMatrix(pricematrix);
+        serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+        vehiclePartsPage.verifyThatAvailableServicesListIsEmpty();
+
+		companyPage = backOfficeHeader.clickCompanyLink();
+		pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		pricematriceswebpage.deletePriceMatrix(priceMatrix);
 	}
 }

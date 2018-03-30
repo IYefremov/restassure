@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
@@ -39,8 +38,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void BackOfficeLogin(Method method) throws InterruptedException {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 		Thread.sleep(2000);
 	}
@@ -185,71 +183,69 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		teamspage.deleteTeam(teamedited);
 		Assert.assertFalse(teamspage.isTeamExists(teamedited));
 	}
-	
+
 	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
 	public void testCompanyJobsCRUD() throws Exception {
 
-		final String _job = "Test job";
-		final String jobdesc = "Test job description";
+		final String job = "Test job";
+		final String jobDesc = "Test job description";
 		final String customer = "001 - Test Company";
-		final String parentcustomer = "002 - Test Company";
-		final String jobaccid = "testID";
-		final String jobacc2id = "testID2";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		final String parentCustomer = "002 - Test Company";
+        final String jobAccId = "testID";
+        final String jobAcc2Id = "testID2";
+        final String jobEdited = job + "edited";
 
-		JobsWebPage jobspage = companypage.clickJobsLink();
-		if (jobspage.isJobExists(_job)) {
-			jobspage.deleteJob(_job);
-		}		
-		
-		jobspage.createNewJob(_job);
-		jobspage.clickEditJob(_job);
-		Assert.assertEquals(_job, jobspage.getNewJobName());
-		final String jobedited = _job + "edited";
-		jobspage.setNewJobName(jobedited);
-		jobspage.setNewJobDescription(jobdesc);
-		jobspage.selectJobClient(customer);
-		jobspage.selectJobParentClient(parentcustomer);
-		jobspage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
-		jobspage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
-		jobspage.setNewJobAccountingID(jobaccid);
-		jobspage.setNewJobAccountingID(jobacc2id);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+
+        JobsWebPage jobsPage = companyPage.clickJobsLink();
+        if (jobsPage.isJobPresent(job)) {
+            jobsPage.deleteJob(job);
+        }
+
+        jobsPage.createNewJob(job);
+        jobsPage.clickEditJob(job);
+        Assert.assertEquals(job, jobsPage.getNewJobName());
+		jobsPage.setNewJobName(jobEdited);
+		jobsPage.setNewJobDescription(jobDesc);
+		jobsPage.selectJobClient(customer);
+		jobsPage.selectJobParentClient(parentCustomer);
+		jobsPage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
+		jobsPage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
+		jobsPage.setNewJobAccountingID(jobAccId);
+		jobsPage.setNewJobAccountingID(jobAcc2Id);
 			
-		jobspage.clickAddJobCancelButton();
+		jobsPage.clickAddJobCancelButton();
 
-		Assert.assertEquals("", jobspage.getTableJobDescription(_job).trim());
-		Assert.assertEquals("", jobspage.getTableJobClient(_job).trim());
-		Assert.assertEquals("", jobspage.getTableJobStartDate(_job).trim());
-		Assert.assertEquals("", jobspage.getTableJobEndDate(_job).trim());
-		Assert.assertEquals("", jobspage.getTableJobAccountingID(_job).trim());
-		Assert.assertEquals("", jobspage.getTableJobAccountingID2(_job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobDescription(job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobClient(job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobStartDate(job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobEndDate(job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobAccountingID(job).trim());
+		Assert.assertEquals("", jobsPage.getTableJobAccountingID2(job).trim());
 
-		jobspage.clickEditJob(_job);
-		Thread.sleep(2000);
-		jobspage.setNewJobName(jobedited);
-		jobspage.setNewJobDescription(jobdesc);
-		jobspage.selectJobClient(customer);
-		jobspage.selectJobParentClient(parentcustomer);
-		jobspage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
-		jobspage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
-		jobspage.setNewJobAccountingID(jobaccid);
-		jobspage.setNewJobAccountingID2(jobacc2id);	
-		jobspage.clickAddJobOKButton();
+		jobsPage.clickEditJob(job);
+		jobsPage.setNewJobName(jobEdited);
+		jobsPage.setNewJobDescription(jobDesc);
+		jobsPage.selectJobClient(customer);
+		jobsPage.selectJobParentClient(parentCustomer);
+		jobsPage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
+		jobsPage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
+		jobsPage.setNewJobAccountingID(jobAccId);
+		jobsPage.setNewJobAccountingID2(jobAcc2Id);
+		jobsPage.clickAddJobOKButton();
 
-		Assert.assertEquals(jobdesc, jobspage.getTableJobDescription(jobedited).trim());
-		Assert.assertEquals(customer, jobspage.getTableJobClient(jobedited).trim());
-		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobspage.getTableJobStartDate(jobedited).trim());
-		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobspage.getTableJobEndDate(jobedited).trim());
-		Assert.assertEquals(jobaccid, jobspage.getTableJobAccountingID(jobedited).trim());
-		Assert.assertEquals(jobacc2id, jobspage.getTableJobAccountingID2(jobedited).trim());;
+		Assert.assertEquals(jobDesc, jobsPage.getTableJobDescription(jobEdited).trim());
+		Assert.assertEquals(customer, jobsPage.getTableJobClient(jobEdited).trim());
+		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobsPage.getTableJobStartDate(jobEdited).trim());
+		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(jobEdited).trim());
+		Assert.assertEquals(jobAccId, jobsPage.getTableJobAccountingID(jobEdited).trim());
+		Assert.assertEquals(jobAcc2Id, jobsPage.getTableJobAccountingID2(jobEdited).trim());;
 		
 		
-		jobspage.deleteJobAndCancelDeleting(jobedited);
-		jobspage.deleteJob(jobedited);
-		Assert.assertFalse(jobspage.isJobExists(jobedited));
+		jobsPage.deleteJobAndCancelDeleting(jobEdited);
+		jobsPage.deleteJob(jobEdited);
+		Assert.assertFalse(jobsPage.isJobPresent(jobEdited));
 	}
 	
 	@Test(testName = "Test Case 27878:Company- Service Advisors: CRUD", description = "Company- Service Advisors: CRUD" )
@@ -407,7 +403,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		PriceMatricesWebPage pricematricespage = companypage.clickPriceMatricesLink();
 		
-		if (pricematricespage.isPriceMatrixExists(pricematrixname)) {
+		if (pricematricespage.isPriceMatrixPresent(pricematrixname)) {
 			pricematricespage.deletePriceMatrix(pricematrixname);
 		}
 		
@@ -417,7 +413,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		pricematricespage.clickEditPriceMatrix(pricematrixname);
 		pricematricespage.setPriceMarixName(pricematrixnameedited);
-		pricematricespage.selectPriceMarixService(pricematrixservice);
+		pricematricespage.selectPriceMatrixService(pricematrixservice);
 		pricematricespage.selectPriceMarixType(pricematrixtype);
 		pricematricespage.clickCancelNewPriceMatrix();
 		Assert.assertEquals("_testStas1", pricematricespage.getTablePriceMatrixService(pricematrixname));
@@ -425,7 +421,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		pricematricespage.clickEditPriceMatrix(pricematrixname);
 		pricematricespage.setPriceMarixName(pricematrixnameedited);
-		pricematricespage.selectPriceMarixService(pricematrixservice);
+		pricematricespage.selectPriceMatrixService(pricematrixservice);
 		pricematricespage.selectPriceMarixType(pricematrixtype);
 		pricematricespage.saveNewPriceMatrix();
 		Assert.assertEquals(pricematrixservice, pricematricespage.getTablePriceMatrixService(pricematrixnameedited));
@@ -433,7 +429,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		pricematricespage.deletePriceMatrixAndCancelDeleting(pricematrixnameedited);
 		pricematricespage.deletePriceMatrix(pricematrixnameedited);
-		Assert.assertFalse(pricematricespage.isPriceMatrixExists(pricematrixnameedited));
+		Assert.assertFalse(pricematricespage.isPriceMatrixPresent(pricematrixnameedited));
 	}
 	
 	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD")

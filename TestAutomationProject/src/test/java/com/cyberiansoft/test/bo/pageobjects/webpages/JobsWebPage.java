@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,13 +11,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class JobsWebPage extends WebPageWithPagination {
 	
@@ -281,12 +278,12 @@ public class JobsWebPage extends WebPageWithPagination {
 	
 	
 	
-	public boolean isJobExists(String job) {
+	public boolean isJobPresent(String job) {
 		boolean exists =  jobstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + job + "']")).size() > 0;
 		return exists;
 	}
 	
-	public void clickEditJob(String job) throws InterruptedException {
+	public void clickEditJob(String job) {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -294,7 +291,7 @@ public class JobsWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + job + " job");
 	}
 	
-	public void deleteJob(String job) throws InterruptedException {
+	public void deleteJob(String job) {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			deleteTableRow(row);

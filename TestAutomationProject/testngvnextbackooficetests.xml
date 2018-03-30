@@ -1,7 +1,8 @@
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
-  <parameter name="selenium.browser" value="firefox" />
+  <!--<parameter name="selenium.browser" value="firefox" />-->
+  <parameter name="selenium.browser" value="chrome"/>
   <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
   <!--<parameter name="backoffice.url" value="http://capi.cyberianconcepts.com"  />-->
   <parameter name="backoffice.url" value="http://capi.qc.cyberianconcepts.com"  />
@@ -35,7 +36,7 @@
 	  	 <include name="testCreateUserWithExistingEmailAddress" />
       </methods>
       </class>-->
-     <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicestestCases">
+     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicestestCases">
 	  <methods> 
 	  	 <include name="testAddMoneyService" />	  	 
 	  	 <include name="testEditMoneyService" />
@@ -48,8 +49,8 @@
 	  	 <include name="testVerifyErrorMessagesOnCreateEditServiceDialog" />
 	  	 <include name="testEditMatrixService" />
       </methods>
-      </class>-->
-      <class name="com.cyberiansoft.test.vnextbo.testcases.testMy">
+      </class>
+      <!--<class name="com.cyberiansoft.test.vnextbo.testcases.testMy">
 	  <methods> 
 	  	 <include name="testCreateUserWithWebAccess" />
 	  	 <include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />
@@ -57,7 +58,7 @@
 	  	 <include name="testVerifyValidationMessagesOnChangePasswordPage" />  
 	  	 <include name="testCheckPosibilityToResendRegistrationEmail" /> 	 
       </methods>
-      </class>
+      </class>-->
     </classes>
   </test>
 </suite>

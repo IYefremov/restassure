@@ -100,7 +100,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		click(addpricematrixbtn);
 	}
 	
-	public void saveNewPriceMatrix() throws InterruptedException {
+	public void saveNewPriceMatrix() {
 		clickAndWait(OKnewPricemarixbtn);
 	}
 	
@@ -112,7 +112,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		clearAndType(newpricematrixnamefld, pricematrixname);
 	}
 	
-	public void selectPriceMarixService(String pricematrixservice) {
+	public void selectPriceMatrixService(String pricematrixservice) {
 		selectComboboxValue(newpricematrixservicecmb, newpricematrixservicedd, pricematrixservice);	
 	}
 	
@@ -187,12 +187,11 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		return pricematrixtype;
 	}
 	
-	public boolean isPriceMatrixExists(String pricematrix) {
-		boolean exists =  pricematricestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + pricematrix + "']")).size() > 0;
-		return exists;
+	public boolean isPriceMatrixPresent(String pricematrix) {
+        return pricematricestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + pricematrix + "']")).size() > 0;
 	}
 	
-	public void clickEditPriceMatrix(String pricematrix) throws InterruptedException {
+	public void clickEditPriceMatrix(String pricematrix) {
 		WebElement row = getTableRowWithPriceMatrix(pricematrix);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -200,7 +199,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + pricematrix + " price matrix");		
 	}
 	
-	public void clickPricesForPriceMatrix(String pricematrix) throws InterruptedException {
+	public void clickPricesForPriceMatrix(String pricematrix) {
 		List<WebElement> rows = getPriceMatricesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().contains(pricematrix)) {
@@ -215,7 +214,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		}		
 	}
 	
-	public void deletePriceMatrix(String pricematrix) throws InterruptedException {
+	public void deletePriceMatrix(String pricematrix) {
 		WebElement row = getTableRowWithPriceMatrix(pricematrix);
 		if (row != null) {
 			deleteTableRow(row);
@@ -224,7 +223,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		}
 	}
 	
-	public void deletePriceMatrixAndCancelDeleting(String pricematrix) throws InterruptedException {
+	public void deletePriceMatrixAndCancelDeleting(String pricematrix) {
 		WebElement row = getTableRowWithPriceMatrix(pricematrix);
 		if (row != null) {
 			cancelDeletingTableRow(row);

@@ -1,38 +1,35 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.lang.reflect.Method;
 
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
-	
-	@BeforeMethod
-	@Parameters({ "backofficedemo.url", "userdemo.name", "userdemo.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
+
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeDemoURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserDemoName(), BOConfigInfo.getInstance().getUserDemoPassword());
+    }
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		try{
-		backofficeheader.clickLogout();
-		Thread.sleep(3000);
-		}catch(Exception e){
+	public void BackOfficeLogout() {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		try {
+            backofficeheader.clickLogout();
+            Thread.sleep(3000);
+		} catch(Exception e) {
 			backofficeheader.refresh();
 			backofficeheader.clickLogout();
 		}

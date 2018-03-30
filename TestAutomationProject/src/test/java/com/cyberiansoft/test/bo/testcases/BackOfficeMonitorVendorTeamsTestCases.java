@@ -1,42 +1,33 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewVendorTeamDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorsTeamsWebPage;
+import java.lang.reflect.Method;
+import java.util.List;
 
 public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
-	
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
+
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
+	public void BackOfficeLogout() {
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		backOfficeHeader.clickLogout();
 	}
 	
 	@Test(testName = "Test Case 15294:Monitor - Vendor/Teams: Search", description = "Monitor - Vendor/Teams: Search")
@@ -47,8 +38,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		final String deflocation = "Default Location";
 		final String vendortemtype = "Vendor";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
@@ -80,8 +70,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		final String vendortemtype = "Vendor";
 		final String additionallocation = "Best Location";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
@@ -124,8 +113,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		final String vendortemtypeed = "Vendor";
 		final String vendorcompany = "Test";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
@@ -171,7 +159,8 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		newvendordialog.clickCancelButton();
 		vendorsteamspage.archiveVendorTeam(vendorteam);		
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 26710:Monitor - Vendor/Teams: Archive", description = "Monitor - Vendor/Teams: Archive")
 	public void testMonitorVendorTeamsArchive() throws Exception {
 		
@@ -182,8 +171,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		final String deflocation = "My Location 2";
 		final String additionallocation = "ALM - Recon Facility";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
@@ -208,7 +196,8 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 			Assert.assertTrue(vendorsteamspage.isVendorTeamExists(vendorteam));
 		}
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 26714:Monitor - Vendor/Teams: Audit Log", description = "Monitor - Vendor/Teams: Audit Log")
 	public void testMonitorVendorTeamsAuditLog() throws Exception {
 		

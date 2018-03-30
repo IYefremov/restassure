@@ -1,65 +1,41 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewRepairLocationDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewTeamsDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewVendorTeamDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationClientsTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationDepartmentsTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationManagersTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationPhaseServicesTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationPhasesTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationUserSettingsTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.TeamsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorsTeamsWebPage;
+import java.lang.reflect.Method;
+import java.util.List;
 
 public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
-	
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
-	
+
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
+
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		backofficeheader.clickLogout();
-		Thread.sleep(3000);
+	public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		backOfficeHeader.clickLogout();
 	}
 	
 	@Test(testName = "Test Case 15527:Monitor - Repair Locations: Search", description = "Monitor - Repair Locations: Search")
-	public void testMonitorRepairLocationsSearch() throws Exception {
+	public void testMonitorRepairLocationsSearch() {
 
 		final String locationname = "Time_Reports_01";
 		final String locationstatus = "Active";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
@@ -71,7 +47,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		
 	}
 	
-@Test(testName = "Test Case 26707:Monitor - Repair Locations: Add", description = "Monitor - Repair Locations: Add")
+    @Test(testName = "Test Case 26707:Monitor - Repair Locations: Add", description = "Monitor - Repair Locations: Add")
 	public void testMonitorRepairLocationsAdd() throws Exception {
 		
 		final String repairlocationname = "test_loc";
@@ -268,17 +244,16 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
-	
+
 	@Test(testName = "Test Case 30729:Monitor - Repair Locations: Clients Edit", description = "Monitor - Repair Locations: Clients Edit")
-	public void testMonitorRepairLocationsClientsEdit() throws Exception {
+	public void testMonitorRepairLocationsClientsEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
 		final String repairlocationtomezone = "Pacific Standard Time";
 		final String repairlocationclient = "005 - Test Company";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
@@ -311,7 +286,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 30801:Monitor - Repair Locations: Services Edit", description = "Monitor - Repair Locations: Services Edit")
-	public void testMonitorRepairLocationsServicesEdit() throws Exception {
+	public void testMonitorRepairLocationsServicesEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";		
@@ -369,7 +344,8 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationphaseservicestab.closeNewTab(mainWindowHandle);
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 31404:Monitor - Repair Locations: Managers Edit", description = "Monitor - Repair Locations: Managers Edit")
 	public void testMonitorRepairLocationsManagersEdit() throws Exception {
 		
@@ -510,5 +486,4 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(repairlocationname).clickFindButton();
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
-
 }

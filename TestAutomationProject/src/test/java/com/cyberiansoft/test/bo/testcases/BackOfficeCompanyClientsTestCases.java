@@ -3,8 +3,8 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,15 +18,13 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void backOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 	}
 	
 	@AfterMethod
 	public void BackOfficeLogout() throws InterruptedException {
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
 		Thread.sleep(3000);
 	}
@@ -45,7 +43,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.verifyEmployeesTableColumnsAreVisible();
 		
 		Assert.assertEquals("1", clientspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
+		org.testng.Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
 		
 		clientspage.setPageSize("1");
 		Assert.assertEquals(1, clientspage.getClientsTableRowsCount());
@@ -720,27 +718,26 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.clickDeleteClientUser("test");
 		clientUsersWebPage1.closePage();
 	}
-	
+
 	@Test(testName= "Test Case 66211:Company - Clients User : ClientAccountant")
 	public void testClientUserClientAccountant() throws InterruptedException{
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.scrollDownToText("000 15.11 Companey");
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientsPage = companyWebPage.clickClientsLink();
+		clientsPage.scrollDownToText("000 15.11 Companey");
 		ClientUsersWebPage  clientUsersWebPage =
-				clientspage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
+				clientsPage.clickClientUsersLinkForClientOpenDialogWindow("000 15.11 Companey");
 		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
-		addclientUsersDialogWebPage.clickButtonOk();
-		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
-		addclientUsersDialogWebPage.clickButtonOk();
-		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
-		addclientUsersDialogWebPage.clickClientAccountChkbox();
-		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+		AddEditClientUsersDialogWebPage editClientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		editClientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(editClientUsersDialogWebPage.checkAddUserPopUp());
+		editClientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(editClientUsersDialogWebPage.checkAllPossibleValidators());
+		editClientUsersDialogWebPage.clickClientAccountChkbox();
+		Assert.assertTrue(editClientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
+		ClientUsersWebPage  clientUsersWebPage1 = editClientUsersDialogWebPage.
 				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();

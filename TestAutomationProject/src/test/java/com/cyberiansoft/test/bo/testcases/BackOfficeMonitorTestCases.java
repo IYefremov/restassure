@@ -1,55 +1,32 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.Retry;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveVechicleByPhaseWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.AverageRepairTimeReportWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.KanbanWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorSettingsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationTimeTrackingWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceCountWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SubscriptionsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.TrendingReportWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrdersWebPage;
-import com.cyberiansoft.test.bo.utils.Retry;
-import com.cyberiansoft.test.bo.utils.WebConstants;
+import java.lang.reflect.Method;
 
 public class BackOfficeMonitorTestCases extends BaseTestCase {
 	
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		try{
-		backofficeheader.clickLogout();
-		Thread.sleep(3000);
-		}catch(Exception e){
-			Thread.sleep(3000);
-			backofficeheader.refresh();
-			backofficeheader.clickLogout();
-		}
+	public void BackOfficeLogout() {
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		backOfficeHeader.clickLogout();
 	}
 
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
@@ -267,10 +244,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.openFullDisplayWOMonitorandVerifyContent();
 	}
 	
-	
-	
 	@Test(testName = "Test Case 28379:Monitor - Verify \"On Hold\" Reason at RO", description = "Monitor - Verify \"On Hold\" Reason at RO")
-	public void testMonitorVerifyOnHoldReasonAtRO() throws Exception {
+	public void testMonitorVerifyOnHoldReasonAtRO() {
 		
 		final String orderstatus = "On Hold";
 		final String orderstatusreason = "testreason";
@@ -306,9 +281,9 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		monitorsettingspage = monitorpage.clickMonitorSettingsLink();
 		monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
 	}
-	
+
 	@Test(testName = "Test Case 28380:Monitor - Verify \"Closed\" Reason at RO", description = "Monitor - Verify \"Closed\" Reason at RO")
-	public void testMonitorVerifyClosedReasonAtRO() throws Exception {
+	public void testMonitorVerifyClosedReasonAtRO() {
 		
 		final String orderstatus = "Closed";
 		final String orderstatusreason = "testreason";

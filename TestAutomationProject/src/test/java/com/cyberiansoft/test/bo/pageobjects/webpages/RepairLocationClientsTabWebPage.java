@@ -48,8 +48,7 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 		//new WebDriverWait(driver, 20)
 		//  .until(ExpectedConditions.visibilityOf(locationclientsdd.getWrappedElement()));
 		locationclientsdd.selectByVisibleText(clientname);
-		return PageFactory.initElements(
-				driver, RepairLocationClientsTabWebPage.class);
+		return PageFactory.initElements(driver, RepairLocationClientsTabWebPage.class);
 	}
 	
 	public RepairLocationClientsTabWebPage clickAddRepairLocationClientButton() {

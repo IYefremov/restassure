@@ -8,12 +8,12 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases">
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfotestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases">
