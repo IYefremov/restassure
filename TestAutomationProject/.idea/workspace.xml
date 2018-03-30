@@ -4,665 +4,9 @@
     <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#BO some tests fixed">
       <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" />
       <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_2_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_2_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_12.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_48.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_3_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_17_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_inject_guice_2_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_9_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_13_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_validator_commons_validator_1_4_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_2_0_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_3_3_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_6_0_0_BETA3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_5_2_Final.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javassist_javassist_3_12_1_GA.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_javax_mail_api_1_5_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_9.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_cssparser_cssparser_0_9_16.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_2_17.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_2_18.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_core_js_2_17.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_nekohtml_nekohtml_1_9_22.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_3_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_3_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_4_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_13.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_beanshell_bsh_2_0b4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_2_11_v20150529.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_2_12_v20150709.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_2_11_v20150529.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_2_12_v20150709.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_api_9_2_11_v20150529.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_api_9_2_12_v20150709.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_client_9_2_11_v20150529.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_client_9_2_12_v20150709.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_common_9_2_11_v20150529.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_common_9_2_12_v20150709.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_htmlunit_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_htmlunit_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_leg_rc_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_leg_rc_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_opera_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_2_46_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_2_50_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_3_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_3_RELEASE.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_6_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_6_9_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_w3c_css_sac_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_14.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_serializer_2_7_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_xalan_2_7_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_11_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/data.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/resources.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/data/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/data/Repair360Android.apk" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/data/Repair360Android1.apk" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/data/pCloudy-java-connector-11.0.3-jar-with-dependencies.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/inhousesuite.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testngbackooficetests2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testngvnextbackooficetests2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vnextpcloudysuite2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_2_5.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_5_0_4.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_5.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_3.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_11.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_2.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_opera_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_3_6_0.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_0_RELEASE.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/TestAutomationProject.iml" afterPath="$PROJECT_DIR$/TestAutomationProject.iml" />
-      <change beforePath="$PROJECT_DIR$/backofficepom.xml" afterPath="$PROJECT_DIR$/backofficepom.xml" />
-      <change beforePath="$PROJECT_DIR$/java-client.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/mainpom.xml" afterPath="$PROJECT_DIR$/mainpom.xml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/pomdw.xml" afterPath="$PROJECT_DIR$/pomdw.xml" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ClientUsersWebPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ClientUsersWebPage.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/JobsWebPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/JobsWebPage.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/PriceMatricesWebPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/PriceMatricesWebPage.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationClientsTabWebPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationClientsTabWebPage.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VehiclePartsWebPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VehiclePartsWebPage.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyCRUDTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyCRUDTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MyInspectionsScreen.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MyInspectionsScreen.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/DentWizartestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/DentWizartestCases.java" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/test.iml" afterPath="$PROJECT_DIR$/src/test/test.iml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/appiumiosconf.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/iosdevicehdconf.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/iosdeviceregularconf.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lombok-1.14.8.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lombok.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/oneMorePony.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/config/BOConfigInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/containers/AbstractContainer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/containers/ContainerFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/containers/DefaultContainerFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/containers/IWebContainer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ActiveDevicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ActiveVechicleByPhaseWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AddEditClientUsersContactsDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AddEditClientUsersDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AllEmployeesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AllUsersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ApplicationsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AreasWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/AverageRepairTimeReportWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeLoginWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BackofficePaginationPanel.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage$4.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage$5.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ClientContactsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ClientUsersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ClientsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/CompanyWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ConfirmPasswordWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/EmailTemplatesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/EmployeesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/EventsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ExpensesTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ExportInvoicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/HomeWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionTypesVehicleInfoSettingsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InsuranceCompaniesWePpage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InterApplicationExchangeWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InvoiceEditTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InvoiceEmailActivityTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicePaymentsTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InvoiceTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/JobsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/KanbanWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ManageLicencesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/MiscellaneousWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/MonitorSettingsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/MonitorWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewClientDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewEmployeeDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewInspectionTypeDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewInspectionWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewInvoiceTypeDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewPrintTemplatesDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewRepairLocationDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewServiceDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewServicePackageDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewTeamsDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/NewVendorTeamDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/PriceMatricesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/PrintServersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/PrintTemplatesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/QuestionsFormsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/QuestionsSectionDialogWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationClientsTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationDepartmentsTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationManagersTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationPhaseServicesTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationPhasesTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationTimeTrackingWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationUserSettingsTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/RepairOrdersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SRAppointmentInfoPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SendInvoiceCustomEmailTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceAdvisorsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceContractTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceContractsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceCountWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServicePackagesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestTypesVehicleInfoSettingsPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/ServicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SubscriptionsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SuperUserWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/SuppliesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TeamsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TimeframeFilter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TimesheetTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TimesheetsSectionWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TimesheetsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/TrendingReportWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/UsersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/VehiclePartsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/VendorBillsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrderServicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrdersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/VendorsTeamsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithPagination.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeframeFilter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrderInfoTabWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrderTypesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyCRUDTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficePrintTemplatesestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeSuperUserTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BackOfficeTimesheetsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BaclOfficeMonitorReportsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/testcases/BaseTestCase.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/BackOfficeUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/FileDownloader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/MailChecker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/RequestMethod.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/Retry.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/TestListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/URLStatusChecker$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/URLStatusChecker$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/URLStatusChecker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebConstants$InvoiceStatuses.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebConstants$TimeFrameValues.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebConstants.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebDriverExt.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebDriverFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebDriverInstansiator.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebElementExt.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebElementsBot$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/utils/WebElementsBot.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/ComboBox.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/DropDown.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/ExtendedFieldDecorator.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/IWebElement.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/TextField.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/VNextWebTable.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/WebElementFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/WebTable.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/AbstractWebElement.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/ComboBoxImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/DefaultElementFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/DropDownImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/TextFieldImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/VNextWebTableImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/bo/webelements/impl/WebTableImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumConfiguration$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumConfiguration.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumDriverBuilder$AndroidDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumDriverBuilder$IOSDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumIOSConfInfo$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumIOSConfInfo$LazyHolder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/AppiumIOSConfInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/IOSHDDeviceInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/IOSRegularDeviceInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/core/MobilePlatform.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ibs/pageobjects/webpages/IBSDashboardPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ibs/pageobjects/webpages/IBSLoginWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/BasePage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalAgreementApprovePage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalCategoriesPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalClientQuotesDetailPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalClientQuotesPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalDashboardPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalHeader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalLeftMenuPanel.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/pageObject/TeamPortalLoginPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/testcases/BaseTestCase.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/utils/MailChecker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/utils/TestListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/utils/WebDriverFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/inhouse/utils/WebDriverInstansiator.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/AddCustomerScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ApproveInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ApproveSummaryPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/CarHistoryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ClaimScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/CustomersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/DevicesPopupScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/EmailScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/EnterpriseBeforeDamageScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/HomeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/InspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/InspectionToolBar.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/InvoiceInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/LicensesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/LoginScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MainScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MyInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MyInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/MyWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/NotesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/OrderMonitorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/OrderSummaryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/PriceMatrixScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/PrintSelectorPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/QuestionsPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/QuestionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SelectEmployeePopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SelectEnvironmentPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SelectedServiceBundleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SelectedServiceDetailsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServicePartPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SettingsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/SinglePageInspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/TeamInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/TeamInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/TeamWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/TechRevenueScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/VehicleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/VisualInteriorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/iOSBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/iOSHDBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularAddCustomerScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularApproveInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularCarHistoryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularClaimScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularCustomersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularEnterpriseBeforeDamageScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularHomeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularInspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularInspectionToolBar.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularInvoiceInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularMainScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularMyInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularMyInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularMyWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularNotesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularOrderMonitorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularOrderSummaryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularPriceMatrixScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularQuestionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularSelectEnvironmentScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularSelectedServiceBundleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularSelectedServiceDetailsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularServiceRequestsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularSettingsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularTeamInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularTeamInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularTeamWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularTechRevenueScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularVehicleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularVisualInteriorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/iOSRegularBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/BaseTestCase.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/DentWizardRegularVersionTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/DentWizartestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/iOSRegularCalculationsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/testcases/iOSRegularSmokeTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/utils/Helpers.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/utils/RegularSuperListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios10_client/utils/SuperListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/AddCustomerScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ApproveInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ApproveSummaryPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/CarHistoryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ClaimScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/CustomersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/DevicesPopupScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/EnterpriseBeforeDamageScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/HomeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/InspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/InspectionToolBar.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/InvoiceInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/LicensesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/LoginScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/MainScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/MyInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/MyInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/MyWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/NotesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/OrderMonitorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/OrderSummaryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/PriceMatrixScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/PrintSelectorPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/QuestionsPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/QuestionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/SelectEmployeePopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/SelectedServiceBundleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/SelectedServiceDetailsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ServicePartPopup.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ServiceRequestsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/ServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/SettingsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/SinglePageInspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/TeamInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/TeamInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/TeamWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/VehicleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/VisualInteriorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/iOSBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosdevicescreens/iOSHDBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularAddCustomerScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularApproveInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularCarHistoryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularClaimScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularCustomersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularEnterpriseBeforeDamageScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularHomeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularInspectionScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularInspectionToolBar.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularInvoiceInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularMainScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularMyInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularMyInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularMyWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularNotesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularOrderMonitorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularOrderSummaryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularPriceMatrixScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularQuestionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularSelectedServiceBundleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularSelectedServiceDetailsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularServiceRequestsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularSettingsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularTeamInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularTeamWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularVehicleScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/RegularVisualInteriorScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/pageobjects/iosregulardevicescreens/iOSRegularBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/BaseTestCase.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/DentWizardRegularVersionTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/DentWizartestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/IOSSmokeTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/iOSRegularCalculationsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/testcases/iOSRegularSmokeTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/AlertsCaptions.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/ExcelUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/Helpers.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/LogAssertions.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/MailChecker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/PDFReader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/PricesCalculations.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/RegularSuperListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/SuperListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/TestUser.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/UtilConstants.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/iOSInternalProjectConstants.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/ios_client/utils/iOSLogger.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/reporting/ExtentReportFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/builder/VNextAppiumDriverBuilder$AndroidDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/builder/VNextAppiumDriverBuilder$IOSDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/builder/VNextAppiumDriverBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/config/VNextConfigInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/config/VNextUserRegistrationInfo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/SwipeableWebDriver.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextApproveScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextBaseInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextBaseScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextBaseScreenWithListSelection.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextClaimInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextCustomKeyboard.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextCustomersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextEmailMismatchDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextEmailScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextEmailVerificationScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextFeedbackScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextHomeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInformationDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInspectionServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInspectionTypesList.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInspectionsMenuScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInspectionsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInvoiceInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInvoiceMenuScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextInvoicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextLoginScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextNewCustomerScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextNotesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextPhoneMismatchDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextPriceMatrixesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationLineOfBusinessScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationNewUserPersonalInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationOverviewLegalInfosScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationOverviewScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationPaymentInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationPersonalInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextRegistrationScreensModalDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextSelectDamagesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextSelectServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextServiceDetailsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextSettingsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextStatusScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextTeamEditionVerificationScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVehicleInfoScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVehiclePartInfoPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVehiclePartsScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVehicleTypeScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVerificationScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextViewScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVisualScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextVisualServicesScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextWorkOrderSummaryScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/screens/VNextWorkOrdersScreen.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/BaseTestCaseTeamEditionRegistration.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/BaseTestCaseWithDeviceRegistration.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/BaseTestCaseWithDeviceRegistrationAndExistingUserLogin.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/BaseTestCaseWithDeviceRegistrationAndUserLogin.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/BaseTestCaseWithoutDeviceRegistration.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/InstallUninstallUpdate.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextBaseTestCase.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextCreateInspectionOnTheClientTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextCreateInvoiceFromMultiplyWOTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextInspectionSearchTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextInspectionsNotesTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextInspectionsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextInvoicesTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextNavigationTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextRegistrationActivationLoginLogoutTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextSyncInspectionsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextTeamInspectionsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextTeamInvoicesTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextUserRegistrationTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextVehicleScreenFieldsReflectingOnBOSettings.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextWholesaleCustomersTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/VNextWorkOrdersTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/vNextCustomersTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/testcases/vNextInspectionServicesTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/AppContexts.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/AppDownloader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/VNextAlertMessages.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/VNextInspectionStatuses.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/VNextTestListener.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnext/utils/VNextWebServicesUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNexBOAddNewUserDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNexBOLeftMenuPanel.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNexBOServicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNexBOUsersWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOAddNewServiceDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOAdvancedSearchInspectionDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOApproveAccountWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOBaseWebPage$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOBaseWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOConfirmPasswordWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOForgotPasswordWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOHeaderPanel.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOInspectionInfoWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOInspectionsWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOInvoicesWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextBOLoginScreenWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextConfirmationDialog.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextPaymentInfoWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/screens/VNextUpgradeInfoWebPage.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/testcases/VNextBOInvoiceDetailsTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/testcases/VNextBOServicestestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/testcases/VNextBOSmokeTestCases.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/testcases/VNextWebServices.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/utils/VNextBOAlertMessages.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/utils/VNextBOErrorMessages.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/cyberiansoft/test/vnextbo/utils/VNextPriceCalculations.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testng.xml" afterPath="$PROJECT_DIR$/testng.xml" />
-      <change beforePath="$PROJECT_DIR$/testngInhouseTestCases.xml" afterPath="$PROJECT_DIR$/testngInhouseTestCases.xml" />
-      <change beforePath="$PROJECT_DIR$/testngbackooficetests.xml" afterPath="$PROJECT_DIR$/testngbackooficetests.xml" />
-      <change beforePath="$PROJECT_DIR$/testngvnextbackooficetests.xml" afterPath="$PROJECT_DIR$/testngvnextbackooficetests.xml" />
-      <change beforePath="$PROJECT_DIR$/vnextbasicsuite.xml" afterPath="$PROJECT_DIR$/vnextbasicsuite.xml" />
-      <change beforePath="$PROJECT_DIR$/vnextpcloudysuite.xml" afterPath="$PROJECT_DIR$/vnextpcloudysuite.xml" />
-      <change beforePath="$PROJECT_DIR$/vnextpom.xml" afterPath="$PROJECT_DIR$/vnextpom.xml" />
-      <change beforePath="$PROJECT_DIR$/vnextteameditionsuite.xml" afterPath="$PROJECT_DIR$/vnextteameditionsuite.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -678,11 +22,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BackOfficeCompanyClientsTestCases.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="731" column="9" lean-forward="true" selection-start-line="731" selection-start-column="9" selection-end-line="731" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BackOfficeCompanyEditTestCases.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="989" column="0" lean-forward="true" selection-start-line="989" selection-start-column="0" selection-end-line="989" selection-end-column="0" />
+              <caret line="989" column="0" lean-forward="false" selection-start-line="989" selection-start-column="0" selection-end-line="989" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -691,8 +45,28 @@
       <file leaf-file-name="IOSSmokeTestCases.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="6610" column="50" lean-forward="false" selection-start-line="6610" selection-start-column="30" selection-end-line="6610" selection-end-column="50" />
+            <state relative-caret-position="-52">
+              <caret line="6587" column="52" lean-forward="false" selection-start-line="6587" selection-start-column="52" selection-end-line="6587" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IOSHDCalculationsTestCases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1260">
+              <caret line="1499" column="8" lean-forward="false" selection-start-line="1499" selection-start-column="8" selection-end-line="1499" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -702,17 +76,17 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularServiceRequestsScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="226" column="41" lean-forward="true" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
+              <caret line="226" column="41" lean-forward="false" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServiceRequestsScreen.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServiceRequestsScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="155">
+              <caret line="179" column="37" lean-forward="false" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -748,36 +122,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RepairLocationManagersTabWebPage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationManagersTabWebPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackOfficeMonitorVendorTeamsTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="162" column="16" lean-forward="false" selection-start-line="162" selection-start-column="16" selection-end-line="162" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DropDownImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/webelements/impl/DropDownImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -785,9 +129,9 @@
       <find>jun</find>
       <find>testClientUserClientAccountant</find>
       <find>//todo fa</find>
-      <find>selectInspectionType</find>
       <find>com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens</find>
       <find>selectInspectionType(</find>
+      <find>selectInspectionType</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -812,6 +156,9 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java" />
       </list>
     </option>
   </component>
@@ -950,7 +297,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.BackOfficeMonitorRepairLocationsTestCases">
+  <component name="RunManager" selected="TestNG.BackOfficeCompanyClientsTestCases.testClientUserClientAccountant">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -1201,9 +548,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.BackOfficeMonitorRepairLocationsTestCases" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.BackOfficeMonitorEventsTestCases" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.BackOfficeCompanyClientsTestCases.testClientUserClientAccountant" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.BackOfficeCompanyClientsTestCases.testClientUserClientAccountant" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.BackOfficeMonitorRepairLocationsTestCases" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.BackOfficeMonitorEventsTestCases" />
         <item index="3" class="java.lang.String" itemvalue="TestNG.BackOfficeCompanyCRUDTestCases.testCompanyJobsCRUD" />
         <item index="4" class="java.lang.String" itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients" />
       </list>
@@ -1223,6 +570,14 @@
       <option name="presentableId" value="Default" />
       <updated>1522352018050</updated>
     </task>
+    <task id="LOCAL-00001" summary="#BO some tests fixed">
+      <created>1522387129600</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1522387129600</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1257,23 +612,32 @@
       <configuration name="BackOfficeMonitorRepairLocationsTestCases" configurationId="TestNG" />
     </history-entry>
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38369566" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34673914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34673914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26332623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15138593" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1368,10 +732,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#441#475#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1437,10 +798,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#441#475#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1584,17 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="731" column="9" lean-forward="false" selection-start-line="731" selection-start-column="9" selection-end-line="731" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#441#475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1646,15 +993,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="989" column="0" lean-forward="true" selection-start-line="989" selection-start-column="0" selection-end-line="989" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="6610" column="50" lean-forward="false" selection-start-line="6610" selection-start-column="30" selection-end-line="6610" selection-end-column="50" />
+          <caret line="989" column="0" lean-forward="false" selection-start-line="989" selection-start-column="0" selection-end-line="989" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1662,15 +1001,47 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/iosregulardevicescreens/RegularServiceRequestsScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="226" column="41" lean-forward="true" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
+          <caret line="226" column="41" lean-forward="false" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state relative-caret-position="155">
+          <caret line="179" column="37" lean-forward="false" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52">
+          <caret line="6587" column="52" lean-forward="false" selection-start-line="6587" selection-start-column="52" selection-end-line="6587" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="1499" column="8" lean-forward="false" selection-start-line="1499" selection-start-column="8" selection-end-line="1499" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="731" column="9" lean-forward="true" selection-start-line="731" selection-start-column="9" selection-end-line="731" selection-end-column="9" />
           <folding />
         </state>
       </provider>
