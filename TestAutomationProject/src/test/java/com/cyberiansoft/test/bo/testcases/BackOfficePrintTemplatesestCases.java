@@ -1,57 +1,27 @@
 package com.cyberiansoft.test.bo.testcases;
 
 
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewInspectionTypeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewInvoiceTypeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewPrintTemplatesDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.PrintTemplatesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.QuestionsFormsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.QuestionsSectionDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SendInspectionCustomEmailTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularInvoiceInfoScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyInspectionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyInvoicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyWorkOrdersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularPriceMatrixScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularQuestionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularServicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
+import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.*;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
-	final String questionsectionname = "AT_print_section1";
-	final String insptypename = "AT_print_inspection";
-	final String invoicetypename = "AT_print_invoice";
-	String inspectionnum;
-	String invoicenum;
+	private final String questionsectionname = "AT_print_section1";
+	private final String insptypename = "AT_print_inspection";
+	private final String invoicetypename = "AT_print_invoice";
+	private String inspectionnum;
+	private String invoicenum;
 	
 	@BeforeMethod
 	@Parameters({ "backoffice.url", "setupengineer.name", "setupengineer.psw" })
@@ -59,7 +29,7 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 			String userName, String userPassword) throws InterruptedException {
 		backofficeLogin(backofficeurl, userName, userPassword);
 	}
-	
+
 	public void backofficeLogin(String backofficeurl, String userName, String userPassword) throws InterruptedException {
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -67,21 +37,25 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		loginpage.UserLogin(userName, userPassword);
 		Thread.sleep(2000);
 	}
-			
-	
-	@AfterMethod
-	public void BackOfficeLogout() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		backofficeheader.clickLogout();
-	}
-	
+
+//    @BeforeMethod
+//    public void BackOfficeLogin(Method method) {
+//        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+//        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeCapiURL());
+//        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+//        loginPage.UserLogin(BOConfigInfo.getInstance().getUserCapiName(),
+//                BOConfigInfo.getInstance().getUserCapiPassword());
+//    }
+//
+//    @AfterMethod
+//    public void BackOfficeLogout() {
+//        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//        backOfficeHeader.clickLogout();
+//    }
+
 	@Test(testName = "Test Case 35010:Login as Setup Engineer in BO application",  description = "Login as Setup Engineer in BO application")
 	public void testLoginAsSetupEngineerInBOApplication() {
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		companypage.clickPrintTemplatesConfigurationsLink();		
 	}

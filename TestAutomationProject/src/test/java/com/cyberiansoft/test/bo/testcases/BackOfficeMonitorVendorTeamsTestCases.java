@@ -180,7 +180,8 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.setSearchTeamLocation(vendorteam);
 		vendorsteamspage.clickFindButton();
 		if (!vendorsteamspage.isVendorTeamExists(vendorteam)) {
-			vendorsteamspage.createNewVendorTeam(vendorteam, timezone, vendordesc, vendortimesheettype, deflocation, additionallocation);
+			vendorsteamspage.createNewVendorTeam(vendorteam, timezone, vendordesc,
+                    vendortimesheettype, deflocation, additionallocation);
 		}		
 		
 		for (int i = 0; i < 3; i ++) {

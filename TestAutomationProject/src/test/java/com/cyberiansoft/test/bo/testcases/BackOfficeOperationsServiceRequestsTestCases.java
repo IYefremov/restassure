@@ -2,12 +2,14 @@ package com.cyberiansoft.test.bo.testcases;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
@@ -38,29 +40,19 @@ import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-	}
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
 
-	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		try {
-			webdriver.switchTo().alert().accept();
-		} catch (NoAlertPresentException e) {
-
-		}
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		try{
-			backofficeheader.clickLogout();
-		}catch(Exception e){
-			backofficeheader.refresh();
-			backofficeheader.clickLogout();
-		}
-	}
+    @AfterMethod
+    public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        backOfficeHeader.clickLogout();
+    }
 
 	@Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")
 	public void testOperationNewServiceRequestAppointmentRetail() throws InterruptedException {

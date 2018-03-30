@@ -1,51 +1,36 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.awt.AWTException;
-
-import org.junit.Assert;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ExportInvoicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceEditTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceEmailActivityTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicePaymentsTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SendInvoiceCustomEmailTabWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.utils.WebConstants.InvoiceStatuses;
+import org.junit.Assert;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.awt.*;
+import java.lang.reflect.Method;
 
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl, String userName, String userPassword)
-			throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
 
-	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		try {
-			backofficeheader.clickLogout();
-		} catch (Exception e) {
-		}
-	}
+    @AfterMethod
+    public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        backOfficeHeader.clickLogout();
+    }
 
 	@Test(description = "Test Case 15161:Operation - Invoice: Search")
 	public void testOperationInvoiceSearch() throws Exception {

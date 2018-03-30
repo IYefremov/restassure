@@ -1,54 +1,18 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.AverageRepairTimeReportWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationTimeTrackingWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairLocationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorsTeamsWebPage;
-
 public class BaclOfficeMonitorReportsTestCases extends BaseTestCase {
-	
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
-	
-	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		backofficeheader.clickLogout();
-		//Thread.sleep(3000);
-	}
-	
+
 	@Test(testName="Average Repair Time Report preconditions", description = "Average Repair Time Report preconditions")
 	public void testOperationInvoiceSearch() throws Exception {
 		

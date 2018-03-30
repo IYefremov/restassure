@@ -345,9 +345,8 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 31404:Monitor - Repair Locations: Managers Edit", description = "Monitor - Repair Locations: Managers Edit")
-	public void testMonitorRepairLocationsManagersEdit() throws Exception {
+	public void testMonitorRepairLocationsManagersEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";

@@ -1,58 +1,45 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.VendorBillsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrdersWebPage;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.utils.WebConstants;
+import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	
-	final LocalDate currentdate = LocalDate.now().plusDays(1);
-	final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
-	final LocalDate lastweekstart = BackOfficeUtils.getLastWeekStartDate().minusDays(1);
-	final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(2);
-	final LocalDate startmonth = BackOfficeUtils.getMonthStartDate().minusDays(1);
-	final LocalDate startlastmonth = BackOfficeUtils.getLastMonthStartDate().minusDays(1);
-	final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(1);
-	final LocalDate startyear = BackOfficeUtils.getYearStartDate().minusDays(1);
-	final LocalDate startlastyear = BackOfficeUtils.getLastYearStartDate().minusDays(1);
-	final LocalDate endlastyear = BackOfficeUtils.getLastYearEndDate().plusDays(1);
-	
-	
-	@BeforeMethod
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void BackOfficeLogin(String backofficeurl,
-			String userName, String userPassword) throws InterruptedException {
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		Thread.sleep(2000);
-	}
-	
-	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		backofficeheader.clickLogout();
-	}
+	private final LocalDate currentdate = LocalDate.now().plusDays(1);
+	private final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
+	private final LocalDate lastweekstart = BackOfficeUtils.getLastWeekStartDate().minusDays(1);
+	private final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(2);
+	private final LocalDate startmonth = BackOfficeUtils.getMonthStartDate().minusDays(1);
+	private final LocalDate startlastmonth = BackOfficeUtils.getLastMonthStartDate().minusDays(1);
+	private final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(1);
+	private final LocalDate startyear = BackOfficeUtils.getYearStartDate().minusDays(1);
+	private final LocalDate startlastyear = BackOfficeUtils.getLastYearStartDate().minusDays(1);
+	private final LocalDate endlastyear = BackOfficeUtils.getLastYearEndDate().plusDays(1);
+
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        backOfficeHeader.clickLogout();
+    }
 	
 	@Test(testName = "Test Case 31966:Operation - Work Orders: timeframe search", description = "Operation - Work Orders: timeframe search")
 	public void testOperationWorkOrdersTimeframeSearch() throws InterruptedException {

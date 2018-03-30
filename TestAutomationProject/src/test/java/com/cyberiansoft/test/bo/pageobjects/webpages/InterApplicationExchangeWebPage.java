@@ -104,8 +104,8 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 		entityTypeDropDown.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
-				.get().click();
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType))
+                .findFirst().get().click();
 		waitABit(500);
 		wait.until(ExpectedConditions.elementToBeClickable(sendFromCalendarBTN)).click();
 		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
@@ -218,7 +218,6 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 			new Select(driver.findElement(
 					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))
 							.selectByIndex(1);
-		;
 	}
 
 	public void fillFilterRuleBox(String name, String filterType) {
