@@ -3,10 +3,10 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,7 +31,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 15294:Monitor - Vendor/Teams: Search", description = "Monitor - Vendor/Teams: Search")
-	public void testMonitorVendorsTeamsSearch() throws Exception {
+	public void testMonitorVendorsTeamsSearch() {
 
 		final String vendorteam = "Test Vendor Team";
 		final String timezone = "Pacific Standard Time";
@@ -52,7 +52,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		
 		vendorsteamspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(vendorsteamspage.getVendorsTeamsTableRowCount()));
-		Assert.assertTrue(vendorsteamspage.isVendorTeamExists(vendorteam));
+		Assert.assertTrue(vendorsteamspage.isActiveVendorTeamPresent(vendorteam));
 		Assert.assertEquals(deflocation, vendorsteamspage.getTableVendorTeamLocation(vendorteam));
 		Assert.assertEquals(vendortemtype, vendorsteamspage.getTableVendorTeamType(vendorteam));	
 	}
@@ -78,7 +78,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.makeSearchPanelVisible();
 		vendorsteamspage.setSearchTeamLocation(vendorteam);
 		vendorsteamspage.clickFindButton();
-		if (vendorsteamspage.isVendorTeamExists(vendorteam)) {
+		if (vendorsteamspage.isActiveVendorTeamPresent(vendorteam)) {
 			vendorsteamspage.archiveVendorTeam(vendorteam);
 		}
 		
@@ -121,11 +121,11 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.makeSearchPanelVisible();
 		vendorsteamspage.setSearchTeamLocation(vendorteam);
 		vendorsteamspage.clickFindButton();
-		if (vendorsteamspage.isVendorTeamExists(vendorteam)) {
+		if (vendorsteamspage.isActiveVendorTeamPresent(vendorteam)) {
 			vendorsteamspage.archiveVendorTeam(vendorteam);
 		}
 		
-		if (vendorsteamspage.isVendorTeamExists(vendorteamed)) {
+		if (vendorsteamspage.isActiveVendorTeamPresent(vendorteamed)) {
 			vendorsteamspage.archiveVendorTeam(vendorteamed);
 		}
 		vendorsteamspage.createNewVendorTeam(vendorteam, timezone, vendordesc, vendortimesheettype, deflocation, additionallocation);
@@ -160,92 +160,87 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.archiveVendorTeam(vendorteam);		
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 26710:Monitor - Vendor/Teams: Archive", description = "Monitor - Vendor/Teams: Archive")
-	public void testMonitorVendorTeamsArchive() throws Exception {
+	public void testMonitorVendorTeamsArchive() {
 		
-		final String vendorteam = "ArchiveNewTeamInternal";
-		final String timezone = "Pacific Standard Time";
-		final String vendordesc = "Test decription";
-		final String vendortimesheettype = "ClockIn / ClockOut";		
-		final String deflocation = "My Location 2";
-		final String additionallocation = "ALM - Recon Facility";
+		final String vendorTeam = "ArchiveNewTeamInternal";
+		final String timeZone = "Pacific Standard Time";
+		final String vendorDescription = "Test decription";
+		final String vendorTimesheetType = "ClockIn / ClockOut";
+		final String defLocation = "My Location 2";
+		final String additionalLocation = "ALM - Recon Facility";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
-		vendorsteamspage.makeSearchPanelVisible();
-		vendorsteamspage.setSearchTeamLocation(vendorteam);
-		vendorsteamspage.clickFindButton();
-		if (!vendorsteamspage.isVendorTeamExists(vendorteam)) {
-			vendorsteamspage.createNewVendorTeam(vendorteam, timezone, vendordesc,
-                    vendortimesheettype, deflocation, additionallocation);
-		}		
-		
-		for (int i = 0; i < 3; i ++) {
-			vendorsteamspage.archiveVendorTeam(vendorteam);			
-			vendorsteamspage.clickArchivedTab();
-			//TODO no archive
-			Assert.assertTrue(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
-			vendorsteamspage.restoreVendorTeam(vendorteam);
-			//fix deletion
-			Assert.assertFalse(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
-			vendorsteamspage.clickActiveTab();
-		
-			Assert.assertTrue(vendorsteamspage.isVendorTeamExists(vendorteam));
-		}
+		MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        VendorsTeamsWebPage vendorsTeamsPage = monitorPage.clickVendorsTeamsLink();
+        vendorsTeamsPage.makeSearchPanelVisible();
+        vendorsTeamsPage.setSearchTeamLocation(vendorTeam);
+        vendorsTeamsPage.clickFindButton();
+
+        vendorsTeamsPage.verifyThatActiveVendorTeamExists(vendorTeam, timeZone, vendorDescription, vendorTimesheetType,
+                defLocation, additionalLocation);
+        int activeVendorTeamsCountBefore = vendorsTeamsPage.getActiveVendorTeamsCountOnPage(vendorTeam);
+
+        vendorsTeamsPage.archiveVendorTeam(vendorTeam);
+        Assert.assertEquals(activeVendorTeamsCountBefore - 1, vendorsTeamsPage.getActiveVendorTeamsCountOnPage(vendorTeam));
+        vendorsTeamsPage.clickArchivedTab();
+        int archivedVendorTeamsCountBefore = vendorsTeamsPage.getArchivedVendorTeamsCount(vendorTeam);
+        vendorsTeamsPage.restoreVendorTeam(vendorTeam);
+        Assert.assertEquals(archivedVendorTeamsCountBefore - 1, vendorsTeamsPage
+                        .getArchivedVendorTeamsCount(vendorTeam), "The archived vendors team is still present!");
+
+        vendorsTeamsPage.clickActiveTab();
+        Assert.assertEquals(activeVendorTeamsCountBefore, vendorsTeamsPage.getActiveVendorTeamsCountOnPage(vendorTeam),
+                "The archived vendors team is still present!");
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 26714:Monitor - Vendor/Teams: Audit Log", description = "Monitor - Vendor/Teams: Audit Log")
-	public void testMonitorVendorTeamsAuditLog() throws Exception {
+	public void testMonitorVendorTeamsAuditLog() {
 		
-		final String vendorteam = "ZalexTestLoc";
-		final String[] auditlogsmessages = {"Team \"" + vendorteam + "\" is restored", "Team \"" + vendorteam + "\" is deleted"};
+		final String vendorTeam = "ZalexTestLoc";
+		final String[] auditLogsMessages = {"Team \"" + vendorTeam + "\" is restored", "Team \"" + vendorTeam + "\" is deleted"};
+
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
 		
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
-		vendorsteamspage.makeSearchPanelVisible();
-		vendorsteamspage.setSearchTeamLocation(vendorteam);
-		vendorsteamspage.clickFindButton();
-		//TODO no archive
-		if (!vendorsteamspage.isVendorTeamExists(vendorteam)) {
-			vendorsteamspage.clickArchivedTab();
-			vendorsteamspage.restoreVendorTeam(vendorteam);
-		}
-		vendorsteamspage.clickActiveTab();
+		VendorsTeamsWebPage vendorsTeamsPage = monitorPage.clickVendorsTeamsLink();
+		vendorsTeamsPage.makeSearchPanelVisible();
+		vendorsTeamsPage.setSearchTeamLocation(vendorTeam);
+		vendorsTeamsPage.clickFindButton();
+
+        vendorsTeamsPage.verifyThatActiveVendorTeamExists(vendorTeam);
+
+		vendorsTeamsPage.clickActiveTab();
 		String mainWindowHandle = webdriver.getWindowHandle();
-		vendorsteamspage.clickAuditLogButtonForVendorTeam(vendorteam);
-		int auditlogsrowscount = vendorsteamspage.getVendorsTeamsAuditLogTableRows().size();
-		vendorsteamspage.closeNewTab(mainWindowHandle);
+		vendorsTeamsPage.clickAuditLogButtonForVendorTeam(vendorTeam);
+		int auditLogsRowsCount = vendorsTeamsPage.getVendorsTeamsAuditLogTableRows().size();
+		vendorsTeamsPage.closeNewTab(mainWindowHandle);
 		
-		vendorsteamspage.archiveVendorTeam(vendorteam);
-		vendorsteamspage.clickArchivedTab();
-		Assert.assertTrue(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
-		vendorsteamspage.restoreVendorTeam(vendorteam);
-		Assert.assertFalse(vendorsteamspage.isArchivedVendorTeamExists(vendorteam));
-		
-		vendorsteamspage.clickActiveTab();
-		vendorsteamspage.clickAuditLogButtonForVendorTeam(vendorteam);
-		List<WebElement> auditlogtablerows = vendorsteamspage.getVendorsTeamsAuditLogTableRows();
-		for (int i = 0; i < auditlogsmessages.length; i++) {
-			int columnindex = i +1;
-			Assert.assertEquals(auditlogsmessages[i],  vendorsteamspage.getAuditLogVendorsTeamsTable().findElement(By.xpath(".//tbody/tr[" + columnindex + "]/td[3]")).getText());
+		vendorsTeamsPage.archiveVendorTeam(vendorTeam);
+		vendorsTeamsPage.clickArchivedTab();
+        int archivedVendorTeamsCountBefore = vendorsTeamsPage.getArchivedVendorTeamsCount(vendorTeam);
+        vendorsTeamsPage.restoreVendorTeam(vendorTeam);
+        Assert.assertEquals(archivedVendorTeamsCountBefore - 1, vendorsTeamsPage
+                .getArchivedVendorTeamsCount(vendorTeam), "The archived vendors team is still present!");
+
+		vendorsTeamsPage.clickActiveTab();
+		vendorsTeamsPage.clickAuditLogButtonForVendorTeam(vendorTeam);
+		List<WebElement> auditLogTableRows = vendorsTeamsPage.getVendorsTeamsAuditLogTableRows();
+		for (int i = 0; i < auditLogsMessages.length; i++) {
+			int columnIndex = i + 1;
+			Assert.assertEquals(auditLogsMessages[i],  vendorsTeamsPage
+                    .getAuditLogVendorsTeamsTable()
+                    .findElement(By.xpath(".//tbody/tr[" + columnIndex + "]/td[3]")).getText());
 		}
-		vendorsteamspage.closeNewTab(mainWindowHandle);
-		Assert.assertEquals(auditlogsrowscount+2, auditlogtablerows.size());
-		
+		vendorsTeamsPage.closeNewTab(mainWindowHandle);
+		Assert.assertEquals(auditLogsRowsCount + 2, auditLogTableRows.size());
 	}
 	
 	@Test(testName = "Test Case 31420:Monitor - Vendor/Team: Guests Edit", description = "Monitor - Vendor/Teams: Guests Edit")
-	public void testMonitorVendorTeamsGuestsEdit() throws Exception {
+	public void testMonitorVendorTeamsGuestsEdit() {
 		
 		final String vendorteam = "TestTeamInternal";
 		final String vendorteamemployee = "Alex Maximov";
@@ -294,5 +289,4 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		Assert.assertFalse(vendorsteamspage.isTeamGuestEmployeesExists(vendorteamemployee));
 		vendorsteamspage.closeNewTab(mainWindowHandle);
 	}
-
 }

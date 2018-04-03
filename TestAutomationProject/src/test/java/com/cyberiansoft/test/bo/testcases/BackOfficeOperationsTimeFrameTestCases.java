@@ -42,7 +42,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     }
 	
 	@Test(testName = "Test Case 31966:Operation - Work Orders: timeframe search", description = "Operation - Work Orders: timeframe search")
-	public void testOperationWorkOrdersTimeframeSearch() throws InterruptedException {
+	public void testOperationWorkOrdersTimeframeSearch() {
 		
 		final String statusall = "All";
 		
@@ -77,7 +77,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 31968:Operation - Inspections: timeframe search", description = "Operation - Inspections: timeframe search")
-	public void testOperationInspectionsTimeframeSearch() throws InterruptedException {
+	public void testOperationInspectionsTimeframeSearch() {
 		
 		final String statusall = "All active";
 		
@@ -113,7 +113,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 31973:Operation - Vendor Bills: timeframe search", description = "Operation - Vendor Bills: timeframe search")
-	public void testOperationVendorBillsTimeframeSearch() throws InterruptedException {
+	public void testOperationVendorBillsTimeframeSearch() {
 		
 		final String statusall = "All";
 		
@@ -148,7 +148,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 31974:Operation - Invoices: timeframe search", description = "Operation - Invoices: timeframe search")
-	public void testOperationInvoicesTimeframeSearch() throws InterruptedException {
+	public void testOperationInvoicesTimeframeSearch() {
 			
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		

@@ -1,36 +1,20 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
-
-import java.awt.AWTException;
-import java.util.List;
-import java.util.Set;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.awt.*;
+import java.util.List;
+import java.util.Set;
 
-import com.cyberiansoft.test.bo.utils.WebElementExt;
-import lombok.experimental.ExtensionMethod;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 //@ExtensionMethod(WebElementExt.class)
 public class InvoicesWebPage extends WebPageWithTimeframeFilter {
@@ -200,8 +184,9 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return invoicestable.getTableRows();
 	}
 
-	public void clickFindButton() {
+	public InvoicesWebPage clickFindButton() {
 		clickAndWait(findbtn);
+		return this;
 	}
 
 	public boolean invoicesTableIsVisible() {
@@ -578,11 +563,11 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		if (string.equals("Edit") || string.equals("Print preview (server)")) {
 			act.moveToElement(selectBTN).click().build().perform();
 			ivoiceOptions.findElement(By.linkText(string)).click();
-			Set frames = driver.getWindowHandles();
+			Set<String> frames = driver.getWindowHandles();
 			Thread.sleep(10000);
 			frames.remove(mainWindow);
-			driver.switchTo().window((String) frames.iterator().next());
-			return (String) frames.iterator().next();
+			driver.switchTo().window(frames.iterator().next());
+			return frames.iterator().next();
 		}
 		
 		 else if (string.equals("Pay")) {
@@ -695,7 +680,6 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			}
 			return mainWindow;
 		}
-
 	}
 
 	public void scrollWindowDown(int pix) {

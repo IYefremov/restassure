@@ -1,20 +1,14 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.base.Function;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.google.common.base.Function;
+import java.util.concurrent.TimeUnit;
 
 //import com.cyberiansoft.test.bo.utils.WebDriverExt;
 //import lombok.experimental.ExtensionMethod;
@@ -75,6 +69,15 @@ public abstract class BaseWebPage {
 
 		return childElement;
 	}
+
+    WebElement waitForElementNotToMove(final WebElement element) {
+        wait.until((ExpectedCondition<Boolean>) wDriver -> {
+            Point loc = element.getLocation();
+            waitABit(1000);
+            return element.getLocation().equals(loc);
+        });
+        return element;
+    }
 
 	public String getBrowserType() {
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();

@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class BaclOfficeMonitorReportsTestCases extends BaseTestCase {
+public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
 	@Test(testName="Average Repair Time Report preconditions", description = "Average Repair Time Report preconditions")
 	public void testOperationInvoiceSearch() throws Exception {

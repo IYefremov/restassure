@@ -15,6 +15,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+/**
+ * test suite excluded
+ */
 public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 	
 	private final String questionsectionname = "AT_print_section1";

@@ -24,7 +24,7 @@ public class WebConstants {
 		}
 	}	
 	
-	public static enum InvoiceStatuses {
+	public enum InvoiceStatuses {
 		INVOICESTATUS_ALL("All"),
 		INVOICESTATUS_APPROVED("Approved"),
 		INVOICESTATUS_DRAFT("Draft"),
