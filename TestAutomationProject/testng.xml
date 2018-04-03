@@ -1,8 +1,7 @@
 <suite name="Cyberiansoft iOS client tests" verbose="10">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
-  <!--<parameter name="selenium.browser" value="*firefox" />-->
-  <parameter name="selenium.browser" value="chrome"/>
+  <parameter name="selenium.browser" value="*firefox" />
   <parameter name="backoffice.url" value="http://reconpro-devqa.cyberianconcepts.com/Admin/Devices.aspx"  />
   <parameter name="user.name" value="su"  />
   <parameter name="user.psw" value="su@css"  />

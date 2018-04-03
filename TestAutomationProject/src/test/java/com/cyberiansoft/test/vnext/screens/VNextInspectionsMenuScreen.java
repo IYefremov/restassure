@@ -113,12 +113,11 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		tap(archiveinspectionbtn);
 	}
 	
-	public VNextApproveScreen clickApproveInspectionMenuItem() {
+	public void clickApproveInspectionMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(approveinspectionbtn));
 		tap(approveinspectionbtn);
 		log(LogStatus.INFO, "Tap on Approve Inspection Menu");
-		return new VNextApproveScreen(appiumdriver);
 	}
 	
 	public boolean isApproveMenuPresent() {

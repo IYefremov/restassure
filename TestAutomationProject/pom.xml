@@ -5,15 +5,7 @@
 	<groupId>com.cyberiansoft.test.bo</groupId>
 	<artifactId>TestAutomationProject</artifactId>
 	<version>1.2</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.3.0</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <name>backofficetests</name>
+	<name>backofficetests</name>
 	<parent>
 		<groupId>com.cyberiansoft.test</groupId>
 		<artifactId>testcases</artifactId>

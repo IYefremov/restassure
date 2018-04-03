@@ -18,31 +18,42 @@ public class InspectionData {
 	 
 	 @JsonProperty("service")
 	 ServiceData service;
-	 
-	 @JsonProperty("serviceStatus")
-	 String serviceStatus;
-	 
+
 	 @JsonProperty("services")
 	 List<ServiceData> services;
 	 
 	 @JsonProperty("insuranceCompany")
 	 InsuranceCompanyData insuranceCompany;
 	 
+	 @JsonProperty("inspPrice")
+	 String inspPrice;
+	 
+	 @JsonProperty("inspApprovedPrice")
+	 String inspApprovedPrice;
+	 
 	 
 	 public String getInspectionType() {
 		 return inspType;
 	 }
 	 
+	 public String getInspectionPrice() {
+		 return inspPrice;
+	 }
+	 
+	 public String getInspectionApprovedPrice() {
+		 return inspApprovedPrice;
+	 }
+	 
 	 public String getVinNumber() {
 		 return vihicleInfo.getVINNumber();
 	 }
-	 
+ 
 	 public String getNewVinNumber() {
 		 return newVinNumber;
 	 }
 	 
 	 public String getServiceStatus() {
-		 return serviceStatus;
+		 return service.getServiceStatus();
 	 }
 	 
 	 public String getServiceName() {
@@ -51,6 +62,10 @@ public class InspectionData {
 	 
 	 public String getServicePrice() {
 		 return service.getServicePrice();
+	 }
+	 
+	 public List<ServiceData> getServicesList() {
+		 return services;
 	 }
 	 
 	 public String getServiceNameByIndex(int serviceIndex) {

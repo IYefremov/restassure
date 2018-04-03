@@ -35,7 +35,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		Assert.assertFalse(inspmenuscreen.isCreateWorkOrderMenuPresent());
-		VNextApproveScreen approvescreen = inspmenuscreen.clickApproveInspectionMenuItem();
+		inspmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.saveApprovedInspection();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
@@ -57,7 +58,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextApproveScreen approvescreen = inspmenuscreen.clickApproveInspectionMenuItem();
+		inspmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.clickClearSignatureButton();
 		approvescreen.clickSaveButton();
@@ -84,7 +86,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextApproveScreen approvescreen = inspmenuscreen.clickApproveInspectionMenuItem();
+		inspmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		Assert.assertTrue(approvescreen.isClearButtonVisible());
 		approvescreen.saveApprovedInspection();

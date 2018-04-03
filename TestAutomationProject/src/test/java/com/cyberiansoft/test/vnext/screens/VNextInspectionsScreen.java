@@ -149,6 +149,16 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		return inspprice;	
 	}
 	
+	public String getInspectionApprovedPriceValue(String inspectionnumber) {
+		String inspprice = null;
+		WebElement inspcell = getInspectionCell(inspectionnumber);
+		if (inspcell != null)
+			inspprice = inspcell.findElement(By.xpath(".//div[@class='entity-item-approved-amount']")).getText();
+		else
+			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
+		return inspprice;	
+	}
+	
 	public WebElement getInspectionCell(String inspectionnumber) {
 		WebElement inspcell = null;
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
@@ -179,6 +189,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
