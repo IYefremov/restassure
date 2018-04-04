@@ -1,9 +1,15 @@
 package com.cyberiansoft.test.baseutils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -65,5 +71,29 @@ public class AppiumUtils {
 		((AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver()).pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
 		//DriverBuilder.getInstance().getAppiumDriver().navigate().back();
 		switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+	}
+	
+	public static String createScreenshot(String reportFolder, String filename) {
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		//WebDriver driver1 = new Augmenter().augment(driver);
+		UUID uuid = UUID.randomUUID();
+		File file = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(file , new File(reportFolder + "\\" + filename + uuid + ".jpeg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		return filename + uuid + ".jpeg";
+	}
+	
+	public static String createBase64Screenshot() {
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		//WebDriver driver1 = new Augmenter().augment(driver);
+		String base64Screenshot = "data:image/png;base64,"+ ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.BASE64);
+		
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		return base64Screenshot;
 	}
 }

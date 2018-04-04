@@ -231,7 +231,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspservicesscreen.saveInspection();
 		
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextApproveScreen approvescreen = inspectionmenuscreen.clickApproveInspectionMenuItem();
+		inspectionmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
@@ -276,7 +277,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.saveInspectionViaMenu();
 		
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextApproveScreen approvescreen = inspectionmenuscreen.clickApproveInspectionMenuItem();
+		inspectionmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);

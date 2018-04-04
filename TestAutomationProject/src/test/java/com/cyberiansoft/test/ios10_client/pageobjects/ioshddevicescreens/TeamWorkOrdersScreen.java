@@ -44,7 +44,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersPageTableLeft"))); 
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft"))); 
 	}
 	
 	public void clickOnWO(String wonumber) {
@@ -72,7 +72,9 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}
 	
 	public void clickiCreateInvoiceButton()  {
-		appiumdriver.findElementByAccessibilityId("invoice new").click();		
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("invoice new"))).click();
+		//appiumdriver.findElementByAccessibilityId("invoice new").click();		
 	}	
 	
 	public void clickSearchButton() {

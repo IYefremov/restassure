@@ -11,7 +11,6 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.reporting.ExtentReportFactory;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -20,12 +19,10 @@ import io.appium.java_client.MobileElement;
 
 
 public class VNextTeamEditionTestListener extends TestListenerAdapter implements IInvokedMethodListener  {
-	private Object currentClass;
 	
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-		
-		currentClass = testResult.getInstance();
+
 	}
 	
 	@Override
@@ -34,7 +31,7 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 		AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
 		WebDriver webdriver = DriverBuilder.getInstance().getDriver();
 	    if (appiumdriver != null) {
-	    	filename = ((VNextBaseTestCase) currentClass).createScreenshot(appiumdriver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
+	    	filename = AppiumUtils.createScreenshot("reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
 	    }
 	    
 	    if (webdriver != null) {
@@ -74,7 +71,7 @@ public class VNextTeamEditionTestListener extends TestListenerAdapter implements
 	public void onTestSkipped (ITestResult result) {
 		AppiumDriver<MobileElement> driver = DriverBuilder.getInstance().getAppiumDriver();
 	    if (driver != null) {
-	    	((VNextBaseTestCase) currentClass).createScreenshot(driver, "reportvnext/" + ExtentReportFactory.reporttime + "/", "skipped" + getTestMethodName(result));
+	    	AppiumUtils.createScreenshot("reportvnext/" + ExtentReportFactory.reporttime + "/", "skipped" + getTestMethodName(result));
 	    }
 	    ExtentTest testReporter = ExtentReportFactory.getTest();
 	    testReporter.log(LogStatus.SKIP, getTestMethodName(result));

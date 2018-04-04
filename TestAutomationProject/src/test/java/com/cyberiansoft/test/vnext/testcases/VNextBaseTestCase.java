@@ -1,16 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -62,8 +55,6 @@ public class VNextBaseTestCase {
 	
 	protected static AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
-	protected DesiredCapabilities webcap;
-	protected DesiredCapabilities appiumcap;
 	protected static AppiumDriverLocalService service;
 	protected String regcode = "";
 	protected static String deviceofficeurl;
@@ -101,21 +92,6 @@ public class VNextBaseTestCase {
 	
 	public void setUp() {
 		AppiumUtils.setNetworkOn();
-	}
-	
-	public String createScreenshot(WebDriver driver, String loggerdir, String testcasename) {
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		WebDriver driver1 = new Augmenter().augment(driver);
-		UUID uuid = UUID.randomUUID();
-		File file = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(file , new File(loggerdir + "\\" + testcasename + uuid + ".jpeg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		return testcasename + uuid + ".jpeg";
 	}
 	
 	@AfterSuite

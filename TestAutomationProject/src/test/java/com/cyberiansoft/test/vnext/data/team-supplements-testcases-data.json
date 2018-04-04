@@ -60,5 +60,18 @@
       "serviceQuantity": "2"
       }]
     }
+  ],
+  
+  "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection.01",
+      "description": "Test Case 72594:Verify user can add supplements only for Approved or New Inspection",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "TEST"
+      },
+      "service": {"serviceName": "Damage Service"
+      },
+      "services": [{"serviceName": "Battery Installation"}, {"serviceName": "Labor"}]
+    }
   ]
 }

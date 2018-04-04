@@ -65,7 +65,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextApproveScreen approvescreen = inspmenuscreen.clickApproveInspectionMenuItem();
+		inspmenuscreen.clickApproveInspectionMenuItem();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		Assert.assertTrue(approvescreen.isClearButtonVisible());
 		approvescreen.saveApprovedInspection();

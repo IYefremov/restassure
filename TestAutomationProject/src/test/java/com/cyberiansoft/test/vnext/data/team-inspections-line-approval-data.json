@@ -1,0 +1,32 @@
+{
+  
+  	"testVerifyUserCanApproveServiceForInspectionIfLineApprovalEqualsON": [
+    {
+      "rowID": "testVerifyUserCanApproveServiceForInspectionIfLineApprovalEqualsON.01",
+      "description": "Test Case 71742:Verify user can approve service for Inspection if Line Approval = ON",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "services": [{"serviceName": "Battery Installation",
+      }, {"serviceName": "Aluminum Panel",
+      }, {"serviceName": "Anastasia Labor Avarage Data",
+      }]
+    }
+  ],
+  
+  "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection": [
+    {
+      "rowID": "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection.01",
+      "description": "Test Case 71743:Verify user can approve, decline and skip different services in one Inspection",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "services": [{"serviceName": "Battery Installation",
+      }, {"serviceName": "Aluminum Panel",
+      }, {"serviceName": "Anastasia Labor Avarage Data",
+      }],
+      "inspPrice": "$14.85",
+      "inspApprovedPrice": "$9.00"
+    }
+  ]
+}

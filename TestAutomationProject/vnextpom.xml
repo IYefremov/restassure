@@ -6,13 +6,6 @@
 <groupId>com.cyberiansoft.test.bo</groupId>
     <artifactId>botests</artifactId>
     <version>1.0</version>
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.2</version>
-        </dependency>
-    </dependencies>
     <name>backofficetests</name>
     <parent>
         <groupId>com.cyberiansoft.test</groupId>

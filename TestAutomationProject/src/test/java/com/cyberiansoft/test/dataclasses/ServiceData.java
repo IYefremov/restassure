@@ -12,6 +12,9 @@ public class ServiceData {
 	 
 	@JsonProperty("serviceQuantity")
 	String serviceQuantity;
+	
+	@JsonProperty("serviceStatus")
+	String serviceStatus;
 	 
 	public String getServiceName() {
 		return serviceName; 
@@ -23,6 +26,10 @@ public class ServiceData {
 	 
 	public String getServiceQuantity() {
 		return serviceQuantity; 
+	}
+	
+	public String getServiceStatus() {
+		return serviceStatus; 
 	}
 
 }

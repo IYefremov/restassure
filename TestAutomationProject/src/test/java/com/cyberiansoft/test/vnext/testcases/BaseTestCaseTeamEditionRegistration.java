@@ -12,8 +12,8 @@ import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 
 public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 	
-	RetailCustomer testcustomer;
-	WholesailCustomer testwholesailcustomer;
+	protected static RetailCustomer testcustomer;
+	protected static WholesailCustomer testwholesailcustomer;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -26,7 +26,6 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 		
 		testcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-retail-customer.json", RetailCustomer.class);
 		testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
-		System.out.println("_________" + testwholesailcustomer.getCompany());
 	}
 
 }

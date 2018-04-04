@@ -1,0 +1,150 @@
+package com.cyberiansoft.test.vnext.listeners;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.TestListenerAdapter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.extentreportproviders.ExtentManager;
+import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
+
+public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener {
+	
+	
+	//private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
+	private ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+	
+    @Override
+	public synchronized void onStart(ITestContext context) {
+    	ExtentManager.createInstance("test-output/extent.html");
+    	//ExtentTest parent = extent.createTest(getClass().getName());
+        //parentTest.set(parent);
+	}
+
+	@Override
+	public synchronized void onFinish(ITestContext context) {
+		ExtentManager.getInstance().flush();
+	}
+	
+	@Override
+	public synchronized void onTestStart(ITestResult result) {
+		ExtentTest extent;
+		if ( getTestParams(result).isEmpty() ) {
+			extent = ExtentTestManager.getTest().createNode(result.getMethod().getMethodName());
+        }
+
+        else {
+            if ( getTestParams(result).split(",")[0].contains(result.getMethod().getMethodName()) ) {
+            	extent = ExtentTestManager.getTest().createNode(getTestParams(result).split(",")[0], getTestParams(result).split(",")[1]);
+            }
+
+            else {
+            	extent = ExtentTestManager.getTest().createNode(result.getMethod().getMethodName(), getTestParams(result).split(",")[1]);
+            }
+        }
+		
+		extent.getModel().setStartTime(getTime(result.getStartMillis()));
+		
+		extentTest.set(extent);
+		//ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName());
+        //test.set(child);
+	}
+
+	@Override
+	public synchronized void onTestSuccess(ITestResult result) {
+		extentTest.get().log(Status.PASS, "<font color=#00af00>" + Status.PASS.toString().toUpperCase() + "</font>");
+		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	}
+
+	@Override
+	public synchronized void onTestFailure(ITestResult result) {
+		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
+		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
+		try {
+			//test.get().log(Status.WARNING, "details", MediaEntityBuilder.createScreenCaptureFromBase64String(AppiumUtils.createBase64Screenshot()));
+			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot("test-output", "fail")).build());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if ( !getTestParams(result).isEmpty() ) {
+			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
+		}
+		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+		VNextAppUtils.restartApp();
+	}
+
+	@Override
+	public synchronized void onTestSkipped(ITestResult result) {
+		extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
+		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
+		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	}
+
+	@Override
+	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		
+	}
+	
+	private String getStrackTrace(ITestResult result) {
+        Writer writer = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(writer);
+        result.getThrowable().printStackTrace(printWriter);
+
+        return "<br/>\n" + writer.toString().replace(System.lineSeparator(), "<br/>\n");
+    }
+	
+	private String getTestParams(ITestResult tr) {
+        TestNG_ConsoleRunner runner = new TestNG_ConsoleRunner();
+
+        return runner.getTestParams(tr);
+    }
+	
+	private Date getTime(long millis) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(millis);
+        
+        return calendar.getTime();
+    }
+
+	@Override
+	public void afterInvocation(IInvokedMethod method, ITestResult result) {
+		AfterClass testAnnotation = (AfterClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(AfterClass.class);
+		if (testAnnotation != null) {
+			ExtentTestManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
+			System.out.println("!!!!!!!!!!!!!!!Endtime" + ExtentTestManager.getTest().getModel().getEndTime().toString());
+			System.out.println("!!!!!!!!!!!!!!!Endtime" + getTime(result.getEndMillis()));
+		}
+		
+	}
+
+	@Override
+	public void beforeInvocation(IInvokedMethod method, ITestResult result) {
+		BeforeClass testAnnotation = (BeforeClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(BeforeClass.class);
+		if (testAnnotation != null) {
+			if (method.getTestMethod().getDescription() != null)
+				ExtentTestManager.createTest(method.getTestMethod().getDescription());
+			else
+				ExtentTestManager.createTest(result.getMethod().getTestClass().getName());
+			ExtentTestManager.getTest().getModel().setStartTime(getTime(result.getStartMillis()));
+			System.out.println("!!!!!!!!!!!!!!!Starttime" + ExtentTestManager.getTest().getModel().getStartTime().toString());
+			System.out.println("!!!!!!!!!!!!!!!Starttime" + getTime(result.getStartMillis()));
+		}
+	}
+}
