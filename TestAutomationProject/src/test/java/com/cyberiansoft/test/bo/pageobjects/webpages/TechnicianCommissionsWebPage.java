@@ -1,30 +1,22 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
+import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 
@@ -213,7 +205,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	public boolean checkSortAbility() {
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
-		List<WebElement> allNames = new ArrayList<WebElement>();
+		List<WebElement> allNames = new ArrayList<>();
 		
 		int counter = 4;
 		while(true){

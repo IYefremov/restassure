@@ -32,14 +32,13 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 16189:Reports - Technician Commissions")
 	public void testReportsTechnicianCommissions() throws InterruptedException{
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		ReportsWebPage reportsPage = backofficeheader.clickReportsLink();
-		TechnicianCommissionsWebPage technishialCommissionsPage = reportsPage.clickTechnicianCommissionsLink();
-		technishialCommissionsPage.setSearchFromDate();
-		technishialCommissionsPage.clickSearchBTN();
-		Assert.assertTrue(technishialCommissionsPage.checkSortAbility());
-		technishialCommissionsPage.clickOnLastSearchResult();
-		Assert.assertTrue(technishialCommissionsPage.checkResultsTable());
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		ReportsWebPage reportsPage = backofficeHeader.clickReportsLink();
+		TechnicianCommissionsWebPage technicianCommissionsPage = reportsPage.clickTechnicianCommissionsLink();
+		technicianCommissionsPage.setSearchFromDate();
+		technicianCommissionsPage.clickSearchBTN();
+		Assert.assertTrue(technicianCommissionsPage.checkSortAbility());
+		technicianCommissionsPage.clickOnLastSearchResult();
+		Assert.assertTrue(technicianCommissionsPage.checkResultsTable());
 	}	
 }

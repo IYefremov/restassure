@@ -11,7 +11,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 public class ReportsWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl07_Label1")
-	public WebElement technicianCommissionLink;
+    private WebElement technicianCommissionLink;
 
 	public ReportsWebPage(WebDriver driver) {
 		super(driver);
@@ -20,7 +20,6 @@ public class ReportsWebPage extends BaseWebPage {
 	
 	public TechnicianCommissionsWebPage clickTechnicianCommissionsLink(){
 		wait.until(ExpectedConditions.elementToBeClickable(technicianCommissionLink)).click();
-		return PageFactory.initElements(
-				driver, TechnicianCommissionsWebPage.class);
+		return PageFactory.initElements(driver, TechnicianCommissionsWebPage.class);
 	}
 }

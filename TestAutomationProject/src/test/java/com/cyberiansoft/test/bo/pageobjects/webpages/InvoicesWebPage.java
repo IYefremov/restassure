@@ -637,10 +637,14 @@ public class InvoicesWebPage extends WebPageWithFilter {
 				
 			}
 		 else if (string.equals("Download JSON")) {
-			 act.moveToElement(selectBTN).click().build().perform();
-			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-			Thread.sleep(3000);
-			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
+		    act.moveToElement(selectBTN).click().build().perform();
+//			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+//			Thread.sleep(3000);
+            wait.until(ExpectedConditions
+                    .visibilityOf(driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
+                    .click();
+
+//			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 			return mainWindow;
 		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
 			act.moveToElement(selectBTN).click().build().perform();

@@ -595,7 +595,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft")
+	@Test(testName = "Test Case 43709:Operation - Invoice: Status - Draft", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusDraft() throws InterruptedException {
 		final String ponum = "123";
 
@@ -660,7 +660,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
+	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
@@ -737,19 +737,16 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         Assert.assertTrue(invoicesPage.isChangeButtonClicked());
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON")
+	@Test(testName = "Test Case 43693:Operation - Invoice: Edit - Download JSON", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceDownloadJSON() throws InterruptedException {
+        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-
-		operationspage = backofficeheader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
-
-		invoicespage.selectActionForFirstInvoice("Download JSON", false);
+        InvoicesWebPage invoicesPage = backofficeHeader
+                .clickOperationsLink()
+                .clickInvoicesLink();
+        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+        invoicesPage.clickFindButton();
+		invoicesPage.selectActionForFirstInvoice("Download JSON", false);
 	}
 
 	@Test(testName = "Test Case 43724:Operation - Invoice: Edit - Tech. Info", retryAnalyzer = Retry.class)

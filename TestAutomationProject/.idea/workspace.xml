@@ -8,9 +8,13 @@
     <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#BO some tests fixed">
       <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,8 +33,8 @@
       <file leaf-file-name="BackOfficeOperationsInvoiceTestCases.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="723" column="38" lean-forward="true" selection-start-line="723" selection-start-column="38" selection-end-line="723" selection-end-column="38" />
+            <state relative-caret-position="107">
+              <caret line="837" column="39" lean-forward="true" selection-start-line="837" selection-start-column="39" selection-end-line="837" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,11 +42,56 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="BackOfficeOperationsServiceRequestsTestCases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="93">
+              <caret line="961" column="33" lean-forward="true" selection-start-line="961" selection-start-column="33" selection-end-line="961" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorkOrdersWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="402" column="25" lean-forward="true" selection-start-line="402" selection-start-column="25" selection-end-line="402" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BackOfficeReportsTestCases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="16" column="62" lean-forward="true" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BackOfficeOperationsTimeFrameTestCases.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+            <state relative-caret-position="17">
+              <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TechnicianCommissionsWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="215" column="22" lean-forward="true" selection-start-line="215" selection-start-column="22" selection-end-line="215" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReportsWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -50,8 +99,8 @@
       <file leaf-file-name="InvoicesWebPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="744" column="11" selection-start-line="744" selection-start-column="11" selection-end-line="744" selection-end-column="11" />
+            <state relative-caret-position="290">
+              <caret line="566" column="18" selection-start-line="566" selection-start-column="18" selection-end-line="566" selection-end-column="18" />
               <folding>
                 <element signature="e#6533#6534#0" expanded="true" />
                 <element signature="e#6560#6561#0" expanded="true" />
@@ -90,20 +139,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebElementsBot.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7450#7451#0" expanded="true" />
-                <element signature="e#7485#7486#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AddEditClientUsersContactsDialogWebPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/AddEditClientUsersContactsDialogWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,51 +147,6 @@
               <folding>
                 <element signature="e#3290#3291#0" expanded="true" />
                 <element signature="e#3345#3346#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InspectionsWebPage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <element signature="e#6431#6432#0" expanded="true" />
-                <element signature="e#6461#6462#0" expanded="true" />
-                <element signature="e#6659#6660#0" expanded="true" />
-                <element signature="e#6704#6705#0" expanded="true" />
-                <element signature="e#6773#6774#0" expanded="true" />
-                <element signature="e#6825#6826#0" expanded="true" />
-                <element signature="e#6878#6879#0" expanded="true" />
-                <element signature="e#6922#6923#0" expanded="true" />
-                <element signature="e#6972#6973#0" expanded="true" />
-                <element signature="e#7013#7014#0" expanded="true" />
-                <element signature="e#7475#7476#0" expanded="true" />
-                <element signature="e#7537#7538#0" expanded="true" />
-                <element signature="e#7773#7774#0" expanded="true" />
-                <element signature="e#7840#7841#0" expanded="true" />
-                <element signature="e#9833#9834#0" expanded="true" />
-                <element signature="e#9898#9899#0" expanded="true" />
-                <element signature="e#9950#9951#0" expanded="true" />
-                <element signature="e#10012#10013#0" expanded="true" />
-                <element signature="e#10062#10063#0" expanded="true" />
-                <element signature="e#10122#10123#0" expanded="true" />
-                <element signature="e#10172#10173#0" expanded="true" />
-                <element signature="e#10232#10233#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackOfficeMonitorVendorTeamsTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,7 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loading</find>
       <find>Loading</find>
       <find>Loa</find>
       <find>//todo fa</find>
@@ -203,6 +192,7 @@
       <find>ctl00_ctl00_Content_Main_panelPopup</find>
       <find>ctl00_ctl00_Content_Main_btnPopupCancel</find>
       <find>//todo</find>
+      <find>@Test</find>
     </findStrings>
     <replaceStrings>
       <replace>Include Selected Vehicle Parts (Vehicle Parts Include Selected)</replace>
@@ -238,12 +228,10 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficePrintTemplatesestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaclOfficeMonitorReportsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorReportsTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/BasePage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorsTeamsWebPage.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/utils/RegularSuperListener.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/utils/SuperListener.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.java" />
@@ -255,7 +243,6 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrdersWebPage.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorBillsWebPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" />
@@ -263,6 +250,11 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" />
       </list>
     </option>
@@ -389,7 +381,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice">
+  <component name="RunManager" selected="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -412,65 +404,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="TestAutomationProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases" />
-      <option name="METHOD_NAME" value="testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration name="BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="TestAutomationProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases" />
-      <option name="METHOD_NAME" value="testCompanySharingWorkOrderAddRuleVehicleParts" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsInvoiceTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
       <extension name="coverage">
         <pattern>
@@ -483,9 +417,9 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
       <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases" />
-      <option name="METHOD_NAME" value="checkOperationInvoiceEditChangeInvoice" />
+      <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -528,7 +462,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
       <extension name="coverage">
         <pattern>
@@ -541,7 +475,65 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
       <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases" />
-      <option name="METHOD_NAME" value="testOperationInvoiceSentMailInMailActivity" />
+      <option name="METHOD_NAME" value="checkOperationInvoiceStatusDraft" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="BackOfficeOperationsTimeFrameTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="BackOfficeReportsTestCases.testReportsTechnicianCommissions" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases" />
+      <option name="METHOD_NAME" value="testReportsTechnicianCommissions" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -594,18 +586,18 @@
     </configuration>
     <list>
       <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" />
-      <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" />
-      <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" />
-      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" />
-      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" />
+      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases" />
+      <item itemvalue="TestNG.BackOfficeReportsTestCases.testReportsTechnicianCommissions" />
+      <item itemvalue="TestNG.BackOfficeOperationsTimeFrameTestCases" />
+      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" />
-        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" />
+        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" />
+        <item itemvalue="TestNG.BackOfficeOperationsTimeFrameTestCases" />
+        <item itemvalue="TestNG.BackOfficeReportsTestCases.testReportsTechnicianCommissions" />
+        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases" />
         <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" />
-        <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" />
-        <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" />
       </list>
     </recent_temporary>
   </component>
@@ -662,39 +654,46 @@
       <option name="project" value="LOCAL" />
       <updated>1522831590205</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="#BO 43692 fixed, steps added">
+      <created>1522837961274</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1522837961274</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 12h 51m 38s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceDownloadJSON - 2018.04.04 at 13h 57m 02s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceDownloadJSON" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 12h 57m 11s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceDownloadJSON - 2018.04.04 at 14h 03m 29s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceDownloadJSON" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 01m 35s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases - 2018.04.04 at 14h 20m 28s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 03m 55s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 14h 22m 19s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 09m 45s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeReportsTestCases_testReportsTechnicianCommissions - 2018.04.04 at 14h 29m 56s.xml">
+      <configuration name="BackOfficeReportsTestCases.testReportsTechnicianCommissions" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 14m 53s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceStatusDraft - 2018.04.04 at 14h 41m 56s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 16m 35s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsTimeFrameTestCases - 2018.04.04 at 14h 43m 19s.xml">
+      <configuration name="BackOfficeOperationsTimeFrameTestCases" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 19m 55s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceStatusDraft - 2018.04.04 at 14h 49m 07s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 27m 28s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceStatusDraft - 2018.04.04 at 14h 51m 48s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceStatusDraft" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 29m 50s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases - 2018.04.04 at 14h 54m 46s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -708,7 +707,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32934782" />
@@ -719,18 +717,18 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5021322" side_tool="true" weight="0.32934782" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.21350762" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28976035" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29302832" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.37363833" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23560767" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3845316" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.37363833" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32570806" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -774,7 +772,8 @@
     <MESSAGE value="#BO *.properties updated" />
     <MESSAGE value="#43689 fixed, refactoring" />
     <MESSAGE value="#BO 43689 fix update" />
-    <option name="LAST_COMMIT_MESSAGE" value="#BO 43689 fix update" />
+    <MESSAGE value="#BO 43692 fixed, steps added" />
+    <option name="LAST_COMMIT_MESSAGE" value="#BO 43692 fixed, steps added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -852,12 +851,6 @@
           <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>754</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
           <line>641</line>
           <properties />
@@ -875,8 +868,20 @@
           <properties />
           <option name="timeStamp" value="244" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java</url>
+          <line>403</line>
+          <properties />
+          <option name="timeStamp" value="260" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
+          <line>622</line>
+          <properties />
+          <option name="timeStamp" value="264" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="251" />
+      <option name="time" value="265" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -929,28 +934,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-          <folding>
-            <element signature="e#1097#1098#0" expanded="true" />
-            <element signature="e#1156#1157#0" expanded="true" />
-            <element signature="e#1444#1445#0" expanded="true" />
-            <element signature="e#1496#1497#0" expanded="true" />
-            <element signature="e#1717#1718#0" expanded="true" />
-            <element signature="e#1765#1766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testngbackooficetests.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="30" column="92" selection-start-line="30" selection-start-column="92" selection-end-line="30" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1021,13 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25191">
-          <caret line="971" column="9" selection-start-line="971" selection-start-column="4" selection-end-line="971" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorReportsTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
@@ -1074,13 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="664">
           <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1188,24 +1157,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrdersWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="20" column="67" lean-forward="true" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -1333,8 +1288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="744" column="11" selection-start-line="744" selection-start-column="11" selection-end-line="744" selection-end-column="11" />
+        <state relative-caret-position="290">
+          <caret line="566" column="18" selection-start-line="566" selection-start-column="18" selection-end-line="566" selection-end-column="18" />
           <folding>
             <element signature="e#6533#6534#0" expanded="true" />
             <element signature="e#6560#6561#0" expanded="true" />
@@ -1360,10 +1315,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ReportsWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/TechnicianCommissionsWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="215" column="22" lean-forward="true" selection-start-line="215" selection-start-column="22" selection-end-line="215" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeReportsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="16" column="62" lean-forward="true" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="402" column="25" lean-forward="true" selection-start-line="402" selection-start-column="25" selection-end-line="402" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="961" column="33" lean-forward="true" selection-start-line="961" selection-start-column="33" selection-end-line="961" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="723" column="38" lean-forward="true" selection-start-line="723" selection-start-column="38" selection-end-line="723" selection-end-column="38" />
+        <state relative-caret-position="107">
+          <caret line="837" column="39" lean-forward="true" selection-start-line="837" selection-start-column="39" selection-end-line="837" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
