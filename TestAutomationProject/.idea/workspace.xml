@@ -8,19 +8,8 @@
     <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#BO some tests fixed">
       <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aventstack_extentreports_3_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_3_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_0_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_relevantcodes_extentreports_2_40_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_relevantcodes_extentreports_2_41_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestAutomationProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TestAutomationProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,8 +29,8 @@
       <file leaf-file-name="BackOfficeOperationsInvoiceTestCases.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="17" column="49" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="49" />
+            <state relative-caret-position="207">
+              <caret line="723" column="38" lean-forward="true" selection-start-line="723" selection-start-column="38" selection-end-line="723" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,8 +50,8 @@
       <file leaf-file-name="InvoicesWebPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="704" column="20" lean-forward="true" selection-start-line="704" selection-start-column="20" selection-end-line="704" selection-end-column="20" />
+            <state relative-caret-position="151">
+              <caret line="744" column="11" selection-start-line="744" selection-start-column="11" selection-end-line="744" selection-end-column="11" />
               <folding>
                 <element signature="e#6533#6534#0" expanded="true" />
                 <element signature="e#6560#6561#0" expanded="true" />
@@ -78,6 +67,10 @@
                 <element signature="e#21500#21501#0" expanded="true" />
                 <element signature="e#21511#21512#0" expanded="true" />
                 <element signature="e#21578#21579#0" expanded="true" />
+                <element signature="e#29383#29384#0" expanded="true" />
+                <element signature="e#29430#29431#0" expanded="true" />
+                <element signature="e#29405#29406#0" expanded="true" />
+                <element signature="e#29445#29446#0" expanded="true" />
                 <element signature="e#47900#47901#0" expanded="true" />
                 <element signature="e#47938#47939#0" expanded="true" />
               </folding>
@@ -101,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="125">
-              <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+              <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7450#7451#0" expanded="true" />
@@ -161,7 +154,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="182" column="23" lean-forward="true" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
+              <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -180,14 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>activeVend</find>
-      <find>getArchivedVendorTeamsCountOnPage</find>
-      <find>ctl00_ctl00_Content_Main_gvTeamsDeleted_ctl00_ctl03_ctl01_GoToPageTextBox</find>
-      <find>wait.un</find>
-      <find>wait.until</find>
-      <find>wait</find>
-      <find>todo</find>
-      <find>@Test</find>
       <find>loading</find>
       <find>Loading</find>
       <find>Loa</find>
@@ -196,7 +181,6 @@
       <find>Mark as Paid</find>
       <find>searchtimeframedd</find>
       <find>selectBillingOption</find>
-      <find>//todo</find>
       <find>selectSearchTimeFrame()</find>
       <find>bill</find>
       <find>//publi</find>
@@ -205,11 +189,20 @@
       <find>juni</find>
       <find>//todo fails</find>
       <find>26710</find>
-      <find>43689</find>
       <find>filterer_txtInvoiceNo</find>
       <find>TextField</find>
       <find>firstInvoiceWithPaidStatus</find>
       <find>isFirstInvoiceMarkedAsPaid</find>
+      <find>43689</find>
+      <find>Change Invoice#</find>
+      <find>change</find>
+      <find>getFirst</find>
+      <find>&quot;ctl00_ctl00_Content_Main_btnPopupCancel&quot;</find>
+      <find>&quot;Аштв</find>
+      <find>isInvo</find>
+      <find>ctl00_ctl00_Content_Main_panelPopup</find>
+      <find>ctl00_ctl00_Content_Main_btnPopupCancel</find>
+      <find>//todo</find>
     </findStrings>
     <replaceStrings>
       <replace>Include Selected Vehicle Parts (Vehicle Parts Include Selected)</replace>
@@ -269,8 +262,8 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeFrameFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" />
       </list>
     </option>
   </component>
@@ -368,16 +361,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="bo" type="462c0819:PsiDirectoryNode" />
-              <item name="webpages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="bo" type="462c0819:PsiDirectoryNode" />
               <item name="testcases" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -406,7 +389,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid">
+  <component name="RunManager" selected="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -428,64 +411,6 @@
         <value defaultName="singleModule" />
       </option>
       <patterns />
-    </configuration>
-    <configuration name="BackOfficeCompanyCRUDTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="TestAutomationProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration name="BackOfficeCompanyEditTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="TestAutomationProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
     </configuration>
     <configuration name="BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
@@ -545,6 +470,35 @@
       <properties />
       <listeners />
     </configuration>
+    <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases" />
+      <option name="METHOD_NAME" value="checkOperationInvoiceEditChangeInvoice" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
     <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
       <extension name="coverage">
@@ -559,6 +513,35 @@
       <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
       <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases" />
       <option name="METHOD_NAME" value="checkOperationInvoiceEditMarkAsPaid" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases" />
+      <option name="METHOD_NAME" value="testOperationInvoiceSentMailInMailActivity" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -611,18 +594,18 @@
     </configuration>
     <list>
       <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" />
-      <item itemvalue="TestNG.BackOfficeCompanyCRUDTestCases" />
-      <item itemvalue="TestNG.BackOfficeCompanyEditTestCases" />
       <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" />
       <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" />
+      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" />
+      <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" />
+        <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.testOperationInvoiceSentMailInMailActivity" />
         <item itemvalue="TestNG.BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" />
         <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" />
         <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" />
-        <item itemvalue="TestNG.BackOfficeCompanyEditTestCases" />
-        <item itemvalue="TestNG.BackOfficeCompanyCRUDTestCases" />
       </list>
     </recent_temporary>
   </component>
@@ -672,39 +655,46 @@
       <option name="project" value="LOCAL" />
       <updated>1522824806932</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="#BO 43689 fix update">
+      <created>1522831590205</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1522831590205</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 07m 02s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 12h 51m 38s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 09m 43s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 12h 57m 11s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 40m 18s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 01m 35s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 00m 13s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 03m 55s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 07m 14s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 09m 45s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 24m 23s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 14m 53s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 31m 24s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 16m 35s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 33m 36s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 19m 55s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 36m 05s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 27m 28s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 39m 20s.xml">
-      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditChangeInvoice - 2018.04.04 at 13h 29m 50s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditChangeInvoice" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -722,19 +712,19 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32934782" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.1633987" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.16666667" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5021322" side_tool="true" weight="0.32934782" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.22657952" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26252723" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.21350762" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28976035" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.37363833" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.21568628" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3845316" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -783,7 +773,8 @@
     <MESSAGE value="#BO 27877, 62299, 62297, 62295, 62298 fixed" />
     <MESSAGE value="#BO *.properties updated" />
     <MESSAGE value="#43689 fixed, refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="#43689 fixed, refactoring" />
+    <MESSAGE value="#BO 43689 fix update" />
+    <option name="LAST_COMMIT_MESSAGE" value="#BO 43689 fix update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -862,13 +853,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>749</line>
+          <line>754</line>
           <properties />
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>639</line>
+          <line>641</line>
           <properties />
           <option name="timeStamp" value="155" />
         </line-breakpoint>
@@ -885,7 +876,7 @@
           <option name="timeStamp" value="244" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="247" />
+      <option name="time" value="251" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -1300,7 +1291,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="182" column="23" lean-forward="true" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
+          <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1310,7 +1301,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
-          <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+          <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7450#7451#0" expanded="true" />
@@ -1342,8 +1333,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="704" column="20" lean-forward="true" selection-start-line="704" selection-start-column="20" selection-end-line="704" selection-end-column="20" />
+        <state relative-caret-position="151">
+          <caret line="744" column="11" selection-start-line="744" selection-start-column="11" selection-end-line="744" selection-end-column="11" />
           <folding>
             <element signature="e#6533#6534#0" expanded="true" />
             <element signature="e#6560#6561#0" expanded="true" />
@@ -1359,6 +1350,10 @@
             <element signature="e#21500#21501#0" expanded="true" />
             <element signature="e#21511#21512#0" expanded="true" />
             <element signature="e#21578#21579#0" expanded="true" />
+            <element signature="e#29383#29384#0" expanded="true" />
+            <element signature="e#29430#29431#0" expanded="true" />
+            <element signature="e#29405#29406#0" expanded="true" />
+            <element signature="e#29445#29446#0" expanded="true" />
             <element signature="e#47900#47901#0" expanded="true" />
             <element signature="e#47938#47939#0" expanded="true" />
           </folding>
@@ -1367,8 +1362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="17" column="49" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="49" />
+        <state relative-caret-position="207">
+          <caret line="723" column="38" lean-forward="true" selection-start-line="723" selection-start-column="38" selection-end-line="723" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

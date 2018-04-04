@@ -280,7 +280,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.clickFindButton();
-		final String invoicenumber = invoicespage.getFirstInvoiceNumberInTable();
+		final String invoicenumber = invoicespage.getFirstInvoiceName();
 
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
@@ -715,21 +715,26 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoiceEditTabWebPage invoiceeditpage = invoicespage.clickEditFirstInvoice();
 	}
 
-	//todo ignored
 	@Test(testName = "Test Case 43692:Operation - Invoice: Edit - Change Invoice", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditChangeInvoice() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		operationspage = backofficeheader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
+        InvoicesWebPage invoicesPage = backofficeHeader
+                .clickOperationsLink()
+                .clickInvoicesLink();
+        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+        invoicesPage.clickFindButton();
+        String firstInvoiceNameBefore = invoicesPage.getFirstInvoiceName();
 
-		invoicespage.selectActionForFirstInvoice("Change Invoice#", false);
-		Assert.assertTrue(invoicespage.checkInvoiceFrameOpened());
-		Assert.assertTrue(invoicespage.isInvoiceAbleToChange());
-		String newInvoiceNumber = invoicespage.getFirstInvoiceNumberInTable();
+		invoicesPage.selectActionForFirstInvoice("Change Invoice#", false);
+		Assert.assertTrue(invoicesPage.checkInvoiceFrameOpened());
+		Assert.assertTrue(invoicesPage.isCloseButtonClicked());
+		Assert.assertEquals(firstInvoiceNameBefore, invoicesPage.getFirstInvoiceName(),
+                "The invoice name has been changed although the 'Close' button was clicked!");
+
+        invoicesPage.selectActionForFirstInvoice("Change Invoice#", false);
+        Assert.assertTrue(invoicesPage.checkInvoiceFrameOpened());
+        Assert.assertTrue(invoicesPage.isChangeButtonClicked());
 	}
 
 	//todo fails

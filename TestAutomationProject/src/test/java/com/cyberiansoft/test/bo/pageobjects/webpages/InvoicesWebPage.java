@@ -129,6 +129,12 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	@FindBy(xpath = "//tr[@id='ctl00_ctl00_Content_Main_grdInvoices_ctl00__0']//a[@class='entity-link']")
     private WebElement firstInvoiceName;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_btnPopupCancel")
+    private WebElement closeButton;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_btnChangeInvoiceNumber")
+    private WebElement changeButton;
+
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
 
@@ -259,10 +265,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public void setSearchInvoiceNumber(String invoicenum) {
 		waitUntilElementIsClickable(searchinvoicenofld.getWrappedElement());
 		clearAndType(searchinvoicenofld, invoicenum);
-	}
-
-	public String getFirstInvoiceNumberInTable() {
-		return invoicestable.getWrappedElement().findElement(By.xpath(".//tr/td[5]/a")).getText();
 	}
 
 	public boolean isInvoiceNumberExists(String invoicenum) {
@@ -740,16 +742,24 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		}
 	}
 
-	public boolean isInvoiceAbleToChange() {
+	private boolean isInvoiceChangeable(WebElement element) {
 		try {
-			wait.until(
-					ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_popupInvoiceNoSuffix")))
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_popupInvoiceNoSuffix")))
 					.sendKeys("test");
-			driver.findElement(By.id("ctl00_ctl00_Content_Main_btnPopupCancel")).click();
+            element.click();
 			return true;
 		} catch (Exception e) {
+            System.err.println("EXCEPTION: " + e);
 			return false;
 		}
+	}
+
+	public boolean isChangeButtonClicked() {
+		return isInvoiceChangeable(changeButton);
+	}
+
+	public boolean isCloseButtonClicked() {
+        return isInvoiceChangeable(closeButton);
 	}
 
 	public boolean isWindowOpened() {
