@@ -2,7 +2,6 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
-import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Set;
 
@@ -127,6 +125,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
 	@FindBy(xpath = "//tr[@id='ctl00_ctl00_Content_Main_grdInvoices_ctl00__0']/td[contains(text(), 'Paid')]")
     private WebElement firstInvoiceWithPaidStatus;
+
+	@FindBy(xpath = "//tr[@id='ctl00_ctl00_Content_Main_grdInvoices_ctl00__0']//a[@class='entity-link']")
+    private WebElement firstInvoiceName;
 
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
@@ -557,6 +558,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		driver.navigate().refresh();
 	}
 
+	public String getFirstInvoiceName() {
+        return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
+    }
+
 	public String selectActionForFirstInvoice(String string, boolean switchArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
 		scrollWindowDown(300);
@@ -690,7 +695,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
 	public boolean isFirstInvoiceMarkedAsPaid() {
 		try {
-		    wait.until(ExpectedConditions.visibilityOf(firstInvoiceWithPaidStatus));
+			Actions actioons = new Actions(driver);
+			actioons.moveToElement(selectBTN).click().build().perform();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
+			actioons.moveToElement(selectBTN).click().build().perform();
 		} catch (TimeoutException e) {
 			return false;
 		}

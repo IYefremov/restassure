@@ -8,24 +8,20 @@
     <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#BO some tests fixed">
       <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aventstack_extentreports_3_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_3_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_0_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_relevantcodes_extentreports_2_40_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_relevantcodes_extentreports_2_41_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestAutomationProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TestAutomationProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorBillsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorBillsWebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrdersWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/VendorOrdersWebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithPagination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithPagination.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeframeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeFrameFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTimeFrameTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/Retry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/Retry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -44,8 +40,11 @@
       <file leaf-file-name="BackOfficeOperationsInvoiceTestCases.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="675" column="39" lean-forward="true" selection-start-line="675" selection-start-column="39" selection-end-line="675" selection-end-column="39" />
+            <state relative-caret-position="209">
+              <caret line="17" column="49" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,8 +61,8 @@
       <file leaf-file-name="InvoicesWebPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="711" column="20" lean-forward="true" selection-start-line="711" selection-start-column="20" selection-end-line="711" selection-end-column="20" />
+            <state relative-caret-position="543">
+              <caret line="704" column="20" lean-forward="true" selection-start-line="704" selection-start-column="20" selection-end-line="704" selection-end-column="20" />
               <folding>
                 <element signature="e#6533#6534#0" expanded="true" />
                 <element signature="e#6560#6561#0" expanded="true" />
@@ -77,6 +76,8 @@
                 <element signature="e#9867#9868#0" expanded="true" />
                 <element signature="e#21466#21467#0" expanded="true" />
                 <element signature="e#21500#21501#0" expanded="true" />
+                <element signature="e#21511#21512#0" expanded="true" />
+                <element signature="e#21578#21579#0" expanded="true" />
                 <element signature="e#47900#47901#0" expanded="true" />
                 <element signature="e#47938#47939#0" expanded="true" />
               </folding>
@@ -84,13 +85,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebPageWithTimeFrameFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeFrameFilter.java">
+      <file leaf-file-name="WebPageWithFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="34" column="35" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="35" />
+            <state relative-caret-position="191">
+              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebElementsBot.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7450#7451#0" expanded="true" />
+                <element signature="e#7485#7486#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddEditClientUsersContactsDialogWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/AddEditClientUsersContactsDialogWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+              <folding>
+                <element signature="e#3290#3291#0" expanded="true" />
+                <element signature="e#3345#3346#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,7 +128,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#6431#6432#0" expanded="true" />
                 <element signature="e#6461#6462#0" expanded="true" />
@@ -129,23 +157,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebPageWithBillingFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java">
+      <file leaf-file-name="BackOfficeMonitorVendorTeamsTestCases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="611">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebPageFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+            <state relative-caret-position="171">
+              <caret line="182" column="23" lean-forward="true" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -164,15 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isArchivedVendorTeamPresent</find>
-      <find />
-      <find>jun</find>
-      <find>ExpectedConditions</find>
-      <find>BackOfficeOperationsInvoiceTestCases</find>
-      <find>archivedTable</find>
-      <find>ctl00_ctl00_Content_Main_gvTeamsDeleted_ctl00</find>
-      <find>active</find>
-      <find>BackOfficePrintTemplatesestCases</find>
       <find>activeVend</find>
       <find>getArchivedVendorTeamsCountOnPage</find>
       <find>ctl00_ctl00_Content_Main_gvTeamsDeleted_ctl00_ctl03_ctl01_GoToPageTextBox</find>
@@ -184,19 +191,28 @@
       <find>loading</find>
       <find>Loading</find>
       <find>Loa</find>
-      <find />
+      <find>//todo fa</find>
       <find>checkOperationInvoiceEditMarkAsPaid</find>
-      <find />
+      <find>Mark as Paid</find>
       <find>searchtimeframedd</find>
       <find>selectBillingOption</find>
       <find>//todo</find>
       <find>selectSearchTimeFrame()</find>
       <find>bill</find>
       <find>//publi</find>
-      <find />
+      <find>//public cla</find>
+      <find>selectInspectionType()</find>
+      <find>juni</find>
+      <find>//todo fails</find>
+      <find>26710</find>
+      <find>43689</find>
+      <find>filterer_txtInvoiceNo</find>
+      <find>TextField</find>
+      <find>firstInvoiceWithPaidStatus</find>
+      <find>isFirstInvoiceMarkedAsPaid</find>
     </findStrings>
     <replaceStrings>
-      <replace />
+      <replace>Include Selected Vehicle Parts (Vehicle Parts Include Selected)</replace>
       <replace>entry</replace>
       <replace>rule</replace>
     </replaceStrings>
@@ -215,7 +231,6 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSHDCalculationsTestCases.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" />
@@ -252,8 +267,10 @@
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeFrameFilter.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" />
       </list>
     </option>
   </component>
@@ -648,38 +665,45 @@
       <option name="project" value="LOCAL" />
       <updated>1522419412374</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="#43689 fixed, refactoring">
+      <created>1522824806932</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1522824806932</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BackOfficeCompanyEditTestCases - 2018.04.03 at 16h 03m 24s.xml">
-      <configuration name="BackOfficeCompanyEditTestCases" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="BackOfficeCompanyEditTestCases - 2018.04.03 at 17h 08m 24s.xml">
-      <configuration name="BackOfficeCompanyEditTestCases" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 07h 32m 18s.xml">
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 07m 02s.xml">
       <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 07h 36m 23s.xml">
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 09m 43s.xml">
       <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 07h 42m 55s.xml">
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 10h 40m 18s.xml">
       <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeCompanyEditTestCases - 2018.04.04 at 08h 02m 29s.xml">
-      <configuration name="BackOfficeCompanyEditTestCases" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="BackOfficeCompanyEditTestCases_testCompanySharingWorkOrderAddRuleVehicleParts - 2018.04.04 at 08h 36m 42s.xml">
-      <configuration name="BackOfficeCompanyEditTestCases.testCompanySharingWorkOrderAddRuleVehicleParts" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="BackOfficeCompanyEditTestCases_testCompanyExchangeConfigurationSharingEstimateAddRuleTeams - 2018.04.04 at 08h 49m 06s.xml">
-      <configuration name="BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimateAddRuleTeams" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 09h 31m 08s.xml">
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 00m 13s.xml">
       <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 09h 47m 28s.xml">
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 07m 14s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 24m 23s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 31m 24s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 33m 36s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 36m 05s.xml">
+      <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="BackOfficeOperationsInvoiceTestCases_checkOperationInvoiceEditMarkAsPaid - 2018.04.04 at 11h 39m 20s.xml">
       <configuration name="BackOfficeOperationsInvoiceTestCases.checkOperationInvoiceEditMarkAsPaid" configurationId="TestNG" />
     </history-entry>
   </component>
@@ -698,25 +722,25 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32934782" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.27233115" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.1633987" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5021322" side_tool="true" weight="0.32934782" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.27342048" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32026145" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.22657952" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26252723" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12793177" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.28213507" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.21568628" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3608361" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.37363833" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -758,7 +782,8 @@
     <MESSAGE value="#method changed because of encoding problem" />
     <MESSAGE value="#BO 27877, 62299, 62297, 62295, 62298 fixed" />
     <MESSAGE value="#BO *.properties updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="#BO *.properties updated" />
+    <MESSAGE value="#43689 fixed, refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="#43689 fixed, refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -837,57 +862,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>742</line>
+          <line>749</line>
           <properties />
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>635</line>
+          <line>639</line>
           <properties />
           <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>674</line>
-          <properties />
-          <option name="timeStamp" value="227" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>594</line>
-          <properties />
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>668</line>
-          <properties />
-          <option name="timeStamp" value="230" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>669</line>
-          <properties />
-          <option name="timeStamp" value="231" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>670</line>
-          <properties />
-          <option name="timeStamp" value="232" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>673</line>
-          <properties />
-          <option name="timeStamp" value="233" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>592</line>
-          <properties />
-          <option name="timeStamp" value="234" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
@@ -896,49 +879,13 @@
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>587</line>
-          <properties />
-          <option name="timeStamp" value="236" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>589</line>
-          <properties />
-          <option name="timeStamp" value="237" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>591</line>
-          <properties />
-          <option name="timeStamp" value="238" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>593</line>
-          <properties />
-          <option name="timeStamp" value="239" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>675</line>
-          <properties />
-          <option name="timeStamp" value="241" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>676</line>
-          <properties />
-          <option name="timeStamp" value="242" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
           <line>1078</line>
           <properties />
           <option name="timeStamp" value="244" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="245" />
+      <option name="time" value="247" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -991,31 +938,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InterApplicationExchangeWebPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="109" column="89" lean-forward="true" selection-start-line="109" selection-start-column="89" selection-end-line="109" selection-end-column="89" />
-          <folding>
-            <element signature="e#6428#6429#0" expanded="true" />
-            <element signature="e#6500#6501#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-output/Inhouse test cases/testng-failed.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-output/Cyberiansoft iOS client tests/testng-failed.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" selection-start-line="12" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
@@ -1220,16 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="511">
@@ -1278,16 +1190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="44" column="42" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -1323,6 +1225,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/webelements/ExtendedFieldDecorator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="20" column="70" lean-forward="true" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1333,17 +1242,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/webelements/ExtendedFieldDecorator.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="20" column="70" lean-forward="true" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+        <state relative-caret-position="611">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/pageobjects/ioshddevicescreens/ServiceRequestsScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="320" column="5" lean-forward="true" selection-start-line="320" selection-start-column="5" selection-end-line="320" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#6431#6432#0" expanded="true" />
             <element signature="e#6461#6462#0" expanded="true" />
@@ -1371,20 +1297,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithBillingFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorVendorTeamsTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        <state relative-caret-position="171">
+          <caret line="182" column="23" lean-forward="true" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithTimeFrameFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/WebElementsBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="35" />
+        <state relative-caret-position="125">
+          <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7450#7451#0" expanded="true" />
+            <element signature="e#7485#7486#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/AddEditClientUsersContactsDialogWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+          <folding>
+            <element signature="e#3290#3291#0" expanded="true" />
+            <element signature="e#3345#3346#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WebPageWithFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1393,8 +1342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="711" column="20" lean-forward="true" selection-start-line="711" selection-start-column="20" selection-end-line="711" selection-end-column="20" />
+        <state relative-caret-position="543">
+          <caret line="704" column="20" lean-forward="true" selection-start-line="704" selection-start-column="20" selection-end-line="704" selection-end-column="20" />
           <folding>
             <element signature="e#6533#6534#0" expanded="true" />
             <element signature="e#6560#6561#0" expanded="true" />
@@ -1408,6 +1357,8 @@
             <element signature="e#9867#9868#0" expanded="true" />
             <element signature="e#21466#21467#0" expanded="true" />
             <element signature="e#21500#21501#0" expanded="true" />
+            <element signature="e#21511#21512#0" expanded="true" />
+            <element signature="e#21578#21579#0" expanded="true" />
             <element signature="e#47900#47901#0" expanded="true" />
             <element signature="e#47938#47939#0" expanded="true" />
           </folding>
@@ -1416,8 +1367,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="675" column="39" lean-forward="true" selection-start-line="675" selection-start-column="39" selection-end-line="675" selection-end-column="39" />
+        <state relative-caret-position="209">
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

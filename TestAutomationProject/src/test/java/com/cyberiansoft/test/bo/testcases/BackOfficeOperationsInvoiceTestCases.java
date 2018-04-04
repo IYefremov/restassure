@@ -7,8 +7,8 @@ import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.utils.WebConstants.InvoiceStatuses;
-import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -660,7 +660,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -671,9 +670,16 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicesPage.selectBillingOption(WebConstants.BillingValues.NO_PAYMENT_INFO);
 
-		invoicesPage.clickFindButton()
-                .selectActionForFirstInvoice("Mark as Paid", false);
 		invoicesPage.clickFindButton();
+        String firstInvoiceNameBefore = invoicesPage.getFirstInvoiceName();
+        invoicesPage.selectActionForFirstInvoice("Mark as Paid", false);
+
+        invoicesPage
+                .selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS)
+                .selectBillingOption(WebConstants.BillingValues.PAID)
+                .insertInvoice(firstInvoiceNameBefore);
+		invoicesPage.clickFindButton();
+		Assert.assertEquals(firstInvoiceNameBefore, invoicesPage.getFirstInvoiceName(), "Names differ!");
 		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid());
 	}
 
