@@ -62,4 +62,12 @@ public class VNextConfigInfo {
 	public String getBuildProductionAttribute() {
 	      return props.getProperty("build.production");
 	}
+	
+	public String geReportFolderPath() {
+	      return props.getProperty("report.folder");
+	}
+	
+	public String geReportFileName() {
+	      return props.getProperty("report.filename");
+	}
 }

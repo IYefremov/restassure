@@ -880,7 +880,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickRefreshButton();
 		servicerequestsscreen.selectServiceRequest(servicerequest);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
 		String inspnumber = servicerequestsscreen.getInspectionNumber();
 		// vehiclescreeen.clickStepsButton();
 		// vehiclescreeen.selectServicesAllServicesStep();
@@ -1053,7 +1053,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
 		
 		Thread.sleep(3000);
 		
@@ -1136,7 +1136,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.WO_FOR_SR);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_FOR_SR);
 		String wonumber = servicerequestsscreen.getWorkOrderNumber();
 
 		servicerequestsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -2881,7 +2881,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		
-		servicerequestsscreen.selectInspectionType ("SR_only_Acc_Estimate");
+		servicerequestsscreen.selectInspectionType("SR_only_Acc_Estimate");
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
@@ -2912,7 +2912,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String newsrnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(newsrnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSPTYPE_FOR_SR_INSPTYPE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSPTYPE_FOR_SR_INSPTYPE);
 	
 		String inspectnumber = vehiclescreeen.getInspectionNumber();		
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
@@ -4392,7 +4392,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.isRejectActionExists());
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		//Thread.sleep(2000);
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		String inspectnumber = servicerequestsscreen.getInspectionNumber();
 		servicesscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		servicesscreen.clickSaveAsFinal();
@@ -5077,7 +5077,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_FOR_CALC);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -5363,7 +5363,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		Thread.sleep(2000);
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.INSP_DRAFT_MODE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
 		
@@ -6543,7 +6543,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (insptype1);
+		servicerequestsscreen.selectInspectionType(insptype1);
 		inspnumbers.add(vehiclescreeen.getInspectionNumber());
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -6553,7 +6553,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType (insptype2);
+		servicerequestsscreen.selectInspectionType(insptype2);
 		inspnumbers.add(vehiclescreeen.getInspectionNumber());	
 		vehiclescreeen.selectNextScreen("Zayats Section1");
 		questionsscreen = new QuestionsScreen(appiumdriver);
@@ -6573,7 +6573,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.WO_DELAY_START);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_DELAY_START);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		wonumbers.add(vehiclescreeen.getInspectionNumber());
 		vehiclescreeen.selectNextScreen(OrderSummaryScreen
@@ -6585,7 +6585,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		servicerequestsscreen.selectInspectionType (iOSInternalProjectConstants.WO_MONITOR_DEVICE);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_MONITOR_DEVICE);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		wonumbers.add(vehiclescreeen.getInspectionNumber());
 		vehiclescreeen.selectNextScreen(OrderSummaryScreen

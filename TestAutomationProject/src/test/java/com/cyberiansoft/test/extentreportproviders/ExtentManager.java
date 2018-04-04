@@ -21,12 +21,12 @@ public class ExtentManager {
     public static ExtentReports createInstance(String filePath) {
     	ExtentReports extentmy = new ExtentReports();
     	extentmy.attachReporter(getHtmlReporter(filePath));
-    	extentmy.setSystemInfo("Browser", "Chrome");
+    	/*extentmy.setSystemInfo("Browser", "Chrome");
     	extentmy.setSystemInfo("Environment", "Windows 10");
     	extentmy.setSystemInfo("Platform", "Android");
     	extentmy.setSystemInfo("OS Version", System.getProperty("os.version"));
     	extentmy.setSystemInfo("Java Version", System.getProperty("java.version"));
-    	extentmy.setSystemInfo("Selenium Version", "3.11.0");
+    	extentmy.setSystemInfo("Selenium Version", "3.11.0");*/
         
     	extentmy.setReportUsesManualConfiguration(true);
     	extent.set(extentmy);
@@ -37,7 +37,7 @@ public class ExtentManager {
     private static ExtentHtmlReporter getHtmlReporter(String filePath) {
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(filePath);
 
-        htmlReporter.config().setDocumentTitle("VNext");
+        //htmlReporter.config().setDocumentTitle("VNext");
         htmlReporter.config().setReportName(filePath);
         htmlReporter.config().setChartVisibilityOnOpen(false);
         htmlReporter.config().setTheme(Theme.STANDARD);

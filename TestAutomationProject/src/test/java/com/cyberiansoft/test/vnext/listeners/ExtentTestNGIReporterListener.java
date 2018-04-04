@@ -22,6 +22,7 @@ import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 
 public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener {
@@ -32,7 +33,8 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	
     @Override
 	public synchronized void onStart(ITestContext context) {
-    	ExtentManager.createInstance("test-output/extent.html");
+    	ExtentManager.createInstance(VNextConfigInfo.getInstance().geReportFolderPath() +
+    			VNextConfigInfo.getInstance().geReportFileName());
     	//ExtentTest parent = extent.createTest(getClass().getName());
         //parentTest.set(parent);
 	}
@@ -45,6 +47,10 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	@Override
 	public synchronized void onTestStart(ITestResult result) {
 		ExtentTest extent;
+		if (ExtentTestManager.getTest() == null) {
+			System.out.println("+++++++++++" + result.getTestClass().getName());
+			ExtentTestManager.createTest(result.getTestClass().getName());
+		}
 		if ( getTestParams(result).isEmpty() ) {
 			extent = ExtentTestManager.getTest().createNode(result.getMethod().getMethodName());
         }
@@ -128,8 +134,6 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		AfterClass testAnnotation = (AfterClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(AfterClass.class);
 		if (testAnnotation != null) {
 			ExtentTestManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
-			System.out.println("!!!!!!!!!!!!!!!Endtime" + ExtentTestManager.getTest().getModel().getEndTime().toString());
-			System.out.println("!!!!!!!!!!!!!!!Endtime" + getTime(result.getEndMillis()));
 		}
 		
 	}
@@ -143,8 +147,6 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			else
 				ExtentTestManager.createTest(result.getMethod().getTestClass().getName());
 			ExtentTestManager.getTest().getModel().setStartTime(getTime(result.getStartMillis()));
-			System.out.println("!!!!!!!!!!!!!!!Starttime" + ExtentTestManager.getTest().getModel().getStartTime().toString());
-			System.out.println("!!!!!!!!!!!!!!!Starttime" + getTime(result.getStartMillis()));
 		}
 	}
 }
