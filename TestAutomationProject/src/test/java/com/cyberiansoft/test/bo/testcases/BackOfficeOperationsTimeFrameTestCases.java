@@ -51,27 +51,27 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 		workorderspage.selectSearchStatus(statusall);
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 		
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForAllTablePages(startmonth, currentdate, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForAllTablePages(startlastmonth, endlastmonth, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		workorderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		workorderspage.clickFindButton();
 		workorderspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, workorderspage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 	}
@@ -87,27 +87,27 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		InspectionsWebPage inspectionspage =  operationspage.clickInspectionsLink();
 		
 		inspectionspage.selectSearchStatus(statusall);
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 		
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForFirstAndLastTablePages(startmonth, currentdate, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForFirstAndLastTablePages(startlastmonth, endlastmonth, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		inspectionspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 	}
@@ -122,27 +122,27 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		VendorBillsWebPage vendorbillspage = operationspage.clickVendorBillsLink();
 		vendorbillspage.selectSearchStatus(statusall);
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 		
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startmonth, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastmonth, endlastmonth, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 
-		vendorbillspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		vendorbillspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		vendorbillspage.clickFindButton();
 		vendorbillspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, vendorbillspage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));	
 	}
@@ -156,27 +156,27 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		InvoicesWebPage invoicespage =  operationspage.clickInvoicesLink();
 		
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForAllTablePages(weekStart, currentdate, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 		
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForAllTablePages(lastweekstart, lastweekend, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForFirstAndLastTablePages(startmonth, currentdate, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForFirstAndLastTablePages(startlastmonth, endlastmonth, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForFirstAndLastTablePages(startyear, currentdate, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		invoicespage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, invoicespage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 	}

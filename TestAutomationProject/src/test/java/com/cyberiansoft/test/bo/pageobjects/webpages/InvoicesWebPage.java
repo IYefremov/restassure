@@ -17,7 +17,7 @@ import java.util.Set;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 //@ExtensionMethod(WebElementExt.class)
-public class InvoicesWebPage extends WebPageWithTimeframeFilter {
+public class InvoicesWebPage extends WebPageWithFilter {
 
 	public final static String WOTABLE_DATE_COLUMN_NAME = "Date";
 
@@ -117,13 +117,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 	private WebElement markAsPaidBTN;
 
 	@FindBy(xpath = "//tr[contains(@class, 'order-row border-row custom-order-row')]")
-	WebElement editableRow;
+	private WebElement editableRow;
 
 	@FindBy(xpath = "//div[contains(@title, 'Save')]")
-	WebElement saveVehicleInfoBTN;
+    private WebElement saveVehicleInfoBTN;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl04_Button1")
-	WebElement voidBTN;
+	private WebElement voidBTN;
+
+	@FindBy(xpath = "//tr[@id='ctl00_ctl00_Content_Main_grdInvoices_ctl00__0']/td[contains(text(), 'Paid')]")
+    private WebElement firstInvoiceWithPaidStatus;
 
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
@@ -206,7 +209,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		clearAndType(searchponofld, ponumber);
 	}
 
-	public void setSearchFromDate(String date, String month, String year) throws InterruptedException {
+	public void setSearchFromDate(String date, String month, String year) {
 		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_calendar_Title")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
@@ -216,19 +219,19 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']")).click();
 	}
 
-	public void setSearchFromDate(String date) throws InterruptedException {
+	public void setSearchFromDate(String date) {
 		// Thread.sleep(1000);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")).sendKeys(date);
 	}
 
-	public void setSearchToDate(String date) throws InterruptedException {
+	public void setSearchToDate(String date) {
 		// Thread.sleep(1000);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")).sendKeys(date);
 	}
 
-	public void setSearchToDate(String date, String month, String year) throws InterruptedException {
+	public void setSearchToDate(String date, String month, String year) {
 		wait.until(ExpectedConditions.elementToBeClickable(searchtopopupbtn)).click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_calendar_Title")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
@@ -281,7 +284,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status;
 	}
 
-	public String getInvoicePONumber(String invoicenumber) throws InterruptedException {
+	public String getInvoicePONumber(String invoicenumber) {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
@@ -292,7 +295,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status;
 	}
 
-	public String getInvoicePOPaidValue(String invoicenumber) throws InterruptedException {
+	public String getInvoicePOPaidValue(String invoicenumber) {
 		String status = null;
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
@@ -303,7 +306,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return status;
 	}
 
-	public void changeInvoiceStatus(String invoicenumber, String invoicestatus) throws InterruptedException {
+	public void changeInvoiceStatus(String invoicenumber, String invoicestatus) {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(@id, 'comboStatus_Arrow')]")).click();
@@ -331,7 +334,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		return null;
 	}
 
-	public WebElement clickSelectButtonForInvoice(String invoicenumber) throws InterruptedException {
+	public WebElement clickSelectButtonForInvoice(String invoicenumber) {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
 			Actions act = new Actions(driver);
@@ -499,7 +502,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 
-	public void archiveInvoiceByNumber(String invoicenumber) throws InterruptedException {
+	public void archiveInvoiceByNumber(String invoicenumber) {
 		WebElement row = getTableRowWithInvoiceNumber(invoicenumber);
 		if (row != null) {
 			checkboxSelect(row.findElement(By.xpath(".//td/input[@type='checkbox']")));
@@ -507,8 +510,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
 		}
 		driver.findElement(By.xpath("//span[@class='rtbText' and text()='Archive']")).click();
-		;
-		wait.until(ExpectedConditions.alertIsPresent()).accept();
+        wait.until(ExpectedConditions.alertIsPresent()).accept();
 		waitUntilPageReloaded();
 	}
 
@@ -555,7 +557,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		driver.navigate().refresh();
 	}
 
-	public String selectActionForFirstInvoice(String string, boolean swichArrow) throws InterruptedException {
+	public String selectActionForFirstInvoice(String string, boolean switchArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
 		scrollWindowDown(300);
 		Actions act = new Actions(driver);
@@ -564,53 +566,52 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			act.moveToElement(selectBTN).click().build().perform();
 			ivoiceOptions.findElement(By.linkText(string)).click();
 			Set<String> frames = driver.getWindowHandles();
-			Thread.sleep(10000);
+			waitABit(10000);
 			frames.remove(mainWindow);
 			driver.switchTo().window(frames.iterator().next());
 			return frames.iterator().next();
-		}
-		
-		 else if (string.equals("Pay")) {
+		} else if (string.equals("Pay")) {
 			 act.moveToElement(selectBTN).click().build().perform();
-			 try{
+			 try {
 				ivoiceOptions.findElement(By.linkText(string)).click();
-				Thread.sleep(1000);
-			 }catch(Exception e){
-					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-					ivoiceOptions.findElement(By.linkText(string)).click();
+				waitABit(1000);
+			 } catch(Exception e) {
+			     act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
+			     ivoiceOptions.findElement(By.linkText(string)).click();
 			 }
-				wait.until(
-						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-				return mainWindow;
-			}
-		else 
-			if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
+			 waitForLoading();
+//				wait.until(ExpectedConditions
+//                        .invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+                return mainWindow;
+			} else if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
 				act.moveToElement(selectBTN).click().build().perform();
 				try{
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 				}catch(Exception e){
-					try{
+					try {
 					act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-					}catch(Exception ex){}
+					} catch(Exception ignored){}
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 				}
-				Thread.sleep(1000);
-				wait.until(
-						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+            waitForLoading();
+//				Thread.sleep(1000);
+//				wait.until(
+//						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				
 				if(string.equals("Mark as Paid")){
 				wait.until(ExpectedConditions.visibilityOf(paymentNote));
 				paymentTextField.sendKeys("test");
 				markAsPaidBTN.click();
 				driver.switchTo().alert().accept();
-					Thread.sleep(1000);
-				wait.until(
-						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				waitForLoading();
+				// Thread.sleep(1000);
+//				wait.until(
+//						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				driver.navigate().refresh();
 				}
 				return mainWindow;
 			}
-			else if((string.equals("Email Activity") && !swichArrow)){
+			else if((string.equals("Email Activity") && !switchArrow)){
 				act.moveToElement(selectBTN).click().build().perform();
 				try{
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
@@ -634,7 +635,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 			Thread.sleep(3000);
 			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 			return mainWindow;
-		} else if ((string.equals("Send Email") && swichArrow) || (string.equals("Send Custom Email") && swichArrow)) {
+		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
 			act.moveToElement(selectBTN).click().build().perform();
 			Thread.sleep(1000);
 			try {
@@ -687,20 +688,16 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		jse.executeScript("window.scrollBy(0," + pix + ")", "");
 	}
 
-	public boolean firstInvoiceMarkedAsPaid() {
+	public boolean isFirstInvoiceMarkedAsPaid() {
 		try {
-			Actions act = new Actions(driver);
-			act.moveToElement(selectBTN).click().build().perform();
-			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
-			act.moveToElement(selectBTN).click().build().perform();
+		    wait.until(ExpectedConditions.visibilityOf(firstInvoiceWithPaidStatus));
 		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
 
-	public void editVehicleInfo(String editText) throws AWTException {
+	public void editVehicleInfo(String editText) {
 
 		List<WebElement> editableFields = driver.findElements(By.tagName("td"));
 		Actions act = new Actions(driver);
@@ -710,7 +707,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		saveVehicleInfoBTN.click();
 	}
 
-	public InvoiceEditTabWebPage clickEditFirstInvoice() throws InterruptedException {
+	public InvoiceEditTabWebPage clickEditFirstInvoice() {
 
 		String mainWindowHandle = driver.getWindowHandle();
 		Actions act = new Actions(driver);
@@ -753,7 +750,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return driver.getWindowHandles().size() > 1 ? true : false;
+		return driver.getWindowHandles().size() > 1;
 	}
 
 	public void closeTab(String newTab) {
@@ -773,7 +770,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 
-	public int countEmailActivities(String emailWindow) throws InterruptedException {
+	public int countEmailActivities(String emailWindow) {
 		String mainWindow = "";
 		Set<String> windows = driver.getWindowHandles();
 		for (String window : windows) {
@@ -805,7 +802,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 		}
 	}
 
-	public void setEmailAndSend(String string) throws InterruptedException {
+	public void setEmailAndSend(String string) {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(string);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")).click();
@@ -855,7 +852,7 @@ public class InvoicesWebPage extends WebPageWithTimeframeFilter {
 				.sendKeys(string);
 	}
 
-	public boolean checkSearchResult() throws InterruptedException {
+	public boolean checkSearchResult() {
 		return driver.findElements(By.className("rgRow")).size() > 0;
 	}
 

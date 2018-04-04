@@ -1,18 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 
 public class WebPageWithPagination extends BaseWebPage {
@@ -27,7 +21,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	private WebElement gotopreviouspage;
 		
 	@FindBy(xpath = "//input[@title='Next Page']")
-	private WebElement gotonextpage;
+	private WebElement goToNextPage;
 		
 	@FindBy(xpath = "//input[@title='Last Page']")
 	private WebElement gotolastpage;
@@ -128,10 +122,10 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 	
 	public void clickGoToNextPage()  {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
-		int nextpage = currenpage + 1;
-		gotonextpage.click();		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
+		int currentPage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int nextPage = currentPage + 1;
+		goToNextPage.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextPage  + "']")));
 	}
 	
 	public void clickGoToPreviousPage() {
@@ -144,11 +138,11 @@ public class WebPageWithPagination extends BaseWebPage {
 		}catch(TimeoutException e){}
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
-	public void waitForLoading(){
+
+	void waitForLoading(){
 		try{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		}catch(TimeoutException e){}
+		} catch(TimeoutException ignored){}
 	}
-
 }

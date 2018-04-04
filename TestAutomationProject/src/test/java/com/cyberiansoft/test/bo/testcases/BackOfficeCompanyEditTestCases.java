@@ -1008,7 +1008,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.deleteRule(newName+" (Services Include Selected)");
 	}
 
-	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts")
+	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts", retryAnalyzer = Retry.class)
 	public void testCompanySharingWorkOrderAddRuleVehicleParts() throws InterruptedException {
 	    final String entry = "WO JST (Work Order)";
 	    final String rule = "Include Selected Vehicle Parts (Vehicle Parts Include Selected)";
@@ -1185,8 +1185,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.deleteRule(newName+" (Clients Include Selected)");
 	}
-	
-	@Test(testName = "Test Case 62302:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Teams")
+
+	@Test(testName = "Test Case 62302:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Teams", retryAnalyzer = Retry.class)
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleTeams() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -1194,9 +1194,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab("Sending");
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
-			}
+		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");

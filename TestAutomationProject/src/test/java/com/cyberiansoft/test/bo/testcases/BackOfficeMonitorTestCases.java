@@ -99,7 +99,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 
 		VendorOrdersWebPage vendororderspage = monitorpage.clickVendorOrdersLink();
-		vendororderspage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		vendororderspage.selectSearchServiceStatus(servicestatus);
 		vendororderspage.clickFindButton();
 		vendororderspage.repairOrdersTableIsVisible();

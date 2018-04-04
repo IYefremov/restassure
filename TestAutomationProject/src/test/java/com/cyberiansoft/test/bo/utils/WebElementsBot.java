@@ -1,15 +1,10 @@
 package com.cyberiansoft.test.bo.utils;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,10 +12,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class WebElementsBot {
 	
@@ -56,7 +50,7 @@ public class WebElementsBot {
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		waitABit(1000);
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
-		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(e -> e.getText()).forEach(System.out::println);
+		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(WebElement::getText).forEach(System.out::println);
 		List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
 		items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
 		waitABit(1500);

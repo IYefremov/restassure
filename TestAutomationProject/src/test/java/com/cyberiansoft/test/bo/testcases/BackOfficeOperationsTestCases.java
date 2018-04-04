@@ -91,7 +91,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.clickFindButton();
 		wopage.makeSearchPanelVisible();
-		wopage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		wopage.clickFindButton();
 		wopage.verifyWorkOrdersTableColumnsAreVisible();
 

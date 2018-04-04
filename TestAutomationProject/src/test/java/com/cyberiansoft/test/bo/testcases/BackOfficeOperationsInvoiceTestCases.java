@@ -47,7 +47,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
@@ -103,7 +103,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -157,7 +157,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -170,24 +170,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(3000);
 		// TODO when webdriver renewed
-		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);
-		invoiceedittab.clcikAddPO();
-		invoiceedittab.clickAddPOPayButton();
-		Assert.assertTrue(invoiceedittab.getPONumberField().getAttribute("style").contains("solid red"));
-		invoiceedittab.setPONumber(po);
-		invoiceedittab.setPONotes(notes);
-		String alerttext = invoiceedittab.clickAddPOPayButtonAndAcceptPayment();
+		InvoiceEditTabWebPage invoiceEditTab = invoicespage.clickEditInvoice(invoicenumber);
+		invoiceEditTab.clcikAddPO();
+		invoiceEditTab.clickAddPOPayButton();
+		Assert.assertTrue(invoiceEditTab.getPONumberField().getAttribute("style").contains("solid red"));
+		invoiceEditTab.setPONumber(po);
+		invoiceEditTab.setPONotes(notes);
+		String alerttext = invoiceEditTab.clickAddPOPayButtonAndAcceptPayment();
 		Assert.assertEquals(alerttext, "PO/RO payment has processed.");
 
-		invoiceedittab.clcikAddPO();
-		invoiceedittab.setPONumber(ponum);
-		invoiceedittab.setPONotes(ponotes);
-		invoiceedittab.checkApproveInvoiceAfterPayment();
-		alerttext = invoiceedittab.clickAddPOPayButtonAndAcceptPayment();
+		invoiceEditTab.clcikAddPO();
+		invoiceEditTab.setPONumber(ponum);
+		invoiceEditTab.setPONotes(ponotes);
+		invoiceEditTab.checkApproveInvoiceAfterPayment();
+		alerttext = invoiceEditTab.clickAddPOPayButtonAndAcceptPayment();
 		Assert.assertEquals(alerttext, "PO/RO payment has processed.");
-		invoiceedittab.clcikAddPO();
-		Assert.assertFalse(invoiceedittab.getCheckApproveInvoiceAfterPayment().isEnabled());
-		invoiceedittab.closeNewTab(mainWindowHandle);
+		invoiceEditTab.clcikAddPO();
+		Assert.assertFalse(invoiceEditTab.getCheckApproveInvoiceAfterPayment().isEnabled());
+		invoiceEditTab.closeNewTab(mainWindowHandle);
 
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_APPROVED);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
@@ -212,17 +212,16 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(5000);
-		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(invoicenumber);
-		invoiceedittab.clickTechniciansLink();
-		invoiceedittab.unselectAllTechnicians();
-
+		InvoiceEditTabWebPage invoiceEditTab = invoicespage.clickEditInvoice(invoicenumber);
+		invoiceEditTab.clickTechniciansLink();
+		invoiceEditTab.unselectAllTechnicians();
 	}
 
 	// @Test(testName = "Test Case 28578:Operation - Invoice: Edit - Click here
@@ -236,7 +235,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -278,7 +277,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.clickFindButton();
 		final String invoicenumber = invoicespage.getFirstInvoiceNumberInTable();
@@ -307,7 +306,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
@@ -367,7 +366,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String status = "";
@@ -386,18 +385,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_APPROVED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Approved"));
+            Assert.assertEquals("Approved", invoicespage.getInvoiceStatus(invoicenumber));
 		} else {
 			invoicespage.changeInvoiceStatus(invoicenumber, "New");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));
+            Assert.assertEquals("New", invoicespage.getInvoiceStatus(invoicenumber));
 			invoicespage.changeInvoiceStatus(invoicenumber, "Approved");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_APPROVED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Approved"));
+            Assert.assertEquals("Approved", invoicespage.getInvoiceStatus(invoicenumber));
 		}
 	}
 
@@ -433,7 +432,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		String status = "";
 		for (InvoiceStatuses stat : WebConstants.InvoiceStatuses.values()) {
@@ -451,18 +450,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORTED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Exported"));
+            Assert.assertEquals("Exported", invoicespage.getInvoiceStatus(invoicenumber));
 		} else {
 			invoicespage.changeInvoiceStatus(invoicenumber, "New");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));
+            Assert.assertEquals("New", invoicespage.getInvoiceStatus(invoicenumber));
 			invoicespage.changeInvoiceStatus(invoicenumber, "Exported");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORTED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Exported"));
+            Assert.assertEquals("Exported", invoicespage.getInvoiceStatus(invoicenumber));
 		}
 	}
 
@@ -498,7 +497,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		String status = "";
 		for (InvoiceStatuses stat : WebConstants.InvoiceStatuses.values()) {
@@ -516,18 +515,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Void"));
+            Assert.assertEquals("Void", invoicespage.getInvoiceStatus(invoicenumber));
 		} else {
 			invoicespage.changeInvoiceStatus(invoicenumber, "New");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));
+            Assert.assertEquals("New", invoicespage.getInvoiceStatus(invoicenumber));
 			invoicespage.changeInvoiceStatus(invoicenumber, "Void");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Void"));
+            Assert.assertEquals("Void", invoicespage.getInvoiceStatus(invoicenumber));
 		}
 	}
 
@@ -538,61 +537,61 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
+		WorkOrdersWebPage workOrdersPage = operationspage.clickWorkOrdersLink();
+		workOrdersPage.unselectInvoiceFromDeviceCheckbox();
+		workOrdersPage.selectSearchStatus("All");
+		workOrdersPage.clickFindButton();
 
-		workorderspage.unselectInvoiceFromDeviceCheckbox();
-		workorderspage.checkFirstWorkOrderCheckBox();
-		workorderspage.addInvoiceDescription("test");
-		workorderspage.clickCreateInvoiceButton();
+		workOrdersPage.unselectInvoiceFromDeviceCheckbox();
+		workOrdersPage.checkFirstWorkOrderCheckBox();
+		workOrdersPage.addInvoiceDescription("test");
+		workOrdersPage.clickCreateInvoiceButton();
 
-		String wonum = workorderspage.getFirstWorkOrderNumberInTheTable();
-		String invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		String wonum = workOrdersPage.getFirstWorkOrderNumberInTheTable();
+		String invoiceNumber = workOrdersPage.getWorkOrderInvoiceNumber(wonum);
 
-		workorderspage.selectSearchStatus("All");
-		workorderspage.clickFindButton();
+		workOrdersPage.selectSearchStatus("All");
+		workOrdersPage.clickFindButton();
 
-		if (invoicenumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, ponum);
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoicenumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+		if (invoiceNumber.equals("")) {
+			workOrdersPage.createInvoiceFromWorkOrder(wonum, ponum);
+			workOrdersPage.setSearchOrderNumber(wonum);
+			workOrdersPage.clickFindButton();
+			invoiceNumber = workOrdersPage.getWorkOrderInvoiceNumber(wonum);
 		}
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.setSearchInvoiceNumber(invoicenumber);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.setSearchInvoiceNumber(invoiceNumber);
 		String status = "";
 		for (InvoiceStatuses stat : WebConstants.InvoiceStatuses.values()) {
 			try {
 				invoicespage.selectSearchStatus(stat);
 				invoicespage.clickFindButton();
-				status = invoicespage.getInvoiceStatus(invoicenumber);
+				status = invoicespage.getInvoiceStatus(invoiceNumber);
 				if (!status.isEmpty())
 					break;
 			} catch (Exception e) {
 			}
 		}
 		if (status.equals("New")) {
-			invoicespage.changeInvoiceStatus(invoicenumber, "Export Failed");
+			invoicespage.changeInvoiceStatus(invoiceNumber, "Export Failed");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORT_FAILED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Export Failed"));
+            Assert.assertEquals("Export Failed", invoicespage.getInvoiceStatus(invoiceNumber));
 		} else {
-			invoicespage.changeInvoiceStatus(invoicenumber, "New");
+			invoicespage.changeInvoiceStatus(invoiceNumber, "New");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("New"));
-			invoicespage.changeInvoiceStatus(invoicenumber, "Export Failed");
+            Assert.assertEquals("New", invoicespage.getInvoiceStatus(invoiceNumber));
+			invoicespage.changeInvoiceStatus(invoiceNumber, "Export Failed");
 			invoicespage.refreshPage();
 			invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_EXPORT_FAILED);
 			invoicespage.clickFindButton();
-			Assert.assertTrue(invoicespage.getInvoiceStatus(invoicenumber).equals("Export Failed"));
+            Assert.assertEquals("Export Failed", invoicespage.getInvoiceStatus(invoiceNumber));
 		}
 	}
 
@@ -629,7 +628,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		String status = "";
 		for (InvoiceStatuses stat : WebConstants.InvoiceStatuses.values()) {
@@ -662,19 +661,20 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 
 	//todo fails
-	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		InvoicesWebPage invoicesPage = backofficeHeader
                 .clickOperationsLink()
                 .clickInvoicesLink();
-		invoicesPage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectBillingOption(WebConstants.BillingValues.NO_PAYMENT_INFO);
 
 		invoicesPage.clickFindButton()
                 .selectActionForFirstInvoice("Mark as Paid", false);
 		invoicesPage.clickFindButton();
-		Assert.assertTrue(invoicesPage.firstInvoiceMarkedAsPaid());
+		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid());
 	}
 
 	// @Test(testName = "Test Case 43217:Operation - Invoice: Edit - Vehicle
@@ -701,7 +701,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 
@@ -717,7 +717,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 
 		invoicespage.selectActionForFirstInvoice("Change Invoice#", false);
@@ -735,7 +735,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 
 		invoicespage.selectActionForFirstInvoice("Download JSON", false);
@@ -748,7 +748,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Tech. Info", false);
 		Assert.assertTrue(invoicespage.isWindowOpened());
@@ -762,7 +762,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Recalc Tech Split", false);
@@ -776,18 +776,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailWindow);
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		invoicespage.selectActionForFirstInvoice("Send Email", false);
 		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
 		invoicespage.setEmailAndSend("test123@domain.com");
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		emailWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
@@ -799,17 +799,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectActionForFirstInvoice("Send Custom Email", false);
 		invoicespage.setCustomEmailAndSend("test123@domain.com", emailWindow);
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		emailActivityWindow = invoicespage.selectActionForFirstInvoice("Email Activity", false);
 		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
@@ -824,7 +824,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectActionForFirstInvoice("Internal Tech. Info", false);
@@ -854,7 +854,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		// TODO bug
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus("All");
 		invoicespage.setSearchByYear("2007");
 		invoicespage.clickFindButton();
@@ -882,7 +882,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 
@@ -899,7 +899,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		try {
 			invoicespage.clickFindButton();
 			invoicespage.selectActionForFirstInvoice("Mark as Unpaid", false);
@@ -922,7 +922,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));

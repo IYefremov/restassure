@@ -1,39 +1,46 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.WebTable;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-public class WebPageWithTimeframeFilter extends WebPageWithPagination {
-	
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
+
+public class WebPageWithFilter extends WebPageWithPagination {
+
 	@FindBy(xpath = "//*[contains(@id, 'filterer_ddlTimeframe_Input')]")
 	private ComboBox searchtimeframecmb;
 	
 	@FindBy(xpath = "//*[contains(@id, 'filterer_ddlTimeframe_DropDown')]")
 	private DropDown searchtimeframedd;
-	
-	public WebPageWithTimeframeFilter(WebDriver driver) {
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_ddlPORequired_Input')]")
+    private ComboBox searchBillingCmb;
+
+    @FindBy(xpath = "//div[contains(@id, 'filterer_ddlPORequired_DropDown')]")
+    private DropDown searchBillingDropDown;
+
+    public void selectBillingOption(WebConstants.BillingValues billingValues) {
+        selectComboboxValue(searchBillingCmb, searchBillingDropDown, billingValues.getName());
+    }
+	public WebPageWithFilter(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void selectSearchTimeframe(WebConstants.TimeFrameValues timeframe) { 
+	public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
 	}
 	

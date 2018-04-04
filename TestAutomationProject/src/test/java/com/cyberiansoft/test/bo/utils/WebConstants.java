@@ -2,7 +2,7 @@ package com.cyberiansoft.test.bo.utils;
 
 public class WebConstants {
 
-	public static enum TimeFrameValues {
+	public enum TimeFrameValues {
 		TIMEFRAME_WEEKTODATE("Week to date"),
 		TIMEFRAME_LASTWEEK("Last Week"),
 		TIMEFRAME_MONTHTODATE("Month to date"),
@@ -23,7 +23,23 @@ public class WebConstants {
 		   return name;
 		}
 	}	
-	
+
+	public enum BillingValues {
+		PAYMENT_INFO_RECEIVED("Payment Info Received"),
+		NO_PAYMENT_INFO("No Payment Info"),
+		PAID("Paid");
+
+		private String name;
+
+		BillingValues(final String name) {
+		   this.name = name;
+		}
+
+		public String getName() {
+		   return name;
+		}
+	}
+
 	public enum InvoiceStatuses {
 		INVOICESTATUS_ALL("All"),
 		INVOICESTATUS_APPROVED("Approved"),
