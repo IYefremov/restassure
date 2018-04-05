@@ -211,7 +211,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceContractsPage.verifyPortfolioOptionsAreOpened();
 	}
 
-	@Test(description = "Test Case 17281:Operations - Inspection")
+	@Test(description = "Test Case 17281:Operations - Inspection", retryAnalyzer = Retry.class)
 	public void testOperationInspection() throws Exception {
 
 		final String timeframe = "Last Year";

@@ -1,29 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class EventsWebPage extends BaseWebPage {
 
@@ -232,13 +222,11 @@ public class EventsWebPage extends BaseWebPage {
 			// driver.findElement(By.linkText("Save")).click();
 			new Actions(driver).moveToElement(emailNotificationCheckBox)
 					.moveToElement(selectedRow.findElement(By.linkText("Save"))).click().build().perform();
-			Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitForLoading();
 		}
 	}
 
-	public void setEmailNototificationDropDownForSelected(String string) {
+	public void setEmailNotificationDropDownForSelected(String string) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		selectedRow.findElement(By.xpath(".//div[@class ='RadComboBox RadComboBox_Office2007 ddlTemplates']")).click();

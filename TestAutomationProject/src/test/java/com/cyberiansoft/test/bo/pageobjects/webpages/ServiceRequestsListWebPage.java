@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -40,6 +41,9 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 //
 //@ExtensionMethod(WebElementExt.class)
 public class ServiceRequestsListWebPage extends BaseWebPage implements ClipboardOwner {
+
+    private String userName;
+    private String userPassword;
 
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
 	private WebElement searchtab;
@@ -194,7 +198,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	private WebElement removeBTN;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbServicePachages_Input")
-	private WebElement addServiceRequestDopDown;
+	private WebElement addServiceRequestDropDown;
 
 	@FindBy(xpath = "//div[contains(@class, 'infoBlock main')]")
 	private List<WebElement> serviceRequestInfoBlocks;
@@ -302,6 +306,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		PageFactory.initElements(driver, WebPageWithPagination.class);
+
+        userName = BOConfigInfo.getInstance().getUserName();
+        userPassword = BOConfigInfo.getInstance().getUserPassword();
 	}
 
 	public boolean searchPanelIsExpanded() {
@@ -1029,12 +1036,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void selectAddServiceRequestDropDown(String string) {
 		if (!string.equals("01_Alex2SRT")) {
-			addServiceRequestDopDown.click();
+			addServiceRequestDropDown.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
 					.get().click();
 		}
-
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
@@ -1909,7 +1915,7 @@ waitABit(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("divGeneralButtonsDone"))).click();
 	}
 
-	public void addAppointmentWithTechnisian(String startDate, String endDate, String string)
+	public void addAppointmentWithTechnician(String startDate, String endDate, String string)
 			throws InterruptedException {
 		waitABit(3000);
 
@@ -1942,20 +1948,28 @@ waitABit(3000);
 	}
 
 	public boolean checkEmails(String message) throws InterruptedException {
-		boolean flag1 = false;
+		boolean flag = false;
 		Thread.sleep(20000);
 		for (int i = 0; i < 7; i++) {
 			try {
-				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!", message,
-						"reconpro+main@cyberiansoft.com").isEmpty()) {
-					flag1 = true;
+//				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
+//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
+//				    if (!MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!",
+//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
+//				        if (!MailChecker.searchEmailAndGetMailMessage("cyberiansoft.test@gmail.com", "ZZzz11!!",
+//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
+ 				        if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
+                                "reconpro+main@cyberiansoft.com").isEmpty()) {
+					flag = true;
 					break;
 				}
-			} catch (NullPointerException e) {
+//            } catch (NullPointerException ignored) {}
+        } catch (NullPointerException e) {
+                System.err.println("EXCEPTION: " + e);
 			}
 			Thread.sleep(40000);
 		}
-		return flag1;
+		return flag;
 	}
 
 	public void selectSREditFrame() {

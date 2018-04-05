@@ -107,7 +107,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 	}
 
-    //todo ignored
+    //todo ignored  works
     @Test(testName = "Test Case 25589:Operation - New service request - Appointment - Wholesale", description = "Operation - New service request - Appointment - Wholesale")
 	public void testOperationNewServiceRequestAppointmentWholesale() throws InterruptedException {
 
@@ -175,7 +175,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 	}
 
-    //todo ignored
+    //todo ignored works
 	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom",
             description = "Operation - New service request - Appointment - Location Type: Custom", retryAnalyzer = Retry.class)
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustom() throws InterruptedException {
@@ -273,7 +273,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-    //todo ignored
+    //todo ignored works
     @Test(testName = "Test Case 26165:Operation - New service request - Appointment - Location Type: Customer", description = "Operation - New service request - Appointment - Location Type: Customer")
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustomer() throws InterruptedException {
 
@@ -460,7 +460,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-    //todo ignored
+    //todo ignored works
     @Test(testName = "Test Case 26172:Operation - New service request - Appointment - Location Type: Repair Location", description = "Operation - New service request - Appointment - Location Type: Repair Location")
 	public void testOperationNewServiceRequestAppointmentLocationTypeRepairLocation() throws InterruptedException {
 
@@ -577,7 +577,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-    //todo ignored
+    //todo ignored works
     @Test(testName = "Test Case 24852:Operations: CLUser - it not possible to accept SR (option is not present)"
 			+ "Test Case 24853:Operations: CLUser - it is possible to reject SR (option is present)", description = "Operations: CLUser - it not possible to accept SR (option is not present)"
 					+ "Operations: CLUser - it is possible to reject SR (option is present)")
@@ -1044,10 +1044,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         return new Object[][] { { "Alex SASHAZ", firstDate, secondDate, "Scheduled", isDateShifted } };
     }
 
-	//todo fails unhandled alert
-	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdata")
-	public void checkSRappointmentSchedulerMonth(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+    @DataProvider
+    public Object[][] provideSRdataForSchedulerMonth() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        return new Object[][] {{ "Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter) }};
+    }
+
+	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdataForSchedulerMonth")
+	public void checkSRappointmentSchedulerMonth(String customer, String startDate) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestLink();
@@ -1063,14 +1067,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
 		int afterRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
-        System.out.println("AFTER: " + afterRequestsCount);
-        System.out.println("BEFORE: " + prevRequestsCount);
-//        Assert.assertEquals(1, afterRequestsCount - prevRequestsCount);
+        Assert.assertEquals(1, afterRequestsCount - prevRequestsCount);
 	}
 
-	@Test(testName = "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5", dataProvider = "provideSRdata")
-	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5(String customer, String startDate, String endDate,
-			String status, boolean isDateShifted) throws InterruptedException {
+	@Test(testName = "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5")
+	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1104,8 +1105,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.aplyTechniciansFromScheduler();
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset", dataProvider = "provideSRdata")
+	@Test(testName = "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset",
+            dataProvider = "provideSRdata", retryAnalyzer = Retry.class)
 	public void checkSRmultiTechReset(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1130,7 +1131,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 56839:Operation - Service Request - Appointment - Scheduler - Add Service Request", dataProvider = "provideSRdata")
 	public void checkSRcreation(String customer, String startDate, String endDate, String status, boolean isDateShifted)
-			throws InterruptedException {
+            throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1314,8 +1315,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1326,7 +1326,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1337,7 +1337,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(
@@ -1346,7 +1346,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		// eventsWebPage.deleteSelectedEvent();
 	}
 
     //todo ignored
@@ -1361,7 +1360,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1372,7 +1371,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Service Request with RO#  was created")
@@ -1383,7 +1382,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails
+	//todo fails failed to change window state to normal, current state is maximized
 	@Test(testName = "Test Case 31350:Miscellaneous - Events: Service Request Checked In", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsServiceRequestCheckedIn(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
@@ -1395,7 +1394,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR Checked In");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
-		eventsWebPage.setEmailNototificationDropDownForSelected("ServiceRequest Checked In");
+		eventsWebPage.setEmailNotificationDropDownForSelected("ServiceRequest Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1407,7 +1406,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
@@ -1433,7 +1432,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment Appointment Created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment Appointment Created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
+		eventsWebPage.setEmailNotificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1467,7 +1466,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment Appointment Failed");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
-		eventsWebPage.setEmailNototificationDropDownForSelected("test appointment creation/fail");
+		eventsWebPage.setEmailNotificationDropDownForSelected("test appointment creation/fail");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1501,7 +1500,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1512,7 +1511,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(
@@ -1535,7 +1534,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1546,7 +1545,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails()
@@ -1569,7 +1568,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1580,7 +1579,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
@@ -1602,7 +1601,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1613,7 +1612,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Remainder") || serviceRequestsWebPage.checkTestEmails());
@@ -1635,7 +1634,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1646,7 +1645,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created"));
@@ -1667,7 +1666,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setAlertNewName("test appointment SR created");
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		eventsWebPage.setEmailNototificationDropDownForSelected("My Service Requests");
+		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
@@ -1678,7 +1677,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("was created")||serviceRequestsWebPage.checkTestEmails());
@@ -1710,7 +1709,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo("Automation1 Primary  Tech");
-		serviceRequestsWebPage.addAppointmentWithTechnisian(startDate, endDate, "Automation 2 Appointment Tech");
+		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();

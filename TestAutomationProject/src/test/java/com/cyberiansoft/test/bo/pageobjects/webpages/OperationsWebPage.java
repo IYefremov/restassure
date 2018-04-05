@@ -58,14 +58,14 @@ public class OperationsWebPage extends BaseWebPage {
 				driver, TechnicianCommissionsWebPage.class);
 	}
 	
-	public ServiceRequestsWebPage clickServiceRequestsLink() throws InterruptedException {
+	public ServiceRequestsWebPage clickServiceRequestsLink() {
 		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(servicerequestslink)).click();
 		return PageFactory.initElements(
 				driver, ServiceRequestsWebPage.class);
 	}
 	
-	public ServiceContractsWebPage clickServiceContactsLink() throws InterruptedException {
+	public ServiceContractsWebPage clickServiceContactsLink() {
 		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(servicecontactslink)).click();
 		return PageFactory.initElements(
@@ -92,7 +92,7 @@ public class OperationsWebPage extends BaseWebPage {
 				driver, ServiceRequestsListWebPage.class);
 	}
 	
-	public NewInspectionWebPage clickNewInspectionLink() throws InterruptedException {
+	public NewInspectionWebPage clickNewInspectionLink() {
 		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(newinspectionlink)).click();
 		return PageFactory.initElements(

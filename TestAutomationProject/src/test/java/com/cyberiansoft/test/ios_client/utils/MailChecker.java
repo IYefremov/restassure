@@ -1,5 +1,13 @@
 package com.cyberiansoft.test.ios_client.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.search.FlagTerm;
+import javax.mail.search.OrTerm;
+import javax.mail.search.SearchTerm;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,25 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import javax.mail.Address;
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.search.FlagTerm;
-import javax.mail.search.OrTerm;
-import javax.mail.search.SearchTerm;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class MailChecker {
 
@@ -56,7 +45,6 @@ public class MailChecker {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         }
-
         return store;
     }
 
@@ -537,11 +525,11 @@ public class MailChecker {
             Message[] foundMessages = folderInbox.search(searchTerm);
             System.out.println("Total Messages Found :" + foundMessages.length);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
-            if (message != null)
+            if (message != null) {
                 mailmessage = getText(message);
-
-            //message.setFlag(Flags.Flag.SEEN, true);
-            message.setFlag(Flags.Flag.DELETED, true);
+                //message.setFlag(Flags.Flag.SEEN, true);
+                message.setFlag(Flags.Flag.DELETED, true);
+            }
             // disconnect
             folderInbox.close(false);
             store.close();
