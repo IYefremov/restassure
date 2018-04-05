@@ -23,6 +23,10 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamSupplementsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsLineApprovalTestCases">
+      </class>
     </classes>
   </test>
 </suite>
