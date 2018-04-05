@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.AppiumDriver;
@@ -114,10 +115,22 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElements(MobileBy.iOSNsPredicateString("name = '" + service + "' and type = 'XCUIElementTypeCell'")).size();
 	}
 	
-	public void assertServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
-		final String labelvalue = servicename + ", " + servicepriceandquantity;
+	public void assertServiceIsSelectedWithServiceValues(String servicename, String vehiclepart, String servicepriceandquantity) {
+		
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		Assert.assertTrue(selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(labelvalue).size() > 0);
+		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
+				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + vehiclepart + "']/..");
+		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.]", ""), 
+				servicepriceandquantity.replaceAll(" ", ""));
+	}
+	
+	public void assertServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
+		
+		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
+				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']");
+		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.]", ""), 
+				servicepriceandquantity.replaceAll(" ", ""));
 	}
 
 	public int getServiceSelectedNumber(String service) {

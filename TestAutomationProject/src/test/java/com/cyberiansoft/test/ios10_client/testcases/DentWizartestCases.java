@@ -93,7 +93,7 @@ public class DentWizartestCases extends BaseTestCase {
 		//appiumdriver.installApp(appiumdriver.getCapabilities().getCapability("MobileCapabilityType.APP").toString());
 		//appiumdriver.launchApp();
 		//if (appiumdriver.isAppInstalled(IOSHDDeviceInfo.getInstance().getDeviceBundleId()))
-				appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
@@ -941,11 +941,11 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 1; i < vehicleparts.length; i++) {
-			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[i]
+			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00");
 		}
 		
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[0]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00");
 
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
@@ -968,12 +968,12 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 2; i < vehicleparts.length; i++) {
-			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[i]
+			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00");
 		}
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[0]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[1]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00");
 
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
@@ -999,14 +999,14 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 3; i < vehicleparts.length; i++) {
-			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[i]
+			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00");
 		}
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[0]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[1]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[2]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
 				, "$60.00 x 1.00");
 
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
@@ -1014,13 +1014,13 @@ public class DentWizartestCases extends BaseTestCase {
 				vehicleparts[3]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[3]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[3]
 				, "$275.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[0]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[1]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00");
-		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE + ", " + vehicleparts[2]
+		servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
 				, "$60.00 x 1.00");
 
 		servicesscreen.selectNextScreen(OrderSummaryScreen
@@ -3407,7 +3407,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		servicesscreen.clickSaveButton();
-		
+		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3433,7 +3433,6 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 
-		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection1);
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection2);
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection3);
@@ -3839,11 +3838,11 @@ public class DentWizartestCases extends BaseTestCase {
 		String wonumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		for (int i = 0; i < vehicleparts.length; i++) {
-			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE + ", " + vehicleparts[i]
+			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE , vehicleparts[i]
 					, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00");
 		}
 		for (int i = 0; i < vehiclepartspaint.length; i++) {
-			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE + ", " + vehiclepartspaint[i]
+			servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE , vehiclepartspaint[i]
 					, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00");
 		}
 		//servicesscreen.assertServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00");
