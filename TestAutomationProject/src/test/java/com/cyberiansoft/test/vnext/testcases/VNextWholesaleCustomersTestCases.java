@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
@@ -23,6 +24,10 @@ import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 
 public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionRegistration {
+	
+	@BeforeClass(description="Wholesale Customers Test Cases")
+	public void beforeClass() throws Exception {
+	}
 	
 	@Test(testName= "Test Case 63620:Verify created on BO Wholesale customer displays in the list", 
 			description = "Verify created on BO Wholesale customer displays in the list")
@@ -83,8 +88,6 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify user can select Wholesale customer when create Inspection")
 	public void testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "AppendToRO";
 		final String vinnumber = "TEST";
 
@@ -92,7 +95,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import org.junit.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
@@ -19,6 +20,10 @@ import com.cyberiansoft.test.vnext.screens.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 
 public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistration {
+	
+	@BeforeClass(description="Team Work Orders Test Cases")
+	public void beforeClass() throws Exception {
+	}
 	
 	@Test(testName= "Test Case 67042:Verify user can delete WO if 'Allow Delete=ON'", 
 			description = "Verify user can delete WO if 'Allow Delete=ON'")
