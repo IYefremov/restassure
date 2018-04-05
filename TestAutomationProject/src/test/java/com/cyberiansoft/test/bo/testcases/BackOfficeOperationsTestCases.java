@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -325,7 +326,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		 */
 	}
 
-	@Test(description = "Test Case 18475:Operation - New service request")
+	@Test(description = "Test Case 18475:Operation - New service request", retryAnalyzer = Retry.class)
 	public void testOperationNewServiceRequest() throws Exception {
 
 		final String srtype = "Vit_All_Services";

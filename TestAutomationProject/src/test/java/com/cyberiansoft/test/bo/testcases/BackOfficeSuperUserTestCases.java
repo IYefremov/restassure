@@ -33,44 +33,43 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		final String username = "Oleksandr Kramar";
 		final String appname = "380505460134";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		SuperUserWebPage superuserpage = backofficeheader.clickSuperUserLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		SuperUserWebPage superUserPage = backofficeHeader.clickSuperUserLink();
 
-		AllUsersWebPage alluserspage = superuserpage.clickAllUsersLink();
+		AllUsersWebPage allUsersPage = superUserPage.clickAllUsersLink();
 
-		alluserspage.verifyAllUsersTableColumnsAreVisible();
+		allUsersPage.verifyAllUsersTableColumnsAreVisible();
 		
-		Assert.assertEquals("1", alluserspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", alluserspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", allUsersPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", allUsersPage.getGoToPageFieldValue());
 		
-		alluserspage.setPageSize("1");
-		Assert.assertEquals(1, alluserspage.getAllUsersTableRowCount());
+		allUsersPage.setPageSize("1");
+		Assert.assertEquals(1, allUsersPage.getAllUsersTableRowCount());
 		
-		String lastpagenumber = alluserspage.getLastPageNumber();
-		alluserspage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, alluserspage.getGoToPageFieldValue());
+		String lastpagenumber = allUsersPage.getLastPageNumber();
+		allUsersPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, allUsersPage.getGoToPageFieldValue());
 		
-		alluserspage.clickGoToFirstPage();
-		Assert.assertEquals("1", alluserspage.getGoToPageFieldValue());
+		allUsersPage.clickGoToFirstPage();
+		Assert.assertEquals("1", allUsersPage.getGoToPageFieldValue());
 		
-		alluserspage.clickGoToNextPage();
-		Assert.assertEquals("2", alluserspage.getGoToPageFieldValue());
+		allUsersPage.clickGoToNextPage();
+		Assert.assertEquals("2", allUsersPage.getGoToPageFieldValue());
 		
-		alluserspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", alluserspage.getGoToPageFieldValue());
+		allUsersPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", allUsersPage.getGoToPageFieldValue());
 
-		alluserspage.setPageSize("999");
-		Assert.assertEquals(alluserspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(alluserspage.getAllUsersTableRowCount()));
+		allUsersPage.setPageSize("999");
+		Assert.assertEquals(allUsersPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(allUsersPage.getAllUsersTableRowCount()));
 		
-		alluserspage.makeSearchPanelVisible();
-		alluserspage.setSearchUserParameter(username.substring(0, 4));
-		alluserspage.selectSearchApplication(appname);
-		alluserspage.checkSuperUserCheckBox();
-		alluserspage.clickFindButton();
+		allUsersPage.makeSearchPanelVisible();
+		allUsersPage.setSearchUserParameter(username.substring(0, 4));
+		allUsersPage.selectSearchApplication(appname);
+		allUsersPage.checkSuperUserCheckBox();
+		allUsersPage.clickFindButton();
 		
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(alluserspage.getAllUsersTableRowCount()));
-		alluserspage.isUserExists(username);
+		Assert.assertEquals(1, allUsersPage.getAllUsersTableRowCount());
+		allUsersPage.userExists(username);
 	}
 	
 	@Test(description = "Test Case 15156:All Employees - Search")
@@ -79,43 +78,42 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		final String employee = "Aaron Naber";
 		final String appname = "Dent Wizard International";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		SuperUserWebPage superuserpage = backofficeheader.clickSuperUserLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		SuperUserWebPage superUserPage = backofficeHeader.clickSuperUserLink();
 
-		AllEmployeesWebPage allemployeespage = superuserpage.clickAllEmployeesLink();
+		AllEmployeesWebPage allEmployeesPage = superUserPage.clickAllEmployeesLink();
 
-		allemployeespage.verifyAllEmployeesTableColumnsAreVisible();
+		allEmployeesPage.verifyAllEmployeesTableColumnsAreVisible();
 		
-		/*Assert.assertEquals("1", allemployeespage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", allemployeespage.getGoToPageFieldValue());
+		/*Assert.assertEquals("1", allEmployeesPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", allEmployeesPage.getGoToPageFieldValue());
 		
-		allemployeespage.setPageSize("1");
-		Assert.assertEquals(1, allemployeespage.getAllEmployeesTableRowCount());
+		allEmployeesPage.setPageSize("1");
+		Assert.assertEquals(1, allEmployeesPage.getAllEmployeesTableRowCount());
 		
-		String lastpagenumber = allemployeespage.getLastPageNumber();
-		allemployeespage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, allemployeespage.getGoToPageFieldValue());
+		String lastpagenumber = allEmployeesPage.getLastPageNumber();
+		allEmployeesPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, allEmployeesPage.getGoToPageFieldValue());
 		
-		allemployeespage.clickGoToFirstPage();
-		Assert.assertEquals("1", allemployeespage.getGoToPageFieldValue());
+		allEmployeesPage.clickGoToFirstPage();
+		Assert.assertEquals("1", allEmployeesPage.getGoToPageFieldValue());
 		
-		allemployeespage.clickGoToNextPage();
-		Assert.assertEquals("2", allemployeespage.getGoToPageFieldValue());
+		allEmployeesPage.clickGoToNextPage();
+		Assert.assertEquals("2", allEmployeesPage.getGoToPageFieldValue());
 		
-		allemployeespage.clickGoToPreviousPage();
-		Assert.assertEquals("1", allemployeespage.getGoToPageFieldValue());
+		allEmployeesPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", allEmployeesPage.getGoToPageFieldValue());
 
-		allemployeespage.setPageSize("999");
-		Assert.assertEquals(allemployeespage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(allemployeespage.getAllEmployeesTableRowCount()));
+		allEmployeesPage.setPageSize("999");
+		Assert.assertEquals(allEmployeesPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(allEmployeesPage.getAllEmployeesTableRowCount()));
 		*/
-		allemployeespage.makeSearchPanelVisible();
-		allemployeespage.setSearchEmployeeParameter(employee);
-		allemployeespage.selectSearchApplication(appname);
-		allemployeespage.clickFindButton();
+		allEmployeesPage.makeSearchPanelVisible();
+		allEmployeesPage.setSearchEmployeeParameter(employee);
+		allEmployeesPage.selectSearchApplication(appname);
+		allEmployeesPage.clickFindButton();
 	
-		allemployeespage.verifySearchResultsByApplication(appname);
-		allemployeespage.verifyProfilesLinkWorks();
+		allEmployeesPage.verifySearchResultsByApplication(appname);
+		allEmployeesPage.verifyProfilesLinkWorks();
 	}
 	
 	@Test(description = "Test Case 17283:Super User - Applications")
@@ -125,46 +123,45 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		final String appname = "20141006102411";
 		final String username = "kramar";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		SuperUserWebPage superuserpage = backofficeheader.clickSuperUserLink();
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		SuperUserWebPage superUserPage = backofficeheader.clickSuperUserLink();
 
-		ApplicationsWebPage applicationspage = superuserpage.clickApplicationsLink();
+		ApplicationsWebPage applicationsPage = superUserPage.clickApplicationsLink();
 
-		applicationspage.verifyApplicationsTableColumnsAreVisible();
+		applicationsPage.verifyApplicationsTableColumnsAreVisible();
 		
-		Assert.assertEquals("1", applicationspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", applicationspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", applicationsPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", applicationsPage.getGoToPageFieldValue());
 		
-		applicationspage.setPageSize("1");
-		Assert.assertEquals(1, applicationspage.getApplicationsTableRowCount());
+		applicationsPage.setPageSize("1");
+		Assert.assertEquals(1, applicationsPage.getApplicationsTableRowCount());
 		
-		String lastpagenumber = applicationspage.getLastPageNumber();
-		applicationspage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, applicationspage.getGoToPageFieldValue());
+		String lastPageNumber = applicationsPage.getLastPageNumber();
+		applicationsPage.clickGoToLastPage();
+		Assert.assertEquals(lastPageNumber, applicationsPage.getGoToPageFieldValue());
 		
-		applicationspage.clickGoToFirstPage();
-		Assert.assertEquals("1", applicationspage.getGoToPageFieldValue());
+		applicationsPage.clickGoToFirstPage();
+		Assert.assertEquals("1", applicationsPage.getGoToPageFieldValue());
 		
-		applicationspage.clickGoToNextPage();
-		Assert.assertEquals("2", applicationspage.getGoToPageFieldValue());
+		applicationsPage.clickGoToNextPage();
+		Assert.assertEquals("2", applicationsPage.getGoToPageFieldValue());
 		
-		applicationspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", applicationspage.getGoToPageFieldValue());
+		applicationsPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", applicationsPage.getGoToPageFieldValue());
 
-		applicationspage.setPageSize("999");
-		Assert.assertEquals(applicationspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(applicationspage.getApplicationsTableRowCount()));
+		applicationsPage.setPageSize("999");
+		Assert.assertEquals(applicationsPage.MAX_TABLE_ROW_COUNT_VALUE,
+                Integer.valueOf(applicationsPage.getApplicationsTableRowCount()));
 		
-		applicationspage.makeSearchPanelVisible();
+		applicationsPage.makeSearchPanelVisible();
 				
-		applicationspage.selectSearchApplication(appname);
-		applicationspage.selectSearchStatus(status);
-		applicationspage.setSearchUsername(username);
+		applicationsPage.selectSearchApplication(appname);
+		applicationsPage.selectSearchStatus(status);
+		applicationsPage.setSearchUsername(username);
 		
-		applicationspage.clickFindButton();
+		applicationsPage.clickFindButton();
 	
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(applicationspage.getApplicationsTableRowCount()));
-		applicationspage.verifySearchResultsByApplication(appname);
+		Assert.assertEquals(1, applicationsPage.getApplicationsTableRowCount());
+		applicationsPage.verifySearchResultsByApplication(appname);
 	}
-
 }

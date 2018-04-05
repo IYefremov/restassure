@@ -133,11 +133,11 @@ public class WebPageWithPagination extends BaseWebPage {
 		}catch(TimeoutException e){}
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
-
-	void waitForLoading(){
-		try{
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} catch(TimeoutException ignored){}
-	}
+//
+//	void waitForLoading(){
+//		try{
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//		} catch(TimeoutException ignored){}
+//	}
 }
