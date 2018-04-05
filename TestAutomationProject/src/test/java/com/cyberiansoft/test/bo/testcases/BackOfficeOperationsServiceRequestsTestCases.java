@@ -1,42 +1,20 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import java.awt.AWTException;
-import java.io.IOException;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.Retry;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Random;
-
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.HomeWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SRAppointmentInfoPopup;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesVehicleInfoSettingsPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.utils.Retry;
-import com.cyberiansoft.test.ios_client.utils.MailChecker;
 
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
@@ -188,7 +166,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 	}
 
-	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom", description = "Operation - New service request - Appointment - Location Type: Custom", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom",
+            description = "Operation - New service request - Appointment - Location Type: Custom", retryAnalyzer = Retry.class)
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustom() throws InterruptedException {
 
 		final String teamname = "Default team";

@@ -61,23 +61,18 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 	
 	public String getCurrentlySelectedPageNumber() {
-		
 		return paginations.findElement(By.xpath(".//a[@class='rgCurrentPage']/span")).getText();
 	}
 	
-	public String getGoToPageFieldValue() throws InterruptedException {
+	public String getGoToPageFieldValue() {
 		return gotopagefld.getAttribute("value");
 	}
 	
-	public void setPageSize(String pagesize) throws InterruptedException {
+	public void setPageSize(String pageSize) throws InterruptedException {
 		pagesizefld.clear();
 		Thread.sleep(1000);
-		pagesizefld.sendKeys(pagesize + "\n");
-		Thread.sleep(700);
-		try{
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		}catch(TimeoutException e){}
-		Thread.sleep(3000);
+		pagesizefld.sendKeys(pageSize + "\n");
+		waitForLoading();
 	}
 	
 	public void clickGoToLastPage() {
@@ -89,7 +84,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
-	public void clickGoToLastPage(String browsertype) throws InterruptedException {
+	public void clickGoToLastPage(String browsertype) {
 		if (browsertype.equals("ie") ) {
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", gotolastpage);

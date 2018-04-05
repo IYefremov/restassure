@@ -4,8 +4,8 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -28,54 +28,54 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         backOfficeHeader.clickLogout();
     }
 
-	@Test(description = "Test Case 15295:Operations - Technician Commision: Search")
-	public void testOperationTechnicianCommisionSearch() throws Exception {
+	@Test(description = "Test Case 15295:Operations - Technician Commission: Search")
+	public void testOperationTechnicianCommissionSearch() throws Exception {
 		
-		final String invoicenumber = "I-000-00646";
+		final String invoiceNumber = "I-000-00646";
 		final String status = "New";
 		final String tech = "1111 2222";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 
-		TechnicianCommissionsWebPage techcommissionpage = operationspage.clickTechnicianCommissionsLink();
-		techcommissionpage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
-		techcommissionpage.clickFindButton();
-		techcommissionpage.verifyInvoicesTableColumnsAreVisible();
+		TechnicianCommissionsWebPage techCommissionPage = operationsPage.clickTechnicianCommissionsLink();
+		techCommissionPage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		techCommissionPage.clickFindButton();
+		techCommissionPage.verifyInvoicesTableColumnsAreVisible();
 
-		Assert.assertEquals("1", techcommissionpage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", techcommissionpage.getGoToPageFieldValue());
+		Assert.assertEquals("1", techCommissionPage.getCurrentlySelectedPageNumber(),
+                "The current first page is not opened!");
+		Assert.assertEquals("1", techCommissionPage.getGoToPageFieldValue());
 
-		techcommissionpage.setPageSize("1");
-		Assert.assertEquals(1, techcommissionpage.getTechnicianCommissionsTableRowCount());
+		techCommissionPage.setPageSize("1");
+		Assert.assertEquals(1, techCommissionPage.getTechnicianCommissionsTableRowCount());
 
-		String lastpagenumber = techcommissionpage.getLastPageNumber();
-		techcommissionpage.clickGoToLastPage(browsertype.getBrowserTypeString());
-		Assert.assertEquals(lastpagenumber, techcommissionpage.getGoToPageFieldValue().replace(",", ""));
+		String lastPageNumber = techCommissionPage.getLastPageNumber();
+		techCommissionPage.clickGoToLastPage(browsertype.getBrowserTypeString());
+		Assert.assertEquals(lastPageNumber, techCommissionPage.getGoToPageFieldValue().replace(",", ""));
 
-		techcommissionpage.clickGoToFirstPage();
-		Assert.assertEquals("1", techcommissionpage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToFirstPage();
+		Assert.assertEquals("1", techCommissionPage.getGoToPageFieldValue());
 
-		techcommissionpage.clickGoToNextPage();
-		Assert.assertEquals("2", techcommissionpage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToNextPage();
+		Assert.assertEquals("2", techCommissionPage.getGoToPageFieldValue());
 
-		techcommissionpage.clickGoToPreviousPage();
-		Assert.assertEquals("1", techcommissionpage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", techCommissionPage.getGoToPageFieldValue());
 
-		techcommissionpage.setPageSize("999");
-		Assert.assertEquals(techcommissionpage.MAX_TABLE_ROW_COUNT_VALUE,
-				Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
+		techCommissionPage.setPageSize("999");
+		Assert.assertEquals(techCommissionPage.MAX_TABLE_ROW_COUNT_VALUE,
+				Integer.valueOf(techCommissionPage.getTechnicianCommissionsTableRowCount()));
 
-		techcommissionpage.verifySearchFieldsAreVisible();
+		techCommissionPage.verifySearchFieldsAreVisible();
 
-		techcommissionpage.selectSearchStatus(status);
-		techcommissionpage.selectSearchTechnician(tech);
-		techcommissionpage.setSearchInvoice(invoicenumber);
-		techcommissionpage.clickFindButton();
+		techCommissionPage.selectSearchStatus(status);
+		techCommissionPage.selectSearchTechnician(tech);
+		techCommissionPage.setSearchInvoice(invoiceNumber);
+		techCommissionPage.clickFindButton();
 
-		Assert.assertEquals(Integer.valueOf(1),
-				Integer.valueOf(techcommissionpage.getTechnicianCommissionsTableRowCount()));
-		techcommissionpage.verifySearchResults(invoicenumber);
+		Assert.assertEquals(1, techCommissionPage.getTechnicianCommissionsTableRowCount());
+		techCommissionPage.verifySearchResults(invoiceNumber);
 	}
 
 	@Test(description = "Test Case 15386:Operations - Work Orders: Search")
@@ -101,9 +101,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.setPageSize("1");
 		Assert.assertEquals(1, wopage.getWorkOrdersTableRowCount());
 
-		String lastpagenumber = wopage.getLastPageNumber();
+		String lastPageNumber = wopage.getLastPageNumber();
 		wopage.clickGoToLastPage(browsertype.getBrowserTypeString());
-		Assert.assertEquals(lastpagenumber, wopage.getGoToPageFieldValue().replace(",", ""));
+		Assert.assertEquals(lastPageNumber, wopage.getGoToPageFieldValue().replace(",", ""));
 
 		wopage.clickGoToFirstPage();
 		Assert.assertEquals("1", wopage.getGoToPageFieldValue());
@@ -125,7 +125,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.setSearchOrderNumber(wonum);
 		wopage.unselectInvoiceFromDeviceCheckbox();
 		wopage.clickFindButton();
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(wopage.getWorkOrdersTableRowCount()));
+		Assert.assertEquals(1, wopage.getWorkOrdersTableRowCount());
 		wopage.isWorkOrderExists(wonum);
 	}
 
@@ -186,28 +186,28 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	@Test(description = "Test Case 17280:Operations - Service Contract")
 	public void testOperationServiceContract() throws Exception {
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 
-		ServiceContractsWebPage servicecontractspage = operationspage.clickServiceContactsLink();
+		ServiceContractsWebPage serviceContractsPage = operationsPage.clickServiceContactsLink();
 		Thread.sleep(2000);
-		servicecontractspage.verifyServiceContactsTableColumnsAreVisible();
+		serviceContractsPage.verifyServiceContactsTableColumnsAreVisible();
 
-		servicecontractspage.makeSearchPanelVisible();
-		servicecontractspage.verifySearchFieldsAreVisible();
-		ServiceContractTypesWebPage servicecontracttypespage = servicecontractspage.clickContractTypesButton();
-		servicecontracttypespage.waitServiceContractTypesPageIsLoaded();
+		serviceContractsPage.makeSearchPanelVisible();
+		serviceContractsPage.verifySearchFieldsAreVisible();
+		ServiceContractTypesWebPage serviceContractTypesPage = serviceContractsPage.clickContractTypesButton();
+		serviceContractTypesPage.waitServiceContractTypesPageIsLoaded();
 		webdriver.navigate().back();
 		Thread.sleep(1000);
-		servicecontractspage.clickContractDataButton();
-		servicecontractspage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
+		serviceContractsPage.clickContractDataButton();
+		serviceContractsPage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
 
-		servicecontractspage.clickClaimDataButton();
-		servicecontractspage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
+		serviceContractsPage.clickClaimDataButton();
+		serviceContractsPage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
 
-		servicecontractspage.clickPortfolioButton();
+		serviceContractsPage.clickPortfolioButton();
 		Thread.sleep(2000);
-		servicecontractspage.verifyPortfolioOptionsAreOpened();
+		serviceContractsPage.verifyPortfolioOptionsAreOpened();
 	}
 
 	@Test(description = "Test Case 17281:Operations - Inspection")
@@ -222,62 +222,62 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		final String technician = "Serhii Toropov";
 		final String technicianfull = "Serhii Toropov";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 
-		InspectionsWebPage inpectionspage = operationspage.clickInspectionsLink();
-		inpectionspage.makeSearchPanelVisible();
-		inpectionspage.selectSearchTimeframe(timeframe);
-		inpectionspage.clickFindButton();
-		inpectionspage.verifyInspectionsTableColumnsAreVisible();
+		InspectionsWebPage inpectionsPage = operationsPage.clickInspectionsLink();
+		inpectionsPage.makeSearchPanelVisible();
+		inpectionsPage.selectSearchTimeframe(timeframe);
+		inpectionsPage.clickFindButton();
+		inpectionsPage.verifyInspectionsTableColumnsAreVisible();
 
-		Assert.assertEquals("1", inpectionspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", inpectionspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", inpectionsPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", inpectionsPage.getGoToPageFieldValue());
 
-		inpectionspage.setPageSize("1");
-		Assert.assertEquals(1, inpectionspage.getInspectionsTableRowCount());
+		inpectionsPage.setPageSize("1");
+		Assert.assertEquals(1, inpectionsPage.getInspectionsTableRowCount());
 
-		String lastpagenumber = inpectionspage.getLastPageNumber();
-		inpectionspage.clickGoToLastPage(browsertype.getBrowserTypeString());
+		String lastpagenumber = inpectionsPage.getLastPageNumber();
+		inpectionsPage.clickGoToLastPage(browsertype.getBrowserTypeString());
 
-		inpectionspage.clickGoToFirstPage();
-		Assert.assertEquals("1", inpectionspage.getGoToPageFieldValue());
+		inpectionsPage.clickGoToFirstPage();
+		Assert.assertEquals("1", inpectionsPage.getGoToPageFieldValue());
 
-		inpectionspage.clickGoToNextPage();
-		Assert.assertEquals("2", inpectionspage.getGoToPageFieldValue());
+		inpectionsPage.clickGoToNextPage();
+		Assert.assertEquals("2", inpectionsPage.getGoToPageFieldValue());
 
-		inpectionspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", inpectionspage.getGoToPageFieldValue());
+		inpectionsPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", inpectionsPage.getGoToPageFieldValue());
 
-		inpectionspage.setPageSize("50");
+		inpectionsPage.setPageSize("50");
 		if (Integer.valueOf(lastpagenumber) < 50) {
 			Assert.assertEquals(Integer.valueOf(lastpagenumber),
-					Integer.valueOf(inpectionspage.getInspectionsTableRowCount()));
+					Integer.valueOf(inpectionsPage.getInspectionsTableRowCount()));
 		} else {
-			Assert.assertEquals(Integer.valueOf(50), Integer.valueOf(inpectionspage.getInspectionsTableRowCount()));
+			Assert.assertEquals(50, inpectionsPage.getInspectionsTableRowCount());
 		}
 
-		inpectionspage.makeSearchPanelVisible();
-		inpectionspage.verifySearchFieldsAreVisible();
+		inpectionsPage.makeSearchPanelVisible();
+		inpectionsPage.verifySearchFieldsAreVisible();
 
-		inpectionspage.selectSearchCustomer(customer);
-		inpectionspage.selectSearchTechnician(technician, technicianfull);
-		inpectionspage.selectSearchStatus(inspstatus);
-		inpectionspage.setInspectionNumberSearchCriteria(inspnum);
-		inpectionspage.clickFindButton();
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(inpectionspage.getInspectionsTableRowCount()));
+		inpectionsPage.selectSearchCustomer(customer);
+		inpectionsPage.selectSearchTechnician(technician, technicianfull);
+		inpectionsPage.selectSearchStatus(inspstatus);
+		inpectionsPage.setInspectionNumberSearchCriteria(inspnum);
+		inpectionsPage.clickFindButton();
+		Assert.assertEquals(1, inpectionsPage.getInspectionsTableRowCount());
 		Thread.sleep(2000);
-		inpectionspage.isInspNumberExists(inspnum);
+		inpectionsPage.isInspNumberExists(inspnum);
 	}
 
 	@Test(description = "Test Case 17282:Operations - Vendor Bill")
-	public void testOperationVendorBill() throws Exception {
+	public void testOperationVendorBill() {
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 
-		VendorBillsWebPage vendoebillspage = operationspage.clickVendorBillsLink();
-		vendoebillspage.verifyVendorBillsTableColumnsAreVisible();
+		VendorBillsWebPage vendorBillsPage = operationsPage.clickVendorBillsLink();
+		vendorBillsPage.verifyVendorBillsTableColumnsAreVisible();
 
 		/*
 		 * Assert.assertEquals("1",
@@ -307,8 +307,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		 * else { Assert.assertEquals(Integer.valueOf(50),
 		 * Integer.valueOf(inpectionspage.getInspectionsTableRowCount())); }
 		 */
-		vendoebillspage.makeSearchPanelVisible();
-		vendoebillspage.verifySearchFieldsAreVisible();
+		vendorBillsPage.makeSearchPanelVisible();
+		vendorBillsPage.verifySearchFieldsAreVisible();
 
 		/*
 		 * inpectionspage.selectSearchCustomer("002 - Test Company");
@@ -349,54 +349,54 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
-		servicerequestslistpage.makeSearchPanelVisible();
+		ServiceRequestsListWebPage serviceRequestsListPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsListPage.makeSearchPanelVisible();
 
-		servicerequestslistpage.verifySearchFieldsAreVisible();
+		serviceRequestsListPage.verifySearchFieldsAreVisible();
 
-		servicerequestslistpage.selectSearchTeam(teamname);
-		servicerequestslistpage.setSearchFreeText(textsearchparameter);
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.verifySearchResultsByServiceName(textsearchparameter);
+		serviceRequestsListPage.selectSearchTeam(teamname);
+		serviceRequestsListPage.setSearchFreeText(textsearchparameter);
+		serviceRequestsListPage.clickFindButton();
+		serviceRequestsListPage.verifySearchResultsByServiceName(textsearchparameter);
 
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(srtype);
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
-		servicerequestslistpage.setServiceRequestGeneralInfo(teamname, assignedto, ponum, ronum);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(srtype);
+		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListPage.clickGeneralInfoEditButton();
+		serviceRequestsListPage.setServiceRequestGeneralInfo(teamname, assignedto, ponum, ronum);
+		serviceRequestsListPage.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(newservicerequest);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListPage.clickCustomerEditButton();
+		serviceRequestsListPage.selectServiceRequestCustomer(newservicerequest);
+		serviceRequestsListPage.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListPage.clickVehicleInforEditButton();
+		serviceRequestsListPage.setServiceRequestVIN(VIN);
+		serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(_make, _model);
+		serviceRequestsListPage.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequesInsurance(insurance);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListPage.clickClaimInfoEditButton();
+		serviceRequestsListPage.selectServiceRequesInsurance(insurance);
+		serviceRequestsListPage.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(_label);
-		servicerequestslistpage.setServiceRequestDescription(_label);
+		serviceRequestsListPage.setServiceRequestLabel(_label);
+		serviceRequestsListPage.setServiceRequestDescription(_label);
 
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListPage.saveNewServiceRequest();
 
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(newservicerequest);
-		servicerequestslistpage.clickFindButton();
-		Assert.assertTrue(servicerequestslistpage.verifySearchResultsByServiceName(newservicerequest));
-		Assert.assertTrue(servicerequestslistpage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
+		serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListPage.setSearchFreeText(newservicerequest);
+		serviceRequestsListPage.clickFindButton();
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByServiceName(newservicerequest));
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
 
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		servicerequestslistpage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListPage.acceptFirstServiceRequestFromList();
+		serviceRequestsListPage.closeFirstServiceRequestFromTheList();
 
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(newservicerequest);
-		servicerequestslistpage.clickFindButton();
-		Assert.assertTrue(servicerequestslistpage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
-		Assert.assertEquals("Closed", servicerequestslistpage.getFirstServiceRequestStatus());
+		serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListPage.setSearchFreeText(newservicerequest);
+		serviceRequestsListPage.clickFindButton();
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(_make, _model, _year, VIN));
+		Assert.assertEquals("Closed", serviceRequestsListPage.getFirstServiceRequestStatus());
 	}
 
 	/*
