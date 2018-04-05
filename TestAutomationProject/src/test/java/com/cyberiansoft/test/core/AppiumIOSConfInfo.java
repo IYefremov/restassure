@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.core;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -9,9 +11,12 @@ public class AppiumIOSConfInfo {
 	
 private final Properties configProp = new Properties();
 	private AppiumIOSConfInfo() {
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream("src/test/java/com/cyberiansoft/test/core/appiumiosconf.properties");
-	    try {
-	        configProp.load(in);
+		File file =
+				new File("src/test/java/com/cyberiansoft/test/core/appiumiosconf.properties");
+		try {
+			FileInputStream fileInput = new FileInputStream(file);
+			configProp.load(fileInput);
+			fileInput.close();
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
