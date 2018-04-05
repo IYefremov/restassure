@@ -8,9 +8,8 @@ import java.util.Properties;
 public class AppiumIOSConfInfo {
 	
 private final Properties configProp = new Properties();
-	
 	private AppiumIOSConfInfo() {
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream("appiumiosconf.properties");
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream("src/test/java/com/cyberiansoft/test/core/appiumiosconf.properties");
 	    try {
 	        configProp.load(in);
 	    } catch (IOException e) {

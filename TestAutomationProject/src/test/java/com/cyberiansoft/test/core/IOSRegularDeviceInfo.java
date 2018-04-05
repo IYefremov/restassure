@@ -12,7 +12,7 @@ public class IOSRegularDeviceInfo {
     private IOSRegularDeviceInfo() {
          props = new Properties();
     	try {
-    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdeviceregularconf.properties");
+    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("src/test/java/com/cyberiansoft/test/core/iosdeviceregularconf.properties");
 	    props.load(in);
     	}
     	catch (Exception e) {

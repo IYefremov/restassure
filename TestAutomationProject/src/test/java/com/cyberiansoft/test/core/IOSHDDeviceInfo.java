@@ -14,7 +14,7 @@ public class IOSHDDeviceInfo {
     private IOSHDDeviceInfo() {
          props = new Properties();
     	try {
-    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdevicehdconf.properties");
+    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("src/test/java/com/cyberiansoft/test/core/iosdevicehdconf.properties");
 	    props.load(in);
     	}
     	catch (IOException e) {
