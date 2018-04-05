@@ -29,6 +29,8 @@ public class VNextInspectionTypesList extends VNextBaseScreen {
 	}
 	
 	public void selectInspectionType(String inspectionType) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + inspectionType + "']")));
 		tap(insptypeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + inspectionType + "']")));
 		log(LogStatus.INFO, "Select Inspection type: " + inspectionType);
 	}

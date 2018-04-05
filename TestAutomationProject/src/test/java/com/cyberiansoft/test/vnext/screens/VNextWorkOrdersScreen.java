@@ -47,6 +47,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		BaseUtils.waitABit(2000);
+		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
+			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {

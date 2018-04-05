@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
@@ -43,6 +45,21 @@ import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 
 
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
+	
+	@BeforeClass(description="Team Inspections Test Cases")
+	public void beforeClass() throws Exception {
+	}
+	
+	@BeforeMethod(description="Send all messages")
+	public void beforeTestCase() throws Exception {
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		if (homescreen.isQueueMessageVisible()) {		
+			VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
+			settingsscreen.setManualSendOff();
+			settingsscreen.clickBackButton();		
+			homescreen.waitUntilQueueMessageInvisible();
+		}
+	}
 	
 	@Test(testName= "Test Case 64494:Verify user can approve Invoice after creating, "
 			+ "Test Case 64497:Verify user can create Invoice from Inspection, "
@@ -293,6 +310,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String vinnumber = "123";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
+		settingsscreen.setManualSendOff();
+		settingsscreen.clickBackButton();
 		AppiumUtils.setNetworkOff();
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();

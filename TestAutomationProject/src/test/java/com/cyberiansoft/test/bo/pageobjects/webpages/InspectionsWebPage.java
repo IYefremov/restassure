@@ -521,7 +521,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
 			waitABit(5000);
-			Assert.assertTrue(driver.findElements(By.xpath("//div[text()='" + VIN + "']")).size() > 0);
+			Assert.assertTrue(driver.findElement(By.xpath("//td[@id='vinBlock']")).getText().contains(VIN));
 			driver.close();
 			driver.switchTo().window(parent);
 		}

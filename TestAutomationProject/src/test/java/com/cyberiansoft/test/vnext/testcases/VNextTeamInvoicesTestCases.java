@@ -682,6 +682,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
 		invoicesscreen.switchToMyInvoicesView();
 		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+		invoicesscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 72052:R360 client: Verify email Invoice for multiple items with the same customer, "
