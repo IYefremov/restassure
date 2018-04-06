@@ -457,7 +457,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public SRAppointmentInfoPopup clickAddAppointmentToFirstServiceRequestFromList() {
-		getFirstServiceRequestFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")).click();
+		wait.until(ExpectedConditions
+                .visibilityOf(getFirstServiceRequestFromList()
+                .findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]"))))
+                .click();
 		waitABit(300);
 		return PageFactory.initElements(driver, SRAppointmentInfoPopup.class);
 	}
@@ -1947,34 +1950,30 @@ waitABit(3000);
 		driver.findElement(By.id("Card_btnAddApp")).click();
 	}
 
-	public boolean checkEmails(String message) throws InterruptedException {
+	public boolean checkEmails(String message) {
 		boolean flag = false;
-		Thread.sleep(20000);
+		waitABit(20000);
 		for (int i = 0; i < 7; i++) {
 			try {
-//				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
+			    //				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
 //                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
-//				    if (!MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!",
-//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
-//				        if (!MailChecker.searchEmailAndGetMailMessage("cyberiansoft.test@gmail.com", "ZZzz11!!",
-//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
- 				        if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
-                                "reconpro+main@cyberiansoft.com").isEmpty()) {
-					flag = true;
-					break;
-				}
-//            } catch (NullPointerException ignored) {}
-        } catch (NullPointerException e) {
+			    if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
+                        "reconpro+main@cyberiansoft.com").isEmpty()) {
+			        flag = true;
+			        break;
+                }
+			} catch (NullPointerException e) {
                 System.err.println("EXCEPTION: " + e);
 			}
-			Thread.sleep(40000);
+			waitABit(40000);
 		}
 		return flag;
 	}
 
 	public void selectSREditFrame() {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']"))
+                .findElement(By.xpath("./iframe")));
 	}
 
 	public boolean checkTestEmails() throws InterruptedException {
@@ -1982,8 +1981,8 @@ waitABit(3000);
 		for (int i = 0; i < 5; i++) {
 			try {
 				Thread.sleep(40000);
-				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
-						"test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
+				if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword,
+                        "test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
 					flag1 = true;
 				}
 			} catch (NullPointerException e) {

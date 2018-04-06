@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.utils;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.mail.*;
@@ -18,8 +19,16 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class MailChecker {
-	
-	public static Store loginToGMailBox(String userName,String password) {
+
+    private static String userName;
+    private static String userPassword;
+
+    public MailChecker() {
+        userName = BOConfigInfo.getInstance().getUserName();
+        userPassword = BOConfigInfo.getInstance().getUserPassword();
+    }
+
+    public static Store loginToGMailBox(String userName, String password) {
 		Properties properties = new Properties();
 		Store store = null;
         // server setting
@@ -472,18 +481,16 @@ public class MailChecker {
     
     public static String getUserMailContentFromSpam() throws IOException {
     	
-    	final String usermail = "automationvozniuk@gmail.com";
-    	final String usermailpsw = "55555!!!";
     	final String usermailtitle = "Agreement";
     	final String sendermail = "noreply@repair360.net";
     	final String mailcontainstext = "Thank you for your interest in AMT's suite of products";
-    	
+
 		String mailmessage = "";
 		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail(usermail, usermailpsw, usermailtitle, sendermail, mailcontainstext)) {
+			if (!MailChecker.searchEmail(userName, userPassword, usermailtitle, sendermail, mailcontainstext)) {
 				waitABit(60*500);
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(usermail, usermailpsw, usermailtitle, sendermail);
+				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(userName, userPassword, usermailtitle, sendermail);
 				break;
 			}
 		}

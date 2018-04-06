@@ -13,20 +13,22 @@ import java.lang.reflect.Method;
 
 @SuppressWarnings("LossyEncoding")
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
-	
-	@BeforeMethod
+
+    private String userName;
+
+    @BeforeMethod
 	public void backOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        userName = BOConfigInfo.getInstance().getUserName();
+		loginpage.UserLogin(userName, BOConfigInfo.getInstance().getUserPassword());
 	}
 	
 	@AfterMethod
 	public void BackOfficeLogout() {
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-//		Thread.sleep(3000);
 	}
 	
 	@Test(description = "Test Case 15322:Company- Clients: Search")
@@ -604,7 +606,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickClientMonManagReadOnlyChkbox();
 		Assert.assertFalse(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
@@ -631,7 +633,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickSalesPersonMonManagChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
@@ -658,7 +660,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickSalesPersonChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
@@ -685,7 +687,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickClientInspectChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
@@ -712,7 +714,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		addclientUsersDialogWebPage.clickClientMonManagChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");
@@ -738,7 +740,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		editClientUsersDialogWebPage.clickClientAccountChkbox();
 		Assert.assertTrue(editClientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
 		ClientUsersWebPage  clientUsersWebPage1 = editClientUsersDialogWebPage.
-				createUserWithRequiredFields("automationvozniuk@gmail.com", "test", "automation");
+				createUserWithRequiredFields(userName, "test", "automation");
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable("test", "automation"));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser("test");

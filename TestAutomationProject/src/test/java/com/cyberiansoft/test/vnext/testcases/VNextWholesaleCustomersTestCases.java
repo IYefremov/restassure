@@ -1,27 +1,16 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import org.junit.Assert;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.*;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionRegistration {
 	

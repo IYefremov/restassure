@@ -1,10 +1,15 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.relevantcodes.extentreports.LogStatus;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,18 +17,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.remote.MobilePlatform;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextNotesScreen extends VNextBaseScreen {
 	

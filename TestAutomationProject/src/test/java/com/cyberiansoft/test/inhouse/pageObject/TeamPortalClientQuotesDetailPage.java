@@ -1,17 +1,16 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +19,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TeamPortalClientQuotesDetailPage extends BasePage {
+
+    private String userName;
+    private String userPassword;
+
     @FindBy(className = "agreement-statuses")
     WebElement agreementStatuses;
 
@@ -47,6 +50,8 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
     public TeamPortalClientQuotesDetailPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        userName = BOConfigInfo.getInstance().getUserName();
+        userPassword = BOConfigInfo.getInstance().getUserPassword();
     }
 
     public boolean checkAgreementStatuses(String aNew, String no, String no1, String no2) throws InterruptedException {
@@ -98,7 +103,7 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
         Thread.sleep(30000);
         for (int i = 0; i < 5; i++) {
             try {
-                if (!MailChecker.searchEmailAndGetMailMessageFromSpam("automationvozniuk@gmail.com", "55555!!!", title,
+                if (!MailChecker.searchEmailAndGetMailMessageFromSpam(userName, userPassword, title,
                         "noreply@repair360.net").isEmpty()) {
                     flag1 = true;
                     break;

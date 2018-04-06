@@ -273,8 +273,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-    //todo ignored works
-    @Test(testName = "Test Case 26165:Operation - New service request - Appointment - Location Type: Customer", description = "Operation - New service request - Appointment - Location Type: Customer")
+    @Test(testName = "Test Case 26165:Operation - New service request - Appointment - Location Type: Customer",
+            description = "Operation - New service request - Appointment - Location Type: Customer")
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustomer() throws InterruptedException {
 
 		final String teamname = "Default team";
@@ -334,7 +334,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
 		appointmentpopup.setStartTimeValue("8:00 AM");
 		appointmentpopup.setEndTimeValue("8:40 AM");
-		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), assignedto);
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
@@ -348,7 +347,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// "ALICIA.VILLALOBOS@KCC.COM");
 
 		appointmentpopup.selectLocationType("Customer");
-		Thread.sleep(1000);
 		// Assert.assertEquals(appointmentpopup.getClientAddressValue(), "407
 		// SILVER SAGE DR.");
 		// Assert.assertEquals(appointmentpopup.getClientCityValue(),
@@ -374,7 +372,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// Assert.assertEquals(appointmentpopup.getClientInfoEmailValue(),
 		// "ALICIA.VILLALOBOS@KCC.COM");
 		appointmentpopup.clickAddAppointment();
-		Thread.sleep(2000);
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
@@ -1051,7 +1048,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         return new Object[][] {{ "Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter) }};
     }
 
-	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month", dataProvider = "provideSRdataForSchedulerMonth")
+    //todo fails org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//a[contains(@title, '4/7/2018')]"}
+	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month",
+            dataProvider = "provideSRdataForSchedulerMonth")
 	public void checkSRappointmentSchedulerMonth(String customer, String startDate) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -1383,8 +1382,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails failed to change window state to normal, current state is maximized
-	@Test(testName = "Test Case 31350:Miscellaneous - Events: Service Request Checked In", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 31350:Miscellaneous - Events: Service Request Checked In",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsServiceRequestCheckedIn(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1421,8 +1420,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsAppointmentCreated(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1455,8 +1454,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 31296:Miscellaneous - Events: Appointment Failed", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 31296:Miscellaneous - Events: Appointment Failed",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsAppointmentFailed(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1482,15 +1481,15 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate, "Automation 2 Appointment Tech");
-		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails() ||serviceRequestsWebPage.checkEmails("was created"));
+		Assert.assertTrue(serviceRequestsWebPage.checkTestEmails() || serviceRequestsWebPage.checkEmails("was created"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment Appointment Failed");
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails
-	@Test(testName = "Test Case 59702:Miscellaneous - Events: Service Request Appointment Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59702:Miscellaneous - Events: Service Request Appointment Created",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsServiceRequestAppointmentCreated(String customer, String startDate,
 			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
