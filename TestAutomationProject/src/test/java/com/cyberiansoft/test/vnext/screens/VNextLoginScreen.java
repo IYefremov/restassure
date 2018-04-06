@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,13 +13,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class VNextLoginScreen extends VNextBaseScreen {
@@ -82,7 +79,6 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void setUserLoginPassword(String userpsw) {
 		setValue(passwordfld, userpsw);
-		log(LogStatus.INFO, "Set User password: " + userpsw);		
 	}
 	
 	public boolean isUserLoginPasswordDialogVisible() {
@@ -91,18 +87,15 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void selectEmployee(String username) {
 		tapListElement(employeeslist, username);
-		log(LogStatus.INFO, "Select employee: " + username);
 	}
 	
 	public void tapLoginButton() {
 		tap(loginbtn);
-		log(LogStatus.INFO, "Tap Login button");
 		
 	}
 	
 	public void tapLoginDialogCancelButton() {
 		tap(cancelbtn);
-		log(LogStatus.INFO, "Tap Cancel button");
 		waitUserListVisibility();
 	}
 	
@@ -113,7 +106,6 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void updateMainDB() {
 		tap(updatemaindbbtn);
-		log(LogStatus.INFO, "Tap Update Main DB button");
 		BaseUtils.waitABit(10000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();

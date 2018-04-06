@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,11 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextInformationDialog extends VNextBaseScreen {
 	
@@ -42,12 +39,10 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
-		log(LogStatus.INFO, "Tap Information Dialog OK Button");
 	}
 	
 	public void clickInformationDialogYesButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Yes']")));
-		log(LogStatus.INFO, "Tap Information Dialog Yes Button");
 	}
 	
 	public void clickInformationDialogDontSaveButton() {
@@ -57,39 +52,30 @@ public class VNextInformationDialog extends VNextBaseScreen {
 				tap(btn);
 				break;
 			}
-			//System.out.println("====" + btn.getText());
-		//tap(modaldlg.findElement(By.xpath(".//span[text()=" + "Don\'t save" + "]")));
-		log(LogStatus.INFO, "Tap Information Dialog Don't save Button");
 	}
 	
 	public void clickInformationDialogSaveButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Save']")));
-		log(LogStatus.INFO, "Tap Information Dialog Save Button");
 	}
 	
 	public void clickInformationDialogCancelButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Cancel']")));
-		log(LogStatus.INFO, "Tap Information Dialog Cancel Button");
 	}
 	
 	public void clickInformationDialogNoButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='No']")));
-		log(LogStatus.INFO, "Tap Information Dialog No Button");
 	}
 	
 	public void clickInformationDialogArchiveButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Archive']")));
-		log(LogStatus.INFO, "Tap Information Dialog Archive Button");
 	}
 	
 	public void clickInformationDialogDeleteButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Delete']")));
-		log(LogStatus.INFO, "Tap Information Dialog Delete Button");
 	}
 	
 	public void clickInformationDialogRemoveButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Remove']")));
-		log(LogStatus.INFO, "Tap Information Dialog Save Button");
 	}
 	
 	public void clickInformationDialogDontDeleteButton() {
@@ -97,7 +83,6 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
 		tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
-		log(LogStatus.INFO, "Tap Information Dialog Don't Delete Button");
 	}
 	
 	public String clickInformationDialogOKButtonAndGetMessage() {
@@ -131,7 +116,6 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='Void']"))));
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Void']")));
-		log(LogStatus.INFO, "Tap Information Dialog Void Button");
 	}
 	
 	public void clickInformationDialogDontVoidButton() {
@@ -139,7 +123,6 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
 		tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
-		log(LogStatus.INFO, "Tap Information Dialog Don't Void Button");
 	}
 	
 	public String clickInformationDialogVoidButtonAndGetMessage() {
@@ -156,7 +139,6 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	
 	public void clickInformationDialogStartSyncButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[text()='Start sync']")));
-		log(LogStatus.INFO, "Tap Information Dialog Start sync Button");
 	}
 
 }

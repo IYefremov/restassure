@@ -44,7 +44,6 @@ import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios_client.utils.UtilConstants;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class DentWizartestCases extends BaseTestCase {
 

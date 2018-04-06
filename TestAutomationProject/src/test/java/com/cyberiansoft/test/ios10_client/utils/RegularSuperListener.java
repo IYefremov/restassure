@@ -1,32 +1,19 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-
-import java.net.MalformedURLException;
-
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios_client.utils.LogAssertions;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
-import com.cyberiansoft.test.ios_client.utils.iOSLogger;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import org.testng.*;
+
+import java.net.MalformedURLException;
 
 public class RegularSuperListener extends TestListenerAdapter  implements IInvokedMethodListener  {
 	private Object currentClass;
-	private ExtentReports extentreport;
-	private ExtentTest testlogger;
 	
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
@@ -62,18 +49,9 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
         	AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
         	
         	if (appiumdriver != null) {
-        		testlogger = extentreport.startTest(method.getTestMethod().getMethodName());
-        		testlogger.log(LogStatus.FAIL, "Something wrong", testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));
         		appiumdriver.quit();
-        		extentreport = iOSLogger.getInstance();
-        		extentreport.endTest(testlogger);
-        		extentreport.flush();
         	} else {
-        		testlogger = extentreport.startTest(method.getTestMethod().getMethodName());
-        		testlogger.log(LogStatus.FAIL, "Something wrong");
-        		extentreport = iOSLogger.getInstance();
-        		extentreport.endTest(testlogger);
-        		extentreport.flush();
+
         	}
         }
 		
@@ -108,10 +86,9 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	@Override
 	public void onTestFailure(ITestResult result) {
 		AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
-	        testlogger= iOSLogger.getTestLogerInstance();
 	        if (appiumdriver != null) {
 	        	try {
-	        		testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));        
+	        		//testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));
 	        	} catch (Exception e) {
 	        		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 	    			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
@@ -135,50 +112,31 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	extentreport = iOSLogger.getInstance();
-        	extentreport.endTest(testlogger);
-        	extentreport.flush();
 	}
 	
 	@Override
 	public void onTestSkipped(ITestResult result) {
-        testlogger= iOSLogger.getTestLogerInstance();
-		System.out.println("test method " + getTestMethodName(result) + " skipped");
-		testlogger.log(LogStatus.SKIP , "Test Case Skipped", getTestName(result) + " skipped");
-		extentreport = iOSLogger.getInstance();
-		extentreport.endTest(testlogger);
-		extentreport.flush();
+
 	}
 	
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		testlogger.log(LogStatus.PASS , "Test Case Finished", getTestName(result) + " passed");
-		extentreport = iOSLogger.getInstance();
-		extentreport.endTest(testlogger);
-		extentreport.flush();
 	}
 
 	
 	@Override
 	public void onTestStart(ITestResult result) {
-		iOSLogger.initTestLogger(getTestName(result), getTestDescription(result));
-		System.out.println("test method " + getTestName(result) + " started");
-		testlogger = iOSLogger.getTestLogerInstance();
-		((BaseTestCase) currentClass).setTestLogger(testlogger);
+
 	}
 	
 	@Override
 	public void onStart(ITestContext context) {
-		extentreport = iOSLogger.getInstance();
+
 	}
 	
 	@Override
 	public void onFinish(ITestContext context) {
-		if (extentreport != null) {
-			extentreport.flush();
-			extentreport.close();			
-		}
-		System.out.println("on finish of test " + context.getName());
+
 	}
 	
 	private static String getTestName(ITestResult result) {

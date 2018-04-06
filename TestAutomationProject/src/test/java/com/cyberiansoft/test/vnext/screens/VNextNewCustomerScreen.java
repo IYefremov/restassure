@@ -1,5 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -7,14 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
@@ -106,7 +103,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	public void setCustomerFirstName(String firstname) {
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname);
-		log(LogStatus.INFO, "Set customer First Name: " + firstname);
 	}
 	
 	public String getCustomerFirstName() {
@@ -117,7 +113,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (lastname.length() > 0) {
 			lastnamefld.clear();
 			lastnamefld.sendKeys(lastname);
-			log(LogStatus.INFO, "Set customer Last Name: " + lastname);
 		}
 	}
 	
@@ -129,7 +124,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (companyname.length() > 0) {
 			companynamefld.clear();
 			companynamefld.sendKeys(companyname);
-			log(LogStatus.INFO, "Set customer Company Name: " + companyname);
 		}
 	}
 	
@@ -141,7 +135,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customeremail.length() > 0) {
 			emailfld.clear();
 			emailfld.sendKeys(customeremail);
-			log(LogStatus.INFO, "Set customer Email: " + customeremail);
 		}
 	}
 	
@@ -153,7 +146,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customerphone.length() > 0) {
 			phonefld.clear();
 			phonefld.sendKeys(customerphone);
-			log(LogStatus.INFO, "Set customer Phone: " + customerphone);
 		}
 	}
 	
@@ -165,7 +157,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customeraddress.length() > 0) {
 			addressfld.clear();
 			addressfld.sendKeys(customeraddress);
-			log(LogStatus.INFO, "Set customer Address: " + customeraddress);
 		}
 	}
 	
@@ -173,7 +164,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customeraddress2.length() > 0) {
 			address2fld.clear();
 			address2fld.sendKeys(customeraddress2);
-			log(LogStatus.INFO, "Set customer Address 2: " + customeraddress2);
 		}
 	}
 	
@@ -185,7 +175,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customercity.length() > 0) {
 			cityfld.clear();
 			cityfld.sendKeys(customercity);
-			log(LogStatus.INFO, "Set customer Address: " + customercity);
 		}
 	}
 	
@@ -197,7 +186,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 		if (customerzip.length() > 0) {
 			zipfld.clear();
 			zipfld.sendKeys(customerzip);
-			log(LogStatus.INFO, "Set customer Address: " + customerzip);
 		}
 	}
 	
@@ -213,7 +201,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(countriespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customercountry + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-			log(LogStatus.INFO, "Select customer Country: " + customercountry);
 		}
 	}
 	
@@ -234,7 +221,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(statespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customerstate + "')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-			log(LogStatus.INFO, "Select customer State: " + customerstate);
 		}
 	}
 	
@@ -244,12 +230,10 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
 	public void clickSaveCustomerButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Click New customer Save button");
 	}
 	
 	public VNextCustomersScreen clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Click New Customer screen Back button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 

@@ -1,17 +1,14 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 	
@@ -41,7 +38,6 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 		tap(policyfld);
 		appiumdriver.getKeyboard().sendKeys(policynum);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set Policy Number : " + policynum);
 	}
 	
 	public String getPolicyNumber() {
@@ -56,7 +52,6 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 		tap(claimfld);
 		appiumdriver.getKeyboard().sendKeys(claimnum);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set Claim Number : " + claimnum);
 	}
 	
 	public String getClaimNumber() {
@@ -75,7 +70,6 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 		listscreen.selectListItem(insuranceCompany);*/
 		insurancecompanyfld.sendKeys(insuranceCompany);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Select Insurance Company: " + insuranceCompany);
 	}
 	
 	public String getInsuranceCompany() {
@@ -90,7 +84,6 @@ public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(deductiblefld.getAttribute("value"), deductiblevalue);
-		log(LogStatus.INFO, "Set Deductible value: " + deductiblevalue);
 	}
 	
 	public String getDeductibleValue() {

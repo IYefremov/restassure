@@ -1,7 +1,12 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,15 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import java.util.List;
 
 public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	
@@ -56,7 +53,6 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 
 	public VNextSelectDamagesScreen clickAddServiceButton() {		
 		tap(adddamagesbtn);
-		log(LogStatus.INFO, "Tap Add Service button");
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	
@@ -67,13 +63,11 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextSelectDamagesScreen clickOtherServiceOption() {		
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='Other']")));
-		log(LogStatus.INFO, "Tap Other Damage Type option");
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	
 	public void clickCarImage() {
 		tap(carimage);
-		log(LogStatus.INFO, "Tap on Car image");
 	}
 	
 	public void clickCarImageSecondTime() {
@@ -83,7 +77,6 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3) ).perform();
 		BaseUtils.waitABit(300);	
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		log(LogStatus.INFO, "Tap on Car image");
 	}
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {
@@ -97,18 +90,15 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		}
 		
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		log(LogStatus.INFO, "Tap on Car image");
 	}
 	
 	public VNextServiceDetailsScreen clickCarImageMarker() {
 		tap(carmarker);
-		log(LogStatus.INFO, "Tap on Car image marker");
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
 	public VNextServiceDetailsScreen clickCarImageMarker(WebElement markeritem) {
 		tap(markeritem);
-		log(LogStatus.INFO, "Tap on Car image marker");
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
@@ -116,7 +106,6 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='icon cancel-editing-button']")));
 		tap(visualscreen.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
-		log(LogStatus.INFO, "Tap Damage Cancel Editing button");
 	}
 	
 	public List<MobileElement> getImageMarkers() {
@@ -126,7 +115,6 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
 		tap(defaulttab);
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		log(LogStatus.INFO, "Tap Damage Type: " + damagetype);
 		return new VNextVisualScreen(appiumdriver);
 	}
 }

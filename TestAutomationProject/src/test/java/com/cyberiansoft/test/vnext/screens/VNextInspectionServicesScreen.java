@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,12 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
@@ -50,7 +47,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextSelectServicesScreen clickAddServicesButton() {
 		tap(addservicesbtn);
-		log(LogStatus.INFO, "Tap Add Services button");
 		return new VNextSelectServicesScreen(appiumdriver);
 	}
 	
@@ -118,19 +114,16 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
-		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
 	public VNextVehiclePartsScreen openMatrixServiceVehiclePartsScreen(String servicename) {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
-		log(LogStatus.INFO, "Open '" + servicename + "' service details");
 		return new VNextVehiclePartsScreen(appiumdriver);
 	}
 	
 	public void clickSaveButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Click Save inspection button");
 	}
 	
 	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
@@ -165,7 +158,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		WebElement servicecell = getSelectedServiceCell(serviceName);
 		if (servicecell != null) {
 			tap(servicecell.findElement(By.xpath(".//input[@action='check-item']")));
-			log(LogStatus.INFO, "Unselect Service: " + serviceName);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
@@ -178,7 +170,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
 			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
-			log(LogStatus.INFO, "Set Service value: " + amount);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}
@@ -189,7 +180,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
 				tap(servicecell);
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
-			log(LogStatus.INFO, "Click service " + serviceName + " amount field");
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
@@ -202,7 +192,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			tap(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")));
 			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
-			log(LogStatus.INFO, "Set Service value: " + quantity);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}
@@ -219,7 +208,6 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).sendKeys(notes);
 			appiumdriver.hideKeyboard();
 			tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
-			log(LogStatus.INFO, "Set Service notes: " + notes);
 		} else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);	
 	}

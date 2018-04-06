@@ -1,9 +1,23 @@
 package com.cyberiansoft.test.ios_client.testcases;
 
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios_client.utils.TestUser;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.monte.screenrecorder.ScreenRecorder;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,30 +30,6 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.monte.screenrecorder.ScreenRecorder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
-
-import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.TestUser;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-
 public class BaseTestCase {
 
 	private ScreenRecorder screenRecorder;
@@ -51,16 +41,11 @@ public class BaseTestCase {
 	
 	protected TestUser testuser;
 	protected String userpsw;
-	protected static ExtentTest testlogger;
 	protected BrowserType browsertype;
 	
 	//final String bundleid = "com.automobiletechnologies.reconprohd";
 	String bundleid = "";
-	
-	public void setTestLogger(ExtentTest logger) {
-		testlogger = logger;
-	}
-	
+
 	public void initTestUser(String username,  String userpsw) {
 		this.testuser = new TestUser(username, userpsw);
 	}

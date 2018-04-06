@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -68,7 +67,6 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		if (!quicknotescontent.getAttribute("class").contains("accordion-item-expanded"))
 			tap(quicknotescontent);
 		tap(quicknotescontent.findElement(By.xpath(".//div[@action='quick-note' and contains(text(), '" + quicknote + "')]")));
-		log(LogStatus.INFO, "Add '" + quicknote + "' quick note");
 	}
 	
 	public String getSelectedNotes() {
@@ -80,38 +78,31 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		//notestextfld.sendKeys(notetext);
 		notestextfld.click();
 		setValue(notestextfld, notetext);
-		log(LogStatus.INFO, "Type note text '" + notetext + "'");
 	}
 	
 	public void clickNotesBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Clack Notes screen Back button");
 	}
 	
 	public void selectNotesPicturesTab() {
 		//tap(notespicturestab);
 		tap(notescamerabtn);
-		log(LogStatus.INFO, "Select Notes Pictures tab");
 	}
 	
 	public void selectNotesTextTab() {
 		tap(notestexttab);
-		log(LogStatus.INFO, "Select Notes Text tab");
 	}
 	
 	public void clickCameraIcon() {
 		tap(notescamerabtn);
-		log(LogStatus.INFO, "Select Notes Camera icon");
 	}
 	
 	public void clickGalleryIcon() {
 		tap(notesgallerybtn);
-		log(LogStatus.INFO, "Select Notes Camera icon");
 	}
 	
 	public void clickClearNotesButton() {
 		tap(clearnotesbtn);
-		log(LogStatus.INFO, "Tap Clear Notes button");
 	}
 	
 	public void addCameraPictureToNote() {
@@ -128,7 +119,6 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(4000);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		Assert.assertTrue(isPictureaddedToNote());
-		log(LogStatus.INFO, "Add Camera picture to Note");
 	}
 
 	public boolean isPictureaddedToNote() {

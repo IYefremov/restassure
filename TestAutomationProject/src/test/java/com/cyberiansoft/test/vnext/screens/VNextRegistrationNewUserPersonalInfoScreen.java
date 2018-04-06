@@ -1,5 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
@@ -8,13 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 
 public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen {
@@ -123,7 +120,6 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		tap(countriespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + usercountry + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
-		log(LogStatus.INFO, "Select new user Country: " + usercountry);
 	}
 	
 	public void selectNewUserState(String userstate) {
@@ -135,12 +131,10 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		tap(statespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + userstate + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
-		log(LogStatus.INFO, "Select new user State: " + userstate);
 	}
 	
 	public void clickDoneButton() {
 		tap(personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i")));
-		log(LogStatus.INFO, "Click Done button");
 	}
 
 }

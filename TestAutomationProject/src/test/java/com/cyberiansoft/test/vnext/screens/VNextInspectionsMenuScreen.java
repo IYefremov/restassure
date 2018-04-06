@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,12 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
@@ -67,7 +64,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1000);
 		tap(editinspectionbtn);
 		BaseUtils.waitABit(4000);		
-		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 	
@@ -75,7 +71,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(emailinspectionbtn));
 		tap(emailinspectionbtn);
-		log(LogStatus.INFO, "Tap on Email Inspection Menu");
 		return new VNextEmailScreen(appiumdriver);
 	}
 	
@@ -83,7 +78,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(notesinspectionbtn));
 		tap(notesinspectionbtn);
-		log(LogStatus.INFO, "Tap on Email Inspection Menu");
 		return new VNextNotesScreen(appiumdriver);
 	}
 	
@@ -92,7 +86,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(createwoinspectionbtn));
 		tap(createwoinspectionbtn);
 		BaseUtils.waitABit(8000);
-		log(LogStatus.INFO, "Tap on Inspection Create Work Order Menu");
 	}
 	
 	public boolean isCreateWorkOrderMenuPresent() {
@@ -103,7 +96,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		clickArchiveInspectionMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogArchiveButton();	
-		log(LogStatus.INFO, "Tap on Inspection Archive Menu");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
@@ -117,7 +109,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(approveinspectionbtn));
 		tap(approveinspectionbtn);
-		log(LogStatus.INFO, "Tap on Approve Inspection Menu");
 	}
 	
 	public boolean isApproveMenuPresent() {
@@ -129,7 +120,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(viewinspectionbtn));
 		tap(viewinspectionbtn);
 		BaseUtils.waitABit(3000);
-		log(LogStatus.INFO, "Tap on View Inspection Menu");
 		return new VNextViewScreen(appiumdriver);
 	}
 	
@@ -137,7 +127,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(addsupplementbtn));
 		tap(addsupplementbtn);	
-		log(LogStatus.INFO, "Tap on Inspection Edit Menu");
 		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 	
@@ -152,8 +141,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 				tap(closebtn);
 				break;
 			}
-		log(LogStatus.INFO, "Tap on Close Inspection Menu button");
-		//return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public boolean isDeleteWorkOrderMenuButtonExists() {
@@ -162,7 +149,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
 	public void clickDeleteWorkOrderMenuButton() {
 		tap(deleteorderbtn);
-		log(LogStatus.INFO, "Tap on Delete Work Order Menu button");
 	}
 	
 	public VNextWorkOrdersScreen deleteWorkOrder() {

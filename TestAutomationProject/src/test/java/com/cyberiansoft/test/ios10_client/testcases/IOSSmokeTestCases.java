@@ -11,7 +11,6 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.*;
-import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -2395,7 +2394,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.clickSaveButton();
 		
 		Thread.sleep(45000);
-		testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreeen = new VehicleScreen(appiumdriver); 

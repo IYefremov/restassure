@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.ios_client.testcases;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.*;
+import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.*;
+import com.cyberiansoft.test.ios_client.utils.*;
 import io.appium.java_client.ios.IOSElement;
-
-import java.net.MalformedURLException;
-
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -11,42 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.EnterpriseBeforeDamageScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.OrderSummaryScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.PriceMatrixScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularApproveInspectionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularCarHistoryScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularClaimScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularCustomersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularEnterpriseBeforeDamageScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularInspectionScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularInvoiceInfoScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyInspectionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyInvoicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularMyWorkOrdersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularOrderSummaryScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularPriceMatrixScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularQuestionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularServicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularSettingsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularTeamWorkOrdersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.RegularVehicleScreen;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios_client.utils.UtilConstants;
-import com.cyberiansoft.test.ios_client.utils.iOSLogger;
-import com.relevantcodes.extentreports.LogStatus;
+import java.net.MalformedURLException;
 
 public class DentWizardRegularVersionTestCases extends BaseTestCase {
 

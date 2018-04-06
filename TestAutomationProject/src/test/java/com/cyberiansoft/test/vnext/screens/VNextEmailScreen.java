@@ -1,5 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -7,13 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextEmailScreen extends VNextBaseScreen {
 	
@@ -54,7 +51,6 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		clickToEmailAddressRemoveButton();
 		toemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		toemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(emailaddress);
-		log(LogStatus.INFO, "Set Send Email to: " + emailaddress);
 	}
 	
 	public void sentToCCEmailAddress(String ccemailaddress) {
@@ -63,7 +59,6 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1000);
 		ccemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		ccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(ccemailaddress);
-		log(LogStatus.INFO, "Set Send Email CC to: " + ccemailaddress);
 	}
 	
 	public void sentToBCCEmailAddress(String bccemailaddress) {
@@ -72,14 +67,12 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1000);
 		bccemailpanel.findElement(By.xpath(toemailxpath)).clear();
 		bccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(bccemailaddress);
-		log(LogStatus.INFO, "Set Send Email BCC to: " + bccemailaddress);
 	}
 	
 	public void addToEmailAddress(String emailaddress) {
 		clickAddMoreToEmailsButton();
 		toemailpanel.findElements(By.xpath(toemailxpath)).get(1).clear();
 		toemailpanel.findElements(By.xpath(toemailxpath)).get(1).sendKeys(emailaddress);
-		log(LogStatus.INFO, "Set Send Email To: " + emailaddress);
 	}
 	
 	public String getToEmailFieldValue() {
@@ -88,7 +81,6 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickAddMoreToEmailsButton() {
 		tap(toemailpanel.findElement(By.xpath(addmorebtn)));
-		log(LogStatus.INFO, "Tap on Add More To Emails button");
 	}
 	
 	public void clickSendEmailsButton() {
@@ -99,9 +91,6 @@ public class VNextEmailScreen extends VNextBaseScreen {
 		} catch (WebDriverException e) {
 			//do nothing
 		}
-		//VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
-		//informationdialog.clickInformationDialogOKButton();
-		log(LogStatus.INFO, "Tap on Send Emails button");
 	}
 	
 	public String sendEmail() {

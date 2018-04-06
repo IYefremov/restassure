@@ -1,7 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,25 +11,17 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.reporting.ExtentReportFactory;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBaseScreen {
 
 	AppiumDriver<MobileElement> appiumdriver;
-	ExtentTest testReporter;
 	
 	@FindBy(xpath="//*[@data-autotests-id='change-screen-popover']")
 	private WebElement changescrenpopover;
 
 	public VNextBaseScreen(AppiumDriver<MobileElement> driver) {
 		this.appiumdriver = driver;
-		testReporter = ExtentReportFactory.getTest();
 	}
 	
 	public void tap(WebElement element) {
@@ -70,7 +63,6 @@ public class VNextBaseScreen {
 	public void swipeScreenLeft() {	
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swipeleft')");
-		log(LogStatus.INFO, "Swipe To Next Screen");
 		BaseUtils.waitABit(1000);
 	}
 	
@@ -87,7 +79,6 @@ public class VNextBaseScreen {
 		
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('.page-content').trigger('swiperight');");		
-		log(LogStatus.INFO, "Swipe Back To Previous Screen");
 		BaseUtils.waitABit(2000);
 	}
 	
@@ -109,12 +100,7 @@ public class VNextBaseScreen {
 		for (int i = 0; i < screensnumber; i++) 
 			swipeScreenRight();	
 	}	
-	
-	public void log(LogStatus logstatus, String logmessage) {
-		if (testReporter != null)
-			testReporter.log(logstatus, logmessage);		
-	}
-	
+
 	protected boolean checkHelpPopupPresence() {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		boolean exists = false;
@@ -133,7 +119,6 @@ public class VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
 		tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
 		BaseUtils.waitABit(1000);
-		log(LogStatus.INFO, "Change screen to: " + screenName);
 	}
 	
 	public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {
@@ -142,9 +127,6 @@ public class VNextBaseScreen {
 	
 	public void clickScreenTitleCaption() {
 		tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		//wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
-		log(LogStatus.INFO, "Click Screen Title Caption");
 	}
 	
 	public boolean elementExists(String xpath) {

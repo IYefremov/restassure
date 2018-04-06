@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -54,7 +53,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set PO number: " + ponumber);		
 	}
 	
 	public void addQuickNoteToInvoice(String quicknote) {
@@ -73,14 +71,12 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public void clickMenuButton() {
 		tap(menubtn);
-		log(LogStatus.INFO, "Click Invoice Menu button");	
 	}
 	
 	public VNextNotesScreen clickNotesMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//div[@class='actions-modal modal-in']"))));
 		tap(appiumdriver.findElement(By.xpath("//div[@class='actions-modal modal-in']")).findElement(By.xpath(".//div[@class='actions-modal-button']")));
-		log(LogStatus.INFO, "Click Invoice Notes Menu item");	
 		return new VNextNotesScreen(appiumdriver);
 	}
 	
@@ -91,7 +87,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public void clickSaveInvoiceButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Click Invoice Info screen Save button");	
 	}
 	
 	public String getInvoiceNumber() {
@@ -108,7 +103,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public void clickInvoiceInfoBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Click Invoice Info screen Back button");	
 	}
 
 }

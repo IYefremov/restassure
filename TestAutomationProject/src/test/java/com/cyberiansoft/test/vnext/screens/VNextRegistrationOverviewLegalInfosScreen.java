@@ -1,18 +1,15 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
@@ -71,20 +68,16 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(termsandconditionslink));
 		tap(termsandconditionslink);
-		
-		log(LogStatus.INFO, "Click Terms And Conditions link");
 	}
 	
 	public void clickPaymentTermsLink() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(paymenttermslink));
 		tap(paymenttermslink);
-		log(LogStatus.INFO, "Click Payment Termslink link");
 	}
 	
 	public void clickPaymentIAgreeButton() {
 		tap(paymentagreebtn);
-		log(LogStatus.INFO, "Click I Agree button");
 	}
 	
 	public void clickIAgreeButton() {
@@ -93,24 +86,20 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		tap(agreebtn);
 		wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.invisibilityOf(agreebtn));
-		log(LogStatus.INFO, "Click I Agree button");
 	}
 	
 	public void clickDeclineButton() {
 		tap(declinebtn);
-		log(LogStatus.INFO, "Click Decline button");
 	}
 	
 	public void clickSubmitButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(submitbtn));
 		tap(submitbtn);
-		log(LogStatus.INFO, "Click Submit button");
 	}
 	
 	public void clickPayNowButton() {
 		tap(paynowbtn);
-		log(LogStatus.INFO, "Click Pay Now button");
 	}
 
 }

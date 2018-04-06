@@ -6,8 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -32,12 +31,10 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseInspectionsScreen {
 	
 	public void clickCreateInvoiceOption() {
 		tap(autoinvoicecreateoption);
-		log(LogStatus.INFO, "Select Create Invoice Option");
 	}
 	
 	public void clickWorkOrderSaveButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Click Save work order button");
 	}
 
 }

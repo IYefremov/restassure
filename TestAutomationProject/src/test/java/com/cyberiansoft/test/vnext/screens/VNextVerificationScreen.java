@@ -1,17 +1,14 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextVerificationScreen extends VNextBaseScreen {
 	
@@ -44,11 +41,6 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 		tap(regfld);
 		appiumdriver.getKeyboard().pressKey(regcode);
 		appiumdriver.hideKeyboard();
-		//setValue(regfld, regcode);
-		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		//appiumdriver.hideKeyboard();
-	    //switchToWebViewContext();
-		log(LogStatus.INFO, "Set registration code: " + regcode);
 	}
 	
 	public String getEnteredDeviceRegistrationCodeValue() {
@@ -57,7 +49,6 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	
 	public void clickVerifyButton() {
 		tap(phonevereficationscreren.findElement(By.xpath(".//button[@data-bind='click: navigateNext']")));
-		log(LogStatus.INFO, "Tap Verify button");
 	}
 	
 	public boolean isDownloadDBProgressBarAppears() {
@@ -81,7 +72,6 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	public void clickDownloadAgainButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		tap(wait.until(ExpectedConditions.visibilityOf(downloadagainbtn)));
-		log(LogStatus.INFO, "Tap Download Again button");
 	}
 	
 }

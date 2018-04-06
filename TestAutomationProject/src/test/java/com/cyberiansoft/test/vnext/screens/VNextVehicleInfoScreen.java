@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -11,12 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
@@ -84,8 +81,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(vinfld));
 		setValue(vinfld, vinnumber);
-		//appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set VIN: " + vinnumber);
 	}
 	
 	public String getVINFieldValue() {
@@ -128,7 +123,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		tap(typefld);
 		VNextVehicleTypeScreen vehicletypescreen = new VNextVehicleTypeScreen(appiumdriver);
 		vehicletypescreen.selectType(vehicletype);
-		log(LogStatus.INFO, "Select Vehicle Type: " + vehicletype);
 	}
 	
 	public void selectModelColor (String color) {
@@ -136,7 +130,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']"))));
 		tap(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']")));
-		log(LogStatus.INFO, "Select Vehicle Color: " + color);
 	}
 	
 	public String getType () {
@@ -169,14 +162,12 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 				tap(closebtn);
 				break;
 			}
-		log(LogStatus.INFO, "Select Vehicle Year: " + yearValue);
 	}
 	
 	public void setLicPlate (String licplate) {
 		licplatefld.clear();
 		licplatefld.sendKeys(licplate);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set License Plate : " + licplate);
 	}
 	
 	public String getLicPlate () {
@@ -187,7 +178,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		milagefld.click();
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(milagefld.getAttribute("value"), milage);
-		log(LogStatus.INFO, "Set Milage: " + milage);
 	}
 	
 	public String getMilage () {
@@ -197,7 +187,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void setStockNo (String stockno) {
 		stockfld.clear();
 		stockfld.sendKeys(stockno);
-		log(LogStatus.INFO, "Set Stock Number : " + stockno);
 	}
 	
 	public String getStockNo () {
@@ -208,7 +197,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		rofld.clear();
 		rofld.sendKeys(rono);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set RO Number : " + rono);
 	}
 	
 	public String getPoNo () {
@@ -219,7 +207,6 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		pofld.clear();
 		pofld.sendKeys(pono);
 		appiumdriver.hideKeyboard();
-		log(LogStatus.INFO, "Set RO Number : " + pono);
 	}
 	
 	public String getRoNo () {

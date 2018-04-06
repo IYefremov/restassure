@@ -67,8 +67,6 @@ import com.cyberiansoft.test.ios_client.utils.PDFReader;
 import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios_client.utils.UtilConstants;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
-import com.cyberiansoft.test.ios_client.utils.iOSLogger;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IOSSmokeTestCases extends BaseTestCase {
 
@@ -2580,7 +2578,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.clickSaveButton();
 		
 		Thread.sleep(45000);
-		testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
 		Thread.sleep(5000);
 		myworkordersscreen.openWorkOrderDetails(wonumber);

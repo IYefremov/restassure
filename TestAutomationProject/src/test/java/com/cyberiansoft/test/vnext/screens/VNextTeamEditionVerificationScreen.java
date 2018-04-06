@@ -1,16 +1,13 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
@@ -40,15 +37,10 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 		setValue(regfld1, regCode.substring(0, 4));
 		setValue(regfld2, regCode.substring(5, 9));
 		setValue(regfld3, regCode.substring(10, 14));
-		//switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		//appiumdriver.hideKeyboard();
-	    //switchToWebViewContext();
-		log(LogStatus.INFO, "Set registration code: " + regCode);
 	}
 	
 	public void clickVerifyButton() {
 		tap(verifyBtn);
-		log(LogStatus.INFO, "Tap Verify button");
 	}
 
 }

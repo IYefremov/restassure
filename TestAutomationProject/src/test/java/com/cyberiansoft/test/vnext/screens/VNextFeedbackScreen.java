@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,13 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 
 public class VNextFeedbackScreen extends VNextBaseScreen {
@@ -58,7 +55,6 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(typeslist));
 		tap(typeslist.findElement(By.xpath(".//a[contains(text(), '" + feedbackType + "')]")));
-		log(LogStatus.INFO, "Select feedback type: " + feedbackType);
 	}
 	
 	public void selectArea(String feedbackArea, String subArea) {
@@ -67,20 +63,16 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(areaslist));
 		tap(areaslist.findElement(By.xpath(".//a[@data-id='" + feedbackArea + "']")));
 		tap(areaslist.findElement(By.xpath(".//a[@data-id='" + subArea + "']")));
-		log(LogStatus.INFO, "Select feedback area: " + feedbackArea);
-		log(LogStatus.INFO, "Select feedback subarea: " + subArea);
 	}
 	
 	public void setFeedbackSubject(String subject) {
 		subjectfld.clear();
 		subjectfld.sendKeys(subject);
-		log(LogStatus.INFO, "Set feedback subject: " + subject);
 	}
 	
 	public void setFeedbackDescription(String description) {
 		descfld.clear();
 		descfld.sendKeys(description);
-		log(LogStatus.INFO, "Set feedback description: " + description);
 	}
 	
 	public VNextStatusScreen clickSendButton() {
@@ -90,7 +82,6 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 				tap(btn);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.YOUR_FEEDBACK_HAS_BEEN_SENT);
-		log(LogStatus.INFO, "Click feedback Send button");
 		return new VNextStatusScreen(appiumdriver);
 	}
 

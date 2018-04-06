@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,12 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 public class VNextSelectServicesScreen extends VNextBaseScreen {
 	
@@ -126,12 +123,10 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	
 	public void clickSaveSelectedServicesButton() {
 		tap(selectservicesscreen.findElement(By.xpath(".//span[@action='save']")));
-		log(LogStatus.INFO, "Click Save button");
 	}
 	
 	public VNextInspectionServicesScreen clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Click Select Services screen Back button");
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }

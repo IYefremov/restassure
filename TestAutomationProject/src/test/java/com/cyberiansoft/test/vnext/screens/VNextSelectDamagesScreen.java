@@ -1,17 +1,14 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextSelectDamagesScreen extends VNextBaseScreen {
 	
@@ -36,18 +33,15 @@ public class VNextSelectDamagesScreen extends VNextBaseScreen {
 	
 	public void selectAllDamagesTab() {
 		tap(alltab);
-		log(LogStatus.INFO, "Tap All Damages tab");
 	}
 	
 	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		log(LogStatus.INFO, "Tap Damage Type: " + damagetype);
 		return new VNextVisualScreen(appiumdriver);
 	}
 
 	public VNextVisualServicesScreen clickCustomDamageType(String damagetype) {
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		log(LogStatus.INFO, "Tap Damage Type: " + damagetype);
 		return new VNextVisualServicesScreen(appiumdriver);
 	}
 	

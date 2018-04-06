@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,12 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 public class VNextApproveServicesScreen extends VNextBaseScreen {
 	
@@ -49,17 +46,14 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(approveallbtn));
 		tap(approveallbtn);
-		log(LogStatus.INFO, "Tap on Approve All Button");
 	}
 	
 	public void clickDeclineAllButton() {
-		tap(declineallbtn);
-		log(LogStatus.INFO, "Tap on Decline All Button");
+		tap(declineallbtn);;
 	}
 	
 	public void clickSkipAllButton() {
 		tap(skipallbtn);
-		log(LogStatus.INFO, "Tap on Skip All Button");
 	}
 	
 	public boolean isApproveAllButtonDisplayed() {
@@ -80,7 +74,6 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 	
 	public void clickSaveButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Tap on Save Button");
 	}
 	
 	public void clickApproveButtonForService(String serviceName) {

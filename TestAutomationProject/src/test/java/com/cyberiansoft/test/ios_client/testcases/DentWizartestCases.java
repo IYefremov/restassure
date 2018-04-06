@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.ios_client.testcases;
 
-import java.net.MalformedURLException;
-
+import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.*;
+import com.cyberiansoft.test.ios_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -9,37 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ApproveInspectionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.CarHistoryScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ClaimScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.CustomersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.EnterpriseBeforeDamageScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.HomeScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.InspectionScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.InvoiceInfoScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.MainScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.MyInspectionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.MyInvoicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.MyWorkOrdersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.NotesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.OrderMonitorScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.OrderSummaryScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.PriceMatrixScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.QuestionsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServicesScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.SettingsScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.TeamWorkOrdersScreen;
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.VehicleScreen;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios_client.utils.UtilConstants;
-import com.relevantcodes.extentreports.LogStatus;
+import java.net.MalformedURLException;
 
 public class DentWizartestCases extends BaseTestCase {
 
@@ -3505,7 +3477,6 @@ public class DentWizartestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Thread.sleep(2000);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-		testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.clickInvoiceIcon();
 		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -3751,7 +3722,6 @@ public class DentWizartestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Thread.sleep(1000);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-		testlogger.log(LogStatus.INFO, wonumber);
 		Thread.sleep(2000);
 		myworkordersscreen.clickInvoiceIcon();
 		Thread.sleep(1000);

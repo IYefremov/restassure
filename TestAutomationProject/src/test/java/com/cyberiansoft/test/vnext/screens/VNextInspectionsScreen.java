@@ -1,8 +1,13 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -12,16 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextInspectionsScreen extends VNextBaseScreen {
 	
@@ -73,7 +70,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 			
 		}
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		log(LogStatus.INFO, "Tap Add inspection button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
@@ -83,7 +79,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public VNextHomeScreen clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Tap Inspections Screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
@@ -192,7 +187,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
-		log(LogStatus.INFO, "Tap on Inspection: " + inspnumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
 	
@@ -240,7 +234,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 				//do nothing
 			}
 		}
-		log(LogStatus.INFO, "Switch to Team Inspections view");
 	}
 	
 	public boolean isTeamInspectionsViewActive() {
@@ -251,7 +244,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(myinspectiontab));
 		tap(myinspectiontab);
-		log(LogStatus.INFO, "Switch to My Inspections view");
 	}
 	
 	public boolean isMyInspectionsViewActive() {
@@ -265,8 +257,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSearchButton() {
-		tap(searchbtn);
-		log(LogStatus.INFO, "Click Search Button");
+		tap(searchbtn);;
 	}
 	
 	public void setSearchText(String searchtext) {
@@ -277,11 +268,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		log(LogStatus.INFO, "Set Search Text: " + searchtext);
 	}
 	
 	public void clickCancelSearchButton() {
 		tap(cancelsearchbtn);
-		log(LogStatus.INFO, "Click Cancel Search Button");
 	}
 }

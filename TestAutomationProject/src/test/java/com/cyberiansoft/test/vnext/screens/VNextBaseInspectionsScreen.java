@@ -1,17 +1,12 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
@@ -52,7 +47,6 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public void clickCancelInspectionMenuItem() {
 		clickMenuButton();
 		tap(cancelinspectionmenu);
-		log(LogStatus.INFO, "Tap Cancel inspection button");
 	}
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
@@ -66,20 +60,17 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickMenuButton() {
-		tap(menubtn); 
-		log(LogStatus.INFO, "Tap Menu button");
+		tap(menubtn);
 	}
 	
 	public void clickSaveInspectionMenuButton() {
 		clickMenuButton();
 		tap(saveinspectionmenu);
-		log(LogStatus.INFO, "Tap Save Inspection button");
 	}
 	
 	public void clickSaveWorkOrderMenuButton() {
 		clickMenuButton();
 		tap(saveworkordermenu);
-		log(LogStatus.INFO, "Tap Save Work Order button");
 	}
 	
 	public String getNewInspectionNumber() {
@@ -89,7 +80,6 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	public VNextNotesScreen clickInspectionNotesOption() {
 		clickMenuButton();
 		tap(inspectionnotesmenu);
-		log(LogStatus.INFO, "Tap Inspection Notes button");
 		return new VNextNotesScreen(appiumdriver);
 	}
 	

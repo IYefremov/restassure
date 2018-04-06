@@ -1,19 +1,16 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class VNextHomeScreen extends VNextBaseScreen {
 	
@@ -81,7 +78,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextCustomersScreen clickCustomersMenuItem() {
 		tap(customerslist);
-		log(LogStatus.INFO, "Tap Customers menu item");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
@@ -90,21 +86,18 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(workorderslist));
 		tap(workorderslist);
-		log(LogStatus.INFO, "Tap Work Orders menu item");
 		return new VNextWorkOrdersScreen(appiumdriver);
 	}
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
 		BaseUtils.waitABit(2000);
-		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public VNextInvoicesScreen clickInvoicesMenuItem() {
 		tap(invoiceslist);
 		BaseUtils.waitABit(2000);
-		log(LogStatus.INFO, "Tap Inspections menu item");
 		return new VNextInvoicesScreen(appiumdriver);
 	}
 	
@@ -112,7 +105,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		if (!settingslist.isDisplayed())
 			tap(morelist);
 		tap(settingslist);
-		log(LogStatus.INFO, "Tap Settings menu item");
 		return new VNextSettingsScreen(appiumdriver);
 	}
 	
@@ -120,13 +112,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		if (!statuslist.isDisplayed())
 			tap(morelist);
 		tap(statuslist);
-		log(LogStatus.INFO, "Tap Status menu item");
 		return new VNextStatusScreen(appiumdriver);
 	}
 	
 	public void clickQueueMessageIcon() {
 		tap(queuemessageicon);
-		log(LogStatus.INFO, "Tap Queue Message Icon");
 		BaseUtils.waitABit(500);
 	}
 	
@@ -145,7 +135,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextLoginScreen clickLogoutButton() {
 		tap(logoutbtn);
-		log(LogStatus.INFO, "Tap Logout button");
 		return new VNextLoginScreen(appiumdriver);
 	}
 	
@@ -158,7 +147,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public void clickUpgrateToProBanner() {
 		tap(appiumdriver.findElement(By.xpath("//div[@class='upgrade-image' and @action='ad']")));
-		log(LogStatus.INFO, "Tap Upgrate To Pro Banner");
 	}
 	
 	public boolean isUpgrateToProBannerVisible() {
@@ -167,20 +155,17 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
 	public void clickAddButton() {
 		tap(addbtn);
-		log(LogStatus.INFO, "Tap Home screen Add button");
 	}
 	
 	public VNextCustomersScreen clickNewWorkOrderPopupMenu() {
 		clickAddButton();
 		tap(newworkorderbtn);
-		log(LogStatus.INFO, "Tap New Work Order menu button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
 	public VNextCustomersScreen clickNewInspectionPopupMenu() {
 		clickAddButton();
 		tap(newinspectionbtn);
-		log(LogStatus.INFO, "Tap New Inspection menu button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 }

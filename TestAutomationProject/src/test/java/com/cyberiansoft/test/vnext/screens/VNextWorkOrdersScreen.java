@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -11,12 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.List;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
@@ -54,7 +51,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public VNextCustomersScreen clickAddWorkOrderButton() {
 		BaseUtils.waitABit(2000);		
 		tap(addwobtn);
-		log(LogStatus.INFO, "Tap Add work order button");
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
@@ -64,7 +60,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String wonumber) {
 		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
-		log(LogStatus.INFO, "Tap on Work order: " + wonumber);
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
 	
@@ -107,7 +102,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public VNextHomeScreen clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Tap Work Orders screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
@@ -136,7 +130,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null) {
 			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
-			log(LogStatus.INFO, "Click on Work Order: " + wonumber);
 		}
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
@@ -146,12 +139,10 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public void clickCreateInvoiceMenuItem() {
 		tap(createinvoicemenu);
-		log(LogStatus.INFO, "Click Create Invoice menu item");
 	}
 	
 	public void clickCreateInvoiceIcon() {
 		tap(createinvoiceicon);
-		log(LogStatus.INFO, "Click Create Invoice icon");
 	}
 	
 	public void switchToTeamWorkordersView() {
@@ -164,7 +155,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 				//do nothing
 			}
 		}
-		log(LogStatus.INFO, "Switch to Team Work Orders view");
 	}
 	
 	public boolean isTeamWorkordersViewActive() {
@@ -173,7 +163,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public void switchToMyWorkordersView() {
 		tap(myworkorderstab);
-		log(LogStatus.INFO, "Switch to My Work Orders view");
 	}
 	
 	public boolean isMyWorkordersViewActive() {

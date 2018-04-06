@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.time.Duration;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
+import java.time.Duration;
 
 public class VNextApproveScreen extends VNextBaseScreen {
 	
@@ -46,7 +43,6 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	
 	public void clickClearSignatureButton() {
 		tap(clearsignaturebtn);
-		log(LogStatus.INFO, "Tap on Clear signature Button");
 	}
 	
 	public void drawSignature() {
@@ -77,7 +73,6 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	
 	public void clickSaveButton() {
 		tap(savebtn);
-		log(LogStatus.INFO, "Tap on Save Button");
 	}
 	
 	public void saveApprovedInspection() {

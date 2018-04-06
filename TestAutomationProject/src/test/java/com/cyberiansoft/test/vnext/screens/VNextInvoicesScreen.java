@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -13,12 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class VNextInvoicesScreen extends VNextBaseScreen {
 	
@@ -124,18 +121,15 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public void unselectAllSelectedInvoices() {
 		if (cancelselectedinvoices.isDisplayed())
 			tap(cancelselectedinvoices);
-		log(LogStatus.INFO, "Click unselect all Selected Invoices button");
 	}
 	
 	public VNextHomeScreen clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Click Invoices screen Back button");
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
 	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
 		tap(invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")));
-		log(LogStatus.INFO, "Tap on Invoice: " + invoicenumber);
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
 	
@@ -147,7 +141,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextWorkOrdersScreen clickAddInvoiceButton() {	
 		tap(addinvoicebtn);
 		BaseUtils.waitABit(1000);
-		log(LogStatus.INFO, "Tap Add inspection button");
 		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
@@ -164,7 +157,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 				//do nothing
 			}
 		}
-		log(LogStatus.INFO, "Switch to Team Invoices view");
 	}
 	
 	public boolean isTeamInvoicesViewActive() {
@@ -173,7 +165,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public void switchToMyInvoicesView() {
 		tap(myinvoicestab);
-		log(LogStatus.INFO, "Switch to My Invoices view");
 	}
 	
 	public boolean isMyInvoicesViewActive() {
@@ -191,7 +182,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public void clickOnSelectedInvoicesMailButton() {
 		tap(appiumdriver.findElement(By.xpath(".//*[@action='multiselect-actions-send-email']")));
-		log(LogStatus.INFO, "Tap selected invoices Mail Button");
 	}
 
 }

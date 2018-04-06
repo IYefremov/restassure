@@ -1,38 +1,28 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.UUID;
-
-import org.apache.commons.io.FileUtils;
-import org.monte.screenrecorder.ScreenRecorder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
-
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.TestUser;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios_client.utils.TestUser;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import org.apache.commons.io.FileUtils;
+import org.monte.screenrecorder.ScreenRecorder;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.UUID;
 
 public class BaseTestCase {
 
@@ -45,14 +35,9 @@ public class BaseTestCase {
 	protected static MobilePlatform mobilePlatform;
 	protected TestUser testuser;
 	protected String userpsw;
-	protected static ExtentTest testlogger;
 
 	String bundleid = "";
-	
-	public void setTestLogger(ExtentTest logger) {
-		testlogger = logger;
-	}
-	
+
 	public void initTestUser(String username,  String userpsw) {
 		this.testuser = new TestUser(username, userpsw);
 	}

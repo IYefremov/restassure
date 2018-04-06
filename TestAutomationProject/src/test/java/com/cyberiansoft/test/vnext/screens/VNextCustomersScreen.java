@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -11,13 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.relevantcodes.extentreports.LogStatus;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextCustomersScreen extends VNextBaseScreen {
 	
@@ -76,7 +73,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			//waitABit(1000);
 
 		}
-		log(LogStatus.INFO, "Select customer " + customer.getFullName());
 	}
 	
 	public void selectCustomerByCompanyName(String customercompany) {
@@ -85,7 +81,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);			
 		tap(customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
 		BaseUtils.waitABit(1000);
-		log(LogStatus.INFO, "Select customer by Address " + customercompany);
 	}
 	
 	public VNextNewCustomerScreen clickAddCustomerButton() {
@@ -96,8 +91,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 				tap(addbtn);
 		}*/
 		tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
-		log(LogStatus.INFO, "Click Add customer button");
-		return new VNextNewCustomerScreen(appiumdriver);	
+		return new VNextNewCustomerScreen(appiumdriver);
 	}
 	
 	public boolean isAddCustomerButtonDisplayed() {
@@ -111,17 +105,14 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public void clickBackButton() {
 		clickScreenBackButton();
-		log(LogStatus.INFO, "Click Customers screen Back button");
 	}
 	
 	public void switchToRetailMode() {
 		tap(retailcustomertab);
-		log(LogStatus.INFO, "Switch To Retail Mode");
 	}
 	
 	public void switchToWholesaleMode() {
 		tap(wholesalecustomertab);
-		log(LogStatus.INFO, "Switch To Wholesale Mode");
 	}
 	
 	public void searchCustomerByName(String customername) {
@@ -135,7 +126,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public void clickCancelSearchButton() {
 		tap(cancelsearchbtn);
-		log(LogStatus.INFO, "Tap Cancel Search Button");
 	}
 	
 	public void typeSearchParameters(String searchtxt) {

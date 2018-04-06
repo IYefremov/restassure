@@ -75,8 +75,6 @@ import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
-import com.cyberiansoft.test.ios_client.utils.iOSLogger;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class iOSRegularSmokeTestCases extends BaseTestCase {
 
