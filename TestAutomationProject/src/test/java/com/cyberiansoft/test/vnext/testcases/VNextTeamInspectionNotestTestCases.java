@@ -3,10 +3,10 @@ package com.cyberiansoft.test.vnext.testcases;
 import java.util.ArrayList;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
@@ -18,6 +18,10 @@ import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 
 public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
 	
+	@BeforeClass(description="Team Inspection Notest Test Cases")
+	public void beforeClass() throws Exception {
+	}
+	
 	@Test(testName= "Test Case 67743:Verify user can add Notes for Team Inspection, "
 			+ "Test Case 67744:Verify User can edit Notes from Team Inspection list, "
 			+ "Test Case 67746:Verify Notes changes is saved after DB update", 
@@ -26,8 +30,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify Notes changes is saved after DB update")
 	public void testVerifyUserAddNotesForTeamInspection() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -40,7 +42,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -91,8 +93,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify Notes icon displays if user add Notes for Inspection My/Team")
 	public void testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -103,7 +103,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -140,8 +140,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 					+ "Verify saving text note on tapping 'Back' button")
 	public void testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -153,7 +151,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -186,8 +184,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify quick notes are added as new lines of text")
 	public void testVerifyQuickNotesAreAddedAsNewLinesOfText() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -199,7 +195,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -232,8 +228,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify user can add several Quick notes")
 	public void testVerifyUserCanAddSeveralQuickNotes() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -242,7 +236,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -272,8 +266,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify saving text note on tapping hardware 'Back' button")
 	public void testVerifySavingTextNoteOnTappingHardwareBackButton() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -285,7 +277,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -317,8 +309,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			description = "Verify user can remove pictures from Notes")
 	public void testVerifyUserCanRemovePicturesFromNotes() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
@@ -330,7 +320,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);

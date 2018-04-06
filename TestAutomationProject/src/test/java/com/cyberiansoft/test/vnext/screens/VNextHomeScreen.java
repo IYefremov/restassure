@@ -139,7 +139,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public void waitUntilQueueMessageInvisible() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByXPath("//*[@action='messager-send']")));
 	}
 	

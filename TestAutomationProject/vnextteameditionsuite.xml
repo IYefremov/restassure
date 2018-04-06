@@ -4,7 +4,8 @@
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
   <listeners>
-		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>
+		<!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
+		<listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
@@ -14,13 +15,17 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases">
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfotestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfoScreenTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoicesTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamSupplementsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsLineApprovalTestCases">
       </class>
     </classes>
   </test>

@@ -31,6 +31,8 @@ public class InspectionData {
 	 @JsonProperty("inspApprovedPrice")
 	 String inspApprovedPrice;
 	 
+	 @JsonProperty("declineReason")
+	 String declineReason;
 	 
 	 public String getInspectionType() {
 		 return inspType;
@@ -42,6 +44,10 @@ public class InspectionData {
 	 
 	 public String getInspectionApprovedPrice() {
 		 return inspApprovedPrice;
+	 }
+	 
+	 public String getDeclineReason() {
+		 return declineReason;
 	 }
 	 
 	 public String getVinNumber() {

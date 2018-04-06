@@ -28,5 +28,46 @@
       "inspPrice": "$14.85",
       "inspApprovedPrice": "$9.00"
     }
+  ],
+  
+  "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
+    {
+      "rowID": "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON.01",
+      "description": "Test Case 71744:Verify user can decline all service if Line Approval = ON",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "services": [{"serviceName": "Battery Installation",
+      }, {"serviceName": "Aluminum Panel",
+      }, {"serviceName": "Anastasia Labor Avarage Data",
+      }],
+      "declineReason": "No repair needed"
+    }
+  ],
+  
+  "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF.01",
+      "description": "Test Case 71745:Verify user can't approve or decline services if Line Approval = OFF",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation",
+      }
+    }
+  ],
+  
+  "testVerifyStateChangedToNewIfUserEditInspection": [
+    {
+      "rowID": "testVerifyStateChangedToNewIfUserEditInspection.01",
+      "description": "Test Case 71746:Verify state changed to New if user edit Inspection",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "services": [{"serviceName": "Battery Installation",
+      }, {"serviceName": "Aluminum Panel",
+      }, {"serviceName": "Anastasia Labor Avarage Data",
+      }]
+    }
   ]
 }

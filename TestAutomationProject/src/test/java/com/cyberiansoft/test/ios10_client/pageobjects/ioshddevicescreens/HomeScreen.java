@@ -97,7 +97,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 	
 	public TeamWorkOrdersScreen clickTeamWorkordersButton() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
 		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.switchToTeamWorkOrdersView();		

@@ -97,6 +97,8 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public void expandInvoiceDetails(String invoicenumber) {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		if (!invoicecell.getAttribute("class").contains("expanded")) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']"))));
 			tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
 		}
 		else

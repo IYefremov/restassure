@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.core;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -13,9 +15,12 @@ public class IOSHDDeviceInfo {
 
     private IOSHDDeviceInfo() {
          props = new Properties();
-    	try {
-    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdevicehdconf.properties");
-	    props.load(in);
+		File file =
+				new File("src/test/java/com/cyberiansoft/test/core/iosdevicehdconf.properties");
+		try {
+			FileInputStream fileInput = new FileInputStream(file);
+			props.load(fileInput);
+			fileInput.close();
     	}
     	catch (IOException e) {
     	    System.out.println("Can't load device properties");

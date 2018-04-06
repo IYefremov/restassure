@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,7 +24,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
 		if (checkHelpPopupPresence())		
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+			tap(viewscreen.findElement(By.xpath(".//div[@class='help-button' and text()='OK, got it']")));
 	}
 
 }

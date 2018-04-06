@@ -7,6 +7,7 @@ import java.io.Writer;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
@@ -48,7 +49,6 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public synchronized void onTestStart(ITestResult result) {
 		ExtentTest extent;
 		if (ExtentTestManager.getTest() == null) {
-			System.out.println("+++++++++++" + result.getTestClass().getName());
 			ExtentTestManager.createTest(result.getTestClass().getName());
 		}
 		if ( getTestParams(result).isEmpty() ) {
@@ -84,7 +84,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
 		try {
 			//test.get().log(Status.WARNING, "details", MediaEntityBuilder.createScreenCaptureFromBase64String(AppiumUtils.createBase64Screenshot()));
-			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot("test-output", "fail")).build());
+			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().geReportFolderPath(), "fail")).build());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,6 +93,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
 		}
 		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+		AppiumUtils.setNetworkOn();
 		VNextAppUtils.restartApp();
 	}
 
@@ -142,7 +143,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public void beforeInvocation(IInvokedMethod method, ITestResult result) {
 		BeforeClass testAnnotation = (BeforeClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(BeforeClass.class);
 		if (testAnnotation != null) {
-			if (method.getTestMethod().getDescription() != null)
+			if (!StringUtils.isEmpty(method.getTestMethod().getDescription()))
 				ExtentTestManager.createTest(method.getTestMethod().getDescription());
 			else
 				ExtentTestManager.createTest(result.getMethod().getTestClass().getName());

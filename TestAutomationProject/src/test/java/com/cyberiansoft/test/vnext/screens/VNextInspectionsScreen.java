@@ -248,6 +248,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToMyInspectionsView() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(myinspectiontab));
 		tap(myinspectiontab);
 		log(LogStatus.INFO, "Switch to My Inspections view");
 	}

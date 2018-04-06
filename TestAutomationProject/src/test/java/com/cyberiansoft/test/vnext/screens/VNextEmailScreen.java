@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -93,7 +94,11 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
 		BaseUtils.waitABit(2000);
-		tap(sendbtn);
+		try {
+			tap(sendbtn);
+		} catch (WebDriverException e) {
+			//do nothing
+		}
 		//VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
 		//informationdialog.clickInformationDialogOKButton();
 		log(LogStatus.INFO, "Tap on Send Emails button");

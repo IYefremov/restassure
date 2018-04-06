@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -12,14 +12,16 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 
-public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
+	
+	@BeforeClass(description="Team Claim Info Test Cases")
+	public void beforeClass() throws Exception {
+	}
 	
 	@Test(testName= "Test Case 64814:Verify Claim Info screen visible for Inspection if 'Claim Info = ON'", 
 			description = "Verify Claim Info screen visible for Inspection if 'Claim Info = ON'")
 	public void testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
@@ -27,7 +29,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -50,8 +52,6 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen is not visible for Inspection if 'Claim Info = OFF'")
 	public void testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar2";
 		final String vinnumber = "TEST";
 
@@ -59,7 +59,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -76,8 +76,6 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen visible for WO if 'Claim Info = ON'")
 	public void testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
@@ -85,7 +83,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -108,8 +106,6 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 			description = "Verify Claim Info screen is not visible for WO if 'Claim Info = OFF'")
 	public void testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF() {
 		
-		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-		wholesalecustomer.setCompanyName("001 - Test Company");
 		final String inspType = "O_Kramar2";
 		final String vinnumber = "TEST";
 
@@ -117,7 +113,7 @@ public class VNextTeamClaimInfotestCases extends BaseTestCaseTeamEditionRegistra
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(wholesalecustomer);
+		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);

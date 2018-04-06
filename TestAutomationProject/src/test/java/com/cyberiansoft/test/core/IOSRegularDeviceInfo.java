@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.core;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -11,11 +13,13 @@ public class IOSRegularDeviceInfo {
 
     private IOSRegularDeviceInfo() {
          props = new Properties();
-    	try {
-    		InputStream in = this.getClass().getClassLoader().getResourceAsStream("iosdeviceregularconf.properties");
-	    props.load(in);
-    	}
-    	catch (Exception e) {
+    	File file =
+				new File("src/test/java/com/cyberiansoft/test/core/iosdeviceregularconf.properties");
+		try {
+			FileInputStream fileInput = new FileInputStream(file);
+			props.load(fileInput);
+			fileInput.close();
+		} catch (Exception e) {
     	    // catch Configuration Exception right here
     	}
     }

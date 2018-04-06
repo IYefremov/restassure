@@ -31,6 +31,9 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 	public VNextInvoicesScreen changeInvoicePONumber(String poNumber) {
 		setInvoicePONumber(poNumber);
 		clickSaveButton();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.
+				xpath("//div[@class='notifier' and @data-type='success']"))));
 		return new VNextInvoicesScreen(appiumdriver);
 	}
 
