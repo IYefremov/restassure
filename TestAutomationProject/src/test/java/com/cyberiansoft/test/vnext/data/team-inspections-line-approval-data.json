@@ -7,9 +7,9 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation",
-      }, {"serviceName": "Aluminum Panel",
-      }, {"serviceName": "Anastasia Labor Avarage Data",
+      "services": [{"serviceName": "Battery Installation"
+      }, {"serviceName": "Aluminum Panel"
+      }, {"serviceName": "Anastasia Labor Avarage Data"
       }]
     }
   ],
@@ -21,9 +21,9 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation",
-      }, {"serviceName": "Aluminum Panel",
-      }, {"serviceName": "Anastasia Labor Avarage Data",
+      "services": [{"serviceName": "Battery Installation"
+      }, {"serviceName": "Aluminum Panel"
+      }, {"serviceName": "Anastasia Labor Avarage Data"
       }],
       "inspPrice": "$14.85",
       "inspApprovedPrice": "$9.00"
@@ -33,13 +33,13 @@
   "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
     {
       "rowID": "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON.01",
-      "description": "Test Case 71744:Verify user can decline all service if Line Approval = ON",
+      "description": "Test Case 71744:Verify user can decline all service if Line Approval = ON, Test Case 71747:Verify user need to select reason for decline/skip all services in Inspection",
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation",
-      }, {"serviceName": "Aluminum Panel",
-      }, {"serviceName": "Anastasia Labor Avarage Data",
+      "services": [{"serviceName": "Battery Installation"
+      }, {"serviceName": "Aluminum Panel"
+      }, {"serviceName": "Anastasia Labor Avarage Data"
       }],
       "declineReason": "No repair needed"
     }
@@ -52,7 +52,7 @@
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "service": {"serviceName": "Battery Installation",
+      "service": {"serviceName": "Battery Installation"
       }
     }
   ],
@@ -64,9 +64,23 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation",
-      }, {"serviceName": "Aluminum Panel",
-      }, {"serviceName": "Anastasia Labor Avarage Data",
+      "services": [{"serviceName": "Battery Installation"
+      }, {"serviceName": "Aluminum Panel"
+      }, {"serviceName": "Anastasia Labor Avarage Data"
+      }]
+    }
+  ],
+
+  "testVerifyInspectionHaveStateApproveIfUserSelectOnlyOneServiceAsApproved": [
+    {
+      "rowID": "testVerifyInspectionHaveStateApproveIfUserSelectOnlyOneServiceAsApproved.01",
+      "description": "Test Case 71748:Verify Inspection have state 'Approve' if user select only one service as 'approved'",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "services": [{"serviceName": "Battery Installation"
+      }, {"serviceName": "Aluminum Panel"
+      }, {"serviceName": "Anastasia Labor Avarage Data"
       }]
     }
   ]

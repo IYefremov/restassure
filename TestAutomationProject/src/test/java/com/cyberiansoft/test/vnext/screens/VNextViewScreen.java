@@ -23,8 +23,12 @@ public class VNextViewScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
-		if (checkHelpPopupPresence())		
+		if (checkHelpPopupPresence()) {
+			wait = new WebDriverWait(appiumdriver, 15);
+			wait.until(ExpectedConditions.elementToBeClickable (viewscreen.findElement(By.xpath(".//div[@class='help-button' and text()='OK, got it']"))));
 			tap(viewscreen.findElement(By.xpath(".//div[@class='help-button' and text()='OK, got it']")));
+
+		}
 	}
 
 }
