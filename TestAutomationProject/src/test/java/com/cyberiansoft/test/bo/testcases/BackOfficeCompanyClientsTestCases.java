@@ -23,10 +23,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
+	public void BackOfficeLogout() {
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		Thread.sleep(3000);
+//		Thread.sleep(3000);
 	}
 	
 	@Test(description = "Test Case 15322:Company- Clients: Search")
@@ -229,7 +229,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 29760: Company- Clients: Client Users Update", description = "Company- Clients: Client Users Update" )
-	public void testCompanyClientsClientUsersUpdate() throws Exception {
+	public void testCompanyClientsClientUsersUpdate() {
 		
 		final String clientname = "AlExTest";
 		final String useremail = "test@cyberiansoft.com";

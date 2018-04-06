@@ -1,54 +1,32 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import org.junit.Assert;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.EmailTemplatesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InsuranceCompaniesWePpage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.InvoiceTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.JobsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ManageLicencesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewInvoiceTypeDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewServicePackageDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewTeamsDialogWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.PriceMatricesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.PrintServersWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceAdvisorsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceContractTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.TeamsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.TimesheetTypesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.WorkOrderTypesWebPage;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 
 import java.lang.reflect.Method;
 
 public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	
 	@BeforeMethod
-	public void BackOfficeLogin(Method method) throws InterruptedException {
+	public void BackOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
-		Thread.sleep(2000);
 	}
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+	public void BackOfficeLogout() {
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backofficeheader.clickLogout();
-		Thread.sleep(3000);
 	}
 	
 	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD",
@@ -184,7 +162,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(teamspage.isTeamExists(teamedited));
 	}
 
-	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
+	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD", retryAnalyzer = Retry.class)
 	public void testCompanyJobsCRUD() throws Exception {
 
 		final String job = "Test job";
@@ -240,9 +218,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobsPage.getTableJobStartDate(jobEdited).trim());
 		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(jobEdited).trim());
 		Assert.assertEquals(jobAccId, jobsPage.getTableJobAccountingID(jobEdited).trim());
-		Assert.assertEquals(jobAcc2Id, jobsPage.getTableJobAccountingID2(jobEdited).trim());;
-		
-		
+		Assert.assertEquals(jobAcc2Id, jobsPage.getTableJobAccountingID2(jobEdited).trim());
+
 		jobsPage.deleteJobAndCancelDeleting(jobEdited);
 		jobsPage.deleteJob(jobEdited);
 		Assert.assertFalse(jobsPage.isJobPresent(jobEdited));

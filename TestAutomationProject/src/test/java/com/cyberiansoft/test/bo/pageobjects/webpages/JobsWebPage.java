@@ -118,8 +118,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobdesc = row.findElement(By.xpath(".//td[4]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobdesc;
 	}
 	
@@ -128,8 +128,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobclient = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobclient;
 	}
 	
@@ -138,8 +138,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobstartdate = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobstartdate;
 	}
 	
@@ -148,8 +148,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobenddate = row.findElement(By.xpath(".//td[7]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobenddate;
 	}
 	
@@ -158,8 +158,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobaccid = row.findElement(By.xpath(".//td[8]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobaccid;
 	}
 	
@@ -168,8 +168,8 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			jobaccid2 = row.findElement(By.xpath(".//td[9]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 		return jobaccid2;
 	}
 	
@@ -287,23 +287,23 @@ public class JobsWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");
+		} else
+            Assert.fail("Can't find " + job + " job");
 	}
 	
 	public void deleteJob(String job) {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");		
+		} else
+            Assert.fail("Can't find " + job + " job");
 	}
 	
 	public void deleteJobAndCancelDeleting(String job) throws InterruptedException {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			cancelDeletingTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + job + " job");		
+		} else
+            Assert.fail("Can't find " + job + " job");
 	}
 }

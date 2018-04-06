@@ -45,7 +45,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public void clickLogout() {
-		driver.navigate().refresh();
 		if (driver.getWindowHandles().size() > 1) {
 			driver.close();
 			for (String activeHandle : driver.getWindowHandles())
@@ -65,6 +64,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 			e.printStackTrace();
 		}
 		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		waitABit(4000);
 	}
 	
 	public OperationsWebPage clickOperationsLink() {

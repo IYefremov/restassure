@@ -587,8 +587,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			     ivoiceOptions.findElement(By.linkText(string)).click();
 			 }
 			 waitForLoading();
-//				wait.until(ExpectedConditions
-//                        .invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
                 return mainWindow;
 			} else if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
 				act.moveToElement(selectBTN).click().build().perform();
@@ -601,19 +599,13 @@ public class InvoicesWebPage extends WebPageWithFilter {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
 				}
             waitForLoading();
-//				Thread.sleep(1000);
-//				wait.until(
-//						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-				
+
 				if(string.equals("Mark as Paid")){
 				wait.until(ExpectedConditions.visibilityOf(paymentNote));
 				paymentTextField.sendKeys("test");
 				markAsPaidBTN.click();
 				driver.switchTo().alert().accept();
 				waitForLoading();
-				// Thread.sleep(1000);
-//				wait.until(
-//						ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 				driver.navigate().refresh();
 				}
 				return mainWindow;
@@ -638,13 +630,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			}
 		 else if (string.equals("Download JSON")) {
 		    act.moveToElement(selectBTN).click().build().perform();
-//			act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-//			Thread.sleep(3000);
             wait.until(ExpectedConditions
                     .visibilityOf(driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
                     .click();
-
-//			driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 			return mainWindow;
 		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
 			act.moveToElement(selectBTN).click().build().perform();
@@ -1146,10 +1134,11 @@ Thread.sleep(3000);
 		}
 	}
 
-	public void clickExportButton() throws InterruptedException {
+	public void clickExportButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(), 'Export')]"))).click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
+//		Thread.sleep(1000);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public void setStatusForSelectedInvoices(String status) throws InterruptedException {

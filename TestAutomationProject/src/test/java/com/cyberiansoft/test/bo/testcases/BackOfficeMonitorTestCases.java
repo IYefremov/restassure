@@ -373,12 +373,11 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 	
-	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
-	public void checkMonitorKanbanAutoRefresh() throws InterruptedException{
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		KanbanWebPage kanbanPage = monitorpage.clickKanbanLink();
+	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF", retryAnalyzer = Retry.class)
+	public void checkMonitorKanbanAutoRefresh() throws InterruptedException {
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
+		KanbanWebPage kanbanPage = monitorPage.clickKanbanLink();
 		kanbanPage.setSearchLocation("Default Location");
 		kanbanPage.clickSearchButton();
 		Assert.assertTrue(kanbanPage.checkSearhResultColumns());

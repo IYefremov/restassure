@@ -43,7 +43,8 @@ public class ExportInvoicesWebPage extends BaseWebPage {
 				break;
 			
 			nextPageButton.click();
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitForLoading();
+//			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		}
 		return true;
 	}

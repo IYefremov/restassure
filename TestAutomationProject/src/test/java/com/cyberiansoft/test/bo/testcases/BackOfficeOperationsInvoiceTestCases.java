@@ -465,7 +465,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 43713:Operation - Invoice: Status - Void")
+	@Test(testName = "Test Case 43713:Operation - Invoice: Status - Void", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceStatusVoid() throws InterruptedException {
 		final String ponum = "123";
 
@@ -948,17 +948,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkInvoicesSearchResults());
 	}
 
-	@Test(testName = "Test Case 64968:Operations - Invoice: Export")
+	@Test(testName = "Test Case 64968:Operations - Invoice: Export", retryAnalyzer = Retry.class)
 	public void checkOperationsInvoiceExport() throws InterruptedException {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchStatus("New");
-		invoicespage.clickFindButton();
-		invoicespage.selectIvoicesFromTop(3);
-		String mainWindow = invoicespage.getMainWindow();
-		invoicespage.clickExportButton();
-		ExportInvoicesWebPage exportInvoicesPage = invoicespage.switchToExportInvoicesWindow(mainWindow);
+		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
+		invoicesPage.selectSearchStatus("New");
+		invoicesPage.clickFindButton();
+		invoicesPage.selectIvoicesFromTop(3);
+		String mainWindow = invoicesPage.getMainWindow();
+		invoicesPage.clickExportButton();
+		ExportInvoicesWebPage exportInvoicesPage = invoicesPage.switchToExportInvoicesWindow(mainWindow);
 		Assert.assertTrue(exportInvoicesPage.allInvoicesAreAbleToExport());
 	}
 }
