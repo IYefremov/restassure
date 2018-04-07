@@ -97,7 +97,7 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 	        if (appiumdriver != null) {
 	        	try {
 	        		System.out.println("==================== " + "takescreenshot");
-					AppiumUtils.createiOSScreenshot("report", result.getMethod().getMethodName());
+					AppiumUtils.createScreenshot("report", result.getMethod().getMethodName());
 	        		//testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));
 	        	} catch (Exception e) {
 	        		System.out.println("==================== " + "exception");

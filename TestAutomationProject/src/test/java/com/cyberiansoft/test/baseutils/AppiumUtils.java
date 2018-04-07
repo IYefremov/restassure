@@ -71,26 +71,11 @@ public class AppiumUtils {
 	}
 	
 	public static String createScreenshot(String reportFolder, String filename) {
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		//WebDriver driver1 = new Augmenter().augment(driver);
 		UUID uuid = UUID.randomUUID();
 		File file = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(file , new File(reportFolder + "\\" + filename + uuid + ".jpeg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		return filename + uuid + ".jpeg";
-	}
-
-	public static String createiOSScreenshot(String reportFolder, String filename) {
-		//WebDriver driver1 = new Augmenter().augment(driver);
-		UUID uuid = UUID.randomUUID();
-		File file = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(file , new File(reportFolder + "/" + filename + uuid + ".jpeg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

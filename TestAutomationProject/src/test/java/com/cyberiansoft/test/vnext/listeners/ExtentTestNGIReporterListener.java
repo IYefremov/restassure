@@ -1,22 +1,5 @@
 package com.cyberiansoft.test.vnext.listeners;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
@@ -24,7 +7,19 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.testng.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener {
 	
@@ -83,7 +78,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
 		try {
-			//test.get().log(Status.WARNING, "details", MediaEntityBuilder.createScreenCaptureFromBase64String(AppiumUtils.createBase64Screenshot()));
+			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().geReportFolderPath(), "fail")).build());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
