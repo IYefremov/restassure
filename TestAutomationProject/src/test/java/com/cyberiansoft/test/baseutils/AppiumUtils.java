@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.baseutils;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-
-
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 
 public class AppiumUtils {
 	
@@ -85,6 +82,19 @@ public class AppiumUtils {
 			e.printStackTrace();
 		}
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		return filename + uuid + ".jpeg";
+	}
+
+	public static String createiOSScreenshot(String reportFolder, String filename) {
+		//WebDriver driver1 = new Augmenter().augment(driver);
+		UUID uuid = UUID.randomUUID();
+		File file = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(file , new File(reportFolder + "/" + filename + uuid + ".jpeg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return filename + uuid + ".jpeg";
 	}
 	

@@ -10,19 +10,14 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.UUID;
 
 public class BaseTestCase {
 
@@ -101,19 +96,6 @@ public class BaseTestCase {
 		
 		Helpers.init(appiumdriver);
 	}*/
-	
-	public String createScreenshot(WebDriver driver, String loggerdir) {
-		WebDriver driver1 = new Augmenter().augment(appiumdriver);
-		UUID uuid = UUID.randomUUID();
-		File file = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(file , new File(loggerdir + "/myscreen" + uuid + ".jpeg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "myscreen" + uuid + ".jpeg";
-	}
 
 	@AfterSuite
 	public void tearDown() throws Exception {

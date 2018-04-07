@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -113,23 +114,24 @@ public class WebElementsBot {
 		combobox.click();
 		combobox.clearAndType(value);
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
+		WebElement comboitem = new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
 
-		waitUntilSelectOptionsLoaded(droplist.getWrappedElement());
+		//waitUntilSelectOptionsLoaded(value);
 		waitABit(500);
-		droplist.selectByVisibleText(value);
+		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
+		//droplist.selectByVisibleText(value);
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
-	private static void waitUntilSelectOptionsLoaded(final WebElement element) {
+	private static void waitUntilSelectOptionsLoaded(final String value) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getDriver())
-                .withTimeout(60, TimeUnit.SECONDS)
-                .pollingEvery(80, TimeUnit.MILLISECONDS)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofMillis(80))
                 .ignoring(NoSuchElementException.class);
 		wait.until(new Function<WebDriver, Boolean>() {
              @Override
              public Boolean apply(WebDriver driver) {
-            	    return wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("b"))).getText().equals("1");
+            	    return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul/li[@class='rcbHovered']"))).getText().trim().equals(value.trim());
             	  }
             	});
     }

@@ -1,11 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -13,10 +8,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -25,7 +17,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ServicesScreen extends iOSHDBaseScreen {
 
@@ -120,17 +114,29 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
 				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + vehiclepart + "']/..");
-		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.]", ""), 
+		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""),
 				servicepriceandquantity.replaceAll(" ", ""));
 	}
 	
 	public void assertServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
-		
+		boolean selected = false;
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
-				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']");
-		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.]", ""), 
-				servicepriceandquantity.replaceAll(" ", ""));
+		List<MobileElement> serviceCells = selectedservices.findElementByClassName("XCUIElementTypeTable").
+				findElementsByXPath("//XCUIElementTypeStaticText[@name='" + servicename + "']/..");
+		for (MobileElement serviceCell : serviceCells) {
+			if (serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
+			servicepriceandquantity.replaceAll(" ", ""))) {
+				selected = true;
+				break;
+			}
+
+
+		}
+		Assert.assertTrue(selected);
+		//IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
+		//		findElementByXPath("//XCUIElementTypeStaticText[@name='" + servicename + "']/..");
+		//Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""),
+		//		servicepriceandquantity.replaceAll(" ", ""));
 	}
 
 	public int getServiceSelectedNumber(String service) {
@@ -333,8 +339,11 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		return new PriceMatrixScreen(appiumdriver);
 	}
 	
-	public void removeSelectedServices(String service) {
-		appiumdriver.findElementByName("Delete " + service).click();
+	public void removeSelectedServices(String serviceName) {
+		IOSElement selectedServices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		IOSElement serviceCell = (IOSElement) selectedServices.findElementByAccessibilityId(serviceName);
+		serviceCell.findElementByIosNsPredicate("name CONTAINS 'Delete'").click();
+		//appiumdriver.findElementByName("Delete " + service).click();
 		appiumdriver.findElementByAccessibilityId("Delete").click();
 	}
 	

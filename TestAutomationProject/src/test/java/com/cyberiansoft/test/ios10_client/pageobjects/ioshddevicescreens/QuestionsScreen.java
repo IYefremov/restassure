@@ -8,8 +8,11 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
@@ -134,11 +137,9 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 
 	public void drawSignature() throws InterruptedException {
-		//appiumdriver.findElementByAccessibilityId("Tap here to sign").click();
-		
-		//MobileElement element = (MobileElement) appiumdriver.findElementByAccessibilityId("Signature_Handwriting_Cell");
-		//element.click();
-		WebElement signature = appiumdriver.findElementByAccessibilityId("Tap here to sign");
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		WebElement signature = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Signature_Handwriting")));
+		//WebElement signature = appiumdriver.findElementByAccessibilityId("Tap here to sign");
 		int x = signature.getLocation().getX()/2;
 
 		int y = signature.getLocation().getY()/2;
