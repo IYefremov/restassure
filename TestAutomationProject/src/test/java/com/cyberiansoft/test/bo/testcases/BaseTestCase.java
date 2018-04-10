@@ -1,34 +1,27 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import com.cyberiansoft.test.bo.utils.DataProviderPool;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.io.File;
+import java.io.IOException;
 
 public class BaseTestCase {
 
@@ -45,7 +38,7 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
-		FileUtils.cleanDirectory(new File(".//report")); 
+		FileUtils.cleanDirectory(new File("./report"));
 	}
 	
 //	@BeforeClass
