@@ -482,7 +482,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.wizprotrackerrouteworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -536,7 +536,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.wizprotrackerrouteworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -754,7 +754,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.wizardprotrackerrouteinspectiondertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.wizardprotrackerrouteinspectiondertype);
 		InspectionScreen  inspectionscreen = new InspectionScreen(appiumdriver);
 		String alerttext = inspectionscreen.clickSaveWithAlert();
 		Assert.assertTrue(alerttext.contains("VIN# is required"));
@@ -786,7 +786,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.routecanadaworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.routecanadaworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -855,7 +855,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2613,7 +2613,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3057,7 +3057,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3540,7 +3540,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.servicedriveinspectiondertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.servicedriveinspectiondertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3793,7 +3793,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.routeworkordertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4159,7 +4159,7 @@ public class DentWizartestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 
 		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType (UtilConstants.economicalinspectiondertype);
+		myinspectionsscreen.selectInspectionType(UtilConstants.economicalinspectiondertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
