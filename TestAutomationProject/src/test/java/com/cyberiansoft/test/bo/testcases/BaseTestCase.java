@@ -38,7 +38,11 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
-		FileUtils.cleanDirectory(new File("/report"));
+		File reportFolder = new File("/report");
+		if (!reportFolder.exists())
+			reportFolder.mkdir();
+		else
+			FileUtils.cleanDirectory(new File("/report"));
 	}
 	
 //	@BeforeClass
