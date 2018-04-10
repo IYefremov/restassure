@@ -75,7 +75,7 @@ public class AppiumUtils {
 		UUID uuid = UUID.randomUUID();
 		File file = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(file , new File(reportFolder + "\\" + filename + uuid + ".jpeg"));
+			FileUtils.copyFile(file , new File(reportFolder + "/" + filename + uuid + ".jpeg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

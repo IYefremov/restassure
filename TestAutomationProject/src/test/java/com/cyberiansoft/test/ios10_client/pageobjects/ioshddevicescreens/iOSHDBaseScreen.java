@@ -61,7 +61,6 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(500);
 	}
 	
 	public void cancelOrder() {

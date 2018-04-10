@@ -5,8 +5,6 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios_client.pageobjects.iosregulardevicescreens.*;
 import org.openqa.selenium.support.PageFactory;
@@ -810,10 +808,8 @@ public class BackOfficePrintTemplatesestCases extends BaseTestCase {
 		String regCode = activedevicespage.getFirstRegCodeInTable();
 		
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		appiumdriver.removeApp(bundleid);
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);

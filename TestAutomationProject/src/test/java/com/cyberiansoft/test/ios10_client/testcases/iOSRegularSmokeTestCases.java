@@ -125,11 +125,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());	
 		appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		//appiumdriver.installApp(appPath);
 		//appiumdriver.removeApp(bundleid);
 		//appiumdriverInicialize();

@@ -1,26 +1,20 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
+import java.util.concurrent.TimeUnit;
 
 public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 
@@ -130,7 +124,10 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public void selectCustomer(String customer) {
 		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
         tap.perform();
-        Helpers.waitABit(1000);
+		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
+		}
 	}
 	
 	public void changeCustomerForWorkOrder(String wonumber, String customer) {
@@ -141,7 +138,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void customersPopupSwitchToWholesailMode() throws InterruptedException {
