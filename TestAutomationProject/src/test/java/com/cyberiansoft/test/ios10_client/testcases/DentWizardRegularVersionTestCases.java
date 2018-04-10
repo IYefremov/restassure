@@ -498,7 +498,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			// approveinspscreen.selectInspectionToApprove();
 			approveinspscreen.clickApproveButton();
 			approveinspscreen.clickSignButton();
-			approveinspscreen.drawApprovalSignature ();
+			approveinspscreen.drawApprovalSignature();
 			//approveinspscreen.clickDoneButton();
 			// approveinspscreen.clickBackButton();
 			myinspectionsscreen.assertInspectionIsApproved(insptoapprove);
@@ -573,7 +573,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
 			approveinspscreen.clickApproveButton();
 			approveinspscreen.clickSignButton();
-			approveinspscreen.drawApprovalSignature ();			
+			approveinspscreen.drawApprovalSignature();
 			myinspectionsscreen.assertInspectionIsApproved(inpnumber);
 			myinspectionsscreen.selectInspectionType(inpnumber);
 			myinspectionsscreen.clickCreateWOButton();
@@ -601,8 +601,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
 			final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
-			
-			
+
 			homescreen.clickCustomersButton();
 			RegularCustomersScreen customersscreen = new RegularCustomersScreen(appiumdriver);
 			customersscreen.selectCustomerWithoutEditing(customer);
@@ -806,7 +805,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(wonumber.substring(0, 1), "O");
 			ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));		
 			ordersummaryscreen.clickSaveButton();
-			Helpers.waitABit(3000);
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -823,11 +821,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(wonumber2.substring(0, 1), "O");
 			ordersummaryscreen.assertOrderSummIsCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			ordersummaryscreen.clickSaveButton();
-			Helpers.waitABit(3000);
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
-			Thread.sleep(10000);
-			
+
 			Assert.assertEquals(myinspectionsscreen.getNumberOfWorkOrdersForIspection(), 2);
 			Assert.assertTrue(myinspectionsscreen.isWorkOrderForInspectionExists(wonumber2));
 			myinspectionsscreen.clickHomeButton();
