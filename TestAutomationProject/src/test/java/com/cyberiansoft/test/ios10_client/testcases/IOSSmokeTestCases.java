@@ -304,7 +304,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inspNumber);
 		approveinspscreen.clickApproveAfterSelection();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		// approveinspscreen.clickBackButton();
 		myinspectionsscreen.assertInspectionIsApproved(inspNumber);
@@ -629,7 +629,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			approveinspscreen.clickApproveAfterSelection();
 		}
 		
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		// }
 
@@ -1095,7 +1095,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inspnumber);
 		approveinspscreen.clickApproveButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		//myinspectionsscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
@@ -1232,7 +1232,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.findElement(
 				MobileBy.name("Yes"))
 				.click();
-		Helpers.waitABit(1000);
 		myworkordersscreen.approveWorkOrderWithoutSignature(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 			
 		myworkordersscreen.selectWorkOrder(wonumber1);
@@ -5570,7 +5569,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			approveinspscreen.clickSaveButton();
 		}
 		approveinspscreen.clickSignButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		
 		teaminspectionsscreen.clickActionButton();
@@ -5819,7 +5818,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(approveinspscreen.getNumberOfActiveSkipButtons(), 2);
 		approveinspscreen.clickApproveAllServicesButton();
 		approveinspscreen.clickSaveButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -6057,7 +6056,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickDeclineAllServicesButton();
 		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)");
 		approveinspscreen.clickSaveButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
 		Thread.sleep(10000);
@@ -6786,7 +6785,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		approveinspscreen.selectInspectionForApprove(inspnumber);
 		approveinspscreen.clickApproveAllServicesButton();
 		approveinspscreen.clickSaveButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		
 		homescreen = myinspectionsscreen.clickHomeButton();

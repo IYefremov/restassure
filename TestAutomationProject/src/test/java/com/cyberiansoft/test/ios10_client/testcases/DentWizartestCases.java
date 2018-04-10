@@ -508,7 +508,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Helpers.waitABit(1000);
 		approveinspscreen.clickApproveButton();
 		//approveinspscreen.clickSignButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		// approveinspscreen.clickBackButton();
 		myinspectionsscreen.assertInspectionIsApproved(insptoapprove);
@@ -576,14 +576,12 @@ public class DentWizartestCases extends BaseTestCase {
 		String insptoapprove = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.selectInspectionForApprove(insptoapprove);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
-		Helpers.waitABit(1000);
 		approveinspscreen.clickApproveButton();
-		approveinspscreen.drawSignature AfterSelection();
+		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.assertInspectionIsApproved(insptoapprove);
 		myinspectionsscreen.selectInspectionInTable(insptoapprove);
 		myinspectionsscreen.clickCreateWOButton();
-		Helpers.waitABit(1000);
 		servicesscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
