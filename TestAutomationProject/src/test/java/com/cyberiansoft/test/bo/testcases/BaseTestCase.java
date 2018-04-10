@@ -38,7 +38,7 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
-		FileUtils.cleanDirectory(new File("./report"));
+		FileUtils.cleanDirectory(new File("/report"));
 	}
 	
 //	@BeforeClass
