@@ -56,6 +56,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));
 		wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(inspectionsscreen));
+		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
+			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
