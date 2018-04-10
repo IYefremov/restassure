@@ -6642,11 +6642,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_SINGLE_PAGE);
-<<<<<<< Updated upstream
-	
-=======
-
->>>>>>> Stashed changes
 		SinglePageInspectionScreen singlepageinspectionscreen = new SinglePageInspectionScreen(appiumdriver);
 		String inspnumber = singlepageinspectionscreen.getInspectionNumber();
 		
