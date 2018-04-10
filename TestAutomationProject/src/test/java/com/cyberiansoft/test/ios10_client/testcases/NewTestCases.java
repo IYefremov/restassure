@@ -214,13 +214,12 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		
-		servicerequestsscreen.selectServiceRequestType ("SR_EST_WO_REQ");
+		servicerequestsscreen.selectServiceRequestType("SR_EST_WO_REQ");
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);		
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setYear(_year);
-		Thread.sleep(2000);
 		vehiclescreeen.setMileage(mileage);
 		//vehiclescreeen.setFuelTankLevel(fueltanklevel);
 		//vehiclescreeen.setType(_type);
@@ -326,7 +325,7 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.clickRefreshButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectServiceRequestType ("Insp_smoke_test");
+		servicerequestsscreen.selectServiceRequestType("Insp_smoke_test");
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);

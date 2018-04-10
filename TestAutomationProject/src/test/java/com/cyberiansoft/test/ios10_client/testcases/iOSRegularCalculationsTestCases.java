@@ -2918,7 +2918,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
+		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3050,7 +3050,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
+		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3182,7 +3182,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		
-		servicerequestsscreen.selectServiceRequestType (iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
+		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
@@ -3193,8 +3193,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.selectService("3/4\" - Penny Size");
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveButton();
-		
-		Helpers.waitABit(5000);
+
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
