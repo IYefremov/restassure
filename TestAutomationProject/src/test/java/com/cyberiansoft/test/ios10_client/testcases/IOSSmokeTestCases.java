@@ -3915,7 +3915,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		Thread.sleep(5000);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestClient(srnumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		//Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
@@ -3926,10 +3925,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCheckInMenu();
-		Thread.sleep(2000);
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.resetFilter();
-		Thread.sleep(2000);
 		Assert.assertTrue(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();
 	}
