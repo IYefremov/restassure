@@ -1,26 +1,20 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairOrdersWebPage extends WebPageWithPagination {
 	
@@ -197,20 +191,26 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithRepairOrder(String wo) {
 		List<WebElement> rows = getRepairOrdersTableRows();		
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
-				return row;
-			}
+		    try {
+                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
+                    System.out.println("ME: "+row.getText());
+                    System.out.println("ME: "+row.getText().equals(wo));
+                    return row;
+                }
+            } catch (NoSuchElementException e) {
+		        Assert.fail("The table row with given repair order doesn't exist!");
+            }
 		} 
 		return null;
 	}
 	
-	public boolean isRepairOrderExistsInTable(String wo) {
-		boolean exists = false;
+	public boolean isRepairOrderPresentInTable(String wo) {
+		boolean present = false;
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {
-			exists = true;
+			present = true;
 		}
-		return exists;
+		return present;
 	}
 	
 	public VendorOrderServicesWebPage clickOnWorkOrderLinkInTable(String wo) {
@@ -218,7 +218,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		if (row != null) {
 			row.findElement(By.xpath(".//td[3]/a[contains(text(), '" + wo + "')]")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find " + wo + " repair order");	
+            Assert.fail("Can't find " + wo + " repair order");
 		}
 		return PageFactory.initElements(
 				driver, VendorOrderServicesWebPage.class); 

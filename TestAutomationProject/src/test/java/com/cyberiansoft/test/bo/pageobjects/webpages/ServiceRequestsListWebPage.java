@@ -352,7 +352,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(1000);
 			driver.switchTo().alert().accept();
 		}catch (Exception e){}
-		waitABit(1000);
 		clickAndWait(findbtn);
 	}
 
@@ -477,7 +476,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public String getWOForFirstServiceRequestFromList() {
-		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemWO']")).getText();
+        WebElement element = getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='itemWO']"));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element.getText();
 	}
 	
 	public WebElement getServiceRequestCellBySRNumber(String srNumber) {

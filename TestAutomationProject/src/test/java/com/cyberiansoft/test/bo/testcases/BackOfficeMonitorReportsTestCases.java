@@ -18,52 +18,48 @@ import java.time.format.DateTimeFormatter;
 
 public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
+    private BackOfficeHeaderPanel backOfficeHeader;
+
     @BeforeMethod
     public void BackOfficeLogin(Method method) {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
         backOfficeHeader.clickLogout();
     }
 
     //todo fails the whole class
 	@Test(testName="Average Repair Time Report preconditions", description = "Average Repair Time Report preconditions")
-	public void testOperationInvoiceSearch() throws Exception {
-		
-		final String repairlocationname = "Time_Reports_02";
+	public void testOperationInvoiceSearch() throws InterruptedException {
+
+        final String repairlocationname = "Time_Reports_01";
 		final String approxrepairtime = "8.0";
 		final String workingday = "Monday";
 		final String starttime = "9:00 AM";
 		final String finishtime = "5:00 PM";
+		final String WOType = "01ZalexWO_tp";
 		
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
-		repairlocationspage.addNewRepairLocation(repairlocationname, approxrepairtime, workingday, starttime, finishtime, true);
-		
-		repairlocationspage.makeSearchPanelVisible();
-		repairlocationspage.setSearchLocation(repairlocationname);
-		repairlocationspage.clickFindButton();
-		repairlocationspage.addPhaseForRepairLocation(repairlocationname, "Start", "Pre-Repair", approxrepairtime, approxrepairtime, true);
-		repairlocationspage.addPhaseForRepairLocation(repairlocationname, "On Hold", "On Hold", "111.0", "111.0", false);
-		
-		repairlocationspage.assignServiceForRepairLocation(repairlocationname, "AMoneyFlatFee_VacuumCleaner", "On Hold");
-		repairlocationspage.assignServiceForRepairLocation(repairlocationname, "AMoneyVehicleFF_Washing", "Start");
-		backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		monitorpage = backofficeheader.clickMonitorLink();
-		VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
-		vendorsteamspage.createNewVendorTeam("02_TimeRep_team", "Pacific Standard Time", "TF145", "ClockIn / ClockOut", repairlocationname, repairlocationname);
+		backOfficeHeader
+                .clickMonitorLink()
+                .clickRepairLocationsLink()
+		        .addNewRepairLocation(repairlocationname, approxrepairtime, workingday, starttime, finishtime, true)
+                .makeSearchPanelVisible()
+		        .setSearchLocation(repairlocationname)
+		        .clickFindButton()
+		        .addPhaseForRepairLocation(repairlocationname, "Start", "Pre-Repair", approxrepairtime, approxrepairtime, true)
+		        .addPhaseForRepairLocation(repairlocationname, "On Hold", "On Hold", "111.0", "111.0", false)
+                .assignServiceForRepairLocation(repairlocationname, WOType, "AMoneyFlatFee_VacuumCleaner", "On Hold")
+		        .assignServiceForRepairLocation(repairlocationname, WOType, "AMoneyVehicleFF_Washing", "Start");
+
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
+        VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
+        vendorsteamspage.createNewVendorTeam("02_TimeRep_team", "Pacific Standard Time", "TF145", "ClockIn / ClockOut", repairlocationname, repairlocationname);
 	}
 	
 	@Test(testName="Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)", description = "Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)")
@@ -76,11 +72,8 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String newservicerequest= "SASHAZ";
 		
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		OperationsWebPage operatonspage = backofficeheader.clickOperationsLink(); 
-		ServiceRequestsListWebPage servicerequestslistpage = operatonspage.clickNewServiceRequestLink();
+		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationsPage.clickNewServiceRequestLink();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
@@ -98,25 +91,21 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		servicerequestslistpage.clickFindButton();
 		String wonumber = servicerequestslistpage.getWOForFirstServiceRequestFromList();
 		
-		backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation("Time_Reports_01");
+//		repairorderspage.selectSearchLocation("Time_Reports_01");
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		
-		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
 		
-		DateTimeFormatter format =
-		            DateTimeFormatter.ofPattern("d/MM/yyyy");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
 		 LocalDateTime now = LocalDateTime.now();
 		 LocalDateTime then = now.minusDays(7);
@@ -133,7 +122,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25524:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 2)", description = "Monitor- Reports - Average Repair Time Report (Detailed automation - Part 2)")
-	public void testMonitorReportsAverageRepairTimeReport_Part2() throws Exception {
+	public void testMonitorReportsAverageRepairTimeReport_Part2() {
 		
 		final String VIN = "WAUBC044XMN771407";
 		final String _make = "Audi";
@@ -161,11 +150,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		repairorderspage = vendorordersservicespage.clickBackToROLink();*/
 		
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
@@ -181,6 +166,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		 averagerepairtimereportpage.setSearchToDate(after.format(formatting));
 		        
 		averagerepairtimereportpage.clickFindButton();
+		//todo fails here
 		averagerepairtimereportpage.verifySearchResults("Time_Reports_01", "01ZalexWO_tp");
 		
 		averagerepairtimereportpage.checkShowDetails();
@@ -197,11 +183,8 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String _model = "100";
 		final String newservicerequest= "SASHAZ";
 		
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		OperationsWebPage operatonspage = backofficeheader.clickOperationsLink(); 
+
+		OperationsWebPage operatonspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operatonspage.clickNewServiceRequestLink();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -220,18 +203,16 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		servicerequestslistpage.clickFindButton();
 		String wonumber = servicerequestslistpage.getWOForFirstServiceRequestFromList();
 		
-		backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Time_Reports_01");
 		repairorderspage.setSearchWoNumber(wonumber);
+        //todo fails here
 		repairorderspage.clickFindButton();
-		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
@@ -264,22 +245,20 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		BufferedReader in = new BufferedReader(new FileReader("data/repairlocationtimetrackingwonubers.txt"));
 		String wonumber = in.readLine();
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Time_Reports_01");
 		repairorderspage.setSearchWoNumber(wonumber);
+        //todo fails here
 		repairorderspage.clickFindButton();
 		
-		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		VendorOrderServicesWebPage vendorordersservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonumber);
 		vendorordersservicespage.setServicesStatus("Completed");
 		repairorderspage = vendorordersservicespage.clickBackToROLink();
 		
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickRepairLocationTimeTrackingLink();
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		repairlocationtimetrackingpage.selectSearchLocation("Time_Reports_01");

@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
+import com.cyberiansoft.test.bo.webelements.impl.DropDownImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +13,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
-import com.cyberiansoft.test.bo.webelements.impl.DropDownImpl;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	
@@ -26,6 +24,12 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_Content_comboPhase_DropDown")
 	private DropDown phasedd;
+
+	@FindBy(id = "ctl00_Content_comboLocation_Input")
+    private ComboBox locationcmb;
+
+	@FindBy(id = "ctl00_Content_comboLocation_DropDown")
+    private DropDown locationdd;
 	
 	@FindBy(id = "ctl00_Content_ddlOrderType_Input")
 	private ComboBox wotypecmb;
@@ -94,7 +98,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		waitABit(300);
 			new DropDownImpl(driver.findElement(By.xpath(".//*[contains(@id, 'comboPhase_DropDown')]"))).selectByVisibleText(phase);
 		} else {
-			Assert.assertTrue(false, "Can't find " + phaseservice + " phase service");	
+            Assert.fail("Can't find " + phaseservice + " phase service");
 		}
 		waitUntilPageReloaded();
 	}
@@ -109,7 +113,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		if (row != null) {
 			phase = getTableRowPhaseValue(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + phaseservice + " phase service");	
+            Assert.fail("Can't find " + phaseservice + " phase service");
 		}
 		return phase;
 	}
@@ -119,7 +123,11 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		phase = row.findElement(By.xpath(".//input[contains(@id, 'comboPhase_Input')]")).getAttribute("value");
 		return phase;
 	}
-	
+
+	public void selectLocation(String location) {
+	    selectComboboxValue(locationcmb, locationdd, location);
+    }
+
 	public void selectPhase(String phase) {
 		selectComboboxValue(phasecmb, phasedd, phase);
 	}
@@ -132,9 +140,10 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	public void selectPhaseServiceInTable(String phaseservice) {
 		WebElement row = getTableRowWithPhaseService(phaseservice);
 		if (row != null) {
-			click(row.findElement(By.xpath(".//label[contains(@id, 'chkService')]")));	
+//			click(row.findElement(By.xpath(".//label[contains(@id, 'chkService')]")));
+			click(row.findElement(By.xpath("//input[contains(@id, 'chkService')]")));
 		} else {
-			Assert.assertTrue(false, "Can't find " + phaseservice + " phase service");	
+            Assert.fail("Can't find " + phaseservice + " phase service");
 		}
 	}
 	

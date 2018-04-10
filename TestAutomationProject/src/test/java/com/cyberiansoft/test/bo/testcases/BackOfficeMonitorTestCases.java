@@ -76,7 +76,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
-		Assert.assertTrue(repairorderspage.isRepairOrderExistsInTable(wonumber));
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("000 15.11 Companey", "1GCPKSE70CF109506");
 
 	}

@@ -22,7 +22,6 @@ public class WebElementsBot {
 	@FindBy(className = "updateProcess")
 	private static WebElement updateProcess;
 	
-
 	public static void click(WebElement element) {
 	    try {
 	    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)

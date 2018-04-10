@@ -1,24 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairLocationsWebPage extends WebPageWithPagination {
 	
@@ -62,24 +55,22 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
-		return PageFactory.initElements(
-				driver, RepairLocationsWebPage.class);
+		return this;
 	}
 	
 	public RepairLocationsWebPage setSearchLocation(String typelocation) { 
 		clearAndType(searchlocationfld, typelocation);
-		return PageFactory.initElements(
-				driver, RepairLocationsWebPage.class);
+		return this;
 	}
 	
 	public RepairLocationsWebPage selectSearchStatus(String status) {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
-		return PageFactory.initElements(
-				driver, RepairLocationsWebPage.class);
+		return this;
 	}
 	
-	public void clickFindButton() { 
+	public RepairLocationsWebPage clickFindButton() {
 		clickAndWait(findbtn);
+        return this;
 	}
 	
 	public NewRepairLocationDialogWebPage clickAddRepairLocationButton() { 
@@ -88,7 +79,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 				driver, NewRepairLocationDialogWebPage.class);
 	}
 	
-	public void addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) { 
+	public RepairLocationsWebPage addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) {
 		NewRepairLocationDialogWebPage newrepairlocdialog = clickAddRepairLocationButton();
 		newrepairlocdialog.setNewRepairLocationName(repairlocationname);
 		newrepairlocdialog.setNewRepairLocationApproxRepairTime(approxrepairtime);
@@ -96,12 +87,13 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		if (phaseenforcement)
 			newrepairlocdialog.selectPhaseEnforcementOption();
 		newrepairlocdialog.clickOKButton();
+        return this;
 	}
 	
-	public void addPhaseForRepairLocation(String repairlocationname, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) { 
+	public RepairLocationsWebPage addPhaseForRepairLocation(String repairlocationname, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) {
 		final String mainWindowHandle = driver.getWindowHandle();
 		RepairLocationPhasesTabWebPage repairlocationphasestab = clickRepairLocationPhasesLink(repairlocationname);
-		repairlocationphasestab.clickAddPhasetButton();
+		repairlocationphasestab.clickAddPhasesButton();
 		repairlocationphasestab.setNewRepairLocationPhaseName(phasename);
 		repairlocationphasestab.selectNewRepairLocationPhaseType(phasetype);
 		repairlocationphasestab.setNewRepairLocationPhaseApproxTransitionTime(transitiontime);
@@ -111,15 +103,20 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			repairlocationphasestab.selectDoNotTrackIndividualServiceStatuses();
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
 		closeNewTab(mainWindowHandle);
+        return this;
 	}
 	
-	public void assignServiceForRepairLocation(String repairlocationname, String servicename, String phase) { 
+	public RepairLocationsWebPage assignServiceForRepairLocation(String repairlocationname, String WOType, String servicename, String phase) {
 		final String mainWindowHandle = driver.getWindowHandle();
 		RepairLocationPhaseServicesTabWebPage repairlocationphaseservicestab = clickRepairLocationServicesLink(repairlocationname);
-		repairlocationphaseservicestab.selectPhase(phase);
+//        repairlocationphaseservicestab.selectLocation(repairlocationname);
+		repairlocationphaseservicestab.selectWOType(WOType);
+        repairlocationphaseservicestab.selectPhase(phase);
+        //todo here fails
 		repairlocationphaseservicestab.selectPhaseServiceInTable(servicename);
 		repairlocationphaseservicestab.clickAssignToSelectedservicesButton();
-		closeNewTab(mainWindowHandle);		
+		closeNewTab(mainWindowHandle);
+		return this;
 	}
 	
 	public RepairLocationPhasesTabWebPage clickRepairLocationPhasesLink(String repairlocationname) {

@@ -195,7 +195,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		
 		RepairLocationPhasesTabWebPage repairlocationphasestab = repairlocationspage.clickRepairLocationPhasesLink(repairlocationname);
-		repairlocationphasestab.clickAddPhasetButton();
+		repairlocationphasestab.clickAddPhasesButton();
 		repairlocationphasestab.setNewRepairLocationPhaseName(repairlocationphase);
 		repairlocationphasestab.setNewRepairLocationPhaseDescription(repairlocationphasedesc);
 		repairlocationphasestab.selectNewRepairLocationPhaseType(repairlocationphasetype);
@@ -310,12 +310,12 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		newrepairlocdialog.createNewRepairLocation(repairlocationname, repairlocationstatus, repairlocationtomezone);
 		String mainWindowHandle = webdriver.getWindowHandle();
 		RepairLocationPhasesTabWebPage repairlocationphasestab = repairlocationspage.clickRepairLocationPhasesLink(repairlocationname);
-		repairlocationphasestab.clickAddPhasetButton();
+		repairlocationphasestab.clickAddPhasesButton();
 		repairlocationphasestab.setNewRepairLocationPhaseName(phaseclosed);
 		repairlocationphasestab.selectNewRepairLocationPhaseType(phaseclosedtype);
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
 		
-		repairlocationphasestab.clickAddPhasetButton();
+		repairlocationphasestab.clickAddPhasesButton();
 		repairlocationphasestab.setNewRepairLocationPhaseName(phasestarted);
 		repairlocationphasestab.selectNewRepairLocationPhaseType(phasestartedtype);
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();

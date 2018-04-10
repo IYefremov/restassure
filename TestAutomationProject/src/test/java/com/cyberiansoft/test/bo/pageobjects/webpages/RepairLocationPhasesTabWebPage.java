@@ -76,7 +76,7 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void clickAddPhasetButton() {
+	public void clickAddPhasesButton() {
 		clickAndWait(addphasebtn);
 	}
 	
