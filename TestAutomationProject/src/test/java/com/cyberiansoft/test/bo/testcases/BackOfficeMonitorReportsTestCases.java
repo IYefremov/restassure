@@ -244,19 +244,19 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         vendorordersservicespage.setServicesStatus("Completed");
         vendorordersservicespage.clickBackToROLink();
 
-//        monitorpage = backOfficeHeader.clickMonitorLink();
-//        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickRepairLocationTimeTrackingLink();
-//        repairlocationtimetrackingpage.makeSearchPanelVisible();
-//        repairlocationtimetrackingpage.selectSearchLocation("Time_Reports_01");
-//
+        monitorpage = backOfficeHeader.clickMonitorLink();
+        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickRepairLocationTimeTrackingLink();
+        repairlocationtimetrackingpage.makeSearchPanelVisible();
+        repairlocationtimetrackingpage.selectSearchLocation("Time_Reports_01");
+
 //        then = now.minusDays(5);
 //		after = now.plusDays(2);
-//
-//		repairlocationtimetrackingpage.setSearchFromDate(then.format(format));
-//		repairlocationtimetrackingpage.setSearchToDate(after.format(format));
-//
-//		repairlocationtimetrackingpage.clickFindButton();
-//
-//		Assert.assertTrue(repairlocationtimetrackingpage.searchWorkOrderInTable(wonumber));
+
+		repairlocationtimetrackingpage.setSearchFromDate(then.format(format));
+		repairlocationtimetrackingpage.setSearchToDate(after.format(format));
+
+		repairlocationtimetrackingpage.clickFindButton();
+
+		Assert.assertTrue(repairlocationtimetrackingpage.searchWorkOrderInTable(wonumber));
 	}
 }
