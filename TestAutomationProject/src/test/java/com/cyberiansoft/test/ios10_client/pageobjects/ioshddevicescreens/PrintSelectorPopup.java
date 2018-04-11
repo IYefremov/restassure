@@ -5,12 +5,9 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.support.PageFactory;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
@@ -29,23 +26,19 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	public void checkRemotePrintServerAndSelectPrintServer(String printserver) {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(printserver)).click();
-		Helpers.waitABit(500);
 		IOSElement par = (IOSElement) appiumdriver.findElement(MobileBy.
 				xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + printserver + "']/.."));
 		IOSElement remoteserverchkbox = (IOSElement) par.findElement(MobileBy.xpath("//XCUIElementTypeButton[1]"));
 		if (remoteserverchkbox.getAttribute("name").equals("unselected"))
-			remoteserverchkbox.click();	
-		Helpers.waitABit(1000);
+			remoteserverchkbox.click();
 	}
 	
 	public void clickPrintSelectorPrintButton() {
 		//appiumdriver.findElement(MobileBy.AccessibilityId("Print Selector")).findElement(MobileBy.AccessibilityId("Print")).click();
 		printserverprintbtn.click();
-		Helpers.waitABit(3000);
 	}
 	
 	public void clickPrintOptionsPrintButton() {
 		printoptionsprintbtn.click();
-		Helpers.waitABit(5000);
 	}
 }

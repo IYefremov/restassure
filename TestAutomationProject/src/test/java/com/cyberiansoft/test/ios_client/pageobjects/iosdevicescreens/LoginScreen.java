@@ -1,16 +1,17 @@
 package com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import static org.junit.Assert.assertEquals;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import org.openqa.selenium.support.PageFactory;
+
 
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.PageFactory;
 
-import static org.testng.Assert.assertEquals;
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class LoginScreen extends iOSHDBaseScreen {
 

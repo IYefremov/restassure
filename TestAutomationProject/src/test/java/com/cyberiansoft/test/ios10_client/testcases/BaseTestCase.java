@@ -113,7 +113,6 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		} catch (NoSuchSessionException e) {
 			AppiumInicializator.getInstance().initAppium(mobilePlatform);
-			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
 		}
 		Helpers.waitABit(7000);
 		try {

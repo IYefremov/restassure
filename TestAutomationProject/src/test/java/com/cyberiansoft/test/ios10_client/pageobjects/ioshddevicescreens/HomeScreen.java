@@ -81,6 +81,10 @@ public class HomeScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		inspectionsscreen.switchToTeamInspectionsView();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 		return new TeamInspectionsScreen(appiumdriver);
 	}
 

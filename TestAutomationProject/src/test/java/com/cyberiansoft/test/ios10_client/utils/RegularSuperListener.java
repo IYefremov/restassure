@@ -91,8 +91,6 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	        		//testlogger.log(LogStatus.FAIL, LogAssertions.stepMessage, testlogger.addScreenCapture(((BaseTestCase) currentClass).createScreenshot(appiumdriver, iOSLogger.loggerdir)));
 	        	} catch (Exception e) {
 	        		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-	    			Helpers.init(DriverBuilder.getInstance().getAppiumDriver());
-	
 	        	}
 	        	
 	        }

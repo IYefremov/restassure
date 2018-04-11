@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -20,7 +21,6 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import static com.cyberiansoft.test.ios10_client.utils.Helpers.element;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -162,18 +162,22 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);
 		
-		Assert.assertTrue(element(
+		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
+						.findElement(
 				MobileBy.name("No vehicle invoice history found")).isDisplayed());
-		element(
+		DriverBuilder.getInstance().getAppiumDriver()
+				.findElement(
 				MobileBy.name("Close"))
 				.click();
 	}
 	
 	public void verifyExistingWorkOrdersDialogAppears() throws InterruptedException {
 		
-		Assert.assertTrue(element(
+		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
+				.findElement(
 				MobileBy.name("Existing work orders were found for this vehicle")).isDisplayed());
-		element(
+		DriverBuilder.getInstance().getAppiumDriver()
+				.findElement(
 				MobileBy.name("Close"))
 				.click();
 	}

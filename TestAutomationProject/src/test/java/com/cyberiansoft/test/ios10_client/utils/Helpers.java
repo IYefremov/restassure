@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
-import io.appium.java_client.AppiumDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,18 +18,13 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Helpers {
 
-	private static AppiumDriver<MobileElement> driver;
+	//private static AppiumDriver<MobileElement> driver;
 	private static WebDriverWait driverWait;
 
 	/**
 	 * Initialize the webdriver. Must be called before using any helper methods.
 	 * *
 	 */
-	public static void init(AppiumDriver<MobileElement> appiumbDriver) {
-		driver = appiumbDriver;
-		int timeoutInSeconds = 240;
-		driverWait = new WebDriverWait(driver, timeoutInSeconds);
-	}
 
 	/**
 	 * Wrap WebElement in MobileElement *
@@ -52,46 +46,13 @@ public abstract class Helpers {
 	}
 
 	/**
-	 * Return an element by locator *
-	 */
-	public static IOSElement element(By locator) {
-		return (IOSElement) w(driver.findElement(locator));
-	}
-
-	/**
-	 * Press the back button *
-	 */
-	public static void back() {
-		driver.navigate().back();
-	}
-
-	/**
 	 * Return a tag name locator *
 	 */
 	public static By for_tags(String tagName) {
 		return By.className(tagName);
 	}
 
-	/**
-	 * Return a static text element by xpath index *
-	 */
-	public static MobileElement text(int xpathIndex) {
-		return element(for_text(xpathIndex));
-	}
 
-	/**
-	 * Return a static text locator by xpath index *
-	 */
-	public static By for_text(int xpathIndex) {
-		return By.xpath("//UIAStaticText[" + xpathIndex + "]");
-	}
-
-	/**
-	 * Return a static text element that contains text *
-	 */
-	public static MobileElement text(String text) {
-		return element(for_text(text));
-	}
 
 	/**
 	 * Return a static text locator that contains text *
@@ -124,12 +85,7 @@ public abstract class Helpers {
 						+ down + "\"), \"" + down + "\"))]");
 	}
 
-	/**
-	 * Return a static text element by exact text *
-	 */
-	public static MobileElement text_exact(String text) {
-		return element(for_text_exact(text));
-	}
+
 
 	/**
 	 * Return a static text locator by exact text *
@@ -157,24 +113,24 @@ public abstract class Helpers {
 	}
 
 	public static void waitForAlert() {
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//WebDriverWait wait = new WebDriverWait(driver, 300);
 		//wait.until(ExpectedConditions.alertIsPresent());
-		FluentWait<WebDriver> wait = new WebDriverWait(driver, 300);
+		FluentWait<WebDriver> wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 300);
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeAlert"))); 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeAlert")));
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public static void acceptAlert() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		alert.accept();
 	}
 
 	public static String getAlertTextAndAccept() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
 		alert.accept();
 		waitABit(1000);
@@ -183,7 +139,7 @@ public abstract class Helpers {
 	
 	public static String getAlertTextAndCancel() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
 		alert.dismiss();
 		return alertetxt;
@@ -191,32 +147,32 @@ public abstract class Helpers {
 	
 	public static String getAlertText() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
 		return alertetxt;
 	}
 	
 	public static String getAlertTextAndClickEdit() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
-		element(By.xpath("//XCUIElementTypeButton[@name=\"Edit\"]")).click();
+		DriverBuilder.getInstance().getAppiumDriver().findElementByXPath("//XCUIElementTypeButton[@name=\"Edit\"]").click();
 		return alertetxt;
 	}
 	
 	public static String getAlertTextAndClickOverride() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
-		element(By.xpath("//XCUIElementTypeButton[@name=\"Override\"]")).click();
+		DriverBuilder.getInstance().getAppiumDriver().findElementByXPath("//XCUIElementTypeButton[@name=\"Override\"]").click();
 		return alertetxt;
 	}
 	
 	public static String getAlertTextAndClickCancel() {
 		waitForAlert();
-		Alert alert = driver.switchTo().alert();
+		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
-		element(By.xpath("//XCUIElementTypeButton[@name=\"Cancel\"]")).click();
+		DriverBuilder.getInstance().getAppiumDriver().findElementByXPath("//XCUIElementTypeButton[@name=\"Cancel\"]").click();
 		return alertetxt;
 	}
 
@@ -224,7 +180,7 @@ public abstract class Helpers {
 
 		Thread.sleep(2000);
 		try {
-			Alert alert = driver.switchTo().alert();
+			Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 			alert.accept();
 		} catch (NoAlertPresentException ex) {
 			// Alert not present
@@ -233,87 +189,69 @@ public abstract class Helpers {
 	}
 
 	public static void setDefaultTimeOut() {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public static void setTimeOut(int seconds) {
-		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
 	}
 
 	public static void scroolTo(String scroll) {
-		WebElement row = driver.findElement(By.name(scroll));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement row = DriverBuilder.getInstance().getAppiumDriver().findElement(By.name(scroll));
+		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
 		HashMap<String, String> swipeObject = new HashMap<String, String>();
 		swipeObject.put("element", ((RemoteWebElement) row).getId());
 		js.executeScript("mobile: scroll", swipeObject);
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
 	}
 	
 	public static void scroolToByXpath(String xpath) {
-		WebElement row = driver.findElement(By.xpath(xpath));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement row = DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath(xpath));
+		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
 		HashMap<String, String> swipeObject = new HashMap<String, String>();
 		swipeObject.put("element", ((RemoteWebElement) row).getId());
 		js.executeScript("mobile: scrollTo", swipeObject);
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
 	}
 	
 	public static void scroolToElement(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
 		HashMap<String, String> swipeObject = new HashMap<String, String>();
 		swipeObject.put("element", ((RemoteWebElement) element).getId());
 		js.executeScript("mobile: scrollTo", swipeObject);
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-	}
-
-	public static void keyboadrType2(String value) throws InterruptedException {
-
-		for (int i = 0; i < value.length() - 1; i++) {
-			element(
-					By.xpath("//UIAApplication[1]/UIAWindow[2]/UIAKeyboard[1]/UIAKey[@name=\""
-							+ value.charAt(i) + "\"]")).click();
-			// Thread.sleep(100);
-		}
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	}
 
 	public static void keyboadrType(String value) throws InterruptedException {
 		for (int i = 0; i < value.length(); i++) {
-			driver.getKeyboard().sendKeys(value.substring(i, i + 1));
+			DriverBuilder.getInstance().getAppiumDriver().getKeyboard().sendKeys(value.substring(i, i + 1));
 			Thread.sleep(200);
 		}
 
 	}
 
 	public static boolean elementExists(String xpath) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		boolean exists = driver.findElements(By.xpath(xpath)).size() != 0;
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		boolean exists = DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(xpath)).size() != 0;
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public static boolean elementExists(By locator) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		boolean exists = driver.findElements(locator).size() != 0;
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		boolean exists = DriverBuilder.getInstance().getAppiumDriver().findElements(locator).size() != 0;
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
 
 	}
 
-	public static void hideKeyboard() throws InterruptedException {
-		// driver.getKeyboard().
-		//driver.hideKeyboard();
-		element(By.xpath("//UIAKeyboard[1]/UIAButton[@name=\"Hide keyboard\"]"))
-		.click();
-		// driver.executeScript("UIATarget.localTarget().frontMostApp().keyboard().buttons()[\"Hide keyboard\"].tap();");
-	}
-
 	public static void tapInterior(int x, int y) throws InterruptedException {
-		TouchAction action = new TouchAction(driver);
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
-		MobileElement element = (MobileElement) driver
+		MobileElement element = (MobileElement) DriverBuilder.getInstance().getAppiumDriver()
 				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		action.tap(element, x, y).perform();
 		//action = new TouchAction(driver);
@@ -332,8 +270,9 @@ public abstract class Helpers {
 		action.tap(element, x, y).perform();
 		Thread.sleep(1000);*/
 		
-		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//XCUIElementTypeImage"));
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
+		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeImage");
 		
 		//int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		//int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
@@ -350,8 +289,9 @@ public abstract class Helpers {
 	
 	public static void tapCarImage() { 
 		
-		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//XCUIElementTypeImage"));
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
+		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeImage");
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
@@ -360,8 +300,9 @@ public abstract class Helpers {
 	}
 	
 	public static void tapRegularCarImage() throws InterruptedException {
-		TouchAction action = new TouchAction(driver);
-		MobileElement element = element(By.xpath("//XCUIElementTypeImage"));
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
+		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeImage");
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
@@ -370,27 +311,10 @@ public abstract class Helpers {
 		//element.tap(1, x, y, 1000);
 		Thread.sleep(1000);
 	}
-
-	public static void drawSignature() {
-		MobileElement element = element(By
-				.xpath("//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]"));
-		int xx = element.getLocation().getX();
-
-		int yy = element.getLocation().getY();
-		int xxd = xx + 100;
-		int yyd = yy + 100;
-
-		int duration = 800;
-		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
-                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
-        swipe.perform();
-		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
-
-	}
 	
 	public static void drawRegularQuestionsSignature() throws InterruptedException {
-		MobileElement element = element(By
-				.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeStaticText[1]"));
+		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeStaticText[1]");
 		element.click();
 		int xx = element.getLocation().getX();
 
@@ -398,16 +322,16 @@ public abstract class Helpers {
 		int xxd = xx + 200;
 		int yyd = yy + 200;
 
-		TouchAction action = new TouchAction(driver);
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
 		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xxd, yyd).release().perform();
 		
 		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
-		driver.findElementByAccessibilityId("Done").click();           
+		DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Done").click();
 	}
 	
 	public static void drawQuestionsSignature() throws InterruptedException {
-		MobileElement element = element(By
-				.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]"));
+		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]");
 		element.click();
 		int xx = element.getLocation().getX();
 
@@ -416,15 +340,16 @@ public abstract class Helpers {
 		int yyd = yy + 200;
 
 		int duration = 1000;
-		TouchAction action = new TouchAction(driver);
+		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
 		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
-		TouchAction swipe = new TouchAction(driver).press(xx+100, yy+100)
+		TouchAction swipe = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).press(xx+100, yy+100)
                 .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
         swipe.perform();
 		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
 		//driver.findElementByXPath("//UIAScrollView/UIATableView[2]/UIATableCell[2]/UIAButton[@name='Done']").click();
-		MobileElement signatureview  = element(By.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]"));
+		MobileElement signatureview  = DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]");
 
 		//int x = signatureview.getLocation().getX() + signatureview.getSize().getWidth()/2+5;
 		//int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
@@ -432,7 +357,7 @@ public abstract class Helpers {
 		int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
 		
 		//driver.tap(1, element1.getLocation().getX()+10, element1.getLocation().getY() + element1.getSize().getHeight()-10, 1000);
-		TouchAction tap = new TouchAction(driver).tap(x, y).perform();
+		TouchAction tap = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).tap(x, y).perform();
 		//driver.tap(1, x, y, duration);                 
 	}
 
@@ -441,7 +366,7 @@ public abstract class Helpers {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			TouchAction tap = new TouchAction(driver).tap(pickerwheel.getLocation().getX()
+			TouchAction tap = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).tap(pickerwheel.getLocation().getX()
 					+ picker.getSize().getWidth() - 100, pickerwheel
 					.getLocation().getY() + picker.getSize().getHeight() + 10).perform();
 			/*driver.tap(1, pickerwheel.getLocation().getX()
@@ -459,73 +384,56 @@ public abstract class Helpers {
 
 		//element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIATextField"))
 		//		.click();
-		element(MobileBy.xpath("//XCUIElementTypeStaticText[@name=\"VIN#\"]"))
+		DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//XCUIElementTypeStaticText[@name=\"VIN#\"]")
 				.click();
 		keyboadrType(vin + "\n");
 	}
 
-	public static String getMake() {
-		return element(
-				MobileBy.xpath("//UIATableCell[@name=\"Make\"]/UIATextField"))
-				.getAttribute("value");
-	}
-
-	public static String getModel() {
-		return element(
-				MobileBy.xpath("//UIATableCell[@name=\"Model\"]/UIATextField"))
-				.getAttribute("value");
-	}
-
-	public static String getYear() {
-		return element(
-				MobileBy.xpath("//UIATableCell[@name=\"Year\"]/UIATextField"))
-				.getAttribute("value");
-	}
-
 	public static boolean screenIsDisplayed(String screenname) {
 		waitABit(500);
-		return driver.findElementsByXPath("//XCUIElementTypeButton[@label='"
+		return DriverBuilder.getInstance().getAppiumDriver().findElementsByXPath("//XCUIElementTypeButton[@label='"
 						+ screenname + "']").size() > 0;
 	}
 
 	public static void makeCapture() throws InterruptedException {
 		Thread.sleep(2000);
 		if (elementExists(By.xpath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]"))) {
-			element(
-					MobileBy.xpath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]"))
+			DriverBuilder.getInstance().getAppiumDriver()
+					.findElementByXPath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]")
 					.click();
 		}
-		element(
-				MobileBy.xpath("//UIAButton[@name=\"PhotoCapture\"]"))
+		DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//UIAButton[@name=\"PhotoCapture\"]")
 				.click();
-		element(
-				MobileBy.xpath("//UIAButton[@name=\"Use Photo\"]"))
+		DriverBuilder.getInstance().getAppiumDriver()
+				.findElementByXPath("//UIAButton[@name=\"Use Photo\"]")
 				.click();
 	}
 	
 	public static void waitUntilCheckLicenseDialogDisappears() throws InterruptedException {
-	    driver.findElement(By.xpath("//UIAButton[@name=\"Licenses\"]"));	
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//UIAButton[@name=\"Licenses\"]"));
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		for (int i =0; i<60; i++) {
-			if (driver.findElements(By.name("LoginViewCheckLicense")).size() < 1) {
+			if (DriverBuilder.getInstance().getAppiumDriver().findElements(By.name("LoginViewCheckLicense")).size() < 1) {
 				break;
 			} else {
 				Thread.sleep(1000);
 			}
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.MILLISECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.MILLISECONDS);
 		//WebDriverWait wait = new WebDriverWait(driver, 40);
 	    //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.name("LoginViewCheckLicense")));
 		
 	}
 	
 	public static WebElement waitUntilVisible(String xpath) {
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 60);
 		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 	}
 	
 	public static WebElement waitUntilVisibleBy(By locator) {
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 10);
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));		
 	}
 	

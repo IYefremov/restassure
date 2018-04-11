@@ -1,23 +1,19 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios_client.utils.Helpers;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import java.util.concurrent.TimeUnit;
 
 public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
@@ -43,7 +39,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft"))); 
 	}
 	
@@ -65,7 +61,6 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) {
-		Helpers.waitABit(2000);		
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 						+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);		
@@ -83,7 +78,6 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
 	public void clickSearchSaveButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		Helpers.waitABit(2000);
 	}
 	
 	public void selectSearchLocation(String _location) {

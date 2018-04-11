@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
@@ -75,10 +77,14 @@ public class iOSHDClientListener extends TestListenerAdapter implements IInvoked
 	public synchronized void onTestFailure(ITestResult result) {
 		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
+		System.out.println("!!!!!!!!!!!!!!: " + DriverBuilder.getInstance().getAppiumDriver() == null);
+		System.out.println("!!!!!!!!!!!!!!: " + AppiumDriverServiceBuilder.getInstance().getAppiumService() != null);
 		try {
 			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot("report", "fail")).build());
+		} catch (org.openqa.selenium.NoSuchSessionException e) {
+			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD);
+			DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if ( !getTestParams(result).isEmpty() ) {

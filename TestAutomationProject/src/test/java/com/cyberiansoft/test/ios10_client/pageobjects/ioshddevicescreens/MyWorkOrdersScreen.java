@@ -124,7 +124,10 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public void selectCustomer(String customer) {
 		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
         tap.perform();
-        Helpers.waitABit(1000);
+		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
+		}
 	}
 	
 	public void changeCustomerForWorkOrder(String wonumber, String customer) {
@@ -135,7 +138,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void customersPopupSwitchToWholesailMode() throws InterruptedException {

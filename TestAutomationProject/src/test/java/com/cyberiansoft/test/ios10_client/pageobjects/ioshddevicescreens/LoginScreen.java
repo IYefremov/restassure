@@ -1,15 +1,18 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import static org.junit.Assert.assertEquals;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.PageFactory;
+
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 
 public class LoginScreen extends iOSHDBaseScreen {
 	
@@ -37,7 +40,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		/*if (dontallowbtn.isDisplayed()) {
 			dontallowbtn.click();
 		}*/
-		Assert.assertEquals("Verify", registerbtn.getAttribute("name"));
+		assertEquals("Verify", registerbtn.getAttribute("name"));
 	}
 
 	public void registeriOSDevice(String regCode)
