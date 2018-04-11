@@ -1,3 +1,4 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
     <parameter name="selenium.host" value="localhost"/>
     <parameter name="selenium.port" value="3737"/>
