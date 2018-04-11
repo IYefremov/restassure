@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -15,13 +18,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class BaseTestCase {
 
@@ -100,12 +102,7 @@ public class BaseTestCase {
 		return Helpers.wait(locator);
 	}
 
-	@AfterMethod
-	public void cookieCleaner(){
-		DriverBuilder.getInstance().getDriver().get("https://reconpro.cyberianconcepts.com/");
-		DriverBuilder.getInstance().getDriver().manage().deleteAllCookies();
-	}
-	
+
 	@AfterClass
 	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
@@ -114,4 +111,20 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().getAppiumDriver().quit();
 	}
 
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+        if (DriverBuilder.getInstance().getDriver() == null) {
+            setUp();
+        }
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        backofficeheader.clickLogout();
+    }
 }
