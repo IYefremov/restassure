@@ -7,7 +7,7 @@ public class DataProviderPool {
     @DataProvider
     public static Object[][] getUserNameTestData() {
         return new String[][] {
-                { BOConfigInfo.getInstance().getUserName() + "30" }
+                {  "30" + BOConfigInfo.getInstance().getUserName() }
         };
     }
 
