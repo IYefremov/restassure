@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.Retry;
@@ -9,27 +7,9 @@ import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.utils.WebConstants.InvoiceStatuses;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
-
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
-
-    @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
-    }
-
-    @AfterMethod
-    public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        backOfficeHeader.clickLogout();
-    }
 
 	@Test(description = "Test Case 15161:Operation - Invoice: Search")
 	public void testOperationInvoiceSearch() throws Exception {
@@ -924,12 +904,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 43694:Operation - Invoice: Edit - Audit Log", retryAnalyzer = Retry.class)
 	public void checkOperationInvoiceEditAuditLog() throws InterruptedException {
-
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-
-		operationspage = backofficeheader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationsPage;
+		operationsPage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationsPage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectActionForFirstInvoice("Payments", false);

@@ -1,32 +1,21 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.UUID;
-
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOErrorMessages;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOAddNewUserDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOUsersWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmPasswordWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOForgotPasswordWebPage;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.UUID;
 
 public class VNextBOSmokeTestCases extends BaseTestCase {
 	
@@ -49,7 +38,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@AfterMethod
-	public void BackOfficeLogout() throws IOException {
+	public void BackOfficeLogout() {
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		if (headerpanel.isLogOutLinkExists())

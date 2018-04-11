@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
+import com.cyberiansoft.test.bo.webelements.impl.ComboBoxImpl;
+import com.cyberiansoft.test.bo.webelements.impl.DropDownImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,12 +15,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
-import com.cyberiansoft.test.bo.webelements.impl.ComboBoxImpl;
-import com.cyberiansoft.test.bo.webelements.impl.DropDownImpl;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class VendorOrderServicesWebPage extends BaseWebPage {
 	
@@ -30,6 +29,12 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvPhases_ctl00_ctl04_phaseStatus_DropDown")
 	private DropDown phasestatusdd;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvPhases_ctl00_ctl06_phaseStatus_Input")
+	private ComboBox statuscmb;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvPhases_ctl00_ctl06_phaseStatus_DropDown")
+	private DropDown statusdd;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl07_comboStatus_Input")
 	private ComboBox combostatuscmb;
@@ -54,13 +59,14 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void setServicesStatus(String _status) {
-		selectComboboxValue(phasestatuscmb, phasestatusdd, _status);
+	public void setServicesStatus(String status) {
+//		selectComboboxValue(phasestatuscmb, phasestatusdd, status);
+		selectComboboxValue(statuscmb, statusdd, status);
 		clickChangeStatusButton();
 	}
 	
-	public void setStartPhaseStatus(String _status) {
-		selectComboboxValue(combostatuscmb, combostatusdd, _status);
+	public void setStartPhaseStatus(String status) {
+		selectComboboxValue(combostatuscmb, combostatusdd, status);
 		clickChangeStatusButton();
 	}
 	

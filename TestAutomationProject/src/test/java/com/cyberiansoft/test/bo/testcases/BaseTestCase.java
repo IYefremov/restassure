@@ -1,34 +1,29 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import com.cyberiansoft.test.bo.utils.DataProviderPool;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class BaseTestCase {
 
@@ -103,12 +98,6 @@ public class BaseTestCase {
 		return Helpers.wait(locator);
 	}
 
-	@AfterMethod
-	public void cookieCleaner(){
-		DriverBuilder.getInstance().getDriver().get("https://reconpro.cyberianconcepts.com/");
-		DriverBuilder.getInstance().getDriver().manage().deleteAllCookies();
-	}
-	
 	@AfterClass
 	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
@@ -117,4 +106,20 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().getAppiumDriver().quit();
 	}
 
+    @BeforeMethod
+    public void BackOfficeLogin(Method method) {
+	    if (DriverBuilder.getInstance().getDriver() == null) {
+	        setUp();
+        }
+        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
+        loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        backofficeheader.clickLogout();
+    }
 }

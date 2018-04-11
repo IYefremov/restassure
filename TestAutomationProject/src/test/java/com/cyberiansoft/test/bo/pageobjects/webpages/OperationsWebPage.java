@@ -86,7 +86,7 @@ public class OperationsWebPage extends BaseWebPage {
 				driver, VendorBillsWebPage.class);
 	}
 	
-	public ServiceRequestsListWebPage clickNewServiceRequestLink() {
+	public ServiceRequestsListWebPage clickNewServiceRequestList() {
 		wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);

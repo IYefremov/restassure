@@ -1,34 +1,15 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
-    @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
-    }
-
-	@AfterMethod
-	public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		backOfficeHeader.clickLogout();
-	}
-	
 	@Test(testName = "Test Case 15527:Monitor - Repair Locations: Search", description = "Monitor - Repair Locations: Search")
 	public void testMonitorRepairLocationsSearch() {
 
@@ -48,7 +29,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
     @Test(testName = "Test Case 26707:Monitor - Repair Locations: Add", description = "Monitor - Repair Locations: Add")
-	public void testMonitorRepairLocationsAdd() throws Exception {
+	public void testMonitorRepairLocationsAdd() {
 		
 		final String repairlocationname = "test_loc";
 		final String repairlocationstatus = "Active";

@@ -1,34 +1,13 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Method;
 
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 
-    @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeDemoURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserDemoName(), BOConfigInfo.getInstance().getUserDemoPassword());
-    }
-	
-	@AfterMethod
-	public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        backofficeHeader.clickLogout();
-	}
-	
 	@Test(description = "Test Case 19250:\"Estimate approved\" event creation")
 	public void testEstimateApprovedEventCreation() throws Exception {
 		

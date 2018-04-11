@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -80,8 +77,14 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")
 	private WebElement findbtn;
-	
-	
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")
+    private TextField fromDateField;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")
+    private TextField toDateField;
+
+
 	public RepairOrdersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -135,24 +138,27 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe);
 	}
 	
-	public void setSearchFromDate(String date, String month, String year) { 
-		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_calendar_Title")).click();
-		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
-		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();		
-		driver.findElement(By.id("rcMView_OK")).click();
-		waitABit(1000);
-		driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']")).click();
+	public void setSearchFromDate(String date) {
+	    clearAndType(fromDateField, date);
+//		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
+//		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_calendar_Title")).click();
+//		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
+//		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
+//		driver.findElement(By.id("rcMView_OK")).click();
+//		wait.until(ExpectedConditions
+//                .elementToBeClickable(driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']"))))
+//                .click();
 	}
 	
-	public void setSearchToDate(String date, String month, String year) { 
-		searchtopopupbtn.click();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_calendar_Title")).click();
-		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
-		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
-		driver.findElement(By.id("rcMView_OK")).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
+	public void setSearchToDate(String date) {
+	    clearAndType(toDateField, date);
+//		searchtopopupbtn.click();
+//		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_calendar_Title")).click();
+//		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
+//		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
+//		driver.findElement(By.id("rcMView_OK")).click();
+//		waitABit(1000);
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 	
 	public void selectSearchWOType(String wotype)  { 
@@ -193,18 +199,17 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		for (WebElement row : rows) {
 		    try {
                 if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
-                    System.out.println("ME: "+row.getText());
-                    System.out.println("ME: "+row.getText().equals(wo));
                     return row;
                 }
-            } catch (NoSuchElementException e) {
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
 		        Assert.fail("The table row with given repair order doesn't exist!");
             }
-		} 
+        }
 		return null;
 	}
 	
 	public boolean isRepairOrderPresentInTable(String wo) {
+	    waitForLoading();
 		boolean present = false;
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {

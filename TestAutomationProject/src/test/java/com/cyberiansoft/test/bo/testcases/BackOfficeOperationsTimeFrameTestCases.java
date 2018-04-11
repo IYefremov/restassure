@@ -1,16 +1,11 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -27,20 +22,6 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	private final LocalDate startlastyear = BackOfficeUtils.getLastYearStartDate().minusDays(1);
 	private final LocalDate endlastyear = BackOfficeUtils.getLastYearEndDate().plusDays(1);
 
-    @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
-    }
-
-    @AfterMethod
-    public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        backOfficeHeader.clickLogout();
-    }
-	
 	@Test(testName = "Test Case 31966:Operation - Work Orders: timeframe search", description = "Operation - Work Orders: timeframe search")
 	public void testOperationWorkOrdersTimeframeSearch() {
 		

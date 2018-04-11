@@ -1,37 +1,15 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.DataProviderPool;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Method;
 
 @SuppressWarnings("LossyEncoding")
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
-    private String userName;
-
-    @BeforeMethod
-	public void backOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        userName = BOConfigInfo.getInstance().getUserName();
-		loginpage.UserLogin(userName, BOConfigInfo.getInstance().getUserPassword());
-	}
-	
-	@AfterMethod
-	public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		backofficeheader.clickLogout();
-	}
-	
-	@Test(description = "Test Case 15322:Company- Clients: Search")
+    @Test(description = "Test Case 15322:Company- Clients: Search")
 	public void testCompanyClientsSearch() throws Exception {
 		final String clientname = "IntCompany";
 		final String clienttype = "Wholesale";
@@ -584,8 +562,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientContactsWebPage3.closePage();
 	}
 
-	@Test(testName= "Test Case 66217:Company - Clients User : Add Client")
-	public void testClientUserAddClient() throws InterruptedException{
+	@Test(testName= "Test Case 66217:Company - Clients User : Add Client",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+    	public void testClientUserAddClient(String userName) throws InterruptedException{
 	    String clientName = "000 15.11 Companey";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -613,8 +592,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 
-	@Test(testName= "Test Case 66215:Company - Clients User : Sales Person Monitor Manager")
-	public void testClientUserSalesPersonMonitorManager() throws InterruptedException{
+	@Test(testName= "Test Case 66215:Company - Clients User : Sales Person Monitor Manager",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+	public void testClientUserSalesPersonMonitorManager(String userName) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -640,8 +620,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 	
-	@Test(testName= "Test Case 66214:Company - Clients User : SalesPerson")
-	public void testClientUserSalesPerson() throws InterruptedException{
+	@Test(testName= "Test Case 66214:Company - Clients User : SalesPerson",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+	public void testClientUserSalesPerson(String userName) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -667,8 +648,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 	
-	@Test(testName= "Test Case 66213:Company - Clients User : Client Inspector")
-	public void testClientUserClientInspector() throws InterruptedException{
+	@Test(testName= "Test Case 66213:Company - Clients User : Client Inspector",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+	public void testClientUserClientInspector(String userName) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -694,8 +676,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 	
-	@Test(testName= "Test Case 66212:Company - Clients User : Client Monitor Manager")
-	public void testClientUserClientMonitorManager() throws InterruptedException{
+	@Test(testName= "Test Case 66212:Company - Clients User : Client Monitor Manager",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+	public void testClientUserClientMonitorManager(String userName) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -721,8 +704,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 
-	@Test(testName= "Test Case 66211:Company - Clients User : ClientAccountant")
-	public void testClientUserClientAccountant() throws InterruptedException{
+	@Test(testName= "Test Case 66211:Company - Clients User : ClientAccountant",
+            dataProvider = "getUserNameTestData", dataProviderClass = DataProviderPool.class)
+	public void testClientUserClientAccountant(String userName) throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientsPage = companyWebPage.clickClientsLink();

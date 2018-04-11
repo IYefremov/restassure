@@ -1,28 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.io.File;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.io.File;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ClientsWebPage extends WebPageWithPagination {
 
@@ -248,7 +239,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 			wait.until(
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + clientname);
+            Assert.fail("Can't find client: " + clientname);
 		}
 	}
 
@@ -271,7 +262,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 			}
 			action.release().build().perform();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + clientname);
+            Assert.fail("Can't find client: " + clientname);
 		}
 		return notetxt;
 	}
@@ -308,7 +299,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + clientname);
+            Assert.fail("Can't find client: " + clientname);
 		}
 		return PageFactory.initElements(driver, NewClientDialogWebPage.class);
 	}
@@ -354,7 +345,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 			act.click(getTableRowWithClient(clientName)
 					.findElement(By.xpath(".//span[text()='" + menuItem + "']"))).perform();
 		} else {
-			Assert.assertTrue(false, "Can't find " + clientName + " client");
+            Assert.fail("Can't find " + clientName + " client");
 		}
 	}
 

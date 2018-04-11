@@ -1,20 +1,21 @@
 package com.cyberiansoft.test.bo.utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.testng.ITestResult;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
+import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 
 public class TestListener extends TestListenerAdapter  implements IInvokedMethodListener  {
@@ -24,24 +25,27 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
 	
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-		
 		currentClass = testResult.getInstance();
 	}
 	
 	@Override
 	public void onTestFailure(ITestResult result) {
-	        WebDriver driver = DriverBuilder.getInstance().getDriver();
-	        if (driver != null) {
-	        	createScreenshot(driver, "report/", getTestMethodName(result));
-	        }
+        if (DriverBuilder.getInstance().getDriver() != null) {
+            createScreenshot(DriverBuilder.getInstance().getDriver(), "report/", getTestMethodName(result));
+            DriverBuilder.getInstance().getDriver().quit();
+            DriverBuilder.getInstance().setDriver(BaseUtils
+                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
+        }
 	}
 	
 	@Override
 	public void onTestSkipped (ITestResult result) {
-	        WebDriver driver = DriverBuilder.getInstance().getDriver();
-	        if (driver != null) {
-	        	//createScreenshot(driver, "report/", "skipped" + getTestMethodName(result));
-	        }
+        if (DriverBuilder.getInstance().getDriver() != null) {
+            createScreenshot(DriverBuilder.getInstance().getDriver(), "report/", getTestMethodName(result));
+            DriverBuilder.getInstance().getDriver().quit();
+            DriverBuilder.getInstance().setDriver(BaseUtils
+                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
+        }
 	}
 	
 	public String createScreenshot(WebDriver driver, String loggerdir, String testcasename) {

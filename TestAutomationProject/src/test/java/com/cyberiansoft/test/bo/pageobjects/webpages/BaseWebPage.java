@@ -124,16 +124,9 @@ public abstract class BaseWebPage {
 		}
 	}
 
-    void waitForLoading(){
-        try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-        } catch(TimeoutException ignored){}
-    }
-
 	public void clickDeleteTableRow(WebElement row) {
 		row.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-	waitABit(1000);
+	    waitABit(1000);
 	}
 
 	public void clickArchiveTableRow(WebElement row) {
@@ -240,4 +233,10 @@ public abstract class BaseWebPage {
 
 	}
 
+    public void waitForLoading(){
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+        } catch(TimeoutException ignored){}
+    }
 }

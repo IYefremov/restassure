@@ -1,11 +1,18 @@
 package com.cyberiansoft.test.driverutils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.MobilePlatform;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -17,17 +24,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.core.MobilePlatform;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class DriverBuilder {
 	
@@ -113,11 +112,19 @@ public class DriverBuilder {
 		    break;
 		}
 		sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
-        sessionBrowser.set(webcap.getBrowserName());
-        sessionVersion.set(webcap.getVersion());
+        if (webcap != null) {
+            sessionBrowser.set(webcap.getBrowserName());
+            sessionVersion.set(webcap.getVersion());
+        }
 		getDriver().manage().timeouts().implicitlyWait(IMPLICIT_TIMEOUT, TimeUnit.SECONDS);
-		getDriver().manage().window().maximize();
-	 }
+		try {
+            getDriver().manage().window().maximize();
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        } finally {
+            getDriver().manage().window().maximize();
+        }
+	}
 	
 	public void setDriver(WebDriver driver) {
 		webDriver.set(driver);

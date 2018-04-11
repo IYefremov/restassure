@@ -1,43 +1,20 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.DataProviderPool;
 import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
-
-    private String userName;
-    private String userPassword;
-
-    @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        userName = BOConfigInfo.getInstance().getUserName();
-        userPassword = BOConfigInfo.getInstance().getUserPassword();
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(userName, userPassword);
-    }
-
-    @AfterMethod
-    public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        backOfficeHeader.clickLogout();
-    }
 
     //todo works
     @Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")
@@ -61,7 +38,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -129,7 +106,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -198,7 +175,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -295,7 +272,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -396,7 +373,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -479,7 +456,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -614,8 +591,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 24854:Operations: CLUser - Verify that accepted SR is in read-only mode " +
             "(not possible to edit)", description = "Operations: CLUser - Verify that accepted SR is in read-only mode " +
-            "(not possible to edit)")
-	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit() throws InterruptedException {
+            "(not possible to edit)", dataProvider = "getUserData", dataProviderClass = DataProviderPool.class)
+	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String userName, String userPassword) throws InterruptedException {
 
 		final String addsrvalue = "SR_type_WO_auto_create";
 
@@ -649,7 +626,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		loginpage.UserLogin(userName, userPassword);
 		backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.setSearchFreeText(VIN);
 		servicerequestslistpage.clickFindButton();
@@ -720,7 +697,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
 
@@ -754,7 +731,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
 
@@ -793,7 +770,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
 		servicerequestslistpage.clickAddServiceRequestButton();
 
@@ -831,7 +808,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setServiceRequestDescription(description);
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -849,7 +826,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequest(String[] tags, String symbol) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.addTags(tags);
 		Assert.assertTrue(serviceRequestsWebPage.addTags(tags[tags.length - 1]));
@@ -870,7 +847,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestDesciptionInExistingSR(String[] descriptions) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -890,7 +867,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testShownSRDuringCreation() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
 	}
@@ -899,7 +876,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
 		serviceRequestsWebPage.setServiceRequestDescription(descriptions[1]);
@@ -912,7 +889,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkDescriptionDocument() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
@@ -930,7 +907,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -951,7 +928,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -970,7 +947,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1007,7 +984,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		int prevReqestsCount = serviceRequestsWebPage.checkSchedulerByDateWeek(startDate, isDateShifted);
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1054,7 +1031,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRappointmentSchedulerMonth(String customer, String startDate) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestList();
 		int prevRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1074,7 +1051,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
 		Assert.assertTrue(serviceRequestsWebPage.checkIf5TechiciansIsMaximum());
@@ -1086,7 +1063,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1111,7 +1088,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1134,7 +1111,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
             throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1152,7 +1129,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		serviceRequestsWebPage.goToTimeLine();
@@ -1177,7 +1154,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		Assert.assertFalse(serviceRequestsWebPage.checkLifeCycleBTN());
@@ -1188,7 +1165,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1210,7 +1187,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1231,7 +1208,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_Auto");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1252,7 +1229,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1274,7 +1251,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1296,7 +1273,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 			String newStatus) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
 		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
 		// serviceRequestsWebPage.selectAddServiceRequestDropDown("Oleksa_AcceptanceAndAllRequired");
@@ -1329,7 +1306,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1363,7 +1340,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1398,7 +1375,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1436,7 +1413,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1470,7 +1447,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1503,7 +1480,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1537,7 +1514,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1571,7 +1548,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1604,7 +1581,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1637,7 +1614,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1669,7 +1646,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1701,7 +1678,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1727,7 +1704,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateSearchIssue() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1752,7 +1729,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		settingsPage.closeNewTab(currentWindow);
 		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
@@ -1782,7 +1759,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1798,7 +1775,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("Stock");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1832,7 +1809,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateErrorVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1848,7 +1825,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("Stock");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1876,7 +1853,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateErrorRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1892,7 +1869,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("Stock");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1926,7 +1903,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1942,7 +1919,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("Stock");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1969,7 +1946,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateErrorStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -1985,7 +1962,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("RO");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -2013,7 +1990,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestTypeDublicateNotificationStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();
@@ -2029,7 +2006,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.unselectOption("VIN");
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationspage = backofficeheader.clickOperationsLink();
-		serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("01_Alex2SRT");
 
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -2062,7 +2039,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestTypesPage.isAllowUndoRejectChecked());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
 		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
 		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue("Vit_All_Services");
@@ -2096,7 +2073,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServicerequestAdviserListing() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer("001 - Test Company");
@@ -2112,7 +2089,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServicerequestServicesAddNotes() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue("Zak_Request_Type");
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickServiceEditButton();

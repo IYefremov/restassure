@@ -141,9 +141,10 @@ public class WebElementsBot {
 	
 	public static void waitUntilPageReloaded() {
     	waitABit(300);
-    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
+                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
     }
-	
+
 	/* Wait For */
     public static void waitABit(int milliseconds) {
         if (milliseconds > 0) {

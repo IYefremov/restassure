@@ -68,7 +68,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -128,7 +128,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -194,7 +194,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -267,7 +267,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();

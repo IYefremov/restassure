@@ -350,7 +350,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListPage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage serviceRequestsListPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsListPage.makeSearchPanelVisible();
 
 		serviceRequestsListPage.verifySearchFieldsAreVisible();

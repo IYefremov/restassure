@@ -1,45 +1,21 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
-	private String userName;
-	private String userPassword;
-
-	@BeforeMethod
-	public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        userName = BOConfigInfo.getInstance().getUserName();
-        userPassword = BOConfigInfo.getInstance().getUserPassword();
-        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
-        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(userName, userPassword);
-	}
-
-	@AfterMethod
-	public void BackOfficeLogout() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		backofficeheader.clickLogout();
-	}
-
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
             description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
-	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() throws InterruptedException {
+	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() {
 
 		final String srcompany = "Alex SASHAZ";
 		final String insurancecompanyname = "Oranta";
@@ -53,7 +29,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.clickAddInsuranceCompanyButton();
 		insurancecompaniespage.createNewInsuranceCompany(insurancecompanyname);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickClaimInfoEditButton();
@@ -69,10 +45,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.deleteInsuranceCompany(insurancecompanyname);
 	}
 
-	// @Test(testName = "Test Case 27891:Company- Service Advisors:
-	// Authentication", description = "Company- Service Advisors:
-	// Authentication",retryAnalyzer=Retry.class)
-	public void testCompanyServiceAdvisorsAuthentication() throws InterruptedException, IOException {
+//	 @Test(testName = "Test Case 27891:Company- Service Advisors: Authentication",
+//             description = "Company- Service Advisors: Authentication",
+//             dataProvider = "getUserData", dataProviderClass = DataProviderPool.class,
+//             retryAnalyzer=Retry.class)
+	public void testCompanyServiceAdvisorsAuthentication(String userName, String userPassword) throws InterruptedException, IOException {
 
 		// final String email = "test123CD@domain.com";
 		final String usermailprefix = "test.cyberiansoft+";
@@ -541,7 +518,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage srlistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage srlistpage = operationspage.clickNewServiceRequestList();
 		srlistpage.selectAddServiceRequestsComboboxValue(srtype);
 		srlistpage.clickAddServiceRequestButton();
 
@@ -557,7 +534,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
 		operationspage = backofficeheader.clickOperationsLink();
-		srlistpage = operationspage.clickNewServiceRequestLink();
+		srlistpage = operationspage.clickNewServiceRequestList();
 		srlistpage.selectAddServiceRequestsComboboxValue(srtype);
 		srlistpage.clickAddServiceRequestButton();
 
