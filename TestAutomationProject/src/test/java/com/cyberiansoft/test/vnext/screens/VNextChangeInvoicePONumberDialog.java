@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,8 +30,12 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 		setInvoicePONumber(poNumber);
 		clickSaveButton();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.
-				xpath("//div[@class='notifier' and @data-type='success']"))));
+		try {
+			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.
+					xpath("//div[@class='notifier' and @data-type='success']"))));
+		} catch (NoSuchElementException e) {
+			//
+		}
 		return new VNextInvoicesScreen(appiumdriver);
 	}
 

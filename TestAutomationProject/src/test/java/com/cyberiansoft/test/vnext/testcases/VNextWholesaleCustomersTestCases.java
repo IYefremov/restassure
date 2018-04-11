@@ -77,7 +77,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 			description = "Verify user can select Wholesale customer when create Inspection")
 	public void testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection() {
 		
-		final String inspType = "AppendToRO";
+		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);

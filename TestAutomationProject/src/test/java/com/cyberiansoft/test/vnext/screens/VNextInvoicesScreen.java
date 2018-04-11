@@ -56,7 +56,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		String invoicecell = null;
 		WebElement inspcell = getInvoiceCell(invoicenumber);
 		if (inspcell != null)
-			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status-')]")).getText();
+			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status')]/span[contains(@class, 'entity-item-status')]")).getText();
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 		return invoicecell;
