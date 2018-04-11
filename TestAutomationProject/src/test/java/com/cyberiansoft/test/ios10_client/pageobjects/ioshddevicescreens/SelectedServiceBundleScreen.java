@@ -1,20 +1,17 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	
@@ -35,12 +32,12 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 
 	public void assertBundleIsSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("selected")).isDisplayed());
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("selected")).size() > 0);
 	}
 
 	public void assertBundleIsNotSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).isDisplayed());
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0);
 		
 	}
 

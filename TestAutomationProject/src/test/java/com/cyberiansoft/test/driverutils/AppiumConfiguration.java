@@ -1,20 +1,18 @@
 package com.cyberiansoft.test.driverutils;
 
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
+import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
+import com.cyberiansoft.test.core.MobilePlatform;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import com.cyberiansoft.test.core.IOSHDDeviceInfo;
-import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
-import com.cyberiansoft.test.core.MobilePlatform;
 
 
 public class AppiumConfiguration {
@@ -24,7 +22,7 @@ public class AppiumConfiguration {
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
 		LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
-		//date = date.minusDays(3);
+		//date = date.minusDays(2);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:

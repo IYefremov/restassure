@@ -133,10 +133,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 		}
 		Assert.assertTrue(selected);
-		//IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
-		//		findElementByXPath("//XCUIElementTypeStaticText[@name='" + servicename + "']/..");
-		//Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""),
-		//		servicepriceandquantity.replaceAll(" ", ""));
+
+
 	}
 
 	public int getServiceSelectedNumber(String service) {

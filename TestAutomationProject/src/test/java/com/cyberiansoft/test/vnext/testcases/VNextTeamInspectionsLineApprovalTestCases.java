@@ -1,28 +1,19 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataclasses.InspectionStatuses;
+import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.screens.*;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.InspectionStatuses;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
-import com.cyberiansoft.test.vnext.screens.VNextApproveServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextDeclineReasonScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import java.util.List;
 
 public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -273,5 +264,43 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
 	}
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanGoBackFromApproveScreenUsingHardwareBackButton(String rowID,
+                                                                                   String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.swipeScreensLeft(2);
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+
+        List<ServiceData> services = inspdata.getServicesList();
+        for (ServiceData service : services)
+            inpsctionservicesscreen.selectService(service.getServiceName());
+
+        inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+        VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+        inspmenu.clickApproveInspectionMenuItem();
+        VNextApproveServicesScreen approveservicesscreen = new VNextApproveServicesScreen(appiumdriver);
+        approveservicesscreen.clickApproveAllButton();
+        approveservicesscreen.clickSaveButton();
+        VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
+        AppiumUtils.clickHardwareBackButton();
+        approveservicesscreen = new VNextApproveServicesScreen(appiumdriver);
+        AppiumUtils.clickHardwareBackButton();
+        inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.NEW.getInspectionStatusValue());
+        homescreen = inspectionscreen.clickBackButton();
+    }
 
 }
