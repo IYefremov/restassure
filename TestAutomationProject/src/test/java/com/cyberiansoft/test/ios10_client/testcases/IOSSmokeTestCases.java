@@ -1009,7 +1009,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		
 		servicerequestslistpage.verifySearchFieldsAreVisible();
@@ -4489,7 +4489,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = boheader.clickOperationsLink();
-		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_INSP_ONLY);
 		srlistwebpage.clickAddServiceRequestButton();
 		
@@ -4540,7 +4540,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = boheader.clickOperationsLink();
-		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
 		srlistwebpage.clickAddServiceRequestButton();
 		
@@ -4580,7 +4580,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		boheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		operationspage = boheader.clickOperationsLink();
-		srlistwebpage = operationspage.clickNewServiceRequestLink();
+		srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
 		srlistwebpage.clickAddServiceRequestButton();
 		
@@ -7953,7 +7953,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
@@ -8016,7 +8016,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
@@ -8074,7 +8074,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
@@ -8141,7 +8141,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestLink();
+		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
 		servicerequestslistpage.clickAddServiceRequestButton();
 		
