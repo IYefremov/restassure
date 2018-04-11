@@ -1,4 +1,3 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="selenium.host" value="localhost" />
   <parameter name="selenium.port" value="3737" />
@@ -10,20 +9,14 @@
   <parameter name="ios.build" value="ReconPro_HD_0116.app.zip"  />
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <listeners>
-		<!--<listener class-name="com.cyberiansoft.test.ios10_client.utils.SuperListener"/>-->
-    <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSHDClientListener"/>
+		<listener class-name="com.cyberiansoft.test.ios10_client.utils.SuperListener"/>
   </listeners>
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
 
-
-         <include name="testCopyInspections" />
-
-         <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
-
-         <!--<include name="testGetDeviceRegistrationCode" />
+          <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  -->  
 		  <!--<include name="testUpdateDatabase" />           
           <include name="testUpdateVIN" />
@@ -73,7 +66,8 @@
           <include name="testWOMonitorCreateWOForMonitor" />
           <include name="testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService" />          
           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" /> 
-          <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" />
+          <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" /> 
+          <!--<include name="testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown" />  -->
           <include name="testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase" />         
           <include name="testSRHDVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo" /> 
           <include name="testSRHDVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON" /> 
@@ -159,7 +153,7 @@
 		  <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" />
 		  <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" />
 		    
-          <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
+          <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>
       </class>
     </classes>

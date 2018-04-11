@@ -12,15 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 public class RegularInspectionScreen extends iOSRegularBaseScreen {
-
-	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField")
-	private IOSElement makefld;
-
-	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Model']/XCUIElementTypeTextField")
-	private IOSElement modelfld;
-
-	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField")
-	private IOSElement yearfldvalue;
+	
+	@iOSFindBy(uiAutomator = ".popover().navigationBar().buttons()[\"Save\"]")
+    private IOSElement savechangesbtn;
 	
 	@iOSFindBy(accessibility = "Advisor")
     private IOSElement advisorcell;
@@ -32,7 +26,7 @@ public class RegularInspectionScreen extends iOSRegularBaseScreen {
 	}
 
 	public void saveChanges() {
-		clickSaveButton();
+		savechangesbtn.click();
 	}
 
 	public String clickSaveWithAlert() {
@@ -45,16 +39,16 @@ public class RegularInspectionScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getMake() {
-		return makefld.getAttribute("value");
+		return Helpers.getMake();
 	}
 
 	public String getModel() {
-		return modelfld.getAttribute("value");
+		return Helpers.getModel();
 
 	}
 
 	public String getYear() {
-		return yearfldvalue.getAttribute("value");
+		return Helpers.getYear();
 	}
 	
 	public void seletAdvisor(String advisor) {

@@ -32,12 +32,12 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 
 	public void assertBundleIsSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("selected")).size() > 0);
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("selected")).isDisplayed());
 	}
 
 	public void assertBundleIsNotSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0);
+		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).isDisplayed());
 		
 	}
 

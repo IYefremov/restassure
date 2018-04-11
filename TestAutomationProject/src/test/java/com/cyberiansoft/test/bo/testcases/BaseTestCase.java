@@ -37,15 +37,15 @@ public class BaseTestCase {
 	protected File app;
 	String bundleid = "";
 	protected static AppiumDriverLocalService service;
-	
-	@BeforeSuite
-	public void cleanScreenShotsFolder() throws IOException{
-		File reportFolder = new File("/report");
-		if (!reportFolder.exists())
-			reportFolder.mkdir();
-		else
-			FileUtils.cleanDirectory(new File("/report"));
-	}
+
+    @BeforeSuite
+    public void cleanScreenShotsFolder() throws IOException{
+        File reportFolder = new File("/report");
+        if (!reportFolder.exists())
+            reportFolder.mkdir();
+        else
+            FileUtils.cleanDirectory(new File("/report"));
+    }
 	
 //	@BeforeClass
 //	@Parameters({ "selenium.browser", "ios.bundleid" })
@@ -102,7 +102,6 @@ public class BaseTestCase {
 		return Helpers.wait(locator);
 	}
 
-
 	@AfterClass
 	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
@@ -113,8 +112,8 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin(Method method) {
-        if (DriverBuilder.getInstance().getDriver() == null) {
-            setUp();
+	    if (DriverBuilder.getInstance().getDriver() == null) {
+	        setUp();
         }
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());

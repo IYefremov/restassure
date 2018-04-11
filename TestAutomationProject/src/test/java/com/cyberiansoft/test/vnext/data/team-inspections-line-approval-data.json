@@ -83,19 +83,5 @@
       }, {"serviceName": "Anastasia Labor Avarage Data"
       }]
     }
-  ],
-
-  "testVerifyUserCanGoBackFromApproveScreenUsingHardwareBackButton": [
-    {
-      "rowID": "testVerifyUserCanGoBackFromApproveScreenUsingHardwareBackButton.01",
-      "description": "Test Case 71749:Verify user can go back from approve screen using hardware back button",
-      "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
-      }]
-    }
   ]
 }
