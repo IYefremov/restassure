@@ -1292,7 +1292,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
 	}
 
-	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted", dataProvider = "provideSRdata1")
+	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1386,7 +1387,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(startDate, endDate, "Automation 2 Appointment Tech");
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+        serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
 		serviceRequestsWebPage.selectSREditFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -1394,7 +1395,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR Checked In");
-		// eventsWebPage.deleteSelectedEvent();
+		eventsWebPage.deleteSelectedEvent();
 	}
 
 	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created",
@@ -1533,8 +1534,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo test fails
-	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created",
+            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
 	public void testMiscellaneousEventsServiceRequestEstimationCreated(String customer, String startDate,
 			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1563,7 +1564,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName("test appointment SR created");
-		// eventsWebPage.deleteSelectedEvent();
+		eventsWebPage.deleteSelectedEvent();
 	}
 
 	//todo test fails

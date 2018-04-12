@@ -1956,8 +1956,6 @@ waitABit(3000);
 		waitABit(20000);
 		for (int i = 0; i < 7; i++) {
 			try {
-			    //				if (!MailChecker.searchEmailAndGetMailMessage("automationvozniuk@gmail.com", "ZZzz11!!",
-//                        message, "reconpro+main@cyberiansoft.com").isEmpty()) {
 			    if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
                         "reconpro+main@cyberiansoft.com").isEmpty()) {
 			        flag = true;

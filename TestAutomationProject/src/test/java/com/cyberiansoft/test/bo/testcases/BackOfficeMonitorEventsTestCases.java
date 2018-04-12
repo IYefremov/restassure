@@ -2,7 +2,7 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.MonitorWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
@@ -17,31 +17,29 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		final String firstconditiontype = "equals";
 		final String firstconditioncriteria = "Inttest";
 
-		final String firstconditionnames[] = {"Amount", "Completed", "InspectionType", "Status"};
-		final String firstconditiontypes[] = {"equals", "moreThan", "contains", "empty"};
-		final String firstconditioncriterias[] = {"10", "1", "Inte", ""};
+		final String firstConditionNames[] = {"Amount", "Completed", "InspectionType", "Status"};
+		final String firstConditionTypes[] = {"equals", "moreThan", "contains", "empty"};
+		final String firstConditionCriteria[] = {"10", "1", "Inte", ""};
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+		EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
-		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
-		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
+		for (int i = 0;  i < firstConditionNames.length; i++) {
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstConditionNames[i], firstConditionTypes[i], firstConditionCriteria[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstConditionNames[i], firstConditionTypes[i], firstConditionCriteria[i]);
+			eventsPage.cancelNewEvent();
+		}
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	@Test(description = "Test Case 19282:\"Estimate decline\" event creation")
@@ -60,24 +58,23 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
 		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	@Test(description = "Test Case 19283:\"New Inspection\" event creation")
@@ -96,24 +93,23 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
+
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
-		}		
-		eventspage.deleteEvent(alertname);
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
+		}
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	//@Test(description = "Test Case 19384:\"60 min to target time\" event creation")
@@ -131,25 +127,24 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
 		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	@Test(description = "Test Case 19563:\"High Priority RO\" event creation")
@@ -167,25 +162,24 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
 		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	@Test(description = "Test Case 19564:\"Invoice Created\" event creation")
@@ -203,25 +197,24 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
 		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.deleteEvent(alertname);
 	}
 	
 	@Test(description = "Test Case 19567:\"New Repair Order\" event creation")
@@ -239,25 +232,24 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
+
+        MiscellaneousWebPage miscellaneousPage = backofficeheader.clickMiscellaneousLink();
+        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		EventsWebPage eventspage = monitorpage.clickEventsLink();	
-		
-		eventspage.verifyEventsTableColumnsAreVisible();
-		eventspage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
-		eventspage.clickEditButtonForEvent(alertname);
-		eventspage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);		
-		eventspage.cancelNewEvent();
+		eventsPage.verifyEventsTableColumnsAreVisible();
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.clickEditButtonForEvent(alertname);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.saveNewEvent();
-			eventspage.clickEditButtonForEvent(alertname);
-			eventspage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);		
-			eventspage.cancelNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.saveNewEvent();
+			eventsPage.clickEditButtonForEvent(alertname);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.cancelNewEvent();
 		}		
-		eventspage.deleteEvent(alertname);
+		eventsPage.deleteEvent(alertname);
 	}
 
 }

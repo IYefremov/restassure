@@ -16,13 +16,10 @@ public class MiscellaneousWebPage extends BaseWebPage {
 	public MiscellaneousWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		
 	}
 
 	public EventsWebPage clickEventsLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(eventstab)).click();
-		return PageFactory.initElements(
-				driver, EventsWebPage.class);
+		return PageFactory.initElements(driver, EventsWebPage.class);
 	}
-
 }

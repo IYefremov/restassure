@@ -221,7 +221,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.archiveUser(userfirstnameed, userlastnameed);
 	}
 
-	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit")
+	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit",
+            retryAnalyzer = Retry.class)
 	public void testCompanyClientsUsersEdit() throws Exception {
 
 		final String clientmail = "123123213@domain.com";

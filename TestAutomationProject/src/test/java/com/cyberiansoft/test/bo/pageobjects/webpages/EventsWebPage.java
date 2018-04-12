@@ -156,14 +156,11 @@ public class EventsWebPage extends BaseWebPage {
 	public boolean saveNewEvent() {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(neweventOKbtn)).click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitForLoading();
 			try {
 				if (neweventOKbtn.isDisplayed())
 					neweventCancelbtn.click();
-			} catch (NoSuchElementException e) {
-			}
+			} catch (NoSuchElementException ignored) {}
 		} catch (Exception e) {
 			return false;
 		}
@@ -247,11 +244,10 @@ public class EventsWebPage extends BaseWebPage {
 		Thread.sleep(1000);
 		try {
 			driver.switchTo().alert().accept();
-		} catch (NoAlertPresentException e) {
-		}
+		} catch (NoAlertPresentException ignored) {}
 		try {
 			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} catch (TimeoutException e) {
 			driver.navigate().refresh();
 		}

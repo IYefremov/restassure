@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,25 +46,34 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public void clickLogout() {
-		if (driver.getWindowHandles().size() > 1) {
-			driver.close();
-			for (String activeHandle : driver.getWindowHandles())
-				driver.switchTo().window(activeHandle);	
-		}
+        try {
+            while (driver.getWindowHandles().size() > 1) {
+                driver.close();
+                for (String activeHandle : driver.getWindowHandles())
+				driver.switchTo().window(activeHandle);
+            }
+        } catch (Exception e) {
+            System.err.println("Closing driver exception: " + e);
+        }
+//		if (driver.getWindowHandles().size() > 1) {
+//			driver.close();
+//			for (String activeHandle : driver.getWindowHandles())
+//				driver.switchTo().window(activeHandle);
+//		}
 		driver.switchTo().defaultContent();
 		waitABit(1000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		try{
-		wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		}catch(Exception ignored){}
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
 		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+		    wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
+		} catch (Exception ignored) {}
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
+        try {
+            wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+        } catch (TimeoutException e) {
+            driver.close();
+            System.err.println("Login button has not been displayed!\n" + e);
+        }
 		waitABit(4000);
 	}
 	

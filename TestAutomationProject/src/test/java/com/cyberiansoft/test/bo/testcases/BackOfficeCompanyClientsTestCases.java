@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.DataProviderPool;
+import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -153,14 +154,15 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertFalse(clientspage.isClientPresentInTable(companyname));
 	}
 
-	@Test(testName = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file", description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file")
+	@Test(testName = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file",
+            description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file",
+            retryAnalyzer = Retry.class)
 	public void testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile() throws Exception {
 
 		final String companyname = "CompanyNoteTest";
 		final String companynote = "Test Note for import";
 		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		ClientsWebPage clientspage = companypage.clickClientsLink();

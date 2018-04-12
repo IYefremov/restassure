@@ -125,12 +125,12 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		employeespage.setSearchUserParameter(employeename.substring(0, 4).toLowerCase());
 		employeespage.clickFindButton();
 
-		Assert.assertTrue(Integer.valueOf(employeespage.getEmployeesTableRowCount()) > 0);
+		Assert.assertTrue(employeespage.getEmployeesTableRowCount() > 0);
 		employeespage.isActiveEmployeeExists(employeefirstname, employeelastname);
 	}
 
 
-	@Test(description = "Test Case 15323:Company- Services: Search")
+	@Test(description = "Test Case 15323:Company- Services: Search", retryAnalyzer = Retry.class)
 	public void testCompanyServicesSearch() throws Exception {
 
 		final String pricetype = "Percentage";
