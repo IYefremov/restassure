@@ -6336,6 +6336,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
@@ -6444,6 +6445,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
@@ -6960,6 +6962,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10*1000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
