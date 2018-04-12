@@ -73,9 +73,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
 
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
+		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
 		devicespage.setSearchCriteriaByName(searchlicensecriteria);
 		regCode = devicespage.getFirstRegCodeInTable();

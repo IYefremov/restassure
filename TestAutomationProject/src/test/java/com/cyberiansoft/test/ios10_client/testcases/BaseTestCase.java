@@ -6,6 +6,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
@@ -15,7 +16,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 
@@ -31,8 +31,6 @@ public class BaseTestCase {
 	protected TestUser testuser;
 	protected String userpsw;
 
-	String bundleid = "";
-
 	public void initTestUser(String username,  String userpsw) {
 		this.testuser = new TestUser(username, userpsw);
 	}
@@ -43,12 +41,9 @@ public class BaseTestCase {
 	
 	
 	@BeforeSuite
-	@Parameters({ "selenium.browser", "ios.bundleid", "ios.build", "ios.udid" })
-	public void setUp(String browser, String bundleid, String buildtype, String udid ) throws Exception {
+	public void setUp() throws Exception {
 
 		// Parameters for WebDriver
-		 
-		 this.bundleid =  bundleid;
 
 		/*
 		 * GraphicsConfiguration gc = GraphicsEnvironment
@@ -70,7 +65,7 @@ public class BaseTestCase {
 		 */
 		 
 		 AppiumDriverServiceBuilder.getInstance().buildAppiumService();
-	     browsertype = BaseUtils.getBrowserType(browser);
+	     browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
 	}
 
 	public static WebElement wait(By locator) {

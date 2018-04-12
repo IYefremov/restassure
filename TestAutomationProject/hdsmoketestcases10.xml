@@ -1,3 +1,4 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <listeners>

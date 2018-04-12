@@ -46,4 +46,8 @@ public class ReconProIOSStageInfo {
     public String getUserStageUserPassword() {
         return props.getProperty("userstage.password");
     }
+
+    public String getDefaultBrowser() {
+        return props.getProperty("selenium.browser");
+    }
 }
