@@ -8,6 +8,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.*;
@@ -17,7 +18,6 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -47,11 +47,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	private final String country = "Canada";
 
 	@BeforeClass
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void setUpSuite() throws Exception {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
+		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
 	}
@@ -186,19 +186,20 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	// Test Case 8460: Delete Customer 
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 8460: Delete Customer ", description = "Delete retail customer")
-	public void testDeleteRetailCustomer(String backofficeurl, String userName,
-			String userPassword) throws Exception {
+	public void testDeleteRetailCustomer() throws Exception {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Admin/Clients.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		ClientsWebPage clientspage = PageFactory.initElements(webdriver,
-				ClientsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = companyWebPage.clickClientsLink();
 
 		clientspage.deleteUserViaSearch(firstnamenew);
 
@@ -356,9 +357,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	//Test Case 8430:Create work order with type is assigned to a specific client
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
-	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient(String backofficeurl, String userName, String userPassword)
+	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient()
 			throws Exception {
 		final String VIN = "ZWERTYASDFDDXZBVB";
 		final String _po = "1111 2222";
@@ -375,14 +375,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-		
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		webdriver.manage().window().maximize();
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
 		devicespage.setSearchCriteriaByName(license);
 		regCode = devicespage.getFirstRegCodeInTable();
@@ -690,10 +692,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	//Test Case 8467:Approve inspection on back office (full inspection approval)
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 8467:Approve inspection on back office (full inspection approval)", description = "Approve inspection on back office (full inspection approval)")
-	public void testApproveInspectionOnBackOfficeFullInspectionApproval(
-			String url, String userName, String userPassword) throws Exception {
+	public void testApproveInspectionOnBackOfficeFullInspectionApproval() throws Exception {
 
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
@@ -732,13 +732,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(30*1000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 
 		inspectionspage.approveInspectionByNumber(inpectionnumber);
 
@@ -753,11 +755,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 	}
 
-	//Test Case 8463:Approve inspection on back office (line-by-line approval) 
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
+	//Test Case 8463:Approve inspection on back office (line-by-line approval)
 	@Test(testName = "Test Case 8463:Approve inspection on back office (line-by-line approval) ", description = "Approve inspection on back office (line-by-line approval)")
-	public void testApproveInspectionOnBackOfficeLinebylineApproval(String url,
-			String userName, String userPassword) throws Exception {
+	public void testApproveInspectionOnBackOfficeLinebylineApproval() throws Exception {
 
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
@@ -794,13 +794,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		Helpers.waitABit(10*1000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 
 		inspectionspage.approveInspectionLinebylineApprovalByNumber(
 				inpectionnumber, iOSInternalProjectConstants.DISC_EX_SERVICE1, iOSInternalProjectConstants.DYE_SERVICE);
@@ -816,10 +819,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	// Test Case 8442: Creating Inspection From Service Request
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 8442: Creating Inspection From Service Request", description = "Creating Inspection From Service Request")
-	public void testCreatingInspectionFromServiceRequest(String url,
-			String userName, String userPassword) throws Exception {
+	public void testCreatingInspectionFromServiceRequest() throws Exception {
 
 		final String customer = "Company2";
 		final String vin = "TESTVNN1";
@@ -830,13 +831,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequestList.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		
-		ServiceRequestsWebPage servicerequestpage = PageFactory.initElements(
-				webdriver, ServiceRequestsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsWebPage servicerequestpage = operationspage.clickServiceRequestsLink();
 
 		servicerequestpage.clickEditBtn();
 		servicerequestpage.clickCustomerTab();
@@ -882,22 +885,24 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 
 		inspectionspage.assertInspectionPrice(inspnumber, PricesCalculations.getPriceRepresentation(price));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	//Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device", description = "Creating Service Request with Inspection, WO and Appointment required on device")
-	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice() throws Exception {
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -995,13 +1000,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
@@ -1027,10 +1033,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	//Test Case 21582:Create Inspection from Service request
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 21582:Create Inspection from Service request", description = "Create Inspection from Service request"/*,
 			dependsOnMethods = { "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice" }*/)
-	public void testCreateInspectionFromServiceRequest(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testCreateInspectionFromServiceRequest() throws Exception {
 		final String summ= "438.60";
 				
 		//resrtartApplication();
@@ -1097,10 +1102,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	//Test Case 21585:Create WO from Service Request
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 21585:Create WO from Service Request", description = "Create WO from Service Request"/*,
 			dependsOnMethods = { "testCreateInspectionFromServiceRequest" }*/)
-	public void testCreateWOFromServiceRequest(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testCreateWOFromServiceRequest() throws Exception {
 
 		appiumdriver.closeApp();
 		Thread.sleep(60*1000*15);
@@ -2032,8 +2036,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 25526:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testCreateInvoiceWithTwoWOsAndCopyVehicle(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -2141,14 +2144,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10*1000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
@@ -4436,8 +4440,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29082:SR: HD - Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech", 
 			description = "Test Case 29082:SR: HD - Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech(String backofficeurl, String userName, String userPassword)
+	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -4445,14 +4448,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _model = "Town and Country";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_INSP_ONLY);
 		srlistwebpage.clickAddServiceRequestButton();
@@ -4485,8 +4489,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29083:SR: HD - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech", 
 			description = "SR: HD - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech(String backofficeurl, String userName, String userPassword)
+	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -4496,14 +4499,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
 		srlistwebpage.clickAddServiceRequestButton();
@@ -4536,14 +4540,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		operationspage = boheader.clickOperationsLink();
+		operationspage = backofficeheader.clickOperationsLink();
 		srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
 		srlistwebpage.clickAddServiceRequestButton();
@@ -5963,8 +5968,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
 			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount(String userName, String userPassword) throws Exception {
+	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6020,13 +6024,17 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		Thread.sleep(10000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.searchInspectionByNumber(inspnumber);		
@@ -6080,8 +6088,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27717:Invoices: HD - Verify that it is posible to add payment from device for draft invoice", 
 			description = "Invoices: HD - Verify that it is posible to add payment from device for draft invoice")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice(String backofficeurl, String userName, String userPassword)
+	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice()
 			throws Exception {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
@@ -6091,8 +6098,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
-		
+
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -6148,14 +6154,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
@@ -6177,8 +6184,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	@Test(testName="Test Case 27739:Invoices: HD - Verify that payment is send to BO when PO# is changed under My invoice", 
 			description = "Invoices: HD - Verify that payment is send to BO when PO# is changed under My invoice")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice(String backofficeurl, String userName, String userPassword)
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice()
 			throws Exception {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
@@ -6189,7 +6195,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = new HomeScreen(appiumdriver);
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
 
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 			
@@ -6247,14 +6252,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
@@ -6272,8 +6278,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27741:Invoices: HD - Verify that payment is send to BO when PO# is changed under Team invoice", 
 			description = "Invoices: HD - Verify that payment is send to BO when PO# is changed under Team invoice")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice(String backofficeurl, String userName, String userPassword)
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice()
 			throws Exception {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
@@ -6331,14 +6336,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
@@ -6358,8 +6362,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			+ "Test Case 40034:WO Monitor: Verify that employee with Manager role may see and change all services of repair order", 
 			description = "WO: HD - Verify filter for Team WO that returns only work assigned to tech who is logged in,"
 					+ "WO Monitor: Verify that employee with Manager role may see and change all services of repair order")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn(String backofficeurl, String userName, String userPassword)
+	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn()
 			throws Exception {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
@@ -6441,14 +6444,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = boheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Default Location");
@@ -6848,8 +6850,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 26265:Invoices HD: Create Invoice with two WOs and copy vehicle for Retail customer", 
 			description = "Create Invoice with two WOs and copy vehicle for Retail customer")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer() throws Exception {
 		
 		final String VIN = "QWERTYUI123";
 		final String retailcustomer  = "19319";
@@ -6899,7 +6900,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setType(_type);
 		vehiclescreeen.setStock(stock);
 		vehiclescreeen.setRO(_ro);
-		
 		
 		vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption());
 		ServicesScreen servicesscreen = new ServicesScreen(appiumdriver);
@@ -6960,14 +6960,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10*1000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		BackOfficeHeaderPanel boheader = PageFactory.initElements(webdriver,
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = boheader.clickOperationsLink();
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
@@ -7235,8 +7234,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 50250:WO: HD - Verify that WO number is not duplicated", 
 			description = "WO: - Verify that WO number is not duplicated")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testWOVerifyThatWONumberIsNotDuplicated(String backofficeurl, String userName, String userPassword)
+	public void testWOVerifyThatWONumberIsNotDuplicated()
 			throws Exception {
 		
 		final String VIN  = "JA4LS31H8YP047397";
@@ -7278,13 +7276,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InvoicesWebPage invoiceswebpage = PageFactory.initElements(
-				webdriver, InvoicesWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
@@ -7346,13 +7347,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		WorkOrdersWebPage workorderspage = PageFactory.initElements(
-				webdriver, WorkOrdersWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		operationspage = backofficeheader.clickOperationsLink();
+		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.setSearchOrderNumber(wonumber3);
@@ -7895,9 +7899,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35951:SR: HD - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
 			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed(
-			String userName, String userPassword)
+	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -7905,13 +7907,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _model = "Town and Country";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
@@ -7957,9 +7960,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35953:SR: HD - Verify that when SR is declined status reason should be selected", 
 			description = "Verify that when SR is declined status reason should be selected")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected(
-			String userName, String userPassword)
+	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -7967,13 +7968,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _model = "Town and Country";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
@@ -8015,8 +8017,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
 			description = "Verify that SR is not accepted when employee review or update it")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt(String userName, String userPassword)
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -8024,11 +8025,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String _model = "Town and Country";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -8078,8 +8080,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 36004:SR: HD - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
 			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
-	@Parameters({ "user.name", "user.psw" })
-	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON(String userName, String userPassword)
+	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -8091,13 +8092,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String endDate = LocalDate.now().plusDays(2).format(formatter);
 	
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
