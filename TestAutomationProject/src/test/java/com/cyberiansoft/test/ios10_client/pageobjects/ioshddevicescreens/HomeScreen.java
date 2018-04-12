@@ -1,19 +1,21 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+  import com.cyberiansoft.test.ios10_client.utils.Helpers;
+  import io.appium.java_client.AppiumDriver;
+  import io.appium.java_client.MobileBy;
+  import io.appium.java_client.MobileElement;
+  import io.appium.java_client.TouchAction;
+  import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+  import org.openqa.selenium.By;
+  import org.openqa.selenium.WebDriver;
+  import org.openqa.selenium.support.PageFactory;
+  import org.openqa.selenium.support.ui.ExpectedConditions;
+  import org.openqa.selenium.support.ui.FluentWait;
+  import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+  import java.time.Duration;
+  import java.util.List;
+  import java.util.concurrent.TimeUnit;
 
 public class HomeScreen extends iOSHDBaseScreen {
 	
@@ -159,21 +161,33 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Settings")));
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByAccessibilityId("Settings")).waitAction(Duration.ofSeconds(1)).release().perform();
-		Helpers.waitABit(1000);
 		return new SettingsScreen(appiumdriver);
 	}	
 	
 	public void updateDatabase() {
+        MobileElement toolbar = null;
+	    List<MobileElement> toolbars = appiumdriver.findElementsByAccessibilityId("Toolbar");
+	    for (MobileElement tlb : toolbars)
+	        if (tlb.isDisplayed()) {
+                toolbar = tlb;
+                break;
+            }
+        toolbar.findElementByClassName("XCUIElementTypeButton").click();
 		Helpers.setTimeOut(180);
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton").click();
-		
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 	
 	public void updateVIN() {
-		Helpers.setTimeOut(60);
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[2]").click();
+        MobileElement toolbar = null;
+        List<MobileElement> toolbars = appiumdriver.findElementsByAccessibilityId("Toolbar");
+        for (MobileElement tlb : toolbars)
+            if (tlb.isDisplayed()) {
+                toolbar = tlb;
+                break;
+            }
+        toolbar.findElementsByClassName("XCUIElementTypeButton").get(1).click();
+	    Helpers.setTimeOut(60);
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}

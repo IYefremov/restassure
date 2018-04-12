@@ -78,6 +78,10 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 	
 	public void clickSearchSaveButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		}
 	}
 	
 	public void selectSearchLocation(String _location) {
