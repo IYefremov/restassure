@@ -183,7 +183,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-		System.out.println("+++++" + inspnumber);
 		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();

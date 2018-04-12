@@ -102,7 +102,7 @@
   "testVerifyTotalAmountIncludeOnlyApprovedServices": [
     {
       "rowID": "testVerifyTotalAmountIncludeOnlyApprovedServices.01",
-      "description": "Test Case 71751:Verify total amount include only Approved services",
+      "description": "Test Case 71751:Verify total amount include only Approved services, Test Case 73110:Verify user can select several Inspection with line approve for approve.",
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },

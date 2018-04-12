@@ -85,8 +85,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	}
 	
 	public void selectNotesPicturesTab() {
-		//tap(notespicturestab);
-		tap(notescamerabtn);
+		tap(notespicturestab);
 	}
 	
 	public void selectNotesTextTab() {
@@ -107,7 +106,6 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	public void addCameraPictureToNote() {
 		selectNotesPicturesTab();
-		clickCameraIcon();
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		BaseUtils.waitABit(8000);
 		//appiumdriver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
@@ -128,10 +126,12 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	public void addFakeImageNote() {
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('[action=take-camera]').trigger('tap:fake')");
+		BaseUtils.waitABit(3000);
 	}
 	
 	public void addImageToNotesFromGallery() {
-		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
+		clickCameraIcon();
+		if (DriverBuilder.getInstance().getMobilePlatform().name().toUpperCase().equals(MobilePlatform.ANDROID.toUpperCase())) {
 			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			BaseUtils.waitABit(3000);
 			if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).size() > 0)
@@ -144,14 +144,20 @@ public class VNextNotesScreen extends VNextBaseScreen {
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='Allow']")).click();
 			else if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
 				appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
-			BaseUtils.waitABit(4000);
-
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
-			BaseUtils.waitABit(10000);
-			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
+			//BaseUtils.waitABit(2000);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+			wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")));
+			wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")))).click();
+			//appiumdriver.findElement(MobileBy.xpath("//*[@class='GLButton' and @text='Shutter']")).click();
+			//BaseUtils.waitABit(10000);
+			wait = new WebDriverWait(appiumdriver, 30);
+			wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")));
+			wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")))).click();
+			//appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.TextView' and @text='OK']")).click();
 			
 			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-			BaseUtils.waitABit(3000);
 		} else {
 			addFakeImageNote();
 			BaseUtils.waitABit(3000);

@@ -116,6 +116,8 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		notesscreen.setNoteText(notetext);
 		notesscreen.addQuickNote(quicknote);
+		//notesscreen.addImageToNotesFromGallery();
+		//notesscreen.addImageToNotesFromGallery();
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
@@ -164,6 +166,8 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		notesscreen.setNoteText(notetext);
 		notesscreen.addQuickNote(quicknote);
+		//notesscreen.addImageToNotesFromGallery();
+		//notesscreen.addImageToNotesFromGallery();
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
