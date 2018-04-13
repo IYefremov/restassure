@@ -7,6 +7,7 @@ import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EnterpriseBeforeDamageScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PriceMatrixScreen;
@@ -33,11 +34,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		public RegularHomeScreen homescreen;
 		
 		@BeforeClass
-		@Parameters({ "backoffice.url", "user.name", "user.psw" })
-		public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
+		public void setUpSuite() throws Exception {
 			mobilePlatform = MobilePlatform.IOS_REGULAR;
 			initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-			testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
+			testGetDeviceRegistrationCode(DentWizardIOSInfo.getInstance().getBackOfficeURL(),
+					DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword());
 			testRegisterationiOSDdevice();
 			ExcelUtils.setDentWizardExcelFile();
 		}

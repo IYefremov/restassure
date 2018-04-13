@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -52,11 +53,11 @@ public class DentWizartestCases extends BaseTestCase {
 	public HomeScreen homescreen;
 	
 	@BeforeClass
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void setUpSuite(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void setUpSuite() throws Exception {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword);
+		testGetDeviceRegistrationCode(DentWizardIOSInfo.getInstance().getBackOfficeURL(),
+				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword());
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
 	}
