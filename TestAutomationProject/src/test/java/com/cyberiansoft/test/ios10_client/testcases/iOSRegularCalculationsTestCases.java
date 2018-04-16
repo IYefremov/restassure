@@ -7,6 +7,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
@@ -28,17 +29,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	private RegularHomeScreen homescreen;
 	
 	@BeforeClass
-	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
-	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) throws Exception {
+	public void setUpSuite() throws Exception {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
+		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword, String licensename) throws Exception {
+			String userName, String userPassword) throws Exception {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -50,11 +51,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
 				ActiveDevicesWebPage.class);
 
-		devicespage.setSearchCriteriaByName(licensename);
+		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular");
 		regCode = devicespage.getFirstRegCodeInTable();
 
 		DriverBuilder.getInstance().getDriver().quit();
-		Thread.sleep(2000);
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
@@ -332,18 +332,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28583:WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity", 
 			description = "WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
-	@Parameters({ "user.name", "user.psw" })
-	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2(String userName, String userPassword)
+	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2()
 			throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		WorkOrdersWebPage wopage = PageFactory.initElements(webdriver,
-				WorkOrdersWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.makeSearchPanelVisible();
 		wopage.setSearchOrderNumber(wonumber28583);
 		wopage.unselectInvoiceFromDeviceCheckbox();
@@ -601,18 +602,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29398:WO: Regular - Verify that Fee Bundle services is calculated for additional matrix services", 
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2(String userName, String userPassword)
+	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2()
 			throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		WorkOrdersWebPage wopage = PageFactory.initElements(webdriver,
-				WorkOrdersWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.makeSearchPanelVisible();
 		wopage.setSearchOrderNumber(wonumber29398);
 		wopage.clickFindButton();
@@ -833,18 +835,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31498:WO: Regular - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2(String userName, String userPassword)
+	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2()
 			throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Orders.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		WorkOrdersWebPage wopage = PageFactory.initElements(webdriver,
-				WorkOrdersWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.makeSearchPanelVisible();
 		wopage.setSearchOrderNumber(wonumber31498);
 		wopage.clickFindButton();
@@ -915,16 +918,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32226:Inspections: Regular - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("Declined");
 		inspectionspage.searchInspectionByNumber(inspectionnumber32226);
@@ -1005,16 +1010,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
 			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
-	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.searchInspectionByNumber(inspectionnumber32286);		
@@ -1086,16 +1093,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32287:Inspections: Regular - Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount", 
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount")
-	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2(String userName, String userPassword) throws Exception {
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("http://reconpro-devqa.cyberianconcepts.com/Company/Inspections.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InspectionsWebPage inspectionspage = PageFactory.initElements(
-				webdriver, InspectionsWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("Declined");
 		inspectionspage.searchInspectionByNumber(inspnumber32287);		
@@ -2132,16 +2141,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45224:WO: Regular - Verify calculation with price matrix Labor type", 
 			description = "WO: Regular - Verify calculation with price matrix Labor type")
-	@Parameters({ "user.name", "user.psw" })
-	public void testWOVerifyCalculationWithPriceMatrixLaborType_2(String userName, String userPassword) throws Exception {
+	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InvoicesWebPage invoicespage = PageFactory.initElements(
-				webdriver, InvoicesWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		
 		invoicespage.setSearchInvoiceNumber(invoicenumber45224);
 		invoicespage.clickFindButton();
@@ -2253,16 +2264,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42803:Invoices: Regular - Verify rounding money amount values", 
 			description = "Invoices: Regular - Verify rounding money amount values")
-	@Parameters({ "user.name", "user.psw" })
-	public void testInvoicesVerifyRoundingMoneyAmountValues_2(String userName, String userPassword) throws Exception {
+	public void testInvoicesVerifyRoundingMoneyAmountValues_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/Invoices.aspx");
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		InvoicesWebPage invoicespage = PageFactory.initElements(
-				webdriver, InvoicesWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		
 		invoicespage.setSearchInvoiceNumber(invoicenumber42803);
 		invoicespage.clickFindButton();
@@ -3167,8 +3180,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49896:SR: Regular - Verify ALM flow when decline both inspections", 
 			description = "SR: Regular - Verify ALM flow when decline both inspections")
-	@Parameters({ "user.name", "user.psw" })
-	public void testSRVerifyALMFlowWhenDeclineBothInspections(String userName, String userPassword)
+	public void testSRVerifyALMFlowWhenDeclineBothInspections()
 			throws Exception {
 		
 		final String VIN = "2A4RR4DE2AR286008";
@@ -3213,7 +3225,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Helpers.waitABit(4000);
 		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		String inspnumber1 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber1), "ALM - Recon Inspection");
@@ -3280,14 +3291,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));		
 		servicerequestsscreen.clickHomeButton();	
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);		
-		WebDriverUtils.webdriverGotoWebPage("https://reconpro-devqa.cyberianconcepts.com/Company/ServiceRequestList.aspx");
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-		ServiceRequestsListWebPage srlist = PageFactory.initElements(webdriver,
-				ServiceRequestsListWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage srlist = operationspage.clickNewServiceRequestList();
 		srlist.makeSearchPanelVisible();
 		srlist.setSearchFreeText(srnumber);
 		Assert.assertEquals(srlist.getFirstServiceRequestStatus(), "Request Rejected");
