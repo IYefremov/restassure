@@ -19,11 +19,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.*;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 public class BaseTestCase {
 
@@ -90,7 +93,7 @@ public class BaseTestCase {
 //		webdriver.navigate().refresh();
 //	}
 
-	@BeforeClass
+	@BeforeSuite
 	public void setUp() {
 		browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
 		DriverBuilder.getInstance().setDriver(browsertype);
@@ -106,7 +109,7 @@ public class BaseTestCase {
 		return Helpers.wait(locator);
 	}
 
-	@AfterClass
+	@AfterSuite
 	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
 			DriverBuilder.getInstance().getDriver().quit();
@@ -115,16 +118,18 @@ public class BaseTestCase {
 	}
 
     @BeforeMethod
-    public void BackOfficeLogin(Method method) {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
+    public void BackOfficeLogin() {
+//        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
     }
 
     @AfterMethod
-    public void BackOfficeLogout() {
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        backofficeheader.clickLogout();
+    public void BackOfficeLogout(ITestResult result) {
+        if (result.isSuccess()) {
+            BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+            backofficeheader.clickLogout();
+        }
     }
 }

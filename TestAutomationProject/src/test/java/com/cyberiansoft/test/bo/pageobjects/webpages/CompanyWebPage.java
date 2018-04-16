@@ -91,6 +91,9 @@ public class CompanyWebPage extends BaseWebPage {
 	
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Inter Application Exchange']")
 	private WebElement interApplicationExchangeLink;
+
+	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Client Users']")
+	private WebElement clientUsersLink;
 	
 	public CompanyWebPage(WebDriver driver) {
 		super(driver);
@@ -102,7 +105,13 @@ public class CompanyWebPage extends BaseWebPage {
 		return PageFactory.initElements(
 				driver, ClientsWebPage.class);
 	}
-	
+
+	public ClientUsersWebPage clickClientUsersLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(clientUsersLink)).click();
+		return PageFactory.initElements(
+				driver, ClientUsersWebPage.class);
+	}
+
 	public ServicePackagesWebPage clickServicePackagesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(servicepackageslink)));
 		return PageFactory.initElements(

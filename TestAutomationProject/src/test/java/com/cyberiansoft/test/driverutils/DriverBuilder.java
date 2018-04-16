@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class DriverBuilder {
 	
 	private static DriverBuilder instance = null;
-	private static final int IMPLICIT_TIMEOUT = 0;
+	private static final int IMPLICIT_TIMEOUT = 15;
 	private ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 	private ThreadLocal<AppiumDriver<MobileElement>> mobileDriver = new ThreadLocal<>();
 	private ThreadLocal<String> sessionId = new ThreadLocal<>();

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+<suite name="ReconPro Backoffice test cases" verbose="10" configfailurepolicy="continue">
     <parameter name="selenium.host" value="localhost"/>
     <parameter name="selenium.port" value="3737"/>
     <!--<parameter name="selenium.browser" value="firefox"/>-->
@@ -14,8 +14,6 @@
     <parameter name="userdemo.psw" value="111111"/>
     <parameter name="setupengineer.name" value="testapp@i.ua"/>
     <parameter name="setupengineer.psw" value="ReconPro"/>
-    <!--todo винести в properties-->
-    <!--todo config file-->
 
     <listeners>
         <listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>

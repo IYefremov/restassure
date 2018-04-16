@@ -2,7 +2,6 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -142,7 +141,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(teamspage.isTeamExists(teamedited));
 	}
 
-	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
 	public void testCompanyJobsCRUD() throws Exception {
 
 		final String job = "Test job";

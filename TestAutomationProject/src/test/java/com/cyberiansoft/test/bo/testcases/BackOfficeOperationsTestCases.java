@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -9,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class BackOfficeOperationsTestCases extends BaseTestCase {
 
-	@Test(description = "Test Case 15295:Operations - Technician Commission: Search", retryAnalyzer = Retry.class)
+	@Test(description = "Test Case 15295:Operations - Technician Commission: Search")
 	public void testOperationTechnicianCommissionSearch() throws Exception {
 		
 		final String invoiceNumber = "I-000-00646";
@@ -191,7 +190,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceContractsPage.verifyPortfolioOptionsAreOpened();
 	}
 
-	@Test(description = "Test Case 17281:Operations - Inspection", retryAnalyzer = Retry.class)
+	@Test(description = "Test Case 17281:Operations - Inspection")
 	public void testOperationInspection() throws Exception {
 
 		final String timeframe = "Last Year";
@@ -306,7 +305,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		 */
 	}
 
-	@Test(description = "Test Case 18475:Operation - New service request", retryAnalyzer = Retry.class)
+	@Test(description = "Test Case 18475:Operation - New service request")
 	public void testOperationNewServiceRequest() throws Exception {
 
 		final String srtype = "Vit_All_Services";

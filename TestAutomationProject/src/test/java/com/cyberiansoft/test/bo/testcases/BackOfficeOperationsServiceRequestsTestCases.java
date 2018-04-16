@@ -3,7 +3,6 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.DataProviderPool;
-import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -153,7 +152,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     //todo ignored works
 	@Test(testName = "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom",
-            description = "Operation - New service request - Appointment - Location Type: Custom", retryAnalyzer = Retry.class)
+            description = "Operation - New service request - Appointment - Location Type: Custom")
 	public void testOperationNewServiceRequestAppointmentLocationTypeCustom() throws InterruptedException {
 
 		final String teamname = "Default team";
@@ -884,7 +883,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(descriptions[1]));
 	}
 
-	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
 	public void checkDescriptionDocument() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -897,11 +896,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
 		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
 		//serviceRequestsWebPage.addImage();
-
 	}
 
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR",
-            dataProvider = "provideSRdata", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata")
 	public void checkMultiTechInSR(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -922,7 +920,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	}
 
-	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
 	public void checkMultiTechInSRshowHideTech(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -941,7 +939,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 	}
 
-	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1")
 	public void checkMultiTechInSideScrollbar(String customer, String startDate, String endDate, String status,
 			String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1082,7 +1080,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset",
-            dataProvider = "provideSRdata", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata")
 	public void checkSRmultiTechReset(String customer, String startDate, String endDate, String status,
 			boolean isDateShifted) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1267,7 +1265,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkRejectOfSRinLC());
 	}
 
-	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Closed", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Closed", dataProvider = "provideSRdata1")
 	public void checkSRLCclosed(String customer, String startDate, String endDate, String status, String SRcustomer,
 			String newStatus) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1292,7 +1290,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1326,7 +1324,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Test Case 59700:Miscellaneous - Events:SR Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+    @Test(testName = "Test Case 59700:Miscellaneous - Events:SR Created", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsSRCreated(String customer, String startDate, String endDate, String status,
 			String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1360,7 +1358,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 31350:Miscellaneous - Events: Service Request Checked In",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestCheckedIn(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1398,7 +1396,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 31234:Miscellaneous - Events: Appointment Created",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsAppointmentCreated(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1432,7 +1430,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 31296:Miscellaneous - Events: Appointment Failed",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsAppointmentFailed(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1466,7 +1464,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 59702:Miscellaneous - Events: Service Request Appointment Created",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAppointmentCreated(String customer, String startDate,
 			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1500,7 +1498,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	//todo fails
-	@Test(testName = "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAcceptedByTech(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1534,7 +1532,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created",
-            dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+            dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestEstimationCreated(String customer, String startDate,
 			String endDate, String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1567,7 +1565,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	//todo test fails
-	@Test(testName = "Test Case 59704:Miscellaneous - Events: Service Request Is Monitored", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59704:Miscellaneous - Events: Service Request Is Monitored", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestIsMonitored(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1600,7 +1598,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Test Case 59705:Miscellaneous - Events: Service Request Order Created", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+    @Test(testName = "Test Case 59705:Miscellaneous - Events: Service Request Order Created", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestOrderCreated(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1632,7 +1630,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	@Test(testName = "Test Case 59706:Miscellaneous - Events: Service Request Rejected", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59706:Miscellaneous - Events: Service Request Rejected", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestRejected(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1665,7 +1663,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	//todo fails
-	@Test(testName = "Test Case 59636:Events: SR Check In", dataProvider = "provideSRdata1", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 59636:Events: SR Check In", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestCheckIn(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1755,7 +1753,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO", retryAnalyzer = Retry.class)
+    @Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO")
 	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1805,7 +1803,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN", retryAnalyzer = Retry.class)
+    @Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN")
 	public void testServiceRequestTypeDublicateErrorVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1849,7 +1847,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO", retryAnalyzer = Retry.class)
+    @Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO")
 	public void testServiceRequestTypeDublicateErrorRO() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1899,7 +1897,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN" , retryAnalyzer = Retry.class)
+    @Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN" )
 	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1942,7 +1940,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK", retryAnalyzer = Retry.class)
+    @Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK")
 	public void testServiceRequestTypeDublicateErrorStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -1986,7 +1984,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     //todo ignored
-    @Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK", retryAnalyzer = Retry.class)
+    @Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK")
 	public void testServiceRequestTypeDublicateNotificationStock() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();

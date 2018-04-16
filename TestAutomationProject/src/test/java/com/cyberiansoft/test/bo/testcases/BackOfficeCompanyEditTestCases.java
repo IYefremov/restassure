@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -14,7 +13,7 @@ import java.util.List;
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
-            description = "Company- Insurance Company: in Service Request Claim info Edit", retryAnalyzer = Retry.class)
+            description = "Company- Insurance Company: in Service Request Claim info Edit")
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() {
 
 		final String srcompany = "Alex SASHAZ";
@@ -117,7 +116,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 	}
 
-	@Test(testName = "Test Case 29764:Company- Users : Edit", description = "Company- Users : Edit", retryAnalyzer=Retry.class)
+	@Test(testName = "Test Case 29764:Company- Users : Edit", description = "Company- Users : Edit")
 	public void testCompanyUsersEdit() throws Exception {
 
 		final String usermail = "zakaulov.admin@cyberiansoft.com";
@@ -221,8 +220,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		userspage.archiveUser(userfirstnameed, userlastnameed);
 	}
 
-	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit",
-            retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit")
 	public void testCompanyClientsUsersEdit() throws Exception {
 
 		final String clientmail = "123123213@domain.com";
@@ -319,7 +317,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.deleteClient(retailcompanynameed);
 	}
 
-	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit", retryAnalyzer=Retry.class)
+	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
 	public void testCompanyEmployeesEdit() throws Exception {
 
 		final String employeeteam = "01_TimeRep_team";
@@ -549,7 +547,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.deleteServiceRequestType(srtype);
 	}
 
-	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit", retryAnalyzer=Retry.class)
+	@Test(testName = "Test Case 29017:Company - Invoice Type: Client Edit", description = "Company - Invoice Type: Client Edit")
 	public void testCompanyInvoiceTypeClientEdit() throws Exception {
 
 		final String invoicetype = "TestIntInvTeam";
@@ -601,8 +599,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		invoicestypespage.closeAssignedClientsTab(mainWindowHandle);
 	}
 
-	@Test(testName = "Test Case 29759:Company- Clients: Services Update", description = "Company- Clients: Services Update", retryAnalyzer=Retry.class)
-	public void testCompanyClientsServicesUpdate() throws Exception {
+	@Test(testName = "Test Case 29759:Company- Clients: Services Update", description = "Company- Clients: Services Update")
+	public void testCompanyClientsServicesUpdate() {
 
 		final String clientname = "TestAlExTest";
 		final String servicepackage = "Demo Service Package";
@@ -636,8 +634,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.closeClientServicesTab(mainWindowHandle);
 	}
 
-	@Test(testName = "Test Case 29761:Company- Clients: Client Users Search", description = "Company- Clients: Client Users Search", retryAnalyzer=Retry.class )
-	public void testCompanyClientsClientUsersSearch() throws Exception {
+	@Test(testName = "Test Case 29761:Company- Clients: Client Users Search", description = "Company- Clients: Client Users Search" )
+	public void testCompanyClientsClientUsersSearch() {
 
 		final String clientname = "AlExTest";
 		final String firstsearchparemeter = "name";
@@ -986,7 +984,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.deleteRule(newName+" (Services Include Selected)");
 	}
 
-	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts")
 	public void testCompanySharingWorkOrderAddRuleVehicleParts() throws InterruptedException {
 	    final String entry = "WO JST (Work Order)";
 	    final String rule = "Include Selected Vehicle Parts (Vehicle Parts Include Selected)";
@@ -1164,7 +1162,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.deleteRule(newName+" (Clients Include Selected)");
 	}
 
-	@Test(testName = "Test Case 62302:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Teams", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 62302:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Teams")
 	public void testCompanyExchangeConfigurationSharingEstimateAddRuleTeams() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();

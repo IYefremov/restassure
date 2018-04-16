@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -130,7 +129,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 
-	@Test(description = "Test Case 15323:Company- Services: Search", retryAnalyzer = Retry.class)
+	@Test(description = "Test Case 15323:Company- Services: Search")
 	public void testCompanyServicesSearch() throws Exception {
 
 		final String pricetype = "Percentage";
@@ -520,7 +519,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		}
 	}
 
-	@Test(testName = "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options", description = "Company - Invoice type: Verify dependency bwn Visible and Required options",retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options", description = "Company - Invoice type: Verify dependency bwn Visible and Required options")
 	public void testCompanyInvoiceTypeVerifyDependencyBetweenVisibleAndRequiredOptions() throws Exception {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,

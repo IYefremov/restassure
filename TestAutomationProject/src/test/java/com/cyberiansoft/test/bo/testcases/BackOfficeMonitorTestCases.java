@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.Retry;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -353,7 +352,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 	
-	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
 	public void checkMonitorKanbanAutoRefresh() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
@@ -402,7 +401,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		subscriptionsPege.clickOkAddPopUpButton();
 	}
 	
-	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count", retryAnalyzer = Retry.class)
+	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
 	public void checkMonitorReportsServiceCount() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);

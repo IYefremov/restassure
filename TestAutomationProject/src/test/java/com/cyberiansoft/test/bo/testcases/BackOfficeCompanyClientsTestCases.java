@@ -2,7 +2,6 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.DataProviderPool;
-import com.cyberiansoft.test.bo.utils.Retry;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -155,8 +154,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file",
-            description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file",
-            retryAnalyzer = Retry.class)
+            description = "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file")
 	public void testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile() throws Exception {
 
 		final String companyname = "CompanyNoteTest";
@@ -573,13 +571,18 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
+
+        clientspage.makeSearchPanelVisible();
+        clientspage.setClientSearchCriteria(clientName);
+        clientspage.clickFindButton();
+        clientspage.verifyEmployeeIsActive(clientName);
 		clientspage.scrollDownToText(clientName);
 		ClientUsersWebPage  clientUsersWebPage =
 				clientspage.clickClientUsersLinkForClientOpenDialogWindow(clientName);
 		if (clientUsersWebPage.isClientUserPresentInTable( "test", "automation")){
 			clientUsersWebPage.clickDeleteClientUser( "test");
 		}
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();

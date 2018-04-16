@@ -11,7 +11,6 @@ import org.testng.Assert;
 import java.io.File;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
@@ -140,9 +139,32 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public void clickFindButton() {
-		clickAndWait(wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.elementToBeClickable(findbtn)));
-		wait.withTimeout(30, TimeUnit.SECONDS);
+		clickAndWait(wait.until(ExpectedConditions.elementToBeClickable(findbtn)));
+		waitABit(3000);
 	}
+
+    public void verifyEmployeeIsActive(String clientName) {
+        List<WebElement> activeClients = clientstable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + clientName + "']"));
+        try {
+            if (activeClients.isEmpty()) {
+                clickArchivedTab();
+                unarchiveClient(clientName);
+                clickActiveTab();
+            }
+        } catch (Exception e) {
+            System.err.println("The client is not found: " + e);
+        }
+    }
+
+    private void unarchiveClient(String clientName) {
+        WebElement row = getTableRowWithArchivedClient(clientName);
+        if (row != null) {
+            restoreTableRow(row);
+        }
+        else
+            Assert.fail("Can't find " + clientName + " employee");
+    }
 
 	public boolean isContactVerifDisableChkboxChecked() {
 		return isCheckboxChecked(contverifdisablechkbox);
@@ -183,7 +205,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		clickFindButton();
 	}
 
-	public void deleteUserViaSearch(String clientname) throws InterruptedException {
+	public void deleteUserViaSearch(String clientname) {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(clientname);
 		clickFindButton();
@@ -228,7 +250,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
-	public void restoreClient(String clientname) throws InterruptedException {
+	public void restoreClient(String clientname) {
 		WebElement archivedclientstablerow = getTableRowWithArchivedClient(clientname);
 		if (archivedclientstablerow != null) {
 			archivedclientstablerow.findElement(By.xpath(".//td[1]/input")).click();
@@ -243,7 +265,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		}
 	}
 
-	public String mouseMoveToClientNotesGridAndGetNoteContent(String clientname) throws InterruptedException {
+	public String mouseMoveToClientNotesGridAndGetNoteContent(String clientname) {
 		String notetxt = "";
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
@@ -283,14 +305,18 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return null;
 	}
 
-	public WebElement getTableRowWithArchivedClient(String clientname) {
-		List<WebElement> archivedclientstablerows = getArchivedClientsTableRows();
-		for (WebElement archivedclientstablerow : archivedclientstablerows) {
-			if (archivedclientstablerow.findElement(By.xpath(".//td[2]")).getText().equals(clientname)) {
-				return archivedclientstablerow;
-			}
-		}
-		return null;
+	private WebElement getTableRowWithArchivedClient(String clientname) {
+        try {
+            List<WebElement> archivedclientstablerows = getArchivedClientsTableRows();
+            for (WebElement archivedclientstablerow : archivedclientstablerows) {
+                if (archivedclientstablerow.findElement(By.xpath(".//td[2]")).getText().equals(clientname)) {
+                    return archivedclientstablerow;
+                }
+            }
+        } catch (NoSuchElementException e) {
+            System.err.println("The archived client is not displayed in the table!\n" + e);
+        }
+        return null;
 	}
 
 	public NewClientDialogWebPage clickEditClient(String clientname) throws InterruptedException {
@@ -332,25 +358,24 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public void clickInspectionSelectExpandableMenu(String clientName, String menuItem) {
 		WebElement row = clickSelectButtonForClient(clientName);
 		if (row != null) {
-			wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+		    try {
+                wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 
-			Actions act = new Actions(driver);
-//			if (!getTableRowWithClient(clientName).findElement(By.xpath(".//span[text()='" + menuItem + "']"))
-//					.isDisplayed()) {
-//				act.moveToElement(getTableRowWithClient(clientName)
-//						.findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
-//			}
-			wait.until(ExpectedConditions.elementToBeClickable(getTableRowWithClient(clientName)
-					.findElement(By.xpath(".//span[text()='" + menuItem + "']"))));
-			act.click(getTableRowWithClient(clientName)
-					.findElement(By.xpath(".//span[text()='" + menuItem + "']"))).perform();
+                Actions act = new Actions(driver);
+                WebElement element = getTableRowWithClient(clientName)
+                        .findElement(By.xpath(".//span[text()='" + menuItem + "']"));
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                act.click(element).perform();
+            } catch (TimeoutException e) {
+
+            }
 		} else {
             Assert.fail("Can't find " + clientName + " client");
 		}
 	}
 
 	// method for click on contacts link and open new dialog window
-	public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) throws InterruptedException {
+	public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) {
 
 		clickInspectionSelectExpandableMenu(clientname, "Contacts");
 		waitForNewTab();
@@ -401,7 +426,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.visibilityOf(clientstable.getWrappedElement()));
 	}
 
-	public Set<String> clickServicesLinkForClient(String clientname) throws InterruptedException {
+	public Set<String> clickServicesLinkForClient(String clientname) {
 		clickInspectionSelectExpandableMenu(clientname, "Services");
 
 		waitForNewTab();
@@ -414,7 +439,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return driver.getWindowHandles();
 	}
 
-	public Set<String> clickClientUsersLinkForClient(String clientname) throws InterruptedException {
+	public Set<String> clickClientUsersLinkForClient(String clientname) {
 		clickInspectionSelectExpandableMenu(clientname, "Client Users");
 		waitForNewTab();
 		String mainWindowHandle = driver.getWindowHandle();
