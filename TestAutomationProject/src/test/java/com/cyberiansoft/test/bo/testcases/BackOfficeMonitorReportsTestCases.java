@@ -40,7 +40,8 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         vendorsteamspage.createNewVendorTeam("02_TimeRep_team", "Pacific Standard Time", "TF145", "ClockIn / ClockOut", repairlocationname, repairlocationname);
 	}
 	
-	@Test(testName="Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)", description = "Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)")
+	@Test(testName="Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)",
+            description = "Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)")
 	public void testMonitorReportsAverageRepairTimeReport_Part1() throws Exception {
 		
 		final String addsrvalue = "01_Alex2SRT";
@@ -73,7 +74,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-//		repairorderspage.selectSearchLocation("Time_Reports_01");
+		repairorderspage.selectSearchLocation("Time_Reports_01");
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		
@@ -148,7 +149,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         averagerepairtimereportpage.checkShowDetails();
 		averagerepairtimereportpage.clickFindButton();
 		//todo uncomment if the data appears
-//		averagerepairtimereportpage.verifyDetailReportSearchResults("Time_Reports_01", "01ZalexWO_tp", VIN, _make, _model, _year);
+		averagerepairtimereportpage.verifyDetailReportSearchResults("Time_Reports_01", "01ZalexWO_tp", VIN, _make, _model, _year);
 	}
 	
 	@Test(testName="Test Case 25578:Monitor- Reports - Repair Location Time Tracking(Detailed automation - Part 1)", description = "Monitor- Reports - Repair Location Time Tracking(Detailed automation - Part 1)")

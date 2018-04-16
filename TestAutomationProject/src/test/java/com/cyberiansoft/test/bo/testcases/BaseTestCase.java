@@ -112,9 +112,9 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin(Method method) {
-	    if (DriverBuilder.getInstance().getDriver() == null) {
-	        setUp();
-        }
+//	    if (DriverBuilder.getInstance().getDriver() == null) {
+//	        setUp();
+//        }
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);

@@ -32,21 +32,21 @@ public class DriverBuilder {
 	
 	private static DriverBuilder instance = null;
 	private static final int IMPLICIT_TIMEOUT = 0;
-	private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
-	private ThreadLocal<AppiumDriver<MobileElement>> mobileDriver = new ThreadLocal<AppiumDriver<MobileElement>>();
-	private ThreadLocal<String> sessionId = new ThreadLocal<String>();
-    private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
-    private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
-    private ThreadLocal<MobilePlatform> mobilePlatform = new ThreadLocal<MobilePlatform>();
-	
-	private DriverBuilder() {
+	private ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+	private ThreadLocal<AppiumDriver<MobileElement>> mobileDriver = new ThreadLocal<>();
+	private ThreadLocal<String> sessionId = new ThreadLocal<>();
+    private ThreadLocal<String> sessionBrowser = new ThreadLocal<>();
+    private ThreadLocal<String> sessionVersion = new ThreadLocal<>();
+    private ThreadLocal<MobilePlatform> mobilePlatform = new ThreadLocal<>();
+
+
+    private DriverBuilder() {
 	}
 	
 	public static DriverBuilder getInstance() {
         if ( instance == null ) {
             instance = new DriverBuilder();
         }
-
         return instance;
     }
 	
@@ -129,9 +129,9 @@ public class DriverBuilder {
 	public void setDriver(WebDriver driver) {
 		webDriver.set(driver);
 		sessionId.set(((RemoteWebDriver) webDriver.get())
-		.getSessionId().toString());
+		    .getSessionId().toString());
 		sessionBrowser.set(((RemoteWebDriver) webDriver.get())
-		.getCapabilities().getBrowserName());
+		    .getCapabilities().getBrowserName());
 	}
 
 	public WebDriver getDriver() {
@@ -155,29 +155,23 @@ public class DriverBuilder {
 		DesiredCapabilities appiumcap =  new AppiumConfiguration().getCapabilities(mobilePlatform);
 		switch (mobilePlatform) {
 			case ANDROID:
-				mobileDriver.set(new AndroidDriver<MobileElement>(appiumURL,
-						appiumcap));
-				sessionId.set(((AndroidDriver<MobileElement>)
-						mobileDriver.get()).getSessionId().toString());
+				mobileDriver.set(new AndroidDriver<>(appiumURL, appiumcap));
+				sessionId.set(mobileDriver.get().getSessionId().toString());
 				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
 				this.mobilePlatform.set(mobilePlatform);
 				break;
 			case IOS_HD:
-				mobileDriver.set(new IOSDriver<MobileElement>(appiumURL,
-						appiumcap));
-				sessionId.set(((IOSDriver<MobileElement>)
-						mobileDriver.get()).getSessionId().toString());
+				mobileDriver.set(new IOSDriver<>(appiumURL, appiumcap));
+				sessionId.set(mobileDriver.get().getSessionId().toString());
 				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
 				this.mobilePlatform.set(mobilePlatform);
 				break;
 			case IOS_REGULAR:
-				mobileDriver.set(new IOSDriver<MobileElement>(appiumURL,
-						appiumcap));
-				sessionId.set(((IOSDriver<MobileElement>)
-						mobileDriver.get()).getSessionId().toString());
+				mobileDriver.set(new IOSDriver<>(appiumURL, appiumcap));
+				sessionId.set(mobileDriver.get().getSessionId().toString());
 				sessionBrowser.set(appiumcap.getCapability(MobileCapabilityType.DEVICE_NAME).toString());
 				this.mobilePlatform.set(mobilePlatform);
-				break;	
+				break;
 		}
 	}
 	

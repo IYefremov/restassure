@@ -363,11 +363,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.setSearchUserParameter(employeelastname);
 		employeespage.clickFindButton();
 
-		if (employeespage.isActiveEmployeeExists(employeefirstname, employeelastname)) {
+		if (employeespage.activeEmployeeExists(employeefirstname, employeelastname)) {
 			employeespage.archiveEmployee(employeefirstname, employeelastname);
 		}
 
-		if (employeespage.isActiveEmployeeExists(employeefirstnameed, employeelastnameed)) {
+		if (employeespage.activeEmployeeExists(employeefirstnameed, employeelastnameed)) {
 			employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 		}
 

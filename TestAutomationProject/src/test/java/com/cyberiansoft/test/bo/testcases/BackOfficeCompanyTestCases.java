@@ -115,10 +115,10 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		employeespage.makeSearchPanelVisible();
 		employeespage.setSearchUserParameter(employeelastname);
 		employeespage.clickFindButton();
-		Assert.assertTrue(employeespage.isArchivedEmployeeExists(employeefirstname, employeelastname));
+		Assert.assertTrue(employeespage.archivedEmployeeExists(employeefirstname, employeelastname));
 		employeespage.unarchiveEmployee(employeefirstname, employeelastname);
 		employeespage.clickActiveTab();
-		Assert.assertTrue(employeespage.isActiveEmployeeExists(employeefirstname, employeelastname));
+		Assert.assertTrue(employeespage.activeEmployeeExists(employeefirstname, employeelastname));
 
 		employeespage.makeSearchPanelVisible();
 		employeespage.selectSearchTeam(team);
@@ -126,7 +126,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		employeespage.clickFindButton();
 
 		Assert.assertTrue(employeespage.getEmployeesTableRowCount() > 0);
-		employeespage.isActiveEmployeeExists(employeefirstname, employeelastname);
+		employeespage.activeEmployeeExists(employeefirstname, employeelastname);
 	}
 
 
@@ -438,8 +438,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		final String employeelastname = "unarchive";
 		final String employeename = employeefirstname + " " + employeelastname;
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		EmployeesWebPage employeespage = companypage.clickEmployeesLink();
@@ -447,24 +446,24 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		employeespage.makeSearchPanelVisible();
 		employeespage.setSearchUserParameter(employeename.substring(0, 5));
 		employeespage.clickFindButton();
-		for (int i = 0; i < 3; i++) {
-			Thread.sleep(2000);
+        employeespage.verifyEmployeeIsActive(employeefirstname, employeelastname);
+        for (int i = 0; i < 3; i++) {
 			employeespage.archiveEmployee(employeefirstname, employeelastname);
 			employeespage.clickArchivedTab();
 
 			employeespage.setSearchUserParameter(employeename.substring(0, 5));
 			employeespage.clickFindButton();
-			Assert.assertTrue(employeespage.isArchivedEmployeeExists(employeefirstname, employeelastname));
+			Assert.assertTrue(employeespage.archivedEmployeeExists(employeefirstname, employeelastname));
 			employeespage.unarchiveEmployee(employeefirstname, employeelastname);
 			employeespage.clickActiveTab();
 
 			employeespage.setSearchUserParameter(employeename.substring(0, 5));
 			employeespage.clickFindButton();
-			Assert.assertTrue(employeespage.isActiveEmployeeExists(employeefirstname, employeelastname));
+			Assert.assertTrue(employeespage.activeEmployeeExists(employeefirstname, employeelastname));
 		}
 	}
 
-	@Test(testName = "Test Case 26727:Company- Services: Archive", description = "Company- Services: Archive")
+    @Test(testName = "Test Case 26727:Company- Services: Archive", description = "Company- Services: Archive")
 	public void testCompanyServicesArchive() throws Exception {
 
 		final String servicename = "test12";

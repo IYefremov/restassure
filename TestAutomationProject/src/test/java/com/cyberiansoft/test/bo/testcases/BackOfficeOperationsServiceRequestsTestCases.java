@@ -16,7 +16,6 @@ import java.util.Random;
 
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
-    //todo works
     @Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")
 	public void testOperationNewServiceRequestAppointmentRetail() throws InterruptedException {
 

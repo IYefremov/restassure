@@ -1,25 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class EmployeesWebPage extends WebPageWithPagination {
 
@@ -58,10 +52,28 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")
 	private WebElement findbtn;
 
+	@FindBy(xpath = "//li[contains(@class, 'rtsLast')]/a[contains(@class, 'rtsSelected')]//span[text()='Active']")
+    private WebElement selectedActiveTab;
+
 	public EmployeesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
+	}
+
+    public void verifyEmployeeIsActive(String employeefirstname, String employeelastname) {
+        String employeename = employeefirstname + " " + employeelastname;
+        List<WebElement> activeEmployees = employeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeename + "']"));
+        try {
+            if (activeEmployees.isEmpty()) {
+                clickArchivedTab();
+                unarchiveEmployee(employeefirstname, employeelastname);
+                clickActiveTab();
+            }
+        } catch (Exception e) {
+            System.err.println("The employee is not found: " + e);
+        }
 	}
 
 	public boolean searchPanelIsExpanded() {
@@ -128,25 +140,34 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	
 	public WebElement getTableRowWithActiveEmployee(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
-		List<WebElement> employeestablerows = getEmployeesTableRows();
-		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td["+ employeestable.getTableColumnIndex("Employee") +"]")).getText().equals(employeename)) {
-				return employeestablerow;
-			}
-		}
-		return null;
+        try {
+            List<WebElement> employeestablerows = getEmployeesTableRows();
+            for (WebElement employeestablerow : employeestablerows) {
+                if (employeestablerow.findElement(By.xpath(".//td[" + employeestable
+                        .getTableColumnIndex("Employee") + "]")).getText().equals(employeename)) {
+                    return employeestablerow;
+                }
+            }
+        } catch (NoSuchElementException e) {
+            System.err.println("The active employee is not displayed in the table!\n" + e);
+        }
+        return null;
 	}
 
 	public WebElement getTableRowWithArchivedEmployee(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
-		List<WebElement> employeestablerows = getArchivedEmployeesTableRows();
-		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td[3]")).getText().equals(employeename)) {
-				return employeestablerow;
-			}
-		}
-		return null;
-	}
+        try {
+            List<WebElement> employeestablerows = getArchivedEmployeesTableRows();
+    		for (WebElement employeestablerow : employeestablerows) {
+	    		if (employeestablerow.findElement(By.xpath(".//td[3]")).getText().equals(employeename)) {
+		    		return employeestablerow;
+	    		}
+    		}
+        } catch (NoSuchElementException e) {
+            System.err.println("The archived employee is not displayed in the table!\n" + e);
+        }
+        return null;
+    }
 
 	public List<String> getActiveEmployees() {
 		List<String> employee = new ArrayList<String>();
@@ -169,21 +190,22 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	}
 
-	public void archiveEmployee(String firstname, String lastname) throws InterruptedException {
-		waitABit(1000);
+	public void archiveEmployee(String firstname, String lastname) {
+		waitABit(3000);
 		WebElement row = getTableRowWithActiveEmployee(firstname, lastname);
 		if (row != null) {
 			archiveTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " employee");
+            Assert.fail("Can't find " + firstname + " " + lastname + " employee");
 	}
 
-	public void unarchiveEmployee(String firstname, String lastname) throws InterruptedException {
+	public void unarchiveEmployee(String firstname, String lastname) {
 		WebElement row = getTableRowWithArchivedEmployee(firstname, lastname);
 		if (row != null) {
 			restoreTableRow(row);
-		} else
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " employee");
+		}
+		else
+            Assert.fail("Can't find " + firstname + " " + lastname + " employee");
 	}
 
 	public String findDuplicateNames(List<String> employeeact, List<String> employeearch) {
@@ -195,7 +217,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		return duplicates;
 	}
 
-	public boolean isActiveEmployeeExists(String firstname, String lastname) {
+	public boolean activeEmployeeExists(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
 		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
 		boolean exists = employeestable.getWrappedElement()
@@ -203,12 +225,11 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		return exists;
 	}
 
-	public boolean isArchivedEmployeeExists(String firstname, String lastname) {
+	public boolean archivedEmployeeExists(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
 		wait.until(ExpectedConditions.visibilityOf(archivedemployeestable.getWrappedElement()));
-		boolean exists = archivedemployeestable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
-		return exists;
+        return archivedemployeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
 	}
 
 	public NewEmployeeDialogWebPage clickAddEmployeeButton() {
@@ -221,7 +242,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " employee");
+            Assert.fail("Can't find " + firstname + " " + lastname + " employee");
 		}
 		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
 	}
