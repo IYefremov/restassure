@@ -98,6 +98,10 @@ public class BaseTestCase {
 		webdriver.navigate().refresh();
 	}
 
+	public void setDriver() {
+        webdriver = DriverBuilder.getInstance().getDriver();
+    }
+
 	public static WebElement wait(By locator) {
 		return Helpers.wait(locator);
 	}
@@ -112,9 +116,6 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin(Method method) {
-//	    if (DriverBuilder.getInstance().getDriver() == null) {
-//	        setUp();
-//        }
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);

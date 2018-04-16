@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.utils;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -36,6 +37,7 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
             DriverBuilder.getInstance().setDriver(BaseUtils
                     .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
+        ((BaseTestCase) currentClass).setDriver();
 	}
 	
 	@Override
@@ -46,6 +48,7 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
             DriverBuilder.getInstance().setDriver(BaseUtils
                     .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
+        ((BaseTestCase) currentClass).setDriver();
 	}
 	
 	public String createScreenshot(WebDriver driver, String loggerdir, String testcasename) {
