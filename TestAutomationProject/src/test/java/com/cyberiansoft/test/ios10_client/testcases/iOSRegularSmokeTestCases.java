@@ -1952,9 +1952,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//Create WO1
 		Instant star = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		System.out.println("Diff: " + Duration.between(star, Instant.now()).toMillis());
 		myworkordersscreen.clickAddOrderButton();
-		System.out.println("Diff: " + Duration.between(star, Instant.now()).toMillis());
 		customersscreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE) ;
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);

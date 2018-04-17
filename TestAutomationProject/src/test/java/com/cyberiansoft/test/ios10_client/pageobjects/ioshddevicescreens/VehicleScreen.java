@@ -123,7 +123,6 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		clickVINField();
 
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
-		Helpers.waitABit(500);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		//Helpers.waitABit(500);
 		try {
@@ -132,7 +131,6 @@ public class VehicleScreen extends iOSHDBaseScreen {
 			
 		}
 		//((IOSDriver) appiumdriver).hideKeyboard();
-		Helpers.waitABit(500);
 	}
 	
 	public void clearVINCode() {
@@ -160,7 +158,6 @@ public class VehicleScreen extends iOSHDBaseScreen {
 
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 		
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
 						.findElement(
@@ -171,7 +168,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 				.click();
 	}
 	
-	public void verifyExistingWorkOrdersDialogAppears() throws InterruptedException {
+	public void verifyExistingWorkOrdersDialogAppears() {
 		
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
 				.findElement(
@@ -243,7 +240,6 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void cancelOrder() {
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 		acceptAlert();
-		Helpers.waitABit(1000);
 	}
 	
 	public void setColor(String color) {
@@ -256,24 +252,21 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Mileage").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(mileage);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel)  {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(fueltanklevel);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setLicensePlate(String licplate)  {
 		appiumdriver.findElementByAccessibilityId("License Plate").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(licplate);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
-	public void selectOwnerT(String owner) throws InterruptedException {
+	public void selectOwnerT(String owner)  {
 		appiumdriver.findElementByAccessibilityId("Owner").click();
 		try {
 		TouchAction action = new TouchAction(appiumdriver);
@@ -283,7 +276,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		}
 	}
 
-	public void setTech(String _tech) throws InterruptedException {
+	public void setTech(String _tech)  {
 		clickTech();
 		appiumdriver.findElementByName(_tech).click();
 	}
@@ -293,7 +286,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByName(_location).click();
 	}
 	
-	public void setType(String _type) throws InterruptedException {
+	public void setType(String _type)  {
 		appiumdriver.findElementByAccessibilityId("Type").click();
 		selectUIAPickerValue(_type);
 		appiumdriver.findElementByAccessibilityId("Done").click();
@@ -345,21 +338,18 @@ public class VehicleScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Stock#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 
 	public void setRO(String ro)  {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setPO(String po)  {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public String getWorkOrderCustomer() {
@@ -394,7 +384,6 @@ public class VehicleScreen extends iOSHDBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(500);
 	}
 	
 }

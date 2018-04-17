@@ -78,7 +78,6 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 			//appiumdriver.findElementByAccessibilityId(wotype).click();
 		}
 		appiumdriver.findElementByAccessibilityId(pricematrix).click();
-		Helpers.waitABit(1000);
 		
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
@@ -97,13 +96,11 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	public void setPrice(String price) {
 		appiumdriver.findElementByAccessibilityId("Price").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setTime(String timevalue) {
 		appiumdriver.findElementByAccessibilityId("Time").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
-		Helpers.waitABit(500);
 	}
 
 	/*public void setSeverity(String severity) {
@@ -182,7 +179,6 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void clickSaveButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		Helpers.waitABit(2000);
 	}
 
 	public void clickCancelButton() {

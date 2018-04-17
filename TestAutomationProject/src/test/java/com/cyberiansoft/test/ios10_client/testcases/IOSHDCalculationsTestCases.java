@@ -1515,9 +1515,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		MyInspectionsScreen myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		myinspectionsscreen.assertInspectionExists(inspectionnumber);
-		myinspectionsscreen.selectInspectionForApprove(inspectionnumber);
+		TeamInspectionsScreen teaminspectionsscreen = new TeamInspectionsScreen(appiumdriver);
+		teaminspectionsscreen.assertInspectionExists(inspectionnumber);
+		teaminspectionsscreen.selectInspectionForApprove(inspectionnumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
@@ -1527,11 +1527,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneStatusReasonButton();
-		
-		myinspectionsscreen.assertInspectionIsApproved(inspectionnumber);
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$2,000.00");
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionTotalPriceValue(), "$2,050.00");
-		myinspectionsscreen.clickServiceRequestButton();
+
+		teaminspectionsscreen.assertInspectionIsApproved(inspectionnumber);
+		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionPriceValue(), "$2,000.00");
+		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionTotalPriceValue(), "$2,050.00");
+		teaminspectionsscreen.clickBackServiceRequest();
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();		
 	}

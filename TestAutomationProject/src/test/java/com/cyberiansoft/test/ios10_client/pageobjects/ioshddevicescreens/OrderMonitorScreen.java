@@ -61,7 +61,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public void selectPanel(String panelname) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(panelname))).click(); 
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 	}
 	
 	public void verifyPanelsStatuses(String panelname, String status) {

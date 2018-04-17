@@ -8,8 +8,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -86,6 +88,9 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionsPageTableLeft")));
 	}
 
 	public void clickAddInspectionButton() {
@@ -94,11 +99,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		}
 		Helpers.waitABit(500);
-	}
-	
-	public void clickBackServiceRequest() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Request"))).click();
 	}
 
 	public void clickEditInspectionButton() {
@@ -152,6 +152,10 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	
 	public void clickCopyInspection() {
 		appiumdriver.findElementByAccessibilityId("Copy").click();
+		if (appiumdriver.findElementsByAccessibilityId("Synchronizing with Back Office").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Synchronizing with Back Office")));
+		}
 	}
 
 	public boolean isCreateWOButtonDisplayed() {
@@ -260,10 +264,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		Assert.assertTrue(appiumdriver.findElementsByName(inspection).size() < 1);
 	}
 
-	public void assertInspectionExists(String inspection) {
-		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(inspection).size() > 0);
-	}
-
 	public ApproveInspectionsScreen selectFirstInspectionToApprove() {
 		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIATableView[1]/UIATableCell[1]/UIAButton[contains(@name, \"EntityInfoButtonUnchecked\")] ").click();
 		return new ApproveInspectionsScreen(appiumdriver);
@@ -280,6 +280,10 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 			}
 		}*/
 		Helpers.waitABit(500);
+	}
+
+	public void assertInspectionExists(String inspection) {
+		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(inspection).size() > 0);
 	}
 
 	public void clickFilterButton() {
@@ -317,7 +321,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	public void showWorkOrdersForInspection(String inpection) {
 		selectInspectionInTable(inpection);
 		clickShowWorkOrdersButton();
-		Helpers.waitABit(1000);
 	}
 	
 	public void clickShowWorkOrdersButton() {
@@ -334,7 +337,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	
 	public void clickChangeCustomerpopupMenu() {
 		appiumdriver.findElementByAccessibilityId("Change Customer").click();
-		Helpers.waitABit(1000);
 	}
 	
 	public void selectCustomer(String customer) {
@@ -345,7 +347,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 			customersTable.findElementByAccessibilityId(customer).click();
 		}
 		customersTable.findElementByAccessibilityId(customer).click();
-		Helpers.waitABit(1000);
 		
 		//TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
         //tap.perform();
@@ -358,13 +359,17 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		selectCustomer(customer);
 	}
 	
-	public void customersPopupSwitchToWholesailMode() throws InterruptedException {
+	public void customersPopupSwitchToWholesailMode()  {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Customers")));
 		if (elementExists(By.name("btnRetail"))) {
 			appiumdriver.findElementByName("btnRetail").click();
 		}
 	}
 	
-	public void customersPopupSwitchToRetailMode() throws InterruptedException {
+	public void customersPopupSwitchToRetailMode()  {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Customers")));
 		if (elementExists(By.name("btnWholesale"))) {
 			appiumdriver.findElementByName("btnWholesale").click();
 		}
@@ -402,6 +407,7 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		if (elementExists("Actions"))
 			appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
+		new MyInspectionsScreen(appiumdriver);
 	}
 
 	public void clickApproveInspections() {
@@ -497,11 +503,7 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	public int getNumberOfRowsInTeamInspectionsTable() {		
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell")).size();
 	}
-	
-	public void clickServiceRequestButton() {
-		appiumdriver.findElementByAccessibilityId("Service Request").click();
-	}
-	
+
 	public void switchToMyInspectionsView() {
 		appiumdriver.findElementByAccessibilityId("My").click();		
 	}

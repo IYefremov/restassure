@@ -253,9 +253,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 			appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
-		
-		
-		Helpers.waitABit(1000);
+
 		return new TechRevenueScreen(appiumdriver);
 	}
 	

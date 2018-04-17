@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -7,16 +8,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static java.time.Duration.ofSeconds;
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,7 +17,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
@@ -148,8 +141,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Questions").click();
 		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeSelect_Choose One Hail Project Code")).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
-		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
-		Helpers.waitABit(500);
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 	
 	public void answerTaxPoint1Question(String answer) {
@@ -157,8 +149,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Questions").click();
 		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeSelect_Tax_Point_1")).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
-		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
-		Helpers.waitABit(500);
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 	
 	public void answerQuestion2(String answer) {
@@ -230,7 +221,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
-		Helpers.waitABit(500);
 		/*List<WebElement> savebtns = appiumdriver.findElementsByName("Save");
 		System.out.println("+++" + savebtns.size());
 		for (WebElement sv : savebtns)
@@ -249,7 +239,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			((IOSElement) appiumdriver.findElementsByAccessibilityId("Save").get(1)).click();
 		else
 			appiumdriver.findElementByAccessibilityId("Save").click();*/
-		Helpers.waitABit(500);
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()
@@ -292,7 +281,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 					+ technician + "')]/XCUIElementTypeTextField[1]").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(1000);
 		/*if (elementExists("//UIAPopover[1]")) {
 			appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
 						+ technician + "\")]/UIAStaticText[1]").click();
@@ -345,7 +333,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(technician);
-		Helpers.waitABit(1000);
 	}
 	
 	public void cancelSearchTechnician() {
@@ -409,7 +396,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void typeTechnicianValue(String percentage) {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(1000);
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
@@ -432,7 +418,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		amountfld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();
-		Helpers.waitABit(1000);
 	}
 
 	public boolean isTechnicianIsSelected(String technician) {
@@ -546,7 +531,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_timevalue);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setServiceRateValue(String _ratevalue)
@@ -558,7 +542,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_ratevalue);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public boolean isServiceDetailsFieldEditable(String fieldname) {
