@@ -169,9 +169,9 @@ public abstract class BaseWebPage {
 
 	public void deleteTableRow(WebElement row) {
 		clickDeleteTableRow(row);
-		try{
-		acceptAlertAndWait();
-		}catch(NoAlertPresentException e){}
+		try {
+		    acceptAlertAndWait();
+		} catch (NoAlertPresentException ignored) {}
 	}
 
 	public void archiveTableRow(WebElement row) {

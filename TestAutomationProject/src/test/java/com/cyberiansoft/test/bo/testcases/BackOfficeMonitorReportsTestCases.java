@@ -54,7 +54,6 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationsPage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(addsrvalue);
-		//todo waiting to no longer be visible
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(newservicerequest);
