@@ -1,0 +1,35 @@
+{
+  
+  	"testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection.01",
+      "description": "Test Case 73393:R360 client: Verify correct Total is shown after editing Percentage service in My Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "percentageServices": [{"serviceName": "Aluminum Panel", "servicePrice": "50"
+      }, {"serviceName": "Aluminum Panel", "servicePrice": "-25"
+      }],
+      "service": {"serviceName": "Battery Installation", "servicePrice": "9"
+      },
+      "inspPrice": "$11.25"
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceInMyInspection": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceInMyInspection.01",
+      "description": "Test Case 73395:R360 client: Verify correct Total is shown after editing Money service in My Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "0.50"
+      }, {"serviceName": "Battery Installation", "servicePrice": "100"
+      }, {"serviceName": "Battery Installation", "servicePrice": "0"
+      }],
+      "service": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      },
+      "inspPrice": "$11.25"
+    }
+  ]
+}

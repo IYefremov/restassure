@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public class BackOfficeUtils {
-	
+
+	public static String MONEY_SYMBOL =  "$";
+
 	public static String getFullDateFormat() {
 		return "MM/dd/yyyy";
 	}
@@ -155,6 +157,19 @@ public class BackOfficeUtils {
 			return false;
 		}
 		return true;
+	}
+
+	public static float getServicePriceValue(String servicePriceString) {
+		if (servicePriceString.contains(MONEY_SYMBOL))
+			servicePriceString = servicePriceString.replace (MONEY_SYMBOL, "").trim();
+		else
+			servicePriceString = servicePriceString.trim();
+		return Float.valueOf(servicePriceString).floatValue();
+	}
+
+	public static String getFormattedServicePriceValue(float servicePrice) {
+		String servicePriceFormatted= MONEY_SYMBOL + String.format("%.2f", servicePrice);
+		return servicePriceFormatted;
 	}
 
 }

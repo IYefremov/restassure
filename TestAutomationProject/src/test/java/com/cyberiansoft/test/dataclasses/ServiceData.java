@@ -9,6 +9,9 @@ public class ServiceData {
 
 	@JsonProperty("servicePrice")
 	String servicePrice;
+
+	@JsonProperty("servicePrice2")
+	String servicePrice2;
 	 
 	@JsonProperty("serviceQuantity")
 	String serviceQuantity;
@@ -22,6 +25,10 @@ public class ServiceData {
 	 
 	public String getServicePrice() {
 		return servicePrice; 
+	}
+
+	public String getServicePrice2() {
+		return servicePrice2;
 	}
 	 
 	public String getServiceQuantity() {

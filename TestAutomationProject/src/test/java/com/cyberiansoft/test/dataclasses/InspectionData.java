@@ -21,7 +21,13 @@ public class InspectionData {
 
 	 @JsonProperty("services")
 	 List<ServiceData> services;
-	 
+
+	 @JsonProperty("moneyServices")
+	 List<ServiceData> moneyServices;
+
+	 @JsonProperty("percentageServices")
+	 List<ServiceData> percentageServices;
+
 	 @JsonProperty("insuranceCompany")
 	 InsuranceCompanyData insuranceCompany;
 	 
@@ -73,6 +79,14 @@ public class InspectionData {
 	 public List<ServiceData> getServicesList() {
 		 return services;
 	 }
+
+	 public List<ServiceData> getMoneyServicesList() {
+		return moneyServices;
+	}
+
+	 public List<ServiceData> getPercentageServicesList() {
+		return percentageServices;
+	}
 	 
 	 public String getServiceNameByIndex(int serviceIndex) {
 		 return services.get(serviceIndex).getServiceName();

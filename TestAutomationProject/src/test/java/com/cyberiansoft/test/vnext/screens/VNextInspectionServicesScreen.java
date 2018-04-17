@@ -287,4 +287,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		}
 	}
 
+	public String getTotalPriceValue() {
+		return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
+	}
+
 }
