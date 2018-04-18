@@ -235,6 +235,10 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	public void selectCreateWorkOrderRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Create Work Order").click();
 	}
+
+	public boolean isCreateWorkOrderActionExists() {
+		return appiumdriver.findElementsByAccessibilityId("Create Work Order").size() > 0;
+	}
 	
 	public void selectAppointmentRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Appointments").click();
@@ -368,7 +372,9 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectTodayFromAppointmet() {
-		appiumdriver.findElementByAccessibilityId("From").click();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("From"))).click();
+		//appiumdriver.findElementByAccessibilityId("From").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
@@ -438,8 +444,14 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	}
 			
 	public void clickDoneCloseReasonDialog() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
+        clickDoneButton();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")) );
 	}
+
+    public void clickDoneButton() {
+        appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
+    }
 			
 	public void selectDoneReason(String selectreason) throws InterruptedException {
 		selectUIAPickerValue(selectreason);

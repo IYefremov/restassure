@@ -509,11 +509,11 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void switchToLocalInspectionsView() {
-		appiumdriver.findElementByAccessibilityId("Local").click();		
+		appiumdriver.findElementByAccessibilityId("My").click();
 	}
 	
 	public void switchToOnlineInspectionsView() {
-		appiumdriver.findElementByAccessibilityId("Online").click();		
+		appiumdriver.findElementByAccessibilityId("Team").click();
 	}
 	
 }

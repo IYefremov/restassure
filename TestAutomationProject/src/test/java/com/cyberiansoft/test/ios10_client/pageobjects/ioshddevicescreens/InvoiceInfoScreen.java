@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
@@ -67,7 +64,6 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		clickSaveButton();
 		appiumdriver.findElementByAccessibilityId("Final").click();
 		clickSaveButton();
-		Helpers.waitABit(500);
 	}
 	
 	public String getInvoicePOValue() {
@@ -77,7 +73,6 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	public void setPO(String _po) {
 		setPOWithoutHidingkeyboard(_po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setPOWithoutHidingkeyboard(String _po) {
@@ -90,21 +85,22 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	
 	public void clickFirstWO() {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[1]").click();
-		Helpers.waitABit(1000);
 	}
 	
 	public void assertOrderSummIsCorrect(String summ) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("TotalAmount")));
 		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), summ);
 	}
 	
 	public void addWorkOrder(String wonumber) {
-		Helpers.waitABit(2000);
-		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[2]").click();
-		//appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[2]").click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
-						+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
+		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByAccessibilityId("Insert").click();
+		IOSElement invoicesOrdersTable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InvoiceOrdersView' and type = 'XCUIElementTypeTable'"));
+		invoicesOrdersTable.findElementByAccessibilityId(wonumber).findElementByAccessibilityId("unselected").click();
+
+		//appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
+		//				+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
-		Helpers.waitABit(1000);
 	}
 	
 	public String getInvoiceNumber() {

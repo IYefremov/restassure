@@ -82,6 +82,7 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
+		new TeamWorkOrdersScreen(appiumdriver);
 	}
 	
 	public void selectSearchLocation(String _location) {
