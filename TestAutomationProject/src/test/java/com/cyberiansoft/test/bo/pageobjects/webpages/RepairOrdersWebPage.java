@@ -178,8 +178,8 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyRepairOrdersTableColumnsAreVisible() {
-		Assert.assertTrue(repairorderstable.isTableColumnExists("!"));
-		Assert.assertTrue(repairorderstable.isTableColumnExists("Flag"));
+		Assert.assertTrue(repairorderstable.tableColumnExists("!"));
+		Assert.assertTrue(repairorderstable.tableColumnExists("Flag"));
 		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[3]")).getText(), "Order /\nType");
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[3]")).isDisplayed());
 		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "Customer /\nVehicle /\nVIN#");

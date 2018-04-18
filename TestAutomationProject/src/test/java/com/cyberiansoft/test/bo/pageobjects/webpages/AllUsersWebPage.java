@@ -1,22 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class AllUsersWebPage extends WebPageWithPagination {
 	
@@ -96,10 +93,10 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyAllUsersTableColumnsAreVisible() {
-		Assert.assertTrue(alluserstable.isTableColumnExists("Full Name / Username / Roles"));
-		Assert.assertTrue(alluserstable.isTableColumnExists("Application"));
-		Assert.assertTrue(alluserstable.isTableColumnExists("Contact Info"));
-		Assert.assertTrue(alluserstable.isTableColumnExists("Accounting ID"));
+		Assert.assertTrue(alluserstable.tableColumnExists("Full Name / Username / Roles"));
+		Assert.assertTrue(alluserstable.tableColumnExists("Application"));
+		Assert.assertTrue(alluserstable.tableColumnExists("Contact Info"));
+		Assert.assertTrue(alluserstable.tableColumnExists("Accounting ID"));
 	}
 	
 	public void verifyAllUserSearchParametersAreVisible() {

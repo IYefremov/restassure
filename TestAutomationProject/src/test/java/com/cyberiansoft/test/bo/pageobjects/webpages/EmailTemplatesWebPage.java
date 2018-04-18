@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class EmailTemplatesWebPage extends BaseWebPage {
 	
@@ -64,6 +62,7 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	
 	public void clickNewEmailTemplateOKButton() {
 		clickAndWait(newemailtemplateOKbtn);
+		waitABit(2000);
 	}
 	
 	public void clickNewEmailTemplateCancelButton() {
@@ -88,6 +87,7 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	}
 	
 	public WebElement getTableRowWithEmailTemplate(String templatename) {
+	    waitABit(1500);
 		List<WebElement> rows = getEmailTemplatesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[4]")).getText().equals(templatename)) {
@@ -138,4 +138,12 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 		}
 	}
 
+    public void verifyEmailTemplatesDoNoExist(String templatename, String templatenameedited) {
+        while (isEmailTemplateExists(templatename)) {
+            deleteEmailTemplate(templatename);
+        }
+        while (isEmailTemplateExists(templatenameedited)) {
+            deleteEmailTemplate(templatenameedited);
+        }
+    }
 }

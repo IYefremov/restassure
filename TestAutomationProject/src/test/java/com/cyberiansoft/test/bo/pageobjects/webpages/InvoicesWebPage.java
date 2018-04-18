@@ -147,18 +147,18 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public void verifyInvoicesTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(invoicestable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Invoice #"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Date"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Status"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Reason"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Amount"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Paid"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Customer"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("PO#"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Notes"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Media"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Duplicates"));
-		Assert.assertTrue(invoicestable.isTableColumnExists("Action"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Invoice #"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Date"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Status"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Reason"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Amount"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Paid"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Customer"));
+		Assert.assertTrue(invoicestable.tableColumnExists("PO#"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Notes"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Media"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Duplicates"));
+		Assert.assertTrue(invoicestable.tableColumnExists("Action"));
 	}
 
 	public void verifySearchFieldsAreVisible() {

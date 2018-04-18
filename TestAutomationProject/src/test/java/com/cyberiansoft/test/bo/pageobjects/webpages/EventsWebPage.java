@@ -52,12 +52,12 @@ public class EventsWebPage extends BaseWebPage {
 	}
 
 	public void verifyEventsTableColumnsAreVisible() {
-		Assert.assertTrue(eventstable.isTableColumnExists("Alert"));
-		Assert.assertTrue(eventstable.isTableColumnExists("Email"));
-		Assert.assertTrue(eventstable.isTableColumnExists("SMS"));
-		Assert.assertTrue(eventstable.isTableColumnExists("Push"));
-		Assert.assertTrue(eventstable.isTableColumnExists("Fax"));
-		Assert.assertTrue(eventstable.isTableColumnExists("Voice"));
+		Assert.assertTrue(eventstable.tableColumnExists("Alert"));
+		Assert.assertTrue(eventstable.tableColumnExists("Email"));
+		Assert.assertTrue(eventstable.tableColumnExists("SMS"));
+		Assert.assertTrue(eventstable.tableColumnExists("Push"));
+		Assert.assertTrue(eventstable.tableColumnExists("Fax"));
+		Assert.assertTrue(eventstable.tableColumnExists("Voice"));
 	}
 
 	public List<WebElement> getEventsTableRows() {
@@ -145,8 +145,12 @@ public class EventsWebPage extends BaseWebPage {
 
 	public void verifyFirstConditionValues(String firstconditionname, String firstconditiontype,
 			String firstconditioncriteria) {
-		wait.until(ExpectedConditions.elementToBeClickable(visibleconditions));
-		Assert.assertEquals(getFirstConditionNameCriteriaCombobox().getFirstSelectedOption().getText(),
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(visibleconditions));
+        } catch (TimeoutException e) {
+            System.out.println("The conditions are not displayed in the dialog!" + e);
+        }
+        Assert.assertEquals(getFirstConditionNameCriteriaCombobox().getFirstSelectedOption().getText(),
 				firstconditionname);
 		Assert.assertEquals(selectFirstConditionTypeCriteriaCombobox().getFirstSelectedOption().getAttribute("value"),
 				firstconditiontype);

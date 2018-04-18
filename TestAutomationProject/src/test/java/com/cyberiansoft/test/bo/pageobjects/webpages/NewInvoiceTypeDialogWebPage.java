@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -13,10 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	
@@ -134,6 +131,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	
 	public void clickOKAddInvoiceTypeButton() {
 		clickAndWait(invoicetypeOKbtn);
+		waitABit(4000);
 	}
 	
 	public void setInvoiceTypeName(String invoicetypename) {

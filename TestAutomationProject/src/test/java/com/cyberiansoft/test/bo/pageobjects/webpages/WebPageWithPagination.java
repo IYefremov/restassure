@@ -77,10 +77,8 @@ public class WebPageWithPagination extends BaseWebPage {
 	
 	public void clickGoToLastPage() {
 		gotolastpage.click();
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		//waitABit(700);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+        waitForLoading();
+        waitABit(10000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
@@ -135,9 +133,9 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void waitForLoading(){
-		try{
+		try {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} catch(TimeoutException ignored){}
+		} catch (TimeoutException ignored) {}
 	}
 }

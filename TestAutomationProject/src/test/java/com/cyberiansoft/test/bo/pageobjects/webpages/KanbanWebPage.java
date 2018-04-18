@@ -1,15 +1,13 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class KanbanWebPage extends BaseWebPage {
 
@@ -38,8 +36,7 @@ public class KanbanWebPage extends BaseWebPage {
 
 	public void clickSearchButton() throws InterruptedException {
 		searchButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 	}
 
 	public boolean checkSearhResultColumns() {
@@ -63,9 +60,7 @@ public class KanbanWebPage extends BaseWebPage {
 
 		intervalField.sendKeys(Integer.toString(intervalBorder - 1));
 		searchButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-
+		waitForLoading();
 		if (intervalField.getAttribute("value").equals(Integer.toString(intervalBorder)))
 			return false;
 
@@ -77,9 +72,7 @@ public class KanbanWebPage extends BaseWebPage {
 
 		intervalField.sendKeys(Integer.toString(intervalBorder + 1));
 		searchButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-
+        waitForLoading();
 		if (intervalField.getAttribute("value").equals(Integer.toString(intervalBorder)))
 			return false;
 
@@ -91,9 +84,7 @@ public class KanbanWebPage extends BaseWebPage {
 
 		intervalField.sendKeys(string);
 		searchButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-
+		waitForLoading();
 		if (intervalField.getAttribute("value").equals(string))
 			return true;
 
@@ -105,9 +96,7 @@ public class KanbanWebPage extends BaseWebPage {
 
 		intervalField.sendKeys(Integer.toString(interval));
 		autoRefreshButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		
+        waitForLoading();
 		if (!intervalField.getAttribute("value").equals(Integer.toString(interval)))
 			return false;
 		

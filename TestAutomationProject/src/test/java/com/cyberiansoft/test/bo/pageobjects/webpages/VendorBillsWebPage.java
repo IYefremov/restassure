@@ -77,11 +77,11 @@ public class VendorBillsWebPage extends WebPageWithFilter {
 	
 	public void verifyVendorBillsTableColumnsAreVisible() {
 		wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.visibilityOf(vendorbillstable.getWrappedElement()));
-		Assert.assertTrue(vendorbillstable.isTableColumnExists("Invoice #"));
-		Assert.assertTrue(vendorbillstable.isTableColumnExists("Vendor"));
-		Assert.assertTrue(vendorbillstable.isTableColumnExists("Date"));
-		Assert.assertTrue(vendorbillstable.isTableColumnExists("Amount"));
-		Assert.assertTrue(vendorbillstable.isTableColumnExists("Status"));
+		Assert.assertTrue(vendorbillstable.tableColumnExists("Invoice #"));
+		Assert.assertTrue(vendorbillstable.tableColumnExists("Vendor"));
+		Assert.assertTrue(vendorbillstable.tableColumnExists("Date"));
+		Assert.assertTrue(vendorbillstable.tableColumnExists("Amount"));
+		Assert.assertTrue(vendorbillstable.tableColumnExists("Status"));
 		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
 	

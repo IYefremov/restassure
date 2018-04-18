@@ -157,14 +157,14 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	
 	public void verifyVendorsTeamsTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(activeVendorsTeamsTable.getWrappedElement()));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Guests"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Vendor/Team"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Type"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Service Assign"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Location"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Area"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Timesheet type"));
-		Assert.assertTrue(activeVendorsTeamsTable.isTableColumnExists("Description"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Guests"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Vendor/Team"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Type"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Service Assign"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Location"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Area"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Timesheet type"));
+		Assert.assertTrue(activeVendorsTeamsTable.tableColumnExists("Description"));
 	}
 
 	public boolean isActiveVendorTeamPresent(String vendorTeam) {

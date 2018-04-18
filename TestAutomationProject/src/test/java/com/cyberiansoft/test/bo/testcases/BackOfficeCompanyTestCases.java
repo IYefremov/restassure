@@ -173,7 +173,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		servicespage.setServiceSearchCriteria(servicename.substring(0, 4).toLowerCase());
 		servicespage.clickFindButton();
 
-		servicespage.isActiveServiceExists(servicename);
+		servicespage.activeServiceExists(servicename);
 	}
 
 	@Test(description = "Test Case 15539:Company - Teams: Search")
@@ -335,7 +335,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		serviceadvisorspage.clickFindButton();
 
 		Assert.assertTrue(serviceadvisorspage.getServiceAdvisorsTableRowsCount() > 0);
-		serviceadvisorspage.isServiceAdvisorExists(firstname, lastname);
+		serviceadvisorspage.serviceAdvisorExists(firstname, lastname);
 	}
 
 	@Test(description = "Test Case 18799:Company- Question Forms")
@@ -357,7 +357,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		questionsformspage.createQuestionSection(questionsectionname);
 		questionsformspage.addQuestionForQuestionSection(questionsectionname, questionname);
 
-		if (questionsformspage.isQuestionFormExists(questionformname)) {
+		while (questionsformspage.isQuestionFormExists(questionformname)) {
 			questionsformspage.deleteQuestionForm(questionformname);
 		}
 		questionsformspage.createQuestionForm(questionformname);
@@ -484,7 +484,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			servicespage.unarchiveService(servicename);
 
 			servicespage.clickActiveTab();
-			Assert.assertTrue(servicespage.isActiveServiceExists(servicename));
+			Assert.assertTrue(servicespage.activeServiceExists(servicename));
 		}
 	}
 

@@ -917,7 +917,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(
 				serviceRequestsWebPage.checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(startDate, endDate));
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
-
 	}
 
 	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
@@ -1022,7 +1021,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         return new Object[][] {{ "Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter) }};
     }
 
-    //todo fails org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//a[contains(@title, '4/7/2018')]"}
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month",
             dataProvider = "provideSRdataForSchedulerMonth")
 	public void checkSRappointmentSchedulerMonth(String customer, String startDate) throws InterruptedException {
@@ -1497,7 +1495,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAcceptedByTech(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {

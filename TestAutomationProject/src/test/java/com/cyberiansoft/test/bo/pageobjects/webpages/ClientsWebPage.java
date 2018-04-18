@@ -119,15 +119,15 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	public void verifyEmployeesTableColumnsAreVisible() {
 
-		Assert.assertTrue(clientstable.isTableColumnExists("Client"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Address"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Email"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Phone"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Notes"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Wholesale"));
-		Assert.assertTrue(clientstable.isTableColumnExists("PO# req."));
-		Assert.assertTrue(clientstable.isTableColumnExists("Commission"));
-		Assert.assertTrue(clientstable.isTableColumnExists("Action"));
+		Assert.assertTrue(clientstable.tableColumnExists("Client"));
+		Assert.assertTrue(clientstable.tableColumnExists("Address"));
+		Assert.assertTrue(clientstable.tableColumnExists("Email"));
+		Assert.assertTrue(clientstable.tableColumnExists("Phone"));
+		Assert.assertTrue(clientstable.tableColumnExists("Notes"));
+		Assert.assertTrue(clientstable.tableColumnExists("Wholesale"));
+		Assert.assertTrue(clientstable.tableColumnExists("PO# req."));
+		Assert.assertTrue(clientstable.tableColumnExists("Commission"));
+		Assert.assertTrue(clientstable.tableColumnExists("Action"));
 	}
 
 	public void clickArchivedTab() {
@@ -295,7 +295,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 			waitABit(500);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
-			waitABit(1500);
+			waitABit(3000);
 			if (clientsTableRow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
 					//if (clientsTableRow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {
@@ -464,6 +464,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public void searchClientUser(String clienuser) {
 		clearAndType(clientuserssearchfld, clienuser);
 		clickAndWait(clientusersfindbtn);
+		waitABit(3000);
 	}
 
 	public List<WebElement> getClientUsersTableRows() {

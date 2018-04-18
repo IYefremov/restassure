@@ -1,24 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	
@@ -124,14 +117,14 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyServiceAdvisorsTableColumnsAreVisible() {	
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Clients"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Full Name"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Email"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Address"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Phone"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Roles"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Accounting ID"));
-		Assert.assertTrue(serviceadvisorstable.isTableColumnExists("Commissions"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Clients"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Full Name"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Email"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Address"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Phone"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Roles"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Accounting ID"));
+		Assert.assertTrue(serviceadvisorstable.tableColumnExists("Commissions"));
 	}
 	
 	public String getTableServiceAdvisorFullName(String firstname, String lastname) {
@@ -200,7 +193,8 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-	}
+        waitABit(5000);
+    }
 	
 	public int getServiceAdvisorsTableRowsCount() {
 		return getServiceAdvisorsTableRows().size();
@@ -232,7 +226,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//li[text()='" + _client + "']")).click();
 	}
 	
-	public boolean isServiceAdvisorExists(String firstname, String lastname) {
+	public boolean serviceAdvisorExists(String firstname, String lastname) {
 		boolean exists =  serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
 		return exists;
 	}
@@ -323,6 +317,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 
 	public void clickNewServiceAdvisorOKButton() {
 		clickAndWait(serviceadvisorOKbtn);
+		waitABit(3000);
 	}
 	
 	public void clickNewServiceAdvisorCancelButton() {

@@ -1,22 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
@@ -67,7 +64,10 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	private WebElement lastpagenumber;
 		
 	@FindBy(id = "ctl00_ctl00_Content_Main_report_ctl05_ctl00_CurrentPage")
-	private WebElement currentlyselectedpagenumber; 
+	private WebElement currentlyselectedpagenumber;
+
+	@FindBy(id = "//div[@id='ctl00_ctl00_Content_Main_report']")
+	private WebElement mainReportContent;
 	
 	public RepairLocationTimeTrackingWebPage(WebDriver driver) {
 		super(driver);
@@ -119,9 +119,10 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpTo_dateInput")).sendKeys(dateformat);
 	}
 	
-	public void clickFindButton() { 
-		click(findbtn);
-waitABit(5000);
+	public void clickFindButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
+//		click(findbtn);
+        waitABit(5000);
 		//new WebDriverWait(driver, 10)
 		  //.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
@@ -133,14 +134,14 @@ waitABit(5000);
 		}
 	}
 	
-	public boolean isWONumberExistsIntable(String wonumber) {
+	public boolean WONumberExistsInTable(String wonumber) {
 		return driver.findElements(By.xpath("//tr/td/div[text()='" + wonumber + "']")).size() > 0;
 	}
 	
 	public boolean searchWorkOrderInTable(String wonumber) {
 		boolean found = false;
 		for (int i = 1; i <= Integer.valueOf(getLastPageNumber()); i++) {
-			if (!isWONumberExistsIntable(wonumber)) {
+			if (!WONumberExistsInTable(wonumber)) {
 				clickGoToNextPage();
 			} else {
 				found = true;
@@ -180,6 +181,5 @@ waitABit(5000);
     
     public String getLastPageNumber() {	
 		return driver.findElement(By.xpath("//span[@id='ctl00_ctl00_Content_Main_report_ctl05_ctl00_TotalPages']")).getText();
-	} 
-
+	}
 }

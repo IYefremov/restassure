@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ManageLicencesWebPage extends WebPageWithPagination {
 	
@@ -81,12 +78,15 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		selectComboboxValue(dearchlicenceappcmb, dearchlicenceappdd, licenceapp);
 	}
 	
-	public void clickFindButton() { 
+	public ManageLicencesWebPage clickFindButton() {
 		clickAndWait(findbtn);
+		waitABit(3000);
+		return this;
 	}
 	
 	public void clickAddManageLicenceButton() {
 		clickAndWait(addmanagelicensebtn);
+		waitABit(2000);
 	}
 	
 	public void selectNewLicenceApplication(String licenceapp) {
@@ -104,6 +104,7 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	
 	public void clickNewLicenceOKButton() {
 		clickAndWait(newlicenceOKbtn);
+		waitABit(4000);
 	}
 	
 	public void clickNewLicenceCancelButton() {
@@ -145,12 +146,12 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	}
 	
 	
-	public boolean isLicenceApplicationExists(String licenceapp) {
-		boolean exists =  managelicensestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + licenceapp + "']")).size() > 0;
-		return exists;
+	public boolean licenceApplicationExists(String licenceapp) {
+        return managelicensestable
+                .getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + licenceapp + "']")).size() > 0;
 	}
 	
-	public void clickEditLicenceApplication(String licenceapp) throws InterruptedException {
+	public void clickEditLicenceApplication(String licenceapp) {
 		WebElement row = getTableRowWithLicenceApplication(licenceapp);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -167,7 +168,7 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		}
 	}
 	
-	public void deleteLicenceApplicationAndCancelDeleting(String licenceapp) throws InterruptedException {
+	public void deleteLicenceApplicationAndCancelDeleting(String licenceapp) {
 		WebElement row = getTableRowWithLicenceApplication(licenceapp);
 		if (row != null) {
 			cancelDeletingTableRow(row);

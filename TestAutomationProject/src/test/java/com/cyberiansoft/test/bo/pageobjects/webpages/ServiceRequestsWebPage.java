@@ -4,7 +4,6 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -120,20 +118,20 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyInvoicesTableColumnsAreVisible() {		
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Status"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Package"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Device"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Vehicle Info"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Client"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Stock"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("RO"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Inspection"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("WorkOrder"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Invoice"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Description"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Media"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Scheduled"));
-		Assert.assertTrue(servicerequeststable.isTableColumnExists("Email"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Status"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Package"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Device"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Vehicle Info"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Client"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Stock"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("RO"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Inspection"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("WorkOrder"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Invoice"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Description"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Media"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Scheduled"));
+		Assert.assertTrue(servicerequeststable.tableColumnExists("Email"));
 	}
 	
 	public void verifySearchFieldsAreVisible() {

@@ -18,5 +18,5 @@ public interface WebTable extends IWebElement {
 	
 	int getTableColumnIndex(String columnname);
 	
-	boolean isTableColumnExists(String columnname);
+	boolean tableColumnExists(String columnname);
 }

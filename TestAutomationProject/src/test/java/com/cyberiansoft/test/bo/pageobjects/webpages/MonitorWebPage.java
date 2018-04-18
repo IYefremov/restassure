@@ -1,15 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class MonitorWebPage extends BaseWebPage {
 	
@@ -73,7 +70,11 @@ public class MonitorWebPage extends BaseWebPage {
 	}
 	
 	public VendorOrdersWebPage clickVendorOrdersLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(vendororderslink)).click();
+	    try {
+            wait.until(ExpectedConditions.elementToBeClickable(vendororderslink)).click();
+        } catch (TimeoutException e) {
+            vendororderslink.click();
+        }
 		return PageFactory.initElements(
 				driver, VendorOrdersWebPage.class);
 	}

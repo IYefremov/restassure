@@ -73,7 +73,7 @@ public abstract class BaseWebPage {
     WebElement waitForElementNotToMove(final WebElement element) {
         wait.until((ExpectedCondition<Boolean>) wDriver -> {
             Point loc = element.getLocation();
-            waitABit(1000);
+            waitABit(10000);
             return element.getLocation().equals(loc);
         });
         return element;
@@ -190,14 +190,21 @@ public abstract class BaseWebPage {
 	}
 
 	public void clickEditTableRow(WebElement row) {
-		row.findElement(By.xpath(".//*[@title='Edit']")).click();
-		waitUntilPageReloaded();
+        waitABit(2000);
+        try {
+            row.findElement(By.xpath(".//*[@title='Edit']")).click();
+        } catch (StaleElementReferenceException e) {
+            waitABit(3000);
+            row.findElement(By.xpath(".//*[@title='Edit']")).click();
+        }
+        waitUntilPageReloaded();
+        waitABit(3000);
 	}
 
 	public void checkboxSelect(String checkboxvalue) {
 		waitABit(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(
-				(WebElement) driver.findElement(By.xpath("//label[text()='" + checkboxvalue + "']")))).click();
+                driver.findElement(By.xpath("//label[text()='" + checkboxvalue + "']")))).click();
 	}
 
 	public void checkboxSelect(WebElement checkbox) {

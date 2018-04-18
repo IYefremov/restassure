@@ -1,11 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,9 +13,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class VehiclePartsWebPage extends WebPageWithPagination {
 	
@@ -59,7 +58,7 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	
 	public void verifyVehiclePartsColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartstable.getWrappedElement()));
-		Assert.assertTrue(vehiclepartstable.isTableColumnExists("Part"));
+		Assert.assertTrue(vehiclepartstable.tableColumnExists("Part"));
 	}
 	
 	public List<WebElement> getVehiclePartsTableRows() {
@@ -171,6 +170,7 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	
 	public void saveNewVehiclePart() {	
 		clickAndWait(newvehiclepartOKbtn);
+		waitABit(3000);
 	}
 	
 	public void cancelNewVehiclePart() {	

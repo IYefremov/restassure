@@ -132,21 +132,21 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 	}
 	
 	public void verifyVendorOrdersTableColumnsAreVisible() {
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Services"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Order#"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("!"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Flag"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Team/Vendor"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Customer"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Vehicle"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Stock# / RO#"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Amount"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Retail Amount"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Start Date"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Target Date"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Active Phase"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Days In Process"));
-		Assert.assertTrue(vendororderstable.isTableColumnExists("Completed (%)"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Services"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Order#"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("!"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Flag"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Team/Vendor"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Customer"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Vehicle"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Stock# / RO#"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Amount"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Retail Amount"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Start Date"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Target Date"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Active Phase"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Days In Process"));
+		Assert.assertTrue(vendororderstable.tableColumnExists("Completed (%)"));
 	}
 	
 	public List<WebElement>  getVendorOrdersTableRows() {

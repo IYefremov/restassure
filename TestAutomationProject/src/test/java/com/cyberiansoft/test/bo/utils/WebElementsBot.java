@@ -28,16 +28,17 @@ public class WebElementsBot {
 	    	.until(ExpectedConditions.elementToBeClickable(element));
 	        element.click();	        
 	    } catch (StaleElementReferenceException sere) {
+	        waitABit(4000);
 	        // simply retry finding the element in the refreshed DOM
 	    	element.click();
 	    }
 	    catch (TimeoutException toe) {
-	        //test.log(logStatus.Error, "Element identified by " + by.toString() + " was not clickable after 10 seconds");
+//	        test.log(logStatus.Error, "Element identified by " + by.toString() + " was not clickable after 10 seconds");
 	    }
 	}
 	
 	public static void clickAndWait(WebElement element) {
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
+	    new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
 	    element.click();
 	    waitUntilPageReloaded();
 	}
@@ -140,9 +141,12 @@ public class WebElementsBot {
     }
 	
 	public static void waitUntilPageReloaded() {
-    	waitABit(300);
-    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+    	try {
+            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
+                    .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+        } catch (TimeoutException ignored) {
+    	    waitABit(5000);
+        }
     }
 
 	/* Wait For */

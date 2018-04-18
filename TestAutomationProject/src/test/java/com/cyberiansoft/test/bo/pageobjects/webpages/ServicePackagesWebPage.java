@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+import java.util.Set;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class ServicePackagesWebPage extends BaseWebPage {
 	
@@ -171,4 +168,13 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	public List<WebElement> getAllServicePackageItems() {
 		return servicepackageitemstable.getWrappedElement().findElements(By.xpath(".//tr[contains(@id, 'ctl00_Content_gv_ctl00')]/td[" + servicepackageitemstable.getTableColumnIndex("Service") + "]"));
 	}
+
+    public void verifyServicePackagesDoNotExist(String servicepackagename, String servicepackagenameedited) {
+        while (isServicePackageExists(servicepackagename)) {
+            deleteServicePackage(servicepackagename);
+        }
+        while (isServicePackageExists(servicepackagenameedited)) {
+            deleteServicePackage(servicepackagenameedited);
+        }
+    }
 }

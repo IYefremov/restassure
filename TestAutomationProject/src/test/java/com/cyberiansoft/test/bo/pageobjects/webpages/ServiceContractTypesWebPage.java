@@ -1,22 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ServiceContractTypesWebPage extends BaseWebPage {
 	
@@ -134,7 +131,7 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 		return null;
 	}
 	
-	public void createNewServiceContractType(String servicecontracttypename) throws InterruptedException {
+	public void createNewServiceContractType(String servicecontracttypename) {
 		setNewServiceContractTypeName(servicecontracttypename);
 		clickNewServiceContractTypeOKButton();
 	}
@@ -144,7 +141,7 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 		return exists;
 	}
 	
-	public void clickEditServiceContractType(String servicecontacttype) throws InterruptedException {
+	public void clickEditServiceContractType(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -152,7 +149,7 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
 	}
 	
-	public void deleteServiceContractType(String servicecontacttype) throws InterruptedException {
+	public void deleteServiceContractType(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			deleteTableRow(row);
@@ -160,7 +157,7 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");		
 	}
 	
-	public void deleteServiceContractTypeAndCancelDeleting(String servicecontacttype) throws InterruptedException {
+	public void deleteServiceContractTypeAndCancelDeleting(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			cancelDeletingTableRow(row);
@@ -194,10 +191,19 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 	
 	public void clickNewServiceContractTypeOKButton() {
 		clickAndWait(newservicecontacttypeOKbtn);
+		waitABit(2000);
 	}
 	
 	public void clickNewServiceContractTypeCancelButton() {
 		click(newservicecontacttypecancelbtn);
 	}
-	
+
+    public void verifyServiceContractTypesDoNotExist(String contracttype, String contracttypeedited) {
+        while (isServiceContractTypeExists(contracttype)) {
+            deleteServiceContractType(contracttype);
+        }
+        while (isServiceContractTypeExists(contracttypeedited)) {
+            deleteServiceContractType(contracttypeedited);
+        }
+    }
 }

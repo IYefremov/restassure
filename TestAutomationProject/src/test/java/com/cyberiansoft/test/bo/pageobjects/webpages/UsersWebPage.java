@@ -1,23 +1,20 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 
 public class UsersWebPage extends WebPageWithPagination {
@@ -112,12 +109,12 @@ public class UsersWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyUsersTableColumnsAreVisible() {
-		Assert.assertTrue(userstable.isTableColumnExists("Full Name"));
-		Assert.assertTrue(userstable.isTableColumnExists("Email"));
-		Assert.assertTrue(userstable.isTableColumnExists("Address"));
-		Assert.assertTrue(userstable.isTableColumnExists("Phone"));
-		Assert.assertTrue(userstable.isTableColumnExists("Roles"));
-		Assert.assertTrue(userstable.isTableColumnExists("Accounting ID"));
+		Assert.assertTrue(userstable.tableColumnExists("Full Name"));
+		Assert.assertTrue(userstable.tableColumnExists("Email"));
+		Assert.assertTrue(userstable.tableColumnExists("Address"));
+		Assert.assertTrue(userstable.tableColumnExists("Phone"));
+		Assert.assertTrue(userstable.tableColumnExists("Roles"));
+		Assert.assertTrue(userstable.tableColumnExists("Accounting ID"));
 	}
 	
 	public void verifyTabsAreVisible() {
@@ -128,12 +125,14 @@ public class UsersWebPage extends WebPageWithPagination {
 	
 	public void clickArchivedTab() {
 		clickAndWait(archivedtab);
-	}
+        waitABit(3000);
+    }
 	
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
-	}
+        waitABit(3000);
+    }
 	
 	public void setSearchUserParameter(String username) {
 		clearAndType(searchuserfld, username);
@@ -141,7 +140,8 @@ public class UsersWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-	}
+        waitABit(3000);
+    }
 	
 	public int getUsersTableRowCount() {
 		return getUsersTableRows().size();

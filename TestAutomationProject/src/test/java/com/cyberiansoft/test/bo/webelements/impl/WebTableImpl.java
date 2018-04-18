@@ -74,7 +74,7 @@ public class WebTableImpl extends AbstractWebElement implements WebTable {
     }
 	
 	@Override
-    public boolean isTableColumnExists(String columnname) {
+    public boolean tableColumnExists(String columnname) {
 		boolean exists = false;
 		if (getTableColumnIndex(columnname) > 0)
 			exists = true;

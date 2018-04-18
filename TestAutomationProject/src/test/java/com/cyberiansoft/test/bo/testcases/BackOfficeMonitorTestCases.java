@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 public class BackOfficeMonitorTestCases extends BaseTestCase {
 
+    //todo ignored
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
 	public void testMonitorRepairOrderSearch() throws Exception {
 
@@ -60,6 +61,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 	}
 
+	//todo fails
 	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
 	public void testMonitorVendorOrdersSearch() throws Exception {
 
@@ -124,7 +126,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	//	vendororderspage.openOrderNoInformationWindowAndVerifyContent(wonum, VIN, company, employee);
 	//	vendororderspage.openServicesInformationByOrderNoWindowAndVerifyContent(wonum, VIN, company);
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
 	public void testMonitorReportsAverageRepairTimeReport() throws Exception {
 
@@ -201,7 +204,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		trendingreportpage.verifySearchResults("Default Location", "Artem order test");
 		
 	}
-	
+
+	//todo fails
 	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")
 	public void testMonitorRepairOrderFullDisplayVersion() throws Exception {
 
@@ -351,7 +355,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
 	public void checkMonitorKanbanAutoRefresh() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

@@ -70,6 +70,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	
 	public RepairLocationsWebPage clickFindButton() {
 		clickAndWait(findbtn);
+		waitABit(3000);
         return this;
 	}
 	
@@ -236,7 +237,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	}
 	
 	public void deleteRepairLocationifExists(String repairlocation) {
-		if (isRepairLocationExists(repairlocation)) {
+		if (repairLocationExists(repairlocation)) {
 			deleteRepairLocation(repairlocation);
 		}
 	}
@@ -269,15 +270,15 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyRRepairLocationsTableColumnsAreVisible() {		
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Phases"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Services"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Managers"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("User Settings"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Location"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Status"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Phases"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Services"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Managers"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("User Settings"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Location"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Status"));
 	}
 	
-	public boolean isRepairLocationExists(String repairlocation) {
+	public boolean repairLocationExists(String repairlocation) {
 		boolean exists =  repairlocationstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocation + "']")).size() > 0;
 		return exists;
 	}

@@ -1,24 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ServicesWebPage extends WebPageWithPagination {
 	
@@ -88,16 +81,16 @@ public class ServicesWebPage extends WebPageWithPagination {
 	
 	public void verifyServicesTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
-		Assert.assertTrue(servicestable.isTableColumnExists("Packages"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Type"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Service"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Description"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Wh. Price"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Retail Price"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Multiple"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Acc.ID"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Acc.ID 2"));
-		Assert.assertTrue(servicestable.isTableColumnExists("Action"));
+		Assert.assertTrue(servicestable.tableColumnExists("Packages"));
+		Assert.assertTrue(servicestable.tableColumnExists("Type"));
+		Assert.assertTrue(servicestable.tableColumnExists("Service"));
+		Assert.assertTrue(servicestable.tableColumnExists("Description"));
+		Assert.assertTrue(servicestable.tableColumnExists("Wh. Price"));
+		Assert.assertTrue(servicestable.tableColumnExists("Retail Price"));
+		Assert.assertTrue(servicestable.tableColumnExists("Multiple"));
+		Assert.assertTrue(servicestable.tableColumnExists("Acc.ID"));
+		Assert.assertTrue(servicestable.tableColumnExists("Acc.ID 2"));
+		Assert.assertTrue(servicestable.tableColumnExists("Action"));
 	}
 	
 	public WebElement getTableRowWithActiveService(String servicename) {
@@ -153,7 +146,8 @@ public class ServicesWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-	}
+        waitABit(3000);
+    }
 	
 	public void clickArchivedTab() {
 		clickAndWait(archivedtab);
@@ -162,7 +156,8 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
-	}
+        waitABit(3000);
+    }
 
 	public void archiveService(String servicename) throws InterruptedException {
 		Thread.sleep(2000);
@@ -190,7 +185,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 
 	}
 	
-	public boolean isActiveServiceExists(String servicename) {
+	public boolean activeServiceExists(String servicename) {
 		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
 		boolean exists =  servicestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
 		return exists;

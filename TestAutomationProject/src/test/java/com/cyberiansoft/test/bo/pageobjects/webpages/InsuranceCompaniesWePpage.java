@@ -1,22 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class InsuranceCompaniesWePpage extends BaseWebPage {
 	
@@ -65,13 +62,22 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 	public boolean isAddInsuranceCompanyButtonExists() {
 		return addinsurancecompanylink.isDisplayed();
 	}
+
+    public void verifyInsuranceCompaniesDoNotExist(String insurancecompany, String insurancecompanyedited) {
+        while (insuranceCompanyExists(insurancecompany)) {
+            deleteInsuranceCompany(insurancecompany);
+        }
+        while (insuranceCompanyExists(insurancecompanyedited)) {
+            deleteInsuranceCompany(insurancecompanyedited);
+        }
+    }
 	
 	public void verifyInsuranceCompaniesTableColumnsAreVisible() {		
-		Assert.assertTrue(insurancecompaniestable.isTableColumnExists("Name"));
-		Assert.assertTrue(insurancecompaniestable.isTableColumnExists("Address"));
-		Assert.assertTrue(insurancecompaniestable.isTableColumnExists("Email"));
-		Assert.assertTrue(insurancecompaniestable.isTableColumnExists("Phone"));
-		Assert.assertTrue(insurancecompaniestable.isTableColumnExists("Order"));
+		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Name"));
+		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Address"));
+		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Email"));
+		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Phone"));
+		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Order"));
 	}
 	
 	public String getTableInsuranceCompanyAddress(String insurancecompany) {
@@ -104,27 +110,29 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 		return insurancecompanyphone;
 	}
 		
-	public WebElement getTableRowWithInsuranceCompany(String insurancecompany) {
-		List<WebElement> rows = getInsuranceCompaniesTableRows();
-		for (WebElement row : rows) {
+	private WebElement getTableRowWithInsuranceCompany(String insurancecompany) {
+        List<WebElement> rows = getInsuranceCompaniesTableRows();
+        for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[3]")).getText().contains(insurancecompany)) {
 				return row;
 			}
-		} 
+		}
 		return null;
-	}	
+	}
 	
 	public List<WebElement> getInsuranceCompaniesTableRows() {
 		return insurancecompaniestable.getTableRows();
 	}
 	
 	public void clickEditInsuranceCompany(String insurancecompany) {
+	    waitABit(3000);
 		WebElement row = getTableRowWithInsuranceCompany(insurancecompany);
 		if (row != null) {
 			clickEditTableRow(row);
 		} else 
 			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
-	}
+        waitABit(1000);
+    }
 	
 	public void deleteInsuranceCompany(String insurancecompany) {
 		WebElement row = getTableRowWithInsuranceCompany(insurancecompany);
@@ -142,7 +150,7 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");		
 	}
 	
-	public boolean isInsuranceCompanyExists(String insurancecompany) {
+	public boolean insuranceCompanyExists(String insurancecompany) {
 		boolean exists =  insurancecompaniestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insurancecompany + "']")).size() > 0;
 		return exists;
 	}
@@ -182,6 +190,7 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 	
 	public void clickAddInsuranceCompanyOKButton() {
 		clickAndWait(addinsurancecompanyOKbtn);
+		waitABit(2000);
 	}
 	
 	public void clickAddInsuranceCompanyCancelButton() {

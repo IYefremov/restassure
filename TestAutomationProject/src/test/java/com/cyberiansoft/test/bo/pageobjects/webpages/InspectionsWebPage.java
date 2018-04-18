@@ -131,19 +131,19 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	public void verifyInspectionsTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInspections")));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Status"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Inspection#"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Date"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Stock#"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("RO#"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Type"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Vehicle Info"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Customer"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Technician"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Advisor"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Amount"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Archived"));
-		Assert.assertTrue(inspectionstable.isTableColumnExists("Action"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Status"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Inspection#"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Date"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Stock#"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("RO#"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Type"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Vehicle Info"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Customer"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Technician"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Advisor"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Amount"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Archived"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Action"));
 	}
 
 	public void verifySearchFieldsAreVisible() {

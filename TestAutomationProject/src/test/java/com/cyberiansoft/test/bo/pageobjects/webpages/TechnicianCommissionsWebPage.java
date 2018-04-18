@@ -93,12 +93,12 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	public void verifyInvoicesTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Vendor Name"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order #"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Order Amount"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Tech Amount"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Vendor Bill #"));
-		Assert.assertTrue(techniciancommissionstable.isTableColumnExists("Billing Status"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Vendor Name"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Order #"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Order Amount"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Tech Amount"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Vendor Bill #"));
+		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Billing Status"));
 	}
 
 	public void verifySearchFieldsAreVisible() {

@@ -87,16 +87,16 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	}
 
 	public void verifyEmployeesTableColumnsAreVisible() {
-		Assert.assertTrue(employeestable.isTableColumnExists("Team"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Employee"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Password"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Roles"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Accounting ID"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Address"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Type"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Email"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Phone"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Commissions"));
+		Assert.assertTrue(employeestable.tableColumnExists("Team"));
+		Assert.assertTrue(employeestable.tableColumnExists("Employee"));
+		Assert.assertTrue(employeestable.tableColumnExists("Password"));
+		Assert.assertTrue(employeestable.tableColumnExists("Roles"));
+		Assert.assertTrue(employeestable.tableColumnExists("Accounting ID"));
+		Assert.assertTrue(employeestable.tableColumnExists("Address"));
+		Assert.assertTrue(employeestable.tableColumnExists("Type"));
+		Assert.assertTrue(employeestable.tableColumnExists("Email"));
+		Assert.assertTrue(employeestable.tableColumnExists("Phone"));
+		Assert.assertTrue(employeestable.tableColumnExists("Commissions"));
 	}
 
 	public void verifyTabsAreVisible() {
@@ -122,8 +122,9 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		clearAndType(searchemployeefld, username);
 	}
 
-	public void clickFindButton() throws InterruptedException {
+	public void clickFindButton() {
 		clickAndWait(findbtn);
+		waitABit(4000);
 	}
 
 	public int getEmployeesTableRowCount() {

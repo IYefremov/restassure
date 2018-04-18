@@ -1,24 +1,21 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+import java.util.Set;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class InvoiceTypesWebPage extends BaseWebPage {
 	
@@ -79,7 +76,7 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		return invoicetypedesc;
 	}
 	
-	public boolean isInvoiceTypeExists(String invoicetype) {
+	public boolean invoiceTypeExists(String invoicetype) {
 		boolean exists =  invoicestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + invoicetype + "']")).size() > 0;
 		return exists;
 	}
@@ -175,5 +172,14 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		} else {
 			Assert.assertTrue(false, "Can't find " + clientname + " client in Assigned Clients table");	
 		}
+	}
+
+    public void verifyInvoiceTypesDoNotExist(String invoicetype, String invoicetypeedited) {
+        while (invoiceTypeExists(invoicetype)) {
+            deleteInvoiceType(invoicetype);
+        }
+        while (invoiceTypeExists(invoicetypeedited)) {
+            deleteInvoiceType(invoicetypeedited);
+        }
 	}
 }

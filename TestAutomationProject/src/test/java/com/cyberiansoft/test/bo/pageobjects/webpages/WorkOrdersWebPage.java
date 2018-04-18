@@ -122,19 +122,19 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		wait.until(ExpectedConditions.visibilityOf(wotable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		// Assert.assertTrue(wotable.findElement(By.id("chkAllInvoices")).isDisplayed());
-		Assert.assertTrue(wotable.isTableColumnExists("Order#"));
-		Assert.assertTrue(wotable.isTableColumnExists("Invoice#"));
-		Assert.assertTrue(wotable.isTableColumnExists("Stock#"));
-		Assert.assertTrue(wotable.isTableColumnExists("Customer"));
-		Assert.assertTrue(wotable.isTableColumnExists("Vehicle"));
-		Assert.assertTrue(wotable.isTableColumnExists("Type / Package"));
-		Assert.assertTrue(wotable.isTableColumnExists("Date"));
-		Assert.assertTrue(wotable.isTableColumnExists("Technician"));
-		Assert.assertTrue(wotable.isTableColumnExists("Advisor"));
-		Assert.assertTrue(wotable.isTableColumnExists("Amount"));
-		Assert.assertTrue(wotable.isTableColumnExists("Notes"));
-		Assert.assertTrue(wotable.isTableColumnExists("Media"));
-		Assert.assertTrue(wotable.isTableColumnExists("Action"));
+		Assert.assertTrue(wotable.tableColumnExists("Order#"));
+		Assert.assertTrue(wotable.tableColumnExists("Invoice#"));
+		Assert.assertTrue(wotable.tableColumnExists("Stock#"));
+		Assert.assertTrue(wotable.tableColumnExists("Customer"));
+		Assert.assertTrue(wotable.tableColumnExists("Vehicle"));
+		Assert.assertTrue(wotable.tableColumnExists("Type / Package"));
+		Assert.assertTrue(wotable.tableColumnExists("Date"));
+		Assert.assertTrue(wotable.tableColumnExists("Technician"));
+		Assert.assertTrue(wotable.tableColumnExists("Advisor"));
+		Assert.assertTrue(wotable.tableColumnExists("Amount"));
+		Assert.assertTrue(wotable.tableColumnExists("Notes"));
+		Assert.assertTrue(wotable.tableColumnExists("Media"));
+		Assert.assertTrue(wotable.tableColumnExists("Action"));
 	}
 
 	public void verifySearchFieldsAreVisible() {

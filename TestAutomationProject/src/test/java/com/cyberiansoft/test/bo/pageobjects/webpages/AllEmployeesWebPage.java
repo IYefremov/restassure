@@ -58,12 +58,12 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	
 	public void verifyAllEmployeesTableColumnsAreVisible() {
 		
-		Assert.assertTrue(employeestable.isTableColumnExists("Employee"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Application / Team / Area"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Contact Info"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Password"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Accounting ID"));
-		Assert.assertTrue(employeestable.isTableColumnExists("Commissions"));
+		Assert.assertTrue(employeestable.tableColumnExists("Employee"));
+		Assert.assertTrue(employeestable.tableColumnExists("Application / Team / Area"));
+		Assert.assertTrue(employeestable.tableColumnExists("Contact Info"));
+		Assert.assertTrue(employeestable.tableColumnExists("Password"));
+		Assert.assertTrue(employeestable.tableColumnExists("Accounting ID"));
+		Assert.assertTrue(employeestable.tableColumnExists("Commissions"));
 	}
 	
 	public void verifyAllEmployeeSearchParametersAreVisible() {

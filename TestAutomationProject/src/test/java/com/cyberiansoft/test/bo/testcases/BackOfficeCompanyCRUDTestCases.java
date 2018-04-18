@@ -10,10 +10,11 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 27871:Company- Insurance Company: CRUD",
             description = "Company- Insurance Company: CRUD" )
-	public void testCompanyInsuranceCompanyCRUD() throws Exception {
+	public void testCompanyInsuranceCompanyCRUD() {
 
 		final String insurancecompany = "testinsurancecompany";
-		final String insurancecompanyaddress = "First streen valley 23/75, New York";
+        final String insurancecompanyedited = insurancecompany + "edited";
+        final String insurancecompanyaddress = "First streen valley 23/75, New York";
 		final String insurancecompanyemail = "olexandr.kramar@cyberiansoft.com";
 		final String insurancecompanyphone = "654654654";
 		final String insurancecompanyaccountingid = "testID";
@@ -25,16 +26,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
-		if (insurancecompaniespage.isInsuranceCompanyExists(insurancecompany)) {
-			insurancecompaniespage.deleteInsuranceCompany(insurancecompany);
-		}
+        insurancecompaniespage.verifyInsuranceCompaniesDoNotExist(insurancecompany, insurancecompanyedited);
 		
 		insurancecompaniespage.clickAddInsuranceCompanyButton();
 		insurancecompaniespage.createNewInsuranceCompany(insurancecompany);
 		
 		insurancecompaniespage.clickEditInsuranceCompany(insurancecompany);
 		Assert.assertEquals(insurancecompany, insurancecompaniespage.getNewInsuranceCompanyName());
-		final String insurancecompanyedited = insurancecompany + "edited";
 		insurancecompaniespage.setNewInsuranceCompanyName(insurancecompanyedited);
 		insurancecompaniespage.setNewInsuranceCompanyAddress(insurancecompanyaddress);
 		insurancecompaniespage.setNewInsuranceCompanyEmail(insurancecompanyemail);
@@ -48,7 +46,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyPhone(insurancecompany).trim());
 		
 		insurancecompaniespage.clickEditInsuranceCompany(insurancecompany);
-		Thread.sleep(1000);
 		Assert.assertEquals(insurancecompany, insurancecompaniespage.getNewInsuranceCompanyName());
 		insurancecompaniespage.setNewInsuranceCompanyName(insurancecompanyedited);
 		insurancecompaniespage.setNewInsuranceCompanyAddress(insurancecompanyaddress);
@@ -64,10 +61,10 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		insurancecompaniespage.deleteInsuranceCompanyAndCancelDeleting(insurancecompanyedited);
 		insurancecompaniespage.deleteInsuranceCompany(insurancecompanyedited);
-		Assert.assertFalse(insurancecompaniespage.isInsuranceCompanyExists(insurancecompanyedited));
+		Assert.assertFalse(insurancecompaniespage.insuranceCompanyExists(insurancecompanyedited));
 	}
 
-	@Test(testName = "Test Case 27876:Company-Teams: CRUD", description = "Company-Teams: CRUD" )
+    @Test(testName = "Test Case 27876:Company-Teams: CRUD", description = "Company-Teams: CRUD" )
 	public void testCompanyTeamsCRUD() throws Exception {
 
 		final String team = "Testteam";
@@ -96,9 +93,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		TeamsWebPage teamspage = companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(team).clickFindButton();
-		teamspage.deleteTeamIfExists(team);
-		teamspage.deleteTeamIfExists(teamedited);
-		teamspage.createNewTeam(team , "Default area");	
+		teamspage.verifyTeamsDoNotExist(team, teamedited);
+
+		teamspage.createNewTeam(team , "Default area");
 		teamspage.setTeamLocationSearchCriteria(team).clickFindButton();
 		
 		NewTeamsDialogWebPage newteamsdialog = teamspage.clickEditTeam(team);
@@ -138,7 +135,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		teamspage.deleteTeamAndCancelDeleting(teamedited);
 		teamspage.deleteTeam(teamedited);
-		Assert.assertFalse(teamspage.isTeamExists(teamedited));
+		Assert.assertFalse(teamspage.teamExists(teamedited));
 	}
 
 	@Test(testName = "Test Case 27877:Company- Jobs: CRUD", description = "Company- Jobs: CRUD")
@@ -203,7 +200,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.deleteJob(jobEdited);
 		Assert.assertFalse(jobsPage.isJobPresent(jobEdited));
 	}
-	
+
 	@Test(testName = "Test Case 27878:Company- Service Advisors: CRUD", description = "Company- Service Advisors: CRUD" )
 	public void testCompanyServiceAdvisorsCRUD() throws Exception {
 
@@ -233,7 +230,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
 		serviceadvisorspage.clickFindButton();
 		
-		if (serviceadvisorspage.isServiceAdvisorExists(firstname, lastname)) {
+		if (serviceadvisorspage.serviceAdvisorExists(firstname, lastname)) {
 			serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 		}
 		serviceadvisorspage.clickServiceAdvisorAddButton();
@@ -279,33 +276,26 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 		serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
 		serviceadvisorspage.clickFindButton();
-		Assert.assertFalse(serviceadvisorspage.isServiceAdvisorExists(firstname, lastname));		
+		Assert.assertFalse(serviceadvisorspage.serviceAdvisorExists(firstname, lastname));
 	}
 	
 	@Test(testName = "Test Case 28114:Company- Service Contract Types: CRUD", description = "Company- Service Contract Types: CRUD")
-	public void testCompanyServiceContractTypesCRUD() throws Exception {
-
+	public void testCompanyServiceContractTypesCRUD() {
 
 		final String contracttype = "test123CD";
-				
 		final String contracttypeedited = "test123CD Edited";
 		final String contracttypedesc = "Test description";
 		final String contracttypeaccid = "123";
 		final String contracttypeaccid2 = "456";
 		final String contracttypeprice = "112";
 		final String contracttypesalesprice = "223";
-		
-		
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServiceContractTypesWebPage servicecontracttypespage = companypage.clickServiceContractTypesLink();
-		if (servicecontracttypespage.isServiceContractTypeExists(contracttype)) {
-			servicecontracttypespage.deleteServiceContractType(contracttype);
-		}
-		if (servicecontracttypespage.isServiceContractTypeExists(contracttypeedited)) {
-			servicecontracttypespage.deleteServiceContractType(contracttypeedited);
-		}
+		servicecontracttypespage.verifyServiceContractTypesDoNotExist(contracttype, contracttypeedited);
+
 		servicecontracttypespage.clickAddServiceContractTypeButton();
 		servicecontracttypespage.createNewServiceContractType(contracttype);
 		servicecontracttypespage.clickEditServiceContractType(contracttype);
@@ -344,25 +334,19 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28119:Company- Price Matrix: CRUD", description = "Company- Price Matrix: CRUD")
-	public void testCompanyPriceMatrixCRUD() throws Exception {
-
+	public void testCompanyPriceMatrixCRUD() {
 
 		final String pricematrixname = "test123CD";
-				
 		final String pricematrixnameedited = "test123CD Edited";
 		final String pricematrixservice = "VD_PriceMatrix";
 		final String pricematrixtype = "Labor";
-		
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		PriceMatricesWebPage pricematricespage = companypage.clickPriceMatricesLink();
-		
-		if (pricematricespage.isPriceMatrixPresent(pricematrixname)) {
-			pricematricespage.deletePriceMatrix(pricematrixname);
-		}
-		
+		pricematricespage.verifyPriceMatricesDoNotExist(pricematrixname, pricematrixnameedited);
+
 		pricematricespage.clickAddPriceMarixButton();
 		pricematricespage.setPriceMarixName(pricematrixname);
 		pricematricespage.saveNewPriceMatrix();
@@ -387,25 +371,23 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		pricematricespage.deletePriceMatrix(pricematrixnameedited);
 		Assert.assertFalse(pricematricespage.isPriceMatrixPresent(pricematrixnameedited));
 	}
-	
+
+	//todo fails
 	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD")
 	public void testCompanyInvoiceTypeCRUD() {
-
 
 		final String invoicetype = "test123CD";
 		final String invoicetypeedited = "test123CD edited";		
 		final String invoicetypedesc = "Test description";
 		
-		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
-		
-		if(invoicestypespage.isInvoiceTypeExists(invoicetype)) {
-			invoicestypespage.deleteInvoiceType(invoicetype);
-		}
-		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
+
+		invoicestypespage.verifyInvoiceTypesDoNotExist(invoicetype, invoicetypeedited);
+
+        NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 		newinvoicetypedialog.createInvoiceType(invoicetype);
 		newinvoicetypedialog = invoicestypespage.clickEditInvoiceType(invoicetype);
 		newinvoicetypedialog.setInvoiceTypeName(invoicetypeedited);
@@ -421,12 +403,11 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		invoicestypespage.deleteInvoiceTypeAndCancelDeleting(invoicetypeedited);
 		invoicestypespage.deleteInvoiceType(invoicetypeedited);
-		Assert.assertFalse(invoicestypespage.isInvoiceTypeExists(invoicetypeedited));
+		Assert.assertFalse(invoicestypespage.invoiceTypeExists(invoicetypeedited));
 	}
 	
 	@Test(testName = "Test Case 28130:Company - Service Request Type: CRUD", description = "Company- Service Request Type: CRUD")
-	public void testCompanyServiceRequestTypeCRUD() throws Exception {
-
+	public void testCompanyServiceRequestTypeCRUD() {
 
 		final String srtype = "test123CD";
 		final String srtypeedited = "test123CD edited";		
@@ -437,9 +418,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServiceRequestTypesWebPage servicerequesttypespage= companypage.clickServiceRequestTypesLink();
-		if (servicerequesttypespage.isServiceRequestTypeExists(srtype)) {
-			servicerequesttypespage.deleteServiceRequestType(srtype);
-		}
+		servicerequesttypespage.verifyServiceRequestsTypesDonNotExist(srtype, srtypeedited);
 		servicerequesttypespage.clickAddServiceRequestTypeButton();
 		servicerequesttypespage.createNewServiceRequestType(srtype);
 		
@@ -477,10 +456,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		EmailTemplatesWebPage emailtemplatespage = companypage.clickEmailTemplatesLink();
-		if (emailtemplatespage.isEmailTemplateExists(templatename)) {
-			emailtemplatespage.deleteEmailTemplate(templatename);
-		}
-		
+		emailtemplatespage.verifyEmailTemplatesDoNoExist(templatename, templatenameedited);
+
 		emailtemplatespage.clickAddMailTemplateButton();
 		emailtemplatespage.createNewEmailTemplate(templatename, templatesubject);
 		emailtemplatespage.clickEditEmailTemplate(templatename);
@@ -500,8 +477,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28218:Company - Print Server: CRUD", description = "Company- Print Server: CRUD")
-	public void testCompanyPrintServerCRUD() throws Exception {
-
+	public void testCompanyPrintServerCRUD() {
 
 		final String printsrvname = "test print server";
 		final String printsrvnameedited = "new test print server";
@@ -509,11 +485,10 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();		
+		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		PrintServersWebPage printserverspage = companypage.clickPrintServersLink();
-		if (printserverspage.isPrintServerExists(printsrvname)) {
-			printserverspage.deletePrintServer(printsrvname);
-		}
+		printserverspage.verifyPrintServersDoNotExist(printsrvname, printsrvnameedited);
+
 		printserverspage.clickAddPrintServerButton();
 		printserverspage.addNewPrintServer(printsrvname);
 		printserverspage.clickEditPrintServer(printsrvname);
@@ -522,20 +497,19 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		printserverspage.setPrintServerDescription(printsrvdesc);
 		printserverspage.clickNewPrintServerCancelButton();
 		Assert.assertEquals("", printserverspage.getTablePrintServerDescription(printsrvname).trim());
-		
-		
+
 		printserverspage.clickEditPrintServer(printsrvname);
 		printserverspage.addNewPrintServer(printsrvnameedited, printsrvdesc);
 		Assert.assertEquals(printsrvdesc, printserverspage.getTablePrintServerDescription(printsrvnameedited).trim());
 		
 		printserverspage.deletePrintServerAndCancelDeleting(printsrvnameedited);
 		printserverspage.deletePrintServer(printsrvnameedited);
-		Assert.assertFalse(printserverspage.isPrintServerExists(printsrvnameedited));
+		Assert.assertFalse(printserverspage.printServerExists(printsrvnameedited));
 	}
 
-@Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
-	public void testCompanyLicenceCRUD() throws Exception {
-
+	//todo fails
+    @Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
+	public void testCompanyLicenceCRUD() {
 
 		final String licenceapp = "tf145";
 		final String licencetype = "Support";
@@ -548,10 +522,10 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		managelicencespage.selectLicenceSearchApplicationParameter(licenceapp);
 		managelicencespage.clickFindButton();
 		
-		if (managelicencespage.isLicenceApplicationExists(licenceapp)) {
+		if (managelicencespage.licenceApplicationExists(licenceapp)) {
 			managelicencespage.deleteLicenceApplication(licenceapp);
 		}
-		
+
 		managelicencespage.clickAddManageLicenceButton();
 //		managelicencespage.selectNewLicenceApplication(licenceapp);
 		String deflicencetype = managelicencespage.getNewLicenceType();
@@ -569,7 +543,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		
 		managelicencespage.deleteLicenceApplicationAndCancelDeleting(licenceapp);
 		managelicencespage.deleteLicenceApplication(licenceapp);
-		Assert.assertFalse(managelicencespage.isLicenceApplicationExists(licenceapp));
+		Assert.assertFalse(managelicencespage.licenceApplicationExists(licenceapp));
 	}
 	
 	@Test(testName = "Test Case 28422:Company- Timesheet Types: CRUD", description = "Company- Timesheet Types: CRUD")
@@ -585,9 +559,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		TimesheetTypesWebPage timesheettypespage = companypage.clickTimesheetTypesLink();
-		if (timesheettypespage.isTimesheetTypeExists(timesheettype)) {
-			timesheettypespage.deleteTimesheetType(timesheettype);
-		}
+        timesheettypespage.verifyTimeSheetsTypeDoNoExist(timesheettype, timesheettypeedited);
+
 		timesheettypespage.clickAddTimesheetTypeButton();
 		String tsdefaultentrytype = timesheettypespage.createNewTimesheetType(timesheettype);
 		
@@ -684,19 +657,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		final String servicepackageformtype = "Order";	
 		final String servicepackagetechcomm = "2.00";	
 		final String servicepackageadvcomm = "5.00";
-		
-		final String servicepackagenameed = "testpackage2";
+		final String servicepackagenameedited = "testpackage2";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServicePackagesWebPage servicepackagespage = companypage.clickServicePackagesLink();
-		if (servicepackagespage.isServicePackageExists(servicepackagename)) {
-			servicepackagespage.deleteServicePackage(servicepackagename);
-		}
-		if (servicepackagespage.isServicePackageExists(servicepackagenameed)) {
-			servicepackagespage.deleteServicePackage(servicepackagenameed);
-		}
+        servicepackagespage.verifyServicePackagesDoNotExist(servicepackagename, servicepackagenameedited);
 
 		NewServicePackageDialogWebPage newservicepackagedialog = servicepackagespage.clickAddServicePackageButton();
 		newservicepackagedialog.setNewServicePackageName(servicepackagename);
@@ -710,7 +677,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(servicepackagename), servicepackageformtype);
 		servicepackagespage.clickEditServicePackage(servicepackagename);
 		
-		newservicepackagedialog.setNewServicePackageName(servicepackagenameed);
+		newservicepackagedialog.setNewServicePackageName(servicepackagenameedited);
 		newservicepackagedialog.clickCancelButton();
 		
 		Assert.assertEquals(servicepackagespage.getTableServicePackageType(servicepackagename), servicepackagetype);
@@ -718,13 +685,12 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicepackagespage.clickEditServicePackage(servicepackagename);
 		Assert.assertEquals(newservicepackagedialog.getNewServicePackageName(), servicepackagename);
 		
-		newservicepackagedialog.setNewServicePackageName(servicepackagenameed);
+		newservicepackagedialog.setNewServicePackageName(servicepackagenameedited);
 		newservicepackagedialog.clickOKButton();
-		Assert.assertEquals(servicepackagespage.getTableServicePackageType(servicepackagenameed), servicepackagetype);
-		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(servicepackagenameed), servicepackageformtype);
+		Assert.assertEquals(servicepackagespage.getTableServicePackageType(servicepackagenameedited), servicepackagetype);
+		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(servicepackagenameedited), servicepackageformtype);
 		
-		servicepackagespage.deleteServicePackageAndCancelDeleting(servicepackagenameed);
-		servicepackagespage.deleteServicePackage(servicepackagenameed);
-
+		servicepackagespage.deleteServicePackageAndCancelDeleting(servicepackagenameedited);
+		servicepackagespage.deleteServicePackage(servicepackagenameedited);
 	}
 }

@@ -22,7 +22,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
-		if (insurancecompaniespage.isInsuranceCompanyExists(insurancecompanyname)) {
+		if (insurancecompaniespage.insuranceCompanyExists(insurancecompanyname)) {
 			insurancecompaniespage.deleteInsuranceCompany(insurancecompanyname);
 		}
 		insurancecompaniespage.clickAddInsuranceCompanyButton();
@@ -65,7 +65,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		serviceadvisorspage.makeSearchPanelVisible();
 		serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
 		serviceadvisorspage.clickFindButton();
-		if (serviceadvisorspage.isServiceAdvisorExists(firstname, lastname)) {
+		if (serviceadvisorspage.serviceAdvisorExists(firstname, lastname)) {
 			serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 		}
 		serviceadvisorspage.clickServiceAdvisorAddButton();
@@ -364,7 +364,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		if (employeespage.activeEmployeeExists(employeefirstname, employeelastname)) {
 			employeespage.archiveEmployee(employeefirstname, employeelastname);
 		}
-
 		if (employeespage.activeEmployeeExists(employeefirstnameed, employeelastnameed)) {
 			employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
 		}
@@ -455,10 +454,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicespage.setServiceSearchCriteria(servicename);
 		servicespage.clickFindButton();
 
-		if (servicespage.isActiveServiceExists(servicename)) {
+		if (servicespage.activeServiceExists(servicename)) {
 			servicespage.archiveService(servicename);
 		}
-		if (servicespage.isActiveServiceExists(servicenameed)) {
+		if (servicespage.activeServiceExists(servicenameed)) {
 			servicespage.archiveService(servicenameed);
 		}
 		NewServiceDialogWebPage newservicedialog = servicespage.clickAddServiceButton();
@@ -559,7 +558,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
-		if (invoicestypespage.isInvoiceTypeExists(invoicetype)) {
+		if (invoicestypespage.invoiceTypeExists(invoicetype)) {
 			invoicestypespage.deleteInvoiceType(invoicetype);
 		}
 

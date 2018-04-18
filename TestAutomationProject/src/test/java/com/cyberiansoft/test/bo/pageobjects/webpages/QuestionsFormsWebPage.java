@@ -1,12 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +11,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class QuestionsFormsWebPage extends BaseWebPage {
 
@@ -70,23 +67,23 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 
 	public void verifyQuestionSectionsTableColumnsAreVisible() {
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[contains(text(), 'Question Sections')]")).isDisplayed());
-		Assert.assertTrue(questionformstable.isTableColumnExists("Form Name"));
-		Assert.assertTrue(questionformstable.isTableColumnExists("Order"));
+		Assert.assertTrue(questionformstable.tableColumnExists("Form Name"));
+		Assert.assertTrue(questionformstable.tableColumnExists("Order"));
 	}
 
 	public void verifyQuestionFormsTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(questionsectionstable.getWrappedElement()));
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[contains(text(), 'Question Forms')]")).isDisplayed());
-		Assert.assertTrue(questionsectionstable.isTableColumnExists("Section"));
-		Assert.assertTrue(questionsectionstable.isTableColumnExists("Expanded"));
-		Assert.assertTrue(questionsectionstable.isTableColumnExists("Copy"));
+		Assert.assertTrue(questionsectionstable.tableColumnExists("Section"));
+		Assert.assertTrue(questionsectionstable.tableColumnExists("Expanded"));
+		Assert.assertTrue(questionsectionstable.tableColumnExists("Copy"));
 	}
 
 	public void verifyPrintTemplatesTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(printtemplatestable.getWrappedElement()));
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[contains(text(), 'Print Templates')]")).isDisplayed());
-		Assert.assertTrue(printtemplatestable.isTableColumnExists("Print Template"));
-		Assert.assertTrue(printtemplatestable.isTableColumnExists("Description"));
+		Assert.assertTrue(printtemplatestable.tableColumnExists("Print Template"));
+		Assert.assertTrue(printtemplatestable.tableColumnExists("Description"));
 	}
 
 	public void clickAddQuestionSectionButton() {
@@ -96,11 +93,12 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	public void createQuestionSection(String questionsectionname) {
 		if (isQuestionSectionExists(questionsectionname)) {
 			deleteQuestionSections(questionsectionname);
-		};
+		}
 		clickAddQuestionSectionButton();
 		clearAndType(newquestionsectionnamefld, questionsectionname);
 		clickAndWait(newquestionsectionnamedialogOKbtn);
-	}
+        waitABit(3000);
+    }
 
 	public void createQuestionSection(String questionsectionname, boolean expanded) {
 		if (isQuestionSectionExists(questionsectionname)) {

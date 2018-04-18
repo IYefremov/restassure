@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,12 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ExpensesTypesWebPage extends WebPageWithPagination {
 	
@@ -41,8 +38,8 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	
 	public void verifyExpensesTypesColumnsAreVisible() {
 		
-		Assert.assertTrue(expensestypestable.isTableColumnExists("Name"));
-		Assert.assertTrue(expensestypestable.isTableColumnExists("Category"));
+		Assert.assertTrue(expensestypestable.tableColumnExists("Name"));
+		Assert.assertTrue(expensestypestable.tableColumnExists("Category"));
 	}
 	
 	public List<WebElement> getExpensesTypesTableRows() {
@@ -75,6 +72,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	
 	public void clickNewExpenceTypeOKButton() {
 		clickAndWait(newexpencetypeOKbtn);
+		waitABit(3000);
 	}
 	
 	public void clickEditButtonForExpenseType(String expensetype) {

@@ -3,7 +3,6 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.webelements.ComboBox;
@@ -69,15 +67,15 @@ public class ApplicationsWebPage extends WebPageWithPagination {
 	
 	public void verifyApplicationsTableColumnsAreVisible() {
 		
-		Assert.assertTrue(applicationstable.isTableColumnExists("Application"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Description"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Host"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Culture"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Theme"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("TimeZone"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Status"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Created"));
-		Assert.assertTrue(applicationstable.isTableColumnExists("Modified"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Application"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Description"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Host"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Culture"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Theme"));
+		Assert.assertTrue(applicationstable.tableColumnExists("TimeZone"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Status"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Created"));
+		Assert.assertTrue(applicationstable.tableColumnExists("Modified"));
 	}
 	
 	public void verifyApplicationsSearchParametersAreVisible() {

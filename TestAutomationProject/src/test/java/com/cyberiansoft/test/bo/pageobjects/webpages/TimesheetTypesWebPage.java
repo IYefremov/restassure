@@ -1,24 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class TimesheetTypesWebPage extends WebPageWithPagination {
 	
@@ -94,6 +87,7 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 	
 	public void clickNewTimesheetTypeOKButton() {
 		clickAndWait(newtimesheettypeOKbtn);
+		waitABit(2000);
 	}
 	
 	public void clickNewTimesheetTypeCancelButton() {
@@ -175,5 +169,13 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");	
 		}
 	}
-	
+
+    public void verifyTimeSheetsTypeDoNoExist(String timesheettype, String timesheettypeedited) {
+        while (isTimesheetTypeExists(timesheettype)) {
+            deleteTimesheetType(timesheettype);
+        }
+        while (isTimesheetTypeExists(timesheettypeedited)) {
+            deleteTimesheetType(timesheettypeedited);
+        }
+    }
 }

@@ -24,7 +24,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.verifyRRepairLocationsTableColumnsAreVisible();
 		repairlocationspage.makeSearchPanelVisible().selectSearchStatus(locationstatus).setSearchLocation(locationname).clickFindButton();
 		
-		Assert.assertTrue(repairlocationspage.isRepairLocationExists(locationname));
+		Assert.assertTrue(repairlocationspage.repairLocationExists(locationname));
 		
 	}
 	
@@ -62,7 +62,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28180:Monitor: Repair Location - in Team default Repair location edit", description = "Monitor: Repair Location - in Team default Repair location edit")
-	public void testMonitorRepairLocationInTeamDefaultRepairLocationEdit() throws Exception {
+	public void testMonitorRepairLocationInTeamDefaultRepairLocationEdit() {
 		
 		final String repairlocationname = "test_loc";
 		final String repairlocationstatus = "Active";
@@ -94,7 +94,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 29848:Monitor - Repair Locations: Department Edit", description = "Monitor - Repair Locations: Department Edit")
-	public void testMonitorRepairLocationsDepartmentEdit() throws Exception {
+	public void testMonitorRepairLocationsDepartmentEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
@@ -142,7 +142,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 29849:Monitor - Repair Locations: Phases Edit", description = "Monitor - Repair Locations: Phases Edit")
-	public void testMonitorRepairLocationsPhasesEdit() throws Exception {
+	public void testMonitorRepairLocationsPhasesEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
@@ -226,6 +226,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
 
+	//todo ignored
 	@Test(testName = "Test Case 30729:Monitor - Repair Locations: Clients Edit", description = "Monitor - Repair Locations: Clients Edit")
 	public void testMonitorRepairLocationsClientsEdit() {
 		
@@ -326,6 +327,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
 
+	//todo ignored
 	@Test(testName = "Test Case 31404:Monitor - Repair Locations: Managers Edit", description = "Monitor - Repair Locations: Managers Edit")
 	public void testMonitorRepairLocationsManagersEdit() {
 		
@@ -374,7 +376,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 31405:Monitor - Repair Locations: User Settings Edit", description = "Monitor - Repair Locations: User Settings Edit")
-	public void testMonitorRepairLocationsUserSettingsEdit() throws Exception {
+	public void testMonitorRepairLocationsUserSettingsEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
@@ -421,7 +423,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 30726:Monitor - Repair Locations: not active status for default repair location", description = "Monitor - Repair Locations: not active status for default repair location")
-	public void testMonitorRepairLocationsNotActiveStatusForDefaultRepairLocation() throws Exception {
+	public void testMonitorRepairLocationsNotActiveStatusForDefaultRepairLocation() {
 		
 		final String teamname = "TestTeamNotActiveStatus";
 		final String teamdefaultlocation = "Not active Loc";

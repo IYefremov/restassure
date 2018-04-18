@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.cyberiansoft.test.bo.utils.RequestMethod;
@@ -93,16 +91,16 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 	
 	public void verifyServiceContactsTableColumnsAreVisible() {	
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllItems")));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Invoice #"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Invoice #"));
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "ID /\nContract#");
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[6]")).getText(), "Issue Date /\nExpiration");
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Status"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Status"));
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[8]")).getText(), "Type /\nDescription");
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Client"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Vehicle"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Client"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Vehicle"));
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[11]")).getText(), "Dealer /\nAgent Name");
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Valid"));
-		Assert.assertTrue(repairlocationstable.isTableColumnExists("Service Request"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Valid"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Service Request"));
 	}
 	
 	public void verifySearchFieldsAreVisible() {

@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class PrintServersWebPage extends BaseWebPage {
 	
@@ -45,6 +43,7 @@ public class PrintServersWebPage extends BaseWebPage {
 	
 	public void clickAddPrintServerButton() {
 		clickAndWait(addprintserveerebtn);
+		waitABit(2000);
 	}
 	
 	public void setPrintServerName(String servername) {
@@ -57,6 +56,7 @@ public class PrintServersWebPage extends BaseWebPage {
 	
 	public void clickNewPrintServerOKButton() {
 		clickAndWait(newprintserverOKbtn);
+		waitABit(8000);
 	}
 	
 	public void clickNewPrintServerCancelButton() {
@@ -98,12 +98,12 @@ public class PrintServersWebPage extends BaseWebPage {
 		return serverdesc;
 	}
 	
-	public boolean isPrintServerExists(String servername) {
+	public boolean printServerExists(String servername) {
 		boolean exists =  printserverstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servername + "']")).size() > 0;
 		return exists;
 	}
 	
-	public void clickEditPrintServer(String servername) throws InterruptedException {
+	public void clickEditPrintServer(String servername) {
 		WebElement row = getTableRowWithPrintServer(servername);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -120,7 +120,7 @@ public class PrintServersWebPage extends BaseWebPage {
 		}
 	}
 	
-	public void deletePrintServerAndCancelDeleting(String servername) throws InterruptedException {
+	public void deletePrintServerAndCancelDeleting(String servername) {
 		WebElement row = getTableRowWithPrintServer(servername);
 		if (row != null) {
 			cancelDeletingTableRow(row);
@@ -128,4 +128,13 @@ public class PrintServersWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + servername + " print server");	
 		}
 	}
+
+    public void verifyPrintServersDoNotExist(String printsrvname, String printsrvnameedited) {
+        while (printServerExists(printsrvname)) {
+            deletePrintServer(printsrvname);
+        }
+        while (printServerExists(printsrvnameedited)) {
+            deletePrintServer(printsrvnameedited);
+        }
+    }
 }

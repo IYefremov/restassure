@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,12 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class SuppliesWebPage extends WebPageWithPagination {
 	
@@ -40,7 +38,7 @@ public class SuppliesWebPage extends WebPageWithPagination {
 	
 	public void verifySuppliesTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(suppliestable.getWrappedElement()));
-		Assert.assertTrue(suppliestable.isTableColumnExists("Supply"));
+		Assert.assertTrue(suppliestable.tableColumnExists("Supply"));
 	}
 	
 	public List<WebElement> getSuppliesTableRows() {
@@ -65,7 +63,8 @@ public class SuppliesWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.visibilityOf(newsupplynamefld.getWrappedElement()));
 		clearAndType(newsupplynamefld, newsupplyname);
 		clickAndWait(newsupplyOKbtn);
-	}
+        waitABit(3000);
+    }
 	
 	public void clickEditButtonForSupply(String supplyname) {
 		List<WebElement> questionformsrows = getSuppliesTableRows();

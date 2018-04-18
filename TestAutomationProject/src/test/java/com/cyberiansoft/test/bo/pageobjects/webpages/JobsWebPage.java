@@ -104,13 +104,13 @@ public class JobsWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyJobsTableColumnsAreVisible() {	
-		Assert.assertTrue(jobstable.isTableColumnExists("Job"));
-		Assert.assertTrue(jobstable.isTableColumnExists("Description"));
-		Assert.assertTrue(jobstable.isTableColumnExists("Client"));
-		Assert.assertTrue(jobstable.isTableColumnExists("Start Date"));
-		Assert.assertTrue(jobstable.isTableColumnExists("End Date"));
-		Assert.assertTrue(jobstable.isTableColumnExists("AccountingID"));
-		Assert.assertTrue(jobstable.isTableColumnExists("AccountingID2"));
+		Assert.assertTrue(jobstable.tableColumnExists("Job"));
+		Assert.assertTrue(jobstable.tableColumnExists("Description"));
+		Assert.assertTrue(jobstable.tableColumnExists("Client"));
+		Assert.assertTrue(jobstable.tableColumnExists("Start Date"));
+		Assert.assertTrue(jobstable.tableColumnExists("End Date"));
+		Assert.assertTrue(jobstable.tableColumnExists("AccountingID"));
+		Assert.assertTrue(jobstable.tableColumnExists("AccountingID2"));
 	}	
 	
 	public String getTableJobDescription(String job) {
@@ -175,6 +175,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
+		waitABit(3000);
 	}
 	
 	public int getJobsTableRowsCount() {
