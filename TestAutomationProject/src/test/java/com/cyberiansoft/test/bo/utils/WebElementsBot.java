@@ -26,36 +26,44 @@ public class WebElementsBot {
 	    try {
 	    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
 	    	.until(ExpectedConditions.elementToBeClickable(element));
-	        element.click();	        
-	    } catch (StaleElementReferenceException sere) {
-	        waitABit(4000);
-	        // simply retry finding the element in the refreshed DOM
-	    	element.click();
+	    } catch (StaleElementReferenceException | TimeoutException e) {
+            // just retry finding the element in the refreshed DOM
+            waitABit(4000);
 	    }
-	    catch (TimeoutException toe) {
-//	        test.log(logStatus.Error, "Element identified by " + by.toString() + " was not clickable after 10 seconds");
-	    }
-	}
+        element.click();
+	    waitABit(2000);
+    }
 	
 	public static void clickAndWait(WebElement element) {
 	    new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
 	    element.click();
 	    waitUntilPageReloaded();
+	    waitABit(4000);
 	}
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value){
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
-		try{
-		combobox.click();
-		}catch(Exception e){}
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		waitABit(1000);
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
-		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(WebElement::getText).forEach(System.out::println);
-		List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
-		items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
+		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
+                .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		try {
+		    combobox.click();
+		} catch (Exception ignored) {}
+		try {
+            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
+                    .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+            waitABit(1000);
+            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
+                    .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+        } catch (TimeoutException e) {
+            waitABit(1500);
+        }
+//		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(WebElement::getText).forEach(System.out::println);
+		try {
+		    List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
+            items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
+        } catch (Exception e) {
+            System.err.println("The value has not been found! " + e);
+        }
 		waitABit(1500);
-		//WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
 	}
 	
 //	public static void selectTimeSheetComboboxValue(ComboBox combobox, DropDown droplist, String value) {
@@ -147,6 +155,7 @@ public class WebElementsBot {
         } catch (TimeoutException ignored) {
     	    waitABit(5000);
         }
+        waitABit(1000);
     }
 
 	/* Wait For */

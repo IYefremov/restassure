@@ -204,7 +204,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 27878:Company- Service Advisors: CRUD", description = "Company- Service Advisors: CRUD" )
 	public void testCompanyServiceAdvisorsCRUD() throws Exception {
 
-
 		final String email = "test123CD@domain.com";
 		final String psw = "111aaa";
 		final String customer = "001 - Test Company";
@@ -230,7 +229,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
 		serviceadvisorspage.clickFindButton();
 		
-		if (serviceadvisorspage.serviceAdvisorExists(firstname, lastname)) {
+		while (serviceadvisorspage.serviceAdvisorExists(firstname, lastname)) {
 			serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
 		}
 		serviceadvisorspage.clickServiceAdvisorAddButton();

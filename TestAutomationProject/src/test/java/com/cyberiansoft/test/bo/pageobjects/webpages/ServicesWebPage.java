@@ -146,7 +146,6 @@ public class ServicesWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-        waitABit(3000);
     }
 	
 	public void clickArchivedTab() {
@@ -156,7 +155,6 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
-        waitABit(3000);
     }
 
 	public void archiveService(String servicename) throws InterruptedException {

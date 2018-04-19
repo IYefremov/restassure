@@ -72,7 +72,6 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	
 	public void clickNewExpenceTypeOKButton() {
 		clickAndWait(newexpencetypeOKbtn);
-		waitABit(3000);
 	}
 	
 	public void clickEditButtonForExpenseType(String expensetype) {

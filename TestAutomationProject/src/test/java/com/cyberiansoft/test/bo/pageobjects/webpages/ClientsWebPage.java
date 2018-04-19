@@ -245,9 +245,10 @@ public class ClientsWebPage extends WebPageWithPagination {
                 .findElements(By.tagName("td")).get(1).findElement(By.tagName("input")).click();
 
         driver.switchTo().alert().accept();
-			waitABit(500);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+        waitForLoading();
+//			waitABit(500);
+//			wait.until(
+//					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public void restoreClient(String clientname) {
@@ -394,7 +395,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return exists;
 	}
 
-	public boolean isClientExistsInArchivedTable(String clientname) {
+	public boolean clientExistsInArchivedTable(String clientname) {
 		boolean exists = clientsarchivedtable.getWrappedElement()
 				.findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
 		return exists;
@@ -488,4 +489,14 @@ public class ClientsWebPage extends WebPageWithPagination {
                 "arguments[0].scrollIntoView();", element);
 		Thread.sleep(500); 
 	}
+
+    public void verifyClientIsPresentInActiveTab(String companyname) {
+        if (!isClientPresentInTable(companyname)) {
+            clickArchivedTab();
+            searchClientByName(companyname);
+            Assert.assertTrue(clientExistsInArchivedTable(companyname));
+            restoreClient(companyname);
+            clickActiveTab();
+        }
+    }
 }

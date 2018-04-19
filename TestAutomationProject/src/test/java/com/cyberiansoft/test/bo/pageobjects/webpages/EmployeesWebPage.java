@@ -124,7 +124,6 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	public void clickFindButton() {
 		clickAndWait(findbtn);
-		waitABit(4000);
 	}
 
 	public int getEmployeesTableRowCount() {

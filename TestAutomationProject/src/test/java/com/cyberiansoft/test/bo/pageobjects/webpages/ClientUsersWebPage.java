@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -72,7 +73,6 @@ public class ClientUsersWebPage extends BaseWebPage {
 		} else {
 			Assert.assertTrue(false, "Can't find client: " + userfstname);
 		}
-
 		driver.switchTo().alert().accept();
 		waitUntilPageReloaded();
 
@@ -85,18 +85,21 @@ public class ClientUsersWebPage extends BaseWebPage {
 			if (!window.equals(thisWindow))
 				mainWindow = window;
 		}
-		driver.switchTo().window(thisWindow).close();
-		driver.switchTo().window(mainWindow);
-		driver.switchTo().defaultContent();
+		try {
+            driver.switchTo().window(thisWindow).close();
+            driver.switchTo().window(mainWindow);
+            driver.switchTo().defaultContent();
+        } catch (NoSuchWindowException ignored) {}
 	}
 
-	public void clickResendButton() throws InterruptedException {
+	public void clickResendButton() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_lbMsg")));
 		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl06_btnResend")).click();
 		driver.switchTo().alert().accept();
-		Thread.sleep(1000);
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
+//		Thread.sleep(1000);
+//		wait.until(
+//				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 }

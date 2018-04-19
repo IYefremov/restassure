@@ -80,13 +80,11 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	
 	public ManageLicencesWebPage clickFindButton() {
 		clickAndWait(findbtn);
-		waitABit(3000);
 		return this;
 	}
 	
 	public void clickAddManageLicenceButton() {
 		clickAndWait(addmanagelicensebtn);
-		waitABit(2000);
 	}
 	
 	public void selectNewLicenceApplication(String licenceapp) {
@@ -104,7 +102,6 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 	
 	public void clickNewLicenceOKButton() {
 		clickAndWait(newlicenceOKbtn);
-		waitABit(4000);
 	}
 	
 	public void clickNewLicenceCancelButton() {

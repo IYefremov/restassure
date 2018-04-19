@@ -229,7 +229,6 @@ public class InspectionsWebPage extends WebPageWithFilter {
 
 	public void clickFindButton() {
 		clickAndWait(findbtn);
-		waitABit(400);
 		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 	}
 

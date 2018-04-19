@@ -95,7 +95,6 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 	
 	public void saveNewPriceMatrix() {
 		clickAndWait(OKnewPricemarixbtn);
-		waitABit(2000);
 	}
 	
 	public void clickCancelNewPriceMatrix() {

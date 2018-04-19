@@ -90,7 +90,6 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public void clickNewServiceRequestTypeOKButton() {
 		clickAndWait(newservicerequesttypeOKbtn);
-		waitABit(2000);
 	}
 
 	public void clickNewServiceRequestTypeCancelButton() {

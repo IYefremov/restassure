@@ -97,7 +97,6 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 		clickAddQuestionSectionButton();
 		clearAndType(newquestionsectionnamefld, questionsectionname);
 		clickAndWait(newquestionsectionnamedialogOKbtn);
-        waitABit(3000);
     }
 
 	public void createQuestionSection(String questionsectionname, boolean expanded) {

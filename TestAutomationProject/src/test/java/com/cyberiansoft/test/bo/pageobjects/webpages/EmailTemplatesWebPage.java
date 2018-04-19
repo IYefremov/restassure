@@ -62,7 +62,6 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	
 	public void clickNewEmailTemplateOKButton() {
 		clickAndWait(newemailtemplateOKbtn);
-		waitABit(2000);
 	}
 	
 	public void clickNewEmailTemplateCancelButton() {

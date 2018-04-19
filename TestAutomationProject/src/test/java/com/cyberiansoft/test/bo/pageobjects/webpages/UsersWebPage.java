@@ -125,13 +125,11 @@ public class UsersWebPage extends WebPageWithPagination {
 	
 	public void clickArchivedTab() {
 		clickAndWait(archivedtab);
-        waitABit(3000);
     }
 	
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
-        waitABit(3000);
     }
 	
 	public void setSearchUserParameter(String username) {
@@ -140,7 +138,6 @@ public class UsersWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-        waitABit(3000);
     }
 	
 	public int getUsersTableRowCount() {

@@ -166,7 +166,6 @@ public class TeamsWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-		waitABit(3000);
 	}
 	
 	public int getTeamsTableRowsCount() {

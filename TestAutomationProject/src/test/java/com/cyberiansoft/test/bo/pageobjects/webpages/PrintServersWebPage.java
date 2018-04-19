@@ -43,7 +43,6 @@ public class PrintServersWebPage extends BaseWebPage {
 	
 	public void clickAddPrintServerButton() {
 		clickAndWait(addprintserveerebtn);
-		waitABit(2000);
 	}
 	
 	public void setPrintServerName(String servername) {

@@ -131,7 +131,6 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 	
 	public void clickOKAddInvoiceTypeButton() {
 		clickAndWait(invoicetypeOKbtn);
-		waitABit(4000);
 	}
 	
 	public void setInvoiceTypeName(String invoicetypename) {

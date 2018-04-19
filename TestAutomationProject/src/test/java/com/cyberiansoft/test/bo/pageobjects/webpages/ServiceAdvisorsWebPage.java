@@ -193,7 +193,6 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
-        waitABit(5000);
     }
 	
 	public int getServiceAdvisorsTableRowsCount() {
@@ -317,7 +316,6 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 
 	public void clickNewServiceAdvisorOKButton() {
 		clickAndWait(serviceadvisorOKbtn);
-		waitABit(3000);
 	}
 	
 	public void clickNewServiceAdvisorCancelButton() {

@@ -281,7 +281,6 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void clickCopyToBillToButton() {
 		clickAndWait(copytobilltobtn);
-        waitABit(3000);
     }
 
 	public void selectBillToAddress() {

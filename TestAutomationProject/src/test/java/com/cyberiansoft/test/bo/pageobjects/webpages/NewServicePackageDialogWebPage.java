@@ -92,8 +92,9 @@ public class NewServicePackageDialogWebPage extends BaseWebPage {
 	
 	public void clickOKButton() {
 		clickAndWait(newwotypeOKbtn);
-		waitABit(2000);
-	}
+        waitABit(2000);
+
+    }
 	
 	public void clickCancelButton() {
 		click(newwotypecancelbtn);
