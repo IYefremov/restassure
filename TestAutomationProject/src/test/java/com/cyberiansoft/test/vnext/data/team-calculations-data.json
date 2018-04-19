@@ -31,5 +31,35 @@
       },
       "inspPrice": "$11.25"
     }
+  ],
+
+  "testVerifyMyInspectionTotalAmountCantBeLessThan0": [
+    {
+      "rowID": "testVerifyMyInspectionTotalAmountCantBeLessThan0.01",
+      "description": "Test Case 73396:R360 client: Verify My Inspection total amount can't be less than 0",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyService": {"serviceName": "Battery Installation", "servicePrice": "-9"
+      },
+      "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      },
+      "inspPrice": "($11.25)"
+    }
+  ],
+
+  "testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion": [
+    {
+      "rowID": "testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion.01",
+      "description": "Test Case 73397:R360 client: Verify My Inspection total amount can't be more than 999999999.99",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyService": {"serviceName": "Battery Installation", "servicePrice": "999999.00", "serviceQuantity": "19999.00"
+      },
+      "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      },
+      "inspPrice": "$24998725001.25"
+    }
   ]
 }

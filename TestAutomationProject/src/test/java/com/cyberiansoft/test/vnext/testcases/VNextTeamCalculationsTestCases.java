@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -103,6 +104,77 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        homescreen = inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyMyInspectionTotalAmountCantBeLessThan0(String rowID,
+                                                                                    String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.swipeScreensLeft(2);
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        VNextSelectServicesScreen selectServicesScreen = inpsctionservicesscreen.clickAddServicesButton();
+        selectServicesScreen.selectService(inspdata.getMoneyServiceName());
+        selectServicesScreen.selectService(inspdata.getPercentageServiceName());
+
+        selectServicesScreen.clickSaveSelectedServicesButton();
+        inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        inpsctionservicesscreen.setServiceAmountValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServicePrice());
+        Assert.assertEquals(inpsctionservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+
+        inpsctionservicesscreen.clickSaveInspectionMenuButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_CANT_BE_LESS_THAN_0);
+        inspectionscreen = inpsctionservicesscreen.cancelInspection();
+        homescreen = inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.swipeScreensLeft(2);
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        VNextSelectServicesScreen selectServicesScreen = inpsctionservicesscreen.clickAddServicesButton();
+        selectServicesScreen.selectService(inspdata.getMoneyServiceName());
+        selectServicesScreen.selectService(inspdata.getPercentageServiceName());
+
+        selectServicesScreen.clickSaveSelectedServicesButton();
+        inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        inpsctionservicesscreen.setServiceAmountValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServicePrice());
+        inpsctionservicesscreen.setServiceQuantityValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServiceQuantity());
+        Assert.assertEquals(inpsctionservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+
+        inpsctionservicesscreen.clickSaveInspectionMenuButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED);
+        inspectionscreen = inpsctionservicesscreen.cancelInspection();
         homescreen = inspectionscreen.clickBackButton();
     }
 }
