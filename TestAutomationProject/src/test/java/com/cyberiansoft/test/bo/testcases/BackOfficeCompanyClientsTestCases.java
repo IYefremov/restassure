@@ -43,7 +43,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
         Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
 
         clientspage.setPageSize("999");
-        Assert.assertEquals(clientspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(clientspage.getClientsTableRowsCount()));
+        Assert.assertEquals(clientspage.MAX_TABLE_ROW_COUNT_VALUE, clientspage.getClientsTableRowsCount());
 
         clientspage.makeSearchPanelVisible();
         clientspage.selectSearchType(clienttype);

@@ -371,7 +371,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(pricematricespage.isPriceMatrixPresent(pricematrixnameedited));
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 28122:Company - Invoice type: CRUD", description = "Company- Invoice type: CRUD")
 	public void testCompanyInvoiceTypeCRUD() {
 
@@ -506,7 +505,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertFalse(printserverspage.printServerExists(printsrvnameedited));
 	}
 
-	//todo fails
     @Test(testName = "Test Case 28406:Company - Licence: CRUD", description = "Company- Licence: CRUD")
 	public void testCompanyLicenceCRUD() {
 

@@ -196,7 +196,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
 	public InvoicesWebPage clickFindButton() {
 		clickAndWait(findbtn);
-		return this;
+        waitABit(4500);
+        return this;
 	}
 
 	public boolean invoicesTableIsVisible() {

@@ -153,7 +153,10 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public void clickGoToLastPage() {
 		click(gotolastpage);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='ctl00_ctl00_Content_Main_report_ctl05_ctl00_Last_ctl01_ctl00' and @disabled='disabled']")));
+		wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//input[@id='ctl00_ctl00_Content_Main_report_" +
+                "ctl05_ctl00_Last_ctl01_ctl00' and @disabled='disabled']")));
+
 	}
 	
 	public void clickGoToFirstPage() {

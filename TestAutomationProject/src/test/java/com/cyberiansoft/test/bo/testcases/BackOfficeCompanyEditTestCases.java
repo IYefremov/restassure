@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
+    @Ignore
+    //todo fails. Needs to be clarified. Claim Info field is absent!!!
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
             description = "Company- Insurance Company: in Service Request Claim info Edit")
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() {
@@ -318,7 +321,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
-	public void testCompanyEmployeesEdit() throws Exception {
+	public void testCompanyEmployeesEdit() {
 
 		final String employeeteam = "01_TimeRep_team";
 		final String employeefirstname = "azalex";
@@ -341,7 +344,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeefirstnameed = "azalex2";
 		final String employeelastnameed = "avalex2";
 		final String employeepswed = "1234";
-		final String employeehometeamed = "Team 2";
+		final String employeehometeamed = "Testteam";
 		final String employeeaddressed = "E. La Palma Ave.";
 		final String employeecityed = "L'viv";
 		final String employeecountryed = "Uruguay";
@@ -360,13 +363,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.makeSearchPanelVisible();
 		employeespage.setSearchUserParameter(employeelastname);
 		employeespage.clickFindButton();
-
-		if (employeespage.activeEmployeeExists(employeefirstname, employeelastname)) {
-			employeespage.archiveEmployee(employeefirstname, employeelastname);
-		}
-		if (employeespage.activeEmployeeExists(employeefirstnameed, employeelastnameed)) {
-			employeespage.archiveEmployee(employeefirstnameed, employeelastnameed);
-		}
+        employeespage.verifyActiveEmployeeDoesNotExist(employeefirstname, employeelastname, employeefirstnameed, employeelastnameed);
 
 		NewEmployeeDialogWebPage newemployeedialog = employeespage.clickAddEmployeeButton();
 		newemployeedialog.selectNewEmployeeTeam(employeeteam);

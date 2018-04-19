@@ -552,7 +552,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		// .frame((WebElement)
 		// driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		getClaimInfoEditButton().click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("Card_divCliamInfoAll")))).click();
 	}
 
 	public void clickServiceEditButton() {
@@ -596,10 +596,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public WebElement getVehicleInfoEditButton() {
 		return driver.findElement(By.xpath("//div[@id='Card_divVehInfoAll']/span"));
-	}
-
-	public WebElement getClaimInfoEditButton() {
-		return driver.findElement(By.id("Card_divCliamInfoAll"));
 	}
 
 	public WebElement getServiceEditButton() {

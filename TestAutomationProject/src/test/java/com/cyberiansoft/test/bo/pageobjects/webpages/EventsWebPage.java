@@ -86,7 +86,7 @@ public class EventsWebPage extends BaseWebPage {
 		return driver.findElements(By.xpath("//tr/td[text()='" + alertname + "']")).size() > 0;
 	}
 
-	public void setAlertNewName(String alertname) throws InterruptedException {
+	public void setAlertNewName(String alertname) {
 		clearAndType(alertnamefld, alertname);
 	}
 
@@ -175,16 +175,16 @@ public class EventsWebPage extends BaseWebPage {
 		click(neweventCancelbtn);
 	}
 
-	public void clickEditButtonForEvent(String alertname) throws InterruptedException {
+	public void clickEditButtonForEvent(String alertname) {
 		List<WebElement> eventsrows = getEventsTableRows();
+		wait.until(ExpectedConditions.visibilityOfAllElements(eventsrows));
 		for (WebElement eventsrow : eventsrows) {
 			if (eventsrow.getText().contains(alertname)) {
 				eventsrow.findElement(By.xpath(".//td/input[@title='Edit']")).click();
 				break;
 			}
 		}
-		Thread.sleep(300);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 		wait.until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
 	}
 
@@ -199,8 +199,9 @@ public class EventsWebPage extends BaseWebPage {
 				break;
 			}
 		}
-		Thread.sleep(300);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
+//		Thread.sleep(300);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public boolean isEventExists(String expensetype) {
@@ -215,7 +216,7 @@ public class EventsWebPage extends BaseWebPage {
 		return exists;
 	}
 
-	public void setEmailNotificationCheckBoxForSelected() throws InterruptedException {
+	public void setEmailNotificationCheckBoxForSelected() {
 		WebElement emailNotificationCheckBox = selectedRow.findElement(By.className("activeCell-outer"))
 				.findElement(By.xpath(".//input[@type='checkbox']"));
 		if (emailNotificationCheckBox.getAttribute("checked") == null) {

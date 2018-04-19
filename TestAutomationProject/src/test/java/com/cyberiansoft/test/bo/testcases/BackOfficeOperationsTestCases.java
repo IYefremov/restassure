@@ -45,7 +45,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		techCommissionPage.setPageSize("999");
 		Assert.assertEquals(techCommissionPage.MAX_TABLE_ROW_COUNT_VALUE,
-				Integer.valueOf(techCommissionPage.getTechnicianCommissionsTableRowCount()));
+				techCommissionPage.getTechnicianCommissionsTableRowCount());
 
 		techCommissionPage.verifySearchFieldsAreVisible();
 
@@ -95,7 +95,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		Assert.assertEquals("1", wopage.getGoToPageFieldValue());
 
 		wopage.setPageSize("999");
-		Assert.assertEquals(wopage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(wopage.getWorkOrdersTableRowCount()));
+		Assert.assertEquals(wopage.MAX_TABLE_ROW_COUNT_VALUE, wopage.getWorkOrdersTableRowCount());
 
 		wopage.makeSearchPanelVisible();
 		wopage.verifySearchFieldsAreVisible();

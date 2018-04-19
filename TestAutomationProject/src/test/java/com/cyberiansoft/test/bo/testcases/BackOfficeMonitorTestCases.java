@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class BackOfficeMonitorTestCases extends BaseTestCase {
 
-    //todo ignored
 	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
 	public void testMonitorRepairOrderSearch() throws Exception {
 
@@ -129,7 +128,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 	//todo fails
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
-	public void testMonitorReportsAverageRepairTimeReport() throws Exception {
+	public void testMonitorReportsAverageRepairTimeReport() {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -142,14 +141,12 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.selectSearchLocation("Default Location");
 		averagerepairtimereportpage.selectSearchWOType("Lilia");
 		averagerepairtimereportpage.setSearchFromDate("3/1/2013");
-		averagerepairtimereportpage.waitABit(1000);
 		averagerepairtimereportpage.clickFindButton();
 		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
-		
 	}
 	
 	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking", description = "Monitor- Reports - Repair Location Time Tracking")
-	public void testMonitorReportsRepairLocationTimeTracking() throws Exception {
+	public void testMonitorReportsRepairLocationTimeTracking() {
 
 		String[] wonumbersfirstpage = {"O-10000-00090", "O-10000-00091", "O-10000-00106", "O-10000-00107" };
 		String[] wonumberslastpage = {"O-000-01595"};
@@ -185,7 +182,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 15728:Monitor- Reports - Trending Report", description = "Monitor- Reports - Trending Report")
-	public void testMonitorReportsTrendingReport() throws Exception {
+	public void testMonitorReportsTrendingReport() {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -202,7 +199,6 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		trendingreportpage.clickFindButton();
 		trendingreportpage.verifySearchResults("Default Location", "Artem order test");
-		
 	}
 
 	//todo fails
@@ -304,7 +300,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 28378:Monitor - Monitor Settings: CRUD", description = "Monitor - Monitor Settings: CRUD")
-	public void testMonitorSettingsCRUD() throws Exception {
+	public void testMonitorSettingsCRUD() {
 		
 		final String orderstatus = "On Hold";
 		final String orderstatusreason = "testreasoncrud";

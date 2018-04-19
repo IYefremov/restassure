@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WebPageWithPagination extends BaseWebPage {
 	
-	public final Integer MAX_TABLE_ROW_COUNT_VALUE = 50;
+	public final int MAX_TABLE_ROW_COUNT_VALUE = 50;
 	
 	//Pagination
 	@FindBy(xpath = "//input[@title='First Page']")
@@ -76,10 +76,12 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 	
 	public void clickGoToLastPage() {
+	    wait.until(ExpectedConditions.elementToBeClickable(gotolastpage));
 		gotolastpage.click();
         waitForLoading();
         waitABit(10000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
 	
 	public void clickGoToLastPage(String browsertype) {

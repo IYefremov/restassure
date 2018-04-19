@@ -169,6 +169,20 @@ public class EmployeesWebPage extends WebPageWithPagination {
         return null;
     }
 
+	public WebElement getTableRowWithArchivedEmployee(String employeename) {
+        try {
+            List<WebElement> employeestablerows = getArchivedEmployeesTableRows();
+    		for (WebElement employeestablerow : employeestablerows) {
+	    		if (employeestablerow.findElement(By.xpath(".//td[3]")).getText().equals(employeename)) {
+		    		return employeestablerow;
+	    		}
+    		}
+        } catch (NoSuchElementException e) {
+            System.err.println("The archived employee is not displayed in the table!\n" + e);
+        }
+        return null;
+    }
+
 	public List<String> getActiveEmployees() {
 		List<String> employee = new ArrayList<String>();
 		List<WebElement> employeeact = employeestable.getWrappedElement()
@@ -208,6 +222,15 @@ public class EmployeesWebPage extends WebPageWithPagination {
             Assert.fail("Can't find " + firstname + " " + lastname + " employee");
 	}
 
+	public void unarchiveEmployee(String employeename) {
+		WebElement row = getTableRowWithArchivedEmployee(employeename);
+		if (row != null) {
+			restoreTableRow(row);
+		}
+		else
+            Assert.fail("Can't find " + employeename + " employee");
+	}
+
 	public String findDuplicateNames(List<String> employeeact, List<String> employeearch) {
 		String duplicates = "";
 		for (String username : employeeact) {
@@ -232,6 +255,18 @@ public class EmployeesWebPage extends WebPageWithPagination {
                 .findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
 	}
 
+	public boolean activeEmployeeExists(String employeename) {
+		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
+        return employeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
+	}
+
+	public boolean archivedEmployeeExists(String employeename) {
+		wait.until(ExpectedConditions.visibilityOf(archivedemployeestable.getWrappedElement()));
+        return archivedemployeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
+	}
+
 	public NewEmployeeDialogWebPage clickAddEmployeeButton() {
 		clickAndWait(employeeaddbtn);
 		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
@@ -246,4 +281,29 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		}
 		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
 	}
+
+    public void verifyActiveEmployeeDoesNotExist(String employeefirstname, String employeelastname,
+                                                 String employeefirstnameed, String employeelastnameed) {
+        if (activeEmployeeExists(employeefirstname, employeelastname)) {
+            archiveEmployee(employeefirstname, employeelastname);
+        }
+        if (activeEmployeeExists(employeefirstnameed, employeelastnameed)) {
+            archiveEmployee(employeefirstnameed, employeelastnameed);
+        }
+    }
+
+    public void verifyActiveEmployeeDoesNotExist(String employeename) {
+        makeSearchPanelVisible();
+        setSearchUserParameter(employeename);
+        clickFindButton();
+        waitABit(2000);
+        if (!activeEmployeeExists(employeename)) {
+            clickArchivedTab();
+            makeSearchPanelVisible();
+            setSearchUserParameter(employeename);
+            clickFindButton();
+            unarchiveEmployee(employeename);
+            clickActiveTab();
+        }
+    }
 }

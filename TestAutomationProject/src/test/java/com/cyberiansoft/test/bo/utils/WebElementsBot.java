@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage.wait;
+
 public class WebElementsBot {
 	
 	@FindBy(className = "updateProcess")
@@ -31,14 +33,14 @@ public class WebElementsBot {
             waitABit(4000);
 	    }
         element.click();
-	    waitABit(2000);
+	    waitABit(3500);
     }
 	
 	public static void clickAndWait(WebElement element) {
 	    new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
 	    element.click();
 	    waitUntilPageReloaded();
-	    waitABit(4000);
+	    waitABit(4500);
 	}
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value){
@@ -56,10 +58,10 @@ public class WebElementsBot {
         } catch (TimeoutException e) {
             waitABit(1500);
         }
-//		droplist.getWrappedElement().findElements(By.tagName("li")).stream().map(WebElement::getText).forEach(System.out::println);
 		try {
 		    List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
-            items.stream().filter(w -> w.getText().equals(value)).findFirst().get().click();
+		    wait.until(ExpectedConditions.visibilityOfAllElements(items));
+            items.stream().filter(w -> w.getText().equals(value)).findFirst().ifPresent(WebElement::click);
         } catch (Exception e) {
             System.err.println("The value has not been found! " + e);
         }

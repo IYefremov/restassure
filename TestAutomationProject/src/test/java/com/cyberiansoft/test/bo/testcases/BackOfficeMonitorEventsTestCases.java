@@ -49,11 +49,11 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		final String alertname = "Test Estimate Decline";
 		final String firstconditionname = "Name";
 		final String firstconditiontype = "equals";
-		final String firstconditioncriteria = "Inttest";
+		final String firstconditioncriterion = "Inttest";
 
 		final String firstconditionnames[] = {"Amount", "Completed", "InspectionType", "Status"};
 		final String firstconditiontypes[] = {"equals", "moreThan", "contains", "empty"};
-		final String firstconditioncriterias[] = {"10", "1", "Inte", ""};
+		final String firstconditioncriteria[] = {"10", "1", "Inte", ""};
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -62,16 +62,16 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
         EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
 		
 		eventsPage.verifyEventsTableColumnsAreVisible();
-		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.createNewEventWithConditions(eventname, alertname, firstconditionname, firstconditiontype, firstconditioncriterion);
 		eventsPage.clickEditButtonForEvent(alertname);
-		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
+		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriterion);
 		eventsPage.cancelNewEvent();
 		for (int i = 0;  i < firstconditionnames.length; i++) {
 			eventsPage.clickEditButtonForEvent(alertname);
-			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriteria[i]);
 			eventsPage.saveNewEvent();
 			eventsPage.clickEditButtonForEvent(alertname);
-			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
+			eventsPage.verifyFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriteria[i]);
 			eventsPage.cancelNewEvent();
 		}		
 		eventsPage.deleteEvent(alertname);
@@ -251,5 +251,4 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		}		
 		eventsPage.deleteEvent(alertname);
 	}
-
 }

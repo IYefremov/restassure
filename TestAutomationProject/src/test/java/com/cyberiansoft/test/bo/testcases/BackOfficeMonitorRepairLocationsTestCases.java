@@ -327,14 +327,13 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
 
-	//todo ignored
 	@Test(testName = "Test Case 31404:Monitor - Repair Locations: Managers Edit", description = "Monitor - Repair Locations: Managers Edit")
 	public void testMonitorRepairLocationsManagersEdit() {
 		
 		final String repairlocationname = "TestLoc";
 		final String repairlocationstatus = "Active";
 		final String repairlocationtomezone = "Pacific Standard Time";
-		final String _team = "Default team";
+		final String team = "Default team";
 		final String manager = "Marta Moe";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -350,12 +349,12 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		
 		RepairLocationManagersTabWebPage repairlocationmanagerstab = repairlocationspage.clickRepairLocationManagersLink(repairlocationname);
-		repairlocationmanagerstab.selectTeam(_team).selectRepairLocationManager(manager).clickAddManagerButton();
+		repairlocationmanagerstab.selectTeam(team).selectRepairLocationManager(manager).clickAddManagerButton();
 		repairlocationmanagerstab.closeNewTab(mainWindowHandle);
 		
 		repairlocationmanagerstab = repairlocationspage.clickRepairLocationManagersLink(repairlocationname);
 		Assert.assertFalse(repairlocationmanagerstab.isRepairLocationManagerExists(manager));
-		repairlocationmanagerstab.selectTeam(_team).selectRepairLocationManager(manager).clickAddManagerButton().clickUpdateManagersButton();		
+		repairlocationmanagerstab.selectTeam(team).selectRepairLocationManager(manager).clickAddManagerButton().clickUpdateManagersButton();
 		repairlocationmanagerstab.closeNewTab(mainWindowHandle);
 		
 		repairlocationmanagerstab = repairlocationspage.clickRepairLocationManagersLink(repairlocationname);

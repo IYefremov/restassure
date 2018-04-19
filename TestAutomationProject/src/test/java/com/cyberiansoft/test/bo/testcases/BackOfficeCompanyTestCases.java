@@ -45,7 +45,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
 
 		usersPage.setPageSize("999");
-		Assert.assertEquals(usersPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(usersPage.getUsersTableRowCount()));
+		Assert.assertEquals(usersPage.MAX_TABLE_ROW_COUNT_VALUE, usersPage.getUsersTableRowCount());
 
 		List<String> usernamesact = usersPage.getActiveUserNames();
 		usersPage.clickArchivedTab();
@@ -66,7 +66,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		usersPage.setSearchUserParameter(userFirstName.substring(0, 4));
 		usersPage.clickFindButton();
 
-		Assert.assertTrue(Integer.valueOf(usersPage.getUsersTableRowCount()) > 0);
+		Assert.assertTrue(usersPage.getUsersTableRowCount() > 0);
 		usersPage.isUserActive(userFirstName, userLastName);
 	}
 
@@ -107,7 +107,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals("1", employeespage.getGoToPageFieldValue());
 
 		employeespage.setPageSize("999");
-		Assert.assertEquals(employeespage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(employeespage.getEmployeesTableRowCount()));
+		Assert.assertEquals(employeespage.MAX_TABLE_ROW_COUNT_VALUE, employeespage.getEmployeesTableRowCount());
+
+		employeespage.verifyActiveEmployeeDoesNotExist(employeename);
 
 		employeespage.archiveEmployee(employeefirstname, employeelastname);
 		employeespage.clickArchivedTab();
@@ -215,7 +217,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(teamspage.getTeamsTableRowsCount()));
 		} else {
 			teamspage.setPageSize("999");
-			Assert.assertEquals(teamspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(teamspage.getTeamsTableRowsCount()));
+			Assert.assertEquals(teamspage.MAX_TABLE_ROW_COUNT_VALUE, teamspage.getTeamsTableRowsCount());
 		}
 
 		teamspage.makeSearchPanelVisible();
@@ -265,7 +267,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(jobspage.getJobsTableRowsCount()));
 		} else {
 			jobspage.setPageSize("999");
-			Assert.assertEquals(jobspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(jobspage.getJobsTableRowsCount()));
+			Assert.assertEquals(jobspage.MAX_TABLE_ROW_COUNT_VALUE, jobspage.getJobsTableRowsCount());
 		}
 
 		jobspage.makeSearchPanelVisible();
@@ -278,7 +280,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 17284:Company - Insurance Companies")
-	public void testCompanyJobsInsuranceCompanies() throws Exception {
+	public void testCompanyJobsInsuranceCompanies() {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -326,7 +328,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals("1", serviceadvisorspage.getGoToPageFieldValue());
 
 		serviceadvisorspage.setPageSize("999");
-		Assert.assertEquals(serviceadvisorspage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(serviceadvisorspage.getServiceAdvisorsTableRowsCount()));
+		Assert.assertEquals(serviceadvisorspage.MAX_TABLE_ROW_COUNT_VALUE, serviceadvisorspage.getServiceAdvisorsTableRowsCount());
 
 
 		serviceadvisorspage.makeSearchPanelVisible();
@@ -339,12 +341,11 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 18799:Company- Question Forms")
-	public void testCompanyQuestionForms() throws Exception {
+	public void testCompanyQuestionForms() {
 
 		final String questionsectionname = "Test Question Section";
 		final String questionname = "New Question";
 		final String questionformname = "Test Question Form";
-
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -371,7 +372,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 18800:Company -Supplies")
-	public void testCompanySupplies() throws Exception {
+	public void testCompanySupplies() {
 
 		final String supplyname = "Test Supply";
 		final String supplynameedited = "Test Supply Edited";
@@ -391,7 +392,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 18801:Company -Expenses Types")
-	public void testCompanyExpensesTypes() throws Exception {
+	public void testCompanyExpensesTypes() {
 
 		final String expensetype = "Test Type";
 		final String newexpensetypename = "Test Type Edited";
@@ -414,7 +415,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 18802:Company -Vehicle Parts")
-	public void testCompanyVehicleParts() throws Exception {
+	public void testCompanyVehicleParts() {
 
 		final String vehiclepart = "Test Part";
 		final String newvehiclepartname = "Test Vehicle Part";
@@ -431,7 +432,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 26726:Company- Employees: Archive", description = "Company- Employees: Archive")
-	public void testCompanyEmployeesArchive() throws Exception {
+	public void testCompanyEmployeesArchive() {
 
 		final String employeefirstname = "archive";
 		final String employeelastname = "unarchive";

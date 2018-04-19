@@ -40,7 +40,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		Assert.assertEquals("1", allUsersPage.getGoToPageFieldValue());
 
 		allUsersPage.setPageSize("999");
-		Assert.assertEquals(allUsersPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(allUsersPage.getAllUsersTableRowCount()));
+		Assert.assertEquals(allUsersPage.MAX_TABLE_ROW_COUNT_VALUE, allUsersPage.getAllUsersTableRowCount());
 		
 		allUsersPage.makeSearchPanelVisible();
 		allUsersPage.setSearchUserParameter(username.substring(0, 4));
@@ -131,7 +131,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 
 		applicationsPage.setPageSize("999");
 		Assert.assertEquals(applicationsPage.MAX_TABLE_ROW_COUNT_VALUE,
-                Integer.valueOf(applicationsPage.getApplicationsTableRowCount()));
+                applicationsPage.getApplicationsTableRowCount());
 		
 		applicationsPage.makeSearchPanelVisible();
 				

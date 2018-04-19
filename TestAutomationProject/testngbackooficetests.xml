@@ -18,149 +18,24 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
     </listeners>
-    <test name="Back Office Test Cases - Chrome" preserve-order="true">
+    <test name="Back Office Test Cases - Chrome">
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
-            </class>
-			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-            </class>
-            <!--        -->
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases"/>
+			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases"/>
         </classes>
     </test>
-
-    <!--<test name="Back Office Test Cases - Firefox" preserve-order="true">
-      <parameter name="selenium.browser" value="firefox" />
-      <classes>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorVendorTeamsTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-        </class>
-
-
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-        </class>
-
-
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
-        </class>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
-        </class>
-      </classes>
-    </test>-->
-
-
-    <!--
-    <test name="Back Office Test Cases - IE" preserve-order="true">
-        <parameter name="selenium.browser" value="ie"/>
-        <classes>
-
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-            </class>
-
-             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
-            </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
-           </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases">
-           </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
-           </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases">
-           </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases">
-           </class>
-
-           <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases">
-           </class>
-
-
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases">
-          </class>
-
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-          </class>
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases">
-          </class>
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorTestCases">
-          </class>
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases">
-          </class>
-             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-            </class>
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeSuperUserTestCases">
-            </class>
-          <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases">
-            </class>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases">
-            </class>
-    <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases">
-    </class>
-
-        </classes>
-    </test> -->
-    <!--<test name="Back Office Test Cases - IE" preserve-order="true">
-      <parameter name="selenium.browser" value="firefox" />
-      <classes>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases">
-        </class>
-      </classes>
-    </test>-->
-    <!--<test name="Back Office Test Cases - IE" preserve-order="true">
-      <parameter name="selenium.browser" value="chrome" />
-      <classes>
-        <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases">
-        <methods>
-             <include name="testCompanyWorkOrderTypesCRUD" />
-        </methods>
-        </class>
-      </classes>
-    </test>-->
 </suite>
