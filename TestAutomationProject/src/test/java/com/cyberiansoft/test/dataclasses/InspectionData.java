@@ -19,6 +19,12 @@ public class InspectionData {
 	 @JsonProperty("service")
 	 ServiceData service;
 
+	@JsonProperty("moneyService")
+	ServiceData moneyService;
+
+	@JsonProperty("percentageService")
+	ServiceData percentageService;
+
 	 @JsonProperty("services")
 	 List<ServiceData> services;
 
@@ -75,6 +81,24 @@ public class InspectionData {
 	 public String getServicePrice() {
 		 return service.getServicePrice();
 	 }
+
+	 public String getMoneyServiceName() {
+		return moneyService.getServiceName();
+	}
+
+	 public String getMoneyServicePrice() {
+		return moneyService.getServicePrice();
+	}
+
+	 public String getMoneyServiceQuantity() { return moneyService.getServiceQuantity(); }
+
+	 public String getPercentageServiceName() {
+		return percentageService.getServiceName();
+	}
+
+	 public String getPercentageServicePrice() {
+		return percentageService.getServicePrice();
+	}
 	 
 	 public List<ServiceData> getServicesList() {
 		 return services;
