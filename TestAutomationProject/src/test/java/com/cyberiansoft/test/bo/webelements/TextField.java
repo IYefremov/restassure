@@ -10,4 +10,6 @@ public interface TextField extends IWebElement {
     String getValue();
     
     void click();
+
+    void sendKeys(CharSequence... var1);
 }

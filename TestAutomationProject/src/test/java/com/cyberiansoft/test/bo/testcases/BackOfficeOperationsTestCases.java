@@ -355,7 +355,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListPage.clickDoneButton();
 
 		serviceRequestsListPage.clickClaimInfoEditButton();
-		serviceRequestsListPage.selectServiceRequesInsurance(insurance);
+		serviceRequestsListPage.selectServiceRequestInsurance(insurance);
 		serviceRequestsListPage.clickDoneButton();
 
 		serviceRequestsListPage.setServiceRequestLabel(_label);

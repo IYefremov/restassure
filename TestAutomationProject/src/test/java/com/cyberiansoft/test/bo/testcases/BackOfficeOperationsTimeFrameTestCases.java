@@ -12,12 +12,14 @@ import java.time.format.DateTimeFormatter;
 public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 	
 	private final LocalDate currentdate = LocalDate.now().plusDays(1);
-	private final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
+//	private final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);
+	private final LocalDate weekStart = LocalDate.now().minusDays(8);
 	private final LocalDate lastweekstart = BackOfficeUtils.getLastWeekStartDate().minusDays(1);
 	private final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate().plusDays(2);
+//	private final LocalDate lastweekend = BackOfficeUtils.getLastWeekEndDate(lastweekstart).plusDays(2);
 	private final LocalDate startmonth = BackOfficeUtils.getMonthStartDate().minusDays(1);
 	private final LocalDate startlastmonth = BackOfficeUtils.getLastMonthStartDate().minusDays(1);
-	private final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(1);
+	private final LocalDate endlastmonth = BackOfficeUtils.getLastMonthEndDate().plusDays(2);
 	private final LocalDate startyear = BackOfficeUtils.getYearStartDate().minusDays(1);
 	private final LocalDate startlastyear = BackOfficeUtils.getLastYearStartDate().minusDays(1);
 	private final LocalDate endlastyear = BackOfficeUtils.getLastYearEndDate().plusDays(1);
@@ -91,7 +93,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		inspectionspage.clickFindButton();
 		inspectionspage.verifyTableDateRangeForFirstAndLastTablePages(startlastyear, endlastyear, inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 	}
-	
+
 	@Test(testName = "Test Case 31973:Operation - Vendor Bills: timeframe search", description = "Operation - Vendor Bills: timeframe search")
 	public void testOperationVendorBillsTimeframeSearch() {
 		

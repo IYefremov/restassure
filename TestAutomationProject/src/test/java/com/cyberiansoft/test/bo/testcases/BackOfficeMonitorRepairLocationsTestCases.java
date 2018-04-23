@@ -226,7 +226,6 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocation(repairlocationname);
 	}
 
-	//todo ignored
 	@Test(testName = "Test Case 30729:Monitor - Repair Locations: Clients Edit", description = "Monitor - Repair Locations: Clients Edit")
 	public void testMonitorRepairLocationsClientsEdit() {
 		

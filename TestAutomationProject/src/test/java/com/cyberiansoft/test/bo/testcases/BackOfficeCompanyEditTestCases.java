@@ -2,7 +2,6 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -13,8 +12,6 @@ import java.util.List;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
-    @Ignore
-    //todo fails. Needs to be clarified. Claim Info field is absent!!!
 	@Test(testName = "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
             description = "Company- Insurance Company: in Service Request Claim info Edit")
 	public void testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit() {
@@ -35,7 +32,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequesInsurance(insurancecompanyname);
+		servicerequestslistpage.selectServiceRequestInsurance(insurancecompanyname);
 		servicerequestslistpage.clickDoneButton();
 
 		servicerequestslistpage.saveNewServiceRequest();

@@ -35,4 +35,8 @@ public class TextFieldImpl extends AbstractWebElement implements TextField {
         wrappedElement.click();
     }
 
+    @Override
+    public void sendKeys(CharSequence... var1) {
+        wrappedElement.sendKeys(var1);
+    }
 }

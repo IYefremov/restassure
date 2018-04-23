@@ -60,7 +60,6 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
 	public void testMonitorVendorOrdersSearch() throws Exception {
 
@@ -126,7 +125,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	//	vendororderspage.openServicesInformationByOrderNoWindowAndVerifyContent(wonum, VIN, company);
 	}
 
-	//todo fails
+	//todo fails today Lilia
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
 	public void testMonitorReportsAverageRepairTimeReport() {
 
@@ -144,7 +143,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.clickFindButton();
 		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
 	}
-	
+
+	//todo fails friday. The WO numbers are no more valid. No WO are displayed in Default Location section
 	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking", description = "Monitor- Reports - Repair Location Time Tracking")
 	public void testMonitorReportsRepairLocationTimeTracking() {
 
@@ -163,7 +163,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
 		repairlocationtimetrackingpage.selectSearchLocation("Default Location");
 		repairlocationtimetrackingpage.setSearchFromDate("1/1/2015");
-		repairlocationtimetrackingpage.setSearchToDate("8/31/2015");
+		repairlocationtimetrackingpage.setSearchToDate("8/31/2018");
 
 		repairlocationtimetrackingpage.clickFindButton();
 		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
@@ -180,7 +180,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
 		
 	}
-	
+
+    //todo fails friday NO data available
 	@Test(testName = "Test Case 15728:Monitor- Reports - Trending Report", description = "Monitor- Reports - Trending Report")
 	public void testMonitorReportsTrendingReport() {
 
@@ -201,7 +202,6 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		trendingreportpage.verifySearchResults("Default Location", "Artem order test");
 	}
 
-	//todo fails
 	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")
 	public void testMonitorRepairOrderFullDisplayVersion() throws Exception {
 
@@ -352,7 +352,6 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 
-	//todo fails
 	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
 	public void checkMonitorKanbanAutoRefresh() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

@@ -94,17 +94,23 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
-		Actions act = new Actions(DriverBuilder.getInstance().getDriver());
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        new WebDriverWait(driver, 50)
+                .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+		Actions act = new Actions(driver);
 		act.click(combobox.getWrappedElement()).perform();
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		try {
+            new WebDriverWait(driver, 50)
+                    .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+        } catch (TimeoutException ignored) {}
 		combobox.click();
-		combobox.clear();
-		combobox.typeValue(value);
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(droplist.getWrappedElement()));
-		waitABit(4000);
-		droplist.selectByVisibleText(value);
-		waitABit(7000);
+        combobox.clear();
+        combobox.typeValue(value);
+        waitABit(1000);
+        combobox.sendKeys(Keys.ENTER);
+//        wait.until(ExpectedConditions
+//                .attributeToBe(By.xpath("//form[@name='form1']/div[@class='rcbSlide']"),
+//                        "overflow", "hidden"));
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {

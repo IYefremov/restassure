@@ -299,8 +299,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "Card_ddlAdvisors_Input")
 	private WebElement advisorInputField;
 
-	final By addSREditbuttons = By.xpath("//span[contains(@class, 'infoBlock-editBtn bs-btn bs-btn-mini')]");
-	final By donebtn = By.xpath("//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]");
+	@FindBy(xpath = "//div[@class='infoBlock-footer']/div[contains(@class, 'infoBlock-doneBtn')]")
+    private List<WebElement> donebtns;
+
+	@FindBy(xpath = "//div[@id='itemContainer']/div[1]//a[@class='detailsPopover']")
+    private WebElement firstServiceRequestDetails;
 
 	public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
@@ -376,21 +379,16 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return null;
 	}
 
-	public void selectFirstServiceRequestFromList() throws InterruptedException {
-		waitABit(4000);
-		Actions builder = new Actions(driver);
-		builder.moveToElement(getFirstServiceRequestFromList());
-		Thread.sleep(1000);
-		getFirstServiceRequestFromList().findElement(By.xpath(".//i[@class='detailsPopover-icon icon-chevron-right']"))
-				.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		waitABit(5000);
-		driver.switchTo()
-		.frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+	public void selectFirstServiceRequestFromList() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(firstServiceRequestDetails).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(firstServiceRequestDetails));
+		firstServiceRequestDetails.click();
+        waitABit(10000);
+		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 	}
 
-	public void closeFirstServiceRequestFromTheList() throws InterruptedException {
+	public void closeFirstServiceRequestFromTheList()  {
 		selectFirstServiceRequestFromList();
 		switchToServiceRequestInfoFrame();
 		wait.until(ExpectedConditions.elementToBeClickable(closeservicerequestbtn));
@@ -403,7 +401,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		click(closeservicerequestbtn);
 	}
 
-	public void acceptFirstServiceRequestFromList() throws InterruptedException {
+	public void acceptFirstServiceRequestFromList() {
 		waitABit(4000);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(getFirstServiceRequestFromList())
@@ -412,7 +410,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		// getFirstServiceRequestFromList().findElement(By.xpath(".//a[@title='Accept']")).click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		Thread.sleep(1000);
+		waitABit(1000);
 	}
 
 	public void rejectFirstServiceRequestFromList() {
@@ -460,7 +458,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
                 .visibilityOf(getFirstServiceRequestFromList()
                 .findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]"))))
                 .click();
-		waitABit(300);
+		waitABit(2000);
 		return PageFactory.initElements(driver, SRAppointmentInfoPopup.class);
 	}
 
@@ -664,19 +662,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Assert.assertEquals(addsrvcarmodel.getValue(), _model);
 	}
 
-	public void selectServiceRequesInsurance(String insurance) {
+	public void selectServiceRequestInsurance(String insurance) {
 		selectComboboxValueWithTyping(addsrvinsurancecmb, addsrvinsurancedd, insurance);
 	}
 
 	public void clickDoneButton() {
 		waitABit(2000);
-		List<WebElement> donebtns = driver.findElements(donebtn);
 		for (WebElement donebtn : donebtns) {
-			if (donebtn.isDisplayed()) {
-				new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(donebtn));
-				donebtn.click();
-				break;
-			}
+		    try {
+                if (donebtn.isDisplayed()) {
+                    new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(donebtn));
+                    donebtn.click();
+                    break;
+                }
+            } catch (WebDriverException e) {
+                e.printStackTrace();
+		    }
 		}
 	}
 

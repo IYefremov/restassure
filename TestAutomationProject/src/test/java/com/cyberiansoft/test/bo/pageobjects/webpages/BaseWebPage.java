@@ -163,7 +163,7 @@ public abstract class BaseWebPage {
 	}
 
 	public void waitUntilPageReloaded() {
-		waitABit(1000);
+		waitABit(1500);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 

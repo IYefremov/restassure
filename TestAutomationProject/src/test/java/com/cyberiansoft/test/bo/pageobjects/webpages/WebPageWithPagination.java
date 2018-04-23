@@ -79,7 +79,6 @@ public class WebPageWithPagination extends BaseWebPage {
 	    wait.until(ExpectedConditions.elementToBeClickable(gotolastpage));
 		gotolastpage.click();
         waitForLoading();
-        waitABit(10000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
                 .xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 	}
@@ -120,7 +119,10 @@ public class WebPageWithPagination extends BaseWebPage {
 		int currentPage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int nextPage = currentPage + 1;
 		goToNextPage.click();
+		waitForLoading();
+		try {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextPage  + "']")));
+        } catch (TimeoutException ignored) {}
 	}
 	
 	public void clickGoToPreviousPage() {

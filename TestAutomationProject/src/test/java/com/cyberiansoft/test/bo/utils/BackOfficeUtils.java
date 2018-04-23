@@ -75,15 +75,32 @@ public class BackOfficeUtils {
 		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
-		localDate = localDate.minusWeeks(1);
-		return localDate.with(fieldUS, 1);		
+//		localDate = localDate.minusWeeks(1);
+		localDate = localDate.minusWeeks(2);
+		return localDate.with(fieldUS, 1);
 	}
 	
-	public static LocalDate getLastWeekEndDate() {
+//	public static LocalDate getLastWeekEndDate() {
+//		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+//		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+//
+//		localDate = localDate.minusWeeks(1);
+//		return localDate.with(fieldUS, 7);
+//	}
+
+    public static LocalDate getLastWeekEndDate(LocalDate lastweekstart) {
+//		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+
+		lastweekstart = lastweekstart.plusWeeks(1);
+		return lastweekstart.with(fieldUS, 7);
+	}
+
+    public static LocalDate getLastWeekEndDate() {
 		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
-		localDate = localDate.minusWeeks(1);
+		localDate = localDate.plusWeeks(1);
 		return localDate.with(fieldUS, 7);
 	}
 	

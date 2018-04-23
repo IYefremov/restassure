@@ -56,11 +56,10 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells) {
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern(BackOfficeUtils.getFullDateFormat());
-		
 		for (WebElement datecell : datecells) {
 			LocalDate datevalue = LocalDate.parse(datecell.getText(), dateFormat);
-			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);		
-		}	
+			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);
+		}
 	}
 	
 	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells, DateTimeFormatter dateFormat) {
@@ -70,8 +69,8 @@ public class WebPageWithFilter extends WebPageWithPagination {
 		}	
 	}
 	
-	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {		
-		int pagenum =  Integer.valueOf(getLastPageNumber());	
+	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
+		int pagenum =  Integer.valueOf(getLastPageNumber());
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
