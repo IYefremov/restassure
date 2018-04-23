@@ -19,11 +19,11 @@ public class InspectionData {
 	 @JsonProperty("service")
 	 ServiceData service;
 
-	@JsonProperty("moneyService")
-	ServiceData moneyService;
+	 @JsonProperty("moneyService")
+	 ServiceData moneyService;
 
-	@JsonProperty("percentageService")
-	ServiceData percentageService;
+	 @JsonProperty("percentageService")
+	 ServiceData percentageService;
 
 	 @JsonProperty("services")
 	 List<ServiceData> services;

@@ -61,5 +61,53 @@
       },
       "inspPrice": "$24998725001.25"
     }
+  ],
+
+  "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection.01",
+      "description": "Test Case 73398:R360 client: Verify correct Total is shown after editing Money service QTY in My Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "0.50"
+      }, {"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "100"
+      }, {"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "0"
+      }],
+      "service": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      },
+      "inspPrice": "$11.25"
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownMyInspectionWithNegativeAndPositivePercentageServices": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownMyInspectionWithNegativeAndPositivePercentageServices.01",
+      "description": "Test Case 73399:R360 client: Verify correct Total is shown My Inspection with negative and positive percentage services",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "percentageServices": [{"serviceName": "Aluminum Panel", "servicePrice": "25"
+      }, {"serviceName": "Bundle Discount", "servicePrice": "-25"
+      }],
+      "service": {"serviceName": "Battery Installation", "servicePrice": "9"
+      },
+      "inspPrice": "$8.44"
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices.01",
+      "description": "Test Case 73400:R360 client: Verify correct Total is shown for My Inspection with few Money services",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "1"
+      }, {"serviceName": "Damage Service", "servicePrice": "-1", "serviceQuantity": "1"
+      }, {"serviceName": "Labor", "servicePrice": "13.99", "serviceQuantity": "1"
+      }],
+      "inspPrice": "$21.99"
+    }
   ]
 }

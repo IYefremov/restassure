@@ -184,6 +184,13 @@ public class BackOfficeUtils {
 		return Float.valueOf(servicePriceString).floatValue();
 	}
 
+	public static float getServiceQuantityValue(String serviceQuantityString) {
+		String quantityValue = serviceQuantityString.trim();
+		if (quantityValue.equals("0") || quantityValue.equals("0.00"))
+			quantityValue = "1.00";
+		return Float.valueOf(quantityValue).floatValue();
+	}
+
 	public static String getFormattedServicePriceValue(float servicePrice) {
 		String servicePriceFormatted= MONEY_SYMBOL + String.format("%.2f", servicePrice);
 		return servicePriceFormatted;
