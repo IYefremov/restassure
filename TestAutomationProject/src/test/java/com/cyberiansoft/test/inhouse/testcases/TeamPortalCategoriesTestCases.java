@@ -3,26 +3,10 @@ package com.cyberiansoft.test.inhouse.testcases;
 import com.cyberiansoft.test.inhouse.pageObject.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class TeamPortalCategoriesTestCases extends BaseTestCase {
-    @BeforeMethod
-    @Parameters({"backoffice.url"})
-    public void teamPortalLogin(String backofficeurl) throws InterruptedException {
-        webdriverGotoWebPage(backofficeurl);
-        TeamPortalLoginPage loginPage = PageFactory.initElements(webdriver,
-                TeamPortalLoginPage.class);
-        loginPage.loginByGmail();
-        Thread.sleep(2000);
-    }
-
-    @AfterMethod
-    public void teamPortalLogout() throws InterruptedException {
-        TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
-                TeamPortalHeader.class);
-        headerPanel.clickLogOutButton();
-        Thread.sleep(1000);
-    }
 
     @DataProvider
     public Object[][] provideNewClientData() {

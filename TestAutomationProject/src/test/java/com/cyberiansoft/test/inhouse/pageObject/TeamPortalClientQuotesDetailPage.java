@@ -7,10 +7,10 @@ import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,6 +46,9 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
 
     @FindBy(xpath = "//a[@class='btn-add-ischecked-addon-edition-feature addon-checked-value']")
     WebElement yesAddItemToAgreement;
+
+    @FindBy(className = "price")
+    private WebElement priceDisplayed;
 
     public TeamPortalClientQuotesDetailPage(WebDriver driver) {
         super(driver);
@@ -145,23 +148,19 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
         return MailChecker.getUserMailContentFromSpam();
     }
 
-    public void selectDiscount(String discount) throws InterruptedException {
-//        discountList.click();
+    public void selectDiscount(String discount) {
         driver.switchTo().defaultContent();
-        Thread.sleep(500);
         wait.until(ExpectedConditions.elementToBeClickable(discountList));
-        discountList.click();
-        new Actions(driver).moveToElement(discountList).click(discountList).click().build().perform();
-        Thread.sleep(500);
-        driver.findElements(By.tagName("option")).stream().filter(e -> e.getText().equals(discount)).findFirst().get().click();
+        new Select(discountList).selectByVisibleText(discount);
         submitDiscountBTN.click();
-        Thread.sleep(1000);
     }
 
     public boolean checkNewPrice(String price) throws InterruptedException {
         Thread.sleep(1500);
-        System.out.println(driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText());
-        return driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText().equals(price);
+        System.out.println(priceDisplayed.getText());
+//        System.out.println(driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText());
+//        return driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText().equals(price);
+        return priceDisplayed.getText().equals(price);
     }
 
     public boolean checkSetupFee(String fee) throws InterruptedException {

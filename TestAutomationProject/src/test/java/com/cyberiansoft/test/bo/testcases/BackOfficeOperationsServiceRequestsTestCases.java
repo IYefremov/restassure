@@ -394,9 +394,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-	//todo fails on Monday
     @Test(testName = "Test Case 26172:Operation - New service request - Appointment - Location Type: Repair Location", description = "Operation - New service request - Appointment - Location Type: Repair Location")
-	public void testOperationNewServiceRequestAppointmentLocationTypeRepairLocation() throws InterruptedException {
+	public void testOperationNewServiceRequestAppointmentLocationTypeRepairLocation() {
 
 		final String teamname = "Default team";
 		final String addsrvalue = "Vit_All_Services";
@@ -455,22 +454,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
 		appointmentpopup.setStartTimeValue("8:00 AM");
 		appointmentpopup.setEndTimeValue("8:40 AM");
-		appointmentpopup.waitABit(3000);
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), assignedto);
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
 		appointmentpopup.selectLocationType("Repair Location");
-		appointmentpopup.waitABit(1000);
 		appointmentpopup.selectLocation("VD_Location");
-		appointmentpopup.waitABit(1000);
 		appointmentpopup.clickAddAppointment();
-		Thread.sleep(1000);
 		servicerequestslistpage
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
-		Thread.sleep(1000);
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), newservicerequest);
 
 		appointmentpopup.clickAddAppointment();
@@ -609,7 +603,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 26221:Operations: SR list - Verify that Check In Button is not present when create SR", description = "Operations: SR list - Verify that Check In Button is not present when create SR")
-	public void testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR() throws InterruptedException {
+	public void testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR() {
 
 		final String addsrvalue = "Type_for_Check_In_ON";
 		final String customer = "002 - Test Company";
@@ -642,7 +636,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 26225:Operations: SR list - Verify that Check In button is appeared when SR is saved", description = "Operations: SR list - Verify that Check In button is appeared when SR is saved")
-	public void testOperationsVerifyThatCheckInButtonIsAppearedWhenSRIsSaved() throws InterruptedException {
+	public void testOperationsVerifyThatCheckInButtonIsAppearedWhenSRIsSaved() {
 
 		final String addsrvalue = "Type_for_Check_In_ON";
 		final String customer = "002 - Test Company";
@@ -724,7 +718,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 56760:Operation - Service Request - Description in excisting SR", dataProvider = "provideSRdescription")
-	public void testServiceRequestdescription(String description) throws InterruptedException {
+	public void testServiceRequestDescription(String description) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
@@ -742,7 +736,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 56761:Operation - Service Request - Tags manipulation in new SR", dataProvider = "provideSRwholeInfo")
-	public void testServiceRequest(String[] tags, String symbol) throws InterruptedException {
+	public void testServiceRequest(String[] tags, String symbol) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -762,7 +756,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 56760:Operation - Service Request - Description in excisting SR", dataProvider = "provideSomeDescriptions")
-	public void testServiceRequestDesciptionInExistingSR(String[] descriptions) throws InterruptedException {
+	public void testServiceRequestDesciptionInExistingSR(String[] descriptions) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -790,7 +784,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR", dataProvider = "provideSomeDescriptions")
-	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) throws InterruptedException {
+	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -803,7 +797,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
-	public void checkDescriptionDocument() throws InterruptedException {
+	public void checkDescriptionDocument() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1139,7 +1133,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 57875:Operation - Service Request Life Cycle - Approved", dataProvider = "provideSRdata1")
 	public void checkSRLCapproved(String customer, String startDate, String endDate, String status, String SRcustomer,
-			String newStatus) throws InterruptedException {
+			String newStatus) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1161,7 +1155,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Rejected", dataProvider = "provideSRdata1")
 	public void checkSRLCrejected(String customer, String startDate, String endDate, String status, String SRcustomer,
-			String newStatus) throws InterruptedException {
+			String newStatus) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1969,6 +1963,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 	}
 
+    //todo fails needs to be discussed with Sasha Zakaulov. п. 6 "Select 001 - Test Company and click Client Users". Where are Client Users?
     @Test(testName = "Test Case 65611:Operation - Service Request - Adviser Listing")
 	public void testServicerequestAdviserListing() throws InterruptedException{
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1977,7 +1972,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer("001 - Test Company");
-		Assert.assertTrue(serviceRequestsWebPage.checkPresentanceOfServiceAdvisorsByFilter("tes"));
+		Assert.assertTrue(serviceRequestsWebPage.checkPresenceOfServiceAdvisorsByFilter("tes"));
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();

@@ -683,7 +683,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean saveNewServiceRequest() {
 		try {
-			waitABit(3000);
+			waitABit(5000);
 			wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 			click(saveservicerequestbutton);
 			waitABit(3000);
@@ -1036,12 +1036,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void selectAddServiceRequestDropDown(String string) {
-		if (!string.equals("01_Alex2SRT")) {
 			addServiceRequestDropDown.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-					.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
-					.get().click();
-		}
+					.findElements(By.className("rcbItem")).stream().filter(e -> e
+                    .getText()
+                    .equals(string))
+                    .findFirst()
+                    .ifPresent(WebElement::click);
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
@@ -2064,27 +2065,25 @@ waitABit(3000);
 		}
 	}
 
-	public boolean checkPresentanceOfServiceAdvisorsByFilter(String filter) {
+	public boolean checkPresenceOfServiceAdvisorsByFilter(String filter) {
 		wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();
 		try {
 			wait.until(ExpectedConditions.visibilityOf(advisorUsersList));
-			Thread.sleep(4000);
+			waitABit(4000);
 			List<WebElement> list = advisorUsersList.findElements(By.tagName("li"));
 			if (list.size() < 1)
 				return false;
 			advisorInputField.sendKeys(filter);
-			Thread.sleep(3000);
+			waitABit(3000);
 			boolean result = advisorUsersList.findElements(By.tagName("li")).stream()
-					.map(e -> e.getText()).map(t -> t.toLowerCase()).allMatch(t -> t.contains(filter));
+					.map(WebElement::getText).map(String::toLowerCase).allMatch(t -> t.contains(filter));
 			advisorUsersList.findElements(By.tagName("li")).get(0).click();
-			Thread.sleep(2000);
+			waitABit(2000);
 			return result;
 		} catch (TimeoutException e) {
 			return false;
-		} catch (InterruptedException e) {
-			return false;
 		}
-	}
+    }
 
 	public String getkServiceAdvisorName() throws InterruptedException {
 		getCustomerEditButton().click();

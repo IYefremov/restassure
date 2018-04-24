@@ -169,26 +169,32 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 				.click();
 	}
 
-	public void clickEditServiceRequestTypeOkButton() throws InterruptedException {
-		Thread.sleep(1500);
+	public void clickEditServiceRequestTypeOkButton() {
+		waitABit(1500);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")).click();
-		waitABit(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 	}
 
 	public void selectStockRoVinOptions() {
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).getAttribute("class")
-				.equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
-		}
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).getAttribute("class")
-				.equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).click();
-		}
-		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).getAttribute("class")
-				.equals(" rfdCheckboxUnchecked")) {
-			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
-		}
+    /** verifying the checkbox (checked or unchecked) isn't available any more */
+//		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).getAttribute("class")
+//				.equals(" rfdCheckboxUnchecked")) {
+//			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
+//		}
+//		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).getAttribute("class")
+//				.equals(" rfdCheckboxUnchecked")) {
+//			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")).click();
+//		}
+//		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).getAttribute("class")
+//				.equals(" rfdCheckboxUnchecked")) {
+//			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
+//		}
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")))).click();
 	}
 
 	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype)

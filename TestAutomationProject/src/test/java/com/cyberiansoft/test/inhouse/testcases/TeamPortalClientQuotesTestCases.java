@@ -3,29 +3,12 @@ package com.cyberiansoft.test.inhouse.testcases;
 import com.cyberiansoft.test.inhouse.pageObject.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 public class TeamPortalClientQuotesTestCases extends BaseTestCase {
-
-    @BeforeMethod
-    @Parameters({"backoffice.url"})
-    public void teamPortalLogin(String backofficeurl) throws InterruptedException {
-        webdriverGotoWebPage(backofficeurl);
-        TeamPortalLoginPage loginPage = PageFactory.initElements(webdriver,
-                TeamPortalLoginPage.class);
-        loginPage.loginByGmail();
-        Thread.sleep(2000);
-    }
-
-    @AfterMethod
-    public void teamPortalLogout() throws InterruptedException {
-        TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
-                TeamPortalHeader.class);
-        headerPanel.clickLogOutButton();
-        Thread.sleep(1000);
-    }
 
     @Test(testName = "Test Case 66618:Verify user can add new Client", dataProvider = "provideNewClientData")
     public void testUserCanAddNewClient(String name, String nickname, String address, String address2, String zip,
@@ -161,6 +144,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
     }
 
+    //todo fails
     @Test(testName = "Test Case 66650:Verify user can send notification (sms/email)", dataProvider = "provideNewClientData")
     public void testUserCanSendNotifications(String name, String nickname, String address, String address2, String zip,
                                                     String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
@@ -211,6 +195,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.deleteUser(name);
     }
 
+    //todo fails
     @Test(testName = "Test Case 66655:Verify \"Viewed letter:<date>\", \"Viewed agreement: <date>\" if user open mail with link.", dataProvider = "provideNewClientData")
     public void testUserCanVerifyDatesWhenOpenMailWithLink(String name, String nickname, String address, String address2, String zip,
                                              String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
@@ -263,10 +248,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.deleteUser(name);
     }
 
-
-
-
-
+    //todo fails
     @Test(testName = "Test Case 66656:Verify user can pay agreement from mail link.", dataProvider = "provideNewClientData")
     public void testUserCanPayAgreementFromMailLink(String name, String nickname, String address, String address2, String zip,
                                                            String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
@@ -302,6 +284,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.1 per m.");
         Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        //todo Where is the price $1578.00 taken?
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
         clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));

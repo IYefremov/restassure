@@ -125,7 +125,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	//	vendororderspage.openServicesInformationByOrderNoWindowAndVerifyContent(wonum, VIN, company);
 	}
 
-	//todo fails today Lilia
+
+	//todo fails Friday. Lilia, needs to be discussed
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
 	public void testMonitorReportsAverageRepairTimeReport() {
 

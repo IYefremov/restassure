@@ -306,7 +306,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 18475:Operation - New service request")
-	public void testOperationNewServiceRequest() throws Exception {
+	public void testOperationNewServiceRequest() {
 
 		final String srtype = "Vit_All_Services";
 

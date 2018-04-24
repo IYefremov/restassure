@@ -1,31 +1,14 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.inhouse.pageObject.*;
+import com.cyberiansoft.test.inhouse.pageObject.BasePage;
+import com.cyberiansoft.test.inhouse.pageObject.OrganizationsRulesPage;
+import com.cyberiansoft.test.inhouse.pageObject.TeamPortalAccountsRulesPage;
+import com.cyberiansoft.test.inhouse.pageObject.TeamPortalLeftMenuPanel;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class TeamPortalRulesTestCases extends BaseTestCase {
-    @BeforeMethod
-    @Parameters({"backoffice.url"})
-    public void teamPortalLogin(String backofficeurl) throws InterruptedException {
-        webdriverGotoWebPage(backofficeurl);
-        TeamPortalLoginPage loginPage = PageFactory.initElements(webdriver,
-                TeamPortalLoginPage.class);
-        loginPage.loginByGmail();
-        Thread.sleep(2000);
-    }
-
-    @AfterMethod
-    public void teamPortalLogout() throws InterruptedException {
-        TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
-                TeamPortalHeader.class);
-        headerPanel.clickLogOutButton();
-        Thread.sleep(1000);
-    }
 
     @Test(testName = "Test Case 59858:Verify user can add new organization rules.")
     public void testUserCanAddNewOrganisationRules() throws InterruptedException {
