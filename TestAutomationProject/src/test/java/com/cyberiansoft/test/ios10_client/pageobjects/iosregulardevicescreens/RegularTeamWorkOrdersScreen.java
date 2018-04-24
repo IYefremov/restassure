@@ -1,7 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.ios.IOSTouchAction;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,14 +16,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.ios.IOSTouchAction;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import java.util.concurrent.TimeUnit;
 
 public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 	
@@ -49,7 +47,7 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("MyWorkOrdersTable")));
 	}
 	
@@ -65,7 +63,6 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 	
 	public RegularOrderMonitorScreen selectWOMonitor() {
 		womonitor.click();
-		Helpers.waitABit(5000);
 		return new RegularOrderMonitorScreen(appiumdriver);
 	}
 	

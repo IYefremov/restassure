@@ -1,32 +1,25 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class iOSRegularBaseScreen extends iOSBaseScreen {
 	
@@ -56,9 +49,8 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickSaveButton() {
-		if (appiumdriver.findElements(MobileBy.AccessibilityId("Save")).size() < 1) {
+		if (!elementExists("Save"))
 			clickChangeScreen();
-		}
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -70,7 +62,6 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		clickChangeScreen();
 		clickCancel();
 		acceptAlert();
-		Helpers.waitABit(1000);
 	}
 	
 	public void clickCancel() {
@@ -105,7 +96,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		if (! appiumdriver.findElementByAccessibilityId(screenname).isDisplayed()) {
 			swipeToElement(appiumdriver.
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
-			appiumdriver.findElementByAccessibilityId(screenname).click();
+			//appiumdriver.findElementByAccessibilityId(screenname).click();
 		}
 		appiumdriver.findElementByAccessibilityId(screenname).click();
 		Helpers.waitABit(1000);

@@ -1,25 +1,18 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class RegularClaimScreen extends iOSRegularBaseScreen {
-	
-	@iOSFindBy(accessibility = "Done")
-    private IOSElement donebtn;
 	
 	public RegularClaimScreen(AppiumDriver driver) {
 		super(driver);
@@ -33,14 +26,12 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 		if (!appiumdriver.findElementByAccessibilityId(insurancecompany).isDisplayed())
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + insurancecompany + "']")));
 		appiumdriver.findElementByAccessibilityId(insurancecompany).click();
-		Helpers.waitABit(500);
 	}
 
 	public void setClaim(String claim) {
 		appiumdriver.findElementByAccessibilityId("Claim#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(claim);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 
 	}
 	
@@ -56,7 +47,6 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(deductible);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 
 	public String getDeductibleValue() {
@@ -67,7 +57,7 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	public void setAccidentDate() {
 		WebElement par = getTableParentCell("Accident Date");
 		new TouchAction(appiumdriver).tap(par.findElement(MobileBy.AccessibilityId("custom detail button"))).perform() ;
-		donebtn.click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public String clickSaveWithAlert() {

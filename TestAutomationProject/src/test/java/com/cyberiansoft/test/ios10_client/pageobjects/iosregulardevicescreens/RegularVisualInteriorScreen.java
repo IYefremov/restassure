@@ -1,25 +1,22 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	@iOSFindBy(accessibility = "Quantity")
+	/*@iOSFindBy(accessibility = "Quantity")
     private IOSElement quantityfld;
 	
 	@iOSFindBy(accessibility = "Price")
@@ -36,7 +33,7 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	
 	
 	@iOSFindBy(accessibility = "Save")
-    private IOSElement savebtn;
+    private IOSElement savebtn;*/
 
 	public RegularVisualInteriorScreen(AppiumDriver driver) {
 		super(driver);
@@ -55,11 +52,11 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectService(String _service) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@value='" + _service + "']").click();
+		appiumdriver.findElementByAccessibilityId (_service ).click();
 	}
 
 	public void selectSubService(String _subservice) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@value='" + _subservice + "']").click();
+		appiumdriver.findElementByAccessibilityId( _subservice).click();
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
@@ -69,32 +66,27 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void saveCarServiceDetails() {
-		savebtn.click();
+		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
 	public void tapInterior() throws InterruptedException {
-		Thread.sleep(1000);
 		Helpers.tapInterior(50, 50);
 	}
 	
 	public static void tapInteriorWithCoords(int x, int y) throws InterruptedException {
-		Thread.sleep(1000);
 		Helpers.tapInterior(x, y);
 	}
 
 	public static void tapExterior() throws InterruptedException {
-		Thread.sleep(2000);
 		Helpers.tapExterior(150, 150);
 	}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
-		Thread.sleep(1000);
 		Helpers.tapExterior(x, y);
 	}
 	
 	public void clickServicesToolbarButton() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("services")).click();
-		Helpers.waitABit(500);
 	}
 
 	public void assertPriceIsCorrect(String price) {
@@ -102,12 +94,11 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void assertVisualPriceIsCorrect(String price) {
-		Assert.assertEquals(toolbarvisualpricevalue.getAttribute("value"), price);
+		Assert.assertEquals(appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value"), price);
 	}
 
 
-	public void assertDefaultInteriorServicesPresent()
-			throws InterruptedException {
+	public void assertDefaultInteriorServicesPresent() {
 		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
 		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
 		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());

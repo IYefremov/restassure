@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -96,7 +95,6 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Duplicate services")));
         appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Cancel']").click();
-        Helpers.waitABit(1000);
 	}
 	
 	public void closeDublicaterServicesWarningByClickingOverride() {

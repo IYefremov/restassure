@@ -1,31 +1,21 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-import io.appium.java_client.remote.HideKeyboardStrategy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.PriceMatrixScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RegularServicesScreen extends iOSRegularBaseScreen {
 
@@ -287,7 +277,6 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public void setSelectedServiceRequestServicesQuantity(String servicename, String _quantity) throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		Helpers.waitABit(500);
 		WebElement par = getServiceTableCell(servicename);
 		par.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity + "\n");
@@ -304,7 +293,6 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 	
 	public void openServiceDetailsByIndex(String servicename, int servicedetailindex) {
 		((WebElement) appiumdriver.findElementsByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='custom detail button']").get(servicedetailindex)).click();
-		Helpers.waitABit(1000);
 	}
 	
 	public void setSelectedServiceRequestServicePrice(String servicename, String price) {
@@ -366,7 +354,7 @@ public class RegularServicesScreen extends iOSRegularBaseScreen {
 		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
 		navbar.findElement(MobileBy.AccessibilityId("Add")).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Add")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
 	}
 	
 	public void clickSaveAsFinal() {

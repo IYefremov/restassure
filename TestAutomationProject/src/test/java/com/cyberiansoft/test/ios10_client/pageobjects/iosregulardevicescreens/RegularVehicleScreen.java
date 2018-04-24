@@ -1,20 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +18,11 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		
@@ -85,14 +82,14 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
     private IOSElement regularwotypelabel;
 	
-	@iOSFindBy(accessibility = "Done")
+	/*@iOSFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;
 	
 	@iOSFindBy(accessibility = "Compose")
     private IOSElement composebtn;
 	
 	@iOSFindBy(accessibility = "Cancel")
-    private IOSElement cancelbtn;
+    private IOSElement cancelbtn;*/
 	
 	public RegularVehicleScreen(AppiumDriver driver) {
 		super(driver);
@@ -115,7 +112,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		clickVINField();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(1500);
 	}
 
 	public void setVIN(String vin)  {
@@ -132,12 +128,12 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
-			closebtn.click();
-			/*if (closebtn.isDisplayed()) {
+//			closebtn.click();
+			if (closebtn.isDisplayed()) {
 				closebtn.click();
 				
 				break;
-			}*/
+			}
 		}
 		
 		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
@@ -149,9 +145,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 					break;
 				}
 			}
-		
-
-		Helpers.waitABit(500);
 	}
 	
 	public void clearVINCode() {
@@ -194,7 +187,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getWorkOrderTypeValue() {
-		Helpers.waitABit(1000);
 		return regularwotypelabel.getAttribute("value");
 	}
 	
@@ -249,7 +241,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getTechnician() {
-		Helpers.waitABit(1000);
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
@@ -261,37 +252,35 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	
 	public void cancelOrder() {
 		clickChangeScreen();
-		cancelbtn.click();
+		appiumdriver.findElementByAccessibilityId("Cancel").click();
 		acceptAlert();
 	}
 	
 	public void setColor(String color) {
 		appiumdriver.findElementByAccessibilityId("Color").click();
 		appiumdriver.findElementByAccessibilityId(color).click();
-		Helpers.waitABit(1000);
 	}
 	
-	public void setMileage(String mileage) throws InterruptedException {
+	public void setMileage(String mileage) {
 		appiumdriver.findElementByAccessibilityId("Mileage").click();
-		Helpers.keyboadrType(mileage);
+		appiumdriver.getKeyboard().sendKeys(mileage);
 	}
 	
-	public void setFuelTankLevel(String fueltanklevel) throws InterruptedException {
+	public void setFuelTankLevel(String fueltanklevel) {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
-		Helpers.keyboadrType(fueltanklevel);
+		appiumdriver.getKeyboard().sendKeys(fueltanklevel);
 		//element(
 			//	MobileBy.name("Fuel Tank Level")).setValue(fueltanklevel);
 	}
 	
-	public void setLicensePlate(String licplate) throws InterruptedException {
+	public void setLicensePlate(String licplate) {
 		appiumdriver.findElementByAccessibilityId("License Plate").click();
-		Helpers.keyboadrType(licplate);
+		appiumdriver.getKeyboard().sendKeys(licplate);
 	}
 
 	public void setTech(String _tech) throws InterruptedException {
 		clickTech();
 		appiumdriver.findElementByAccessibilityId(_tech).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void selectLocation(String _location) {
@@ -309,7 +298,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setType(String _type) throws InterruptedException {
 		appiumdriver.findElementByAccessibilityId("Type").click();
 		//selectUIAPickerValue(_type);
-		toolbardonebtn.click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void setYear(String year) throws InterruptedException {
@@ -327,10 +316,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
 		appiumdriver.findElementByAccessibilityId("Trim").click();
-		appiumdriver.findElementByAccessibilityId("Trim").click();
-		Thread.sleep(1000);
+		appiumdriver.findElementByAccessibilityId("Trim").click();;
 		selectUIAPickerValue(trimvalue);
-		toolbardonebtn.click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
 	public void clickTech() {
@@ -344,7 +332,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElementByAccessibilityId("RO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 		
 	}
 
@@ -352,14 +339,12 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setPO(String po) throws InterruptedException {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public String getWorkOrderCustomer() {
@@ -373,7 +358,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularNotesScreen clickNotesButton() {
-		composebtn.click();
+		appiumdriver.findElementByAccessibilityId("Compose").click();
 		return new RegularNotesScreen(appiumdriver);
 	}
 	
