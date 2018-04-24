@@ -34,6 +34,9 @@ public class InspectionData {
 	 @JsonProperty("percentageServices")
 	 List<ServiceData> percentageServices;
 
+	 @JsonProperty("matrixService")
+	 MatrixServiceData matrixService;
+
 	 @JsonProperty("insuranceCompany")
 	 InsuranceCompanyData insuranceCompany;
 	 
@@ -111,7 +114,9 @@ public class InspectionData {
 	 public List<ServiceData> getPercentageServicesList() {
 		return percentageServices;
 	}
-	 
+
+	 public MatrixServiceData getMatrixServiceData() { return matrixService; }
+
 	 public String getServiceNameByIndex(int serviceIndex) {
 		 return services.get(serviceIndex).getServiceName();
 	 }

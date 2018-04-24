@@ -109,5 +109,39 @@
       }],
       "inspPrice": "$21.99"
     }
+  ],
+
+  "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsStateFarmMatrix": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsStateFarmMatrix.01",
+      "description": "Test Case 73401:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels State Farm matrix",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "State Farm-Tech",
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "DIME", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Very Light 1 to 5"
+        }, {"hailMatrixServiceName": "Deck Lid", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Limit 151 to 200"
+        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
+        }]},
+      "inspPrice": "$281.25"
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsNationwideInsuranceMatrix": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsNationwideInsuranceMatrix.01",
+      "description": "Test Case 73402:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Nationwide Insurance matrix",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Nationwide Insurance-Tech",
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "QTR", "hailMatrixSeverity": "1-5", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "NKL", "hailMatrixSeverity": "Roof (251 - 300)"
+        }, {"hailMatrixServiceName": "Left Other", "hailMatrixSize": "HLF", "hailMatrixSeverity": "6-15"
+        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
+        }]},
+      "inspPrice": "$281.25"
+    }
   ]
 }
