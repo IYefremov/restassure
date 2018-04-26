@@ -114,12 +114,12 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		clickOKButton();
 	}
 
-	public void switchToRetailCustomer() throws InterruptedException {
+	public void switchToRetailCustomer() {
 		checkboxSelect("Retail");
 	}
 
-	public boolean isCompanyRetail() throws InterruptedException {
-		Thread.sleep(3000);
+	public boolean isCompanyRetail() {
+		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Retail']")));
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Retail']")));
 	}
@@ -189,7 +189,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return workhourstart.getValue();
 	}
 
-	public boolean isWorkHoursStartVisible() throws InterruptedException {
+	public boolean isWorkHoursStartVisible() {
 //		Thread.sleep(5000);
 //		return workhourstart.isDisplayed();
 		try{

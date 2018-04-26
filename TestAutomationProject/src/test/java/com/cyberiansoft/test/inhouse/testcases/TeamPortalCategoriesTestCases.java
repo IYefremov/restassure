@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
+import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.pageObject.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -13,7 +14,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         return new Object[][]{
                 {"CompanyAutomation", "Nock for company", "Address 1", "Address 2", "123AB", "United States",
                         "California", "LA", "+380963665214", "+380963665214", "Test", "User",
-                        "Job title", "automationvozniuk@gmail.com"}
+//                        "Job title", "automationvozniuk@gmail.com"}
+                        "Job title", InHouseConfigInfo.getInstance().getUserEmail()}
 
         };
     }

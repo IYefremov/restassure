@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.utils;
 
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.mail.*;
@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
+
+import static com.cyberiansoft.test.inhouse.pageObject.BasePage.waitABit;
 
 public class MailChecker {
 
@@ -24,8 +25,8 @@ public class MailChecker {
     private static String userPassword;
 
     public MailChecker() {
-        userName = BOConfigInfo.getInstance().getUserName();
-        userPassword = BOConfigInfo.getInstance().getUserPassword();
+        userName = InHouseConfigInfo.getInstance().getUserEmail();
+        userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
     public static Store loginToGMailBox(String userName, String password) {
@@ -184,6 +185,7 @@ public class MailChecker {
     			Message message = foundMessages[i];
     			Address[] froms = message.getFrom();
     			String email = froms == null ? null : ((InternetAddress)froms[0]).getAddress();
+                System.out.println("EMAIL: " + email);
     			if(message.getSubject()==null){
     				continue;
     			}
@@ -203,7 +205,7 @@ public class MailChecker {
              		System.out.println("Found message #" + i + ": ");
              		System.out.println("At "+ i + " :"+ "Subject:"+ subject);
              		System.out.println("From: "+ email +" on : "+message.getReceivedDate());
-             		if (getText(message).contains(bodySearchText)== true) {
+             		if (getText(message).contains(bodySearchText)) {
              			System.out.println("Message contains the search text "+bodySearchText);
              			val=true;
              		}
@@ -255,7 +257,7 @@ public class MailChecker {
     	return requiredmessage;
     }
     
-    public static boolean searchEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
     	boolean val = false;	
     	try {
     		Store store = loginToGMailBox(userName, password);
@@ -312,7 +314,7 @@ public class MailChecker {
     public static boolean downloadMessageAttachment(Message message, String attachmentfilename) {
     	boolean downloaded = false;
     	try {
-    		List<File> attachments = new ArrayList<File>();
+    		List<File> attachments = new ArrayList<>();
     		Multipart multipart = (Multipart) message.getContent();
     		for (int j = 0; j < multipart.getCount(); j++) {
     			BodyPart bodyPart = multipart.getBodyPart(j);
@@ -496,18 +498,4 @@ public class MailChecker {
 		}
 		return mailmessage;
     }
-    
-    
-    
-    public static void waitABit(int milliseconds) {
-        if (milliseconds > 0) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(milliseconds);
-            } catch (InterruptedException ex) {
-                // Swallow exception
-                ex.printStackTrace();
-            }
-        }
-    }
-    
 }

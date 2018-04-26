@@ -30,16 +30,20 @@ public class WebElementsBot {
 	    	.until(ExpectedConditions.elementToBeClickable(element));
 	    } catch (StaleElementReferenceException | TimeoutException e) {
             // just retry finding the element in the refreshed DOM
-            waitABit(4000);
+            waitABit(5000);
 	    }
         element.click();
 	    waitABit(3500);
     }
 	
 	public static void clickAndWait(WebElement element) {
-	    new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
-	    element.click();
-	    waitUntilPageReloaded();
+	    try {
+            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
+        } catch (TimeoutException e) {
+	        waitABit(3000);
+        }
+        element.click();
+        waitUntilPageReloaded();
 	    waitABit(4500);
 	}
 	
@@ -95,8 +99,12 @@ public class WebElementsBot {
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
-        new WebDriverWait(driver, 50)
-                .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+        try {
+            new WebDriverWait(driver, 50)
+                    .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+        } catch (Exception e) {
+            waitABit(3000);
+        }
 		Actions act = new Actions(driver);
 		act.click(combobox.getWrappedElement()).perform();
 		try {
@@ -171,10 +179,7 @@ public class WebElementsBot {
         if (milliseconds > 0) {
             try {
                 TimeUnit.MILLISECONDS.sleep(milliseconds);
-            } catch (InterruptedException ex) {
-                // Swallow exception
-                ex.printStackTrace();
-            }
+            } catch (InterruptedException ignored) {}
         }
     }
 }

@@ -234,7 +234,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tbody/tr/td/div/div[contains(text(), '" + vin + "')]")).isDisplayed());
 	}
 	
-	public void openFullDisplayWOMonitorandVerifyContent() throws InterruptedException {
+	public void openFullDisplayWOMonitorAndVerifyContent() {
 		clickFullDisplayLink();
 		waitForNewTab();
 		Set<String> handles = driver.getWindowHandles();

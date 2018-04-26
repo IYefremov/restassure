@@ -289,7 +289,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesDetailPage.clickSendNotificationButton();
         Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
         String link = clientQuotesDetailPage.getAgreementApproveLink();
-        page = clientQuotesDetailPage.goToAgreemntApprovmentPageFromEmail(link);
+        page = clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
         Assert.assertTrue(page instanceof TeamPortalAgreementApprovePage);
         TeamPortalAgreementApprovePage agreementApprovePage = (TeamPortalAgreementApprovePage)page;
         agreementApprovePage.fillClientInfo("Anastasia","Maksimova","automationCompany");

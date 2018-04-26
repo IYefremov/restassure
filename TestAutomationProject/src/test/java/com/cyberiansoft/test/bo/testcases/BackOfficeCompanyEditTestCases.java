@@ -277,7 +277,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newclientdialogpage.setCompanyShipToZip(clientzip);
 		newclientdialogpage.clickCopyToBillToButton();
 		newclientdialogpage.clickOKButton();
-		clientspage.waitABit(3000);
 		newclientdialogpage = clientspage.clickEditClient(retailcompanyname);
 		Assert.assertTrue(newclientdialogpage.isCompanyRetail());
 		Assert.assertEquals(newclientdialogpage.getCompanyName(), clientname);

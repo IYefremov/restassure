@@ -298,7 +298,6 @@ public class ClientsWebPage extends WebPageWithPagination {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
 			waitABit(3000);
 			if (clientsTableRow.findElement(By.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
-					//if (clientsTableRow.findElement(By.xpath(".//td[7]"))
 					.getText().equals(clientname)) {
 				return clientsTableRow;
 			}
@@ -320,8 +319,8 @@ public class ClientsWebPage extends WebPageWithPagination {
         return null;
 	}
 
-	public NewClientDialogWebPage clickEditClient(String clientname) throws InterruptedException {
-		Thread.sleep(2000);
+	public NewClientDialogWebPage clickEditClient(String clientname) {
+		waitABit(7000);
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();

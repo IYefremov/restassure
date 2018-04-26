@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ServiceCountWebPage extends BaseWebPage {
 
@@ -43,35 +41,34 @@ public class ServiceCountWebPage extends BaseWebPage {
 		searchBTN.click();
 	}
 
-	public boolean verifySearchFields() throws InterruptedException {
+	public boolean verifySearchFields() {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		try {
-			Thread.sleep(1500);
+			waitABit(1500);
 			if (!locationField.getAttribute("value").equals("(all)")) {
 				return false;
 			}
 			StringBuilder criteriaDate = new StringBuilder(formatter.format(now.minusWeeks(1)));
-			Thread.sleep(1500);
+			waitABit(1500);
 			if (!searchDateFrom.getAttribute("value").equals(criteriaDate.toString())) {
 				return false;
 			}
-			 criteriaDate = new StringBuilder(formatter.format(now));
-				Thread.sleep(1500);
+			criteriaDate = new StringBuilder(formatter.format(now));
+			waitABit(1500);
 			if (!searchDateTo.getAttribute("value").equals(criteriaDate.toString())) {
 				return false;
 			}
-			Thread.sleep(1500);
+			waitABit(1500);
 			calendarDateFromBTN.click();
-			Thread.sleep(1500);
+			waitABit(1500);
 			wait.until(ExpectedConditions.presenceOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_calendar_Top")));
-			Thread.sleep(1500);
+			waitABit(1500);
 			calendarDateToBTN.click();
-			Thread.sleep(1500);
+			waitABit(1500);
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateTo_calendar_Top")));
-
 		} catch (Exception e) {
 			return false;
 		}

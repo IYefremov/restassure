@@ -204,7 +204,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")
-	public void testMonitorRepairOrderFullDisplayVersion() throws Exception {
+	public void testMonitorRepairOrderFullDisplayVersion() {
 
 		final String repairorderlocation = "Default Location";
 		final String repairordertimeframe = "Last Year";
@@ -221,7 +221,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation(repairorderlocation);
 		repairorderspage.selectSearchTimeframe(repairordertimeframe);
 		repairorderspage.clickFindButton();
-		repairorderspage.openFullDisplayWOMonitorandVerifyContent();
+		repairorderspage.openFullDisplayWOMonitorAndVerifyContent();
 	}
 	
 	@Test(testName = "Test Case 28379:Monitor - Verify \"On Hold\" Reason at RO", description = "Monitor - Verify \"On Hold\" Reason at RO")
@@ -403,7 +403,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
-	public void checkMonitorReportsServiceCount() throws InterruptedException{
+	public void checkMonitorReportsServiceCount() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();

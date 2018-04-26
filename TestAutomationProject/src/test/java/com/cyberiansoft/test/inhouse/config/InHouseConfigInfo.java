@@ -39,6 +39,10 @@ public class InHouseConfigInfo {
 	      return props.getProperty("user.name");
 	}
 
+	public String getUserEmail() {
+	      return props.getProperty("user.mail");
+	}
+
 	public String getUserPassword() {
 	      return props.getProperty("user.password");
 	}

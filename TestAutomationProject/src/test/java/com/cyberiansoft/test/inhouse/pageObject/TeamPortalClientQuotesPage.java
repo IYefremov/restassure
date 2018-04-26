@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,73 +10,76 @@ import java.util.List;
 public class TeamPortalClientQuotesPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-potential-client']")
-    WebElement addClientBTN;
+    private WebElement addClientBTN;
 
     @FindBy(xpath = "//input[@id='ClientName']")
-    List<WebElement> newClientName;
+    private List<WebElement> newClientName;
 
     @FindBy(id = "ClientNickname")
-    WebElement newClientNickName;
+    private WebElement newClientNickName;
 
     @FindBy(id = "ClientAddress")
-    WebElement newClientAddress;
+    private WebElement newClientAddress;
 
     @FindBy(id = "ClientAddress2")
-    WebElement newClientAddress2;
+    private WebElement newClientAddress2;
 
     @FindBy(id = "ClientZip")
-    WebElement newClientZip;
+    private WebElement newClientZip;
 
     @FindBy(id = "ClientCountry")
-    WebElement newClientCountry;
+    private WebElement newClientCountry;
 
     @FindBy(id = "ClientState")
-    WebElement newClientState;
+    private WebElement newClientState;
 
     @FindBy(id = "ClientCity")
-    WebElement newClientCity;
+    private WebElement newClientCity;
 
     @FindBy(id = "ClientPhone")
-    WebElement newClientBusinessPhone;
+    private WebElement newClientBusinessPhone;
 
     @FindBy(id = "ContactPhone")
-    WebElement newClientCellPhone;
+    private WebElement newClientCellPhone;
 
     @FindBy(id = "ContactFirstName")
-    WebElement newClientFirstName;
+    private WebElement newClientFirstName;
 
     @FindBy(id = "ContactLastName")
-    WebElement newClientLastName;
+    private WebElement newClientLastName;
 
     @FindBy(id = "ContactTitle")
-    WebElement newClientTitle;
+    private WebElement newClientTitle;
 
     @FindBy(id = "ContactEmail")
-    WebElement newClientEmail;
+    private WebElement newClientEmail;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
-    WebElement confirmNewClient;
+    private WebElement confirmNewClient;
 
     @FindBy(id = "searchString")
-    WebElement searchField;
+    private WebElement searchField;
 
     @FindBy(id = "btnSearch")
-    WebElement searchBTN;
+    private WebElement searchBTN;
 
     @FindBy(id = "table-potential-client_processing")
-    WebElement processingBar;
+    private WebElement processingBar;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
-    List<WebElement> updateClientBTN;
+    private List<WebElement> updateClientBTN;
 
     @FindBy(id = "ProposalName")
-    List<WebElement> agreementName;
+    private List<WebElement> agreementName;
 
     @FindBy(id = "EditionID")
-    WebElement editionMenu;
+    private WebElement editionMenu;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
-    List<WebElement> addClientProposalBTN;
+    private List<WebElement> addClientProposalBTN;
+
+    @FindBy(xpath = "//div[@class='callout callout-info']/button")
+    private WebElement closeNotificationBTN;
 
     public TeamPortalClientQuotesPage(WebDriver driver) {
         super(driver);
@@ -183,17 +185,24 @@ public class TeamPortalClientQuotesPage extends BasePage {
     }
 
 
-    public boolean verifyUserWasCreated(String verifyParameter) throws InterruptedException {
+    public boolean verifyUserWasCreated(String verifyParameter) {
         searchUser(verifyParameter);
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + verifyParameter + "']")));
             return true;
         } catch (TimeoutException e) {
-            return false;
+            searchUser(verifyParameter);
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + verifyParameter + "']")));
+                return true;
+            } catch (TimeoutException ignored) {
+                return false;
+            }
         }
     }
 
-    public void searchUser(String searchValue) throws InterruptedException {
+    public void searchUser(String searchValue) {
+        try {
         Thread.sleep(1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
@@ -203,22 +212,41 @@ public class TeamPortalClientQuotesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
         Thread.sleep(500);
         wait.until(ExpectedConditions.invisibilityOf(processingBar));
+        } catch (Exception ignored) {}
+
+//        try {
+//            wait.until(ExpectedConditions.visibilityOf(searchField));
+////            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
+////            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
+//        } catch (TimeoutException e) {
+//            waitABit(3000);
+//        }
+//        searchField.clear();
+//        searchField.sendKeys(searchValue);
+//        try {
+//            wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
+//        } catch (Exception e) {
+//            clickElementWithJS(searchBTN);
+//        }
+//        try {
+//            wait.until(ExpectedConditions.invisibilityOf(processingBar));
+//        } catch (Exception e) {
+//            waitABit(1000);
+//        }
     }
 
     public void deleteUser(String deleteParameter) {
-//        while(true) {
-//            try {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).
-                findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-delete btn-delete-potential-client']")).click();
         try {
-            driver.switchTo().alert().accept();
-        } catch (Exception e) {
-        }
-//            }catch (TimeoutException ex){
-//                break;
-//            }
-//        }
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).
+                    findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-delete btn-delete-potential-client']"));
+            while(element.isDisplayed()) {
+                element.click();
+                driver.switchTo().alert().accept();
+                wait.until(ExpectedConditions.visibilityOf(closeNotificationBTN)).click();
+            }
+        } catch (Exception ignored) {}
     }
+
 
     public void editClient(String editParemeter) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + editParemeter + "']"))).
@@ -233,8 +261,8 @@ public class TeamPortalClientQuotesPage extends BasePage {
         js.executeScript("document.body.style.zoom='100%';");
     }
 
-    public void clickAddAgreementBTN(String agreementIdentefier) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentefier + "']"))).
+    public void clickAddAgreementBTN(String agreementIdentifier) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
     }
 
@@ -264,16 +292,25 @@ public class TeamPortalClientQuotesPage extends BasePage {
     }
 
     public void expandAgreementList(String identifier) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + identifier + "']"))).
-                findElement(By.xpath("..")).findElement(By.xpath("//td[@class=' details-control']")).click();
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + identifier + "']"))).
+                    findElement(By.xpath("..")).findElement(By.xpath("//td[@class=' details-control']")).click();
+        } catch (Exception e) {
+            searchUser(identifier); //todo delete?
+        }
     }
 
     public void clickEditAgreement(String s) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']"))).
-                findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")).click();
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']"))).
+                    findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")).click();
+        } catch (Exception e) {
+            clickElementWithJS(driver.findElement(By.xpath("//td[text()='" + s + "']")).
+                    findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")));
+        }
     }
 
-    public boolean abilityToChangeAgreementEdition(String newName) throws InterruptedException {
+    public boolean abilityToChangeAgreementEdition(String newName) {
         try {
             selectEdition(newName);
             return true;
@@ -295,6 +332,7 @@ public class TeamPortalClientQuotesPage extends BasePage {
 
     public boolean checkAgreementByName(String s) {
         try {
+            waitABit(1000);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']")));
             return true;
         } catch (TimeoutException e) {
@@ -313,15 +351,14 @@ public class TeamPortalClientQuotesPage extends BasePage {
         Thread.sleep(500);
     }
 
-    public BasePage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
+    public TeamPortalClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
         Thread.sleep(1500);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-potential-client_processing")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")).click();
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='agreement-statuses']")));
-            return PageFactory.initElements(driver,
-                    TeamPortalClientQuotesDetailPage.class);
+            return PageFactory.initElements(driver, TeamPortalClientQuotesDetailPage.class);
         } catch (TimeoutException e) {
             return null;
         }

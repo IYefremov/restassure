@@ -97,17 +97,8 @@ public abstract class BaseWebPage {
 
 	public void waitForNewTab() {
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		wait.until(new ExpectedCondition<Boolean>() {
-			@Override
-			public Boolean apply(WebDriver d) {
-				return (d.getWindowHandles().size() != 1);
-			}
-		});
+		waitABit(5000);
+		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() != 1));
 	}
 
 	// Bot actions

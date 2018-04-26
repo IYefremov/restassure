@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,37 +25,52 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
     private String userPassword;
 
     @FindBy(className = "agreement-statuses")
-    WebElement agreementStatuses;
+    private WebElement agreementStatuses;
 
     @FindBy(className = "btn-select-edition-discount")
-    WebElement discountBTN;
+    private WebElement discountBTN;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-finalize-agreement']")
-    List<WebElement> finalizeAgreementBTN;
+    private WebElement finalizeAgreementBTN;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-send-notification']")
-    List<WebElement> sendNotificationBTN;
+    private WebElement sendNotificationBTN;
 
     @FindBy(className = "form-control")
-    WebElement discountList;
+    private WebElement formControlList;
 
     @FindBy(xpath = "//button[@class='submit btn-save-select-edition-discount']")
-    WebElement submitDiscountBTN;
+    private WebElement submitDiscountBTN;
+
+    @FindBy(xpath = "//button[@class='submit btn-save-select-edition-feature-setup-fee']")
+    private WebElement submitSetupFeeBTN;
 
     @FindBy(xpath = "//tbody[@data-tbody-feature-group-id]")
-    List<WebElement> clientSupportTables;
+    private List<WebElement> clientSupportTables;
 
     @FindBy(xpath = "//a[@class='btn-add-ischecked-addon-edition-feature addon-checked-value']")
-    WebElement yesAddItemToAgreement;
+    private WebElement yesAddItemToAgreement;
 
     @FindBy(className = "price")
-    private WebElement priceDisplayed;
+    private WebElement repair360Free;
+
+    @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-price-per-month]")
+    private WebElement pricePerMonth;
+
+    @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-setup-fee]")
+    private WebElement setUpFee;
+
+    @FindBy(xpath = "//div[@id='finalize-validation-error-dialog']/div[@class='modal modal-primary']")
+    private WebElement modalDialog;
+
+    @FindBy(xpath = "//span[@class='notification-status']")
+    private WebElement notificationStatus;
 
     public TeamPortalClientQuotesDetailPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        userName = BOConfigInfo.getInstance().getUserName();
-        userPassword = BOConfigInfo.getInstance().getUserPassword();
+        userName = InHouseConfigInfo.getInstance().getUserName();
+        userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
     public boolean checkAgreementStatuses(String aNew, String no, String no1, String no2) throws InterruptedException {
@@ -77,52 +93,66 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
         return true;
     }
 
-    public void clickDiscountBTN() throws InterruptedException {
+    public void clickDiscountBTN() {
         discountBTN.click();
-        Thread.sleep(2000);
+        waitABit(2000);
     }
 
-    public void clickFinalizeAgreementBTN() throws InterruptedException {
-        Thread.sleep(1000);
-        finalizeAgreementBTN.get(0).click();
+    public void clickFinalizeAgreementBTN() {
+        wait.until(ExpectedConditions.elementToBeClickable(finalizeAgreementBTN)).click();
         try {
             driver.switchTo().alert().accept();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignored) {}
     }
 
-    public void clickSendNotificationButton() throws InterruptedException {
-        Thread.sleep(4000);
-        sendNotificationBTN.get(0).click();
+    public void handleAlertForFinalizeAgreementBTN() {
+        try {
+            wait.until(ExpectedConditions.attributeToBe(modalDialog, "display", "block"));
+            wait.until(ExpectedConditions.elementToBeClickable(modalDialog.findElement(By.className("close")))).click();
+            wait.until(ExpectedConditions.attributeToBe(modalDialog, "display", "none"));
+        } catch (Exception ignored) {}
+    }
+
+    public void clickSendNotificationButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(sendNotificationBTN)).click();
+        } catch (Exception e) {
+            clickElementWithJS(sendNotificationBTN);
+        }
         try {
             driver.switchTo().alert().accept();
+            waitForLoading();
+            //todo add waitForLoading method?
         } catch (Exception e) {
+            handleAlertForFinalizeAgreementBTN();
+            Assert.fail("The modal dialog has been displayed after clicking the \"Send Notification\" button." + e);
         }
-        Thread.sleep(1000 * 60 * 6);
+        wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Sending..."));
+        waitABit(10000);
+        wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Notification successfully sent."));
     }
 
-    public boolean checkEmails(String title) throws InterruptedException {
-        boolean flag1 = false;
-        Thread.sleep(30000);
+    public boolean checkEmails(String title) {
+        boolean flag = false;
+        waitABit(30000);
         for (int i = 0; i < 5; i++) {
             try {
                 if (!MailChecker.searchEmailAndGetMailMessageFromSpam(userName, userPassword, title,
                         "noreply@repair360.net").isEmpty()) {
-                    flag1 = true;
+                    flag = true;
                     break;
                 }
-            } catch (NullPointerException e) {
-            }
-            Thread.sleep(40000);
+            } catch (NullPointerException ignored) {}
+            waitABit(40000);
         }
-        return flag1;
+        return flag;
     }
 
     public ArrayList<String> getLinks() throws IOException {
         String mailContent = MailChecker.getUserMailContentFromSpam();
         Pattern linkPattern = Pattern.compile("(<a[^>]+>.+?<\\/a>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher pageMatcher = linkPattern.matcher(mailContent);
-        ArrayList<String> links = new ArrayList<String>();
+        ArrayList<String> links = new ArrayList<>();
         while (pageMatcher.find()) {
             links.add(pageMatcher.group());
         }
@@ -150,41 +180,78 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
 
     public void selectDiscount(String discount) {
         driver.switchTo().defaultContent();
-        wait.until(ExpectedConditions.elementToBeClickable(discountList));
-        new Select(discountList).selectByVisibleText(discount);
+        wait.until(ExpectedConditions.elementToBeClickable(formControlList));
+        new Select(formControlList).selectByVisibleText(discount);
         submitDiscountBTN.click();
+        waitForLoading();
     }
 
-    public boolean checkNewPrice(String price) throws InterruptedException {
-        Thread.sleep(1500);
-        System.out.println(priceDisplayed.getText());
-//        System.out.println(driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText());
-//        return driver.findElement(By.xpath("//table[@class='text-center table-price']")).findElements(By.tagName("td")).get(1).findElement(By.tagName("p")).getText().equals(price);
-        return priceDisplayed.getText().equals(price);
+    public boolean checkNewPrice(String price) {
+        waitABit(3000);
+        System.out.println("PRICE:");
+        System.out.println(pricePerMonth.getText());
+        System.out.println(price);
+        return pricePerMonth.getText().equals(price);
     }
 
-    public boolean checkSetupFee(String fee) throws InterruptedException {
-        Thread.sleep(1500);
-        System.out.println(driver.findElement(By.tagName("tfoot")).findElements(By.tagName("td")).get(2).getText());
-        return driver.findElement(By.tagName("tfoot")).findElements(By.tagName("td")).get(2).getText().contains(fee);
+    public boolean checkSetupFee(String fee) {
+        waitABit(3000);
+        System.out.println("SetUpFee:");
+        System.out.println(setUpFee.getText());
+        System.out.println(fee);
+        return setUpFee.getText().contains(fee);
     }
 
     public boolean checkPricePerMonth(String price) {
-        return driver.findElement(By.tagName("tfoot")).findElements(By.tagName("td")).get(1).getText().contains(price);
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(pricePerMonth, price));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public void clickAddClientSupportItem(String s) throws InterruptedException {
-        System.out.println(clientSupportTables.size());
-        clientSupportTables.get(0).findElement(By.xpath("//span[text()='" + s + "']")).
-                findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath("..")).
-                findElements(By.tagName("td")).get(1).
-                findElement(By.xpath("//div[@class='btn-actions dropdown-toggle chk add-on-feature-chk btn-add-on-feature-chk ']")).
-                click();
+    public void clickAddClientSupportItem(String clientSupportItem) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[text()='" +
+                            clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")))).click();
+        } catch (Exception e) {
+            clickElementWithJS(driver.findElement(By.xpath("//span[text()='" +
+                            clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")));
+        }
         clickYesToAddItemTOAgreement();
     }
 
-    public void clickYesToAddItemTOAgreement() throws InterruptedException {
+    private void clickSelectSetupFee(String clientSupportItem, String option) {
+        waitABit(3000);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(driver
+                    .findElement(By.xpath("//span[text()='" + clientSupportItem + "']/following::td[2]//span")))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(formControlList));
+            new Select(formControlList).selectByVisibleText(option);
+            wait.until(ExpectedConditions.visibilityOf(submitSetupFeeBTN));
+        } catch (Exception e) {
+            Assert.fail("The Setup fee for " + clientSupportItem + " has not been selected!" + e);
+        }
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeBTN)).click();
+        } catch (Exception e) {
+            submitSetupFeeBTN.click();
+        }
+        waitForLoading();
+    }
+
+    public void selectSetupFeeForAllClients() {
+        clickSelectSetupFee("testFeature2_1 test mike", "setupfee1_1");
+        clickSelectSetupFee("testFeature3 test mike", "setupfee3_1");
+        clickSelectSetupFee("tf22222", "1_1");
+        clickSelectSetupFee("Test private", "test name");
+        clickSelectSetupFee("Create Invoices (single or multiple vehicles) (edit)", "1");
+        clickSelectSetupFee("Copy to Agreement settings page only features with \"Publice view\" State (when creating Client Agreement).", "test_r_1");
+    }
+
+    private void clickYesToAddItemTOAgreement() {
         yesAddItemToAgreement.click();
-        Thread.sleep(3000);
+        waitForLoading();
     }
 }

@@ -167,6 +167,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 
 	public void clickFindButton() {
 		clickAndWait(findbtn);
+		waitABit(4000);
 	}
 
 	public boolean workOrdersTableIsVisible() {

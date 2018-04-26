@@ -13,37 +13,37 @@ import java.util.List;
 public class TeamPortalAccountsRulesPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-entity']")
-    WebElement addNewAccountRule;
+    private WebElement addNewAccountRule;
 
     @FindBy(xpath = "//input[@placeholder='Enter account name...']")
-    WebElement newRuleAccountField;
+    private WebElement newRuleAccountField;
 
     @FindBy(id = "Condition")
-    List<WebElement> newRuleConditionField;
+    private List<WebElement> newRuleConditionField;
 
     @FindBy(id = "OrderNo")
-    List<WebElement>  newRuleOrderNoField;
+    private List<WebElement>  newRuleOrderNoField;
 
     @FindBy(id = "Description")
-    List<WebElement>  newRuleDescriptionField;
+    private List<WebElement>  newRuleDescriptionField;
 
     @FindBy(xpath = "(//button[text()='Add New'])[2]")
-    WebElement submitNewRuleBTN;
+    private WebElement submitNewRuleBTN;
 
     @FindBy(xpath = "//div[contains(@class, 'ms-res-item')]")
-    List<WebElement> accountsList;
+    private List<WebElement> accountsList;
 
     @FindBy(xpath = "//div[@class='ms-trigger']")
-    List<WebElement> newRuleAccountsListExpandArrow;
+    private List<WebElement> newRuleAccountsListExpandArrow;
 
     @FindBy(xpath = "//div[@class='ms-trigger']")
-    List<WebElement> newRuleOrganisationListExpandArrow;
+    private List<WebElement> newRuleOrganisationListExpandArrow;
 
     @FindBy(xpath = "//div[contains(@class, 'ms-res-item')]")
-    List<WebElement> organisationsList;
+    private List<WebElement> organisationsList;
 
     @FindBy(xpath = "//button[text()='Update']")
-    WebElement updateRuleButton;
+    private WebElement updateRuleButton;
 
     public TeamPortalAccountsRulesPage(WebDriver driver) {
         super(driver);

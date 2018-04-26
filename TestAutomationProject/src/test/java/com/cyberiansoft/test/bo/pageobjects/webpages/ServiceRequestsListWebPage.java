@@ -616,12 +616,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		selectComboboxValue(addservicerequestcmb, addservicerequestdd, value);
 	}
 
-	public void setServiceRequestGeneralInfo(String _team, String _assignedto, String _po, String _ro) {
+	public void setServiceRequestGeneralInfo(String _team, String assignedto, String po, String ro) {
 		setServiceRequestGeneralInfoTeam(_team);
 		waitABit(2000);
-		setServiceRequestGeneralInfoAssignedTo(_assignedto);
-		clearAndType(addsrvponum, _po);
-		clearAndType(addsrvronum, _ro);
+		setServiceRequestGeneralInfoAssignedTo(assignedto);
+		clearAndType(addsrvponum, po);
+		clearAndType(addsrvronum, ro);
 	}
 
 	public void selectServiceRequestCustomer(String customer) {
@@ -2066,8 +2066,13 @@ waitABit(3000);
 	}
 
 	public boolean checkPresenceOfServiceAdvisorsByFilter(String filter) {
-		wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();
-		try {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();
+        } catch (Exception e) {
+            waitABit(3000);
+            serviceAdvisorArrow.click();
+        }
+        try {
 			wait.until(ExpectedConditions.visibilityOf(advisorUsersList));
 			waitABit(4000);
 			List<WebElement> list = advisorUsersList.findElements(By.tagName("li"));
