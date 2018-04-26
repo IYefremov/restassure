@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -11,14 +8,14 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
@@ -112,7 +109,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void drawApprovalSignature() throws InterruptedException {
-		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther");
+		MobileElement element = (MobileElement) appiumdriver.findElementByAccessibilityId("TouchInputView");
 		int xx = element.getLocation().getX();
 
 		int yy = element.getLocation().getY();

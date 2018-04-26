@@ -1,16 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -18,8 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	
@@ -39,7 +35,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	public final static String SEVERE_SEVERITY = "Severe (76-100 Dents)";
 	public final static String QUICK_QUOTE_SEVERITY = "Quick Quote";
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Price\"]/UIAStaticText[@name=\"Price\"]")
+	/*@iOSFindBy(xpath = "//UIATableCell[@name=\"Price\"]/UIAStaticText[@name=\"Price\"]")
     private IOSElement pricecell;
 	
 	@iOSFindBy(xpath = "//UIATableCell[@name=\"Time\"]/UIAStaticText[@name=\"Time\"]")
@@ -70,7 +66,7 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
     private IOSElement servicesbtn;
 	
 	@iOSFindBy(accessibility = "Back")
-    private IOSElement backbtn;
+    private IOSElement backbtn;*/
 	
 	public RegularPriceMatrixScreen(AppiumDriver driver) {
 		super(driver);
@@ -97,16 +93,13 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + size + "']")).click();
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + severity + "']")).click();
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		Helpers.waitABit(500);
 	}
 
 	public void setPrice(String price) {
-		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("Price");
 		par.findElement(By.xpath("//XCUIElementTypeTextField")).click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void setTime(String timevalue) throws InterruptedException {
@@ -122,11 +115,9 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectDiscaunt(String discaunt) {
-		Helpers.waitABit(300);
 		clickDiscaunt(discaunt);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Helpers.waitABit(500);
 	}
 
 	public void clickDiscaunt(String discaunt) {
@@ -138,14 +129,13 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void switchOffOption(String optionname) {
-		Helpers.waitABit(1000);
 		if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
 			appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
 	}
 	
 	public String getDiscauntPriceAndValue(String discaunt) {
 		WebElement par = getTableParentCell(discaunt);
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.,% ]", " ").trim();
 	}
 	
 	public boolean isDiscauntPresent(String discaunt) {
@@ -163,15 +153,14 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void assertNotesExists() {
-		Assert.assertTrue(notescell.isDisplayed());
+		Assert.assertTrue(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")).isDisplayed());
 	}
 
 	public void assertTechniciansExists() {
-		Assert.assertTrue(technicianscell.isDisplayed());
+		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed());
 	}
 
 	public String getTechniciansValue() {
-		Helpers.waitABit(1000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Technicians")));
 		WebElement par = getTableParentCell("Technicians");
@@ -179,16 +168,15 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickOnTechnicians() {
-		technicianscell.click();
-		Helpers.waitABit(1000);
+        appiumdriver.findElementByAccessibilityId("Technicians").click();
 	}
 	
 	public void clickNotesButton() {
-		composecell.click();
+        appiumdriver.findElementByAccessibilityId("Compose").click();
 	}
 
 	public void clickCancelButton() {
-		cancelbtn.click();
+        appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
 	public void clickServicesButton() {
@@ -204,12 +192,11 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}	
 	
 	public void clickBackButton() {
-		backbtn.click();
-		Helpers.waitABit(1000);
+        appiumdriver.findElementByAccessibilityId("Back").click();
 	}
 	
 	public void clearVehicleData() {
-		toolbardeletebtn.click();
+        appiumdriver.findElementByAccessibilityId("Delete").click();
 		String msg = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 	}

@@ -1,15 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import io.appium.java_client.remote.HideKeyboardStrategy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	
@@ -30,7 +27,7 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility  = "action pay")
     private IOSElement invoicepaybtn;
 	
-	@iOSFindBy(accessibility  = "cash normal")
+	@iOSFindBy(accessibility  = "Payment_Tab_Cash")
     private IOSElement cashnormalbtn;
 	
 	@iOSFindBy(accessibility = "Save")
@@ -153,9 +150,8 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setCashCheckAmountValue(String amountvalue) {
-		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='Cash / Check']/..");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(amountvalue);
+		appiumdriver.findElementByAccessibilityId("Payment_Cash_Amount").clear();
+		appiumdriver.findElementByAccessibilityId("Payment_Cash_Amount").sendKeys(amountvalue);
 	}
 	
 	public void clickInvoicePayDialogButon() {
