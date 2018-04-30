@@ -201,7 +201,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     @Test(testName = "Test Case 66655:Verify \"Viewed letter:<date>\", \"Viewed agreement: <date>\" if user open mail with link.", dataProvider = "provideNewClientData")
     public void testUserCanVerifyDatesWhenOpenMailWithLink(String name, String nickname, String address, String address2, String zip,
                                              String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
-                                             String title, String email) throws InterruptedException, IOException {
+                                             String title, String email) throws InterruptedException {
         TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 TeamPortalLeftMenuPanel.class);
         leftMenuPanel.clickOnMenu("Client Management");
@@ -260,8 +260,12 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, TeamPortalLeftMenuPanel.class);
         leftMenuPanel.openClientQuotesLink();
         TeamPortalClientQuotesPage clientQuotesPage = leftMenuPanel.openClientQuotesLink();
+
+        // the user is deleted in preconditions, because otherwise the Agreement statuses are not stable
+        // (instead of "New" the "Finalized" can appear)
         clientQuotesPage.searchUser(name);
         clientQuotesPage.deleteUser(name);
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip, country,  state,  city,
                 businessPhone,  cellPhone,  firstName,  lastName, title,  email);
@@ -289,25 +293,24 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1746.00"), "The setupFee is not calculated properly!");
         clientQuotesDetailPage.clickFinalizeAgreementBTN();
         clientQuotesDetailPage.clickSendNotificationButton();
-        //todo finish!!!
         Assert.assertTrue(clientQuotesDetailPage.checkEmails("AMT Agreement for Approval"));
+        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("Finalized","No","No","No"));
         String link = clientQuotesDetailPage.getAgreementApproveLink();
-//
-//
-//        TeamPortalAgreementApprovePage agreementApprovePage =
-//                (TeamPortalAgreementApprovePage) clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
-//        agreementApprovePage.fillClientInfo("Anastasia","Maksimova",name);
-//        Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
-//        agreementApprovePage.clickAgreeWithTermsAndConditionsBTN();
-//        agreementApprovePage.clickAcceptAgreementBTN();
-//        agreementApprovePage.fillFeesPayment("4242424242424242","10","2026","123");
-//        agreementApprovePage.clickPayBTN();
-//        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
-//        agreementApprovePage.clickCancelPayBTN();
-//        agreementApprovePage.clickPayBTN();
-//        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
-//        agreementApprovePage.clickApprovePayBTN();
-//        agreementApprovePage.goToPreviousPage();
+
+        TeamPortalAgreementApprovePage agreementApprovePage =
+                (TeamPortalAgreementApprovePage) clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
+        agreementApprovePage.fillClientInfo("Anastasia","Maksimova", name);
+        Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
+        agreementApprovePage.clickAgreeWithTermsAndConditionsBTN();
+        agreementApprovePage.clickAcceptAgreementBTN();
+        agreementApprovePage.fillFeesPayment("4242424242424242","10","2026","123");
+        agreementApprovePage.clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,746.00","4242424242424242"));
+        agreementApprovePage.clickCancelPayBTN();
+        agreementApprovePage.clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,746.00","4242424242424242"));
+        agreementApprovePage.clickApprovePayBTN();
+        agreementApprovePage.goToPreviousPage();
 
 //        leftMenuPanel.clickOnMenu("Client Management");
 //        page = leftMenuPanel.clickOnMenu("Client Quotes");

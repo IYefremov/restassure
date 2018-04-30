@@ -126,7 +126,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 
 
-	//todo fails Friday. Lilia, needs to be discussed
+    //todo fails. Needs data from S. Zakaulov. Lilia, needs to be discussed
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
 	public void testMonitorReportsAverageRepairTimeReport() {
 
@@ -145,8 +145,9 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
 	}
 
-	//todo fails friday. The WO numbers are no more valid. No WO are displayed in Default Location section
-	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking", description = "Monitor- Reports - Repair Location Time Tracking")
+	//todo fails. Needs data from S. Zakaulov. The WO numbers are no more valid. No WO are displayed in Default Location section
+	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking",
+            description = "Monitor- Reports - Repair Location Time Tracking")
 	public void testMonitorReportsRepairLocationTimeTracking() {
 
 		String[] wonumbersfirstpage = {"O-10000-00090", "O-10000-00091", "O-10000-00106", "O-10000-00107" };
@@ -182,7 +183,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 	}
 
-    //todo fails friday NO data available
+    //todo fails. Needs data from S. Zakaulov. NO data available
 	@Test(testName = "Test Case 15728:Monitor- Reports - Trending Report", description = "Monitor- Reports - Trending Report")
 	public void testMonitorReportsTrendingReport() {
 

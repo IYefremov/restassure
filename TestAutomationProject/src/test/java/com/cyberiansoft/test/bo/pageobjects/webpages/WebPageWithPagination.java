@@ -68,9 +68,9 @@ public class WebPageWithPagination extends BaseWebPage {
 		return gotopagefld.getAttribute("value");
 	}
 	
-	public void setPageSize(String pageSize) throws InterruptedException {
+	public void setPageSize(String pageSize) {
 		pagesizefld.clear();
-		Thread.sleep(1000);
+		waitABit(1000);
 		pagesizefld.sendKeys(pageSize + "\n");
 		waitForLoading();
 	}
@@ -140,6 +140,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		try {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} catch (TimeoutException ignored) {}
+		} catch (TimeoutException e) {
+		    waitABit(3000);
+        }
 	}
 }

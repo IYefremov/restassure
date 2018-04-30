@@ -175,6 +175,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	
 	public void clickFindButton() { 
 		clickAndWait(findbtn);
+		waitABit(3000);
 	}
 	
 	public void verifyRepairOrdersTableColumnsAreVisible() {

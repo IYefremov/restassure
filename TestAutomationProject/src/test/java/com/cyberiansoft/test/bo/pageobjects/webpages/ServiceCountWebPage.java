@@ -45,31 +45,25 @@ public class ServiceCountWebPage extends BaseWebPage {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		try {
-			waitABit(1500);
-			if (!locationField.getAttribute("value").equals("(all)")) {
+			if (!wait.until(ExpectedConditions.attributeToBe(locationField, "value", "(all)"))) {
 				return false;
 			}
 			StringBuilder criteriaDate = new StringBuilder(formatter.format(now.minusWeeks(1)));
-			waitABit(1500);
-			if (!searchDateFrom.getAttribute("value").equals(criteriaDate.toString())) {
+            if (!wait.until(ExpectedConditions.attributeToBe(searchDateFrom, "value", criteriaDate.toString()))) {
 				return false;
 			}
 			criteriaDate = new StringBuilder(formatter.format(now));
-			waitABit(1500);
-			if (!searchDateTo.getAttribute("value").equals(criteriaDate.toString())) {
+            if (!wait.until(ExpectedConditions.attributeToBe(searchDateTo, "value", criteriaDate.toString()))) {
 				return false;
 			}
-			waitABit(1500);
-			calendarDateFromBTN.click();
-			waitABit(1500);
+			wait.until(ExpectedConditions.elementToBeClickable(calendarDateFromBTN)).click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(
 					By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_calendar_Top")));
-			waitABit(1500);
-			calendarDateToBTN.click();
-			waitABit(1500);
+            wait.until(ExpectedConditions.elementToBeClickable(calendarDateToBTN)).click();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateTo_calendar_Top")));
 		} catch (Exception e) {
+            e.printStackTrace();
 			return false;
 		}
 		return true;

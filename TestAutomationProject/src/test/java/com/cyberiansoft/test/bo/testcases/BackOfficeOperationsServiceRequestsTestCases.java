@@ -568,7 +568,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
 		servicerequestslistpage.switchToServiceRequestInfoFrame();
-		Assert.assertFalse(servicerequestslistpage.getGeneralInfoEditButton().isDisplayed());
+        Assert.assertFalse(servicerequestslistpage.getGeneralInfoEditButton().isDisplayed());
 		Assert.assertFalse(servicerequestslistpage.getCustomerEditButton().isDisplayed());
 		Assert.assertFalse(servicerequestslistpage.getVehicleInfoEditButton().isDisplayed());
 		servicerequestslistpage.clickCloseServiceRequestButton();
@@ -814,7 +814,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR",
             dataProvider = "provideSRdata")
 	public void checkMultiTechInSR(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+			boolean isDateShifted) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -828,7 +828,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(startDate, endDate));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(
-				serviceRequestsWebPage.checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(startDate, endDate));
+				serviceRequestsWebPage.checkDefaultAppointmentValuesAndAddAppointmentFomSREdit());
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 	}
 
@@ -1295,7 +1295,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
         serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
-		serviceRequestsWebPage.selectSREditFrame();
+		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		Assert.assertTrue(serviceRequestsWebPage.checkEmails("Service Request with RO#"));
 		miscellaneouspage = backofficeheader.clickMiscellaneousLink();
@@ -1926,7 +1926,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 66190:Operation - Service Request - Undo Rejected")
-	public void testServicerequestUndoReject() throws InterruptedException{
+	public void testServicerequestUndoReject() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companypage.clickServiceRequestTypesLink();

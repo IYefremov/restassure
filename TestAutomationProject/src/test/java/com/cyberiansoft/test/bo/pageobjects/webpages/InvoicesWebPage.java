@@ -135,6 +135,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	@FindBy(id = "ctl00_ctl00_Content_Main_btnChangeInvoiceNumber")
     private WebElement changeButton;
 
+	@FindBy(xpath = "\"//div[@class='rmSlide' and contains(@style, 'block')]\"")
+    private WebElement slideDisplayed;
+
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
 
@@ -184,9 +187,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return invoicestable;
 	}
 
-	public int getInvoicesTableRowCount() throws InterruptedException {
-		Thread.sleep(4000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+	public int getInvoicesTableRowCount() {
+	    waitForLoading();
 		return getInvoicesTableRows().size();
 	}
 
@@ -195,8 +197,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public InvoicesWebPage clickFindButton() {
-		clickAndWait(findbtn);
-        waitABit(4500);
+	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
+        waitForLoading();
         return this;
 	}
 
@@ -349,7 +351,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return row;
 	}
 
-	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) throws InterruptedException {
+	public void clickInvoiceSelectExpandableMenu(String invoicenumber, String menuitem) {
 
 		WebElement row = clickSelectButtonForInvoice(invoicenumber);
 		waitABit(1000);
@@ -562,7 +564,18 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public String getFirstInvoiceName() {
-        return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
+	    try {
+            return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
+        } catch (TimeoutException ignored) {
+	        waitABit(5000);
+	        try {
+                return firstInvoiceName.getText();
+            } catch (TimeoutException e) {
+	            e.printStackTrace();
+                Assert.fail("The first invoice name has not been displayed!");
+                return null;
+            }
+        }
     }
 
 	public String selectActionForFirstInvoice(String string, boolean switchArrow) throws InterruptedException {
@@ -631,9 +644,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			}
 		 else if (string.equals("Download JSON")) {
 		    act.moveToElement(selectBTN).click().build().perform();
-
-            try {wait.until(ExpectedConditions
-                        .visibilityOf(driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
+            try {
+                wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
+                wait.until(ExpectedConditions
+                        .visibilityOf(slideDisplayed.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
                         .click();
             } catch (Exception e) {
                 waitABit(3000);

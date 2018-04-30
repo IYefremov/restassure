@@ -1,5 +1,12 @@
 package com.cyberiansoft.test.bo.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.search.FlagTerm;
+import javax.mail.search.OrTerm;
+import javax.mail.search.SearchTerm;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,23 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import javax.mail.Address;
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.internet.InternetAddress;
-import javax.mail.search.FlagTerm;
-import javax.mail.search.OrTerm;
-import javax.mail.search.SearchTerm;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class MailChecker {
     /**
@@ -93,7 +83,7 @@ private static boolean textIsHtml = false;
             // connects to the message store
             Store store = session.getStore("imap");
             store.connect(userName, password);
-            System.out.println("Connected to Email server….");
+            System.out.println("Connected to Email serverï¿½.");
             // opens the inbox folder
             Folder folderInbox = store.getFolder("INBOX");
             folderInbox.open(Folder.READ_ONLY);
@@ -120,7 +110,7 @@ private static boolean textIsHtml = false;
                     // if(diffMinutes>2){
                     // diffMinutes=2;
                     // }
-                    System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
+                    System.out.println("Difference in Minutes b/w present time & Email Received time :" +diffMinutes);
                     try {
                     	System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                     	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
@@ -145,7 +135,7 @@ private static boolean textIsHtml = false;
                     	// TODO Auto-generated catch block
                     	expected.printStackTrace();
                     }
-                    System.out.println("Searching.…" +"At "+ i );
+                    System.out.println("Searching.ï¿½" +"At "+ i );
             }
             // disconnect
             folderInbox.close(false);
@@ -175,7 +165,7 @@ private static boolean textIsHtml = false;
             // connects to the message store
             Store store = session.getStore("imap");
             store.connect(userName, password);
-            System.out.println("Connected to Email server….");
+            System.out.println("Connected to Email serverï¿½.");
             // opens the inbox folder
             Folder folderInbox = store.getFolder("INBOX");
             folderInbox.open(Folder.READ_ONLY);
@@ -202,7 +192,7 @@ private static boolean textIsHtml = false;
                     // if(diffMinutes>2){
                     // diffMinutes=2;
                     // }
-                    System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
+                    System.out.println("Difference in Minutes b/w present time & Email Received time :" +diffMinutes);
                     try {
                     	System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                     	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
@@ -235,7 +225,7 @@ private static boolean textIsHtml = false;
                     	// TODO Auto-generated catch block
                     	expected.printStackTrace();
                     }
-                    System.out.println("Searching.…" +"At "+ i );
+                    System.out.println("Searching.ï¿½" +"At "+ i );
             }
             // disconnect
             folderInbox.close(false);

@@ -41,9 +41,12 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_bRecalcCommissions")
 	private WebElement recalccomissionsbtn;
 	
-	//Service Package Items 
+	//Service Package Items
 	@FindBy(id = "ctl00_Content_gv_ctl00")
 	private WebTable servicepackageitemstable;
+
+	@FindBy(xpath = "//div[@class='radwindow_Vista']")
+	private WebElement servicePackageModalWindow;
 	
 	public ServicePackagesWebPage(WebDriver driver) {
 		super(driver);
@@ -103,6 +106,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
 			clickEditTableRow(row);
 		} else 
 			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+		wait.until(ExpectedConditions.visibilityOf(servicePackageModalWindow));
 		return PageFactory.initElements(
 				driver, NewServicePackageDialogWebPage.class);
 	}

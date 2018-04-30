@@ -196,7 +196,7 @@ public class MailChecker {
                 long diff = date.getTime() - message.getReceivedDate().getTime();//Get The difference between two dates
                 long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
 
-                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" + diffMinutes);
+                System.out.println("Difference in Minutes b/w present time & Email Received time :" + diffMinutes);
 
                 System.out.println("Current " + i + " :" + "Subject:" + message.getSubject());
                 System.out.println("Current " + i + " :" + "Subject:" + email);
@@ -243,7 +243,7 @@ public class MailChecker {
                 long diff = date.getTime() - message.getReceivedDate().getTime();//Get The difference between two dates
                 long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
 
-                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" + diffMinutes);
+                System.out.println("Difference in Minutes b/w present time & Email Received time :" + diffMinutes);
                 System.out.println("Current " + i + " :" + "Subject:" + message.getSubject());
                 System.out.println("Current " + i + " :" + "Subject:" + email);
                 if (message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes <= 15) {
@@ -599,7 +599,7 @@ public class MailChecker {
 
     public static boolean getKayakoFeedbackMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
         String mailmessage = "";
-        boolean kayakoMailRecieved = false;
+        boolean kayakoMailReceived = false;
         for (int i = 0; i < 15; i++) {
             if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
                 try {
@@ -611,12 +611,12 @@ public class MailChecker {
             } else {
                 mailmessage = MailChecker.searchEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
                 if (mailmessage.length() > 3) {
-                    kayakoMailRecieved = true;
+                    kayakoMailReceived = true;
                     break;
                 }
             }
         }
-        return kayakoMailRecieved;
+        return kayakoMailReceived;
     }
 
     public static String getSpamMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {

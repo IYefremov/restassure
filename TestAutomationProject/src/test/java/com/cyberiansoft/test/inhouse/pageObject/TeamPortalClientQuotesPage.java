@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -304,9 +305,9 @@ public class TeamPortalClientQuotesPage extends BasePage {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']"))).
                     findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")).click();
+            //td[text()='First agreement'] todo check this locator!!!
         } catch (Exception e) {
-            clickElementWithJS(driver.findElement(By.xpath("//td[text()='" + s + "']")).
-                    findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")));
+            Assert.fail("The \"Edit Agreement\" button has not been clicked!");
         }
     }
 

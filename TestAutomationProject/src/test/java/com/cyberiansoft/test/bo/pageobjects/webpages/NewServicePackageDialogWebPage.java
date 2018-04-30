@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
@@ -56,7 +55,6 @@ public class NewServicePackageDialogWebPage extends BaseWebPage {
 	}
 	
 	public String getNewServicePackageName() {
-	    wait.until(ExpectedConditions.visibilityOf((WebElement) newservicepackagenamefld));
 		return newservicepackagenamefld.getValue();
 	}
 	

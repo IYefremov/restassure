@@ -221,7 +221,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 28316:Company - Clients : Edit", description = "Company - Clients : Edit")
-	public void testCompanyClientsUsersEdit() throws Exception {
+	public void testCompanyClientsUsersEdit() {
 
 		final String clientmail = "123123213@domain.com";
 		final String clientname = "Anaheim Hills Lexus";

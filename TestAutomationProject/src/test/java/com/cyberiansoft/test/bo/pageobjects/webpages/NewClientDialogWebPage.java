@@ -317,6 +317,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void clickOKButton() {
 		clickAndWait(OKbtn);
+		waitABit(2000);
 	}
 
 	public void clickCancelButton() {

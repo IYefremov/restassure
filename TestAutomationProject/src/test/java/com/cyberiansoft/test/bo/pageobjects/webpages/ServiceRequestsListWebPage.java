@@ -305,6 +305,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//div[@id='itemContainer']/div[1]//a[@class='detailsPopover']")
     private WebElement firstServiceRequestDetails;
 
+	@FindBy(xpath = "//div[@class='editServiceRequestPanel']/iframe")
+    private WebElement editServiceRequestPanelFrame;
+
 	public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -366,8 +369,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(3000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
-		driver.switchTo()
-				.frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+		driver.switchTo().frame(editServiceRequestPanelFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 		waitABit(3000);
 	}
@@ -381,16 +383,21 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void selectFirstServiceRequestFromList() {
         Actions actions = new Actions(driver);
-        actions.moveToElement(firstServiceRequestDetails).build().perform();
-        wait.until(ExpectedConditions.elementToBeClickable(firstServiceRequestDetails));
-		firstServiceRequestDetails.click();
-        waitABit(10000);
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
+        try {
+            actions.moveToElement(firstServiceRequestDetails).build().perform();
+            wait.until(ExpectedConditions.elementToBeClickable(firstServiceRequestDetails));
+            firstServiceRequestDetails.click();
+        } catch (StaleElementReferenceException e) {
+            waitABit(3000);
+            firstServiceRequestDetails.click();
+        }
+        waitABit(1500);
+        switchToServiceRequestInfoFrame();
 	}
 
 	public void closeFirstServiceRequestFromTheList()  {
 		selectFirstServiceRequestFromList();
-		switchToServiceRequestInfoFrame();
+        switchToServiceRequestInfoFrame();
 		wait.until(ExpectedConditions.elementToBeClickable(closeservicerequestbtn));
 		clickCloseServiceRequestButton();
 		driver.switchTo().defaultContent();
@@ -545,11 +552,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickClaimInfoEditButton() {
-		driver.switchTo().defaultContent();
-		// driver.switchTo()
-		// .frame((WebElement)
-		// driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+        switchToServiceRequestInfoFrame();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("Card_divCliamInfoAll")))).click();
 	}
 
@@ -566,14 +569,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		WebElement services = driver
 				.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"));
 		return services.findElements(By.xpath(".//div[@class='container-service']"));
-	}
-
-	public void switchToServiceRequestInfoFrame() {
-		waitABit(3000);
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-//		driver.switchTo()
-//				.frame((WebElement) driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']/iframe")));
 	}
 
 	public WebElement getGeneralInfoEditButton() {
@@ -701,42 +696,37 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickCheckInButtonForSelectedSR() {
-		switchToServiceRequestInfoFrame();
-		click(servicerequestcheckinbtn);
+        switchToServiceRequestInfoFrame();
+        click(servicerequestcheckinbtn);
 		driver.switchTo().defaultContent();
 	}
 
 	public String getCheckInButtonValueForSelectedSR() {
-		String value = "";
-		switchToServiceRequestInfoFrame();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		value = servicerequestcheckinbtn.getText();
+		String value;
+        switchToServiceRequestInfoFrame();
+        value = servicerequestcheckinbtn.getText();
 		driver.switchTo().defaultContent();
 		return value;
 	}
 
 	public boolean isCheckInButtonExistsForSelectedSR() {
-		boolean exists = false;
-		switchToServiceRequestInfoFrame();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		exists = driver.findElements(By.id("btnCheckInCheckOut")).size() > 0;
+		boolean exists;
+        switchToServiceRequestInfoFrame();
+        exists = driver.findElements(By.id("btnCheckInCheckOut")).size() > 0;
 		driver.switchTo().defaultContent();
 		return exists;
 	}
 
 	public boolean isCheckInButtonVisible() {
-		boolean visible = false;
-		switchToServiceRequestInfoFrame();
-		// driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		visible = servicerequestcheckinbtn.isDisplayed();
+        switchToServiceRequestInfoFrame();
+        boolean visible = servicerequestcheckinbtn.isDisplayed();
 		driver.switchTo().defaultContent();
 		return visible;
 	}
 
 	public String getVINValueForSelectedServiceRequest() {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-		String VINValue = driver.findElement(By.xpath("//span[@data-for='Card_vehicleVin']")).getText();
+        switchToServiceRequestInfoFrame();
+        String VINValue = driver.findElement(By.xpath("//span[@data-for='Card_vehicleVin']")).getText();
 		driver.switchTo().defaultContent();
 		return VINValue;
 	}
@@ -919,15 +909,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean checkServiceRequestDocumentIcon() {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
-
+        switchToServiceRequestInfoFrame();
         return !driver.findElement(By.xpath("//div[contains(@class, 'description-reason')]")).findElement(By.tagName("i")).getAttribute("style").equals("display : none;");
     }
 
 	public void clickDocumentButton() {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 
 		String oldWindow = driver.getWindowHandle();
 		descriptionDocuments.findElement(By.tagName("i")).click();
@@ -1046,8 +1033,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 
 		serviceRequestInfoBlocks.get(1).click();
 		customerName.click();
@@ -1057,8 +1043,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		Actions act = new Actions(driver);
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 		Thread.sleep(2000);
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 		updateWait.until(ExpectedConditions.elementToBeClickable(serviceRequestInfoBlocks.get(1))).click();
 		act.moveToElement(acceptCustomerBTN).click().build().perform();
 		Thread.sleep(2000);
@@ -1087,8 +1072,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean addAppointmentFromSRlist(String fromDate, String toDate, String technician) {
-waitABit(3000);
-		appointmentCalendarIcon.click();
+//        waitABit(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(appointmentCalendarIcon)).click();
 
 		appointmentFromDate.clear();
 		appointmentToDate.clear();
@@ -1103,9 +1088,8 @@ waitABit(3000);
 		appointmentToTime.sendKeys("7:00 AM");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("gvTechnicians")));
-		// wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("gvTechnicians"))));
 
-		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbTechnician_Input")).click();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_rcbTechnician_Input")).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(technician)).findFirst()
 				.get().click();
@@ -1118,45 +1102,42 @@ waitABit(3000);
 		}
 	}
 
-	public boolean checkDefaultAppointmentValuesAndaddAppointmentFomSREdit(String startDate, String endDate)
-			throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
-		addAppointmentBTNfromSRedit.click();
+	public boolean checkDefaultAppointmentValuesAndAddAppointmentFomSREdit() {
+        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (!(appointmentFromDateSRedit.getText().isEmpty() && appointmentToDateSRedit.getText().isEmpty()
 				&& appointmentFromTimeSRedit.getText().isEmpty() && appointmentToTimeSRedit.getText().isEmpty())) {
 			return false;
 		}
 
-		Thread.sleep(1000);
+		waitABit(1000);
 		if (!(appointmentContent.findElement(By.id("Card_tbxSubject")).getAttribute("value").equals("Alex SASHAZ"))) {
 			return false;
 		}
 
 		appointmentContent.findElement(By.id("Card_rcbAppLocations_Input")).click();
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (!driver.findElement(By.className("rcbHovered")).getText().equals("Custom") && appointmentContent
 				.findElement(By.id("Card_rcbAppointmentLocations_Input")).getAttribute("disabled").equals("disabled")) {
 			return false;
 		}
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (!appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).getAttribute("value").equals("All")
 				&& appointmentContent.findElement(By.id("Card_rcbStates_Input")).getAttribute("value").equals("All")) {
 			return false;
 		}
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (!appointmentContent.findElement(By.id("Card_tbxAddress")).getText().isEmpty()
 				&& appointmentContent.findElement(By.id("Card_tbxCity")).getText().isEmpty()
 				&& appointmentContent.findElement(By.id("Card_tbxZip")).getText().isEmpty()) {
 			return false;
 		}
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (!appointmentContent.findElement(By.id("Card_tbAppointmentClientName")).getText().equals("Alex SASHAZ")
 				&& appointmentContent.findElement(By.id("Card_tbAppointmentClientAddress")).getText()
 						.equals("407 SILVER SAGE DR., NewYork, 10001")
@@ -1167,12 +1148,12 @@ waitABit(3000);
 			return false;
 		}
 		driver.findElement(By.id("Card_rcbAppLocations_Arrow")).click();
-		Thread.sleep(1000);
+        waitABit(1000);
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).get(0).click();
-			Thread.sleep(500);
+            waitABit(500);
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).get(1).click();
@@ -1180,7 +1161,7 @@ waitABit(3000);
 			return false;
 		}
 
-		Thread.sleep(1000);
+        waitABit(1000);
 		if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4 && driver
 				.findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container")).size() != 4) {
 			return false;
@@ -1203,8 +1184,7 @@ waitABit(3000);
 	}
 
 	public boolean checkShowHideTeches(String startDate, String endDate) throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 		addAppointmentBTNfromSRedit.click();
 
 		appointmentFromDateSRedit.clear();
@@ -1353,9 +1333,7 @@ waitABit(3000);
 	}
 
 	public void setSuggestedStartDate(String startDate) throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
-
+        switchToServiceRequestInfoFrame();
 		serviceRequestInfoBlocks.get(0).click();
 		suggestedStart.sendKeys(startDate);
 		Thread.sleep(2000);
@@ -1365,8 +1343,7 @@ waitABit(3000);
 	}
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 		addAppointmentBTNfromSRedit.click();
 
 		Thread.sleep(1000);
@@ -1695,16 +1672,14 @@ waitABit(3000);
 	}
 
 	public boolean checkLifeCycleBTN() {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 		driver.findElement(By.id("Card_srLifeCycle")).click();
 		waitABit(1000);
 		return driver.getWindowHandles().size() == 2;
 	}
 
 	public void addAppointmentWithoutDescription(String startDate, String toDate) throws InterruptedException {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 
 		addAppointmentBTNfromSRedit.click();
 		appointmentFromDateSRedit.clear();
@@ -1723,11 +1698,10 @@ waitABit(3000);
 
 	}
 
-	public boolean checkLifeCycleDate() throws InterruptedException {
+	public boolean checkLifeCycleDate() {
 		String parentFrame = driver.getWindowHandle();
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
-		Thread.sleep(3000);
+        switchToServiceRequestInfoFrame();
+		waitABit(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("Card_srLifeCycle"))).click();
 		Set windows = driver.getWindowHandles();
 		windows.remove(parentFrame);
@@ -1745,8 +1719,7 @@ waitABit(3000);
 
 	public void goToLifeCycle() {
 		String parentFrame = driver.getWindowHandle();
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 		driver.findElement(By.id("Card_srLifeCycle")).click();
 		Set windows = driver.getWindowHandles();
 		driver.close();
@@ -1917,12 +1890,9 @@ waitABit(3000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("divGeneralButtonsDone"))).click();
 	}
 
-	public void addAppointmentWithTechnician(String startDate, String endDate, String string)
-			throws InterruptedException {
+	public void addAppointmentWithTechnician(String startDate, String endDate, String string) {
 		waitABit(3000);
-
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']")).findElement(By.xpath("./iframe")));
+        switchToServiceRequestInfoFrame();
 
 		addAppointmentBTNfromSRedit.click();
 		waitABit(2000);
@@ -1936,7 +1906,7 @@ waitABit(3000);
 		appointmentFromTimeSRedit.sendKeys("6:00 AM");
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
 		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
-		Thread.sleep(2000);
+		waitABit(2000);
 		appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 		// .findElement(By.linkText(string)).click();
@@ -1945,7 +1915,7 @@ waitABit(3000);
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
 				.get().click();
 
-		Thread.sleep(1000);
+		waitABit(1000);
 		driver.findElement(By.id("Card_btnAddApp")).click();
 	}
 
@@ -1967,10 +1937,9 @@ waitABit(3000);
 		return flag;
 	}
 
-	public void selectSREditFrame() {
+	public void switchToServiceRequestInfoFrame() {
 		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='editServiceRequestPanel']"))
-                .findElement(By.xpath("./iframe")));
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
 	}
 
 	public boolean checkTestEmails() throws InterruptedException {

@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 	@Test(description = "Test Case 15161:Operation - Invoice: Search")
-	public void testOperationInvoiceSearch() throws Exception {
+	public void testOperationInvoiceSearch() {
 
 		final String customer = "000 My Company";
 		final String ponumber = "234";
@@ -19,7 +19,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		final String amountfrom = "0";
 		final String amountto = "8";
 		final String invoicenumber = "I-062-00007";
-		final String usermail = "olexandr.kramar@cyberiansoft.com";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -37,7 +36,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		// String initialpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.setPageSize("1");
 		Assert.assertEquals(1, invoicespage.getInvoicesTableRowCount());
-		String numberofrows = invoicespage.getLastPageNumber();
+		int numberofrows = Integer.valueOf(invoicespage.getLastPageNumber());
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.clickGoToLastPage(browsertype.getBrowserTypeString());
@@ -53,11 +52,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals("1", invoicespage.getGoToPageFieldValue());
 
 		invoicespage.setPageSize("999");
-		if (Integer.valueOf(numberofrows) < 500) {
-			Assert.assertEquals(Integer.valueOf(numberofrows),
-					Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
+		if (numberofrows < 500) {
+			Assert.assertEquals(numberofrows, invoicespage.getInvoicesTableRowCount());
 		} else
-			Assert.assertEquals(Integer.valueOf(500), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
+			Assert.assertEquals(500, invoicespage.getInvoicesTableRowCount());
 
 		invoicespage.verifySearchFieldsAreVisible();
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
@@ -65,8 +63,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchAmountFrom(amountfrom);
 		invoicespage.setSearchAmountTo(amountto);
 		invoicespage.clickFindButton();
-		Thread.sleep(1000);
-		Assert.assertEquals(Integer.valueOf(4), Integer.valueOf(invoicespage.getInvoicesTableRowCount()));
+		Assert.assertEquals(4, invoicespage.getInvoicesTableRowCount());
 	}
 
 	// @Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add

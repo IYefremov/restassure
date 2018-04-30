@@ -2,9 +2,8 @@ package com.cyberiansoft.test.inhouse.pageObject;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -127,9 +126,18 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
             handleAlertForFinalizeAgreementBTN();
             Assert.fail("The modal dialog has been displayed after clicking the \"Send Notification\" button." + e);
         }
-        wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Sending..."));
-        waitABit(10000);
-        wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Notification successfully sent."));
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Sending..."));
+            waitABit(10000);
+            wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Notification successfully sent."));
+        } catch (TimeoutException e) {
+            waitABit(20000);
+            try {
+                wait.until(ExpectedConditions.textToBePresentInElement(notificationStatus, "Notification successfully sent."));
+            } catch (TimeoutException ex) {
+                Assert.fail("The \"Notification successfully sent\" has not been displayed!");
+            }
+        }
     }
 
     public boolean checkEmails(String title) {
@@ -137,7 +145,7 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
         waitABit(30000);
         for (int i = 0; i < 5; i++) {
             try {
-                if (!MailChecker.searchEmailAndGetMailMessageFromSpam(userName, userPassword, title,
+                if (!MailChecker.searchSpamEmailAndGetMailMessage(userName, userPassword, title,
                         "noreply@repair360.net").isEmpty()) {
                     flag = true;
                     break;
@@ -160,18 +168,41 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
     }
 
     public String getAgreementApproveLink() throws IOException {
-        String mailContent = MailChecker.getUserMailContentFromSpam();
-        Document doc = Jsoup.parse(mailContent);
-        String text = doc.body().text();
-        System.out.println(text);
-        String[] allTexts = text.split(" ");
-        String result = "";
-        for (String str : allTexts) {
-            if (str.contains("https://goo.gl")) {
-                result = str;
+//        String mailContent = null;
+//        try {
+//            mailContent = MailChecker.getUserMailContentFromSpam();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Document doc = Jsoup.parse(mailContent);
+//        String text = doc.body().text();
+//        System.out.println(text);
+//        String[] allTexts = text.split(" ");
+//        String result = "";
+//        for (String str : allTexts) {
+//            if (str.contains("https://goo.gl")) {
+//                result = str;
+//            }
+//        }
+//        return result;
+
+
+        final String usermail = "test.cyberiansoft@gmail.com";
+        final String usermailpsw = "ZZzz11!!";
+        final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
+        final String sendermail = "Repair360-qc@cyberianconcepts.com";
+        final String mailcontainstext = "complete the registration process";
+
+        String mailmessage = "";
+        for (int i = 0; i < 4; i++) {
+            if (!com.cyberiansoft.test.ios_client.utils.MailChecker.searchSpamEmail(userName, userPassword, "Agreement", "noreply@repair360.net", "https://goo.gl")) {
+                waitABit(60 * 500);
+            } else {
+                mailmessage = com.cyberiansoft.test.ios_client.utils.MailChecker.searchEmailAndGetMailMessage(userName, userPassword, "Agreement", "noreply@repair360.net");
+                break;
             }
         }
-        return result;
+        return mailmessage;
     }
 
     public String getMailContentFromSpam() throws IOException {
@@ -229,14 +260,17 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
                     .findElement(By.xpath("//span[text()='" + clientSupportItem + "']/following::td[2]//span")))).click();
             wait.until(ExpectedConditions.elementToBeClickable(formControlList));
             new Select(formControlList).selectByVisibleText(option);
-            wait.until(ExpectedConditions.visibilityOf(submitSetupFeeBTN));
         } catch (Exception e) {
-            Assert.fail("The Setup fee for " + clientSupportItem + " has not been selected!" + e);
+            try {
+                new Select(formControlList).selectByVisibleText(option);
+            } catch (Exception e1) {
+                Assert.fail("The Setup fee for \"" + clientSupportItem + "\" has not been selected!" + e);
+            }
         }
         try {
             wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeBTN)).click();
         } catch (Exception e) {
-            submitSetupFeeBTN.click();
+            e.printStackTrace();
         }
         waitForLoading();
     }

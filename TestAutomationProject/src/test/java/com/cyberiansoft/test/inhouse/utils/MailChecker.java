@@ -193,7 +193,7 @@ public class MailChecker {
     			long diff = date.getTime()-message.getReceivedDate().getTime();//Get The difference between two dates
     			long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
 
-    			System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
+    			System.out.println("Difference in Minutes b/w present time & Email Received time :" +diffMinutes);
             
              	System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
              	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
@@ -241,7 +241,7 @@ public class MailChecker {
                 long diff = date.getTime()-message.getReceivedDate().getTime();//Get The difference between two dates
                 long diffMinutes = diff / (60 * 1000) % 60; //Fetching the difference of minute
          
-                System.out.println("Difference in Minutes b/w present time & Email Recieved time :" +diffMinutes);
+                System.out.println("Difference in Minutes b/w present time & Email Received time :" +diffMinutes);
                 System.out.println("Current "+ i + " :"+ "Subject:"+ message.getSubject());
                 System.out.println("Current "+ i + " :"+ "Subject:"+ email); 
             	System.out.println(message.getSubject());
@@ -412,37 +412,70 @@ public class MailChecker {
     }
     
     public static String searchSpamEmailAndGetMailMessage(String userName, String password, final String subjectKeyword, final String fromEmail) {
-    	String mailmessage = "";
-    	try {
-    		Store store = loginToGMailBox(userName, password);
-            
+        String mailmessage = "";
+        try {
+            Store store = loginToGMailBox(userName, password);
+
             Folder folderInbox = getSpamMailMessages(store);
             //create a search term for all "unseen" messages
             Flags seen = new Flags(Flags.Flag.SEEN);
-			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
-			//create a search term for all recent messages
-			Flags recent = new Flags(Flags.Flag.RECENT);
-			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
-            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+            FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+            //create a search term for all recent messages
+            Flags recent = new Flags(Flags.Flag.RECENT);
+            FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+            SearchTerm searchTerm = new OrTerm(unseenFlagTerm, recentFlagTerm);
             Message[] foundMessages = folderInbox.search(searchTerm);
-            System.out.println("Total Messages Found :"+ foundMessages.length);
+            System.out.println("Total Messages Found :" + foundMessages.length);
             Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
-            if (message != null)        
-            	mailmessage = getText(message);
-            
+            if (message != null)
+                mailmessage = getText(message);
+
             //message.setFlag(Flags.Flag.SEEN, true);
             message.setFlag(Flags.Flag.DELETED, true);
             // disconnect
             folderInbox.close(false);
             store.close();
-    	} catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             System.out.println("Could not connect to the message store.");
             ex.printStackTrace();
         } catch (IOException e) {
-        	System.out.println("IOException.");
+            System.out.println("IOException.");
             e.printStackTrace();
-		}	
-    	return mailmessage;
+        }
+        return mailmessage;
+
+
+//        String mailmessage = "";
+//    	try {
+//    		Store store = loginToGMailBox(userName, password);
+//
+//            Folder folderInbox = getSpamMailMessages(store);
+//            //create a search term for all "unseen" messages
+//            Flags seen = new Flags(Flags.Flag.SEEN);
+//			FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+//			//create a search term for all recent messages
+//			Flags recent = new Flags(Flags.Flag.RECENT);
+//			FlagTerm recentFlagTerm = new FlagTerm(recent, false);
+//            SearchTerm searchTerm = new OrTerm(unseenFlagTerm,recentFlagTerm);
+//            Message[] foundMessages = folderInbox.search(searchTerm);
+//            System.out.println("Total Messages Found :"+ foundMessages.length);
+//            Message message = findMessage(foundMessages, subjectKeyword, fromEmail);
+//            if (message != null)
+//            	mailmessage = getText(message);
+//
+//            //message.setFlag(Flags.Flag.SEEN, true);
+//            message.setFlag(Flags.Flag.DELETED, true);
+//            // disconnect
+//            folderInbox.close(false);
+//            store.close();
+//    	} catch (MessagingException ex) {
+//            System.out.println("Could not connect to the message store.");
+//            ex.printStackTrace();
+//        } catch (IOException e) {
+//        	System.out.println("IOException.");
+//            e.printStackTrace();
+//		}
+//    	return mailmessage;
     }
     
     public static String getMailMessageFromSpam(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
