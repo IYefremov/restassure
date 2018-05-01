@@ -198,5 +198,11 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 
 	}
 
+	public void clickBackButton()  {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
+	}
+
 
 }

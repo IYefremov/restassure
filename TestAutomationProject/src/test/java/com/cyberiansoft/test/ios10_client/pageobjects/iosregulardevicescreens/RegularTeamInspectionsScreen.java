@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -68,8 +67,8 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeImage[@name='ESTIMATION_DRAFT']")).size() > 0;
 	}
 	
-	public void assertInspectionExists(String inspection) {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId(inspection)).size() > 0);
+	public boolean isInspectionExists(String inspection) {
+		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
 	}
 	
 	public void clickActionButton() {
@@ -89,6 +88,8 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectEmployee(String employee) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Employees")));
 		appiumdriver.findElementByAccessibilityId(employee).click();
 	}
 	
@@ -113,8 +114,8 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Approve").click();
 	}
 	
-	public void assertInspectionIsApproved(String inspnumber) {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked"));
+	public boolean checkInspectionIsApproved(String inspnumber) {
+		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public String getFirstInspectionAprovedPriceValue() {
@@ -124,6 +125,12 @@ public class RegularTeamInspectionsScreen extends iOSRegularBaseScreen {
 	public String getFirstInspectionPriceValue() {
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
 		//return firstinspectionprice.getAttribute("label");
+	}
+
+	public void clickBackButton() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 	}
 
 }

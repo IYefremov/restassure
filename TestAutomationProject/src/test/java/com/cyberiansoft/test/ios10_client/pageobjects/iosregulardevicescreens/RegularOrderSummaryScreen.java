@@ -1,18 +1,15 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +18,11 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String ordersummaryscreencapt = "Summary";
 	
-	@iOSFindBy(accessibility = "Default")
+	/*@iOSFindBy(accessibility = "Default")
     private IOSElement defaultinvoicetype;
 	
 	@iOSFindBy(accessibility = "Save")
-    private IOSElement savebtn;
+    private IOSElement savebtn;*/
 	
 	private By approveandcreateinvoicechekbox = MobileBy.AccessibilityId("checkbox unchecked");
 
@@ -37,15 +34,12 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 
 	public void checkApproveAndCreateInvoice() {
 		//savebtn.click();
-		Helpers.waitABit(1000);
-		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();				
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
 	}
 	
 	public void checkApproveAndSaveWorkOrder() {
 		//savebtn.click();
-		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();	
-		Helpers.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
 	}
 	
 	public boolean checkApproveAndCreateInvoiceExists() {
@@ -60,15 +54,15 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		selectEmployee( employee);
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Enter password here")).setValue(password);
 		Helpers.acceptAlert();
-		Helpers.waitABit(1000);
 	}
 
 	public void selectDefaultInvoiceType() {
-		defaultinvoicetype.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default")));
+		appiumdriver.findElementByAccessibilityId("Default").click();
 	}
 	
 	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
-		Helpers.waitABit(1000);
 		if (!appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
@@ -84,17 +78,22 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId(workorderdetails).click();
 	}
 
-	public void assertOrderSummIsCorrect(String summ) {
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), summ);
+	public String getOrderSumm() {
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
-	
-	public void setTotalSale(String totalsale) throws InterruptedException {
-		setTotalSaleWithoutHidingkeyboard(totalsale+"\n");
+
+	public String getTotalSaleValue() {
 		WebElement par = getTableParentNode("Total Sale");
-		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value"), PricesCalculations.getPriceRepresentation(totalsale));
+		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
-	public void setTotalSaleWithoutHidingkeyboard(String totalsale) throws InterruptedException {
+	public void setTotalSale(String totalsale) {
+		setTotalSaleWithoutHidingkeyboard(totalsale+"\n");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Total Sale")));
+	}
+	
+	public void setTotalSaleWithoutHidingkeyboard(String totalsale) {
 		WebElement par = getTableParentNode("Total Sale");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(totalsale);
 		//appiumdriver.findElement(By.xpath("//XCUIElementTypeButton[@name='Return']")).click();
@@ -106,16 +105,16 @@ public class RegularOrderSummaryScreen extends iOSRegularBaseScreen {
 	
 	public void clickSaveButton() {
 		clickSave();
-		Helpers.waitABit(1000);
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+		if (elementExists("Connecting to Back Office")) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 	}
 	
 	public void clickSave() {
-		savebtn.click();
-		Helpers.waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Save")));
+		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 	
 	public WebElement getTableParentNode(String cellname) {

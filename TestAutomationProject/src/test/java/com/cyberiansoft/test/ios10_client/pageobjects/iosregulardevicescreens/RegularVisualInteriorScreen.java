@@ -7,7 +7,6 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -89,19 +88,20 @@ public class RegularVisualInteriorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("services")).click();
 	}
 
-	public void assertPriceIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
+	public String getTotalPrice() {
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
-	public void assertVisualPriceIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value"), price);
+	public String getSubTotalPrice() {
+		return appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value");
 	}
 
 
-	public void assertDefaultInteriorServicesPresent() {
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
+	public boolean isInteriorServicePresent(String serviceName) {
+		return appiumdriver.findElement(MobileBy.AccessibilityId(serviceName)).isDisplayed();
+		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
+		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
+		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
 	}
 
 	public static String getVisualInteriorCaption() {

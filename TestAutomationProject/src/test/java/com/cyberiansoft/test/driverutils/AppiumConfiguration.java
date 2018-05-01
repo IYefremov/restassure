@@ -69,6 +69,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSRegularDeviceInfo.getInstance().getPlatformVersion());
 				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
 				appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
+				appiumcap.setCapability("session-override",true);
 				appiumcap.setCapability("nativeWebTap", true);
 				appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST); 
 				appiumcap.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);

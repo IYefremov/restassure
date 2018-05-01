@@ -1,23 +1,14 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.ServiceRequestsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTeamInspectionsScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import java.util.concurrent.TimeUnit;
 
 public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
@@ -61,6 +52,8 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), RegularHomeScreen.class);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Home")));
 	}
 
 	public RegularCustomersScreen clickCustomersButton() {	
@@ -93,7 +86,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 		myworkordersscreen.switchToLocalWorkOrdersView();
-		return new RegularMyWorkOrdersScreen(appiumdriver);
+		return myworkordersscreen;
 	}
 	
 	public RegularCarHistoryScreen clickCarHistoryButton() {

@@ -15,7 +15,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -119,6 +118,8 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectEmployee(String employee) {
+        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(employee)));
 		appiumdriver.findElementByAccessibilityId(employee).click();
 	}
 	
@@ -181,8 +182,6 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 
 		selectUIAPickerValue(reason);
 		//statusreasonbtn.click();
-		//Thread.sleep(1000);
-		Helpers.waitABit(500);		
 		if (appiumdriver.findElements(MobileBy.name("Done")).size() > 1)
 			((WebElement) appiumdriver.findElements(MobileBy.name("Done")).get(1)).click();
 		else
@@ -190,6 +189,8 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularVehicleScreen selectDefaultInspectionType() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Default")).click();
 		return new RegularVehicleScreen(appiumdriver);
 	}
@@ -217,7 +218,9 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 		//firstinspection.click();
 	}
 
-	public String getFirstInspectionNumberValue() {		
+	public String getFirstInspectionNumberValue() {
+        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsTable")));
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionNumber']")).getAttribute("label");
 	}
 	
@@ -251,12 +254,12 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");	
 	}
 
-	public void assertInspectionDoesntExists(String inspection)  {
-		Assert.assertTrue(appiumdriver.findElementsByName(inspection).size() < 1);
+	public boolean checkInspectionDoesntExists(String inspection)  {
+		return appiumdriver.findElementsByName(inspection).size() < 1;
 	}
 
-	public void assertInspectionExists(String inspection) {
-		Assert.assertTrue(appiumdriver.findElementsByName(inspection).size() > 0);
+	public boolean checkInspectionExists(String inspection) {
+		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
 	}
 
 	public RegularApproveInspectionsScreen selectFirstInspectionToApprove() {
@@ -273,10 +276,7 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	public void clickActionButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Share"))).click(); 
-		
-		//appiumdriver.findElementByAccessibilityId("Share").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeButton[contains(@label,'Share')]").click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Share"))).click();
 	}
 
 	public void clickFilterButton() {
@@ -284,7 +284,7 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[contains(@name,'filter')]").click();
 	}
 
-	public boolean assertFilterIsApplied() {
+	public boolean checkFilterIsApplied() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");		
 		return toolbar.findElementByXPath("//XCUIElementTypeButton[contains(@name,'filter')]").getAttribute("name").equals("filter pressed");
 	}
@@ -300,9 +300,9 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@visible=\"true\" and (contains(@name,\"Status\"))]").click();
 	}
 
-	public void assertFilterStatusIsSelected(String filterstatus) {
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='"
-								+ filterstatus + "_Checked" + "']").size() > 0);
+	public boolean checkFilterStatusIsSelected(String filterstatus) {
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='"
+								+ filterstatus + "_Checked" + "']").size() > 0;
 	}
 
 	public void clickFilterStatus(String filterstatus) {
@@ -330,14 +330,11 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void clickChangeCustomerpopupMenu() {
 		appiumdriver.findElementByAccessibilityId("Change\nCustomer").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 	}
 	
 	public void selectCustomer(String customer) {
-		/*appiumdriver.findElementByAccessibilityId("Search").click();
-		Helpers.waitABit(1000);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(1000);*/
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	
@@ -347,20 +344,21 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 		selectCustomer(customer);
 	}
 	
-	public void customersPopupSwitchToWholesailMode() throws InterruptedException {
+	public void customersPopupSwitchToWholesailMode() {
 		if (elementExists(MobileBy.AccessibilityId("btnRetail"))) {
 			appiumdriver.findElementByAccessibilityId("btnRetail").click();
 		}
 	}
 	
-	public void customersPopupSwitchToRetailMode() throws InterruptedException {
-		Helpers.waitABit(500);
+	public void customersPopupSwitchToRetailMode() {
 		if (elementExists(MobileBy.AccessibilityId("btnWholesale"))) {
 			appiumdriver.findElementByAccessibilityId("btnWholesale").click();
 		}
 	}
 	
 	public int getNumberOfWorkOrdersForIspection() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSheet")));
 		IOSElement typesheet = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeSheet");
 		return typesheet.findElementsByClassName("XCUIElementTypeButton").size()-1;
 	}
@@ -425,9 +423,9 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 				AccessibilityId(inspnumber)).click();
 	}
 
-	public void assertInspectionIsApproved(String inspnumber) {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
-				AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked"));
+	public boolean isInspectionIsApproved(String inspnumber) {
+		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+				AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public boolean isInspectionIsApproveButtonExists(String inspnumber) {
@@ -514,6 +512,12 @@ public class RegularMyInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void switchToOnlineInspectionsView() {
 		appiumdriver.findElementByAccessibilityId("Team").click();
+	}
+
+	public void clickBackButton()  {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 	}
 	
 }

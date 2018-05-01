@@ -9,6 +9,8 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -55,6 +57,8 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setAccidentDate() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Accident Date")));
 		WebElement par = getTableParentCell("Accident Date");
 		new TouchAction(appiumdriver).tap(par.findElement(MobileBy.AccessibilityId("custom detail button"))).perform() ;
 		appiumdriver.findElementByAccessibilityId("Done").click();

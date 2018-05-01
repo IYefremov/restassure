@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,17 +26,17 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	public void assertBundleIsSelected(String bundle) {
+	public boolean checkBundleIsSelected(String bundle) {
 
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='selected']").size() > 0);
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='selected']").size() > 0;
 	}
 
-	public void assertBundleIsNotSelected(String bundle) {
+	public boolean checkBundleIsNotSelected(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='unselected']").size() > 0);
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='unselected']").size() > 0;
 	}
 
 	public void selectBundle(String bundle) {

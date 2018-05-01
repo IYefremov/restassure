@@ -15,7 +15,6 @@ import io.appium.java_client.MobileBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -64,7 +63,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
-		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -199,7 +197,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
-		Helpers.waitABit(2000);
 		visualinteriorscreen.tapInteriorWithCoords(1);
 		visualinteriorscreen.tapInteriorWithCoords(2);
 		visualinteriorscreen.switchToCustomTab();
@@ -210,16 +207,13 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.tapInteriorWithCoords(4);
 		visualinteriorscreen.selectNextScreen(VisualInteriorScreen
 				.getVisualExteriorCaption());
-		Thread.sleep(2000);
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		visualinteriorscreen.tapExterior();
-		Thread.sleep(2000);
 		InspectionToolBar toolaber = new InspectionToolBar(appiumdriver);		;
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));	
 		visualinteriorscreen.clickSaveButton();
-		Thread.sleep(2000);
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -252,19 +246,16 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
 		visualinteriorscreen.tapInterior();
-		Helpers.waitABit(1000);
 		visualinteriorscreen.tapInterior();
 		visualinteriorscreen.setCarServiceQuantityValue(_quantity);
 		visualinteriorscreen.saveCarServiceDetails();
 		visualinteriorscreen.assertPriceIsCorrect(PricesCalculations.getPriceRepresentation(_inspectionpricevisual));
 		visualinteriorscreen.selectNextScreen(VisualInteriorScreen
 				.getVisualExteriorCaption());
-		Thread.sleep(2000);
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		visualinteriorscreen.tapExterior();
-		Thread.sleep(3000);
 		visualinteriorscreen.setCarServiceQuantityValue(_quantityexterior);
 		visualinteriorscreen.saveCarServiceDetails();
 

@@ -100,7 +100,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 		//LoginScreen loginscreen = new LoginScreen(appiumdriver);
-		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -855,9 +854,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestpage.setServiceTypeQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "3");
 		servicerequestpage.clickSaveBtn();
 		DriverBuilder.getInstance().getDriver().quit();
-			
-		
-		resrtartApplication();
+
+
+		DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -3010,7 +3010,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 		Helpers.waitABit(40*1000);
-		resrtartApplication();
+		DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		MainScreen mainscreen = new MainScreen(appiumdriver);
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -3018,8 +3019,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectContinueWorkOrder(wonumber);
 		Thread.sleep(30*1000);
 		Assert.assertEquals(vehiclescreeen.getInspectionNumber(), wonumber);
-		
-		resrtartApplication();
+
+		DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		mainscreen = new MainScreen(appiumdriver);
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -4496,8 +4498,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		srlistwebpage.saveNewServiceRequest();
 		String srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		resrtartApplication();
+
+		DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		mainscr.updateDatabase();
 		HomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
