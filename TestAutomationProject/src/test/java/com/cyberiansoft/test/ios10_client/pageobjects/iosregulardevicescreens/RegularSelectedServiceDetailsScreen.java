@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -7,38 +8,23 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.pageobjects.iosdevicescreens.PriceMatrixScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[contains(@name,\"Vehicle Part\")]/UIAStaticText[2]")
-    private IOSElement vehiclepartsfld;
-	
-	@iOSFindBy(accessibility = "Vehicle Part")
+	/*@iOSFindBy(accessibility = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
 	@iOSFindBy(accessibility = "Questions")
     private IOSElement questionsfld;
 
-	
-	@iOSFindBy(xpath = "//UIATableView[1]/UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
-    private IOSElement quantityfld;
 	
 	@iOSFindBy(accessibility = "Notes")
     private IOSElement notesfld;
@@ -57,49 +43,45 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
-	
-	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAKey[@name=\"Delete\"]")
-    private IOSElement keyboarddeletebtn;
+	*/
 	
 	
 	public RegularSelectedServiceDetailsScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		Helpers.waitABit(500);
 	}
 
-	public void assertServicePriceValue(String expectedprice) {
+	public String getServicePriceValue() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Price")));
 		WebElement pricefld = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]"));
-		Assert.assertEquals(pricefld.getAttribute("value"), expectedprice);
+		return pricefld.getAttribute("value");
 	}
 
-	public void assertServiceAdjustmentsValue(String adjustments) {
+	public String getServiceAdjustmentsValue() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Adjustments")));
 		WebElement par = getTableParentCell("Adjustments");
 		
-		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getText(), adjustments);
+		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getText();
 	}
 
-	public void setServicePriceValue(String _price)
-			throws InterruptedException {
-		Helpers.waitABit(1000);
+	public void setServicePriceValue(String _price) {
 		WebElement pricecell = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/	XCUIElementTypeStaticText[@name='Price']/.."));
 		pricecell.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).clear();
 		
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 
 	public void clickVehiclePartsCell() {
 		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(vehiclepartscell)).click();
+		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Vehicle Part"))).click();
 	}
 	
 	public RegularNotesScreen clickNotesCell() {
-		notesfld.click();
+		appiumdriver.findElementByAccessibilityId("Notes").click();
 		return new RegularNotesScreen(appiumdriver);
 	}
 
@@ -111,7 +93,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void answerQuestion(String answer) {
 
-		questionsfld.click();
+		appiumdriver.findElementByAccessibilityId("Questions").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")));
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
@@ -119,7 +103,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void answerQuestion2(String answer) {
 
-		questionsfld.click();
+		appiumdriver.findElementByAccessibilityId("Questions").click();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
@@ -127,7 +111,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public String getQuestion2Value() {
 		String questionvalue = "";
-		questionsfld.click();
+		appiumdriver.findElementByAccessibilityId("Questions").click();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionvalue = questionsscreen.getQuestion2Value();
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
@@ -136,20 +120,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void answerQuestionCheckButton() {
 
-		questionsfld.click();
-		Helpers.waitABit(500);
+		appiumdriver.findElementByAccessibilityId("Questions").click();
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")).click();
-		Helpers.waitABit(1000);
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")).click();
-		Helpers.waitABit(1000);
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 	
 	public void answerTaxPoint1Question(String answer) {
-		Helpers.waitABit(500);
-		questionsfld.click();
-		Helpers.waitABit(500);
+		appiumdriver.findElementByAccessibilityId("Questions").click();
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[6]")).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
@@ -204,13 +183,12 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
-	public void assertAdjustmentValue(String adjustment,
-			String adjustmentvalue) {
+	public String getAdjustmentValue(String adjustment) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(adjustment)));
 		WebElement par = getTableParentCell(adjustment);
 		
-		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getText(), adjustmentvalue);
+		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getText();
 	}
 
 	public void selectAdjustment(String adjustment) {
@@ -238,12 +216,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean vehiclePartsIsDisplayed() {
-		return vehiclepartsfldname.isDisplayed();
+		return appiumdriver.findElementByAccessibilityId("Vehicle Parts").isDisplayed();
 	}
 
 	public void saveSelectedServiceDetails() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();	
-		Helpers.waitABit(1000);
+		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()
@@ -253,11 +230,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectTechniciansCustomView() {
-		technitianscustomview.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Custom")));
+		appiumdriver.findElement(MobileBy.xpath("//UIASegmentedControl[1]/UIAButton[@name=\"Custom\"]")).click();
 	}
 
 	public void selectTechniciansEvenlyView() {
-		technitiansevenlyview.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Evenly")));
+		appiumdriver.findElement(MobileBy.xpath("//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")).click();
 	}
 	
 	public void removeService() throws InterruptedException {
@@ -279,7 +260,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		}
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 
 	public String getAdjustmentsValue() {
@@ -308,9 +288,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	
 	public void clickTechniciansIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("technician")));
 		appiumdriver.findElementByAccessibilityId("technician").click();
-		Helpers.waitABit(1000);
-
 	}
 
 	public void selecTechnician(String technician) {
@@ -322,12 +302,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(technician);
-		Helpers.waitABit(1000);
 	}
 	
 	public void cancelSearchTechnician() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
-		Helpers.waitABit(1000);
 	}
 
 	public void unselecTechnician(String technician) {
@@ -372,7 +350,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		}
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
@@ -382,8 +359,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 				btn.click();
 				break;
 			}
-		//appiumdriver .findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeButton[3]").click();
-		Helpers.waitABit(300);
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(newamount);
@@ -412,17 +387,14 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		if (appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
 				MobileBy.AccessibilityId(vehiclepart)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0)
 			table.findElementByAccessibilityId(vehiclepart).click();
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
-				MobileBy.AccessibilityId(vehiclepart)).findElements(MobileBy.AccessibilityId("selected")).size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {
-		cancelbtn.click();
+		appiumdriver.findElementByName("Cancel").click();
 	}
 
 	public void clickAdjustments() {
 		appiumdriver.findElementByName("Adjustments").click();
-		Helpers.waitABit(300);
 	}
 	
 	public String getServiceDetailsPriceValue() {
@@ -439,8 +411,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void clickServicePartCell() {
 		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(servicepartcell)).click();
-		Helpers.waitABit(500);
+		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByName("Service Part"))).click();
 	}
 	
 	public void selectServicePartCategory(String categoryname) {
@@ -465,9 +436,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
 		appiumdriver.findElementByAccessibilityId("Subcategory").click();
-		Helpers.waitABit(300);
-		//appiumdriver.findElementByAccessibilityId("Search").sendKeys(subcategoryname);
-		Helpers.waitABit(300);
 		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(subcategoryname));
         tap.perform();
 		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
@@ -482,13 +450,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
 		appiumdriver.findElementByAccessibilityId("Part").click();
-		Helpers.waitABit(300);
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
 		appiumdriver.findElementByAccessibilityId("Position").click();
-		Helpers.waitABit(300);
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
 	}
 	

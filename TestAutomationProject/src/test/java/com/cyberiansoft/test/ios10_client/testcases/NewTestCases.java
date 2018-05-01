@@ -56,7 +56,6 @@ public class NewTestCases extends BaseTestCase {
 		devicespage.setSearchCriteriaByName(licensename);
 		regCode = devicespage.getFirstRegCodeInTable();
 		DriverBuilder.getInstance().getDriver().quit();
-		Thread.sleep(2000);
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
@@ -65,7 +64,6 @@ public class NewTestCases extends BaseTestCase {
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		LoginScreen loginscreen = new LoginScreen(appiumdriver);
-		loginscreen.assertRegisterButtonIsValidCaption();
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(userLogin, userPassword);
@@ -330,8 +328,8 @@ public class NewTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
 		for (String serviceName : services)
-			servicesscreen.assertServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) + 
-					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity));
+			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
+					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
 		servicesscreen.clickSaveButton();
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.clickHomeButton();

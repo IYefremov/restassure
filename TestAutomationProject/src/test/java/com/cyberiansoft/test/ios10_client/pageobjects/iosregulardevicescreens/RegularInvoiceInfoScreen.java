@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,7 +53,6 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		clickSaveButton();
 		draftalertbtn.click();
 		savebtn.click();
-		Helpers.waitABit(500);
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading team order")));
@@ -65,11 +63,9 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		clickSaveButton();
 		finalalertbtn.click();
 		savebtn.click();
-		Helpers.waitABit(500);
 	}
 
 	public void setPO(String _po) throws InterruptedException {
-		Helpers.waitABit(500);
 		setPOWithoutHidingkeyboard(_po);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		//((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
@@ -77,13 +73,15 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setPOWithoutHidingkeyboard(String _po)  {
-		Helpers.waitABit(500);
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("PO#")));
 		WebElement par = getTableParentCell("PO#");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_po);
 	}
 	
 	public String  getInvoicePOValue()  {
-		Helpers.waitABit(500);
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("PO#")));
 		WebElement par = getTableParentCell("PO#");
 		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
@@ -99,8 +97,8 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[1]/XCUIElementTypeCell[1]").click();
 	}
 	
-	public void assertOrderSummIsCorrect(String summ) {
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), summ);
+	public String getOrderSumm() {
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
 	public void clickOnWO(String wonum) {
@@ -108,10 +106,8 @@ public class RegularInvoiceInfoScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void addWorkOrder(String wonumber)  {
-		Helpers.waitABit(1000);
 		appiumdriver.findElementByAccessibilityId("Insert").click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[3]").click();
-		Helpers.waitABit(1000);
 		WebElement par = getTableParentCell(wonumber);
 		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]"));
 		par.findElement(By.xpath("//XCUIElementTypeButton[@name=\"unselected\"]")).click();

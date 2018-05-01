@@ -92,7 +92,7 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable"))); 
 	}
 
@@ -103,8 +103,10 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickAddButton() {
-		appiumdriver.findElementByAccessibilityId("Add").click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
+		appiumdriver.findElementByAccessibilityId("Add").click();
+		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 	}
 	
@@ -201,6 +203,8 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectInspectionType(String inspectiontype) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspectiontype)));
 		if (!appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectiontype + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
@@ -280,19 +284,22 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 		return par.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
-	public void setSubjectAppointmet(String _subject) throws InterruptedException {
+	public void setSubjectAppointmet(String _subject)  {
 		appiumdriver.findElementByAccessibilityId("Subject").click();
-		Helpers.keyboadrType(_subject+"\n");
+		appiumdriver.getKeyboard().sendKeys(_subject+"\n");
+		//Helpers.keyboadrType(_subject+"\n");
 	}
 	
-	public void setAddressAppointmet(String _address) throws InterruptedException {
+	public void setAddressAppointmet(String _address)  {
 		appiumdriver.findElementByAccessibilityId("Address").click();
-		Helpers.keyboadrType(_address+"\n");
+		appiumdriver.getKeyboard().sendKeys(_address+"\n");
+		//Helpers.keyboadrType(_address+"\n");
 	}
 	
-	public void setCityAppointmet(String _city) throws InterruptedException {
+	public void setCityAppointmet(String _city)  {
 		appiumdriver.findElementByAccessibilityId("City").click();
-		Helpers.keyboadrType(_city+"\n");
+		appiumdriver.getKeyboard().sendKeys(_city+"\n");
+		//Helpers.keyboadrType(_city+"\n");
 	}
 	
 	public void selectSummaryRequestAction() {
@@ -313,24 +320,33 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickServiceRequestSummaryInspectionsButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Inspections")));
 		new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId("Inspections")).perform() ;
 	}
 	
 	public void clickServiceRequestSummaryOrdersButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Work Orders")));
 		appiumdriver.findElementByAccessibilityId("Work Orders").click();
 	}
 	
 	public void saveAppointment() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Appointments")));
 	}
 	
 	//Close reason UIAPicker
 	public void clickCancelCloseReasonDialog() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Reasons")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 	
 	public void clickDoneCloseReasonDialog() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
+		new RegularServiceRequestsScreen(appiumdriver);
 	}
 	
 	public void selectDoneReason(String selectreason) {
@@ -361,4 +377,10 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 				+ "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_90')]")).size() > 0;
 	}
 
+
+	public void clickBackButton() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
+	}
 }

@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -12,12 +11,12 @@ import com.cyberiansoft.test.ios_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.monte.screenrecorder.ScreenRecorder;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-
-import java.net.MalformedURLException;
 
 public class BaseTestCase {
 
@@ -103,7 +102,7 @@ public class BaseTestCase {
         }
 	}
 	
-	public void resrtartApplication() throws MalformedURLException {
+	/*public void resrtartApplication() throws MalformedURLException {
 		try {
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		} catch (NoSuchSessionException e) {
@@ -122,6 +121,6 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().getAppiumDriver().launchApp();
 			Helpers.waitABit(2000);
 		}
-	}
+	}*/
 
 }

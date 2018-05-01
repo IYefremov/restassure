@@ -43,8 +43,8 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public RegularHomeScreen clickHomeButton() throws InterruptedException {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Back"))).click();
-		
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
+
 		return new RegularHomeScreen(appiumdriver);
 	}
 	
@@ -52,7 +52,7 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 		if (!elementExists("Save"))
 			clickChangeScreen();
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
+		if (elementExists("Connecting to Back Office")) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
@@ -110,10 +110,10 @@ public class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
-		/*IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
-		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
-		pickerwhl.setValue(value);*/
-		WebElement picker = appiumdriver.findElementByClassName("XCUIElementTypePicker");
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement picker = wait.until(ExpectedConditions.presenceOfElementLocated( MobileBy.className("XCUIElementTypePicker")));
+
 		while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
 			action.tap(picker.getSize().getWidth()/2, picker

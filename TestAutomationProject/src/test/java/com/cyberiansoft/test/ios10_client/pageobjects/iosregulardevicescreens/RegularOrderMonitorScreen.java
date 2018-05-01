@@ -1,15 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +16,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
@@ -197,8 +195,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
 	}
 	
-	public void clicksRepairPhaseLine() { 
-		appiumdriver.findElementByAccessibilityId("Repair phase").click();
+	public void clicksRepairPhaseLine() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 	
 	public void clickStartPhaseButton() { 

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -121,9 +122,10 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		if (!appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")).isDisplayed()) {
+		MobileElement elDiscount = (MobileElement) appiumdriver.findElementByAccessibilityId(discaunt);
+		if (!elDiscount.isDisplayed()) {
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + discaunt + "']/..")));
-			appiumdriver.findElementByAccessibilityId(discaunt).click();
+			//appiumdriver.findElementByAccessibilityId(discaunt).click();
 		}
 		appiumdriver.findElementByAccessibilityId(discaunt).click();
 	}
@@ -192,7 +194,8 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 	}	
 	
 	public void clickBackButton() {
-        appiumdriver.findElementByAccessibilityId("Back").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
 	}
 	
 	public void clearVehicleData() {

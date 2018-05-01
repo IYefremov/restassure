@@ -8,10 +8,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -116,7 +113,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 
 	public void setVIN(String vin)  {
 		setVINValue(vin);
-
+		Helpers.waitABit(1000);
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
@@ -124,8 +121,16 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 				
 				break;
 			}
-		
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
+        try {
+            if (appiumdriver.findElementsByAccessibilityId("Searching on Back Office").size() > 0) {
+                WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+                wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId("Searching on Back Office")));
+            }
+        } catch (WebDriverException e) {
+
+        }
+
+		if (elementExists("Close"))	 {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
 //			closebtn.click();
@@ -135,8 +140,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 				break;
 			}
 		}
-		
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0) {
+
+		if (elementExists("Close"))	 {
 			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 			for (IOSElement closebtn : closebtns)
 				if (closebtn.isDisplayed()) {
@@ -168,8 +173,9 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 			throws InterruptedException {
 
 		getVINField().click();
-
-		Helpers.keyboadrType(vin + "\n");		
+		appiumdriver.getKeyboard().sendKeys(vin + "\n");
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
 		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
@@ -191,7 +197,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getInspectionNumber() {
-
 		return getInspectionNumberLabel().getText();
 	}
 	
@@ -199,7 +204,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'O-'").getText();
 	}
-
 
 	public void setMakeAndModel(String make, String model) {
 		
@@ -358,7 +362,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularNotesScreen clickNotesButton() {
-		appiumdriver.findElementByAccessibilityId("Compose").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Compose"))).click();
 		return new RegularNotesScreen(appiumdriver);
 	}
 	

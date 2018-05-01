@@ -10,8 +10,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.testng.*;
 
-import java.net.MalformedURLException;
-
 public class RegularSuperListener extends TestListenerAdapter  implements IInvokedMethodListener  {
 	private Object currentClass;
 	
@@ -94,13 +92,9 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	        	}
 	        	
 	        }
-	         try {
-				((BaseTestCase) currentClass).resrtartApplication();
-	        	
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        DriverBuilder.getInstance().getAppiumDriver().closeApp();
+	        DriverBuilder.getInstance().getAppiumDriver().launchApp();
+
         	RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
     		try {
     			TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
