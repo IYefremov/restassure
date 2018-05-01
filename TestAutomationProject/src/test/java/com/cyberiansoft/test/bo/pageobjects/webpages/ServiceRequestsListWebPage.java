@@ -385,11 +385,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         Actions actions = new Actions(driver);
         try {
             actions.moveToElement(firstServiceRequestDetails).build().perform();
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(firstServiceRequestDetails)));
             wait.until(ExpectedConditions.elementToBeClickable(firstServiceRequestDetails));
             firstServiceRequestDetails.click();
         } catch (StaleElementReferenceException e) {
-            waitABit(3000);
-            firstServiceRequestDetails.click();
+            wait.until(ExpectedConditions.elementToBeClickable(firstServiceRequestDetails)).click();
         }
         waitABit(1500);
         switchToServiceRequestInfoFrame();
@@ -885,13 +885,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
     }
 
 	public boolean checkServiceDescription(String string) {
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-
+	    switchToServiceRequestInfoFrame();
+        waitABit(3000);
 		click(driver.findElement(By.xpath("//div[@class='description-content']/span[@class='infoBlock-editBtn']")));
 		wait.until(ExpectedConditions.elementToBeClickable(addsrvdescription.getWrappedElement()));
 		WebElement lastDescription = oldDescriptions.get(0);
-		System.out.println(lastDescription.findElement(By.tagName("span")).getText());
         return lastDescription.findElement(By.tagName("span")).getText().equals(string);
 
     }
@@ -910,12 +908,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkServiceRequestDocumentIcon() {
         switchToServiceRequestInfoFrame();
-        return !driver.findElement(By.xpath("//div[contains(@class, 'description-reason')]")).findElement(By.tagName("i")).getAttribute("style").equals("display : none;");
+        return wait.until(ExpectedConditions
+                .not(ExpectedConditions
+                        .attributeToBe(driver.findElement(By.xpath("//div[contains(@class, 'description-reason')]"))
+                                .findElement(By.tagName("i")), "style", "display : none;")));
+//        return !driver.findElement(By.xpath("//div[contains(@class, 'description-reason')]")).findElement(By.tagName("i")).getAttribute("style").equals("display : none;");
     }
 
 	public void clickDocumentButton() {
         switchToServiceRequestInfoFrame();
-
 		String oldWindow = driver.getWindowHandle();
 		descriptionDocuments.findElement(By.tagName("i")).click();
 		Set allWindows = driver.getWindowHandles();
@@ -1183,9 +1184,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 	}
 
-	public boolean checkShowHideTeches(String startDate, String endDate) throws InterruptedException {
+	public boolean checkShowHideTeches(String startDate, String endDate) {
         switchToServiceRequestInfoFrame();
-		addAppointmentBTNfromSRedit.click();
+		wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
 
 		appointmentFromDateSRedit.clear();
 		appointmentToDateSRedit.clear();
@@ -1198,17 +1199,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
 		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
 
-		Thread.sleep(1000);
+		waitABit(1000);
 		try {
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
-			Thread.sleep(2000);
+            waitABit(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(0).click();
-			Thread.sleep(500);
+            waitABit(500);
 			appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
-			Thread.sleep(2000);
+            waitABit(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.tagName("li")).get(1).click();
 			if (driver.findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4
@@ -1221,7 +1222,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 					.equals("Hide")) {
 				return false;
 			}
-			Thread.sleep(2000);
+            waitABit(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("gvTechnicians-table")));
 
@@ -1720,12 +1721,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void goToLifeCycle() {
 		String parentFrame = driver.getWindowHandle();
         switchToServiceRequestInfoFrame();
-		driver.findElement(By.id("Card_srLifeCycle")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("Card_srLifeCycle")))).click();
 		Set windows = driver.getWindowHandles();
 		driver.close();
 		windows.remove(parentFrame);
 		driver.switchTo().window((String) windows.iterator().next());
-
 	}
 
 	public boolean checkLifeCycleContent() throws InterruptedException {
@@ -1803,7 +1803,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean goToWOfromLC() {
-		try {
+        waitForLoading();
+        try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
 					.click();
             waitForLoading();

@@ -38,7 +38,7 @@ public class ServiceCountWebPage extends BaseWebPage {
 	}
 
 	public void clickSearchButton() {
-		searchBTN.click();
+	    wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
 	}
 
 	public boolean verifySearchFields() {

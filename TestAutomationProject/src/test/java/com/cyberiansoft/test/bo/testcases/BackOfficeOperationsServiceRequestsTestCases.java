@@ -1089,9 +1089,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	}
 
-	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation", dataProvider = "provideSRdata")
-	public void checkSRLCafterCreation(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation")
+	public void checkSRLCafterCreation() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();

@@ -569,7 +569,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
         } catch (TimeoutException ignored) {
 	        waitABit(5000);
 	        try {
-                return firstInvoiceName.getText();
+                return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
             } catch (TimeoutException e) {
 	            e.printStackTrace();
                 Assert.fail("The first invoice name has not been displayed!");
@@ -650,8 +650,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
                         .visibilityOf(slideDisplayed.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
                         .click();
             } catch (Exception e) {
-                waitABit(3000);
-                driver.findElement((By.xpath("//span[contains(text(), '" + string + "')]"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(driver
+                        .findElement((By.xpath("//span[contains(text(), '" + string + "')]"))))).click();
             }
 			return mainWindow;
 		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {

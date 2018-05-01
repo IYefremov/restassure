@@ -316,6 +316,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.deleteClient(retailcompanynameed);
 	}
 
+	//todo fails. Bug #64984
 	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
 	public void testCompanyEmployeesEdit() {
 
