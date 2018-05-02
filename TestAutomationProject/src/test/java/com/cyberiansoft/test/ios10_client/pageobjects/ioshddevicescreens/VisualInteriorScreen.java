@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -11,12 +9,10 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class VisualInteriorScreen extends iOSHDBaseScreen {
 	
@@ -100,11 +96,9 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
 		action.tap(imagecar, imagecar.getSize().getWidth()/(times+2), imagecar.getSize().getHeight()/2 + 130).perform();
 
-		Helpers.waitABit(1000);
 	}
 
 	public void tapExterior() throws InterruptedException {
-		Thread.sleep(1000);
 		TouchAction action = new TouchAction(appiumdriver);
 		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		
@@ -112,7 +106,6 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
 		//action.tap(element, x, y).perform();
 		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
-		Helpers.waitABit(1000);
 		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
 		//action.tap(element, x, y).perform();
@@ -130,28 +123,22 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
 		//action.tap(element, x, y).perform();
 		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
-		Helpers.waitABit(1000);
 	}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
-		Thread.sleep(1000);
 		Helpers.tapExterior(x, y);
 	}
 
-	public void assertPriceIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
+	public String getTotalAmaunt() {
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
-	public void assertVisualPriceIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("SubtotalAmount").getAttribute("value"), price);
+	public String getSubTotalAmaunt() {
+		return appiumdriver.findElementByAccessibilityId("SubtotalAmount").getAttribute("value");
 	}
 
-
-	public void assertDefaultInteriorServicesPresent()
-			throws InterruptedException {
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
-		Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
+	public boolean isInteriorServicePresent(String interiorServiceName) {
+		return appiumdriver.findElement(MobileBy.AccessibilityId(interiorServiceName)).isDisplayed();
 	}
 
 	public static String getVisualInteriorCaption() {

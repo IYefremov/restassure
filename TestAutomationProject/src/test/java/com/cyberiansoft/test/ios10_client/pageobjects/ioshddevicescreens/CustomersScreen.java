@@ -1,22 +1,17 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class CustomersScreen extends iOSHDBaseScreen {
 	
@@ -102,20 +97,12 @@ public class CustomersScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Select").click();
 	}
 
-	public void assertCustomerDoesntExists(String customer) {
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.AccessibilityId(customer)).size() < 1);
-	}
-
-	public void assertCustomerExists(String customer) {
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.AccessibilityId(customer)).size() > 0);
+	public boolean isCustomerExists(String customer) {
+		return elementExists(customer);
 	}
 	
-	public void assertTopCustomersExists() {
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.name("Top Customers")).size() > 0);
-	}
-	
-	public boolean customerIsPresent(String customer) {		
-		return appiumdriver.findElementsByAccessibilityId(customer).size() > 0;
+	public boolean isTopCustomersExists() {
+		return elementExists("Top Customers");
 	}
 
 }

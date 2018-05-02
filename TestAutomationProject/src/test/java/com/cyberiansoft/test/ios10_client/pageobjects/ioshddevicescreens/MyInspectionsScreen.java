@@ -13,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -260,10 +259,6 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspnumber + "']").findElement(MobileBy.name("labelInspectionAmount")).getAttribute("value");
 	}
 
-	public void assertInspectionDoesntExists(String inspection)  {
-		Assert.assertTrue(appiumdriver.findElementsByName(inspection).size() < 1);
-	}
-
 	public ApproveInspectionsScreen selectFirstInspectionToApprove() {
 		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIATableView[1]/UIATableCell[1]/UIAButton[contains(@name, \"EntityInfoButtonUnchecked\")] ").click();
 		return new ApproveInspectionsScreen(appiumdriver);
@@ -279,16 +274,14 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 				break;
 			}
 		}*/
-		Helpers.waitABit(500);
 	}
 
-	public void assertInspectionExists(String inspection) {
-		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(inspection).size() > 0);
+	public boolean isInspectionExists(String inspection) {
+		return elementExists(inspection);
 	}
 
 	public void clickFilterButton() {
 		appiumdriver.findElementByAccessibilityId("filter").click();
-		Helpers.waitABit(500);
 	}
 
 	public boolean isFilterIsApplied() {
@@ -377,31 +370,9 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	
 	public boolean isWorkOrderForInspectionExists(String wonuber) {
 		boolean result = selectUIAPickerValue(wonuber);
-		Assert.assertTrue(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").equals(wonuber));
 		appiumdriver.findElementByAccessibilityId("StringPicker_Cancel").click();
 		return result;
 	}
-	
-	/*public boolean selectUIAPickerWheelValue(MobileElement picker,
-			MobileElement pickerwheel, String value) throws InterruptedException {
-		int defaultwheelnumer = 10;
-		int clicks = 0;
-		boolean result = false;
-		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			appiumdriver.tap(1, pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 50, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() + 10, 50);
-			Thread.sleep(1000);
-			if (pickerwheel.getAttribute("name").contains(value)) {
-				result = true;
-			}
-			clicks = clicks+1;
-			if (clicks > defaultwheelnumer)
-				return false;
-		}
-		return result;
-	}*/
-	
 
 	public void clickDoneButton() {
 		if (elementExists("Actions"))
@@ -444,10 +415,10 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId(inspnumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 
-	public void assertInspectionIsApproved(String inspnumber) {
+	public boolean isInspectionApproved(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(inspnumber)));
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0);
+		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
 		//Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked"));
 	}
 	

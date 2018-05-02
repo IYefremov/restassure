@@ -15,7 +15,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -82,7 +81,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	public void assertServicePriceValue(String expectedprice) {
+	public String getServicePriceValue() {
 		IOSElement pricecell = null;
 		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
 		for (WebElement prc : priceflds)
@@ -91,11 +90,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 				break;
 			}
 		IOSElement pricefld = (IOSElement) pricecell.findElementByClassName("XCUIElementTypeTextField");
-		Assert.assertEquals(pricefld.getText(), expectedprice);
+		return pricefld.getText();
 	}
 
-	public void assertServiceAdjustmentsValue(String adjustments) {
-		Assert.assertEquals(getAdjustmentsValue(), adjustments);
+	public String getServiceAdjustmentsValue() {
+		return getAdjustmentsValue();
 	}
 
 	public void setServicePriceValue(String _price)	 {
@@ -188,9 +187,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
-	public void assertAdjustmentValue(String adjustment,
-			String adjustmentvalue) {
-		Assert.assertEquals(appiumdriver.findElement(MobileBy.AccessibilityId(adjustment)).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value"), adjustmentvalue);
+	public String getAdjustmentValue(String adjustment) {
+		return appiumdriver.findElement(MobileBy.AccessibilityId(adjustment)).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public void selectAdjustment(String adjustment) {
@@ -474,7 +472,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		}*/
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(Duration.ofSeconds(1)).release().perform();
-		Assert.assertTrue(vehiclepartstable.findElement(MobileBy.name(vehiclepart)).findElements(MobileBy.name("selected")).size() > 0);
 	}
 
 	public void cancelSelectedServiceDetails() {

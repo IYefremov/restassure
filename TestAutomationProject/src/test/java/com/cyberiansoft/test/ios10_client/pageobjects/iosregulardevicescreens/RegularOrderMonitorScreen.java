@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -112,9 +111,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickCompletedPhaseCell() {
-		Helpers.waitABit(1000);
 		completedcell.click();
-		Helpers.waitABit(2000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
@@ -170,7 +167,6 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public void clickStartService() throws InterruptedException {		
 		startservicebtn.click();
-		Thread.sleep(3000);
 	}
 	
 	public String getServiceStartDate() {
