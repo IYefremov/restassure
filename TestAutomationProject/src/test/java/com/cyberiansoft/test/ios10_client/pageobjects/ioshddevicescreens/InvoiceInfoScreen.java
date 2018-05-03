@@ -12,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -79,18 +78,18 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("txtPO")).setValue(_po);
 	}
 
-	public void assertWOIsSelected(String wonumber) {
-		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(wonumber).size() > 0);
+	public boolean isWOSelected(String wonumber) {
+		return appiumdriver.findElementsByAccessibilityId(wonumber).size() > 0;
 	}
 	
 	public void clickFirstWO() {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[1]").click();
 	}
 	
-	public void assertOrderSummIsCorrect(String summ) {
+	public String getOrderSumm() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TotalAmount")));
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), summ);
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
 	public void addWorkOrder(String wonumber) {

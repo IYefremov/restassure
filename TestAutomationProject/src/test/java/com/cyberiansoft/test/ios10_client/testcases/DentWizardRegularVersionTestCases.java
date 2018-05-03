@@ -1555,7 +1555,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			pricematrix.clickSaveButton();
 			pricematrix.clickBackButton();
-			pricematrix.clickBackButton();
+			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+			priceMatricesScreen.clickBackButton();
 			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			pricematrix.selectNextScreen(RegularOrderSummaryScreen
@@ -1563,6 +1564,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			ordersummaryscreen.clickSaveButton();
+			myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1649,7 +1651,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.clickSaveButton();
 			pricematrix.clickBackButton();
-			pricematrix.clickBackButton();
+			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+            priceMatricesScreen.clickBackButton();
 			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			pricematrix.selectNextScreen(RegularOrderSummaryScreen
@@ -1682,7 +1685,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-
 			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 			questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1715,7 +1717,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			pricematrix.clickSaveButton();
 			pricematrix.clickBackButton();
-			pricematrix.clickBackButton();
+			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+			priceMatricesScreen.clickBackButton();
 			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			pricematrix.selectNextScreen(RegularOrderSummaryScreen
@@ -1861,7 +1864,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					UtilConstants.technicianA));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianB));
-
 			pricematrix.clickDiscaunt(ExcelUtils.getDiscount2(retailhaildatarow));
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -1879,7 +1881,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.clickSaveButton();
 			pricematrix.clickBackButton();
-			pricematrix.clickBackButton();
+			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+            priceMatricesScreen.clickBackButton();
 			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			pricematrix.selectNextScreen(RegularOrderSummaryScreen
@@ -1997,13 +2000,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "100");
 			selectedservicescreen.selecTechnician(UtilConstants.technicianC);
 			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "45");
-
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.clickSaveButton();
 			pricematrix.clickBackButton();
-			pricematrix.clickBackButton();
+			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+            priceMatricesScreen.clickBackButton();
 			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			pricematrix.selectNextScreen(RegularOrderSummaryScreen
@@ -2472,7 +2475,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-
+			servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -2575,7 +2578,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
+			servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));

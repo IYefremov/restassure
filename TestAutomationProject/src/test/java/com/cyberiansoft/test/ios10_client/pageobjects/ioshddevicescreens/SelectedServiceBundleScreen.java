@@ -8,7 +8,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -30,14 +29,14 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	public void assertBundleIsSelected(String bundle) {
+	public boolean checkBundleIsSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("selected")).size() > 0);
+		return bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("selected")).size() > 0;
 	}
 
-	public void assertBundleIsNotSelected(String bundle) {
+	public boolean checkBundleIsNotSelected(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
-		Assert.assertTrue(bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0);
+		return bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0;
 		
 	}
 
@@ -69,7 +68,6 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	
 	public void overrideBundleAmountValue(String newvalue) throws InterruptedException {
 		appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[3]").click();
-		Helpers.waitABit(2000);
 		
 		List<WebElement> elems = appiumdriver.findElementsByAccessibilityId("Bundle service amount");
 		for (WebElement el : elems) {

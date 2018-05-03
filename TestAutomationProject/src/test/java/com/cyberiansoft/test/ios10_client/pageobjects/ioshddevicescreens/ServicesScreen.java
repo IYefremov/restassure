@@ -15,7 +15,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -94,14 +93,14 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("AvailableServicesSwitchButton").click();
 	}
 
-	public void assertDefaultServiceIsSelected() {
+	public boolean checkDefaultServiceIsSelected() {
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		Assert.assertTrue(selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(defaultServiceValue).size() > 0);
+		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(defaultServiceValue).size() > 0;
 	}
 
-	public void assertServiceIsSelected(String service) {
+	public boolean checkServiceIsSelected(String service) {
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
-		Assert.assertTrue(selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(service).size() > 0);
+		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(service).size() > 0;
 	}
 	
 	public int getNumberOfServiceSelectedItems(String service) {
@@ -109,16 +108,17 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElements(MobileBy.iOSNsPredicateString("name = '" + service + "' and type = 'XCUIElementTypeCell'")).size();
 	}
 	
-	public void assertServiceIsSelectedWithServiceValues(String servicename, String vehiclepart, String servicepriceandquantity) {
-		
+	public boolean checkServiceIsSelectedWithServiceValues(String servicename, String vehiclepart, String servicepriceandquantity) {
+		boolean selected = false;
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
 				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + vehiclepart + "']/..");
-		Assert.assertEquals(servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""),
+		selected = servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
 				servicepriceandquantity.replaceAll(" ", ""));
+		return selected;
 	}
 	
-	public void assertServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
+	public boolean checkServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
 		boolean selected = false;
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		List<MobileElement> serviceCells = selectedservices.findElementByClassName("XCUIElementTypeTable").
@@ -132,23 +132,21 @@ public class ServicesScreen extends iOSHDBaseScreen {
 
 
 		}
-		Assert.assertTrue(selected);
-
-
+		return selected;
 	}
 
 	public int getServiceSelectedNumber(String service) {
 		return appiumdriver.findElements(MobileBy.IosUIAutomation(".scrollViews()[0].elements()['SelectedServicesView'].tableViews()[0]cells()['" + service + "']")).size();
 	}
 
-	public void assertTotalAmauntIsCorrect(String price) {
+	public String getTotalAmaunt() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("TotalAmount")));
-		Assert.assertEquals(appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value"), price);
+		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
-	public void assertSubTotalAmauntIsCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElementByName("SubtotalAmount").getAttribute("value"), price);
+	public String getSubTotalAmaunt() {
+		return appiumdriver.findElementByName("SubtotalAmount").getAttribute("value");
 	}
 
 	public boolean isServiceTypeExists(String servicetype) {
@@ -161,7 +159,6 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 
 	public void selectService(String servicename) {

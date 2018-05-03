@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -31,8 +30,8 @@ public class TeamInspectionsScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Request"))).click();
 	}
 
-	public void assertInspectionExists(String inspection) {
-		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId(inspection).size() > 0);
+	public boolean isInspectionExists(String inspection) {
+		return appiumdriver.findElementsByAccessibilityId(inspection).size() > 0;
 	}
 
 	public void selectInspectionForApprove(String inspnumber) {
@@ -55,11 +54,10 @@ public class TeamInspectionsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Approve").click();
 	}
 
-	public void assertInspectionIsApproved(String inspnumber) {
+	public boolean isInspectionApproved(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(inspnumber)));
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0);
-		//Assert.assertTrue(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked"));
+		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
 	}
 
 	public String getFirstInspectionPriceValue() {

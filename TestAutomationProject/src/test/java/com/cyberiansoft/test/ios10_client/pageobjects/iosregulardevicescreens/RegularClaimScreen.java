@@ -43,8 +43,9 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	}
 	
 
-	public void setDeductible(String deductible)
-			throws InterruptedException {
+	public void setDeductible(String deductible) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Deductible")));
 		WebElement par = getTableParentCell("Deductible");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(deductible);
@@ -52,6 +53,8 @@ public class RegularClaimScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getDeductibleValue() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Deductible")));
 		WebElement par = getTableParentCell("Deductible");
 		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
