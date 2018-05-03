@@ -199,6 +199,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public InvoicesWebPage clickFindButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
         waitForLoading();
+        waitABit(2000);
         return this;
 	}
 
@@ -814,10 +815,12 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			int size = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("tr"))).size();
 			driver.close();
 			driver.switchTo().window(mainWindow);
+			waitABit(1000);
 			return size;
 		} catch (TimeoutException e) {
 			driver.close();
 			driver.switchTo().window(mainWindow);
+            waitABit(1000);
 			return 0;
 		}
 	}

@@ -631,11 +631,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.setSearchFreeText(VIN);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(servicerequestslistpage.isCheckInButtonExistsForSelectedSR());
+		Assert.assertFalse(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		servicerequestslistpage.rejectFirstServiceRequestFromList();
 	}
 
-    @Test(testName = "Test Case 26225:Operations: SR list - Verify that Check In button is appeared when SR is saved", description = "Operations: SR list - Verify that Check In button is appeared when SR is saved")
+    @Test(testName = "Test Case 26225:Operations: SR list - Verify that Check In button is appeared when SR is saved",
+            description = "Operations: SR list - Verify that Check In button is appeared when SR is saved")
 	public void testOperationsVerifyThatCheckInButtonIsAppearedWhenSRIsSaved() {
 
 		final String addsrvalue = "Type_for_Check_In_ON";
@@ -664,10 +665,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.setSearchFreeText(VIN);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(servicerequestslistpage.isCheckInButtonExistsForSelectedSR());
+		Assert.assertFalse(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(servicerequestslistpage.isCheckInButtonExistsForSelectedSR());
+		Assert.assertTrue(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		Assert.assertTrue(servicerequestslistpage.isCheckInButtonVisible());
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
@@ -702,10 +703,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.setSearchFreeText(VIN);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(servicerequestslistpage.isCheckInButtonExistsForSelectedSR());
+		Assert.assertFalse(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(servicerequestslistpage.isCheckInButtonExistsForSelectedSR());
+		Assert.assertTrue(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		Assert.assertTrue(servicerequestslistpage.isCheckInButtonVisible());
 		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Check-In");
 		servicerequestslistpage.clickCheckInButtonForSelectedSR();
@@ -834,7 +835,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech", dataProvider = "provideSRdata")
 	public void checkMultiTechInSRshowHideTech(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+			boolean isDateShifted) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1101,7 +1102,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleContent());
+		Assert.assertTrue(serviceRequestsWebPage.isLifeCycleContentDisplayed());
 		serviceRequestsWebPage.goToDocumentLinkFromLC();
 		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDocumentsContent());
 		Assert.assertTrue(serviceRequestsWebPage.checkDocumentDownloadingInLC());
@@ -1245,6 +1246,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName("test appointment SR created");
 		eventsWebPage.setEmailNotificationDropDownForSelected("My Service Requests");
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
+
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown("Zak_Request_Type");
@@ -1975,7 +1977,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsWebPage.getkServiceAdvisorName() , "_TesW _TesW");
+		Assert.assertEquals(serviceRequestsWebPage.getServiceAdvisorName() , "_TesW _TesW");
 	}
 	
 	//TODO

@@ -96,7 +96,12 @@ public abstract class BaseWebPage {
 	}
 
 	public void waitForNewTab() {
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+	    try {
+            wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        } catch (TimeoutException e) {
+	        waitABit(5000);
+            wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        }
 		waitABit(5000);
 		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() != 1));
 	}

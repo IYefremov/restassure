@@ -308,6 +308,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//div[@class='editServiceRequestPanel']/iframe")
     private WebElement editServiceRequestPanelFrame;
 
+	@FindBy(id = "Card_rdpEndTime_timePopupLink")
+    private WebElement timePopupLink;
+
 	public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -709,7 +712,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return value;
 	}
 
-	public boolean isCheckInButtonExistsForSelectedSR() {
+	public boolean isCheckInButtonDisplayedForSelectedSR() {
 		boolean exists;
         switchToServiceRequestInfoFrame();
         exists = driver.findElements(By.id("btnCheckInCheckOut")).size() > 0;
@@ -1187,6 +1190,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkShowHideTeches(String startDate, String endDate) {
         switchToServiceRequestInfoFrame();
 		wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+		wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
+		wait.until(ExpectedConditions.visibilityOf(appointmentToDateSRedit));
+		wait.until(ExpectedConditions.visibilityOf(appointmentFromTimeSRedit));
+		wait.until(ExpectedConditions.visibilityOf(appointmentToTimeSRedit));
 
 		appointmentFromDateSRedit.clear();
 		appointmentToDateSRedit.clear();
@@ -1197,7 +1204,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		appointmentToDateSRedit.sendKeys(endDate);
 		appointmentFromTimeSRedit.sendKeys("6:00 AM");
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
-		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		timePopupLink.click();
 
 		waitABit(1000);
 		try {
@@ -1345,7 +1352,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) throws InterruptedException {
         switchToServiceRequestInfoFrame();
-		addAppointmentBTNfromSRedit.click();
+        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
 
 		Thread.sleep(1000);
 		if (!driver.findElement(By.id("Card_rcbAppointmentPhase_Input")).getAttribute("value").equals("Estimating"))
@@ -1679,22 +1686,22 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return driver.getWindowHandles().size() == 2;
 	}
 
-	public void addAppointmentWithoutDescription(String startDate, String toDate) throws InterruptedException {
+	public void addAppointmentWithoutDescription(String startDate, String toDate) {
         switchToServiceRequestInfoFrame();
 
-		addAppointmentBTNfromSRedit.click();
-		appointmentFromDateSRedit.clear();
-		appointmentFromTimeSRedit.clear();
-		appointmentToDateSRedit.clear();
-		appointmentToTimeSRedit.clear();
+        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentToDateSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentFromTimeSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentToTimeSRedit));
 
 		appointmentFromDateSRedit.sendKeys(startDate);
 		appointmentToDateSRedit.sendKeys(toDate);
 		appointmentFromTimeSRedit.sendKeys("6:00 AM");
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
-		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
+		timePopupLink.click();
 
-		Thread.sleep(1000);
+		waitABit(1000);
 		driver.findElement(By.id("Card_btnAddApp")).click();
 
 	}
@@ -1728,8 +1735,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().window((String) windows.iterator().next());
 	}
 
-	public boolean checkLifeCycleContent() throws InterruptedException {
-		Thread.sleep(5000);
+	public boolean isLifeCycleContentDisplayed() {
+		waitABit(5000);
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'SR')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Year')]")));
@@ -1895,22 +1902,25 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(3000);
         switchToServiceRequestInfoFrame();
 
-		addAppointmentBTNfromSRedit.click();
-		waitABit(2000);
-		appointmentFromDateSRedit.clear();
-		appointmentFromTimeSRedit.clear();
-		appointmentToDateSRedit.clear();
-		appointmentToTimeSRedit.clear();
+        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentToDateSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentFromTimeSRedit));
+        wait.until(ExpectedConditions.visibilityOf(appointmentToTimeSRedit));
+
+        appointmentFromDateSRedit.clear();
+        appointmentToDateSRedit.clear();
+        appointmentFromTimeSRedit.clear();
+        appointmentToTimeSRedit.clear();
 
 		appointmentFromDateSRedit.sendKeys(startDate);
 		appointmentToDateSRedit.sendKeys(endDate);
 		appointmentFromTimeSRedit.sendKeys("6:00 AM");
 		appointmentToTimeSRedit.sendKeys("7:00 AM");
-		driver.findElement(By.id("Card_rdpEndTime_timePopupLink")).click();
-		waitABit(2000);
+		timePopupLink.click();
+        wait.until(ExpectedConditions.attributeToBe(driver
+                .findElement(By.id("Card_rdpEndTime_timeView_wrapper")), "visibility", "hidden"));
 		appointmentContent.findElement(By.id("Card_rcbTechnician_Input")).click();
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
-		// .findElement(By.linkText(string)).click();
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(string)).findFirst()
@@ -1940,7 +1950,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public void switchToServiceRequestInfoFrame() {
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
+		try {
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
+        } catch (TimeoutException e) {
+		    waitABit(1000);
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
+        }
 	}
 
 	public boolean checkTestEmails() throws InterruptedException {
@@ -2060,7 +2075,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
     }
 
-	public String getkServiceAdvisorName() throws InterruptedException {
+	public String getServiceAdvisorName() throws InterruptedException {
 		getCustomerEditButton().click();
 		Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();

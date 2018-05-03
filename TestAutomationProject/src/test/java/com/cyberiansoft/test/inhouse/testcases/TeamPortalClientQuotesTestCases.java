@@ -146,7 +146,6 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
     }
 
-    //todo fails
     @Test(testName = "Test Case 66650:Verify user can send notification (sms/email)", dataProvider = "provideNewClientData")
     public void testUserCanSendNotifications(String name, String nickname, String address, String address2, String zip,
                                                     String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
@@ -197,7 +196,6 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.deleteUser(name);
     }
 
-    //todo fails
     @Test(testName = "Test Case 66655:Verify \"Viewed letter:<date>\", \"Viewed agreement: <date>\" if user open mail with link.", dataProvider = "provideNewClientData")
     public void testUserCanVerifyDatesWhenOpenMailWithLink(String name, String nickname, String address, String address2, String zip,
                                              String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
@@ -250,7 +248,6 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.deleteUser(name);
     }
 
-    //todo fails
     @Test(testName = "Test Case 66656:Verify user can pay agreement from mail link.", dataProvider = "provideNewClientData")
     public void testUserCanPayAgreementFromMailLink(String name, String nickname, String address, String address2,
                                                     String zip, String country, String state, String city,

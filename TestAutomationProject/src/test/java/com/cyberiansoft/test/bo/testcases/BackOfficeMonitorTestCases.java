@@ -355,7 +355,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
-	public void checkMonitorKanbanAutoRefresh() throws InterruptedException {
+	public void checkMonitorKanbanAutoRefresh() {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
 		KanbanWebPage kanbanPage = monitorPage.clickKanbanLink();

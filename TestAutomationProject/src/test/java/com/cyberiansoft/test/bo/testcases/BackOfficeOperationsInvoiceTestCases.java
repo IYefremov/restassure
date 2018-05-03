@@ -780,8 +780,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	@Test(testName = "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity")
 	public void checkOperationInvoiceSentCustomMailInMailActivity() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		operationspage = backofficeheader.clickOperationsLink();
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
@@ -804,9 +803,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	public void checkOperationInvoiceEditInternalTechInfo() throws InterruptedException {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-
-		operationspage = backofficeheader.clickOperationsLink();
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(invoicenumber);

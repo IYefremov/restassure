@@ -7,6 +7,8 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.dataclasses.ClientsData;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -146,5 +148,11 @@ public class BaseTestCase {
             DriverBuilder.getInstance().getDriver().quit();
         }
         //todo delete from here after the problem with skips will be solved
+    }
+
+    @BeforeTest
+    public void beforeTest() throws IOException {
+        JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/bo/data/" +
+                "BO-data.json", ClientsData.class);
     }
 }

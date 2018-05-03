@@ -59,7 +59,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 15386:Operations - Work Orders: Search")
-	public void testOperationWorkOrdersSearch() throws Exception {
+	public void testOperationWorkOrdersSearch() {
 
 		final String wonum = "O-000-148090";
 		final String _package = "ALM - Recon Facility";
@@ -95,7 +95,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		Assert.assertEquals("1", wopage.getGoToPageFieldValue());
 
 		wopage.setPageSize("999");
-		Assert.assertEquals(wopage.MAX_TABLE_ROW_COUNT_VALUE, wopage.getWorkOrdersTableRowCount());
+		Assert.assertEquals(wopage.getWorkOrdersTableRowCount(), 40);
 
 		wopage.makeSearchPanelVisible();
 		wopage.verifySearchFieldsAreVisible();

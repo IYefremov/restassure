@@ -100,7 +100,10 @@ public class ClientsWebPage extends WebPageWithPagination {
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 
-	public ClientsWebPage(WebDriver driver) {
+    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
+    private WebElement searchEmployeeFld;
+
+    public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		wait.until(ExpectedConditions.visibilityOf(clientstable.getWrappedElement()));
@@ -111,10 +114,12 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return searchtab.getAttribute("class").contains("open");
 	}
 
-	public void makeSearchPanelVisible() {
+	public ClientsWebPage makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
+        return PageFactory.initElements(
+                driver, ClientsWebPage.class);
 	}
 
 	public void verifyEmployeesTableColumnsAreVisible() {
@@ -138,9 +143,11 @@ public class ClientsWebPage extends WebPageWithPagination {
 		clickAndWait(activetab);
 	}
 
-	public void clickFindButton() {
+	public ClientsWebPage clickFindButton() {
 		clickAndWait(wait.until(ExpectedConditions.elementToBeClickable(findbtn)));
 		waitABit(3000);
+        return PageFactory.initElements(
+                driver, ClientsWebPage.class);
 	}
 
     public void verifyEmployeeIsActive(String clientName) {
@@ -195,9 +202,10 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return clientsarchivedtable.getTableRows();
 	}
 
-	public void setClientSearchCriteria(String name) {
+	public ClientsWebPage setClientSearchCriteria(String name) {
 		clearAndType(searchclientfld, name);
-	}
+        return this;
+    }
 
 	public void searchClientByName(String companyname) {
 		makeSearchPanelVisible();
@@ -482,11 +490,13 @@ public class ClientsWebPage extends WebPageWithPagination {
 		driver.switchTo().window(mainWindowHandle);
 	}
 
-	public void scrollDownToText(String text) throws InterruptedException {
+	public ClientsWebPage scrollDownToText(String text) {
 		WebElement element = driver.findElement(By.xpath("//td[text()='"+text+"']"));
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView();", element);
-		Thread.sleep(500); 
+		waitABit(500);
+        return PageFactory.initElements(
+                driver, ClientsWebPage.class);
 	}
 
     public void verifyClientIsPresentInActiveTab(String companyname) {
@@ -497,5 +507,12 @@ public class ClientsWebPage extends WebPageWithPagination {
             restoreClient(companyname);
             clickActiveTab();
         }
+    }
+
+    public ClientsWebPage setSearchUserParameter(String clientName) {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch"))));
+        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).clear();
+        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).sendKeys(clientName);
+        return this;
     }
 }

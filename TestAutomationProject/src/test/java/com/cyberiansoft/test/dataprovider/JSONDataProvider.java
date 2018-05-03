@@ -1,5 +1,10 @@
 package com.cyberiansoft.test.dataprovider;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.testng.annotations.DataProvider;
+
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
@@ -7,16 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.testng.annotations.DataProvider;
-
 public class JSONDataProvider {
     public static String dataFile = "";
     public static String testCaseName = "NA";
 
-    public JSONDataProvider() throws Exception {
+    public JSONDataProvider() {
     }
     
     @DataProvider(name = "fetchData_JSON")
@@ -27,6 +27,10 @@ public class JSONDataProvider {
         List<JSONObject> testDataList = new ArrayList<JSONObject>();
         
         JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
+        System.out.println("Method: "+method.getName());
+        System.out.println("DataFile: "+dataFile);
+        System.out.println(testData);
+        System.out.println(testData.size());
 
         for ( int i = 0; i < testData.size(); i++ ) {
             testDataList.add((JSONObject) testData.get(i));
@@ -37,7 +41,6 @@ public class JSONDataProvider {
             String include = System.getProperty("includePattern");
             List<JSONObject> newList = new ArrayList<JSONObject>();
             List<String> tests = Arrays.asList(include.split(",", -1));
-
             for ( String getTest : tests ) {
                 for ( int i = 0; i < testDataList.size(); i++ ) {
                     if ( testDataList.get(i).toString().contains(getTest) ) {
@@ -84,13 +87,11 @@ public class JSONDataProvider {
     }
 
     public static JSONObject extractData_JSON(String file) throws Exception {
-    	File filejson =
-                new File(file);
+    	File filejson = new File(file);
     	System.out.println("+++++++" + file);
     	FileReader reader = new FileReader(filejson);
         JSONParser jsonParser = new JSONParser();
 
         return (JSONObject) jsonParser.parse(reader);
     }
-
 }

@@ -97,9 +97,12 @@ public class ClientUsersWebPage extends BaseWebPage {
 		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl06_btnResend")).click();
 		driver.switchTo().alert().accept();
 		waitForLoading();
-//		Thread.sleep(1000);
-//		wait.until(
-//				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitABit(1000);
 	}
 
+    public void verifyClientUserDoesNotExist(String clientUserName, String userFirstName) {
+        if (isClientUserPresentInTable( "test", "automation")){
+            clickDeleteClientUser( "test");
+        }
+    }
 }

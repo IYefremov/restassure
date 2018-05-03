@@ -24,7 +24,8 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
 		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		
-		testcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-retail-customer.json", RetailCustomer.class);
+		testcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/" +
+                "test-retail-customer.json", RetailCustomer.class);
 		testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
 	}
 

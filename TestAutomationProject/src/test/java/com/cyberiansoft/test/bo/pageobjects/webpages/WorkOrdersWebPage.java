@@ -156,8 +156,8 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return wotable;
 	}
 
-	public int getWorkOrdersTableRowCount() throws InterruptedException {
-		Thread.sleep(3000);
+	public int getWorkOrdersTableRowCount() {
+		waitABit(3000);
 		return wotable.getTableRowCount();
 	}
 

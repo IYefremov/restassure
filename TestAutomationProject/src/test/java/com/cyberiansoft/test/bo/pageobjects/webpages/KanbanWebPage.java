@@ -34,7 +34,7 @@ public class KanbanWebPage extends BaseWebPage {
 				.filter(e -> e.getText().equals(location)).findFirst().get().click();
 	}
 
-	public void clickSearchButton() throws InterruptedException {
+	public void clickSearchButton() {
 		searchButton.click();
 		waitForLoading();
 	}
@@ -55,52 +55,39 @@ public class KanbanWebPage extends BaseWebPage {
 
 	}
 
-	public boolean checkIntervalFieldLessThan(int intervalBorder) throws InterruptedException {
+	public boolean checkIntervalFieldLessThan(int intervalBorder) {
 		intervalField.clear();
 
-		intervalField.sendKeys(Integer.toString(intervalBorder - 1));
-		searchButton.click();
+		intervalField.sendKeys(String.valueOf(intervalBorder - 1));
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
 		waitForLoading();
-		if (intervalField.getAttribute("value").equals(Integer.toString(intervalBorder)))
-			return false;
+        return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
+    }
 
-		return true;
-	}
-
-	public boolean checkIntervalFieldOverThan(int intervalBorder) throws InterruptedException {
+	public boolean checkIntervalFieldOverThan(int intervalBorder) {
 		intervalField.clear();
 
 		intervalField.sendKeys(Integer.toString(intervalBorder + 1));
-		searchButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         waitForLoading();
-		if (intervalField.getAttribute("value").equals(Integer.toString(intervalBorder)))
-			return false;
+        return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
+    }
 
-		return true;
-	}
-
-	public boolean checkIntervalFieldInputSymbol(String string) throws InterruptedException {
+	public boolean checkIntervalFieldInputSymbol(String string) {
 		intervalField.clear();
 
 		intervalField.sendKeys(string);
-		searchButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
 		waitForLoading();
-		if (intervalField.getAttribute("value").equals(string))
-			return true;
+        return intervalField.getAttribute("value").equals(string);
+    }
 
-		return false;
-	}
-
-	public boolean checkIntervalField(int interval) throws InterruptedException {
+	public boolean checkIntervalField(int interval) {
 		intervalField.clear();
 
 		intervalField.sendKeys(Integer.toString(interval));
-		autoRefreshButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(autoRefreshButton)).click();
         waitForLoading();
-		if (!intervalField.getAttribute("value").equals(Integer.toString(interval)))
-			return false;
-		
-		return true;
-	}
-
+        return intervalField.getAttribute("value").equals(String.valueOf(interval));
+    }
 }
