@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.dataclasses.HailMatrixService;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.InspectionStatuses;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -345,4 +346,60 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		homescreen = inspectionscreen.clickBackButton();
 	}
 
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON(String rowID,
+																						String description, JSONObject testData) {
+
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToRetailMode();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.swipeScreensLeft(2);
+		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inpsctionservicesscreen.switchToAvalableServicesView();
+
+		VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+		List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
+		for (HailMatrixService  hailMatrixService : hailMatrixServices) {
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
+			vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
+			vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+			if (hailMatrixService.getMatrixAdditionalServices() != null) {
+				List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
+				for (ServiceData additionalService : additionalServices)
+					vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
+			}
+			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+		}
+		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+
+		Assert.assertEquals(inpsctionservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
+		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		inspmenu.clickApproveInspectionMenuItem();
+		VNextApproveServicesScreen approveservicesscreen = new VNextApproveServicesScreen(appiumdriver);
+		approveservicesscreen.isServicePresentInTheList(inspdata.getMatrixServiceData().getMatrixServiceName());
+		Assert.assertEquals(approveservicesscreen.getServicePriceValue(inspdata.getMatrixServiceData().getMatrixServiceName()),
+				inspdata.getInspectionPrice());
+		approveservicesscreen.clickApproveAllButton();
+		approveservicesscreen.clickSaveButton();
+		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
+		approvescreen.drawSignature();
+		approvescreen.saveApprovedInspection();
+
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
+		homescreen = inspectionscreen.clickBackButton();
+	}
 }

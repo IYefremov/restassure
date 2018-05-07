@@ -14,7 +14,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class VNextSelectServicesScreen extends VNextBaseScreen {
+public class VNextSelectServicesScreenOLD extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='center' and text()='Select Services']")
 	private WebElement selectservicesscreencapt;
@@ -22,7 +22,7 @@ public class VNextSelectServicesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='services-add']")
 	private WebElement selectservicesscreen;
 	
-	public VNextSelectServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
+	public VNextSelectServicesScreenOLD(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

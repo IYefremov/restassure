@@ -23,7 +23,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
@@ -122,14 +122,15 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.setServiceAmountValue(inspdata.getServiceNameByIndex(0), inspdata.getServicePriceByIndex(0));
-		VNextSelectServicesScreen selectedservicescreen = inpsctionservicesscreen.clickAddServicesButton();		
-		selectedservicescreen.selectService(inspdata.getServiceNameByIndex(1));
-		selectedservicescreen.clickSaveSelectedServicesButton();
-		inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.setServiceAmountValue(inspdata.getServiceNameByIndex(1), inspdata.getServicePriceByIndex(1));
-		inpsctionservicesscreen.setServiceQuantityValue(inspdata.getServiceNameByIndex(1), inspdata.getServiceQuantityByIndex(1));
-		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
+		VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+		selectedServicesScreen.setServiceAmountValue(inspdata.getServiceNameByIndex(0), inspdata.getServicePriceByIndex(0));
+		inpsctionservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
+		inpsctionservicesscreen.selectService(inspdata.getServiceNameByIndex(1));
+
+		selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+		selectedServicesScreen.setServiceAmountValue(inspdata.getServiceNameByIndex(1), inspdata.getServicePriceByIndex(1));
+		selectedServicesScreen.setServiceQuantityValue(inspdata.getServiceNameByIndex(1), inspdata.getServiceQuantityByIndex(1));
+		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		Assert.assertTrue(inspmenu.isAddSupplementInspectionMenuItemPresent());
 		inspmenu.clickCloseInspectionMenuButton();
@@ -167,12 +168,10 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickAddSupplementInspectionMenuItem();
 		vehicleinfoscreen.swipeScreensLeft(2);
 		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextSelectServicesScreen selectservicesscreen = inpsctionservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(inspdata.getServiceName());
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.setServiceAmountValue(inspdata.getServiceName(), inspdata.getServicePrice());
-		inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
+		inpsctionservicesscreen.selectService(inspdata.getServiceName());
+		VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+		selectedServicesScreen.setServiceAmountValue(inspdata.getServiceName(), inspdata.getServicePrice());
+		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), inspdata.getServiceStatus());
 		homescreen = inspectionscreen.clickBackButton();

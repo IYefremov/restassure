@@ -23,7 +23,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
@@ -58,12 +58,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist)
@@ -72,20 +69,16 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			notesscreen.addQuickNote(notes.get(i));
 		}
 		AppiumUtils.clickHardwareBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+
+
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		final String selectednotes = notesscreen.getSelectedNotes();
 		for (String note : notes)
 			Assert.assertTrue(selectednotes.contains(note));
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -98,12 +91,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist)
@@ -112,12 +102,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			notesscreen.addQuickNote(notes.get(i));
 		}
 		AppiumUtils.clickHardwareBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		final String selectednotes = notesscreen.getSelectedNotes();
 		String notestocompare = "";
 		for (int i =0; i< 3; i++) {
@@ -126,10 +113,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			
 		Assert.assertEquals(selectednotes, notestocompare.trim());
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -145,13 +130,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.selectService(testservice2);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice2);
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		inspservicesscreen.selectService(testservice);
+		inspservicesscreen.selectService(testservice2);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice2);
 		notesscreen.setNoteText(notetext);
 		notesscreen.clickNotesBackButton();
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
@@ -163,18 +145,13 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		Assert.assertEquals(msg, VNextAlertMessages.SOME_NOTES_CHARACTERS_NOT_ALLOWED);
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.clickNotesBackButton();
-		
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice2);
-		notesscreen = servicedetailsscreen.clickServiceNotesOption();
+
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice2);
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -190,13 +167,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.selectService(testservice2);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice2);
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		inspservicesscreen.selectService(testservice);
+		inspservicesscreen.selectService(testservice2);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice2);
 		notesscreen.setNoteText(notetext);
 		notesscreen.clickNotesBackButton();
 		VNextInformationDialog infodialog = new VNextInformationDialog(appiumdriver);
@@ -209,18 +183,13 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		AppiumUtils.clickHardwareBackButton();
 		notesscreen.setNoteText(notetextvalid);
 		notesscreen.clickNotesBackButton();
-		
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice2);
-		notesscreen = servicedetailsscreen.clickServiceNotesOption();
+
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice2);
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetextvalid);
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();		
 	}
 	
@@ -256,11 +225,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspservicesscreen.addNotesToSelectedService(testservice, notetextvalid);
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		selectedServicesScreen.addNotesToSelectedService(testservice, notetextvalid);
 		/*VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
 		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
 		notesscreen.setNoteText(notetextvalid);
@@ -269,7 +236,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsDoneButton();*/
-		Assert.assertEquals(inspservicesscreen.getSelectedServiceNotesValue(testservice), notetextvalid);
+		Assert.assertEquals(selectedServicesScreen.getSelectedServiceNotesValue(testservice), notetextvalid);
 
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();		
@@ -284,31 +251,23 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist)
     		notes.add(note.getText());
 		notesscreen.addQuickNote(notes.get(0));
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		
-		servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		final String selectednotes = notesscreen.getSelectedNotes();
 		Assert.assertTrue(selectednotes.contains(notes.get(0)));
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();	
 	}
 	
@@ -321,12 +280,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		//VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist) {
@@ -337,9 +294,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesscreen.clickNotesBackButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i = 0; i < 3; i++) 
-			Assert.assertTrue(inspservicesscreen.getSelectedServiceNotesValue(testservice).trim().contains(notes.get(i).trim()));
+			Assert.assertTrue(selectedServicesScreen.getSelectedServiceNotesValue(testservice).trim().contains(notes.get(i).trim()));
 		
-		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		final String selectednotes = notesscreen.getSelectedNotes();
 		for (int i = 0; i < 3; i++) 
 			Assert.assertTrue(selectednotes.contains(notes.get(i)));		
@@ -495,12 +452,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(testservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		inspservicesscreen.selectService(testservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		//VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		List<WebElement> quicknoteslist = notesscreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<String>();
 		for (WebElement note : quicknoteslist)
@@ -508,23 +463,23 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (int i = 0; i < 3; i++) 
 			notesscreen.addQuickNote(notes.get(i));
 		AppiumUtils.clickHardwareBackButton();
-		
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		notesscreen.clickClearNotesButton();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
 		AppiumUtils.clickHardwareBackButton();
-		
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		notesscreen = inspservicesscreen.clickServiceNotesOption(testservice);
+
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
 		notesscreen.clickNotesBackButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	
@@ -625,19 +580,17 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
 		for (String serviceadd : servicestoadd)
-			selectservicesscreen.selectService(serviceadd);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			inspservicesscreen.selectService(serviceadd);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		for (String serviceadd : servicestoadd) {
 			//VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(serviceadd);
-			VNextNotesScreen notesscreen = inspservicesscreen.clickServiceNotesOption(serviceadd);
+			VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(serviceadd);
 			notesscreen.selectNotesPicturesTab();
 			notesscreen.addImageToNotesFromGallery();
 			Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 			notesscreen.clickNotesBackButton();
-			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
 		}
 		
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
@@ -678,8 +631,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
 		for (int i=0; i < vehiclepartnames.length; i++) {
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartnames[i]);
@@ -694,12 +646,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 		}
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
-		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
+		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();		
 		homescreen.waitUntilQueueMessageInvisible();
 		

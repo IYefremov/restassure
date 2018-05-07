@@ -1,23 +1,12 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.vnext.screens.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -62,8 +51,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickScreenForwardButton();
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected("Facility Fee"));
-		Assert.assertTrue(inspservicesscreen.isServiceSelected("Other"));
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected("Facility Fee"));
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected("Other"));
 		
 		inspservicesscreen.changeScreen("Vehicle Info");
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
@@ -80,10 +70,11 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.changeScreen("Services");
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected("Facility Fee"));
-		Assert.assertTrue(inspservicesscreen.isServiceSelected("Other"));
+		selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected("Facility Fee"));
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected("Other"));
 		
-		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		Assert.assertTrue(inspectionsscreen.isInspectionExists(inspNumber));
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -135,15 +126,16 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		
 		vehicleinfoscreen.clickScreenForwardButton();
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		for (String selectedService : selectedServices)
-			Assert.assertTrue(inspservicesscreen.isServiceSelected(selectedService));
+			Assert.assertTrue(selectedServicesScreen.isServiceSelected(selectedService));
 		
-		VNextNotesScreen notesscreen = inspservicesscreen.clickInspectionNotesOption();
+		VNextNotesScreen notesscreen = selectedServicesScreen.clickInspectionNotesOption();
 		notesscreen.setNoteText(notetext);
 		notesscreen.clickScreenBackButton();
-		
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+
+		selectedServicesScreen = new VNextSelectedServicesScreen (appiumdriver);
+		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		notesscreen = inspectionsscreen.openInspectionNotes(inspnumber);
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext);

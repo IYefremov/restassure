@@ -2,20 +2,11 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import java.util.ArrayList;
 
+import com.cyberiansoft.test.vnext.screens.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -256,11 +247,10 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.setVIN(testVIN);
 			vehicleinfoscreen.swipeScreenLeft();
 			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-			VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-			selectservicesscreen.selectService(serviceName);
-			selectservicesscreen.clickSaveSelectedServicesButton();	
-			servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-			servicesscreen.setServiceAmountValue(serviceName, servicePrice);			
+			servicesscreen.switchToAvalableServicesView();
+			servicesscreen.selectService(serviceName);
+			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
+			selectservicesscreen.setServiceAmountValue(serviceName, servicePrice);
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -309,11 +299,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.setVIN(testVIN);
 			vehicleinfoscreen.swipeScreenLeft();
 			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-			VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-			selectservicesscreen.selectService(serviceName);
-			selectservicesscreen.clickSaveSelectedServicesButton();	
-			servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-			servicesscreen.setServiceAmountValue(serviceName, servicePrices[i]);			
+			servicesscreen.selectService(serviceName);
+			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
+			selectservicesscreen.setServiceAmountValue(serviceName, servicePrices[i]);
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
