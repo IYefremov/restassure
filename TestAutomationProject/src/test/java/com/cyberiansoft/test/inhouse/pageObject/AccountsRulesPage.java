@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class TeamPortalAccountsRulesPage extends BasePage {
+public class AccountsRulesPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-entity']")
     private WebElement addNewAccountRule;
@@ -45,7 +45,7 @@ public class TeamPortalAccountsRulesPage extends BasePage {
     @FindBy(xpath = "//button[text()='Update']")
     private WebElement updateRuleButton;
 
-    public TeamPortalAccountsRulesPage(WebDriver driver) {
+    public AccountsRulesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

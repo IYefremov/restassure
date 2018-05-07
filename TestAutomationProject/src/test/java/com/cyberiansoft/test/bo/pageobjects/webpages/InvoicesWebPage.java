@@ -567,17 +567,13 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public String getFirstInvoiceName() {
 	    try {
             return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
-        } catch (TimeoutException ignored) {
-	        waitABit(5000);
-	        try {
-                return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
-            } catch (TimeoutException e) {
-	            e.printStackTrace();
-                Assert.fail("The first invoice name has not been displayed!");
-                return null;
-            }
+        } catch (TimeoutException e) {
+	        e.printStackTrace();
+	        Assert.fail("The first invoice name has not been displayed!");
+	        return null;
         }
     }
+
 
 	public String selectActionForFirstInvoice(String string, boolean switchArrow) throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class TeamPortalAgreementApprovePage extends BasePage {
+public class AgreementApprovePage extends BasePage {
 
     @FindBy(id = "FirstName")
     WebElement firstNameField;
@@ -56,7 +56,7 @@ public class TeamPortalAgreementApprovePage extends BasePage {
     @FindBy(id = "btnDialogPay")
     WebElement approvePayButton;
 
-    public TeamPortalAgreementApprovePage(WebDriver driver) {
+    public AgreementApprovePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

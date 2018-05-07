@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -1458,12 +1459,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public int checkSchedulerByDateMonth(String date) {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-        waitForLoading();
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
-		driver.findElement(By.xpath("//a[contains(@title, '" + date + "')]")).click();
-        waitForLoading();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@title, '" + date + "')]"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
-        waitForLoading();
 		return updateWait.until(ExpectedConditions.presenceOfElementLocated(By.className("rsNonWorkHour")))
 				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
@@ -1952,8 +1950,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().defaultContent();
 		try {
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
-        } catch (TimeoutException e) {
-		    waitABit(1000);
+        } catch (TimeoutException | StaleElementReferenceException e) {
+		    waitABit(3000);
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(editServiceRequestPanelFrame));
         }
 	}
@@ -2050,40 +2048,47 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 	}
 
-	public boolean checkPresenceOfServiceAdvisorsByFilter(String filter) {
+	public boolean checkPresenceOfServiceAdvisersByFilter(String filter) {
+        wait.until(ExpectedConditions.visibilityOf(addsrvcustomercmb.getWrappedElement())).clear();
+        addsrvcustomercmb.sendKeys(filter);
+        By clients = By.xpath("//div[@id='Card_ddlClients_DropDown']//li");
+        List<WebElement> list = null;
+        int index = RandomUtils.nextInt(0, 5);
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();
-        } catch (Exception e) {
-            waitABit(3000);
-            serviceAdvisorArrow.click();
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(clients, 5));
+            list = driver.findElements(clients);
+        } catch (TimeoutException e) {
+            Assert.fail("The drop down list has not been displayed.", e);
         }
         try {
-			wait.until(ExpectedConditions.visibilityOf(advisorUsersList));
-			waitABit(4000);
-			List<WebElement> list = advisorUsersList.findElements(By.tagName("li"));
-			if (list.size() < 1)
-				return false;
-			advisorInputField.sendKeys(filter);
-			waitABit(3000);
-			boolean result = advisorUsersList.findElements(By.tagName("li")).stream()
+            boolean result = list.stream()
 					.map(WebElement::getText).map(String::toLowerCase).allMatch(t -> t.contains(filter));
-			advisorUsersList.findElements(By.tagName("li")).get(0).click();
-			waitABit(2000);
+            list.get(index).click();
+            wait.until(ExpectedConditions.invisibilityOf(addsrvcustomerdd.getWrappedElement()));
 			return result;
 		} catch (TimeoutException e) {
+            e.printStackTrace();
 			return false;
 		}
     }
 
-	public String getServiceAdvisorName() throws InterruptedException {
+	public String getServiceAdviserName() {
 		getCustomerEditButton().click();
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.elementToBeClickable(serviceAdvisorArrow)).click();
-		wait.until(ExpectedConditions.visibilityOf(advisorUsersList));
-		Thread.sleep(4000);
-		String name = advisorUsersList.findElements(By.tagName("li")).stream()
-		.map(e -> e.getText()).findFirst().get();
-		return name;
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(addsrvcustomercmb.getWrappedElement())).click();
+        } catch (TimeoutException e) {
+            Assert.fail("The combobox with customers list is not clickable.", e);
+        }
+        By clients = By.xpath("//div[@id='Card_ddlClients_DropDown']//li");
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+        } catch (TimeoutException ignored) {}
+        wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(clients)));
+        return driver.findElements(clients)
+                .stream()
+                .map(WebElement::getText)
+                .findFirst()
+                .get();
 	}
 
 	public boolean checkAddedServices(String...services) {

@@ -96,6 +96,9 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//input[contains(@id, 'ctl00_ctl00_Content_Main_ctl05_ctl02_BtnCancel')]")
 	private WebElement cancelbtn;
 
+	@FindBy(className = "ModalDialog")
+    private WebElement modalDialog;
+
 	public NewClientDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -317,7 +320,6 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void clickOKButton() {
 		clickAndWait(OKbtn);
-		waitABit(2000);
 	}
 
 	public void clickCancelButton() {

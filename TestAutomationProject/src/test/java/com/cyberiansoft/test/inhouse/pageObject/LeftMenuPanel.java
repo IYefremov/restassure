@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-public class TeamPortalLeftMenuPanel extends BasePage {
+public class LeftMenuPanel extends BasePage {
 
     /** Main Menu */
     @FindBy(xpath = "//span[text()='Financial Mapping']")
@@ -44,16 +44,11 @@ public class TeamPortalLeftMenuPanel extends BasePage {
     @FindBy(xpath = "//span[text()='Accounts Rules']")
     private WebElement accountsRules;
 
-    public TeamPortalLeftMenuPanel(WebDriver driver) {
+    public LeftMenuPanel(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public TeamPortalClientQuotesPage openClientQuotesLink() {
-        clickMenu(clientManagement);
-        clickSubMenu(clientQuotes);
-        return PageFactory.initElements(driver, TeamPortalClientQuotesPage.class);
-    }
 
     private void clickMenu(WebElement menu) {
         try {
@@ -63,11 +58,48 @@ public class TeamPortalLeftMenuPanel extends BasePage {
         }
     }
 
-    private void clickSubMenu(WebElement subMenu) {
+    private void clickSubMenu(WebElement submenu) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(subMenu)).click();
-        } catch (Exception ignored) {}
+            wait.until(ExpectedConditions.elementToBeClickable(submenu)).click();
+        } catch (Exception e) {
+            Assert.fail("The submenu has not been clicked!", e);
+        }
     }
+
+    /**
+     * MenuLinks
+     * @return
+     */
+    public LeftMenuPanel clickClientManagement() {
+        clickMenu(clientManagement);
+        return this;
+    }
+
+    public LeftMenuPanel clickClients() {
+        clickMenu(clients);
+        return this;
+    }
+
+    /**
+     * SubmenuLinks
+     * @return
+     */
+    public ClientQuotesPage clickClientQuotesSubmenu() {
+        clickSubMenu(clientQuotes);
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
+    }
+
+    public ClientSegmentsPage clickClientSegmentsSubMenu() {
+        clickSubMenu(clientSegments);
+        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+    }
+
+    public CategoriesPage clickCategoriesSubmenu() {
+        clickSubMenu(categories);
+        return PageFactory.initElements(driver, CategoriesPage.class);
+    }
+
+
 
     public BasePage clickOnMenu(String menuName) throws InterruptedException {
         Thread.sleep(2000);
@@ -78,21 +110,21 @@ public class TeamPortalLeftMenuPanel extends BasePage {
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
                     return PageFactory.initElements(driver,
-                            TeamPortalClientQuotesPage.class);
+                            ClientQuotesPage.class);
                 }catch(TimeoutException ex){}
                 break;
             case "Categories":
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-toggle btn-add-category']")));
                     return PageFactory.initElements(driver,
-                            TeamPortalCategoriesPage.class);
+                            CategoriesPage.class);
                 }catch(TimeoutException ex){}
                 break;
             case "Client Segments":
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchClient")));
                     return PageFactory.initElements(driver,
-                            TeamPortalClientSegmentsPage.class);
+                            ClientSegmentsPage.class);
                 }catch(TimeoutException ex){}
                 break;
             case "Organizations Rules":
@@ -106,7 +138,7 @@ public class TeamPortalLeftMenuPanel extends BasePage {
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Accounts Rules')]")));
                     return PageFactory.initElements(driver,
-                            TeamPortalAccountsRulesPage.class);
+                            AccountsRulesPage.class);
                 }catch(TimeoutException ex){}
                 break;
         }

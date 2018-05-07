@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TeamPortalClientQuotesDetailPage extends BasePage {
+public class ClientQuotesDetailPage extends BasePage {
 
     private String userName;
     private String userPassword;
@@ -65,7 +65,7 @@ public class TeamPortalClientQuotesDetailPage extends BasePage {
     @FindBy(xpath = "//span[@class='notification-status']")
     private WebElement notificationStatus;
 
-    public TeamPortalClientQuotesDetailPage(WebDriver driver) {
+    public ClientQuotesDetailPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         userName = InHouseConfigInfo.getInstance().getUserName();

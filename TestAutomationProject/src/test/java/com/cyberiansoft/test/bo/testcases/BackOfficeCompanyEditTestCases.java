@@ -254,14 +254,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 
 		clientspage.searchClientByName(clientfirstname);
-
-		if (clientspage.isClientPresentInTable(retailcompanyname)) {
-			clientspage.deleteClient(retailcompanyname);
-		}
-
-		if (clientspage.isClientPresentInTable(retailcompanynameed)) {
-			clientspage.deleteClient(retailcompanynameed);
-		}
+        clientspage.verifyClientIsNotPresentInActiveTab(retailcompanyname, retailcompanynameed);
 
 		NewClientDialogWebPage newclientdialogpage = clientspage.clickAddClientButton();
 		newclientdialogpage.switchToRetailCustomer();
@@ -316,7 +309,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		clientspage.deleteClient(retailcompanynameed);
 	}
 
-	//todo fails. Bug #64984
 	@Test(testName = "Test Case 28319:Company - Employees : Edit", description = "Company - Employees : Edit")
 	public void testCompanyEmployeesEdit() {
 
@@ -341,7 +333,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		final String employeefirstnameed = "azalex2";
 		final String employeelastnameed = "avalex2";
 		final String employeepswed = "1234";
-		final String employeehometeamed = "Testteam";
+		final String employeehometeamed = "Test Team";
 		final String employeeaddressed = "E. La Palma Ave.";
 		final String employeecityed = "L'viv";
 		final String employeecountryed = "Uruguay";

@@ -59,7 +59,12 @@ public class KanbanWebPage extends BaseWebPage {
 		intervalField.clear();
 
 		intervalField.sendKeys(String.valueOf(intervalBorder - 1));
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        } catch (Exception e) {
+            waitABit(2000);
+            searchButton.click();
+        }
 		waitForLoading();
         return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
     }
@@ -68,7 +73,12 @@ public class KanbanWebPage extends BaseWebPage {
 		intervalField.clear();
 
 		intervalField.sendKeys(Integer.toString(intervalBorder + 1));
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        } catch (Exception e) {
+            waitABit(2000);
+            searchButton.click();
+        }
         waitForLoading();
         return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
     }
@@ -77,7 +87,12 @@ public class KanbanWebPage extends BaseWebPage {
 		intervalField.clear();
 
 		intervalField.sendKeys(string);
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        } catch (Exception e) {
+            waitABit(2000);
+            searchButton.click();
+        }
 		waitForLoading();
         return intervalField.getAttribute("value").equals(string);
     }
@@ -86,7 +101,12 @@ public class KanbanWebPage extends BaseWebPage {
 		intervalField.clear();
 
 		intervalField.sendKeys(Integer.toString(interval));
-		wait.until(ExpectedConditions.elementToBeClickable(autoRefreshButton)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(autoRefreshButton)).click();
+        } catch (Exception e) {
+            waitABit(2000);
+            autoRefreshButton.click();
+        }
         waitForLoading();
         return intervalField.getAttribute("value").equals(String.valueOf(interval));
     }

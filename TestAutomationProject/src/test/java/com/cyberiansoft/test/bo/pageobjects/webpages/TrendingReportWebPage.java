@@ -1,22 +1,19 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 public class TrendingReportWebPage extends BaseWebPage {
 	
@@ -85,14 +82,16 @@ public class TrendingReportWebPage extends BaseWebPage {
 	public void clickFindButton() { 
 		click(findbtn);
 		waitABit(5000);
-		//new WebDriverWait(driver, 10)
-		//  .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 	
-	public void verifySearchResults(String location, String wotype) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + location + "']")));
-		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + location + "']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wotype + "']")).isDisplayed());
+	public boolean areSearchResultsDisplayed(String location, String wotype) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//tr/td/div[text()='" + location + "']"))));
+            wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//tr/td/div[text()='" + wotype + "']"))));
+            return true;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return false;
+        }
 	}
-
 }

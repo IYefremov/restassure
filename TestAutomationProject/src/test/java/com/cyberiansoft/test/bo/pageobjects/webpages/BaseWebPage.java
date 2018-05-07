@@ -239,6 +239,8 @@ public abstract class BaseWebPage {
         try{
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-        } catch(TimeoutException ignored){}
+        } catch(TimeoutException ignored){
+            waitABit(5000);
+        }
     }
 }

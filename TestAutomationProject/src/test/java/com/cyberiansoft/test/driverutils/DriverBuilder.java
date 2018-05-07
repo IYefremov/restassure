@@ -11,6 +11,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -95,7 +96,11 @@ public class DriverBuilder {
 		case CHROME:
 			ChromeDriverManager.getInstance().setup();
 			webcap =  DesiredCapabilities.chrome();
-			webDriver.set(new ChromeDriver());
+			try {
+                webDriver.set(new ChromeDriver());
+            } catch (SessionNotCreatedException ignored) {
+                new ThreadLocal<WebDriver>().set(new ChromeDriver());
+            }
 			break;
 		case SAFARI:
 			SafariOptions safariOpts = new SafariOptions();
@@ -135,10 +140,9 @@ public class DriverBuilder {
 	}
 
 	public WebDriver getDriver() {
-	   return webDriver.get();
+        return webDriver.get();
 	}
-	
-	
+
 	public AppiumDriver<MobileElement> getAppiumDriver() {
 		  return mobileDriver.get();
 	}

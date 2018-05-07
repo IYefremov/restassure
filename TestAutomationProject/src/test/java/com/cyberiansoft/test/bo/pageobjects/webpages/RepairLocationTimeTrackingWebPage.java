@@ -5,6 +5,7 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -68,6 +69,9 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 
 	@FindBy(id = "//div[@id='ctl00_ctl00_Content_Main_report']")
 	private WebElement mainReportContent;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_report_ctl09")
+    private WebElement repairLocationTimeTrackingTable;
 	
 	public RepairLocationTimeTrackingWebPage(WebDriver driver) {
 		super(driver);
@@ -118,6 +122,33 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpTo_dateInput")).clear();	
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpTo_dateInput")).sendKeys(dateformat);
 	}
+
+	public boolean isTableIsDisplayed() {
+	    try {
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'Customer')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'WO #')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//div[contains(text(), 'Amount')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'WO Type')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'Start Date')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//div[contains(text(), 'Target Date')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'Completed Date')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//span[contains(text(), 'Target')]"))));
+            wait.until(ExpectedConditions.visibilityOf(repairLocationTimeTrackingTable
+                    .findElement(By.xpath("//td[@colspan]/div[contains(text(), 'Repair Time')]"))));
+            return true;
+        } catch (TimeoutException e) {
+	        e.printStackTrace();
+	        return false;
+        }
+    }
 	
 	public void clickFindButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();

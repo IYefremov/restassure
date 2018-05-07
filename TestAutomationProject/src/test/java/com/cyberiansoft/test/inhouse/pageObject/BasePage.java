@@ -28,7 +28,7 @@ public class BasePage {
         driver.get(link);
         try {
             return PageFactory.initElements(driver,
-                    TeamPortalAgreementApprovePage.class);
+                    AgreementApprovePage.class);
         } catch (TimeoutException e) {
             return PageFactory.initElements(driver,
                     BasePage.class);

@@ -1,24 +1,25 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ReconPro Backoffice test cases" verbose="10" configfailurepolicy="continue">
-    <parameter name="selenium.host" value="localhost"/>
-    <parameter name="selenium.port" value="3737"/>
-    <!--<parameter name="selenium.browser" value="firefox"/>-->
-    <parameter name="selenium.browser" value="chrome"/>
-    <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd"/>
-    <parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com/"/>
-    <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
-    <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"/>
-    <parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"/>
-    <parameter name="user.psw" value="test12345"/>
-    <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"/>
-    <parameter name="userdemo.psw" value="111111"/>
-    <parameter name="setupengineer.name" value="testapp@i.ua"/>
-    <parameter name="setupengineer.psw" value="ReconPro"/>
+       <!--parallel="tests" thread-count="3">-->
+    <!--<parameter name="selenium.host" value="localhost"/>-->
+    <!--<parameter name="selenium.port" value="3737"/>-->
+    <!--&lt;!&ndash;<parameter name="selenium.browser" value="firefox"/>&ndash;&gt;-->
+    <!--<parameter name="selenium.browser" value="chrome"/>-->
+    <!--<parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd"/>-->
+    <!--<parameter name="backoffice.url" value="https://reconpro.cyberianconcepts.com/"/>-->
+    <!--&lt;!&ndash;<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />&ndash;&gt;-->
+    <!--<parameter name="backofficedemo.url" value="https://demo.reconpro.net/"/>-->
+    <!--<parameter name="user.name" value="olexandr.kramar@cyberiansoft.com"/>-->
+    <!--<parameter name="user.psw" value="test12345"/>-->
+    <!--<parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"/>-->
+    <!--<parameter name="userdemo.psw" value="111111"/>-->
+    <!--<parameter name="setupengineer.name" value="testapp@i.ua"/>-->
+    <!--<parameter name="setupengineer.psw" value="ReconPro"/>-->
 
     <listeners>
         <listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
     </listeners>
-    <test name="Back Office Test Cases - Chrome">
+    <test name="Back Office Test Cases - Chrome Part 1">
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsServiceRequestsTestCases"/>
@@ -26,11 +27,21 @@
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases"/>
-			<class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases"/>
-            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases"/>
+        </classes>
+    </test>
+    <test name="Back Office Test Cases - Chrome Part2">
+        <parameter name="selenium.browser" value="chrome"/>
+        <classes>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorReportsTestCases"/>
+        </classes>
+    </test>
+    <test name="Back Office Test Cases - Chrome Part3">
+        <parameter name="selenium.browser" value="chrome"/>
+        <classes>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorEventsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeTimesheetsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeReportsTestCases"/>

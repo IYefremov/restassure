@@ -179,7 +179,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 	@Test(description = "Test Case 15539:Company - Teams: Search")
-	public void testCompanyTeamsSearch() throws Exception {
+	public void testCompanyTeamsSearch() {
 
 		final String teamlocation = "Test Team";
 		final String _type = "Internal";

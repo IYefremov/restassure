@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class TeamPortalClientQuotesPage extends BasePage {
+public class ClientQuotesPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-potential-client']")
     private WebElement addClientBTN;
@@ -82,7 +82,7 @@ public class TeamPortalClientQuotesPage extends BasePage {
     @FindBy(xpath = "//div[@class='callout callout-info']/button")
     private WebElement closeNotificationBTN;
 
-    public TeamPortalClientQuotesPage(WebDriver driver) {
+    public ClientQuotesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -204,14 +204,14 @@ public class TeamPortalClientQuotesPage extends BasePage {
 
     public void searchUser(String searchValue) {
         try {
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
         searchField.clear();
         searchField.sendKeys(searchValue);
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
-        Thread.sleep(500);
+//        Thread.sleep(500);
         wait.until(ExpectedConditions.invisibilityOf(processingBar));
         } catch (Exception ignored) {}
 
@@ -352,14 +352,14 @@ public class TeamPortalClientQuotesPage extends BasePage {
         Thread.sleep(500);
     }
 
-    public TeamPortalClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
+    public ClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
         Thread.sleep(1500);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-potential-client_processing")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")).click();
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='agreement-statuses']")));
-            return PageFactory.initElements(driver, TeamPortalClientQuotesDetailPage.class);
+            return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
         } catch (TimeoutException e) {
             return null;
         }

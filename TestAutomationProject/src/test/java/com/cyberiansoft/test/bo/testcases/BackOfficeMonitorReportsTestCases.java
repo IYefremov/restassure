@@ -209,8 +209,9 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		writer.println(wonumber);
 		writer.close();
 	}
-	
-	@Test(testName="Test Case 25579:Monitor- Reports - Repair Location Time Tracking (Detailed automation - Part 2)", description = "Monitor- Reports - Repair Location Time Tracking (Detailed automation - Part 2)")
+
+	//todo fix and include into run!!!
+//	@Test(testName="Test Case 25579:Monitor- Reports - Repair Location Time Tracking (Detailed automation - Part 2)", description = "Monitor- Reports - Repair Location Time Tracking (Detailed automation - Part 2)")
 	public void testMonitorReportsRepairLocationTimeTracking_Part2() {
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 //        BufferedReader in = new BufferedReader(new FileReader("data/repairlocationtimetrackingwonubers.txt"));

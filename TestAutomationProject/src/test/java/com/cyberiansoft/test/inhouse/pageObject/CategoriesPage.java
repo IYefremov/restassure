@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class TeamPortalCategoriesPage extends BasePage {
+public class CategoriesPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='dropdown-toggle btn-add-category']")
     WebElement addCategoryBTN;
@@ -36,7 +36,7 @@ public class TeamPortalCategoriesPage extends BasePage {
     @FindBy(id ="ProcName")
     WebElement storedProcedureNameField;
 
-    public TeamPortalCategoriesPage(WebDriver driver) {
+    public CategoriesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

@@ -5,7 +5,7 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.pageObject.TeamPortalHeader;
-import com.cyberiansoft.test.inhouse.pageObject.TeamPortalLoginPage;
+import com.cyberiansoft.test.inhouse.pageObject.LoginPage;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
@@ -74,8 +74,8 @@ public class BaseTestCase {
     public void teamPortalLogin(Method method) throws InterruptedException {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         webdriverGotoWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
-        TeamPortalLoginPage loginPage = PageFactory.initElements(webdriver,
-                TeamPortalLoginPage.class);
+        LoginPage loginPage = PageFactory.initElements(webdriver,
+                LoginPage.class);
         loginPage.loginByGmail();
         Thread.sleep(2000);
     }

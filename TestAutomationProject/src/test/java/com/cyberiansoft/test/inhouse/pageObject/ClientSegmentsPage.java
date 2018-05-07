@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class TeamPortalClientSegmentsPage  extends BasePage {
+public class ClientSegmentsPage extends BasePage {
 
     @FindBy(id="searchClient")
     WebElement searchField;
@@ -15,7 +15,7 @@ public class TeamPortalClientSegmentsPage  extends BasePage {
     @FindBy(id ="btnSearch")
     WebElement searchButton;
 
-    public TeamPortalClientSegmentsPage(WebDriver driver) {
+    public ClientSegmentsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

@@ -132,8 +132,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		try{
 		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
 		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		}catch(TimeoutException e){}
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		}catch(TimeoutException ignored){}
+		waitForLoading();
 	}
 
 	public void waitForLoading(){

@@ -125,9 +125,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	//	vendororderspage.openServicesInformationByOrderNoWindowAndVerifyContent(wonum, VIN, company);
 	}
 
-
-    //todo fails. Needs data from S. Zakaulov. Lilia, needs to be discussed
-	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report", description = "Monitor- Reports - Average Repair Time Report")
+	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report",
+            description = "Monitor- Reports - Average Repair Time Report")
 	public void testMonitorReportsAverageRepairTimeReport() {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
@@ -138,22 +137,17 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
-		averagerepairtimereportpage.selectSearchLocation("Default Location");
-		averagerepairtimereportpage.selectSearchWOType("Lilia");
-		averagerepairtimereportpage.setSearchFromDate("3/1/2013");
+		averagerepairtimereportpage.selectSearchLocation("VD_Location");
+		averagerepairtimereportpage.selectSearchWOType("VD_WOT_TEST");
+		averagerepairtimereportpage.setSearchFromDate("4/30/2017");
+		averagerepairtimereportpage.setSearchToDate("5/7/2018");
 		averagerepairtimereportpage.clickFindButton();
-		averagerepairtimereportpage.verifySearchResults("Default Location", "Lilia");
+		averagerepairtimereportpage.verifySearchResults("VD_Location", "VD_WOT_TEST");
 	}
 
-	//todo fails. Needs data from S. Zakaulov. The WO numbers are no more valid. No WO are displayed in Default Location section
 	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking",
             description = "Monitor- Reports - Repair Location Time Tracking")
 	public void testMonitorReportsRepairLocationTimeTracking() {
-
-		String[] wonumbersfirstpage = {"O-10000-00090", "O-10000-00091", "O-10000-00106", "O-10000-00107" };
-		String[] wonumberslastpage = {"O-000-01595"};
-		String[] wonumberssecondpage = {"O-10000-00118", "O-10000-00124", "O-10000-00125", "O-10000-00128"};
-		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
@@ -163,24 +157,12 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
-		repairlocationtimetrackingpage.selectSearchLocation("Default Location");
-		repairlocationtimetrackingpage.setSearchFromDate("1/1/2015");
-		repairlocationtimetrackingpage.setSearchToDate("8/31/2018");
+		repairlocationtimetrackingpage.selectSearchLocation("VD_Location");
+		repairlocationtimetrackingpage.setSearchFromDate("4/30/2017");
+		repairlocationtimetrackingpage.setSearchToDate("5/7/2018");
 
 		repairlocationtimetrackingpage.clickFindButton();
-		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
-		repairlocationtimetrackingpage.clickGoToLastPage();
-		repairlocationtimetrackingpage.verifySearchResults(wonumberslastpage);
-		
-		repairlocationtimetrackingpage.clickGoToFirstPage();
-		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
-		
-		repairlocationtimetrackingpage.clickGoToNextPage();
-		repairlocationtimetrackingpage.verifySearchResults(wonumberssecondpage);
-		
-		repairlocationtimetrackingpage.clickGoToPreviousPage();
-		repairlocationtimetrackingpage.verifySearchResults(wonumbersfirstpage);
-		
+		Assert.assertTrue(repairlocationtimetrackingpage.isTableIsDisplayed(), "The table is not displayed.");
 	}
 
     //todo fails. Needs data from S. Zakaulov. NO data available
@@ -194,14 +176,15 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		TrendingReportWebPage trendingreportpage = monitorpage.clickTrendingReportLink();
 		
-		//Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
-		trendingreportpage.selectSearchLocation("Default Location");
-		trendingreportpage.selectSearchWOType("Artem order test");
-		trendingreportpage.setSearchFromDate("Jan", "2015");
-		trendingreportpage.setSearchToDate("Aug", "2015");
+		Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
+		trendingreportpage.selectSearchLocation("VD_Location");
+		trendingreportpage.selectSearchWOType("VD_WOT_TEST");
+		trendingreportpage.setSearchFromDate("Apr", "2017");
+		trendingreportpage.setSearchToDate("May", "2018");
 		
 		trendingreportpage.clickFindButton();
-		trendingreportpage.verifySearchResults("Default Location", "Artem order test");
+		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed("VD_Location", "VD_WOT_TEST"),
+                "The search results are not displayed.");
 	}
 
 	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")

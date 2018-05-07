@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
@@ -931,8 +932,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     @DataProvider
     public Object[][] provideSRdataForSchedulerMonth() {
+        String date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-        return new Object[][] {{ "Alex SASHAZ", LocalDate.now().plusDays(1).format(formatter) }};
+        LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+
+        if (localDate.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            date = localDate.plusDays(3).format(formatter);
+        } else if (localDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+            date = localDate.plusDays(2).format(formatter);
+        } else {
+            date = localDate.plusDays(1).format(formatter);
+        }
+        return new Object[][] {{ "Alex SASHAZ", date }};
     }
 
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month",
@@ -1964,20 +1975,21 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 	}
 
-    //todo fails needs to be discussed with Sasha Zakaulov. п. 6 "Select 001 - Test Company and click Client Users". Where are Client Users?
     @Test(testName = "Test Case 65611:Operation - Service Request - Adviser Listing")
-	public void testServicerequestAdviserListing() throws InterruptedException{
+	public void testServiceRequestAdviserListing() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer("001 - Test Company");
-		Assert.assertTrue(serviceRequestsWebPage.checkPresenceOfServiceAdvisorsByFilter("tes"));
-		serviceRequestsWebPage.clickDoneButton();
+        serviceRequestsWebPage.clickCustomerEditButton();
+        Assert.assertTrue(serviceRequestsWebPage.checkPresenceOfServiceAdvisersByFilter("tes"));
+        serviceRequestsWebPage.clickDoneButton();
+        serviceRequestsWebPage.clickCustomerEditButton();
+        serviceRequestsWebPage.selectServiceRequestCustomer("001 - Test Company");
+        serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsWebPage.getServiceAdvisorName() , "_TesW _TesW");
+		Assert.assertEquals(serviceRequestsWebPage.getServiceAdviserName(), "001 - Test Company");
 	}
 	
 	//TODO

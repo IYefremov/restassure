@@ -15,12 +15,12 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanAddNewClient(String name, String nickname, String address, String address2, String zip,
      String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                         String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Client Management");
-        BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                  country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -28,7 +28,6 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.clickConfirmNewClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.deleteUser(name);
-
     }
 
     @DataProvider
@@ -46,12 +45,13 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanEditClientInformation(String name, String nickname, String address, String address2, String zip,
                                                  String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                                  String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Client Management");
-        BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                 country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -69,12 +69,12 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanAddAgreement(String name, String nickname, String address, String address2, String zip,
                                         String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                         String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Client Management");
-        BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                 country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -83,9 +83,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+
+        leftMenuPanel.clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
@@ -101,12 +100,12 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanSelectServiceInAgreement(String name, String nickname, String address, String address2, String zip,
                                         String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                         String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Client Management");
-        BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                 country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -115,9 +114,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        leftMenuPanel.clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
@@ -125,9 +122,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
-        page = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
-        TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
@@ -137,10 +132,9 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
         Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
 
-        leftMenuPanel.clickOnMenu("Client Management");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(name);
         clientQuotesPage.deleteUser(name);
 
@@ -150,12 +144,13 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanSendNotifications(String name, String nickname, String address, String address2, String zip,
                                                     String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                                     String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Client Management");
-        BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                 country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -164,9 +159,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        leftMenuPanel.clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
@@ -174,9 +167,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
-        page = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
-        TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
@@ -188,10 +179,10 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesDetailPage.clickFinalizeAgreementBTN();
         clientQuotesDetailPage.clickSendNotificationButton();
         Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
-        leftMenuPanel.clickOnMenu("Client Management");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(name);
         clientQuotesPage.deleteUser(name);
     }
@@ -200,12 +191,12 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
     public void testUserCanVerifyDatesWhenOpenMailWithLink(String name, String nickname, String address, String address2, String zip,
                                              String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
                                              String title, String email) throws InterruptedException {
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                TeamPortalLeftMenuPanel.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
         leftMenuPanel.clickOnMenu("Client Management");
         BasePage page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        TeamPortalClientQuotesPage clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        Assert.assertTrue(page instanceof ClientQuotesPage);
+        ClientQuotesPage clientQuotesPage = (ClientQuotesPage) page;
         clientQuotesPage.clickAddClientBTN();
         clientQuotesPage.fillNewClientProfile( name,  nickname,  address,  address2,  zip,
                 country,  state,  city,  businessPhone,  cellPhone,  firstName,  lastName,
@@ -215,8 +206,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
         page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        Assert.assertTrue(page instanceof ClientQuotesPage);
+        clientQuotesPage = (ClientQuotesPage) page;
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
@@ -225,8 +216,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
         page = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesDetailPage);
-        TeamPortalClientQuotesDetailPage clientQuotesDetailPage = (TeamPortalClientQuotesDetailPage)page;
+        Assert.assertTrue(page instanceof ClientQuotesDetailPage);
+        ClientQuotesDetailPage clientQuotesDetailPage = (ClientQuotesDetailPage)page;
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
@@ -242,8 +233,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
         leftMenuPanel.clickOnMenu("Client Management");
         page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+        Assert.assertTrue(page instanceof ClientQuotesPage);
+        clientQuotesPage = (ClientQuotesPage) page;
         clientQuotesPage.searchUser(name);
         clientQuotesPage.deleteUser(name);
     }
@@ -254,9 +245,10 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
                                                     String businessPhone, String cellPhone, String firstName,
                                                     String lastName, String title, String email) throws InterruptedException, IOException {
 
-        TeamPortalLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, TeamPortalLeftMenuPanel.class);
-        leftMenuPanel.openClientQuotesLink();
-        TeamPortalClientQuotesPage clientQuotesPage = leftMenuPanel.openClientQuotesLink();
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
 
         // the user is deleted in preconditions, because otherwise the Agreement statuses are not stable
         // (instead of "New" the "Finalized" can appear)
@@ -270,7 +262,9 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
-        clientQuotesPage = leftMenuPanel.openClientQuotesLink();
+        clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
         clientQuotesPage.verifyUserWasCreated(name);
 
         clientQuotesPage.expandAgreementList(name);
@@ -279,7 +273,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
-        TeamPortalClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.1 per m.");
@@ -294,8 +288,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("Finalized","No","No","No"));
         String link = clientQuotesDetailPage.getAgreementApproveLink();
 
-        TeamPortalAgreementApprovePage agreementApprovePage =
-                (TeamPortalAgreementApprovePage) clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
+        AgreementApprovePage agreementApprovePage =
+                (AgreementApprovePage) clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
         agreementApprovePage.fillClientInfo("Anastasia","Maksimova", name);
         Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
         agreementApprovePage.clickAgreeWithTermsAndConditionsBTN();
@@ -311,8 +305,8 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
 //        leftMenuPanel.clickOnMenu("Client Management");
 //        page = leftMenuPanel.clickOnMenu("Client Quotes");
-//        Assert.assertTrue(page instanceof TeamPortalClientQuotesPage);
-//        clientQuotesPage = (TeamPortalClientQuotesPage) page;
+//        Assert.assertTrue(page instanceof ClientQuotesPage);
+//        clientQuotesPage = (ClientQuotesPage) page;
 //        clientQuotesPage.searchUser(name);
 //        clientQuotesPage.deleteUser(name);
     }

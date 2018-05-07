@@ -14,13 +14,10 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	public void testOperationInvoiceSearch() {
 
 		final String customer = "000 My Company";
-		final String ponumber = "234";
-
-		final String amountfrom = "0";
+        final String amountfrom = "0";
 		final String amountto = "8";
-		final String invoicenumber = "I-062-00007";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -63,7 +60,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchAmountFrom(amountfrom);
 		invoicespage.setSearchAmountTo(amountto);
 		invoicespage.clickFindButton();
-		Assert.assertEquals(4, invoicespage.getInvoicesTableRowCount());
+		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 4);
 	}
 
 	// @Test(testName = "Test Case 24750:Operations: Invoice editor - verify Add
@@ -636,6 +633,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		}
 	}
 
+	//todo fails unexpectedly with batch run. No fail, if only this test runs
 	@Test(testName = "Test Case 43689:Operation - Invoice: Edit - Mark As Paid")
 	public void checkOperationInvoiceEditMarkAsPaid() throws InterruptedException {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

@@ -5,19 +5,17 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-
-import static com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage.wait;
 
 public class WebElementsBot {
 	
@@ -48,19 +46,12 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value){
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
-                .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
-		try {
-		    combobox.click();
-		} catch (Exception ignored) {}
-		try {
-            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
-                    .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-            waitABit(1000);
-            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 70)
-                    .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
-        } catch (TimeoutException e) {
-            waitABit(1500);
+        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 70);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
+            wait.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		} catch (Exception e) {
+            Assert.fail("The droplist has not been displayed!", e);
         }
 		try {
 		    List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
@@ -69,7 +60,7 @@ public class WebElementsBot {
         } catch (Exception e) {
             System.err.println("The value has not been found! " + e);
         }
-		waitABit(1500);
+        wait.until(ExpectedConditions.invisibilityOf(droplist.getWrappedElement()));
 	}
 	
 //	public static void selectTimeSheetComboboxValue(ComboBox combobox, DropDown droplist, String value) {
@@ -101,12 +92,10 @@ public class WebElementsBot {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         try {
             new WebDriverWait(driver, 50)
-                    .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
+                    .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
         } catch (Exception e) {
-            waitABit(3000);
+            Assert.fail("The combobox is not clickable.", e);
         }
-		Actions act = new Actions(driver);
-		act.click(combobox.getWrappedElement()).perform();
 		try {
             new WebDriverWait(driver, 50)
                     .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
@@ -116,9 +105,6 @@ public class WebElementsBot {
         combobox.typeValue(value);
         waitABit(1000);
         combobox.sendKeys(Keys.ENTER);
-//        wait.until(ExpectedConditions
-//                .attributeToBe(By.xpath("//form[@name='form1']/div[@class='rcbSlide']"),
-//                        "overflow", "hidden"));
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {
