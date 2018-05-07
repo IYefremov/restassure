@@ -38,7 +38,7 @@ import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPaymentInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
@@ -716,18 +716,17 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		vehicleinfoscreen.swipeScreensLeft(2);		
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		for (int i = 0; i < availablepricematrixes.length; i++) {
-			VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-			VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+			VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 			VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[i]);
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);
 			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-			selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
-			Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[i]);
-			selectservicesscreen.clickSaveSelectedServicesButton();
-			inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+			VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+			Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[i]);
+			inspservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
 		}
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
@@ -839,15 +838,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		claimscren.selectInsuranceCompany("Test Insurance Company");		
 		vehicleinfoscreen.swipeScreensLeft(2);			
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectMatrixService(matrixservice);
-		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));
-		Assert.assertEquals(inspservicesscreen.getSelectedServicePriceMatrixValue(matrixservice), availablepricematrix);
+		inspservicesscreen.selectMatrixService(matrixservice);
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
+
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
+		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
 		
-		inspectionsscreen = inspservicesscreen.cancelInspection();
+		inspectionsscreen = selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
 	

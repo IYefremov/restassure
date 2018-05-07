@@ -17,6 +17,9 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='parts']")
 	private WebElement vehiclepartsscreen;
+
+	@FindBy(xpath="//div[@data-autotests-id='matrix-parts-list']")
+	private WebElement matrixpartslist;
 	
 	public VNextVehiclePartsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
@@ -26,12 +29,6 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		}
-	}
-	
-	public WebElement getVehiclePartsList() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen.findElement(By.xpath(".//*[@data-autotests-id='matrix-parts-list']"))));
-		return vehiclepartsscreen.findElement(By.xpath(".//*[@data-autotests-id='matrix-parts-list']"));
 	}
 	
 	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclepartname) {
@@ -46,7 +43,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	public WebElement getVehiclePartCell(String vehiclepartname) {
 		WebElement vpcell = null;
-		List<WebElement> vehicleparts = getVehiclePartsList().findElements(By.xpath(".//div[@action='select-item']"));
+		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath(".//div[@action='select-item']"));
 		for (WebElement vehiclepartcell : vehicleparts) {
 			if (vehiclepartcell.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + vehiclepartname + "']")).size() > 0) {
 				vpcell = vehiclepartcell;
@@ -56,10 +53,14 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		return vpcell;
 	}
 	
-	public VNextSelectServicesScreen clickVehiclePartsBackButton() {
+	/*public VNextSelectedServicesScreen clickVehiclePartsBackButton() {
 		clickScreenBackButton();
-		return new VNextSelectServicesScreen(appiumdriver);
-		
+		return new VNextSelectedServicesScreen(appiumdriver);
+	}*/
+
+	public VNextInspectionServicesScreen clickVehiclePartsSaveButton() {
+		tap(vehiclepartsscreen.findElement(By.xpath(".//*[@action='save']")));
+		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 }
  

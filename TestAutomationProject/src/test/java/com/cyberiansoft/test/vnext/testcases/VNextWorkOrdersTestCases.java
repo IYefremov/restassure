@@ -8,7 +8,7 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextWorkOrdersScreen;
 
@@ -31,18 +31,16 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.setVIN(testVIN);
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectServices(services);
-		selectservicesscreen.clickSaveSelectedServicesButton();	
-		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		servicesscreen.selectServices(services);
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		VNextInspectionsMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
 		vehicleinfoscreen = menuscreen.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String servicename : services)
-			Assert.assertTrue(servicesscreen.isServiceSelected(servicename));
+			Assert.assertTrue(selectedServicesScreen.isServiceSelected(servicename));
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		homescreen = workordersscreen.clickBackButton();
 	}

@@ -139,9 +139,24 @@
         "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "QTR", "hailMatrixSeverity": "1-5", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
         }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "NKL", "hailMatrixSeverity": "Roof (251 - 300)"
         }, {"hailMatrixServiceName": "Left Other", "hailMatrixSize": "HLF", "hailMatrixSeverity": "6-15"
-        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
         }]},
-      "inspPrice": "$281.25"
+      "inspPrice": "$1531.25"
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix.01",
+      "description": "Test Case 73403:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Progressive matrix",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Progressive-Tech",
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Half", "hailMatrixSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Quater", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
+        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Light 6 to 15"
+        }]},
+      "inspPrice": "$2287.50"
     }
   ]
 }

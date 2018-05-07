@@ -32,7 +32,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
@@ -535,12 +535,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		AppiumUtils.setNetworkOff();
-		BaseUtils.waitABit(13000);		
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
-		
-		//VNextCustomersScreen customersscreen = homescreen.clickNewInspectionPopupMenu();
-		
+
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		inspectionsscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
@@ -556,22 +553,18 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		claiminfoscreen.swipeScreenLeft();		
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		VNextSelectServicesScreen selectedservicesscreen = inspservicesscreen.clickAddServicesButton();
-		for (String srv : services) {			
-			VNextServiceDetailsScreen servicedetailsscreen = selectedservicesscreen.openServiceDetails(srv);
-			VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
+		for (String srv : services)
+			inspservicesscreen.selectService(srv);
+		VNextSelectedServicesScreen selectedservicesscreen = inspservicesscreen.switchToSelectedServicesView();
+		for (String srv : services) {
+			VNextNotesScreen notesscreen = selectedservicesscreen.clickServiceNotesOption(srv);
 			for (int i = 0; i < fakeimagescount; i++)
 				notesscreen.addFakeImageNote();
 			notesscreen.clickScreenBackButton();
-			servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-			servicedetailsscreen.clickServiceDetailsDoneButton();
-			selectedservicesscreen = new VNextSelectServicesScreen(appiumdriver);
+			selectedservicesscreen = new VNextSelectedServicesScreen(appiumdriver);
 		}
-		selectedservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		//inspservicesscreen.selectAllServices();
-		
-		inspservicesscreen.saveInspectionViaMenu();
+
+		selectedservicesscreen.saveInspectionViaMenu();
 		inspservicesscreen.clickScreenBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
@@ -598,9 +591,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		claiminfoscreen.swipeScreenLeft();		
 		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		for (String srv : services) {	
-			inspservicesscreen.isServiceSelected(srv);
-			Assert.assertEquals(inspservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
+		selectedservicesscreen = inspservicesscreen.switchToSelectedServicesView();
+		for (String srv : services) {
+			selectedservicesscreen.isServiceSelected(srv);
+			Assert.assertEquals(selectedservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
 		}
 		inspectionsscreen = inspservicesscreen.cancelInspection();
 		inspservicesscreen.clickScreenBackButton();

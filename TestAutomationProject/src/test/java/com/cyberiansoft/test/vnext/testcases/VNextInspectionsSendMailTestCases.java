@@ -20,7 +20,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
@@ -126,12 +126,12 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextInspectionServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
-		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
-		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
+		vehiclepartsscreen = selectedServicesScreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.clickScreenBackButton();
@@ -140,10 +140,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
 		vehiclepartinfoscreen.clickScreenBackButton();
 		vehiclepartinfoscreen.clickScreenBackButton();
-		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionscreen = servicesscreen.saveInspectionViaMenu();
+		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
@@ -207,11 +205,11 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextInspectionServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
-		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
+		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectservicesscreen = servicesscreen.switchToSelectedServicesView();
 		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
@@ -221,10 +219,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
 		AppiumUtils.clickHardwareBackButton();
 		AppiumUtils.clickHardwareBackButton();
-		selectservicesscreen = new VNextSelectServicesScreen(appiumdriver);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inspectionscreen = servicesscreen.saveInspectionViaMenu();
+		selectservicesscreen = new VNextSelectedServicesScreen(appiumdriver);
+		inspectionscreen = selectservicesscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
@@ -289,17 +285,14 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextInspectionServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = servicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectServices(moneyservices);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		
-		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		servicesscreen.selectServices(moneyservices);
+		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (int i = 0; i < moneyservices.length; i++) {
-			servicesscreen.setServiceAmountValue(moneyservices[i], moneyservicesprices[i]);
-			servicesscreen.setServiceQuantityValue(moneyservices[i], moneyservicesquantities[i]);
+			selectedServicesScreen.setServiceAmountValue(moneyservices[i], moneyservicesprices[i]);
+			selectedServicesScreen.setServiceQuantityValue(moneyservices[i], moneyservicesquantities[i]);
 		}
 		
-		inspectionscreen = servicesscreen.saveInspectionViaMenu();
+		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		//inspectionscreen.switchToTeamInspectionsView();
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());

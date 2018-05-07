@@ -71,7 +71,12 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 	public boolean isServicePresentInTheList(String serviceName) {
 		return serviceslist.findElements(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")).size() > 0;
 	}
-	
+
+	public String getServicePriceValue(String serviceName) {
+		WebElement serviceCell =  serviceslist.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']/../.."));
+		return serviceCell.findElement(By.xpath(".//*[@class='entity-item-amount']")).getText().trim();
+	}
+
 	public void clickSaveButton() {
 		tap(savebtn);
 	}

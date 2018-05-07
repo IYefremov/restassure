@@ -23,7 +23,7 @@ import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
@@ -81,10 +81,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
 		inspnumbertc46975 = vehicleinfoscreen.getNewInspectionNumber();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		selectservicesscreen.selectService(percservices);
-		selectservicesscreen.selectService(moneyservices);
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		inspservicesscreen.selectService(percservices);
+		inspservicesscreen.selectService(moneyservices);
+		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
@@ -92,16 +91,12 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
+		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
 
-		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		
-		VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(moneyservices);
-		servicedetailsscreen.setServiceAmountValue(moneyserviceprice);
-		servicedetailsscreen.setServiceQuantityValue(moneyservicequant);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
+		selectedServicesScreen.setServiceAmountValue(moneyservices, moneyserviceprice);
+		selectedServicesScreen.setServiceQuantityValue(moneyservices, moneyservicequant);
 
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc46975), PricesCalculations.getPriceRepresentation(insppriceexp));
@@ -173,8 +168,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		VNextInspectionServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
@@ -182,14 +176,12 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
-		
-		Assert.assertEquals(selectservicesscreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), pricematrix);
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));		
+		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
+		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), pricematrix);
 
-		inspectionsscreen = visualscreen.saveInspectionViaMenu();
+		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc47229), finalprice);
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -269,8 +261,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
 		String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
-		VNextSelectServicesScreen selectservicesscreen = inspservicesscreen.clickAddServicesButton();
-		VNextPriceMatrixesScreen pricematrixesscreen = selectservicesscreen.openMatrixServiceDetails(matrixservice);
+		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
 		for (String vehiclepartname : vehiclepartsname) {
@@ -282,12 +273,11 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 
 		}
-		selectservicesscreen = vehiclepartsscreen.clickVehiclePartsBackButton();
-		selectservicesscreen.clickSaveSelectedServicesButton();
-		inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		Assert.assertTrue(inspservicesscreen.isServiceSelected(matrixservice));		
+		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
 
-		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
+		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumber), finalprice);
 		VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspnumber);
 		if (!emailscreen.getToEmailFieldValue().equals(usermail))

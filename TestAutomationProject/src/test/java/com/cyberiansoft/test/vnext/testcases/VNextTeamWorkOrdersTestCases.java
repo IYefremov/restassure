@@ -167,8 +167,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen = womenuscreen.clickEditInspectionMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
-			Assert.assertTrue(servicesscreen.isServiceSelected(service));
+			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
 		servicesscreen.saveWorkOrderViaMenu();
 		workordersscreen.clickBackButton();		
 	}
@@ -236,9 +237,10 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
-			Assert.assertTrue(servicesscreen.isServiceSelected(service));
-		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
+			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
+		VNextWorkOrdersScreen workordersscreen = selectedServicesScreen.saveWorkOrderViaMenu();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		workordersscreen.clickBackButton();		
 	}

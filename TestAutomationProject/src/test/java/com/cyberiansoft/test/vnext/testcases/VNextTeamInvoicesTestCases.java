@@ -710,7 +710,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -781,7 +781,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -847,7 +847,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -921,7 +921,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -995,7 +995,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1059,7 +1059,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1122,7 +1122,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1196,7 +1196,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1253,7 +1253,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1319,7 +1319,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
@@ -1393,7 +1393,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			wotypeslist.selectWorkOrderType(wotype);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
-			vehicleinfoscreen.swipeScreensLeft(3);
+			vehicleinfoscreen.changeScreen("Summary");
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
