@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.support.PageFactory;
 
 public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	
@@ -22,6 +22,8 @@ public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	
 	public void clickApproveButton() {
 		appiumdriver.findElementByAccessibilityId("Approve").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan (MobileBy.AccessibilityId("Approve"), 1));
 	}
 
 }

@@ -1,5 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.ServiceRequestTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -19,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ServiceRequestsScreen extends iOSHDBaseScreen {
+public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	/*@iOSFindBy(accessibility  = "Add")
     private IOSElement addbtn;
@@ -120,7 +124,6 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 
 	public void clickRefreshButton() throws InterruptedException {
 		appiumdriver.findElementByAccessibilityId("Refresh").click();
-		Thread.sleep(3000);
 	}
 	
 	public void clickAddButton() {
@@ -128,12 +131,28 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Add"))).click();
 		//appiumdriver.findElementByAccessibilityId("Add").click();
 	}
+
+	public void addServiceRequestWithSelectCustomer(String customerName, String serviceRequestType) {
+		clickAddButton();
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(customerName);
+		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup(appiumdriver);
+		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
+	}
+
+	public void addServiceRequest(String serviceRequestType) {
+		clickAddButton();
+		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup(appiumdriver);
+		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
+	}
 	
 	public void clickSearchButton() {
 		appiumdriver.findElementByAccessibilityId("Search").click();
 	}
 	
 	public void clickNotCheckedInFilterItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Not Checked In")));
 		appiumdriver.findElementByAccessibilityId("Not Checked In").click();
 	}
 	
@@ -156,84 +175,30 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsPageTableLeft")));
 	}
-	
-	public void selectServiceRequestType(String srtype) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestTypeSelector"))); 
-		WebElement inptypetable = null;
-		
-		List<WebElement> tbls = appiumdriver.findElementsByAccessibilityId("ServiceRequestTypeSelector");
-		for (WebElement tb : tbls) {
-			if (tb.getAttribute("type").equals("XCUIElementTypeTable")) {
-				inptypetable = tb;
-				break;
-			}
-		}
-		if (!appiumdriver.findElementByAccessibilityId(srtype).isDisplayed()) {
-			swipeTableUp(appiumdriver.findElementByAccessibilityId(srtype),
-					inptypetable);
-			appiumdriver.findElementByAccessibilityId(srtype).click();
-		}
-		appiumdriver.findElementByAccessibilityId(srtype).click();
-		Helpers.waitABit(1000);
-	}
-	
-	public void selectInspectionType(String insptype) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionTypeSelector"))); 
-		WebElement inptypetable = null;
-		
-		List<MobileElement> tbls = appiumdriver.findElementsByAccessibilityId("InspectionTypeSelector");
-		for (WebElement tb : tbls) {
-			if (tb.getAttribute("type").equals("XCUIElementTypeTable")) {
-				inptypetable = tb;
-				break;
-			}
-		}
-		if (!appiumdriver.findElementByAccessibilityId(insptype).isDisplayed()) {
-			swipeTableUp(appiumdriver.findElementByAccessibilityId(insptype),
-					inptypetable);
-			appiumdriver.findElementByAccessibilityId(insptype).click();
-		}
-		appiumdriver.findElementByAccessibilityId(insptype).click();
-		Helpers.waitABit(1000);
-	}
-	
-	public void selectWOType(String wotype) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("OrderTypeSelector"))); 
-		WebElement inptypetable = null;
-		
-		List<WebElement> tbls = appiumdriver.findElementsByAccessibilityId("OrderTypeSelector");
-		for (WebElement tb : tbls) {
-			if (tb.getAttribute("type").equals("XCUIElementTypeTable")) {
-				inptypetable = tb;
-				break;
-			}
-		}
-		if (!appiumdriver.findElementByAccessibilityId(wotype).isDisplayed()) {
-			swipeTableUp(appiumdriver.findElementByAccessibilityId(wotype),
-					inptypetable);
-			appiumdriver.findElementByAccessibilityId(wotype).click();
-		}
-		appiumdriver.findElementByAccessibilityId(wotype).click();
-		Helpers.waitABit(1000);
-	}
 
 	public void selectServiceRequest(String servicerequest) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(MobileBy.AccessibilityId("labelServiceRequestNumber"), 1));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicerequest + "']").click();
 		//Helpers.text(servicerequest).click();
 	}
 
-	public void selectCreateInspectionRequestAction() {
+	public void createInspectionFromServiceReques(String serviceRequestNumber, String inspType) {
+		selectServiceRequest(serviceRequestNumber);
 		appiumdriver.findElementByAccessibilityId("Create Inspection").click();
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		inspectionTypesPopup.selectInspectionType(inspType);
 	}
 	
 	public void selectCreateWorkOrderRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Create Work Order").click();
+	}
+
+	public void createWorkOrderFromServiceRequest(String serviceRequestNumber, String workOrderType) {
+		selectServiceRequest(serviceRequestNumber);
+		selectCreateWorkOrderRequestAction();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
 	public boolean isCreateWorkOrderActionExists() {
@@ -256,14 +221,24 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElementsByAccessibilityId("decline little").size() > 0;
 	}
 	
-	public void selectCheckInMenu() throws InterruptedException {
+	public ServiceRequestsScreen selectCheckInMenu()  {
 		appiumdriver.findElementByAccessibilityId("Check In").click();
-		Thread.sleep(3000);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsPageTableLeft")));
+		return this;
 	}
 	
-	public void selectUndoCheckMenu() throws InterruptedException {
+	public ServiceRequestsScreen selectUndoCheckMenu() {
 		appiumdriver.findElementByAccessibilityId("Undo Check In").click();
-		Thread.sleep(3000);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsPageTableLeft")));
+		/*FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
+		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
+			wait = new WebDriverWait(appiumdriver, 25);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
+		}*/
+		return this;
 	}
 	
 	public void selectRejectAction() {
@@ -279,6 +254,8 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectCloseAction() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Close")));
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
@@ -342,6 +319,8 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getFirstServiceRequestNumber() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 		List<WebElement> ws = appiumdriver.findElementsByAccessibilityId("labelServiceRequestNumber");
 		List<String> nmbr = new ArrayList();
  		for (WebElement el : ws ) {
@@ -353,10 +332,8 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	
 	//Appointmets
 	public void clickAddAppointmentButton() {
-		Helpers.waitABit(1000);
-		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeNavigationBar[@name='AppointmentsView']/XCUIElementTypeButton[@name='Add']"))).click(); 
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Appointments")));
 		System.out.println("+++" +  appiumdriver.findElementsByAccessibilityId("Add").size());
 		List<WebElement> addds = appiumdriver.findElementsByAccessibilityId("Add");
 		for(WebElement add : addds)
@@ -364,11 +341,7 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 				add.click();
 				break;
 			}
-		//IOSElement appointmentview = (IOSElement) appiumdriver.findElementsByAccessibilityId("AppointmentsView").get(1);
-		//appointmentview.findElementByAccessibilityId("Add").click();
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appointmentview.findElementByAccessibilityId("Add")).waitAction(Duration.ofSeconds(1)).release().perform();
-		//addappointmentbtn.click();
+
 	}
 	
 	public void selectTodayFromAppointmet() {
@@ -386,7 +359,6 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	public void selectTodayToAppointmet() {
 		appiumdriver.findElementByAccessibilityId("To").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
-		Helpers.waitABit(500);
 	}
 	
 	public String getToAppointmetValue() {
@@ -422,14 +394,20 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isSRSummaryAppointmentsInformation() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("General Info")));
 		return appiumdriver.findElementsByAccessibilityId("Appointments").size() > 0;
 	}
 	
 	public void clickServiceRequestSummaryInspectionsButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceRequestSummaryInspectionsButton")));
 		appiumdriver.findElementByAccessibilityId("ServiceRequestSummaryInspectionsButton").click();
 	}
 	
 	public MyWorkOrdersScreen clickServiceRequestSummaryOrdersButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Work Orders")));
 		appiumdriver.findElementByAccessibilityId("Work Orders").click();
 		return new MyWorkOrdersScreen(appiumdriver);
 	}
@@ -464,7 +442,6 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 			
 	public void clickCloseSR() {
 		appiumdriver.findElement(MobileBy.name("Close SR")).click();
-		Helpers.waitABit(3000);
 	}
 	
 	public boolean isUndoCheckInActionExists() {
@@ -490,7 +467,6 @@ public class ServiceRequestsScreen extends iOSHDBaseScreen {
 	
 	public void clickCloseButton() {
 		appiumdriver.findElementByAccessibilityId("Close").click();
-		Helpers.waitABit(500);
 	}
 	
 	public HomeScreen clickHomeButton() {

@@ -51,8 +51,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickApproveAfterSelection() {
+		Helpers.waitForAlert();
 		appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.AccessibilityId("Approve")).click();
-		Helpers.waitABit(500);
 	}
 	
 
@@ -104,6 +104,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickSignButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Sign")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
 	

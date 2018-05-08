@@ -1,25 +1,21 @@
 package com.cyberiansoft.test.ios_client.utils;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Helpers {
 
@@ -175,10 +171,11 @@ public abstract class Helpers {
 	}
 
 	public static void waitForAlert() {
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(driver, 340);
+
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
 		wait.until(ExpectedConditions.alertIsPresent());
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public static void acceptAlert() {

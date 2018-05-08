@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -43,6 +43,8 @@ public class CustomersScreen extends iOSHDBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 	}
 
 	public void swtchToRetailMode() {
@@ -74,7 +76,6 @@ public class CustomersScreen extends iOSHDBaseScreen {
 			
 			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-			Helpers.waitABit(1000);
 			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
 		}
 	}
@@ -88,13 +89,20 @@ public class CustomersScreen extends iOSHDBaseScreen {
 	public void clickOnCustomer(String customer) {
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
-	
-	public void selectCustomerWithoutEditing(String customer) {
-		
+
+	public void selectCustomer(String customer) {
+
 		if (!elementExists(customer))
 			searchCustomer(customer);
 		clickOnCustomer(customer);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 3);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Select")));
 		appiumdriver.findElementByAccessibilityId("Select").click();
+	}
+	
+	public HomeScreen selectCustomerWithoutEditing(String customer) {
+		selectCustomer(customer);
+		return new HomeScreen(appiumdriver);
 	}
 
 	public boolean isCustomerExists(String customer) {

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -13,7 +15,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,8 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 
 	public void acceptForReminderNoDrilling() {
-		Assert.assertTrue (appiumdriver.findElementByName("REMINDER NO DRILLING AND USE E-COAT").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("REMINDER NO DRILLING AND USE E-COAT")));
 		clickAccept();
 	}
 
@@ -36,7 +38,8 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickCustomButtonEstimateConditions() {
-		Assert.assertTrue (appiumdriver.findElementByName("Estimate Conditions").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Estimate Conditions")));
 	}
 
 	public void selectOtherQuestions() {
@@ -63,7 +66,6 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 
 	public void setOwnerAddress(String owneraddress) {
-		Helpers.waitABit(2000);
 		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[@name='Owner Address_TextView_Cell']").click();
 		//appiumdriver.findElementByAccessibilityId("Owner Address_TextView_Cell").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(owneraddress);
@@ -97,7 +99,6 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 		setOwnerAddress(owneraddress);
 		swipeScreenRight();
 		setOwnerCity(ownercity);
-		Thread.sleep(2000);
 		setOwnerState(ownerstate);
 		swipeScreenRight();
 		setOwnerCountry(ownercountry);
@@ -105,26 +106,30 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 		setOwnerZip(ownerzip);
 	}
 
-	public void setOwnerState(String ownerstate)
-			throws InterruptedException {
-		Assert.assertTrue (appiumdriver.findElementByName("Owner State").isDisplayed());
+	public void setOwnerState(String ownerstate) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByName(ownerstate)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByName(ownerstate).click();
 	}
 
 	public void setOwnerCountry(String ownercountry) {
-		Assert.assertTrue (appiumdriver.findElementByName("Owners Country").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owners Country")));
 		appiumdriver.findElementByName(ownercountry).click();
 	}
 	
-	public void chooseAVISCode(String aviscode) {
-		Assert.assertTrue (appiumdriver.findElementByName("Choose One AVIS Code").isDisplayed());
+	public InvoiceInfoScreen chooseAVISCode(String aviscode) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Choose One AVIS Code")));
 		appiumdriver.findElementByName(aviscode).click();
+		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
 	}
 	
 	public void chooseConsignor(String consignor) {
-		Assert.assertTrue (appiumdriver.findElementByName("Consignor").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Consignor")));
 		Helpers.scroolTo(consignor);
 		appiumdriver.findElementByName(consignor).click();
 	}
@@ -171,7 +176,8 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectTaxPoint(String taxpoint) {
-		Assert.assertTrue(appiumdriver.findElementByName("Tax_Point_1").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Tax_Point_1")));
 		appiumdriver.findElementByName(taxpoint).click();
 	}
 	
@@ -182,60 +188,64 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void setEngineCondition(String enginecondition) {
-		Assert.assertTrue (appiumdriver.findElementByName("Engine Condition").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Engine Condition")));
 		appiumdriver.findElementByName(enginecondition).click();
 	}
 	
 	public void setJustOnePossibleAnswer(String justoneanswer) {
-		Assert.assertTrue (appiumdriver.findElementByName("Just One Possible Answer").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Just One Possible Answer")));
 		appiumdriver.findElementByName(justoneanswer).click();
 	}
 	
 	public void setMultipleAnswersCopy(String multipleanswer) {
-		Assert.assertTrue (appiumdriver.findElementByName("Multiple Answers Copy").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Multiple Answers Copy")));
 		appiumdriver.findElementByName(multipleanswer).click();
 	}
 	
 	public void setFreeText(String freetext) {
-		Assert.assertTrue (appiumdriver.findElementByName("Free Text").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Free Text")));
 		((IOSElement) appiumdriver.findElementByName("Free Text_TextView")).setValue(freetext + "\n");
 		((IOSDriver) appiumdriver).hideKeyboard();
 	}
 	
 	public void setBetteryTerminalsAnswer(String _answer) {
-		Assert.assertTrue (appiumdriver.findElementByName("Battery Terminals / Cables / Mountings").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Battery Terminals / Cables / Mountings")));
 		appiumdriver.findElementByName(_answer).click();
 		//appiumdriver.findElementByXPath("//UIAScrollView[1]/UIATableView[1]/UIATableCell[@name=\"" + _answer + "\"]").click();
 	}
 	
 	public void setCheckConditionOfBatteryAnswer(String _answer) {
-		Assert.assertTrue (appiumdriver.findElementByName("Check Condition of Battery (Storage Capacity Test)").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Check Condition of Battery (Storage Capacity Test)")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + 
 				_answer + "']").click();
 	}
 	
 	public void setSampleQuestion(String samplequestion) {
-		Assert.assertTrue (appiumdriver.findElementByName("Sample Question").isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Sample Question")));
 		appiumdriver.findElementByName(samplequestion).click();
 	}
 	
 	public void selectAnswerForQuestion(String question, String answer) {
-		Assert.assertTrue (appiumdriver.findElementByName(question).isDisplayed());
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(question)));
 		appiumdriver.findElementByName(answer).click();
 	}
 	
 	public void setToYesFinalQuestion() {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]")).click();
-		Helpers.waitABit(300);
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]")).click();
-		Helpers.waitABit(300);
 	}
 	
 	public void setToYesCompleteQuestion() {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[4]")).click();
-		Helpers.waitABit(300);
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[4]")).click();
-		Helpers.waitABit(300);
 	}
 	
 	public void answerAllIsGoodQuestion() {

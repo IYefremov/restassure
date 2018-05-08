@@ -118,7 +118,6 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				closebtn.click();
-				
 				break;
 			}
         try {
@@ -130,6 +129,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 
         }
 
+		Helpers.waitABit(1000);
 		if (elementExists("Close"))	 {
 		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
@@ -141,6 +141,7 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 			}
 		}
 
+		Helpers.waitABit(1000);
 		if (elementExists("Close"))	 {
 			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 			for (IOSElement closebtn : closebtns)
@@ -208,6 +209,8 @@ public class RegularVehicleScreen extends iOSRegularBaseScreen {
 	public void setMakeAndModel(String make, String model) {
 		
 		makecustombtn.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(make)));
 		appiumdriver.findElementByAccessibilityId(make).click();
 		appiumdriver.findElementByAccessibilityId(model).click();
 		clickSaveButton();

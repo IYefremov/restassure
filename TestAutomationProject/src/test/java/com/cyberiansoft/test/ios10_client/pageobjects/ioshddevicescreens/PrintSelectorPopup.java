@@ -6,6 +6,8 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,8 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
 	public void checkRemotePrintServerAndSelectPrintServer(String printserver) {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(printserver)));
 		appiumdriver.findElement(MobileBy.AccessibilityId(printserver)).click();
 		IOSElement par = (IOSElement) appiumdriver.findElement(MobileBy.
 				xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + printserver + "']/.."));
@@ -39,6 +43,8 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	}
 	
 	public void clickPrintOptionsPrintButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Print")));
 		printoptionsprintbtn.click();
 	}
 }

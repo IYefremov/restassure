@@ -1,18 +1,17 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -44,9 +43,6 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	//@iOSFindBy(uiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
     //private IOSElement pricevaluefld;
 	
-	//@iOSFindBy(accessibility = "Notes")
-    //private IOSElement notescell;
-	
 	//@iOSFindBy(accessibility = "Technicians")
     //private IOSElement technicianscell;
 	
@@ -64,6 +60,12 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
+
+	@iOSFindBy(accessibility = "Technicians")
+	private IOSElement technicianscell;
+
+	@iOSFindBy(accessibility = "Notes")
+	private IOSElement notescell;
 	
 	public PriceMatrixScreen(AppiumDriver driver) {
 		super(driver);
@@ -72,6 +74,8 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
 		if (!appiumdriver.findElementByAccessibilityId(pricematrix).isDisplayed()) {
 			swipeTableUp(appiumdriver.findElementByAccessibilityId(pricematrix),
 					appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList"));
@@ -90,6 +94,8 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("tableSize").findElement(MobileBy.AccessibilityId(size)).click();
 		appiumdriver.findElementByAccessibilityId("tableSeverity").findElement(MobileBy.AccessibilityId(severity)).click();
 		appiumdriver.findElementByAccessibilityId("Size & Severity").findElement(By.name("Save")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan (MobileBy.AccessibilityId("Size & Severity"), 1));
 		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
 	}
 
@@ -109,10 +115,10 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 						+ severity + "\"]").click();
 	}*/
 
-	public void assertPriceCorrect(String price) {
-		Assert.assertEquals(appiumdriver.findElement(
+	public String getPrice() {
+		return appiumdriver.findElement(
 				MobileBy.xpath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='PriceMatrixItemDetailsCellPrice']/XCUIElementTypeTextField[1]")).
-				getAttribute("value"),price);
+				getAttribute("value");
 	}
 
 	public void selectDiscaunt(String discaunt) {
@@ -155,12 +161,12 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 		return vehiclePart.findElementsByAccessibilityId("selected").size() > 0;
 	}
 
-	public void assertNotesExists() {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Notes").isDisplayed());
+	public boolean isNotesExists() {
+		return appiumdriver.findElementByAccessibilityId("Notes").isDisplayed();
 	}
 
-	public void assertTechniciansExists() {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed());
+	public boolean isTechniciansExists() {
+		return technicianscell.isDisplayed();
 	}
 
 	public String getTechniciansValue() {
@@ -185,10 +191,9 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Camcel").click();
 	}
 	
-	public void clearVehicleData() {
+	public String clearVehicleData() {
 		appiumdriver.findElementByAccessibilityId("Clear").click();
-		String msg = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
+		return Helpers.getAlertTextAndAccept();
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {

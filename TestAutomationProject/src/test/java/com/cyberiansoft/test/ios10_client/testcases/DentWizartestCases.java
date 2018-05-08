@@ -10,6 +10,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
@@ -98,9 +99,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(tcrow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(tcrow), ExcelUtils.getModel(tcrow), ExcelUtils.getYear(tcrow));
@@ -141,13 +140,10 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
 				0, 11));
-		Thread.sleep(2000);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(tcrow).substring(11, 17));
 		vehiclescreeen.verifyExistingWorkOrdersDialogAppears();		
 		vehiclescreeen.clickSaveButton();
@@ -170,12 +166,9 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVINAndAndSearch(ExcelUtils.getVIN(testcaserow));
-		Thread.sleep(2000);
 		//Assert.assertEquals(searchresult, "Search Complete No vehicle invoice history found");
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
@@ -203,7 +196,6 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
-		Thread.sleep(2000);
 
 	}
 
@@ -222,9 +214,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo1 = vehiclescreeen.getInspectionNumber();
@@ -272,8 +262,7 @@ public class DentWizartestCases extends BaseTestCase {
 		final String[] vehicleparts2 = { "Hood", "Roof", "Trunk Lid" };
 		final String[] vehiclepartspaints = { "Front Bumper", "Rear Bumper" };
 
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo2 = vehiclescreeen.getInspectionNumber();
@@ -365,9 +354,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routecanadaworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routecanadaworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo1 = vehiclescreeen.getInspectionNumber();
@@ -399,8 +386,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		final String[] vehicleparts2 = { "Hood" };
 
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo2 = vehiclescreeen.getInspectionNumber();
@@ -454,8 +440,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.wizprotrackerrouteworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -507,8 +492,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.wizprotrackerrouteworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -583,9 +567,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -627,9 +609,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -667,9 +647,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.carmaxworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -697,9 +675,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.servicedriveworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.servicedriveworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -722,8 +698,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.wizardprotrackerrouteinspectiondertype);
+		myinspectionsscreen.addInspection(UtilConstants.wizardprotrackerrouteinspectiondertype);
 		InspectionScreen  inspectionscreen = new InspectionScreen(appiumdriver);
 		String alerttext = inspectionscreen.clickSaveWithAlert();
 		Assert.assertTrue(alerttext.contains("VIN# is required"));
@@ -752,8 +727,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.routecanadaworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.routecanadaworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -821,8 +795,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -871,9 +844,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wholesailhailworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -993,9 +964,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
 		myworkordersscreen.clickHomeButton();
@@ -1015,9 +985,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype) ;
+		myworkordersscreen.addWorkOrder(UtilConstants.wholesailhailworkordertype); ;
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -1060,9 +1028,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen =  ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
 		myworkordersscreen.clickHomeButton();
@@ -1084,14 +1051,7 @@ public class DentWizartestCases extends BaseTestCase {
 		//MobileCommand.startRecordingScreenCommand(stratrec);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		//IOSStopScreenRecordingOptions stoprec = IOSStopScreenRecordingOptions.stopScreenRecordingOptions();
-		//ScreenRecordingUploadOptions upl = ScreenRecordingUploadOptions.uploadOptions().withRemotePath("/Users/kolin/Downloads/photos");
-		//stoprec.withUploadOptions(upl).build();
-		//MobileCommand.stopRecordingScreenCommand(stoprec);
-		
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wholesailhailworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -1152,9 +1112,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 
 		myworkordersscreen.clickHomeButton();
@@ -1172,9 +1131,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wholesailhailworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -1252,9 +1209,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -1270,9 +1226,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wholesailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wholesailhailworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -1296,9 +1250,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -1312,9 +1265,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
@@ -1348,8 +1299,8 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Quick Quote");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QUICK_QUOTE_SIZE, PriceMatrixScreen.QUICK_QUOTE_SEVERITY);
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		pricematrix.setPrice(ExcelUtils.getServicePrice(testcaserow));
 
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
@@ -1384,9 +1335,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
@@ -1444,9 +1393,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1496,7 +1443,7 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.HEAVY_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1516,7 +1463,7 @@ public class DentWizartestCases extends BaseTestCase {
 
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.SEVERE_SEVERITY);
-		pricematrix.assertPriceCorrect("$0.00");
+		Assert.assertEquals(pricematrix.getPrice(), "$0.00");
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1559,9 +1506,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1592,9 +1537,9 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 
@@ -1613,7 +1558,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.HLF_SIZE, PriceMatrixScreen.LIGHT_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 
@@ -1650,9 +1595,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1687,9 +1630,9 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 
@@ -1700,10 +1643,9 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails("Hail");
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -1718,9 +1660,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
@@ -1760,9 +1700,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1813,9 +1751,9 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.VERYLIGHT_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1828,9 +1766,9 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1877,9 +1815,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -1910,9 +1846,9 @@ public class DentWizartestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 		pricematrix.clickOnTechnicians();
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
@@ -1940,9 +1876,9 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
-		pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-		pricematrix.assertNotesExists();
-		pricematrix.assertTechniciansExists();
+		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+		Assert.assertTrue(pricematrix.isNotesExists());
+		Assert.assertTrue(pricematrix.isTechniciansExists());
 
 		pricematrix.clickOnTechnicians();
 		selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
@@ -2000,9 +1936,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -2067,9 +2001,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2123,7 +2055,6 @@ public class DentWizartestCases extends BaseTestCase {
 		homescreen = myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		Thread.sleep(2000);
 		teamworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 		teamworkordersscreen.clickiCreateInvoiceButton();
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -2150,9 +2081,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String inspection = vehiclescreeen.getInspectionNumber();
@@ -2228,8 +2157,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		teamworkordersscreen.verifyCreateInvoiceIsActivated(inspection);
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+        InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
@@ -2256,9 +2184,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String inspection = vehiclescreeen.getInspectionNumber();
@@ -2316,7 +2242,6 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		Thread.sleep(2000);
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
@@ -2339,7 +2264,6 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveButton();
-		Thread.sleep(4000);
 		ordermonitorscreen = new OrderMonitorScreen(appiumdriver);
 		
 		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Queued");
@@ -2364,8 +2288,7 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+        InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
 		teamworkordersscreen = new TeamWorkOrdersScreen(appiumdriver);
@@ -2390,9 +2313,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2421,14 +2342,12 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		Thread.sleep(1000);
 		teamworkordersscreen.clickOnWO(wonumber);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		//String servicedisplayname = ordermonitorscreen.selectPanel(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		Assert.assertTrue(ordermonitorscreen.isServiceIsActive(UtilConstants.FRONTLINEREADY_SUBSERVICE));
 		ordermonitorscreen.selectPanel(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 		ordermonitorscreen.clickStartService();
-		Thread.sleep(1000);
 		ordermonitorscreen.selectPanel(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 		ordermonitorscreen.verifyStartServiceDissapeared();
 		
@@ -2455,9 +2374,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2531,9 +2448,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routecanadaworkordertype);	
+		myworkordersscreen.addWorkOrder(UtilConstants.routecanadaworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo = vehiclescreeen.getInspectionNumber();
@@ -2577,8 +2492,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2607,7 +2521,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveButton();
-		Thread.sleep(4000);
+        myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		String inspectioncustomer = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.changeCustomerForInspection(inspectioncustomer, customer);
 		myinspectionsscreen.clickHomeButton();
@@ -2641,9 +2555,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.retailhailworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
 		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
@@ -2685,10 +2597,9 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), totalsumm);
-		ordersummaryscreen.checkCreateInvoice();
+        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails("Hail No Discount Invoice");
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), totalsumm);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
@@ -2707,9 +2618,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2789,10 +2698,9 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
@@ -2809,9 +2717,7 @@ public class DentWizartestCases extends BaseTestCase {
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2870,10 +2776,9 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
@@ -2893,9 +2798,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routecanadaworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routecanadaworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2944,9 +2847,8 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkCreateInvoice();
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -2971,9 +2873,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.servicedriveworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.servicedriveworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -2990,9 +2890,8 @@ public class DentWizartestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("1");
-		ordersummaryscreen.checkCreateInvoice();		
+        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setPO("832145");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -3022,8 +2921,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3068,9 +2966,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.carmaxworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3124,9 +3020,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3229,9 +3123,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizardprotrackeravisworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizardprotrackeravisworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String inspection = vehiclescreeen.getInspectionNumber();
@@ -3272,9 +3164,8 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen.selectNextScreen("AVIS Questions");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-		
-		questionsscreen.chooseAVISCode("Rental-921");
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+
+		InvoiceInfoScreen invoiceinfoscreen =questionsscreen.chooseAVISCode("Rental-921");
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
@@ -3309,9 +3200,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow1));
 		String inspection1 = vehiclescreeen.getInspectionNumber();
@@ -3335,8 +3224,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.clickSaveButton();
 		
 		//Create second WO
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow2));
 		String inspection2 = vehiclescreeen.getInspectionNumber();
@@ -3353,8 +3241,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		
 		//Create third WO
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow3));
 		String inspection3 = vehiclescreeen.getInspectionNumber();
@@ -3399,8 +3286,7 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection3);
 		
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+		InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
 		invoiceinfoscreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
 		
@@ -3421,9 +3307,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3436,8 +3320,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.saveWorkOrder();
-		myworkordersscreen.selectWorkOrderForCopyVehicle(wo);
-		myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
+		myworkordersscreen.copyServicesForWorkOrder(wo, UtilConstants.carmaxworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		servicesscreen.cancelOrder();
@@ -3457,9 +3340,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow1));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
@@ -3472,8 +3353,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.saveWorkOrder();
-		myworkordersscreen.selectWorkOrderForCopyServices(wo);
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.copyServicesForWorkOrder(wo, UtilConstants.routeusworkordertype);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow2));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
@@ -3500,8 +3380,7 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.servicedriveinspectiondertype);
+		myinspectionsscreen.addInspection(UtilConstants.servicedriveinspectiondertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3562,10 +3441,8 @@ public class DentWizartestCases extends BaseTestCase {
 
 		myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		Thread.sleep(2000);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-		myworkordersscreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+        InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.clickInvoiceIcon();
 		invoiceinfoscreen.clickSaveAsFinal();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
@@ -3581,9 +3458,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.carmaxworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3597,9 +3472,8 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkCreateInvoice();
+        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();	
 		CarHistoryScreen carhistoryscreen = new CarHistoryScreen(appiumdriver); 
@@ -3615,7 +3489,6 @@ public class DentWizartestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 
 		carhistoryscreen.clickSwitchToWeb();
-		Thread.sleep(5000);
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
 		carhistoryscreen.clickFirstCarHistoryInTable();
@@ -3644,8 +3517,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizardprotrackerservicedriveworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizardprotrackerservicedriveworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3694,9 +3566,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.carmaxworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3729,9 +3599,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
-		ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		invoiceinfoscreen.clickSaveAsFinal();
 		vehiclescreeen.clickHomeButton();
 	}
@@ -3753,8 +3621,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
+		myinspectionsscreen.addInspection(UtilConstants.routeworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3860,9 +3727,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(_customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3920,9 +3785,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -3999,9 +3862,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.enterpriseworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.enterpriseworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4033,9 +3894,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.avisworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.avisworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4081,8 +3940,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.selectNextScreen("AVIS Questions");
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-		questionsscreen.chooseAVISCode("Other-920");
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+        InvoiceInfoScreen invoiceinfoscreen = questionsscreen.chooseAVISCode("Other-920");
 		invoiceinfoscreen.clickSaveAsFinal();
 		
 		myworkordersscreen.clickHomeButton();
@@ -4115,14 +3973,11 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-
-		myinspectionsscreen.clickAddInspectionButton();
-		myinspectionsscreen.selectInspectionType(UtilConstants.economicalinspectiondertype);
+		myinspectionsscreen.addInspection(UtilConstants.economicalinspectiondertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-		//String wo = vehiclescreeen.getInspectionNumber();
 		NotesScreen notesscreen = vehiclescreeen.clickNotesButton();
 		notesscreen.addNotesCapture();
 		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
@@ -4174,6 +4029,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myinspectionsscreen.selectInspectionInTable(insptoapprove);
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
 		myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
+        myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.clickHomeButton();
 		
 	}
@@ -4193,9 +4049,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.auctionworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.auctionworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4272,9 +4126,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.servicedriveworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.servicedriveworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4305,9 +4157,7 @@ public class DentWizartestCases extends BaseTestCase {
 					.getOrderSummaryScreenCaption());
 		OrderSummaryScreen ordersummaryscreen = new OrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.setTotalSale("1");
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		invoiceinfoscreen.clickSaveAsFinal();
         myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
@@ -4342,9 +4192,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4389,9 +4237,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.servicedriveworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.servicedriveworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
@@ -4425,9 +4271,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(customer);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
+		myworkordersscreen.addWorkOrder(UtilConstants.routeusworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));

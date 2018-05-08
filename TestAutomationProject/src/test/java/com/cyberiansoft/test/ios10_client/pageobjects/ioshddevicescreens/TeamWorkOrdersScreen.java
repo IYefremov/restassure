@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -56,8 +58,9 @@ public class TeamWorkOrdersScreen extends MyWorkOrdersScreen {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 	}
 	
-	public void selectWOInvoiceType(String invoicetype) {
+	public InvoiceInfoScreen selectWOInvoiceType(String invoicetype) {
 			appiumdriver.findElementByAccessibilityId(invoicetype).click();
+			return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.TEAMWORKORDER);
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) {

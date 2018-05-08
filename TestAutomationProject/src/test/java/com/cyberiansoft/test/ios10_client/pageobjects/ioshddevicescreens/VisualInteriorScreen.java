@@ -10,6 +10,8 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +44,8 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Visual")));
 	}
 	
 	public void switchToCustomTab() {
@@ -49,7 +53,10 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectService(String _service) {
-		appiumdriver.findElementByAccessibilityId(_service).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_service)));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(_service))).click();
 	}
 
 	public void selectSubService(String _subservice) {
@@ -102,28 +109,19 @@ public class VisualInteriorScreen extends iOSHDBaseScreen {
 		TouchAction action = new TouchAction(appiumdriver);
 		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		
-		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
-		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
-		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
-		/*int x = element.getLocation().getX() + element.getSize().getWidth()/2;
-		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
-		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(1000).release().perform();
-		Helpers.waitABit(1000);
-		Helpers.tapExterior(50, 50);*/
+		int x = element.getSize().getWidth()/2;
+		int y = element.getSize().getHeight()/2;
+		action.tap(element, x, y).perform();
 	}
 	
-	public void tapCarImage() { 
-		
+	public void tapCarImage() {
 		TouchAction action = new TouchAction(appiumdriver);
 		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		
-		int x = element.getLocation().getX() + element.getSize().getWidth()/2;
-		int y = element.getLocation().getY() + element.getSize().getHeight()/2;
-		//action.tap(element, x, y).perform();
-		action.press(element, x, y).waitAction(Duration.ofSeconds(1)).release().perform();
-	}
+		int x = element.getSize().getWidth()/2;
+		int y = element.getSize().getHeight()/2;
+		action.tap(element, x, y).perform();
+		}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
 		Helpers.tapExterior(x, y);

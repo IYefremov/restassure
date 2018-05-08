@@ -8,6 +8,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,7 +74,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "BundleItemsView")
     private IOSElement bundleitemstable;*/
-	
+
+	@iOSFindBy(accessibility = "Vehicle Part")
+	private IOSElement vehiclepartscell;
+
+	@iOSFindBy(accessibility = "Service Part")
+	private IOSElement servicepartscell;
 	
 	public SelectedServiceDetailsScreen(AppiumDriver driver) {
 		super(driver);
@@ -112,11 +118,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickVehiclePartsCell() {
-		appiumdriver.findElementByAccessibilityId("Vehicle Part").click();
+		vehiclepartscell.click();
 	}
 	
 	public ServicePartPopup clickServicePartCell() {
-		appiumdriver.findElementByAccessibilityId("Service Part").click();
+		servicepartscell.click();
 		return new ServicePartPopup(appiumdriver);
 	}
 	
