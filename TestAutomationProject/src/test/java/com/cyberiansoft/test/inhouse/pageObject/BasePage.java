@@ -39,9 +39,9 @@ public class BasePage {
         driver.navigate().back();
     }
 
-    public void refreshPage() throws InterruptedException {
+    public void refreshPage() {
         driver.navigate().refresh();
-        Thread.sleep(2000);
+        waitABit(2000);
     }
 
     public void waitForLoading() {
@@ -52,8 +52,7 @@ public class BasePage {
             wait.until(ExpectedConditions
                     .invisibilityOf(driver.findElement(By
                             .xpath("//div[not(contains(@style, 'none'))]/i[@class='fa fa-refresh fa-spin']"))));
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
     }
 
     public static void waitABit(int milliseconds) {

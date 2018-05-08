@@ -22,7 +22,7 @@ public class ServiceRequestTypesVehicleInfoSettingsPage extends BaseWebPage {
 		WebElement visibleCheckBox = driver.findElement(By.xpath("//td[text()='" + string + "']"))
 				.findElement(By.xpath("..")).findElement(By.tagName("input"));
 		if (!requiredCheckBox.getAttribute("class").equals("rfdInputDisabled")) {
-			visibleCheckBox.click();
+			wait.until(ExpectedConditions.elementToBeClickable(visibleCheckBox)).click();
 		}
 	}
 

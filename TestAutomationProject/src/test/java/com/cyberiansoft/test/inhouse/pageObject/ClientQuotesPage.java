@@ -352,8 +352,8 @@ public class ClientQuotesPage extends BasePage {
         Thread.sleep(500);
     }
 
-    public ClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) throws InterruptedException {
-        Thread.sleep(1500);
+    public ClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) {
+//        Thread.sleep(1500);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-potential-client_processing")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")).click();

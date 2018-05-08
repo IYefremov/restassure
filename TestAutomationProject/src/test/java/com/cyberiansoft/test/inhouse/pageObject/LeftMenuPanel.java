@@ -86,16 +86,19 @@ public class LeftMenuPanel extends BasePage {
      */
     public ClientQuotesPage clickClientQuotesSubmenu() {
         clickSubMenu(clientQuotes);
+        waitForLoading();
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
     public ClientSegmentsPage clickClientSegmentsSubMenu() {
         clickSubMenu(clientSegments);
+        waitForLoading();
         return PageFactory.initElements(driver, ClientSegmentsPage.class);
     }
 
     public CategoriesPage clickCategoriesSubmenu() {
         clickSubMenu(categories);
+        waitForLoading();
         return PageFactory.initElements(driver, CategoriesPage.class);
     }
 

@@ -1,12 +1,10 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -36,61 +34,93 @@ public class CategoriesPage extends BasePage {
     @FindBy(id ="ProcName")
     WebElement storedProcedureNameField;
 
+    @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']")
+    private WebElement addAttributeDialog;
+
+    @FindBy(id="table-categories")
+    private WebElement categoriesTable;
+
     public CategoriesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
 
-    public void clickAddCategoryButton() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickAddCategoryButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-toggle btn-add-category']")));
-        wait.until(ExpectedConditions.elementToBeClickable(addCategoryBTN)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(addCategoryBTN)).click();
+        } catch (WebDriverException e) {
+            waitABit(1000);
+            try {
+                addCategoryBTN.click();
+            } catch (Exception ex) {
+                Assert.fail("The add category button has not been displayed.", ex);
+            }
+        }
     }
 
-    public void setCategory(String category) throws InterruptedException {
-        Thread.sleep(1000);
-        inputFields.get(0).sendKeys(category);
-
+    public void setCategory(String category) {
+        wait.until(ExpectedConditions.visibilityOf(inputFields.get(0))).sendKeys(category);
     }
 
-    public void clickSubmitCategoryButton() throws InterruptedException {
-        submitCategoryBTN.click();
-        Thread.sleep(2000);
+    public void clickSubmitCategoryButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitCategoryBTN)).click();
+        waitForLoading();
     }
 
-    public void deleteCategory(String name) throws InterruptedException {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+name+"')]")));
-        driver.findElement(By.xpath("//span[contains(text(),'"+name+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-                .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-                .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-delete']")).click();
-        try{
+    public void deleteCategory(String name) {
+//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'" + name + "')]")));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(driver
+                    .findElements(By.xpath("//span[contains(text(),'" + name + "')]/following::a[2]")).get(0))).click();
+        } catch (WebDriverException e) {
+            waitABit(2000);
+            driver.findElements(By.xpath("//span[contains(text(),'" + name + "')]/following::a[2]")).get(0).click();
+        }
+
+
+//        driver.findElement(By.xpath("//span[contains(text(),'"+name+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
+//                .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
+//                .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-delete']")).click();
+        try {
             driver.switchTo().alert().accept();
-        }catch(Exception e){}
-        Thread.sleep(3000);
+        } catch(Exception ignored){}
     }
 
-    public void clickAddAttributeButton(String name) throws InterruptedException {
+    public void verifyThatCategoriesDoNoExist(String name) {
+        List<WebElement> categories = null;
+        try {
+            wait.until(ExpectedConditions.visibilityOf(categoriesTable));
+            categories = driver.findElements(By.xpath("//span[contains(text(),'" + name + "')]"));
+        } catch (NoSuchElementException | TimeoutException e) {
+            e.printStackTrace();
+        }
+        if ((categories != null) && !categories.isEmpty()) {
+            for (int i = 0; i < categories.size(); i++) {
+                deleteCategory(name);
+            }
+        }
+    }
+
+    public void clickAddAttributeButton(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+name+"')]")));
         driver.findElement(By.xpath("//span[contains(text(),'"+name+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
                 .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
                 .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add']")).click();
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
     }
 
-    public void fillNotAutomatedAttributeFields(String name, String dataType) throws InterruptedException {
-        Thread.sleep(2000);
-        createAttributeName.sendKeys(name);
+    public void fillNotAutomatedAttributeFields(String name, String dataType) {
+        wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
 
         createElementAttributeDataType.click();
         createElementAttributeDataType.findElements(By.tagName("option")).stream().
                 filter(e -> e.getText().equals(dataType)).findFirst().get().click();
-        Thread.sleep(1000);
 
-        createAttributeIsAutomated.click();
+        wait.until(ExpectedConditions.elementToBeClickable(createAttributeIsAutomated)).click();
         createAttributeIsAutomated.findElements(By.tagName("option")).stream().
                 filter(e -> e.getText().equals("No")).findFirst().get().click();
-        Thread.sleep(1000);
     }
 
     public void fillAutomatedAttributeFields(String name, String procedureName) throws InterruptedException {
@@ -105,13 +135,11 @@ public class CategoriesPage extends BasePage {
         storedProcedureNameField.sendKeys(procedureName);
     }
 
-    public void clickAddAttributeButton() throws InterruptedException {
-        addAttributeInCreationWindow.click();
-        Thread.sleep(3000);
-
+    public void clickAddAttributeButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(addAttributeInCreationWindow)).click();
     }
 
-    public boolean checkAttributeByName(String categoryName ,String attName) throws InterruptedException {
+    public boolean checkAttributeByName(String categoryName ,String attName) {
         expandAttributesList(categoryName);
         try{
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='"+attName+"']")));
@@ -121,11 +149,11 @@ public class CategoriesPage extends BasePage {
         }
     }
 
-    public void expandAttributesList(String categoryName) throws InterruptedException {
+    public void expandAttributesList(String categoryName) {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+categoryName+"')]")));
         driver.findElement(By.xpath("//span[contains(text(),'"+categoryName+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
                 .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
                 .findElement(By.xpath("..")).findElement(By.xpath("//td[@class=' details-control']")).click();
-        Thread.sleep(3000);
+        waitABit(3000);
     }
 }

@@ -44,6 +44,7 @@ public class ServiceCountWebPage extends BaseWebPage {
 	public boolean verifySearchFields() {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		waitABit(1500);
 		try {
 			if (!wait.until(ExpectedConditions.attributeToBe(locationField, "value", "(all)"))) {
 				return false;
@@ -62,7 +63,7 @@ public class ServiceCountWebPage extends BaseWebPage {
             wait.until(ExpectedConditions.elementToBeClickable(calendarDateToBTN)).click();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_dpDateTo_calendar_Top")));
-		} catch (Exception e) {
+		} catch (TimeoutException e) {
             e.printStackTrace();
 			return false;
 		}

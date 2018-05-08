@@ -205,9 +205,11 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
         clientQuotesPage.clickAddAgreementBTN(name);
         clientQuotesPage.setAgreement("First agreement","Repair360 FREE");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof ClientQuotesPage);
-        clientQuotesPage = (ClientQuotesPage) page;
+        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
+
+//        page = leftMenuPanel.clickOnMenu("Client Quotes");
+//        Assert.assertTrue(page instanceof ClientQuotesPage);
+//        clientQuotesPage = (ClientQuotesPage) page;
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
@@ -215,9 +217,9 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
-        page = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
-        Assert.assertTrue(page instanceof ClientQuotesDetailPage);
-        ClientQuotesDetailPage clientQuotesDetailPage = (ClientQuotesDetailPage)page;
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN("Second Agreement");
+//        Assert.assertTrue(page instanceof ClientQuotesDetailPage);
+//        ClientQuotesDetailPage clientQuotesDetailPage = (ClientQuotesDetailPage)page;
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountBTN();
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
@@ -230,11 +232,13 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesDetailPage.clickSendNotificationButton();
         //TODO when dates will be shown correct
 
-
-        leftMenuPanel.clickOnMenu("Client Management");
-        page = leftMenuPanel.clickOnMenu("Client Quotes");
-        Assert.assertTrue(page instanceof ClientQuotesPage);
-        clientQuotesPage = (ClientQuotesPage) page;
+        clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+//        leftMenuPanel.clickOnMenu("Client Management");
+//        page = leftMenuPanel.clickOnMenu("Client Quotes");
+//        Assert.assertTrue(page instanceof ClientQuotesPage);
+//        clientQuotesPage = (ClientQuotesPage) page;
         clientQuotesPage.searchUser(name);
         clientQuotesPage.deleteUser(name);
     }

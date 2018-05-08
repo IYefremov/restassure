@@ -157,13 +157,13 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		}
 	}
 
-	public void openGeneralSettingsTab() throws InterruptedException {
-		Thread.sleep(1000);
+	public void openGeneralSettingsTab() {
+        waitABit(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
 	}
 
-	public void clickErrorWithBLockingRadioButton() throws InterruptedException {
-		Thread.sleep(1000);
+	public void clickErrorWithBLockingRadioButton() {
+        waitABit(1000);
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2")))
 				.click();
@@ -197,14 +197,13 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
                 .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")))).click();
 	}
 
-	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype)
-			throws InterruptedException {
+	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) {
 		// String mainWindow = driver.getWindowHandle();
 		List<WebElement> rows = getServiceRequestTypesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().equals(srtype)) {
 				row.findElement(By.linkText("Settings")).click();
-				Thread.sleep(3000);
+                waitABit(3000);
 				return PageFactory.initElements(driver, ServiceRequestTypesVehicleInfoSettingsPage.class);
 			}
 		}

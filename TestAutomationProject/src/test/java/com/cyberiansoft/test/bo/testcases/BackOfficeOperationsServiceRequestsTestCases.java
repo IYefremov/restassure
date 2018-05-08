@@ -675,8 +675,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 26249:Operations: SR list - Verify that Check In button is changed to Undo Check In after pressing and vice versa", description = "Operations: SR list - Verify that Check In button is changed to Undo Check In after pressing and vice versa")
-	public void testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa()
-			throws InterruptedException {
+	public void testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa() {
 
 		final String addsrvalue = "Type_for_Check_In_ON";
 		final String customer = "002 - Test Company";
@@ -711,10 +710,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestslistpage.isCheckInButtonVisible());
 		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Check-In");
 		servicerequestslistpage.clickCheckInButtonForSelectedSR();
-		Thread.sleep(5000);
 		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Undo Check-In");
 		servicerequestslistpage.clickCheckInButtonForSelectedSR();
-		Thread.sleep(5000);
 		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Check-In");
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
@@ -767,7 +764,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.addNewDescriptionAndCheckOld(descriptions[1], descriptions[0]));
-
 	}
 
 	@DataProvider
@@ -964,7 +960,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
 		int afterRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(startDate);
-        Assert.assertEquals(1, afterRequestsCount - prevRequestsCount);
+        Assert.assertEquals(afterRequestsCount - prevRequestsCount, 1);
 	}
 
 	@Test(testName = "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5")
@@ -1615,7 +1611,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 63581:Company - Service Request Type: Duplicate search Issue")
-	public void testServiceRequestTypeDublicateSearchIssue() throws InterruptedException {
+	public void testServiceRequestTypeDublicateSearchIssue() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();

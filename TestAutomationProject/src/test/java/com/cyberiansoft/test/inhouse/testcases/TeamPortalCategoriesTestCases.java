@@ -20,7 +20,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     }
 
     @Test(testName = "Test Case 59877:Verify user can add new categories.")
-    public void testUserCanAddNewCategories() throws InterruptedException {
+    public void testUserCanAddNewCategories() {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
@@ -33,13 +33,14 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     }
 
     @Test(testName = "Test Case 59879:Verify user can add new categories.")
-    public void testUserCanAddAttributeToCategories() throws InterruptedException {
+    public void testUserCanAddAttributeToCategories() {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
                 .clickCategoriesSubmenu();
 
+        categoriesPage.verifyThatCategoriesDoNoExist("Test Category");
         categoriesPage.clickAddCategoryButton();
         categoriesPage.setCategory("Test Category");
         categoriesPage.clickSubmitCategoryButton();
