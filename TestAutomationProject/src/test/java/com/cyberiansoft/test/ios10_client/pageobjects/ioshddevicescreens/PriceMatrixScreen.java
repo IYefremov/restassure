@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class PriceMatrixScreen extends iOSHDBaseScreen {
@@ -128,8 +126,17 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(Duration.ofSeconds(1)).release().perform();
+		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails");
+		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
+			swipeTableUp(table.findElementByAccessibilityId(discaunt),
+					table);
+		}
+		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId(discaunt)).click();
+
+
+
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByAccessibilityId(discaunt).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
 		//				+ discaunt + "\")]").click();

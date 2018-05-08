@@ -1,5 +1,6 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+  import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
   import com.cyberiansoft.test.ios10_client.utils.Helpers;
   import io.appium.java_client.AppiumDriver;
   import io.appium.java_client.MobileBy;
@@ -75,7 +76,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		//action.press(myinspectionsbtn).waitAction(300).release().perform();
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		inspectionsscreen.switchToMyInspectionsView();
+		inspectionsscreen.switchToMyView();
 		return inspectionsscreen;
 	}
 	
@@ -84,7 +85,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		inspectionsscreen.switchToTeamInspectionsView();
+		inspectionsscreen.switchToTeamView();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -96,7 +97,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
 		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
-		myworkordersscreen.switchToLocalMyOrdersView();
+		myworkordersscreen.switchToMyView();
 		return myworkordersscreen;		
 	}
 	
@@ -104,7 +105,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
 		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
-		myworkordersscreen.switchToTeamWorkOrdersView();		
+		myworkordersscreen.switchToTeamView();
 		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 	
@@ -120,7 +121,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
-		myinvoicesscreen.switchToMyInvoicesView();
+		myinvoicesscreen.switchToMyView();
 		return myinvoicesscreen;
 	}
 	
@@ -129,7 +130,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen(appiumdriver);
-		myinvoicesscreen.switchToTeameInvoicesView();
+		myinvoicesscreen.switchToTeamView();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));

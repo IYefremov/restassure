@@ -2,7 +2,9 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
@@ -10,6 +12,10 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
@@ -51,13 +57,15 @@ public class DentWizartestCases extends BaseTestCase {
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+
+		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
 		devicespage.setSearchCriteriaByName(searchlicensecriteria);
 		regCode = devicespage.getFirstRegCodeInTable();
 		DriverBuilder.getInstance().getDriver().quit();
-		Thread.sleep(2000);
 	}
 
 	//@Test(description = "Register iOS Ddevice")
@@ -1265,8 +1273,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1316,7 +1323,8 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen(appiumdriver);
 		pricematrix.clickSaveButton();
-		pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		servicesscreen = new ServicesScreen(appiumdriver);
+		servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		pricematrix.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption());
@@ -1335,8 +1343,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1393,8 +1400,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1506,8 +1512,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1595,8 +1600,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1660,8 +1664,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1700,8 +1703,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1815,8 +1817,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
@@ -1936,8 +1937,7 @@ public class DentWizartestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.retailhailworkordertype);
-		myworkordersscreen.selectWorkOrderJob(UtilConstants.WO_TYPE_JOB);
+		myworkordersscreen.addWorkWithJobOrder(UtilConstants.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 		questionsscreen.acceptForReminderNoDrilling();
