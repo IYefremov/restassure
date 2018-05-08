@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -13,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -108,11 +106,11 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		par.findElement(By.xpath("//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
 	}
 
-	public void assertPriceCorrect(String expectedprice) {
+	public String getPrice() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Price")));
 		WebElement par = getTableParentCell("Price");
-		Assert.assertEquals(par.findElement(By.xpath("//XCUIElementTypeTextField")).getAttribute("value"), expectedprice);
+		return par.findElement(By.xpath("//XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public void selectDiscaunt(String discaunt) {
@@ -154,12 +152,12 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		return par.findElements(By.xpath("//XCUIElementTypeStaticText[@name=\""+ pricevalue + "\"]")).size() > 0;
 	}
 
-	public void assertNotesExists() {
-		Assert.assertTrue(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")).isDisplayed());
+	public boolean isNotesExists() {
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")).isDisplayed();
 	}
 
-	public void assertTechniciansExists() {
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed());
+	public boolean isTechniciansExists() {
+		return appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed();
 	}
 
 	public String getTechniciansValue() {
@@ -198,10 +196,9 @@ public class RegularPriceMatrixScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
 	}
 	
-	public void clearVehicleData() {
+	public String clearVehicleData() {
         appiumdriver.findElementByAccessibilityId("Delete").click();
-		String msg = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(msg, AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
+		return Helpers.getAlertTextAndAccept();
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {

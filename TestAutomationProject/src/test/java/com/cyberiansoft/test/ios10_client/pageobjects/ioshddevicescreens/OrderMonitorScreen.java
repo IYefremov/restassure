@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,14 +43,14 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Start phase")
     private IOSElement startphasebtn;
 	
-	@iOSFindBy(accessibility = "Back")
-    private IOSElement backbtn;
-	
 	@iOSFindBy(accessibility = "Services")
     private IOSElement servicesbtn;
 	
 	@iOSFindBy(accessibility = "Active")
     private IOSElement activecaption;*/
+
+    @iOSFindBy(accessibility = "Back")
+    private IOSElement backbtn;
 	
 	public OrderMonitorScreen(AppiumDriver driver) {
 		super(driver);
@@ -60,7 +61,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPanel(String panelname) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 	}
 	
@@ -86,8 +87,6 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void setCompletedServiceStatus() throws InterruptedException {
 		clickServiceStatusCell();
 		appiumdriver.findElementByAccessibilityId("Completed").click();
-		Thread.sleep(2000);
-		//clickBackButton();
 	}
 	
 	public void setCompletedPhaseStatus() throws InterruptedException {
@@ -108,9 +107,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	
-	public void clickStartPhase() throws InterruptedException {
+	public void clickStartPhase() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='Repair phase']/XCUIElementTypeButton[@name='Start phase']").click();
-		Thread.sleep(3000);
 	}
 	
 	public void clickServiceDetailsDoneButton() throws InterruptedException {
@@ -130,16 +128,15 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void clickServicesButton() {
 		//appiumdriver.findElement(By.xpath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeButton[@name='Services']")).click();
 		appiumdriver.findElement(By.xpath("//XCUIElementTypeButton[@name='Services']")).click();
-		Helpers.waitABit(1000);
 	}
 	
 	public boolean isRepairPhaseExists() { 
 		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
 	}
 	
-	public void clicksRepairPhaseLine() { 
-		appiumdriver.findElementByAccessibilityId("Repair phase").click();
-		Helpers.waitABit(1000);
+	public void clicksRepairPhaseLine() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 	
 	public boolean isServiceIsActive(String servicedisplayname) {
@@ -171,7 +168,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public TeamWorkOrdersScreen clickBackButton() {
-		appiumdriver.findElementByAccessibilityId("Back").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(backbtn)).click();
 		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 	

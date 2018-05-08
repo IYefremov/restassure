@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class iOSRegularBaseScreen extends iOSBaseScreen {
+public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	
 	
 	//final String uipickerxpath = ".popover().pickers()[0]";

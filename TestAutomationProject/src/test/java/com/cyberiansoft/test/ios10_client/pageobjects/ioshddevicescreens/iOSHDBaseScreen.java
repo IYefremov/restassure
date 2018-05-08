@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -15,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-public class iOSHDBaseScreen extends iOSBaseScreen {
+public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
 	
@@ -38,10 +37,6 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public HomeScreen clickHomeButton() {
 		appiumdriver.findElementByAccessibilityId("Back").click();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(waitOptions(ofSeconds(2))).release().perform();
 		return new HomeScreen(appiumdriver);		
 	}
 	
@@ -55,12 +50,21 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
 	public void clickSaveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Save")));
 		appiumdriver.findElementByAccessibilityId("Save").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+			wait = new WebDriverWait(appiumdriver, 30);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 	}
+
+	/*public void clickSaveIvoiceWithoutPONumber() {
+		appiumdriver.findElementByAccessibilityId("Save").click();
+		Helpers.waitForAlert();
+		appiumdriver.switchTo().alert().accept();
+		new InvoiceInfoScreen(appiumdriver);
+	}*/
 	
 	public void cancelOrder() {
 		clickCancelButton();
@@ -129,9 +133,18 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
 		boolean found = false;
-		//selectUIAPickerValue(year);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypePicker")));
 		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+
+		if (!pickerwhl.getAttribute("value").contains(value)) {
+			pickerwhl.setValue(value);
+			picker.setValue(value);
+		}
+		return true;
+
+		/*
 		int  xx = picker.getSize().getWidth()/2;
 		int yy = (int) (picker.getSize().getHeight()*0.75);
 
@@ -150,7 +163,7 @@ public class iOSHDBaseScreen extends iOSBaseScreen {
 			if (clicks > defaultwheelnumer)
 				break;
 		}
-		return found;
+		return found;*/
 	}
 	
 	public void swipeScreenUp() {

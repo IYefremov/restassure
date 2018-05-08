@@ -1,5 +1,8 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -15,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class InvoiceInfoScreen extends iOSHDBaseScreen {
+public class InvoiceInfoScreen extends BaseWizardScreen {
 	
 	/*@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
@@ -41,8 +44,8 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;*/
 
-	public InvoiceInfoScreen(AppiumDriver driver) {
-		super(driver);
+	public InvoiceInfoScreen(AppiumDriver driver, TypeScreenContext typeScreenContext) {
+		super(driver, typeScreenContext);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
@@ -53,10 +56,11 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 		alert.accept();
 	}
 
-	public void clickSaveAsDraft()  {
+	public <T extends BaseTypeScreen> T clickSaveAsDraft()  {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 		appiumdriver.findElementByAccessibilityId("Draft").click();
 		clickSaveButton();
+		return getTypePageFromContext();
 	}
 
 	public void clickSaveAsFinal() {
@@ -117,12 +121,15 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	//}
 
 	public void clickCancelButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
-	public void cancelInvoice() {
+	public <T extends BaseTypeScreen> T cancelInvoice() {
 		clickCancelButton();
 		acceptAlert();
+		return getTypePageFromContext();
 	}
 
 	public void clickInvoicePayButton() {
@@ -143,6 +150,11 @@ public class InvoiceInfoScreen extends iOSHDBaseScreen {
 	public void clickInvoicePayDialogButon() {
 		appiumdriver.findElementByAccessibilityId("Pay").click();
 	}
-	
-	
+
+	public void clickSaveIvoiceWithoutPONumber() {
+		appiumdriver.findElementByAccessibilityId("Save").click();
+		Helpers.waitForAlert();
+		appiumdriver.switchTo().alert().accept();
+		new InvoiceInfoScreen(appiumdriver, typeContext);
+	}
 }

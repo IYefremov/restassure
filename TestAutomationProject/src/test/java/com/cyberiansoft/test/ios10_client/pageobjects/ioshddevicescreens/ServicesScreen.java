@@ -168,13 +168,15 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		else 
 			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
 
-		
-		TouchAction action = new TouchAction(appiumdriver);
-		/*action.press(appiumdriver.findElementByAccessibilityId("AvailableServiceList")
-				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
-						servicename + "']"))).waitAction(1000).release().perform();*/
-		action.press(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename)).waitAction(Duration.ofSeconds(1)).release().perform();
-		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
+		if (!(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementsByAccessibilityId(servicename).size() < 0)) {
+			IOSElement searchfld = (IOSElement) availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField"));
+			searchfld.clear();
+			searchfld.setValue(servicename);
+			appiumdriver.hideKeyboard();
+		}
+		availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename).click();
+		//TouchAction action = new TouchAction(appiumdriver);
+		//action.press(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename)).waitAction(Duration.ofSeconds(1)).release().perform();
 	}
 	
 	public void selectGroupServiceItem(String servicename) {
@@ -216,7 +218,13 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
-		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");		
+		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		if (!(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementsByAccessibilityId(servicename).size() < 0)) {
+			IOSElement searchfld = (IOSElement) availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField"));
+			searchfld.clear();
+			searchfld.setValue(servicename);
+			appiumdriver.hideKeyboard();
+		}
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(availableservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).findElementByAccessibilityId("custom detail button")).waitAction(Duration.ofSeconds(1)).release().perform();
 		return new SelectedServiceDetailsScreen(appiumdriver);
@@ -250,6 +258,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		//searchfld.click();
 		searchfld.clear();
 		searchfld.setValue(servicename);
+		appiumdriver.hideKeyboard();
 		/*((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		Helpers.waitABit(500);*/
@@ -260,7 +269,6 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);
 	}
 	
 	public void cancelSearchAvailableService() {

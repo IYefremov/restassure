@@ -1357,8 +1357,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Quick Quote");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.QUICK_QUOTE_SIZE, PriceMatrixScreen.QUICK_QUOTE_SEVERITY);
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			pricematrix.setPrice(ExcelUtils.getServicePrice(testcaserow));
 
 			pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
@@ -1511,7 +1511,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.HEAVY_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1531,7 +1531,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix.clickSaveButton();
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.SEVERE_SEVERITY);
-			pricematrix.assertPriceCorrect("$0.00");
+			Assert.assertEquals(pricematrix.getPrice(), "$0.00");
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1611,9 +1611,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 
@@ -1633,7 +1633,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.HLF_SIZE, PriceMatrixScreen.LIGHT_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 
@@ -1709,9 +1709,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 
@@ -1841,9 +1841,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.VERYLIGHT_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1857,9 +1857,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
@@ -1935,9 +1935,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 			pricematrix.clickOnTechnicians();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
@@ -1971,9 +1971,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
-			pricematrix.assertPriceCorrect(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-			pricematrix.assertNotesExists();
-			pricematrix.assertTechniciansExists();
+			Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
+			Assert.assertTrue(pricematrix.isNotesExists());
+			Assert.assertTrue(pricematrix.isTechniciansExists());
 
 			pricematrix.clickOnTechnicians();
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);

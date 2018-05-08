@@ -71,12 +71,10 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
-		Helpers.waitABit(500);
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {
-		Helpers.waitABit(1000);
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 				+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	
@@ -89,24 +87,19 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	public void clickSearchButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void clickSearchSaveButton() {
 		searccsavebtn.click();
-		Helpers.waitABit(2000);
 	}
 	
 	public void selectSearchLocation(String _location) {
-		Helpers.waitABit(500);
 		locationfld.click();
-		Helpers.waitABit(500);
 		appiumdriver.findElementByName(_location).click();
 	}
 	
 	public void setSearchType(String wotype)  {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
-		Helpers.waitABit(500);
 		selectWorkOrderType(wotype);
 	}
 	
@@ -144,12 +137,11 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		selectEmployee( employee);
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Enter password here")).setValue(password);
 		Helpers.acceptAlert();
-		Helpers.waitABit(1000);
+
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading team order")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void selectEmployee(String employee) {
@@ -158,12 +150,12 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	
 	public void setFilterLocation(String _location)  {
 		appiumdriver.findElementByAccessibilityId("Location").click();
-		Helpers.waitABit(500);
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
 	public void clickSaveFilter() {
 		clickSaveButton();
+		new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 	
 	public boolean woExists(String wonumber) {
@@ -189,7 +181,6 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading team order")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void selectWorkOrder(String wonumber) {

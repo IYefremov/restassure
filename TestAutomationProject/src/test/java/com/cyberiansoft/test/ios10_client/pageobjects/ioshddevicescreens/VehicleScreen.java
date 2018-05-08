@@ -19,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -110,12 +110,44 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	public void setVIN(String vin) {
 	
 		setVINFieldValue(vin);
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 1)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Close").get(1)).click();
-		if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Close").click();
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Helpers.waitABit(1000);
+		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+		for (IOSElement closebtn : closebtns)
+			if (closebtn.isDisplayed()) {
+				closebtn.click();
+				break;
+			}
+		try {
+			if (appiumdriver.findElementsByAccessibilityId("Searching on Back Office").size() > 0) {
+				WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+				wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId("Searching on Back Office")));
+			}
+		} catch (WebDriverException e) {
+
+		}
+
+		Helpers.waitABit(1000);
+		if (elementExists("Close"))	 {
+			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+			for (IOSElement closebtn : closebtns)
+//			closebtn.click();
+				if (closebtn.isDisplayed()) {
+					closebtn.click();
+
+					break;
+				}
+		}
+
+		Helpers.waitABit(1000);
+		if (elementExists("Close"))	 {
+			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
+			for (IOSElement closebtn : closebtns)
+				if (closebtn.isDisplayed()) {
+					closebtn.click();
+
+					break;
+				}
+		}
 	}
 	
 	public void setVINFieldValue(String vin) {

@@ -1,23 +1,18 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.DeviceRotation;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class MainScreen extends iOSHDBaseScreen {
 	
@@ -83,10 +78,9 @@ public class MainScreen extends iOSHDBaseScreen {
 			appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
 		} else 
 			appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
-		
-		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
-		//wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(securefld));
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSecureTextField")));
 		((IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeSecureTextField")).setValue(password);
 		//securefld.setValue(password);
 		TouchAction action = new TouchAction(appiumdriver);

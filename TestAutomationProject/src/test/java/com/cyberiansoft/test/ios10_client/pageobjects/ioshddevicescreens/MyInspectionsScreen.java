@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -18,7 +21,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class MyInspectionsScreen extends iOSHDBaseScreen {
+public class MyInspectionsScreen extends BaseTypeScreen {
 	
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	private By discardbtnxpath = By.name("Discard");
@@ -97,7 +100,20 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0) {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		}
-		Helpers.waitABit(500);
+	}
+
+	public void addInspection(String inspType) {
+		clickAddInspectionButton();
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		inspectionTypesPopup.selectInspectionType(inspType);
+	}
+
+	public void addOInspectionWithSelectCustomer(String customerName, String inspType) {
+		clickAddInspectionButton();
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(customerName);
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		inspectionTypesPopup.selectInspectionType(inspType);
 	}
 
 	public void clickEditInspectionButton() {
@@ -112,9 +128,11 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		clickEditInspectionButton();
 	}
 	
-	public void selectInspectionForCreatingWO(String inspnumber) {
-		selectInspectionInTable(inspnumber);
+	public void createWOFromInspection(String inspNumber, String workOrderType) {
+		selectInspectionInTable(inspNumber);
 		clickCreateWOButton();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
 	public void selectInspectionForApprove(String inspnumber) {
@@ -163,6 +181,8 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 
 	public void clickArchiveInspectionButton() {
 		appiumdriver.findElementByAccessibilityId("Archive").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Yes")));
 		appiumdriver.findElementByAccessibilityId("Yes").click();
 		//waitForAlert();
 		//acceptAlert();
@@ -181,7 +201,7 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
         wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId(inpectionNumber)));
 	}
 
-	public void archiveInspections(ArrayList<String> inspections, String reason) throws InterruptedException {
+	public void archiveInspections(ArrayList<String> inspections, String reason)  {
 		clickActionButton();
 		for (String inspNumber : inspections) {
 			selectInspectionForAction(inspNumber);
@@ -190,10 +210,10 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 		selectReasonToArchive(reason);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Status Reason"), 1));
+		new MyInspectionsScreen(appiumdriver);
 	}
 
-	public void selectReasonToArchive(String reason)
-			throws InterruptedException {
+	public void selectReasonToArchive(String reason) {
 
 		selectUIAPickerValue(reason);
 		appiumdriver.findElementByAccessibilityId("Status Reason").click();
@@ -204,29 +224,15 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	}
 
 	public VehicleScreen selectDefaultInspectionType() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default inspection type")));
 		appiumdriver.findElementByAccessibilityId("Default inspection type").click();
 		return new VehicleScreen(appiumdriver);
 	}
 
-	public void selectInspectionType(String inspectiontype) {
-		
-		IOSElement inptypetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InspectionTypeSelector' and type = 'XCUIElementTypeTable'"));
-		if (!inptypetable.findElementByAccessibilityId(inspectiontype).isDisplayed()) {
-			swipeTableUp(inptypetable.findElementByAccessibilityId(inspectiontype),
-					inptypetable);
-			//inptypetable.click();
-			inptypetable.findElementByAccessibilityId(inspectiontype).click();
-			//Helpers.waitABit(500);
-		}
-		if (elementExists(inspectiontype))
-			appiumdriver.findElementByAccessibilityId(inspectiontype).click();
-	}
-
 	public void selectInspectionInTable(String inspectionnumber) {
-		//System.out.println("++++" + appiumdriver.findElementsByAccessibilityId(inspectionnumber).size());
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionnumber))).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspectionnumber + "']").click();
 	}
 	
 	public void selectFirstInspection() {
@@ -333,6 +339,8 @@ public class MyInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("CustomerSelectorTable")));
 		MobileElement customersTable = (MobileElement) appiumdriver.findElementByAccessibilityId("CustomerSelectorTable");
 		if (!customersTable.findElementByAccessibilityId(customer).isDisplayed()) {
 			swipeTableUp(customersTable.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/.."),

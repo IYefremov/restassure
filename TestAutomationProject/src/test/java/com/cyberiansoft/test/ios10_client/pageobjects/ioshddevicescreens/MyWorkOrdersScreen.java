@@ -1,5 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.AppiumDriver;
@@ -7,6 +11,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -16,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class MyWorkOrdersScreen extends iOSHDBaseScreen {
+public class MyWorkOrdersScreen extends BaseTypeScreen {
 
 	private By autosavedworkorder = By.name("EntityInfoButtonUnchecked, AutoSaved");
 	
@@ -83,21 +88,40 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility  = "Service Request")
     private IOSElement servicerequestbtn;*/
 
+	@iOSFindBy(accessibility = "Add")
+	private IOSElement addorderbtn;
+
 	public MyWorkOrdersScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Orders")));
 	}
 
-	public void clickAddOrderButton() {			
-		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.AccessibilityId("Add")).click();
+	public void clickAddOrderButton() {
+		addorderbtn.click();
 		if (elementExists("Discard"))
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
-	
-	public IOSElement getAddOrderButton() {	
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		return (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Add"))); 
+
+
+	public void addOrderWithSelectCustomer(String customerName, String workOrderType) {
+		clickAddOrderButton();
+		selectCustomerAndWorkOrderType(customerName, workOrderType);
+	}
+
+	private void selectCustomerAndWorkOrderType(String customerName, String workOrderType) {
+		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(customerName);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+	}
+
+	public void addWorkOrder(String workOrderType) {
+		clickAddOrderButton();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
 	public void selectFirstOrder() {
@@ -107,6 +131,25 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	public void selectCopyServices() {
 		appiumdriver.findElementByAccessibilityId("Copy Services").click();
 	}
+
+	public void copyServicesForWorkOrder(String workOrderNumber, String customerName, String workOrderType) {
+		selectWorkOrder(workOrderNumber);
+		selectCopyServices();
+		selectCustomerAndWorkOrderType(customerName, workOrderType);
+	}
+
+	public void copyServicesForWorkOrder(String workOrderNumber, String workOrderType) {
+		selectWorkOrder(workOrderNumber);
+		selectCopyServices();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+	}
+
+	public void copyVehicleForWorkOrder(String workOrderNumber, String customerName, String workOrderType) {
+		selectWorkOrder(workOrderNumber);
+		selectCopyVehicle();
+		selectCustomerAndWorkOrderType(customerName, workOrderType);
+	}
 	
 	public void selectCopyVehicle() {
 		appiumdriver.findElementByAccessibilityId("Copy Vehicle").click();
@@ -114,7 +157,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void clickChangeCustomerPopupMenu() {
 		appiumdriver.findElementByAccessibilityId("Change Customer").click();
-		Helpers.waitABit(1000);
 	}
 	
 	public void clickDetailspopupMenu() {
@@ -122,10 +164,12 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectCustomer(String customer) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		TouchAction tap = new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId(customer));              
         tap.perform();
 		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 		}
 	}
@@ -134,19 +178,25 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Customers"), 1));
 		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 		}
 	}
 	
-	public void customersPopupSwitchToWholesailMode() throws InterruptedException {
+	public void customersPopupSwitchToWholesailMode() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		if (elementExists(btnretail)) {
 			appiumdriver.findElement(btnretail).click();
 		}
 	}
 	
-	public void customersPopupSwitchToRetailMode() throws InterruptedException {
+	public void customersPopupSwitchToRetailMode() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		if (elementExists(btnwholesale)) {
 			appiumdriver.findElement(btnwholesale).click();
 		}
@@ -166,28 +216,9 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		clickDoneButton();
 	}
 	
-	public void deleteWorkOrderViaActionAndSearch(String wo) throws InterruptedException {
-		IOSElement addbtn = getAddOrderButton();
-		int xx = addbtn.getLocation().getX();
-
-		int yy = addbtn.getLocation().getY();
-		appiumdriver.findElement(MobileBy.IosUIAutomation(".navigationBars()[0].buttons()[\"Search\"]")).click();
-		Helpers.keyboadrType(wo.substring(6, wo.length()));
-		appiumdriver.findElement(MobileBy.xpath("//UIAKeyboard[1]/UIAButton[@name=\"Search\"]")).click();
-		
-		clickActionButton();
-		selectWorkOrderForAction(wo);
-		clickActionButton();
-		appiumdriver.findElementByXPath("//UIAScrollView[2]/UIAButton[4]").click();
-		Helpers.acceptAlert();
-		clickDoneButton();
-		
-		
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(xx + 10,yy + 10).release().perform();
-	}
-	
 	public void clickActionButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable (appiumdriver.findElementByAccessibilityId("Share")));
 		appiumdriver.findElementByAccessibilityId("Share").click();		
 	}
 	
@@ -201,7 +232,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	
 	public void setFilterLocation(String _location)  {
 		appiumdriver.findElementByAccessibilityId("Location").click();
-		Helpers.waitABit(500);
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
@@ -214,7 +244,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isAutosavedWorkOrderExists() {
-		Helpers.waitABit(1500);
+		Helpers.waitABit(1000);
 		return elementExists(autosavedworkorder);
 	}
 	
@@ -227,15 +257,20 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		return new SelectEmployeePopup(appiumdriver);
 	}
 	
-	public void approveWorkOrderWithoutSignature(String wo, String employee, String pwd) {
+	public MyWorkOrdersScreen approveWorkOrderWithoutSignature(String wo, String employee, String pwd) {
 		SelectEmployeePopup selectemployeepopup = clickWorkOrderForApproveButton(wo);
 		selectemployeepopup.selectEmployeeAndTypePassword(employee, pwd);
 		ApproveSummaryPopup approvepopup = new ApproveSummaryPopup(appiumdriver);
 		approvepopup.clickApproveButton();
+
+		return this;
 	}
 	
 	public void selectWorkOrder(String wonumber) {
-		appiumdriver.findElementByAccessibilityId(wonumber).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(wonumber))).click();
 	}
 	
 	public void selectWorkOrderForEidt(String wonumber) {		
@@ -250,7 +285,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/.."),
 					appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/../.."));
-			appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
+			//appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 
@@ -264,7 +299,7 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/.."),
 					appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Technicians']/../.."));
-			appiumdriver.findElementByAccessibilityId("Technicians").click();
+			//appiumdriver.findElementByAccessibilityId("Technicians").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
@@ -310,7 +345,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getPriceValueForWO(String wonumber) {
-		Helpers.waitABit(500);
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeStaticText[@name='labelOrderAmount']").getAttribute("value");
 	}
 
@@ -318,35 +352,21 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		return elementExists(wonumber);
 	}
 
-	public void clickInvoiceIcon() {
+	public InvoiceInfoScreen clickInvoiceIcon() {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
+		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
 	}
 
 	public InvoiceInfoScreen selectInvoiceType(String invoicetype) {
 		/*appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
 						+ invoicetype + "\")]/UIAStaticText[1]").click();*/
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
-		return new InvoiceInfoScreen(appiumdriver);
+		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
 	}
 
 	public String selectInvoiceTypeAndAcceptAlert(String invoicetype) throws InterruptedException {
 		selectInvoiceType(invoicetype);
 		return Helpers.getAlertTextAndAccept();
-	}
-
-	public void selectWorkOrderType(String workordertype) {
-
-		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0)
-			appiumdriver.findElementByAccessibilityId("Discard").click();
-		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
-
-		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
-			swipeTableUp(wostable.findElementByAccessibilityId(workordertype),
-					wostable);
-			wostable.findElementByAccessibilityId(workordertype).click();
-		}
-		if (appiumdriver.findElementsByAccessibilityId(workordertype).size() > 0)
-			appiumdriver.findElementByAccessibilityId(workordertype).click();
 	}
 
 	public  void selectWorkOrderJob(String job) {
@@ -359,7 +379,9 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickSaveFilter() {
-		clickSaveButton();
+		appiumdriver.findElementByAccessibilityId("Save").click();
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Save"), 1));
 	}
 	
 	public boolean isMenuItemForSelectedWOExists(String menuitem) {
@@ -388,7 +410,6 @@ public class MyWorkOrdersScreen extends iOSHDBaseScreen {
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.clickApproveButton();
-		Helpers.waitABit(1000);
 	}
 	
 	public VehicleScreen selectJob(String workorderjob) {
