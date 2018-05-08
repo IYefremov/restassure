@@ -33,7 +33,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String quicknote = "AB note";
+		final String quicknote = "ab note";
 		final String notetext = "new notes";
 		final String quicknotenew = "1 note";
 		
@@ -96,7 +96,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String quicknote = "AB note";
+		final String quicknote = "ab note";
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -145,7 +145,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String quicknote = "AB note";
+		final String quicknote = "ab note";
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -191,7 +191,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { "1 note", "AB note" };
+		final String[] quicknotes = { "1 note", "ab note" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -273,7 +273,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String quicknote = "AB note";
+		final String quicknote = "ab note";
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -317,7 +317,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String vinnumber = "123";
 		
 		final int numberOfImages = 3;
-		final String quicknote = "AB note";
+		final String quicknote = "ab note";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		

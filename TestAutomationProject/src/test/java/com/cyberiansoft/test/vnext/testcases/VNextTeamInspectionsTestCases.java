@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import java.util.List;
 
+import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -510,10 +511,11 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+		loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+				VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();

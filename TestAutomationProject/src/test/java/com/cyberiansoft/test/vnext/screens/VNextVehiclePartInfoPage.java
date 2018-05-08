@@ -76,7 +76,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		WebElement addsrvc = null;
 		List<WebElement> addservs = additionalserviceslist.findElements(By.xpath(".//div[contains(@class, 'checked-accordion-item')]"));
 		for (WebElement additinalservice : addservs) {
-			if (additinalservice.findElement(By.xpath(".//div[@class='item-title']")).getText().equals(additionalservicename)) {
+			if (additinalservice.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(additionalservicename)) {
 				addsrvc = additinalservice;
 				break;
 			}
