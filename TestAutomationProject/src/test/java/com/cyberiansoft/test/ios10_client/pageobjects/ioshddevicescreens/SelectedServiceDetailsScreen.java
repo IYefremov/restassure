@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -465,19 +463,22 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {
 		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
-		/*if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
-			swipeTableUp(vehiclepartstable.findElementByAccessibilityId(vehiclepart),
-					vehiclepartstable);
+
+
+
+		if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
+			scrollToElement(vehiclepart);
+			//swipeTableUp(vehiclepartstable.findElementByAccessibilityId(vehiclepart),
+			//		vehiclepartstable);
 		}
-		vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
+		/*vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
 		if (vehiclepartstable.findElement(MobileBy.name(vehiclepart)).findElementByClassName("XCUIElementTypeButton").getAttribute("name").equals("unselected")) {
 			//vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
 			//vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
 			new TouchAction(appiumdriver).press(vehiclepartstable.findElement(MobileBy.name(vehiclepart)))
 	                .waitAction(waitOptions(ofSeconds(2))).release().perform();
 		}*/
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(vehiclepartstable.findElement(MobileBy.name(vehiclepart))).waitAction(Duration.ofSeconds(1)).release().perform();
+		vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
 	}
 
 	public void cancelSelectedServiceDetails() {
