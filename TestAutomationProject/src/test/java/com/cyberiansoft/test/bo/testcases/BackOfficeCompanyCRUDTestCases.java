@@ -65,7 +65,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 27876:Company-Teams: CRUD", description = "Company-Teams: CRUD" )
-	public void testCompanyTeamsCRUD() throws Exception {
+	public void testCompanyTeamsCRUD() {
 
 		final String team = "Testteam";
 		final String teamdesc = "Test team description";
@@ -102,10 +102,10 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals(team, newteamsdialog.getNewTeamName());
 		
 		newteamsdialog.setNewTeamName(teamedited).selectTeamTimezone(teamtimezone).setNewTeamDescription(teamdesc)
-			.setNewTeamAccountingID(teamid).selectTeamArea(teamarea)
+            .setNewTeamAccountingID(teamid).selectTeamArea(teamarea)
 			.selectTeamTimesheetType(teamtimesheettype)
-			.selectTeamDefaultRepairLocation(teamdefaultlocation).
-			selectTeamAdditionalRepairLocation(teamadditionallocation)
+            .selectTeamDefaultRepairLocation(teamdefaultlocation)
+            .selectTeamAdditionalRepairLocation(teamadditionallocation)
 			.selectTeamType(teamtype).setNewTeamCompany(teamcompany).setNewTeamAddress(teamaddress).setNewTeamCity(teamcity)
 			.selectTeamCountry(teamcountry).selectTeamState(teamstate).setNewTeamZip(teamzip).setNewTeamEmail(teamemail)
 			.setNewTeamPhone(teamphone).clickAddTeamCancelButton();	
@@ -118,7 +118,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals("", teamspage.getTableTeamDescription(team).trim());
 
 		newteamsdialog = teamspage.clickEditTeam(team);
-		Thread.sleep(1000);
 		newteamsdialog.setNewTeamName(teamedited).selectTeamTimezone(teamtimezone).setNewTeamDescription(teamdesc).setNewTeamAccountingID(teamid)
 			.selectTeamArea(teamarea).selectTeamTimesheetType(teamtimesheettype).selectTeamDefaultRepairLocation(teamdefaultlocation)
 			.selectTeamAdditionalRepairLocation(teamadditionallocation).selectTeamType(teamtype).setNewTeamCompany(teamcompany)

@@ -638,7 +638,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     @Test(testName = "Test Case 26225:Operations: SR list - Verify that Check In button is appeared when SR is saved",
             description = "Operations: SR list - Verify that Check In button is appeared when SR is saved")
-	public void testOperationsVerifyThatCheckInButtonIsAppearedWhenSRIsSaved() {
+	public void testOperationsVerifyThatCheckInButtonAppearsWhenSRIsSaved() {
 
 		final String addsrvalue = "Type_for_Check_In_ON";
 		final String customer = "002 - Test Company";
@@ -1094,7 +1094,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithoutDescription(startDate, endDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
 		Assert.assertFalse(serviceRequestsWebPage.checkLifeCycleDate());
-
 	}
 
 	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation")

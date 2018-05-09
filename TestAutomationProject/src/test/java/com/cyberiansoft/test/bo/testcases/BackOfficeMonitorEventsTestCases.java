@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 
 	@Test(description = "Test Case 19250:\"Estimate approved\" event creation")
-	public void testEstimateApprovedEventCreation() throws Exception {
+	public void testEstimateApprovedEventCreation() {
 		
 		final String eventname = "Estimate Approved";
 		final String alertname = "Test estimate";
@@ -43,7 +43,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 19282:\"Estimate decline\" event creation")
-	public void testEstimateDeclineEventCreation() throws Exception {
+	public void testEstimateDeclineEventCreation() {
 		
 		final String eventname = "Estimate Declined";
 		final String alertname = "Test Estimate Decline";
@@ -78,7 +78,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 19283:\"New Inspection\" event creation")
-	public void testNewInspectionEventCreation() throws Exception {
+	public void testNewInspectionEventCreation() {
 		
 		final String eventname = "New Inspection";
 		final String alertname = "Test New Inspection";
@@ -113,7 +113,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	//@Test(description = "Test Case 19384:\"60 min to target time\" event creation")
-	public void test60MinToTargetTimeEventCreation() throws Exception {
+	public void test60MinToTargetTimeEventCreation() {
 		
 		final String eventname = "60 Min to Target Time";
 		final String alertname = "Test 60 Min to Target Time";
@@ -148,7 +148,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 19563:\"High Priority RO\" event creation")
-	public void testHighPriorityROEventCreation() throws Exception {
+	public void testHighPriorityROEventCreation() {
 		
 		final String eventname = "High Priority RO";
 		final String alertname = "Test High Priority RO";
@@ -183,7 +183,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 19564:\"Invoice Created\" event creation")
-	public void testInvoiceCreatedEventCreation() throws Exception {
+	public void testInvoiceCreatedEventCreation() {
 		
 		final String eventname = "Invoice Created";
 		final String alertname = "Test Invoice Created";
@@ -206,8 +206,8 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		eventsPage.clickEditButtonForEvent(alertname);
 		eventsPage.verifyFirstConditionValues(firstconditionname, firstconditiontype, firstconditioncriteria);
 		eventsPage.cancelNewEvent();
-		for (int i = 0;  i < firstconditionnames.length; i++) {
-			eventsPage.clickEditButtonForEvent(alertname);
+        for (int i = 0;  i < firstconditionnames.length; i++) {
+            eventsPage.clickEditButtonForEvent(alertname);
 			eventsPage.selectFirstConditionValues(firstconditionnames[i], firstconditiontypes[i], firstconditioncriterias[i]);
 			eventsPage.saveNewEvent();
 			eventsPage.clickEditButtonForEvent(alertname);
@@ -218,7 +218,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 19567:\"New Repair Order\" event creation")
-	public void testNewRepairOrderEventCreation() throws Exception {
+	public void testNewRepairOrderEventCreation() {
 		
 		final String eventname = "New Repair Order";
 		final String alertname = "Test New Repair Order";

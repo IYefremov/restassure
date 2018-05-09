@@ -381,9 +381,19 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public boolean isClientPresentInTable(String clientname) {
-		boolean exists = clientstable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		return exists;
+        List<WebElement> elements = null;
+		try {
+            elements = clientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']"));
+            if (!elements.isEmpty()) {
+                return true;
+            }
+        } catch (StaleElementReferenceException e) {
+		    waitABit(3000);
+            if (elements != null && !elements.isEmpty()) {
+                return true;
+            }
+        }
+		return false;
 	}
 
 	public boolean clientExistsInArchivedTable(String clientname) {

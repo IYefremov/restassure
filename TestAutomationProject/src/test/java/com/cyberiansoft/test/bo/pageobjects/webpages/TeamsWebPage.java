@@ -217,6 +217,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 			clickEditTableRow(row);
 		} else 
 			Assert.assertTrue(false, "Can't find " + team + " team");
+		waitABit(1000);
 		return PageFactory.initElements(
 				driver, NewTeamsDialogWebPage.class);
 	}

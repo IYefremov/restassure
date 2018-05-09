@@ -135,7 +135,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	@FindBy(id = "ctl00_ctl00_Content_Main_btnChangeInvoiceNumber")
     private WebElement changeButton;
 
-	@FindBy(xpath = "\"//div[@class='rmSlide' and contains(@style, 'block')]\"")
+	@FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
     private WebElement slideDisplayed;
 
 	// @FindBy(className = "rfdSkinnedButton")
@@ -568,14 +568,13 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	    try {
             return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
         } catch (TimeoutException e) {
-	        e.printStackTrace();
-	        Assert.fail("The first invoice name has not been displayed!");
-	        return null;
+	        Assert.fail("The first invoice name has not been displayed!", e);
         }
+        return "";
     }
 
 
-	public String selectActionForFirstInvoice(String string, boolean switchArrow) throws InterruptedException {
+	public String selectActionForFirstInvoice(String string, boolean switchArrow) {
 		String mainWindow = driver.getWindowHandle();
 		scrollWindowDown(300);
 		Actions act = new Actions(driver);
@@ -653,7 +652,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			return mainWindow;
 		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
 			act.moveToElement(selectBTN).click().build().perform();
-			Thread.sleep(1000);
+			waitABit(1000);
 			try {
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
 			} catch (Exception e) {
@@ -661,33 +660,31 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			try {
 				wait.until(ExpectedConditions
 						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")));
-				Thread.sleep(500);
+				waitABit(500);
 				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
-			} catch (TimeoutException e) {
-			}
+			} catch (TimeoutException ignored) {}
 			if (string.equals("Send Email"))
 				return mainWindow;
 			else {
 				Set frames = driver.getWindowHandles();
-				Thread.sleep(10000);
+				waitABit(10000);
 				frames.remove(mainWindow);
 				driver.switchTo().window((String) frames.iterator().next());
 				return (String) frames.iterator().next();
 			}
 		} else {
 			act.moveToElement(selectBTN).click().build().perform();
-			Thread.sleep(2000);
+			waitABit(2000);
 			try {
 				act.moveToElement(selectBTN).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-			} catch (Exception e) {
-			}
+			} catch (Exception ignored) {}
 			try {
 				wait.until(ExpectedConditions
 						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]"))).click();
 //				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
 			} catch (TimeoutException e) {
 			}
-			Thread.sleep(3000);
+			waitABit(3000);
 			Set<String> windows = driver.getWindowHandles();
 			if (windows.size() > 1) {
 				for (String window : windows) {

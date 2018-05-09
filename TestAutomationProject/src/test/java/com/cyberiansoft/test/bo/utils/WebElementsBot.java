@@ -46,9 +46,14 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value){
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 70);
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 70);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
+        } catch (TimeoutException e) {
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", combobox.getWrappedElement());
+        }
+        try {
             wait.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
 		} catch (Exception e) {
             Assert.fail("The droplist has not been displayed!", e);

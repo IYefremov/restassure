@@ -70,7 +70,7 @@ public class EventsWebPage extends BaseWebPage {
 	}
 
 	public void createNewEventWithConditions(String eventname, String alertname, String firstconditionname,
-			String firstconditiontype, String firstconditioncriteria) throws InterruptedException {
+			String firstconditiontype, String firstconditioncriteria) {
 		if (isEventWithConditionsExists(alertname)) {
 			deleteEvent(alertname);
 		}
@@ -96,12 +96,12 @@ public class EventsWebPage extends BaseWebPage {
 	}
 
 	public void selectFirstConditionValues(String firstconditionname, String firstconditiontype,
-			String firstconditioncriteria) throws InterruptedException {
-		Thread.sleep(1000);
+			String firstconditioncriteria) {
+//		waitABit(1000);
 		wait.until(ExpectedConditions.visibilityOf(visibleconditions));
 		selectFirstConditionNameCriteria(firstconditionname);
 		selectFirstConditionTypeCriteria(firstconditiontype);
-		Thread.sleep(1000);
+//		waitABit(1000);
 		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		setFirstConditionCriteria(firstconditioncriteria);
 	}
@@ -148,7 +148,7 @@ public class EventsWebPage extends BaseWebPage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(visibleconditions));
         } catch (TimeoutException e) {
-            System.out.println("The conditions are not displayed in the dialog!" + e);
+            e.printStackTrace();
         }
         Assert.assertEquals(getFirstConditionNameCriteriaCombobox().getFirstSelectedOption().getText(),
 				firstconditionname);
@@ -185,10 +185,14 @@ public class EventsWebPage extends BaseWebPage {
 			}
 		}
 		waitForLoading();
-		wait.until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
+		try {
+            wait.until(ExpectedConditions.elementToBeClickable(alertnamefld.getWrappedElement()));
+        } catch (TimeoutException e) {
+		    waitABit(4000);
+        }
 	}
 
-	public void deleteEvent(String alertname) throws InterruptedException {
+	public void deleteEvent(String alertname) {
 		List<WebElement> eventsrows = getEventsTableRows();
 		for (WebElement eventsrow : eventsrows) {
 			if (eventsrow.getText().contains(alertname)) {
