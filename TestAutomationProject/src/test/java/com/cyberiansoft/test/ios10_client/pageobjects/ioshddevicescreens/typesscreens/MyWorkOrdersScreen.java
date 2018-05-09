@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
@@ -21,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class MyWorkOrdersScreen extends BaseTypeScreen {
+public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	private By autosavedworkorder = By.name("EntityInfoButtonUnchecked, AutoSaved");
 	
@@ -122,6 +122,13 @@ public class MyWorkOrdersScreen extends BaseTypeScreen {
 		clickAddOrderButton();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+	}
+
+	public void addWorkWithJobOrder(String workOrderType, String jobName) {
+		clickAddOrderButton();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		selectWorkOrderJob(jobName);
 	}
 
 	public void selectFirstOrder() {
@@ -278,7 +285,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreen {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 	}
 	
-	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {		
+	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {
 		selectWorkOrder(wonumber);
 		if (!appiumdriver.findElementByAccessibilityId("Tech Revenue").isDisplayed()) {
 			swipeTableUp(appiumdriver.
@@ -292,7 +299,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreen {
 		return new TechRevenueScreen(appiumdriver);
 	}
 	
-	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {		
+	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {
 		selectWorkOrder(wo);
 		if (!appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed()) {
 			swipeTableUp(appiumdriver.
@@ -369,8 +376,10 @@ public class MyWorkOrdersScreen extends BaseTypeScreen {
 		return Helpers.getAlertTextAndAccept();
 	}
 
-	public  void selectWorkOrderJob(String job) {
-		appiumdriver.findElementByName(job).click();
+	public  void selectWorkOrderJob(String jobName) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(jobName)));
+		appiumdriver.findElementByName(jobName).click();
 	}
 	
 	public void setFilterBilling(String billing)  {
@@ -419,18 +428,5 @@ public class MyWorkOrdersScreen extends BaseTypeScreen {
 	
 	public String getFirstWorkOrderNumberValue() {		
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
-	}
-	
-	public void switchToLocalMyOrdersView() {
-		appiumdriver.findElementByAccessibilityId("My").click();		
-	}
-	
-	public void switchToTeamWorkOrdersView() {
-		appiumdriver.findElementByAccessibilityId("Team").click();
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
 	}
 }

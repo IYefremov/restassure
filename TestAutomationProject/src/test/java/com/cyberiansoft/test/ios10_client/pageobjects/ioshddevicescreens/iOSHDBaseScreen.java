@@ -78,10 +78,7 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	public void selectNextScreen(String screenname) {
 		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
 		navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
-		//navbar.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'WizardStepsButton')]").click();
 		appiumdriver.findElementByAccessibilityId(screenname).click();
-		//action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByAccessibilityId(screenname).click();
 	}
 	
 	public WebElement waitUntilVisible(String xpath) {

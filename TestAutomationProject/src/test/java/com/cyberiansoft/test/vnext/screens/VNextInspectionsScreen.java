@@ -30,6 +30,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='inspections-list']")
 	private WebElement inspectionslist;
+
+	@FindBy(xpath="//*[@action='multiselect-actions-approve']")
+	private WebElement multiselectinspapprovebtn;
 	
 	@FindBy(xpath="//*[@action='my']")
 	private WebElement myinspectiontab;
@@ -176,7 +179,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		if (inspcell != null)
 			notesPresent = inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
 		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
+			Assert.fail( "Can't find inspection: " + inspectionnumber);
 		return notesPresent;			
 	}
 	
@@ -259,7 +262,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSearchButton() {
-		tap(searchbtn);;
+		tap(searchbtn);
 	}
 	
 	public void setSearchText(String searchtext) {
@@ -274,5 +277,29 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	public void clickCancelSearchButton() {
 		tap(cancelsearchbtn);
+	}
+
+	public void selectInspection(String inspectionNumber) {
+		WebElement workordercell = getInspectionCell(inspectionNumber);
+		if (workordercell != null)
+			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
+				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+			else
+				Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+	}
+
+	public void unselectInspection(String inspectionNumber) {
+		WebElement workordercell = getInspectionCell(inspectionNumber);
+		if (workordercell != null)
+			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
+				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+			else
+				Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+	}
+
+	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
+		tap(multiselectinspapprovebtn);
+		return new VNextApproveInspectionsScreen(appiumdriver);
+
 	}
 }

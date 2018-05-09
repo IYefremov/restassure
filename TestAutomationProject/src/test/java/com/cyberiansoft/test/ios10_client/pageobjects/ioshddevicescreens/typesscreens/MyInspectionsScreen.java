@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class MyInspectionsScreen extends BaseTypeScreen {
+public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	private By discardbtnxpath = By.name("Discard");
@@ -482,13 +482,4 @@ public class MyInspectionsScreen extends BaseTypeScreen {
 	public int getNumberOfRowsInTeamInspectionsTable() {		
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell")).size();
 	}
-
-	public void switchToMyInspectionsView() {
-		appiumdriver.findElementByAccessibilityId("My").click();		
-	}
-	
-	public void switchToTeamInspectionsView() {
-		appiumdriver.findElementByAccessibilityId("Team").click();		
-	}
-
 }

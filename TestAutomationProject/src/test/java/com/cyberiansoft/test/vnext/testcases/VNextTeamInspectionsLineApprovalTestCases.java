@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.dataclasses.HailMatrixService;
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.InspectionStatuses;
-import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -14,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamEditionRegistration {
@@ -402,4 +400,52 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		homescreen = inspectionscreen.clickBackButton();
 	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove(String rowID,
+																 String description, JSONObject testData) {
+
+		List<String> inspNumbers = new ArrayList<String>();
+		List<String> inspServives = new ArrayList<String>();
+		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
+		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		for (InspectionData inspdata: inspectionsData) {
+			VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+			customersscreen.switchToRetailMode();
+			customersscreen.selectCustomer(testcustomer);
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+			inspNumbers.add(vehicleinfoscreen.getNewInspectionNumber());
+			vehicleinfoscreen.swipeScreensLeft(2);
+			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+
+			List<ServiceData> services = inspdata.getServicesList();
+			for (ServiceData service : services) {
+				inpsctionservicesscreen.selectService(service.getServiceName());
+				inspServives.add(service.getServiceName());
+			}
+			inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		}
+
+		for (String inspNumber : inspNumbers)
+			inspectionscreen.selectInspection(inspNumber);
+		VNextApproveInspectionsScreen approveInspectionsScreen = inspectionscreen.clickMultiselectInspectionsApproveButton();
+
+		for (String inspNumber : inspNumbers)
+			Assert.assertTrue(approveInspectionsScreen.isInspectionExistsForApprove(inspNumber));
+		Assert.assertTrue(approveInspectionsScreen.isApproveIconForInspectionSelected(inspNumbers.get(0)));
+		Assert.assertFalse(approveInspectionsScreen.isInspectionServicesStatusesCanBeChanged(inspNumbers.get(0)));
+		Assert.assertFalse(approveInspectionsScreen.isApproveIconForInspectionSelected(inspNumbers.get(1)));
+		Assert.assertTrue(approveInspectionsScreen.isInspectionServicesStatusesCanBeChanged(inspNumbers.get(1)));
+		inspectionscreen = approveInspectionsScreen.clickBackButton();
+		for (String inspNumber : inspNumbers)
+			inspectionscreen.unselectInspection(inspNumber);
+		inspectionscreen.clickBackButton();
+	}
+
 }

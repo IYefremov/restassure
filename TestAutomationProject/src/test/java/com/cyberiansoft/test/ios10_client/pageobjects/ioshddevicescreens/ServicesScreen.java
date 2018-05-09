@@ -225,8 +225,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 			searchfld.setValue(servicename);
 			appiumdriver.hideKeyboard();
 		}
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(availableservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).findElementByAccessibilityId("custom detail button")).waitAction(Duration.ofSeconds(1)).release().perform();
+		availableservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).
+				findElementByAccessibilityId("custom detail button").click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 public class VNextVehiclePartsScreen extends VNextBaseScreen {
@@ -43,9 +45,9 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	public WebElement getVehiclePartCell(String vehiclepartname) {
 		WebElement vpcell = null;
-		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath(".//div[@action='select-item']"));
+		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath("./div[@action='select-item']"));
 		for (WebElement vehiclepartcell : vehicleparts) {
-			if (vehiclepartcell.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + vehiclepartname + "']")).size() > 0) {
+			if (vehiclepartcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(vehiclepartname)) {
 				vpcell = vehiclepartcell;
 				break;
 			}
