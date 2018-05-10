@@ -38,8 +38,6 @@ public class VNextApproveInspectionsScreen extends VNextBaseScreen {
     public boolean isInspectionExistsForApprove(String inspectionNumber) {
         boolean exists = false;
         List<WebElement> inspections = getInspectionsListForApprove();
-        System.out.println("++++++++++" + inspections.size());
-        System.out.println("++++++++++" + inspectionNumber);
         for (WebElement insp : inspections)
             if (insp.findElement(By.xpath(".//*[@class='checkbox-item-title']")).getText().trim().equals(inspectionNumber)) {
                 exists = true;
@@ -78,5 +76,10 @@ public class VNextApproveInspectionsScreen extends VNextBaseScreen {
     public VNextInspectionsScreen clickBackButton() {
         clickScreenBackButton();
         return new VNextInspectionsScreen(appiumdriver);
+    }
+
+    public VNextApproveServicesScreen openApproveServicesScreenForInspection(String inspNumber) {
+        tap(approveservicesscreen.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspNumber + "']")));
+        return new VNextApproveServicesScreen(appiumdriver);
     }
 }

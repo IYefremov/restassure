@@ -150,5 +150,27 @@
         }]
       }]
     }
+  ],
+
+  "testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection": [
+    {
+      "rowID": "testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection.01",
+      "description": "Test Case 73113:Verify user can select service for approve on multi line approve screen if line approval = ON for this Inspection",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
+        }, {"serviceName": "Labor", "servicePrice": "5"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "10"
+        }]
+      }, {"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
+        }, {"serviceName": "Labor", "servicePrice": "20"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
+        }]
+      }]
+    }
   ]
 }

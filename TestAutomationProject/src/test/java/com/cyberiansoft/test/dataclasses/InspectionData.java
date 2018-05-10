@@ -48,6 +48,9 @@ public class InspectionData {
 	 
 	 @JsonProperty("declineReason")
 	 String declineReason;
+
+	@JsonProperty("inspectionNumber")
+	String inspectionNumber;
 	 
 	 public String getInspectionType() {
 		 return inspType;
@@ -140,4 +143,13 @@ public class InspectionData {
 	 public String getInsurancePolicyNumber() {
 		 return insuranceCompany.getPolicyNumber();
 	 }
+
+	 public String getInspectionNumber() {
+		return inspectionNumber;
+	}
+
+	 public void setInspectionNumber(String inspNumber) {
+
+	 	this.inspectionNumber =inspNumber;
+	}
 }
