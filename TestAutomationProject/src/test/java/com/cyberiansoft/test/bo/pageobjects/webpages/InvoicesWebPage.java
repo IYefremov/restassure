@@ -138,6 +138,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	@FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
     private WebElement slideDisplayed;
 
+	@FindBy(xpath = "//a[@class='rmLink rmRootLink']")
+    private List<WebElement> selectButtons;
+
 	// @FindBy(className = "rfdSkinnedButton")
 	// private WebElement voidBTN;
 
@@ -573,7 +576,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
         return "";
     }
 
-
 	public String selectActionForFirstInvoice(String string, boolean switchArrow) {
 		String mainWindow = driver.getWindowHandle();
 		scrollWindowDown(300);
@@ -639,15 +641,16 @@ public class InvoicesWebPage extends WebPageWithFilter {
 				
 			}
 		 else if (string.equals("Download JSON")) {
-		    act.moveToElement(selectBTN).click().build().perform();
+		    selectButtons.get(0).click();
+//		    act.moveToElement(selectButtons.get(0)).click().build().perform();
             try {
                 wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
-                wait.until(ExpectedConditions
-                        .visibilityOf(slideDisplayed.findElement((By.xpath("//span[contains(text(), '" + string + "')]")))))
-                        .click();
+                act.moveToElement(wait.until(ExpectedConditions
+                        .visibilityOf(slideDisplayed
+                                .findElement((By.xpath("//span[contains(text(), '" + string + "')]"))))))
+                        .click().build().perform();
             } catch (Exception e) {
-                wait.until(ExpectedConditions.elementToBeClickable(driver
-                        .findElement((By.xpath("//span[contains(text(), '" + string + "')]"))))).click();
+                Assert.fail("The \"Download JSON\" button has not been displayed.", e);
             }
 			return mainWindow;
 		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
@@ -783,7 +786,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		driver.switchTo().window(windows.iterator().next());
 	}
 
-	public boolean recalcTechSplitProceed() throws InterruptedException {
+   	public boolean recalcTechSplitProceed() throws InterruptedException {
 		try {
 			Thread.sleep(1000);
 			wait.until(

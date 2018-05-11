@@ -1,8 +1,132 @@
 {
   "testCompanyClientsSearch": [
     {
+      "rowID": "testCompanyClientsSearch.01",
+      "description": "Test Case 15322:Company- Clients: Search",
       "clientName": "IntCompany",
       "clientType": "Wholesale"
+    }
+  ],
+
+  "testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient": [
+    {
+      "rowID": "testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient.01",
+      "description": "Test Case 24158:Company - Clients: Verify that �Notes� are added on �Client Details� screen and saved correctly for New Client",
+      "companyName": "NotesCompany",
+      "companyNote": "First note\nSecond note"
+    }
+  ],
+
+  "testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForExistingClient": [
+    {
+      "rowID": "testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForExistingClient.01",
+      "description": "Test Case 24159:Company - Clients: Verify that �Notes� are added on �Client Details� screen and saved correctly for Existing Client",
+      "companyName": "NotesCompany",
+      "companyNote": "First note\nSecond note"
+    }
+  ],
+
+  "testCompanyClientsVerifyThatAddedNotesOnClientDetailsScreenAreVisibleAsAPopupOnClientsGrid": [
+    {
+      "rowID": "testCompanyClientsVerifyThatAddedNotesOnClientDetailsScreenAreVisibleAsAPopupOnClientsGrid.01",
+      "description": "Test Case 24160:Company - Clients: Verify that added �Notes� on �Client Details� screen are visible as a popup on Clients grid",
+      "companyName": "NotesCompany",
+      "companyNote": "First note"
+    }
+  ],
+
+  "testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile": [
+    {
+      "rowID": "testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile.01",
+      "description": "Test Case 24209:Company - Clients: Verify that Client 'Notes' are imported from csv file",
+      "companyName": "CompanyNoteTest",
+      "companyNote": "Test Note for import",
+      "importFile": "Clients.csv"
+    }
+  ],
+
+  "testCompanyClientsArchive": [
+    {
+      "rowID": "testCompanyClientsArchive.01",
+      "description": "Test Case 26725:Company- Clients: Archive",
+      "companyName": "000 1111"
+    }
+  ],
+
+  "testCompanyClientsClientUsersUpdate": [
+    {
+      "rowID": "testCompanyClientsClientUsersUpdate.01",
+      "description": "Test Case 29760: Company- Clients: Client Users Update",
+      "clientName": "AlExTest",
+      "userEmail": "test@cyberiansoft.com",
+      "userFirstName": "test",
+      "userLastName": "automation",
+      "userCompany": "companytest",
+      "userAddress": "adress",
+      "userCity": "city",
+      "userCountry": "United States",
+      "userStateProvince": "Colorado",
+      "userZipPostCode": "12345",
+      "userPhone": "12345",
+      "userAccountId": "testtest"
+    }
+  ],
+
+  "testCompanyClientsHoursOfOperationAddRetail": [
+    {
+      "rowID": "testCompanyClientsHoursOfOperationAddRetail.01",
+      "description": "Test Case 48950: Company - Clients : Hours of operation - Add Retail",
+      "companyName": "companyroman"
+    }
+  ],
+
+  "testCompanyClientsContactsVerificationDisable": [
+    {
+      "rowID": "testCompanyClientsContactsVerificationDisable.01",
+      "description": "Test Case 29762: Company - Clients: Contacts Verification Disable",
+      "clientName": "AlExTest",
+      "contactEmail": "test1@cyberiansoft.com",
+      "contactFirstName": "test1",
+      "contactLastName": "automation1",
+      "contactEmail2": "test2@cyberiansoft.com",
+      "contactFirstName2": "test2",
+      "contactLastName2": "automation2",
+      "notification": "Email address is not validated and validation email is going to be sent to the following address.",
+      "pendingSendEmailMess": "Pending (sending email)",
+      "notVerifiedMess": "Not verified (email was sent)",
+      "verifiedMess": "Verified",
+      "colorRed": "red",
+      "colorGreen": "green"
+    }
+  ],
+
+  "testCompanyClientsContactsUpdate": [
+    {
+      "rowID": "testCompanyClientsContactsUpdate.01",
+      "description": "Test Case 29763: Company- Clients: Contacts Update",
+      "clientName": "AlExTest",
+      "contactEmail": "test@cyberiansoft.com",
+      "userFirstName": "test",
+      "userLastName": "automation",
+      "companyName": "testcompany",
+      "contactPhone": "testphone",
+      "userAddress": "testadress",
+      "userAddress2": "testadress2",
+      "userCity": "testcity",
+      "userCountry": "United States",
+      "userStateProvince": "Colorado",
+      "userZipPostCode": "111111"
+    }
+  ],
+
+  "testClientUserAddClient": [
+    {
+      "rowID": "testClientUserAddClient.01",
+      "description": "Test Case 66217:Company - Clients User : Add Client",
+      "clientName": "000 15.11 Companey",
+      "userName": "30cyberiansoft.test@gmail.com",
+      "userFirstName": "test",
+      "userLastName": "automation"
     }
   ]
 }

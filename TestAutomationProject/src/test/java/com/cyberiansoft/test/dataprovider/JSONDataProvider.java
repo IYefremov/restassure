@@ -24,7 +24,7 @@ public class JSONDataProvider {
         Object rowID, description;
         Object[][] result;
         testCaseName = method.getName();
-        List<JSONObject> testDataList = new ArrayList<JSONObject>();
+        List<JSONObject> testDataList = new ArrayList<>();
         
         JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
         System.out.println("Method: "+method.getName());
@@ -78,7 +78,6 @@ public class JSONDataProvider {
                 result[i] = new Object[] { rowID, description, testDataList.get(i) };
             }
         }
-
         catch(IndexOutOfBoundsException ie) {
             result = new Object[0][0];
         }
