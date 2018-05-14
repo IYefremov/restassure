@@ -97,9 +97,8 @@ public class ClientQuotesPage extends BasePage {
         newClientName.get(0).sendKeys(name);
     }
 
-    public void clearAndSetNewClientName(String name) throws InterruptedException {
-        Thread.sleep(1500);
-        newClientName.get(1).clear();
+    public void clearAndSetNewClientName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(newClientName.get(1))).clear();
         newClientName.get(1).sendKeys(name);
     }
 
@@ -177,12 +176,8 @@ public class ClientQuotesPage extends BasePage {
     }
 
 
-    public void clickConfirmNewClientBTN() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='90%';");
-        Thread.sleep(1000);
-        js.executeScript("arguments[0].click();", confirmNewClient);
-        js.executeScript("document.body.style.zoom='100%';");
+    public void clickConfirmNewClientBTN() {
+        wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
     }
 
 
@@ -204,14 +199,11 @@ public class ClientQuotesPage extends BasePage {
 
     public void searchUser(String searchValue) {
         try {
-//        Thread.sleep(1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
         searchField.clear();
         searchField.sendKeys(searchValue);
-//        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
-//        Thread.sleep(500);
         wait.until(ExpectedConditions.invisibilityOf(processingBar));
         } catch (Exception ignored) {}
 
@@ -254,12 +246,8 @@ public class ClientQuotesPage extends BasePage {
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-update btn-update-potential-client']")).click();
     }
 
-    public void clickUpdateClientBTN() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='90%';");
-        Thread.sleep(1000);
-        js.executeScript("arguments[0].click();", updateClientBTN.get(1));
-        js.executeScript("document.body.style.zoom='100%';");
+    public void clickUpdateClientBTN() {
+        wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(1))).click();
     }
 
     public void clickAddAgreementBTN(String agreementIdentifier) {
@@ -271,25 +259,24 @@ public class ClientQuotesPage extends BasePage {
         agreementName.get(0).sendKeys(name);
     }
 
-    public void selectEdition(String edition) throws InterruptedException {
+    public void selectEdition(String edition) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         editionMenu.click();
-        Thread.sleep(100);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[text()='" + edition + "']"))).click();
         js.executeScript("arguments[0].click();", updateClientBTN.get(2));
-        Thread.sleep(500);
     }
 
-    public void setAgreement(String s, String team) throws InterruptedException {
-        setAgreementName(s);
+    public void setAgreement(String agreement, String team) {
+        setAgreementName(agreement);
         selectEdition(team);
         saveAgreement();
     }
 
-    public void saveAgreement() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", updateClientBTN.get(2));
-        Thread.sleep(500);
+    public void saveAgreement() {
+        wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(2))).click();
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].click();", updateClientBTN.get(2));
+//        Thread.sleep(500);
     }
 
     public void expandAgreementList(String identifier) {
@@ -346,14 +333,11 @@ public class ClientQuotesPage extends BasePage {
         driver.navigate().refresh();
     }
 
-    public void updateAgreement() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", updateClientBTN.get(3));
-        Thread.sleep(500);
+    public void updateAgreement() {
+        wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(3))).click();
     }
 
     public ClientQuotesDetailPage clickSetupAgreementBTN(String agreementIdentifier) {
-//        Thread.sleep(1500);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-potential-client_processing")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")).click();

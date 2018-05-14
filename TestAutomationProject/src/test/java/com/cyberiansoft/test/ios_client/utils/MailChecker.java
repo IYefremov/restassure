@@ -259,7 +259,7 @@ public class MailChecker {
         return requiredmessage;
     }
 
-    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
         boolean val = false;
         try {
             Store store = loginToGMailBox(userName, password);
@@ -285,7 +285,7 @@ public class MailChecker {
         return val;
     }
 
-    public static boolean searchSpamEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static boolean searchSpamEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
         boolean val = false;
         try {
             Store store = loginToGMailBox(userName, password);
@@ -445,7 +445,7 @@ public class MailChecker {
     }
 
 
-    public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) throws IOException {
+    public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) {
 
         boolean val = false;
         try {
@@ -477,7 +477,7 @@ public class MailChecker {
         return val;
     }
     
-    public static boolean searchEmailAndVerifyAttachmentExists(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) throws IOException {
+    public static boolean searchEmailAndVerifyAttachmentExists(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) {
 
         boolean val = false;
         try {

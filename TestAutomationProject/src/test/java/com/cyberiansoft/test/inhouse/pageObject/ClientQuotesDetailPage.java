@@ -72,10 +72,10 @@ public class ClientQuotesDetailPage extends BasePage {
         userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
-    public boolean checkAgreementStatuses(String aNew, String no, String no1, String no2) throws InterruptedException {
-        Thread.sleep(5000);
+    public boolean checkAgreementStatuses(String aNew, String no, String no1, String no2) {
+        waitABit(5000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("agreement-statuses")));
-        Thread.sleep(5000);
+        waitABit(5000);
         if (!agreementStatuses.findElement(By.tagName("b")).getText().equals(aNew)) {
             return false;
         }
@@ -167,7 +167,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return links;
     }
 
-    public String getAgreementApproveLink() throws IOException {
+    public String getAgreementApproveLink() {
 //        String mailContent = null;
 //        try {
 //            mailContent = MailChecker.getUserMailContentFromSpam();

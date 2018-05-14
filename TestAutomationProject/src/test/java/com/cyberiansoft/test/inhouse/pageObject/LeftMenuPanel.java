@@ -80,6 +80,11 @@ public class LeftMenuPanel extends BasePage {
         return this;
     }
 
+    public LeftMenuPanel clickFinancialMapping() {
+        clickMenu(financialMapping);
+        return this;
+    }
+
     /**
      * SubmenuLinks
      * @return
@@ -102,13 +107,25 @@ public class LeftMenuPanel extends BasePage {
         return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
+    public OrganizationsRulesPage clickOrganizationsRulesSubmenu() {
+        clickSubMenu(organizationsRules);
+        waitForLoading();
+        return PageFactory.initElements(driver, OrganizationsRulesPage.class);
+    }
+
+    public AccountsRulesPage clickAccountsRulesSubmenu() {
+        clickSubMenu(accountsRules);
+        waitForLoading();
+        return PageFactory.initElements(driver, AccountsRulesPage.class);
+    }
+
 
 
     public BasePage clickOnMenu(String menuName) throws InterruptedException {
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='" + menuName + "']")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='" + menuName + "']"))).click();
-        switch (menuName){ //todo delete the switch loop after the necessary clickMethods will be created
+        switch (menuName){ //todo delete the method after the necessary clickMethods will be created
             case "Client Quotes":
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));

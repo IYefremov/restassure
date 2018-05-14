@@ -1,0 +1,164 @@
+{
+  "testUserCanAddNewClient": [
+    {
+      "rowID": "testUserCanAddNewClient.01",
+      "description": "Test Case 66618:Verify user can add new Client",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com"
+    }
+  ],
+
+  "testUserCanEditClientInformation": [
+    {
+      "rowID": "testUserCanEditClientInformation.01",
+      "description": "Test Case 66619:Verify user can edit Client information",
+      "name": "CompanyAutomation",
+      "newName": "@New_Name",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com"
+    }
+  ],
+
+  "testUserCanAddAgreement": [
+    {
+      "rowID": "testUserCanAddAgreement.01",
+      "description": "Test Case 66621:Verify user can add agreement",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanSelectServiceInAgreement": [
+    {
+      "rowID": "testUserCanSelectServiceInAgreement.01",
+      "description": "Test Case 66622:Verify user can select service in agreement",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanSendNotifications": [
+    {
+      "rowID": "testUserCanSendNotifications.01",
+      "description": "Test Case 66650:Verify user can send notification (sms/email)",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanVerifyDatesWhenOpenMailWithLink": [
+    {
+      "rowID": "testUserCanVerifyDatesWhenOpenMailWithLink.01",
+      "description": "Test Case 66655:Verify \"Viewed letter:<date>\", \"Viewed agreement: <date>\" if user open mail with link",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanPayAgreementFromMailLink": [
+    {
+      "rowID": "testUserCanPayAgreementFromMailLink.01",
+      "description": "Test Case 66656:Verify user can pay agreement from mail link",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ]
+}

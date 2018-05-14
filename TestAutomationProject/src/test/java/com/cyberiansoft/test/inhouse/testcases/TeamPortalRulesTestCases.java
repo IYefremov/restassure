@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.inhouse.pageObject.BasePage;
-import com.cyberiansoft.test.inhouse.pageObject.OrganizationsRulesPage;
 import com.cyberiansoft.test.inhouse.pageObject.AccountsRulesPage;
 import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
+import com.cyberiansoft.test.inhouse.pageObject.OrganizationsRulesPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,10 +13,9 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanAddNewOrganisationRules() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Organizations Rules");
-        Assert.assertTrue(page instanceof OrganizationsRulesPage);
-        OrganizationsRulesPage organizationsRulesPage = (OrganizationsRulesPage) page;
+        OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickOrganizationsRulesSubmenu();
         organizationsRulesPage.clickAddNewButton();
         organizationsRulesPage.createNewRule("Test Organization", "Description LIKE '%AMT%'", "1", "Test", false);
         Assert.assertTrue(organizationsRulesPage.checkRuleByName("Test Organization"));
@@ -28,10 +26,13 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanSelecyOrganisationFromList() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Organizations Rules");
-        Assert.assertTrue(page instanceof OrganizationsRulesPage);
-        OrganizationsRulesPage organizationsRulesPage = (OrganizationsRulesPage) page;
+        OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickOrganizationsRulesSubmenu();
+//        leftMenuPanel.clickOnMenu("Financial Mapping");
+//        BasePage page = leftMenuPanel.clickOnMenu("Organizations Rules");
+//        Assert.assertTrue(page instanceof OrganizationsRulesPage);
+//        OrganizationsRulesPage organizationsRulesPage = (OrganizationsRulesPage) page;
         organizationsRulesPage.clickAddNewButton();
         organizationsRulesPage.createNewRule("Test Organization", "Description LIKE '%AMT%'", "1", "Test", true);
         Assert.assertTrue(organizationsRulesPage.checkRuleByName("Test Organization"));
@@ -42,10 +43,13 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanEditOrganisationRules() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Organizations Rules");
-        Assert.assertTrue(page instanceof OrganizationsRulesPage);
-        OrganizationsRulesPage organizationsRulesPage = (OrganizationsRulesPage) page;
+        OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickOrganizationsRulesSubmenu();
+//        leftMenuPanel.clickOnMenu("Financial Mapping");
+//        BasePage page = leftMenuPanel.clickOnMenu("Organizations Rules");
+//        Assert.assertTrue(page instanceof OrganizationsRulesPage);
+//        OrganizationsRulesPage organizationsRulesPage = (OrganizationsRulesPage) page;
         organizationsRulesPage.clickAddNewButton();
         organizationsRulesPage.createNewRule("Test Organization", "Description LIKE '%AMT%'", "1", "Test", false);
         Assert.assertTrue(organizationsRulesPage.checkRuleByName("Test Organization"));
@@ -59,10 +63,14 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanAddNewAccountsRules() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
-        Assert.assertTrue(page instanceof AccountsRulesPage);
-        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
+        AccountsRulesPage accountsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickAccountsRulesSubmenu();
+
+//        leftMenuPanel.clickOnMenu("Financial Mapping");
+//        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
+//        Assert.assertTrue(page instanceof AccountsRulesPage);
+//        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
         accountsRulesPage.clickAddNewAccountRuleButton();
         accountsRulesPage.createNewRule("Test account rule", "Description LIKE '%Skype%'", "2", "Test description", false);
         accountsRulesPage.deleteRuleByName("Test account rule");
@@ -72,10 +80,13 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanAddSelectAccountFromList() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
-        Assert.assertTrue(page instanceof AccountsRulesPage);
-        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
+        AccountsRulesPage accountsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickAccountsRulesSubmenu();
+//        leftMenuPanel.clickOnMenu("Financial Mapping");
+//        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
+//        Assert.assertTrue(page instanceof AccountsRulesPage);
+//        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
         accountsRulesPage.clickAddNewAccountRuleButton();
         accountsRulesPage.createNewRule("Test account rule", "Description LIKE '%Skype%'", "2", "Test description", true);
         accountsRulesPage.deleteRuleByName("Test account rule");
@@ -85,14 +96,17 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
     public void testUserCanEditAccountsRules() throws InterruptedException {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
-        leftMenuPanel.clickOnMenu("Financial Mapping");
-        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
-        Assert.assertTrue(page instanceof AccountsRulesPage);
-        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
+        AccountsRulesPage accountsRulesPage = leftMenuPanel
+                .clickFinancialMapping()
+                .clickAccountsRulesSubmenu();
+//        leftMenuPanel.clickOnMenu("Financial Mapping");
+//        BasePage page = leftMenuPanel.clickOnMenu("Accounts Rules");
+//        Assert.assertTrue(page instanceof AccountsRulesPage);
+//        AccountsRulesPage accountsRulesPage = (AccountsRulesPage) page;
         accountsRulesPage.clickAddNewAccountRuleButton();
         accountsRulesPage.createNewRule("Test account rule", "Description LIKE '%Skype%'", "2", "Test description", false);
         accountsRulesPage.clickEditRuleByName("Test account rule");
         accountsRulesPage.editExistingRule("Account", "Description LIKE '%ADOBE%'", "5", "new description");
         accountsRulesPage.deleteRuleByName("Account");
     }
-} 
+}
