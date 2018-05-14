@@ -1,5 +1,7 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.AddCustomerScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -13,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class CustomersScreen extends iOSHDBaseScreen {
+public class CustomersScreen extends BaseAppScreen {
 	
 	/*@iOSFindBy(accessibility  = "btnWholesale")
     private IOSElement btnwholesale;

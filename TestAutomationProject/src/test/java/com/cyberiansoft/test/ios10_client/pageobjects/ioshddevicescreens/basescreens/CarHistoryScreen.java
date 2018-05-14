@@ -1,21 +1,20 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
-
-import java.util.concurrent.TimeUnit;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInvoicesScreen;
+import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
-public class CarHistoryScreen extends iOSHDBaseScreen {
+public class CarHistoryScreen extends BaseAppScreen {
 	
 	@iOSFindBy(accessibility = "btnSearch")
     private IOSElement searchbtn;
@@ -42,6 +41,8 @@ public class CarHistoryScreen extends iOSHDBaseScreen {
 	}
 	
 	public void searchCar(String car) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("btnSearch")));
 		searchbtn.click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(car);
 		closesearchbtn.click();

@@ -1,16 +1,14 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
-
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
 
-public class SettingsScreen extends iOSHDBaseScreen {
+import java.util.concurrent.TimeUnit;
+
+public class SettingsScreen extends BaseAppScreen {
 	
 	private By inspectionsinglepagetoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[3]");
 	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[3]")

@@ -1,17 +1,14 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
-
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.support.PageFactory;
-
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class EnterpriseBeforeDamageScreen extends iOSHDBaseScreen {
+import java.util.concurrent.TimeUnit;
+
+public class EnterpriseBeforeDamageScreen extends BaseWizardScreen {
 	
 	final static String enterprisebeforedamagescreencapt = "Enterprise Before Damage";
 	

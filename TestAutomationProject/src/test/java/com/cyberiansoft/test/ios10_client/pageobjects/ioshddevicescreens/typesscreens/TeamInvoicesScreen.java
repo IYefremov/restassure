@@ -5,6 +5,7 @@ import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +13,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
+
+	@iOSFindBy(accessibility ="Change PO#")
+	private IOSElement changepo;
 	
 	public TeamInvoicesScreen(AppiumDriver driver) {
 		super(driver);
@@ -46,12 +50,11 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public boolean isInvoicePrintButtonExists(String invoicenumber) {
-		Helpers.waitABit(2000);
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoicenumber + "']/XCUIElementTypeImage[@name='INVOICE_PRINTED']").size() > 0;
 	}
 	
 	public void clickChangePOPopup() {
-		appiumdriver.findElementByAccessibilityId("Change PO#").click();
+		changepo.click();
 	}
 	
 	public void changePO(String newpo) {

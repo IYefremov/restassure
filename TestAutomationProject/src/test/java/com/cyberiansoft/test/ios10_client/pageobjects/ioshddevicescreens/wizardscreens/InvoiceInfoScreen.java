@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -44,29 +43,30 @@ public class InvoiceInfoScreen extends BaseWizardScreen {
 	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;*/
 
-	public InvoiceInfoScreen(AppiumDriver driver, TypeScreenContext typeScreenContext) {
-		super(driver, typeScreenContext);
+	public InvoiceInfoScreen(AppiumDriver driver) {
+		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickSaveEmptyPO() {
-		clickSaveButton();
+		clickSave();
 		Alert alert = appiumdriver.switchTo().alert();
 		alert.accept();
 	}
 
 	public <T extends BaseTypeScreen> T clickSaveAsDraft()  {
-		appiumdriver.findElementByAccessibilityId("Save").click();
+		clickSave();
 		appiumdriver.findElementByAccessibilityId("Draft").click();
-		clickSaveButton();
-		return getTypePageFromContext();
+		clickSave();
+		return getTypeScreenFromContext();
 	}
 
-	public void clickSaveAsFinal() {
-		clickSaveButton();
+	public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+		clickSave();
 		appiumdriver.findElementByAccessibilityId("Final").click();
-		clickSaveButton();
+		clickSave();
+		return getTypeScreenFromContext();
 	}
 	
 	public String getInvoicePOValue() {
@@ -129,7 +129,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen {
 	public <T extends BaseTypeScreen> T cancelInvoice() {
 		clickCancelButton();
 		acceptAlert();
-		return getTypePageFromContext();
+		return getTypeScreenFromContext();
 	}
 
 	public void clickInvoicePayButton() {
@@ -155,6 +155,6 @@ public class InvoiceInfoScreen extends BaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 		Helpers.waitForAlert();
 		appiumdriver.switchTo().alert().accept();
-		new InvoiceInfoScreen(appiumdriver, typeContext);
+		new InvoiceInfoScreen(appiumdriver);
 	}
 }

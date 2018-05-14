@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.CustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.ServiceRequestTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ServiceRequestsScreen extends BaseTypeScreen {
+
+	private final TypeScreenContext SRCONTEXT = TypeScreenContext.SERVICEREQUEST;
 	
 	/*@iOSFindBy(accessibility  = "Add")
     private IOSElement addbtn;
@@ -129,8 +133,10 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	public void clickAddButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Add"))).click();
-		//appiumdriver.findElementByAccessibilityId("Add").click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
+		wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Add"))).click();
+		BaseWizardScreen.typeContext =  SRCONTEXT;
 	}
 
 	public void addServiceRequestWithSelectCustomer(String customerName, String serviceRequestType) {
@@ -241,6 +247,13 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		}*/
 		return this;
 	}
+
+	public ServiceRequestsScreen rejectServiceRequest(String srNumber) {
+		selectServiceRequest(srNumber);
+		selectRejectAction();
+		Helpers.acceptAlert();
+		return this;
+	}
 	
 	public void selectRejectAction() {
 		appiumdriver.findElementByAccessibilityId("Reject").click();
@@ -277,11 +290,14 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 	
 	public boolean isServiceRequestExists(String srnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(MobileBy.AccessibilityId("labelServiceRequestNumber"), 1));
 		return appiumdriver.findElementsByAccessibilityId(srnumber).size() > 0;
 	}
 	
 	public void selectEditServiceRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
+		BaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
 	public void selectCancelAction() {
@@ -386,8 +402,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		appiumdriver.findElementByAccessibilityId("Summary").click();
 	}*/
 	
-	public void selectDetailsRequestAction() {
+	public ServiceRequestdetailsScreen selectDetailsRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Details").click();
+		return new ServiceRequestdetailsScreen(appiumdriver);
 	}
 
 	public String getSummaryAppointmentsInformation() {
@@ -398,12 +415,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("General Info")));
 		return appiumdriver.findElementsByAccessibilityId("Appointments").size() > 0;
-	}
-	
-	public void clickServiceRequestSummaryInspectionsButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceRequestSummaryInspectionsButton")));
-		appiumdriver.findElementByAccessibilityId("ServiceRequestSummaryInspectionsButton").click();
 	}
 	
 	public MyWorkOrdersScreen clickServiceRequestSummaryOrdersButton() {
@@ -441,8 +452,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		}
 	}
 			
-	public void clickCloseSR() {
+	public ServiceRequestsScreen clickCloseSR() {
 		appiumdriver.findElement(MobileBy.name("Close SR")).click();
+		return this;
 	}
 	
 	public boolean isUndoCheckInActionExists() {
@@ -469,12 +481,5 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void clickCloseButton() {
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
-	
-	public HomeScreen clickHomeButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Back"))).click();
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByAccessibilityId("Back")).waitAction(waitOptions(ofSeconds(2))).release().perform();
-		return new HomeScreen(appiumdriver);		
-	}
+
 }

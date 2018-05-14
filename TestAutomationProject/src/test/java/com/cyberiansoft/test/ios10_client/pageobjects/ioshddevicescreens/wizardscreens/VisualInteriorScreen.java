@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class VisualInteriorScreen extends iOSHDBaseScreen {
+public class VisualInteriorScreen extends BaseWizardScreen {
 	
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";

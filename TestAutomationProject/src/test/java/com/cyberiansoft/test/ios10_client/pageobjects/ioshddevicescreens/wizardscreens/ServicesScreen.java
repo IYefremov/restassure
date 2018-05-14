@@ -1,5 +1,6 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -20,7 +21,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ServicesScreen extends iOSHDBaseScreen {
+public class ServicesScreen extends BaseWizardScreen {
 
 	final static String defaultServiceValue = "Test Tax";
 	final static String servicesscreencapt = "Services";
@@ -62,12 +63,8 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		clickSaveButton();
 	}*/
 	
-	public void saveWorkOrder() {
-		clickSaveButton();
-	}
-	
 	public void clickSaveAsFinal() {
-		clickSaveButton();
+		clickSave();
 		appiumdriver.findElementByAccessibilityId("Final").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -76,7 +73,7 @@ public class ServicesScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickSaveAsDraft() {
-		clickSaveButton();
+		clickSave();
 		appiumdriver.findElementByAccessibilityId("Draft").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -326,17 +323,11 @@ public class ServicesScreen extends iOSHDBaseScreen {
 		Helpers.keyboadrType("\n");
 	}
 
-	public void cancelOrder() {
-		clickCancelButton();
-		acceptAlert();
-	}
-
 	public boolean priceMatricesPopupIsDisplayed() {
 		return appiumdriver.findElementByAccessibilityId("Price Matrices").isDisplayed();
 	}
 
 	public PriceMatrixScreen selectPriceMatrices(String pricematrice) {
-		Helpers.waitABit(1500);
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name, \""
 						+ pricematrice + "\")]").click();
 		return new PriceMatrixScreen(appiumdriver);

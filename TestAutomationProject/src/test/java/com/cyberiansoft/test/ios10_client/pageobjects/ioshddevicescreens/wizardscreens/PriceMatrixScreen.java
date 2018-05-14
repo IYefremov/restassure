@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class PriceMatrixScreen extends iOSHDBaseScreen {
+public class PriceMatrixScreen extends BaseWizardScreen {
 	
 	//Sizes
 	public final static String DIME_SIZE = "DIME";
@@ -121,38 +121,26 @@ public class PriceMatrixScreen extends iOSHDBaseScreen {
 
 	public void selectDiscaunt(String discaunt) {
 		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).findElement(By.name("unselected")).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
-		//		+ discaunt + "']/XCUIElementTypeButton[@name='unselected']").click();
 	}
 
 	public void clickDiscaunt(String discaunt) {
 		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails");
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
-			swipeTableUp(table.findElementByAccessibilityId(discaunt),
-					table);
+		    scrollToElement(discaunt);
+			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
+			//		table);
 		}
 		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId(discaunt)).click();
-
-
-
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByAccessibilityId(discaunt)).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByAccessibilityId(discaunt).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\""
-		//				+ discaunt + "\")]").click();
 	}
 	
 	public void switchOffOption(String optionname) {
 		IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
 		if (switcher.getAttribute("value").equals("1"))
-		//if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname + "']").getAttribute("value").equals("1"))
 			switcher.click();
 	}
 	
 	public String getDiscauntPriceAndValue(String discaunt) {
 		return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).getAttribute("label");
-		//return appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='"
-		//				+ discaunt + "']").getAttribute("label");
 	}
 	
 	public boolean isDiscauntPresent(String discaunt) {

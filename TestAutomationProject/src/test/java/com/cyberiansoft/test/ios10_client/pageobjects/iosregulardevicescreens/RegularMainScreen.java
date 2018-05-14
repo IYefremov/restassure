@@ -73,14 +73,13 @@ public class RegularMainScreen {
 	}
 
 	public RegularHomeScreen userLogin(String user, String password) throws InterruptedException {
-		Thread.sleep(1000);
 		//Helpers.waitUntilCheckLicenseDialogDisappears();
 		//Thread.sleep(3000);
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(user))).click(); 
-		//appiumdriver.findElementByAccessibilityId(user).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(user)));
+		appiumdriver.findElementByAccessibilityId(user).click();
 		securefld.setValue(password);
 		loginbtn.click();
 		return new RegularHomeScreen(appiumdriver);

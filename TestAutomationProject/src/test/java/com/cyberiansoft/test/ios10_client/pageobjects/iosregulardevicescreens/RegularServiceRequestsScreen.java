@@ -346,7 +346,6 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 	
 	public void clickDoneCloseReasonDialog() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
-		new RegularServiceRequestsScreen(appiumdriver);
 	}
 	
 	public void selectDoneReason(String selectreason) {

@@ -85,17 +85,19 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}	
 	
 	public void clickSearchButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
 	}
 	
-	public void clickSearchSaveButton() {
+	public RegularTeamWorkOrdersScreen clickSearchSaveButton() {
 		searccsavebtn.click();
+		return this;
 	}
 	
 	public void selectSearchLocation(String _location) {
 		locationfld.click();
-		appiumdriver.findElementByName(_location).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByName(_location))).click();
 	}
 	
 	public void setSearchType(String wotype)  {

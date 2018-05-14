@@ -1,5 +1,8 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+  import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
+  import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
+  import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
   import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
   import com.cyberiansoft.test.ios10_client.utils.Helpers;
   import io.appium.java_client.AppiumDriver;
@@ -64,7 +67,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
 	}
 
-	public CustomersScreen clickCustomersButton() {	
+	public CustomersScreen clickCustomersButton() {
 		appiumdriver.findElementByAccessibilityId("Customers").click();
 		return new CustomersScreen(appiumdriver);
 	}

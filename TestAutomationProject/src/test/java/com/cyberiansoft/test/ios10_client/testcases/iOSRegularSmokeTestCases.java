@@ -4751,6 +4751,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		questionsscreen.clickSaveButton();
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
 		
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -7399,6 +7400,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, "Would you like to decline  selected service request?");
 		servicerequestsscreen.clickDoneCloseReasonDialog();
+		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();
 	

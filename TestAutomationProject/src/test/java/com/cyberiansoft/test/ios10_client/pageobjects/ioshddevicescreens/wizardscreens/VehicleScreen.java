@@ -1,6 +1,7 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -24,7 +25,7 @@ import java.util.List;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class VehicleScreen extends iOSHDBaseScreen {
+public class VehicleScreen extends BaseWizardScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
 	
@@ -89,7 +90,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	//@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
     //private IOSElement wotypelabel;
 	
-	public VehicleScreen(AppiumDriver driver) {		
+	public VehicleScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
@@ -102,7 +103,7 @@ public class VehicleScreen extends iOSHDBaseScreen {
 	}
 
 	public String clickSaveWithAlert() throws InterruptedException {
-		clickSaveButton();
+		clickSave();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		return Helpers.getAlertTextAndAccept();
 	}

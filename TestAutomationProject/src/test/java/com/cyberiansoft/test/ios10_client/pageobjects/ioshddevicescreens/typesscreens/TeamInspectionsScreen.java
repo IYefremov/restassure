@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -14,8 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 
+	private final TypeScreenContext TEAMINSPECTIONCONTEXT = TypeScreenContext.TEAMINSPECTION;
+
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
-	private By discardbtnxpath = By.name("Discard");
 	
 	public TeamInspectionsScreen(AppiumDriver driver) {
 		super(driver);
@@ -25,9 +29,27 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("TeamInspectionsPageTableLeft")));
 	}
 
-	public void clickBackServiceRequest() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+	public String getFirstInspectionNumberValue() {
+		return appiumdriver.findElementByXPath(firstinspxpath + "/XCUIElementTypeStaticText[1]").getAttribute("label");
+	}
+
+	public String getInspectionTypeValue(String inspectionnumber) {
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspectionnumber + "']/XCUIElementTypeStaticText[@name='labelInfo2']")).getAttribute("label");
+		//return firstinspectionprice.getAttribute("label");
+	}
+
+	public void clickAddInspectionButton() {
+		appiumdriver.findElementByAccessibilityId("Add").click();
+		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0) {
+			appiumdriver.findElementByAccessibilityId("Discard").click();
+		}
+		BaseWizardScreen.typeContext = TEAMINSPECTIONCONTEXT;
+	}
+
+	public ServiceRequestdetailsScreen clickBackServiceRequest() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Request"))).click();
+		return new ServiceRequestdetailsScreen(appiumdriver);
 	}
 
 	public boolean isInspectionExists(String inspection) {
@@ -116,5 +138,17 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	public boolean isDraftIconPresentForInspection(String inspnumber) {
 		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT"))
 				.size() > 0;
+	}
+
+	public int getNumberOfRowsInTeamInspectionsTable() {
+		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell")).size();
+	}
+
+	public boolean isWOIconPresentForInspection(String inspnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy
+				.AccessibilityId(inspnumber)));
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspnumber
+				+ "']/XCUIElementTypeImage[@name='ESTIMATION_WO_CREATED']")).size() > 0;
 	}
 }

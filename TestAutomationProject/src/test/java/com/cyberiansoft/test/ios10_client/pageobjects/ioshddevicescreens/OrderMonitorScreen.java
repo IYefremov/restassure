@@ -170,7 +170,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	public TeamWorkOrdersScreen clickBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(backbtn)).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+		backbtn.click();
 		return new TeamWorkOrdersScreen(appiumdriver);
 	}
 	

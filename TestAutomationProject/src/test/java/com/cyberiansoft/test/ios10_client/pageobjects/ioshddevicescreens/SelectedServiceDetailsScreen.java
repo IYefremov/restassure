@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -78,6 +79,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	@iOSFindBy(accessibility = "Service Part")
 	private IOSElement servicepartscell;
+
+	@iOSFindBy(accessibility = "Vehicle Parts")
+	private IOSElement vehiclepartsfldname;
 	
 	public SelectedServiceDetailsScreen(AppiumDriver driver) {
 		super(driver);
@@ -219,7 +223,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public boolean vehiclePartsIsDisplayed() {
-		return appiumdriver.findElementByAccessibilityId("Vehicle Parts").isDisplayed();
+		return vehiclepartsfldname.isDisplayed();
 	}
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
@@ -463,22 +467,20 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void selectVehiclePart(String vehiclepart) {
 		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
-
-
-
 		if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
 			scrollToElement(vehiclepart);
-			//swipeTableUp(vehiclepartstable.findElementByAccessibilityId(vehiclepart),
-			//		vehiclepartstable);
 		}
-		/*vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
-		if (vehiclepartstable.findElement(MobileBy.name(vehiclepart)).findElementByClassName("XCUIElementTypeButton").getAttribute("name").equals("unselected")) {
-			//vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
-			//vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
-			new TouchAction(appiumdriver).press(vehiclepartstable.findElement(MobileBy.name(vehiclepart)))
-	                .waitAction(waitOptions(ofSeconds(2))).release().perform();
-		}*/
-		vehiclepartstable.findElement(MobileBy.name(vehiclepart)).click();
+		vehiclepartstable.findElementByAccessibilityId(vehiclepart).click();
+	}
+
+	public void selectVehicleParts(String[] vehicleParts) {
+		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
+		for (String vehiclepart : vehicleParts) {
+			if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
+				scrollToElement(vehiclepart);
+			}
+			vehiclepartstable.findElementByAccessibilityId(vehiclepart).click();
+		}
 	}
 
 	public void cancelSelectedServiceDetails() {

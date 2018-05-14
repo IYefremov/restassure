@@ -1,7 +1,5 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -19,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class QuestionsScreen extends iOSHDBaseScreen {
+public class QuestionsScreen extends BaseWizardScreen {
 	
 	public QuestionsScreen(AppiumDriver driver) {
 		super(driver);
@@ -109,9 +107,9 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	public void setOwnerState(String ownerstate) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByName(ownerstate)).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByName(ownerstate).click();
+		if (!appiumdriver.findElementByName(ownerstate).isDisplayed())
+			scrollToElement(ownerstate);
+		appiumdriver.findElementByName(ownerstate).click();
 	}
 
 	public void setOwnerCountry(String ownercountry) {
@@ -124,7 +122,7 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Choose One AVIS Code")));
 		appiumdriver.findElementByName(aviscode).click();
-		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
+		return new InvoiceInfoScreen(appiumdriver);
 	}
 	
 	public void chooseConsignor(String consignor) {
@@ -178,7 +176,8 @@ public class QuestionsScreen extends iOSHDBaseScreen {
 	public void selectTaxPoint(String taxpoint) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Tax_Point_1")));
-		appiumdriver.findElementByName(taxpoint).click();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(taxpoint))).click();
 	}
 	
 	public String clickSaveWithAlert() {
