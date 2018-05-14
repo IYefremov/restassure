@@ -11,10 +11,18 @@ import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EnterpriseBeforeDamageScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.EnterpriseBeforeDamageScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PriceMatrixScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
@@ -106,9 +114,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(tcrow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(tcrow), ExcelUtils.getModel(tcrow), ExcelUtils.getYear(tcrow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.cancelOrder();
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -157,7 +165,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyExistingWorkOrdersDialogAppears();	
 			if (appiumdriver.findElementsByAccessibilityId("Close").size() > 0)
 				appiumdriver.findElementByAccessibilityId("Close").click();
-			vehiclescreeen.clickSaveButton();
+			vehiclescreeen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			homescreen.clickSettingsButton();
 			settingsscreen = new RegularSettingsScreen(appiumdriver);
@@ -188,8 +196,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			//Assert.assertEquals(searchresult, "Search Complete No vehicle invoice history found");
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			Assert.assertTrue(servicesscreen
 					.isServiceTypeExists(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE));
@@ -203,7 +211,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickCancelButton();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.cancelOrder();
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 
 			homescreen.clickSettingsButton();
@@ -236,8 +244,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo1 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -265,11 +273,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 
 			// ==================Create second WO=============
 			tcname = "testTurningMultipleWorkOrdersIntoASingleInvoice2";
@@ -285,7 +292,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo2 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -339,10 +347,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			final String[] wos = {wo1, wo2};
 			myworkordersscreen.clickCreateInvoiceIconForWOs(wos);
 			myworkordersscreen.clickInvoiceIcon();
@@ -381,8 +388,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo1 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -397,10 +404,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				selectedservicescreen.saveSelectedServiceDetails();
 			}
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 
 			// ==================Create second WO=============
 			tcname = "testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice2";
@@ -414,7 +420,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo2 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -429,10 +436,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				selectedservicescreen.saveSelectedServiceDetails();
 			}
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
+			ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			final String[] wos = {wo1, wo2};
 			myworkordersscreen.clickCreateInvoiceIconForWOs(wos);
 			
@@ -475,8 +482,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.clickToolButton();
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
@@ -492,7 +499,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickAddServicesButton();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			String insptoapprove = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.selectInspectionForApprove(insptoapprove);			
 			RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
@@ -534,8 +541,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String inpnumber = vehiclescreeen.getInspectionNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -568,7 +575,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 			myinspectionsscreen.selectInspectionForApprove(inpnumber);
 			RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
@@ -581,15 +588,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myinspectionsscreen.clickCreateWOButton();
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			
 			Assert.assertEquals(inpnumber.substring(0, 1), "E");
 			Assert.assertEquals(wonumber.substring(0, 1), "O");
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 
 			myinspectionsscreen.clickHomeButton();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -616,8 +623,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -634,7 +641,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 
-			servicesscreen.cancelOrder();
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 
 			homescreen.clickSettingsButton();
@@ -663,8 +670,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -681,7 +688,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 
-			servicesscreen.cancelOrder();
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -706,9 +713,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.clickChangeScreen();
 			Assert.assertTrue(vehiclescreeen.clickSaveWithAlert().contains("RO# is required"));
 			vehiclescreeen.setRO(ExcelUtils.getRO(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.cancelOrder();
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -730,9 +737,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.clickChangeScreen();
 			Assert.assertTrue(vehiclescreeen.clickSaveWithAlert().contains("Advisor is required"));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.cancelOrder();
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -748,20 +755,18 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 			myinspectionsscreen.clickAddInspectionButton();
 			myinspectionsscreen.selectInspectionType(UtilConstants.wizardprotrackerrouteinspectiondertype);
-			RegularInspectionScreen  inspectionscreen = new RegularInspectionScreen(appiumdriver);
-			inspectionscreen.clickChangeScreen();
-			String alerttext = inspectionscreen.clickSaveWithAlert();
+			RegularVehicleScreen  vehicleScreen = new RegularVehicleScreen(appiumdriver);
+			vehicleScreen.clickSave();
+			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("VIN# is required"));
-			inspectionscreen.setVIN(ExcelUtils.getVIN(testcaserow));
-			inspectionscreen.clickChangeScreen();
-			alerttext = inspectionscreen.clickSaveWithAlert();
+			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
+			vehicleScreen.clickSave();
+			alerttext = Helpers.getAlertTextAndAccept();
 			//alerttext = Helpers.getAlertTextAndAccept();
 			//alerttext = inspectionscreen.clickSaveWithAlert();
 			Assert.assertTrue(alerttext.contains("Advisor is required"));
-			inspectionscreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			inspectionscreen.clickChangeScreen();
-			//inspectionscreen.saveChanges();
-			inspectionscreen.clickSaveButton();
+			vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
+			vehicleScreen.saveWizard();
 			myinspectionsscreen.clickHomeButton();
 		}
 		
@@ -788,26 +793,26 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			//String wonumber = vehiclescreeen.getInspectionNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.INTERIORBURNS_SUBSERVICE);
 
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			String inspnum = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			Assert.assertEquals(wonumber.substring(0, 1), "O");
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -817,14 +822,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
             vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber2 = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());			
-			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-
-			
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			Assert.assertEquals(wonumber2.substring(0, 1), "O");
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 
@@ -859,15 +863,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.OTHER_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			String insptoarchive = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.selectInspection(insptoarchive);
 			myinspectionsscreen.clickArchiveInspectionButton();
@@ -918,10 +922,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-			selectedservicescreen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+
+			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			selectedservicescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = regularQuestionsScreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 
 			selectedservicescreen.clickVehiclePartsCell();
@@ -1001,12 +1007,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE, "$140.00 x 1.00"));
 			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE, "$60.00 x 1.00"));
 
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1035,10 +1040,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
-			vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.clickVehiclePartsCell();
@@ -1070,12 +1076,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1123,10 +1128,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-			vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 
@@ -1152,13 +1158,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%54.55");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 
@@ -1185,10 +1190,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 
@@ -1252,13 +1258,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%76.00");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
             myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
@@ -1283,10 +1288,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
-			vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreeen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.clickVehiclePartsCell();
@@ -1299,12 +1305,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen = servicesscreen.openCustomServiceDetails("Customer Discount");
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
@@ -1327,16 +1333,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
-			vehiclescreeen.clickChangeScreen();
-			String alerttext = questionsscreen.clickSaveWithAlert();
+			questionsscreen.clickSave();
+			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(
 					alerttext.contains("Question 'Estimate Conditions' in section 'Hail Info' should be answered."));
 			questionsscreen = new RegularQuestionsScreen(appiumdriver);
@@ -1345,13 +1350,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Quick Quote");
@@ -1378,13 +1382,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 			priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1406,29 +1409,27 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOutsideQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);		
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompany(ExcelUtils.getInsuranceCompany(retailhaildatarow));
 			claimscreen.clickChangeScreen();
 			String alerttext = claimscreen.clickSaveWithAlert();
 			Assert.assertTrue(alerttext.contains("Claim# is required."));
 			claimscreen.setClaim(ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.HAIL_PDR_NON_CUSTOMARY_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1439,14 +1440,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
-
-			selectedservicescreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1468,8 +1468,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.clickTech();
@@ -1492,20 +1492,20 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-			selectedservicescreen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOtherQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
@@ -1528,7 +1528,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.SEVERE_SEVERITY);
 			Assert.assertEquals(pricematrix.getPrice(), "$0.00");
@@ -1553,18 +1553,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 			priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
-			myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1586,26 +1584,25 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+			questionsscreen =vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOtherQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
-					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));	
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
@@ -1629,7 +1626,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.HLF_SIZE, PriceMatrixScreen.LIGHT_SEVERITY);
@@ -1649,17 +1646,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
             priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1681,29 +1677,27 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOtherQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 			claimscreen.setDeductible("50");
 			Assert.assertEquals(
 					claimscreen
 							.getDeductibleValue(), "50.00");
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
@@ -1715,18 +1709,17 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 					UtilConstants.technicianA));
 
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 			priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-            Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			ordersummaryscreen.selectWorkOrderDetails("Hail");
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
@@ -1753,13 +1746,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOutsideQuestions();
 			
@@ -1772,10 +1763,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					.contains("Your answer doesn't match the validator 'US Zip Codes'."));
 			questionsscreen.clearZip();
 			questionsscreen.setRegularSetFieldValue((IOSElement) appiumdriver.findElementByAccessibilityId("Owner Zip_TextView"), validzip);
-			questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.cancelOrder();
-            myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1797,8 +1787,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.clickTech();
@@ -1821,21 +1811,20 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-
-			selectedservicescreen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectProperQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
-					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));		
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
@@ -1879,17 +1868,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
             priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -1910,26 +1898,24 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOtherQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
-					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));	
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectSubService(UtilConstants.PDRHAILUS_SERVICE);
 			Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
 			RegularPriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
@@ -2003,17 +1989,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickBackButton();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
             priceMatricesScreen.clickBackButton();
-			pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			pricematrix.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -2034,26 +2019,24 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOutsideQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
-					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));		
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Customer Discount");
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
@@ -2061,15 +2044,14 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-			selectedservicescreen.saveSelectedServiceDetails();	
-
-			selectedservicescreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			selectedservicescreen.saveSelectedServiceDetails();
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-            Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -2095,8 +2077,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2130,13 +2112,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			
-			ordersummaryscreen.clickSaveButton();
-			homescreen = myworkordersscreen.clickHomeButton();
-			
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 
 			teamworkordersscreen.clickCreateInvoiceForWO(wonumber);
@@ -2169,8 +2147,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2204,10 +2182,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -2268,8 +2245,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2311,12 +2288,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
-			Thread.sleep(4000);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -2345,7 +2319,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.clickSave();
 			ordermonitorscreen = new RegularOrderMonitorScreen(appiumdriver);
 			ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Queued");
 			ordermonitorscreen.selectPanelToChangeStatus(UtilConstants.PDR_SERVICE);
@@ -2393,8 +2367,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.DETAIL_SERVICE );
 			RegularSelectedServiceDetailsScreen selectedservicescreen =servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2402,12 +2376,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -2448,8 +2420,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2488,12 +2460,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			invoiceinfoscreen.clickSaveAsFinal();
@@ -2521,8 +2491,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2535,10 +2505,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.deleteWorkOrderViaActionAndSearch(wo);
 			Assert.assertFalse(myworkordersscreen.woExists(wo));
 			myworkordersscreen.clickHomeButton();
@@ -2569,8 +2538,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.DETAIL_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WASH_N_VAC_SERVICE);
 			//servicesscreen.openServiceDetails(UtilConstants.WASH_N_VAC_SERVICE);
@@ -2592,8 +2561,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
-		    myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
+			servicesscreen.saveWizard();
 			String inspectioncustomer = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.changeCustomerForInspection(inspectioncustomer, customer);
 			myinspectionsscreen.clickHomeButton();
@@ -2638,26 +2606,24 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.acceptForReminderNoDrilling();
 
-			questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+					RegularVehicleScreen.class);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			questionsscreen = vehiclescreeen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.selectOutsideQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			RegularClaimScreen claimscreen = new RegularClaimScreen(appiumdriver);
+
+			RegularClaimScreen claimscreen = questionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
 			claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-			claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.setServiceQuantityValue(servicequantity);	
@@ -2666,16 +2632,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.setServiceQuantityValue(servicequantity2);	
-			selectedservicescreen.saveSelectedServiceDetails();		
-			//servicesscreen.clickBackServicesButton();
-			selectedservicescreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+			selectedservicescreen.saveSelectedServiceDetails();
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			selectedservicescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), totalsumm);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			ordersummaryscreen.selectWorkOrderDetails("Hail No Discount Invoice");
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), totalsumm);
@@ -2714,8 +2679,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
 
-			selectedservicescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			selectedservicescreen =  servicesscreen.openCustomServiceDetails(UtilConstants.DUELEATHER_SUBSERVICE);
 
@@ -2770,12 +2735,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -2812,8 +2775,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-			selectedservicescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.DETAIL_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 
@@ -2850,12 +2813,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			ordersummaryscreen.selectWorkOrderDetails(UtilConstants.NO_ORDER_TYPE);
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -2887,9 +2848,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.setNotes("Blue fender");
 			//notesscreen.clickDoneButton();
 			notesscreen.clickSaveButton();
-			
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -2923,11 +2884,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -2961,21 +2921,20 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.setTotalSale("1");
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setPO("832145");
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -3012,8 +2971,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3026,18 +2985,18 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
-            myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
-			String insptoapprove = myinspectionsscreen.getFirstInspectionNumberValue();
-			myinspectionsscreen.selectInspectionForEdit(insptoapprove); 
-			myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen.saveWizard();
+            String insptoapprove = myinspectionsscreen.getFirstInspectionNumberValue();
+			myinspectionsscreen.selectInspectionForEdit(insptoapprove);
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			myinspectionsscreen.clickHomeButton();
 		}
 		
@@ -3060,8 +3019,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wo = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreeen.setRO(ExcelUtils.getRO(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_FABRIC_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE);
 			selectedservicescreen.saveSelectedServiceDetails();
@@ -3073,12 +3032,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
             Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00"));
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.selectWorkOrderForEidt(wo);
-			myworkordersscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 
 			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
@@ -3094,9 +3053,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
             Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.WHEELCOVER2_SUBSERVICE, "$45.00 x 1.00"));
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -3121,8 +3080,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String wonum = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails (UtilConstants.CARPETREPAIR_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3154,12 +3113,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -3172,7 +3129,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			invoiceinfoscreen = myinvoicesscreen.clickEditPopup();
 			invoiceinfoscreen.clickOnWO(wonum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			servicesscreen.searchServiceByName(UtilConstants.PAINTMIRROR_SUBSERVICE);
 			selectedservicescreen = servicesscreen.clickServiceCustomDetailButton(UtilConstants.PAINTMIRROR_SUBSERVICE);
@@ -3202,7 +3159,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			
-			servicesscreen.clickSaveButton();
+			servicesscreen.clickSave();
 			invoiceinfoscreen.clickSaveAsFinal();
 			homescreen = myinvoicesscreen.clickHomeButton();
 		}
@@ -3224,10 +3181,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));		
-			
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_FABRIC_SERVICE);
 			servicesscreen.selectSubService("Tear/Burn >2\" (Fabric)");                                         
 			servicesscreen.clickBackServicesButton();
@@ -3238,7 +3195,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE));
 			servicesscreen.clickBackServicesButton();
 			Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3258,8 +3215,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			teamworkordersscreen.clickiCreateInvoiceButton();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.selectNextScreen("AVIS Questions");
-			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			RegularQuestionsScreen questionsscreen = invoiceinfoscreen.selectNextScreen("AVIS Questions",
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			
 			questionsscreen.chooseAVISCode("Rental-921");						
@@ -3300,8 +3257,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wonumber1 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
@@ -3314,7 +3271,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			
 			//Create second WO
 			myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
@@ -3325,17 +3282,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wonumber2 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.LEATHERREPAIR_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow2));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow2)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 
 			//Create third WO
-			myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 			myworkordersscreen.clickAddOrderButton();
 			myworkordersscreen.selectWorkOrderType(UtilConstants.wizprotrackerrouteworkordertype);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -3343,14 +3299,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String wonumber3 = vehiclescreeen.getWorkOrderNumber();
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow3), ExcelUtils.getModel(testcaserow3), ExcelUtils.getYear(testcaserow3));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow3));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow3)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3411,21 +3368,21 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String wo = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.OTHER_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
             myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
 			myworkordersscreen.selectWorkOrderForCopyVehicle(wo);
 			myworkordersscreen.selectWorkOrderType(UtilConstants.carmaxworkordertype);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			servicesscreen.cancelOrder();
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -3449,27 +3406,27 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow1));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
 			String wo = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
 			
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
-			myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
+			servicesscreen.saveWizard();
 			myworkordersscreen.selectWorkOrderForCopyServices(wo);
 			myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow2));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.BLACKOUT_SUBSERVICE));
 			Assert.assertEquals(servicesscreen.getServicePriceValue(UtilConstants.BLACKOUT_SUBSERVICE), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow1)) + " x 1.00");
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.cancelOrder();
+			servicesscreen.cancelWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -3496,8 +3453,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 			final String inspnum = vehiclescreeen.getInspectionNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3519,13 +3476,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();	
 			servicesscreen.clickBackServicesButton();
 			Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			servicesscreen.clickSaveButton();
+			servicesscreen.saveWizard();
 
-			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 			myinspectionsscreen.selectInspection(inspnum);
 			myinspectionsscreen.clickCreateWOButton();
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
@@ -3533,11 +3490,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();	
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.setTotalSale("1");
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			//Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -3573,8 +3529,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3594,15 +3550,13 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.clickSave();
 			String alerttext = Helpers.getAlertTextAndAccept();
 			ordersummaryscreen.setTotalSale(totalsale);
 			Assert.assertTrue(alerttext.contains("Total Sale is required."));
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -3626,8 +3580,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreeen.setRO(ExcelUtils.getRO(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIOR_LEATHER_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CRT_2_RPR_LTHR_SUBSERVICE);
 			Assert.assertEquals(selectedservicescreen.getAdjustmentsValue(), "-$14.48");
@@ -3649,12 +3603,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			servicesscreen.clickBackServicesButton();
 			Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-					
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 			vehiclescreeen.clickHomeButton();
@@ -3679,8 +3631,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String inspnum = vehiclescreeen.getInspectionNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			servicesscreen.clickToolButton();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
@@ -3710,22 +3662,20 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickAddServicesButton();
 			servicesscreen.clickBackServicesButton();	
-			servicesscreen.clickSaveButton();
-			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
+			servicesscreen.saveWizard();
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
-			
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);;
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
             Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00"));
 			servicesscreen.clickBackServicesButton();
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
             Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00"));
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.clickSaveButton();
-			//inspnum = myinspectionsscreen.getFirstInspectionNumberValue();
-            myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
+			servicesscreen.saveWizard();
 			Assert.assertEquals(myinspectionsscreen.getFirstInspectionNumberValue(), inspnum);
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -3779,8 +3729,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3806,12 +3756,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-				
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			invoiceinfoscreen.clickSaveAsFinal();
@@ -3838,8 +3786,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -3871,22 +3819,20 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			
-			ordersummaryscreen.clickSaveButton();
+
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 			
 			RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 			teamworkordersscreen.clickOnWO(wonumber);
 			teamworkordersscreen.selectEditWO();
-			teamworkordersscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			Assert.assertFalse(ordersummaryscreen.checkApproveAndCreateInvoiceExists());
-			ordersummaryscreen.clickSaveButton();
-            teamworkordersscreen = new RegularTeamWorkOrdersScreen(appiumdriver);
+			ordersummaryscreen.saveWizard();
 			teamworkordersscreen.clickCreateInvoiceForWO(wonumber);
 			teamworkordersscreen.clickiCreateInvoiceButton();
 			String alerttext = Helpers.getAlertTextAndAccept();
@@ -3910,21 +3856,22 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularEnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption());
-			RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = new RegularEnterpriseBeforeDamageScreen(appiumdriver);
-			enterprisebeforedamagescreen.saveWorkOrder();
+			RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = vehiclescreeen.selectNextScreen(
+					RegularEnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption(), RegularEnterpriseBeforeDamageScreen.class);
+			enterprisebeforedamagescreen.clickSave();
 			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("Question 'VIN' in section 'Enterprise Before Damage' should be answered."));
 			enterprisebeforedamagescreen.setVINCapture();
-			enterprisebeforedamagescreen.saveWorkOrder();
+			enterprisebeforedamagescreen.clickSave();
 			alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("Question 'License Plate' in section 'Enterprise Before Damage' should be answered."));
 			enterprisebeforedamagescreen.setLicensePlateCapture();
-			
-			enterprisebeforedamagescreen.selectNextScreen(UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION);
-			enterprisebeforedamagescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.clickSaveButton();
+
+			enterprisebeforedamagescreen = enterprisebeforedamagescreen.selectNextScreen(
+					UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION, RegularEnterpriseBeforeDamageScreen.class);
+			RegularServicesScreen servicesscreen = enterprisebeforedamagescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
+			servicesscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -3950,9 +3897,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
 			notesscreen.clickSaveButton();
-		
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.clickNotesButton();
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
@@ -3967,16 +3914,16 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.clickSaveButton();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(EnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption());
-			RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = new RegularEnterpriseBeforeDamageScreen(appiumdriver);
+			RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = servicesscreen.selectNextScreen(
+					EnterpriseBeforeDamageScreen.getEnterpriseBeforeDamageScreenCaption(), RegularEnterpriseBeforeDamageScreen.class);
 			enterprisebeforedamagescreen.setVINCapture();
 			enterprisebeforedamagescreen.setLicensePlateCapture();
-			
-			enterprisebeforedamagescreen.selectNextScreen(UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION);
-			enterprisebeforedamagescreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+
+			enterprisebeforedamagescreen = enterprisebeforedamagescreen.selectNextScreen(UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION,
+					RegularEnterpriseBeforeDamageScreen.class);
+			RegularOrderSummaryScreen ordersummaryscreen = enterprisebeforedamagescreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.selectWorkOrderForAddingNotes(wo);
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 3);
@@ -3986,8 +3933,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myworkordersscreen.clickInvoiceIcon();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.selectNextScreen("AVIS Questions");
-			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			RegularQuestionsScreen questionsscreen = invoiceinfoscreen.selectNextScreen("AVIS Questions",
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			questionsscreen.chooseAVISCode("Other-920");			
 			invoiceinfoscreen.clickSaveAsFinal();
@@ -4030,9 +3977,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
 			notesscreen.clickSaveButton();
 		
-			vehiclescreeen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-			vehiclescreeen.selectNextScreen(UtilConstants.HAIL_PHOTOS_SCREEN_CAPTION);
-			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+			RegularClaimScreen regularClaimScreen = vehiclescreeen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION,
+					RegularClaimScreen.class);
+			RegularQuestionsScreen questionsscreen = regularClaimScreen.selectNextScreen(UtilConstants.HAIL_PHOTOS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			questionsscreen.makeCaptureForQuestionRegular("VIN");
 			questionsscreen.swipeScreenUp();
 			questionsscreen.makeCaptureForQuestionRegular("Odometer");
@@ -4046,15 +3994,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			questionsscreen.makeCaptureForQuestionRegular("Right Rear of Vehicle");
 			questionsscreen.swipeScreenUp();
 			questionsscreen.makeCaptureForQuestionRegular("Left Rear of Vehicle");
-			questionsscreen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+			questionsscreen.selectNextScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			questionsscreen.selectProperQuestions();
 			
 			int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
 			questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 					ExcelUtils.getownerState(retailhaildatarow), UtilConstants.CANADA, ExcelUtils.getOwnerZip(retailhaildatarow));
-			
-			questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.clickToolButton();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("E-Coat");
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -4063,19 +4011,18 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.clickSaveButton();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickAddServicesButton();
-			
-			servicesscreen.selectNextScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
-			RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+
+			RegularPriceMatrixScreen pricematrix = servicesscreen.selectNextScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION,
+					RegularPriceMatrixScreen.class);
 			pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 			pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 			pricematrix.clickNotesButton();
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
 			notesscreen.clickSaveButton();
-			pricematrix.clickSaveButton();
-			
-			Thread.sleep(13000);
+			pricematrix.saveWizard();
+
 			String insptoapprove = myinspectionsscreen.getFirstInspectionNumberValue();
 			myinspectionsscreen.selectInspectionType(insptoapprove);
 			RegularMyInvoicesScreen myinvoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
@@ -4110,9 +4057,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
 			notesscreen.clickSaveButton();
-		
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -4131,16 +4078,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			
-			servicesscreen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION);
+
+			RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen(UtilConstants.QUESTIONS_SCREEN_CAPTION,
+					RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
-			RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 			questionsscreen.chooseConsignor("Unknown Consignor/One Off-718");
-			
-			questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-			ordersummaryscreen.clickSaveButton();
+
+			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.selectWorkOrderForAddingNotes(wo);
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
@@ -4179,9 +4125,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-				
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -4201,12 +4147,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-						.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.setTotalSale("1");
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -4249,8 +4194,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -4265,12 +4210,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), (PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow))));
 
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
 			invoiceinfoscreen.setPOWithoutHidingkeyboard(_po);
 			invoiceinfoscreen.clickSaveAsFinal();			
@@ -4295,20 +4239,19 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.setTotalSaleWithoutHidingkeyboard(totalsale);
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.saveWizard();
 			myworkordersscreen.clickHomeButton();
 		}
 		
@@ -4330,20 +4273,19 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreeen.setRO(ExcelUtils.getRO(testcaserow));
-			vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-			RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+			RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+					RegularServicesScreen.class);
 			servicesscreen.selectService(UtilConstants.INTERIORPLASTIC_SERVICE);
 			servicesscreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
 			servicesscreen.clickBackServicesButton();
-			servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-					.getOrderSummaryScreenCaption());
-			RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.checkApproveAndCreateInvoice();
-			ordersummaryscreen.clickSaveButton();
+			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.clickSaveAsFinal();	
-			RegularCarHistoryScreen carhistoryscreen = new RegularCarHistoryScreen(appiumdriver); 
+			RegularCarHistoryScreen carhistoryscreen = new RegularCarHistoryScreen(appiumdriver);
 			carhistoryscreen.clickHomeButton();
 			carhistoryscreen = homescreen.clickCarHistoryButton();
 			carhistoryscreen.searchCar("887340");

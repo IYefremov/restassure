@@ -2,8 +2,12 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typess
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.AppiumDriver;
@@ -23,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
+	private final TypeScreenContext WOCONTEXT = TypeScreenContext.WORKORDER;
 	private By autosavedworkorder = By.name("EntityInfoButtonUnchecked, AutoSaved");
 	
 	private By btnwholesale = By.name("btnWholesale");
@@ -103,6 +108,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		addorderbtn.click();
 		if (elementExists("Discard"))
 			appiumdriver.findElementByAccessibilityId("Discard").click();
+		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
 
@@ -124,11 +130,12 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
-	public void addWorkWithJobOrder(String workOrderType, String jobName) {
+	public QuestionsScreen addWorkWithJobOrder(String workOrderType, String jobName) {
 		clickAddOrderButton();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 		selectWorkOrderJob(jobName);
+		return  new QuestionsScreen(appiumdriver);
 	}
 
 	public void selectFirstOrder() {
@@ -156,6 +163,15 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		selectWorkOrder(workOrderNumber);
 		selectCopyVehicle();
 		selectCustomerAndWorkOrderType(customerName, workOrderType);
+		BaseWizardScreen.typeContext = WOCONTEXT;
+	}
+
+	public void copyVehicleForWorkOrder(String workOrderNumber, String workOrderType) {
+		selectWorkOrder(workOrderNumber);
+		selectCopyVehicle();
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 	
 	public void selectCopyVehicle() {
@@ -209,23 +225,27 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		}
 	}
 	
-	public void openWorkOrderDetails(String wonumber) {
-		selectWorkOrder(wonumber);
+	public void openWorkOrderDetails(String workOrderNumber) {
+		selectWorkOrder(workOrderNumber);
 		clickDetailspopupMenu();
 	}
 	
-	public void deleteWorkOrderViaAction(String wo) {
+	public MyWorkOrdersScreen deleteWorkOrderViaAction(String workOrderNumber) {
 		clickActionButton();
-		selectWorkOrderForAction(wo);
+		selectWorkOrderForAction(workOrderNumber);
 		clickActionButton();
 		clickDeleteButton();
 		Helpers.acceptAlert();
-		clickDoneButton();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId(workOrderNumber), 1));
+		return this;
 	}
 	
 	public void clickActionButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable (appiumdriver.findElementByAccessibilityId("Share")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Share")));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable (MobileBy.AccessibilityId("Share")));
 		appiumdriver.findElementByAccessibilityId("Share").click();		
 	}
 	
@@ -283,6 +303,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void selectWorkOrderForEidt(String wonumber) {		
 		selectWorkOrder(wonumber);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
+		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 	
 	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {
@@ -343,12 +364,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWO(String wonumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
-		
-		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonUnchecked\")]")).click();
-		//Helpers.waitABit(1000);
-		//appiumdriver.findElement(MobileBy.xpath("//UIATableView[@name=\"MyWorkOrdersTable\"]/UIATableCell[@name = \"" + wo + "\"]/UIAButton[@name=\"EntityInfoButtonUnchecked\"]")).click();
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[\"MyWorkOrdersTable\"].cells()[\"" + wo + "\"].buttons()[\"EntityInfoButtonUnchecked\"]")).click();
 	}
 	
 	public String getPriceValueForWO(String wonumber) {
@@ -361,14 +379,14 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	public InvoiceInfoScreen clickInvoiceIcon() {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
-		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
+		BaseWizardScreen.typeContext = WOCONTEXT;
+		return new InvoiceInfoScreen(appiumdriver);
 	}
 
 	public InvoiceInfoScreen selectInvoiceType(String invoicetype) {
-		/*appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
-						+ invoicetype + "\")]/UIAStaticText[1]").click();*/
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
-		return new InvoiceInfoScreen(appiumdriver, TypeScreenContext.WORKORDER);
+		BaseWizardScreen.typeContext = WOCONTEXT;
+		return new InvoiceInfoScreen(appiumdriver);
 	}
 
 	public String selectInvoiceTypeAndAcceptAlert(String invoicetype) throws InterruptedException {
@@ -413,20 +431,27 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'EntityInfoButtonUnchecked')]")).click();
 	}
 	
-	public void approveWorkOrder(String wo, String employee, String pwd) {
+	public MyWorkOrdersScreen approveWorkOrder(String wo, String employee, String pwd) {
 		selectWorkOrderForApprove(wo);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.clickApproveButton();
+		return this;
 	}
 	
-	public VehicleScreen selectJob(String workorderjob) {
+	public void selectJob(String workorderjob) {
 		appiumdriver.findElementByName(workorderjob).click();
-		return new VehicleScreen(appiumdriver);
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
 	}
+
+    public CarHistoryScreen clickBackToCarHystoryScreen() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+        appiumdriver.findElementByAccessibilityId("Back").click();
+        return new CarHistoryScreen(appiumdriver);
+    }
 }

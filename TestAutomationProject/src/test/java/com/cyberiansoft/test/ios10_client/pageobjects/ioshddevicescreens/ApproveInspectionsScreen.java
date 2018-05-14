@@ -57,7 +57,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
 
 	public void clickDoneButton() {
-		//approvebtn.click();
 		if (appiumdriver.findElements(MobileBy.AccessibilityId("Done")).size() > 1)
 			((IOSElement) appiumdriver.findElements(MobileBy.AccessibilityId("Done")).get(1)).click();
 		else
@@ -94,9 +93,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectInspectionForApprove(String inspnum) {
-		/*System.out.println("+++++" + appiumdriver.findElementsByAccessibilityId("ApproveInspectionsView").size());
-		IOSElement approvepopup = (IOSElement) appiumdriver.findElementByAccessibilityId("ApproveInspectionsView");
-		approvepopup.findElementByAccessibilityId(inspnum).click();*/
 		if (appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnum + "']")).size() > 1)
 			((IOSElement) appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnum + "']")).get(1)).click();
 		else
@@ -106,7 +102,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	public void clickSignButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Sign")));
-		appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
 	}
 	
 	
@@ -138,7 +135,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		selectInspectionForApprove(inspnum);
 		approveallbtn.click();
 		clickSaveButton();
-		clickSignButton();
 		drawSignatureAfterSelection();
 		clickDoneButton();
 	}
@@ -162,7 +158,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 	
 	public void selectStatusReason(String statusreson) throws InterruptedException {
@@ -191,7 +186,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press((WebElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).waitAction(Duration.ofSeconds(1)).release().perform();
-		Helpers.waitABit(1000);
 	}
 	
 	public int getNumberOfActiveApproveButtons() {
@@ -204,6 +198,12 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 
 	public int getNumberOfActiveSkipButtons() {
 		return appiumdriver.findElements(MobileBy.AccessibilityId("skip little")).size();
+	}
+
+	public void clickSaveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Save")));
+		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 
 }

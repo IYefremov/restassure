@@ -48,33 +48,11 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		return new RegularHomeScreen(appiumdriver);
 	}
 	
-	public void clickSaveButton() {
-		if (!elementExists("Save"))
-			clickChangeScreen();
-		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
-		if (elementExists("Connecting to Back Office")) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
-	}
-	
-	public void cancelOrder() {
-		clickChangeScreen();
-		clickCancel();
-		acceptAlert();
-	}
-	
 	public void clickCancel() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 	
-	public void clickChangeScreen() {
-		if (elementExists("WizardStepsButton")) 
-			appiumdriver.findElementByAccessibilityId("WizardStepsButton").click();
-		else
-			appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
-	}
-	
+
 	public void acceptAlertByCoords() {
 		int xx = appiumdriver.manage().window().getSize().getWidth();
 		int yy = appiumdriver.manage().window().getSize().getHeight();
@@ -90,18 +68,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
         tap.perform();
 		//appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
 	}
-	
-	public void selectNextScreen(String screenname) {
-		clickChangeScreen();
-		if (! appiumdriver.findElementByAccessibilityId(screenname).isDisplayed()) {
-			swipeToElement(appiumdriver.
-					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + screenname + "']/..")));
-			//appiumdriver.findElementByAccessibilityId(screenname).click();
-		}
-		appiumdriver.findElementByAccessibilityId(screenname).click();
-		Helpers.waitABit(1000);
-	}
-	
+
 	public WebElement waitUntilVisible(String xpath) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));

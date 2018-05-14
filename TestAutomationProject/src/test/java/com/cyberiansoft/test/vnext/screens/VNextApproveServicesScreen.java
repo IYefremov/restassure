@@ -119,4 +119,9 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 		}
 		return serviceRow;
 	}
+
+	public VNextApproveInspectionsScreen clickBackButton() {
+		clickScreenBackButton();
+		return new VNextApproveInspectionsScreen(appiumdriver);
+	}
 }

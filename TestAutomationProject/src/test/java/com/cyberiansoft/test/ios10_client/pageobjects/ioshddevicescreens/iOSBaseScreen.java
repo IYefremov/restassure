@@ -26,79 +26,12 @@ public abstract class iOSBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
-	
-	/*private MobileElement w(WebElement element) {
-		return (MobileElement) element;
-	}
-	
-	private List<MobileElement> w(List<WebElement> elements) {
-		List list = new ArrayList(elements.size());
-		for (WebElement element : elements) {
-			list.add(w(element));
-		}
 
-		return list;
-	}*/
-	
 	protected boolean elementExists(By locator) {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		boolean exists = appiumdriver.findElements(locator).size() != 0;
 		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
-	}
-	
-	public void selectNextScreen(String screenname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElement(By.xpath("//UIANavigationBar[1]/UIAButton[4]")))).click();
-		if (Helpers.elementExists("//UIAPopover[1]")) {
-			appiumdriver.findElement(By.xpath("//UIAPopover[1]/UIATableView[1]/UIATableCell/UIAStaticText[contains(@name,\""+ screenname + "\")]")).click();
-		} else {
-			appiumdriver.findElement(By.xpath("//UIATableView[1]/UIATableCell/UIAStaticText[contains(@name,\""+ screenname + "\")]")).click();
-		}
-	}
-	
-	public By for_text(int xpathIndex) {
-		return By.xpath("//UIAStaticText[" + xpathIndex + "]");
-	}
-	
-	/*public MobileElement text(String text) {
-		return element(for_text(text));
-	}
-	
-	public IOSElement element(By locator) {
-		return (IOSElement) w(appiumdriver.findElement(locator));
-	}
-	
-	public List<MobileElement> elements(By locator) {
-		return w(appiumdriver.findElements(locator));
-	}*/
-	
-	public By for_text(String text) {
-		String up = text.toUpperCase();
-		String down = text.toLowerCase();
-		return By
-				.xpath("//UIAStaticText[@visible=\"true\" and (contains(translate(@name,\""
-						+ up
-						+ "\",\""
-						+ down
-						+ "\"), \""
-						+ down
-						+ "\") or contains(translate(@hint,\""
-						+ up
-						+ "\",\""
-						+ down
-						+ "\"), \""
-						+ down
-						+ "\") or contains(translate(@label,\""
-						+ up
-						+ "\",\""
-						+ down
-						+ "\"), \""
-						+ down
-						+ "\") or contains(translate(@value,\""
-						+ up
-						+ "\",\""
-						+ down + "\"), \"" + down + "\"))]");
 	}
 	
 	public void waitForAlert() {
@@ -113,17 +46,6 @@ public abstract class iOSBaseScreen {
 		Alert alert = appiumdriver.switchTo().alert();
 		alert.accept();
 	}
-	
-	public boolean isAlertExists() {
-		boolean exists = false;
-		try {
-			appiumdriver.switchTo().alert();
-			exists = true;
-		} catch (NoAlertPresentException e) {
-			exists = false;
-		}
-		return exists;
-	}
 
 	public boolean elementExists(String xpath) {
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
@@ -131,22 +53,6 @@ public abstract class iOSBaseScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
 	}
-	
-	/*public void selectUIAPickerValue(String value) {
-		int defaultwheelnumer = 10;
-		int clicks = 0;
-		Helpers.waitABit(500);
-		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
-		while (!(pickerwhl.getAttribute("value").contains(value))) {
-			//MobileElement slider = appiumdriver.findElementByClassName("UIASlider");
-			pickerwhl.setValue(value);
-			Helpers.waitABit(1000);
-			clicks = clicks+1;
-			if (clicks > defaultwheelnumer)
-				break;
-		}
-
-	}*/
 	
 	public void swipeScreenUp() {
 		Dimension size = appiumdriver.manage().window().getSize();
