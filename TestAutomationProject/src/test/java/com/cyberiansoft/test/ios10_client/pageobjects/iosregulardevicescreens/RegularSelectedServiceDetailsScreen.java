@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -460,6 +462,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public WebElement getTableParentCell(String cellname) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
+	}
+
+	public void clickSaveButton() {
+		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 
 }

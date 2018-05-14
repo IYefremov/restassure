@@ -1,5 +1,9 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -56,7 +60,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Home")));
 	}
 
-	public RegularCustomersScreen clickCustomersButton() {	
+	public RegularCustomersScreen clickCustomersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Customers")));
 		appiumdriver.findElementByAccessibilityId("Customers").click();
@@ -68,7 +72,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);  
-		myinspectionsscreen.switchToLocalInspectionsView();
+		myinspectionsscreen.switchToMyView();
 		return myinspectionsscreen;
 	}
 	
@@ -77,7 +81,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver); 
-		myinspectionsscreen.switchToOnlineInspectionsView();
+		myinspectionsscreen.switchToTeamView();
 		return new RegularTeamInspectionsScreen(appiumdriver);
 	}
 
@@ -85,7 +89,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
-		myworkordersscreen.switchToLocalWorkOrdersView();
+		myworkordersscreen.switchToMyView();
 		return myworkordersscreen;
 	}
 	
@@ -101,7 +105,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
-		invoicesscreen.switchToLocalInvoicesView();
+		invoicesscreen.switchToMyView();
 		return invoicesscreen;
 	}
 	
@@ -110,7 +114,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen(appiumdriver);
-		invoicesscreen.switchToOnlineInvoicesView();
+		invoicesscreen.switchToTeamView();
 		return new RegularTeamInvoicesScreen(appiumdriver);
 	}
 
@@ -131,7 +135,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen(appiumdriver);
-		myworkordersscreen.switchToOnlineWorkOrdersView();
+		myworkordersscreen.switchToTeamView();
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 

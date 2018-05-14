@@ -11,6 +11,9 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.*;
 import io.appium.java_client.MobileBy;
@@ -47,8 +50,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+
+		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
 		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular");
 		regCode = devicespage.getFirstRegCodeInTable();
@@ -86,18 +92,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
-		myinspectionsscreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION);
-		myinspectionsscreen.selectNextScreen(RegularVisualInteriorScreen
-					.getVisualInteriorCaption());
-		myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickSaveButton();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen(appiumdriver);
+        RegularClaimScreen claimScreen = vehicleScreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
+        RegularVisualInteriorScreen visualInteriorScreen = claimScreen.selectNextScreen(RegularVisualInteriorScreen
+					.getVisualInteriorCaption(), RegularVisualInteriorScreen.class);
+        RegularServicesScreen servicesscreen = visualInteriorScreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
+		servicesscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 			
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("Make is required"));
 			
@@ -105,9 +112,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		String inspnumber = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.saveWizard();
 
-		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForApprove(inspnumber);
 		//testlogger.log(LogStatus.INFO, "After approve", testlogger.addScreenCapture(createScreenshot(appiumdriver, iOSLogger.loggerdir)));
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -140,29 +146,28 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
 		RegularVehicleScreen vehiclescreeen = myinspectionsscreen.selectDefaultInspectionType();
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehiclescreeen.setVIN(VIN);
 		inspection8434 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("Make is required"));
 			
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-		vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen
-					.getVisualInteriorCaption());
-		vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen
-					.getVisualExteriorCaption());
-		
-		vehiclescreeen.clickSaveButton();
-		
+        RegularVisualInteriorScreen visualInteriorScreen = vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen
+					.getVisualInteriorCaption(), RegularVisualInteriorScreen.class);
+        visualInteriorScreen.selectNextScreen(RegularVisualInteriorScreen
+					.getVisualExteriorCaption(), RegularVisualInteriorScreen.class);
+
+        visualInteriorScreen.saveWizard();
 		myinspectionsscreen.selectInspectionForEdit(inspection8434);
-		myinspectionsscreen.selectNextScreen(RegularVisualInteriorScreen
-					.getVisualInteriorCaption());
-		RegularVisualInteriorScreen visualinteriorscreen = new RegularVisualInteriorScreen(appiumdriver);
+        vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularVisualInteriorScreen visualinteriorscreen = vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen
+					.getVisualInteriorCaption(), RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
 		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Miscellaneous"));
 		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Price Adjustment"));
@@ -178,8 +183,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 150);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 200);
-		visualinteriorscreen.selectNextScreen(RegularVisualInteriorScreen
-					.getVisualExteriorCaption());
+		visualinteriorscreen = visualinteriorscreen.selectNextScreen(RegularVisualInteriorScreen
+					.getVisualExteriorCaption(), RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
@@ -188,7 +193,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.clickServicesBackButton();
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));
-		visualinteriorscreen.clickSaveButton();
+		visualinteriorscreen.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspection8434), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -204,9 +209,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		homescreen = new RegularHomeScreen(appiumdriver);
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForEdit(inspection8434);
-		myinspectionsscreen.selectNextScreen(RegularVisualInteriorScreen
-				.getVisualInteriorCaption());
-		RegularVisualInteriorScreen visualinteriorscreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularVisualInteriorScreen visualinteriorscreen = vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen
+				.getVisualInteriorCaption(), RegularVisualInteriorScreen.class);
+
 		/*visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
@@ -215,8 +221,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.setCarServiceQuantityValue(_quantity);
 		visualinteriorscreen.saveCarServiceDetails();
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionpricevisual));
-		visualinteriorscreen.selectNextScreen(RegularVisualInteriorScreen
-				.getVisualExteriorCaption());
+		visualinteriorscreen = visualinteriorscreen.selectNextScreen(RegularVisualInteriorScreen
+				.getVisualExteriorCaption(), RegularVisualInteriorScreen.class);
 		/*visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
@@ -226,7 +232,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.saveCarServiceDetails();
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));
 
-		visualinteriorscreen.clickSaveButton();
+		visualinteriorscreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
 
 	}
@@ -251,8 +257,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
@@ -281,7 +286,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$67.00");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -308,16 +313,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
 		wonumber28583 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Service_in_2_fee_packs");
 		servicedetailsscreen.saveSelectedServiceDetails();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$36.00");
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("1");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 		
 	}
@@ -373,13 +376,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Service_for_override");
 		servicedetailsscreen.saveSelectedServiceDetails();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$27.00");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -403,8 +405,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.setServicePriceValue("13");
 		servicedetailsscreen.clickVehiclePartsCell();
@@ -436,7 +437,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$35.00");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -460,8 +461,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Service");
 		servicedetailsscreen.setServicePriceValue("10");
 		servicedetailsscreen.clickVehiclePartsCell();
@@ -490,7 +490,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$68.00");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -514,8 +514,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Panel");
 		servicedetailsscreen.setServicePriceValue("12");
 		servicedetailsscreen.clickVehiclePartsCell();
@@ -544,7 +543,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$67.00");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -572,8 +571,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		wonumber29398 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("All Services");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		servicesscreen.selectSubService("SR_S5_Matrix_DE_TE");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix(_pricematrix);
@@ -583,11 +581,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		pricematrix.selectDiscaunt("SR_S5_Mt_Money");
 		pricematrix.selectDiscaunt("SR_S5_Mt_Upcharge_25");
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$2,117.50");
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$2,117.50");
 		pricematrix.clickServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$2,127.50");
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 		
 	}
@@ -642,9 +640,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-			
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		//servicesscreen.clickToolButton();
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY);
 		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -665,7 +662,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -692,10 +689,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-			
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		//servicesscreen.clickToolButton();
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY);
 		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		regularselectedservicedetailsscreen.setServicePriceValue(srs1moneyprice);
@@ -715,7 +711,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -742,9 +738,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-			
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		//servicesscreen.clickToolButton();
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY);
 		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
@@ -765,7 +761,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		Assert.assertEquals(regularselectedservicedetailsscreen.getServiceDetailsPriceValue(), servicetotalprice);
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -793,12 +789,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		wonumber31498 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		for (String _price : prices) {
 			servicesscreen.clickToolButton();
 			RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
@@ -812,15 +807,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Hood");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TAX_DISCOUNT);
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$3,153.94");
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 
 	}
@@ -877,20 +871,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		
-		questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = questionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		inspectionnumber32226 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Default");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+        RegularPriceMatrixScreen pricematrix = vehiclescreeen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
 		for(String pricemrx : pricematrixes) {
 			pricematrix.selectPriceMatrix(pricemrx);
 			pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-			pricematrix.clickSaveButton();
+			pricematrix.clickSave();
 		}
-		pricematrix.clickSaveButton();
+		pricematrix.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber32226);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -956,12 +948,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		inspectionnumber32286 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.clickVehiclePartsCell();
@@ -980,15 +971,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber32286);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
 		String servicetoapprove = iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)";
 		String servicetodecline = iOSInternalProjectConstants.SR_S1_MONEY_PANEL + " (Left Rear Door)";
-		String servicetoskip = iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + " (Front Bumper)";
-		Helpers.waitABit(6000);
+		String servicetoskip = iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + " (Front Bumper)";;
 		approveinspscreen.selectInspection(inspectionnumber32286);
 		approveinspscreen.selectInspectionServiceToApprove(servicetoapprove);
 		approveinspscreen.selectInspectionServiceToDecline(servicetodecline);
@@ -1041,13 +1031,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		inspnumber32287 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -1068,7 +1057,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForApprove(inspnumber32287);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1119,13 +1108,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -1145,11 +1133,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			servicesscreen.clickAddServicesButton();
 		}
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$2,050.00");
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
-		questionsscreen.clickSaveButton();
+		questionsscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1181,71 +1168,68 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_TYPE_FOR_PRICE_MATRIX);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
-		
-		vehiclescreeen.selectNextScreen("Price Matrix Zayats");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+
+        RegularPriceMatrixScreen pricematrix =  vehiclescreeen.selectNextScreen("Price Matrix Zayats", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("VP1 zayats");
 		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
 		pricematrix.selectDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$55.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$55.00");
-		
-		
-		pricematrix.selectNextScreen("Zayats test pack");
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+
+        RegularServicesScreen servicesscreen = pricematrix.selectNextScreen("Zayats test pack", RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		servicesscreen.clickAddServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$60.00");
-		
-		servicesscreen.selectNextScreen("Hail Matrix");
+
+        pricematrix = servicesscreen.selectNextScreen("Hail Matrix", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("ROOF");
 		pricematrix.setSizeAndSeverity("DIME", "LIGHT");
 		pricematrix.setPrice("123");
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$183.00");
 		
-		pricematrix.selectNextScreen("Hail Damage");
+		pricematrix.selectNextScreen("Hail Damage", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("Grill");
 		pricematrix.setSizeAndSeverity("DIME", "LIGHT");
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Helpers.acceptAlert();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		
-		vehiclescreeen.clickSaveButton();
+		vehiclescreeen.saveWizard();
 		for (int i = 0; i<2; i++) {
-			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 			myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
-			pricematrix.selectNextScreen("Price Matrix Zayats");
+            vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+            pricematrix = vehiclescreeen.selectNextScreen("Price Matrix Zayats", RegularPriceMatrixScreen.class);
 			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$55.00");
 			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
-			pricematrix.selectNextScreen("Zayats test pack");
+			pricematrix.selectNextScreen("Zayats test pack", RegularPriceMatrixScreen.class);
             Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), "$5.00");
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$193.00");
 		
-			pricematrix.selectNextScreen("Hail Matrix");
+			pricematrix.selectNextScreen("Hail Matrix", RegularPriceMatrixScreen.class);
 			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
 			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
-			pricematrix.selectNextScreen("Hail Damage");
+			pricematrix.selectNextScreen("Hail Damage", RegularPriceMatrixScreen.class);
 			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
 			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
-			vehiclescreeen.clickSaveButton();
+            pricematrix.saveWizard();
 		}
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -1269,9 +1253,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_TEST);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("999999.00");
 		selectedservicedetailscreen.setServiceQuantityValue("98765");
@@ -1280,10 +1264,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.clickSave();
 		
@@ -1291,13 +1274,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttext.contains("Total amount of work order is huge."));
 		Assert.assertTrue(alerttext.contains("Maximum allowed total amount is $999,999,999.99"));
 		ordersummaryscreen.swipeScreenLeft();
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        servicesscreen = ordersummaryscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServiceQuantityValue("987");
 		
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -1321,13 +1304,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wo1 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("999999.00");
 		selectedservicedetailscreen.setServiceQuantityValue("987");
@@ -1336,25 +1318,23 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.clickAddOrderButton();
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wo2 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("999999.00");
 		selectedservicedetailscreen.setServiceQuantityValue("987");
@@ -1363,18 +1343,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+		ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.approveWorkOrder(wo1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
 		myworkordersscreen.clickInvoiceIcon();
 		
 		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType("Invoice_Custom1");
-		invoiceinfoscreen.selectNextScreen("Info");
+        invoiceinfoscreen = invoiceinfoscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
@@ -1385,15 +1364,15 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
-		invoiceinfoscreen.selectNextScreen("Info");
+		invoiceinfoscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.addWorkOrder(wo2);
-		invoiceinfoscreen.clickSaveButton();
+		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Total amount of invoice is huge."));
 		Assert.assertTrue(alerttext.contains("Maximum allowed total amount is $999,999,999.99"));
 		ordersummaryscreen.swipeScreenLeft();
 		invoiceinfoscreen.clickChangeScreen();
-		invoiceinfoscreen.cancelInvoice();
+		invoiceinfoscreen.cancelWizard();
 		myinvoicesscreen.clickHomeButton();
 	}
 	
@@ -1413,9 +1392,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_DRAFT_MODE);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("999999.00");
@@ -1425,7 +1404,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		
 		Assert.assertTrue(alerttext.contains("Total amount of inspection is huge."));
@@ -1448,45 +1427,39 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		Thread.sleep(3000);
 		servicerequestsscreen.clickAddButton();
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.SR_ALL_PHASES);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		questionsscreen.clickSaveButton();
+		questionsscreen.clickSave();
 		Assert.assertTrue(appiumdriver.findElement(
 				MobileBy.name(AlertsCaptions.ALERT_CREATE_APPOINTMENT)).isDisplayed());
 		appiumdriver.findElement(
 				MobileBy.name("No"))
 				.click();
-		Thread.sleep(3000);
+
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		Thread.sleep(2000);
 		servicerequestsscreen.selectInspectionType("Insp_for_auto_WO_line_appr_multiselect");
-		servicerequestsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+		servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -1494,11 +1467,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();	
-		Thread.sleep(5000);
+		servicesscreen.saveWizard();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
-		Thread.sleep(3000);
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen(appiumdriver);
 		
@@ -1540,53 +1511,49 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		
 		vehiclescreeen.setVIN(VIN);
 		inspnumber47249 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		myinspectionsscreen.selectNextScreen("Default");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+
+        RegularPriceMatrixScreen pricematrix = questionsscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix(_pricematrix1);
 		pricematrix.switchOffOption("PDR");
 		pricematrix.setPrice(defprice);
 		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_20");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.saveSelectedServiceDetails();	
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$120.00");
 		pricematrix.selectPriceMatrix(_pricematrix1);
 		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$145.00");
 		pricematrix.selectPriceMatrix(_pricematrix1);
 		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$130.50");
-		
-		myinspectionsscreen.selectNextScreen("Matrix Labor");
-		pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+
+        pricematrix.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix(_pricematrix1);
 		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
 		Helpers.waitABit(500);
 		pricematrix.setTime(timevalue);
 		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$90.00");
 		pricematrix.selectPriceMatrix(_pricematrix1);
 		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$112.50");
-		pricematrix.clickSaveButton();
+		pricematrix.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -1604,13 +1571,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.approveInspectionApproveAllAndSignature();
 		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber47249);
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.WO_SMOKE_MONITOR);
-		myinspectionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen(appiumdriver);
+        vehicleScreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$293.00");
 		servicesscreen.searchServiceByName("Dent Removal");
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues("Dent Removal", "$112.50"));
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues("Dent Removal", "$130.50"));
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -1630,21 +1598,20 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_WITH_PART_SERVICES);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		inspnumber48543 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickSaveAsDraft();
 		myinspectionsscreen.selectInspectionForEdit(inspnumber48543);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
@@ -1714,9 +1681,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
-		
-		vehiclescreeen.selectNextScreen("Future Audi Car");		
-		RegularVisualInteriorScreen visualinteriorscreen = new RegularVisualInteriorScreen(appiumdriver);
+
+        RegularVisualInteriorScreen visualinteriorscreen =vehiclescreeen.selectNextScreen("Future Audi Car", RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService("Detail");
@@ -1734,9 +1700,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectVehiclePart("VP1 zayats");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		vehiclescreeen.selectNextScreen("PM_New");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+
+        RegularPriceMatrixScreen pricematrix = visualinteriorscreen.selectNextScreen("PM_New", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("VP1 zayats");
 		pricematrix.switchOffOption("PDR");
 		pricematrix.setPrice("10");
@@ -1766,7 +1731,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);	
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$89.13");
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$49.45");
@@ -1805,12 +1770,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$77.13");
-		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		homescreen = myinspectionsscreen.clickHomeButton();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$77.13");
@@ -1835,22 +1799,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		
-		ordersummaryscreen.clickSaveButton();
-		
-		
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
 		selectedservicescreen.clickServicePartCell();
@@ -1952,13 +1912,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$49.45");
 		pricematrix.clickBackButton();
 		pricematrix.clickBackButton();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);	
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$70.70");
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -1980,13 +1940,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		servicesscreen.selectPriceMatrices("Grill");	
@@ -2001,27 +1960,27 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicescreen.setServicePriceValue("192");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
 		pricematrix.clickBackButton();
 		pricematrix.clickBackButton();
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		selectedservicescreen.setServicePriceValue("-30");
 		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$987.52");
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType("Invoice_Default_Template");
 		invoiceinfoscreen.setPO("12345");
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveButton();
+		invoiceinfoscreen.clickSave();
 		Helpers.acceptAlert();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		
@@ -2057,13 +2016,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("100");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -2102,25 +2060,23 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		pricematrix.clickDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		selectedservicedetailscreen.setServicePriceValue("100");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
+		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+		priceMatricesScreen.clickBackButton();
 		pricematrix.clickBackButton();
-		pricematrix.clickBackButton();
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = pricematrix.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ordersummaryscreen.clickSaveButton();
-		Helpers.waitABit(1000);
+		ordersummaryscreen.clickSave();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType("Invoice_AutoWorkListNet");
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		questionsscreen.selectNextScreen("Info");
+        invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO("12345");
 		invoicenumber45224 = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
-		
 		myworkordersscreen.clickFilterButton();
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
@@ -2180,13 +2136,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		servicesscreen.selectPriceMatrices("Grill");	
@@ -2197,8 +2152,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue("23");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSaveButton();
-		pricematrix.clickBackButton();
+		pricematrix.clickSave();
+		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+		priceMatricesScreen.clickBackButton();
 		pricematrix.clickBackButton();
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
@@ -2225,18 +2181,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.changeAmountOfBundleService("30");
-		servicesscreen.clickSaveButton();
+		servicesscreen.clickSave();
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
 		selectedservicescreen.setServicePriceValue("3.8");
 		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$169.19");
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForApprove(wonumber);
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2297,14 +2252,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickSaveButton();
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
+		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2315,14 +2269,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickCancelButton();
 		
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.selectService("Buff");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE);
 		selectedservicescreen.setServicePriceValue(serviceprice);
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickBackServicesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2349,17 +2303,15 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("25");
@@ -2386,7 +2338,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$2,688.00");
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -2419,12 +2371,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType("Insp_Draft_Mode");
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("25");
@@ -2455,7 +2406,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.selectStatusReason("Decline 1");
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		Thread.sleep(1000);
+
 		myinspectionsscreen.clickFilterButton();
 		myinspectionsscreen.clickStatusFilter();
 		myinspectionsscreen.clickFilterStatus("Declined");
@@ -2484,13 +2435,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.openCustomServiceDetails("Oksi_Bundle_PP");
 		
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
@@ -2534,7 +2484,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("You can add only one service 'Service_PP_Vehicle_not_multiple'"));
-		Helpers.waitABit(1000);
 		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$96.30");
 		
 		//servicesscreen.selectPriceMatrices(iOSInternalProjectConstants.OKSI_SERVICE_PP_LABOR);
@@ -2548,12 +2497,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		
 		selectedservicedetailscreen.changeAmountOfBundleService("163.80");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -2575,13 +2523,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
 		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsFieldValue("State Rate"), "%6.250");
 		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsFieldValue("County Rate"), "%0.250");
@@ -2602,16 +2549,15 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Dashboard");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+        servicesscreen = new RegularServicesScreen(appiumdriver);
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
 		Assert.assertFalse(selectedservicedetailscreen.isServiceDetailsFieldEditable("State Rate"));
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -2621,7 +2567,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsFieldValue("State Rate"), "%6.000");
 		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsTotalValue(), "%9.250");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -2642,20 +2588,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("79");
@@ -2691,7 +2636,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$3,742.10");
 		
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -2709,23 +2654,21 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
-		
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.clickSaveButton();
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
+		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Money_Tax_Exempt");
 		selectedservicedetailscreen.setServicePriceValue("100");
@@ -2777,7 +2720,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 			
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$389.50");
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspectionnumber), "$389.50");
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -2799,25 +2742,22 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber1 = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForEidt(wonumber1);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-		
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.selectSubService("Money_Pack_Price");
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$4.07");
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 
 		myworkordersscreen.clickHomeButton();
 		customersscreen = homescreen.clickCustomersButton();
@@ -2829,26 +2769,25 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String wonumber2 = vehiclescreeen.getWorkOrderNumber();
-		
-		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+
+        ordersummaryscreen = vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+                .getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForEidt(wonumber2);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		
 		servicesscreen.selectSubService("Money_Pack_Price");
 		toolaber = new RegularInspectionToolBar(appiumdriver);		
-		servicesscreen.saveWorkOrder();
+		servicesscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrder(wonumber2);	
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		customersscreen.swtchToRetailMode();
-		customersscreen.selectCustomer("19319");
-		Helpers.waitABit(3000);
+		customersscreen.selectCustomer("19319");;
 		Assert.assertFalse(myworkordersscreen.woExists(wonumber2));
 		myworkordersscreen.clickHomeButton();
 		
@@ -2858,8 +2797,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.selectWorkOrderForEidt(wonumber2);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$12.00");
 		
 		servicesscreen.clickToolButton();
@@ -2867,7 +2807,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$35.00");
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -2888,20 +2828,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen =myworkordersscreen.selectJob("Job for test");
 		vehiclescreeen.setVIN(VIN);
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.selectSubService("Money_client_override");
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$4.79");
 		
 		servicesscreen.selectSubService("Money_job_override");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$13.84");
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$13.84");
 		myworkordersscreen.clickHomeButton();
 	}
@@ -2926,15 +2865,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService("3/4\" - Penny Size");
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
-		
-		Helpers.waitABit(5000);
+		servicesscreen.saveWizard();
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -2954,17 +2891,16 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Helpers.waitABit(4000);
 		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		String inspnumber1 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber1), "ALM - Recon Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber1);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("12");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -2981,16 +2917,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String inspnumber2 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber2), "ALM - Service Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber2);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveAsFinal();
-		Helpers.waitABit(2000);
+
 		myinspectionsscreen.selectInspectionForAction(inspnumber1);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -3026,13 +2964,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getWorkOrderTypeValue(), "ALM - Recon Facility");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.searchServiceByName("3/4\" - Penny Size");
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$12.00 x 1.00"));
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$25.00 x 1.00"));
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();	
@@ -3058,15 +2996,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService("3/4\" - Penny Size");
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
-		
-		Helpers.waitABit(5000);
+		servicesscreen.saveWizard();
+
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -3086,17 +3023,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
-		Helpers.waitABit(4000);
 		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		String inspnumber1 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber1), "ALM - Recon Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber1);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("12");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -3113,16 +3050,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String inspnumber2 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber2), "ALM - Service Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber2);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveAsFinal();
-		Helpers.waitABit(5000);
 		myinspectionsscreen.selectInspectionForAction(inspnumber1);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -3159,11 +3097,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getWorkOrderTypeValue(), "ALM - Recon Facility");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$12.00 x 1.00"));
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen.clickHomeButton();	
@@ -3189,13 +3127,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService("3/4\" - Penny Size");
 		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickSaveButton();
+		servicesscreen.saveWizard();
 
 		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -3220,12 +3158,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String inspnumber1 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber1), "ALM - Recon Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber1);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        RegularQuestionsScreen questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("12");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -3242,16 +3181,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String inspnumber2 = myinspectionsscreen.getFirstInspectionNumberValue();
 		Assert.assertEquals(myinspectionsscreen.getInspectionTypeValue(inspnumber2), "ALM - Service Inspection");
 		myinspectionsscreen.selectInspectionForEdit(inspnumber2);
-		vehiclescreeen.selectNextScreen("ALM - Statuses");
-		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+        questionsscreen =  vehiclescreeen.selectNextScreen("ALM - Statuses",
+                RegularQuestionsScreen.class);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
-		questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
+		servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveAsFinal();
-		Helpers.waitABit(5000);
 		myinspectionsscreen.selectInspectionForAction(inspnumber1);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen(appiumdriver);
@@ -3316,18 +3256,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		myinspectionsscreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption());
+
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		String inspnumber = vehiclescreeen.getInspectionNumber();
-		
-		vehiclescreeen.selectNextScreen("Zayats Section1");
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+
+        RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+                RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
 		servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
@@ -3342,28 +3281,26 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
+        servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickAddServicesButton();
-		vehiclescreeen.selectNextScreen("Default");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+        RegularPriceMatrixScreen pricematrix = servicesscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("Hood");
 		pricematrix.setSizeAndSeverity("DIME", "HEAVY");
-		pricematrix.clickSaveButton();
-		myinspectionsscreen.selectNextScreen("Future Sport Car");
-		RegularVisualInteriorScreen visualinteriorscreen = new RegularVisualInteriorScreen(appiumdriver);
+		pricematrix.clickSave();
+
+        RegularVisualInteriorScreen visualinteriorscreen = pricematrix.selectNextScreen("Future Sport Car", RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 200);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 250);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 300);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 350);
-		visualinteriorscreen.selectNextScreen("Matrix Labor");
-		pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+        pricematrix = visualinteriorscreen.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
 		pricematrix.selectPriceMatrix("Back Glass");
 		pricematrix.switchOffOption("PDR");
 		pricematrix.setTime("34");
-		pricematrix.clickSaveButton();
-		pricematrix.clickSaveButton();
+		pricematrix.clickSave();
+		pricematrix.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3388,14 +3325,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.selectNextScreen("Test_pack_for_calc");
-		servicesscreen = new RegularServicesScreen(appiumdriver);
+        servicesscreen = servicesscreen.selectNextScreen("Test_pack_for_calc", RegularServicesScreen.class);
 		Assert.assertTrue(servicesscreen.isServiceApproved(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		Assert.assertTrue(servicesscreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
 		Assert.assertTrue(servicesscreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
 		Assert.assertTrue(servicesscreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.SR_S1_MONEY));
 		Assert.assertTrue(servicesscreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.TAX_DISCOUNT));
-		servicesscreen.cancelOrder();
+		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickOnInspection(inspnumber);
 		EmailScreen mailscreen = myinspectionsscreen.clickSendEmail();
 		mailscreen.sendInvoiceOnEmailAddress("test.cyberiansoft@gmail.com");

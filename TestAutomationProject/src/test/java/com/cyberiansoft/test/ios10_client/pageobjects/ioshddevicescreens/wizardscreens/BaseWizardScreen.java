@@ -57,6 +57,8 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
         appiumdriver.findElementByAccessibilityId("Save").click();
     }
 
+
+
     public <T extends BaseTypeScreen> T saveWizard() {
         clickSave();
         return getTypeScreenFromContext();

@@ -11,6 +11,11 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
@@ -126,9 +131,8 @@ public class NewTestCases extends BaseTestCase {
 		//vehiclescreeen.setType(_type);
 		vehiclescreeen.setStock(stock);
 		vehiclescreeen.setRO(_ro);
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Dye_Panel");
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -136,48 +140,42 @@ public class NewTestCases extends BaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
-		RegularOrderSummaryScreen ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
-		
-		ordersummaryscreen.clickSaveButton();
-		Thread.sleep(1000);
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+		ordersummaryscreen.saveWizard();
 		myworkordersscreen.selectWorkOrderForApprove(wonumber1);
 		myworkordersscreen.clickApproveButton();
 		
 		//myworkordersscreen.searchWO(wonumber1);
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
-		Thread.sleep(1000);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);
 		Assert.assertEquals(vehiclescreeen.getYear(), _year);
-		vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption());
+		ordersummaryscreen = vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
 		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSaveButton();
+		ordersummaryscreen.clickSave();
 		
 		ordersummaryscreen.selectDefaultInvoiceType();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
-		questionsscreen.selectNextScreen("Info");
-		RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
+		RegularInvoiceInfoScreen invoiceinfoscreen =questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO(poNomber);
 		invoiceinfoscreen.addWorkOrder(wonumber1);
-		invoiceinfoscreen.clickSaveButton();
+		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Signature' in section 'Follow up Requested' should be answered."));
 		Helpers.drawRegularQuestionsSignature();
-		questionsscreen.clickSaveButton();
+		questionsscreen.clickSave();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Engine Condition' in section 'Test Section' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Engine Condition", "Pretty Good");
-		questionsscreen.selectNextScreen("Info");
-		invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -224,9 +222,8 @@ public class NewTestCases extends BaseTestCase {
 		vehiclescreeen.setStock(stock);
 		vehiclescreeen.setRO(_ro);
 		//vehiclescreeen.setLicensePlate(licplate);
-		
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+
+		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServiceQuantityValue("3");
@@ -236,10 +233,10 @@ public class NewTestCases extends BaseTestCase {
 		
 		servicesscreen.clickAddServicesButton();
 		
-		servicesscreen.clickSaveButton();
+		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		Thread.sleep(5000);
+
 		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srtowo), "On Hold");
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER));
@@ -325,13 +322,12 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		servicerequestsscreen.selectServiceRequestType("Insp_smoke_test");
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
-		vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption());
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
+		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+				RegularServicesScreen.class);
 		for (String serviceName : services)
 			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
-		servicesscreen.clickSaveButton();
-		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
+		servicesscreen.saveWizard();
 		servicerequestsscreen.clickHomeButton();
 	}
 	

@@ -1,5 +1,7 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -19,7 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
+public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
+
+	private final TypeScreenContext SRCONTEXT = TypeScreenContext.SERVICEREQUEST;
 	
 	/*@iOSFindBy(accessibility = "Add")
     private IOSElement addbtn;
@@ -106,8 +110,7 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
 		appiumdriver.findElementByAccessibilityId("Add").click();
-		wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
 	public void selectServiceRequestType(String srtype) {
@@ -134,8 +137,7 @@ public class RegularServiceRequestsScreen extends iOSRegularBaseScreen {
 	
 	public void selectEditServiceRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Synchronizing with Back Office")));
+		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
 	public void selectCreateWorkOrderRequestAction() {

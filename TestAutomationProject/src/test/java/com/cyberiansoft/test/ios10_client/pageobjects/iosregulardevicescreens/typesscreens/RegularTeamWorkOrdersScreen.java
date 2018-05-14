@@ -1,5 +1,8 @@
-package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
+package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -18,7 +21,9 @@ import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
-public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
+public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
+
+	private final TypeScreenContext TEAMWOCONTEXT = TypeScreenContext.TEAMWORKORDER;
 	
 	private By discardbtnxpath = By.name("Discard");
 	
@@ -68,10 +73,12 @@ public class RegularTeamWorkOrdersScreen extends iOSRegularBaseScreen {
 	
 	public void selectEditWO() {
 		editmanu.click();
+		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
+		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {
@@ -156,7 +163,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}
 	
 	public void clickSaveFilter() {
-		clickSaveButton();
+		appiumdriver.findElementByAccessibilityId("Save").click();
 		new RegularTeamWorkOrdersScreen(appiumdriver);
 	}
 	
