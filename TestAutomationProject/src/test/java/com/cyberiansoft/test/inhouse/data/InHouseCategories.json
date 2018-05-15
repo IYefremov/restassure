@@ -1,0 +1,51 @@
+{
+  "testUserCanAddNewCategories": [
+    {
+      "rowID": "testUserCanAddNewCategories.01",
+      "description": "Test Case 59877:Verify user can add new categories",
+      "category": "Test Category"
+    }
+  ],
+
+  "testUserCanAddAttributeToCategories": [
+    {
+      "rowID": "testUserCanAddAttributeToCategories.01",
+      "description": "Test Case 59879:Verify user can add new categories",
+      "category": "Test Category",
+      "attributeName": "Test Attribute Name",
+      "dataType": "String"
+    }
+  ],
+
+  "testUserCanSearchByKeyWord": [
+    {
+      "rowID": "testUserCanSearchByKeyWord.01",
+      "description": "Test Case 59882:Verify user can search by key-word",
+      "ClientSegmentsPage": "Google"
+    }
+  ],
+
+  "testUserCanManualAttribute": [
+    {
+      "rowID": "testUserCanManualAttribute.01",
+      "description": "Test Case 59881:Verify manual attribute",
+      "category": "Test Category",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "attributeName": "Manual attribute",
+      "attributeValue": "15",
+      "dataType": "String"
+    }
+  ]
+}

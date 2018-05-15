@@ -116,7 +116,7 @@ public class ClientQuotesDetailPage extends BasePage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(sendNotificationBTN)).click();
         } catch (Exception e) {
-            clickElementWithJS(sendNotificationBTN);
+            clickWithJS(sendNotificationBTN);
         }
         try {
             driver.switchTo().alert().accept();
@@ -247,7 +247,7 @@ public class ClientQuotesDetailPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[text()='" +
                             clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")))).click();
         } catch (Exception e) {
-            clickElementWithJS(driver.findElement(By.xpath("//span[text()='" +
+            clickWithJS(driver.findElement(By.xpath("//span[text()='" +
                             clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")));
         }
         clickYesToAddItemTOAgreement();

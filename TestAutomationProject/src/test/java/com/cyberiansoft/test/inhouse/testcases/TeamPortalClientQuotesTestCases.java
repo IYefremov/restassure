@@ -89,7 +89,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition("Repair360 FREE"));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged("Repair360 FREE"));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
@@ -119,7 +119,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition("Repair360 FREE"));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged("Repair360 FREE"));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
@@ -164,7 +164,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition("Repair360 FREE"));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged("Repair360 FREE"));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
@@ -210,7 +210,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(name);
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition("Repair360 FREE"));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged("Repair360 FREE"));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));
@@ -264,7 +264,7 @@ public class TeamPortalClientQuotesTestCases extends BaseTestCase {
 
         clientQuotesPage.expandAgreementList(name);
         clientQuotesPage.clickEditAgreement("First agreement");
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition("Repair360 FREE"));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged("Repair360 FREE"));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName("Second Agreement"));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName("Second Agreement"));

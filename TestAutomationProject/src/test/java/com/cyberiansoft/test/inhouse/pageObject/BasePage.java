@@ -55,6 +55,13 @@ public class BasePage {
         } catch (Exception ignored) {}
     }
 
+    public void waitForProcessing() {
+        try {
+            wait.until(ExpectedConditions
+                    .attributeToBe(By.id("table-potential-client_processing"), "display", "none"));
+        } catch (Exception ignored) {}
+    }
+
     public static void waitABit(int milliseconds) {
         if (milliseconds > 0) {
             try {
@@ -63,15 +70,8 @@ public class BasePage {
         }
     }
 
-    public BasePage clickElementWithJS(WebElement element) {
-        final String javaScript = "if(document.createEvent){" +
-                "var evObj = document.createEvent('MouseEvents');" +
-                "evObj.initEvent('click', true, false);" + "" +
-                "arguments[0].dispatchEvent(evObj);" +
-                "} else if(document.createEventObject){" +
-                "arguments[0].fireEvent('onclick');" +
-                "}";
-        ((JavascriptExecutor) driver).executeScript(javaScript, element);
+    public BasePage clickWithJS(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         return this;
     }
 }

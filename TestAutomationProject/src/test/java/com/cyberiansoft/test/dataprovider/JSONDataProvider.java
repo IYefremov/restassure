@@ -27,10 +27,6 @@ public class JSONDataProvider {
         List<JSONObject> testDataList = new ArrayList<>();
         
         JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
-        System.out.println("Method: "+method.getName());
-        System.out.println("DataFile: "+dataFile);
-        System.out.println(testData);
-        System.out.println(testData.size());
 
         for ( int i = 0; i < testData.size(); i++ ) {
             testDataList.add((JSONObject) testData.get(i));

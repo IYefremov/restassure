@@ -1,14 +1,24 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class InHouseUserData {
+public class InHouseCategoriesData {
+
+    @JsonProperty("category")
+    private String category;
+
+    @JsonProperty("attributeName")
+    private String attributeName;
+
+    @JsonProperty("attributeValue")
+    private String attributeValue;
+
+    @JsonProperty("dataType")
+    private String dataType;
 
     @JsonProperty("name")
     private String name;
-
-    @JsonProperty("newName")
-    private String newName;
 
     @JsonProperty("nickname")
     private String nickname;
@@ -46,24 +56,28 @@ public class InHouseUserData {
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("ClientSegmentsPage")
+    private String ClientSegmentsPage;
 
-    @JsonProperty("firstAgreement")
-    private String firstAgreement;
 
-    @JsonProperty("secondAgreement")
-    private String secondAgreement;
+    public String getCategory() {
+        return category;
+    }
 
-    @JsonProperty("team")
-    private String team;
+    public String getAttributeName() {
+        return attributeName;
+    }
+
+    public String getAttributeValue() {
+        return attributeValue;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public String getNewName() {
-        return newName;
     }
 
     public String getNickname() {
@@ -115,18 +129,10 @@ public class InHouseUserData {
     }
 
     public String getEmail() {
-        return email;
+        return InHouseConfigInfo.getInstance().getUserEmail();
     }
 
-    public String getFirstAgreement() {
-        return firstAgreement;
-    }
-
-    public String getSecondAgreement() {
-        return secondAgreement;
-    }
-
-    public String getTeam() {
-        return team;
+    public String getClientSegmentsPage() {
+        return ClientSegmentsPage;
     }
 }

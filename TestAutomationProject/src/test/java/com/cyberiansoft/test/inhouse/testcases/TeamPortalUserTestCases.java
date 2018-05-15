@@ -78,7 +78,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition(data.getTeam()));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
@@ -107,7 +107,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition(data.getTeam()));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
@@ -152,7 +152,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition(data.getTeam()));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
@@ -189,12 +189,12 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.clickConfirmNewClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
         clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(),data.getTeam());
+        clientQuotesPage.setAgreement(data.getFirstAgreement(), data.getTeam());
         clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition(data.getTeam()));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
@@ -233,7 +233,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.abilityToChangeAgreementEdition(data.getTeam()));
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
         Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));

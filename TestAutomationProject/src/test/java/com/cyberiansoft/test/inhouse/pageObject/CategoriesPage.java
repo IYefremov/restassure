@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
@@ -22,16 +23,16 @@ public class CategoriesPage extends BasePage {
     @FindBy(id ="AttributeName")
     WebElement createAttributeName;
 
-    @FindBy(id="IsAutomated")
-    WebElement createAttributeIsAutomated;
+    @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']//select[@id='IsAutomated']")
+    WebElement addAttributeIsAutomatedSelection;
 
-    @FindBy(id ="AttributeDataTypeID")
+    @FindBy(xpath ="//div[@class='form-dialog add-attribute-dialog active']//select[@id='AttributeDataTypeID']")
     WebElement createElementAttributeDataType;
 
     @FindBy(xpath="//button[@class='btn btn-outline btn-submit']")
     WebElement addAttributeInCreationWindow;
 
-    @FindBy(id ="ProcName")
+    @FindBy(xpath ="//div[@class='form-dialog add-attribute-dialog active']//input[@id='ProcName']")
     WebElement storedProcedureNameField;
 
     @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']")
@@ -47,16 +48,10 @@ public class CategoriesPage extends BasePage {
 
 
     public void clickAddCategoryButton() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-toggle btn-add-category']")));
         try {
             wait.until(ExpectedConditions.elementToBeClickable(addCategoryBTN)).click();
-        } catch (WebDriverException e) {
-            waitABit(1000);
-            try {
-                addCategoryBTN.click();
-            } catch (Exception ex) {
-                Assert.fail("The add category button has not been displayed.", ex);
-            }
+        } catch (Exception e) {
+            Assert.fail("The \"Add category\" button has not been displayed.", e);
         }
     }
 
@@ -118,21 +113,22 @@ public class CategoriesPage extends BasePage {
         createElementAttributeDataType.findElements(By.tagName("option")).stream().
                 filter(e -> e.getText().equals(dataType)).findFirst().get().click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(createAttributeIsAutomated)).click();
-        createAttributeIsAutomated.findElements(By.tagName("option")).stream().
+        wait.until(ExpectedConditions.elementToBeClickable(addAttributeIsAutomatedSelection)).click();
+        addAttributeIsAutomatedSelection.findElements(By.tagName("option")).stream().
                 filter(e -> e.getText().equals("No")).findFirst().get().click();
     }
 
-    public void fillAutomatedAttributeFields(String name, String procedureName) throws InterruptedException {
-        Thread.sleep(2000);
-        createAttributeName.sendKeys(name);
+    public void fillAutomatedAttributeFields(String name, String procedureName) {
+        wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
+        wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
 
-        createAttributeIsAutomated.click();
-        createAttributeIsAutomated.findElements(By.tagName("option")).stream().
-                filter(e -> e.getText().equals("Yes")).findFirst().get().click();
-        Thread.sleep(1000);
+        new Select(createElementAttributeDataType).selectByVisibleText(procedureName);
+        new Select(addAttributeIsAutomatedSelection).selectByVisibleText("Yes");
+        wait.until(ExpectedConditions.attributeToBe(storedProcedureNameField, "value required", ""));
+        storedProcedureNameField.sendKeys("Stored procedure name");
 
-        storedProcedureNameField.sendKeys(procedureName);
+
+//        storedProcedureNameField.sendKeys(procedureName);
     }
 
     public void clickAddAttributeButton() {

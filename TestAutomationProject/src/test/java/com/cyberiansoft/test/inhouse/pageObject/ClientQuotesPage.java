@@ -1,9 +1,13 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
@@ -55,7 +59,7 @@ public class ClientQuotesPage extends BasePage {
     @FindBy(id = "ContactEmail")
     private WebElement newClientEmail;
 
-    @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
+    @FindBy(xpath = "//div[@id='add-potential-client-dialog']/div[@class='modal modal-primary']//button[@class='btn btn-outline btn-submit']")
     private WebElement confirmNewClient;
 
     @FindBy(id = "searchString")
@@ -64,16 +68,13 @@ public class ClientQuotesPage extends BasePage {
     @FindBy(id = "btnSearch")
     private WebElement searchBTN;
 
-    @FindBy(id = "table-potential-client_processing")
-    private WebElement processingBar;
-
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
     private List<WebElement> updateClientBTN;
 
     @FindBy(id = "ProposalName")
     private List<WebElement> agreementName;
 
-    @FindBy(id = "EditionID")
+    @FindBy(xpath = "//div[contains(@class, 'active')]//select[@id='EditionID']")
     private WebElement editionMenu;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
@@ -82,11 +83,19 @@ public class ClientQuotesPage extends BasePage {
     @FindBy(xpath = "//div[@class='callout callout-info']/button")
     private WebElement closeNotificationBTN;
 
+    @FindBy(xpath = "//div[@id='add-potential-client-dialog']/div[@class='modal modal-primary']")
+    private WebElement addClientDialog;
+
+    @FindBy(xpath = "//div[@id='add-client-proposal-dialog']/div[@class='modal modal-primary']")
+    private WebElement addAgreementDialog;
+
+    @FindBy(xpath = "//div[@id='update-client-proposal-dialog']/div[@class='modal modal-primary']")
+    private WebElement updateAgreementDialog;
+
     public ClientQuotesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
 
     public void clickAddClientBTN() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
@@ -119,8 +128,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     public void setNewClientCountry(String country) {
-        newClientCountry.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[text()='" + country + "']"))).click();
+        new Select(newClientCountry).selectByVisibleText(country);
     }
 
     public void setNewClientState(String state) {
@@ -158,6 +166,7 @@ public class ClientQuotesPage extends BasePage {
     public void fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
                                      String country, String state, String city, String businessPhone, String cellPhone, String firstName,
                                      String lastName, String title, String email) {
+        wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "block"));
         setNewClientName(name);
         setNewClientNickName(nickname);
         setNewClientAddress(address);
@@ -172,12 +181,12 @@ public class ClientQuotesPage extends BasePage {
         setNewClientLastName(lastName);
         setNewClientTitle(title);
         setNewClientEmail(email);
-
     }
 
 
     public void clickConfirmNewClientBTN() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
+        wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
     }
 
 
@@ -187,25 +196,20 @@ public class ClientQuotesPage extends BasePage {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + verifyParameter + "']")));
             return true;
         } catch (TimeoutException e) {
-            searchUser(verifyParameter);
-            try {
-                wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + verifyParameter + "']")));
-                return true;
-            } catch (TimeoutException ignored) {
-                return false;
-            }
+            e.printStackTrace();
+            return false;
         }
     }
 
     public void searchUser(String searchValue) {
         try {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
-        searchField.clear();
+        wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
         searchField.sendKeys(searchValue);
-        wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
-        wait.until(ExpectedConditions.invisibilityOf(processingBar));
-        } catch (Exception ignored) {}
+        clickWithJS(searchBTN);
+        waitForProcessing();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
 
 //        try {
 //            wait.until(ExpectedConditions.visibilityOf(searchField));
@@ -219,7 +223,7 @@ public class ClientQuotesPage extends BasePage {
 //        try {
 //            wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
 //        } catch (Exception e) {
-//            clickElementWithJS(searchBTN);
+//            clickWithJS(searchBTN);
 //        }
 //        try {
 //            wait.until(ExpectedConditions.invisibilityOf(processingBar));
@@ -253,6 +257,7 @@ public class ClientQuotesPage extends BasePage {
     public void clickAddAgreementBTN(String agreementIdentifier) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
+        wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "block"));
     }
 
     public void setAgreementName(String name) {
@@ -260,23 +265,19 @@ public class ClientQuotesPage extends BasePage {
     }
 
     public void selectEdition(String edition) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        editionMenu.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[text()='" + edition + "']"))).click();
-        js.executeScript("arguments[0].click();", updateClientBTN.get(2));
+        new Select(editionMenu).selectByVisibleText(edition);
     }
 
     public void setAgreement(String agreement, String team) {
         setAgreementName(agreement);
         selectEdition(team);
         saveAgreement();
+        wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "none"));
     }
 
-    public void saveAgreement() {
-        wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(2))).click();
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("arguments[0].click();", updateClientBTN.get(2));
-//        Thread.sleep(500);
+    private void saveAgreement() {
+            wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(2))).click();
+//            clickWithJS(updateClientBTN.get(2));
     }
 
     public void expandAgreementList(String identifier) {
@@ -284,7 +285,7 @@ public class ClientQuotesPage extends BasePage {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + identifier + "']"))).
                     findElement(By.xpath("..")).findElement(By.xpath("//td[@class=' details-control']")).click();
         } catch (Exception e) {
-            searchUser(identifier); //todo delete?
+            Assert.fail("The agreement list has not been displayed");
         }
     }
 
@@ -296,9 +297,10 @@ public class ClientQuotesPage extends BasePage {
         } catch (Exception e) {
             Assert.fail("The \"Edit Agreement\" button has not been clicked!");
         }
+        wait.until(ExpectedConditions.attributeToBe(updateAgreementDialog, "display", "block"));
     }
 
-    public boolean abilityToChangeAgreementEdition(String newName) {
+    public boolean verifyAgreementEditionCannotBeChanged(String newName) {
         try {
             selectEdition(newName);
             return true;
@@ -309,8 +311,7 @@ public class ClientQuotesPage extends BasePage {
 
     public boolean abilityToChangeAgreementName(String s) {
         try {
-            Thread.sleep(1000);
-            agreementName.get(1).clear();
+            wait.until(ExpectedConditions.visibilityOf(agreementName.get(1))).clear();
             agreementName.get(1).sendKeys(s);
             return true;
         } catch (Exception e) {

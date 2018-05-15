@@ -1,142 +1,146 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
-import com.cyberiansoft.test.inhouse.pageObject.*;
+import com.cyberiansoft.test.dataclasses.InHouseCategoriesData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.inhouse.pageObject.CategoriesPage;
+import com.cyberiansoft.test.inhouse.pageObject.ClientQuotesPage;
+import com.cyberiansoft.test.inhouse.pageObject.ClientSegmentsPage;
+import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
-    @DataProvider
-    public Object[][] provideNewClientData() {
-        return new Object[][]{
-                {"CompanyAutomation", "Nock for company", "Address 1", "Address 2", "123AB", "United States",
-                        "California", "LA", "+380963665214", "+380963665214", "Test", "User",
-                        "Job title", InHouseConfigInfo.getInstance().getUserEmail()}
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseCategories.json";
 
-        };
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    @Test(testName = "Test Case 59877:Verify user can add new categories.")
-    public void testUserCanAddNewCategories() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanAddNewCategories(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
                 .clickCategoriesSubmenu();
         categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
+        categoriesPage.setCategory(data.getCategory());
         categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.deleteCategory("Test Category");
+        categoriesPage.deleteCategory(data.getCategory());
     }
 
-    @Test(testName = "Test Case 59879:Verify user can add new categories.")
-    public void testUserCanAddAttributeToCategories() {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanAddAttributeToCategories(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
                 .clickCategoriesSubmenu();
 
-        categoriesPage.verifyThatCategoriesDoNoExist("Test Category");
+        categoriesPage.verifyThatCategoriesDoNoExist(data.getCategory());
         categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
+        categoriesPage.setCategory(data.getCategory());
         categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton("Test Category");
-        categoriesPage.fillNotAutomatedAttributeFields("Test Attribute Name", "String");
+        categoriesPage.clickAddAttributeButton(data.getCategory());
+        categoriesPage.fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType());
         categoriesPage.clickAddAttributeButton();
         categoriesPage.refreshPage();
-        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
-        categoriesPage.deleteCategory("Test Category");
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
+        categoriesPage.deleteCategory(data.getCategory());
     }
 
-    // @Test(testName = "Test Case 59880:Verify automated attribute.")
-    public void testUserCanAddAutomatedAttributeToCategories() throws InterruptedException {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
-        CategoriesPage categoriesPage = leftMenuPanel
-                .clickClients()
-                .clickCategoriesSubmenu();
-
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton("Test Category");
-        categoriesPage.fillAutomatedAttributeFields("Test Attribute Name", "Number");
-        categoriesPage.clickAddAttributeButton();
-        categoriesPage.refreshPage();
-        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
-        categoriesPage.deleteCategory("Test Category");
-    }
-
-    @Test(testName = "Test Case 59881:Verify manual attribute.", dataProvider = "provideNewClientData")
-    public void testUserCanManualAttribute(String name, String nickname, String address, String address2, String zip,
-                                           String country, String state, String city, String businessPhone, String cellPhone, String firstName, String lastName,
-                                           String title, String email) throws InterruptedException {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(name, nickname, address, address2, zip,
-                country, state, city, businessPhone, cellPhone, firstName, lastName,
-                title, email);
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(name));
-
-        CategoriesPage categoriesPage = leftMenuPanel
-                .clickClients()
-                .clickCategoriesSubmenu();
-
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton("Test Category");
-        categoriesPage.fillNotAutomatedAttributeFields("Manual attribute", "String");
-        categoriesPage.clickAddAttributeButton();
-
-        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubMenu();
-
-        clientSegmentsPage.searchClientSegment("CompanyAutomation");
-        clientSegmentsPage.expandAttributesList("CompanyAutomation");
-        clientSegmentsPage.setAttributeValue("Manual attribute", "15");
-        clientSegmentsPage.refreshPage();
-        clientSegmentsPage.searchClientSegment("CompanyAutomation");
-        clientSegmentsPage.expandAttributesList("CompanyAutomation");
-        Assert.assertTrue(clientSegmentsPage.checkAttributeValue("Manual attribute", "15"));
-
-        leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-
-        clientQuotesPage.searchUser("CompanyAutomation");
-        clientQuotesPage.deleteUser("CompanyAutomation");
-
-        leftMenuPanel
-                .clickClients()
-                .clickCategoriesSubmenu();
-        categoriesPage.deleteCategory("Test Category");
-    }
-
-    @Test(testName = "Test Case 59882:Verify user can search by key-word.")
-    public void testUserCanSearchByKeyWord() throws InterruptedException {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanSearchByKeyWord(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         ClientSegmentsPage clientSegmentsPage = leftMenuPanel
                 .clickClients()
                 .clickClientSegmentsSubMenu();
 
-        clientSegmentsPage.searchClientSegment("Google");
-        Assert.assertTrue(clientSegmentsPage.checkClientyName("Google"));
+        clientSegmentsPage.searchClientSegment(data.getClientSegmentsPage());
+        Assert.assertTrue(clientSegmentsPage.checkClientsName(data.getClientSegmentsPage()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanManualAttribute(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+
+        clientQuotesPage.clickAddClientBTN();
+        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
+        clientQuotesPage.clickConfirmNewClientBTN();
+        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu();
+
+        categoriesPage.clickAddCategoryButton();
+        categoriesPage.setCategory(data.getCategory());
+        categoriesPage.clickSubmitCategoryButton();
+        categoriesPage.clickAddAttributeButton(data.getCategory());
+        categoriesPage.fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType());
+        categoriesPage.clickAddAttributeButton();
+
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubMenu();
+
+        clientSegmentsPage.searchClientSegment(data.getName());
+        clientSegmentsPage.expandAttributesList(data.getName());
+        clientSegmentsPage.setAttributeValue(data.getAttributeName(), data.getAttributeValue());
+        clientSegmentsPage.refreshPage();
+        clientSegmentsPage.searchClientSegment(data.getName());
+        clientSegmentsPage.expandAttributesList(data.getName());
+        Assert.assertTrue(clientSegmentsPage.checkAttributeValue(data.getAttributeName(), data.getAttributeValue()));
+
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu();
+        clientQuotesPage.searchUser(data.getName());
+        clientQuotesPage.deleteUser(data.getName());
+
+        leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu();
+        categoriesPage.deleteCategory(data.getCategory());
+    }
+
+    //todo get DB data from Nastya
+    @Test(testName = "Test Case 59880:Verify automated attribute.")
+    public void testUserCanAddAutomatedAttributeToCategories() {
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+                LeftMenuPanel.class);
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu();
+
+        categoriesPage.clickAddCategoryButton();
+        categoriesPage.setCategory("Test Category");
+        categoriesPage.clickSubmitCategoryButton();
+        categoriesPage.clickAddAttributeButton("Test Category");
+//        categoriesPage.fillAutomatedAttributeFields("Test Attribute Name", "Number");
+        categoriesPage.fillAutomatedAttributeFields("New Attrinute", "Number");
+        categoriesPage.clickAddAttributeButton();
+        categoriesPage.refreshPage();
+//        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
+        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "New Attrinute"));
+        categoriesPage.deleteCategory("Test Category");
     }
 
     //@Test(testName = "Test Case 59883:Verify user can search by categories.")
-    public void testUserCanSearchCategories() throws InterruptedException {
+    public void testUserCanSearchCategories() {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
@@ -157,7 +161,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     }
 
     //    @Test(testName = "Test Case 59885:Verify created category displays with attributes on the page.")
-    public void testCategiriesdisplaysWithAttributes() throws InterruptedException {
+    public void testCategiriesdisplaysWithAttributes() {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
