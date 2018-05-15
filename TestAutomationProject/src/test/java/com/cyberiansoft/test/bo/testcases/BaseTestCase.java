@@ -153,6 +153,6 @@ public class BaseTestCase {
     @BeforeTest
     public void beforeTest() throws IOException {
         JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/bo/data/" +
-                "BO-data.json", CompanyClientsData.class);
+                "BOCompanyClientsData.json", CompanyClientsData.class);
     }
 }

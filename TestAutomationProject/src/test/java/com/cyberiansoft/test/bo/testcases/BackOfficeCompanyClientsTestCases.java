@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("LossyEncoding")
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BO-data.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json";
 
     @BeforeClass()
     public void settingUp() {
