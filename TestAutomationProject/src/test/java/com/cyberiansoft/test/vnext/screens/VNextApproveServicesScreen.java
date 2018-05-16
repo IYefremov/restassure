@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -80,8 +81,16 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 	public void clickSaveButton() {
 		tap(savebtn);
 	}
+
+	public void setServiceStatus(String serviceNaame, ServiceStatus serviceStatus) {
+		switch (serviceStatus) {
+			case APPROVED: clickApproveButtonForService(serviceNaame); break;
+			case DECLINED: clickDeclineButtonForService(serviceNaame); break;
+			case SKIPPED: clickDeclineButtonForService(serviceNaame); break;
+		}
+	}
 	
-	public void clickApproveButtonForService(String serviceName) {
+	private void clickApproveButtonForService(String serviceName) {
 		WebElement serviceRow = getServiceRowByServiceName(serviceName);
 		if (serviceRow != null) {
 			tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'approve')]")));
@@ -90,7 +99,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 		}
 	}
 	
-	public void clickDeclineButtonForService(String serviceName) {
+	private void clickDeclineButtonForService(String serviceName) {
 		WebElement serviceRow = getServiceRowByServiceName(serviceName);
 		if (serviceRow != null) {
 			tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'decline')]")));
@@ -98,8 +107,8 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 		}
 	}
-	
-	public void clickSkipButtonForService(String serviceName) {
+
+	private void clickSkipButtonForService(String serviceName) {
 		WebElement serviceRow = getServiceRowByServiceName(serviceName);
 		if (serviceRow != null) {
 			tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'skip')]")));
@@ -107,7 +116,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 		}
 	}
-	
+
 	private WebElement getServiceRowByServiceName(String serviceName) {
 		WebElement serviceRow = null;
 		List<WebElement> rows = serviceslist.findElements(By.xpath(".//div[contains(@class, 'entity-item accordion-item')]"));
