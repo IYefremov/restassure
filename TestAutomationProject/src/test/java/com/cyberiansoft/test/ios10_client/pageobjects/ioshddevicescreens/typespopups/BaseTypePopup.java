@@ -15,11 +15,11 @@ public abstract class BaseTypePopup extends iOSHDBaseScreen {
     }
 
     public void selectType(String typeIdentificatorString, String typeItemName) {
-        IOSElement inptypetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" +
+        IOSElement typetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" +
                 typeIdentificatorString + "' and type = 'XCUIElementTypeTable'"));
-        if (!inptypetable.findElementByAccessibilityId(typeItemName).isDisplayed()) {
-            swipeTableUp(inptypetable.findElementByAccessibilityId(typeItemName),
-                    inptypetable);
+        if (!typetable.findElementByAccessibilityId(typeItemName).isDisplayed()) {
+            swipeTableUp(typetable.findElementByAccessibilityId(typeItemName),
+                    typetable);
         }
         appiumdriver.findElementByAccessibilityId(typeItemName).click();
     }

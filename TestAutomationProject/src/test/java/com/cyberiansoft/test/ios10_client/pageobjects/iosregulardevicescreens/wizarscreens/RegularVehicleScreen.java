@@ -367,7 +367,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public RegularNotesScreen clickNotesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Compose"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
+		appiumdriver.findElementByAccessibilityId("Compose").click();
 		return new RegularNotesScreen(appiumdriver);
 	}
 	

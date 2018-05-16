@@ -72,7 +72,7 @@ public class RegularMainScreen {
 		Helpers.setDefaultTimeOut();
 	}
 
-	public RegularHomeScreen userLogin(String user, String password) throws InterruptedException {
+	public RegularHomeScreen userLogin(String user, String password)  {
 		//Helpers.waitUntilCheckLicenseDialogDisappears();
 		//Thread.sleep(3000);
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");

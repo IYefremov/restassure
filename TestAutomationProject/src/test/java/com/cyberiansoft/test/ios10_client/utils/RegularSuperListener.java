@@ -96,14 +96,8 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	        DriverBuilder.getInstance().getAppiumDriver().launchApp();
 
         	RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
-    		try {
-    			TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
-    			mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
-    			
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
+        	mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 	}
 	
 	@Override

@@ -180,6 +180,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public RegularTeamWorkOrdersScreen clickBackButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(backbtn));
 		backbtn.click();
 		return new RegularTeamWorkOrdersScreen(appiumdriver);
 	}

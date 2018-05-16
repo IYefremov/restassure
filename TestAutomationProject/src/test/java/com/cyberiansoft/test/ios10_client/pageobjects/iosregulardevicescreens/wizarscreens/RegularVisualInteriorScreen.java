@@ -53,8 +53,10 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Back").click();
 	}
 
-	public void selectService(String _service) {
-		appiumdriver.findElementByAccessibilityId (_service ).click();
+	public void selectService(String serviceName) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
+		appiumdriver.findElementByAccessibilityId (serviceName ).click();
 	}
 
 	public void selectSubService(String _subservice) {

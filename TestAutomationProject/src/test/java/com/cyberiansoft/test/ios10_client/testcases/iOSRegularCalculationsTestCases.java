@@ -574,14 +574,14 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
 		servicesscreen.selectSubService("SR_S5_Matrix_DE_TE");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.selectPriceMatrix(_pricematrix);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice(price);
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
-		pricematrix.selectDiscaunt("SR_S5_Mt_Money");
-		pricematrix.selectDiscaunt("SR_S5_Mt_Upcharge_25");
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice(price);
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
+		vehiclePartScreen.selectDiscaunt("SR_S5_Mt_Money");
+		vehiclePartScreen.selectDiscaunt("SR_S5_Mt_Upcharge_25");
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$2,117.50");
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$2,117.50");
 		pricematrix.clickServicesButton();
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$2,127.50");
@@ -878,9 +878,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		inspectionnumber32226 = vehiclescreeen.getInspectionNumber();
         RegularPriceMatrixScreen pricematrix = vehiclescreeen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
 		for(String pricemrx : pricematrixes) {
-			pricematrix.selectPriceMatrix(pricemrx);
-			pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-			pricematrix.clickSave();
+			RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(pricemrx);
+			vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
+			vehiclePartScreen.saveVehiclePart();
 		}
 		pricematrix.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber32226);
@@ -1175,10 +1175,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String inspectionnumber = vehiclescreeen.getInspectionNumber();
 
         RegularPriceMatrixScreen pricematrix =  vehiclescreeen.selectNextScreen("Price Matrix Zayats", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		vehiclePartScreen.saveVehiclePart();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$55.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$55.00");
@@ -1191,17 +1191,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$60.00");
 
         pricematrix = servicesscreen.selectNextScreen("Hail Matrix", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("ROOF");
-		pricematrix.setSizeAndSeverity("DIME", "LIGHT");
-		pricematrix.setPrice("123");
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("ROOF");
+		vehiclePartScreen.setSizeAndSeverity("DIME", "LIGHT");
+		vehiclePartScreen.setPrice("123");
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$183.00");
 		
 		pricematrix.selectNextScreen("Hail Damage", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("Grill");
-		pricematrix.setSizeAndSeverity("DIME", "LIGHT");
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("Grill");
+		vehiclePartScreen.setSizeAndSeverity("DIME", "LIGHT");
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
@@ -1520,38 +1520,37 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
         RegularPriceMatrixScreen pricematrix = questionsscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice(defprice);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_20");
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice(defprice);
+		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_20");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
-		selectedservicescreen.saveSelectedServiceDetails();	
-		pricematrix.clickSave();
+		selectedservicescreen.saveSelectedServiceDetails();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$120.00");
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
+		vehiclePartScreen= pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$145.00");
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$130.50");
 
         pricematrix.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-		Helpers.waitABit(500);
-		pricematrix.setTime(timevalue);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
+		vehiclePartScreen.setTime(timevalue);
+		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$90.00");
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$112.50");
 		pricematrix.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
@@ -1702,10 +1701,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
         RegularPriceMatrixScreen pricematrix = visualinteriorscreen.selectNextScreen("PM_New", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("10");
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice("10");
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.clickServicePartCell();
 		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
@@ -1715,8 +1714,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
 		selectedservicescreen.setServicePriceValue("12.44");
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Name");
+
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Name");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.clickServicePartCell();		
@@ -1725,13 +1724,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();	
 		selectedservicescreen.setServicePriceValue("2.13");
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");		
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");
+
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);	
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$89.13");
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$49.45");
@@ -1881,12 +1880,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("PM_New");	
-		servicesscreen.selectPriceMatrices("VP1 zayats");		
+		servicesscreen.selectPriceMatrices("PM_New");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("10");
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		RegularVehiclePartScreen vehiclePartScreen =  pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice("10");
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.clickServicePartCell();
 		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
@@ -1896,8 +1895,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
 		selectedservicescreen.setServicePriceValue("12.44");
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Name");
+
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Name");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.clickServicePartCell();		
@@ -1906,13 +1905,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();	
 		selectedservicescreen.setServicePriceValue("2.13");
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");		
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");
+
+		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$49.45");
 		pricematrix.clickBackButton();
 		pricematrix.clickBackButton();
@@ -1948,19 +1947,19 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
                 RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
-		servicesscreen.selectPriceMatrices("Grill");	
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("975");
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Grill");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice("975");
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue("25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
+
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicescreen.setServicePriceValue("192");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
 		pricematrix.clickBackButton();
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
@@ -2051,16 +2050,16 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.selectSubService("Matrix Service");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Test Matrix Labor");
-		pricematrix.selectPriceMatrix("123");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setTime("100");
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("123");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setTime("100");
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		selectedservicedetailscreen.setServicePriceValue("100");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 		priceMatricesScreen.clickBackButton();
 		pricematrix.clickBackButton();
@@ -2144,15 +2143,15 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
                 RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
-		servicesscreen.selectPriceMatrices("Grill");	
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("100");
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.OKSI_SERVICE_PP_FLAT_FEE);
+		RegularVehiclePartScreen vehiclePartScreen =  pricematrix.selectPriceMatrix("Grill");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setPrice("100");
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.OKSI_SERVICE_PP_FLAT_FEE);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServicePriceValue("23");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.clickSave();
+		vehiclePartScreen.saveVehiclePart();
 		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 		priceMatricesScreen.clickBackButton();
 		pricematrix.clickBackButton();
@@ -3284,9 +3283,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.clickAddServicesButton();
         RegularPriceMatrixScreen pricematrix = servicesscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("Hood");
-		pricematrix.setSizeAndSeverity("DIME", "HEAVY");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Hood");
+		vehiclePartScreen.setSizeAndSeverity("DIME", "HEAVY");
+		vehiclePartScreen.saveVehiclePart();
 
         RegularVisualInteriorScreen visualinteriorscreen = pricematrix.selectNextScreen("Future Sport Car", RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
@@ -3296,10 +3295,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 300);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 350);
         pricematrix = visualinteriorscreen.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("Back Glass");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setTime("34");
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("Back Glass");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setTime("34");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
