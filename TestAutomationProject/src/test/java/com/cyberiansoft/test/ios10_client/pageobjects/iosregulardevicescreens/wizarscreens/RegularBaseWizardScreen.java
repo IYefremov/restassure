@@ -17,7 +17,6 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
     public <T extends RegularBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(screenname).click();
-
         if (type == RegularInvoiceInfoScreen.class)
             return (T) new RegularInvoiceInfoScreen(appiumdriver);
         else if (type == RegularVehicleScreen.class)
@@ -57,14 +56,13 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         return getTypeScreenFromContext();
     }
 
-    public void clickCancel() {
-        if (!elementExists("Cancel"))
-            clickChangeScreen();
-        appiumdriver.findElementByAccessibilityId("Cancel").click();
+    public void clickCancelWizard() {
+        clickChangeScreen();
+        appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
     }
 
     public <T extends RegularBaseTypeScreen> T cancelWizard() {
-        clickCancel();
+        clickCancelWizard();
         acceptAlert();
         return getTypeScreenFromContext();
     }

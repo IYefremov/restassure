@@ -51,16 +51,15 @@ public class RegularMainScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 	
-	public void updateDatabase() throws InterruptedException {
+	public void updateDatabase() {
 		Helpers.setTimeOut(340);
-		Thread.sleep(2000);
 
 		mainbtn.click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 
-	public void updateVIN() throws InterruptedException {
+	public void updateVIN() {
 		Helpers.setTimeOut(60);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		/*

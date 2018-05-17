@@ -295,7 +295,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		if (!table.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
 			swipeToElement(table.findElement(MobileBy.AccessibilityId("Location")));
-			table.findElement(MobileBy.AccessibilityId("Location")).click();
 		}
 		table.findElement(MobileBy.AccessibilityId("Location")).click();
 		//WebElement par = getVehicleInfoTableParentNode("Location");

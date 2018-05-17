@@ -9,6 +9,8 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -97,6 +99,8 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 			searchfld.sendKeys(customer + "\n");
 			
 		}
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(customer)));
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	

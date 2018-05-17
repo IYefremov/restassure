@@ -38,7 +38,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		return exists;
 	}
 	
-	public RegularHomeScreen clickHomeButton() throws InterruptedException {
+	public RegularHomeScreen clickHomeButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();

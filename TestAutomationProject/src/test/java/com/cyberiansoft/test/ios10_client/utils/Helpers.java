@@ -411,14 +411,14 @@ public abstract class Helpers {
 				.click();
 	}
 	
-	public static void waitUntilCheckLicenseDialogDisappears() throws InterruptedException {
+	public static void waitUntilCheckLicenseDialogDisappears() {
 		DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//UIAButton[@name=\"Licenses\"]"));
 		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		for (int i =0; i<60; i++) {
 			if (DriverBuilder.getInstance().getAppiumDriver().findElements(By.name("LoginViewCheckLicense")).size() < 1) {
 				break;
 			} else {
-				Thread.sleep(1000);
+				waitABit(1000);
 			}
 		}
 		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.MILLISECONDS);
