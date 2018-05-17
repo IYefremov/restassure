@@ -120,7 +120,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     public void uselectService(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            tap(servicecell.findElement(By.xpath(".//input[@action='check-item']")));
+            tap(servicecell.findElement(By.xpath(".//input[@action='unselect-item']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -155,8 +155,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         boolean selected = false;
         WebElement servicecell = getSelectedServiceCell(servicename);
         if (servicecell != null) {
-            if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked") != null)
-                if (servicecell.findElement(By.xpath(".//input[@action='check-item']" )).getAttribute("checked").equals("true"))
+            if (servicecell.findElement(By.xpath(".//input[@action='unselect-item']" )).getAttribute("checked") != null)
+                if (servicecell.findElement(By.xpath(".//input[@action='unselect-item']" )).getAttribute("checked").equals("true"))
                     selected = true;
         } else
             Assert.assertTrue(false, "Can't find service: " + servicename);
