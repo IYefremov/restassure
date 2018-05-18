@@ -271,5 +271,31 @@
         "declineReason": "No repair needed"
       }]
     }
+  ],
+
+  "testVerifyUserCantAprroveInspectionsWithDifferentCustomers": [
+    {
+      "rowID": "testVerifyUserCantAprroveInspectionsWithDifferentCustomers.01",
+      "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "retailCustomer": {"firstName": "Retail", "lastName" : "Automation"
+        },
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation"}]
+      }, {"inspType": "O_Kramar3",
+        "retailCustomer": {"firstName": "RetailCustomer2", "lastName" : "RetailLast2"
+        },
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Labor"}]
+      },{"inspType": "O_Kramar3",
+        "retailCustomer": {"firstName": "RetailCustomer2", "lastName" : "RetailLast2"
+        },
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation"}]
+      }]
+    }
   ]
 }

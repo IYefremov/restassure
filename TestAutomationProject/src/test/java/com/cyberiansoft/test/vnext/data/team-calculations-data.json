@@ -152,8 +152,8 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Progressive-Tech",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Half", "hailMatrixSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Quater", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Half", "hailMatrixSeverity": "Moderate 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
         }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Light 6 to 15"
         }]},
       "inspPrice": "$2287.50"
