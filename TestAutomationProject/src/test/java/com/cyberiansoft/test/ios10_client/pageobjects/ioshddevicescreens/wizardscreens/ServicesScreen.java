@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -56,6 +57,8 @@ public class ServicesScreen extends BaseWizardScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Available Services")));
+        wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Available Services")));
 	}
 	
 
@@ -160,17 +163,25 @@ public class ServicesScreen extends BaseWizardScreen {
 
 	public void selectService(String servicename) {
 		IOSElement availableservices = null;
-		if (appiumdriver.findElementsByAccessibilityId("AvailableServiceList").size() > 0)
-			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
-		else 
-			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
 
+		if (BaseWizardScreen.typeContext.equals(TypeScreenContext.SERVICEREQUEST))
+			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
+		else
+			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		if (availableservices.findElementsByAccessibilityId("Clear text").size() > 0) {
+			availableservices.findElementByAccessibilityId("Clear text").click();
+
+		}
+		availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
+		appiumdriver.getKeyboard().sendKeys(servicename);
+		/*appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		if (!(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementsByAccessibilityId(servicename).size() < 0)) {
 			IOSElement searchfld = (IOSElement) availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField"));
 			searchfld.clear();
 			searchfld.setValue(servicename);
 			appiumdriver.hideKeyboard();
-		}
+		}*/
 		availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename).click();
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename)).waitAction(Duration.ofSeconds(1)).release().perform();
@@ -215,13 +226,19 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
-		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
-		if (!(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementsByAccessibilityId(servicename).size() < 0)) {
-			IOSElement searchfld = (IOSElement) availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField"));
-			searchfld.clear();
-			searchfld.setValue(servicename);
-			appiumdriver.hideKeyboard();
-		}
+        IOSElement availableservices = null;
+
+        if (BaseWizardScreen.typeContext.equals(TypeScreenContext.SERVICEREQUEST))
+            availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
+        else
+            availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+        appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+        if (availableservices.findElementsByAccessibilityId("Clear text").size() > 0) {
+            availableservices.findElementByAccessibilityId("Clear text").click();
+
+        }
+        availableservices.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
+        appiumdriver.getKeyboard().sendKeys(servicename);
 		availableservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).
 				findElementByAccessibilityId("custom detail button").click();
 		return new SelectedServiceDetailsScreen(appiumdriver);

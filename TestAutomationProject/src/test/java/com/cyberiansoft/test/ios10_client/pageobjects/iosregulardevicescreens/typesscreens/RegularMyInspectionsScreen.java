@@ -506,15 +506,14 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrderType(String workordertype) {
-
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
 		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
 
 		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
 			swipeToElement(wostable.findElementByAccessibilityId(workordertype));
-			wostable.findElementByAccessibilityId(workordertype).click();
 		}
-		if (elementExists("OrderTypeSelector"))
-			wostable.findElementByAccessibilityId(workordertype).click();
+		wostable.findElementByAccessibilityId(workordertype).click();
 	}
 
 	public void clickBackButton()  {

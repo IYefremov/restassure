@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -48,23 +47,24 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(userName, userPassword);
 
-		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
-				ActiveDevicesWebPage.class);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
 
+		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 		devicespage.setSearchCriteriaByName(searchlicensecriteria);
 		regCode = devicespage.getFirstRegCodeInTable();
-
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		/*appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
-		loginscreen.registeriOSDevice(regCode);
+		LoginScreen loginscreen = kodiselectenvscreen.selectEnvironment("Dev Environment");
+		loginscreen.registeriOSDevice(regCode);*/
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -123,7 +123,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspectionForApprove(inpection);
 		approveinspscreen.clickApproveAfterSelection();
-		approveinspscreen.clickSignButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
         Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpection));
@@ -287,6 +286,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelSearchAvailableService();
 		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$33.00");
 		
 		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
@@ -331,6 +331,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", ServicesScreen.class);
 		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Service_in_2_fee_packs");
 		servicedetailsscreen.saveSelectedServiceDetails();
+        servicesscreen.cancelSearchAvailableService();
 		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$36.00");
 		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
@@ -389,6 +390,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", ServicesScreen.class);
 		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("Service_for_override");
 		servicedetailsscreen.saveSelectedServiceDetails();
+		servicesscreen.cancelSearchAvailableService();
 		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$27.00");
 		
 		servicesscreen.cancelWizard();
@@ -853,7 +855,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			pricematrix.selectPriceMatrix(pricemrx);
 			pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
 		}
-		pricematrix.clickSaveButton();
+		pricematrix.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber32226);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -862,7 +864,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSkipAllServicesButton();
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.clickCancelStatusReasonButton();
-		
+
+
 		approveinspscreen.clickDeclineAllServicesButton();
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.selectStatusReason("Decline 1");
@@ -943,7 +946,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+        servicesscreen = new ServicesScreen(appiumdriver);
+        servicesscreen.cancelSearchAvailableService();
+        servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber32286);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
@@ -1024,6 +1029,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
+        servicesscreen.cancelSearchAvailableService();
 		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForApprove(inspectionnumber32287);
@@ -1958,7 +1964,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.setServicePriceValue("100");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		pricematrix.clickSaveButton();
-
+		servicesscreen = new ServicesScreen(appiumdriver);
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
 		ordersummaryscreen.setTotalSale("3");
