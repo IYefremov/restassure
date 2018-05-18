@@ -59,6 +59,15 @@ public class InHouseCategoriesData {
     @JsonProperty("ClientSegmentsPage")
     private String ClientSegmentsPage;
 
+    @JsonProperty("isAutomatedStatus")
+    private String isAutomatedStatus;
+
+    @JsonProperty("procedureName")
+    private String procedureName;
+
+    @JsonProperty("client")
+    private String client;
+
 
     public String getCategory() {
         return category;
@@ -134,5 +143,17 @@ public class InHouseCategoriesData {
 
     public String getClientSegmentsPage() {
         return ClientSegmentsPage;
+    }
+
+    public String getIsAutomatedStatus() {
+        return isAutomatedStatus;
+    }
+
+    public String getProcedureName() {
+        return procedureName;
+    }
+
+    public String getClient() {
+        return client;
     }
 }

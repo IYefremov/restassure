@@ -47,5 +47,17 @@
       "attributeValue": "15",
       "dataType": "String"
     }
+  ],
+
+  "testUserCanAddAutomatedAttributeToCategories": [
+    {
+      "rowID": "testUserCanAddAutomatedAttributeToCategories.01",
+      "description": "Test Case 59880:Verify automated attribute",
+      "category": "Test Category",
+      "attributeName": "New Attrinute",
+      "isAutomatedStatus": "Yes",
+      "procedureName": "[ProcessDX].[dbo].[usp_ClientSegm_GetNumericValue]",
+      "client": "sdafbgh"
+    }
   ]
 }

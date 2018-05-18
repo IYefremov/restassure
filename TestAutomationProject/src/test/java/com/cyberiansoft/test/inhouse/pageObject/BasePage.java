@@ -44,6 +44,12 @@ public class BasePage {
         waitABit(2000);
     }
 
+    public void waitForOverflowToDisappear() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body[contains(@style, 'auto')]")));
+        } catch (Exception ignored) {}
+    }
+
     public void waitForLoading() {
         try {
             wait.until(ExpectedConditions

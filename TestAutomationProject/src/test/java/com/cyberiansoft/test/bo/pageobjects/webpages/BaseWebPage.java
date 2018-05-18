@@ -186,15 +186,17 @@ public abstract class BaseWebPage {
 	}
 
 	public void clickEditTableRow(WebElement row) {
-        waitABit(2000);
         try {
-            row.findElement(By.xpath(".//*[@title='Edit']")).click();
-        } catch (StaleElementReferenceException e) {
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(row.findElement(By.xpath(".//*[@title='Edit']")))));
+            wait.until(ExpectedConditions.elementToBeClickable(row.findElement(By.xpath(".//*[@title='Edit']")))).click();
+        } catch (Exception e) {
             waitABit(3000);
             row.findElement(By.xpath(".//*[@title='Edit']")).click();
         }
-        waitUntilPageReloaded();
-        waitABit(3000);
+        waitForLoading();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ModalDialog")));
+//        waitUntilPageReloaded();
+//        waitABit(3000);
 	}
 
 	public void checkboxSelect(String checkboxvalue) {

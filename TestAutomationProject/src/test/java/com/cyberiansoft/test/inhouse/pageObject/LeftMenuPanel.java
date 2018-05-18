@@ -54,7 +54,7 @@ public class LeftMenuPanel extends BasePage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(menu)).click();
         } catch (Exception e) {
-            Assert.fail("The menu has not been clicked!", e);
+            Assert.fail("The menu has not been displayed!", e);
         }
     }
 
@@ -95,7 +95,7 @@ public class LeftMenuPanel extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
-    public ClientSegmentsPage clickClientSegmentsSubMenu() {
+    public ClientSegmentsPage clickClientSegmentsSubmenu() {
         clickSubMenu(clientSegments);
         waitForLoading();
         return PageFactory.initElements(driver, ClientSegmentsPage.class);

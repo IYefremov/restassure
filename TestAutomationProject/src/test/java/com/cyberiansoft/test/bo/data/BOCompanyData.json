@@ -1,0 +1,23 @@
+{
+  "testReassignEmployeeForTeam": [
+    {
+      "rowID": "testReassignEmployeeForTeam.01",
+      "description": "Test Case 74893:Company - Employees : Re-assign Employee for team",
+      "employeeName": "Vladimir Avsievich",
+      "employeeName2": "Oksi Employee",
+      "teamName": "Test Team",
+      "teamName2": "Test Vendor Team"
+    }
+  ],
+
+  "testReassignEmployeeForSingleUserInTeamDisabled": [
+    {
+      "rowID": "testReassignEmployeeForSingleUserInTeamDisabled.01",
+      "description": "Test Case 74894:Company - Employees : Re-assign Employee for single user in team disabled",
+      "employeeName": "Vladimir Avsievich",
+      "searchEmployee": "oksi",
+      "employeeFullName": "oksi oksi",
+      "teamName": "Test Vendor Team"
+    }
+  ]
+}

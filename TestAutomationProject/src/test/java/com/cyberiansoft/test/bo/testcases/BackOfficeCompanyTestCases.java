@@ -1,14 +1,26 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.dataclasses.BOCompanyData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class BackOfficeCompanyTestCases extends BaseTestCase {
+
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyData.json";
+
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
 
 	@Test(description = "Test Case 15245:Company-Users: Search")
 	public void testCompanyUsersSearch() throws Exception {
@@ -621,4 +633,64 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		pricematriceswebpage = companyPage.clickPriceMatricesLink();
 		pricematriceswebpage.deletePriceMatrix(priceMatrix);
 	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testReassignEmployeeForTeam(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        EmployeesWebPage employeesWebPage = companyPage
+                .clickEmployeesLink()
+                .makeSearchPanelVisible()
+                .setSearchUserParameter(data.getEmployeeName())
+                .clickFindButton()
+                .verifyEmployeesTableColumnsAreVisible();
+        Assert.assertTrue(employeesWebPage.activeEmployeeExists(data.getEmployeeName()),
+                "The employee is not displayed in the table");
+
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage
+                .clickEditEmployeeFromTeam(data.getEmployeeName(), data.getTeamName());
+        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
+                "The Info Content Dialog has not been opened");
+        infoContentDialog
+                .chooseEmployeeToReassign(data.getEmployeeName2())
+                .reassignEmployee();
+        newEmployeeDialog
+                .selectNewEmployeeTeam(data.getTeamName2())
+                .clickOKButton();
+        employeesWebPage.clickEditEmployee(data.getEmployeeName());
+        infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
+                "The Info Content Dialog has not been opened for the rollback of employee's data");
+        infoContentDialog
+                .chooseEmployeeToReassign(data.getEmployeeName())
+                .reassignEmployee();
+        newEmployeeDialog
+                .selectNewEmployeeTeam(data.getTeamName())
+                .clickOKButton();
+    }
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testReassignEmployeeForSingleUserInTeamDisabled(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        EmployeesWebPage employeesWebPage = companyPage
+                .clickEmployeesLink()
+                .makeSearchPanelVisible()
+                .selectSearchTeam(data.getTeamName())
+                .setSearchUserParameter(data.getSearchEmployee())
+                .clickFindButton()
+                .verifyEmployeesTableColumnsAreVisible()
+                .verifyEmployeeIsActive(data.getEmployeeFullName());
+        employeesWebPage.archiveEmployee(data.getEmployeeFullName());
+        employeesWebPage.setSearchUserParameter(data.getEmployeeName());
+        employeesWebPage.clickFindButton();
+
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeName());
+        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        //todo finish after QC environment will be updated.
+
+    }
 }

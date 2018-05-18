@@ -63,10 +63,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
         ClientSegmentsPage clientSegmentsPage = leftMenuPanel
                 .clickClients()
-                .clickClientSegmentsSubMenu();
+                .clickClientSegmentsSubmenu();
 
         clientSegmentsPage.searchClientSegment(data.getClientSegmentsPage());
-        Assert.assertTrue(clientSegmentsPage.checkClientsName(data.getClientSegmentsPage()));
+        Assert.assertTrue(clientSegmentsPage.verifyClientIsDisplayed(data.getClientSegmentsPage()),
+                "The client has not been displayed in the table!");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -95,7 +96,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         categoriesPage.fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType());
         categoriesPage.clickAddAttributeButton();
 
-        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubMenu();
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubmenu();
 
         clientSegmentsPage.searchClientSegment(data.getName());
         clientSegmentsPage.expandAttributesList(data.getName());
@@ -117,26 +118,30 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         categoriesPage.deleteCategory(data.getCategory());
     }
 
-    //todo get DB data from Nastya
-    @Test(testName = "Test Case 59880:Verify automated attribute.")
-    public void testUserCanAddAutomatedAttributeToCategories() {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+    //todo sometimes fails because of StaleReferenceElementException
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanAddAutomatedAttributeToCategories(String rowID, String description, JSONObject testData) {
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
                 .clickCategoriesSubmenu();
 
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton("Test Category");
-//        categoriesPage.fillAutomatedAttributeFields("Test Attribute Name", "Number");
-        categoriesPage.fillAutomatedAttributeFields("New Attrinute", "Number");
+        categoriesPage.verifyCategoryDoesNotExist(data.getCategory());
+        categoriesPage.addCategory(data.getCategory());
+
+        categoriesPage.clickAddAttributeButton(data.getCategory());
+        categoriesPage.fillAutomatedAttributeFields(data.getAttributeName(), data.getIsAutomatedStatus(),
+                data.getProcedureName());
         categoriesPage.clickAddAttributeButton();
-        categoriesPage.refreshPage();
-//        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
-        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "New Attrinute"));
-        categoriesPage.deleteCategory("Test Category");
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()),
+                "The saved attribute name is not displayed in the category");
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubmenu();
+        clientSegmentsPage.searchClientSegment(data.getClient());
+        Assert.assertTrue(clientSegmentsPage.verifyClientIsDisplayed(data.getClient()),
+                "The client has not been displayed in the table!");
+        clientSegmentsPage.expandAttributesList(data.getClient());
+        Assert.assertTrue(clientSegmentsPage.verifyAttributeNameIsDisplayed(data.getAttributeName(), data.getCategory()));
     }
 
     //@Test(testName = "Test Case 59883:Verify user can search by categories.")
@@ -150,9 +155,9 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         categoriesPage.clickAddCategoryButton();
         categoriesPage.setCategory("Test Category");
         categoriesPage.clickSubmitCategoryButton();
-        leftMenuPanel.clickClientSegmentsSubMenu();
+        leftMenuPanel.clickClientSegmentsSubmenu();
 
-// todo delete, if leftMenuPanel.clickClientSegmentsSubMenu() works
+// todo delete, if leftMenuPanel.clickClientSegmentsSubmenu() works
 // page = leftMenuPanel.clickOnMenu("Client Segments");
 //        Assert.assertTrue(page instanceof ClientSegmentsPage);
 //        ClientSegmentsPage clientSegmentsPage = (ClientSegmentsPage) page;
@@ -177,8 +182,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         categoriesPage.refreshPage();
         Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
 
-        leftMenuPanel.clickClientSegmentsSubMenu();
-        // todo delete, if leftMenuPanel.clickClientSegmentsSubMenu() works
+        leftMenuPanel.clickClientSegmentsSubmenu();
+        // todo delete, if leftMenuPanel.clickClientSegmentsSubmenu() works
 //        page = leftMenuPanel.clickOnMenu("Client Segments");
 //        Assert.assertTrue(page instanceof ClientSegmentsPage);
 //        ClientSegmentsPage clientSegmentsPage = (ClientSegmentsPage) page;

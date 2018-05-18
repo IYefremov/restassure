@@ -76,27 +76,47 @@ public class EmployeesWebPage extends WebPageWithPagination {
         }
 	}
 
+    public EmployeesWebPage verifyEmployeeIsActive(String employeeName) {
+        List<WebElement> activeEmployees = employeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeeName + "']"));
+        try {
+            if (activeEmployees.isEmpty()) {
+                clickArchivedTab();
+                unarchiveEmployee(employeeName);
+                clickActiveTab();
+            }
+        } catch (Exception e) {
+            System.err.println("The employee is not found: " + e);
+        }
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
+	}
+
 	public boolean searchPanelIsExpanded() {
 		return searchtab.getAttribute("class").contains("open");
 	}
 
-	public void makeSearchPanelVisible() {
+	public EmployeesWebPage makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
 	}
 
-	public void verifyEmployeesTableColumnsAreVisible() {
+	public EmployeesWebPage verifyEmployeesTableColumnsAreVisible() {
 		Assert.assertTrue(employeestable.tableColumnExists("Team"));
 		Assert.assertTrue(employeestable.tableColumnExists("Employee"));
 		Assert.assertTrue(employeestable.tableColumnExists("Password"));
 		Assert.assertTrue(employeestable.tableColumnExists("Roles"));
 		Assert.assertTrue(employeestable.tableColumnExists("Accounting ID"));
-		Assert.assertTrue(employeestable.tableColumnExists("Address"));
-		Assert.assertTrue(employeestable.tableColumnExists("Type"));
+        Assert.assertTrue(employeestable.tableColumnExists("Type"));
+        Assert.assertTrue(employeestable.tableColumnExists("Address"));
 		Assert.assertTrue(employeestable.tableColumnExists("Email"));
 		Assert.assertTrue(employeestable.tableColumnExists("Phone"));
 		Assert.assertTrue(employeestable.tableColumnExists("Commissions"));
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
 	}
 
 	public void verifyTabsAreVisible() {
@@ -114,16 +134,21 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		clickAndWait(activetab);
 	}
 
-	public void selectSearchTeam(String team) {
+	public EmployeesWebPage selectSearchTeam(String team) {
 		selectComboboxValue(searchteamcbx, searchteamdd, team);
-	}
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);}
 
-	public void setSearchUserParameter(String username) {
+	public EmployeesWebPage setSearchUserParameter(String username) {
 		clearAndType(searchemployeefld, username);
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
 	}
 
-	public void clickFindButton() {
+	public EmployeesWebPage clickFindButton() {
 		clickAndWait(findbtn);
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
 	}
 
 	public int getEmployeesTableRowCount() {
@@ -153,6 +178,36 @@ public class EmployeesWebPage extends WebPageWithPagination {
         }
         return null;
 	}
+
+	public WebElement getTableRowWithActiveEmployee(String employeeName) {
+        try {
+            List<WebElement> employeestablerows = getEmployeesTableRows();
+            for (WebElement employeestablerow : employeestablerows) {
+                if (employeestablerow.findElement(By.xpath(".//td[" + employeestable
+                        .getTableColumnIndex("Employee") + "]")).getText().equals(employeeName)) {
+                    return employeestablerow;
+                }
+            }
+        } catch (NoSuchElementException e) {
+            System.err.println("The active employee is not displayed in the table!\n" + e);
+        }
+        return null;
+	}
+
+    public WebElement getTableRowWithActiveEmployeeAndTeam(String employeeName, String teamName) {
+        try {
+            List<WebElement> employeestablerows = getEmployeesTableRows();
+            for (WebElement employeestablerow : employeestablerows) {
+                if (employeestablerow.findElement(By.xpath(".//td[" + employeestable
+                        .getTableColumnIndex("Employee") + "]")).getText().equals(employeeName) &&
+                        employeestablerow.findElement(By.xpath(".//td[" + employeestable
+                                .getTableColumnIndex("Team") + "]")).getText().equals(teamName)) {
+                    return employeestablerow;
+                }
+            }
+        } catch (NoSuchElementException ignored) {}
+        return null;
+    }
 
 	public WebElement getTableRowWithArchivedEmployee(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
@@ -204,6 +259,14 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	}
 
+	public void archiveEmployee(String employeeName) {
+		WebElement row = getTableRowWithActiveEmployee(employeeName);
+		if (row != null) {
+			archiveTableRow(row);
+		} else
+            Assert.fail("Can't find " + employeeName + " employee");
+	}
+
 	public void archiveEmployee(String firstname, String lastname) {
 		waitABit(3000);
 		WebElement row = getTableRowWithActiveEmployee(firstname, lastname);
@@ -226,9 +289,9 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithArchivedEmployee(employeename);
 		if (row != null) {
 			restoreTableRow(row);
-		}
-		else
+		} else {
             Assert.fail("Can't find " + employeename + " employee");
+        }
 	}
 
 	public String findDuplicateNames(List<String> employeeact, List<String> employeearch) {
@@ -243,9 +306,8 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	public boolean activeEmployeeExists(String firstname, String lastname) {
 		String employeename = firstname + " " + lastname;
 		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
-		boolean exists = employeestable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
-		return exists;
+        return employeestable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + employeename + "']")).size() > 0;
 	}
 
 	public boolean archivedEmployeeExists(String firstname, String lastname) {
@@ -281,6 +343,39 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		}
 		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
 	}
+
+	public NewEmployeeDialogWebPage clickEditEmployee(String employeeName) {
+		WebElement row = getTableRowWithActiveEmployee(employeeName);
+		if (row != null) {
+			clickEditTableRow(row);
+		} else {
+            Assert.fail("Can't find " + employeeName + " employee");
+		}
+		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
+	}
+
+	public NewEmployeeDialogWebPage clickEditEmployeeFromTeam(String employeeName, String teamName) {
+		WebElement row = getTableRowWithActiveEmployeeAndTeam(employeeName, teamName);
+		if (row != null) {
+			clickEditTableRow(row);
+		} else {
+            changeTeamForEmployee(employeeName, teamName);
+            clickEditTableRow(getTableRowWithActiveEmployeeAndTeam(employeeName, teamName));
+        }
+		return PageFactory.initElements(driver, NewEmployeeDialogWebPage.class);
+	}
+
+    private void changeTeamForEmployee(String employeeName, String teamName) {
+        clickEditEmployee(employeeName);
+        NewEmployeeDialogWebPage newEmployeeDialog = new NewEmployeeDialogWebPage(driver);
+        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
+                "The Info Content Dialog has not been opened");
+        infoContentDialog.chooseEmployeeToReassign(employeeName);
+        infoContentDialog.reassignEmployee();
+        newEmployeeDialog.selectNewEmployeeTeam(teamName);
+        newEmployeeDialog.clickOKButton();
+    }
 
     public void verifyActiveEmployeeDoesNotExist(String employeefirstname, String employeelastname,
                                                  String employeefirstnameed, String employeelastnameed) {

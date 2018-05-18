@@ -1,22 +1,18 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 
 public class NewEmployeeDialogWebPage extends BaseWebPage {
@@ -89,15 +85,24 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	
 	@FindBy(xpath = "//input[contains(@id, 'ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel')]")
 	private WebElement cancelbtn;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_imgTeamInfo")
+	private WebElement infoBubble;
+
+	@FindBy(xpath = "//div[@id='RadToolTipWrapper_ctl00_ctl00_Content_Main_ctl01_ctl01_Card_toolTipTeamInfo' " +
+            "and contains(@style, 'visibility: visible;')]")
+	private WebElement infoContentDialog;
 	
 	public NewEmployeeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void selectNewEmployeeTeam(String employeeteam) {
+	public NewEmployeeDialogWebPage selectNewEmployeeTeam(String employeeteam) {
 		selectComboboxValue(employeeteamcmb, employeeteamdd, employeeteam);
 		Assert.assertEquals(employeeteamcmb.getSelectedValue(), employeeteam);
+        return PageFactory.initElements(
+                driver, NewEmployeeDialogWebPage.class);
 	}
 	
 	public String getNewEmployeeTeam() {
@@ -229,12 +234,18 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='" + employeerole + "']")));
 	}
 	
-	public void clickOKButton() {
+	public NewEmployeeDialogWebPage clickOKButton() {
 		clickAndWait(OKbtn);
+        return PageFactory.initElements(
+                driver, NewEmployeeDialogWebPage.class);
 	}
 	
 	public void clickCancelButton() {
 		click(cancelbtn);
 	}
 
+	public InfoContentDialogWebPage clickInfoBubble() {
+	    click(infoBubble);
+        return PageFactory.initElements(driver, InfoContentDialogWebPage.class);
+    }
 }

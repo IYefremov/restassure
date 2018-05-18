@@ -1,0 +1,122 @@
+{
+  "testUserCanAddNewOrganisationRules": [
+    {
+      "rowID": "testUserCanAddNewOrganisationRules.01",
+      "description": "Test Case 59858:Verify user can add new organization rules",
+      "ruleName": "Test Organization",
+      "condition": "Description LIKE '%AMT%'",
+      "order": "1",
+      "ruleDescription": "Test"
+    }
+  ],
+
+  "testUserCanSelecyOrganisationFromList": [
+    {
+      "rowID": "testUserCanSelecyOrganisationFromList.01",
+      "description": "Test Case 59859:Verify user can select organization from the list",
+      "ruleName": "Test Organization",
+      "condition": "Description LIKE '%AMT%'",
+      "condition2": "Description LIKE '%MOTEL%'",
+      "order": "1",
+      "order2": "2",
+      "ruleDescription": "Test",
+      "ruleDescription2": "Test 1234"
+    }
+  ],
+
+  "testUserCanEditOrganisationRules": [
+    {
+      "rowID": "testUserCanEditOrganisationRules.01",
+      "description": "Test Case 59861:Verify user can edit organization rules",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanAddNewAccountsRules": [
+    {
+      "rowID": "testUserCanAddNewAccountsRules.01",
+      "description": "Test Case 59864:Verify user can add new Accounts Rules",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanAddSelectAccountFromList": [
+    {
+      "rowID": "testUserCanAddSelectAccountFromList.01",
+      "description": "Test Case 59865:Verify user can select account from the list",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ],
+
+  "testUserCanEditAccountsRules": [
+    {
+      "rowID": "testUserCanEditAccountsRules.01",
+      "description": "Test Case 59867:Verify user can edit Accounts Rules",
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title",
+      "email": "test.cyberiansoft@gmail.com",
+      "firstAgreement": "First agreement",
+      "secondAgreement": "Second Agreement",
+      "team": "Repair360 FREE"
+    }
+  ]
+}
