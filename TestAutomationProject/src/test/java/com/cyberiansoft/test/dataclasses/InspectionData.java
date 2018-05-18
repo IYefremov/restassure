@@ -51,6 +51,9 @@ public class InspectionData {
 
 	@JsonProperty("inspectionNumber")
 	String inspectionNumber;
+
+	@JsonProperty("inspectionStatus")
+	String inspectionStatus;
 	 
 	 public String getInspectionType() {
 		 return inspType;
@@ -76,7 +79,7 @@ public class InspectionData {
 		 return newVinNumber;
 	 }
 	 
-	 public String getServiceStatus() {
+	 public ServiceStatus getServiceStatus() {
 		 return service.getServiceStatus();
 	 }
 	 
@@ -151,5 +154,9 @@ public class InspectionData {
 	 public void setInspectionNumber(String inspNumber) {
 
 	 	this.inspectionNumber =inspNumber;
+	}
+
+	public InspectionStatus getInspectionStatus() {
+		return InspectionStatus.getStatus(inspectionStatus);
 	}
 }

@@ -383,12 +383,12 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
 		if (!table.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
 			swipeToElement(table.findElement(MobileBy.AccessibilityId(vehiclepart)));
-			table.findElementByAccessibilityId(vehiclepart).click();
+			//table.findElementByAccessibilityId(vehiclepart).click();
 		}
-
-		if (appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
+		table.findElementByAccessibilityId(vehiclepart).click();
+		/*if (appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView").findElement(
 				MobileBy.AccessibilityId(vehiclepart)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0)
-			table.findElementByAccessibilityId(vehiclepart).click();
+			table.findElementByAccessibilityId(vehiclepart).click();*/
 	}
 
 	public void cancelSelectedServiceDetails() {

@@ -173,7 +173,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		selectedServicesScreen.setServiceAmountValue(inspdata.getServiceName(), inspdata.getServicePrice());
 		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 
-		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), inspdata.getServiceStatus());
+		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), inspdata.getServiceStatus().getStatus());
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	

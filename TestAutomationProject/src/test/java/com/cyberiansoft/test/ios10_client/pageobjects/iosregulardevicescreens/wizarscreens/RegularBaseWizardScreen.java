@@ -5,10 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iO
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
 
@@ -16,14 +12,11 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
 
     public RegularBaseWizardScreen(AppiumDriver driver) {
         super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public <T extends RegularBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(screenname).click();
-
         if (type == RegularInvoiceInfoScreen.class)
             return (T) new RegularInvoiceInfoScreen(appiumdriver);
         else if (type == RegularVehicleScreen.class)
@@ -63,8 +56,13 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         return getTypeScreenFromContext();
     }
 
+    public void clickCancelWizard() {
+        clickChangeScreen();
+        appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
+    }
+
     public <T extends RegularBaseTypeScreen> T cancelWizard() {
-        clickCancel();
+        clickCancelWizard();
         acceptAlert();
         return getTypeScreenFromContext();
     }

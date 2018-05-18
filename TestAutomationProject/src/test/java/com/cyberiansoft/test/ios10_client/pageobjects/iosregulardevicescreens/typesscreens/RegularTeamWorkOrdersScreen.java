@@ -104,7 +104,13 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	public void selectSearchLocation(String _location) {
 		locationfld.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByName(_location))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Locations")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_location)));
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(_location)).click();
+
+		//wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByName(_location))).click();
 	}
 	
 	public void setSearchType(String wotype)  {

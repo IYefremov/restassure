@@ -638,7 +638,7 @@ public class MailChecker {
     public static String getUserMailContent() throws IOException {
 
         final String usermail = "test.cyberiansoft@gmail.com";
-        final String usermailpsw = "ZZzz11!!";
+        final String usermailpsw = "t!y@hGk8";
         final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
         final String sendermail = "Repair360-qc@cyberianconcepts.com";
         final String mailcontainstext = "complete the registration process";

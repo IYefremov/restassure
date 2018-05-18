@@ -51,16 +51,15 @@ public class RegularMainScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 	
-	public void updateDatabase() throws InterruptedException {
+	public void updateDatabase() {
 		Helpers.setTimeOut(340);
-		Thread.sleep(2000);
 
 		mainbtn.click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 
-	public void updateVIN() throws InterruptedException {
+	public void updateVIN() {
 		Helpers.setTimeOut(60);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		/*
@@ -72,7 +71,7 @@ public class RegularMainScreen {
 		Helpers.setDefaultTimeOut();
 	}
 
-	public RegularHomeScreen userLogin(String user, String password) throws InterruptedException {
+	public RegularHomeScreen userLogin(String user, String password)  {
 		//Helpers.waitUntilCheckLicenseDialogDisappears();
 		//Thread.sleep(3000);
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");

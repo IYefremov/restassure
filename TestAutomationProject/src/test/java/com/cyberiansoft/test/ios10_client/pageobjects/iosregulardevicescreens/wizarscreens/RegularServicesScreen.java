@@ -137,8 +137,12 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(servicetype)).size() > 0;
 	}
 
-	public void searchServiceByName(String servicename) {
+	public void clearSearchServiceParameters() {
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
+	}
+
+	public void searchServiceByName(String servicename) {
+		clearSearchServiceParameters();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").click();
 		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 

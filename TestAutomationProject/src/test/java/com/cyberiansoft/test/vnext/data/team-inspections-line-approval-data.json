@@ -7,9 +7,9 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
+      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
+      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
+      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
       }]
     }
   ],
@@ -21,9 +21,9 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
+      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
+      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
+      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
       }],
       "inspPrice": "$14.86",
       "inspApprovedPrice": "$9.00"
@@ -78,7 +78,7 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
+      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
       }, {"serviceName": "Aluminum Panel"
       }, {"serviceName": "Anastasia Labor Avarage Data"
       }]
@@ -106,9 +106,9 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
+      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
+      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
+      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
       }],
       "inspPrice": "$14.86",
       "inspApprovedPrice": "$9.00"
@@ -170,6 +170,105 @@
         }, {"serviceName": "Labor", "servicePrice": "20"
         }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
         }]
+      }]
+    }
+  ],
+
+  "testVerifyUserCanDeleteInspectionFromLineApproveList": [
+    {
+      "rowID": "testVerifyUserCanDeleteInspectionFromLineApproveList.01",
+      "description": "Test Case 73116:Verify user can delete Inspection from line approve list",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
+        }, {"serviceName": "Labor", "servicePrice": "5"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "10"
+        }]
+      }, {"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
+        }, {"serviceName": "Labor", "servicePrice": "20"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
+        }]
+      }]
+    }
+  ],
+
+  "testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService": [
+    {
+      "rowID": "testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService.01",
+      "description": "Test Case 73117:Verify Total approval amount include only SUM of approved service",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
+        }, {"serviceName": "Labor", "serviceStatus" : "Approved"
+        }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
+        }],
+        "inspApprovedPrice": "$52.29"
+      }, {"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "15", "serviceStatus" : "Declined"
+        }, {"serviceName": "Labor", "servicePrice": "20", "serviceStatus" : "Declined"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "50", "serviceStatus" : "Approved"
+        }],
+        "inspApprovedPrice": "$0.00"
+      }]
+    }
+  ],
+
+  "testVerifyUserNeedToSelectReasonForAllDeclinedInspection": [
+    {
+      "rowID": "testVerifyUserNeedToSelectReasonForAllDeclinedInspection.01",
+      "description": "Test Case 73118:Verify user need to select reason for all declined Inspection",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation"
+        }, {"serviceName": "Labor"
+        }, {"serviceName": "Aluminum Panel"
+        }],
+        "inspectionStatus": "Declined",
+        "declineReason": "No repair needed"
+      }, {"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
+        }, {"serviceName": "Labor", "servicePrice": "20"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
+        }],
+        "inspectionStatus": "Declined",
+        "declineReason": "No repair needed"
+      }]
+    }
+  ],
+
+  "testVerifyInspectionStatusUpdatedAfterApproveDecline": [
+    {
+      "rowID": "testVerifyInspectionStatusUpdatedAfterApproveDecline.01",
+      "description": "Test Case 74190:Verify Inspection Status updated after approve/decline",
+      "inspectionDatas" : [{"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
+        }, {"serviceName": "Labor", "serviceStatus" : "Approved"
+        }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
+        }],
+        "inspApprovedPrice": "$52.29",
+        "inspectionStatus": "Approved"
+      }, {"inspType": "O_Kramar3",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "services": [{"serviceName": "Battery Installation", "servicePrice": "15", "serviceStatus" : "Declined"
+        }, {"serviceName": "Labor", "servicePrice": "20", "serviceStatus" : "Declined"
+        }, {"serviceName": "Aluminum Panel", "servicePrice": "50", "serviceStatus" : "Declined"
+        }],
+        "inspApprovedPrice": "$0.00",
+        "inspectionStatus": "Declined",
+        "declineReason": "No repair needed"
       }]
     }
   ]

@@ -27,6 +27,9 @@ public class VNextApproveInspectionsScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@class='approve-inspections-container']")
     private WebElement approveinsplist;
 
+    @FindBy(xpath="//*[@action='save']")
+    private WebElement savebtn;
+
     public VNextApproveInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -78,8 +81,38 @@ public class VNextApproveInspectionsScreen extends VNextBaseScreen {
         return new VNextInspectionsScreen(appiumdriver);
     }
 
-    public VNextApproveServicesScreen openApproveServicesScreenForInspection(String inspNumber) {
-        tap(approveservicesscreen.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspNumber + "']")));
+    public void clickSaveutton() {
+        tap(savebtn);
+    }
+
+    public VNextApproveServicesScreen openApproveServicesScreenForInspection(String inspectionNumber) {
+        tap(approveservicesscreen.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']")));
         return new VNextApproveServicesScreen(appiumdriver);
+    }
+
+    public VNextDeclineReasonScreen clickInspectionDeclineButton(String inspectionNumber) {
+        WebElement inspCell = getInspectionCell(inspectionNumber);
+        tap(inspCell.findElement(By.xpath(".//button[@value='3']")));
+        return new VNextDeclineReasonScreen(appiumdriver);
+    }
+
+    public void clickInspectionApproveButton(String inspectionNumber) {
+        WebElement inspCell = getInspectionCell(inspectionNumber);
+        tap(inspCell.findElement(By.xpath(".//button[@value='1']")));
+    }
+
+    public void clickInspectionDeleteButton(String inspectionNumber) {
+        WebElement inspCell = getInspectionCell(inspectionNumber);
+        tap(inspCell.findElement(By.xpath(".//button[@value='2']")));
+    }
+
+    public String getInspectionTotalAmaunt(String inspectionNumber) {
+        WebElement inspCell = getInspectionCell(inspectionNumber);
+        return  inspCell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText().trim();
+    }
+
+    public String getInspectionApprovedAmaunt(String inspectionNumber) {
+        WebElement inspCell = getInspectionCell(inspectionNumber);
+        return  inspCell.findElement(By.xpath(".//div[@class='entity-item-approved-amount']")).getText().trim();
     }
 }

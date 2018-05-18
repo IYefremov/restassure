@@ -5,11 +5,12 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +39,9 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	
 	@iOSFindBy(accessibility = "Top Customers")
 	private List<IOSElement> topcustomers;*/
+
+	@iOSFindBy(accessibility = "Search")
+	private IOSElement searchbtn;
 	
 	public RegularCustomersScreen(AppiumDriver driver) {
 		super(driver);
@@ -73,13 +77,17 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		MobileElement customercell = (MobileElement) appiumdriver.findElementByAccessibilityId(customer);
-		if (!customercell.isDisplayed()) {
-			swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypeTable").
+		//MobileElement customercell = (MobileElement) appiumdriver.findElementByAccessibilityId(customer);
+		//if (!customercell.isDisplayed()) {
+			searchbtn.click();
+			appiumdriver.getKeyboard().sendKeys(customer);
+		//}
+		appiumdriver.findElementByAccessibilityId(customer).click();
+			/*swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypeTable").
 					findElement(By.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/..")));
 				appiumdriver.findElementByAccessibilityId(customer).click();
 		} else
-			customercell.click();
+			customercell.click();*/
 	}
 	
 	public void selectOnlineCustomer(String customer) {
@@ -91,6 +99,8 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 			searchfld.sendKeys(customer + "\n");
 			
 		}
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(customer)));
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	

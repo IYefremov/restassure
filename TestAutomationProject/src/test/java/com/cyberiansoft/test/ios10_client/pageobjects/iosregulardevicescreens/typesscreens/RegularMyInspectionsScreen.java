@@ -206,14 +206,15 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void selectInspectionType(String inspectiontype) {
-		if (!appiumdriver.findElementByAccessibilityId(inspectiontype).isDisplayed()) {
-			swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectiontype + "']/..")));
-			appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
-			//appiumdriver.findElement(MobileBy.AccessibilityId("Inspection Types")).click();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InspectionTypeSelector")));
+		IOSElement insptypetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InspectionTypeSelector' and type = 'XCUIElementTypeTable'"));
+		if (!insptypetable.findElementByAccessibilityId(inspectiontype).isDisplayed()) {
+			swipeToElement(insptypetable.findElementByAccessibilityId(inspectiontype));
 		}
-		if (elementExists(inspectiontype))
-			appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
+		//if (elementExists(inspectiontype))
+		//	appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
 		/*TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectiontype + "']")).waitAction(1000).release().perform();
 		*/

@@ -3179,7 +3179,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		boolean search = false;
 		final String invpoicereportfilenname = inspnumber + ".pdf";
 		for (int i= 0; i < 7; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "ZZzz11!!", "Estimate #" + inspnumber + " from Recon Pro Development QA", "ReconPro@cyberianconcepts.com", invpoicereportfilenname)) {
+			if (!MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8", "Estimate #" + inspnumber + " from Recon Pro Development QA", "ReconPro@cyberianconcepts.com", invpoicereportfilenname)) {
 				Thread.sleep(30*1000); 
 			} else {
 				

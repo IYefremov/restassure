@@ -295,7 +295,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		if (!table.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
 			swipeToElement(table.findElement(MobileBy.AccessibilityId("Location")));
-			table.findElement(MobileBy.AccessibilityId("Location")).click();
 		}
 		table.findElement(MobileBy.AccessibilityId("Location")).click();
 		//WebElement par = getVehicleInfoTableParentNode("Location");
@@ -367,7 +366,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public RegularNotesScreen clickNotesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Compose"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
+		appiumdriver.findElementByAccessibilityId("Compose").click();
 		return new RegularNotesScreen(appiumdriver);
 	}
 	

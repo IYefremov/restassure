@@ -3543,7 +3543,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		boolean search = false;
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
 		for (int i= 0; i < 7; i++) {
-			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "ZZzz11!!",
+			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8",
 					"Invoice #1" + invoicenumber + " from Recon Pro Development QA", "reconpro@cyberiansoft.com", invpoicereportfilenname);
 			if (!search) {
 				Thread.sleep(30*1000);
@@ -3611,7 +3611,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		boolean search = false;
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
 		for (int i= 0; i < 7; i++) {
-			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "ZZzz11!!",
+			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8",
 					"Invoice #" + invoicenumber + " from Recon Pro Development QA", "reconpro@cyberiansoft.com", invpoicereportfilenname);
 			if (!search) {
 				Thread.sleep(30*1000);

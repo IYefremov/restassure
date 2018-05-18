@@ -25,6 +25,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -598,16 +599,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		// =====================================
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-		pricematrix.selectPriceMatrix(_pricematrix);
-		pricematrix.setSizeAndSeverity(_size, _severity);
-		Assert.assertEquals(pricematrix.getPrice(), _price);
-		Assert.assertTrue(pricematrix.isNotesExists());
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		Assert.assertEquals(vehiclePartScreen.getPrice(), _price);
+		Assert.assertTrue(vehiclePartScreen.isNotesExists());
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		pricematrix.selectDiscaunt(_discaunt_us);
-		pricematrix.clickSave();
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.selectDiscaunt(_discaunt_us);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
 		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 		priceMatricesScreen.clickBackButton();
@@ -1254,14 +1255,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		/*final String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "The VIN is invalid.");
-		appiumdriver.findElement(
-				MobileBy.name("Close"))
-				.click();
-		appiumdriver.findElement(
-				MobileBy.name("Close"))
-				.click();*/
 		String wonumber1 = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		//vehiclescreeen.setYear(_year);
@@ -1292,19 +1285,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = selectedservicescreen.selectMatrics(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
 		pricematrix.selectPriceMatrix("HOOD");
-		pricematrix.setSizeAndSeverity("NKL", "VERY LIGHT");
-		Assert.assertTrue(pricematrix.isNotesExists());
-		Assert.assertTrue(pricematrix.getTechniciansValue().contains("Employee Simple 20%"));
-		Assert.assertEquals(pricematrix.getPrice(), "$100.00");
-		pricematrix.selectDiscaunt("Discount 10-20$");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-		pricematrix.clickSave();
-		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
+		RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen(appiumdriver);
+		vehiclePartScreen.setSizeAndSeverity("NKL", "VERY LIGHT");
+		Assert.assertTrue(vehiclePartScreen.isNotesExists());
+		Assert.assertTrue(vehiclePartScreen.getTechniciansValue().contains("Employee Simple 20%"));
+		Assert.assertEquals(vehiclePartScreen.getPrice(), "$100.00");
+		vehiclePartScreen.selectDiscaunt("Discount 10-20$");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		vehiclePartScreen.saveVehiclePart();
 
-		RegularOrderSummaryScreen ordersummaryscreen = pricematrix.selectNextScreen(RegularOrderSummaryScreen
+		pricematrix.clickBackButton();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 
 		ordersummaryscreen.clickSave();
@@ -1632,7 +1626,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
  		Assert.assertEquals(vehiclescreeen.getWorkOrderCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
-		servicesscreen.cancelWizard();
+		servicesscreen.clickCancel();
+		invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.cancelWizard();
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -1725,7 +1720,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setType(_type);
 		vehiclescreeen.setStock(stock);
 		vehiclescreeen.setRO(_ro);
-		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen.getVisualInteriorCaption(),
 				RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
@@ -1812,17 +1807,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		// =====================================
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-		pricematrix.selectPriceMatrix(_pricematrix);
-		pricematrix.setSizeAndSeverity(_size, _severity);
-		Assert.assertEquals(pricematrix.getPrice(), _price);
-		Assert.assertTrue(pricematrix.isNotesExists());
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		pricematrix.selectDiscaunt(_discaunt_us);
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		Assert.assertEquals(vehiclePartScreen.getPrice(), _price);
+		Assert.assertTrue(vehiclePartScreen.isNotesExists());
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.selectDiscaunt(_discaunt_us);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 		servicesscreen.clickAddServicesButton();
 		
@@ -1957,8 +1950,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		//Create WO1
+		Instant start = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		System.out.println("+++++++1" + Duration.between(start, Instant.now()).toMillis()/1000);
 		myworkordersscreen.clickAddOrderButton();
+		System.out.println("+++++++2" + Duration.between(start, Instant.now()).toMillis()/1000);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -2026,8 +2022,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
+		System.out.println("+++++++3" + Duration.between(start, Instant.now()).toMillis()/1000);
 		invoiceinfoscreen.clickSaveAsDraft();
+		System.out.println("+++++++4" + Duration.between(start, Instant.now()).toMillis()/1000);
 		myworkordersscreen.clickHomeButton();
+		System.out.println("+++++++5" + Duration.between(start, Instant.now()).toMillis()/1000);
 	}
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
@@ -2052,7 +2051,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+				RegularVehicleScreen.class);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -2092,7 +2093,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_CHANGE_INSPTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+				RegularVehicleScreen.class);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -2143,7 +2146,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(),
+				RegularVehicleScreen.class);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -2154,7 +2159,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		claimscreen.saveWizard();
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
-		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
 		vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
 		Assert.assertEquals(vehiclescreeen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehiclescreeen.saveWizard();
@@ -2572,33 +2577,32 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(visualinteriorscreen.getSubTotalPrice(), "$100.00");
 
 		RegularPriceMatrixScreen pricematrix = visualinteriorscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("SR_S5_Mt_Money");
-		pricematrix.selectDiscaunt("SR_S5_Mt_Money_DE_TE");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("SR_S5_Mt_Money");
+		vehiclePartScreen.selectDiscaunt("SR_S5_Mt_Money_DE_TE");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		Assert.assertEquals(pricematrix.getDiscauntPriceAndValue(iOSInternalProjectConstants.SR_S1_MONEY), "$2,000.00 x 3.00");
-		pricematrix.clickSave();
-		pricematrix.selectPriceMatrix(_pricematrix2);
-		pricematrix.setSizeAndSeverity(RegularPriceMatrixScreen.NKL_SIZE, "VERY LIGHT");
-		pricematrix.clickSave();
+		Assert.assertEquals(vehiclePartScreen.getDiscauntPriceAndValue(iOSInternalProjectConstants.SR_S1_MONEY), "$2,000.00 x 3.00");
+		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix2);
+		vehiclePartScreen.setSizeAndSeverity(RegularPriceMatrixScreen.NKL_SIZE, "VERY LIGHT");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix3);
-		pricematrix.setSizeAndSeverity(RegularPriceMatrixScreen.DIME_SIZE, "LIGHT");
-		pricematrix.clickSave();
-		
-		pricematrix.selectPriceMatrix(_pricematrix4);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("Little Service");
-		pricematrix.selectDiscaunt("Disc_Ex_Service1");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		pricematrix.setTime("1");
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix3);
+		vehiclePartScreen.setSizeAndSeverity(RegularPriceMatrixScreen.DIME_SIZE, "LIGHT");
+		vehiclePartScreen.saveVehiclePart();
+
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix4);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("Little Service");
+		vehiclePartScreen.selectDiscaunt("Disc_Ex_Service1");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		vehiclePartScreen.setTime("1");
+		vehiclePartScreen.saveVehiclePart();
 
 		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
@@ -2618,10 +2622,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickAddServicesButton();
 		
 		pricematrix = servicesscreen.selectNextScreen("Test matrix33", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix5);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix5);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY);
+		vehiclePartScreen.saveVehiclePart();
 
 		servicesscreen = pricematrix.selectNextScreen("Test_Package_3PrMatrix", RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
@@ -2944,19 +2948,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");	
 		servicesscreen.selectPriceMatrices("VP1 zayats");		
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.switchOffOption("PDR");
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Test service zayats"));
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Wheel"));		
-		pricematrix.clickSave();
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.switchOffOption("PDR");
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Dye"));
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Test service zayats"));
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Wheel"));
+		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Dye"));
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -2988,16 +2990,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String inspnum = vehiclescreeen.getInspectionNumber();
 		RegularPriceMatrixScreen pricematrix = vehiclescreeen.selectNextScreen("Price Matrix Zayats",
 				RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.switchOffOption("PDR");
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Test service zayats"));
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Wheel"));		
-		pricematrix.clickSave();
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.switchOffOption("PDR");
-		Assert.assertTrue(pricematrix.isDiscauntPresent("Dye"));
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Test service zayats"));
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Wheel"));
+		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		Assert.assertTrue(vehiclePartScreen.isDiscauntPresent("Dye"));
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.saveVehiclePart();
 		RegularQuestionsScreen questionsscreen = pricematrix.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
@@ -3030,22 +3032,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectSubService("Test service price matrix");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Price Matrix Zayats");
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.selectDiscaunt("Wheel");		
-		pricematrix.clickSave();
-		
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		//pricematrix.switchOffOption("PDR");
-		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
-			
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.selectDiscaunt("Wheel");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
-		pricematrix.clickHomeButton();
-		pricematrix.clickHomeButton();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.selectDiscaunt("Wheel");
+		vehiclePartScreen.saveVehiclePart();
+
+		vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.selectDiscaunt("Wheel");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
+		pricematrix.clickBackButton();
+		pricematrix.clickBackButton();
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected("Test service price matrix"));
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -3382,17 +3383,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-		pricematrix.selectPriceMatrix(_pricematrix);
-		pricematrix.setSizeAndSeverity(_size, _severity);
-		Assert.assertEquals(pricematrix.getPrice(), _price);
-		Assert.assertTrue(pricematrix.isNotesExists());
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		pricematrix.selectDiscaunt(_discaunt_us);
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		Assert.assertEquals(vehiclePartScreen.getPrice(), _price);
+		Assert.assertTrue(vehiclePartScreen.isNotesExists());
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.selectDiscaunt(_discaunt_us);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -3482,14 +3482,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-		pricematrix.selectPriceMatrix(_pricematrix);
-		pricematrix.setSizeAndSeverity(_size, _severity);
-		Assert.assertEquals(pricematrix.getPrice(), _price);
-		Assert.assertTrue(pricematrix.isNotesExists());
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		pricematrix.selectDiscaunt(_discaunt_us);
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		Assert.assertEquals(vehiclePartScreen.getPrice(), _price);
+		Assert.assertTrue(vehiclePartScreen.isNotesExists());
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.selectDiscaunt(_discaunt_us);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
 		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 		priceMatricesScreen.clickBackButton();
@@ -3561,7 +3561,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Package_for_Monitor", RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Zayats test pack", RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -3604,7 +3604,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Package_for_Monitor", RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Zayats test pack", RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -3646,7 +3646,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Package_for_Monitor", RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen =  vehiclescreeen.selectNextScreen("Zayats test pack", RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -3682,7 +3682,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Mitsubishi", "Montero Sport", "2000");
-		servicesscreen =  vehiclescreeen.selectNextScreen("Package_for_Monitor", RegularServicesScreen.class);
+		servicesscreen =  vehiclescreeen.selectNextScreen("Zayats test pack", RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -4049,6 +4049,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		alerttext = selectedservicescreen.saveSelectedServiceDetailsWithAlert();
 		Assert.assertTrue(alerttext.contains("You can add only one service '" + iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE + "'"));
 		Assert.assertEquals(servicesscreen.getNumberOfSelectedServices(), 1);
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -4093,7 +4094,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.approveInspectionApproveAllAndSignature();
 		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber);
-		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		myinspectionsscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
@@ -4105,6 +4106,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(selectedservicebundlescreen.isBundleServiceExists(iOSInternalProjectConstants.DYE_SERVICE));
 		selectedservicebundlescreen.clickCloseServicesPopup();
 		selectedservicebundlescreen.clickCancel();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -4435,8 +4437,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
-			servicesscreen.saveWizard();
+			servicesscreen.clickSave();
 		}
+		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
@@ -4519,8 +4522,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			}
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
-			servicesscreen.saveWizard();
+			servicesscreen.clickSave();
 		}
+		servicerequestsscreen = new RegularServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectDetailsRequestAction();
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
@@ -4559,17 +4563,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularPriceMatrixScreen pricematrix = vehiclescreeen.selectNextScreen("Price Matrix Zayats",
 				RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+		vehiclePartScreen.saveVehiclePart();
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar(appiumdriver);		
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$100.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$100.00");
 		
 		pricematrix.selectNextScreen("Hail Matrix", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix("L QUARTER");
-		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("L QUARTER");
+		vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$65.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$165.00");
 
@@ -4819,13 +4823,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);	
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Price Matrix Zayats");
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "MEDIUM");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		
 		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -5485,16 +5487,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.selectDiscaunt("Wheel");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.selectDiscaunt("Wheel");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
@@ -5580,16 +5580,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.selectDiscaunt("Wheel");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.selectDiscaunt("Wheel");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
@@ -5675,16 +5673,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);			
-		pricematrix.selectPriceMatrix("VP2 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.selectDiscaunt("Dye");
-		pricematrix.selectDiscaunt("Wheel");
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.selectDiscaunt("Dye");
+		vehiclePartScreen.selectDiscaunt("Wheel");
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
 		
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		//servicesscreen.clickCancelButton();
@@ -5779,8 +5775,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("5"));
 		ordersummaryscreen.saveWizard();
-		
-		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		myworkordersscreen.switchToTeamView();
+		RegularTeamWorkOrdersScreen teamworkordersscreen = new RegularTeamWorkOrdersScreen(appiumdriver);
 		teamworkordersscreen.clickOnWO(wonum);
 		
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
@@ -5974,8 +5970,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		
 		myinspectionsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
-		
+		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
 		vehiclescreeen.setVIN(VIN);
 		final String inspnumber = vehiclescreeen.getInspectionNumber();
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -6024,17 +6020,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicesscreen.isNotesIconPresentForSelectedService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
 
 		RegularPriceMatrixScreen pricematrix =  servicesscreen.selectNextScreen("Default", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-		pricematrix.setPrice(_price2);
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
+		vehiclePartScreen.setPrice(_price2);
+		vehiclePartScreen.saveVehiclePart();
 		
 		servicesscreen.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
-		pricematrix.selectPriceMatrix(_pricematrix2);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setTime("12");
-		pricematrix.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);		
-		pricematrix.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix2);
+		vehiclePartScreen.switchOffOption("PDR");
+		vehiclePartScreen.setTime("12");
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.saveWizard();
 		
 		Assert.assertTrue(myinspectionsscreen.isNotesIconPresentForInspection(inspnumber));
@@ -6218,21 +6214,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");	
-		servicesscreen.selectPriceMatrices("VP2 zayats");	
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
-		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech);
-		pricematrix.setPrice(pricevalue);
-		pricematrix.clickOnTechnicians();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "MEDIUM");
+		Assert.assertEquals(vehiclePartScreen.getTechniciansValue(), defaulttech);
+		vehiclePartScreen.setPrice(pricevalue);
+		vehiclePartScreen.clickOnTechnicians();
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.selecTechnician(techname);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech + ", " + techname);
-		pricematrix.clickSave();
+		Assert.assertEquals(vehiclePartScreen.getTechniciansValue(), defaulttech + ", " + techname);
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
@@ -6806,17 +6801,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");	
-		servicesscreen.selectPriceMatrices("VP2 zayats");	
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
-		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech);
-		pricematrix.setPrice(pricevalue);
-		pricematrix.selectDiscaunt("Test service zayats");
-		pricematrix.clickSave();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+		Assert.assertEquals(vehiclePartScreen.getTechniciansValue(), defaulttech);
+		vehiclePartScreen.setPrice(pricevalue);
+		vehiclePartScreen.selectDiscaunt("Test service zayats");
+		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TAX_DISCOUNT);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ServiceData {
@@ -18,7 +19,7 @@ public class ServiceData {
 	
 	@JsonProperty("serviceStatus")
 	String serviceStatus;
-	 
+
 	public String getServiceName() {
 		return serviceName; 
 	}
@@ -34,9 +35,9 @@ public class ServiceData {
 	public String getServiceQuantity() {
 		return serviceQuantity; 
 	}
-	
-	public String getServiceStatus() {
-		return serviceStatus; 
+
+	public ServiceStatus getServiceStatus() {
+		return ServiceStatus.getStatus(serviceStatus);
 	}
 
 }
