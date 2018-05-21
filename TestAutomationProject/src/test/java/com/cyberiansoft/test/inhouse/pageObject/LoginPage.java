@@ -35,10 +35,11 @@ public class LoginPage extends BasePage {
         if (driver.findElements(By.id("identifierId")).size() > 0) {
         	wait.until(ExpectedConditions.visibilityOf(emailField))
                     .sendKeys(InHouseConfigInfo.getInstance().getUserEmail());
-            loginNextBTN.click();
+            wait.until(ExpectedConditions.elementToBeClickable(loginNextBTN)).click();
             wait.until(ExpectedConditions.visibilityOf(passwordBlock.findElement(By.tagName("input"))))
                     .sendKeys(InHouseConfigInfo.getInstance().getUserPassword());
-            passwordNextBTN.click();
+            wait.until(ExpectedConditions.elementToBeClickable(passwordNextBTN)).click();
+            //todo add login with another email
         }
     }
 }

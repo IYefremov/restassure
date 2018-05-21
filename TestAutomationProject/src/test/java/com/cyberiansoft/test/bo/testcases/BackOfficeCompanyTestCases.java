@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.dataclasses.BOCompanyData;
+import com.cyberiansoft.test.dataclasses.bo.BOCompanyData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
@@ -659,8 +659,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
         newEmployeeDialog
                 .selectNewEmployeeTeam(data.getTeamName2())
                 .clickOKButton();
-        employeesWebPage.clickEditEmployee(data.getEmployeeName());
-        infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        infoContentDialog = employeesWebPage
+                .clickEditEmployee(data.getEmployeeName())
+                .clickInfoBubble();
         Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
                 "The Info Content Dialog has not been opened for the rollback of employee's data");
         infoContentDialog
@@ -683,14 +684,20 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .setSearchUserParameter(data.getSearchEmployee())
                 .clickFindButton()
                 .verifyEmployeesTableColumnsAreVisible()
-                .verifyEmployeeIsActive(data.getEmployeeFullName());
-        employeesWebPage.archiveEmployee(data.getEmployeeFullName());
-        employeesWebPage.setSearchUserParameter(data.getEmployeeName());
-        employeesWebPage.clickFindButton();
+                .verifyEmployeeIsActive(data.getEmployeeFullName())
+                .archiveEmployee(data.getEmployeeFullName())
+                .setSearchUserParameter(data.getEmployeeName())
+                .clickFindButton();
 
         NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeName());
         InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
-        //todo finish after QC environment will be updated.
-
+        Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
+        Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
+        newEmployeeDialog.clickCancelButton();
+        employeesWebPage
+                .setSearchUserParameter(data.getSearchEmployee())
+                .clickFindButton()
+                .clickArchivedTab()
+                .unarchiveEmployee(data.getEmployeeFullName());
     }
 }

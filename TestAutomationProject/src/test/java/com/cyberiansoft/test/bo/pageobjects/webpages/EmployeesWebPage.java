@@ -125,9 +125,10 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		Assert.assertTrue(archivedtab.isDisplayed());
 	}
 
-	public void clickArchivedTab() {
+	public EmployeesWebPage clickArchivedTab() {
 		clickAndWait(archivedtab);
-	}
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);}
 
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
@@ -259,12 +260,14 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	}
 
-	public void archiveEmployee(String employeeName) {
+	public EmployeesWebPage archiveEmployee(String employeeName) {
 		WebElement row = getTableRowWithActiveEmployee(employeeName);
 		if (row != null) {
 			archiveTableRow(row);
 		} else
             Assert.fail("Can't find " + employeeName + " employee");
+        return PageFactory.initElements(
+                driver, EmployeesWebPage.class);
 	}
 
 	public void archiveEmployee(String firstname, String lastname) {

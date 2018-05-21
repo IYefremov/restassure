@@ -14,7 +14,7 @@ public class InfoContentDialogWebPage extends BaseWebPage {
     private WebElement infoContentDialog;
 
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_comboEmployeeServices")
-    private WebElement employeeServicesCombobox;
+    private WebElement employeeListCombobox;
 
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnReassign")
     private WebElement reassignButton;
@@ -30,7 +30,7 @@ public class InfoContentDialogWebPage extends BaseWebPage {
     }
 
     public InfoContentDialogWebPage chooseEmployeeToReassign(String employee) {
-        new Select(employeeServicesCombobox).selectByVisibleText(employee);
+        new Select(employeeListCombobox).selectByVisibleText(employee);
         return PageFactory.initElements(
                 driver, InfoContentDialogWebPage.class);
     }
@@ -42,5 +42,23 @@ public class InfoContentDialogWebPage extends BaseWebPage {
                 "style", "visibility: hidden;"));
         return PageFactory.initElements(
                 driver, InfoContentDialogWebPage.class);
+    }
+
+    public boolean isEmployeeListDisabled() {
+        return isDisabled(employeeListCombobox);
+    }
+
+    public boolean isReassignButtonDisabled() {
+        return isDisabled(reassignButton);
+    }
+
+    private boolean isDisabled(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.attributeContains(element, "disabled", ""));
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

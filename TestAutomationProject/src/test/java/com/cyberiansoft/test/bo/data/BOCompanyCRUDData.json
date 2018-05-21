@@ -1,0 +1,178 @@
+{
+  "testCompanyInsuranceCompanyCRUD": [
+    {
+      "rowID": "testCompanyInsuranceCompanyCRUD.01",
+      "description": "Test Case 27871:Company- Insurance Company: CRUD",
+      "insuranceCompany": "testinsurancecompany",
+      "insuranceCompanyEdited": "testinsurancecompany edited",
+      "insuranceCompanyAddress": "First streen valley 23/75, New York",
+      "insuranceCompanyEmail": "olexandr.kramar@cyberiansoft.com",
+      "insuranceCompanyPhone": "654654654",
+      "insuranceCompanyAccountingId": "testID",
+      "insuranceCompanyAccountingId2": "testID2"
+    }
+  ],
+  
+  "testCompanyTeamsCRUD": [
+    {
+      "rowID": "testCompanyTeamsCRUD.01",
+      "description": "Test Case 27876:Company-Teams: CRUD",
+      "team": "Testteam",
+      "teamDesc": "Test team description",
+      "teamId": "testID",
+      "teamTimeZone": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
+      "teamArea": "QA Area",
+      "teamTimeSheetType": "Day Type",
+      "teamDefaultLocation": "Time_Reports_01",
+      "teamAdditionalLocation": "Default Location",
+      "teamType": "Vendor",
+
+      "teamCompany": "SyberianSoft",
+      "teamAddress": "First streen valley 23/75, New York",
+      "teamCity": "New York",
+      "teamCountry": "United States",
+      "teamState": "Florida",
+      "teamZip": "39061",
+      "teamEmail": "olexandr.kramar@cyberiansoft.com",
+      "teamPhone": "654654654",
+      "teamEdited": "Testteam edited"
+    }
+  ],
+  
+  "testCompanyJobsCRUD": [
+    {
+      "rowID": "testCompanyJobsCRUD.01",
+      "description": "Test Case 27877:Company- Jobs: CRUD",
+      "job": "Test job",
+      "jobDesc": "Test job description",
+      "customer": "001 - Test Company",
+      "parentCustomer": "002 - Test Company",
+      "jobAccId": "testID",
+      "jobAcc2Id": "testID2",
+      "jobEdited": "Test job edited"
+    }
+  ],
+  
+  "testCompanyServiceAdvisorsCRUD": [
+    {
+      "rowID": "testCompanyServiceAdvisorsCRUD.01",
+      "description": "Test Case 27878:Company- Service Advisors: CRUD",
+      "email": "test123CD@domain.com",
+      "password": "111aaa",
+      "customer": "001 - Test Company",
+      "firstName": "test123CDF",
+      "lastName": "test123CDF",
+      "role": "SalesPerson",
+
+      "serviceAdvisorCompany": "SyberianSoft",
+      "serviceAdvisorAddress": "First streen valley 23/75",
+      "serviceAdvisorCity": "New York",
+      "serviceAdvisorCountry": "United States",
+      "serviceAdvisorState": "Florida",
+      "serviceAdvisorZip": "39061",
+      "serviceAdvisorPhone": "654654654",
+      "serviceAdvisorAccId": "65"
+    }
+  ],
+  
+  "testCompanyServiceContractTypesCRUD": [
+    {
+      "rowID": "testCompanyServiceContractTypesCRUD.01",
+      "description": "Test Case 28114:Company- Service Contract Types: CRUD",
+      "contractType": "test123CD",
+      "contractTypeEdited": "test123CD Edited",
+      "contractTypeDesc": "Test description",
+      "contractTypeAccId": "123",
+      "contractTypeAccId2": "456",
+      "contractTypePrice": "112",
+      "contractTypeSalesPrice": "223"
+    }
+  ],
+  
+  "testCompanyPriceMatrixCRUD": [
+    {
+      "rowID": "testCompanyPriceMatrixCRUD.01",
+      "description": "Test Case 28119:Company- Price Matrix: CRUD",
+      "priceMatrixName": "test123CD",
+      "priceMatrixNameEdited": "test123CD Edited",
+      "priceMatrixService": "VD_PriceMatrix",
+      "priceMatrixType": "Labor"
+    }
+  ],
+  
+  "testCompanyInvoiceTypeCRUD": [
+    {
+      "rowID": "testCompanyInvoiceTypeCRUD.01",
+      "description": "Test Case 28122:Company - Invoice type: CRUD",
+      "invoiceType": "test123CD",
+      "invoiceTypeEdited": "test123CD edited",
+      "invoiceTypeDesc": "Test description"
+    }
+  ],
+  
+  "testCompanyServiceRequestTypeCRUD": [
+    {
+      "rowID": "testCompanyServiceRequestTypeCRUD.01",
+      "description": "Test Case 28130:Company - Service Request Type: CRUD",
+      "serviceType": "test123CD",
+      "serviceTypeEdited": "test123CD edited",
+      "serviceTypeDesc": "Test description",
+      "serviceTypeTeam": "01_TimeRep_team"
+    }
+  ],
+  
+  "testCompanyEmailTemplatesCRUD": [
+    {
+      "rowID": "testCompanyEmailTemplatesCRUD.01",
+      "description": "Test Case 28182:Company - Email Templates: CRUD",
+      "templateName": "test template",
+      "templateNameEdited": "new test template",
+      "templateSubject": "test subject",
+      "templateSubjectEdited": "new test subject",
+      "templateBody": "Test/nbody"
+    }
+  ],
+  
+  "testCompanyPrintServerCRUD": [
+    {
+      "rowID": "testCompanyPrintServerCRUD.01",
+      "description": "Test Case 28218:Company - Print Server: CRUD",
+      "printServerName": "test print server",
+      "printServerNameEdited": "new test print server",
+      "printServerDesc": "print server description"
+    }
+  ],
+  
+  "testCompanyLicenceCRUD": [
+    {
+      "rowID": "testCompanyLicenceCRUD.01",
+      "description": "Test Case 28406:Company - Licence: CRUD",
+      "licenceApp": "tf145",
+      "licenceType": "Support"
+    }
+  ],
+  
+  "testCompanyTimesheetTypesCRUD": [
+    {
+      "rowID": "testCompanyTimesheetTypesCRUD.01",
+      "description": "Test Case 28422:Company- Timesheet Types: CRUD",
+      "timeSheetType": "test timesheet type",
+      "timeSheetTypeEdited": "new test timesheet type",
+      "timeSheetTypeDesc": "timesheet type description",
+      "timeSheetTypeEntryType": "Time Code"
+    }
+  ],
+  
+  "testCompanyServicePackagesCRUD": [
+    {
+      "rowID": "testCompanyServicePackagesCRUD.01",
+      "description": "Test Case 31504:Company - Service Packages: CRUD",
+      "servicePackageName": "testpackage",
+      "servicePackageType": "Package",
+      "servicePackageFormType": "Order",
+      "servicePackageEchComm": "2.00",
+      "servicePackageAdvComm": "5.00",
+      "servicePackageNameEdited": "testpackage2"
+    }
+  ]
+}

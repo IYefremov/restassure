@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses;
+package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

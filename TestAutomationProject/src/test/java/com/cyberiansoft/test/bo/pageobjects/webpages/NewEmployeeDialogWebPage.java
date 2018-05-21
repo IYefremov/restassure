@@ -92,7 +92,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//div[@id='RadToolTipWrapper_ctl00_ctl00_Content_Main_ctl01_ctl01_Card_toolTipTeamInfo' " +
             "and contains(@style, 'visibility: visible;')]")
 	private WebElement infoContentDialog;
-	
+
 	public NewEmployeeDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -246,6 +246,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 
 	public InfoContentDialogWebPage clickInfoBubble() {
 	    click(infoBubble);
-        return PageFactory.initElements(driver, InfoContentDialogWebPage.class);
+        return PageFactory.initElements(
+                driver, InfoContentDialogWebPage.class);
     }
 }

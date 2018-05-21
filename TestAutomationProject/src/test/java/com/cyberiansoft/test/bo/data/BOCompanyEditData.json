@@ -1,0 +1,391 @@
+{
+  "testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit": [
+    {
+      "rowID": "testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit.01",
+      "description": "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
+      "insuranceCompanyName": "Oranta"
+    }
+  ],
+
+  "testCompanyUsersEdit": [
+    {
+      "rowID": "testCompanyUsersEdit.01",
+      "description": "Test Case 29764:Company- Users : Edit",
+
+      "userEmail": "zakaulov.admin@cyberiansoft.com",
+      "userPassword": "test12345",
+      "userFirstName": "zalex",
+      "userLastName": "valex",
+      "userCompany": "CyberianSoft",
+      "userPhone": "123123",
+      "userAccId": "8000001F-1370864710",
+      "userAddress": "5815 E. La Palma Ave.",
+      "userCity": "L'viv",
+      "userZip": "79031",
+      "userComments": "Test User Comments",
+      "userRole": "Administrator",
+
+      "userFirstNameEdited": "valex",
+      "userLastNameEdited": "zalex",
+      "userCompanyEdited": "CyberianSoftConcept",
+      "userPhoneEdited": "123145",
+      "userAccIdEdited": "8999991F-1370864710",
+      "userAddressEdited": "5815 E. La Prima Ave.",
+      "userCityEdited": "New York",
+      "userZipEdited": "79042",
+      "userCommentsEdited": "Test User Comments New",
+      "userRoleEdited": "Work Manager"
+    }
+  ],
+
+  "testCompanyClientsUsersEdit": [
+    {
+      "rowID": "testCompanyClientsUsersEdit.01",
+      "description": "Test Case 28316:Company - Clients : Edit",
+
+      "clientEmail": "123123213@domain.com",
+      "clientName": "Anaheim Hills Lexus",
+      "clientFirstName": "zalex",
+      "clientLastName": "valex",
+      "clientPhone": "123123",
+      "clientAccId": "8000001F-1287569622",
+      "clientAddress": "5815 E. La Palma Ave.",
+      "clientCity": "asdfasd",
+      "clientZip": "12345",
+      "clientArea": "Default area",
+
+      "clientMailEdited": "123123213@domaintest.com",
+      "clientNameEdited": "Anaheim Hills Ford",
+      "clientFirstNameEdited": "zalex2",
+      "clientLastNameEdited": "valex2",
+      "clientPhoneEdited": "1",
+      "clientAccIdEdited": "8000001F-1370864711",
+      "clientAddressEdited": "E. La Palma Ave.",
+      "clientCityEdited": "L'viv",
+      "clientZipEdited": "79031",
+      "clientAreaEdited": "QA Area"
+    }
+  ],
+
+  "testCompanyEmployeesEdit": [
+    {
+      "rowID": "testCompanyEmployeesEdit.01",
+      "description": "Test Case 28319:Company - Employees : Edit",
+      "employeeTeam": "01_TimeRep_team",
+      "employeeFirstName": "azalex",
+      "employeeLastName": "avalex",
+      "employeePassword": "123123",
+      "employeeHomeTeam": "Test Team",
+      "employeeAddress": "5815 E. La Palma Ave.",
+      "employeeCity": "asdfasd",
+      "employeeCountry": "United States",
+      "employeeZip": "12345",
+      "employeePhone": "123123",
+      "employeeEmail": "123123213@domain.com",
+      "employeeAccId": "8000001F-1287569622",
+      "employeeStartDate": "10/28/2015",
+      "employeeType": "Employee",
+      "employeeRole": "Employee",
+
+      "employeeTeamEdited": "Default team",
+      "employeeFirstNameEdited": "azalex2",
+      "employeeLastNameEdited": "avalex2",
+      "employeePasswordEdited": "1234",
+      "employeeHomeTeamEdited": "Test Team",
+      "employeeAddressEdited": "E. La Palma Ave.",
+      "employeeCityEdited": "L'viv",
+      "employeeCountryEdited": "Uruguay",
+      "employeeZipEdited": "79031",
+      "employeePhoneEdited": "1",
+      "employeeEmailEdited": "123123213@domaintest.com",
+      "employeeAccIdEdited": "8000001F-1287569655",
+      "employeeStartDateEdited": "10/28/2014",
+      "employeeTypeEdited": "Manager",
+      "employeeRoleEdited": "Manager"
+    }
+  ],
+
+  "testCompanyServicesEdit": [
+    {
+      "rowID": "testCompanyServicesEdit.01",
+      "description": "Test Case 28321:Company - Services: Edit",
+      "serviceName": "Test Bundle Service",
+      "serviceType": "Detail",
+      "serviceDesc": "Test service description",
+      "serviceAccId": "8000001F-1287569622",
+      "serviceAssignedTo": "Custom Technician",
+
+      "serviceNameEdited": "Test Bundle Service2",
+      "serviceTypeEdited": "Dye",
+      "serviceDescEdited": "New service description",
+      "serviceAccIdEdited": "12345",
+      "serviceAssignedToEdited": "(None)"
+    }
+  ],
+
+  "testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit": [
+    {
+      "rowID": "testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit.01",
+      "description": "Test Case 28342:Company - Service Request Type: Service type at Service Request Edit",
+      "serviceType": "ta SR Type",
+      "ServiceTypeDesc": "Test description",
+      "ServiceTypeTeam": "01_TimeRep_team",
+      "ServiceTypePackage": "TimeZone_Test",
+      "ServiceTypePackageNew": "Test Service Package"
+    }
+  ],
+
+  "testCompanyInvoiceTypeClientEdit": [
+    {
+      "rowID": "testCompanyInvoiceTypeClientEdit.01",
+      "description": "Test Case 29017:Company - Invoice Type: Client Edit",
+      "invoiceType": "TestIntInvTeam",
+      "questionTemplate": "PrintIntForm",
+      "questionForm": "IntForm",
+      "clientName": "002 - Test Company"
+    }
+  ],
+
+  "testCompanyClientsServicesUpdate": [
+    {
+      "rowID": "testCompanyClientsServicesUpdate.01",
+      "description": "Test Case 29759:Company- Clients: Services Update",
+      "clientName": "TestAlExTest",
+      "servicePackage": "Demo Service Package",
+      "servicePackageNew": "All Services"
+    }
+  ],
+
+  "testCompanyClientsClientUsersSearch": [
+    {
+      "rowID": "testCompanyClientsClientUsersSearch.01",
+      "description": "Test Case 29761:Company- Clients: Client Users Search",
+      "clientName": "AlExTest",
+      "firstSearchParameter": "name",
+      "secondSearchParameter": "test2",
+      "thirdSearchParameter": "name@testmail.com",
+      "lastSearchParameter": "test3"
+    }
+  ],
+
+  "testCompanySharingWorkOrder": [
+    {
+      "rowID": "testCompanySharingWorkOrder.01",
+      "description": "Test Case 62293:Company: Inter Application Exchange Configuration - Sharing Work Order",
+      "entry": "WO JST (Work Order)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanySharingWorkOrderAddRuleTeams": [
+    {
+      "rowID": "testCompanySharingWorkOrderAddRuleTeams.01",
+      "description": "Test Case 62296:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Teams",
+      "entry": "WO JST (Work Order)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanySharingWorkOrderAddRuleEmployees": [
+    {
+      "rowID": "testCompanySharingWorkOrderAddRuleEmployees.01",
+      "description": "Test Case 62297:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Employees",
+      "entry": "WO JST (Work Order)",
+      "rule": "Include Selected Employees (Employees Include Selected)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanySharingWorkOrderAddRuleClients": [
+    {
+      "rowID": "testCompanySharingWorkOrderAddRuleClients.01",
+      "description": "Test Case 62295:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Clients",
+      "entry": "WO JST (Work Order)",
+      "rule": "Include Selected Clients (Clients Include Selected)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanySharingWorkOrderAddRuleServices": [
+    {
+      "rowID": "testCompanySharingWorkOrderAddRuleServices.01",
+      "description": "Test Case 62298:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Services",
+      "entry": "WO JST (Work Order)",
+      "rule": "Include Selected Services (Services Include Selected)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanySharingWorkOrderAddRuleVehicleParts": [
+    {
+      "rowID": "testCompanySharingWorkOrderAddRuleVehicleParts.01",
+      "description": "Test Case 62299:Company: Inter Application Exchange Configuration - Sharing Work Order Add Rule Vehicle Parts",
+      "entry": "WO JST (Work Order)",
+      "rule": "Include Selected Vehicle Parts (Vehicle Parts Include Selected)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimate": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimate.01",
+      "description": "Test Case 62300:Company: Inter Application Exchange Configuration - Sharing Estimate",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimateAddRuleClients": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimateAddRuleClients.01",
+      "description": "Test Case 62301:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Clients",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimateAddRuleTeams": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimateAddRuleTeams.01",
+      "description": "Test Case 62302:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Teams",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees.01",
+      "description": "Test Case 62303:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Employees",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimateAddRuleServices": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimateAddRuleServices.01",
+      "description": "Company: Inter Application Exchange Configuration - Sharing Estimate  Add Rule Services",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts": [
+    {
+      "rowID": "testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts.01",
+      "description": "Test Case 62305:Company: Inter Application Exchange Configuration - Sharing Estimate Add Rule Vehicle Parts",
+      "rule": "Include Selected Vehicle Parts (Vehicle Parts Include Selected)",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationMappingWorkOrder": [
+    {
+      "rowID": "testCompanyExchangeConfigurationMappingWorkOrder.01",
+      "description": "Test Case 62786:Company: Inter Application Exchange Configuration - Mapping Work Order",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients": [
+    {
+      "rowID": "testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients.01",
+      "description": "Test Case 62787:Company: Inter Application Exchange Configuration - Mapping Work Order Add Rule Clients",
+      "tabName": "Sending",
+      "profileName": "WO JST",
+      "documentType": "Work Order",
+      "entityType": "test2",
+      "cancelButton": "Cancel",
+      "insertButton": "Insert",
+      "updateButton": "Update",
+      "profileNameTest": "test"
+    }
+  ]
+}
