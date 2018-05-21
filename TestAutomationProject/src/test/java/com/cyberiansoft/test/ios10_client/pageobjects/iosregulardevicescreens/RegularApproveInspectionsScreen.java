@@ -158,13 +158,12 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectInspectionServiceToApprove(String inspservice) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspservice)));
 		swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspservice + "']/..")));
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspservice)).click();
-		
-		//par.findElement(By.xpath(".//XCUIElementTypeButton[@name='approve little off']")).click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']"))).waitAction(Duration.ofSeconds(1)).release().perform();
+
+		appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).click();
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['" + inspservice + "'].buttons()['approve little off']")).click();
 	}
 	

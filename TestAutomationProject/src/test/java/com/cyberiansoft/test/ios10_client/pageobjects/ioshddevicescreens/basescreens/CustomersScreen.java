@@ -50,6 +50,8 @@ public class CustomersScreen extends BaseAppScreen {
 	}
 
 	public void swtchToRetailMode() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		if (elementExists("btnWholesale"))
 			appiumdriver.findElementByAccessibilityId("btnWholesale").click();
 	}

@@ -3316,8 +3316,9 @@ public class DentWizartestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-        InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.clickInvoiceIcon();
-		invoiceinfoscreen.clickSaveAsFinal();
+        myworkordersscreen.clickInvoiceIcon();
+		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
+				invoiceinfoscreen.clickSaveAsFinal();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	

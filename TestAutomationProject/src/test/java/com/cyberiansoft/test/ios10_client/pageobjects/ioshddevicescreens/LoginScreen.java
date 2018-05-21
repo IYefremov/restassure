@@ -44,6 +44,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(firstcode).waitAction(Duration.ofSeconds(1)).release().perform();
 		firstcode.click();
+
 		firstcode.sendKeys(regCode.substring(0, 4));
 		secondcode.sendKeys(regCode.substring(5, 9));
 		thirdcode.sendKeys(regCode.substring(10, 14));

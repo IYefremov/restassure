@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -346,10 +347,11 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		return servicesscreencapt;
 	}
 	
-	public void clickBackServicesButton() {
+	public RegularServicesScreen clickBackServicesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
 		appiumdriver.findElement(MobileBy.name("Back")).click();
+		return this;
 	}
 	
 	public void clickAddServicesButton() {	
@@ -357,7 +359,6 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		navbar.findElement(MobileBy.AccessibilityId("Add")).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
-		Helpers.waitABit(1000);
 	}
 	
 	public void clickSaveAsFinal() {
@@ -365,8 +366,16 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Final")).click();
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
+	}
+
+	public <T extends RegularBaseTypeScreen> T saveAsFinal() {
+		clickSaveAsFinal();
+		return getTypeScreenFromContext();
+	}
+
+	public <T extends RegularBaseTypeScreen> T saveAsDraft() {
+		clickSaveAsDraft();
+		return getTypeScreenFromContext();
 	}
 	
 	public void clickSaveAsDraft() {
@@ -374,8 +383,6 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Draft")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Draft")).click();
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 	}
 	
 	public String getListOfSelectedVehicleParts() {

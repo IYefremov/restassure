@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
@@ -48,9 +49,15 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
+            /*BaseUtils.waitABit(1000);
+            tap(appiumdriver.findElement(By.xpath("//div[contains(@class, 'accordion-item-expanded')]")));
+            WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//div[contains(@class, 'accordion-item-expanded')]"), 1));*/
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -58,6 +65,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     public void clickServiceAmountField(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
@@ -70,6 +79,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
@@ -80,6 +91,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     public void addNotesToSelectedService(String serviceName, String notes) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             BaseUtils.waitABit(1000);
@@ -99,6 +112,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             notesvalue = servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getAttribute("value");
             tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
         } else
@@ -109,6 +124,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     public VNextNotesScreen clickServiceNotesOption(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//div[@action='notes']")));
@@ -129,7 +146,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         String serviceprice = "";
         WebElement servicerow = getSelectedServiceCell(servicename);
         if (servicerow != null) {
-            serviceprice = servicerow.findElement(By.xpath(".//div[@class='item-subtitle']")).getText().trim();
+            serviceprice = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
         } else
             Assert.assertTrue(false, "Can't find service: " + servicename);
         return serviceprice;
@@ -139,6 +156,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
         String imagesammary = "";
         WebElement servicerow = getSelectedServiceCell(servicename);
         if (servicerow != null) {
+            if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicerow);
             if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicerow);
             imagesammary = servicerow.findElement(By.xpath(".//div[@class='img-item summary-item']")).getText().trim();

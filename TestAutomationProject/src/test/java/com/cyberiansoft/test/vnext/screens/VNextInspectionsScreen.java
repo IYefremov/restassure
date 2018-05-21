@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import io.appium.java_client.AppiumDriver;
@@ -300,6 +301,12 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
 		tap(multiselectinspapprovebtn);
 		return new VNextApproveInspectionsScreen(appiumdriver);
+	}
 
+	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButtonAndSelectCustomer(AppCustomer customer) {
+		tap(multiselectinspapprovebtn);
+		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
+		customersscreen.selectCustomer(customer);
+		return new VNextApproveInspectionsScreen(appiumdriver);
 	}
 }

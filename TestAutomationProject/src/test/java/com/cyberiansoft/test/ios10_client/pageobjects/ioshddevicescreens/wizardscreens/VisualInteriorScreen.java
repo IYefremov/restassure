@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class VisualInteriorScreen extends BaseWizardScreen {
@@ -73,11 +74,16 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
-	public void saveCarServiceDetails() {
-		if (appiumdriver.findElementsByAccessibilityId("ServiceDetailsView").size() > 0)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("ServiceDetailsView").get(1)).findElement(MobileBy.AccessibilityId("Save")).click();
-		else
-			appiumdriver.findElementByAccessibilityId("ServiceDetailsView").findElement(MobileBy.AccessibilityId("Save")).click();
+	public VisualInteriorScreen saveCarServiceDetails() {
+		List<MobileElement> savebtns = appiumdriver.findElementsByAccessibilityId("Save");
+		for (MobileElement savebtn : savebtns)
+			if (savebtn.isDisplayed()) {
+				savebtn.click();
+				break;
+			}
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Details"), 1));
+		return this;
 	}
 
 	public void tapInterior() {
@@ -88,7 +94,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int  xx = imagecar.getLocation().getX();
 		int yy = imagecar.getLocation().getY();	
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
-		action.press(xx + imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(Duration.ofSeconds(1)).
+		action.press(imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(Duration.ofSeconds(1)).
 		
 		release().perform();
 	}
@@ -101,7 +107,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.tap(imagecar, imagecar.getSize().getWidth()/(times+2), imagecar.getSize().getHeight()/2 + 130).perform();
+		action.tap(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130).perform();
 
 	}
 
@@ -128,6 +134,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	}
 
 	public String getTotalAmaunt() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("TotalAmount")));
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	

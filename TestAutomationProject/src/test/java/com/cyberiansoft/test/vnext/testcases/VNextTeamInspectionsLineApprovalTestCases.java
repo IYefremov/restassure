@@ -654,7 +654,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		approvescreen.saveApprovedInspection();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		for (InspectionData inspdata: inspectionsData) {
-			Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspdata.getInspectionNumber()), inspdata.getInspectionStatus());
+			Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspdata.getInspectionNumber()), inspdata.getInspectionStatus().getStatus());
 		}
 		inspectionscreen.clickBackButton();
 	}
@@ -720,4 +720,58 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 	}
+
+
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCantAprroveInspectionsWithDifferentCustomers(String rowID,
+																	 String description, JSONObject testData) {
+
+		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
+		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		for (InspectionData inspdata: inspectionsData) {
+			VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+			customersscreen.switchToRetailMode();
+			customersscreen.selectCustomer(inspdata.getInspectionRetailCustomer());
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
+			vehicleinfoscreen.swipeScreensLeft(2);
+			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+
+			List<ServiceData> services = inspdata.getServicesList();
+			for (ServiceData service : services) {
+				inpsctionservicesscreen.selectService(service.getServiceName());
+			}
+
+			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			for (ServiceData service : services)
+				if (service.getServicePrice() != null)
+					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
+			inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		}
+
+		for (InspectionData inspdata: inspectionsData)
+			inspectionscreen.selectInspection(inspdata.getInspectionNumber());
+		VNextApproveInspectionsScreen approveInspectionsScreen = inspectionscreen.
+				clickMultiselectInspectionsApproveButtonAndSelectCustomer(inspectionsData.get(1).getInspectionRetailCustomer());
+		for (InspectionData inspdata: inspectionsData) {
+			if (inspdata.getInspectionRetailCustomer().getLastName().
+					equals(inspectionsData.get(1).getInspectionRetailCustomer().getLastName()))
+				Assert.assertTrue(approveInspectionsScreen.isInspectionExistsForApprove(inspdata.getInspectionNumber()));
+			else
+				Assert.assertFalse(approveInspectionsScreen.isInspectionExistsForApprove(inspdata.getInspectionNumber()));
+		}
+		inspectionscreen = approveInspectionsScreen.clickBackButton();
+		for (InspectionData inspdata: inspectionsData)
+			inspectionscreen.unselectInspection(inspdata.getInspectionNumber());
+		inspectionscreen.clickBackButton();
+	}
+
+
 }

@@ -36,6 +36,8 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	
 	public void clickKeyboardDoneButton() {
 		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.invisibilityOf(keyboard.findElement(By.xpath(".//a[@class='link close-picker']"))));
 	}
 	
 	public void clickKeyboardMinusButton() {

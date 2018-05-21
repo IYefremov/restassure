@@ -102,6 +102,17 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
 
+	public VNextLaborServiceDetailsScreen selectLaborService(String laborServiceName) {
+		WebElement servicerow = getServiceListItem(laborServiceName);
+		if (servicerow != null) {
+			tap(servicerow);
+			return  new VNextLaborServiceDetailsScreen(appiumdriver);
+		}
+		else
+			Assert.assertTrue(false, "Can't find service: " + laborServiceName);
+		return null;
+	}
+
 	public void selectServices(String[] serviceslist) {
 		for (String servicename: serviceslist)
 			selectService(servicename);

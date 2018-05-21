@@ -54,6 +54,9 @@ public class InspectionData {
 
 	@JsonProperty("inspectionStatus")
 	String inspectionStatus;
+
+	@JsonProperty("retailCustomer")
+	RetailCustomer retailCustomer;
 	 
 	 public String getInspectionType() {
 		 return inspType;
@@ -158,5 +161,9 @@ public class InspectionData {
 
 	public InspectionStatus getInspectionStatus() {
 		return InspectionStatus.getStatus(inspectionStatus);
+	}
+
+	public RetailCustomer getInspectionRetailCustomer() {
+	 	return retailCustomer;
 	}
 }
