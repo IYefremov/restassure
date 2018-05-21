@@ -227,11 +227,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() throws InterruptedException {
-		/*List<WebElement> savebtns = appiumdriver.findElementsByName("Save");
-		System.out.println("+++" + savebtns.size());
-		for (WebElement sv : savebtns)
-			if (sv.isDisplayed())
-				sv.click();*/
 		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
 		for (WebElement nv : navbars) {
 			if(nv.isDisplayed()) {
@@ -240,11 +235,17 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 				break;
 			}
 		}
-		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
-		/*if (appiumdriver.findElementsByAccessibilityId("Save").size() > 1)
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("Save").get(1)).click();
-		else
-			appiumdriver.findElementByAccessibilityId("Save").click();*/
+	}
+
+	public void clickCancelSelectedServiceDetails() throws InterruptedException {
+		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
+		for (WebElement nv : navbars) {
+			if(nv.isDisplayed()) {
+				//if (nv.findElements(By.name("Save")).size() > 0) {
+				nv.findElement(By.name("Cancel")).click();
+				break;
+			}
+		}
 	}
 
 	public String saveSelectedServiceDetailsWithAlert()

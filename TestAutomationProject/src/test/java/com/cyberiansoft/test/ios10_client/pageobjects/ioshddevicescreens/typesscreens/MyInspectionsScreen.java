@@ -204,13 +204,12 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		return appiumdriver.findElementByAccessibilityId("Create Work Order").isDisplayed();
 	}
 
-	public void clickArchiveInspectionButton() {
+	public MyInspectionsScreen clickArchiveInspectionButton() {
 		appiumdriver.findElementByAccessibilityId("Archive").click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Yes")));
 		appiumdriver.findElementByAccessibilityId("Yes").click();
-		//waitForAlert();
-		//acceptAlert();
+		return this;
 	}
 	
 	public void clickOnInspection(String inspnumber) {
@@ -497,4 +496,11 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public int getNumberOfRowsInTeamInspectionsTable() {		
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell")).size();
 	}
+
+    public void clickBackButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+        wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Back"))).click();
+    }
 }

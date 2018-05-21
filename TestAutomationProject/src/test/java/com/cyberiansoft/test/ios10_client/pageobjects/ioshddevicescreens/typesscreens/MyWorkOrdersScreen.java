@@ -197,16 +197,13 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		}
 	}
 	
-	public void changeCustomerForWorkOrder(String wonumber, String customer) {
+	public MyWorkOrdersScreen changeCustomerForWorkOrder(String wonumber, String customer) {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Customers"), 1));
-		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
-		}
+		return this;
 	}
 	
 	public void customersPopupSwitchToWholesailMode() {
@@ -377,10 +374,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return elementExists(wonumber);
 	}
 
-	public InvoiceInfoScreen clickInvoiceIcon() {
+	public void clickInvoiceIcon() {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
-		return new InvoiceInfoScreen(appiumdriver);
 	}
 
 	public InvoiceInfoScreen selectInvoiceType(String invoicetype) {

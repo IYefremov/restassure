@@ -364,6 +364,8 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public void clickTech() {
+		if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
+			scrollToElement("Tech");
 		appiumdriver.findElementByAccessibilityId("Tech").click();
 	}
 

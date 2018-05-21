@@ -57,7 +57,17 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
         appiumdriver.findElementByAccessibilityId("Save").click();
     }
 
+    public void clickFinalPopup() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final")));
+        appiumdriver.findElementByAccessibilityId("Final").click();
+    }
 
+    public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+        clickSave();
+        clickFinalPopup();
+        return getTypeScreenFromContext();
+    }
 
     public <T extends BaseTypeScreen> T saveWizard() {
         clickSave();

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -93,14 +94,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 
-		/*appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 
-		loginscreen.registeriOSDevice(regCode);*/
+		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -4995,7 +4996,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			approveinspscreen.clickApproveAllServicesButton();
 			approveinspscreen.clickSaveButton();
 		}
-		approveinspscreen.clickSignButton();
+		//approveinspscreen.clickSignButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		teaminspectionsscreen = new TeamInspectionsScreen(appiumdriver);
@@ -5014,7 +5015,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 33869:IInspections: HD - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard", 
 			description = "Verify that Services on Service Package are grouped by type selected on Insp type->Wizard")
 	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() throws Exception {
-		
+
+
 		final String VIN  = "1D7HW48NX6S507810";
 		List<String> inspnumbers = new ArrayList<String>();
 		
@@ -5042,12 +5044,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectGroupServiceItem("Price Adjustment");
 		servicedetailsscreen = servicesscreen.openCustomServiceDetails("SR_S6_Bl_I1_Percent");
 		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.clickSaveAsFinal();
+		servicesscreen.clickSave();
+		servicesscreen.clickFinalPopup();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Signature' in section 'Follow up Requested' should be answered."));
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.drawSignature();
-		servicesscreen.clickSaveAsFinal();
+		questionsscreen.clickSave();
+		questionsscreen.clickFinalPopup();
 		Helpers.waitForAlert();
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
 				.findElement(
@@ -5058,7 +5062,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectTaxPoint("Test Answer 1");
-        servicesscreen.clickSaveAsFinal();
+		questionsscreen.clickSave();
+		questionsscreen.clickFinalPopup();
 		Helpers.waitForAlert();
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
 				.findElement(
@@ -5069,8 +5074,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
-		servicesscreen.clickSaveAsFinal();
-		myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
+		questionsscreen.clickSaveAsFinal();
 		Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspnumber));
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -5995,16 +5999,18 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		pricematrix.switchOffOption("PDR");	
 		pricematrix.setPrice(_price);
 		pricematrix.clickSaveButton();
-        servicesscreen = new ServicesScreen(appiumdriver);
-		servicesscreen.clickSave();
+		pricematrix.clickSave();
+		pricematrix.clickFinalPopup();
+        //servicesscreen = new ServicesScreen(appiumdriver);
+		//servicesscreen.clickSave();
 		
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);	
 		vehiclescreeen.setVIN(VIN);
-		vehiclescreeen.clickNavigationBarSaveButton();
-		
-		servicesscreen.clickSave();
+		vehiclescreeen.clickSave();
+        vehiclescreeen.clickSave();
+		vehiclescreeen.clickFinalPopup();
 		
 		alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("Question 'Is all good?' in section 'Required trafficlight' should be answered."));		
@@ -6012,17 +6018,19 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		QuestionsScreen questionsscreen = new QuestionsScreen(appiumdriver);
 		questionsscreen.answerAllIsGoodQuestion();
-		servicesscreen.clickSave();
+		questionsscreen.clickSave();
+        questionsscreen.clickSave();
+		questionsscreen.clickFinalPopup();
 		
 		alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("Question 'Question 2' in section 'Zayats Section1' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-		servicesscreen.clickSaveAsFinal();
+        questionsscreen.clickSaveAsFinal();
 
-		
 		myinspectionsscreen.selectInspectionInTable(inspnumber);
 		myinspectionsscreen.isApproveInspectionMenuActionExists();
-		myinspectionsscreen.clickHomeButton();
+		myinspectionsscreen.clickArchiveInspectionButton();
+		myinspectionsscreen.selectReasonToArchive("Reason 1");
 		myinspectionsscreen.clickHomeButton();
 		settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
@@ -6381,7 +6389,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen = vehiclescreeen.selectNextScreen(OrderSummaryScreen
 				.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
 		Assert.assertFalse(ordersummaryscreen.isApproveAndCreateInvoiceExists());
-		ordersummaryscreen.cancelWizard();
+		ordersummaryscreen.clickCancelButton();
+		Helpers.acceptAlert();
+		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.cancelInvoice();
 		myworkordersscreen.clickHomeButton();		
 	}
@@ -6471,8 +6481,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 		selectedservicescreen.clickTechniciansIcon();
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(defaulttech));
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.clickCancelSelectedServiceDetails();
+		selectedservicescreen.clickCancelSelectedServiceDetails();
 		servicesscreen = new ServicesScreen(appiumdriver);
 		QuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
@@ -6640,11 +6650,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("5"));
 		ordersummaryscreen.saveWizard();
+		myworkordersscreen.clickHomeButton();
 		Helpers.waitABit(10000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
-
 		loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
