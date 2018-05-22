@@ -2,6 +2,10 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
+import com.cyberiansoft.test.vnext.screens.panelandparts.VNextBasePanelPartsList;
+import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
+import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -71,6 +75,34 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			BaseUtils.waitABit(500);
 		}
 	}
+
+	private List<WebElement> getSelectedServicesList() {
+		return additionalserviceslist.findElements(By.xpath(".//*[@action='open-item']/.."));
+	}
+
+	private String getServiceListItemName(WebElement srvlistitem) {
+		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
+	}
+
+	private WebElement getSelectedServiceCell(String serviceName) {
+		WebElement serviceListItem = null;
+		List<WebElement> selectedservices = getSelectedServicesList();
+		for (WebElement service : selectedservices)
+			if (getServiceListItemName(service).equals(serviceName)) {
+				serviceListItem =  service;
+				break;
+			}
+		return serviceListItem;
+	}
+
+	public void openSelectedServiceDetails(String serviceName) {
+		WebElement servicerow = getSelectedServiceCell(serviceName);
+		if (servicerow != null) {
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+		} else
+			Assert.assertTrue(false, "Can't find service: " + serviceName);
+	}
 	
 	public WebElement getVehiclePartAdditionalServiceCell(String additionalservicename) {
 		WebElement addsrvc = null;
@@ -111,6 +143,19 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(notesbutton));
 		tap(notesbutton);
 		return new VNextNotesScreen(appiumdriver);
+	}
+
+	public VNextLaborServicePartsList clickSelectPanelsAndPartsForLaborService(LaborServiceData laborService) {
+		WebElement servicerow = getSelectedServiceCell(laborService.getServiceName());
+		if (servicerow != null) {
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+			tap(servicerow.findElement(By.xpath(".//div[@action='select-panel']")));
+		} else
+			Assert.assertTrue(false, "Can't find service: " + laborService.getServiceName());
+		return new VNextLaborServicePartsList(appiumdriver);
 	}
 
 }

@@ -20,7 +20,7 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class VNextBaseScreen {
 
-	AppiumDriver<MobileElement> appiumdriver;
+	protected AppiumDriver<MobileElement> appiumdriver;
 	
 	@FindBy(xpath="//*[@data-autotests-id='change-screen-popover']")
 	private WebElement changescrenpopover;

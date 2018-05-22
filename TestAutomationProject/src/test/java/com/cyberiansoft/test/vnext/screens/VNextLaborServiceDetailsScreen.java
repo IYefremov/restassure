@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
+import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
+import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;

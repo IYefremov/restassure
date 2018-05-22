@@ -1,0 +1,50 @@
+{
+  "testVerifyUserCanSelectPanelAndPartsForLaborService": [
+    {
+      "rowID": "testVerifyUserCanSelectPanelAndPartsForLaborService.01",
+      "description": "Test Case 73234:Verify user can select panel and parts for Labor service",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "777777777777777777"
+      },
+      "laborService":
+        {
+          "serviceName": "Labor_expence",
+          "laborServicePanel": "Front Door",
+          "laborServicePart": "Refinish Left Front Door Cladding",
+          "laborServiceRate": "$99.12",
+          "laborServiceTime": "1.03"
+        }
+    }
+  ],
+
+  "testVerifyUserCantSelectPartWithoutPanel": [
+    {
+      "rowID": "testVerifyUserCantSelectPartWithoutPanel.01",
+      "description": "Test Case 73235:Verify user can't select Part without Panel",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "777777777777777777"
+      },
+      "laborService":
+      {
+        "serviceName": "Labor_expence"
+      }
+    }
+  ],
+
+  "testVerifyUserDoesntNeedToSelectPanelWhenAddLaborServiceInMatrix": [
+    {
+      "rowID": "testVerifyUserDoesntNeedToSelectPanelWhenAddLaborServiceInMatrix.01",
+      "description": "Test Case 73237:Verify user doesn't need to select Panel when add Labor service in matrix",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "777777777777777777"
+      },
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
+        "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence" }
+        }
+      }
+    }
+  ]
+
+}

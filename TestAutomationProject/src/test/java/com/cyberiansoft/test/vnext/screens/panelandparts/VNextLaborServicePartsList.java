@@ -1,6 +1,8 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.panelandparts;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextBaseInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -10,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextLaborServicePartsList extends VNextBaseInspectionsScreen {
+public class VNextLaborServicePartsList extends VNextBasePanelPartsList {
 
     @FindBy(xpath="//div[@data-page='parts']")
     private WebElement laborservicedetailssscreen;
@@ -29,4 +31,5 @@ public class VNextLaborServicePartsList extends VNextBaseInspectionsScreen {
         tap(partslist.findElement(By.xpath(".//*[@action='select-item']/span[text()='" + partName + "']")));
         return new VNextLaborServiceDetailsScreen(appiumdriver);
     }
+
 }
