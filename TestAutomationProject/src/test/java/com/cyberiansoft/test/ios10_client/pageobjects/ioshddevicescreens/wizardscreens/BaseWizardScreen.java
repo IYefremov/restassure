@@ -6,12 +6,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typessc
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public abstract class BaseWizardScreen extends iOSHDBaseScreen {
 
@@ -19,8 +15,8 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
 
     public BaseWizardScreen(AppiumDriver driver) {
         super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public <T extends BaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
@@ -69,18 +65,18 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
         return getTypeScreenFromContext();
     }
 
-    public <T extends BaseTypeScreen> T saveWizard() {
+    public <T extends ITypeScreen> T saveWizard() {
         clickSave();
         return getTypeScreenFromContext();
     }
 
-    public <T extends BaseTypeScreen> T cancelWizard() {
+    public <T extends ITypeScreen> T cancelWizard() {
         clickCancelButton();
         acceptAlert();
         return getTypeScreenFromContext();
     }
 
-    public <T extends BaseTypeScreen> T getTypeScreenFromContext()  {
+    public <T extends ITypeScreen> T getTypeScreenFromContext()  {
         switch (typeContext) {
             case WORKORDER:
                 return (T) new MyWorkOrdersScreen(appiumdriver);
@@ -94,6 +90,8 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
                 return (T) new TeamWorkOrdersScreen(appiumdriver);
             case TEAMINSPECTION:
                 return (T) new TeamInspectionsScreen(appiumdriver);
+            case INVOICEINFO:
+                return (T) new InvoiceInfoScreen(appiumdriver);
         }
         return null;
     }

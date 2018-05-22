@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -29,6 +30,13 @@ public class ServiceRequestdetailsScreen extends iOSHDBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceRequestSummaryInspectionsButton")));
         appiumdriver.findElementByAccessibilityId("ServiceRequestSummaryInspectionsButton").click();
         return new TeamInspectionsScreen(appiumdriver);
+    }
+
+    public TeamWorkOrdersScreen clickServiceRequestSummaryOrdersButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Work Orders")));
+        appiumdriver.findElementByAccessibilityId("Work Orders").click();
+        return new TeamWorkOrdersScreen(appiumdriver);
     }
 
     public ServiceRequestsScreen clickBackButton() {

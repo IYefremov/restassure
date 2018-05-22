@@ -101,7 +101,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Orders")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrdersPageTableLeft")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId( "OrdersPageTableLeft")));
 	}
 
 	public void clickAddOrderButton() {
@@ -201,8 +203,10 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Customers"), 1));
+		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
+		}
 		return this;
 	}
 	
@@ -294,7 +298,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(wonumber))).click();
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']"))).click();
 	}
 	
 	public void selectWorkOrderForEidt(String wonumber) {		
@@ -409,10 +413,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	
 	public boolean isMenuItemForSelectedWOExists(String menuitem) {
 		return elementExists(By.name(menuitem));
-	}
-	
-	public void clickServiceRequestButton() {
-		appiumdriver.findElementByAccessibilityId("Service Request").click();
 	}
 	
 	public boolean isWorkOrderHasApproveIcon(String wonumber) {

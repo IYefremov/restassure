@@ -6,5 +6,6 @@ public enum  TypeScreenContext {
     INVOICE,
     SERVICEREQUEST,
     TEAMWORKORDER,
-    TEAMINSPECTION
+    TEAMINSPECTION,
+    INVOICEINFO
 }
