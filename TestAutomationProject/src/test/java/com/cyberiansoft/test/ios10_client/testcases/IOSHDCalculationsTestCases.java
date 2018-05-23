@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -29,8 +30,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	public void setUpSuite() throws Exception {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		//testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-		//		ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
 		ExcelUtils.setDentWizardExcelFile();
 	}
@@ -59,12 +60,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 
 	public void testRegisterationiOSDdevice() throws Exception {
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-		/*appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
+		appiumdriver.removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
 		appiumdriver.quit();
 		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup(appiumdriver);
-		LoginScreen loginscreen = kodiselectenvscreen.selectEnvironment("Dev Environment");
-		loginscreen.registeriOSDevice(regCode);*/
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen(appiumdriver);
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -2837,12 +2838,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		serviceRequestdetailsScreen.clickServiceRequestSummaryInspectionsButton();
 		Assert.assertTrue(teaminspectionsscreen.isWOIconPresentForInspection(inspnumber1));
 		teaminspectionsscreen.clickBackServiceRequest();
-		
-		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
-		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
-		String wonumber = myworkordersscreen.getFirstWorkOrderNumberValue();
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$37.00");
-		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+
+		serviceRequestdetailsScreen = servicerequestsscreen.selectDetailsRequestAction();
+		TeamWorkOrdersScreen teamwoscreen = serviceRequestdetailsScreen.clickServiceRequestSummaryOrdersButton();
+		String wonumber = teamwoscreen.getFirstWorkOrderNumberValue();
+		Assert.assertEquals(teamwoscreen.getPriceValueForWO(wonumber), "$37.00");
+		teamwoscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getWorkOrderTypeValue(), "ALM - Recon Facility");
 		
@@ -2850,7 +2851,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$12.00 x 1.00"));
         Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$25.00 x 1.00"));
 		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		teamwoscreen.clickServiceRequestButton();
 		serviceRequestdetailsScreen.clickBackButton();
 		servicerequestsscreen.clickHomeButton();	
 	}
@@ -2957,20 +2958,19 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		serviceRequestdetailsScreen.clickServiceRequestSummaryInspectionsButton();
 		
 		Assert.assertTrue(teaminspectionsscreen.isWOIconPresentForInspection(inspnumber1));
-		servicerequestsscreen.clickHomeButton();
-		
-		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
-		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
-		String wonumber = myworkordersscreen.getFirstWorkOrderNumberValue();
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$12.00");
-		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		teaminspectionsscreen.clickBackServiceRequest();
+
+		TeamWorkOrdersScreen teamWorkOrdersScreen = serviceRequestdetailsScreen.clickServiceRequestSummaryOrdersButton();
+		String wonumber = teamWorkOrdersScreen.getFirstWorkOrderNumberValue();
+		Assert.assertEquals(teamWorkOrdersScreen.getPriceValueForWO(wonumber), "$12.00");
+		teamWorkOrdersScreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreeen = new VehicleScreen(appiumdriver);
 		Assert.assertEquals(vehiclescreeen.getWorkOrderTypeValue(), "ALM - Recon Facility");
 
 		servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
         Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues("3/4\" - Penny Size", "$12.00 x 1.00"));
 		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		teamWorkOrdersScreen.clickServiceRequestButton();
 		serviceRequestdetailsScreen.clickBackButton();
 		servicerequestsscreen.clickHomeButton();	
 	}

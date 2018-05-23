@@ -702,7 +702,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		MainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
-		Helpers.waitABit(30*1000);
+		Helpers.waitABit(60*1000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -2967,9 +2967,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
-		myinvoicesscreen.clickSummaryPopup();
-		Assert.assertTrue(myinvoicesscreen.isSummaryPDFExists());
-		myinvoicesscreen.clickHomeButton();
+		SummaryScreen summaryScreen = myinvoicesscreen.clickSummaryPopup();
+		Assert.assertTrue(summaryScreen.isSummaryPDFExists());
+		summaryScreen.clickBackButton();
 		myinvoicesscreen.clickHomeButton();
 	}
 	
@@ -3806,6 +3806,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.myInvoiceExists(invoicenumberapproveon);
 		Assert.assertTrue(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumberapproveon));
+		SummaryScreen summaryScreen = myinvoicesscreen.clickSummaryPopup();
+		summaryScreen.clickBackButton();
 		myinvoicesscreen.selectInvoiceForApprove(invoicenumberapproveon);
 		
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3983,9 +3985,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			}
 		}
 		Assert.assertTrue(onhold);	
-		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectRejectAction();
-		Helpers.acceptAlert();
+		servicerequestsscreen.rejectServiceRequest(srnumber);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -4524,11 +4524,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		}
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectDetailsRequestAction();
-		MyWorkOrdersScreen mywoscreen = servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
-		mywoscreen.woExists(wonumber);
-		mywoscreen.clickServiceRequestButton();
-		servicerequestsscreen.clickHomeButton();
+		ServiceRequestdetailsScreen serviceRequestdetailsScreen = servicerequestsscreen.selectDetailsRequestAction();
+		TeamWorkOrdersScreen teamwoscreen = serviceRequestdetailsScreen.clickServiceRequestSummaryOrdersButton();
+		teamwoscreen.woExists(wonumber);
+		teamwoscreen.clickServiceRequestButton();
+		serviceRequestdetailsScreen.clickBackButton();
 		servicerequestsscreen = new ServiceRequestsScreen(appiumdriver);
 		servicerequestsscreen.clickHomeButton();
 	}
@@ -5959,14 +5959,12 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.saveWizard();
 
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectDetailsRequestAction();
-		servicerequestsscreen.clickServiceRequestSummaryOrdersButton();
-		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);
+		serviceRequestdetailsScreen = servicerequestsscreen.selectDetailsRequestAction();
+		TeamWorkOrdersScreen teamwoscreen = serviceRequestdetailsScreen.clickServiceRequestSummaryOrdersButton();
 		for (String wonumber : wonumbers)
-			Assert.assertTrue(myworkordersscreen.woExists(wonumber));
-		
-		myworkordersscreen.clickServiceRequestButton();
-		servicerequestsscreen.clickHomeButton();
+			Assert.assertTrue(teamwoscreen.woExists(wonumber));
+		serviceRequestdetailsScreen = teamwoscreen.clickServiceRequestButton();
+		serviceRequestdetailsScreen.clickBackButton();
 		servicerequestsscreen.clickHomeButton();
 	}
 	

@@ -20,7 +20,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json";
 
-    @BeforeClass(description = "Team Inspections Line Approval Test Cases")
+    @BeforeClass(description = "Team Inspections Calculations Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }

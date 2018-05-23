@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -61,11 +60,6 @@ public class ServicesScreen extends BaseWizardScreen {
         wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Available Services")));
 	}
 	
-
-	/*public void clickSaveButton() {
-		clickSaveButton();
-	}*/
-	
 	public void clickSaveAsDraft() {
 		clickSave();
 		appiumdriver.findElementByAccessibilityId("Draft").click();
@@ -73,7 +67,6 @@ public class ServicesScreen extends BaseWizardScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		//Helpers.waitABit(1000);
 	}
 
 	public void clickCancelButton() {
@@ -120,8 +113,6 @@ public class ServicesScreen extends BaseWizardScreen {
 				selected = true;
 				break;
 			}
-
-
 		}
 		return selected;
 	}
@@ -154,12 +145,13 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public void selectService(String servicename) {
-		IOSElement availableservices = null;
+        IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		/*IOSElement availableservices = null;
 
 		if (BaseWizardScreen.typeContext.equals(TypeScreenContext.SERVICEREQUEST))
 			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
 		else
-			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+			availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");*/
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		if (availableservices.findElementsByAccessibilityId("Clear text").size() > 0) {
 			availableservices.findElementByAccessibilityId("Clear text").click();
@@ -219,12 +211,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
-        IOSElement availableservices = null;
-
-        if (BaseWizardScreen.typeContext.equals(TypeScreenContext.SERVICEREQUEST))
-            availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceRequestServicesView");
-        else
-            availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+        IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
         appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
         if (availableservices.findElementsByAccessibilityId("Clear text").size() > 0) {
             availableservices.findElementByAccessibilityId("Clear text").click();
@@ -241,9 +228,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
 		if (!appiumdriver.findElementByAccessibilityId(servicename).isDisplayed()) {
 			scrollToElement(servicename);
-	        //appiumdriver.findElementByAccessibilityId(servicename).click();
 		}
-		//appiumdriver.findElementByAccessibilityId(servicename).click();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("custom detail button"))).waitAction(Duration.ofSeconds(1)).release().perform();
@@ -267,9 +252,6 @@ public class ServicesScreen extends BaseWizardScreen {
 		searchfld.clear();
 		searchfld.setValue(servicename);
 		appiumdriver.hideKeyboard();
-		/*((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		Helpers.waitABit(500);*/
 	}
 	
 	public void searchSelectedService(String servicename) {
@@ -319,19 +301,6 @@ public class ServicesScreen extends BaseWizardScreen {
 		if (selectedservices.size() > dervicedetailindex) {
 			selectedservices.get(dervicedetailindex).click();
 		}
-	}
-	
-	public void setSelectedServiceRequestServicePrice(String service, String price) throws InterruptedException {
-		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIAElement[@name='SelectedServiceRequestServicesView']/UIATableView[1]/UIATableCell[@name=\""
-						+ service
-						+ "\"]/UIATextField[1]").click();
-		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIAElement[@name='SelectedServiceRequestServicesView']/UIATableView[1]/UIATableCell[@name=\""
-						+ service
-						+ "\"]/UIATextField[1]/UIAButton[@name=\"Clear text\"]").click();
-		((IOSElement) appiumdriver.findElementByXPath("//UIAScrollView[1]/UIAElement[@name='SelectedServiceRequestServicesView']/UIATableView[1]/UIATableCell[@name=\""
-						+ service
-						+ "\"]/UIATextField[1]")).setValue(price);
-		Helpers.keyboadrType("\n");
 	}
 
 	public boolean priceMatricesPopupIsDisplayed() {

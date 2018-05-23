@@ -37,6 +37,9 @@ public class InspectionData {
 	 @JsonProperty("matrixService")
 	 MatrixServiceData matrixService;
 
+	 @JsonProperty("laborService")
+	 LaborServiceData laborService;
+
 	 @JsonProperty("insuranceCompany")
 	 InsuranceCompanyData insuranceCompany;
 	 
@@ -125,6 +128,8 @@ public class InspectionData {
 	}
 
 	 public MatrixServiceData getMatrixServiceData() { return matrixService; }
+
+	public LaborServiceData getLaborServiceData() { return laborService; }
 
 	 public String getServiceNameByIndex(int serviceIndex) {
 		 return services.get(serviceIndex).getServiceName();

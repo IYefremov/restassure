@@ -109,6 +109,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	public void selectInspectionForEdit(String inspnumber)  {
 		selectInspectionInTable(inspnumber);
 		clickEditInspectionButton();
+		BaseWizardScreen.typeContext = TEAMINSPECTIONCONTEXT;
 	}
 
 	public void clickEditInspectionButton() {

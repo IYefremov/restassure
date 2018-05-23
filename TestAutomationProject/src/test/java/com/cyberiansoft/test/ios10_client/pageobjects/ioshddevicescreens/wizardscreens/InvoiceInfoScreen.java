@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -17,7 +19,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class InvoiceInfoScreen extends BaseWizardScreen {
+public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
+
+	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
+	private static TypeScreenContext INVOICEINFOExCONTEXT = null;
 	
 	/*@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
@@ -90,6 +95,8 @@ public class InvoiceInfoScreen extends BaseWizardScreen {
 	
 	public void clickFirstWO() {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByXPath("//XCUIElementTypeCell[1]").click();
+		INVOICEINFOExCONTEXT = BaseWizardScreen.typeContext;
+		BaseWizardScreen.typeContext = INVOICEINFOCONTEXT;
 	}
 	
 	public String getOrderSumm() {
@@ -129,6 +136,8 @@ public class InvoiceInfoScreen extends BaseWizardScreen {
 	}
 	
 	public <T extends BaseTypeScreen> T cancelInvoice() {
+		if (INVOICEINFOExCONTEXT != null)
+			BaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
 		clickCancelButton();
 		acceptAlert();
 		return getTypeScreenFromContext();

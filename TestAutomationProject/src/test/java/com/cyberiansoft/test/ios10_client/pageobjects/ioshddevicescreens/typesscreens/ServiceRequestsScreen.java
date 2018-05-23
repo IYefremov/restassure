@@ -124,7 +124,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
+		wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 	}
 
 	public void clickRefreshButton() throws InterruptedException {
@@ -415,13 +417,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("General Info")));
 		return appiumdriver.findElementsByAccessibilityId("Appointments").size() > 0;
-	}
-	
-	public MyWorkOrdersScreen clickServiceRequestSummaryOrdersButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Work Orders")));
-		appiumdriver.findElementByAccessibilityId("Work Orders").click();
-		return new MyWorkOrdersScreen(appiumdriver);
 	}
 	
 	public void saveAppointment() {
