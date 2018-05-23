@@ -19,6 +19,9 @@ public class LaborServiceData {
     @JsonProperty("laborServiceTime")
     String laborServiceTime;
 
+    @JsonProperty("laborServiceNotes")
+    String laborServiceNotes;
+
     public String getServiceName() {
         return serviceName;
     }
@@ -41,5 +44,9 @@ public class LaborServiceData {
 
     public String getLaborServicePrice() {
         return laborServiceRate + " x " + laborServiceTime;
+    }
+
+    public String getLaborServiceNotes() {
+        return laborServiceNotes;
     }
 }

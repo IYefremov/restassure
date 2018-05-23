@@ -27,9 +27,8 @@ public class VNextLaborServicePartsList extends VNextBasePanelPartsList {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='parts']")));
     }
 
-    public VNextLaborServiceDetailsScreen selectServiceLaborPart(String partName) {
+    public void selectServiceLaborPart(String partName) {
         tap(partslist.findElement(By.xpath(".//*[@action='select-item']/span[text()='" + partName + "']")));
-        return new VNextLaborServiceDetailsScreen(appiumdriver);
     }
 
 }

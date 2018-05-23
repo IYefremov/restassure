@@ -45,6 +45,25 @@
         }
       }
     }
+  ],
+
+  "testVerifyUserCanSavePartServiceInMatrix": [
+    {
+      "rowID": "testVerifyUserCanSavePartServiceInMatrix.01",
+      "description": "Test Case 73238:Verify user can save Part service in matrix",
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {"vinNumber": "777777777777777777"
+      },
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
+        "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
+          "laborServicePart": "Refinish Liftgate Frame",
+          "laborServiceRate": "99.12",
+          "laborServiceTime": "2.00",
+          "laborServiceNotes": "Liftgate Frame - Refinish Liftgate Frame" }
+        }
+      },
+      "inspPrice": "$198.24"
+    }
   ]
 
 }

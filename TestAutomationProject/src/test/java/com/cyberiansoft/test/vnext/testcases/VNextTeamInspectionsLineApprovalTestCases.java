@@ -365,13 +365,15 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inpsctionservicesscreen.switchToAvalableServicesView();
 
 		VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
-		List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
-		for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-			vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-			vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-			if (hailMatrixService.getMatrixAdditionalServices() != null) {
-				List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
+		MatrixServiceData matrixServiceData = inspdata.getMatrixServiceData();
+		List<MatrixPartData> matrixPartDatas = matrixServiceData.getMatrixPartsData();
+
+		for (MatrixPartData  matrixPartData : matrixPartDatas) {
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+			vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
+			vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
+			if (matrixPartData.getMatrixAdditionalServices() != null) {
+				List<ServiceData> additionalServices = matrixPartData.getMatrixAdditionalServices();
 				for (ServiceData additionalService : additionalServices)
 					vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
 			}
