@@ -97,9 +97,10 @@ public class ClientQuotesPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickAddClientBTN() {
+    public ClientQuotesPage clickAddClientBTN() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
         addClientBTN.click();
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
     public void setNewClientName(String name) {
@@ -163,9 +164,9 @@ public class ClientQuotesPage extends BasePage {
         newClientEmail.sendKeys(email);
     }
 
-    public void fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
-                                     String country, String state, String city, String businessPhone, String cellPhone, String firstName,
-                                     String lastName, String title, String email) {
+    public ClientQuotesPage fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
+                                                 String country, String state, String city, String businessPhone, String cellPhone, String firstName,
+                                                 String lastName, String title, String email) {
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "block"));
         setNewClientName(name);
         setNewClientNickName(nickname);
@@ -181,12 +182,14 @@ public class ClientQuotesPage extends BasePage {
         setNewClientLastName(lastName);
         setNewClientTitle(title);
         setNewClientEmail(email);
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
 
-    public void clickConfirmNewClientBTN() {
+    public ClientQuotesPage clickConfirmNewClientBTN() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
 
@@ -201,14 +204,14 @@ public class ClientQuotesPage extends BasePage {
         }
     }
 
-    public void searchUser(String searchValue) {
+    public ClientQuotesPage searchUser(String searchValue) {
         try {
-        wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
-        searchField.sendKeys(searchValue);
-        clickWithJS(searchBTN);
-        waitForProcessing();
+            wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
+            searchField.sendKeys(searchValue);
+            clickWithJS(searchBTN);
+            waitForProcessing();
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
 
 //        try {
@@ -230,9 +233,10 @@ public class ClientQuotesPage extends BasePage {
 //        } catch (Exception e) {
 //            waitABit(1000);
 //        }
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
-    public void deleteUser(String deleteParameter) {
+    public ClientQuotesPage deleteUser(String deleteParameter) {
         try {
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).
                     findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-delete btn-delete-potential-client']"));
@@ -242,6 +246,7 @@ public class ClientQuotesPage extends BasePage {
                 wait.until(ExpectedConditions.visibilityOf(closeNotificationBTN)).click();
             }
         } catch (Exception ignored) {}
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
 

@@ -44,7 +44,7 @@ public class CategoriesPage extends BasePage {
     @FindBy(id="table-categories")
     private WebElement categoriesTable;
 
-    @FindBy(xpath="//td[@class='sorting_1']//span")
+    @FindBy(xpath="//td[@class='sorting_1']")
     private WebElement categoriesNames;
 
     public CategoriesPage(WebDriver driver) {
@@ -53,38 +53,39 @@ public class CategoriesPage extends BasePage {
     }
 
 
-    public void clickAddCategoryButton() {
+    public CategoriesPage clickAddCategoryButton() {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(addCategoryBTN)).click();
+            wait.until(ExpectedConditions.visibilityOf(addCategoryBTN));
+            clickWithJS(addCategoryBTN);
         } catch (Exception e) {
             Assert.fail("The \"Add category\" button has not been displayed.", e);
         }
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void setCategory(String category) {
+    public CategoriesPage setCategory(String category) {
         wait.until(ExpectedConditions.visibilityOf(inputFields.get(0))).sendKeys(category);
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void clickSubmitCategoryButton() {
+    public CategoriesPage clickSubmitCategoryButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitCategoryBTN)).click();
         waitForLoading();
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void deleteCategory(String name) {
-//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'" + name + "')]")));
+    public CategoriesPage deleteCategory(String name) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(driver
+            wait.until(ExpectedConditions.elementToBeClickable(categoriesNames
                     .findElements(By.xpath("//span[contains(text(),'" + name + "')]/following::a[2]")).get(0))).click();
-        } catch (Exception ignored) {}//span[contains(text(),'Test Category')]/following::a[2]
-//        driver.findElement(By.xpath("//span[contains(text(),'"+name+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-//                .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-//                .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-delete']")).click();
+        } catch (Exception ignored) {}
         try {
             driver.switchTo().alert().accept();
         } catch(Exception ignored){}
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void verifyCategoryDoesNotExist(String category) {
+    public CategoriesPage verifyCategoriesDoNotExist(String category) {
         while (true) {
             try {
                 if (wait.until(ExpectedConditions
@@ -95,60 +96,90 @@ public class CategoriesPage extends BasePage {
                 }
             } catch (Exception ignored) {}
         }
+//        List<WebElement> categories = null;
+//        try {
+//            wait.until(ExpectedConditions.visibilityOf(categoriesTable));
+//            categories = categoriesNames.findElements(By.xpath("//span[contains(text(),'" + category + "')]"));
+//        } catch (NoSuchElementException | TimeoutException e) {
+//            e.printStackTrace();
+//        }
+//        if ((categories != null) && !categories.isEmpty()) {
+//            for (int i = 0; i < categories.size(); i++) {
+//                deleteCategory(category);
+//            }
+//        }
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void verifyThatCategoriesDoNoExist(String name) {
-        List<WebElement> categories = null;
+    public boolean isCategoryDisplayed(String category) {
         try {
-            wait.until(ExpectedConditions.visibilityOf(categoriesTable));
-            categories = driver.findElements(By.xpath("//span[contains(text(),'" + name + "')]"));
-        } catch (NoSuchElementException | TimeoutException e) {
-            e.printStackTrace();
-        }
-        if ((categories != null) && !categories.isEmpty()) {
-            for (int i = 0; i < categories.size(); i++) {
-                deleteCategory(name);
+            try {
+                wait.until(ExpectedConditions.not(ExpectedConditions
+                        .stalenessOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]")))));
+                wait.until(ExpectedConditions
+                        .visibilityOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]"))));
+                return true;
+            } catch (Exception e) {
+                System.out.println("In the first catch");
+                refreshPage();
+                wait.until(ExpectedConditions
+                        .visibilityOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]"))));
+                return true;
             }
+        } catch (Exception e) {
+            System.out.println("In the second catch");
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void clickAddAttributeButton(String name) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
-
-//        driver.findElement(By.xpath("//span[contains(text(),'"+name+"')]")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-//                .findElement(By.xpath("..")).findElement(By.xpath("..")).findElement(By.xpath(".."))
-//                .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add']")).click();
+    public CategoriesPage clickAddAttributeButton(String name) {
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(driver
+                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))));
+            wait.until(ExpectedConditions.elementToBeClickable(driver
+                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
+        } catch (Exception e) {
+            refreshPage();
+            wait.until(ExpectedConditions.elementToBeClickable(driver
+                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
+        }
         wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void fillNotAutomatedAttributeFields(String name, String dataType) {
+    public CategoriesPage fillNotAutomatedAttributeFields(String name, String dataType) {
         wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
 
         createElementAttributeDataType.click();
         createElementAttributeDataType.findElements(By.tagName("option")).stream().
-                filter(e -> e.getText().equals(dataType)).findFirst().get().click();
+                filter(e -> e.getText().equals(dataType)).findFirst().ifPresent(WebElement::click);
 
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeIsAutomatedSelection)).click();
         addAttributeIsAutomatedSelection.findElements(By.tagName("option")).stream().
-                filter(e -> e.getText().equals("No")).findFirst().get().click();
+                filter(e -> e.getText().equals("No")).findFirst().ifPresent(WebElement::click);
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void fillAutomatedAttributeFields(String name, String isAutomated, String procedureName) {
+    public CategoriesPage fillAutomatedAttributeFields(String name, String isAutomated, String procedureName) {
         wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
         wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
         new Select(addAttributeIsAutomatedSelection).selectByVisibleText(isAutomated);
         wait.until(ExpectedConditions.attributeToBe(storedProcedureNameField, "value required", ""));
         storedProcedureNameField.sendKeys(procedureName);
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
-    public void clickAddAttributeButton() {
+    public CategoriesPage clickAddAttributeButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeInCreationWindow)).click();
         waitForLoading();
         try {
             wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.className("shirma-dialog"))));
             wait.until(ExpectedConditions.visibilityOf(addAttributeDialogDisappearance));
-        } catch (WebDriverException ignored) {}
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        }
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
     public boolean checkAttributeByName(String categoryName, String attName) {
@@ -161,34 +192,29 @@ public class CategoriesPage extends BasePage {
         }
     }
 
-    public void expandAttributesList(String category) {
+    private void expandAttributesList(String category) {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'" + category + "')]")));
-        WebElement element = driver.findElement(By.xpath("//span[contains(text(), '"
-                + category + "')]/preceding::td[contains(@class, 'details-control')]"));
-//        WebElement categoryControl = driver.findElement(By.xpath("//td[contains(@class, " +
-//                "'details-control')]/following::span[contains(text(), '" + category + "')]"));
         try {
-            System.out.println("Staleness: " + wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element))));
-            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-//            clickWithJS(element);
+            wait.until(ExpectedConditions.not(ExpectedConditions
+                    .stalenessOf(categoriesNames.findElement(By.xpath("//span[contains(text(), '" +
+                            category + "')]/preceding::td/i[@class='fa fa-chevron-right']")))));
+            wait.until(ExpectedConditions.elementToBeClickable(categoriesNames
+                    .findElement(By.xpath("//span[contains(text(), '" + category +
+                            "')]/preceding::td/i[@class='fa fa-chevron-right']")))).click();
         } catch (Exception e) {
-            System.out.println("In the first catch");
-            try {
-                e.printStackTrace();
-                System.out.println("In the Stale before JS");
-                clickWithJS(element);
-                System.out.println("In the Stale after JS");
-            } catch (Exception ex) {
-                Assert.fail("The attributes list hasn't been expanded", ex);
-            }
-            wait.until(ExpectedConditions.visibilityOfAllElements(driver
-                    .findElements(By.xpath("//span[contains(text(),'" + category + "')]/following::th[text()]"))));
+            refreshPage();
+            wait.until(ExpectedConditions.elementToBeClickable(categoriesNames.findElement(By
+                    .xpath("//span[contains(text(), '" + category +
+                            "')]/preceding::td/i[@class='fa fa-chevron-right']")))).click();
         }
-    }
+        wait.until(ExpectedConditions.visibilityOfAllElements(categoriesNames
+                .findElements(By.xpath("//span[contains(text(),'" + category + "')]/following::th[text()]"))));
+        }
 
-    public void addCategory(String category) {
+    public CategoriesPage addCategory(String category) {
         clickAddCategoryButton();
         setCategory(category);
         clickSubmitCategoryButton();
+        return PageFactory.initElements(driver, CategoriesPage.class);
     }
 }

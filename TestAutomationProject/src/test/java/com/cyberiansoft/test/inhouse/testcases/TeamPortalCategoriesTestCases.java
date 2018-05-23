@@ -25,14 +25,16 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddNewCategories(String rowID, String description, JSONObject testData) {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory(data.getCategory());
-        categoriesPage.clickSubmitCategoryButton();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton();
+        Assert.assertTrue(categoriesPage.isCategoryDisplayed(data.getCategory()), "The category is not displayed");
         categoriesPage.deleteCategory(data.getCategory());
     }
 
@@ -40,18 +42,17 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     public void testUserCanAddAttributeToCategories(String rowID, String description, JSONObject testData) {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
-
-        categoriesPage.verifyThatCategoriesDoNoExist(data.getCategory());
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory(data.getCategory());
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton(data.getCategory());
-        categoriesPage.fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType());
-        categoriesPage.clickAddAttributeButton();
-        categoriesPage.refreshPage();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
         categoriesPage.deleteCategory(data.getCategory());
     }
@@ -74,43 +75,40 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     public void testUserCanManualAttribute(String rowID, String description, JSONObject testData) {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
+        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
 
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory(data.getCategory());
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton(data.getCategory());
-        categoriesPage.fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType());
-        categoriesPage.clickAddAttributeButton();
-
-        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubmenu();
-
-        clientSegmentsPage.searchClientSegment(data.getName());
-        clientSegmentsPage.expandAttributesList(data.getName());
-        clientSegmentsPage.setAttributeValue(data.getAttributeName(), data.getAttributeValue());
-        clientSegmentsPage.refreshPage();
-        clientSegmentsPage.searchClientSegment(data.getName());
-        clientSegmentsPage.expandAttributesList(data.getName());
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getName())
+                .expandAttributesList(data.getName())
+                .setAttributeValue(data.getAttributeName(), data.getAttributeValue());
         Assert.assertTrue(clientSegmentsPage.checkAttributeValue(data.getAttributeName(), data.getAttributeValue()));
 
         leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.deleteUser(data.getName());
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUser(data.getName());
 
         leftMenuPanel
                 .clickClients()
@@ -118,79 +116,153 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         categoriesPage.deleteCategory(data.getCategory());
     }
 
-    //todo sometimes fails because of StaleReferenceElementException
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddAutomatedAttributeToCategories(String rowID, String description, JSONObject testData) {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
-
-        categoriesPage.verifyCategoryDoesNotExist(data.getCategory());
-        categoriesPage.addCategory(data.getCategory());
-
-        categoriesPage.clickAddAttributeButton(data.getCategory());
-        categoriesPage.fillAutomatedAttributeFields(data.getAttributeName(), data.getIsAutomatedStatus(),
-                data.getProcedureName());
-        categoriesPage.clickAddAttributeButton();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .addCategory(data.getCategory())
+                .clickAddAttributeButton(data.getCategory())
+                .fillAutomatedAttributeFields(data.getAttributeName(), data.getIsAutomatedStatus(),
+                        data.getProcedureName())
+                .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()),
                 "The saved attribute name is not displayed in the category");
-        ClientSegmentsPage clientSegmentsPage = leftMenuPanel.clickClientSegmentsSubmenu();
-        clientSegmentsPage.searchClientSegment(data.getClient());
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getClient());
         Assert.assertTrue(clientSegmentsPage.verifyClientIsDisplayed(data.getClient()),
                 "The client has not been displayed in the table!");
         clientSegmentsPage.expandAttributesList(data.getClient());
         Assert.assertTrue(clientSegmentsPage.verifyAttributeNameIsDisplayed(data.getAttributeName(), data.getCategory()));
     }
 
-    //@Test(testName = "Test Case 59883:Verify user can search by categories.")
-    public void testUserCanSearchCategories() {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanSearchCategories(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
 
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
-        categoriesPage.clickSubmitCategoryButton();
-        leftMenuPanel.clickClientSegmentsSubmenu();
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getName())
+                .expandAttributesList(data.getName())
+                .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
+                .selectCategory(data.getCategory());
+        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
+                "The category has not been selected");
+        clientSegmentsPage.clickSearch();
 
-// todo delete, if leftMenuPanel.clickClientSegmentsSubmenu() works
-// page = leftMenuPanel.clickOnMenu("Client Segments");
-//        Assert.assertTrue(page instanceof ClientSegmentsPage);
-//        ClientSegmentsPage clientSegmentsPage = (ClientSegmentsPage) page;
-//no functional
-        categoriesPage.deleteCategory("Test Category");
+        Assert.assertTrue(clientSegmentsPage.verifyClientIsDisplayed(data.getName()),
+                        "The client is not displayed after clicking the \"Search\" button");
     }
 
-    //    @Test(testName = "Test Case 59885:Verify created category displays with attributes on the page.")
-    public void testCategiriesdisplaysWithAttributes() {
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
+    //the test case is similar to 59887, because of its preconditions
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCategoriesAreDisplayedWithAttributes(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
-                .clickCategoriesSubmenu();
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
 
-        categoriesPage.clickAddCategoryButton();
-        categoriesPage.setCategory("Test Category");
-        categoriesPage.clickSubmitCategoryButton();
-        categoriesPage.clickAddAttributeButton("Test Category");
-        categoriesPage.fillNotAutomatedAttributeFields("Test Attribute Name", "String");
-        categoriesPage.clickAddAttributeButton();
-        categoriesPage.refreshPage();
-        Assert.assertTrue(categoriesPage.checkAttributeByName("Test Category", "Test Attribute Name"));
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getName())
+                .expandAttributesList(data.getName())
+                .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
+                .selectCategory(data.getCategory());
+        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
+                "The category has not been selected");
+        clientSegmentsPage.clickSearch();
 
-        leftMenuPanel.clickClientSegmentsSubmenu();
-        // todo delete, if leftMenuPanel.clickClientSegmentsSubmenu() works
-//        page = leftMenuPanel.clickOnMenu("Client Segments");
-//        Assert.assertTrue(page instanceof ClientSegmentsPage);
-//        ClientSegmentsPage clientSegmentsPage = (ClientSegmentsPage) page;
-//no functional
-        categoriesPage.deleteCategory("Test Category");
+        Assert.assertTrue(clientSegmentsPage.verifyAttributeValueIsDisplayed(data.getAttributeValue()),
+                "The attribute is not displayed after clicking the \"Search\" button");
     }
 
-    //Test Case 59886:Verify user can select/deselect category.
-    //Test Case 59887:Verify user can add a value to attribute.
-} 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCategoriesCanBeSelectedAndDeselected(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
+
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getName())
+                .expandAttributesList(data.getName())
+                .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
+                .selectCategory(data.getCategory());
+        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
+                "The category has not been selected");
+
+        clientSegmentsPage.deselectCategory(data.getCategory());
+        Assert.assertFalse(clientSegmentsPage.isCategorySelected(data.getCategory()),
+                "The category has not been deselected");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testValueCanBeAddedToAttribute(String rowID, String description, JSONObject testData) {
+        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu()
+                .verifyCategoriesDoNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton()
+                .clickAddAttributeButton(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
+
+        ClientSegmentsPage clientSegmentsPage = leftMenuPanel
+                .clickClientSegmentsSubmenu()
+                .searchClientSegment(data.getName())
+                .expandAttributesList(data.getName())
+                .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
+                .selectCategory(data.getCategory());
+        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
+                "The category has not been selected");
+        clientSegmentsPage.clickSearch();
+
+        Assert.assertTrue(clientSegmentsPage.verifyAttributeValueIsDisplayed(data.getAttributeValue()),
+                "The attribute is not displayed after clicking the \"Search\" button");
+    }
+}

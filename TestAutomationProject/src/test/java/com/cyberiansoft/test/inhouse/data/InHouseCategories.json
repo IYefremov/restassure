@@ -54,10 +54,58 @@
       "rowID": "testUserCanAddAutomatedAttributeToCategories.01",
       "description": "Test Case 59880:Verify automated attribute",
       "category": "Test Category",
-      "attributeName": "New Attrinute",
+      "attributeName": "New Attrinute2",
       "isAutomatedStatus": "Yes",
-      "procedureName": "[ProcessDX].[dbo].[usp_ClientSegm_GetNumericValue]",
+      "procedureName": "[ProcessDX].[dbo].[usp_ClientSegm_GetDatetimeValue]",
       "client": "sdafbgh"
+    }
+  ],
+
+  "testUserCanSearchCategories": [
+    {
+      "rowID": "testUserCanSearchCategories.01",
+      "description": "Test Case 59883:Verify user can search by categories.",
+      "category": "Test Category",
+      "attributeName": "Test Attribute Name",
+      "attributeValue": "15",
+      "dataType": "String",
+      "name": "CompanyAutomation"
+    }
+  ],
+
+  "testCategoriesAreDisplayedWithAttributes": [
+    {
+      "rowID": "testCategoriesAreDisplayedWithAttributes.01",
+      "description": "Test Case 59885:Verify created category is displayed with attributes on the page",
+      "category": "Test Category",
+      "attributeName": "Test Attribute Name",
+      "attributeValue": "15",
+      "dataType": "String",
+      "name": "CompanyAutomation"
+    }
+  ],
+
+  "testCategoriesCanBeSelectedAndDeselected": [
+    {
+      "rowID": "testCategoriesCanBeSelectedAndDeselected.01",
+      "description": "Test Case 59886:Verify user can select/deselect category",
+      "category": "Test Category",
+      "attributeName": "Test Attribute Name",
+      "attributeValue": "15",
+      "dataType": "String",
+      "name": "CompanyAutomation"
+    }
+  ],
+
+  "testValueCanBeAddedToAttribute": [
+    {
+      "rowID": "testValueCanBeAddedToAttribute.01",
+      "description": "Test Case 59887:Verify user can add a value to attribute",
+      "category": "Test Category",
+      "attributeName": "Test Attribute Name",
+      "attributeValue": "15",
+      "dataType": "String",
+      "name": "CompanyAutomation"
     }
   ]
 }

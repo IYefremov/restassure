@@ -47,6 +47,14 @@ public class InHouseConfigInfo {
 	      return props.getProperty("user.password");
 	}
 
+	public String getUserEmail2() {
+	      return props.getProperty("user.mail2");
+	}
+
+	public String getUserPassword2() {
+	      return props.getProperty("user.password2");
+	}
+
 	public String getDefaultBrowser() {
 		return props.getProperty("default.browser");
 	}

@@ -74,8 +74,7 @@ public class BaseTestCase {
     public void teamPortalLogin(Method method) throws InterruptedException {
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         webdriverGotoWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
-        LoginPage loginPage = PageFactory.initElements(webdriver,
-                LoginPage.class);
+        LoginPage loginPage = PageFactory.initElements(webdriver, LoginPage.class);
         loginPage.loginByGmail();
         Thread.sleep(2000);
     }

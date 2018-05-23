@@ -25,6 +25,9 @@ public class LoginPage extends BasePage {
     @FindBy(id = "password")
     private WebElement passwordBlock;
 
+    @FindBy(xpath = "//img[@id='captchaimg']")
+    private WebElement captcha;
+
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -32,14 +35,26 @@ public class LoginPage extends BasePage {
 
     public void loginByGmail() {
         wait.until(ExpectedConditions.elementToBeClickable(loginGmailBTN)).click();
-        if (driver.findElements(By.id("identifierId")).size() > 0) {
-        	wait.until(ExpectedConditions.visibilityOf(emailField))
-                    .sendKeys(InHouseConfigInfo.getInstance().getUserEmail());
+        if (!driver.getCurrentUrl().contains("Dashboard")) {
+            emailField.sendKeys(InHouseConfigInfo.getInstance().getUserEmail());
             wait.until(ExpectedConditions.elementToBeClickable(loginNextBTN)).click();
-            wait.until(ExpectedConditions.visibilityOf(passwordBlock.findElement(By.tagName("input"))))
-                    .sendKeys(InHouseConfigInfo.getInstance().getUserPassword());
-            wait.until(ExpectedConditions.elementToBeClickable(passwordNextBTN)).click();
-            //todo add login with another email
+            try {
+                wait.until(ExpectedConditions.visibilityOf(passwordBlock.findElement(By.tagName("input"))))
+                        .sendKeys(InHouseConfigInfo.getInstance().getUserPassword());
+                wait.until(ExpectedConditions.elementToBeClickable(passwordNextBTN)).click();
+            } catch (Exception e) {
+                if (!captcha.isDisplayed()) {
+                    e.printStackTrace();
+                } else {
+                    refreshPage();
+                    wait.until(ExpectedConditions.visibilityOf(emailField))
+                            .sendKeys(InHouseConfigInfo.getInstance().getUserEmail2());
+                    wait.until(ExpectedConditions.elementToBeClickable(loginNextBTN)).click();
+                    wait.until(ExpectedConditions.visibilityOf(passwordBlock.findElement(By.tagName("input"))))
+                            .sendKeys(InHouseConfigInfo.getInstance().getUserPassword2());
+                    wait.until(ExpectedConditions.elementToBeClickable(passwordNextBTN)).click();
+                }
+            }
         }
     }
 }
