@@ -25,7 +25,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -610,8 +609,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt(_discaunt_us);
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickBackButton();
-		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-		priceMatricesScreen.clickBackButton();
+//		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+//		priceMatricesScreen.clickBackButton();
 
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
@@ -1950,23 +1949,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		//Create WO1
-		Instant start = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		System.out.println("+++++++1" + Duration.between(start, Instant.now()).toMillis()/1000);
 		myworkordersscreen.clickAddOrderButton();
-		System.out.println("+++++++2" + Duration.between(start, Instant.now()).toMillis()/1000);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 		vehiclescreeen.setVIN(VIN);
-		/*final String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "The VIN is invalid.");
-		appiumdriver.findElement(
-				MobileBy.name("Close"))
-				.click();
-		appiumdriver.findElement(
-				MobileBy.name("Close"))
-				.click();*/
 		String wonumber1 = vehiclescreeen.getWorkOrderNumber();
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -1989,17 +1977,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
-		ordersummaryscreen.clickSave();
-		Assert.assertTrue(appiumdriver.findElement(
-				MobileBy.name("Warning!")).isDisplayed());
-		appiumdriver.findElement(
-				MobileBy.name("Yes"))
-				.click();
-		//testlogger.log(LogStatus.INFO, testuser.getTestUserName());
+		ordersummaryscreen.saveWizardAndAcceptAlert();
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		//myworkordersscreen.clickCancelSearchButton();
-		
-		//myworkordersscreen.searchWO(wonumber1);
+
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -2022,11 +2002,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
-		System.out.println("+++++++3" + Duration.between(start, Instant.now()).toMillis()/1000);
 		invoiceinfoscreen.clickSaveAsDraft();
-		System.out.println("+++++++4" + Duration.between(start, Instant.now()).toMillis()/1000);
 		myworkordersscreen.clickHomeButton();
-		System.out.println("+++++++5" + Duration.between(start, Instant.now()).toMillis()/1000);
 	}
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
@@ -2325,7 +2302,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);

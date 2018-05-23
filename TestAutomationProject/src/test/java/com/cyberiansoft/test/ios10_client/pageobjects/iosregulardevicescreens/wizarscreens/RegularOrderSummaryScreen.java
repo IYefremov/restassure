@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -135,5 +136,11 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	
 	public boolean isTotalSaleFieldPresent()  {
 		return appiumdriver.findElementsByAccessibilityId("Total Sale").size() > 0;
+	}
+
+	public RegularMyWorkOrdersScreen saveWizardAndAcceptAlert() {
+		clickSave();
+		Helpers.acceptAlert();
+		return new RegularMyWorkOrdersScreen(appiumdriver);
 	}
 }

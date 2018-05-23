@@ -60,12 +60,12 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 
 	public void clickApproveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Approve")).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void clickApproveAllServicesButton() {
@@ -93,7 +93,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSignButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
+		//appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
 	
 	public void clickSingnAndDrawApprovalSignature() throws InterruptedException {
@@ -196,7 +198,13 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectInspection(String inspnumber) {
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement approvetable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber))).click();
+		//approvetable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		//wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspnumber)))).click();
 	}
 	
 	public int getNumberOfActiveApproveButtons() {
