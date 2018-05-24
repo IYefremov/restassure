@@ -89,7 +89,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsTable")));
 	}
 

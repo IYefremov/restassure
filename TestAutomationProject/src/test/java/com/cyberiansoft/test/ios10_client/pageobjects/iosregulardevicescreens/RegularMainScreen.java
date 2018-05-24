@@ -79,6 +79,9 @@ public class RegularMainScreen {
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(user)));
 		appiumdriver.findElementByAccessibilityId(user).click();
+		wait = new WebDriverWait(appiumdriver, 15);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Enter password here")));
 		securefld.setValue(password);
 		loginbtn.click();
 		return new RegularHomeScreen(appiumdriver);

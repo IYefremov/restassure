@@ -346,12 +346,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		notesscreen.setNotes(_notes1);
 		//notesscreen.clickDoneButton();
 		notesscreen.addQuickNotes();
-		//notesscreen.clickDoneButton();
-
 		notesscreen.clickSaveButton();
-		vehiclescreeen.clickNotesButton();
+		visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+		visualInteriorScreen.clickNotesButton();
 		Assert.assertEquals(notesscreen.getNotesAndQuickNotes(), _notes1 + "\n" + notesscreen.quicknotesvalue);
 		notesscreen.clickSaveButton();
+		visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
 		visualInteriorScreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
 
@@ -391,7 +391,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		// approveinspscreen.clickBackButton();
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inspection));
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -687,7 +687,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		// }
 
 		// approveinspscreen.clickBackButton();
-		//myinspectionsscreen.clickDoneButton();
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		for (int i = 0; i < 2; i++) {
 			Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpections[i]));
 		}
@@ -1625,7 +1625,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
  		Assert.assertEquals(vehiclescreeen.getWorkOrderCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
-		servicesscreen.clickCancel();
+		servicesscreen.clickCancelWizard();
 		invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.cancelWizard();
 		myinvoicesscreen.clickHomeButton();
@@ -2412,7 +2412,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	//Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO.
 	@Test(testName="Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO", description = "'WO: Test 'Override' option of 'Duplicate services' message for WO.")
 	public void testOverrideOptionOfDuplicateServicesMessageForWO() throws Exception {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
@@ -3406,7 +3406,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttext.contains("You cannot change the status of services for this phase. You can only change the status of the whole phase."));
 		ordermonitorscreen.clickServiceDetailsDoneButton();
 		
-		ordermonitorscreen.clicksRepairPhaseLine();
 		ordermonitorscreen.clickCompletedPhaseCell();
 		
 		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
@@ -3773,7 +3772,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesscreen.clickAddServicesButton();
-		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
+		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		questionsscreen.clickSave();

@@ -106,11 +106,12 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		int yy = element.getLocation().getY();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(1)).moveTo(xx + 200, yy + 200).release().perform();
-		Helpers.waitABit(1000);
 
 	}
 	
-	public void drawApprovalSignature() throws InterruptedException {
+	public void drawApprovalSignature() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("TouchInputView")));
 		MobileElement element = (MobileElement) appiumdriver.findElementByAccessibilityId("TouchInputView");
 		int xx = element.getLocation().getX();
 
