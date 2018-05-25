@@ -71,7 +71,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 					findElement(By.xpath(".//div[@class='truncate']")).getText().trim();
 			List<String> wosarray = Arrays.asList(wos.split(","));
 			for (String wonumber : wosarray)
-				workOrders.add(wonumber);
+				workOrders.add(wonumber.trim());
 		}
 		else
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);

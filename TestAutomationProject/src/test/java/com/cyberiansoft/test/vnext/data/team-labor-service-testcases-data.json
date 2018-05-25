@@ -64,6 +64,25 @@
       },
       "inspPrice": "$198.24"
     }
+  ],
+
+  "testVerifyUserCanCancelAddPanelAndParts": [
+    {
+      "rowID": "testVerifyUserCanCancelAddPanelAndParts.01",
+      "description": "Test Case 73239:Verify user can cancel add panel and parts",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "777777777777777777"
+      },
+      "laborService":
+      {
+        "serviceName": "Labor_expence",
+        "laborServicePanel": "Front Door",
+        "laborServicePart": "Refinish Left Front Door Cladding",
+        "laborServiceRate": "$99.12",
+        "laborServiceTime": "1.03"
+      }
+    }
   ]
 
 }

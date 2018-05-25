@@ -469,11 +469,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspectionsscreen.getFirstInspectionNumber());
 		vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		notesscreen.clickClearNotesButton();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
 		AppiumUtils.clickHardwareBackButton();
-
 		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
 		notesscreen = selectedServicesScreen.clickServiceNotesOption(testservice);
 		Assert.assertEquals(notesscreen.getSelectedNotes(), "");
@@ -495,7 +495,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
 		VNextNotesScreen notesscreen = vehicleinfoscreen.clickInspectionNotesOption();
 		notesscreen.selectNotesPicturesTab();
-		notesscreen.addImageToNotesFromGallery();
+		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		notesscreen = vehicleinfoscreen.clickInspectionNotesOption();
@@ -528,7 +528,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		visualscreen.clickAddServiceButton();
-		VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
+		//VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
+		VNextSelectDamagesScreen selectdamagesscreen = new VNextSelectDamagesScreen(appiumdriver);
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -537,8 +538,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
 		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
-		notesscreen.selectNotesPicturesTab();
-		notesscreen.addImageToNotesFromGallery();
+		//notesscreen.selectNotesPicturesTab();
+		notesscreen.addFakeImageNote();
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 		notesscreen.clickNotesBackButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
@@ -586,8 +587,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		for (String serviceadd : servicestoadd) {
 			//VNextServiceDetailsScreen servicedetailsscreen = inspservicesscreen.openServiceDetailsScreen(serviceadd);
 			VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(serviceadd);
-			notesscreen.selectNotesPicturesTab();
-			notesscreen.addImageToNotesFromGallery();
+			//notesscreen.selectNotesPicturesTab();
+			notesscreen.addFakeImageNote();
 			Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 			notesscreen.clickNotesBackButton();
 			selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
@@ -638,8 +639,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsizes[i]);
 			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);
 			VNextNotesScreen notesscreen = vehiclepartinfoscreen.clickMatrixServiceNotesOption();
-			notesscreen.selectNotesPicturesTab();
-			notesscreen.addImageToNotesFromGallery();
+			//notesscreen.selectNotesPicturesTab();
+			notesscreen.addFakeImageNote();
 			Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 			notesscreen.clickNotesBackButton();
 			vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);

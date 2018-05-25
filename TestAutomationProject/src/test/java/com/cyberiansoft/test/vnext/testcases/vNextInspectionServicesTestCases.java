@@ -968,7 +968,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		for (int i=0; i< servicestoselect.length; i++)
 			selectedServicesScreen.uselectService(servicestoselect[i]);
-		Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), "$0.00");
+		Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), "$10.00");
 		selectedServicesScreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -1064,7 +1064,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
 		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservicename);
-		vehiclepartinfoscreen.setAdditionalServicePriceValue(additionalservicename, additionalservicenprice);
+		vehiclepartinfoscreen.setAdditionalServiceAmauntValue(additionalservicename, additionalservicenprice);
 		Assert.assertEquals(vehiclepartinfoscreen.getMatrixServiceTotalPriceValue(), inspectiontotalprice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
@@ -1167,6 +1167,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		inspinfoscreen.setVIN(testVIN);
 		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
 		VNextInspectionServicesScreen inspservicesscreen =inspinfoscreen.goToInspectionServicesScreen();
+		for (String srv : services) {
+			inspservicesscreen.selectService(srv);
+		}
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		for (String srv : services) {
 			VNextNotesScreen notesscreen = selectedServicesScreen.clickServiceNotesOption(srv);

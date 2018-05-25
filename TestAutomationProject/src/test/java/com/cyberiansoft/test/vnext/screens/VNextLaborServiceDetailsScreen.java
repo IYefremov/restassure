@@ -52,4 +52,9 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseInspectionsScreen {
         tap(savebtn);
         return new VNextInspectionServicesScreen(appiumdriver);
     }
+
+    public VNextInspectionServicesScreen clickBackButton(){
+        clickScreenBackButton();
+        return new VNextInspectionServicesScreen(appiumdriver);
+    }
 }

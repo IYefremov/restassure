@@ -127,7 +127,20 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		} else
 			Assert.assertTrue(false, "Can't find service: " + additionalservicename);	
 	}
-	
+
+
+	public void setAdditionalServiceAmauntValue(String additionalservicename, String pricevalue) {
+		WebElement servicecell = getVehiclePartAdditionalServiceCell(additionalservicename);
+		if (servicecell != null) {
+			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicecell);
+			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
+			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
+			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), pricevalue);
+		} else
+			Assert.assertTrue(false, "Can't find service: " + additionalservicename);
+	}
+
 	public String getMatrixServiceTotalPriceValue() {
 		return vehiclepartinfoscreen.findElement(By.xpath(".//span[@class='money-wrapper']")).getText();
 	}

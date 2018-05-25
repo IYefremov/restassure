@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
 
@@ -101,7 +102,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
             servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).clear();
             servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).sendKeys(notes);
             appiumdriver.hideKeyboard();
-            tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
+            tap(appiumdriver.findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + serviceName + "']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -115,7 +116,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             notesvalue = servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getAttribute("value");
-            tap(appiumdriver.findElement(By.xpath(".//div[@class='item-title' and text()='" + serviceName + "']")));
+            tap(appiumdriver.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + serviceName + "']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
         return notesvalue;
@@ -171,16 +172,12 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     }
 
     public boolean isServiceSelected(String servicename) {
-        boolean selected = false;
-        WebElement servicecell = getSelectedServiceCell(servicename);
-        if (servicecell != null) {
-            if (servicecell.findElement(By.xpath(".//input[@action='unselect-item']" )).getAttribute("checked") != null)
-                if (servicecell.findElement(By.xpath(".//input[@action='unselect-item']" )).getAttribute("checked").equals("true"))
-                    selected = true;
-        } else
-            Assert.assertTrue(false, "Can't find service: " + servicename);
-
-        return selected;
+        boolean exists = false;
+        appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        if (servicesscreen.findElement(By.xpath(".//div[@data-autotests-id='all-services']")).isDisplayed())
+            exists =  getSelectedServicesList().findElements(By.xpath((".//div[@class='checkbox-item-title' and text()='" + servicename + "']"))).size() > 0;
+        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        return exists;
     }
 
 

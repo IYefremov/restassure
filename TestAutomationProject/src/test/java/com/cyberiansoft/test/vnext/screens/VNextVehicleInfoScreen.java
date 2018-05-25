@@ -79,7 +79,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public void setVIN (String vinnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(vinfld));
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
 		setValue(vinfld, vinnumber);
 	}
 	
@@ -149,8 +149,10 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	}
 	
 	public void setYear(String yearValue) {
-		tap(yearfld);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.Year")));
+		tap(yearfld);
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
 		WebElement elem = appiumdriver.findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']"));	
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
