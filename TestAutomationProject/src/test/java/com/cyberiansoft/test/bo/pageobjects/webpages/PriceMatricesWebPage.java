@@ -198,7 +198,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 			if (row.findElement(By.xpath(".//td[5]")).getText().contains(pricematrix)) {
 				row.findElement(By.xpath(".//a[text()='Prices']")).click();
 				try{
-				updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+				wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 				}catch(Exception e){}
 //			Thread.sleep(300);
 //				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));

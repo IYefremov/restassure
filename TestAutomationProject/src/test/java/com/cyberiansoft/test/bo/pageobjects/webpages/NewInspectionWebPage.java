@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,10 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class NewInspectionWebPage extends BaseWebPage {
 	
@@ -57,13 +53,13 @@ public class NewInspectionWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void selectCustomerType(String customertype) throws InterruptedException {
+	public void selectCustomerType(String customertype) {
 		//Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(customertypecmb));
 		Select selectObject = new Select(customertypecmb);
 		selectObject.selectByValue(customertype);
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+        wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(300);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
@@ -76,11 +72,11 @@ public class NewInspectionWebPage extends BaseWebPage {
 		click(driver.findElement(By.xpath("//label[text()='" + actionname + "']")));
 	}
 	
-	public void selectCustomer(String customer) throws InterruptedException {
+	public void selectCustomer(String customer) {
 		wait.until(ExpectedConditions.elementToBeClickable(customercmb)).click();
 		customercmb.sendKeys(customer);
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+        wait.until(ExpectedConditions.visibilityOf(updateProcess));
+        wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + customer + "']"))).click();
 	}

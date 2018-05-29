@@ -102,7 +102,7 @@ public class EventsWebPage extends BaseWebPage {
 		selectFirstConditionNameCriteria(firstconditionname);
 		selectFirstConditionTypeCriteria(firstconditiontype);
 //		waitABit(1000);
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		setFirstConditionCriteria(firstconditioncriteria);
 	}
 

@@ -26,14 +26,15 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     public void testUserCanAddNewClient(String rowID, String description, JSONObject testData) {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
         clientQuotesPage.deleteUser(data.getName());
     }
@@ -42,19 +43,19 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     public void testUserCanEditClientInformation(String rowID, String description, JSONObject testData)  {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.editClient(data.getName());
-        clientQuotesPage.clearAndSetNewClientName(data.getNewName());
-        clientQuotesPage.clickUpdateClientBTN();
+        clientQuotesPage.editClient(data.getName())
+                .clearAndSetNewClientName(data.getNewName())
+                .clickUpdateClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getNewName()));
         clientQuotesPage.deleteUser(data.getNewName());
     }
@@ -65,26 +66,196 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
         Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(),data.getTeam());
-        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.expandAgreementList(data.getName());
-        clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
+        clientQuotesPage
+                .clickAddAgreementBTN(data.getName())
+                .setAgreement(data.getFirstAgreement(),data.getTeam());
+
+        leftMenuPanel
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .expandAgreementList(data.getName())
+                .clickEditAgreement(data.getFirstAgreement());
         Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
+        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
         clientQuotesPage.deleteUser(data.getName());
-
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanSendNotifications(String rowID, String description, JSONObject testData) {
+        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
+        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+        clientQuotesPage
+                .clickAddAgreementBTN(data.getName())
+                .setAgreement(data.getFirstAgreement(), data.getTeam());
+
+        leftMenuPanel
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .expandAgreementList(data.getName())
+                .clickEditAgreement(data.getFirstAgreement());
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
+        clientQuotesPage.updateAgreement();
+        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+
+        clientQuotesDetailPage
+                .clickDiscountButton()
+                .selectDiscount("20 min comm.-$10 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$200.00"));
+//        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$11.00"));
+        clientQuotesDetailPage.selectSetupFeeForAllClients();
+//        clientQuotesDetailPage.clickAddClientSupportItem("testFeature3 test mike");
+//        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$200.00"));
+        clientQuotesDetailPage
+                .clickFinalizeAgreementButton()
+                .sendNotification();
+        Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUser(data.getName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanVerifyDatesWhenOpenMailWithLink(String rowID, String description, JSONObject testData) {
+        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
+        clientQuotesPage.clickConfirmNewClientBTN();
+        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+        clientQuotesPage
+                .clickAddAgreementBTN(data.getName())
+                .setAgreement(data.getFirstAgreement(), data.getTeam());
+
+        leftMenuPanel
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .expandAgreementList(data.getName())
+                .clickEditAgreement(data.getFirstAgreement());
+
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
+        clientQuotesPage.updateAgreement();
+        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        clientQuotesDetailPage
+                .clickDiscountButton()
+                .selectDiscount("1 min comm.-$150.10 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
+        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
+        clientQuotesDetailPage
+                .clickFinalizeAgreementButton()
+                .sendNotification();
+        //TODO when dates will be shown correct
+
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUser(data.getName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanPayAgreementFromMailLink(String rowID, String description, JSONObject testData) {
+        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        ClientQuotesPage clientQuotesPage = leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .clickAddClientBTN()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
+                .clickConfirmNewClientBTN();
+        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+        clientQuotesPage
+                .clickAddAgreementBTN(data.getName())
+                .setAgreement(data.getFirstAgreement(),data.getTeam());
+
+        leftMenuPanel
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .expandAgreementList(data.getName())
+                .clickEditAgreement(data.getFirstAgreement());
+        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
+        clientQuotesPage.updateAgreement();
+        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        clientQuotesDetailPage
+                .clickDiscountButton()
+                .selectDiscount("1 min comm.-$150.1 per m.");
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
+        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
+        clientQuotesDetailPage
+                .clickFinalizeAgreementButton()
+                .sendNotification();
+        Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
+        String link = clientQuotesDetailPage.getAgreementApproveLink();
+        AgreementApprovePage agreementApprovePage = (AgreementApprovePage) clientQuotesDetailPage
+                .goToAgreementApprovementPageFromEmail(link);
+        agreementApprovePage.fillClientInfo("Anastasia","Maksimova","automationCompany");
+        Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
+        agreementApprovePage
+                .clickAgreeWithTermsAndConditionsBTN()
+                .clickAcceptAgreementBTN()
+                .fillFeesPayment("4242424242424242","10","2026","123")
+                .clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
+        agreementApprovePage
+                .clickCancelPayBTN()
+                .clickPayBTN();
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
+        agreementApprovePage
+                .clickApprovePayBTN()
+                .goToPreviousPage();
+
+        leftMenuPanel
+                .clickClientManagement()
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUser(data.getName());
+    }
+
 
     //todo fails S. Zakaulov
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class")
@@ -108,13 +279,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.expandAgreementList(data.getName());
         clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
         Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
+        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
         ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage
-                .clickSetupAgreementBTN(data.getSecondAgreement());
+                .clickSetupAgreementButton(data.getSecondAgreement());
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
-        clientQuotesDetailPage.clickDiscountBTN();
+        clientQuotesDetailPage.clickDiscountButton();
         //todo the discount selection options are absent!
         clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
         Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
@@ -129,143 +300,5 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.searchUser(data.getName());
         clientQuotesPage.deleteUser(data.getName());
 
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanSendNotifications(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(),data.getTeam());
-        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
-
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.expandAgreementList(data.getName());
-        clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN(data.getSecondAgreement());
-                Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
-        clientQuotesDetailPage.clickDiscountBTN();
-        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
-        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
-        clientQuotesDetailPage.clickFinalizeAgreementBTN();
-        clientQuotesDetailPage.clickSendNotificationButton();
-        Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
-        leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.deleteUser(data.getName());
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanVerifyDatesWhenOpenMailWithLink(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(), data.getTeam());
-        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.expandAgreementList(data.getName());
-        clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
-        clientQuotesDetailPage.clickDiscountBTN();
-        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
-        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
-        clientQuotesDetailPage.clickFinalizeAgreementBTN();
-        clientQuotesDetailPage.clickSendNotificationButton();
-        //TODO when dates will be shown correct
-
-        leftMenuPanel.clickClientManagement().clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.deleteUser(data.getName());
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanPayAgreementFromMailLink(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
-        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel.clickClientManagement().clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(),data.getTeam());
-        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.expandAgreementList(data.getName());
-        clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.abilityToChangeAgreementName(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementBTN(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
-        clientQuotesDetailPage.clickDiscountBTN();
-        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.1 per m.");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
-        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
-        clientQuotesDetailPage.clickFinalizeAgreementBTN();
-        clientQuotesDetailPage.clickSendNotificationButton();
-        Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
-        String link = clientQuotesDetailPage.getAgreementApproveLink();
-        AgreementApprovePage agreementApprovePage = (AgreementApprovePage) clientQuotesDetailPage.goToAgreementApprovementPageFromEmail(link);
-        agreementApprovePage.fillClientInfo("Anastasia","Maksimova","automationCompany");
-        Assert.assertTrue(agreementApprovePage.checkTermsAndConditions());
-        agreementApprovePage.clickAgreeWithTermsAndConditionsBTN();
-        agreementApprovePage.clickAcceptAgreementBTN();
-        agreementApprovePage.fillFeesPayment("4242424242424242","10","2026","123");
-        agreementApprovePage.clickPayBTN();
-        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
-        agreementApprovePage.clickCancelPayBTN();
-        agreementApprovePage.clickPayBTN();
-        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage("$1,776.00","4242424242424242"));
-        agreementApprovePage.clickApprovePayBTN();
-        agreementApprovePage.goToPreviousPage();
-
-        leftMenuPanel.clickClientManagement().clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.deleteUser(data.getName());
     }
 }

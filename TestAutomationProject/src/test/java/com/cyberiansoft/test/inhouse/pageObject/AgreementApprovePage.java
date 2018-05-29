@@ -92,16 +92,18 @@ public class AgreementApprovePage extends BasePage {
         }
     }
 
-    public void clickAgreeWithTermsAndConditionsBTN() {
+    public AgreementApprovePage clickAgreeWithTermsAndConditionsBTN() {
         wait.until(ExpectedConditions.elementToBeClickable(agreeWithTermsCheckBox)).click();
+        return PageFactory.initElements(driver, AgreementApprovePage.class);
     }
 
-    public void clickAcceptAgreementBTN() {
+    public AgreementApprovePage clickAcceptAgreementBTN() {
         wait.until(ExpectedConditions.elementToBeClickable(acceptAgreementButton)).click();
         wait.until(ExpectedConditions.elementToBeClickable(acceptThankYouPMessage)).click();
+        return PageFactory.initElements(driver, AgreementApprovePage.class);
     }
 
-    public void fillFeesPayment(String cardNumber, String expirationDateMonth,String expirationDateYear, String cvc) {
+    public AgreementApprovePage fillFeesPayment(String cardNumber, String expirationDateMonth, String expirationDateYear, String cvc) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Number")));
         wait.until(ExpectedConditions.visibilityOf(cardNumberField));
         cardNumberField.sendKeys(cardNumber);
@@ -112,21 +114,24 @@ public class AgreementApprovePage extends BasePage {
         options = driver.findElements(By.xpath("//ul[@class='dropdown-menu inner']")).get(3).findElements(By.xpath("//li[data-original-index]"));
         options.stream().filter(e -> e.findElement(By.tagName("a")).findElement(By.tagName("span")).getText().equals(expirationDateYear)).findFirst().get().click();
         cvcField.sendKeys(cvc);
+        return PageFactory.initElements(driver, AgreementApprovePage.class);
     }
 
     public void clickPayBTN(){
         payButton.click();
     }
 
-    public void clickCancelPayBTN(){
+    public AgreementApprovePage clickCancelPayBTN(){
         wait.until(ExpectedConditions.visibilityOf(cancelPayButton));
         cancelPayButton.click();
+        return PageFactory.initElements(driver, AgreementApprovePage.class);
     }
 
 
-    public void clickApprovePayBTN(){
+    public AgreementApprovePage clickApprovePayBTN(){
         wait.until(ExpectedConditions.visibilityOf(approvePayButton));
         approvePayButton.click();
+        return PageFactory.initElements(driver, AgreementApprovePage.class);
     }
 
     public boolean checkPayConfirmationMessage(String totalAmount ,String cardNumber){

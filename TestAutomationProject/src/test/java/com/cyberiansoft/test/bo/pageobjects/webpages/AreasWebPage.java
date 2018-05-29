@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,12 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class AreasWebPage extends BaseWebPage {
 	
@@ -107,29 +104,29 @@ public class AreasWebPage extends BaseWebPage {
 		return exists;
 	}
 	
-	public void clickEditArea(String areaname) throws InterruptedException {
+	public void clickEditArea(String areaname) {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//*[@title='Edit']")).click();
-			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			wait.until(ExpectedConditions.visibilityOf(updateProcess));
+			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else 
 			Assert.assertTrue(false, "Can't find " + areaname + " area");
 	}
 	
-	public void deleteArea(String areaname) throws InterruptedException {
+	public void deleteArea(String areaname) {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			wait.until(ExpectedConditions.visibilityOf(updateProcess));
+			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			//Thread.sleep(1000);
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
-			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			wait.until(ExpectedConditions.visibilityOf(updateProcess));
+			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {
@@ -137,17 +134,17 @@ public class AreasWebPage extends BaseWebPage {
 		}
 	}
 	
-	public void deleteAreaAndCancelDeleting(String areaname) throws InterruptedException {
+	public void deleteAreaAndCancelDeleting(String areaname) {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			row.findElement(By.xpath(".//td/input[@title='Delete']")).click();
-			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			wait.until(ExpectedConditions.visibilityOf(updateProcess));
+			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			//Thread.sleep(1000);
 			Alert alert = driver.switchTo().alert();
 			alert.dismiss();
-			updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-			updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+			wait.until(ExpectedConditions.visibilityOf(updateProcess));
+			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			//Thread.sleep(300);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} else {

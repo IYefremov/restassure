@@ -55,6 +55,10 @@ public class InHouseConfigInfo {
 	      return props.getProperty("user.password2");
 	}
 
+	public String getEmailVerificationAddress() {
+	      return props.getProperty("email.verification");
+	}
+
 	public String getDefaultBrowser() {
 		return props.getProperty("default.browser");
 	}

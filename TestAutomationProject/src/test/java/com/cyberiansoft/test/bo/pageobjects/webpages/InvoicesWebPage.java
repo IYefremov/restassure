@@ -251,8 +251,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
 		driver.findElement(By.xpath("//tr/td/a[text()='" + year + "']")).click();
 		driver.findElement(By.id("rcMView_OK")).click();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		// Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}

@@ -24,25 +24,25 @@ public class ClientQuotesDetailPage extends BasePage {
     private String userPassword;
 
     @FindBy(className = "agreement-statuses")
-    private WebElement agreementStatuses;
+    private WebElement agreementStatusesBlock;
 
     @FindBy(className = "btn-select-edition-discount")
     private WebElement discountBTN;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-finalize-agreement']")
-    private WebElement finalizeAgreementBTN;
+    private WebElement finalizeAgreementButton;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-send-notification']")
-    private WebElement sendNotificationBTN;
+    private WebElement sendNotificationButton;
 
     @FindBy(className = "form-control")
     private WebElement formControlList;
 
     @FindBy(xpath = "//button[@class='submit btn-save-select-edition-discount']")
-    private WebElement submitDiscountBTN;
+    private WebElement submitDiscountButton;
 
     @FindBy(xpath = "//button[@class='submit btn-save-select-edition-feature-setup-fee']")
-    private WebElement submitSetupFeeBTN;
+    private WebElement submitSetupFeeButton;
 
     @FindBy(xpath = "//tbody[@data-tbody-feature-group-id]")
     private List<WebElement> clientSupportTables;
@@ -57,13 +57,34 @@ public class ClientQuotesDetailPage extends BasePage {
     private WebElement pricePerMonth;
 
     @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-setup-fee]")
-    private WebElement setUpFee;
+    private WebElement totalSetUpFee;
 
     @FindBy(xpath = "//div[@id='finalize-validation-error-dialog']/div[@class='modal modal-primary']")
     private WebElement modalDialog;
 
     @FindBy(xpath = "//span[@class='notification-status']")
     private WebElement notificationStatus;
+
+    @FindBy(xpath = "//span[text()='Select setup fee...']")
+    private List<WebElement> emptySetupFeeSelectionList;
+
+    @FindBy(xpath = "//div[@class='dropup open']")
+    private WebElement dropUpOpen;
+
+    @FindBy(xpath = "//div[@class='dropup open']//select[@class='form-control']")
+    private WebElement dropUpOptions;
+
+    @FindBy(xpath = "//span[contains (text(), 'Agreement status:')]/following-sibling::b")
+    private WebElement agreementStatus;
+
+    @FindBy(xpath = "//span[contains (text(), 'Paid status:')]/following-sibling::span")
+    private WebElement paidStatus;
+
+    @FindBy(xpath = "//span[contains (text(), 'Viewed letter:')]/following-sibling::span")
+    private WebElement viewedLetterStatus;
+
+    @FindBy(xpath = "//span[contains (text(), 'Viewed agreement:')]/following-sibling::span")
+    private WebElement viewedAgreementStatus;
 
     public ClientQuotesDetailPage(WebDriver driver) {
         super(driver);
@@ -72,39 +93,29 @@ public class ClientQuotesDetailPage extends BasePage {
         userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
-    public boolean checkAgreementStatuses(String aNew, String no, String no1, String no2) {
-        waitABit(5000);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("agreement-statuses")));
-        waitABit(5000);
-        if (!agreementStatuses.findElement(By.tagName("b")).getText().equals(aNew)) {
-            return false;
-        }
-        if (!agreementStatuses.findElements(By.tagName("span")).get(2).getText().equals(no)) {
-            return false;
-        }
-        if (!agreementStatuses.findElements(By.tagName("span")).get(4).getText().equals(no1)) {
-            return false;
-        }
-
-        if (!agreementStatuses.findElements(By.tagName("span")).get(6).getText().equals(no2)) {
-            return false;
-        }
-        return true;
+    public boolean checkAgreementStatuses(String agreement, String payment, String letterView, String agreementView) {
+        wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
+        return (agreementStatus.getText().equals(agreement) &&
+                paidStatus.getText().equals(payment) &&
+                viewedLetterStatus.getText().equals(letterView) &&
+                viewedAgreementStatus.getText().equals(agreementView));
     }
 
-    public void clickDiscountBTN() {
+    public ClientQuotesDetailPage clickDiscountButton() {
         discountBTN.click();
-        waitABit(2000);
+        wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
+        return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }
 
-    public void clickFinalizeAgreementBTN() {
-        wait.until(ExpectedConditions.elementToBeClickable(finalizeAgreementBTN)).click();
+    public ClientQuotesDetailPage clickFinalizeAgreementButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(finalizeAgreementButton)).click();
         try {
             driver.switchTo().alert().accept();
         } catch (Exception ignored) {}
+        return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }
 
-    public void handleAlertForFinalizeAgreementBTN() {
+    public void handleAlertForFinalizeAgreementButton() {
         try {
             wait.until(ExpectedConditions.attributeToBe(modalDialog, "display", "block"));
             wait.until(ExpectedConditions.elementToBeClickable(modalDialog.findElement(By.className("close")))).click();
@@ -112,18 +123,17 @@ public class ClientQuotesDetailPage extends BasePage {
         } catch (Exception ignored) {}
     }
 
-    public void clickSendNotificationButton() {
+    public void sendNotification() {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(sendNotificationBTN)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(sendNotificationButton)).click();
         } catch (Exception e) {
-            clickWithJS(sendNotificationBTN);
+            clickWithJS(sendNotificationButton);
         }
         try {
             driver.switchTo().alert().accept();
             waitForLoading();
-            //todo add waitForLoading method?
         } catch (Exception e) {
-            handleAlertForFinalizeAgreementBTN();
+            handleAlertForFinalizeAgreementButton();
             Assert.fail("The modal dialog has been displayed after clicking the \"Send Notification\" button." + e);
         }
         try {
@@ -140,6 +150,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    //todo move to another class
     public boolean checkEmails(String title) {
         boolean flag = false;
         waitABit(30000);
@@ -186,13 +197,6 @@ public class ClientQuotesDetailPage extends BasePage {
 //        }
 //        return result;
 
-
-        final String usermail = "test.cyberiansoft@gmail.com";
-        final String usermailpsw = "ZZzz11!!";
-        final String usermailtitle = "ReconPro vNext Dev: REGISTRATION";
-        final String sendermail = "Repair360-qc@cyberianconcepts.com";
-        final String mailcontainstext = "complete the registration process";
-
         String mailmessage = "";
         for (int i = 0; i < 4; i++) {
             if (!com.cyberiansoft.test.ios_client.utils.MailChecker.searchSpamEmail(userName, userPassword, "Agreement", "noreply@repair360.net", "https://goo.gl")) {
@@ -212,13 +216,15 @@ public class ClientQuotesDetailPage extends BasePage {
     public void selectDiscount(String discount) {
         driver.switchTo().defaultContent();
         wait.until(ExpectedConditions.elementToBeClickable(formControlList));
-        new Select(formControlList).selectByVisibleText(discount);
-        submitDiscountBTN.click();
+        Select selection = new Select(formControlList);
+        selection.selectByVisibleText(discount);
+        wait.until(s -> !selection.getAllSelectedOptions().isEmpty());
+        wait.until(ExpectedConditions.elementToBeClickable(submitDiscountButton)).click();
         waitForLoading();
     }
 
     public boolean checkNewPrice(String price) {
-        waitABit(3000);
+        waitABit(2000);
         System.out.println("PRICE:");
         System.out.println(pricePerMonth.getText());
         System.out.println(price);
@@ -226,11 +232,11 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     public boolean checkSetupFee(String fee) {
-        waitABit(3000);
+        waitABit(2000);
         System.out.println("SetUpFee:");
-        System.out.println(setUpFee.getText());
+        System.out.println(totalSetUpFee.getText());
         System.out.println(fee);
-        return setUpFee.getText().contains(fee);
+        return totalSetUpFee.getText().contains(fee);
     }
 
     public boolean checkPricePerMonth(String price) {
@@ -247,13 +253,14 @@ public class ClientQuotesDetailPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[text()='" +
                             clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")))).click();
         } catch (Exception e) {
+            e.printStackTrace();
             clickWithJS(driver.findElement(By.xpath("//span[text()='" +
                             clientSupportItem + "']/following::td[1]//i[@class='icon cb-icon-check-empty']")));
         }
-        clickYesToAddItemTOAgreement();
+        clickYesToAddItemToAgreement();
     }
 
-    private void clickSelectSetupFee(String clientSupportItem, String option) {
+    private void selectSetupFee(String clientSupportItem, String option) {
         waitABit(3000);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(driver
@@ -268,23 +275,41 @@ public class ClientQuotesDetailPage extends BasePage {
             }
         }
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeBTN)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeButton)).click();
         } catch (Exception e) {
             e.printStackTrace();
         }
         waitForLoading();
     }
 
+//    public void selectSetupFeeForAllClients() {
+//        selectSetupFee("testFeature2_1 test mike", "setupfee1_1");
+//        selectSetupFee("testFeature3 test mike", "setupfee3_1");
+//        selectSetupFee("tf22222", "1_1");
+//        selectSetupFee("Test private", "test name");
+//        selectSetupFee("Create Invoices (single or multiple vehicles) (edit)", "1");
+//        selectSetupFee("Copy to Agreement settings page only features with \"Publice view\" State (when creating Client Agreement).", "test_r_1");
+//    }
+
     public void selectSetupFeeForAllClients() {
-        clickSelectSetupFee("testFeature2_1 test mike", "setupfee1_1");
-        clickSelectSetupFee("testFeature3 test mike", "setupfee3_1");
-        clickSelectSetupFee("tf22222", "1_1");
-        clickSelectSetupFee("Test private", "test name");
-        clickSelectSetupFee("Create Invoices (single or multiple vehicles) (edit)", "1");
-        clickSelectSetupFee("Copy to Agreement settings page only features with \"Publice view\" State (when creating Client Agreement).", "test_r_1");
+        try {
+            int size = wait.until(ExpectedConditions.visibilityOfAllElements(emptySetupFeeSelectionList)).size();
+            for (int i = 0; i < size; i++) {
+                driver.switchTo().defaultContent();
+                wait.until(ExpectedConditions.elementToBeClickable(emptySetupFeeSelectionList.get(i))).click();
+                wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
+                Select selection = new Select(dropUpOptions);
+                selection.selectByIndex(1);
+                wait.until(s -> !selection.getAllSelectedOptions().isEmpty());
+                wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeButton)).click();
+                waitForLoading();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void clickYesToAddItemTOAgreement() {
+    private void clickYesToAddItemToAgreement() {
         yesAddItemToAgreement.click();
         waitForLoading();
     }

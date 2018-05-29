@@ -1,16 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class BackofficePaginationPanel  extends BaseWebPage {
 	
@@ -74,13 +70,13 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	
 	public void setPageSize(String pagesize) throws InterruptedException {
 		pagesizefld.clear();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(1000);
 		pagesizefld.sendKeys(pagesize + "\n");
 		changesizebtn.click();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(3000);
 	}
 	

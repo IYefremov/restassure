@@ -229,7 +229,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 
 	public void clickFindButton() {
 		clickAndWait(findbtn);
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 	}
 
 	public void assertInspectionPrice(String inspnumber, String expectedprice) throws InterruptedException {
@@ -237,7 +237,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
 		waitABit(400);
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		Assert.assertEquals(expectedprice,
 				inspectionstable.getWrappedElement().findElement(By.xpath(".//tr/td[14]")).getText());
 	}
@@ -266,7 +266,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
 		waitABit(400);
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 	}
 
 	public int getTableRowWithInspectionsNumbers() {

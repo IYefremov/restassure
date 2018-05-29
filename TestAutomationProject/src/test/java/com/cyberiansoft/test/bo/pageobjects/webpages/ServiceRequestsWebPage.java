@@ -176,8 +176,8 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
 		click(setdefaultdevicebtn);
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(5000);
 		addservicerequestcmbbox.click();
 		driver.findElement(
@@ -200,8 +200,8 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"
 						+ devicefordispatch + "']")).click();
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 	//Thread.sleep(1000);
 		addservicelink.click();
 		teamcmbbox.click();

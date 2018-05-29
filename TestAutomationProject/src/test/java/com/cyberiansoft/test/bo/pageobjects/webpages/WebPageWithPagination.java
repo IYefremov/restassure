@@ -90,8 +90,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		} else {
 			gotolastpage.click();
 		}
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
 			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
@@ -104,8 +104,8 @@ public class WebPageWithPagination extends BaseWebPage {
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
 		try{
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		}catch(TimeoutException e){}
 		//waitABit(300);
 //		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
@@ -130,8 +130,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
 		try{
-		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		}catch(TimeoutException ignored){}
 		waitForLoading();
 	}

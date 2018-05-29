@@ -944,7 +944,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month",
             dataProvider = "provideSRdataForSchedulerMonth")
-	public void checkSRappointmentSchedulerMonth(String customer, String startDate) throws InterruptedException {
+	public void checkSRappointmentSchedulerMonth(String customer, String startDate) {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestList();
@@ -1093,7 +1093,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentWithoutDescription(startDate, endDate);
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(status));
-		Assert.assertFalse(serviceRequestsWebPage.checkLifeCycleDate());
+		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDate());
 	}
 
 	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation")

@@ -194,8 +194,8 @@ public class JobsWebPage extends WebPageWithPagination {
 	public void selectSearchCustomer(String customer) throws InterruptedException  { 
 		searchcustomercbx.click();
 		searchcustomercbx.sendKeys(customer);
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+//		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + customer + "']"))).click();
 	}

@@ -72,8 +72,8 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchApplication(String _application) throws InterruptedException {
-//		updateWait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		updateWait.until(ExpectedConditions.invisibilityOf(updateProcess));
+//		wait.until(ExpectedConditions.visibilityOf(updateProcess));
+//		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(1000);
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);

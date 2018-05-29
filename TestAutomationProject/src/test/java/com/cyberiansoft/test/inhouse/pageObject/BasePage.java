@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,9 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePage {
 
+    @FindBy(xpath = "//div[@class='shirma-dialog' and contains(@style, 'display: block')]")
+    private WebElement shirmaDialog;
+
     public WebDriver driver;
     public static WebDriverWait wait;
-    public WebDriverWait updateWait;
 
     private static final long SLEEP_TIMEOUT_IN_SEC = 15;
 
@@ -22,6 +25,13 @@ public class BasePage {
         driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC * 2, TimeUnit.SECONDS);
 
         wait = new WebDriverWait(driver, 60, 250);
+    }
+
+    public void waitForShirmaDialog() {
+        try {
+            if (shirmaDialog.isDisplayed())
+            wait.until(ExpectedConditions.invisibilityOf(shirmaDialog));
+        } catch (Exception ignored) {}
     }
 
     public BasePage goToAgreementApprovementPageFromEmail(String link) {
@@ -58,7 +68,9 @@ public class BasePage {
             wait.until(ExpectedConditions
                     .invisibilityOf(driver.findElement(By
                             .xpath("//div[not(contains(@style, 'none'))]/i[@class='fa fa-refresh fa-spin']"))));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            waitABit(1500);
+        }
     }
 
     public void waitForProcessing() {

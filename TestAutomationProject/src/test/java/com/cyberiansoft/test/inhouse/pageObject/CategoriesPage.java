@@ -12,28 +12,28 @@ import java.util.List;
 public class CategoriesPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='dropdown-toggle btn-add-category']")
-    WebElement addCategoryBTN;
+    private WebElement addCategoryBTN;
 
     @FindBy(className = "form-control")
-    List<WebElement> inputFields;
+    private List<WebElement> inputFields;
 
     @FindBy(xpath = "//button[@class='submit btn-save-add-category']")
-    WebElement submitCategoryBTN;
+    private WebElement submitCategoryBTN;
 
     @FindBy(id ="AttributeName")
-    WebElement createAttributeName;
+    private WebElement createAttributeName;
 
     @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']//select[@id='IsAutomated']")
-    WebElement addAttributeIsAutomatedSelection;
+    private WebElement addAttributeIsAutomatedSelection;
 
     @FindBy(xpath ="//div[@class='form-dialog add-attribute-dialog active']//select[@id='AttributeDataTypeID']")
-    WebElement createElementAttributeDataType;
+    private WebElement createElementAttributeDataType;
 
     @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']//button[@class='btn btn-outline btn-submit']")
-    WebElement addAttributeInCreationWindow;
+    private WebElement addAttributeInCreationWindow;
 
     @FindBy(xpath ="//div[@class='form-dialog add-attribute-dialog active']//input[@id='ProcName']")
-    WebElement storedProcedureNameField;
+    private WebElement storedProcedureNameField;
 
     @FindBy(xpath="//div[@class='form-dialog add-attribute-dialog active']")
     private WebElement addAttributeDialog;
@@ -46,6 +46,9 @@ public class CategoriesPage extends BasePage {
 
     @FindBy(xpath="//td[@class='sorting_1']")
     private WebElement categoriesNames;
+
+    @FindBy(className="shirma-dialog")
+    private WebElement shirmaDialog;
 
     public CategoriesPage(WebDriver driver) {
         super(driver);
@@ -96,18 +99,6 @@ public class CategoriesPage extends BasePage {
                 }
             } catch (Exception ignored) {}
         }
-//        List<WebElement> categories = null;
-//        try {
-//            wait.until(ExpectedConditions.visibilityOf(categoriesTable));
-//            categories = categoriesNames.findElements(By.xpath("//span[contains(text(),'" + category + "')]"));
-//        } catch (NoSuchElementException | TimeoutException e) {
-//            e.printStackTrace();
-//        }
-//        if ((categories != null) && !categories.isEmpty()) {
-//            for (int i = 0; i < categories.size(); i++) {
-//                deleteCategory(category);
-//            }
-//        }
         return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
@@ -174,7 +165,7 @@ public class CategoriesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeInCreationWindow)).click();
         waitForLoading();
         try {
-            wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.className("shirma-dialog"))));
+            waitForShirmaDialog();
             wait.until(ExpectedConditions.visibilityOf(addAttributeDialogDisappearance));
         } catch (WebDriverException e) {
             e.printStackTrace();
