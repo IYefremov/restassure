@@ -1,0 +1,52 @@
+{
+  "testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayTeamInvoice": [
+    {
+      "rowID": "testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayTeamInvoice.01",
+      "description": "Test Case 72313:R360 client: verify error message is displayed if Card info is not populated on Pay Team invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyYourCardWasDeclinedOnPayTeamInvoiceWith4000000000000002": [
+    {
+      "rowID": "testVerifyYourCardWasDeclinedOnPayTeamInvoiceWith4000000000000002.01",
+      "description": "Test Case 72314:R360 client: Verify 'Your card was declined' on Pay Team invoice with 4000000000000002",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "сreditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
+  ],
+
+  "testVerifyYourCardsSecurityCodeIsIncorrectOnPayTeamInvoiceWith4000000000000127": [
+    {
+      "rowID": "testVerifyYourCardsSecurityCodeIsIncorrectOnPayTeamInvoiceWith4000000000000127.01",
+      "description": "Test Case 72315:R360 client: Verify 'Your card's security code is incorrect' on Pay Team invoice with 4000000000000127",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "сreditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
+  ]
+}
