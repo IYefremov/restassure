@@ -81,7 +81,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		claiminfoscreen.setDeductibleValue(deductibleValue);
-		inspinfoscreen.swipeScreensLeft(2);
+		inspinfoscreen.swipeScreensLeft(3);
 		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);

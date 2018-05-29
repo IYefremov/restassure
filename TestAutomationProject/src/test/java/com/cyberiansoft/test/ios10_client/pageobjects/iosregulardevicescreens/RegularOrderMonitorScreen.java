@@ -58,6 +58,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
 	
 	public void selectPanel(String panelname) {
@@ -103,18 +105,19 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public void setCompletedServiceStatus() {
 		clickServiceStatusCell();
 		clickCompletedPhaseCell();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
 	
 	public void setCompletedPhaseStatus() {
-		//clickCustomServiceStatusButton();
 		clickPhaseStatusCell();
 		clickCompletedPhaseCell();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
 	
 	public void clickCompletedPhaseCell() {
 		completedcell.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
 	public void clickPhaseStatusCell() {
@@ -132,11 +135,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
-	public void clickServiceDetailsDoneButton() throws InterruptedException {
-		//appiumdriver.findElementByAccessibilityId("Close icon").click();
+	public RegularOrderMonitorScreen clickServiceDetailsDoneButton() throws InterruptedException {
 		servicedetailsdonebtn.click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 40);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
+		return this;
 	}
 	
 	public boolean isStartServiceButtonPresent() {
@@ -187,6 +188,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public WebElement getTableParentCell(String cellname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(cellname)));
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 

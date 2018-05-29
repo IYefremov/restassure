@@ -123,7 +123,6 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         vehiclepartinfoscreen.selectVehiclePartAdditionalService(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
         VNextLaborServicePartsList laborServicePartsList = vehiclepartinfoscreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
-        BaseUtils.waitABit(10000);
         laborServicePartsList.clickBackButton();
         vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
 
@@ -133,5 +132,86 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         homescreen = inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanSavePartServiceInMatrix(String rowID,
+                                                                                 String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.swipeScreensLeft(2);
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        inpsctionservicesscreen.switchToAvalableServicesView();
+
+        VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+        MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
+        VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+        vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
+        vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
+
+        vehiclepartinfoscreen.selectVehiclePartAdditionalService(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
+        VNextLaborServicePartsList laborServicePartsList = vehiclepartinfoscreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
+        Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
+        laborServicePartsList.selectServiceLaborPart(matrixPartData.getMatrixAdditionalLaborService().getLaborServicePart());
+        vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
+        Assert.assertEquals(vehiclepartinfoscreen.getLaborServiceRate(matrixPartData.getMatrixAdditionalLaborService()),
+                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceRate());
+        Assert.assertEquals(vehiclepartinfoscreen.getLaborServiceTime(matrixPartData.getMatrixAdditionalLaborService()),
+                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceTime());
+        Assert.assertEquals(vehiclepartinfoscreen.getLaborServiceNotes(matrixPartData.getMatrixAdditionalLaborService()),
+                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceNotes());
+        Assert.assertEquals(vehiclepartinfoscreen.getMatrixServiceTotalPriceValue(),
+                inspdata.getInspectionPrice());
+
+        vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+        vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+        inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+
+        inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+        homescreen = inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCancelAddPanelAndParts(String rowID,
+                                                                    String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.swipeScreensLeft(2);
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = inpsctionservicesscreen.
+                selectLaborService(inspdata.getLaborServiceData().getServiceName());
+        VNextLaborServicePanelsList laborServicePanelsList = laborServiceDetailsScreen.clickSelectPanelCell();
+        VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(inspdata.getLaborServiceData().getLaborServicePanel());
+        laborServicePartsList.clickBackButton();
+        laborServicePanelsList = new VNextLaborServicePanelsList(appiumdriver);
+        laborServicePanelsList.clickBackButton();
+        laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(appiumdriver);
+        inpsctionservicesscreen = laborServiceDetailsScreen.clickBackButton();
+        inspectionscreen = inpsctionservicesscreen.cancelInspection();
+        inspectionscreen.clickBackButton();
     }
 }

@@ -19,9 +19,6 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
 public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
@@ -315,7 +312,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId("Done").getLocation().getX(), 
 				appiumdriver.findElementByAccessibilityId("Done").getLocation().getY()).perform();
 		
-		TouchAction perform = new TouchAction(appiumdriver).tap(tapOptions().withElement(element(appiumdriver.findElementByAccessibilityId("Done")))).perform();
+		//TouchAction perform = new TouchAction(appiumdriver).tap(tapOptions().withElement(element(appiumdriver.findElementByAccessibilityId("Done")))).perform();
 		
 	}
 	

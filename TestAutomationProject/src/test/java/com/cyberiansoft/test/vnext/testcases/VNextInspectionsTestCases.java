@@ -218,7 +218,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		inspectionsscreen = vehicleinfoscreen.saveInspectionfromFirstScreen();
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnum);
-		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer);
+		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer.getFullName());
 		homescreen = inspectionsscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.selectCustomer(customer);

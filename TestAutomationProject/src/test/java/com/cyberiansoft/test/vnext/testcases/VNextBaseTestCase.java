@@ -73,8 +73,7 @@ public class VNextBaseTestCase {
 	       
 			if (mobilePlatform.getMobilePlatformString().contains("ios"))
 				DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
-			else {
-				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+			else { DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
 				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);

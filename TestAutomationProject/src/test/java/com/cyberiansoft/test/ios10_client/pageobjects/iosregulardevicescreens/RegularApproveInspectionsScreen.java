@@ -60,15 +60,17 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
-		Helpers.waitABit(1000);
 	}
 
 	public void clickApproveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Approve")).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void clickApproveAllServicesButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		approveallbtn.click();
 	}
 	
@@ -93,7 +95,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSignButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
+		//appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
 	
 	public void clickSingnAndDrawApprovalSignature() throws InterruptedException {
@@ -104,11 +108,12 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		int yy = element.getLocation().getY();
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(1)).moveTo(xx + 200, yy + 200).release().perform();
-		Helpers.waitABit(1000);
 
 	}
 	
-	public void drawApprovalSignature() throws InterruptedException {
+	public void drawApprovalSignature() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("TouchInputView")));
 		MobileElement element = (MobileElement) appiumdriver.findElementByAccessibilityId("TouchInputView");
 		int xx = element.getLocation().getX();
 
@@ -196,7 +201,13 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectInspection(String inspnumber) {
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement approvetable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber))).click();
+		//approvetable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		//wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspnumber)))).click();
 	}
 	
 	public int getNumberOfActiveApproveButtons() {

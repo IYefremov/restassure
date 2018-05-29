@@ -123,8 +123,8 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Anastasia Part", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "VERY LIGHT", "matrixAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Igor Labor Service" }, { "serviceName" : "Labor_expence" }]
-        }, {"hailMatrixServiceName": "Hood", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "matrixAdditionalServices" : [{ "serviceName" : "A demo service" }, { "serviceName" : "Large Dent" }, { "serviceName" : "Panel Service" }]
+        "matrixParts" : [{"matrixPartName": "Anastasia Part", "partSize": "Nickel", "partSeverity": "VERY LIGHT", "matrixAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Igor Labor Service" }, { "serviceName" : "Labor_expence" }]
+        }, {"matrixPartName": "Hood", "partSize": "Quarter", "partSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "matrixAdditionalServices" : [{ "serviceName" : "A demo service" }, { "serviceName" : "Large Dent" }, { "serviceName" : "Panel Service" }]
         }]},
       "inspPrice": "$551.13"
     }

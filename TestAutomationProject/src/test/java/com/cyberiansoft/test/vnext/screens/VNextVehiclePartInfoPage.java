@@ -127,7 +127,20 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		} else
 			Assert.assertTrue(false, "Can't find service: " + additionalservicename);	
 	}
-	
+
+
+	public void setAdditionalServiceAmauntValue(String additionalservicename, String pricevalue) {
+		WebElement servicecell = getVehiclePartAdditionalServiceCell(additionalservicename);
+		if (servicecell != null) {
+			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicecell);
+			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
+			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
+			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), pricevalue);
+		} else
+			Assert.assertTrue(false, "Can't find service: " + additionalservicename);
+	}
+
 	public String getMatrixServiceTotalPriceValue() {
 		return vehiclepartinfoscreen.findElement(By.xpath(".//span[@class='money-wrapper']")).getText();
 	}
@@ -156,6 +169,33 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		} else
 			Assert.assertTrue(false, "Can't find service: " + laborService.getServiceName());
 		return new VNextLaborServicePartsList(appiumdriver);
+	}
+
+	public WebElement expandLaborServiceDetails(LaborServiceData laborService) {
+		WebElement servicerow = getSelectedServiceCell(laborService.getServiceName());
+		if (servicerow != null) {
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
+				tap(servicerow);
+		} else
+			Assert.assertTrue(false, "Can't find service: " + laborService.getServiceName());
+		return servicerow;
+	}
+
+	public String getLaborServiceRate(LaborServiceData laborService) {
+		WebElement servicerow =expandLaborServiceDetails(laborService);
+		return servicerow.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value").trim();
+	}
+
+	public String getLaborServiceTime(LaborServiceData laborService) {
+		WebElement servicerow =expandLaborServiceDetails(laborService);
+		return servicerow.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value").trim();
+	}
+
+	public String getLaborServiceNotes(LaborServiceData laborService) {
+		WebElement servicerow =expandLaborServiceDetails(laborService);
+		return servicerow.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getText().trim();
 	}
 
 }

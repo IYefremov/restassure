@@ -296,8 +296,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String wonumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']")));
 		wait = new WebDriverWait(appiumdriver, 15);
+		System.out.println("+++++++++" + "//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']");
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']"))).click();
 	}
 	
