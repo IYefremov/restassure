@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.IRegularTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -16,7 +18,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen {
+public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements IRegularTypeScreen {
+
+	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
+	private static TypeScreenContext INVOICEINFOExCONTEXT = null;
 	
 	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
@@ -43,6 +48,8 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
 	}
 	
 	public void clickSaveEmptyPO() {
@@ -93,9 +100,20 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen {
 	public void clickWO(String wonumber) {
 		WebElement par = getTableParentCell(wonumber);
 		par.findElement(By.xpath("//XCUIElementTypeStaticText[1]")).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[1]/XCUIElementTypeCell[1]").click();
+		INVOICEINFOExCONTEXT = RegularBaseWizardScreen.typeContext;
+		RegularBaseWizardScreen.typeContext = INVOICEINFOCONTEXT;
 	}
-	
+
+	public <T extends RegularBaseTypeScreen> T cancelInvoice() {
+		System.out.println("+++++" + INVOICEINFOExCONTEXT.toString());
+		System.out.println("+++++" + RegularBaseWizardScreen.typeContext.toString());
+		if (INVOICEINFOExCONTEXT != null)
+			RegularBaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
+		clickCancelButton();
+		acceptAlert();
+		return getTypeScreenFromContext();
+	}
+
 	public String getOrderSumm() {
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}

@@ -30,25 +30,19 @@ public class RegularMainScreen {
 	
 	@iOSFindBy(accessibility = "OK")
     private IOSElement loginbtn;
-	
+
 	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Search']")
     private IOSElement searchbtn;
-	
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Licenses']")
+
+	@iOSFindBy(accessibility = "Licenses")
     private IOSElement licenses;
-	
-	@iOSFindBy(xpath = "//UIASearchBar[@name='Search']")
-    private IOSElement searchbar;
-	
-	//final static String mainbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[1]";
-	//final static String updatevinxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[2]";
-	//final static String securefldxpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIASecureTextField[1]";
-	//final static String loginbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAButton[1]";
-	//final static String licensesxpath = "//UIAToolbar[1]/UIAButton[@name=\"Licences\"]";
 
 	public RegularMainScreen(AppiumDriver driver) {
 		appiumdriver = driver;
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Login")));
 	}
 	
 	public void updateDatabase() {
@@ -77,7 +71,7 @@ public class RegularMainScreen {
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(user)));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(user)));
 		appiumdriver.findElementByAccessibilityId(user).click();
 		wait = new WebDriverWait(appiumdriver, 15);
 

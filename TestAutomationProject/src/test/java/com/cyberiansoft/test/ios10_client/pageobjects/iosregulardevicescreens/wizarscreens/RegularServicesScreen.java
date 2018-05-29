@@ -358,7 +358,9 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
 		navbar.findElement(MobileBy.AccessibilityId("Add")).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceGroupServicesTable")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceGroupServicesTable")));
 		return this;
 	}
 	

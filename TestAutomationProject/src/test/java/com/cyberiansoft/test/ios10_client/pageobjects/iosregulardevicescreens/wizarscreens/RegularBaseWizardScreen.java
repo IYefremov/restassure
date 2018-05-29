@@ -48,10 +48,11 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         if (elementExists("WizardStepsButton"))
             appiumdriver.findElementByAccessibilityId("WizardStepsButton").click();
         else
+            //appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]").click();
             appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
     }
 
-    public <T extends RegularBaseTypeScreen> T saveWizard() {
+    public <T extends IRegularTypeScreen> T saveWizard() {
         clickSave();
         return getTypeScreenFromContext();
     }
@@ -61,13 +62,13 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
     }
 
-    public <T extends RegularBaseTypeScreen> T cancelWizard() {
+    public <T extends IRegularTypeScreen> T cancelWizard() {
         clickCancelWizard();
         acceptAlert();
         return getTypeScreenFromContext();
     }
 
-    public <T extends RegularBaseTypeScreen> T getTypeScreenFromContext()  {
+    public <T extends IRegularTypeScreen> T getTypeScreenFromContext()  {
         switch (typeContext) {
             case WORKORDER:
                 return (T) new RegularMyWorkOrdersScreen(appiumdriver);
@@ -81,6 +82,8 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
                 return (T) new RegularTeamWorkOrdersScreen(appiumdriver);
             case TEAMINSPECTION:
                 return (T) new RegularTeamInspectionsScreen(appiumdriver);
+            case INVOICEINFO:
+                return (T) new RegularInvoiceInfoScreen(appiumdriver);
         }
         return null;
     }

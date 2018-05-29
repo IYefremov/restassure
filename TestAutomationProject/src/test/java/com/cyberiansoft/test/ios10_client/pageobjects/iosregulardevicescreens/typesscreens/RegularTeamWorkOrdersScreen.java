@@ -57,7 +57,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void clickCreateInvoiceForWO(String wonumber) {
-		WebElement table = appiumdriver.findElementByAccessibilityId("MyWorkOrdersTable");
+		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
 		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
 						+ wonumber + "']/XCUIElementTypeOther")).click();
 	}
@@ -122,7 +122,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	
 	public void selectWorkOrderForApprove(String wonumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("MyWorkOrdersTable"))); 
+		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersTable")));
 		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther")).click();
 		
 	}
@@ -194,10 +194,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	public void selectWorkOrderForEidt(String wo) throws InterruptedException {
 		selectWorkOrder(wo);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading team order")));
-		}
+		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
 	public void selectWorkOrder(String wonumber) {
