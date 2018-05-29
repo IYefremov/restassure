@@ -644,9 +644,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .makeSearchPanelVisible()
                 .setSearchUserParameter(data.getEmployeeName())
                 .clickFindButton()
-                .verifyEmployeesTableColumnsAreVisible();
-        Assert.assertTrue(employeesWebPage.activeEmployeeExists(data.getEmployeeName()),
-                "The employee is not displayed in the table");
+                .verifyEmployeesTableColumnsAreVisible()
+                .verifyEmployeeIsActive(data.getEmployeeName());
 
         NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage
                 .clickEditEmployeeFromTeam(data.getEmployeeName(), data.getTeamName());
@@ -659,7 +658,8 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
         newEmployeeDialog
                 .selectNewEmployeeTeam(data.getTeamName2())
                 .clickOKButton();
-        infoContentDialog = employeesWebPage
+
+        employeesWebPage
                 .clickEditEmployee(data.getEmployeeName())
                 .clickInfoBubble();
         Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
@@ -699,5 +699,28 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .clickFindButton()
                 .clickArchivedTab()
                 .unarchiveEmployee(data.getEmployeeFullName());
+    }
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testReassignEmployeeVerifyText(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        EmployeesWebPage employeesWebPage = companyPage
+                .clickEmployeesLink()
+                .makeSearchPanelVisible()
+                .selectSearchTeam(data.getTeamName())
+                .setSearchUserParameter(data.getSearchEmployee())
+                .clickFindButton()
+                .verifyEmployeesTableColumnsAreVisible()
+                .verifyEmployeeIsActive(data.getEmployeeFullName())
+                .setSearchUserParameter(data.getEmployeeName())
+                .clickFindButton();
+
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeName());
+        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayed(data.getTopBubbleInfo()));
+        //todo finish this TC
+
     }
 }
