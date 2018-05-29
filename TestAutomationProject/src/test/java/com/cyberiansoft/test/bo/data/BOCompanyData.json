@@ -4,7 +4,7 @@
       "rowID": "testReassignEmployeeForTeam.01",
       "description": "Test Case 74893:Company - Employees : Re-assign Employee for team",
       "employeeName": "Vladimir Avsievich",
-      "employeeName2": "Oksi Employee",
+      "employeeName2": "Oksi Z",
       "teamName": "Test Team",
       "teamName2": "Test Vendor Team"
     }
@@ -18,6 +18,18 @@
       "searchEmployee": "oksi",
       "employeeFullName": "oksi oksi",
       "teamName": "Test Vendor Team"
+    }
+  ],
+
+  "testReassignEmployeeVerifyText": [
+    {
+      "rowID": "testReassignEmployeeVerifyText.01",
+      "description": "Test Case 74918:Company - Employees : Re-assign Employee verify text",
+      "employeeName": "Vladimir Avsievich",
+      "searchEmployee": "oksi",
+      "employeeFullName": "oksi oksi",
+      "teamName": "Test Vendor Team",
+      "topBubbleInfo": "You cannot change team if employee is assigned to uncompleted services, so please mark the following services as completed or reassign them to another employee."
     }
   ]
 }

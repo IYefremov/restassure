@@ -22,6 +22,9 @@ public class BOCompanyData {
     @JsonProperty("teamName2")
     private String teamName2;
 
+    @JsonProperty("topBubbleInfo")
+    private String topBubbleInfo;
+
     public String getEmployeeName() {
         return employeeName;
     }
@@ -44,5 +47,9 @@ public class BOCompanyData {
 
     public String getTeamName2() {
         return teamName2;
+    }
+
+    public String getTopBubbleInfo() {
+        return topBubbleInfo;
     }
 }

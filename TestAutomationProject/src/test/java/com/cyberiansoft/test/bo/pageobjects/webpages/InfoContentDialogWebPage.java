@@ -19,6 +19,9 @@ public class InfoContentDialogWebPage extends BaseWebPage {
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnReassign")
     private WebElement reassignButton;
 
+    @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_lbChooseEmployess")
+    private WebElement bubbleTopInfo;
+
     public InfoContentDialogWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -31,8 +34,11 @@ public class InfoContentDialogWebPage extends BaseWebPage {
 
     public InfoContentDialogWebPage chooseEmployeeToReassign(String employee) {
         new Select(employeeListCombobox).selectByVisibleText(employee);
-        return PageFactory.initElements(
-                driver, InfoContentDialogWebPage.class);
+        return this;
+    }
+
+    public boolean isTopBubbleInfoDisplayed(String topBubbleInfo) {
+        return wait.until(ExpectedConditions.visibilityOf(bubbleTopInfo)).getText().equals(topBubbleInfo);
     }
 
     public InfoContentDialogWebPage reassignEmployee() {
@@ -40,8 +46,7 @@ public class InfoContentDialogWebPage extends BaseWebPage {
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.attributeContains(infoContentDialog,
                 "style", "visibility: hidden;"));
-        return PageFactory.initElements(
-                driver, InfoContentDialogWebPage.class);
+        return this;
     }
 
     public boolean isEmployeeListDisabled() {

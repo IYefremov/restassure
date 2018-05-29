@@ -88,8 +88,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
         } catch (Exception e) {
             System.err.println("The employee is not found: " + e);
         }
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
+        return this;
 	}
 
 	public boolean searchPanelIsExpanded() {
@@ -100,8 +99,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
+        return this;
 	}
 
 	public EmployeesWebPage verifyEmployeesTableColumnsAreVisible() {
@@ -115,8 +113,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 		Assert.assertTrue(employeestable.tableColumnExists("Email"));
 		Assert.assertTrue(employeestable.tableColumnExists("Phone"));
 		Assert.assertTrue(employeestable.tableColumnExists("Commissions"));
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
+        return this;
 	}
 
 	public void verifyTabsAreVisible() {
@@ -127,8 +124,8 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	public EmployeesWebPage clickArchivedTab() {
 		clickAndWait(archivedtab);
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);}
+        return this;
+	}
 
 	public void clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
@@ -137,20 +134,18 @@ public class EmployeesWebPage extends WebPageWithPagination {
 
 	public EmployeesWebPage selectSearchTeam(String team) {
 		selectComboboxValue(searchteamcbx, searchteamdd, team);
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);}
+        return this;
+    }
 
 	public EmployeesWebPage setSearchUserParameter(String username) {
 		clearAndType(searchemployeefld, username);
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
-	}
+        return this;
+    }
 
 	public EmployeesWebPage clickFindButton() {
 		clickAndWait(findbtn);
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
-	}
+        return this;
+    }
 
 	public int getEmployeesTableRowCount() {
 		return getEmployeesTableRows().size();
@@ -266,8 +261,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 			archiveTableRow(row);
 		} else
             Assert.fail("Can't find " + employeeName + " employee");
-        return PageFactory.initElements(
-                driver, EmployeesWebPage.class);
+        return this;
 	}
 
 	public void archiveEmployee(String firstname, String lastname) {
