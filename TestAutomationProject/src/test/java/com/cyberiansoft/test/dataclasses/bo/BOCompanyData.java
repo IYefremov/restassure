@@ -25,6 +25,9 @@ public class BOCompanyData {
     @JsonProperty("topBubbleInfo")
     private String topBubbleInfo;
 
+    @JsonProperty("topBubbleInfoWithReassign")
+    private String topBubbleInfoWithReassign;
+
     public String getEmployeeName() {
         return employeeName;
     }
@@ -51,5 +54,9 @@ public class BOCompanyData {
 
     public String getTopBubbleInfo() {
         return topBubbleInfo;
+    }
+
+    public String getTopBubbleInfoWithReassign() {
+        return topBubbleInfoWithReassign;
     }
 }

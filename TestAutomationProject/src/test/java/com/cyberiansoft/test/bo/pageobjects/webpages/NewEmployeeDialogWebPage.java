@@ -89,6 +89,9 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_imgTeamInfo")
 	private WebElement infoBubble;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_ModalDialog1")
+	private WebElement newEmployeeDialog;
+
 	@FindBy(xpath = "//div[@id='RadToolTipWrapper_ctl00_ctl00_Content_Main_ctl01_ctl01_Card_toolTipTeamInfo' " +
             "and contains(@style, 'visibility: visible;')]")
 	private WebElement infoContentDialog;
@@ -241,7 +244,8 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	}
 	
 	public void clickCancelButton() {
-		click(cancelbtn);
+	    wait.until(ExpectedConditions.elementToBeClickable(cancelbtn)).click();
+	    wait.until(ExpectedConditions.attributeContains(newEmployeeDialog, "style", "display: none;"));
 	}
 
 	public InfoContentDialogWebPage clickInfoBubble() {

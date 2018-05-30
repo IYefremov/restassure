@@ -20,6 +20,9 @@ public class InfoContentDialogWebPage extends BaseWebPage {
     private WebElement reassignButton;
 
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_lbChooseEmployess")
+    private WebElement bubbleTopInfoWithReassign;
+
+    @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_lbCannotChangeTeam")
     private WebElement bubbleTopInfo;
 
     public InfoContentDialogWebPage(WebDriver driver) {
@@ -35,6 +38,10 @@ public class InfoContentDialogWebPage extends BaseWebPage {
     public InfoContentDialogWebPage chooseEmployeeToReassign(String employee) {
         new Select(employeeListCombobox).selectByVisibleText(employee);
         return this;
+    }
+
+    public boolean isTopBubbleInfoDisplayedWithReassign(String topBubbleInfo) {
+        return wait.until(ExpectedConditions.visibilityOf(bubbleTopInfoWithReassign)).getText().equals(topBubbleInfo);
     }
 
     public boolean isTopBubbleInfoDisplayed(String topBubbleInfo) {

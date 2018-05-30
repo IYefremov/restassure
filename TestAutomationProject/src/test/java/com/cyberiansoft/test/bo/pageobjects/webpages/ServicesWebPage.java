@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,13 +26,19 @@ public class ServicesWebPage extends WebPageWithPagination {
 	private WebTable archivedservicestable;
 	
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Active - ALL']")
-	private WebElement activetab;
+	private WebElement activeAllTab;
+
+    @FindBy(xpath = "//span[@class='rtsTxt' and text()='Active - Parts']")
+    private WebElement activePartsTab;
+
+    @FindBy(xpath = "//span[@class='rtsTxt' and text()='Active - Labor']")
+    private WebElement activeLaborTab;
 	
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Archived']")
 	private WebElement archivedtab;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl02_ctl00_lbInsert")
-	private WebElement addservicebtn;
+	private WebElement addServiceButton;
 	
 	//Search Panel
 
@@ -59,9 +63,11 @@ public class ServicesWebPage extends WebPageWithPagination {
 	@FindBy(xpath = "//div[@class='rgWrap rgInfoPart']")
 	private WebElement pagesizelabel;
 
-
 	@FindBy(xpath = "//input[@title='Delete']")
 	private WebElement deletemarker;
+
+	@FindBy(className = "rgNoRecords")
+	private WebElement noData;
 
 	public ServicesWebPage(WebDriver driver) {
 		super(driver);
@@ -132,39 +138,56 @@ public class ServicesWebPage extends WebPageWithPagination {
 		return archivedservicestable.getTableRows();
 	}
 	
-	public void setServiceSearchCriteria(String name) {
+	public ServicesWebPage setServiceSearchCriteria(String name) {
 		searchservicefld.clearAndType(name);
+		return this;
 	}
 
-	public void selectSearchServiceType(String servicetype) {
+	public ServicesWebPage selectSearchServiceType(String servicetype) {
 		selectComboboxValue(searchservicetypecbx, searchservicetypedd, servicetype);
+		return this;
 	}
 	
-	public void selectSearchPriceType(String pricetype) {
+	public ServicesWebPage selectSearchPriceType(String pricetype) {
 		selectComboboxValue(searchpricetypecbx, searchpricetypedd, pricetype);
+		return this;
 	}
 	
-	public void clickFindButton() { 
+	public ServicesWebPage clickFindButton() {
 		clickAndWait(findbtn);
+		return this;
     }
 	
 	public void clickArchivedTab() {
 		clickAndWait(archivedtab);
 	}
 	
-	public void clickActiveTab() {
-		wait.until(ExpectedConditions.elementToBeClickable(activetab));
-		clickAndWait(activetab);
+	public ServicesWebPage clickActiveAllTab() {
+		clickAndWait(activeAllTab);
+        return this;
     }
 
-	public void archiveService(String servicename) throws InterruptedException {
-		Thread.sleep(2000);
-		activetab.click();
-		WebElement row = getTableRowWithActiveService(servicename);
+	public ServicesWebPage clickActivePartsTab() {
+		clickAndWait(activePartsTab);
+        return this;
+	}
+
+	public ServicesWebPage clickActiveLaborTab() {
+		clickAndWait(activeLaborTab);
+        return this;
+	}
+
+	public void archiveServiceForActiveAllTab(String serviceName) {
+		wait.until(ExpectedConditions.elementToBeClickable(activeAllTab)).click();
+		archiveService(serviceName);
+	}
+
+	public void archiveService(String serviceName) {
+		WebElement row = getTableRowWithActiveService(serviceName);
 		if (row != null) {
 			archiveTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicename + " service");		
+		} else
+            Assert.fail("Can't find " + serviceName + " service");
 	}
 	
 	public void unarchiveService(String servicename) {
@@ -182,23 +205,41 @@ public class ServicesWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 
 	}
-	
+
+	public ServicesWebPage verifyActiveServiceDoesNotExist(String serviceName) {
+        try {
+            while (activeServiceExists(serviceName)) {
+                archiveService(serviceName);
+            }
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+        Assert.assertFalse(activeServiceExists(serviceName), "The service has not been deleted");
+	    return this;
+    }
+
 	public boolean activeServiceExists(String servicename) {
-		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
-		boolean exists =  servicestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
-		return exists;
+        wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
+	    try {
+            return servicestable.getWrappedElement()
+                    .findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;
+        } catch (TimeoutException | NoSuchElementException ignored) {
+            return false;
+        }
+    }
+
+    public boolean archivedServiceExists(String servicename) {
+        wait.until(ExpectedConditions.visibilityOf(archivedservicestable.getWrappedElement()));
+        try {
+            return archivedservicestable.getWrappedElement()
+                    .findElements(By.xpath("//td[text()='" + servicename + "']")).size() > 0;
+        } catch (TimeoutException | NoSuchElementException ignored) {
+            return false;
+        }
 	}
-	
-	public boolean isArchivedServiceExists(String servicename) {
-		waitABit(1500);
-		wait.until(ExpectedConditions.visibilityOf(archivedservicestable.getWrappedElement()));
-		waitABit(1500);
-		boolean exists =  archivedservicestable.getWrappedElement().findElements(By.xpath("//td[text()='" + servicename + "']")).size() > 0;
-		return exists;
-	}
-	
+
 	public NewServiceDialogWebPage clickAddServiceButton() {
-		clickAndWait(addservicebtn);
+		clickAndWait(addServiceButton);
 		return PageFactory.initElements(
 				driver, NewServiceDialogWebPage.class);
 	}

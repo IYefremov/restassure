@@ -229,8 +229,11 @@ public class BOCompanyEditData {
     @JsonProperty("serviceType")
     private String serviceType;
 
-    @JsonProperty("serviceDesc")
-    private String serviceDesc;
+    @JsonProperty("serviceDescription")
+    private String serviceDescription;
+
+    @JsonProperty("servicePriceType")
+    private String servicePriceType;
 
     @JsonProperty("serviceAccId")
     private String serviceAccId;
@@ -324,6 +327,9 @@ public class BOCompanyEditData {
 
     @JsonProperty("profileNameTest")
     private String profileNameTest;
+
+    @JsonProperty("multipleCheckboxValue")
+    private String multipleCheckboxValue;
 
     public String getRetailCompanyName() {
         return clientFirstName + " " + clientLastName;
@@ -693,8 +699,12 @@ public class BOCompanyEditData {
         return rule;
     }
 
-    public String getServiceDesc() {
-        return serviceDesc;
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public String getServicePriceType() {
+        return servicePriceType;
     }
 
     public String getServiceAccId() {
@@ -755,5 +765,9 @@ public class BOCompanyEditData {
 
     public String getProfileNameTest() {
         return profileNameTest;
+    }
+
+    public String getMultipleCheckboxValue() {
+        return multipleCheckboxValue;
     }
 }

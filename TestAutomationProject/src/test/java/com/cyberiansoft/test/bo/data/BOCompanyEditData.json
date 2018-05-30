@@ -111,7 +111,7 @@
       "description": "Test Case 28321:Company - Services: Edit",
       "serviceName": "Test Bundle Service",
       "serviceType": "Detail",
-      "serviceDesc": "Test service description",
+      "serviceDescription": "Test service description",
       "serviceAccId": "8000001F-1287569622",
       "serviceAssignedTo": "Custom Technician",
 
@@ -119,7 +119,9 @@
       "serviceTypeEdited": "Dye",
       "serviceDescEdited": "New service description",
       "serviceAccIdEdited": "12345",
-      "serviceAssignedToEdited": "(None)"
+      "serviceAssignedToEdited": "(None)",
+
+      "multipleCheckboxValue": "Multiple"
     }
   ],
 
@@ -386,6 +388,16 @@
       "insertButton": "Insert",
       "updateButton": "Update",
       "profileNameTest": "test"
+    }
+  ],
+
+  "testCompanyServicesActiveParts": [
+    {
+      "rowID": "testCompanyServicesActiveParts.01",
+      "description": "Test Case 68544:Company - Services: Active - Parts",
+      "serviceName": "Test Bundle Service",
+      "serviceType": "Detail",
+      "servicePriceType": "Labor"
     }
   ]
 }

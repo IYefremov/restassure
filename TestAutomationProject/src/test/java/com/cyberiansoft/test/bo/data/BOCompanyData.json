@@ -29,7 +29,8 @@
       "searchEmployee": "oksi",
       "employeeFullName": "oksi oksi",
       "teamName": "Test Vendor Team",
-      "topBubbleInfo": "You cannot change team if employee is assigned to uncompleted services, so please mark the following services as completed or reassign them to another employee."
+      "topBubbleInfo": "You cannot change team if employee is assigned to uncompleted services, so please mark the following services as completed.",
+      "topBubbleInfoWithReassign": "You cannot change team if employee is assigned to uncompleted services, so please mark the following services as completed or reassign them to another employee."
     }
   ]
 }

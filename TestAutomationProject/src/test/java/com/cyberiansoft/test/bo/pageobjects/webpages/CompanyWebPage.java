@@ -132,6 +132,7 @@ public class CompanyWebPage extends BaseWebPage {
 	
 	public ServicesWebPage clickServicesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(serviceslink)));
+		wait.until(ExpectedConditions.titleContains("Services"));
 		return PageFactory.initElements(
 				driver, ServicesWebPage.class);
 	}

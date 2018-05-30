@@ -127,9 +127,10 @@ public class EmployeesWebPage extends WebPageWithPagination {
         return this;
 	}
 
-	public void clickActiveTab() {
+	public EmployeesWebPage clickActiveTab() {
 		wait.until(ExpectedConditions.elementToBeClickable(activetab));
 		clickAndWait(activetab);
+		return this;
 	}
 
 	public EmployeesWebPage selectSearchTeam(String team) {
@@ -282,13 +283,14 @@ public class EmployeesWebPage extends WebPageWithPagination {
             Assert.fail("Can't find " + firstname + " " + lastname + " employee");
 	}
 
-	public void unarchiveEmployee(String employeename) {
+	public EmployeesWebPage unarchiveEmployee(String employeename) {
 		WebElement row = getTableRowWithArchivedEmployee(employeename);
 		if (row != null) {
 			restoreTableRow(row);
 		} else {
             Assert.fail("Can't find " + employeename + " employee");
         }
+        return this;
 	}
 
 	public String findDuplicateNames(List<String> employeeact, List<String> employeearch) {

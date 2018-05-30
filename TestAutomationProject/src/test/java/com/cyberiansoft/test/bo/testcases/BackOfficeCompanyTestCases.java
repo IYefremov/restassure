@@ -491,12 +491,12 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 		for (int i = 0; i < 3; i++) {
 			Thread.sleep(1000);
-			servicespage.archiveService(servicename);
+			servicespage.archiveServiceForActiveAllTab(servicename);
 			servicespage.clickArchivedTab();
-			Assert.assertTrue(servicespage.isArchivedServiceExists(servicename));
+			Assert.assertTrue(servicespage.archivedServiceExists(servicename));
 			servicespage.unarchiveService(servicename);
 
-			servicespage.clickActiveTab();
+			servicespage.clickActiveAllTab();
 			Assert.assertTrue(servicespage.activeServiceExists(servicename));
 		}
 	}
@@ -713,14 +713,43 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .setSearchUserParameter(data.getSearchEmployee())
                 .clickFindButton()
                 .verifyEmployeesTableColumnsAreVisible()
-                .verifyEmployeeIsActive(data.getEmployeeFullName())
-                .setSearchUserParameter(data.getEmployeeName())
-                .clickFindButton();
+                .verifyEmployeeIsActive(data.getEmployeeFullName());
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeName());
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeFullName());
         InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayed(data.getTopBubbleInfo()));
-        //todo finish this TC
+        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
+                "The notification is not displayed at the top of the popup window with reassign");
+        newEmployeeDialog.clickCancelButton();
 
+        employeesWebPage
+                .archiveEmployee(data.getEmployeeFullName())
+                .selectSearchTeam(data.getTeamName())
+                .setSearchUserParameter(data.getEmployeeName())
+                .clickFindButton()
+                .clickEditEmployee(data.getEmployeeName())
+                .clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayed(data.getTopBubbleInfo()),
+                "The notification is not displayed at the top of the popup window");
+        Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
+        Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
+        newEmployeeDialog.clickCancelButton();
+
+        employeesWebPage
+                .selectSearchTeam(data.getTeamName())
+                .setSearchUserParameter(data.getSearchEmployee())
+                .clickFindButton()
+                .clickArchivedTab()
+                .unarchiveEmployee(data.getEmployeeFullName())
+                .selectSearchTeam(data.getTeamName())
+                .setSearchUserParameter(data.getEmployeeName())
+                .clickFindButton()
+                .clickActiveTab()
+                .clickEditEmployee(data.getEmployeeName())
+                .clickInfoBubble();
+        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
+                "The notification is not displayed at the top of the popup window with reassign");
+        Assert.assertFalse(infoContentDialog.isEmployeeListDisabled(), "The employees list is disabled");
+        Assert.assertFalse(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is disabled");
+        newEmployeeDialog.clickCancelButton();
     }
 }

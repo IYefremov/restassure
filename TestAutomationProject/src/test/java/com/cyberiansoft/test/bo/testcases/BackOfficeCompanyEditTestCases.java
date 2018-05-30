@@ -292,15 +292,15 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicespage.clickFindButton();
 
 		if (servicespage.activeServiceExists(data.getServiceName())) {
-			servicespage.archiveService(data.getServiceName());
+			servicespage.archiveServiceForActiveAllTab(data.getServiceName());
 		}
 		if (servicespage.activeServiceExists(data.getServiceNameEdited())) {
-			servicespage.archiveService(data.getServiceNameEdited());
+			servicespage.archiveServiceForActiveAllTab(data.getServiceNameEdited());
 		}
 		NewServiceDialogWebPage newservicedialog = servicespage.clickAddServiceButton();
 		newservicedialog.setNewServiceName(data.getServiceName());
 		newservicedialog.selectNewServiceType(data.getServiceType());
-		newservicedialog.setNewServiceDescription(data.getServiceDesc());
+		newservicedialog.setNewServiceDescription(data.getServiceDescription());
 		newservicedialog.setNewServiceAccountingID(data.getServiceAccId());
 		newservicedialog.selectNewServiceAssignedTo(data.getServiceAssignedTo());
 		newservicedialog.clickOKButton();
@@ -314,7 +314,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newservicedialog.setNewServiceDescription(data.getServiceDescEdited());
 		newservicedialog.setNewServiceAccountingID(data.getServiceAccIdEdited());
 		newservicedialog.selectNewServiceAssignedTo(data.getServiceAssignedToEdited());
-		newservicedialog.selectNewServiceMultiple();
+		newservicedialog.selectNewService(data.getMultipleCheckboxValue());
 		newservicedialog.clickOKButton();
 
 		newservicedialog = servicespage.clickEditService(data.getServiceNameEdited());
@@ -326,7 +326,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertTrue(newservicedialog.isNewServiceMultipleSelected());
 		newservicedialog.clickCancelButton();
 
-		servicespage.archiveService(data.getServiceNameEdited());
+		servicespage.archiveServiceForActiveAllTab(data.getServiceNameEdited());
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1425,4 +1425,35 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
     }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyServicesActiveParts(String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        ServicesWebPage servicesWebPage = companyPage
+                .clickServicesLink()
+                .selectSearchServiceType(data.getServiceType())
+                .setServiceSearchCriteria(data.getServiceName())
+                .clickFindButton()
+                .verifyActiveServiceDoesNotExist(data.getServiceName())
+                .clickActivePartsTab();
+
+        NewServiceDialogWebPage newServiceDialog = servicesWebPage
+                .clickAddServiceButton()
+                .setNewServiceName(data.getServiceName())
+                .selectNewServiceType(data.getServiceType())
+                .selectNewServicePriceType(data.getServicePriceType())
+                .clickOKButton();
+
+        servicesWebPage.clickActiveAllTab();
+        Assert.assertTrue(servicesWebPage.activeServiceExists(data.getServiceName()), "The " + data.getServiceName()
+                + "service does not exist in active tab");
+        servicesWebPage.clickEditService(data.getServiceName());
+        System.out.println(newServiceDialog.getSavedServicePriceType());
+        System.out.println(data.getServicePriceType());
+        Assert.assertEquals(newServiceDialog.getSavedServicePriceType(), data.getServicePriceType(),
+                "The service Price Type has not been saved");
+        newServiceDialog.clickCancelButton();
+        servicesWebPage.archiveService(data.getServiceName());
+    }
 }
