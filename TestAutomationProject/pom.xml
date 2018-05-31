@@ -5,7 +5,15 @@
 	<groupId>com.cyberiansoft.test.bo</groupId>
 	<artifactId>TestAutomationProject</artifactId>
 	<version>1.2</version>
-	<name>backofficetests</name>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <name>backofficetests</name>
 	<parent>
 		<groupId>com.cyberiansoft.test</groupId>
 		<artifactId>testcases</artifactId>
