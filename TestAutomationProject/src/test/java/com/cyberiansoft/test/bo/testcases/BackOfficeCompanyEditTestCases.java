@@ -4,7 +4,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyEditData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -1351,78 +1350,6 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		
 		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 	}
-
-    //	 @Test(testName = "Test Case 27891:Company- Service Advisors: Authentication",
-//             description = "Company- Service Advisors: Authentication",
-//             dataProvider = "getUserData", dataProviderClass = DataProviderPool.class,
-//             retryAnalyzer=Retry.class)
-    public void testCompanyServiceAdvisorsAuthentication(String userName, String userPassword) throws InterruptedException {
-
-        // final String email = "test123CD@domain.com";
-        final String usermailprefix = "test.cyberiansoft+";
-        final String usermailpostbox = "@gmail.com";
-        final String confirmpsw = "111aaa";
-        final String customer = "001 - Test Company";
-        final String firstname = "test123CDF";
-        final String lastname = "test123CDF";
-        final String role = "SalesPerson";
-
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-        ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
-        serviceadvisorspage.makeSearchPanelVisible();
-        serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
-        serviceadvisorspage.clickFindButton();
-        if (serviceadvisorspage.serviceAdvisorExists(firstname, lastname)) {
-            serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
-        }
-        serviceadvisorspage.clickServiceAdvisorAddButton();
-        long currtime = java.lang.System.currentTimeMillis();
-        String usermail = "test.cyberiansoft+" + currtime + "@gmail.com";
-        serviceadvisorspage.createNewServiceAdvisor(usermail, firstname, lastname, customer, role);
-
-        backofficeheader.clickLogout();
-
-        boolean search = false;
-        String mailmessage = "";
-        for (int i = 0; i < 4; i++) {
-            if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "ZZzz11!!", "ReconPro: REGISTRATION",
-                    "ReconPro@cyberianconcepts.com", "Please click link below to complete the registration process.")) {
-                serviceadvisorspage.waitABit(60 * 500);
-            } else {
-                mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "ZZzz11!!",
-                        "ReconPro: REGISTRATION", "ReconPro@cyberianconcepts.com");
-                if (mailmessage.length() > 3) {
-                    search = true;
-                    break;
-                }
-            }
-        }
-
-        String confirmationurl = "";
-        if (search) {
-
-            confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
-
-        }
-        System.out.println("++++++" + confirmationurl);
-        serviceadvisorspage.waitABit(60 * 1000);
-        webdriver.get(confirmationurl);
-        ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver, ConfirmPasswordWebPage.class);
-
-        BackOfficeLoginWebPage loginpage = confirmpasswordpage.confirmUserPassword(confirmpsw);
-        loginpage.UserLogin(userName, userPassword);
-        backofficeheader.clickHomeLink();
-
-        backofficeheader.clickLogout();
-        loginpage.UserLogin(userName, userPassword);
-        companypage = backofficeheader.clickCompanyLink();
-        serviceadvisorspage = companypage.clickServiceAdvisorsLink();
-        serviceadvisorspage.makeSearchPanelVisible();
-        serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
-        serviceadvisorspage.clickFindButton();
-        serviceadvisorspage.deleteServiceAdvisor(firstname, lastname);
-    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCompanyServicesActiveParts(String rowID, String description, JSONObject testData) {
