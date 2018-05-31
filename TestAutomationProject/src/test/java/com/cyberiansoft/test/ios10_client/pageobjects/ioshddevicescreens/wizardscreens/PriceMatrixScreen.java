@@ -130,6 +130,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
 			//		table);
 		}
+		if (!table.findElementByAccessibilityId(discaunt).isDisplayed())
+			swipeTableUp(table.findElementByAccessibilityId(discaunt), table);
+
 		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId(discaunt)).click();
 	}
 	

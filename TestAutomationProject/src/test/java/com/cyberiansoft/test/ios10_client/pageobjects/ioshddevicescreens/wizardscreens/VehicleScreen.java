@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.List;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
@@ -302,8 +301,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	public void selectOwnerT(String owner)  {
 		appiumdriver.findElementByAccessibilityId("Owner").click();
 		try {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']").click();
 		} catch (WebDriverException e) {
 			appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + owner + "']").click();
 		}
@@ -398,8 +396,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public NotesScreen clickNotesButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Compose")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId("Compose").click();
 		//composebtn.click();
 		return new NotesScreen(appiumdriver);
 	}

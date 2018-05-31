@@ -10,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class VNextInspectionTypesList extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='entity-types']")
@@ -20,7 +18,7 @@ public class VNextInspectionTypesList extends VNextBaseScreen {
 	public VNextInspectionTypesList(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		//PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, 15, TimeUnit.SECONDS), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOf(insptypeslist));
 	}

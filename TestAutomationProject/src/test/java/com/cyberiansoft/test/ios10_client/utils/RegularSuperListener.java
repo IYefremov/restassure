@@ -5,7 +5,7 @@ import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios_client.utils.TestUser;
+import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.testng.*;

@@ -54,7 +54,7 @@ public class VNextApproveScreen extends VNextBaseScreen {
 		//action.down(xx + 100,yy + 100).perform();
 		
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		new TouchAction(appiumdriver).tap(xx+200, yy+200).perform();
+		new TouchAction(appiumdriver).tap(PointOption.point(xx+200, yy+200)).perform();
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(300))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();

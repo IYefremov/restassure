@@ -13,6 +13,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class TeamPortalUserTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseUser.json";
@@ -190,7 +192,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanPayAgreementFromMailLink(String rowID, String description, JSONObject testData) {
+    public void testUserCanPayAgreementFromMailLink(String rowID, String description, JSONObject testData) throws IOException {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 

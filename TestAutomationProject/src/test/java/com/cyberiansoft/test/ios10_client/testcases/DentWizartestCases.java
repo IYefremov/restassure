@@ -21,10 +21,10 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typessc
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -1586,7 +1586,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		ordersummaryscreen.selectWorkOrderDetails("Hail");
+		ordersummaryscreen.selectInvoiceType("Hail");
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -2495,7 +2495,7 @@ public class DentWizartestCases extends BaseTestCase {
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), totalsumm);
         InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
-		ordersummaryscreen.selectWorkOrderDetails("Hail No Discount Invoice");
+		ordersummaryscreen.selectInvoiceType("Hail No Discount Invoice");
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), totalsumm);
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen = new MyWorkOrdersScreen(appiumdriver);

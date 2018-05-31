@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -80,6 +81,7 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		//MobileElement customercell = (MobileElement) appiumdriver.findElementByAccessibilityId(customer);
 		//if (!customercell.isDisplayed()) {
 			searchbtn.click();
+		BaseUtils.waitABit(500);
 			appiumdriver.getKeyboard().sendKeys(customer);
 		//}
 		appiumdriver.findElementByAccessibilityId(customer).click();

@@ -28,6 +28,9 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//a[@handler='_refreshPictures']")
 	private WebElement invoicerfreshpicturesbtn;
+
+	@FindBy(xpath="//a[@data-name='pay']")
+	private WebElement invoicepaymenubtn;
 	
 	@FindBy(xpath="//div[@data-menu='popup']")
 	private WebElement invoicemenuscreen;
@@ -87,7 +90,12 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}
-	
+
+	public VNextPayInvoicesScreen clickPayInvoiceMenuItem() {
+		tap(invoicepaymenubtn);
+		return new VNextPayInvoicesScreen(appiumdriver);
+	}
+
 	public boolean isInvoiceChangePONumberMenuItemExists() {
 		return invoicechangeponumbtn.isDisplayed();
 	}

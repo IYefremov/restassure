@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -309,8 +308,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Year").click();
 		selectUIAPickerValue(year);
 		//((IOSElement) appiumdriver.findElementsByAccessibilityId("Year").get(1)).click();
-		new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId("Done").getLocation().getX(), 
-				appiumdriver.findElementByAccessibilityId("Done").getLocation().getY()).perform();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 		
 		//TouchAction perform = new TouchAction(appiumdriver).tap(tapOptions().withElement(element(appiumdriver.findElementByAccessibilityId("Done")))).perform();
 		

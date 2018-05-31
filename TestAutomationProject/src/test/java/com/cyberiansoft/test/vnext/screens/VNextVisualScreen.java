@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -74,7 +75,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		BaseUtils.waitABit(300);
 		TouchAction tch = new TouchAction(appiumdriver);
-		tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3) ).perform();
+		tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
 		BaseUtils.waitABit(300);	
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 	}
@@ -85,7 +86,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		
 		for (int i = 0; i < touchTimes; i++) {
 			TouchAction tch = new TouchAction(appiumdriver);
-			tch.tap(Math.round(appiumdriver.manage().window().getSize().getWidth() / (i+2)), Math.round(appiumdriver.manage().window().getSize().getHeight() / (i+2)) ).perform();
+			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / (i+2)), Math.round(appiumdriver.manage().window().getSize().getHeight() / (i+2)))).perform();
 			BaseUtils.waitABit(1000);
 		}
 		

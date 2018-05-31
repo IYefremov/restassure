@@ -178,7 +178,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return links;
     }
 
-    public String getAgreementApproveLink() {
+    public String getAgreementApproveLink() throws IOException {
 //        String mailContent = null;
 //        try {
 //            mailContent = MailChecker.getUserMailContentFromSpam();
@@ -199,10 +199,10 @@ public class ClientQuotesDetailPage extends BasePage {
 
         String mailmessage = "";
         for (int i = 0; i < 4; i++) {
-            if (!com.cyberiansoft.test.ios_client.utils.MailChecker.searchSpamEmail(userName, userPassword, "Agreement", "noreply@repair360.net", "https://goo.gl")) {
+            if (!com.cyberiansoft.test.ios10_client.utils.MailChecker.searchSpamEmail(userName, userPassword, "Agreement", "noreply@repair360.net", "https://goo.gl")) {
                 waitABit(60 * 500);
             } else {
-                mailmessage = com.cyberiansoft.test.ios_client.utils.MailChecker.searchEmailAndGetMailMessage(userName, userPassword, "Agreement", "noreply@repair360.net");
+                mailmessage = com.cyberiansoft.test.ios10_client.utils.MailChecker.searchEmailAndGetMailMessage(userName, userPassword, "Agreement", "noreply@repair360.net");
                 break;
             }
         }

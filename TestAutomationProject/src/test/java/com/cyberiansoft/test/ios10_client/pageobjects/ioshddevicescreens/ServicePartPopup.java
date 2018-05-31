@@ -5,14 +5,11 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class ServicePartPopup extends iOSHDBaseScreen {
 	
@@ -40,7 +37,6 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public String getServicePartCategoryValue() {
-		Helpers.waitABit(500);
 		WebElement par = getTableParentCell("Category");
 		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
@@ -62,18 +58,15 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
 		partcell.click();
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
 		positioncell.click();
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
-		Helpers.waitABit(500);
 	}
 	
 	public void saveSelectedServicePart() throws InterruptedException {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Part']/XCUIElementTypeButton[@name='Save']")).click();	
-		Helpers.waitABit(1000);
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Part']/XCUIElementTypeButton[@name='Save']")).click();
 	}
 	
 	public WebElement getTableParentCell(String cellname) {

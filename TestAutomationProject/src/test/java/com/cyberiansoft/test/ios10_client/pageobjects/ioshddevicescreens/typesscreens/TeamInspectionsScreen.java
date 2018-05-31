@@ -5,14 +5,12 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Service
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
@@ -113,8 +111,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickEditInspectionButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Edit")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId("Edit").click();
 	}
 
 	public boolean isInspectionApproveButtonExists(String inspnumber) {

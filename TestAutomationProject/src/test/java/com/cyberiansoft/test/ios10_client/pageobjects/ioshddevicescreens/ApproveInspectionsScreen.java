@@ -1,14 +1,15 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -88,8 +89,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		int yy = approvepopup.getLocation().getY();
 		
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(xx + 100,yy + 130).
-		waitAction(Duration.ofSeconds(2)).moveTo(xx + 200, yy + 230).release().perform();
+		action.press(PointOption.point(xx + 100,yy + 130)).
+		waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(xx + 200, yy + 230)).release().perform();
 	}
 	
 	public void selectInspectionForApprove(String inspnum) {
@@ -118,8 +119,9 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		else
 			approveimage  = (IOSElement) appiumdriver.findElement(MobileBy.AccessibilityId("TouchInputView"));
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(approveimage.getLocation().getX()+100, approveimage.getLocation().getY()+100).waitAction(Duration.ofSeconds(2)).
-		moveTo(approveimage.getLocation().getX()+200, approveimage.getLocation().getY()+150).release().perform();
+		action.press(PointOption.point(approveimage.getLocation().getX()+100, approveimage.getLocation().getY()+100)).
+				waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).
+		moveTo(PointOption.point(approveimage.getLocation().getX()+200, approveimage.getLocation().getY()+150)).release().perform();
 
 	}
 	
@@ -170,8 +172,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectInspectionServiceToApproveByIndex(String inspservice, int inspnumber) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press((WebElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).waitAction(Duration.ofSeconds(1)).release().perform();
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).click();
 	}
 
 	public void selectInspectionServiceToDecline(String inspservice) {
@@ -184,8 +185,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press((WebElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).waitAction(Duration.ofSeconds(1)).release().perform();
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
 	}
 	
 	public int getNumberOfActiveApproveButtons() {

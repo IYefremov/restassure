@@ -9,6 +9,8 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class VisualInteriorScreen extends BaseWizardScreen {
 	
@@ -61,8 +65,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	}
 
 	public void selectSubService(String _subservice) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId(_subservice)).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId(_subservice).click();
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
@@ -94,7 +97,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int  xx = imagecar.getLocation().getX();
 		int yy = imagecar.getLocation().getY();	
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
-		action.press(imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2).waitAction(Duration.ofSeconds(1)).
+		action.press(PointOption.point(imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2)).
+				waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).
 		
 		release().perform();
 	}
@@ -107,7 +111,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.tap(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130).perform();
+		action.tap(element(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130)).perform();
 
 	}
 
@@ -117,7 +121,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		
 		int x = element.getSize().getWidth()/2;
 		int y = element.getSize().getHeight()/2;
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 	}
 	
 	public void tapCarImage() {
@@ -126,7 +130,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		
 		int x = element.getSize().getWidth()/2;
 		int y = element.getSize().getHeight()/2;
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 		}
 	
 	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
