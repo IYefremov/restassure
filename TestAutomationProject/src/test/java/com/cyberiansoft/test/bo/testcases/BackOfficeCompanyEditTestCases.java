@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
@@ -280,7 +279,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyServicesEdit(String rowID, String description, JSONObject testData) throws Exception {
+    public void testCompanyServicesEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -483,7 +482,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanySharingWorkOrder(String rowID, String description, JSONObject testData) throws InterruptedException {
+    public void testCompanySharingWorkOrder(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -493,19 +492,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())) {
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -535,19 +534,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())){
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())){
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 			}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -603,19 +602,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())) {
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -675,18 +674,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())) {
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -745,19 +744,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())){
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())){
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -816,19 +815,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName(data.getEntry())) {
+		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
 				
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName(data.getEntry()));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()));
 
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -877,7 +876,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyExchangeConfigurationSharingEstimate(String rowID, String description, JSONObject testData) throws InterruptedException{
+    public void testCompanyExchangeConfigurationSharingEstimate(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -887,19 +886,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")){
+		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")){
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 			}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -929,19 +928,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if (interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+		if (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1000,19 +999,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1068,19 +1067,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1139,19 +1138,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if (interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+		if (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1209,19 +1208,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();		
 		
-		if(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)")) {
+		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("Estimate JST for Name (Estimation)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1270,7 +1269,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyExchangeConfigurationMappingWorkOrder(String rowID, String description, JSONObject testData) throws InterruptedException{
+    public void testCompanyExchangeConfigurationMappingWorkOrder(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1280,19 +1279,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
 		
-		if (interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")) {
+		if (interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)")) {
 		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());   
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1312,7 +1311,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) throws InterruptedException{
+    public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1322,19 +1321,19 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();	
 		
-		if(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)")){
+		if(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)")){
 			interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
-		Assert.assertFalse(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
 		
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
-		Assert.assertTrue(interApplicationExchangePage.checkEntryByName("WO JST for Name (Work Order)"));
+		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
 		
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
@@ -1357,7 +1356,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 //             description = "Company- Service Advisors: Authentication",
 //             dataProvider = "getUserData", dataProviderClass = DataProviderPool.class,
 //             retryAnalyzer=Retry.class)
-    public void testCompanyServiceAdvisorsAuthentication(String userName, String userPassword) throws InterruptedException, IOException {
+    public void testCompanyServiceAdvisorsAuthentication(String userName, String userPassword) throws InterruptedException {
 
         // final String email = "test123CD@domain.com";
         final String usermailprefix = "test.cyberiansoft+";
@@ -1455,5 +1454,49 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
                 "The service Price Type has not been saved");
         newServiceDialog.clickCancelButton();
         servicesWebPage.archiveService(data.getServiceName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyInterApplicationExchangeConfigMappingEstimation(String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        InterApplicationExchangeWebPage interApplicationExchangePage = companyPage
+                .clickInterApplicationExchangeLink()
+                .clickSendingTab()
+                .expandFirstCreatedCompany()
+                .verifyCompanyDoesNotExist(data.getEntry())
+                .verifyCompanyDoesNotExist(data.getProfileName())
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company shouldn't be added after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickInsertButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company should have been added after clicking the \"Insert\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name shouldn't be edited after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickActiveCheckBox()
+                .clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name should have been edited after clicking the \"Update\" button");
+        Assert.assertTrue(interApplicationExchangePage.isEntryActive(data.getProfileName()),
+                "The company profile is not active after clicking the \"Active\" checkbox");
+
+        interApplicationExchangePage.deleteEntry(data.getProfileName());
     }
 }

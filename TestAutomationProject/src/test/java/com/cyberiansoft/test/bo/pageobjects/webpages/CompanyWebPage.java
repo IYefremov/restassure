@@ -264,7 +264,7 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 	
 	public InterApplicationExchangeWebPage clickInterApplicationExchangeLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(interApplicationExchangeLink)).click();;
+		wait.until(ExpectedConditions.elementToBeClickable(interApplicationExchangeLink)).click();
 		return PageFactory.initElements(
 				driver, InterApplicationExchangeWebPage.class);
 	}

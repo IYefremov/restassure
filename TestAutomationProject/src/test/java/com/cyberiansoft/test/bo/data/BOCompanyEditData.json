@@ -399,5 +399,18 @@
       "serviceType": "Detail",
       "servicePriceType": "Labor"
     }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimation": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimation.01",
+      "description": "Test Case 63139:Company: Inter Application Exchange Configuration - Mapping Estimate",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default"
+    }
   ]
 }

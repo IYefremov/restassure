@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -15,13 +17,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
+
 public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
-	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboDocType_Input')]")
-	private WebElement documentTypeDropDown;
+    @FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboDocType_Input')]")
+	private ComboBox documentTypeCombobox;
+
+	@FindBy(xpath = "//div[contains(@id, 'EditFormControl_comboDocType_DropDown')]")
+	private DropDown documentTypeDropDown;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
-	private WebElement entityTypeDropDown;
+	private ComboBox entityTypeCombobox;
+
+	@FindBy(xpath = "//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]")
+	private DropDown entityTypeDropDown;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10__0:0_0")
 	private WebElement firstEntry;
@@ -68,10 +78,38 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_dateInput")
     private WebElement addProfileDateField;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_dateInput_ClientState")
+    private WebElement addProfileDateFieldAttr;
+
 	@FindBy(xpath = "//table[@id='ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10']/tbody/tr")
     private List<WebElement> rulesTableRows;
 
-	public InterApplicationExchangeWebPage(WebDriver driver) {
+	@FindBy(xpath = "//span[text()='Sending']")
+    private WebElement sendingTab;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_ctl00")
+    private WebElement profileDetails;
+
+	@FindBy(className = "rcbItem")
+    private List<WebElement> itemsList;
+
+	@FindBy(xpath = "//input[@value='Cancel']")
+    private WebElement cancelButton;
+
+	@FindBy(xpath = "//input[@value='Insert']")
+    private WebElement insertButton;
+
+	@FindBy(xpath = "//input[@value='Update']")
+    private WebElement updateButton;
+
+	@FindBy(xpath = "//input[@title='Add Profile']")
+    private WebElement addTitleButton;
+
+	@FindBy(xpath = "//div[@class='rgEditForm  RadGrid_Default rgEditPopup']" +
+            "//td[contains(text(), 'Active')]/following-sibling::td/input")
+    private WebElement activeCheckbox;
+
+    public InterApplicationExchangeWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
@@ -81,67 +119,84 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void expandFirstCreatedCompany() {
+	public InterApplicationExchangeWebPage expandFirstCreatedCompany() {
 		driver.findElement(By.className("rgExpand")).click();
 		waitForLoading();
+		return this;
 	}
 
-	public void clickAddProfileButton() {
-		driver.findElement(By.linkText("Add Profile")).click();
+	public InterApplicationExchangeWebPage clickAddProfileButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(addTitleButton)).click();
 		waitForLoading();
+		wait.until(ExpectedConditions.visibilityOf(profileDetails));
+        return this;
+    }
+
+	public InterApplicationExchangeWebPage fillProfileDetails(String name, String documentType, String entityType) {
+        fillInProfileDetailsName(name);
+        selectProfileDetailsDocumentType(documentType);
+        selectProfileDetailsEntityType(entityType);
+        selectProfileDetailsDateForToday();
+        return this;
 	}
 
-	public void fillProfileDetails(String name, String documentType, String entityType) {
-		profileDetailsName.clear();
-		profileDetailsName.sendKeys(name);
-		documentTypeDropDown.click();
+	private void fillInProfileDetailsName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(profileDetailsName)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(profileDetailsName)).sendKeys(name);
+    }
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(documentType))
-				.findFirst().get().click();
+	private void selectProfileDetailsDocumentType(String documentType) {
+        selectComboboxValue(documentTypeCombobox, documentTypeDropDown, documentType);
+        waitForLoading();
+    }
 
-		waitForLoading();
+	private void selectProfileDetailsEntityType(String entityType) {
+        selectComboboxValue(entityTypeCombobox, entityTypeDropDown, entityType);
+    }
 
-		entityTypeDropDown.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType))
-                .findFirst().get().click();
-		waitABit(500);
-		wait.until(ExpectedConditions.elementToBeClickable(sendFromCalendarBTN)).click();
-		driver.findElement(By.className("rcRow")).findElement(By.className("rcOtherMonth")).click();
-		waitABit(2000);
+	private void selectProfileDetailsDateForToday() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        wait.until(ExpectedConditions.visibilityOf(addProfileDateField)).sendKeys(formatter.format(date));
 	}
 
 	public void fillProfileDetails(String name, String entityType) {
-		profileDetailsName.clear();
-		profileDetailsName.sendKeys(name);
-
-		entityTypeDropDown.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(entityType)).findFirst()
-				.get().click();
-
-		LocalDateTime date = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-		addProfileDateField.sendKeys(formatter.format(date));
-
-		// calendsrIcon.click();
-		// calendarPage.findElements(By.className("rcOtherMonth")).stream().findAny().get().click();
-		waitABit(2000);
+        fillInProfileDetailsName(name);
+        selectProfileDetailsEntityType(entityType);
+        selectProfileDetailsDateForToday();
 	}
 
-	public void fillProfileDetailsEdit(String name) {
-		profileDetailsNameEdit.clear();
-		profileDetailsNameEdit.sendKeys(name);
-	}
+	public InterApplicationExchangeWebPage fillProfileDetailsEdit(String name) {
+		wait.until(ExpectedConditions.visibilityOf(profileDetailsNameEdit)).clear();
+		wait.until(ExpectedConditions.visibilityOf(profileDetailsNameEdit)).sendKeys(name);
+        return this;
+    }
 
-	public void clickProfileDetailsBox(String button) throws InterruptedException {
+	public void clickProfileDetailsBox(String button) {
 		if (button.equals("Cancel")) {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
 		} else if (button.equals("Insert")) {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
 		}
 		waitForLoading();
+	}
+
+	public InterApplicationExchangeWebPage clickCancelButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+		waitForLoading();
+		return this;
+	}
+
+	public InterApplicationExchangeWebPage clickInsertButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(insertButton)).click();
+		waitForLoading();
+		return this;
+	}
+
+	public InterApplicationExchangeWebPage clickUpdateButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(updateButton)).click();
+		waitForLoading();
+		return this;
 	}
 
 	public void clickProfileEditBox(String button) {
@@ -157,11 +212,27 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
+	public InterApplicationExchangeWebPage clickEditEntry(String entry) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.xpath("//td[contains(text(), '" + entry + "')]/../td[@class='btn-edit']")))).click();
+		waitForLoading();
+        return this;
+    }
+
+	public boolean isEntryActive(String entry) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(driver
+                    .findElement(By.xpath("//td[contains(text(), '" + entry + "')]/../td[text()='Active']")))).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 	public String getFirstEntryText() {
 		return firstEntry.findElements(By.tagName("td")).get(3).getText();
 	}
 
-	public boolean checkEntryByName(String name) {
+	public boolean isCompanyDisplayed(String name) {
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
 			return true;
@@ -170,9 +241,12 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		}
 	}
 
-	public int countEntries() {
-		return entriesTable.findElements(By.tagName("tbody")).get(1).findElements(By.tagName("tr")).size();
-	}
+    public InterApplicationExchangeWebPage verifyCompanyDoesNotExist(String company) {
+        while (isCompanyDisplayed(company)) {
+            deleteEntry(company);
+        }
+        return this;
+    }
 
 	public void deleteEntry(String entryName) {
 		entriesTable.findElements(By.tagName("tbody"))
@@ -181,12 +255,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
                 .filter(e -> e.findElements(By.tagName("td"))
                         .get(3)
                         .getText()
-                        .equals(entryName))
+                        .contains(entryName))
                 .findFirst()
-                .get()
-                .findElement(By.linkText("Delete"))
-                .click();
-
+                .ifPresent(e -> e.findElement(By.linkText("Delete")).click());
 		driver.switchTo().alert().accept();
 		waitForLoading();
 	}
@@ -316,4 +387,15 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
+	public InterApplicationExchangeWebPage clickSendingTab() {
+	    wait.until(ExpectedConditions.elementToBeClickable(sendingTab)).click();
+	    waitForLoading();
+	    return this;
+    }
+
+	public InterApplicationExchangeWebPage clickActiveCheckBox() {
+	    wait.until(ExpectedConditions.elementToBeClickable(activeCheckbox)).click();
+	    waitABit(500);
+	    return this;
+    }
 }
