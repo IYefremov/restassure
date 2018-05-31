@@ -8,6 +8,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -16,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class QuestionsScreen extends BaseWizardScreen {
 	
@@ -147,7 +151,7 @@ public class QuestionsScreen extends BaseWizardScreen {
 
 		int y = signature.getLocation().getY()/2;
 		TouchAction action = new TouchAction(appiumdriver);
-		action.tap(signature, x, y) .perform();
+		action.tap(element(signature, x, y)).perform();
 		
 		
 		
@@ -163,13 +167,13 @@ public class QuestionsScreen extends BaseWizardScreen {
 
 		action = new TouchAction(appiumdriver);
 		//action.press(xx + 100,yy + 100).waitAction(duration).moveTo(xx + 200, yy + 200).release().perform();
-		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
 		
 	
 		action = new TouchAction(appiumdriver);
 		//action.press(xx - 10,yy + 50).waitAction(3000).moveTo(xx + 200, yy + 200).release().perform();
 		//action.tap(xx - 20, yy + 10).perform();
-		action.tap(element, 30, element.getSize().getHeight() - 20).perform();
+		action.tap(element(element, 30, element.getSize().getHeight() - 20)).perform();
 		
 	}
 	

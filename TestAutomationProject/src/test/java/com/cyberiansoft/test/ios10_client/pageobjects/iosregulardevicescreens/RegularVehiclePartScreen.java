@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -24,7 +23,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public void setSizeAndSeverity(String size, String severity) {
-        new TouchAction(appiumdriver).tap(appiumdriver.findElementByAccessibilityId("Size")).perform();
+        appiumdriver.findElementByAccessibilityId("Size").click();
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(size)));
         appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + size + "']")).click();

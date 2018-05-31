@@ -4,6 +4,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public abstract class Helpers {
 
@@ -253,7 +257,7 @@ public abstract class Helpers {
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
 		MobileElement element = (MobileElement) DriverBuilder.getInstance().getAppiumDriver()
 				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 		//action = new TouchAction(driver);
 		//action.press(element, x, y).waitAction(1000).release().perform();
 		//action.press(element).moveTo(element, 30, 30).release().perform();
@@ -276,7 +280,7 @@ public abstract class Helpers {
 		
 		//int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		//int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 		
 		//element.tap(1, x, y, 1000);
 		Thread.sleep(1000);
@@ -295,7 +299,7 @@ public abstract class Helpers {
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 		waitABit(1000);
 	}
 	
@@ -306,7 +310,7 @@ public abstract class Helpers {
 		
 		int x = element.getLocation().getX() + element.getSize().getWidth()/2+5;
 		int y = element.getLocation().getY() + element.getSize().getHeight()/2-5;
-		action.tap(element, x, y).perform();
+		action.tap(element(element, x, y)).perform();
 		
 		//element.tap(1, x, y, 1000);
 		Thread.sleep(1000);
@@ -323,7 +327,7 @@ public abstract class Helpers {
 		int yyd = yy + 200;
 
 		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
-		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xxd, yyd).release().perform();
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).moveTo(PointOption.point(xxd, yyd)).release().perform();
 		
 		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Done").click();
@@ -341,9 +345,9 @@ public abstract class Helpers {
 
 		int duration = 1000;
 		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
-		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
-		TouchAction swipe = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).press(xx+100, yy+100)
-                .waitAction(Duration.ofSeconds(2)).moveTo(xxd, yyd).release();
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
+		TouchAction swipe = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).press(PointOption.point(xx+100, yy+100))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(xxd, yyd)).release();
         swipe.perform();
 		//driver.swipe(xx+100, yy+100, xxd, yyd, duration);
 		
@@ -357,27 +361,8 @@ public abstract class Helpers {
 		int y = (signatureview.getLocation().getY() + signatureview.getSize().getHeight())-5;
 		
 		//driver.tap(1, element1.getLocation().getX()+10, element1.getLocation().getY() + element1.getSize().getHeight()-10, 1000);
-		TouchAction tap = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).tap(x, y).perform();
+		TouchAction tap = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).tap(PointOption.point(x, y)).perform();
 		//driver.tap(1, x, y, duration);                 
-	}
-
-	public static void selectUIAPickerWheelValue(MobileElement picker,
-			MobileElement pickerwheel, String value) {
-		int defaultwheelnumer = 10;
-		int clicks = 0;
-		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			TouchAction tap = new TouchAction(DriverBuilder.getInstance().getAppiumDriver()).tap(pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 100, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() + 10).perform();
-			/*driver.tap(1, pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 100, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() + 10,
-					100);*/
-			waitABit(1000);
-			clicks = clicks+1;
-			if (clicks > defaultwheelnumer)
-				break;
-		}
 	}
 
 	public static void setVIN(String vin) throws InterruptedException {

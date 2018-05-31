@@ -1,21 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.time.Duration;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerScreen extends iOSHDBaseScreen {
 	
@@ -71,14 +62,11 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	public void addCustomer(String firstname, String lastname,
 			String companyname, String street, String city, String state,
 			String zip, String country, String phone, String mail)	{
-		Helpers.waitABit(2000);
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);
 		setStreet(street);
-		Helpers.waitABit(2000);
 		setCity(city);
-		Helpers.waitABit(2000);
 		selectCountry(country);
 		selectState(state);
 		setZip(zip);
@@ -90,48 +78,39 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 			String companyname, String street, String city, String state,
 			String zip, String country, String phone, String mail)
 			throws InterruptedException {
-		Thread.sleep(2000);
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);
 		setStreet(street);
 		setCity(city);
-		Thread.sleep(2000);
 		setZip(zip);
-		Thread.sleep(2000);
 		setPhone(phone);
-		Thread.sleep(2000);
 		setMail(mail);
 	}
 
 	public void setFirstName(String firstname) {
 		firstnamefld.clear();
 		firstnamefld.setValue(firstname);
-		Helpers.waitABit(300);
 	}
 
 	public void setLastName(String lastname) {
 		lastnamefld.clear();
 		lastnamefld.setValue(lastname);
-		Helpers.waitABit(300);
 	}
 
 	public void setCompanyName(String companyname) {
 		companyfld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(companyname);
-		Helpers.waitABit(300);
 	}
 
 	public void setStreet(String street) {
 		streetfld.clear();
 		streetfld.setValue(street);
-		Helpers.waitABit(300);
 	}
 
 	public void setCity(String city) {
 		cityfld.clear();	
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(city + "\n");
-		Helpers.waitABit(300);
 	}
 
 	public void setState(String state) {
@@ -142,33 +121,26 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	public void setZip(String zip) {
 		zipfld.clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(zip + "\n");
-		Helpers.waitABit(1000);
 	}
 
 	public void setPhone(String phone) {
 		phonefld.clear();		
 		phonefld.sendKeys(phone + "\n");
-		Helpers.waitABit(1000);
 	}
 
 	public void setMail(String mail) {
 		mailfld.clear();
 		mailfld.sendKeys(mail + "\n");
-		Helpers.waitABit(1000);
 	}
 
 	public void selectState(String state) {
 		statebtn.click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(state))).waitAction(Duration.ofMillis(300)).release().perform();
-		Helpers.waitABit(2000);
+		appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();
 	}
 
 	public void selectCountry(String country) {
 		countrybtn.click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(country))).waitAction(Duration.ofMillis(300)).release().perform();
-		Helpers.waitABit(2000);
+		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}
 
 	public void clickSaveBtn() {

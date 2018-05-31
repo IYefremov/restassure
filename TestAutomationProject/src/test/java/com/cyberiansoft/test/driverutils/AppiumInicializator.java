@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.driverutils;
 
-import java.net.URL;
-
 import com.cyberiansoft.test.core.MobilePlatform;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+
+import java.net.URL;
 
 public class AppiumInicializator {
 	
@@ -23,8 +22,10 @@ private static AppiumInicializator instance = null;
     }
 	
 	public AppiumDriver<MobileElement> initAppium(MobilePlatform mobilePlatform) {
-		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null)
+		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null) {
+			System.out.println("+++ Server started at: " +  AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
 			initAppium(mobilePlatform, AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
+		}
 		else
 			DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 		return DriverBuilder.getInstance().getAppiumDriver();

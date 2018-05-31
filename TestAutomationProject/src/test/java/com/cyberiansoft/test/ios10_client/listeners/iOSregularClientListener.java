@@ -10,7 +10,7 @@ import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios_client.utils.TestUser;
+import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
 import org.testng.*;

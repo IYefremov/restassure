@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOErrorMessages;

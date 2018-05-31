@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -66,7 +65,7 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(bundle)).size() > 0;
 	}
 	
-	public void overrideBundleAmountValue(String newvalue) throws InterruptedException {
+	public void overrideBundleAmountValue(String newvalue) {
 		appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[3]").click();
 		
 		List<WebElement> elems = appiumdriver.findElementsByAccessibilityId("Bundle service amount");
@@ -78,7 +77,7 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 			//System.out.println("++++" + el.getAttribute("className"));
 			
 		}
-		Helpers.keyboadrType(newvalue);
+		appiumdriver.getKeyboard().sendKeys(newvalue);
 		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]").click();
 		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]").clear();
 		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]").sendKeys(newvalue);

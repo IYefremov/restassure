@@ -5,7 +5,7 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.ios_client.utils.MailChecker;
+import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;

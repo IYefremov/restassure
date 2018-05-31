@@ -1,7 +1,17 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.io.IOException;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
+import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
+import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,47 +22,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
-import com.cyberiansoft.test.ios_client.utils.MailChecker;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextEmailMismatchDialog;
-import com.cyberiansoft.test.vnext.screens.VNextEmailVerificationScreen;
-import com.cyberiansoft.test.vnext.screens.VNextFeedbackScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextPhoneMismatchDialog;
-import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationLineOfBusinessScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationNewUserPersonalInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewLegalInfosScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationOverviewScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationPaymentInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
-import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
-import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
-import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextPaymentInfoWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextUpgradeInfoWebPage;
+import java.io.IOException;
 
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	

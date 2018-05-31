@@ -10,6 +10,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -246,7 +247,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + servicename + "']/..")));
 		IOSElement el = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeButton[@name='custom detail button']"));
 		TouchAction action = new TouchAction(appiumdriver);
-		action.tap(el.getLocation().getX()+2, el.getLocation().getY()+2).perform();
+		action.tap(PointOption.point(el.getLocation().getX()+2, el.getLocation().getY()+2)).perform();
 		
 		/*Helpers.waitABit(2000);
 		appiumdriver.findElementByAccessibilityId(servicename).click();

@@ -15,7 +15,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.*;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;

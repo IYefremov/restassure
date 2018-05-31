@@ -8,6 +8,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -54,8 +56,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickDoneButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(donestatusreasonbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		donestatusreasonbtn.click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
@@ -79,19 +80,16 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSkipAllServicesButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(skipallbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		skipallbtn.click();
 		//skipallbtn.click();
 	}
 
 	public void clickCancelButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(cancelbtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		cancelbtn.click();
 	}
 	
 	public void clickSaveButton() {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(savebtn).waitAction(Duration.ofSeconds(1)).release().perform();
+		savebtn.click();
 	}
 	
 	public void clickSignButton() {
@@ -107,7 +105,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 
 		int yy = element.getLocation().getY();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(1)).moveTo(xx + 200, yy + 200).release().perform();
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).
+				moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
 
 	}
 	
@@ -119,15 +118,15 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 
 		int yy = element.getLocation().getY();
 		TouchAction action = new TouchAction(appiumdriver);
-		action.press(xx + 100,yy + 100).waitAction(Duration.ofSeconds(3)).moveTo(xx + 200, yy + 200).release().perform();
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).
+				moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
 		clickDoneButton();
 
 	}
 
 	public void clickInspectionInfoAlertCloseButton() {
 		Helpers.waitForAlert();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Close")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
 	public void approveInspectionApproveAllAndSignature() throws InterruptedException {
@@ -173,8 +172,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectInspectionServiceToApproveByIndex(String inspservice, int inspnumber) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press((WebElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).waitAction(Duration.ofSeconds(1)).release().perform();
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).click();
 	}
 
 	public void selectInspectionServiceToDecline(String inspservice) {
@@ -189,15 +187,13 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspservice + "']/..")));
 			appiumdriver.findElement(MobileBy.AccessibilityId(inspservice)).click();
 		}
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']"))).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).click();
 		
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['" + inspservice + "'].buttons()['skip little off']")).click();
 	}
 	
 	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press((WebElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).waitAction(Duration.ofSeconds(1)).release().perform();
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
 	}
 	
 	public void selectInspection(String inspnumber) {

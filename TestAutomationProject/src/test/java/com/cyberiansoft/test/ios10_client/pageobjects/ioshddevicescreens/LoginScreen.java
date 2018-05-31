@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -11,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class LoginScreen extends iOSHDBaseScreen {
@@ -41,8 +39,6 @@ public class LoginScreen extends iOSHDBaseScreen {
 		
 		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//firstcode.setValue(regCode.substring(0, 4));
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(firstcode).waitAction(Duration.ofSeconds(1)).release().perform();
 		firstcode.click();
 
 		firstcode.sendKeys(regCode.substring(0, 4));
@@ -52,8 +48,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		secondcode.setValue(regCode.substring(5, 9));
 		thirdcode.setValue(regCode.substring(10, 14));*/
 		//thirdcode.click();
-		action = new TouchAction(appiumdriver);
-		action.press(registerbtn).waitAction(Duration.ofSeconds(1)).release().perform();	
+		registerbtn.click();
 		//registerbtn.click();
 		
 		//appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);

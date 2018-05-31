@@ -5,8 +5,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBase
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -49,23 +48,6 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void clickCancel() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
-	
-
-	public void acceptAlertByCoords() {
-		int xx = appiumdriver.manage().window().getSize().getWidth();
-		int yy = appiumdriver.manage().window().getSize().getHeight();
-		TouchAction tap = new TouchAction(appiumdriver).tap(xx/2+50, yy/2+50);              
-        tap.perform();
-		//appiumdriver.tap(1, xx/2+50, yy/2+50, 1000);
-	}
-	
-	public void declineAlertByCoords() {
-		int xx = appiumdriver.manage().window().getSize().getWidth();
-		int yy = appiumdriver.manage().window().getSize().getHeight();
-		TouchAction tap = new TouchAction(appiumdriver).tap(xx/2-50, yy/2+50);              
-        tap.perform();
-		//appiumdriver.tap(1, xx/2-50, yy/2+50, 1000);
-	}
 
 	public WebElement waitUntilVisible(String xpath) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
@@ -81,9 +63,9 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 
 		while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
-			action.tap(picker.getSize().getWidth()/2, picker
-					.getLocation().getY() + picker.getSize().getHeight()/2+40).perform();
-			Helpers.waitABit(5000);
+			action.tap(PointOption.point(picker.getSize().getWidth()/2, picker
+					.getLocation().getY() + picker.getSize().getHeight()/2+40)).perform();
+			Helpers.waitABit(1000);
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
@@ -121,16 +103,6 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 			else
 				swipe = false;
 		}
-	}
-	
-	public void swipeTableUp() {
-		
-		MobileElement table = (MobileElement) appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
-		
-		TouchAction swipe = new TouchAction(appiumdriver).press(table, table.getSize().width/2, table.getSize().height-10)
-                .waitAction(Duration.ofSeconds(2)).moveTo(table, table.getSize().width/2, 10).release();
-        swipe.perform();
 	}
 
 }

@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -175,21 +173,13 @@ public class ServicesScreen extends BaseWizardScreen {
 	public void selectGroupServiceItem(String servicename) {
 		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableGroupItemList");
 		
-		TouchAction action = new TouchAction(appiumdriver);
-		/*action.press(appiumdriver.findElementByAccessibilityId("AvailableServiceList")
-				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
-						servicename + "']"))).waitAction(1000).release().perform();*/
-		action.press(availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename)).waitAction(Duration.ofSeconds(1)).release().perform();
+		availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename).click();
 		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
 	}
 	
 	public void selectPriceMatrix(String pricematrixname) {
-		TouchAction action = new TouchAction(appiumdriver);
-		/*action.press(appiumdriver.findElementByAccessibilityId("AvailableServiceList")
-				.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + 
-						servicename + "']"))).waitAction(1000).release().perform();*/
-		action.press(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + 
-				pricematrixname + "']"))).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" +
+				pricematrixname + "']")).click();
 		//action.press(appiumdriver.findElementByAccessibilityId(servicename)).waitAction(1000).release().perform();
 	}
 	
@@ -229,17 +219,15 @@ public class ServicesScreen extends BaseWizardScreen {
 		if (!appiumdriver.findElementByAccessibilityId(servicename).isDisplayed()) {
 			scrollToElement(servicename);
 		}
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
-				.findElement(MobileBy.AccessibilityId("custom detail button"))).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
+				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	
 	public SelectedServiceDetailsScreen selectBundleServiceDetails(String servicename) {
 		appiumdriver.findElementByAccessibilityId(servicename).click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
-				.findElement(MobileBy.AccessibilityId("unselected"))).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
+				.findElement(MobileBy.AccessibilityId("unselected")).click();
 		return new SelectedServiceDetailsScreen(appiumdriver);
 	}
 	

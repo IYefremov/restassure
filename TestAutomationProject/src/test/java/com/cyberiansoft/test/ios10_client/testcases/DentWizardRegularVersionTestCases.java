@@ -24,10 +24,10 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -584,7 +584,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			approveinspscreen.drawApprovalSignature();
 			myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 			Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpnumber));
-			myinspectionsscreen.selectInspectionType(inpnumber);
+			myinspectionsscreen.selectInspection(inpnumber);
 			myinspectionsscreen.clickCreateWOButton();
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
@@ -1370,7 +1370,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-            vehiclePartScreen.saveVehiclePart();
+            //vehiclePartScreen.saveVehiclePart();
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.QUICK_QUOTE_SIZE, PriceMatrixScreen.QUICK_QUOTE_SEVERITY);
             vehiclePartScreen.setPrice(ExcelUtils.getServicePrice3(testcaserow));
@@ -1378,10 +1378,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-            vehiclePartScreen.saveVehiclePart();
 			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
 			priceMatricesScreen.clickBackButton();
-			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -1554,9 +1554,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
             vehiclePartScreen.saveVehiclePart();
 			pricematrix.clickBackButton();
-			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-			priceMatricesScreen.clickBackButton();
-			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -1645,9 +1645,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
             vehiclePartScreen.saveVehiclePart();
 			pricematrix.clickBackButton();
-			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-            priceMatricesScreen.clickBackButton();
-			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -1708,9 +1708,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
             vehiclePartScreen.saveVehiclePart();
 			pricematrix.clickBackButton();
-			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-			priceMatricesScreen.clickBackButton();
-			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -1840,7 +1839,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-            vehiclePartScreen.saveVehiclePart();
+            //vehiclePartScreen.saveVehiclePart();
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 			Assert.assertEquals(vehiclePartScreen.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -1950,7 +1949,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 
-            vehiclePartScreen.saveVehiclePart();
+            //vehiclePartScreen.saveVehiclePart();
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
 			Assert.assertEquals(vehiclePartScreen.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -3471,9 +3470,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
 			Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			servicesscreen.saveWizard();
-
 			myinspectionsscreen.selectInspection(inspnum);
 			myinspectionsscreen.clickCreateWOButton();
+			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			String wonumber = vehiclescreeen.getWorkOrderNumber();
 			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 					RegularServicesScreen.class);

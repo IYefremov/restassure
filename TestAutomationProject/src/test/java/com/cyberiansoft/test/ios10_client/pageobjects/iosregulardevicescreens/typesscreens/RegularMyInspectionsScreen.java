@@ -9,8 +9,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -21,7 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
@@ -380,31 +377,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		typesheet.findElementByXPath("//XCUIElementTypeButton[@name='Cancel']").click();
 		return result;
 	}
-	
-	public boolean selectUIAPickerWheelValue(MobileElement picker,
-			MobileElement pickerwheel, String value) throws InterruptedException {
-		int defaultwheelnumer = 10;
-		int clicks = 0;
-		boolean result = false;
-		while (!(pickerwheel.getAttribute("name").contains(value))) {
-			TouchAction tap = new TouchAction(appiumdriver).tap(pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 50, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() + 10);              
-	        tap.perform();
-			/*appiumdriver.tap(1, pickerwheel.getLocation().getX()
-					+ picker.getSize().getWidth() - 50, pickerwheel
-					.getLocation().getY() + picker.getSize().getHeight() + 10, 50);*/
-			Thread.sleep(1000);
-			if (pickerwheel.getAttribute("name").contains(value)) {
-				result = true;
-			}
-			clicks = clicks+1;
-			if (clicks > defaultwheelnumer)
-				return false;
-		}
-		return result;
-	}
-	
 
 	public void clickDoneButton() {
 		appiumdriver.findElementByAccessibilityId("Done").click();
@@ -466,8 +438,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	public RegularNotesScreen openInspectionNotesScreen(String inspnumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))).click();
-		TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByAccessibilityId("Notes")).waitAction(Duration.ofSeconds(1)).release().perform();
+		appiumdriver.findElementByAccessibilityId("Notes").click();
 		//notespopupmenu.click();
 		return new RegularNotesScreen(appiumdriver);
 	}

@@ -7,7 +7,7 @@ import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.TestUser;
+import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.monte.screenrecorder.ScreenRecorder;

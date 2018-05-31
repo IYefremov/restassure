@@ -17,10 +17,10 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

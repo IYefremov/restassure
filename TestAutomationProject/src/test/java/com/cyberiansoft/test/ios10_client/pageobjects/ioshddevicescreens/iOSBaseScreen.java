@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -15,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public abstract class iOSBaseScreen {
 	
@@ -69,8 +73,8 @@ public abstract class iOSBaseScreen {
 		MobileElement table = (MobileElement) appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
 		
-		TouchAction swipe = new TouchAction(appiumdriver).press(table, table.getSize().width/2, table.getSize().height-10)
-                .waitAction(Duration.ofSeconds(2)).moveTo(table, table.getSize().width/2, 10).release();
+		TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-10))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 10)).release();
         swipe.perform();
 		
         /*swipe = new TouchAction(appiumdriver).press(startx, endy)
@@ -93,8 +97,8 @@ public abstract class iOSBaseScreen {
 		int starty = (int) size.height / 2;	
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(endx, starty).waitAction(1000) .moveTo(startx, starty).release().perform();
-		TouchAction swipe = new TouchAction(appiumdriver).press(endx, starty)
-                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
+		TouchAction swipe = new TouchAction(appiumdriver).press(PointOption.point(endx, starty))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(startx, starty)).release();
         swipe.perform();
 		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
@@ -107,8 +111,8 @@ public abstract class iOSBaseScreen {
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(1000) .moveTo(endx, starty).release().perform();
 		
-		TouchAction swipe = new TouchAction(appiumdriver).press(startx, starty)
-                .waitAction(Duration.ofSeconds(2)).moveTo(endx, starty).release();
+		TouchAction swipe = new TouchAction(appiumdriver).press(PointOption.point(startx, starty))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(endx, starty)).release();
         swipe.perform();
 		//appiumdriver.swipe(startx, starty, endx, starty, 2000);
 	}
