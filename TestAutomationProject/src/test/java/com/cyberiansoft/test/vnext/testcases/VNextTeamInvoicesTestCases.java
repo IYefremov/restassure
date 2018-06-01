@@ -262,8 +262,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen = invoiceinfoscreen.saveInvoice();
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-		invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
-		AppiumUtils.clickHardwareBackButton();
+		VNextChangeInvoicePONumberDialog changeInvoicePONumberDialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
+		changeInvoicePONumberDialog.setInvoicePONumber(ponumber);
+		//AppiumUtils.clickHardwareBackButton();
 		AppiumUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.clickBackButton();
@@ -713,6 +714,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		System.out.println("++++++++++++" + VNextConfigInfo.getInstance().getUserCapiMail());
+		BaseUtils.waitABit(10000);
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -724,7 +727,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			boolean found = false;
 			for (int i = 0; i < iterations; i++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
+						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
 					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
@@ -863,7 +866,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			boolean found = false;
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
+						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
 					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
@@ -937,7 +940,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			boolean found = false;
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
+						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
 					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
@@ -1138,7 +1141,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			boolean found = false;
 			for (int i = 0; i < iterations; i++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
+						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
 					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;
@@ -1411,7 +1414,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			boolean found = false;
 			for (int j = 0; j < iterations; j++)
 				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
+						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
 					BaseUtils.waitABit(45*1000);
 			} else {
 				found = true;

@@ -38,6 +38,10 @@ public class VNextConfigInfo {
 	public String getUserCapiMail() {
 	      return props.getProperty("usercapi.mail");
 	}
+
+	public String getUserCapiMailPassword() {
+		return props.getProperty("usercapimail.password");
+	}
 	
 	public String getUserCapiUserName() {
 	      return props.getProperty("usercapi.name");
