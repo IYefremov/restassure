@@ -6,7 +6,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
@@ -382,14 +381,17 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
-	public InvoiceInfoScreen selectInvoiceType(String invoicetype) {
+	public void clickInvoiceType(String invoicetype) {
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
-		return new InvoiceInfoScreen(appiumdriver);
+	}
+
+	public void selectInvoiceType(String invoicetype) {
+		clickInvoiceType(invoicetype);
 	}
 
 	public String selectInvoiceTypeAndAcceptAlert(String invoicetype) throws InterruptedException {
-		selectInvoiceType(invoicetype);
+		clickInvoiceType(invoicetype);
 		return Helpers.getAlertTextAndAccept();
 	}
 

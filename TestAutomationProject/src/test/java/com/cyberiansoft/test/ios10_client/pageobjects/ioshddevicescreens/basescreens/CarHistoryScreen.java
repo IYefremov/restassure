@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CarHistoryScreen extends BaseAppScreen {
 	
-	@iOSFindBy(accessibility = "btnSearch")
+	@iOSFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
 	@iOSFindBy(xpath = "//XCUIElementTypeSearchBar[1]")
@@ -43,7 +43,7 @@ public class CarHistoryScreen extends BaseAppScreen {
 	
 	public void searchCar(String car) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("btnSearch")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Search")));
 		searchbtn.click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(car);
 		closesearchbtn.click();

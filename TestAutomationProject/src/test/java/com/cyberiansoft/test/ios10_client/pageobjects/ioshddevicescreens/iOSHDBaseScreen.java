@@ -83,12 +83,12 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 		boolean found = false;
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypePicker")));
-		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
+		//IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 
 		if (!pickerwhl.getAttribute("value").contains(value)) {
 			pickerwhl.setValue(value);
-			picker.setValue(value);
+			//picker.setValue(value);
 		}
 		return true;
 	}
