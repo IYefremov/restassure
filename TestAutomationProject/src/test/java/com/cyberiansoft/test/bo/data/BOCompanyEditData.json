@@ -412,5 +412,23 @@
       "documentType": "Estimation",
       "entityType": "Default"
     }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleClients": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleClients.01",
+      "description": "Test Case 63140:Company: Inter Application Exchange Configuration - Mapping Estimate Add Rule Clients",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default",
+      "ruleName": "Include Selected Clients",
+      "ruleEntityType": "Clients",
+      "ruleFilterType": "Include Selected",
+      "usersToAdd": 2,
+      "ruleNameEdited": "Edited rule"
+    }
   ]
 }

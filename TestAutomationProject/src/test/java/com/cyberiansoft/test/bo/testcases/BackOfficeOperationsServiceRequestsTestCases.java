@@ -3,8 +3,10 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.DataProviderPool;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,6 +17,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
+
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsServiceRequestsData.json";
+
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
 
     @Test(testName = "Test Case 25584:Operation - New service request - Appointment - Retail", description = "Operation - New service request - Appointment - Retail")
 	public void testOperationNewServiceRequestAppointmentRetail() throws InterruptedException {
@@ -851,7 +860,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar", dataProvider = "provideSRdata1")
 	public void checkMultiTechInSideScrollbar(String customer, String startDate, String endDate, String status,
-			String SRcustomer, String newStatus) throws InterruptedException {
+			String SRcustomer, String newStatus) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1023,8 +1032,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 56839:Operation - Service Request - Appointment - Scheduler - Add Service Request", dataProvider = "provideSRdata")
-	public void checkSRcreation(String customer, String startDate, String endDate, String status, boolean isDateShifted)
-            throws InterruptedException {
+	public void checkSRcreation(String customer, String startDate, String endDate, String status, boolean isDateShifted) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1066,7 +1074,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 57805:Operation - Service Request Life Cycle - No Entry")
-	public void checkSRLCnoEntry() throws InterruptedException {
+	public void checkSRLCnoEntry() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1077,7 +1085,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 57874:Operation - Service Request Life Cycle - Appointment - Estimate", dataProvider = "provideSRdata")
 	public void checkSRLCestimate(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+			boolean isDateShifted) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1097,7 +1105,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 57806:Operation - Service Request Life Cycle - After Creation")
-	public void checkSRLCafterCreation() throws InterruptedException {
+	public void checkSRLCafterCreation() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1118,7 +1126,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation", dataProvider = "provideSRdata")
 	public void checkSRLCwoAutoCreation(String customer, String startDate, String endDate, String status,
-			boolean isDateShifted) throws InterruptedException {
+			boolean isDateShifted) {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1205,6 +1213,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
 	}
 
+	//todo check
 	@Test(testName = "Test Case 59700:Miscellaneous - Events: Service Request Accepted",
             dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestAccepted(String customer, String startDate, String endDate,
@@ -1511,6 +1520,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
+	//todo check
     @Test(testName = "Test Case 59705:Miscellaneous - Events: Service Request Order Created", dataProvider = "provideSRdata1")
 	public void testMiscellaneousEventsServiceRequestOrderCreated(String customer, String startDate, String endDate,
 			String status, String SRcustomer, String newStatus) throws InterruptedException {
@@ -1664,7 +1674,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 64129:Company - Service Request Type: Duplicate Notification RO")
-	public void testServiceRequestTypeDublicateNotificationRO() throws InterruptedException {
+	public void testServiceRequestTypeDublicateNotificationRO() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1713,7 +1723,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 64124:Company - Service Request Type: Duplicate Error VIN")
-	public void testServiceRequestTypeDublicateErrorVIN() throws InterruptedException {
+	public void testServiceRequestTypeDublicateErrorVIN() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1756,7 +1766,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Test Case 64125:Company - Service Request Type: Duplicate Error RO")
-	public void testServiceRequestTypeDublicateErrorRO() throws InterruptedException {
+	public void testServiceRequestTypeDublicateErrorRO() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1805,7 +1815,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN" )
-	public void testServiceRequestTypeDublicateNotificationVIN() throws InterruptedException {
+	public void testServiceRequestTypeDublicateNotificationVIN() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1847,7 +1857,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(testName = "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK")
-	public void testServiceRequestTypeDublicateErrorStock() throws InterruptedException {
+	public void testServiceRequestTypeDublicateErrorStock() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
@@ -1889,8 +1899,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
 	}
 
+	//todo check
     @Test(testName = "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK")
-	public void testServiceRequestTypeDublicateNotificationStock() throws InterruptedException {
+	public void testServiceRequestTypeDublicateNotificationStock() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -46,25 +47,16 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
     private WebElement entriesTable;
 
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-    private WebElement addRuleNameField;
+    private WebElement ruleNameField;
 
-	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
-    private WebElement addRuleEntityTypeDropDown;
+	@FindBy(xpath = "//select[contains(@name, 'EditFormControl$lbItems_helper1')]")
+    private WebElement addRuleUnselectedUsersList;
 
-	@FindBy(xpath = "//*[contains(@id, 'EditFormControl_comboIncludeType')]")
-    private WebElement addRuleFilterTypeDropDOwn;
-
-	@FindBy(xpath = "//select[@name='ctl00$ctl00$Content$Main$gvSharing$ctl00$ctl06$Detail10$ctl06$Detail10$ctl02$ctl02$EditFormControl$lbItems_helper1']")
-    private WebElement addRuleUsersList;
-
-	@FindBy(xpath = "//select[@name='ctl00$ctl00$Content$Main$gvSharing$ctl00$ctl06$Detail10$ctl06$Detail10$ctl02$ctl02$EditFormControl$lbItems_helper2']")
+	@FindBy(xpath = "//select[contains(@name, 'EditFormControl$lbItems_helper2')]")
     private WebElement addRuleSelectedUsersList;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10")
     private WebElement rulesTable;
-
-	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_tbName')]")
-    private WebElement ruleNameEdit1;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl02_ctl02_EditFormControl_dpCopyOrderDate_popupButton")
     private WebElement sendFromCalendarBTN;
@@ -103,11 +95,26 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
     private WebElement updateButton;
 
 	@FindBy(xpath = "//input[@title='Add Profile']")
-    private WebElement addTitleButton;
+    private WebElement addProfileButton;
 
 	@FindBy(xpath = "//div[@class='rgEditForm  RadGrid_Default rgEditPopup']" +
             "//td[contains(text(), 'Active')]/following-sibling::td/input")
     private WebElement activeCheckbox;
+
+	@FindBy(xpath = "//input[@title='Add Rule']")
+    private WebElement addRuleButton;
+
+	@FindBy(xpath = "//div[@class='rgEditForm  RadGrid_Default rgEditPopup']")
+    private WebElement ruleDialog;
+
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
+    private WebElement ruleEntityType;
+
+    @FindBy(xpath = "//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]/..")
+    private WebElement ruleEntityTypeDropDown;
+
+	@FindBy(xpath = "//select[contains(@id, 'EditFormControl_comboIncludeType')]")
+    private WebElement ruleFilterType;
 
     public InterApplicationExchangeWebPage(WebDriver driver) {
 		super(driver);
@@ -126,7 +133,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public InterApplicationExchangeWebPage clickAddProfileButton() {
-		wait.until(ExpectedConditions.elementToBeClickable(addTitleButton)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(addProfileButton)).click();
 		waitForLoading();
 		wait.until(ExpectedConditions.visibilityOf(profileDetails));
         return this;
@@ -228,6 +235,15 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
         }
     }
 
+	public boolean isRuleDisplayed(String ruleName) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(driver
+                    .findElement(By.xpath("//td[contains(text(), '" + ruleName + "')]")))).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 	public String getFirstEntryText() {
 		return firstEntry.findElements(By.tagName("td")).get(3).getText();
 	}
@@ -276,24 +292,50 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public void fillFilterRuleBox(String name, String entityType, String filterType) {
-		addRuleNameField.clear();
-		addRuleNameField.sendKeys(name);
+		ruleNameField.clear();
+		ruleNameField.sendKeys(name);
 
-		addRuleEntityTypeDropDown.click();
+		ruleEntityTypeDropDown.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]/div/ul"))).findElements(By.tagName("li"))
 				.stream().filter(e -> e.getText().equals(entityType)).findFirst().get().click();
 
 		waitForLoading();
 		waitABit(2000);
-		if (filterType.equals("Include Selected"))
-			new Select(driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))
-							.selectByIndex(1);
+		new Select(ruleFilterType).selectByVisibleText(filterType);
 	}
 
+	public InterApplicationExchangeWebPage fillRuleBox(String name, String entityType, String filterType) {
+        fillAddRuleName(name);
+        selectRuleEntityType(entityType);
+        selectRuleFilterType(filterType);
+        return this;
+	}
+
+	private void fillAddRuleName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(ruleNameField)).clear();
+        wait.until(ExpectedConditions.visibilityOf(ruleNameField)).sendKeys(name);
+    }
+
+    private void selectRuleEntityType(String entityType) {
+        wait.until(ExpectedConditions.elementToBeClickable(ruleEntityType)).click();
+        wait.until(ExpectedConditions.attributeContains(
+                ruleEntityTypeDropDown, "style", "display: block;"));
+        ruleEntityTypeDropDown.findElements(By.xpath(".//li"))
+                .stream()
+                .filter(e -> e.getText().equals(entityType))
+                .findFirst()
+                .ifPresent(WebElement::click);
+        waitForLoading();
+    }
+
+    private void selectRuleFilterType(String filterType) {
+        wait.until(ExpectedConditions.elementToBeClickable(ruleFilterType));
+        new Select(ruleFilterType).selectByVisibleText(filterType);
+    }
+
 	public void fillFilterRuleBox(String name, String filterType) {
-		addRuleNameField.clear();
-		addRuleNameField.sendKeys(name);
+		ruleNameField.clear();
+		ruleNameField.sendKeys(name);
 
 		waitForLoading();
 
@@ -301,26 +343,25 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 			new Select(driver.findElement(
 					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))
 							.selectByIndex(1);
-		;
 	}
 
-	public void selectUsersWhileCreatingRule(int usersToAdd) throws InterruptedException {
-		List<WebElement> allUsers = addRuleUsersList.findElements(By.tagName("option"));
-		int allUsersCount = allUsers.size();
-		if (allUsersCount >= usersToAdd) {
-			for (int i = 0; i < usersToAdd; i++) {
-				addRuleUsersList.findElements(By.tagName("option")).get(0).click();
-				for (int j = 0; j < 5; j++) {
-					Thread.sleep(100);
-					try {
-						if (addRuleSelectedUsersList.findElements(By.tagName("options")).size() == i + 1)
-							break;
-					} catch (Exception e) {
-					}
-				}
-			}
-		}
+	public InterApplicationExchangeWebPage selectUsersWhileCreatingRule(int usersToAdd) {
+        Select unselectedUsersSelection = new Select(addRuleUnselectedUsersList);
+        Select selectedUsersSelection = new Select(addRuleSelectedUsersList);
+        while (unselectedUsersSelection.getOptions().size() > 0 && usersToAdd != 0) {
+            int selectedSize = selectedUsersSelection.getOptions().size();
+            unselectedUsersSelection.selectByIndex(RandomUtils.nextInt(0, unselectedUsersSelection.getOptions().size()));
+            wait.until(driver -> selectedUsersSelection.getOptions().size() != selectedSize);
+            Assert.assertEquals(selectedSize + 1, selectedUsersSelection.getOptions().size(),
+                    "The user has not been selected");
+            usersToAdd--;
+        }
+		return this;
 	}
+
+	public int getNumberOfUnselectedUsers() {
+        return new Select(addRuleUnselectedUsersList).getOptions().size();
+    }
 
 	public void clickAddRuleBox(String button) throws InterruptedException {
 		if (button.equals("Cancel"))
@@ -366,9 +407,10 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void fillRuleBoxEdit(String name) {
-		wait.until(ExpectedConditions.elementToBeClickable(ruleNameEdit1)).clear();
-		ruleNameEdit1.sendKeys(name);
+	public InterApplicationExchangeWebPage editRuleBoxName(String newRuleName) {
+		wait.until(ExpectedConditions.elementToBeClickable(ruleNameField)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(ruleNameField)).sendKeys(newRuleName);
+        return this;
 	}
 
 	public void deleteRule(String ruleName) {
@@ -386,6 +428,43 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 				.findElement(By.linkText("Edit")).click();
 		waitForLoading();
 	}
+
+	public InterApplicationExchangeWebPage expandCompanyProfile(String companyName) {
+	    wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//td[contains(text(), '" +
+                companyName + "')]/..//input[@title='Expand']")))).click();
+	    waitForLoading();
+	    return this;
+    }
+
+	public InterApplicationExchangeWebPage clickAddRule() {
+	    wait.until(ExpectedConditions.elementToBeClickable(addRuleButton)).click();
+	    waitForLoading();
+	    try {
+            wait.until(ExpectedConditions.visibilityOf(ruleDialog));
+        } catch (Exception e) {
+	        Assert.fail("The rule dialog has not been displayed!");
+        }
+	    return this;
+    }
+
+	public InterApplicationExchangeWebPage clickEditRule(String ruleName) {
+	    wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.xpath("//td[contains(text(), '" + ruleName + "')]/../td[@class='btn-edit']"))))
+                .click();
+	    waitForLoading();
+        Assert.assertTrue(isEditDialogDisplayed(),
+                "The rule dialog has not been displayed after clicking the \"Edit Rule\" button");
+        return this;
+    }
+
+    private boolean isEditDialogDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(ruleDialog));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 	public InterApplicationExchangeWebPage clickSendingTab() {
 	    wait.until(ExpectedConditions.elementToBeClickable(sendingTab)).click();

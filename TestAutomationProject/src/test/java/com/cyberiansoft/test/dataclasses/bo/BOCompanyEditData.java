@@ -331,6 +331,21 @@ public class BOCompanyEditData {
     @JsonProperty("multipleCheckboxValue")
     private String multipleCheckboxValue;
 
+    @JsonProperty("ruleName")
+    private String ruleName;
+
+    @JsonProperty("ruleEntityType")
+    private String ruleEntityType;
+
+    @JsonProperty("ruleFilterType")
+    private String ruleFilterType;
+
+    @JsonProperty("usersToAdd")
+    private int usersToAdd;
+
+    @JsonProperty("ruleNameEdited")
+    private String ruleNameEdited;
+
     public String getRetailCompanyName() {
         return clientFirstName + " " + clientLastName;
     }
@@ -769,5 +784,25 @@ public class BOCompanyEditData {
 
     public String getMultipleCheckboxValue() {
         return multipleCheckboxValue;
+    }
+
+    public String getRuleName() {
+        return ruleName;
+    }
+
+    public String getRuleEntityType() {
+        return ruleEntityType;
+    }
+
+    public String getRuleFilterType() {
+        return ruleFilterType;
+    }
+
+    public int getUsersToAdd() {
+        return usersToAdd;
+    }
+
+    public String getRuleNameEdited() {
+        return ruleNameEdited;
     }
 }

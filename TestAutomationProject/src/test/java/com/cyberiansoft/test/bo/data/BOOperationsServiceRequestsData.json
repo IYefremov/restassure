@@ -1,0 +1,19 @@
+{
+  "testOperationNewServiceRequestAppointmentRetail": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentRetail.01",
+      "description": "Test Case 25584:Operation - New service request - Appointment - Retail",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "label": "test"
+    }
+  ]
+}
