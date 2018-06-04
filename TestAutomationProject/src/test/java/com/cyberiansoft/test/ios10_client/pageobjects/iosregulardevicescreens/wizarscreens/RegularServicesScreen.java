@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -86,10 +87,12 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 
 	
 	public String getServicePriceValue(String servicename) {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[3]")).getAttribute("value");
+		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[3]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.%]", "");
 	}
 	
 	public boolean isServiceIsSelectedWithServiceValues(String servicename, String pricevalue) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
 		boolean selected = false;
 		List<WebElement> services = appiumdriver.findElementByClassName("XCUIElementTypeTable").findElements(MobileBy.AccessibilityId(servicename));
 		if (services.size() > 0) {
@@ -154,8 +157,6 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		if (elementExists("Clear text"))
 			appiumdriver.findElementByAccessibilityId("Search").clear();
 
-		//WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
 
 		IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
 				findElement(MobileBy.AccessibilityId(servicename));
@@ -194,9 +195,10 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	public void selectSubService(String servicename) {
 		if (elementExists(MobileBy.AccessibilityId("Clear text")))
 			appiumdriver.findElementByAccessibilityId("Search").clear();
-		if (!appiumdriver.findElementByClassName("XCUIElementTypeTable").
-				findElement(MobileBy.AccessibilityId(servicename)).isDisplayed())
+		if (!elementExists(MobileBy.AccessibilityId(servicename)))
 			searchServiceByName(servicename);
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
 		IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
 				findElement(MobileBy.AccessibilityId(servicename)).
 				findElement(MobileBy.AccessibilityId("unselected"));
@@ -283,6 +285,8 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void clickToolButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("services")));
 		appiumdriver.findElementByAccessibilityId("services").click();
 	}
 	
@@ -349,6 +353,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	}
 	
 	public RegularServicesScreen clickBackServicesButton() {
+		BaseUtils.waitABit(500);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
 		appiumdriver.findElement(MobileBy.name("Back")).click();

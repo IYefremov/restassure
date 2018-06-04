@@ -1306,8 +1306,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickInvoiceIcon();
 		
 		myworkordersscreen.selectInvoiceType("Invoice_Custom1");
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
-				invoiceinfoscreen = invoiceinfoscreen.selectNextScreen("Info", InvoiceInfoScreen.class);
+		QuestionsScreen questionsScreen = new QuestionsScreen(appiumdriver);
+		InvoiceInfoScreen invoiceinfoscreen = questionsScreen.selectNextScreen("Info", InvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
@@ -1318,7 +1318,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
-		invoiceinfoscreen.selectNextScreen("Info", InvoiceInfoScreen.class);
+		questionsScreen = new QuestionsScreen(appiumdriver);
+		questionsScreen.selectNextScreen("Info", InvoiceInfoScreen.class);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -1423,7 +1424,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneStatusReasonButton();
-
+		teaminspectionsscreen = new TeamInspectionsScreen(appiumdriver);
 		Assert.assertTrue(teaminspectionsscreen.isInspectionApproved(inspectionnumber));
 		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionPriceValue(), "$2,000.00");
 		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionTotalPriceValue(), "$2,050.00");

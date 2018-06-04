@@ -103,6 +103,8 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 	
 	public void setTime(String timevalue) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Time")));
 		appiumdriver.findElementByAccessibilityId("Time").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
 	}
