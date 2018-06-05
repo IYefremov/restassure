@@ -7,6 +7,9 @@ public class CreditCardData {
     @JsonProperty("cardNumber")
     String cardNumber;
 
+    @JsonProperty("incorrectCardNumber")
+    String incorrectCardNumber;
+
     @JsonProperty("expirationMonth")
     String expirationMonth;
 
@@ -17,6 +20,8 @@ public class CreditCardData {
     String cvc;
 
     public String getCardNumber() { return cardNumber; };
+
+    public String getIncorrectCardNumber() { return incorrectCardNumber; };
 
     public String getExpirationMonth() { return expirationMonth; };
 

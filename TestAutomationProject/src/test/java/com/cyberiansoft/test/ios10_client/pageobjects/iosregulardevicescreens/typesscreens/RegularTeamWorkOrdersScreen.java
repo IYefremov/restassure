@@ -89,7 +89,8 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}
 	
 	public void clickiCreateInvoiceButton()  {
-		invoicenewbtn.click();		
+		invoicenewbtn.click();
+		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}	
 	
 	public void clickSearchButton() {

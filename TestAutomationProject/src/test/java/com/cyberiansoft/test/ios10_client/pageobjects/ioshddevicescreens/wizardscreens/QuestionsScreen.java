@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -122,11 +123,10 @@ public class QuestionsScreen extends BaseWizardScreen {
 		appiumdriver.findElementByName(ownercountry).click();
 	}
 	
-	public InvoiceInfoScreen chooseAVISCode(String aviscode) {
+	public void chooseAVISCode(String aviscode) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Choose One AVIS Code")));
 		appiumdriver.findElementByName(aviscode).click();
-		return new InvoiceInfoScreen(appiumdriver);
 	}
 	
 	public void chooseConsignor(String consignor) {
@@ -257,6 +257,18 @@ public class QuestionsScreen extends BaseWizardScreen {
 	
 	public void answerTrafficLight1Question() {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTable/XCUIElementTypeCell[2]")).click();
+	}
+
+	public String getInvoiceNumber() {
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByIosNsPredicate("name contains 'I-00'").getAttribute("value");
+	}
+
+	public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+		clickSave();
+		appiumdriver.findElementByAccessibilityId("Final").click();
+		clickSave();
+		return getTypeScreenFromContext();
 	}
 
 }
