@@ -36,11 +36,11 @@ public class WebElementsBot {
 	
 	public static void clickAndWait(WebElement element) {
 	    try {
-            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(element));
+            new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
+                    .until(ExpectedConditions.elementToBeClickable(element)).click();
         } catch (TimeoutException e) {
-	        waitABit(3000);
+	        e.printStackTrace();
         }
-        element.click();
         waitUntilPageReloaded();
 	    waitABit(4500);
 	}
@@ -105,11 +105,13 @@ public class WebElementsBot {
             new WebDriverWait(driver, 50)
                     .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
         } catch (TimeoutException ignored) {}
-		combobox.click();
-        combobox.clear();
-        combobox.typeValue(value);
+        combobox.clearAndType(value);
         waitABit(1000);
         combobox.sendKeys(Keys.ENTER);
+        try {
+            new WebDriverWait(driver, 50)
+                    .until(ExpectedConditions.invisibilityOf(droplist.getWrappedElement()));
+        } catch (TimeoutException ignored) {}
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {

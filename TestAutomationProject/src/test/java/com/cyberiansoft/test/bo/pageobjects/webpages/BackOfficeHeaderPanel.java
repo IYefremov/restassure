@@ -55,11 +55,6 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
         } catch (Exception e) {
             System.err.println("Closing driver exception: " + e);
         }
-//		if (driver.getWindowHandles().size() > 1) {
-//			driver.close();
-//			for (String activeHandle : driver.getWindowHandles())
-//				driver.switchTo().window(activeHandle);
-//		}
 		driver.switchTo().defaultContent();
 		waitABit(1000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;

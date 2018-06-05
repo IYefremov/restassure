@@ -16,10 +16,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SessionNotCreatedException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
@@ -141,7 +138,9 @@ public class BaseTestCase {
     public void BackOfficeLogout(ITestResult result) {
         if (result.isSuccess()) {
             BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-            backofficeheader.clickLogout();
+            try {
+                backofficeheader.clickLogout();
+            } catch (WebDriverException ignored) {}
         }
         //todo delete from here after the problem with skips will be solved
         if (DriverBuilder.getInstance().getDriver() != null) {

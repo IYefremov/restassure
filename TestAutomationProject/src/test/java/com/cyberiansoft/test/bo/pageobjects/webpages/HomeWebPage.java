@@ -1,17 +1,13 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class HomeWebPage extends BaseWebPage {
 	
@@ -28,5 +24,4 @@ public class HomeWebPage extends BaseWebPage {
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);
 	}
-
 }

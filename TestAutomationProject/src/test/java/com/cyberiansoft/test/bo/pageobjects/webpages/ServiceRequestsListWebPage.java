@@ -346,6 +346,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_Arrow")
 	private WebElement techniciansArrow;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_report_AsyncWait_Wait")
+	private WebElement loading;
+
     public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -395,16 +398,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		try{
 			waitABit(1000);
 			driver.switchTo().alert().accept();
-		}catch (Exception e){}
-		clickAndWait(findbtn);
+        }catch (Exception e){}
+        clickAndWait(findbtn);
 	}
 
 	public void clickAddServiceRequestButton() {
-		waitABit(1000);
-		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn));
-		waitABit(4000);
-		click(addservicerequestbtn);
-		waitABit(3000);
+		waitABit(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn)).click();
+		waitForLoading();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='editServiceRequestPanel']/div/img[@id='ctl00_ctl00_Content_Main_Image1']")));
 		driver.switchTo().frame(editServiceRequestPanelFrame);
@@ -515,6 +516,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean isFirstServiceRequestFromListHasAppointment(String appointmenttime) {
+//        waitABit(3000);
+
+        System.out.println(getFirstServiceRequestFromList().findElement(By.xpath(".//a/span")).getText().equals(appointmenttime));
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//a/span")).getText().equals(appointmenttime);
 		// return
 		// getFirstServiceRequestFromList().findElement(By.xpath(".//span[text()='"
@@ -1190,7 +1194,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 		driver.findElement(By.id("Card_rcbAppLocations_Arrow")).click();
-        waitABit(1000);
+        waitABit(2000);
 		try {
             wait.until(ExpectedConditions
                     .elementToBeClickable(techniciansField)).click();
@@ -1846,15 +1850,27 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
 					.click();
-            waitForLoading();
+            waitForSRLoading();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
-		} catch (TimeoutException e) {
-			return false;
-		}
-
-		return true;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 	}
+
+    private void waitForSRLoading(){
+        try{
+            wait.until(ExpectedConditions.attributeContains(loading, "style", "display: block;"));
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(loading)));
+            wait.until(ExpectedConditions.attributeToBe(loading, "", ""));
+            waitABit(1000);
+            wait.until(ExpectedConditions.attributeContains(loading, "style", "display: none;"));
+        } catch(TimeoutException e){
+            waitABit(5000);
+        }
+    }
 
 	public boolean checkAcceptanceOfSRinLC() {
 		LocalDateTime dateToCheck = LocalDateTime.now().minusHours(10);
@@ -1923,10 +1939,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void setServiceRequestGeneralInfo(String _assignedto) throws InterruptedException {
-		setServiceRequestGeneralInfoAssignedTo(_assignedto);
-		driver.findElement(By.id("Card_ddlClientsAssignedTo_Arrow")).click();
-		Thread.sleep(7000);
+	public void setServiceRequestGeneralInfo(String _assignedto) {
+        setServiceRequestGeneralInfoAssignedTo(_assignedto);
+//		driver.findElement(By.id("Card_ddlClientsAssignedTo_Arrow")).click();
+//		waitABit(7000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("divGeneralButtonsDone"))).click();
 	}
 
@@ -1962,21 +1978,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean checkEmails(String message) {
-		boolean flag = false;
 		waitABit(20000);
 		for (int i = 0; i < 7; i++) {
+            System.out.println(i);
 			try {
 			    if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
                         "reconpro+main@cyberiansoft.com").isEmpty()) {
-			        flag = true;
-			        break;
+			        return true;
                 }
 			} catch (NullPointerException e) {
-                System.err.println("EXCEPTION: " + e);
+                e.printStackTrace();
 			}
 			waitABit(40000);
 		}
-		return flag;
+		return false;
 	}
 
 	public void switchToServiceRequestInfoFrame() {
@@ -1988,19 +2003,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         }
 	}
 
-	public boolean checkTestEmails() throws InterruptedException {
-		boolean flag1 = false;
+	public boolean checkTestEmails() {
 		for (int i = 0; i < 5; i++) {
 			try {
-				Thread.sleep(40000);
+				waitABit(40000);
 				if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword,
                         "test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
-					flag1 = true;
+					return true;
 				}
-			} catch (NullPointerException e) {
-			}
+			} catch (NullPointerException ignored) {}
 		}
-		return flag1;
+		return false;
 	}
 
 	public int countAvailableServices() {

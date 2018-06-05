@@ -31,6 +31,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
 	private ComboBox entityTypeCombobox;
 
+	@FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input') and @disabled='disabled']")
+	private WebElement entityTypeDisabled;
+
 	@FindBy(xpath = "//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]")
 	private DropDown entityTypeDropDown;
 
@@ -476,5 +479,15 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	    wait.until(ExpectedConditions.elementToBeClickable(activeCheckbox)).click();
 	    waitABit(500);
 	    return this;
+    }
+
+	public boolean isEntityTypeDisabled() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(entityTypeDisabled));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

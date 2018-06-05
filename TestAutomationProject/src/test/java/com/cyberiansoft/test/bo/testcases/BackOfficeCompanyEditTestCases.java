@@ -58,7 +58,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        
+
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 
 		UsersWebPage userspage = companypage.clickUsersLink();
@@ -139,7 +139,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        
+
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 
@@ -211,7 +211,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		employeespage.makeSearchPanelVisible();
 		employeespage.setSearchUserParameter(data.getEmployeeLastName());
 		employeespage.clickFindButton();
-        employeespage.verifyActiveEmployeeDoesNotExist(data.getEmployeeFirstName(), data.getEmployeeLastName(), 
+        employeespage.verifyActiveEmployeeDoesNotExist(data.getEmployeeFirstName(), data.getEmployeeLastName(),
                 data.getEmployeeFirstNameEdited(), data.getEmployeeLastNameEdited());
 
 		NewEmployeeDialogWebPage newemployeedialog = employeespage.clickAddEmployeeButton();
@@ -489,12 +489,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();		
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
@@ -511,14 +511,14 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
 	}
 
@@ -531,12 +531,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())){
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 			}
-				
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
@@ -553,34 +553,34 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Clients Include Selected)"));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Teams Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Teams Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -599,12 +599,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
-				
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
@@ -621,16 +621,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         if(interApplicationExchangePage.checkRuleByName(data.getRule())) {
             interApplicationExchangePage.deleteRule(data.getRule());
@@ -641,18 +641,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Employees Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -672,7 +672,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
-		
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
@@ -692,16 +692,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         if (interApplicationExchangePage.checkRuleByName(data.getEntry())) {
             interApplicationExchangePage.deleteRule(data.getEntry());
@@ -711,18 +711,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Clients Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -741,12 +741,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())){
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
-				
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
@@ -763,16 +763,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
 
         if(interApplicationExchangePage.checkRuleByName(data.getRule())){
@@ -783,17 +783,17 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Services Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -812,12 +812,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed(data.getEntry())) {
 			interApplicationExchangePage.deleteEntry(data.getEntry());
 		}
-				
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails(data.getProfileName(), data.getDocumentType(), data.getEntityType());
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
@@ -834,16 +834,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry(data.getEntry());
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         if (interApplicationExchangePage.checkRuleByName(data.getRule())) {
             interApplicationExchangePage.deleteRule(data.getRule());
@@ -853,18 +853,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Vehicle Parts Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -883,36 +883,36 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")){
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 			}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter, "The changes have not been applied");
-		
+
 		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 	}
 
@@ -926,28 +926,28 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
-		
+
 		if (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
@@ -972,12 +972,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Clients (Clients Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Clients (Clients Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Clients Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Clients (Clients Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -996,56 +996,56 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();		
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Clients Include Selected)"));
-		
+
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Teams Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Teams Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Teams (Teams Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -1064,38 +1064,38 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();		
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1111,12 +1111,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Employees (Employees Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Employees (Employees Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Employees Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Employees (Employees Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -1136,37 +1136,37 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
-		
+
 		if (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1181,12 +1181,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Services Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule("Include Selected Services (Services Include Selected)");
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -1205,38 +1205,38 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();		
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("Estimate JST for Name", "_test1");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
-		
+
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
@@ -1252,12 +1252,12 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		interApplicationExchangePage.editRuleBoxName("testAO");
 		interApplicationExchangePage.clickEditRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("testAO (Vehicle Parts Include Selected)"));
-		
+
 		interApplicationExchangePage.editRule(data.getRule());
 		String newName = Long.toString(System.currentTimeMillis());
 		interApplicationExchangePage.editRuleBoxName(newName);
@@ -1277,35 +1277,35 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
-		
+
 		if (interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)")) {
 		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
-		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());   
+		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 	}
 
@@ -1318,36 +1318,36 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
-		interApplicationExchangePage.expandFirstCreatedCompany();	
-		
+		interApplicationExchangePage.expandFirstCreatedCompany();
+
 		if(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)")){
 			interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 		}
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
-		
+
 		interApplicationExchangePage.clickAddProfileButton();
 		interApplicationExchangePage.fillProfileDetails("WO JST for Name",data.getDocumentType(),"All Jay");
 		interApplicationExchangePage.clickProfileDetailsBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed("WO JST for Name (Work Order)"));
-		
+
 		String entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(data.getProfileNameTest());
 		interApplicationExchangePage.clickProfileEditBox(data.getCancelButton());
 		String entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertEquals(entryTextBefore, entryTextAfter);
-		
+
 		entryTextBefore = interApplicationExchangePage.getFirstEntryText();
 		interApplicationExchangePage.clickEditFirstEntry();
 		interApplicationExchangePage.fillProfileDetailsEdit(Long.toString(System.currentTimeMillis()));
 		interApplicationExchangePage.clickProfileEditBox(data.getUpdateButton());
 		entryTextAfter = interApplicationExchangePage.getFirstEntryText();
 		Assert.assertNotEquals(entryTextBefore, entryTextAfter);
-		
+
 		interApplicationExchangePage.deleteEntry("WO JST for Name (Work Order)");
 	}
 
@@ -1487,8 +1487,273 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
         interApplicationExchangePage
                 .clickEditRule(data.getRuleName())
-                .editRuleBoxName(data.getRuleNameEdited())
+                .editRuleBoxName(data.getRuleNameEdited());
+        Assert.assertTrue(interApplicationExchangePage.isEntityTypeDisabled(), "The entity type combobox is not disabled");
+        interApplicationExchangePage.clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is not displayed after clicking the \"Update\" button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleTeams(
+            String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        InterApplicationExchangeWebPage interApplicationExchangePage = companyPage
+                .clickInterApplicationExchangeLink()
+                .clickSendingTab()
+                .expandFirstCreatedCompany()
+                .verifyCompanyDoesNotExist(data.getEntry())
+                .verifyCompanyDoesNotExist(data.getProfileName())
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickInsertButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company should have been added after clicking the \"Insert\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickActiveCheckBox()
                 .clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name should have been edited after clicking the \"Update\" button");
+        Assert.assertTrue(interApplicationExchangePage.isEntryActive(data.getProfileName()),
+                "The company profile is not active after clicking the \"Active\" checkbox");
+
+        interApplicationExchangePage
+                .expandCompanyProfile(data.getProfileName())
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        int beforeSelection = interApplicationExchangePage.getNumberOfUnselectedUsers();
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickCancelButton();
+
+        interApplicationExchangePage
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        Assert.assertEquals(beforeSelection, interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has been changed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickInsertButton();
+
+        interApplicationExchangePage.clickEditRule(data.getRuleName());
+        Assert.assertEquals(beforeSelection - data.getUsersToAdd(), interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has not been properly updated after clicking the \"Insert\" button");
+        interApplicationExchangePage
+                .editRuleBoxName(data.getRuleNameEdited())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is displayed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickEditRule(data.getRuleName())
+                .editRuleBoxName(data.getRuleNameEdited());
+        Assert.assertTrue(interApplicationExchangePage.isEntityTypeDisabled(), "The entity type combobox is not disabled");
+        interApplicationExchangePage.clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is not displayed after clicking the \"Update\" button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleEmployees(
+            String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        InterApplicationExchangeWebPage interApplicationExchangePage = companyPage
+                .clickInterApplicationExchangeLink()
+                .clickSendingTab()
+                .expandFirstCreatedCompany()
+                .verifyCompanyDoesNotExist(data.getEntry())
+                .verifyCompanyDoesNotExist(data.getProfileName())
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickInsertButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company should have been added after clicking the \"Insert\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickActiveCheckBox()
+                .clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name should have been edited after clicking the \"Update\" button");
+        Assert.assertTrue(interApplicationExchangePage.isEntryActive(data.getProfileName()),
+                "The company profile is not active after clicking the \"Active\" checkbox");
+
+        interApplicationExchangePage
+                .expandCompanyProfile(data.getProfileName())
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        int beforeSelection = interApplicationExchangePage.getNumberOfUnselectedUsers();
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickCancelButton();
+
+        interApplicationExchangePage
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        Assert.assertEquals(beforeSelection, interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has been changed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickInsertButton();
+
+        interApplicationExchangePage.clickEditRule(data.getRuleName());
+        Assert.assertEquals(beforeSelection - data.getUsersToAdd(), interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has not been properly updated after clicking the \"Insert\" button");
+        interApplicationExchangePage
+                .editRuleBoxName(data.getRuleNameEdited())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is displayed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickEditRule(data.getRuleName())
+                .editRuleBoxName(data.getRuleNameEdited());
+        Assert.assertTrue(interApplicationExchangePage.isEntityTypeDisabled(), "The entity type combobox is not disabled");
+        interApplicationExchangePage.clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is not displayed after clicking the \"Update\" button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleServices(
+            String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        InterApplicationExchangeWebPage interApplicationExchangePage = companyPage
+                .clickInterApplicationExchangeLink()
+                .clickSendingTab()
+                .expandFirstCreatedCompany()
+                .verifyCompanyDoesNotExist(data.getEntry())
+                .verifyCompanyDoesNotExist(data.getProfileName())
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickInsertButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company should have been added after clicking the \"Insert\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickActiveCheckBox()
+                .clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name should have been edited after clicking the \"Update\" button");
+        Assert.assertTrue(interApplicationExchangePage.isEntryActive(data.getProfileName()),
+                "The company profile is not active after clicking the \"Active\" checkbox");
+
+        interApplicationExchangePage
+                .expandCompanyProfile(data.getProfileName())
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        int beforeSelection = interApplicationExchangePage.getNumberOfUnselectedUsers();
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickCancelButton();
+
+        interApplicationExchangePage
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        Assert.assertEquals(beforeSelection, interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has been changed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickInsertButton();
+
+        interApplicationExchangePage.clickEditRule(data.getRuleName());
+        Assert.assertEquals(beforeSelection - data.getUsersToAdd(), interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has not been properly updated after clicking the \"Insert\" button");
+        interApplicationExchangePage
+                .editRuleBoxName(data.getRuleNameEdited())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is displayed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickEditRule(data.getRuleName())
+                .editRuleBoxName(data.getRuleNameEdited());
+        Assert.assertTrue(interApplicationExchangePage.isEntityTypeDisabled(), "The entity type combobox is not disabled");
+        interApplicationExchangePage.clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is not displayed after clicking the \"Update\" button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleVehicleParts(
+            String rowID, String description, JSONObject testData) {
+        BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        InterApplicationExchangeWebPage interApplicationExchangePage = companyPage
+                .clickInterApplicationExchangeLink()
+                .clickSendingTab()
+                .expandFirstCreatedCompany()
+                .verifyCompanyDoesNotExist(data.getEntry())
+                .verifyCompanyDoesNotExist(data.getProfileName())
+                .clickAddProfileButton()
+                .fillProfileDetails(data.getEntry(), data.getDocumentType(), data.getEntityType())
+                .clickInsertButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getEntry()),
+                "The company should have been added after clicking the \"Insert\" button");
+
+        interApplicationExchangePage
+                .clickEditEntry(data.getEntry())
+                .fillProfileDetailsEdit(data.getProfileName())
+                .clickActiveCheckBox()
+                .clickUpdateButton();
+        Assert.assertTrue(interApplicationExchangePage.isCompanyDisplayed(data.getProfileName()),
+                "The company name should have been edited after clicking the \"Update\" button");
+        Assert.assertTrue(interApplicationExchangePage.isEntryActive(data.getProfileName()),
+                "The company profile is not active after clicking the \"Active\" checkbox");
+
+        interApplicationExchangePage
+                .expandCompanyProfile(data.getProfileName())
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        int beforeSelection = interApplicationExchangePage.getNumberOfUnselectedUsers();
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickCancelButton();
+
+        interApplicationExchangePage
+                .clickAddRule()
+                .fillRuleBox(data.getRuleName(), data.getRuleEntityType(), data.getRuleFilterType());
+        Assert.assertEquals(beforeSelection, interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has been changed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .selectUsersWhileCreatingRule(data.getUsersToAdd())
+                .clickInsertButton();
+
+        interApplicationExchangePage.clickEditRule(data.getRuleName());
+        Assert.assertEquals(beforeSelection - data.getUsersToAdd(), interApplicationExchangePage.getNumberOfUnselectedUsers(),
+                "The number of unselected users has not been properly updated after clicking the \"Insert\" button");
+        interApplicationExchangePage
+                .editRuleBoxName(data.getRuleNameEdited())
+                .clickCancelButton();
+        Assert.assertFalse(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
+                "The edited rule name is displayed after clicking the \"Cancel\" button");
+
+        interApplicationExchangePage
+                .clickEditRule(data.getRuleName())
+                .editRuleBoxName(data.getRuleNameEdited());
+        Assert.assertTrue(interApplicationExchangePage.isEntityTypeDisabled(), "The entity type combobox is not disabled");
+        interApplicationExchangePage.clickUpdateButton();
         Assert.assertTrue(interApplicationExchangePage.isRuleDisplayed(data.getRuleNameEdited()),
                 "The edited rule name is not displayed after clicking the \"Update\" button");
     }

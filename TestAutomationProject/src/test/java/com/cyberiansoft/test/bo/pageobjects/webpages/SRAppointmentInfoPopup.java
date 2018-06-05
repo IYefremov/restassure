@@ -168,6 +168,7 @@ public class SRAppointmentInfoPopup extends BaseWebPage {
 	}
 	
 	public String getSubjectValue() {
+	    waitABit(1000);
 		return subjectfld.getValue();
 	}
 	

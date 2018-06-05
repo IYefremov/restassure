@@ -430,5 +430,77 @@
       "usersToAdd": 2,
       "ruleNameEdited": "Edited rule"
     }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleTeams": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleTeams.01",
+      "description": "Test Case 63141:Company: Inter Application Exchange Configuration - Mapping  Estimate Add Rule Teams",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default",
+      "ruleName": "Include Selected Teams",
+      "ruleEntityType": "Teams",
+      "ruleFilterType": "Include Selected",
+      "usersToAdd": 2,
+      "ruleNameEdited": "Edited rule"
+    }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleEmployees": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleEmployees.01",
+      "description": "Test Case 63142:Company: Inter Application Exchange Configuration - Mapping  Estimate Add Rule Employees",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default",
+      "ruleName": "Include Selected Employees",
+      "ruleEntityType": "Employees",
+      "ruleFilterType": "Include Selected",
+      "usersToAdd": 2,
+      "ruleNameEdited": "Edited rule"
+    }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleServices": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleServices.01",
+      "description": "Test Case 63143:Company: Inter Application Exchange Configuration - Mapping  Estimate Add Rule Services",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default",
+      "ruleName": "Include Selected Services",
+      "ruleEntityType": "Services",
+      "ruleFilterType": "Include Selected",
+      "usersToAdd": 2,
+      "ruleNameEdited": "Edited rule"
+    }
+  ],
+
+  "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleVehicleParts": [
+    {
+      "rowID": "testCompanyInterApplicationExchangeConfigMappingEstimationAddRuleVehicleParts.01",
+      "description": "Test Case 63144:Company: Inter Application Exchange Configuration - Mapping  Estimate Add Rule Vehicle Parts",
+      "serviceName": "Test Bundle Service",
+      "entry": "WO JST",
+      "tabName": "Sending",
+      "profileName": "Estimate JST",
+      "documentType": "Estimation",
+      "entityType": "Default",
+      "ruleName": "Include Selected Vehicle Parts",
+      "ruleEntityType": "Vehicle Parts",
+      "ruleFilterType": "Include Selected",
+      "usersToAdd": 2,
+      "ruleNameEdited": "Edited rule"
+    }
   ]
 }

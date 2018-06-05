@@ -13,7 +13,261 @@
       "make": "Honda",
       "model": "Accord",
       "insurance": "Oranta",
-      "label": "test"
+      "label": "test",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationNewServiceRequestAppointmentWholesale": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentWholesale.01",
+      "description": "Test Case 25589:Operation - New service request - Appointment - Wholesale",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "label": "test",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationNewServiceRequestAppointmentLocationTypeCustom": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentLocationTypeCustom.01",
+      "description": "Test Case 26164:Operation - New service request - Appointment - Location Type: Custom",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "label": "test",
+      "status": "OnHold",
+      "locationType": "Custom",
+      "clientAddress": "407 SILVER SAGE DR.",
+      "clientCity": "NewYork",
+      "clientZip": "20002",
+      "clientZip2": "10001",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationNewServiceRequestAppointmentLocationTypeCustomer": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentLocationTypeCustomer.01",
+      "description": "Test Case 26165:Operation - New service request - Appointment - Location Type: Customer",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "label": "test",
+      "locationType": "Customer",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "status": "OnHold"
+    }
+  ],
+
+  "testOperationNewServiceRequestAppointmentLocationTypeOwner": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentLocationTypeOwner.01",
+      "description": "Test Case 26168:Operation - New service request - Appointment - Location Type: Owner",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "label": "test",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "status": "OnHold"
+    }
+  ],
+
+  "testOperationNewServiceRequestAppointmentLocationTypeRepairLocation": [
+    {
+      "rowID": "testOperationNewServiceRequestAppointmentLocationTypeRepairLocation.01",
+      "description": "Test Case 26172:Operation - New service request - Appointment - Location Type: Repair Location",
+      "teamName": "Default team",
+      "addServiceRequestValue": "Vit_All_Services",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "newServiceRequest": "Alex SASHAZ",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Miami Beach Insurance",
+      "label": "test",
+      "locationType": "Repair Location",
+      "location": "VD_Location",
+      "status": "OnHold",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationsCLUserItNotPossibleToAcceptSR_OptionIsNotPresent": [
+    {
+      "rowID": "testOperationsCLUserItNotPossibleToAcceptSR_OptionIsNotPresent.01",
+      "description": "Test Case 24852:Operations: CLUser - it not possible to accept SR (option is not present) Test Case 24853:Operations: CLUser - it is possible to reject SR (option is present)",
+      "addServiceRequestValue": "SR_type_WO_auto_create",
+      "VIN": "1GNDU23E33D176859",
+      "make": "Chevrolet",
+      "model": "Venture",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567"
+    }
+  ],
+
+  "testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit": [
+    {
+      "rowID": "testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit.01",
+      "description": "Test Case 24854:Operations: CLUser - Verify that accepted SR is in read-only mode (not possible to edit)",
+      "addServiceRequestValue": "SR_type_WO_auto_create",
+      "VIN": "1GC5KXBG1AZ501950",
+      "make": "Chevrolet",
+      "model": "Silverado 2500HD",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationsCLUserItNotPossibleToAddLabelsWhenCreateSR": [
+    {
+      "rowID": "testOperationsCLUserItNotPossibleToAddLabelsWhenCreateSR.01",
+      "description": "Test Case 24855:Operations: CLUser - it is not possible to add labels when create SR",
+      "addServiceRequestValue": "SR_type_WO_auto_create",
+      "VIN": "1GNDU23E33D176859",
+      "make": "Chevrolet",
+      "model": "Venture",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All"
+    }
+  ],
+
+  "testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR": [
+    {
+      "rowID": "testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR.01",
+      "description": "Test Case 26221:Operations: SR list - Verify that Check In Button is not present when create SR",
+      "addServiceRequestValue": "Type_for_Check_In_ON",
+      "VIN": "1GNDU23E33D176859",
+      "make": "Chevrolet",
+      "model": "Venture",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "customer": "002 - Test Company"
+    }
+  ],
+
+  "testOperationsVerifyThatCheckInButtonAppearsWhenSRIsSaved": [
+    {
+      "rowID": "testOperationsVerifyThatCheckInButtonAppearsWhenSRIsSaved.01",
+      "description": "Test Case 26225:Operations: SR list - Verify that Check In button is appeared when SR is saved",
+      "addServiceRequestValue": "Type_for_Check_In_ON",
+      "VIN": "1GC5KXBG1AZ501950",
+      "make": "Chevrolet",
+      "model": "Silverado 2500HD",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "customer": "002 - Test Company"
+    }
+  ],
+
+  "testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa": [
+    {
+      "rowID": "testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa.01",
+      "description": "Test Case 26249:Operations: SR list - Verify that Check In button is changed to Undo Check In after pressing and vice versa",
+      "addServiceRequestValue": "Type_for_Check_In_ON",
+      "VIN": "1GC5KXBG1AZ501950",
+      "make": "Chevrolet",
+      "model": "Silverado 2500HD",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "customer": "002 - Test Company"
+    }
+  ],
+
+  "testServiceRequestDescription": [
+    {
+      "rowID": "testServiceRequestDescription.01",
+      "description": "Test Case 56760:Operation - Service Request - Description in excisting SR",
+      "testDescription": "test description"
+    }
+  ],
+
+  "testServiceRequest": [
+    {
+      "rowID": "testServiceRequest.01",
+      "description": "Test Case 56761:Operation - Service Request - Tags manipulation in new SR",
+      "testDescription": "test description",
+      "addServiceRequestValue": "Type_for_Check_In_ON",
+      "VIN": "1GC5KXBG1AZ501950",
+      "make": "Chevrolet",
+      "model": "Silverado 2500HD",
+      "anotherLogin": "zayats@cyberiansoft.com",
+      "anotherPassword": "1234567",
+      "startTime": "8:00 AM",
+      "endTime": "8:40 AM",
+      "clientName": "Alex SASHAZ",
+      "technicianFieldValue": "All",
+      "customer": "002 - Test Company"
     }
   ]
 }

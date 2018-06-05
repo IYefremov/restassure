@@ -247,10 +247,10 @@ public class EventsWebPage extends BaseWebPage {
 		}
 	}
 
-	public void deleteSelectedEvent() throws InterruptedException {
+	public void deleteSelectedEvent() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title ='Delete']"))).click();
 		driver.switchTo().alert().accept();
-		Thread.sleep(1000);
+		waitABit(1000);
 		try {
 			driver.switchTo().alert().accept();
 		} catch (NoAlertPresentException ignored) {}
