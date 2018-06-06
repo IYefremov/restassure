@@ -121,6 +121,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inspnumber));
 			
 		myinspectionsscreen.clickHomeButton();
@@ -571,7 +572,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.setVIN(VIN);
 		wonumber29398 = vehiclescreeen.getWorkOrderNumber();
         RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen("All Services", RegularServicesScreen .class);
-		servicesscreen.selectSubService("SR_S5_Matrix_DE_TE");
+		servicesscreen.selectService("SR_S5_Matrix_DE_TE");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
 		vehiclePartScreen.switchOffOption("PDR");
@@ -1353,8 +1354,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
 		myworkordersscreen.clickInvoiceIcon();
 		
-		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType("Invoice_Custom1");
-        invoiceinfoscreen = invoiceinfoscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
+		myworkordersscreen.selectInvoiceType("Invoice_Custom1");
+		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		RegularInvoiceInfoScreen invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
@@ -1365,7 +1367,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
-		invoiceinfoscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
+		questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -1525,17 +1528,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_20");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen = new RegularVehiclePartScreen(appiumdriver);
+		vehiclePartScreen.clickBackButton();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$120.00");
 		vehiclePartScreen= pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen.clickBackButton();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$145.00");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen.clickBackButton();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$130.50");
 
         pricematrix.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
@@ -1544,12 +1548,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.setTime(timevalue);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen.clickBackButton();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$90.00");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.saveVehiclePart();
+		vehiclePartScreen.clickBackButton();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$112.50");
 		pricematrix.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
@@ -1611,7 +1615,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
         servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
                 RegularServicesScreen.class);
-		
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
 		selectedservicescreen.clickServicePartCell();
@@ -2044,7 +2047,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.TAX_DISCOUNT);
 		selectedservicedetailscreen.setServicePriceValue("10");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
+		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService("Matrix Service");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
 		pricematrix.selectPriceMatrix("Test Matrix Labor");
@@ -2065,10 +2068,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
-		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType("Invoice_AutoWorkListNet");
+		ordersummaryscreen.clickInvoiceType("Invoice_AutoWorkListNet");
+		questionsscreen = new RegularQuestionsScreen(appiumdriver);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
-        invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
+		RegularInvoiceInfoScreen invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO("12345");
 		invoicenumber45224 = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
@@ -2190,10 +2194,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.clickApproveButton();
-		
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 		myworkordersscreen.clickInvoiceIcon();
-		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.DEFAULT_INVOICETYPE);
+		myworkordersscreen.selectInvoiceType(iOSInternalProjectConstants.DEFAULT_INVOICETYPE);
+		RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setPO("12345");
 		invoicenumber42803 = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();

@@ -78,6 +78,10 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWOInvoiceType(String invoicetype) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoicetype)));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoicetype)));
 		appiumdriver.findElementByAccessibilityId(invoicetype).click();
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}

@@ -430,7 +430,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']/..")));
-			appiumdriver.findElementByAccessibilityId(categoryname).click();
+			//appiumdriver.findElementByAccessibilityId(categoryname).click();
 		}
 		appiumdriver.findElementByAccessibilityId(categoryname).click();
 	}

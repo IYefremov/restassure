@@ -126,6 +126,8 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	}
 
 	public String getInspectionSubTotalPrice() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SubtotalAmount")));
 		return appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value");
 	}
 	

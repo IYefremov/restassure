@@ -353,7 +353,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] wos = {wo1, wo2};
 			myworkordersscreen.clickCreateInvoiceIconForWOs(wos);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
+			myworkordersscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
+            RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo1));
 			Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo2));
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -1865,9 +1866,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
             vehiclePartScreen.saveVehiclePart();
 			pricematrix.clickBackButton();
-			RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
-            priceMatricesScreen.clickBackButton();
-			questionsscreen = pricematrix.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
+
+			servicesscreen = new RegularServicesScreen(appiumdriver);
+			questionsscreen = servicesscreen.selectNextScreen(UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION, RegularQuestionsScreen.class);
 			Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
 			RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(RegularOrderSummaryScreen
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -3119,16 +3120,17 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 			myinvoicesscreen.selectInvoice(invoicenum);
-			invoiceinfoscreen = myinvoicesscreen.clickEditPopup();
+			myinvoicesscreen.clickEditPopup();
+			invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickOnWO(wonum);
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
-			servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
+			servicesscreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
 			servicesscreen.searchServiceByName(UtilConstants.PAINTMIRROR_SUBSERVICE);
 			selectedservicescreen = servicesscreen.clickServiceCustomDetailButton(UtilConstants.PAINTMIRROR_SUBSERVICE);
 			selectedservicescreen.removeService();
 			servicesscreen = new RegularServicesScreen(appiumdriver);
-			servicesscreen.clickToolButton();
+			servicesscreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
@@ -3140,7 +3142,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickAddServicesButton();
 			servicesscreen.clickBackServicesButton();
 			
-			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
+			servicesscreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
@@ -3329,7 +3331,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			teamworkordersscreen.clickCreateInvoiceForWO(wonumber1);
 			teamworkordersscreen.clickCreateInvoiceForWO(wonumber2);
 			teamworkordersscreen.clickCreateInvoiceForWO(wonumber3);
-			
+
 			teamworkordersscreen.clickiCreateInvoiceButton();
 			teamworkordersscreen.selectWOInvoiceType(UtilConstants.NO_ORDER_TYPE);
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
@@ -3679,7 +3681,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 			myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
+			myworkordersscreen.selectInvoiceType(UtilConstants.NO_ORDER_TYPE);
+            RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
 		}
@@ -4087,7 +4090,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			myworkordersscreen.clickCreateInvoiceIconForWO(wo);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType("Auction - No Discount Invoice");
+			myworkordersscreen.selectInvoiceType("Auction - No Discount Invoice");
+            RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
