@@ -84,6 +84,20 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		clickSaveInvoiceButton();
 		return new VNextInvoicesScreen(appiumdriver);
 	}
+
+	public VNextInvoicesScreen saveInvoiceAsDraft() {
+		clickSaveInvoiceButton();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickDraftButton();
+		return new VNextInvoicesScreen(appiumdriver);
+	}
+
+	public VNextInvoicesScreen saveInvoiceAsFinal() {
+		clickSaveInvoiceButton();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickFinalButton();
+		return new VNextInvoicesScreen(appiumdriver);
+	}
 	
 	public void clickSaveInvoiceButton() {
 		tap(savebtn);

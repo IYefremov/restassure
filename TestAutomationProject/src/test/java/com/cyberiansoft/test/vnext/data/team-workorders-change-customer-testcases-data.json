@@ -1,0 +1,21 @@
+{
+  "testVerifyUserCanChangeCustomerIfAllowClientChangingEqualsON": [
+    {
+      "rowID": "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsON.01",
+      "description": "Test Case 75339:Verify user can change Customer if Allow Client Changing = ON",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsON.01",
+      "description": "Test Case 75340:Verify user can't change Customer if Allow Client Changing = OFF",
+      "workOrderType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
+}

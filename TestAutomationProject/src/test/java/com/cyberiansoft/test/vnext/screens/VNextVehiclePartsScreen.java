@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 
 public class VNextVehiclePartsScreen extends VNextBaseScreen {
@@ -38,7 +36,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		if (vpcell != null)
 			tap(vpcell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
-			Assert.assertTrue(false, "Can't find Vehicle Part: " + vehiclepartname);
+			Assert.fail("Can't find Vehicle Part: " + vehiclepartname);
 		return new VNextVehiclePartInfoPage(appiumdriver);
 		
 	}

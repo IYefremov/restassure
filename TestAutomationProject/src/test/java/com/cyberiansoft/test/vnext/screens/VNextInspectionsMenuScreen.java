@@ -44,6 +44,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//a[@data-name='addSupplement']")
 	private WebElement addsupplementbtn;
+
+	@FindBy(xpath="//a[@data-name='changeCustomer']")
+	private WebElement changecustomerbtn;
 	
 	@FindBy(xpath="//body/div[@data-menu='popup']")
 	private WebElement inspectionsmenuscreen;
@@ -156,5 +159,14 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogDeleteButton();	
 		return new VNextWorkOrdersScreen(appiumdriver);
+	}
+
+	public VNextCustomersScreen clickChangeCustomerMenuItem() {
+		tap(changecustomerbtn);
+		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public boolean isChangeCustomerMenuPresent() {
+		return changecustomerbtn.isDisplayed();
 	}
 }

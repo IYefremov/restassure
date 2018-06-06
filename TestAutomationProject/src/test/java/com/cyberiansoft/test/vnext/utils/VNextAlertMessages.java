@@ -27,7 +27,7 @@ public class VNextAlertMessages {
 	public static String TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED = "Total amount of Inspection exceeds the maximum allowed value of 999999999.99";
 	public static String YOUR_CARD_WAS_DECLINED = "Your card was declined.";
 	public static String YOUR_CARDs_SECURITY_CODE_IS_INCORRECT = "Your card's security code is incorrect.";
-
+	public static String YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED = "Your payment has been successfully completed";
 
 
 }

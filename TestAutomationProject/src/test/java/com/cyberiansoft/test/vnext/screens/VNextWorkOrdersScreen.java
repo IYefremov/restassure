@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -59,6 +60,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String wonumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
 		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
@@ -113,6 +116,16 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
 		return woprice;		
+	}
+
+	public String getWorkOrderCustomerValue(String wonumber) {
+		String woprice = null;
+		WebElement workordercell = getWorkOrderCell(wonumber);
+		if (workordercell != null)
+			woprice = workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
+		else
+			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+		return woprice;
 	}
 	
 	public WebElement getWorkOrderCell(String wonumber) {
@@ -169,4 +182,12 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		return myworkorderstab.getAttribute("class").contains("active");
 	}
 
+	public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.selectCustomer(newCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		return this;
+	}
 }

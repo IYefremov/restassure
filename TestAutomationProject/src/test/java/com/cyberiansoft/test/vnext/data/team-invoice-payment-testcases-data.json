@@ -66,5 +66,23 @@
         "expirationYear" : "2022",  "cvc" : "123", "cardNumber": "4242424242424242"
       }
     }
+  ],
+
+  "testVerifyPayTeamInvoiceWithValidVisaCard": [
+    {
+      "rowID": "testVerifyPayTeamInvoiceWithValidVisaCard.01",
+      "description": "Test Case 72317:R360 client: Verify Pay Team invoice with valid Visa card",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "сreditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }
