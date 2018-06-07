@@ -1529,17 +1529,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
 		selectedservicescreen.saveSelectedServiceDetails();
 		vehiclePartScreen = new RegularVehiclePartScreen(appiumdriver);
-		vehiclePartScreen.clickBackButton();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$120.00");
 		vehiclePartScreen= pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.clickBackButton();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$145.00");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.clickBackButton();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$130.50");
 
         pricematrix.selectNextScreen("Matrix Labor", RegularPriceMatrixScreen.class);
@@ -1548,12 +1548,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.setTime(timevalue);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.clickBackButton();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$90.00");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen.clickBackButton();
+		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$112.50");
 		pricematrix.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
@@ -1571,6 +1571,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen(appiumdriver);
 		approveinspscreen.selectInspection(inspnumber47249);
 		approveinspscreen.approveInspectionApproveAllAndSignature();
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber47249);
 		myinspectionsscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_SMOKE_MONITOR);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen(appiumdriver);
@@ -2351,7 +2352,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber), "$2,688.00");
 		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspnumber), "$2,650.00");
 		myinspectionsscreen.clickHomeButton();
@@ -2406,7 +2407,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.selectStatusReason("Decline 1");
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.clickFilterButton();
 		myinspectionsscreen.clickStatusFilter();
 		myinspectionsscreen.clickFilterStatus("Declined");
