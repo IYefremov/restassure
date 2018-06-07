@@ -83,4 +83,34 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
         workordersscreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyIfChangedCustomerIsSavedAfterEditWO(String rowID,
+                                                                             String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(workOrderData.getWorkOrderType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
+        VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleinfoscreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+        vehicleinfoscreen.changeScreen("Services");
+        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        inpsctionservicesscreen.selectService(workOrderData.getServiceName());
+        workordersscreen = inpsctionservicesscreen.saveWorkOrderViaMenu();
+        Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
+        System.out.println("++++++++++" + workordersscreen.getWorkOrderPriceValue(woNumber));
+
+        workordersscreen.clickBackButton();
+    }
 }

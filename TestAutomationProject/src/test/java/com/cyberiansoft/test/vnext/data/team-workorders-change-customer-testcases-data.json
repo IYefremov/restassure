@@ -17,5 +17,18 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
+  ],
+
+  "testVerifyIfChangedCustomerIsSavedAfterEditWO": [
+    {
+      "rowID": "testVerifyIfChangedCustomerIsSavedAfterEditWO.01",
+      "description": "Test Case 75356:Verify if changed Customer is saved after edit WO",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
   ]
+
 }

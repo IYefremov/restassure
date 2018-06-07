@@ -112,7 +112,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		String woprice = null;
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		if (workordercell != null)
-			woprice = workordercell.findElement(By.xpath(".//div[@class='checkbox-list-title checkbox-list-bold']")).getText();
+			woprice = workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 		else
 			Assert.assertTrue(false, "Can't find work order: " + wonumber);
 		return woprice;		
