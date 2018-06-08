@@ -1766,7 +1766,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-	
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForCreatingWO(inspnumber48543);
 		myinspectionsscreen.selectWorkOrderType("WO_with_part_service");
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
@@ -2050,8 +2050,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen = new RegularServicesScreen(appiumdriver);
 		servicesscreen.selectSubService("Matrix Service");
-		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen(appiumdriver);
-		pricematrix.selectPriceMatrix("Test Matrix Labor");
+		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen(appiumdriver);
+		RegularPriceMatrixScreen pricematrix = priceMatricesScreen.selectPriceMatrice("Test Matrix Labor");
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("123");
 		vehiclePartScreen.switchOffOption("PDR");
 		vehiclePartScreen.setTime("100");
