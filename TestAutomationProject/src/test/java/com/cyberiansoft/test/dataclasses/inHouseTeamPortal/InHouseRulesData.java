@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.inHouse;
+package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -6,6 +6,9 @@ public class InHouseRulesData {
 
     @JsonProperty("ruleName")
     private String ruleName;
+
+    @JsonProperty("ruleName2")
+    private String ruleName2;
 
     @JsonProperty("condition")
     private String condition;
@@ -27,6 +30,10 @@ public class InHouseRulesData {
 
     public String getRuleName() {
         return ruleName;
+    }
+
+    public String getRuleName2() {
+        return ruleName2;
     }
 
     public String getCondition() {

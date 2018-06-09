@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.dataclasses.inHouse.InHouseUserData;
+import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseUserData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.AgreementApprovePage;
@@ -32,13 +32,14 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
+                .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
-        clientQuotesPage.deleteUser(data.getName());
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -49,17 +50,17 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage.editClient(data.getName())
                 .clearAndSetNewClientName(data.getNewName())
-                .clickUpdateClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getNewName()));
-        clientQuotesPage.deleteUser(data.getNewName());
+                .clickUpdateClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getNewName()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -69,12 +70,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(),data.getTeam());
@@ -88,7 +90,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        clientQuotesPage.deleteUser(data.getName());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -99,12 +100,14 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
+                .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
@@ -119,27 +122,21 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesPage.updateAgreement();
         Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
         ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
+        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses(
+                data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
 
         clientQuotesDetailPage
                 .clickDiscountButton()
-                .selectDiscount("20 min comm.-$10 per m.");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$200.00"));
-//        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$11.00"));
+                .selectDiscount(data.getDiscount());
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
         clientQuotesDetailPage.selectSetupFeeForAllClients();
 //        clientQuotesDetailPage.clickAddClientSupportItem("testFeature3 test mike");
-//        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
-
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$200.00"));
+        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$" + clientQuotesDetailPage.calculatePricePerMonth()));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
         clientQuotesDetailPage
                 .clickFinalizeAgreementButton()
                 .sendNotification();
-        Assert.assertTrue(clientQuotesDetailPage.checkEmails("Agreement"));
-        leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
-                .searchUser(data.getName())
-                .deleteUser(data.getName());
+        Assert.assertTrue(clientQuotesDetailPage.checkEmails(data.getEmailTitle()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -149,12 +146,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+        clientQuotesPage.clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
@@ -183,12 +181,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickFinalizeAgreementButton()
                 .sendNotification();
         //TODO when dates will be shown correct
-
-        leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
-                .searchUser(data.getName())
-                .deleteUser(data.getName());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -199,12 +191,13 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(),data.getTeam());
@@ -222,7 +215,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatuses("New","No","No","No"));
         clientQuotesDetailPage
                 .clickDiscountButton()
-                .selectDiscount("1 min comm.-$150.1 per m.");
+                .selectDiscount("12 min comm.-$2 per m.");
         Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
         clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
@@ -250,12 +243,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         agreementApprovePage
                 .clickApprovePayBTN()
                 .goToPreviousPage();
-
-        leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
-                .searchUser(data.getName())
-                .deleteUser(data.getName());
     }
 
 
@@ -266,13 +253,15 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.clickAddClientBTN();
-        clientQuotesPage.fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
-                data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
-                data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()));
+                .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
+                .clickAddClientButton()
+                .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
+                        data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
+                        data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
+        clientQuotesPage.clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
         clientQuotesPage.clickAddAgreementBTN(data.getName());
         clientQuotesPage.setAgreement(data.getFirstAgreement(), data.getTeam());
 
@@ -295,12 +284,5 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
         Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
-
-        clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.deleteUser(data.getName());
-
     }
 }

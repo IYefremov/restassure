@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.inHouse;
+package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -57,6 +57,21 @@ public class InHouseUserData {
 
     @JsonProperty("team")
     private String team;
+
+    @JsonProperty("discount")
+    private String discount;
+
+    @JsonProperty("price")
+    private String price;
+
+    @JsonProperty("emailTitle")
+    private String emailTitle;
+
+    @JsonProperty("newAgreement")
+    private String newAgreement;
+
+    @JsonProperty("noAgreement")
+    private String noAgreement;
 
     public String getName() {
         return name;
@@ -128,5 +143,25 @@ public class InHouseUserData {
 
     public String getTeam() {
         return team;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getEmailTitle() {
+        return emailTitle;
+    }
+
+    public String getNewAgreement() {
+        return newAgreement;
+    }
+
+    public String getNoAgreement() {
+        return noAgreement;
     }
 }

@@ -2,10 +2,7 @@ package com.cyberiansoft.test.inhouse.pageObject;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -86,6 +83,9 @@ public class ClientQuotesDetailPage extends BasePage {
     @FindBy(xpath = "//span[contains (text(), 'Viewed agreement:')]/following-sibling::span")
     private WebElement viewedAgreementStatus;
 
+    @FindBy(xpath = "//div[@data-feature-setup-fee]")
+    private List<WebElement> setupFeePrices;
+
     public ClientQuotesDetailPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -94,11 +94,17 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     public boolean checkAgreementStatuses(String agreement, String payment, String letterView, String agreementView) {
-        wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
-        return (agreementStatus.getText().equals(agreement) &&
-                paidStatus.getText().equals(payment) &&
-                viewedLetterStatus.getText().equals(letterView) &&
-                viewedAgreementStatus.getText().equals(agreementView));
+        try {
+            wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
+            wait.until(e -> agreementStatus.getText().equals(agreement));
+            wait.until(e -> paidStatus.getText().equals(payment));
+            wait.until(e -> viewedLetterStatus.getText().equals(letterView));
+            wait.until(e -> viewedAgreementStatus.getText().equals(agreementView));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public ClientQuotesDetailPage clickDiscountButton() {
@@ -115,7 +121,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }
 
-    public void handleAlertForFinalizeAgreementButton() {
+    private void handleAlertForFinalizeAgreementButton() {
         try {
             wait.until(ExpectedConditions.attributeToBe(modalDialog, "display", "block"));
             wait.until(ExpectedConditions.elementToBeClickable(modalDialog.findElement(By.className("close")))).click();
@@ -232,11 +238,7 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     public boolean checkSetupFee(String fee) {
-        waitABit(2000);
-        System.out.println("SetUpFee:");
-        System.out.println(totalSetUpFee.getText());
-        System.out.println(fee);
-        return totalSetUpFee.getText().contains(fee);
+        return wait.until(s -> totalSetUpFee.getText().contains(fee));
     }
 
     public boolean checkPricePerMonth(String price) {
@@ -291,18 +293,37 @@ public class ClientQuotesDetailPage extends BasePage {
 //        selectSetupFee("Copy to Agreement settings page only features with \"Publice view\" State (when creating Client Agreement).", "test_r_1");
 //    }
 
+    private int getSetupFeeListSize() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfAllElements(emptySetupFeeSelectionList)).size();
+        } catch (TimeoutException ignored) {
+            return 0;
+        }
+    }
+
+    private int getSetupFeePricesSize() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfAllElements(setupFeePrices)).size();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public void selectSetupFeeForAllClients() {
         try {
-            int size = wait.until(ExpectedConditions.visibilityOfAllElements(emptySetupFeeSelectionList)).size();
-            for (int i = 0; i < size; i++) {
+            int setupFeeListSize = getSetupFeeListSize();
+            while (setupFeeListSize > 0) {
                 driver.switchTo().defaultContent();
-                wait.until(ExpectedConditions.elementToBeClickable(emptySetupFeeSelectionList.get(i))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(emptySetupFeeSelectionList.get(0))).click();
                 wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
                 Select selection = new Select(dropUpOptions);
                 selection.selectByIndex(1);
                 wait.until(s -> !selection.getAllSelectedOptions().isEmpty());
                 wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeButton)).click();
                 waitForLoading();
+                setupFeeListSize--;
+                waitABit(2500);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -312,5 +333,17 @@ public class ClientQuotesDetailPage extends BasePage {
     private void clickYesToAddItemToAgreement() {
         yesAddItemToAgreement.click();
         waitForLoading();
+    }
+
+    public double calculatePricePerMonth() {
+        int setupFeePricesSize = getSetupFeePricesSize();
+        List<Double> prices = new ArrayList<>();
+        while (setupFeePricesSize > 0) {
+            prices.add(Double.valueOf(wait.until(ExpectedConditions
+                    .visibilityOf(setupFeePrices.get(--setupFeePricesSize)))
+                    .getText()
+                    .substring(1)));
+        }
+        return prices.stream().mapToDouble(Double::doubleValue).sum();
     }
 }

@@ -44,6 +44,10 @@ public class LeftMenuPanel extends BasePage {
     @FindBy(xpath = "//span[text()='Accounts Rules']")
     private WebElement accountsRules;
 
+
+    @FindBy(xpath = "//h1[contains(text(), 'Client Quotes')]")
+    private WebElement clientQuotesHeader;
+
     public LeftMenuPanel(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -92,6 +96,12 @@ public class LeftMenuPanel extends BasePage {
     public ClientQuotesPage clickClientQuotesSubmenu() {
         clickSubMenu(clientQuotes);
         waitForLoading();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(clientQuotesHeader));
+        } catch (Exception ignored) {
+            clickClientManagement().clickClientQuotesSubmenu();
+            wait.until(ExpectedConditions.visibilityOf(clientQuotesHeader));
+        }
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 

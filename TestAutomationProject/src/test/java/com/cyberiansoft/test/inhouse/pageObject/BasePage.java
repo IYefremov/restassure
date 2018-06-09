@@ -68,7 +68,7 @@ public class BasePage {
             wait.until(ExpectedConditions
                     .invisibilityOf(driver.findElement(By
                             .xpath("//div[not(contains(@style, 'none'))]/i[@class='fa fa-refresh fa-spin']"))));
-        } catch (Exception ignored) {
+        } catch (NoSuchElementException e) {
             waitABit(1500);
         }
     }

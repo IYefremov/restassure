@@ -78,7 +78,7 @@ public class ClientQuotesPage extends BasePage {
     private List<WebElement> addClientProposalBTN;
 
     @FindBy(xpath = "//div[@class='callout callout-info']/button")
-    private WebElement closeNotificationBTN;
+    private WebElement closeNotificationButton;
 
     @FindBy(xpath = "//div[@id='add-potential-client-dialog']/div[@class='modal modal-primary']")
     private WebElement addClientDialog;
@@ -97,7 +97,7 @@ public class ClientQuotesPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public ClientQuotesPage clickAddClientBTN() {
+    public ClientQuotesPage clickAddClientButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
         addClientBTN.click();
         return PageFactory.initElements(driver, ClientQuotesPage.class);
@@ -187,14 +187,14 @@ public class ClientQuotesPage extends BasePage {
     }
 
 
-    public ClientQuotesPage clickConfirmNewClientBTN() {
+    public ClientQuotesPage clickConfirmNewClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
 
-    public boolean verifyUserWasCreated(String verifyParameter) {
+    public boolean isUserCreated(String verifyParameter) {
         searchUser(verifyParameter);
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + verifyParameter + "']")));
@@ -237,19 +237,22 @@ public class ClientQuotesPage extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
-    public ClientQuotesPage deleteUser(String deleteParameter) {
+    public ClientQuotesPage deleteUsers(String deleteParameter) {
         try {
-            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).
-                    findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-delete btn-delete-potential-client']"));
-            while(element.isDisplayed()) {
-                element.click();
+            while(wait.until(ExpectedConditions
+                    .visibilityOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).isDisplayed()) {
+                wait.until(ExpectedConditions
+                        .elementToBeClickable(By.xpath("//a[@class='btn-delete btn-delete-potential-client']")))
+                        .click();
                 driver.switchTo().alert().accept();
-                wait.until(ExpectedConditions.visibilityOf(closeNotificationBTN)).click();
+                try {
+                    wait.until(ExpectedConditions.visibilityOf(closeNotificationButton)).click();
+                } catch (Exception ignored) {}
+                waitABit(1500);
             }
         } catch (Exception ignored) {}
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
-
 
     public ClientQuotesPage editClient(String editParemeter) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + editParemeter + "']"))).
@@ -257,7 +260,7 @@ public class ClientQuotesPage extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
-    public void clickUpdateClientBTN() {
+    public void clickUpdateClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(1))).click();
     }
 
@@ -356,10 +359,21 @@ public class ClientQuotesPage extends BasePage {
 
     public ClientQuotesDetailPage clickSetupAgreementButton(String agreementIdentifier) {
         waitForProcessing();
-        waitABit(1000);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']")))
-                .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']"))
-                .click();
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions
+                    .stalenessOf(driver.findElement(By.xpath("//td[text()='" + agreementIdentifier + "']"))
+                            .findElement(By.xpath(".."))
+                            .findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']")))));
+            wait.until(ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']")))
+                    .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']"))
+                    .click();
+        } catch (Exception e) {
+            waitABit(3500);
+            driver.findElement(By.xpath("//td[text()='" + agreementIdentifier + "']"))
+                    .findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-setup-client-proposal']"))
+                    .click(); //td[text()='Second Agreement']/..//a[@class='btn-row btn-setup-client-proposal']
+        }
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='agreement-statuses']")));
             return PageFactory.initElements(driver, ClientQuotesDetailPage.class);

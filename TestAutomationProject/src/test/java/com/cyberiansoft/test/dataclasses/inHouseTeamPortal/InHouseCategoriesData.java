@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.inHouse;
+package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;

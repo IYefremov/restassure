@@ -10,11 +10,23 @@
     }
   ],
 
-  "testUserCanSelecyOrganisationFromList": [
+  "testUserCanSelectOrganisationFromList": [
     {
-      "rowID": "testUserCanSelecyOrganisationFromList.01",
+      "rowID": "testUserCanSelectOrganisationFromList.01",
       "description": "Test Case 59859:Verify user can select organization from the list",
       "ruleName": "Test Organization",
+      "condition": "Description LIKE '%AMT%'",
+      "order": "1",
+      "ruleDescription": "Test"
+    }
+  ],
+
+  "testUserCanEditOrganisationRules": [
+    {
+      "rowID": "testUserCanEditOrganisationRules.01",
+      "description": "Test Case 59861:Verify user can edit organization rules",
+      "ruleName": "Test Organization",
+      "ruleName2": "New Organization",
       "condition": "Description LIKE '%AMT%'",
       "condition2": "Description LIKE '%MOTEL%'",
       "order": "1",
@@ -24,51 +36,14 @@
     }
   ],
 
-  "testUserCanEditOrganisationRules": [
-    {
-      "rowID": "testUserCanEditOrganisationRules.01",
-      "description": "Test Case 59861:Verify user can edit organization rules",
-      "name": "CompanyAutomation",
-      "nickname": "Nock for company",
-      "address": "Address 1",
-      "address2": "Address 2",
-      "zip": "123AB",
-      "country": "United States",
-      "state": "California",
-      "city": "LA",
-      "businessPhone": "+380963665214",
-      "cellPhone": "+380963665214",
-      "firstName": "Test",
-      "lastName": "User",
-      "title": "Job title",
-      "email": "test.cyberiansoft@gmail.com",
-      "firstAgreement": "First agreement",
-      "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
-    }
-  ],
-
   "testUserCanAddNewAccountsRules": [
     {
       "rowID": "testUserCanAddNewAccountsRules.01",
       "description": "Test Case 59864:Verify user can add new Accounts Rules",
-      "name": "CompanyAutomation",
-      "nickname": "Nock for company",
-      "address": "Address 1",
-      "address2": "Address 2",
-      "zip": "123AB",
-      "country": "United States",
-      "state": "California",
-      "city": "LA",
-      "businessPhone": "+380963665214",
-      "cellPhone": "+380963665214",
-      "firstName": "Test",
-      "lastName": "User",
-      "title": "Job title",
-      "email": "test.cyberiansoft@gmail.com",
-      "firstAgreement": "First agreement",
-      "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "ruleName": "Test account rule",
+      "condition": "Description LIKE '%Skype%'",
+      "order": "2",
+      "ruleDescription": "Test description"
     }
   ],
 
@@ -76,23 +51,13 @@
     {
       "rowID": "testUserCanAddSelectAccountFromList.01",
       "description": "Test Case 59865:Verify user can select account from the list",
-      "name": "CompanyAutomation",
-      "nickname": "Nock for company",
-      "address": "Address 1",
-      "address2": "Address 2",
-      "zip": "123AB",
-      "country": "United States",
-      "state": "California",
-      "city": "LA",
-      "businessPhone": "+380963665214",
-      "cellPhone": "+380963665214",
-      "firstName": "Test",
-      "lastName": "User",
-      "title": "Job title",
-      "email": "test.cyberiansoft@gmail.com",
-      "firstAgreement": "First agreement",
-      "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "ruleName": "Test account rule",
+      "condition": "Description LIKE '%Skype%'",
+      "condition2": "Description LIKE '%ADOBE%'",
+      "order": "2",
+      "order2": "5",
+      "ruleDescription": "Test description",
+      "ruleDescription2": "new description"
     }
   ],
 
@@ -100,23 +65,14 @@
     {
       "rowID": "testUserCanEditAccountsRules.01",
       "description": "Test Case 59867:Verify user can edit Accounts Rules",
-      "name": "CompanyAutomation",
-      "nickname": "Nock for company",
-      "address": "Address 1",
-      "address2": "Address 2",
-      "zip": "123AB",
-      "country": "United States",
-      "state": "California",
-      "city": "LA",
-      "businessPhone": "+380963665214",
-      "cellPhone": "+380963665214",
-      "firstName": "Test",
-      "lastName": "User",
-      "title": "Job title",
-      "email": "test.cyberiansoft@gmail.com",
-      "firstAgreement": "First agreement",
-      "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "ruleName": "Test account rule",
+      "ruleName2": "Account",
+      "condition": "Description LIKE '%Skype%'",
+      "condition2": "Description LIKE '%ADOBE%'",
+      "order": "2",
+      "order2": "5",
+      "ruleDescription": "Test description",
+      "ruleDescription2": "new description"
     }
   ]
 }

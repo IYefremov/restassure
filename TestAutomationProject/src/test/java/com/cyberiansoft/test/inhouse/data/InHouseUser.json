@@ -110,7 +110,12 @@
       "email": "test.cyberiansoft@gmail.com",
       "firstAgreement": "First agreement",
       "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "team": "Repair360 FREE",
+      "discount": "20 min comm.-$10 per m.",
+      "price": "$200.00",
+      "emailTitle": "Agreement",
+      "newAgreement": "New",
+      "noAgreement": "No"
     }
   ],
 

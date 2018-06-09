@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.dataclasses.inHouse.InHouseCategoriesData;
+import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseCategoriesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.CategoriesPage;
@@ -79,12 +79,12 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
-                .clickAddClientBTN()
+                .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
-                .clickConfirmNewClientBTN();
-        Assert.assertTrue(clientQuotesPage.verifyUserWasCreated(data.getName()), "The user hasn't been created");
+                .clickConfirmNewClientButton();
+        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -108,7 +108,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
                 .searchUser(data.getName())
-                .deleteUser(data.getName());
+                .deleteUsers(data.getName());
 
         leftMenuPanel
                 .clickClients()
