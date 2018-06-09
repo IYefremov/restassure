@@ -57,10 +57,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void clickDoneButton() {
 		donestatusreasonbtn.click();
-		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
-		}
 	}
 
 	public void clickApproveButton() {

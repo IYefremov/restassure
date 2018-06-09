@@ -177,11 +177,21 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			if (invoicecell.findElement(By.xpath(".//input[@action='check-item']")).getAttribute("checked") == null)
 				tap(invoicecell.findElement(By.xpath(".//input[@action='check-item']")));
 		else
-			Assert.assertTrue(false, "Can't find invoice: " + invoiceNumber);
+			Assert.fail("Can't find invoice: " + invoiceNumber);
 	}
 	
 	public void clickOnSelectedInvoicesMailButton() {
 		tap(appiumdriver.findElement(By.xpath(".//*[@action='multiselect-actions-send-email']")));
 	}
 
+
+	public boolean isInvoiceHasApproveIcon(String invoiceNumber) {
+		boolean exists = false;
+		WebElement invoicecell = getInvoiceCell(invoiceNumber);
+		if (invoicecell != null)
+			exists = invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_signed']")).size() > 0;
+			else
+				Assert.fail("Can't find invoice: " + invoiceNumber);
+		return exists;
+	}
 }

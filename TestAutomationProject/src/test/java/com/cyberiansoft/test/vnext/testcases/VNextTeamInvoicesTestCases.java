@@ -1425,4 +1425,47 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		}
 	}
 
+	@Test(testName= "Test Case 75364:Verify 'approve' icon doesn't displays after approve Invoice",
+			description = "Verify 'approve' icon doesn't displays after approve Invoice")
+	public void testVerifyApproveIconDoesntDisplaysAfterApproveInvoice() {
+
+		final String vinnumber = "TEST";
+		final String wotype = "O_Kramar";
+		final String invoiceType = "O_Kramar";
+		final String ponumber = "12345";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.selectCustomer(testcustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(wotype);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+		homescreen = workordersscreen.clickBackButton();
+
+		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
+		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+		insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(invoiceType);
+
+		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+		invoiceinfoscreen.setInvoicePONumber(ponumber);
+		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+		VNextApproveScreen approvescreen = invoicemenuscreen.clickApproveInvoiceMenuItem();
+		approvescreen.drawSignature();
+		approvescreen.saveApprovedInspection();
+		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+		Assert.assertFalse(invoicesscreen.isInvoiceHasApproveIcon(invoicenumber));
+		homescreen = invoicesscreen.clickBackButton();
+
+	}
+
 }

@@ -91,11 +91,25 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		} else
 			customercell.click();*/
 	}
+
+	public void selectLocalCustomer(String customer) {
+		appiumdriver.findElementByAccessibilityId("Local").click();
+		if (!elementExists(customer)) {
+			appiumdriver.findElementByAccessibilityId("Search").click();
+			IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
+			searchfld.click();
+			searchfld.sendKeys(customer + "\n");
+
+		}
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(customer)));
+		appiumdriver.findElementByAccessibilityId(customer).click();
+	}
 	
 	public void selectOnlineCustomer(String customer) {
 		appiumdriver.findElementByAccessibilityId("Online").click();
 		if (!elementExists(customer)) {	
-			appiumdriver.findElementByAccessibilityId("Search").click();
+			appiumdriver.findElementByName("CustomerSelectionView").findElement(MobileBy.name("Search")).click();
 			IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
 			searchfld.click();
 			searchfld.sendKeys(customer + "\n");

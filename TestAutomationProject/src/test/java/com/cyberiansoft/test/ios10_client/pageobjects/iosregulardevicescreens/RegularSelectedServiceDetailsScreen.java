@@ -430,12 +430,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']/..")));
-			appiumdriver.findElementByAccessibilityId(categoryname).click();
+			//appiumdriver.findElementByAccessibilityId(categoryname).click();
 		}
 		appiumdriver.findElementByAccessibilityId(categoryname).click();
 	}
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Subcategory")));
+		appiumdriver.findElementByAccessibilityId("Subcategory").click();
 		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
 		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + subcategoryname + "']")).click();

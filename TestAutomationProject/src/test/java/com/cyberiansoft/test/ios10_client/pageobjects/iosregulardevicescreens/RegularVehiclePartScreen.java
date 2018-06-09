@@ -20,6 +20,8 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         super(driver);
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Vehicle Part")));
     }
 
     public void setSizeAndSeverity(String size, String severity) {
@@ -115,4 +117,10 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         par.findElement(By.xpath("//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
     }
 
+    public RegularPriceMatrixScreen clickBackButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+        appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Back")).click();
+        return new RegularPriceMatrixScreen(appiumdriver);
+    }
 }

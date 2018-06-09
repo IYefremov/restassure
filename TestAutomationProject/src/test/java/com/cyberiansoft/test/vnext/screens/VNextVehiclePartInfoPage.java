@@ -3,8 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.LaborServiceData;
-import com.cyberiansoft.test.vnext.screens.panelandparts.VNextBasePanelPartsList;
-import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -67,7 +66,17 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		else
 			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
 	}
-	
+
+	public void selectVehiclePartAdditionalServices(List<ServiceData> additionalServices) {
+		for (ServiceData additionalService : additionalServices) {
+			WebElement addservs = getVehiclePartAdditionalServiceCell(additionalService.getServiceName());
+			if (addservs != null)
+				tap(addservs.findElement(By.xpath(".//input[@action='select']")));
+			else
+				Assert.fail("Can't find additional servicve: " + additionalService.getServiceName());
+		}
+	}
+
 	public void selectAllAvailableAdditionalServices() {
 		List<WebElement> addservs = additionalserviceslist.findElements(By.xpath(".//div[@class='accordion-item-toggle']"));
 		for (WebElement additinalservice : addservs) {

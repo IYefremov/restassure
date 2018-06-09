@@ -122,10 +122,13 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
-		return appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
+		String priceValue = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
+		return priceValue.substring(priceValue.indexOf("$"), priceValue.length());
 	}
 
 	public String getInspectionSubTotalPrice() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SubtotalAmount")));
 		return appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value");
 	}
 	

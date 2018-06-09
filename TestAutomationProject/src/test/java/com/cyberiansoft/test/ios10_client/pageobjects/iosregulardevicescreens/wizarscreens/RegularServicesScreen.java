@@ -152,6 +152,16 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 
 	}
+
+	public void selectServicePanel(String servicePanel) {
+		MobileElement panelTable = (MobileElement) appiumdriver.findElementByAccessibilityId("ServiceGroupServicePartsTable");
+		if (!panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).isDisplayed())
+			swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicePanel + "']/XCUIElementTypeStaticText[@name='" + servicePanel + "']/..")));
+		panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("ServiceGroupServicePartsTable"), 1));
+	}
 	
 	public void selectService(String servicename) {
 		if (elementExists("Clear text"))
@@ -175,14 +185,6 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 					findElement(MobileBy.AccessibilityId(servicename)).findElement(MobileBy.className("XCUIElementTypeImage")).click();
 	}
 	
-	public void selectServicePanel(String servicepanelname) {
-
-		swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicepanelname + "']/XCUIElementTypeStaticText[@name='" + servicepanelname + "']/..")));
-		appiumdriver.findElementByName(servicepanelname).click();
-		//appiumdriver.findElementByName(servicepanelname).click();
-	}
-	
 	public void selectServiceSubSrvice(String servicesubsrvicename) {
 		appiumdriver.findElementByAccessibilityId(servicesubsrvicename).click();
 	}
@@ -195,18 +197,21 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	public void selectSubService(String servicename) {
 		if (elementExists(MobileBy.AccessibilityId("Clear text")))
 			appiumdriver.findElementByAccessibilityId("Search").clear();
-		if (!elementExists(MobileBy.AccessibilityId(servicename)))
-			searchServiceByName(servicename);
+        IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
+                findElement(MobileBy.AccessibilityId(servicename));
+        if (!servicecell.isDisplayed()) {
+            if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
+                searchServiceByName(servicename);
+        }
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
-		IOSElement servicecell = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeTable").
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").
 				findElement(MobileBy.AccessibilityId(servicename)).
-				findElement(MobileBy.AccessibilityId("unselected"));
+				findElement(MobileBy.AccessibilityId("unselected")).click();
 		/*if (!servicecell.isDisplayed()) {
 			if (appiumdriver.findElementsByAccessibilityId("Search").size() > 0)
 				searchServiceByName(servicename);
 		}*/
-		servicecell.click();
 	//	TouchAction action = new TouchAction(appiumdriver);
 		//action.tap(element(servicecell,  servicecell.getLocation().getX()+2, servicecell.getLocation().getY()+2)).perform();
 		
@@ -267,8 +272,8 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	}
 	
 	public RegularSelectedServiceDetailsScreen clickServiceCustomDetailButton(String service) {
-		//appiumdriver.findElementByXPath("//UIAScrollView[2]/UIATableView[@name=\"ServiceGroupServicesTable\"]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']").click();
-		
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(service)));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + service + "']/XCUIElementTypeButton[@name='custom detail button']").click();
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
 		return new RegularSelectedServiceDetailsScreen(appiumdriver);

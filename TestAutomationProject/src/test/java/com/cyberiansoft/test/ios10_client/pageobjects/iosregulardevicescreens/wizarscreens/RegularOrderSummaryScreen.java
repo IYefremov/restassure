@@ -62,15 +62,18 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default")));
 		appiumdriver.findElementByAccessibilityId("Default").click();
 	}
-	
-	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
+
+	public void clickInvoiceType(String invoicetype) {
 		if (!appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']/..")));
-			appiumdriver.findElementByName(invoicetype).click();
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoicetype + "']/..")));
 		}
 		appiumdriver.findElementByName(invoicetype).click();
+	}
+	
+	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
+		clickInvoiceType(invoicetype);
 		return new RegularInvoiceInfoScreen(appiumdriver);
 	}
 
