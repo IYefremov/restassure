@@ -184,20 +184,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 				.click();
 	}
 	
-	public IOSElement getInspectionNumberLabel() {
-		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
-		return (IOSElement) toolbar.findElementByIosNsPredicate("name CONTAINS 'E-'");
-		//return regularinspnumberlabel;
-	}
-	
-	public String getWorkOrderTypeValue() {
-		return regularwotypelabel.getAttribute("value");
-	}
-	
-	public String getInspectionNumber() {
-		return getInspectionNumberLabel().getText();
-	}
-	
 	public String getWorkOrderNumber() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'O-'").getText();
@@ -368,6 +354,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public WebElement getVehicleInfoTableParentNode(String wonumber) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + wonumber + "']/.."));
+	}
+
+	public String getWorkOrderTypeValue() {
+		return regularwotypelabel.getAttribute("value");
 	}
 
 }

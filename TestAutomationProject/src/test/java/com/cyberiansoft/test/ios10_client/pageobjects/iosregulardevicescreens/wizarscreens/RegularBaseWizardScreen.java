@@ -5,6 +5,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iO
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -90,5 +91,15 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
                 return (T) new RegularInvoiceInfoScreen(appiumdriver);
         }
         return null;
+    }
+
+    public IOSElement getInspectionNumberLabel() {
+        IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+        return (IOSElement) toolbar.findElementByIosNsPredicate("name CONTAINS 'E-'");
+        //return regularinspnumberlabel;
+    }
+
+    public String getInspectionNumber() {
+        return getInspectionNumberLabel().getText();
     }
 }
