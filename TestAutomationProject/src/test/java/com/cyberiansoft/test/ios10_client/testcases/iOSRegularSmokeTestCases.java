@@ -1069,10 +1069,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_SR_INSPTYPE);
-		RegularServicesScreen servicesscreen = new RegularServicesScreen(appiumdriver);
-
-		String inspnumber = servicesscreen.getInspectionNumber();
-		servicesscreen = servicesscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		String inspnumber = vehiclescreeen.getInspectionNumber();
+		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.WHEEL_SERVICE,  "$70.00 x 3.00"));
 		Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.BUNDLE1_DISC_EX, "$150.00"));
@@ -5559,9 +5558,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		pricematrix.clickBackButton();
 		
 		servicesscreen = new RegularServicesScreen(appiumdriver);
-		servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
+		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
-		servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
+		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
@@ -6957,14 +6956,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
-		servicesscreen.searchServiceByName("test");
+		//servicesscreen.searchServiceByName("test");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.TEST_SERVICE_WITH_QF_PP_VEHICLE);
 		selectedservicescreen.clickVehiclePartsCell();
 		selectedservicescreen.selectVehiclePart("Dashboard");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.searchServiceByName("Tax");
+		//servicesscreen.searchServiceByName("Tax");
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.SALES_TAX));
 		

@@ -36,7 +36,7 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("InspectionsTable")));
 	}
 	

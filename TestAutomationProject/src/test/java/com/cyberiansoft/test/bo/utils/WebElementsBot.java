@@ -130,8 +130,9 @@ public class WebElementsBot {
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
 		combobox.clearAndType(value);
-		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-		WebElement comboitem = new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
+		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 20).until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 20).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//li[text()='" + value + "']")));
+		WebElement comboitem = new WebDriverWait(DriverBuilder.getInstance().getDriver() , 20).until(ExpectedConditions.elementToBeClickable((WebElement) droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']"))));
 
 		//waitUntilSelectOptionsLoaded(value);
 		waitABit(500);

@@ -117,7 +117,7 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String clearVehicleData() {
-        appiumdriver.findElementByAccessibilityId("Delete").click();
+        appiumdriver.findElementByAccessibilityId("Clear").click();
 		return Helpers.getAlertTextAndAccept();
 	}
 	
