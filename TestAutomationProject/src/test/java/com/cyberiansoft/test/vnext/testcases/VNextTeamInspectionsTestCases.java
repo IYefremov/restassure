@@ -91,7 +91,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify Team Inspection displays on the screen")
 	public void testVerifyTeamInspectionDisplaysOnTheScreen() {
 		
-		final String inspType = "anastasia type";
+		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -174,7 +174,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify only when user tap 'search' button we perform search and refresh team inspections list")
 	public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList() {
 		
-		final String inspType = "anastasia type";
+		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -216,7 +216,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Verify user can view Team Inspection")
 	public void testVerifyUserCanViewTeamInspection() {
 		
-		final String inspType = "anastasia type";
+		final String inspType = "O_Kramar";
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);

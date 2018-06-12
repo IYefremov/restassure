@@ -62,7 +62,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		VNextApproveScreen approvescreen = invoicemenuscreen.clickApproveInvoiceMenuItem();
@@ -123,7 +123,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		invoicemenuscreen.clickVoidInvoiceMenuItem();
@@ -207,7 +207,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		VNextChangeInvoicePONumberDialog changeinvoiceponumberdialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
@@ -259,7 +259,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		VNextChangeInvoicePONumberDialog changeInvoicePONumberDialog = invoicemenuscreen.clickInvoiceChangePONumberMenuItem();
@@ -296,6 +296,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		homescreen = workordersscreen.clickBackButton();
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		invoicesscreen.switchToMyInvoicesView();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
@@ -399,7 +400,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
 		invoicemenuscreen.refreshInvoicePictures();
@@ -464,7 +465,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
 		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
@@ -531,7 +532,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
 		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
@@ -605,7 +606,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		invoicesscreen.switchToTeamInvoicesView();
 		VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);	
 		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
@@ -704,7 +705,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -777,7 +778,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -843,7 +844,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices[i] = invoiceinfoscreen.getInvoiceNumber();
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -854,7 +855,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(customer2);	
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		//emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -917,7 +918,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -991,7 +992,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1055,7 +1056,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1118,7 +1119,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1192,7 +1193,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1249,7 +1250,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1315,7 +1316,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1389,7 +1390,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(ponumber);
 			invoices[i] = invoiceinfoscreen.getInvoiceNumber();
-			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+			VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 			homescreen = invoicesscreen.clickBackButton();
 		}
 		
@@ -1401,7 +1402,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(customer2);	
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		//emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -1437,6 +1438,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(wotype);

@@ -191,6 +191,17 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		return this;
 	}
 
+	public VNextWorkOrdersScreen changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.switchToRetailMode();
+		customersscreen.searchCustomerByName(newCustomer.getFullName());
+		customersscreen.selectCustomer(newCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		return this;
+	}
+
 	public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
 		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
 		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
