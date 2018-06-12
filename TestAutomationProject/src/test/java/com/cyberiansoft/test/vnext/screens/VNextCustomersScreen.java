@@ -47,7 +47,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);	
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
 		BaseUtils.waitABit(1500);
 		if (checkHelpPopupPresence())		
@@ -95,9 +95,12 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public boolean isAddCustomerButtonDisplayed() {
 		return customersscreen.findElement(By.xpath(".//a[@action='add']")).isDisplayed();
-		
 	}
-	
+
+	public boolean isAddCustomerButtonExists() {
+		return elementExists("//a[@action='add']");
+	}
+
 	public boolean isCustomerExists(AppCustomer customer) {
 		return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;		
 	}
@@ -107,10 +110,14 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToRetailMode() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(retailcustomertab));
 		tap(retailcustomertab);
 	}
 	
 	public void switchToWholesaleMode() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(wholesalecustomertab));
 		tap(wholesalecustomertab);
 	}
 	

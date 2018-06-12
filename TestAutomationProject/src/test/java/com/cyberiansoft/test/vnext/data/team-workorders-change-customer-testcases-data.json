@@ -27,8 +27,38 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
       "service": {"serviceName": "Battery Installation"
+      },
+      "workOrderPrice": "$9.00"
+    }
+  ],
+
+  "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen": [
+    {
+      "rowID": "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen.01",
+      "description": "Test Case 75358:Verify user can't create new Customer on Change customer screen",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
-  ]
+  ],
 
+  "testVerifyUserCanChangeRetailCustomerToWholesaleForWO": [
+    {
+      "rowID": "testVerifyUserCanChangeRetailCustomerToWholesaleForWO.01",
+      "description": "Test Case 75357:Verify user can change Retail customer to Wholesale for WO",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanSelectCustomerUsingSearch": [
+    {
+      "rowID": "testVerifyUserCanSelectCustomerUsingSearch.01",
+      "description": "Test Case 75359:Verify user can select Customer using search",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
 }

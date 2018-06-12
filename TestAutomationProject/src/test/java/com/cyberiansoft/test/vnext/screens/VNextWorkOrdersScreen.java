@@ -190,4 +190,14 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		informationDialog.clickInformationDialogYesButton();
 		return this;
 	}
+
+	public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(newWholesailCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		return this;
+	}
 }

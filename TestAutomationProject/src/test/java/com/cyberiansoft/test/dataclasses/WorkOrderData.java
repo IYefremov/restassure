@@ -13,6 +13,9 @@ public class WorkOrderData {
     @JsonProperty("service")
     ServiceData service;
 
+    @JsonProperty("workOrderPrice")
+    String workOrderPrice;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -23,6 +26,10 @@ public class WorkOrderData {
 
     public String getServiceName() {
         return service.getServiceName();
+    }
+
+    public String getWorkOrderPrice() {
+        return workOrderPrice;
     }
 
 }
