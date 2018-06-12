@@ -10,8 +10,8 @@ public class Invoice {
     @JsonProperty("invoiceData")
     InvoiceData invoiceData;
 
-    @JsonProperty("сreditCardData")
-    CreditCardData сreditCardData;
+    @JsonProperty("creditCardData")
+    CreditCardData creditCardData;
 
     public WorkOrderData getWorkOrderData() {
         return workOrderData;
@@ -21,7 +21,7 @@ public class Invoice {
         return invoiceData;
     }
 
-    public CreditCardData getСreditCardData() {
-        return сreditCardData;
+    public CreditCardData getCreditCardData() {
+        return creditCardData;
     }
 }
