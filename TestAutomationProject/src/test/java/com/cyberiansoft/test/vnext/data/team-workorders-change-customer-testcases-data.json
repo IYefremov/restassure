@@ -61,4 +61,17 @@
       }
     }
   ],
+
+  "testVerifyInvoiceCreatedWithChangedCustomer": [
+    {
+      "rowID": "testVerifyInvoiceCreatedWithChangedCustomer.01",
+      "description": "Test Case 75360:Verify Invoice created with changed customer",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ]
 }
