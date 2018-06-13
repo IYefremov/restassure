@@ -37,17 +37,8 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility  = "Discard")
     private IOSElement discardbtn;
 	
-	@iOSFindBy(accessibility  = "Copy Vehicle")
-    private IOSElement copyvehiclemenu;
-	
 	@iOSFindBy(accessibility  = "Copy Services")
     private IOSElement copyservicesmenu;
-	
-	@iOSFindBy(accessibility  = "Change Customer")
-    private IOSElement changecustomermenu;
-	
-	@iOSFindBy(accessibility  = "Details")
-    private IOSElement detailsmenu;
 	
 	@iOSFindBy(accessibility  = "New Inspection")
     private IOSElement newinspectionmenu;
@@ -94,6 +85,15 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility = "Add")
 	private IOSElement addorderbtn;
 
+    @iOSFindBy(accessibility  = "Change Customer")
+    private IOSElement changecustomermenu;
+
+    @iOSFindBy(accessibility  = "Copy Vehicle")
+    private IOSElement copyvehiclemenu;
+
+    @iOSFindBy(accessibility  = "Details")
+    private IOSElement detailsmenu;
+
 	public MyWorkOrdersScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
@@ -101,7 +101,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrdersPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId( "OrdersPageTableLeft")));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("OrdersPageTableLeft")));
 	}
 
 	public void clickAddOrderButton() {
@@ -175,15 +175,15 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void selectCopyVehicle() {
-		appiumdriver.findElementByAccessibilityId("Copy Vehicle").click();
+        copyvehiclemenu.click();
 	}
 	
 	public void clickChangeCustomerPopupMenu() {
-		appiumdriver.findElementByAccessibilityId("Change Customer").click();
+        changecustomermenu.click();
 	}
 	
 	public void clickDetailspopupMenu() {
-		appiumdriver.findElementByAccessibilityId("Details").click();
+        detailsmenu.click();
 	}
 	
 	public void selectCustomer(String customer) {
@@ -200,10 +200,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		selectWorkOrder(wonumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
-		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
-		}
 		return this;
 	}
 	
@@ -292,11 +288,14 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrder(String wonumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']")));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("label = '" +
+				wonumber + "' and type = 'XCUIElementTypeStaticText'")));
 		wait = new WebDriverWait(appiumdriver, 15);
-		System.out.println("+++++++++" + "//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']");
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("label = '" +
+				wonumber + "' and type = 'XCUIElementTypeStaticText'")));
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("label = '" +
+				wonumber + "' and type = 'XCUIElementTypeStaticText'")).click();
 	}
 	
 	public void selectWorkOrderForEidt(String wonumber) {		

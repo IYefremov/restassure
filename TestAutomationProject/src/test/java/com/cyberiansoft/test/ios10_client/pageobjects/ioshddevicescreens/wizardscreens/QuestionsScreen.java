@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -264,11 +263,11 @@ public class QuestionsScreen extends BaseWizardScreen {
 		return toolbar.findElementByIosNsPredicate("name contains 'I-00'").getAttribute("value");
 	}
 
-	public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+	/*public <T extends BaseTypeScreen> T clickSaveAsFinal() {
 		clickSave();
 		appiumdriver.findElementByAccessibilityId("Final").click();
-		clickSave();
+		//clickSave();
 		return getTypeScreenFromContext();
-	}
+	}*/
 
 }

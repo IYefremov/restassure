@@ -1711,9 +1711,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.findElement(
 				MobileBy.name("Yes"))
 				.click();
+		myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForCopy(inspNumber);
-		QuestionAnswerScreen questionAnswerScreen = new QuestionAnswerScreen(appiumdriver);
-		vehiclescreeen = questionAnswerScreen.selectNextScreen(VehicleScreen.getVehicleScreenCaption(), VehicleScreen.class);
+		vehiclescreeen = new VehicleScreen(appiumdriver);
+		final String copiedInspection = vehiclescreeen.getInspectionNumber();
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);
 		Assert.assertEquals(vehiclescreeen.getYear(), _year);
@@ -1746,7 +1747,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				MobileBy.name("Yes"))
 				.click();
 		myinspectionsscreen = new MyInspectionsScreen(appiumdriver);
-		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), "$837.99"); 
+		System.out.println("++++++" + inspNumber);
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(copiedInspection), "$837.99");
 				//.getFirstInspectionPriceValue(), "$837.99");
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -3144,8 +3146,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clicksRepairPhaseLine();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
@@ -3333,15 +3335,17 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		ordermonitorscreen.clicksRepairPhaseLine();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1, "Completed");
-		ordermonitorscreen.verifyPanelStatus(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
+
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE, "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
+		ordermonitorscreen.clickDoneIcon();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-		ordermonitorscreen.verifyPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE, "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
+		ordermonitorscreen.clickDoneIcon();
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
