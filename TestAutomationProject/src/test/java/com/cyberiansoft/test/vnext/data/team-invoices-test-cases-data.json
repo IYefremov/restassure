@@ -292,9 +292,9 @@
       "description": "Test Case 75364:Verify 'approve' icon doesn't displays after approve Invoice",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
         }
-      },
-      "service": {"serviceName": "Battery Installation"
       },
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
