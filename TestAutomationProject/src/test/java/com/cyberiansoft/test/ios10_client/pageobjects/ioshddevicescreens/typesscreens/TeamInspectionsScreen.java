@@ -45,7 +45,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public ServiceRequestdetailsScreen clickBackServiceRequest() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Request"))).click();
 		return new ServiceRequestdetailsScreen(appiumdriver);
 	}

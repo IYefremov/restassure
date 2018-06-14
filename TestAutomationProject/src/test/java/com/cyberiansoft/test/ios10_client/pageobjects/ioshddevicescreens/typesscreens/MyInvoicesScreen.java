@@ -264,6 +264,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public boolean isInvoiceApproveButtonExists(String invoicenumber) {
 		selectInvoice(invoicenumber);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = '" +
+				invoicenumber + "' and type = 'XCUIElementTypeNavigationBar'")));
 		boolean approved = appiumdriver.findElements(MobileBy.AccessibilityId("Approve")).size() > 0;
 		return approved;	
 	}
