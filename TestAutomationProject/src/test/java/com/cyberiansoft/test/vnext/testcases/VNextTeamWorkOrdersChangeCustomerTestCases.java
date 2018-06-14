@@ -214,7 +214,32 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesscreen.getInvoiceCustomerValue(invoiceNumber), testcustomer2.getFullName());
-
         invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanChangeCustomerForTeamWO(String rowID,
+                                                            String description, JSONObject testData) throws IOException {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToTeamWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(workOrderData.getWorkOrderType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
+        workordersscreen.switchToMyWorkordersView();
+        Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
+
+        workordersscreen.clickBackButton();
     }
 }

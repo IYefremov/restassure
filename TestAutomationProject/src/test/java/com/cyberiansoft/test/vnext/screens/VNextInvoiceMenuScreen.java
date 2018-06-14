@@ -58,6 +58,12 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		tap(approveinvoicebtn);
 		return new VNextApproveScreen(appiumdriver);
 	}
+
+	public boolean isApproveInvoiceMenuItemExists() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(closebtn));
+		return approveinvoicebtn.isDisplayed();
+	}
 	
 	public void clickVoidInvoiceMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

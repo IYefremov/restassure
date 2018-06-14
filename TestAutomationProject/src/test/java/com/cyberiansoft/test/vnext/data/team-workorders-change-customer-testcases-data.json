@@ -73,5 +73,15 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserCanChangeCustomerForTeamWO": [
+    {
+      "rowID": "testVerifyUserCanChangeCustomerForTeamWO.01",
+      "description": "Test Case 75362:Verify user can change customer for Team WO",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
   ]
 }
