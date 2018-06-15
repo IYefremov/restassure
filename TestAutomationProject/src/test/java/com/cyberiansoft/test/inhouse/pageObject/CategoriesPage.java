@@ -12,7 +12,7 @@ import java.util.List;
 public class CategoriesPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='dropdown-toggle btn-add-category']")
-    private WebElement addCategoryBTN;
+    private WebElement addCategoryButton;
 
     @FindBy(className = "form-control")
     private List<WebElement> inputFields;
@@ -50,6 +50,12 @@ public class CategoriesPage extends BasePage {
     @FindBy(className="shirma-dialog")
     private WebElement shirmaDialog;
 
+    @FindBy(xpath="//h4[contains(text(), 'New category successfully added')]/../button[@class='close']")
+    private WebElement categoryAddedCloseButton;
+
+    @FindBy(xpath="//h4[contains(text(), 'New attribute successfully added')]/../button[@class='close']")
+    private WebElement attributeAddedCloseButton;
+
     public CategoriesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -58,23 +64,24 @@ public class CategoriesPage extends BasePage {
 
     public CategoriesPage clickAddCategoryButton() {
         try {
-            wait.until(ExpectedConditions.visibilityOf(addCategoryBTN));
-            clickWithJS(addCategoryBTN);
+            wait.until(ExpectedConditions.visibilityOf(addCategoryButton));
+            clickWithJS(addCategoryButton);
         } catch (Exception e) {
             Assert.fail("The \"Add category\" button has not been displayed.", e);
         }
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage setCategory(String category) {
         wait.until(ExpectedConditions.visibilityOf(inputFields.get(0))).sendKeys(category);
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage clickSubmitCategoryButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitCategoryBTN)).click();
         waitForLoading();
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        wait.until(ExpectedConditions.elementToBeClickable(categoryAddedCloseButton)).click();
+        return this;
     }
 
     public CategoriesPage deleteCategory(String name) {
@@ -85,7 +92,7 @@ public class CategoriesPage extends BasePage {
         try {
             driver.switchTo().alert().accept();
         } catch(Exception ignored){}
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage verifyCategoriesDoNotExist(String category) {
@@ -99,7 +106,7 @@ public class CategoriesPage extends BasePage {
                 }
             } catch (Exception ignored) {}
         }
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public boolean isCategoryDisplayed(String category) {
@@ -124,19 +131,20 @@ public class CategoriesPage extends BasePage {
         }
     }
 
-    public CategoriesPage clickAddAttributeButton(String name) {
-        try {
-            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(driver
-                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))));
+    public CategoriesPage clickAddAttributeButtonForCategory(String name) {
+//        try {
+//            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(driver
+//                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))));
+//            wait.until(ExpectedConditions.elementToBeClickable(driver
+//                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
+//        } catch (Exception e) {
+//            refreshPage();
             wait.until(ExpectedConditions.elementToBeClickable(driver
-                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
-        } catch (Exception e) {
-            refreshPage();
-            wait.until(ExpectedConditions.elementToBeClickable(driver
-                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
-        }
+                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]"))))
+                    .click();
+//        }
         wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage fillNotAutomatedAttributeFields(String name, String dataType) {
@@ -149,7 +157,7 @@ public class CategoriesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeIsAutomatedSelection)).click();
         addAttributeIsAutomatedSelection.findElements(By.tagName("option")).stream().
                 filter(e -> e.getText().equals("No")).findFirst().ifPresent(WebElement::click);
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage fillAutomatedAttributeFields(String name, String isAutomated, String procedureName) {
@@ -158,19 +166,14 @@ public class CategoriesPage extends BasePage {
         new Select(addAttributeIsAutomatedSelection).selectByVisibleText(isAutomated);
         wait.until(ExpectedConditions.attributeToBe(storedProcedureNameField, "value required", ""));
         storedProcedureNameField.sendKeys(procedureName);
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 
     public CategoriesPage clickAddAttributeButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeInCreationWindow)).click();
         waitForLoading();
-        try {
-            waitForShirmaDialog();
-            wait.until(ExpectedConditions.visibilityOf(addAttributeDialogDisappearance));
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        wait.until(ExpectedConditions.elementToBeClickable(attributeAddedCloseButton)).click();
+        return this;
     }
 
     public boolean checkAttributeByName(String categoryName, String attName) {
@@ -206,6 +209,6 @@ public class CategoriesPage extends BasePage {
         clickAddCategoryButton();
         setCategory(category);
         clickSubmitCategoryButton();
-        return PageFactory.initElements(driver, CategoriesPage.class);
+        return this;
     }
 }

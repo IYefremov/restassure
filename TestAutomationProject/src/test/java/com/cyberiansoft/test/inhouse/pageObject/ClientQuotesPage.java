@@ -104,7 +104,7 @@ public class ClientQuotesPage extends BasePage {
     public ClientQuotesPage clickAddClientButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
         addClientBTN.click();
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public void setNewClientName(String name) {
@@ -114,7 +114,7 @@ public class ClientQuotesPage extends BasePage {
     public ClientQuotesPage clearAndSetNewClientName(String name) {
         wait.until(ExpectedConditions.visibilityOf(newClientName.get(1))).clear();
         newClientName.get(1).sendKeys(name);
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public void setNewClientNickName(String name) {
@@ -187,14 +187,14 @@ public class ClientQuotesPage extends BasePage {
         setNewClientLastName(lastName);
         setNewClientTitle(title);
         setNewClientEmail(email);
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
 
     public ClientQuotesPage clickConfirmNewClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
 
@@ -218,27 +218,7 @@ public class ClientQuotesPage extends BasePage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        try {
-//            wait.until(ExpectedConditions.visibilityOf(searchField));
-////            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
-////            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("searchString")));
-//        } catch (TimeoutException e) {
-//            waitABit(3000);
-//        }
-//        searchField.clear();
-//        searchField.sendKeys(searchValue);
-//        try {
-//            wait.until(ExpectedConditions.elementToBeClickable(searchBTN)).click();
-//        } catch (Exception e) {
-//            clickWithJS(searchBTN);
-//        }
-//        try {
-//            wait.until(ExpectedConditions.invisibilityOf(processingBar));
-//        } catch (Exception e) {
-//            waitABit(1000);
-//        }
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public ClientQuotesPage deleteUsers(String deleteParameter) {
@@ -247,7 +227,7 @@ public class ClientQuotesPage extends BasePage {
         } catch (Exception ignored) {
             deleteParameters(deleteParameter);
         }
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     private ClientQuotesPage deleteParameters(String deleteParameter) {
@@ -262,15 +242,19 @@ public class ClientQuotesPage extends BasePage {
                     wait.until(ExpectedConditions.visibilityOf(closeNotificationButton)).click();
                 } catch (Exception ignored) {}
                 waitABit(1500);
+                try {
+                    if (emptyDataTable.isDisplayed())
+                        break;
+                } catch (Exception ignored) {}
             }
         } catch (Exception ignored) {}
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public ClientQuotesPage editClient(String editParemeter) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + editParemeter + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-update btn-update-potential-client']")).click();
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public void clickUpdateClientButton() {
@@ -281,7 +265,7 @@ public class ClientQuotesPage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
         wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "block"));
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public void setAgreementName(String name) {
@@ -297,7 +281,7 @@ public class ClientQuotesPage extends BasePage {
         selectEdition(team);
         saveAgreement();
         wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "none"));
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     private void saveAgreement() {
@@ -312,7 +296,7 @@ public class ClientQuotesPage extends BasePage {
         } catch (Exception e) {
             Assert.fail("The agreement list has not been displayed");
         }
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public ClientQuotesPage clickEditAgreement(String s) {
@@ -324,7 +308,7 @@ public class ClientQuotesPage extends BasePage {
             Assert.fail("The \"Edit Agreement\" button has not been clicked!");
         }
         wait.until(ExpectedConditions.attributeToBe(updateAgreementDialog, "display", "block"));
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return this;
     }
 
     public boolean verifyAgreementEditionCannotBeChanged(String newName) {

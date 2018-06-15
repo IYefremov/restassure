@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -29,12 +30,17 @@ public class ClientSegmentsPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa fa-chevron-right']")
     private WebElement detailsHidden;
 
-    //    @FindBy(id = "filterAttributeValueInput")
-    @FindBy(className = "ms-sel-ctn") //todo change after the new functionality works
+    @FindBy(id = "filterAttributeValueInput")
     private WebElement categoriesSelection;
 
-    @FindBy(xpath = "//div[@class='ms-res-ctn dropdown-menu']/div")
-    private List<WebElement> categoriesSelectionDropDown;
+    @FindBy(xpath = "//table[@id='table-filter-client-attributes']")
+    private WebElement categoriesSelectionDropDown;
+
+    @FindBy(xpath = "//div[@id='client-segments-filter-container']//div[@class='dropdown open']")
+    private WebElement categoriesSelectionOpened;
+
+    @FindBy(xpath = "//div[@id='client-segments-filter-container']//div[@class='dropdown']")
+    private WebElement categoriesSelectionHidden;
 
     @FindBy(xpath = "//td[@class='attribute-value-cell']")
     private List<WebElement> attributeValues;
@@ -42,60 +48,71 @@ public class ClientSegmentsPage extends BasePage {
     @FindBy(xpath = "//div[@class='dropup open']")
     private WebElement dropUpOpen;
 
+    @FindBy(xpath = "//button[@class='submit btn-save-update-client-attribute-value']")
+    private WebElement dropUpOpenSubmitButton;
+
+    @FindBy(xpath = "//div[@class='dropup-child open']")
+    private WebElement dropupAttributeOpen;
+
+    @FindBy(xpath = "//div[@class='dropup-child open']//button[@class='submit btn-save-update-filter-client-attribute-value']")
+    private WebElement dropupAttributeSubmitButton;
+
+    @FindBy(id = "btnSearchFilterAttributesPopupTitle")
+    private WebElement attributeSearchButton;
+
+    @FindBy(id = "btnClearFilterAttributes")
+    private WebElement attributeClearButton;
+
+    @FindBy(id = "btnCloseFilterAttributesPopupTitle")
+    private WebElement attributeCloseButton;
+
+    @FindBy(xpath = "//div[@id='client-segments-filter-container']//a[@class='empty-attribute-value']")
+    private List<WebElement> emptyAttributeValuesList;
+
     public ClientSegmentsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public ClientSegmentsPage selectCategory(String category) {
+    public ClientSegmentsPage selectAttribute(String attributeName, String attributeValue) {
         wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(categoriesSelectionDropDown));
-            waitABit(1000);
-        } catch (Exception e) {
-            waitABit(2000);
-            if (categoriesSelectionDropDown.isEmpty()) {
-                wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
-                wait.until(ExpectedConditions.visibilityOfAllElements(categoriesSelectionDropDown));
-            }
-        }
-        categoriesSelectionDropDown
-                .stream()
-                .filter(e -> e.getText().equals(category))
-                .findFirst()
-                .ifPresent(WebElement::click);
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
+        wait.until(ExpectedConditions
+                .elementToBeClickable(categoriesSelectionDropDown
+                        .findElement(By.xpath("//span[contains(text(), '"+ attributeName + " ')]"))
+                        .findElement(By.xpath(".//following::a[1]")))).click();
+        wait.until(ExpectedConditions.visibilityOf(dropupAttributeOpen))
+                .findElement(By.className("form-control")).sendKeys(attributeValue);
+        wait.until(ExpectedConditions.elementToBeClickable(dropupAttributeSubmitButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(attributeSearchButton)).click();
+        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionHidden));
+        return this;
     }
 
-    public boolean isCategorySelected(String category) {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(driver
-                    .findElement(By.xpath("//div[@class='ms-sel-item ' and contains(text(), '" +
-                            category + "')]/span")))).isDisplayed();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public ClientSegmentsPage deselectCategory(String category) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.xpath("//div[@class='ms-sel-item ' and contains(text(), '" + category + "')]/span"))))
-                .click();
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+    public ClientSegmentsPage deselectAttribute() {
+        waitABit(500);
+        wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
+        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
+        int sizeBeforeDeselection = wait.until(ExpectedConditions.visibilityOfAllElements(emptyAttributeValuesList)).size();
+        wait.until(ExpectedConditions.elementToBeClickable(attributeClearButton)).click();
+        Assert.assertTrue(wait.until(e -> emptyAttributeValuesList.size() != sizeBeforeDeselection),
+                "The attribute values have not been cleared");
+        wait.until(ExpectedConditions.elementToBeClickable(attributeCloseButton)).click();
+        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionHidden));
+        return this;
     }
 
     public ClientSegmentsPage clickSearch() {
-        searchButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(searchButton, "disabled", "")));
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+        return this;
     }
 
     public ClientSegmentsPage expandAttributesList(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//td[text()='" + name +
                     "']/preceding::td[contains(@class, 'details-control')]")))).click(); //td[text()='CompanyAutomation']/preceding::td[contains(@class, 'details-control')]
         wait.until(ExpectedConditions.visibilityOf(detailsShown));
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+        return this;
     }
 
     public ClientSegmentsPage searchClientSegment(String client) {
@@ -108,21 +125,27 @@ public class ClientSegmentsPage extends BasePage {
         searchField.sendKeys(client);
         clickSearch();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-client-segments_processing")));
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+        return this;
     }
 
-    public ClientSegmentsPage setAttributeValue(String attName, String attValue) {
+    public ClientSegmentsPage setAttributeValue(String attributeName, String attributeValue) {
         wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.xpath("//td[contains(text(),'" + attName + "')]"))
+                .findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]"))
                 .findElement(By.xpath(".."))
                 .findElements(By.tagName("td")).get(1)
                 .findElement(By.className("empty-attribute-value")))).click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen
-                .findElement(By.className("form-control")))).sendKeys(attValue);
-        wait.until(ExpectedConditions.elementToBeClickable(dropUpOpen
-                .findElement(By.xpath("//button[@class='submit btn-save-update-client-attribute-value']")))).click();
+                .findElement(By.className("form-control")))).sendKeys(attributeValue);
+        wait.until(ExpectedConditions.elementToBeClickable(dropUpOpenSubmitButton)).click();
         waitForLoading();
-        return PageFactory.initElements(driver, ClientSegmentsPage.class);
+        return this;
+    }
+
+    public boolean isAttributeValueDisplayed(String attributeName, String attributeValue) {
+        return wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]/../td[2]//span"))))
+                .getText()
+                .equals(attributeValue);
     }
 
     public boolean checkAttributeValue(String attName, String attValue) {
@@ -146,17 +169,6 @@ public class ClientSegmentsPage extends BasePage {
         try {
             List<WebElement> data = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//td")));
             return data.stream().anyMatch(e -> e.getText().equals(attribute + " (" + category + ")"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean verifyAttributeValueIsDisplayed(String attribute) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfAllElements(attributeValues))
-                    .stream()
-                    .anyMatch(e -> e.getText().equals(attribute));
         } catch (Exception e) {
             e.printStackTrace();
             return false;

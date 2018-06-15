@@ -50,7 +50,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
@@ -79,6 +79,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
@@ -93,7 +95,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
 
@@ -126,7 +128,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickCategoriesSubmenu()
                 .verifyCategoriesDoNotExist(data.getCategory())
                 .addCategory(data.getCategory())
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillAutomatedAttributeFields(data.getAttributeName(), data.getIsAutomatedStatus(),
                         data.getProcedureName())
                 .clickAddAttributeButton();
@@ -149,6 +151,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
@@ -163,7 +167,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
@@ -173,9 +177,9 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .searchClientSegment(data.getName())
                 .expandAttributesList(data.getName())
                 .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
-                .selectCategory(data.getCategory());
-        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
-                "The category has not been selected");
+                .selectAttribute(data.getAttributeName(), data.getAttributeValue());
+        Assert.assertTrue(clientSegmentsPage.isAttributeValueDisplayed(data.getAttributeName(), data.getAttributeValue()),
+                "The attribute value is not displayed.");
         clientSegmentsPage.clickSearch();
 
         Assert.assertTrue(clientSegmentsPage.verifyClientIsDisplayed(data.getName()),
@@ -197,6 +201,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
@@ -211,7 +217,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
@@ -221,12 +227,12 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .searchClientSegment(data.getName())
                 .expandAttributesList(data.getName())
                 .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
-                .selectCategory(data.getCategory());
-        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
-                "The category has not been selected");
+                .selectAttribute(data.getAttributeName(), data.getAttributeValue());
+        Assert.assertTrue(clientSegmentsPage.isAttributeValueDisplayed(data.getAttributeName(), data.getAttributeValue()),
+                "The attribute value is not displayed.");
         clientSegmentsPage.clickSearch();
 
-        Assert.assertTrue(clientSegmentsPage.verifyAttributeValueIsDisplayed(data.getAttributeValue()),
+        Assert.assertTrue(clientSegmentsPage.isAttributeValueDisplayed(data.getAttributeName(), data.getAttributeValue()),
                 "The attribute is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
@@ -244,6 +250,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
@@ -258,7 +266,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
@@ -268,13 +276,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .searchClientSegment(data.getName())
                 .expandAttributesList(data.getName())
                 .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
-                .selectCategory(data.getCategory());
-        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
-                "The category has not been selected");
-
-        clientSegmentsPage.deselectCategory(data.getCategory());
-        Assert.assertFalse(clientSegmentsPage.isCategorySelected(data.getCategory()),
-                "The category has not been deselected");
+                .selectAttribute(data.getAttributeName(), data.getAttributeValue());
+        Assert.assertTrue(clientSegmentsPage.isAttributeValueDisplayed(data.getAttributeName(), data.getAttributeValue()),
+                "The attribute value is not displayed.");
+                clientSegmentsPage.deselectAttribute();
 
         leftMenuPanel
                 .clickClientManagement()
@@ -291,6 +296,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         ClientQuotesPage clientQuotesPage = leftMenuPanel
                 .clickClientManagement()
                 .clickClientQuotesSubmenu()
+                .searchUser(data.getName())
+                .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
@@ -305,7 +312,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .clickAddCategoryButton()
                 .setCategory(data.getCategory())
                 .clickSubmitCategoryButton()
-                .clickAddAttributeButton(data.getCategory())
+                .clickAddAttributeButtonForCategory(data.getCategory())
                 .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
                 .clickAddAttributeButton();
         Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()));
@@ -315,13 +322,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 .searchClientSegment(data.getName())
                 .expandAttributesList(data.getName())
                 .setAttributeValue(data.getAttributeName(), data.getAttributeValue())
-                .selectCategory(data.getCategory());
-        Assert.assertTrue(clientSegmentsPage.isCategorySelected(data.getCategory()),
-                "The category has not been selected");
-        clientSegmentsPage.clickSearch();
+                .selectAttribute(data.getAttributeName(), data.getAttributeValue());
 
-        Assert.assertTrue(clientSegmentsPage.verifyAttributeValueIsDisplayed(data.getAttributeValue()),
-                "The attribute is not displayed after clicking the \"Search\" button");
+        Assert.assertTrue(clientSegmentsPage.isAttributeValueDisplayed(data.getAttributeName(), data.getAttributeValue()),
+                "The attribute value is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
                 .clickClientManagement()
