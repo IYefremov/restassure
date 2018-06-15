@@ -1977,23 +1977,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.findElement(By.id("Card_btnAddApp")).click();
 	}
 
-	public boolean checkEmails(String message) {
-		waitABit(20000);
-		for (int i = 0; i < 7; i++) {
-            System.out.println(i);
-			try {
-			    if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword, message,
-                        "reconpro+main@cyberiansoft.com").isEmpty()) {
-			        return true;
-                }
-			} catch (NullPointerException e) {
-                e.printStackTrace();
-			}
-			waitABit(40000);
-		}
-		return false;
-	}
-
 	public void switchToServiceRequestInfoFrame() {
 		driver.switchTo().defaultContent();
 		try {

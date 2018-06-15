@@ -73,6 +73,36 @@ public class InHouseUserData {
     @JsonProperty("noAgreement")
     private String noAgreement;
 
+    @JsonProperty("signedAgreement")
+    private String signedAgreement;
+
+    @JsonProperty("bodySearchText")
+    private String bodySearchText;
+
+    @JsonProperty("partialLinkTextToAgreementPage")
+    private String partialLinkTextToAgreementPage;
+
+    @JsonProperty("clientFirstName")
+    private String clientFirstName;
+
+    @JsonProperty("clientLastName")
+    private String clientLastName;
+
+    @JsonProperty("clientCompanyName")
+    private String clientCompanyName;
+
+    @JsonProperty("cardNumber")
+    private String cardNumber;
+
+    @JsonProperty("monthExpiration")
+    private String monthExpiration;
+
+    @JsonProperty("yearExpiration")
+    private String yearExpiration;
+
+    @JsonProperty("cvc")
+    private String cvc;
+
     public String getName() {
         return name;
     }
@@ -163,5 +193,45 @@ public class InHouseUserData {
 
     public String getNoAgreement() {
         return noAgreement;
+    }
+
+    public String getSignedAgreement() {
+        return signedAgreement;
+    }
+
+    public String getBodySearchText() {
+        return bodySearchText;
+    }
+
+    public String getPartialLinkTextToAgreementPage() {
+        return partialLinkTextToAgreementPage;
+    }
+
+    public String getClientFirstName() {
+        return clientFirstName;
+    }
+
+    public String getClientLastName() {
+        return clientLastName;
+    }
+
+    public String getClientCompanyName() {
+        return clientCompanyName;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public String getMonthExpiration() {
+        return monthExpiration;
+    }
+
+    public String getYearExpiration() {
+        return yearExpiration;
+    }
+
+    public String getCvc() {
+        return cvc;
     }
 }

@@ -80,13 +80,15 @@ public class BaseTestCase {
     }
 
     @AfterMethod
-    public void teamPortalLogout() throws InterruptedException {
+    public void teamPortalLogout() {
         TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
                 TeamPortalHeader.class);
-        headerPanel.clickLogOutButton();
-        Thread.sleep(1000);
-        webdriver.get(InHouseConfigInfo.getInstance().getInHouseURL());
-        webdriver.manage().deleteAllCookies();
+        try {
+            headerPanel.clickLogOutButton();
+            Thread.sleep(1000);
+            webdriver.get(InHouseConfigInfo.getInstance().getInHouseURL());
+            webdriver.manage().deleteAllCookies();
+        } catch (Exception ignored) {}
     }
 
 	public void webdriverGotoWebPage(String url) {

@@ -69,7 +69,19 @@
       "attributeName": "Test Attribute Name",
       "attributeValue": "15",
       "dataType": "String",
-      "name": "CompanyAutomation"
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title"
     }
   ],
 
@@ -81,7 +93,19 @@
       "attributeName": "Test Attribute Name",
       "attributeValue": "15",
       "dataType": "String",
-      "name": "CompanyAutomation"
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title"
     }
   ],
 
@@ -93,7 +117,19 @@
       "attributeName": "Test Attribute Name",
       "attributeValue": "15",
       "dataType": "String",
-      "name": "CompanyAutomation"
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title"
     }
   ],
 
@@ -105,7 +141,19 @@
       "attributeName": "Test Attribute Name",
       "attributeValue": "15",
       "dataType": "String",
-      "name": "CompanyAutomation"
+      "name": "CompanyAutomation",
+      "nickname": "Nock for company",
+      "address": "Address 1",
+      "address2": "Address 2",
+      "zip": "123AB",
+      "country": "United States",
+      "state": "California",
+      "city": "LA",
+      "businessPhone": "+380963665214",
+      "cellPhone": "+380963665214",
+      "firstName": "Test",
+      "lastName": "User",
+      "title": "Job title"
     }
   ]
 }

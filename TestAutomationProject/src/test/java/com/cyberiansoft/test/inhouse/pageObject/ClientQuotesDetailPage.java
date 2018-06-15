@@ -93,13 +93,24 @@ public class ClientQuotesDetailPage extends BasePage {
         userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
-    public boolean checkAgreementStatuses(String agreement, String payment, String letterView, String agreementView) {
+    public boolean checkAgreementStatus(String agreement, String payment, String letterView, String agreementView) {
         try {
             wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
             wait.until(e -> agreementStatus.getText().equals(agreement));
             wait.until(e -> paidStatus.getText().equals(payment));
             wait.until(e -> viewedLetterStatus.getText().equals(letterView));
             wait.until(e -> viewedAgreementStatus.getText().equals(agreementView));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean checkAgreementStatus(String agreement) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
+            wait.until(e -> agreementStatus.getText().equals(agreement));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,24 +167,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
-    //todo move to another class
-    public boolean checkEmails(String title) {
-        boolean flag = false;
-        waitABit(30000);
-        for (int i = 0; i < 5; i++) {
-            try {
-                if (!MailChecker.searchSpamEmailAndGetMailMessage(userName, userPassword, title,
-                        "noreply@repair360.net").isEmpty()) {
-                    flag = true;
-                    break;
-                }
-            } catch (NullPointerException ignored) {}
-            waitABit(40000);
-        }
-        return flag;
-    }
-
-    public ArrayList<String> getLinks() throws IOException {
+    public ArrayList<String> getLinks() {
         String mailContent = MailChecker.getUserMailContentFromSpam();
         Pattern linkPattern = Pattern.compile("(<a[^>]+>.+?<\\/a>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher pageMatcher = linkPattern.matcher(mailContent);
@@ -215,7 +209,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return mailmessage;
     }
 
-    public String getMailContentFromSpam() throws IOException {
+    public String getMailContentFromSpam() {
         return MailChecker.getUserMailContentFromSpam();
     }
 
@@ -345,5 +339,9 @@ public class ClientQuotesDetailPage extends BasePage {
                     .substring(1)));
         }
         return prices.stream().mapToDouble(Double::doubleValue).sum();
+    }
+
+    public String getPricePerMonth() {
+        return "$" + calculatePricePerMonth();
     }
 }

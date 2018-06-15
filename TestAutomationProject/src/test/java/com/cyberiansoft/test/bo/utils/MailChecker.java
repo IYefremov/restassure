@@ -122,7 +122,7 @@ private static boolean textIsHtml = false;
                     		System.out.println("Found message #" + i + ": ");
                     		System.out.println("At "+ i + " :"+ "Subject:"+ subject);
                     		System.out.println("From: "+ email +" on : "+message.getReceivedDate());
-                    		if(getText(message).contains(bodySearchText)== true){
+                    		if(getText(message).contains(bodySearchText)){
                     			System.out.println("Message contains the search text "+bodySearchText);
                     			val=true;
                     		}

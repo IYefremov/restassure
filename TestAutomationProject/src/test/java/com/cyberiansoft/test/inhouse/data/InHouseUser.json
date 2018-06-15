@@ -139,7 +139,14 @@
       "email": "test.cyberiansoft@gmail.com",
       "firstAgreement": "First agreement",
       "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "team": "Repair360 FREE",
+      "discount": "20 min comm.-$10 per m.",
+      "price": "$200.00",
+      "emailTitle": "Agreement",
+      "newAgreement": "New",
+      "noAgreement": "No",
+      "bodySearchText": "Hello CompanyAutomation",
+      "partialLinkTextToAgreementPage": "goo.gl"
     }
   ],
 
@@ -163,7 +170,22 @@
       "email": "test.cyberiansoft@gmail.com",
       "firstAgreement": "First agreement",
       "secondAgreement": "Second Agreement",
-      "team": "Repair360 FREE"
+      "team": "Repair360 FREE",
+      "discount": "20 min comm.-$10 per m.",
+      "price": "$200.00",
+      "emailTitle": "Agreement",
+      "newAgreement": "New",
+      "noAgreement": "No",
+      "signedAgreement": "Signed",
+      "bodySearchText": "Hello CompanyAutomation",
+      "partialLinkTextToAgreementPage": "goo.gl",
+      "clientFirstName": "Anastasia",
+      "clientLastName": "Maksimova",
+      "clientCompanyName": "automationCompany",
+      "cardNumber": "4242424242424242",
+      "monthExpiration": "10",
+      "yearExpiration": "2026",
+      "cvc": "123"
     }
   ]
 }

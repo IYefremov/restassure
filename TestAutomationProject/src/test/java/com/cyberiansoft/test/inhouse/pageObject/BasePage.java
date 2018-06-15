@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,17 +36,6 @@ public class BasePage {
         } catch (Exception ignored) {}
     }
 
-    public BasePage goToAgreementApprovementPageFromEmail(String link) {
-        driver.get(link);
-        try {
-            return PageFactory.initElements(driver,
-                    AgreementApprovePage.class);
-        } catch (TimeoutException e) {
-            return PageFactory.initElements(driver,
-                    BasePage.class);
-        }
-    }
-
     public void goToPreviousPage() {
         driver.navigate().back();
     }
@@ -68,7 +59,7 @@ public class BasePage {
             wait.until(ExpectedConditions
                     .invisibilityOf(driver.findElement(By
                             .xpath("//div[not(contains(@style, 'none'))]/i[@class='fa fa-refresh fa-spin']"))));
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
             waitABit(1500);
         }
     }

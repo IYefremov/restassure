@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.cyberiansoft.test.inhouse.pageObject.BasePage.waitABit;
 
@@ -257,7 +259,7 @@ public class MailChecker {
     	return requiredmessage;
     }
     
-    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static boolean searchEmail(String userName, String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
     	boolean val = false;	
     	try {
     		Store store = loginToGMailBox(userName, password);
@@ -283,7 +285,7 @@ public class MailChecker {
         return val;
    }
     
-    public static boolean searchSpamEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static boolean searchSpamEmail(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
     	boolean val = false;	
     	try {
     		Store store = loginToGMailBox(userName, password);
@@ -346,9 +348,9 @@ public class MailChecker {
 	}
     
     
-    public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) throws IOException {
+    public static boolean searchEmailAndGetAttachment(String userName, String password, final String subjectKeyword, final String fromEmail, String attachmentfilename) {
     	
-    	boolean val = false;	
+    	boolean val = false;
     	try {
     		Store store = loginToGMailBox(userName, password);
             
@@ -477,8 +479,38 @@ public class MailChecker {
 //		}
 //    	return mailmessage;
     }
-    
-    public static String getMailMessageFromSpam(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+
+    public ArrayList<String> getLinks(String mailContent) {
+//        String mailContent = MailChecker.getUserMailContentFromSpam();
+        Pattern linkPattern = Pattern.compile("(<a[^>]+>.+?</a>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        Matcher pageMatcher = linkPattern.matcher(mailContent);
+        ArrayList<String> links = new ArrayList<>();
+        while (pageMatcher.find()) {
+            links.add(pageMatcher.group());
+        }
+        return links;
+    }
+
+    public ArrayList<String> getListOfAgreementLinks(String mailContent) {
+        Pattern linkPattern = Pattern.compile("(https://goo.gl/.+)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        Matcher pageMatcher = linkPattern.matcher(mailContent);
+        ArrayList<String> links = new ArrayList<>();
+        while (pageMatcher.find()) {
+            String replace = pageMatcher.group().replaceAll("(<.+)", "");
+            links.add(replace);
+        }
+        return links;
+    }
+
+    public String getAgreementLink(String userMailContentFromSpam, String partialLinkTextToAgreementPage) {
+        return getListOfAgreementLinks(userMailContentFromSpam)
+                .stream()
+                .filter(l -> l.contains(partialLinkTextToAgreementPage))
+                .findFirst()
+                .get();
+    }
+
+    public static String getMailMessageFromSpam(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
     	String mailmessage = "";
 		for (int i=0; i < 3; i++) {
 			if (!MailChecker.searchEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
@@ -489,7 +521,7 @@ public class MailChecker {
 					e.printStackTrace();
 				}
 			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(userName, password, subjectKeyword, fromEmail);
+				mailmessage = searchEmailAndGetMailMessageFromSpam(userName, password, subjectKeyword, fromEmail);
 				if (mailmessage.length() > 3) {
 					break;
 				}				
@@ -498,37 +530,62 @@ public class MailChecker {
     	return mailmessage; 
     }
     
-    public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) throws IOException {
+    public static String getSpamMailMessage(String userName,String password, final String subjectKeyword, final String fromEmail, final String bodySearchText) {
     	String mailmessage = "";
 		if (MailChecker.searchSpamEmail(userName, password, subjectKeyword, fromEmail, bodySearchText)) {
 			mailmessage = MailChecker.searchSpamEmailAndGetMailMessage(userName, password, subjectKeyword, fromEmail);
 		}
-    	return mailmessage; 
+    	return mailmessage;
+    }
+
+    public String getSpamMailMessage(String title, String bodySearchText) {
+        return getSpamMailMessage(userName, userPassword, title, "noreply@repair360.net", bodySearchText);
     }
     
-    public static String getUserRegistrationURLFromSpam() throws IOException {
+    public static String getUserRegistrationURLFromSpam() {
     	
 		String mailmessage = getUserMailContentFromSpam();
 		String confirmationurl = "";
 		confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		return confirmationurl;
     }
-    
-    public static String getUserMailContentFromSpam() throws IOException {
+
+    public String getMailContentFromSpam() {
+        return MailChecker.getUserMailContentFromSpam();
+    }
+
+    public static String getUserMailContentFromSpam() {
     	
     	final String usermailtitle = "Agreement";
     	final String sendermail = "noreply@repair360.net";
-    	final String mailcontainstext = "Thank you for your interest in AMT's suite of products";
 
 		String mailmessage = "";
-		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail(userName, userPassword, usermailtitle, sendermail, mailcontainstext)) {
-				waitABit(60*500);
-			} else {
-				mailmessage = MailChecker.searchEmailAndGetMailMessageFromSpam(userName, userPassword, usermailtitle, sendermail);
-				break;
-			}
+		for (int i=0; i < 8; i++) {
+            try {
+                mailmessage = searchEmailAndGetMailMessageFromSpam(userName, userPassword, usermailtitle, sendermail);
+                if (mailmessage.isEmpty()) {
+                    waitABit(60*500);
+                } else {
+                    break;
+                }
+            } catch (NullPointerException ignored) {}
 		}
 		return mailmessage;
+    }
+
+    public boolean checkEmails(String title) {
+        boolean flag = false;
+        waitABit(30000);
+        for (int i = 0; i < 5; i++) {
+            try {
+                if (!searchSpamEmailAndGetMailMessage(userName, userPassword, title,
+                        "noreply@repair360.net").isEmpty()) {
+                    flag = true;
+                    break;
+                }
+            } catch (NullPointerException ignored) {}
+            waitABit(40000);
+        }
+        return flag;
     }
 }

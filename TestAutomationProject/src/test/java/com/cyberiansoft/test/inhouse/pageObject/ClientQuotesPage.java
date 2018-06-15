@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
@@ -91,6 +92,9 @@ public class ClientQuotesPage extends BasePage {
 
     @FindBy(className="shirma-dialog")
     private WebElement shirmaDialog;
+
+    @FindBy(className="dataTables_empty")
+    private WebElement emptyDataTable;
 
     public ClientQuotesPage(WebDriver driver) {
         super(driver);
@@ -238,6 +242,15 @@ public class ClientQuotesPage extends BasePage {
     }
 
     public ClientQuotesPage deleteUsers(String deleteParameter) {
+        try {
+            new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOf(emptyDataTable));
+        } catch (Exception ignored) {
+            deleteParameters(deleteParameter);
+        }
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
+    }
+
+    private ClientQuotesPage deleteParameters(String deleteParameter) {
         try {
             while(wait.until(ExpectedConditions
                     .visibilityOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).isDisplayed()) {

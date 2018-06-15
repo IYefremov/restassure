@@ -29,7 +29,8 @@ public class ClientSegmentsPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa fa-chevron-right']")
     private WebElement detailsHidden;
 
-    @FindBy(className = "ms-sel-ctn")
+    //    @FindBy(id = "filterAttributeValueInput")
+    @FindBy(className = "ms-sel-ctn") //todo change after the new functionality works
     private WebElement categoriesSelection;
 
     @FindBy(xpath = "//div[@class='ms-res-ctn dropdown-menu']/div")
@@ -50,6 +51,7 @@ public class ClientSegmentsPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
         try {
             wait.until(ExpectedConditions.visibilityOfAllElements(categoriesSelectionDropDown));
+            waitABit(1000);
         } catch (Exception e) {
             waitABit(2000);
             if (categoriesSelectionDropDown.isEmpty()) {
