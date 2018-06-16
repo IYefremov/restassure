@@ -82,6 +82,21 @@ public class BOOperationsServiceRequests {
     @JsonProperty("customer")
     private String customer;
 
+    @JsonProperty("checkInButton")
+    private String checkInButton;
+
+    @JsonProperty("undoCheckInButton")
+    private String undoCheckInButton;
+
+    @JsonProperty("symbol")
+    private String symbol;
+
+    @JsonProperty("tags")
+    private String[] tags;
+
+    @JsonProperty("descriptions")
+    private String[] descriptions;
+
     public String getTeamName() {
         return teamName;
     }
@@ -184,5 +199,25 @@ public class BOOperationsServiceRequests {
 
     public String getCustomer() {
         return customer;
+    }
+
+    public String getCheckInButton() {
+        return checkInButton;
+    }
+
+    public String getUndoCheckInButton() {
+        return undoCheckInButton;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public String[] getDescriptions() {
+        return descriptions;
     }
 }

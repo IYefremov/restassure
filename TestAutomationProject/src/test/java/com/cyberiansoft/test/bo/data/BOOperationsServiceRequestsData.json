@@ -114,7 +114,8 @@
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
       "technicianFieldValue": "All",
-      "status": "OnHold"
+      "status": "OnHold",
+      "locationType": "Owner"
     }
   ],
 
@@ -151,8 +152,7 @@
       "VIN": "1GNDU23E33D176859",
       "make": "Chevrolet",
       "model": "Venture",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567"
+      "status": "Request Rejected"
     }
   ],
 
@@ -164,12 +164,11 @@
       "VIN": "1GC5KXBG1AZ501950",
       "make": "Chevrolet",
       "model": "Silverado 2500HD",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
       "startTime": "8:00 AM",
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
-      "technicianFieldValue": "All"
+      "technicianFieldValue": "All",
+      "status": "Scheduled"
     }
   ],
 
@@ -181,8 +180,6 @@
       "VIN": "1GNDU23E33D176859",
       "make": "Chevrolet",
       "model": "Venture",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
       "startTime": "8:00 AM",
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
@@ -198,8 +195,6 @@
       "VIN": "1GNDU23E33D176859",
       "make": "Chevrolet",
       "model": "Venture",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
       "startTime": "8:00 AM",
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
@@ -216,8 +211,6 @@
       "VIN": "1GC5KXBG1AZ501950",
       "make": "Chevrolet",
       "model": "Silverado 2500HD",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
       "startTime": "8:00 AM",
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
@@ -234,13 +227,13 @@
       "VIN": "1GC5KXBG1AZ501950",
       "make": "Chevrolet",
       "model": "Silverado 2500HD",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
       "startTime": "8:00 AM",
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
       "technicianFieldValue": "All",
-      "customer": "002 - Test Company"
+      "customer": "002 - Test Company",
+      "checkInButton": "Check-In",
+      "undoCheckInButton": "Undo Check-In"
     }
   ],
 
@@ -256,18 +249,52 @@
     {
       "rowID": "testServiceRequest.01",
       "description": "Test Case 56761:Operation - Service Request - Tags manipulation in new SR",
-      "testDescription": "test description",
-      "addServiceRequestValue": "Type_for_Check_In_ON",
-      "VIN": "1GC5KXBG1AZ501950",
-      "make": "Chevrolet",
-      "model": "Silverado 2500HD",
-      "anotherLogin": "zayats@cyberiansoft.com",
-      "anotherPassword": "1234567",
-      "startTime": "8:00 AM",
-      "endTime": "8:40 AM",
-      "clientName": "Alex SASHAZ",
-      "technicianFieldValue": "All",
-      "customer": "002 - Test Company"
+      "tags": [
+        "tag1",
+        "tag2",
+        "tag3",
+        "tag4",
+        "tag5",
+        "tag6",
+        "tag7"
+      ],
+      "symbol": "s"
+    }
+  ],
+
+  "testServiceRequestDescriptionInExistingSR": [
+    {
+      "rowID": "testServiceRequestDescriptionInExistingSR.01",
+      "description": "Test Case 56760:Operation - Service Request - Description in existing SR",
+      "descriptions": [
+        "test description1",
+        "test description2"
+      ]
+    }
+  ],
+
+  "testShownSRDuringCreation": [
+    {
+      "rowID": "testShownSRDuringCreation.01",
+      "description": "Test Case 56827:Operation - Service Request - Documents not shown during creation"
+    }
+  ],
+
+  "testCreatingSRWithDifferentDescriptions": [
+    {
+      "rowID": "testCreatingSRWithDifferentDescriptions.01",
+      "description": "Test Case 56756:Operation - Service Request - Description in new SR",
+      "descriptions": [
+        "test description1",
+        "test description2"
+      ]
+    }
+  ],
+
+  "checkDescriptionDocument": [
+    {
+      "rowID": "checkDescriptionDocument.01",
+      "description": "Test Case 56829:Operation - Service Request - Check Documents"
     }
   ]
 }

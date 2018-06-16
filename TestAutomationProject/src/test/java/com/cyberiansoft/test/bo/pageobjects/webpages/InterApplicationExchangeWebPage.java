@@ -116,6 +116,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
     @FindBy(xpath = "//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]/..")
     private WebElement ruleEntityTypeDropDown;
 
+    @FindBy(xpath = "//input[contains(@id, 'EditFormControl_comboEntityType_Input')]")
+    private WebElement ruleEntityTypeInput;
+
 	@FindBy(xpath = "//select[contains(@id, 'EditFormControl_comboIncludeType')]")
     private WebElement ruleFilterType;
 
@@ -294,25 +297,17 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void fillFilterRuleBox(String name, String entityType, String filterType) {
-		ruleNameField.clear();
-		ruleNameField.sendKeys(name);
-
-		ruleEntityTypeDropDown.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@id, 'EditFormControl_comboEntityType_DropDown')]/div/ul"))).findElements(By.tagName("li"))
-				.stream().filter(e -> e.getText().equals(entityType)).findFirst().get().click();
-
-		waitForLoading();
-		waitABit(2000);
-		new Select(ruleFilterType).selectByVisibleText(filterType);
-	}
-
 	public InterApplicationExchangeWebPage fillRuleBox(String name, String entityType, String filterType) {
         fillAddRuleName(name);
         selectRuleEntityType(entityType);
         selectRuleFilterType(filterType);
         return this;
 	}
+
+    public void fillRuleBox(String name, String filterType) {
+        fillAddRuleName(name);
+        selectRuleFilterType(filterType);
+    }
 
 	private void fillAddRuleName(String name) {
         wait.until(ExpectedConditions.visibilityOf(ruleNameField)).clear();
@@ -335,18 +330,6 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
         wait.until(ExpectedConditions.elementToBeClickable(ruleFilterType));
         new Select(ruleFilterType).selectByVisibleText(filterType);
     }
-
-	public void fillFilterRuleBox(String name, String filterType) {
-		ruleNameField.clear();
-		ruleNameField.sendKeys(name);
-
-		waitForLoading();
-
-		if (filterType.equals("Include Selected"))
-			new Select(driver.findElement(
-					By.id("ctl00_ctl00_Content_Main_gvSharing_ctl00_ctl06_Detail10_ctl06_Detail10_ctl02_ctl02_EditFormControl_comboIncludeType")))
-							.selectByIndex(1);
-	}
 
 	public InterApplicationExchangeWebPage selectUsersWhileCreatingRule(int usersToAdd) {
         Select unselectedUsersSelection = new Select(addRuleUnselectedUsersList);

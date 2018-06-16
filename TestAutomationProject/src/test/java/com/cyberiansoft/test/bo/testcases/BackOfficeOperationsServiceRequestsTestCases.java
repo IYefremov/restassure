@@ -312,7 +312,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
-		appointmentpopup.selectLocationType("Owner");
+		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.clickAddAppointment();
 		servicerequestslistpage
 				.isFirstServiceRequestFromListHasAppointment(appointmentfromdate + " " + appointmentstarttime);
@@ -392,7 +392,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		backofficeheader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(data.getAnotherLogin(), data.getAnotherPassword());
+        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		HomeWebPage homepage = backofficeheader.clickHomeLink();
 		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -410,21 +410,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.clickFindButton();
 		Assert.assertFalse(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
 		servicerequestslistpage.rejectFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), "Request Rejected");
+		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class) //todo username, userpassword from dataProvider
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String rowID, String description, JSONObject testData) throws InterruptedException {
-
-		final String anotherLogin = "zayats@cyberiansoft.com";
-		final String anotherPassword = "1234567";
 
         BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         backofficeheader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(anotherLogin, anotherPassword);
+		loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		HomeWebPage homepage = backofficeheader.clickHomeLink();
 		Thread.sleep(1000);
@@ -450,13 +447,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.clickFindButton();
 		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), "Scheduled");
+		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		backofficeheader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 
-		loginpage.UserLogin(anotherLogin, anotherPassword);
-		backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
+        backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		homepage = backofficeheader.clickHomeLink();
 		Thread.sleep(1000);
 		servicerequestslistpage = homepage.clickNewServiceRequestLink();
@@ -481,7 +478,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
         backofficeheader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin("zayats@cyberiansoft.com", "1234567");
+        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		HomeWebPage homepage = backofficeheader.clickHomeLink();
 		Thread.sleep(1000);
@@ -586,11 +583,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.selectFirstServiceRequestFromList();
 		Assert.assertTrue(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
 		Assert.assertTrue(servicerequestslistpage.isCheckInButtonVisible());
-		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Check-In");
+		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
 		servicerequestslistpage.clickCheckInButtonForSelectedSR();
-		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Undo Check-In");
+		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), data.getUndoCheckInButton());
 		servicerequestslistpage.clickCheckInButtonForSelectedSR();
-		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), "Check-In");
+		Assert.assertEquals(servicerequestslistpage.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
@@ -609,86 +606,86 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkTimeOfLastDescription());
 	}
 
-//	@DataProvider
-//	public Object[][] provideSRdescription() {
-//		return new Object[][] { { "test description" } };
-//	}
-//
-//    @Test(testName = "Test Case 56761:Operation - Service Request - Tags manipulation in new SR", dataProvider = "provideSRwholeInfo")
-//	public void testServiceRequest(String[] tags, String symbol) {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.addTags(tags);
-//		Assert.assertTrue(serviceRequestsWebPage.addTags(tags[tags.length - 1]));
-//		serviceRequestsWebPage.addTags(symbol);
-//		Assert.assertTrue(serviceRequestsWebPage.removeFirtsTag());
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-//		Assert.assertTrue(serviceRequestsWebPage.checkTags(tags));
-//	}
-//
-//	@DataProvider
-//	public Object[][] provideSRwholeInfo() {
-//		return new Object[][] { { new String[] { "tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7" }, "s" } };
-//	}
-//
-//    @Test(testName = "Test Case 56760:Operation - Service Request - Description in excisting SR", dataProvider = "provideSomeDescriptions")
-//	public void testServiceRequestDesciptionInExistingSR(String[] descriptions) {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-//		Assert.assertTrue(serviceRequestsWebPage.addNewDescriptionAndCheckOld(descriptions[1], descriptions[0]));
-//	}
-//
-//	@DataProvider
-//	public Object[][] provideSomeDescriptions() {
-//		return new Object[][] { { new String[] { "test description1", "test description2" } } };
-//	}
-//
-//    @Test(testName = "Test Case 56827:Operation - Service Request - Documents not shown during creation,"
-//			+ "Test Case 56828:Operation - Service Request - Answers not shown during creation")
-//	public void testShownSRDuringCreation() {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
-//	}
-//
-//	@Test(testName = "Test Case 56756:Operation - Service Request - Description in new SR", dataProvider = "provideSomeDescriptions")
-//	public void testCreatingSRWithDifferentDescriptions(String[] descriptions) {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.setServiceRequestDescription(descriptions[0]);
-//		serviceRequestsWebPage.setServiceRequestDescription(descriptions[1]);
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-//		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(descriptions[1]));
-//	}
-//
-//	@Test(testName = "Test Case 56829:Operation - Service Request - Check Documents")
-//	public void checkDescriptionDocument() {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.saveNewServiceRequest();
-//		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-//		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
-//		serviceRequestsWebPage.clickDocumentButton();
-//		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
-//		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
-//		//serviceRequestsWebPage.addImage();
-//	}
-//
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testServiceRequest(String rowID, String description, JSONObject testData) {
+
+        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
+        serviceRequestsWebPage.clickAddServiceRequestButton();
+        serviceRequestsWebPage.addTags(data.getTags());
+        Assert.assertTrue(serviceRequestsWebPage.addTags(data.getTags()[data.getTags().length - 1]));
+        serviceRequestsWebPage.addTags(data.getSymbol());
+        Assert.assertTrue(serviceRequestsWebPage.removeFirtsTag());
+        serviceRequestsWebPage.saveNewServiceRequest();
+        serviceRequestsWebPage.selectFirstServiceRequestFromList();
+        Assert.assertTrue(serviceRequestsWebPage.checkTags(data.getTags()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testServiceRequestDescriptionInExistingSR(String rowID, String description, JSONObject testData) {
+
+        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.addNewDescriptionAndCheckOld(data.getDescriptions()[1],
+                data.getDescriptions()[0]));
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testShownSRDuringCreation(String rowID, String description, JSONObject testData) {
+
+        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCreatingSRWithDifferentDescriptions(String rowID, String description, JSONObject testData) {
+
+        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
+		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[1]);
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(data.getDescriptions()[1]));
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkDescriptionDocument(String rowID, String description, JSONObject testData) {
+
+        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
+		serviceRequestsWebPage.clickDocumentButton();
+		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
+		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
+		//serviceRequestsWebPage.addImage();
+	}
+
 //	@Test(testName = "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR",
 //            dataProvider = "provideSRdata")
 //	public void checkMultiTechInSR(String data.getCustomer(), String startDate, String endDate, String status,

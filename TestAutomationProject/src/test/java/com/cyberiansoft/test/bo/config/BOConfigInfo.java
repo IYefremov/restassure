@@ -43,12 +43,20 @@ public class BOConfigInfo {
 	      return props.getProperty("user.name");
 	}
 
+	public String getAlternativeUserName() {
+	      return props.getProperty("alternative.user.name");
+	}
+
 	public String getUserDemoName() {
 	      return props.getProperty("userdemo.name");
 	}
 
 	public String getUserPassword() {
 	      return props.getProperty("user.password");
+	}
+
+	public String getAlternativeUserPassword() {
+	      return props.getProperty("alternative.user.password");
 	}
 
 	public String getUserDemoPassword() {

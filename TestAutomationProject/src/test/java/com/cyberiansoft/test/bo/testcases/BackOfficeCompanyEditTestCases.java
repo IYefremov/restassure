@@ -565,13 +565,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Clients Include Selected)"));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Teams Include Selected)"));
@@ -637,13 +637,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         }
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Employees","Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Employees","Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
@@ -707,13 +707,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
             interApplicationExchangePage.deleteRule(data.getEntry());
         }
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
@@ -779,13 +779,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
             interApplicationExchangePage.deleteRule(data.getRule());
         }
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
 
@@ -849,13 +849,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
             interApplicationExchangePage.deleteRule(data.getRule());
         }
         interApplicationExchangePage.clickAddRuleToFirstProfile();
-        interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+        interApplicationExchangePage.fillRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName(data.getRule()));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
@@ -927,7 +927,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
 
-		if (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
+		while (interApplicationExchangePage.isCompanyDisplayed("Estimate JST for Name (Estimation)")) {
 			interApplicationExchangePage.deleteEntry("Estimate JST for Name (Estimation)");
 		}
 
@@ -960,7 +960,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
         interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients",
+		interApplicationExchangePage.fillRuleBox("Include Selected Clients",
                 "Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
@@ -968,7 +968,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
                 "The data.getRule() has been added although the \"Cancel\" button was clicked");
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Clients","Clients","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Clients","Clients","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Clients (Clients Include Selected)"));
@@ -1030,13 +1030,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		interApplicationExchangePage.expandFirstCompanyProfile();
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
 		Assert.assertFalse(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Clients Include Selected)"));
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Teams","Teams","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Teams","Teams","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Teams (Teams Include Selected)"));
@@ -1099,7 +1099,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees",
+		interApplicationExchangePage.fillRuleBox("Include Selected Employees",
                 "Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
@@ -1107,7 +1107,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
                 "The data.getRule() has been added although the \"Cancel\" button was clicked");
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Employees","Employees","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Employees","Employees","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Employees (Employees Include Selected)"));
@@ -1170,7 +1170,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services",
+		interApplicationExchangePage.fillRuleBox("Include Selected Services",
                 "Services","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
@@ -1178,7 +1178,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
                 "The data.getRule() has been added although the \"Cancel\" button was clicked");
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Services","Services","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Services","Services","Include Selected");
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName("Include Selected Services (Services Include Selected)"));
 
@@ -1240,7 +1240,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		interApplicationExchangePage.expandFirstCompanyProfile();
         String ruleByNumberBeforeChange = interApplicationExchangePage.getRuleNameByNumber(1);
         interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts",
+		interApplicationExchangePage.fillRuleBox("Include Selected Vehicle Parts",
                 "Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getCancelButton());
@@ -1248,7 +1248,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
                 "The data.getRule() has been added although the \"Cancel\" button was clicked");
 
 		interApplicationExchangePage.clickAddRuleToFirstProfile();
-		interApplicationExchangePage.fillFilterRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
+		interApplicationExchangePage.fillRuleBox("Include Selected Vehicle Parts","Vehicle Parts","Include Selected");
 		interApplicationExchangePage.selectUsersWhileCreatingRule(3);
 		interApplicationExchangePage.clickAddRuleBox(data.getInsertButton());
 		Assert.assertTrue(interApplicationExchangePage.checkRuleByName(data.getRule()));
