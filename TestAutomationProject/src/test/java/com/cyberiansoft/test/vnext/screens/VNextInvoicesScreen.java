@@ -90,6 +90,16 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
 		return poNumber;
 	}
+
+	public String getInvoiceCustomerValue(String invoicenumber) {
+		String customerValue = "";
+		WebElement invoicecell = getInvoiceCell(invoicenumber);
+		if (invoicecell != null) {
+			customerValue = invoicecell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText().trim();
+		} else
+			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+		return customerValue;
+	}
 	
 	public void expandInvoiceDetails(String invoicenumber) {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);

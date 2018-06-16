@@ -2210,68 +2210,6 @@ public class DentWizartestCases extends BaseTestCase {
 		
 	}
 	
-	@Test(testName = "Test Case 12629:Test Start Service feature is accurately capturing times", description = "Test Start Service feature is accurately capturing times")
-	public void testStartServiceFeatureIsAccuratelyCapturingTimes()
-			throws Exception {
-		String tcname = "testStartServiceFeatureIsAccuratelyCapturingTimes";
-		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-
-		final String[] vehicleparts = { "Right Front Door", "Right Quarter Panel",
-				"Right Rear Door", "Right Roof Rail" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-		settingsscreen.setInspectionToNonSinglePageInspection();
-		settingsscreen.clickHomeButton();
-
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.addWorkOrder(UtilConstants.wizprotrackerrouteworkordertype);
-		VehicleScreen vehiclescreeen = new VehicleScreen(appiumdriver);
-		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
-		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-
-        ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
-		servicesscreen.selectService(UtilConstants.DETAIL_SERVICE);
-		servicesscreen.selectService(UtilConstants.FRONTLINEREADY_SUBSERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen(appiumdriver);
-		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(selectedservicescreen.vehiclePartsIsDisplayed());
-		for (int i = 0; i < vehicleparts.length; i++) {
-			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
-		}
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-
-        OrderSummaryScreen ordersummaryscreen =servicesscreen.selectNextScreen(OrderSummaryScreen
-				.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
-		String wonumber = ordersummaryscreen.getWorkOrderNumber();
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
-		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(wonumber);
-		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		//String servicedisplayname = ordermonitorscreen.selectPanel(UtilConstants.PDRVEHICLE_SUBSERVICE);
-		Assert.assertTrue(ordermonitorscreen.isServiceIsActive(UtilConstants.FRONTLINEREADY_SUBSERVICE));
-		ordermonitorscreen.selectPanel(UtilConstants.FRONTLINEREADY_SUBSERVICE);
-		ordermonitorscreen.clickStartService();
-		ordermonitorscreen.selectPanel(UtilConstants.FRONTLINEREADY_SUBSERVICE);
-		ordermonitorscreen.verifyStartServiceDissapeared();
-		
-		String srvstartdate = ordermonitorscreen.getServiceStartDate().substring(0, 10);
-		ordermonitorscreen.clickServiceDetailsDoneButton();
-		ordermonitorscreen.verifyServiceStartDateIsSet(UtilConstants.FRONTLINEREADY_SUBSERVICE, srvstartdate);
-		
-		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		teamworkordersscreen.clickHomeButton();
-		
-	}
-	
 	@Test(testName = "Test Case 12631:Test Quantity does not mulitply price in Route package", description = "Test Quantity does not mulitply price in Route package")
 	public void testQuantityDoesNotMulitplyPriceInRoutePackage()
 			throws Exception {

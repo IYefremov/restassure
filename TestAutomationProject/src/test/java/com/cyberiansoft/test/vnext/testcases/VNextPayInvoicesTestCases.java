@@ -52,7 +52,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayInvoiceMenuItem();
         payInvoicesScreen.clickPayButton();
@@ -94,13 +94,13 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayInvoiceMenuItem();
-        payInvoicesScreen.setCardNumber(invoice.getСreditCardData().getCardNumber());
-        payInvoicesScreen.selectExpirationMonth(invoice.getСreditCardData().getExpirationMonth());
-        payInvoicesScreen.selectExpirationYear(invoice.getСreditCardData().getExpirationYear());
-        payInvoicesScreen.setCVC(invoice.getСreditCardData().getCVC());
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getCardNumber());
+        payInvoicesScreen.selectExpirationMonth(invoice.getCreditCardData().getExpirationMonth());
+        payInvoicesScreen.selectExpirationYear(invoice.getCreditCardData().getExpirationYear());
+        payInvoicesScreen.setCVC(invoice.getCreditCardData().getCVC());
         payInvoicesScreen.clickPayButton();
 
 
@@ -140,13 +140,13 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayInvoiceMenuItem();
-        payInvoicesScreen.setCardNumber(invoice.getСreditCardData().getCardNumber());
-        payInvoicesScreen.selectExpirationMonth(invoice.getСreditCardData().getExpirationMonth());
-        payInvoicesScreen.selectExpirationYear(invoice.getСreditCardData().getExpirationYear());
-        payInvoicesScreen.setCVC(invoice.getСreditCardData().getCVC());
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getCardNumber());
+        payInvoicesScreen.selectExpirationMonth(invoice.getCreditCardData().getExpirationMonth());
+        payInvoicesScreen.selectExpirationYear(invoice.getCreditCardData().getExpirationYear());
+        payInvoicesScreen.setCVC(invoice.getCreditCardData().getCVC());
         payInvoicesScreen.clickPayButton();
 
 
@@ -186,13 +186,13 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayInvoiceMenuItem();
-        payInvoicesScreen.setCardNumber(invoice.getСreditCardData().getIncorrectCardNumber());
-        payInvoicesScreen.selectExpirationMonth(invoice.getСreditCardData().getExpirationMonth());
-        payInvoicesScreen.selectExpirationYear(invoice.getСreditCardData().getExpirationYear());
-        payInvoicesScreen.setCVC(invoice.getСreditCardData().getCVC());
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getIncorrectCardNumber());
+        payInvoicesScreen.selectExpirationMonth(invoice.getCreditCardData().getExpirationMonth());
+        payInvoicesScreen.selectExpirationYear(invoice.getCreditCardData().getExpirationYear());
+        payInvoicesScreen.setCVC(invoice.getCreditCardData().getCVC());
         payInvoicesScreen.clickPayButton();
 
 
@@ -200,7 +200,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARDs_SECURITY_CODE_IS_INCORRECT);
         payInvoicesScreen = new VNextPayInvoicesScreen(appiumdriver);
-        payInvoicesScreen.setCardNumber(invoice.getСreditCardData().getCardNumber());
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getCardNumber());
         payInvoicesScreen.clickPayButton();
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
@@ -237,13 +237,13 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayInvoiceMenuItem();
-        payInvoicesScreen.setCardNumber(invoice.getСreditCardData().getCardNumber());
-        payInvoicesScreen.selectExpirationMonth(invoice.getСreditCardData().getExpirationMonth());
-        payInvoicesScreen.selectExpirationYear(invoice.getСreditCardData().getExpirationYear());
-        payInvoicesScreen.setCVC(invoice.getСreditCardData().getCVC());
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getCardNumber());
+        payInvoicesScreen.selectExpirationMonth(invoice.getCreditCardData().getExpirationMonth());
+        payInvoicesScreen.selectExpirationYear(invoice.getCreditCardData().getExpirationYear());
+        payInvoicesScreen.setCVC(invoice.getCreditCardData().getCVC());
         payInvoicesScreen.clickPayButton();
 
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);

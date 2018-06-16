@@ -51,7 +51,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 35);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft"))); 
 	}
 

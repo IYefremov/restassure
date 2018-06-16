@@ -47,6 +47,9 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//a[@data-name='changeCustomer']")
 	private WebElement changecustomerbtn;
+
+	@FindBy(xpath="//a[@data-name='invoice']")
+	private WebElement createinvoicemenuitem;
 	
 	@FindBy(xpath="//body/div[@data-menu='popup']")
 	private WebElement inspectionsmenuscreen;
@@ -168,5 +171,10 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 
 	public boolean isChangeCustomerMenuPresent() {
 		return changecustomerbtn.isDisplayed();
+	}
+
+	public VNextInspectionTypesList clickCreateInvoiceMenuItem(){
+		tap(createinvoicemenuitem);
+		return new VNextInspectionTypesList(appiumdriver);
 	}
 }

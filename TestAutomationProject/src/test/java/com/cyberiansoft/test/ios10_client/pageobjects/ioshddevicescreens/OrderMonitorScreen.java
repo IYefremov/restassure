@@ -58,7 +58,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Order Monitor")));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
 	
 	public void selectPanel(String panelname) {
@@ -74,27 +74,26 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 
 	}
 	
-	public void verifyPanelStatus(String panelname, String status) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]").getAttribute("value").equals(status));
+	public String getPanelStatus(String panelname) {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]").getAttribute("value");
 	}
 	
-	public void verifyPanelStatusInPopup(String panelname, String status) {
-		//appiumdriver.findElementByName(panelname).click();
+	public String getPanelStatusInPopup(String panelname) {
 		WebElement par = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='Service Status']/.."));
-		Assert.assertTrue(par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value").equals(status));
+		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+	}
+
+	public void clickDoneIcon() {
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
 	
-	public void setCompletedServiceStatus() throws InterruptedException {
+	public void setCompletedServiceStatus() {
 		clickServiceStatusCell();
 		appiumdriver.findElementByAccessibilityId("Completed").click();
 	}
 	
-	public void setCompletedPhaseStatus() throws InterruptedException {
-		//clickCustomServiceStatusButton();
-		//clickPhaseStatusCell();
+	public void setCompletedPhaseStatus() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1][@name='Completed']").click();
-		//completedcell.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
@@ -112,10 +111,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='Repair phase']/XCUIElementTypeButton[@name='Start phase']").click();
 	}
 	
-	public void clickServiceDetailsDoneButton() throws InterruptedException {
+	public OrderMonitorScreen clickServiceDetailsDoneButton() {
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
+		return this;
 	}
 	
 	public boolean isStartServiceButtonPresent() {
@@ -140,28 +138,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 	
-	public boolean isServiceIsActive(String servicedisplayname) {
-		return appiumdriver.findElementByXPath("//UIATableView[3]/UIATableCell[contains(@name, \""
-						+ servicedisplayname + "\")]/UIAStaticText[3]").getAttribute("name").equals("Active");
-		//Assert.assertTrue(activecaption.isDisplayed());
-	}
-	
-	public void verifyServiceStartDateIsSet(String servicedisplayname, String startdate) {
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-						+ servicedisplayname + "\")]/UIAStaticText[contains(@name, \""
-						+ startdate + "\")]").isDisplayed());
-	}
-	
-	public void verifyStartServiceDissapeared() throws InterruptedException {
-		Assert.assertFalse(appiumdriver.findElementByXPath("//UIAPopover[1]/UIAButton[@name=\"Start Service\"]") .isDisplayed());
-	}
-	
-	public void clickStartService() throws InterruptedException {
+	public void clickStartService() {
 		appiumdriver.findElementByAccessibilityId("Start Service").click();
-	}
-	
-	public String getServiceStartDate() {
-		return appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\"Start Date\"]/UIAStaticText[2]").getAttribute("name");
 	}
 	
 	public boolean isServiceStartDateExists() { 
@@ -171,6 +149,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public TeamWorkOrdersScreen clickBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Back")));
 		backbtn.click();
 		return new TeamWorkOrdersScreen(appiumdriver);
 	}
@@ -182,11 +162,6 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void checkMyWorkCheckbox() {
 		if (appiumdriver.findElementsByAccessibilityId("checkbox unchecked").size() > 0)
 			appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
-	}
-	
-	public void uncheckMyWorkCheckbox() {
-		if (appiumdriver.findElementsByAccessibilityId("checkbox checked").size() > 0)
-			appiumdriver.findElementByAccessibilityId("checkbox checked").click();
 	}
 
 }

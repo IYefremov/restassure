@@ -9,6 +9,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,9 +31,6 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	@iOSFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(accessibility = "txtPO")
-    private IOSElement setpofld;
-	
 	@iOSFindBy(accessibility = "InvoiceOrdersTable")
     private IOSElement invoicewostable;
 	
@@ -47,6 +45,9 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	
 	@iOSFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;*/
+
+	@iOSFindBy(accessibility = "txtPO")
+	private IOSElement setpofld;
 
 	public InvoiceInfoScreen(AppiumDriver driver) {
 		super(driver);
@@ -77,7 +78,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 	
 	public String getInvoicePOValue() {
-		return appiumdriver.findElementByAccessibilityId("txtPO").getAttribute("value");
+		return setpofld.getAttribute("value");
 	}
 
 	public void setPO(String _po) {
