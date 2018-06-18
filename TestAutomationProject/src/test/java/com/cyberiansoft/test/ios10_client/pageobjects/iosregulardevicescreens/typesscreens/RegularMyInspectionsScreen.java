@@ -86,8 +86,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsTable")));
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 25);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
 	public void clickAddInspectionButton() throws InterruptedException {
