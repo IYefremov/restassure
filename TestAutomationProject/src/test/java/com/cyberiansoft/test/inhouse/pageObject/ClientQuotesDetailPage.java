@@ -2,7 +2,10 @@ package com.cyberiansoft.test.inhouse.pageObject;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +13,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -85,6 +90,18 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @FindBy(xpath = "//div[@data-feature-setup-fee]")
     private List<WebElement> setupFeePrices;
+
+    @FindBy(xpath = "//span[@data-billing-starts-str]")
+    private WebElement billingStartsLink;
+
+    @FindBy(name = "BillingStartsStr")
+    private WebElement billingStartsField;
+
+    @FindBy(xpath = "//div[contains(@class, 'bootstrap-datetimepicker-widget')]")
+    private WebElement billingStartsDateWidget;
+
+    @FindBy(xpath = "//button[@class='submit btn-save-billing-starts']")
+    private WebElement billingStartsSubmitButton;
 
     public ClientQuotesDetailPage(WebDriver driver) {
         super(driver);
@@ -343,5 +360,35 @@ public class ClientQuotesDetailPage extends BasePage {
 
     public String getPricePerMonth() {
         return "$" + calculatePricePerMonth();
+    }
+
+    private void clickBillingStartsLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(billingStartsLink)).click();
+        wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
+    }
+
+    private void chooseBillingStartsFromToday() {
+        wait.until(ExpectedConditions.elementToBeClickable(billingStartsField)).click();
+        wait.until(ExpectedConditions.visibilityOf(billingStartsDateWidget));
+        String format = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        wait.until(ExpectedConditions.elementToBeClickable(billingStartsDateWidget
+                .findElement(By.xpath(".//td[@data-day='" + format + "']")))).click();
+    }
+
+    private void verifyDateIsSaved() {
+        wait.until(ExpectedConditions.elementToBeClickable(billingStartsSubmitButton)).click();
+        waitForLoading();
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        wait.until(ExpectedConditions.textToBePresentInElement(
+                billingStartsLink, today));
+        Assert.assertEquals(today, billingStartsLink.getText(), "The Billing Starts date has not been set!");
+        waitABit(500);
+    }
+
+        public ClientQuotesDetailPage setBillingStartsFromToday() {
+        clickBillingStartsLink();
+        chooseBillingStartsFromToday();
+        verifyDateIsSaved();
+        return this;
     }
 }

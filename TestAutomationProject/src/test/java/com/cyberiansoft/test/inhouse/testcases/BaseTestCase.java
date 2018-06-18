@@ -95,4 +95,8 @@ public class BaseTestCase {
 		webdriver.manage().window().maximize();
 		webdriver.get(url);
 	}
+
+    public void setDriver() {
+        webdriver = DriverBuilder.getInstance().getDriver();
+    }
 }

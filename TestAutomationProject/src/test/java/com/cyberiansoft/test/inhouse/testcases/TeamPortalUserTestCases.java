@@ -234,6 +234,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         String pricePerMonth = clientQuotesDetailPage.getPricePerMonth();
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(pricePerMonth));
         clientQuotesDetailPage
+                .setBillingStartsFromToday()
                 .clickFinalizeAgreementButton()
                 .sendNotification();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));

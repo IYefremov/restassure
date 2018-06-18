@@ -66,8 +66,9 @@ public class RulesPage extends BasePage {
 
     public RulesPage clickAddNewRuleButton() {
         try {
-            waitABit(1500);
+            waitABit(2000);
             wait.until(ExpectedConditions.elementToBeClickable(addNewRuleButton)).click();
+
             wait.until(ExpectedConditions.visibilityOf(newFormDialog));
         } catch (Exception e) {
             Assert.fail("The \"Add Rule\" button has not been clicked.", e);
