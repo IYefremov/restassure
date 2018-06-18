@@ -383,7 +383,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void selectSearchTeam(String teamname) {
-		doubleselectComboboxValueWithTyping(teamcmb, teamdd, teamname);
+		selectComboboxValueWithTyping(teamcmb, teamdd, teamname);
 	}
 
 	public void selectSearchTechnician(String technician) {

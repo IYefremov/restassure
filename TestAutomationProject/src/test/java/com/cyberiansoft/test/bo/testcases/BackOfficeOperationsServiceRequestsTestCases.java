@@ -3,7 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.dataclasses.bo.BOOperationsServiceRequests;
+import com.cyberiansoft.test.dataclasses.bo.BOOperationsServiceRequestsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
@@ -24,7 +24,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentWholesale(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -76,7 +76,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationNewServiceRequestAppointmentRetail(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -128,7 +128,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentLocationTypeCustom(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -200,7 +200,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentLocationTypeCustomer(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -263,7 +263,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentLocationTypeOwner(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -323,7 +323,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationNewServiceRequestAppointmentLocationTypeRepairLocation(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -387,7 +387,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationsCLUserItNotPossibleToAcceptSR_OptionIsNotPresent(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		backofficeheader.clickLogout();
@@ -416,7 +416,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String rowID, String description, JSONObject testData) throws InterruptedException {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         backofficeheader.clickLogout();
@@ -473,7 +473,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationsCLUserItNotPossibleToAddLabelsWhenCreateSR(String rowID, String description, JSONObject testData) throws InterruptedException {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         backofficeheader.clickLogout();
@@ -497,7 +497,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -525,7 +525,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationsVerifyThatCheckInButtonAppearsWhenSRIsSaved(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -557,7 +557,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -593,7 +593,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testServiceRequestDescription(String rowID, String description, JSONObject testData) {
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -609,7 +609,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testServiceRequest(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -627,7 +627,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testServiceRequestDescriptionInExistingSR(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -643,7 +643,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testShownSRDuringCreation(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -655,7 +655,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreatingSRWithDifferentDescriptions(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -671,7 +671,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkDescriptionDocument(String rowID, String description, JSONObject testData) {
 
-        BOOperationsServiceRequests data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequests.class);
+        BOOperationsServiceRequestsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsServiceRequestsData.class);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeheader.clickOperationsLink();

@@ -116,7 +116,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		return techniciancommissionstable.getTableRowCount();
 	}
 
-	public void clickFindButton() throws InterruptedException {
+	public void clickFindButton() {
 		clickAndWait(findbtn);
 	}
 
@@ -128,7 +128,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
 	}
 
-	public void selectSearchTeamVendor(String teamvendor) throws InterruptedException {
+	public void selectSearchTeamVendor(String teamvendor) {
 		selectComboboxValue(searchteamvendorcmb, searchteamvendordd, teamvendor);
 	}
 

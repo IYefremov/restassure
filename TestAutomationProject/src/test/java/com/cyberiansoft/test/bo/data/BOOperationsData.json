@@ -1,0 +1,90 @@
+{
+  "testOperationTechnicianCommissionSearch": [
+    {
+      "rowID": "testOperationTechnicianCommissionSearch.01",
+      "description": "Test Case 15295:Operations - Technician Commission: Search",
+      "invoiceNumber": "I-000-00646",
+      "status": "New",
+      "tech": "1111 2222",
+      "page1": "1",
+      "pageInt1": 1,
+      "page2": "2",
+      "page999": "999",
+      "tableRowCount1": 1
+    }
+  ],
+
+  "testOperationWorkOrdersSearch": [
+    {
+      "rowID": "testOperationWorkOrdersSearch.01",
+      "description": "Test Case 15386:Operations - Work Orders: Search",
+      "WOnum": "O-000-148090",
+      "searchPackage": "ALM - Recon Facility",
+      "status": "New",
+      "page1": "1",
+      "pageInt1": 1,
+      "tableRowCount40": 40,
+      "tableRowCount1": 1,
+      "page2": "2",
+      "page999": "999"
+    }
+  ],
+
+  "testOperationServiceContract": [
+    {
+      "rowID": "testOperationServiceContract.01",
+      "description": "Test Case 17280:Operations - Service Contract"
+    }
+  ],
+
+  "testOperationInspection": [
+    {
+      "rowID": "testOperationInspection.01",
+      "description": "Test Case 17281:Operations - Inspection",
+      "page1": "1",
+      "page2": "2",
+      "pageInt50": "50",
+      "timeFrame": "Last Year",
+      "inspNum": "E-062-00119",
+      "customer": "000 My Company",
+      "status": "Approved",
+      "technician": "Serhii Toropov",
+      "technicianFull": "Serhii Toropov",
+      "tableRowCount1": 1
+    }
+  ],
+
+  "testOperationVendorBill": [
+    {
+      "rowID": "testOperationVendorBill.01",
+      "description": "Test Case 17282:Operations - Vendor Bill",
+      "timeFrame": "Last Year",
+      "inspNum": "E-062-00119",
+      "customer": "000 My Company",
+      "status": "Approved",
+      "technician": "Serhii Toropov",
+      "technicianFull": "Serhii Toropov"
+    }
+  ],
+
+  "testOperationNewServiceRequest": [
+    {
+      "rowID": "testOperationNewServiceRequest.01",
+      "description": "Test Case 18475:Operation - New service request",
+      "SRtype": "Vit_All_Services",
+      "teamName": "Default team",
+      "textSearchParameter": "Alex SASHAZ",
+      "newServiceRequest": "Alex SASHAZ",
+      "assignedTo": "Igor Baluev",
+      "POnum": "D525",
+      "ROnum": "Dfg 25",
+      "VIN": "1HGCG55691A267167",
+      "make": "Honda",
+      "model": "Accord",
+      "year": "2001",
+      "insurance": "Oranta",
+      "label": "test",
+      "status": "Closed"
+    }
+  ]
+}

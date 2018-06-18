@@ -2,7 +2,7 @@ package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BOOperationsServiceRequests {
+public class BOOperationsServiceRequestsData {
 
     @JsonProperty("teamName")
     private String teamName;

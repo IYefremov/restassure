@@ -111,11 +111,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeNewTab(mainWindowHandle);
 	}
 
-	// @Test(testName = "Test Case 24751:Operations: Invoice editor - verify
-	// that 'Approve invoice after payment' checkbox is disabled after checked
-	// it and Invoice is Approved", description = "Operations: Invoice editor -
-	// verify that 'Approve invoice after payment' checkbox is disabled after
-	// checked it and Invoice is Approved")
+//	 @Test(testName = "Test Case 24751:Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved", description = "Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved")
 	public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved()
 			throws Exception {
 

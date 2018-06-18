@@ -67,6 +67,10 @@ public class WebPageWithPagination extends BaseWebPage {
 	public String getGoToPageFieldValue() {
 		return gotopagefld.getAttribute("value");
 	}
+
+	public String getPageFieldValue() {
+        return getGoToPageFieldValue().replace(",", "");
+	}
 	
 	public void setPageSize(String pageSize) {
 		pagesizefld.clear();
