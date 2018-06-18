@@ -78,8 +78,8 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		//MobileElement customercell = (MobileElement) appiumdriver.findElementByAccessibilityId(customer);
-		//if (!customercell.isDisplayed()) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 			searchbtn.click();
 		BaseUtils.waitABit(500);
 			appiumdriver.getKeyboard().sendKeys(customer);

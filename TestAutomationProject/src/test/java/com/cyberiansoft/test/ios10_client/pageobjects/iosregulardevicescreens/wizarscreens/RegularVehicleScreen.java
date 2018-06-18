@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -118,7 +119,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 				break;
 			}
         try {
-            if (appiumdriver.findElementsByAccessibilityId("Searching on Back Office").size() > 0) {
+			Helpers.waitABit(1000);
+            if (elementExists(MobileBy.AccessibilityId("Searching on Back Office"))) {
                 WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
                 wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId("Searching on Back Office")));
             }
@@ -270,6 +272,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public void setTech(String _tech) throws InterruptedException {
 		clickTech();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_tech)));
 		appiumdriver.findElementByAccessibilityId(_tech).click();
 	}
 	
@@ -310,7 +314,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 
 	public void clickTech() {
-		if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
+
+		JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
+		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+		scrollObject1.put("direction", "up");
+		js1.executeScript("mobile: swipe", scrollObject1);
+
+		//if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeCell[@name='Tech']")));
 		appiumdriver.findElementByAccessibilityId("Tech").click();
 	}

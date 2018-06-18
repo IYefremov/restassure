@@ -7,7 +7,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,11 +46,6 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	
 	public void clickCancel() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
-	}
-
-	public WebElement waitUntilVisible(String xpath) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 	}
 	
 	public void selectUIAPickerValue(String value) {

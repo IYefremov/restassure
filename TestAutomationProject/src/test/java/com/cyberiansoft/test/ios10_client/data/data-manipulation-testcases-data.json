@@ -1,0 +1,20 @@
+{
+
+  "testMyInspectionInspectionTypeMatrixInspection": [
+    {
+      "rowID": "testMyInspectionInspectionTypeMatrixInspection.01",
+      "description": "Test Case 73401:My inspection - inspection type Matrix inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "State Farm-Tech",
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "DIME", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Very Light 1 to 5"
+        }, {"hailMatrixServiceName": "Deck Lid", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Limit 151 to 200"
+        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
+        }]},
+      "inspPrice": "$281.25"
+    }
+  ]
+
+}

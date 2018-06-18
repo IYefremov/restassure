@@ -334,7 +334,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void saveAppointment() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Appointments")));
 	}
 	

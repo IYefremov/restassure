@@ -35,6 +35,13 @@ public class RegularClaimScreen extends RegularBaseWizardScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
+
+	public void setPolicy(String policyNumber) {
+		appiumdriver.findElementByAccessibilityId("Policy#").click();
+		((IOSDriver) appiumdriver).getKeyboard().pressKey(policyNumber);
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+
+	}
 	
 	public void selectInsuranceCompanyAndSetClaim(String insurancecompany, String claim) {
 		selectInsuranceCompany(insurancecompany);

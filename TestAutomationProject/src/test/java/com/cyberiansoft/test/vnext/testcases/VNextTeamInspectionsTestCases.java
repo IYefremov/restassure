@@ -25,11 +25,11 @@ import java.util.List;
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
 	@BeforeClass(description="Team Inspections Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 	}
 	
 	@BeforeMethod(description="Send all messages")
-	public void beforeTestCase() throws Exception {
+	public void beforeTestCase() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		if (homescreen.isQueueMessageVisible()) {		
 			VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();

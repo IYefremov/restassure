@@ -83,5 +83,16 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
+  ],
+
+  "testVerifyUserCanCreateCustomerAfterChangingCustomerForWO": [
+    {
+      "rowID": "testVerifyUserCanCreateCustomerAfterChangingCustomerForWO.01",
+      "description": "Test Case 75374:Verify user can create customer after Changing Customer for WO",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
   ]
+
 }
