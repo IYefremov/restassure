@@ -21,7 +21,7 @@ public class VNextAppUtils {
 		try {
 			((AndroidDriver)DriverBuilder.getInstance().getAppiumDriver()).startRecordingScreen(
 					new AndroidStartScreenRecordingOptions()
-							.withTimeLimit(Duration.ofSeconds(120))
+							.withTimeLimit(Duration.ofSeconds(90))
 			);
 		} catch (WebDriverException e) {
 			if (e.getMessage().toLowerCase().contains("emulator")) {
