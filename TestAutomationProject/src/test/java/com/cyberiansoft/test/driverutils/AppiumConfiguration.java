@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.driverutils;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
@@ -10,6 +11,8 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -26,9 +29,14 @@ public class AppiumConfiguration {
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
-	        	File appDir = new File("./data/");
-	    	    File app = new File(appDir, "Repair360Android.apk");
-	    	    appiumcap = new DesiredCapabilities();
+				File appDir = new File("./data/");
+				try {
+					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_0618.app.zip"), appDir);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				File app = new File(appDir, "Repair360AndroidTeam.apk");
+				appiumcap = new DesiredCapabilities();
 
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
 	    		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
@@ -41,7 +49,7 @@ public class AppiumConfiguration {
 	    		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
 	    		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 	    		//appiumcap.setCapability(MobileCapabilityType.APP,
-	    		//		"http://amtqc.cyberiansoft.net/Uploads/android-debug.apk");
+	    		//		"http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_0618.app.zip");
 	     
 				return appiumcap;
 			case IOS_HD:
