@@ -79,7 +79,7 @@ public class BaseUtils {
 			}
 		}
 		zipFile.close();
-
+		theFile.delete();
 		return theFile;
 	}
 
