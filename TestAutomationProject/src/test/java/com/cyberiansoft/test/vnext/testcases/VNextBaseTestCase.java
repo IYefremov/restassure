@@ -225,7 +225,7 @@ public class VNextBaseTestCase {
 
 		webdriver.quit();
 		
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		//AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		
 		/*VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.clickIHaveRigistrationCodeLink();
