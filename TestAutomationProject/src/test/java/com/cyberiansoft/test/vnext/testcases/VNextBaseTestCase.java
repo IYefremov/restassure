@@ -1,16 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.io.IOException;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
@@ -25,17 +14,23 @@ import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextToolsInfo;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
-import com.cyberiansoft.test.vnext.screens.VNextDownloadDataScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationPersonalInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextRegistrationScreensModalDialog;
-import com.cyberiansoft.test.vnext.screens.VNextTeamEditionVerificationScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVerificationScreen;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import java.io.IOException;
+
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
 import com.ssts.pcloudy.dto.appium.booking.BookingDtoDevice;
@@ -47,8 +42,6 @@ import com.ssts.util.reporting.MultipleRunReport;
 import com.ssts.util.reporting.SingleRunReport;
 import com.ssts.util.reporting.printers.HtmlFilePrinter;
 */
-
-import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 
 public class VNextBaseTestCase {
