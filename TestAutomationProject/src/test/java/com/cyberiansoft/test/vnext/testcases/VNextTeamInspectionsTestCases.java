@@ -55,6 +55,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		final String inspnumber = createSimpleInspection(testwholesailcustomer, inspType, vinnumber);
+
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -84,6 +85,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		
 		homescreen = invoicesscreen.clickBackButton();
+
+
 	}
 
 	

@@ -44,10 +44,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@data-automation-id='search-icon']")
 	private WebElement searchbtn;
 	
-	@FindBy(xpath="//*[@data-automation-id='search-input']")
+	@FindBy(xpath="//*[@data-autotests-id='search-input']")
 	private WebElement searchfld;
 	
-	@FindBy(xpath="//*[@data-automation-id='search-cancel']")
+	@FindBy(xpath="//*[@data-autotests-id='search-cancel']")
 	private WebElement cancelsearchbtn;
 	
 	final public static int MAX_NUMBER_OF_INPECTIONS = 50;
@@ -190,7 +190,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		return new VNextInspectionsMenuScreen(appiumdriver);
@@ -259,7 +259,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public void searchInpectionByFreeText(String searchtext) {
 		clickSearchButton();
 		setSearchText(searchtext);
-		
+		tap(cancelsearchbtn);
 	}
 	
 	public void clickSearchButton() {

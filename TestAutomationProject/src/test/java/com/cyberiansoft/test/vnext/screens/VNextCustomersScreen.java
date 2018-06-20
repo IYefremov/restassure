@@ -20,7 +20,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='customers-list']")
 	private WebElement customersscreen;
 	
-	@FindBy(xpath="//div[contains(@class, 'list-block-search')]")
+	@FindBy(xpath="//*[@data-autotests-id='customers-list']")
 	private WebElement customerslist;
 	
 	@FindBy(xpath="//a[@action='select-customer']")
@@ -55,6 +55,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomer(AppCustomer customer) {
+		if (elementExists("//*[@data-automation-id='search-icon']"))
+			searchCustomerByName(customer.getFullName());
 		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
 			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
