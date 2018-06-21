@@ -8,6 +8,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriverException;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,15 @@ import java.util.UUID;
 public class AppiumUtils {
 	
 	public static void switchApplicationContext(AppContexts context) {
-		Set<String> contextNames = DriverBuilder.getInstance().getAppiumDriver().getContextHandles();
+		Set<String> contextNames;
+
+		try {
+			contextNames = DriverBuilder.getInstance().getAppiumDriver().getContextHandles();
+		} catch (WebDriverException e) {
+			System.out.println("++++++++++++" + e.getMessage());
+			contextNames = DriverBuilder.getInstance().getAppiumDriver().getContextHandles();
+		}
+
 		switch (context) {
 			case NATIVE_CONTEXT:
 				for (String contextName : contextNames) {
