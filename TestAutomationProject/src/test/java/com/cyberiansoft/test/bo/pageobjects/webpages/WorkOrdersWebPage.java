@@ -13,6 +13,7 @@ import org.testng.Assert;
 import java.util.List;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 //import com.cyberiansoft.test.bo.utils.WebElementExt;
 //import lombok.experimental.ExtensionMethod;
@@ -275,7 +276,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return wotable.getWrappedElement().findElement(By.className("entity-link")).getText();
 	}
 
-	public void createInvoiceFromWorkOrder(String wonumber, String ponum) throws InterruptedException {
+	public void createInvoiceFromWorkOrder(String wonumber, String ponum) {
 		selectWorkOrderInTheTable(wonumber);
 		setInvoicePONumber(ponum);
 		clickAndWait(createinvoicebtn);
@@ -299,13 +300,12 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return invoicenum;
 	}
 
-	public boolean checkWorkOrdersInfo() throws InterruptedException {
+	public boolean checkWorkOrdersInfo() {
 		wait.until(
 				ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
 				.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 
 		try{
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Order#')]"))));
@@ -341,7 +341,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public boolean checkWorkOrdersSearchFIelds() {
+	public boolean checkWorkOrdersSearchFields() {
 		try{
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboArea_Input")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input")));
@@ -365,26 +365,24 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public boolean checkWorkOrdersSearchResults() throws InterruptedException {
+	public boolean checkWorkOrdersSearchResults(String wo) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("002 - Test Company");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input"))).click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-		.findElements(By.className("rcbHovered")).stream().filter(e -> e.getText().equals("Dent Repear Package")).findFirst()
-		.get().click();
+        selectComboboxValue(searchpackagecmb, searchpackagedd, "Dent Repear Package");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 		.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
 		.get().click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys("12/8/2014");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys("9/18/2015");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys("12/9/2014");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys("9/18/2015");
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
 		.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'O-10023-00044')]")));
+//			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'O-000-02008'")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), '" + wo + "')]")));
 		}catch(TimeoutException e){
 			return false;
 		}
@@ -399,7 +397,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_txtInvoiceDescription")).sendKeys(text);
 	}
 	
-	public void clickCreateInvoiceButton() throws InterruptedException{
+	public void clickCreateInvoiceButton() {
 		createInvoiceToWorkORderButton.click();
 		waitForLoading();
 //		Thread.sleep(1000);

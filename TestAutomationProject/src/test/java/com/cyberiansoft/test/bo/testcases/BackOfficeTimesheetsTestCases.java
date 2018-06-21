@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class BackOfficeTimesheetsTestCases extends BaseTestCase{
+public class BackOfficeTimesheetsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 65561:Timesheets - Timesheets Monday Sunday switch")
 	public void checkMondaySundaySwitch(){

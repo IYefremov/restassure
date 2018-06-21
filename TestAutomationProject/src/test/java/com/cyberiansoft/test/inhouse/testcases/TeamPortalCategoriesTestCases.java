@@ -26,7 +26,6 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     public void testUserCanAddNewCategories(String rowID, String description, JSONObject testData) {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
                 .clickCategoriesSubmenu()

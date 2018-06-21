@@ -86,5 +86,21 @@
       "label": "test",
       "status": "Closed"
     }
+  ],
+
+  "testWorkOrderSearchOperation": [
+    {
+      "rowID": "testWorkOrderSearchOperation.01",
+      "description": "Test Case 60616:Operations - Work Orders: Search operation",
+      "WOnum": "O-000-02008"
+    }
+  ],
+
+  "testEditDuplicateByRO": [
+    {
+      "rowID": "testEditDuplicateByRO.01",
+      "description": "Test Case 75811:Operation - Inspection: Edit - Duplicate by RO",
+      "WOnum": "O-000-02008"
+    }
   ]
 }

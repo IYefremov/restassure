@@ -349,6 +349,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "ctl00_ctl00_Content_Main_report_AsyncWait_Wait")
 	private WebElement loading;
 
+	@FindBy(xpath = "//div[@id='RadToolTipWrapper_Card_RadToolTip1']//span[@class='spanAppointmentWarning']")
+	private WebElement appointmentWarning;
+
     public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -515,14 +518,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		selectComboboxValueWithTyping(addservicerequesapptechcmb, addservicerequesapptechdd, tech);
 	}
 
-	public boolean isFirstServiceRequestFromListHasAppointment(String appointmenttime) {
-//        waitABit(3000);
-
+	public boolean appointmentExistsForFirstServiceRequestFromList(String appointmenttime) {
         System.out.println(getFirstServiceRequestFromList().findElement(By.xpath(".//a/span")).getText().equals(appointmenttime));
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//a/span")).getText().equals(appointmenttime);
-		// return
-		// getFirstServiceRequestFromList().findElement(By.xpath(".//span[text()='"
-		// + appointmenttime + "']")).isDisplayed();
 	}
 
 	public String getWOForFirstServiceRequestFromList() {
@@ -733,6 +731,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(3000);
 			driver.switchTo().defaultContent();
 			waitUntilPageReloaded();
+			waitABit(2000);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -1161,10 +1160,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 
-		wait.until(ExpectedConditions.visibilityOf(subjectField));
-		if (!subjectField.getAttribute("value").equals("Alex SASHAZ")) {
-			return false;
-		}
+//		wait.until(ExpectedConditions.visibilityOf(subjectField));
+//		if (!subjectField.getAttribute("value").equals("Alex SASHAZ")) {
+//			return false;
+//		}
 
         wait.until(ExpectedConditions.elementToBeClickable(locationTypeField)).click();
 
@@ -1214,7 +1213,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 		driver.findElement(By.id("Card_btnAddApp")).click();
-
 		return true;
 	}
 
@@ -1294,7 +1292,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public boolean checkDefaultAppointmentValuesFromCalendar(String fromDate, String toDate, String subject) {
-//		Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(appointmentCalendarIcon)).click();
 
         wait.until(ExpectedConditions.visibilityOf(appointmentFromDate)).clear();
@@ -1309,10 +1306,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
 
 		waitABit(1000);
-		if (!(appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_tbxSubject"))
-				.getAttribute("value").equals("Alex SASHAZ"))) {
-			return false;
-		}
 
 		appointmentContentFromCalendar.findElement(By.id("ctl00_ctl00_Content_Main_rcbAppLocations_Input")).click();
 
@@ -1410,9 +1403,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			return false;
 		}
 
-		if (!wait.until(ExpectedConditions.visibilityOf(subjectField)).getAttribute("value").equals("Alex SASHAZ")) {
-			return false;
-		}
+//		if (!wait.until(ExpectedConditions.visibilityOf(subjectField)).getAttribute("value").equals("Alex SASHAZ")) {
+//			return false;
+//		}
 
 		wait.until(ExpectedConditions.elementToBeClickable(locationTypeField)).click();
 
@@ -1437,14 +1430,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean retryingFindClick(By by, By byInner, String startDate) throws InterruptedException {
+	public boolean retryingFindClick(By by, By byInner, String startDate) {
 		boolean result = false;
 		int attempts = 0;
 		while (attempts < 10) {
 
 			try {
                 waitForLoading();
-                Thread.sleep(1500);
+                waitABit(1500);
 				// wait.ignoring(TimeoutException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
 				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
 				driver.findElement(by).findElements(byInner).stream().map(w -> w.findElement(By.tagName("a")))
@@ -1453,14 +1446,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				result = true;
 				break;
 			} catch (StaleElementReferenceException e) {
-				Thread.sleep(500);
+				waitABit(500);
 			}
 			attempts++;
 		}
 		return result;
 	}
 
-	public int checkSchedulerByDateWeek(String startDate, boolean isDateShifted) throws InterruptedException {
+	public int checkSchedulerByDateWeek(String startDate, boolean isDateShifted) {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
         waitForLoading();
@@ -1504,7 +1497,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
 
-	public void goToMonthInScheduler() throws InterruptedException {
+	public void goToMonthInScheduler() {
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
         waitForLoading();
@@ -1513,7 +1506,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsDateBox")));
 	}
 
-	public boolean checkTechniciansFromScheduler() throws InterruptedException {
+	public boolean checkTechniciansFromScheduler() {
 		driver.switchTo().defaultContent();
         waitForLoading();
 		try {
@@ -1530,7 +1523,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean retryingFindClick(By by) throws InterruptedException {
+	private boolean retryingFindClick(By by) {
 		boolean result = false;
 		int attempts = 0;
 		while (attempts < 10) {
@@ -1539,7 +1532,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				result = true;
 				break;
 			} catch (StaleElementReferenceException e) {
-				Thread.sleep(500);
+				waitABit(500);
 			}
 			attempts++;
 		}
@@ -1611,17 +1604,17 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void selectTechnicianFromSchedulerByIndex(int i) throws InterruptedException {
+	public void selectTechnicianFromSchedulerByIndex(int i) {
 		driver.switchTo().defaultContent();
         waitForLoading();
 
 		retryingFindClick(By.className("scheduler-dropdown"));
-		Thread.sleep(2000);
+		waitABit(2000);
 		retryingFindClick(techniciansList.get(i));
-		Thread.sleep(2000);
+		waitABit(2000);
 	}
 
-	public boolean retryingFindClick(WebElement element) throws InterruptedException {
+	public boolean retryingFindClick(WebElement element) {
 		boolean result = false;
 		int attempts = 0;
 		while (attempts < 10) {
@@ -1630,19 +1623,19 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				result = true;
 				break;
 			} catch (StaleElementReferenceException e) {
-				Thread.sleep(500);
+				waitABit(500);
 			}
 			attempts++;
 		}
 		return result;
 	}
 
-	public void aplyTechniciansFromScheduler() throws InterruptedException {
+	public void aplyTechniciansFromScheduler() {
 		arrowInTechniciansList.click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
 				.click();
         waitForLoading();
-		Thread.sleep(10000);
+		waitABit(10000);
 	}
 
 	public int countSR() {
@@ -1655,7 +1648,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return defaultSRs + failedSRs + completedSRs;
 	}
 
-	public boolean resetAndCheckTecniciansFromScheduler() throws InterruptedException {
+	public boolean resetAndCheckTecniciansFromScheduler() {
 		retryingFindClick(By.className("scheduler-dropdown"));
 		arrowInTechniciansList.click();
 

@@ -296,5 +296,177 @@
       "rowID": "checkDescriptionDocument.01",
       "description": "Test Case 56829:Operation - Service Request - Check Documents"
     }
+  ],
+
+  "checkMultiTechInSR": [
+    {
+      "rowID": "checkMultiTechInSR.01",
+      "description": "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkMultiTechInSRshowHideTech": [
+    {
+      "rowID": "checkMultiTechInSRshowHideTech.01",
+      "description": "Test Case 56834:Operation - Service Request - Appointment - Multi Tech - show/hide tech",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkMultiTechInSideScrollbar": [
+    {
+      "rowID": "checkMultiTechInSideScrollbar.01",
+      "description": "Test Case 56833:Operation - Service request - Appointment - Multi Tech in side scrollbar",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRappointmentSchedulerWeek": [
+    {
+      "rowID": "checkSRappointmentSchedulerWeek.01",
+      "description": "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Week",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRappointmentSchedulerMonth": [
+    {
+      "rowID": "checkSRappointmentSchedulerMonth.01",
+      "description": "Test Case 56835:Operation - Service Request - Appointment - Scheduler - Month",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRappointmentSchedulerMultiTechniciansFilterOf5": [
+    {
+      "rowID": "checkSRappointmentSchedulerMultiTechniciansFilterOf5.01",
+      "description": "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5"
+    }
+  ],
+
+  "checkSRmultiTechReset": [
+    {
+      "rowID": "checkSRmultiTechReset.01",
+      "description": "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRcreation": [
+    {
+      "rowID": "checkSRcreation.01",
+      "description": "Test Case 56839:Operation - Service Request - Appointment - Scheduler - Add Service Request",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRLCnoEntry": [
+    {
+      "rowID": "checkSRLCnoEntry.01",
+      "description": "Test Case 57805:Operation - Service Request Life Cycle - No Entry"
+    }
+  ],
+
+  "checkSRLCestimate": [
+    {
+      "rowID": "checkSRLCestimate.01",
+      "description": "Test Case 57874:Operation - Service Request Life Cycle - Appointment - Estimate",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSchedulerTechniciansFilter": [
+    {
+      "rowID": "checkSchedulerTechniciansFilter.01",
+      "description": "Test Case 56838:Operation - Service Request - Appointment - Scheduler - Technicians filter",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRLCafterCreation": [
+    {
+      "rowID": "checkSRLCafterCreation.01",
+      "description": "Test Case 57806:Operation - Service Request Life Cycle - After Creation",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Zak_Request_Type"
+    }
+  ],
+
+  "checkSRLCwoAutoCreation": [
+    {
+      "rowID": "checkSRLCwoAutoCreation.01",
+      "description": "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Oleksa_Auto",
+      "vehicleStock": "123",
+      "vehicleVIN": "123"
+    }
+  ],
+
+  "checkSRLCapproved": [
+    {
+      "rowID": "checkSRLCapproved.01",
+      "description": "Test Case 57875:Operation - Service Request Life Cycle - Approved",
+      "clientName": "Alex SASHAZ",
+      "newStatus": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Oleksa_AcceptanceAndAllRequired",
+      "vehicleStock": "123",
+      "vehicleVIN": "123"
+    }
+  ],
+
+  "checkSRLCrejected": [
+    {
+      "rowID": "checkSRLCrejected.01",
+      "description": "Test Case 57879:Operation - Service Request Life Cycle - Rejected",
+      "clientName": "Alex SASHAZ",
+      "status": "Scheduled",
+      "newStatus": "Scheduled",
+      "customer": "002 - Test Company",
+      "serviceRequestType": "Oleksa_AcceptanceAndAllRequired",
+      "vehicleStock": "123",
+      "vehicleVIN": "123"
+    }
+  ],
+
+  "checkSRLCclosed": [
+    {
+      "rowID": "checkSRLCclosed.01",
+      "description": "Test Case 57879:Operation - Service Request Life Cycle - Closed",
+      "serviceRequestType": "Oleksa_AcceptanceAndAllRequired"
+    }
   ]
 }

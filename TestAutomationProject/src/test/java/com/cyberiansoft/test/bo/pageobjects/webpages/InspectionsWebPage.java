@@ -108,6 +108,9 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl04_btnDelete")
 	private WebElement deleteinspectionbtn;
 
+	@FindBy(xpath = "//table[@id='ctl00_ctl00_Content_Main_gv_ctl00']//a[@data-entitytype]")
+	private List<WebElement> inspectionsList;
+
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 
@@ -213,13 +216,14 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
 	}
 
-	public boolean isInspNumberExists(String inspectionnumber) {
-		boolean exists = inspectionstable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td[text()='" + inspectionnumber + "']")).size() > 0;
-		return exists;
+	public boolean inspectionExists(String inspectionnumber) {
+	    wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
+        return inspectionstable.getWrappedElement()
+//                .findElements(By.xpath(".//tr/td[text()='" + inspectionnumber + "']")).size() > 0;
+                .findElements(By.xpath(".//tr/td/a[contains(text(), '" + inspectionnumber + "')]")).size() > 0;
 	}
 
-	public void deleteFirstInspection() throws InterruptedException {
+	public void deleteFirstInspection() {
 		click(deleteinspectionbtn);
 		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
@@ -232,7 +236,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 	}
 
-	public void assertInspectionPrice(String inspnumber, String expectedprice) throws InterruptedException {
+	public void assertInspectionPrice(String inspnumber, String expectedprice) {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
@@ -261,9 +265,9 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return exists;
 	}
 
-	public void searchInspectionByNumber(String inspnumber) {
+	public void searchInspectionByNumber(String inspection) {
 		makeSearchPanelVisible();
-		setInspectionNumberSearchCriteria(inspnumber);
+		setInspectionNumberSearchCriteria(inspection);
 		clickFindButton();
 		waitABit(400);
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
@@ -315,7 +319,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		}
 	}
 
-	public void declineInspectionByNumber(String inspnumber) throws InterruptedException {
+	public void declineInspectionByNumber(String inspnumber) {
 		searchInspectionByNumber(inspnumber);
 		clickInspectionApproveMarker(inspnumber);
 		waitForNewTab();
@@ -338,7 +342,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		// Thread.sleep(3000);
 	}
 
-	public void approveInspectionByNumber(String inspnumber) throws InterruptedException {
+	public void approveInspectionByNumber(String inspnumber) {
 		searchInspectionByNumber(inspnumber);
 		clickInspectionApproveMarker(inspnumber);
 		waitForNewTab();
@@ -642,4 +646,10 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		}
 		return PageFactory.initElements(driver, SendInspectionCustomEmailTabWebPage.class);
 	}
+
+    public String findInspectionFromList() {
+        clickFindButton();
+        waitForLoading();
+        return wait.until(ExpectedConditions.visibilityOfAllElements(inspectionsList)).get(0).getText();
+    }
 }
