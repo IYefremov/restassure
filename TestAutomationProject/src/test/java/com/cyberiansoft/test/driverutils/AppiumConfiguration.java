@@ -31,11 +31,13 @@ public class AppiumConfiguration {
 			case ANDROID:
 				File appDir = new File("./data/");
 				try {
-					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_0618.app.zip"), appDir);
+					date = date.minusDays(1);
+					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_" + date.format(dateFormat) + ".app.zip"), appDir);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				File app = new File(appDir, "Repair360AndroidTeam.apk");
+				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
 
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
