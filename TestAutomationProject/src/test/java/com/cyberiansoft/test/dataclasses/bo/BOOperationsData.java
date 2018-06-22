@@ -2,7 +2,7 @@ package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BOOperations {
+public class BOOperationsData {
 
     @JsonProperty("invoiceNumber")
     private String invoiceNumber;
@@ -93,6 +93,18 @@ public class BOOperations {
 
     @JsonProperty("label")
     private String label;
+
+    @JsonProperty("inspectionNum1")
+    private String inspectionNum1;
+
+    @JsonProperty("inspectionNum2")
+    private String inspectionNum2;
+
+    @JsonProperty("fromTime")
+    private String fromTime;
+
+    @JsonProperty("toTime")
+    private String toTime;
 
     public String getInvoiceNumber() {
         return invoiceNumber;
@@ -212,5 +224,21 @@ public class BOOperations {
 
     public String getLabel() {
         return label;
+    }
+
+    public String getInspectionNum1() {
+        return inspectionNum1;
+    }
+
+    public String getInspectionNum2() {
+        return inspectionNum2;
+    }
+
+    public String getFromTime() {
+        return fromTime;
+    }
+
+    public String getToTime() {
+        return toTime;
     }
 }

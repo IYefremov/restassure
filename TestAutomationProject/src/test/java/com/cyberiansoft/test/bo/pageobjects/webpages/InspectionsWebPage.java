@@ -114,6 +114,37 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 
+	@FindBy(xpath = "//a[contains(text(), 'RO')]") //todo change the locator to verify only 'by RO' duplicates (after the inspections will be corrected)
+	private WebElement duplicateByRO;
+
+	@FindBy(xpath = "//a[contains(text(), 'by VIN')]")
+	private WebElement duplicateByVIN;
+
+    @FindBy(xpath = "//a[contains(text(), 'by VIN and RO#')]")
+    private WebElement duplicateByVINandRO;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpFrom_dateInput') and contains (@type, 'text')]")
+    private WebElement fromDateField;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpTo_dateInput') and contains (@type, 'text')]")
+    private WebElement toDateField;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpFrom_dateInput_ClientState')]")
+    private WebElement fromDateClientsField;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpTo_dateInput_ClientState')]")
+    private WebElement toDateClientsField;
+
+    public InspectionsWebPage setTimeFrame(String from, String to) {
+        wait.until(ExpectedConditions.elementToBeClickable(fromDateField)).clear();
+        fromDateField.sendKeys(from);
+        wait.until(ExpectedConditions.attributeContains(fromDateClientsField, "value", from));
+        wait.until(ExpectedConditions.elementToBeClickable(toDateField)).clear();
+        toDateField.sendKeys(to);
+        wait.until(ExpectedConditions.attributeContains(toDateClientsField, "value", to));
+        return this;
+    }
+
 	public InspectionsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -124,11 +155,12 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return searchtab.getAttribute("class").contains("open");
 	}
 
-	public void makeSearchPanelVisible() {
+	public InspectionsWebPage makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
 		wait.until(ExpectedConditions.visibilityOf(searchcustomercmb.getWrappedElement()));
+		return this;
 	}
 
 	public void verifyInspectionsTableColumnsAreVisible() {
@@ -200,8 +232,9 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		searchcustomerdd.selectByVisibleText(customer);
 	}
 
-	public void selectSearchTimeframe(String timeframe) {
+	public InspectionsWebPage selectSearchTimeframe(String timeframe) {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe);
+		return this;
 	}
 
 	public void selectSearchType(String _type) {
@@ -223,7 +256,25 @@ public class InspectionsWebPage extends WebPageWithFilter {
                 .findElements(By.xpath(".//tr/td/a[contains(text(), '" + inspectionnumber + "')]")).size() > 0;
 	}
 
-	public void deleteFirstInspection() {
+	public DuplicateInspectionsWebPage clickDuplicateByROLink() {
+	    wait.until(ExpectedConditions.elementToBeClickable(duplicateByRO)).click();
+        waitForNewTab();
+        return PageFactory.initElements(driver, DuplicateInspectionsWebPage.class);
+    }
+
+	public DuplicateInspectionsWebPage clickDuplicateByVINLink() {
+	    wait.until(ExpectedConditions.elementToBeClickable(duplicateByVIN)).click();
+        waitForNewTab();
+        return PageFactory.initElements(driver, DuplicateInspectionsWebPage.class);
+    }
+
+	public DuplicateInspectionsWebPage clickDuplicateByVINandROLink() {
+	    wait.until(ExpectedConditions.elementToBeClickable(duplicateByVINandRO)).click();
+        waitForNewTab();
+        return PageFactory.initElements(driver, DuplicateInspectionsWebPage.class);
+    }
+
+    	public void deleteFirstInspection() {
 		click(deleteinspectionbtn);
 		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();

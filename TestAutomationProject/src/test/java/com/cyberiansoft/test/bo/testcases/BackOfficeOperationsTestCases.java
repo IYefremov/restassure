@@ -2,7 +2,7 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.dataclasses.bo.BOOperations;
+import com.cyberiansoft.test.dataclasses.bo.BOOperationsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
@@ -23,7 +23,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationTechnicianCommissionSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -71,7 +71,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -120,7 +120,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationServiceContract(String rowID, String description, JSONObject testData) throws Exception {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -149,7 +149,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationInspection(String rowID, String description, JSONObject testData) throws Exception {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -202,7 +202,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationVendorBill(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -217,7 +217,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequest(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -276,7 +276,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testWorkOrderSearchOperation(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -291,154 +291,66 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testEditDuplicateByRO(String rowID, String description, JSONObject testData) {
 
-        BOOperations data = JSonDataParser.getTestDataFromJson(testData, BOOperations.class);
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
         InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
-        inspectionsWebPage.makeSearchPanelVisible();
-        String inspection = inspectionsWebPage.findInspectionFromList();
-        System.out.println(inspection);
-        inspectionsWebPage.searchInspectionByNumber(inspection);
-        Assert.assertTrue(inspectionsWebPage.inspectionExists(inspection));
-//        VIN: 77777777777777777
-//        E-010-00065
-//        E-010-00064
-//        E-010-00063
-//        E-010-00062
-//        E-010-00060
-//        E-010-00061 todo finish after the TC will be updated
+        inspectionsWebPage.makeSearchPanelVisible()
+                .selectSearchTimeframe(data.getTimeFrame())
+                .setTimeFrame(data.getFromTime(), data.getToTime())
+                .searchInspectionByNumber(data.getInspectionNum1());
+        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByROLink();
+        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
+                "The duplicate by RO inspection #1 has not been displayed");
+        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
+                "The duplicate by RO inspection #2 has not been displayed");//todo change the locator after the inspection will be displayed only for RO
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEditDuplicateByVIN(String rowID, String description, JSONObject testData) {
+
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
+        inspectionsWebPage.makeSearchPanelVisible()
+                .selectSearchTimeframe(data.getTimeFrame())
+                .setTimeFrame(data.getFromTime(), data.getToTime())
+                .searchInspectionByNumber(data.getInspectionNum1());
+        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByVINLink();
+        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
+        //todo uncomment after the inspections with unique VIN numbers will be created
+//        Assert.assertTrue(duplicateInspectionsWebPage.isInspectionDisplayed(data.getInspectionNum1()),
+//                "The inspection #1 has not been displayed for duplicate by VIN");
+//        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayedForInspection(data.getInspectionNum2(), data.getVIN()),
+//                "The inspection #2 has not been displayed for duplicate by VIN");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEditDuplicateByVINandRO(String rowID, String description, JSONObject testData) {
+
+        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
+        inspectionsWebPage.makeSearchPanelVisible()
+                .selectSearchTimeframe(data.getTimeFrame())
+                .setTimeFrame(data.getFromTime(), data.getToTime())
+                .searchInspectionByNumber(data.getInspectionNum1());
+        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByVINandROLink();
+        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
+        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
+                "The duplicate by VIN and RO inspection #1 has not been displayed");
+        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
+                "The duplicate by VIN and RO inspection #2 has not been displayed");
     }
 }
-//package com.cyberiansoft.test.inhouse.utils;
-//
-//import com.aventstack.extentreports.ExtentTest;
-//import com.aventstack.extentreports.Status;
-//import com.cyberiansoft.test.extentreportproviders.ExtentManager;
-//import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
-//import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
-//import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
-//import org.apache.commons.lang3.StringUtils;
-//import org.testng.*;
-//import org.testng.annotations.AfterClass;
-//import org.testng.annotations.BeforeClass;
-//import java.io.PrintWriter;
-//import java.io.StringWriter;
-//import java.io.Writer;
-//import java.util.Calendar;
-//import java.util.Date;
-//
-//public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener {
-//
-//	private ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
-//
-//    @Override
-//	public synchronized void onStart(ITestContext context) {
-//    	ExtentManager.createInstance(InHouseConfigInfo.getInstance().getReportFolderPath() +
-//                InHouseConfigInfo.getInstance().getReportFileName());
-//    	//ExtentTest parent = extent.createTest(getClass().getName());
-//        //parentTest.set(parent);
-//	}
-//
-//	@Override
-//	public synchronized void onFinish(ITestContext context) {
-//		ExtentManager.getInstance().flush();
-//	}
-//
-//	@Override
-//	public synchronized void onTestStart(ITestResult result) {
-//		ExtentTest extent;
-//		if (ExtentTestManager.getTest() == null) {
-//			ExtentTestManager.createTest(result.getTestClass().getName());
-//		}
-//		if ( getTestParams(result).isEmpty() ) {
-//			extent = ExtentTestManager.getTest().createNode(result.getMethod().getMethodName());
-//        }
-//
-//        else {
-//            if ( getTestParams(result).split(",")[0].contains(result.getMethod().getMethodName()) ) {
-//            	extent = ExtentTestManager.getTest().createNode(getTestParams(result).split(",")[0], getTestParams(result).split(",")[1]);
-//            }
-//
-//            else {
-//            	extent = ExtentTestManager.getTest().createNode(result.getMethod().getMethodName(), getTestParams(result).split(",")[1]);
-//            }
-//        }
-//
-//		extent.getModel().setStartTime(getTime(result.getStartMillis()));
-//
-//		extentTest.set(extent);
-//		//ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName());
-//        //test.set(child);
-//	}
-//
-//	@Override
-//	public synchronized void onTestSuccess(ITestResult result) {
-//		extentTest.get().log(Status.PASS, "<font color=#00af00>" + Status.PASS.toString().toUpperCase() + "</font>");
-//		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
-//	}
-//
-//	@Override
-//	public synchronized void onTestFailure(ITestResult result) {
-//		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
-//		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
-//		if ( !getTestParams(result).isEmpty() ) {
-//			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
-//		}
-//		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
-//	}
-//
-//	@Override
-//	public synchronized void onTestSkipped(ITestResult result) {
-//		extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
-//		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
-//		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
-//	}
-//
-//	@Override
-//	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-//
-//	}
-//
-//	private String getStrackTrace(ITestResult result) {
-//        Writer writer = new StringWriter();
-//        PrintWriter printWriter = new PrintWriter(writer);
-//        result.getThrowable().printStackTrace(printWriter);
-//
-//        return "<br/>\n" + writer.toString().replace(System.lineSeparator(), "<br/>\n");
-//    }
-//
-//	private String getTestParams(ITestResult tr) {
-//        TestNG_ConsoleRunner runner = new TestNG_ConsoleRunner();
-//
-//        return runner.getTestParams(tr);
-//    }
-//
-//	private Date getTime(long millis) {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(millis);
-//
-//        return calendar.getTime();
-//    }
-//
-//	@Override
-//	public void afterInvocation(IInvokedMethod method, ITestResult result) {
-//		AfterClass testAnnotation = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(AfterClass.class);
-//		if (testAnnotation != null) {
-//			ExtentTestManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
-//		}
-//
-//	}
-//
-//	@Override
-//	public void beforeInvocation(IInvokedMethod method, ITestResult result) {
-//		BeforeClass testAnnotation = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(BeforeClass.class);
-//		if (testAnnotation != null) {
-//			if (!StringUtils.isEmpty(method.getTestMethod().getDescription()))
-//				ExtentTestManager.createTest(method.getTestMethod().getDescription());
-//			else
-//				ExtentTestManager.createTest(result.getMethod().getTestClass().getName());
-//			ExtentTestManager.getTest().getModel().setStartTime(getTime(result.getStartMillis()));
-//		}
-//	}
-//}
