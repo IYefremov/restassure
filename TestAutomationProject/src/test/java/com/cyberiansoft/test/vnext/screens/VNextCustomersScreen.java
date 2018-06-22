@@ -20,7 +20,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='customers-list']")
 	private WebElement customersscreen;
 	
-	@FindBy(xpath="//div[contains(@class, 'list-block-search')]")
+	@FindBy(xpath="//*[@data-autotests-id='customers-list']")
 	private WebElement customerslist;
 	
 	@FindBy(xpath="//a[@action='select-customer']")
@@ -52,9 +52,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1500);
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+		if (cancelsearchbtn.isDisplayed())
+			tap(cancelsearchbtn);
 	}
 	
 	public void selectCustomer(AppCustomer customer) {
+		if (elementExists("//*[@data-automation-id='search-icon']"))
+			searchCustomerByName(customer.getFullName());
 		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
 			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));	
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
@@ -102,10 +106,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 
 	public boolean isCustomerExists(AppCustomer customer) {
+		searchCustomerByName(customer.getFullName());
 		return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;		
 	}
 	
 	public void clickBackButton() {
+		if (cancelsearchbtn.isDisplayed())
+			tap(cancelsearchbtn);
 		clickScreenBackButton();
 	}
 	
@@ -135,9 +142,12 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void typeSearchParameters(String searchtxt) {
-		tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
+		if (appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")).isDisplayed())
+			tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(searchfld));
+		tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-clear']")));
+		tap(searchfld);
 		appiumdriver.getKeyboard().sendKeys(searchtxt);
 		//searchfld.clear();
 		//searchfld.sendKeys(searchtxt);

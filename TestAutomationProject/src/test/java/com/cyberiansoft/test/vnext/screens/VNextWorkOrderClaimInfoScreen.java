@@ -69,8 +69,9 @@ public class VNextWorkOrderClaimInfoScreen extends VNextBaseInspectionsScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(insurancecompanyfld));
 		tap(appiumdriver.findElement(By.xpath("//*[@action='company']/a")));
-		VNextBaseScreenWithListSelection listscreen = new VNextBaseScreenWithListSelection(appiumdriver);
-		listscreen.selectListItem(insuranceCompany);
+		wait = new WebDriverWait(appiumdriver, 10);
+		WebElement insuranceCompaniesList = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='companies-list']")));
+		tap(insuranceCompaniesList.findElement(By.xpath(".//*[@data-name='" + insuranceCompany + "']")));
 	}
 	
 	public String getInsuranceCompany() {

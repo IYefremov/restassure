@@ -12,7 +12,7 @@
     <classes>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases">
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases">
+      <!--<class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases">
       </class>
@@ -30,6 +30,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamCalculationsTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextPayInvoicesTestCases">
+      </class>-->
     </classes>
   </test>
 </suite>
