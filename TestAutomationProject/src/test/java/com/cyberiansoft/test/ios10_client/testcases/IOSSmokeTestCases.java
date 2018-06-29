@@ -1524,6 +1524,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.changeCustomerForInvoice(invoicenumber, iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		Assert.assertEquals(invoiceinfoscreen.getInvoiceCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		invoiceinfoscreen.clickFirstWO();
 		vehiclescreeen = new VehicleScreen(appiumdriver);
@@ -5571,7 +5572,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);
-		invoiceinfoscreen = myinvoicesscreen.clickEditPopup();
+		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
 		invoiceinfoscreen.clickInvoicePayButton();
 		//invoiceinfoscreen.changePaynentMethodToCashNormal();
@@ -5658,7 +5660,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);
-		invoiceinfoscreen = myinvoicesscreen.clickEditPopup();
+		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new InvoiceInfoScreen(appiumdriver);
 		Assert.assertEquals(invoiceinfoscreen.getInvoicePOValue(), _po);
 		invoiceinfoscreen.clickInvoicePayButton();
 		//invoiceinfoscreen.changePaynentMethodToCashNormal();

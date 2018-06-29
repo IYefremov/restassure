@@ -23,7 +23,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	}
 	
 	@AfterClass()
-	public void settingDown() throws Exception {	
+	public void settingDown() {
 	}
 	
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

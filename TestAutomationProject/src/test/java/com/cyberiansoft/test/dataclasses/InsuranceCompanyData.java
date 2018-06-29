@@ -12,6 +12,9 @@ public class InsuranceCompanyData {
 	 
 	@JsonProperty("policyNumber")
 	String policyNumber;
+
+	@JsonProperty("deductible")
+	String deductible;
 	
 	public String getInsuranceCompanyName() {
 		 return insuranceCompanyName;
@@ -23,6 +26,10 @@ public class InsuranceCompanyData {
 	 
 	public String getPolicyNumber() {
 		 return policyNumber;
+	}
+
+	public String getDeductible() {
+		return deductible;
 	}
 
 }
