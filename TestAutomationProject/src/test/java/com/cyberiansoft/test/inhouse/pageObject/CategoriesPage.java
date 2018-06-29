@@ -1,6 +1,10 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import org.openqa.selenium.*;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -47,21 +51,24 @@ public class CategoriesPage extends BasePage {
     @FindBy(xpath="//td[@class='sorting_1']")
     private WebElement categoriesNames;
 
+    @FindBy(xpath="//td[@class='sorting_1']//span")
+    private List<WebElement> categoriesNamesList;
+
     @FindBy(className="shirma-dialog")
     private WebElement shirmaDialog;
 
     @FindBy(xpath="//h4[contains(text(), 'New category successfully added')]/../button[@class='close']")
     private WebElement categoryAddedCloseButton;
 
-    @FindBy(xpath="//h4[contains(text(), 'New attribute successfully added')]/../button[@class='close']")
-    private WebElement attributeAddedCloseButton;
+    @FindBy(xpath="//td[@class=' details-control']")
+    private List<WebElement> categoryDetailsControlList;
 
     public CategoriesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-
+    @Step
     public CategoriesPage clickAddCategoryButton() {
         try {
             wait.until(ExpectedConditions.visibilityOf(addCategoryButton));
@@ -72,11 +79,13 @@ public class CategoriesPage extends BasePage {
         return this;
     }
 
+    @Step
     public CategoriesPage setCategory(String category) {
         wait.until(ExpectedConditions.visibilityOf(inputFields.get(0))).sendKeys(category);
         return this;
     }
 
+    @Step
     public CategoriesPage clickSubmitCategoryButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitCategoryBTN)).click();
         waitForLoading();
@@ -84,6 +93,7 @@ public class CategoriesPage extends BasePage {
         return this;
     }
 
+    @Step
     public CategoriesPage deleteCategory(String name) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(categoriesNames
@@ -92,61 +102,42 @@ public class CategoriesPage extends BasePage {
         try {
             driver.switchTo().alert().accept();
         } catch(Exception ignored){}
+        closeNotification();
         return this;
     }
 
+    @Step
     public CategoriesPage verifyCategoriesDoNotExist(String category) {
-        while (true) {
-            try {
-                if (wait.until(ExpectedConditions
-                        .visibilityOfAllElements(categoriesNames)).get(0).getText().equals(category)) {
-                    deleteCategory(category);
-                } else {
-                    break;
-                }
-            } catch (Exception ignored) {}
-        }
+        try {
+            while (isCategoryDisplayed(category)) {
+                deleteCategory(category);
+            }
+        } catch (Exception ignored) {}
         return this;
     }
 
+    @Step
     public boolean isCategoryDisplayed(String category) {
         try {
-            try {
-                wait.until(ExpectedConditions.not(ExpectedConditions
-                        .stalenessOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]")))));
-                wait.until(ExpectedConditions
-                        .visibilityOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]"))));
-                return true;
-            } catch (Exception e) {
-                System.out.println("In the first catch");
-                refreshPage();
-                wait.until(ExpectedConditions
-                        .visibilityOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]"))));
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("In the second catch");
-            e.printStackTrace();
+            waitABit(1000);
+            wait.until(ExpectedConditions
+                    .visibilityOf(categoriesNames.findElement(By.xpath("//span[contains(text(),'" + category + "')]"))));
+            return true;
+        } catch (Exception ignored) {
             return false;
         }
     }
 
+    @Step
     public CategoriesPage clickAddAttributeButtonForCategory(String name) {
-//        try {
-//            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(driver
-//                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))));
-//            wait.until(ExpectedConditions.elementToBeClickable(driver
-//                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]")))).click();
-//        } catch (Exception e) {
-//            refreshPage();
-            wait.until(ExpectedConditions.elementToBeClickable(driver
-                    .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]"))))
-                    .click();
-//        }
+        wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.xpath("//span[contains(text(),'" + name + "')]/following::a[1]"))))
+                .click();
         wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
         return this;
     }
 
+    @Step
     public CategoriesPage fillNotAutomatedAttributeFields(String name, String dataType) {
         wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
 
@@ -160,6 +151,7 @@ public class CategoriesPage extends BasePage {
         return this;
     }
 
+    @Step
     public CategoriesPage fillAutomatedAttributeFields(String name, String isAutomated, String procedureName) {
         wait.until(ExpectedConditions.visibilityOf(addAttributeDialog));
         wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
@@ -169,13 +161,15 @@ public class CategoriesPage extends BasePage {
         return this;
     }
 
+    @Step
     public CategoriesPage clickAddAttributeButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addAttributeInCreationWindow)).click();
         waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(attributeAddedCloseButton)).click();
+        closeNotification();
         return this;
     }
 
+    @Step
     public boolean checkAttributeByName(String categoryName, String attName) {
         expandAttributesList(categoryName);
         try{
@@ -186,25 +180,22 @@ public class CategoriesPage extends BasePage {
         }
     }
 
+    @Step
     private void expandAttributesList(String category) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'" + category + "')]")));
         try {
-            wait.until(ExpectedConditions.not(ExpectedConditions
-                    .stalenessOf(categoriesNames.findElement(By.xpath("//span[contains(text(), '" +
-                            category + "')]/preceding::td/i[@class='fa fa-chevron-right']")))));
-            wait.until(ExpectedConditions.elementToBeClickable(categoriesNames
-                    .findElement(By.xpath("//span[contains(text(), '" + category +
-                            "')]/preceding::td/i[@class='fa fa-chevron-right']")))).click();
+            waitABit(500);
+            wait.until(ExpectedConditions.visibilityOfAllElements(categoryDetailsControlList));
+            for (WebElement control : categoryDetailsControlList) {
+                if (control.findElement(By.xpath("./following::span")).getText().contains(category)) {
+                    control.click();
+                }
+            }
         } catch (Exception e) {
-            refreshPage();
-            wait.until(ExpectedConditions.elementToBeClickable(categoriesNames.findElement(By
-                    .xpath("//span[contains(text(), '" + category +
-                            "')]/preceding::td/i[@class='fa fa-chevron-right']")))).click();
+            Assert.fail("The attributes list is not opened for category " + category, e);
         }
-        wait.until(ExpectedConditions.visibilityOfAllElements(categoriesNames
-                .findElements(By.xpath("//span[contains(text(),'" + category + "')]/following::th[text()]"))));
-        }
+    }
 
+    @Step
     public CategoriesPage addCategory(String category) {
         clickAddCategoryButton();
         setCategory(category);

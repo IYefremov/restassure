@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,6 +53,7 @@ public class LeftMenuPanel extends BasePage {
     }
 
 
+    @Step
     private void clickMenu(WebElement menu) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(menu)).click();
@@ -62,6 +62,7 @@ public class LeftMenuPanel extends BasePage {
         }
     }
 
+    @Step
     private void clickSubMenu(WebElement submenu) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(submenu)).click();
@@ -74,16 +75,19 @@ public class LeftMenuPanel extends BasePage {
      * MenuLinks
      * @return
      */
+    @Step
     public LeftMenuPanel clickClientManagement() {
         clickMenu(clientManagement);
         return this;
     }
 
+    @Step
     public LeftMenuPanel clickClients() {
         clickMenu(clients);
         return this;
     }
 
+    @Step
     public LeftMenuPanel clickFinancialMapping() {
         clickMenu(financialMapping);
         return this;
@@ -93,6 +97,7 @@ public class LeftMenuPanel extends BasePage {
      * SubmenuLinks
      * @return
      */
+    @Step
     public ClientQuotesPage clickClientQuotesSubmenu() {
         clickSubMenu(clientQuotes);
         waitForLoading();
@@ -105,73 +110,31 @@ public class LeftMenuPanel extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }
 
+    @Step
     public ClientSegmentsPage clickClientSegmentsSubmenu() {
         clickSubMenu(clientSegments);
         waitForLoading();
         return PageFactory.initElements(driver, ClientSegmentsPage.class);
     }
 
+    @Step
     public CategoriesPage clickCategoriesSubmenu() {
         clickSubMenu(categories);
         waitForLoading();
         return PageFactory.initElements(driver, CategoriesPage.class);
     }
 
+    @Step
     public OrganizationsRulesPage clickOrganizationsRulesSubmenu() {
         clickSubMenu(organizationsRules);
         waitForLoading();
         return PageFactory.initElements(driver, OrganizationsRulesPage.class);
     }
 
+    @Step
     public AccountsRulesPage clickAccountsRulesSubmenu() {
         clickSubMenu(accountsRules);
         waitForLoading();
         return PageFactory.initElements(driver, AccountsRulesPage.class);
-    }
-
-
-
-    public BasePage clickOnMenu(String menuName) throws InterruptedException {
-        Thread.sleep(2000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='" + menuName + "']")));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='" + menuName + "']"))).click();
-        switch (menuName){ //todo delete the method after the necessary clickMethods will be created
-            case "Client Quotes":
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchString")));
-                    return PageFactory.initElements(driver,
-                            ClientQuotesPage.class);
-                }catch(TimeoutException ex){}
-                break;
-            case "Categories":
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-toggle btn-add-category']")));
-                    return PageFactory.initElements(driver,
-                            CategoriesPage.class);
-                }catch(TimeoutException ex){}
-                break;
-            case "Client Segments":
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("searchClient")));
-                    return PageFactory.initElements(driver,
-                            ClientSegmentsPage.class);
-                }catch(TimeoutException ex){}
-                break;
-            case "Organizations Rules":
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[text()='Organization Name']")));
-                    return PageFactory.initElements(driver,
-                            OrganizationsRulesPage.class);
-                }catch(TimeoutException ex){}
-                break;
-            case "Accounts Rules":
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Accounts Rules')]")));
-                    return PageFactory.initElements(driver,
-                            AccountsRulesPage.class);
-                }catch(TimeoutException ex){}
-                break;
-        }
-        return  null;
     }
 }

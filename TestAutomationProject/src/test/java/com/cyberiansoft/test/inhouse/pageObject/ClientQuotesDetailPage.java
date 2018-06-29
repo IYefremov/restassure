@@ -2,6 +2,7 @@ package com.cyberiansoft.test.inhouse.pageObject;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -110,6 +111,7 @@ public class ClientQuotesDetailPage extends BasePage {
         userPassword = InHouseConfigInfo.getInstance().getUserPassword();
     }
 
+    @Step
     public boolean checkAgreementStatus(String agreement, String payment, String letterView, String agreementView) {
         try {
             wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
@@ -124,6 +126,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     public boolean checkAgreementStatus(String agreement) {
         try {
             wait.until(ExpectedConditions.visibilityOf(agreementStatusesBlock));
@@ -135,12 +138,14 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     public ClientQuotesDetailPage clickDiscountButton() {
         discountBTN.click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
         return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }
 
+    @Step
     public ClientQuotesDetailPage clickFinalizeAgreementButton() {
         wait.until(ExpectedConditions.elementToBeClickable(finalizeAgreementButton)).click();
         try {
@@ -149,6 +154,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }
 
+    @Step
     private void handleAlertForFinalizeAgreementButton() {
         try {
             wait.until(ExpectedConditions.attributeToBe(modalDialog, "display", "block"));
@@ -157,6 +163,7 @@ public class ClientQuotesDetailPage extends BasePage {
         } catch (Exception ignored) {}
     }
 
+    @Step
     public void sendNotification() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(sendNotificationButton)).click();
@@ -230,6 +237,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return MailChecker.getUserMailContentFromSpam();
     }
 
+    @Step
     public void selectDiscount(String discount) {
         driver.switchTo().defaultContent();
         wait.until(ExpectedConditions.elementToBeClickable(formControlList));
@@ -240,6 +248,7 @@ public class ClientQuotesDetailPage extends BasePage {
         waitForLoading();
     }
 
+    @Step
     public boolean checkNewPrice(String price) {
         waitABit(2000);
         System.out.println("PRICE:");
@@ -248,10 +257,12 @@ public class ClientQuotesDetailPage extends BasePage {
         return pricePerMonth.getText().equals(price);
     }
 
+    @Step
     public boolean checkSetupFee(String fee) {
         return wait.until(s -> totalSetUpFee.getText().contains(fee));
     }
 
+    @Step
     public boolean checkPricePerMonth(String price) {
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(pricePerMonth, price));
@@ -261,6 +272,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     public void clickAddClientSupportItem(String clientSupportItem) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[text()='" +
@@ -304,6 +316,7 @@ public class ClientQuotesDetailPage extends BasePage {
 //        selectSetupFee("Copy to Agreement settings page only features with \"Publice view\" State (when creating Client Agreement).", "test_r_1");
 //    }
 
+    @Step
     private int getSetupFeeListSize() {
         try {
             return wait.until(ExpectedConditions.visibilityOfAllElements(emptySetupFeeSelectionList)).size();
@@ -312,6 +325,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     private int getSetupFeePricesSize() {
         try {
             return wait.until(ExpectedConditions.visibilityOfAllElements(setupFeePrices)).size();
@@ -321,6 +335,7 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     public void selectSetupFeeForAllClients() {
         try {
             int setupFeeListSize = getSetupFeeListSize();
@@ -331,6 +346,7 @@ public class ClientQuotesDetailPage extends BasePage {
                 Select selection = new Select(dropUpOptions);
                 selection.selectByIndex(1);
                 wait.until(s -> !selection.getAllSelectedOptions().isEmpty());
+                waitABit(300);
                 wait.until(ExpectedConditions.elementToBeClickable(submitSetupFeeButton)).click();
                 waitForLoading();
                 setupFeeListSize--;
@@ -341,11 +357,13 @@ public class ClientQuotesDetailPage extends BasePage {
         }
     }
 
+    @Step
     private void clickYesToAddItemToAgreement() {
         yesAddItemToAgreement.click();
         waitForLoading();
     }
 
+    @Step
     public double calculatePricePerMonth() {
         int setupFeePricesSize = getSetupFeePricesSize();
         List<Double> prices = new ArrayList<>();
@@ -358,15 +376,18 @@ public class ClientQuotesDetailPage extends BasePage {
         return prices.stream().mapToDouble(Double::doubleValue).sum();
     }
 
+    @Step
     public String getPricePerMonth() {
         return "$" + calculatePricePerMonth();
     }
 
+    @Step
     private void clickBillingStartsLink() {
         wait.until(ExpectedConditions.elementToBeClickable(billingStartsLink)).click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
     }
 
+    @Step
     private void chooseBillingStartsFromToday() {
         wait.until(ExpectedConditions.elementToBeClickable(billingStartsField)).click();
         wait.until(ExpectedConditions.visibilityOf(billingStartsDateWidget));
@@ -375,6 +396,7 @@ public class ClientQuotesDetailPage extends BasePage {
                 .findElement(By.xpath(".//td[@data-day='" + format + "']")))).click();
     }
 
+    @Step
     private void verifyDateIsSaved() {
         wait.until(ExpectedConditions.elementToBeClickable(billingStartsSubmitButton)).click();
         waitForLoading();
@@ -385,7 +407,8 @@ public class ClientQuotesDetailPage extends BasePage {
         waitABit(500);
     }
 
-        public ClientQuotesDetailPage setBillingStartsFromToday() {
+    @Step
+    public ClientQuotesDetailPage setBillingStartsFromToday() {
         clickBillingStartsLink();
         chooseBillingStartsFromToday();
         verifyDateIsSaved();

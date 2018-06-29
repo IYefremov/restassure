@@ -22,6 +22,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     @BeforeClass()
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
+
         mailChecker = new MailChecker();
     }
 
@@ -135,6 +136,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(clientQuotesDetailPage.getPricePerMonth()));
         clientQuotesDetailPage
+                .setBillingStartsFromToday()
                 .clickFinalizeAgreementButton()
                 .sendNotification();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));
@@ -182,6 +184,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(clientQuotesDetailPage.getPricePerMonth()));
         clientQuotesDetailPage
+                .setBillingStartsFromToday()
                 .clickFinalizeAgreementButton()
                 .sendNotification();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));

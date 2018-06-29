@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,9 @@ public class BasePage {
     @FindBy(xpath = "//div[@class='shirma-dialog' and contains(@style, 'display: block')]")
     private WebElement shirmaDialog;
 
+    @FindBy(xpath="//button[@data-dismiss='alert']")
+    private WebElement successNotificationCloseButton;
+
     public WebDriver driver;
     public static WebDriverWait wait;
 
@@ -29,6 +33,7 @@ public class BasePage {
         wait = new WebDriverWait(driver, 60, 250);
     }
 
+    @Step
     public void waitForShirmaDialog() {
         try {
             if (shirmaDialog.isDisplayed())
@@ -36,21 +41,25 @@ public class BasePage {
         } catch (Exception ignored) {}
     }
 
+    @Step
     public void goToPreviousPage() {
         driver.navigate().back();
     }
 
+    @Step
     public void refreshPage() {
         driver.navigate().refresh();
         waitABit(2000);
     }
 
+    @Step
     public void waitForOverflowToDisappear() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body[contains(@style, 'auto')]")));
         } catch (Exception ignored) {}
     }
 
+    @Step
     public void waitForLoading() {
         try {
             wait.until(ExpectedConditions
@@ -64,6 +73,7 @@ public class BasePage {
         }
     }
 
+    @Step
     public void waitForProcessing() {
         try {
             wait.until(ExpectedConditions
@@ -71,6 +81,7 @@ public class BasePage {
         } catch (Exception ignored) {}
     }
 
+    @Step
     public static void waitABit(int milliseconds) {
         if (milliseconds > 0) {
             try {
@@ -79,8 +90,16 @@ public class BasePage {
         }
     }
 
+    @Step
     public BasePage clickWithJS(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         return this;
+    }
+
+    @Step
+    public void closeNotification() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(successNotificationCloseButton)).click();
+        } catch (Exception ignored) {}
     }
 }

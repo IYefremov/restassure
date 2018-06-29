@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,6 +75,7 @@ public class ClientSegmentsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public ClientSegmentsPage selectAttribute(String attributeName, String attributeValue) {
         wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
         wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
@@ -89,6 +91,7 @@ public class ClientSegmentsPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientSegmentsPage deselectAttribute() {
         waitABit(500);
         wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
@@ -102,12 +105,14 @@ public class ClientSegmentsPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientSegmentsPage clickSearch() {
         wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(searchButton, "disabled", "")));
         return this;
     }
 
+    @Step
     public ClientSegmentsPage expandAttributesList(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//td[text()='" + name +
                     "']/preceding::td[contains(@class, 'details-control')]")))).click(); //td[text()='CompanyAutomation']/preceding::td[contains(@class, 'details-control')]
@@ -115,6 +120,7 @@ public class ClientSegmentsPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientSegmentsPage searchClientSegment(String client) {
         try {
             wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
@@ -128,6 +134,7 @@ public class ClientSegmentsPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientSegmentsPage setAttributeValue(String attributeName, String attributeValue) {
         wait.until(ExpectedConditions.elementToBeClickable(driver
                 .findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]"))
@@ -141,6 +148,7 @@ public class ClientSegmentsPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean isAttributeValueDisplayed(String attributeName, String attributeValue) {
         return wait.until(ExpectedConditions.elementToBeClickable(driver
                 .findElement(By.xpath("//td[contains(text(),'" + attributeName + "')]/../td[2]//span"))))
@@ -148,6 +156,7 @@ public class ClientSegmentsPage extends BasePage {
                 .equals(attributeValue);
     }
 
+    @Step
     public boolean checkAttributeValue(String attName, String attValue) {
         waitABit(500);
         return driver.findElement(By.xpath("//td[contains(text(),'" + attName + "')]")).findElement(By.xpath(".."))
@@ -156,6 +165,7 @@ public class ClientSegmentsPage extends BasePage {
 
     }
 
+    @Step
     public boolean verifyClientIsDisplayed(String client) {
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(clientNameData, client));
@@ -165,6 +175,7 @@ public class ClientSegmentsPage extends BasePage {
         }
     }
 
+    @Step
     public boolean verifyAttributeNameIsDisplayed(String attribute, String category) {
         try {
             List<WebElement> data = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//td")));

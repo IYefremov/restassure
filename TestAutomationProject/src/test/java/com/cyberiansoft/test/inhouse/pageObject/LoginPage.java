@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,6 +46,7 @@ public class LoginPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public void loginByGmail() {
         wait.until(ExpectedConditions.elementToBeClickable(loginGmailBTN)).click();
         if (!driver.getCurrentUrl().contains("Dashboard")) {

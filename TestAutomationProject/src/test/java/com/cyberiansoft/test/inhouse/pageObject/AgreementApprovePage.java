@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -77,14 +78,17 @@ public class AgreementApprovePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public void openAgreementLinkFromGmail(String link) {
         driver.get(link);
     }
 
+    @Step
     public boolean isAgreementPageOpened() {
         return wait.until(driver -> driver.getTitle().contains("Client agreement"));
     }
 
+    @Step
     public void fillClientInfo(String firstName, String lastName, String companyName) {
         driver.switchTo().defaultContent();
         wait.until(ExpectedConditions.visibilityOf(firstNameField));
@@ -93,18 +97,22 @@ public class AgreementApprovePage extends BasePage {
         setCompanyName(companyName);
     }
 
+    @Step
     public void setFirstName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(firstNameField)).sendKeys(name);
     }
 
+    @Step
     public void setLastName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(lastNameField)).sendKeys(name);
     }
 
+    @Step
     public void setCompanyName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(companyNameField)).sendKeys(name);
     }
 
+    @Step
     public boolean checkTermsAndConditions() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(termsAndConditions)).click();
@@ -117,11 +125,13 @@ public class AgreementApprovePage extends BasePage {
         }
     }
 
+    @Step
     public AgreementApprovePage clickAgreeWithTermsAndConditionsButton() {
         wait.until(ExpectedConditions.elementToBeClickable(agreeWithTermsCheckBox)).click();
         return this;
     }
 
+    @Step
     public AgreementApprovePage clickAcceptAgreementButton() {
         wait.until(ExpectedConditions.elementToBeClickable(acceptAgreementButton)).click();
         wait.until(ExpectedConditions.attributeContains(thankYouDialog, "style", "display: block;"));
@@ -130,6 +140,7 @@ public class AgreementApprovePage extends BasePage {
         return this;
     }
 
+    @Step
     public AgreementApprovePage clickSuccessfulPaymentOkButton() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(successfulPaymentDialogOkButton)).click();
@@ -139,6 +150,7 @@ public class AgreementApprovePage extends BasePage {
         return this;
     }
 
+    @Step
     public AgreementApprovePage fillSetupFeePayment(String cardNumber, String monthExpiration, String yearExpiration, String cvc) {
         fillCardNumberField(cardNumber);
         setMonthExpirationDate(monthExpiration);
@@ -147,11 +159,13 @@ public class AgreementApprovePage extends BasePage {
         return this;
     }
 
+    @Step
     private void fillCardNumberField(String cardNumber) {
         wait.until(ExpectedConditions.elementToBeClickable(cardNumberField)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(cardNumberField)).sendKeys(cardNumber);
     }
 
+    @Step
     private void setMonthExpirationDate(String monthExpiration) {
         wait.until(ExpectedConditions.elementToBeClickable(monthExpirationButton)).click();
         List<WebElement> options = monthExpirationButton.findElements(By.xpath("//following-sibling::div/ul[@class='dropdown-menu inner']/li"));
@@ -161,10 +175,15 @@ public class AgreementApprovePage extends BasePage {
                 .equals(monthExpiration))
                 .findFirst()
                 .ifPresent(WebElement::click);
-        waitABit(500);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-original-index='" + monthExpiration + "' and contains(@class, 'selected')]")));
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-original-index='" +
+                    monthExpiration + "' and contains(@class, 'selected')]")));
+        } catch (Exception ignored) {
+            waitABit(2000);
+        }
     }
 
+    @Step
     private void setYearExpirationDate(String yearExpiration) {
         wait.until(ExpectedConditions.elementToBeClickable(yearExpirationButton)).click();
         List<WebElement> options = driver.findElements(By.xpath("//following-sibling::div/ul[@class='dropdown-menu inner']/li"));
@@ -178,15 +197,18 @@ public class AgreementApprovePage extends BasePage {
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//li[contains(@class, 'selected')]//span[@title='" + yearExpiration + "']")));
     }
 
+    @Step
     private void fillCvcField(String cvc) {
         wait.until(ExpectedConditions.elementToBeClickable(cvcField)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(cvcField)).sendKeys(cvc);
     }
 
+    @Step
     public void clickPayButton(){
         wait.until(ExpectedConditions.elementToBeClickable(payButton)).click();
     }
 
+    @Step
     public AgreementApprovePage clickCancelPayButton(){
         wait.until(ExpectedConditions.visibilityOf(cancelPayButton));
         wait.until(ExpectedConditions.elementToBeClickable(cancelPayButton)).click();
@@ -194,6 +216,7 @@ public class AgreementApprovePage extends BasePage {
     }
 
 
+    @Step
     public AgreementApprovePage clickApprovePayButton(){
         wait.until(ExpectedConditions.visibilityOf(approvePayButton));
         wait.until(ExpectedConditions.elementToBeClickable(approvePayButton)).click();
@@ -201,6 +224,7 @@ public class AgreementApprovePage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean checkPayConfirmationMessage(String totalAmount, String cardNumber){
         wait.until(ExpectedConditions.visibilityOf(paymentDetailsDialog));
         List<WebElement> paymentDetails = paymentDetailsDialog.findElements(By.tagName("b"));

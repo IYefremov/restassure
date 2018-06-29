@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -101,74 +102,91 @@ public class ClientQuotesPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public ClientQuotesPage clickAddClientButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
         addClientBTN.click();
         return this;
     }
 
+    @Step
     public void setNewClientName(String name) {
         newClientName.get(0).sendKeys(name);
     }
 
+    @Step
     public ClientQuotesPage clearAndSetNewClientName(String name) {
         wait.until(ExpectedConditions.visibilityOf(newClientName.get(1))).clear();
         newClientName.get(1).sendKeys(name);
         return this;
     }
 
+    @Step
     public void setNewClientNickName(String name) {
         newClientNickName.sendKeys(name);
     }
 
+    @Step
     public void setNewClientAddress(String address) {
         newClientAddress.sendKeys(address);
     }
 
+    @Step
     public void setNewClientAddress2(String address2) {
         newClientAddress2.sendKeys(address2);
     }
 
+    @Step
     public void setNewClientZip(String zip) {
         newClientZip.sendKeys(zip);
     }
 
+    @Step
     public void setNewClientCountry(String country) {
         new Select(newClientCountry).selectByVisibleText(country);
     }
 
+    @Step
     public void setNewClientState(String state) {
         newClientState.sendKeys(state);
     }
 
+    @Step
     public void setNewClientCity(String city) {
         newClientCity.sendKeys(city);
     }
 
+    @Step
     public void setNewClientBusinessPhone(String businessPhone) {
         newClientBusinessPhone.sendKeys(businessPhone);
     }
 
+    @Step
     public void setNewClientCellPhone(String cellPhone) {
         newClientCellPhone.sendKeys(cellPhone);
     }
 
+    @Step
     public void setNewClientFirstName(String firstName) {
         newClientFirstName.sendKeys(firstName);
     }
 
+    @Step
     public void setNewClientLastName(String lastName) {
         newClientLastName.sendKeys(lastName);
     }
 
+    @Step
     public void setNewClientTitle(String title) {
         newClientTitle.sendKeys(title);
     }
 
+    @Step
     public void setNewClientEmail(String email) {
         newClientEmail.sendKeys(email);
     }
 
+    @Step
     public ClientQuotesPage fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
                                                  String country, String state, String city, String businessPhone, String cellPhone, String firstName,
                                                  String lastName, String title, String email) {
@@ -191,6 +209,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
 
+    @Step
     public ClientQuotesPage clickConfirmNewClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
@@ -198,6 +217,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
 
+    @Step
     public boolean isUserCreated(String verifyParameter) {
         searchUser(verifyParameter);
         try {
@@ -209,6 +229,7 @@ public class ClientQuotesPage extends BasePage {
         }
     }
 
+    @Step
     public ClientQuotesPage searchUser(String searchValue) {
         try {
             wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
@@ -221,6 +242,7 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientQuotesPage deleteUsers(String deleteParameter) {
         try {
             new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOf(emptyDataTable));
@@ -230,6 +252,7 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     private ClientQuotesPage deleteParameters(String deleteParameter) {
         try {
             while(wait.until(ExpectedConditions
@@ -251,16 +274,19 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientQuotesPage editClient(String editParemeter) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + editParemeter + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-update btn-update-potential-client']")).click();
         return this;
     }
 
+    @Step
     public void clickUpdateClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(1))).click();
     }
 
+    @Step
     public ClientQuotesPage clickAddAgreementBTN(String agreementIdentifier) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
@@ -268,14 +294,17 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     public void setAgreementName(String name) {
         agreementName.get(0).sendKeys(name);
     }
 
+    @Step
     public void selectEdition(String edition) {
         new Select(editionMenu).selectByVisibleText(edition);
     }
 
+    @Step
     public ClientQuotesPage setAgreement(String agreement, String team) {
         setAgreementName(agreement);
         selectEdition(team);
@@ -284,11 +313,12 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     private void saveAgreement() {
             wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(2))).click();
-//            clickWithJS(updateClientBTN.get(2));
     }
 
+    @Step
     public ClientQuotesPage expandAgreementList(String identifier) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + identifier + "']"))).
@@ -299,6 +329,7 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     public ClientQuotesPage clickEditAgreement(String s) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']"))).
@@ -311,6 +342,7 @@ public class ClientQuotesPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean verifyAgreementEditionCannotBeChanged(String newName) {
         try {
             selectEdition(newName);
@@ -320,6 +352,7 @@ public class ClientQuotesPage extends BasePage {
         }
     }
 
+    @Step
     public boolean isAgreementNameChangeable(String s) {
         try {
             wait.until(ExpectedConditions.visibilityOf(agreementName.get(1))).clear();
@@ -330,6 +363,7 @@ public class ClientQuotesPage extends BasePage {
         }
     }
 
+    @Step
     public boolean checkAgreementByName(String s) {
         try {
             waitABit(1000);
@@ -338,13 +372,14 @@ public class ClientQuotesPage extends BasePage {
         } catch (TimeoutException e) {
             return false;
         }
-
     }
 
+    @Step
     public void refreshPage() {
         driver.navigate().refresh();
     }
 
+    @Step
     public void updateAgreement() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(3))).click();
@@ -354,6 +389,7 @@ public class ClientQuotesPage extends BasePage {
         }
     }
 
+    @Step
     public ClientQuotesDetailPage clickSetupAgreementButton(String agreementIdentifier) {
         waitForProcessing();
         try {
