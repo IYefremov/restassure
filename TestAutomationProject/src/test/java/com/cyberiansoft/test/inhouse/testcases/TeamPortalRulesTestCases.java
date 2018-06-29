@@ -129,6 +129,6 @@ public class TeamPortalRulesTestCases extends BaseTestCase {
                 .deleteRuleOrganisation()
                 .editExistingRule(data.getRuleName2(), data.getCondition2(), data.getOrder2(), data.getRuleDescription2());
         Assert.assertTrue(accountsRulesPage.checkRuleByName(data.getRuleName2()));
-                accountsRulesPage.deleteRuleByName(data.getRuleName2());
+        accountsRulesPage.deleteRuleByName(data.getRuleName2());
     }
 }

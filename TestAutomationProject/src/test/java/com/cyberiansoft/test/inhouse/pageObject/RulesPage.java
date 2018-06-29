@@ -189,6 +189,7 @@ public class RulesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(ruleOrganisationField)).sendKeys(Keys.ENTER);
         fillRuleFields(condition, order, description);
         clickUpdateRuleButton();
+        closeNotification();
         return this;
     }
 

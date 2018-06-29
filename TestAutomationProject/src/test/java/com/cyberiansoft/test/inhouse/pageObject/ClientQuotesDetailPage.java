@@ -244,6 +244,7 @@ public class ClientQuotesDetailPage extends BasePage {
         Select selection = new Select(formControlList);
         selection.selectByVisibleText(discount);
         wait.until(s -> !selection.getAllSelectedOptions().isEmpty());
+        waitABit(500);
         wait.until(ExpectedConditions.elementToBeClickable(submitDiscountButton)).click();
         waitForLoading();
     }
