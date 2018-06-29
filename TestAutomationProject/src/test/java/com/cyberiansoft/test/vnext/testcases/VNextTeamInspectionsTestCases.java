@@ -173,7 +173,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspections list", 
+	@Test(testName= "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspections list",
 			description = "Verify only when user tap 'search' button we perform search and refresh team inspections list")
 	public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList() {
 		
@@ -202,14 +202,13 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			Assert.assertEquals(testwholesailcustomer.getFullName(), inspectionscreen.getInspectionCustomerValue(inspcell));
 		}
 		final String inspSubNumber = inspnumber.substring(6, inspnumber.length());
-		inspectionscreen.setSearchText(inspSubNumber);
+		inspectionscreen.searchInpectionByFreeText(inspSubNumber);
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		inspections = inspectionscreen.getInspectionsList();
 		for (WebElement inspcell : inspections) {
 			Assert.assertTrue(inspectionscreen.getInspectionNumberValue(inspcell).contains(inspSubNumber));
 		}
-		
-		inspectionscreen.clickCancelSearchButton();
+
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		
 		homescreen = inspectionscreen.clickBackButton();
@@ -421,7 +420,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		inspectionscreen.switchToMyInspectionsView();
 		AppiumUtils.setNetworkOff();
-		
+
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();		
 		vehicleinfoscreen.setVIN(newvinnumber);

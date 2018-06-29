@@ -49,6 +49,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='search-cancel']")
 	private WebElement cancelsearchbtn;
+
+	@FindBy(xpath="//*[@data-automation-id='search-clear']")
+	private WebElement clearsearchicon;
 	
 	final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 	
@@ -62,6 +65,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(inspectionsscreen));
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
 			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
+		if (cancelsearchbtn.isDisplayed()) {
+			tap(clearsearchicon);
+			clickCancelSearchButton();
+		}
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
@@ -192,6 +199,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
+		wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']"))));
 		tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}
@@ -259,7 +268,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	public void searchInpectionByFreeText(String searchtext) {
 		clickSearchButton();
 		setSearchText(searchtext);
-		tap(cancelsearchbtn);
 	}
 	
 	public void clickSearchButton() {
@@ -274,9 +282,12 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		clickCancelSearchButton();
 	}
 	
 	public void clickCancelSearchButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='search-cancel']")));
 		tap(cancelsearchbtn);
 	}
 

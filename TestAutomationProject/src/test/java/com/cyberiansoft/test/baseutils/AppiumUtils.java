@@ -58,6 +58,7 @@ public class AppiumUtils {
 			e.printStackTrace();
 		}
 		switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		BaseUtils.waitABit(5000);
 	}
 	
 	public static void setNetworkOn() {

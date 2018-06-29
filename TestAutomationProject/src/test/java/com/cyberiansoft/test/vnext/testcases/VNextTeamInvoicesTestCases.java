@@ -40,6 +40,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		JSONDataProvider.dataFile = DATA_FILE;
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+		customersscreen.switchToRetailMode();
 		if (!customersscreen.isCustomerExists(testcustomer1)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 			newcustomerscreen.createNewCustomer(testcustomer1);
