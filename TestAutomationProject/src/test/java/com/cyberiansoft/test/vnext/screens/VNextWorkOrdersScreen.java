@@ -14,8 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
@@ -162,13 +160,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamWorkordersView() {
-		Instant now = Instant.now();
-
 		tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
-		System.out.println("---------:" + Duration.between(now, Instant.now()).toMillis());
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
-		System.out.println("---------::" + Duration.between(now, Instant.now()).toMillis());
-		//new WebDriverWait(appiumdriver, 30).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[text()='Loading work orders']")));
 	}
 
 	public boolean isTeamWorkordersViewActive() {

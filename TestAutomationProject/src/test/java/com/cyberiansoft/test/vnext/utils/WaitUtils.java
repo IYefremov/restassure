@@ -30,6 +30,21 @@ public class WaitUtils {
         return  element;
     };
 
+    public static WebElement waitUntilElementIsClickable(final WebElement webElement) {
+        org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(WebDriverException.class);
+
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return webElement;
+            }
+        });
+
+        return  element;
+    };
+
     public static void click(final By locator) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                 .withTimeout(Duration.ofSeconds(30))
@@ -39,6 +54,20 @@ public class WaitUtils {
         Boolean element = wait.until(new Function<WebDriver, Boolean>() {
             public Boolean apply(WebDriver driver) {
                 driver.findElement(locator).click();
+                return true;
+            }
+        });
+    };
+
+    public static void click(final WebElement webElement) {
+        org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(WebDriverException.class);
+
+        Boolean element = wait.until(new Function<WebDriver, Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                webElement.click();
                 return true;
             }
         });
