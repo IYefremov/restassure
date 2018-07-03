@@ -3,10 +3,10 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 public class VNextWorkOrdersScreen extends VNextBaseScreen {
@@ -50,7 +52,6 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
-		BaseUtils.waitABit(2000);		
 		tap(addwobtn);
 		return new VNextCustomersScreen(appiumdriver);
 	}
@@ -104,6 +105,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public VNextHomeScreen clickBackButton() {
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+		//new WebDriverWait(appiumdriver, 30).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[text()='Loading work orders']")));
 		clickScreenBackButton();
 		return new VNextHomeScreen(appiumdriver);
 	}
@@ -159,17 +162,15 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamWorkordersView() {
-		tap(new WebDriverWait(appiumdriver, 10).until(ExpectedConditions.visibilityOf(teamworkorderstab)));
-		if (appiumdriver.findElements(By.xpath("//*[text()='Loading work orders']")).size() > 0) {
-			try {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading work orders']"))));
-			} catch (NoSuchElementException e) {
-				//do nothing
-			}
-		}
+		Instant now = Instant.now();
+
+		tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
+		System.out.println("---------:" + Duration.between(now, Instant.now()).toMillis());
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+		System.out.println("---------::" + Duration.between(now, Instant.now()).toMillis());
+		//new WebDriverWait(appiumdriver, 30).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[text()='Loading work orders']")));
 	}
-	
+
 	public boolean isTeamWorkordersViewActive() {
 		return teamworkorderstab.getAttribute("class").contains("active");
 	}

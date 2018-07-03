@@ -59,20 +59,20 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public void selectCustomer(AppCustomer customer) {
 		if (elementExists("//*[@data-automation-id='search-icon']"))
 			searchCustomerByName(customer.getFullName());
-		if (customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
-			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));	
+		if (customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
+			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
 			
 		} else {
-			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name']"));
+			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
 			WebElement elem = ctmrs.get(ctmrs.size()-1);
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
-			tap(customerslist.findElement(By.xpath(".//*[@action='select-customer']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
+			tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
 			//waitABit(1000);
 
 		}

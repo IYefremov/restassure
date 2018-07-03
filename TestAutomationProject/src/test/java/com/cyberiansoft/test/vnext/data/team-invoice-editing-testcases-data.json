@@ -1,0 +1,33 @@
+{
+
+  "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON": [
+    {
+      "rowID": "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON.01",
+      "description": "Test Case 75376:Verify user can save draft Invoice if Draft Mode = ON",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "services": [{"serviceName": "Battery Installation"
+        }, {"serviceName": "Labor"
+        }]
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsOFF.01",
+      "description": "Test Case 75377:Verify user can't save draft Invoice if Draft Mode = OFF.",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "services": [{"serviceName": "Battery Installation"
+        }, {"serviceName": "Labor"
+        }]
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar2", "poNumber" : "12345"
+      }
+    }
+  ]
+
+}
