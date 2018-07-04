@@ -1,0 +1,18 @@
+<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+    <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
+
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
+    </listeners>
+    <test name="Smoke tests for iOS client" preserve-order="true">
+        <classes>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.ProdDataManipulationTestCases">
+                <methods>
+                    <!--<include name="testMyInspectionInspectionTypeInteriorInspection" />
+                    <include name="testMyInspectionInspectionTypePaintInspection" />-->
+                    <!--<include name="testTeemInspectionInspectionTypeMatrixInspection" />-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

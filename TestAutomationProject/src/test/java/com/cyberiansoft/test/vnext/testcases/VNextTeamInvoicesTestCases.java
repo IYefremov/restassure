@@ -40,6 +40,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		JSONDataProvider.dataFile = DATA_FILE;
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+		customersscreen.switchToRetailMode();
 		if (!customersscreen.isCustomerExists(testcustomer1)) {
 			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 			newcustomerscreen.createNewCustomer(testcustomer1);
@@ -560,7 +561,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
 		final String notetext = "Test";
-		final String quicknote = "1 note";
+		final String quicknote = "Z note";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();

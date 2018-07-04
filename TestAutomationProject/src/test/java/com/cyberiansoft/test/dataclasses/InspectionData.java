@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.dataclasses;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 
 public class InspectionData {
@@ -76,6 +76,10 @@ public class InspectionData {
 	 public String getDeclineReason() {
 		 return declineReason;
 	 }
+
+	public VehicleInfoData getVehicleInfo() {
+		return vihicleInfo;
+	}
 	 
 	 public String getVinNumber() {
 		 return vihicleInfo.getVINNumber();
@@ -143,16 +147,8 @@ public class InspectionData {
 		 return services.get(serviceIndex).getServicePrice();
 	 } 
 	 
-	 public String getInsuranceCompanyName() {
-		 return insuranceCompany.getInsuranceCompanyName();
-	 }
-	 
-	 public String getInsuranceClaimNumber() {
-		 return insuranceCompany.getClaimNumber();
-	 }
-	 
-	 public String getInsurancePolicyNumber() {
-		 return insuranceCompany.getPolicyNumber();
+	 public InsuranceCompanyData getInsuranceCompanyData() {
+		 return insuranceCompany;
 	 }
 
 	 public String getInspectionNumber() {

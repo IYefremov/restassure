@@ -3,17 +3,102 @@
   "testMyInspectionInspectionTypeMatrixInspection": [
     {
       "rowID": "testMyInspectionInspectionTypeMatrixInspection.01",
-      "description": "Test Case 73401:My inspection - inspection type Matrix inspection",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "description": "My inspection - inspection type Matrix inspection",
+      "inspType": "Matrix Inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
       },
-      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "State Farm-Tech",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "DIME", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Very Light 1 to 5"
-        }, {"hailMatrixServiceName": "Deck Lid", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Limit 151 to 200"
-        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
-        }]},
-      "inspPrice": "$281.25"
+      "insuranceCompany" : { "insuranceCompanyName" : "Acuity", "claimNumber" : "123", "policyNumber" : "P-456", "deductible" : "1234-40"
+
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair",
+        "matrixParts" : [{"matrixPartName": "Hood", "partSize": "Nickel", "partSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
+        }, {"matrixPartName": "Roof", "partSize": "Quarter", "partSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
+        }]}
+    }
+  ],
+
+  "testTeemInspectionInspectionTypeMatrixInspection": [
+    {
+      "rowID": "testTeemInspectionInspectionTypeMatrixInspection.01",
+      "description": "Teem  inspection - inspection type Matrix inspection",
+      "inspType": "Matrix Inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Acuity", "claimNumber" : "123", "policyNumber" : "P-456", "deductible" : "1234-40"
+
+      },
+      "matrixService": {"matrixServiceName" : "Hail Damage Repair",
+        "matrixParts" : [{"matrixPartName": "Hood", "partSize": "Nickel", "partSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
+        }, {"matrixPartName": "Roof", "partSize": "Quarter", "partSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
+        }]}
+    }
+  ],
+
+  "testMyInspectionInspectionTypePaintInspection": [
+    {
+      "rowID": "testMyInspectionInspectionTypePaintInspection.01",
+      "description": "My inspection - inspection type Paint inspection",
+      "inspType": "Paint inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Acuity", "claimNumber" : "123", "policyNumber" : "P-456", "deductible" : "1234-40"
+
+      },
+      "moneyServices": [{"serviceName": "Paint Mirror", "servicePrice": "99.99", "serviceQuantity": "0.99"
+      }, {"serviceName": "Paint Front bumper", "servicePrice": "0.99", "serviceQuantity": "99.99"
+      }]
+    }
+  ],
+
+  "testMyInspectionInspectionTypeInteriorInspection": [
+    {
+      "rowID": "testMyInspectionInspectionTypeInteriorInspection.01",
+      "description": "My inspection - inspection type Interior inspection",
+      "inspType": "Interior inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "moneyServices": [{"serviceName": "Discount", "servicePrice": "99.99"
+      }, {"serviceName": "Dye", "servicePrice": "0.99", "serviceQuantity": "99.99"
+      }]
+    }
+  ],
+
+  "testMyInspectionInspectionTypeWheelInspection": [
+    {
+      "rowID": "testMyInspectionInspectionTypeWheelInspection.01",
+      "description": "My inspection - inspection type Wheel inspection",
+      "inspType": "Wheel Inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "moneyServices": [{"serviceName": "Crack Repair", "servicePrice": "99.99", "serviceQuantity": "0.99"
+      }, {"serviceName": "Custom Paint", "servicePrice": "0.99", "serviceQuantity": "99.99"
+      }]
+    }
+  ],
+
+  "testMyInspectionInspectionTypeInteriorDetail": [
+    {
+      "rowID": "testMyInspectionInspectionTypeInteriorDetail.01",
+      "description": "My inspection - inspection type Interior Detail",
+      "inspType": "Interior Detail",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "moneyServices": [{"serviceName": "Discount", "servicePrice": "99.99"
+      }, {"serviceName": "Dye", "servicePrice": "0.99", "serviceQuantity": "99.99"
+      }]
+    }
+  ],
+
+  "testMyInspectionInspectionTypeExteriorDetail": [
+    {
+      "rowID": "testMyInspectionInspectionTypeExteriorDetail.01",
+      "description": "My inspection - inspection type Exterior Detail",
+      "inspType": "Exterior Detail",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "stockNumber": "123-78", "roNumber": "RO-023", "mileage" : "79230"
+      },
+      "moneyServices": [{"serviceName": "Exterior Detail", "servicePrice": "99.99", "serviceQuantity": "0.99"
+      }, {"serviceName": "Full Detail", "servicePrice": "0.99", "serviceQuantity": "99.99"
+      }]
     }
   ]
 

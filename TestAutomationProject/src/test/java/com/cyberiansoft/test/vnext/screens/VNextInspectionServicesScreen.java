@@ -2,9 +2,12 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -94,9 +97,13 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	public void selectService(String serviceName) {
 		WebElement servicerow = getServiceListItem(serviceName);
 		if (servicerow != null) {
-			tap(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 6);
-			wait.until(ExpectedConditions.numberOfElementsToBeLessThan (By.xpath("//div[@data-type='approve']"), 1));
+			try {
+				tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//input[@action='select-item']"))));
+			} catch (WebDriverException e) {
+				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
+				WaitUtils.click(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
+			}
+			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
 		}
 		else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
@@ -116,6 +123,11 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	public void selectServices(String[] serviceslist) {
 		for (String servicename: serviceslist)
 			selectService(servicename);
+	}
+
+	public void selectServices(List<ServiceData> serviceslist) {
+		for (ServiceData servicename: serviceslist)
+			selectService(servicename.getServiceName());
 	}
 	
 	public void selectAllServices() {

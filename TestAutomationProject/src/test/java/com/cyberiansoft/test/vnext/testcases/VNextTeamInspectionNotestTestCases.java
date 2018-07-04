@@ -1,25 +1,19 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.util.ArrayList;
-
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.vnext.screens.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import java.util.ArrayList;
 
 public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
-	
+
+	final String quicknote = "Test Quick Note 1";
+
 	@BeforeClass(description="Team Inspection Notest Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 	}
 	
 	@Test(testName= "Test Case 67743:Verify user can add Notes for Team Inspection, "
@@ -32,10 +26,8 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
-		
-		final String quicknote = "ab note";
 		final String notetext = "new notes";
-		final String quicknotenew = "1 note";
+		final String quicknotenew = "Z note";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
@@ -72,8 +64,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		homescreen = inspectionscreen.clickBackButton();
-		
-
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
@@ -95,8 +85,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
-		
-		final String quicknote = "ab note";
+
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -144,8 +133,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
-		
-		final String quicknote = "ab note";
+
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -191,7 +179,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { "1 note", "ab note" };
+		final String[] quicknotes = { quicknote, "Z note" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -273,7 +261,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String inspType = "O_Kramar";
 		final String vinnumber = "123";
 		
-		final String quicknote = "ab note";
+
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -317,7 +305,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String vinnumber = "123";
 		
 		final int numberOfImages = 3;
-		final String quicknote = "ab note";
+
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		

@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesSc
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSelectorPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SummaryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -102,10 +101,6 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		tablecell.click();
 	}
 	
-	public String getPriceForFirstInvoice() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInvoiceAmount']").getAttribute("value");
-	}
-	
 	public String getPriceForInvoice(String invoiceNumber) {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoiceNumber + "']/XCUIElementTypeStaticText[@name='labelInvoiceAmount']").getAttribute("value");
 	}
@@ -166,10 +161,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		return new PrintSelectorPopup(appiumdriver);
 	}
 	
-	public InvoiceInfoScreen clickEditPopup() {
+	public void clickEditPopup() {
 		editmenu.click();
 		BaseWizardScreen.typeContext = INVOICECONTEXT;
-		return new InvoiceInfoScreen(appiumdriver);
 	}
 	
 	public void clickChangeCustomerPopup() {
@@ -211,11 +205,11 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void clickActionButton() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeToolbar").findElement(By.xpath("//XCUIElementTypeButton[contains(@name,'Share')] ")).click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeToolbar").findElement(By.xpath("//XCUIElementTypeButton[contains(@name,'Share')]")).click();
 	}
 	
 	public void selectInvoiceForActionByIndex(int invoiceindex) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[" + invoiceindex + "]/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonUnchecked\")] ").click();
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[" + invoiceindex + "]/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonUnchecked\")]").click();
 	}
 	
 	public void clickDoneButton() {

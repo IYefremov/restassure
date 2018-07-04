@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 
@@ -24,7 +23,8 @@ public class AppiumConfiguration {
 		DesiredCapabilities appiumcap = new DesiredCapabilities();
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
-		LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
+		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate date = LocalDate.now();
 		//date = date.minusDays(4);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {

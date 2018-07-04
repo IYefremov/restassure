@@ -1387,7 +1387,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		QuestionsScreen questionsscreen = servicesscreen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		questionsscreen.clickSave();
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name(AlertsCaptions.ALERT_CREATE_APPOINTMENT)).isDisplayed());

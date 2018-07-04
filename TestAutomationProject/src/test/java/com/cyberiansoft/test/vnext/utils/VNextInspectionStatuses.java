@@ -4,5 +4,6 @@ public class VNextInspectionStatuses {
 	
 	public static String APPROVED = "Approved";
 	public static String NEW = "New";
+	public static String DRAFT = "Draft";
 
 }

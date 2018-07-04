@@ -74,7 +74,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		selectPanel(panelname);
 		appiumdriver.findElementByAccessibilityId("Change Status").click();
 	}
-	
+
 	public void verifyPanelsStatuses(String panelname, String status) {
 		List<WebElement> elements = appiumdriver.findElementsByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]");
 		for (WebElement element : elements) {
@@ -87,7 +87,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		WebElement par = getTableParentCell(panelname);
 		Assert.assertTrue(par.findElements(By.xpath("//XCUIElementTypeStaticText[@name='" + status + "']")).size() > 0);
 	}
-	
+
 	public void verifyPanelStatusInPopup(String panelname, String status) {
 		appiumdriver.findElementByName(panelname).click();
 		WebElement par = getTableParentCell("Phase Status");

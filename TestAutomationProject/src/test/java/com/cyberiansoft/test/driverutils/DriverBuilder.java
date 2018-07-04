@@ -10,7 +10,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -18,8 +17,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -58,40 +55,18 @@ public class DriverBuilder {
 		switch (browserType) {
 		case FIREFOX:
 			FirefoxDriverManager.getInstance().setup();
-			webcap = DesiredCapabilities.firefox();
-			FirefoxOptions ffOpts = new FirefoxOptions();
-            FirefoxProfile ffProfile = new FirefoxProfile();
 
+			FirefoxOptions ffOpts = new FirefoxOptions();
+			FirefoxProfile ffProfile = new FirefoxProfile();
+			webcap = new FFConfiguration().getFirefoxCapabilities(ffProfile);
             ffProfile.setPreference("browser.autofocus", true);
             ffProfile.setPreference("browser.tabs.remote.autostart.2", false);
-
-            webcap.setCapability(FirefoxDriver.PROFILE, ffProfile);
-            webcap.setCapability("marionette", true);
-
             webDriver.set(new FirefoxDriver(ffOpts.merge(webcap)));
 			break;
 		case IE:
 			InternetExplorerDriverManager.getInstance().arch64().setup();
-	        DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
-
-//			DesiredCapabilities IEDesiredCapabilities = DesiredCapabilities.internetExplorer();
-//	         System.setProperty("webdriver.ie.driver", PATH_TO_IE_DRIVER);
-
-	         IEDesiredCapabilities.setCapability("nativeEvents", false);    
-	         IEDesiredCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
-	         IEDesiredCapabilities.setCapability("ignoreProtectedModeSettings", true);
-	         IEDesiredCapabilities.setCapability("disable-popup-blocking", true);
-	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	         IEDesiredCapabilities.setCapability("ignoreZoomSetting", true);
-	         IEDesiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-	         IEDesiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	         IEDesiredCapabilities.setJavascriptEnabled(true);
-	         IEDesiredCapabilities.setCapability("requireWindowFocus", false);
-	         IEDesiredCapabilities.setCapability("enablePersistentHover", false);
-			webcap = DesiredCapabilities.internetExplorer();
-			webDriver.set(new RemoteWebDriver(IEDesiredCapabilities));
-			//webdriver = new InternetExplorerDriver(IEDesiredCapabilities);
-			//webdriver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
+			webcap = new IEConfiguration().getInternetExplorerCapabilities();
+			webDriver.set(new RemoteWebDriver(webcap));
 			break;
 		case CHROME:
 			ChromeDriverManager.getInstance().setup();
@@ -104,15 +79,9 @@ public class DriverBuilder {
 			break;
 		case SAFARI:
 			SafariOptions safariOpts = new SafariOptions();
-			webcap = DesiredCapabilities.safari();
+			webcap = new SafariConfiguration().getSafariCapabilities(safariOpts);
+			safariOpts.setCapability("UseTechnologyPreview", true);
 
-		    safariOpts.setCapability("UseTechnologyPreview", true);
-		    //safariOpts.useCleanSession(true);
-		    webcap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-		    webcap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, "dismiss");
-		    webcap.setCapability(SafariOptions.CAPABILITY, safariOpts);
-		    webcap.setBrowserName("safari");
-		    webcap.setPlatform(Platform.MAC);
 		    webDriver.set(new SafariDriver(safariOpts.merge(webcap)));
 		    break;
 		}

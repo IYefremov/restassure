@@ -9,6 +9,10 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
 
+
+
+          <include name="testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice" />
+
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  -->  
 		  <!--<include name="testUpdateDatabase" />           
