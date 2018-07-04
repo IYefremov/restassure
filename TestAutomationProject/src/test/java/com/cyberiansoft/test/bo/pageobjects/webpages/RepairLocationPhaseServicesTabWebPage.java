@@ -140,8 +140,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	public void selectPhaseServiceInTable(String phaseservice) {
 		WebElement row = getTableRowWithPhaseService(phaseservice);
 		if (row != null) {
-//			click(row.findElement(By.xpath(".//label[contains(@id, 'chkService')]")));
-			click(row.findElement(By.xpath("//input[contains(@id, 'chkService')]")));
+			click(row.findElement(By.xpath(".//input[contains(@id, 'chkService')]")));
 		} else {
             Assert.fail("Can't find " + phaseservice + " phase service");
 		}

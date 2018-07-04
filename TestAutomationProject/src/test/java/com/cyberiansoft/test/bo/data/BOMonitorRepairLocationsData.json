@@ -1,0 +1,138 @@
+{
+  "testMonitorRepairLocationsSearch": [
+    {
+      "rowID": "testMonitorRepairLocationsSearch.01",
+      "description": "Test Case 15527:Monitor - Repair Locations: Search",
+      "locationName": "Time_Reports_01",
+      "locationStatus": "Active"
+    }
+  ],
+  
+  "testMonitorRepairLocationsAdd": [
+    {
+      "rowID": "testCompanyClientsSearch.01",
+      "description": "Test Case 15322:Company- Clients: Search",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationApproxRepairTime": "3.4",
+      "repairLocationWorkDay1": "Monday",
+      "repairLocationStartTime1": "8:00 AM",
+      "repairLocationEndTime1": "5:00 PM",
+      "repairLocationWorkDay2": "Sunday",
+      "repairLocationStartTime2": "9:00 AM",
+      "repairLocationEndTime2": "13:00 PM"
+    }
+  ],
+  
+  "testMonitorRepairLocationInTeamDefaultRepairLocationEdit": [
+    {
+      "rowID": "testMonitorRepairLocationInTeamDefaultRepairLocationEdit.01",
+      "description": "Test Case 28180:Monitor: Repair Location - in Team default Repair location edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "vendorTeam": "TestTeamInternal"
+    }
+  ],
+
+  "testMonitorRepairLocationsDepartmentEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsDepartmentEdit.01",
+      "description": "Test Case 29848:Monitor - Repair Locations: Department Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "repairLocationDepartmentDefault": "Default",
+      "repairLocationDepartment": "mydepartment",
+      "repairLocationDepartmentDescription": "Test description",
+      "repairLocationDepartmentNew": "mydepartment new",
+      "repairLocationDepartmentDescriptionNew": "Test description new"
+    }
+  ],
+
+  "testMonitorRepairLocationsPhasesEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsPhasesEdit.01",
+      "description": "Test Case 29849:Monitor - Repair Locations: Phases Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+
+      "repairLocationPhase": "Test Phase",
+      "repairLocationPhaseDescription": "Test Description",
+      "repairLocationPhaseType": "In Progress",
+      "repairLocationPhaseCheckoutType": "Optional",
+      "approxTransTime": "2.0",
+      "approxRepairTime": "8.0",
+
+      "repairLocationPhaseNew": "Test Phase New",
+      "repairLocationPhaseDescriptionNew": "Test Description New",
+      "repairLocationPhaseTypeNew": "On Hold",
+      "repairLocationPhaseCheckoutTypeNew": "Required",
+      "approxTransTimeNew": "3.0",
+      "approxRepairTimeNew": "5.0"
+    }
+  ],
+
+  "testMonitorRepairLocationsClientsEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsClientsEdit.01",
+      "description": "Test Case 30729:Monitor - Repair Locations: Clients Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "repairLocationClient": "005 - Test Company_1WO"
+    }
+  ],
+
+  "testMonitorRepairLocationsServicesEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsServicesEdit.01",
+      "description": "Test Case 30801:Monitor - Repair Locations: Services Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "woType": "02_Old",
+      "phaseClosed": "Closed",
+      "phaseClosedType": "Completed",
+      "phaseStarted": "Started",
+      "phaseStartedType": "In Progress"
+    }
+  ],
+
+    "testMonitorRepairLocationsManagersEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsManagersEdit.01",
+      "description": "Test Case 31404:Monitor - Repair Locations: Managers Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "team": "Default team",
+      "manager": "Marta Moe"
+      }
+    ],
+
+  "testMonitorRepairLocationsUserSettingsEdit": [
+    {
+      "rowID": "testMonitorRepairLocationsUserSettingsEdit.01",
+      "description": "Test Case 31405:Monitor - Repair Locations: User Settings Edit",
+      "repairLocationName": "test_loc",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "checkboxesAmount": 28
+    }
+  ],
+
+  "testMonitorRepairLocationsNotActiveStatusForDefaultRepairLocation": [
+    {
+      "rowID": "testMonitorRepairLocationsNotActiveStatusForDefaultRepairLocation.01",
+      "description": "Test Case 30726:Monitor - Repair Locations: not active status for default repair Location",
+      "repairLocationName": "TestLocNotActive",
+      "repairLocationStatus": "Active",
+      "repairLocationTimeZone": "Pacific Standard Time",
+      "teamName": "TestTeamNotActiveStatus",
+      "teamDefaultLocation": "Not active Loc",
+      "repairLocationStatusNotActive": "Not Active"
+    }
+  ]
+}

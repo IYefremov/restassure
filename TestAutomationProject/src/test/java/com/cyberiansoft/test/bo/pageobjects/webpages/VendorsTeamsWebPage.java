@@ -211,12 +211,8 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 
     public void verifyThatActiveVendorTeamExists(String vendorTeam, String timeZone, String vendorDescription, String vendorTimesheetType, String defLocation, String additionalLocation) {
         if (!isActiveVendorTeamPresent(vendorTeam)) {
-            try {
-                createNewVendorTeam(vendorTeam, timeZone, vendorDescription,
-                        vendorTimesheetType, defLocation, additionalLocation);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            createNewVendorTeam(vendorTeam, timeZone, vendorDescription,
+                    vendorTimesheetType, defLocation, additionalLocation);
         }
     }
 
@@ -263,7 +259,7 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 				driver, NewVendorTeamDialogWebPage.class);
 	}
 	
-	public void createNewVendorTeam(String vendorname, String vendortimezone, String vendordesc, String vendortimesheettype, String defaultlocation, String additionallocation) throws InterruptedException {
+	public void createNewVendorTeam(String vendorname, String vendortimezone, String vendordesc, String vendortimesheettype, String defaultlocation, String additionallocation) {
 		NewVendorTeamDialogWebPage newvendordialog = clickAddVendorTeamButton();
 		newvendordialog.setNewVendorTeamName(vendorname);
 		newvendordialog.selectNewVendorTeamTimezone(vendortimezone);

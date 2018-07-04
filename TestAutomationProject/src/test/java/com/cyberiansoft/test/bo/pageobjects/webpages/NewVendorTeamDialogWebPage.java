@@ -1,22 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class NewVendorTeamDialogWebPage extends BaseWebPage {
 	
@@ -167,7 +162,7 @@ public class NewVendorTeamDialogWebPage extends BaseWebPage {
 		return vendordefaultlocationscmb.getSelectedValue();
 	}
 	
-	public void selectNewVendorTeamAdditionalRepairLocations(String additionalrepairlocation) throws InterruptedException {
+	public void selectNewVendorTeamAdditionalRepairLocations(String additionalrepairlocation) {
 		checkboxSelect(additionalrepairlocation);
 	}
 	

@@ -12,11 +12,8 @@ import java.time.format.DateTimeFormatter;
 
 public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
-    /**
-     * creates extra not active location
-     */
-//	@Test(testName="Average Repair Time Report preconditions", description = "Average Repair Time Report preconditions")
-	public void testOperationInvoiceSearch() throws InterruptedException {
+	@Test(testName="Average Repair Time Report preconditions", description = "Average Repair Time Report preconditions")
+	public void testOperationInvoiceSearch() {
 
         final String repairlocationname = "Time_Reports_01";
 		final String approxrepairtime = "8.0";
@@ -24,6 +21,18 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String starttime = "9:00 AM";
 		final String finishtime = "5:00 PM";
 		final String WOType = "01ZalexWO_tp";
+		final String phaseNameStart = "Start";
+		final String phaseNameOnHold = "On Hold";
+		final String phaseType = "Pre-Repair";
+		final String phaseTypeOnHold = "On Hold";
+		final String transitionTime = "111.0";
+		final String repairTime = "111.0";
+        final String serviceNameVacuumCleaner = "AMoneyFlatFee_VacuumCleaner";
+        final String serviceNameWashing = "AMoneyVehicleFF_Washing";
+		final String vendorTeamName = "02_TimeRep_team";
+		final String vendorTimeZone = "Pacific Standard Time";
+		final String vendorDescription = "TF145";
+		final String vendorTimeSheetType = "ClockIn / ClockOut";
 
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		backOfficeHeader
@@ -33,14 +42,14 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
                 .makeSearchPanelVisible()
 		        .setSearchLocation(repairlocationname)
 		        .clickFindButton()
-		        .addPhaseForRepairLocation(repairlocationname, "Start", "Pre-Repair", approxrepairtime, approxrepairtime, true)
-		        .addPhaseForRepairLocation(repairlocationname, "On Hold", "On Hold", "111.0", "111.0", false)
-                .assignServiceForRepairLocation(repairlocationname, WOType, "AMoneyFlatFee_VacuumCleaner", "On Hold")
-		        .assignServiceForRepairLocation(repairlocationname, WOType, "AMoneyVehicleFF_Washing", "Start");
+		        .addPhaseForRepairLocation(repairlocationname, phaseNameStart, phaseType, approxrepairtime, approxrepairtime, true)
+		        .addPhaseForRepairLocation(repairlocationname, phaseNameOnHold, phaseTypeOnHold, transitionTime, repairTime, false)
+                .assignServiceForRepairLocation(repairlocationname, WOType, serviceNameVacuumCleaner, phaseNameOnHold)
+		        .assignServiceForRepairLocation(repairlocationname, WOType, serviceNameWashing, phaseNameStart);
 
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
         VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
-        vendorsteamspage.createNewVendorTeam("02_TimeRep_team", "Pacific Standard Time", "TF145", "ClockIn / ClockOut", repairlocationname, repairlocationname);
+        vendorsteamspage.createNewVendorTeam(vendorTeamName, vendorTimeZone, vendorDescription, vendorTimeSheetType, repairlocationname, repairlocationname);
 	}
 	
 	@Test(testName="Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)",
@@ -52,6 +61,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String _make = "Audi";
 		final String _model = "100";
 		final String newservicerequest= "SASHAZ";
+		final String searchLocation= "Time_Reports_01";
 
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
         OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
@@ -76,7 +86,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation("Time_Reports_01");
+		repairorderspage.selectSearchLocation(searchLocation);
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		
@@ -85,11 +95,11 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
-		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
+		averagerepairtimereportpage.selectSearchLocation(searchLocation);
 		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-		 LocalDateTime now = LocalDateTime.now();
+		 LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
 		 LocalDateTime then = now.minusDays(7);
 		 LocalDateTime after = now.plusDays(1);
 		 averagerepairtimereportpage.setSearchFromDate(then.format(format));
@@ -110,20 +120,22 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String _make = "Audi";
 		final String _model = "100";
 		final String _year = "1991";
+        final String searchLocation= "Time_Reports_01";
+        final String woType= "01ZalexWO_tp";
 
 		/*BufferedReader in = new BufferedReader(new FileReader("data/averagerpairtimewonubers.txt"));
 		String wonumber = in.readLine();
-		
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Time_Reports_01");
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
-		
+
 		repairorderspage.verifyTableOderTypeColumnValuesAreVisible(wonumber);
 		VendorOrderServicesWebPage vendorordersservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonumber);
 		vendorordersservicespage.setStartPhaseStatus("Completed");
@@ -134,8 +146,8 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
-		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
-		averagerepairtimereportpage.selectSearchWOType("01ZalexWO_tp");
+		averagerepairtimereportpage.selectSearchLocation(searchLocation);
+		averagerepairtimereportpage.selectSearchWOType(woType);
 		
 		DateTimeFormatter formatting = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
@@ -145,7 +157,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		averagerepairtimereportpage.setSearchToDate(after.format(formatting));
 		        
 		averagerepairtimereportpage.clickFindButton();
-		averagerepairtimereportpage.verifySearchResults("Time_Reports_01", "01ZalexWO_tp");
+		averagerepairtimereportpage.verifySearchResults(searchLocation, woType);
 
         averagerepairtimereportpage.checkShowDetails();
 		averagerepairtimereportpage.clickFindButton();
@@ -161,6 +173,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		final String _make = "Audi";
 		final String _model = "100";
 		final String newservicerequest= "SASHAZ";
+        final String searchLocation= "Time_Reports_01";
 
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operatonspage = backOfficeHeader.clickOperationsLink();
@@ -185,7 +198,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation("Time_Reports_01");
+		repairorderspage.selectSearchLocation(searchLocation);
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
@@ -193,11 +206,11 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		monitorpage = backOfficeHeader.clickMonitorLink();
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
-		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
+		averagerepairtimereportpage.selectSearchLocation(searchLocation);
 		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
 		LocalDateTime then = now.minusDays(7);
 		LocalDateTime after = now.plusDays(1);
 		averagerepairtimereportpage.setSearchFromDate(then.format(format));
@@ -215,12 +228,15 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 	public void testMonitorReportsRepairLocationTimeTracking_Part2() {
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		String wonumber = "O-000-152054";
+        final String searchLocation= "Time_Reports_01";
+        final String searchTimeFrame= "Custom";
+        final String servicesStatus= "Completed";
 
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
         repairorderspage.makeSearchPanelVisible();
-        repairorderspage.selectSearchLocation("Time_Reports_01");
-        repairorderspage.selectSearchTimeframe("Custom");
+        repairorderspage.selectSearchLocation(searchLocation);
+        repairorderspage.selectSearchTimeframe(searchTimeFrame);
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
@@ -234,7 +250,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 
         VendorOrderServicesWebPage vendorordersservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonumber);
-        vendorordersservicespage.setServicesStatus("Completed");
+        vendorordersservicespage.setServicesStatus(servicesStatus);
         vendorordersservicespage.clickBackToROLink();
 
 //        monitorpage = backOfficeHeader.clickMonitorLink();
