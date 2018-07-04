@@ -13,9 +13,10 @@ public class Invoice {
     @JsonProperty("creditCardData")
     CreditCardData creditCardData;
 
-    public WorkOrderData getWorkOrderData() {
-        return workOrderData;
-    }
+    @JsonProperty("newPoNumber")
+    String newPoNumber;
+
+    public WorkOrderData getWorkOrderData() { return workOrderData; }
 
     public InvoiceData getInvoiceData() {
         return invoiceData;
@@ -23,5 +24,9 @@ public class Invoice {
 
     public CreditCardData getCreditCardData() {
         return creditCardData;
+    }
+
+    public String getNewPONumber() {
+        return newPoNumber;
     }
 }

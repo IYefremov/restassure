@@ -18,7 +18,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-inspections-line-approval-data.json";
 	
 	@BeforeClass(description = "Team Inspections Line Approval Test Cases")
-	public void settingUp() throws Exception {
+	public void settingUp() {
 		JSONDataProvider.dataFile = DATA_FILE;	
 	}
 	
@@ -62,7 +62,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		}
 		approveservicesscreen.clickScreenBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -104,7 +104,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
 		Assert.assertEquals(inspectionscreen.getInspectionApprovedPriceValue(inspnumber), inspdata.getInspectionApprovedPrice());	
 		
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -144,7 +144,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		approvescreen.saveApprovedInspection();
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.DECLINED.getInspectionStatusValue());
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -177,7 +177,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -219,7 +219,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		vehicleinfoscreen = inspmenu.clickEditInspectionMenuItem();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.NEW.getInspectionStatusValue());
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -260,7 +260,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		approvescreen.saveApprovedInspection();
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -298,7 +298,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
         AppiumUtils.clickHardwareBackButton();
         inspectionscreen = new VNextInspectionsScreen(appiumdriver);
         Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.NEW.getInspectionStatusValue());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -340,7 +340,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
 		Assert.assertEquals(inspectionscreen.getInspectionApprovedPriceValue(inspnumber), inspdata.getInspectionApprovedPrice());
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -399,7 +399,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

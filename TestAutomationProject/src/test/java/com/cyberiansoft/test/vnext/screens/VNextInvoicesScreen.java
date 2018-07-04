@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -39,7 +38,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOf(invoiceslist));
-		BaseUtils.waitABit(1000);
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
@@ -48,7 +46,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		if (invoicecell != null)
 			invoiceprice = invoicecell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 		else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail( "Can't find invoice: " + invoicenumber);
 		return invoiceprice;	
 	}
 	
@@ -58,7 +56,17 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		if (inspcell != null)
 			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status')]/span[contains(@class, 'entity-item-status')]")).getText();
 		else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail("Can't find invoice: " + invoicenumber);
+		return invoicecell;
+	}
+
+	public String getInvoiceDateValue(String invoicenumber) {
+		String invoicecell = null;
+		WebElement inspcell = getInvoiceCell(invoicenumber);
+		if (inspcell != null)
+			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[2]/span[@class='text-dim']")).getText();
+		else
+			Assert.fail("Can't find invoice: " + invoicenumber);
 		return invoicecell;
 	}
 	
@@ -74,7 +82,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 				workOrders.add(wonumber.trim());
 		}
 		else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail("Can't find invoice: " + invoicenumber);
 		return workOrders;
 	}
 	
@@ -87,7 +95,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
 			poNumber = poNumber.substring(3, poNumber.length()).trim();
 		} else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail("Can't find invoice: " + invoicenumber);
 		return poNumber;
 	}
 
@@ -97,7 +105,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		if (invoicecell != null) {
 			customerValue = invoicecell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText().trim();
 		} else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail( "Can't find invoice: " + invoicenumber);
 		return customerValue;
 	}
 	
@@ -109,12 +117,12 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
 		}
 		else
-			Assert.assertTrue(false, "Can't find invoice: " + invoicenumber);
+			Assert.fail("Can't find invoice: " + invoicenumber);
 	}
 	
 	public WebElement getInvoiceCell(String invoicenumber) {
 		WebElement invoicecell = null;
-		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
+		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
 		for (WebElement invcell : invoices)
 			if (invcell.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")).size() > 0) {
 				invoicecell = invcell;
@@ -150,7 +158,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public VNextWorkOrdersScreen clickAddInvoiceButton() {	
 		tap(addinvoicebtn);
-		BaseUtils.waitABit(1000);
 		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();

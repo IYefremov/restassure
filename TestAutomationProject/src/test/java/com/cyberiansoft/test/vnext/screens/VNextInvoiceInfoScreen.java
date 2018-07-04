@@ -1,5 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,11 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import java.time.LocalDate;
 
 public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
@@ -20,6 +20,9 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
 	private WebElement invoicepo;
+
+	@FindBy(xpath="//input[@name='Invoices.InvoiceDate']")
+	private WebElement invoicedate;
 	
 	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
 	private WebElement menubtn;
@@ -44,15 +47,21 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(invoiceinfoscreen));
-		BaseUtils.waitABit(1000);
 	}
 	
 	public void setInvoicePONumber(String ponumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(invoicepo));
+		WaitUtils.waitUntilElementIsClickable(invoicepo);
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
 		appiumdriver.hideKeyboard();
+	}
+
+	public String getInvoicePONumberValue() {
+		return invoicepo.getAttribute("value");
+	}
+
+	public String getInvoiceDateValue() {
+		return invoicedate.getAttribute("value");
 	}
 	
 	public void addQuickNoteToInvoice(String quicknote) {
@@ -117,6 +126,36 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public void clickInvoiceInfoBackButton() {
 		clickScreenBackButton();
+	}
+
+	public void changeInvoiceDayValue(LocalDate date) {
+		tap(invoicedate);
+		appiumdriver.hideKeyboard();
+		setInvoiceSelectedDateValue(date);
+		closeInvoiceSelectDatePicker();
+ 	}
+
+ 	private WebElement getDatePickerWheel() {
+		return appiumdriver.findElement(By.xpath("//div[contains(@class, 'picker-modal picker-columns')]"));
+	}
+
+	private WebElement getDatePickerWheelDateColumn() {
+		return getDatePickerWheel().findElement(By.xpath(".//div[@class='picker-modal-inner picker-items']/div[2]"));
+	}
+
+	public int getInvoiceSelectedDateValue() {
+		WebElement pickerwheeldatecolumn = getDatePickerWheelDateColumn();
+		return Integer.valueOf(pickerwheeldatecolumn.findElement(By.xpath(".//div[@class='picker-item picker-selected']")).getAttribute("data-picker-value"));
+	}
+
+	public void setInvoiceSelectedDateValue(LocalDate date) {
+		WebElement pickerwheeldatecolumn = getDatePickerWheelDateColumn();
+		tap(pickerwheeldatecolumn.findElement(By.xpath(".//div[@data-picker-value='" + date.getDayOfMonth() + "']")));
+	}
+
+	private void closeInvoiceSelectDatePicker() {
+		WebElement pickerwheel = getDatePickerWheel();
+		tap(pickerwheel.findElement(By.xpath(".//a[@class='link close-picker']")));
 	}
 
 }

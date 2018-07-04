@@ -198,7 +198,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(countrycell);
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(countriespage));
-			tap(countriespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customercountry + "')]")));
+			tap(countriespage.findElement(By.xpath(".//*[@class='simple-item-main-content' and contains(text(), '" + customercountry +"')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		}
@@ -218,7 +218,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			tap(statecell);
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(statespage));
-			tap(statespage.findElement(By.xpath(".//*[@action='select-item' and contains(text(), '" + customerstate + "')]")));
+			tap(statespage.findElement(By.xpath(".//*[@class='simple-item-main-content' and contains(text(), '" + customerstate +"')]")));
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		}

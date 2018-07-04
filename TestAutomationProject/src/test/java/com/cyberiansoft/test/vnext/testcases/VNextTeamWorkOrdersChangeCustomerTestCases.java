@@ -23,7 +23,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
 
 
     @BeforeClass(description = "Work Orders Change Customer Test Cases")
-    public void settingUp() throws Exception {
+    public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
@@ -41,7 +41,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
     }
 
     @AfterClass()
-    public void settingDown() throws Exception {
+    public void settingDown() {
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

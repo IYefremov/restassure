@@ -11,8 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 
-	@FindBy(xpath="//a[@action='email']/i")
+	@FindBy(xpath="//a[@data-name='email']")
 	private WebElement emailinvoicebtn;
+
+	@FindBy(xpath="//a[@data-name='edit']")
+	private WebElement editinvoicebtn;
 	
 	@FindBy(xpath="//a[@handler='_approve']")
 	private WebElement approveinvoicebtn;
@@ -105,10 +108,18 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	public boolean isInvoiceChangePONumberMenuItemExists() {
 		return invoicechangeponumbtn.isDisplayed();
 	}
+
+	public boolean isInvoiceEditMenuItemExists() {
+		return editinvoicebtn.isDisplayed();
+	}
 	
 	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
 		tap(closebtn);
 		return new VNextInvoicesScreen(appiumdriver);
 	}
 
+	public VNextInvoiceInfoScreen clickEditInvoiceMenuItem() {
+		tap(editinvoicebtn);
+		return new VNextInvoiceInfoScreen(appiumdriver);
+	}
 }

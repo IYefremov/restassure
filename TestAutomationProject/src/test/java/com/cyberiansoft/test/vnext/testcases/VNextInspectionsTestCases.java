@@ -1,22 +1,12 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -221,8 +211,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer.getFullName());
 		homescreen = inspectionsscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
-		customersscreen.selectCustomer(customer);
-		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		newcustomerscreen = customersscreen.openCustomerForEdit(customer);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), customer.getFirstName());
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), customer.getLastName());
 		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), customeraddress);

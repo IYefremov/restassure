@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 
+import com.cyberiansoft.test.vnext.screens.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,10 +15,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 
 
 public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -47,7 +44,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		newcustomerscreen.createNewCustomer(testcustomer);
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomerByCompanyName(testcustomer.getCompany());
-		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
+		newcustomerscreen = customersMenuScreen.clickEditCustomerMenuItem();
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
 		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());
@@ -106,8 +104,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
-		customersscreen.selectCustomer(testcustomer);
-		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
 		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());
@@ -147,8 +144,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		statusscreen.updateMainDB();
 		homescreen = statusscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
-		customersscreen.selectCustomer(testcustomer);
-		newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
 		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
 		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());

@@ -157,4 +157,10 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public boolean isNothingFoundCaptionDisplayed() {
 		return customersscreen.findElement(By.xpath(".//b[text()='Nothing found']")).isDisplayed();
 	}
+
+	public VNextNewCustomerScreen openCustomerForEdit(AppCustomer customer) {
+		selectCustomer(customer);
+		VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
+		return customersMenuScreen.clickEditCustomerMenuItem();
+	}
 }
