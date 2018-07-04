@@ -3323,7 +3323,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		//approveinspscreen.selectStatusReason("Decline 1");
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		
+		myinspectionsscreen = new RegularMyInspectionsScreen(appiumdriver);
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		servicesscreen = new RegularServicesScreen(appiumdriver);
         servicesscreen = servicesscreen.selectNextScreen("Test_pack_for_calc", RegularServicesScreen.class);
