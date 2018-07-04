@@ -165,14 +165,14 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 		}
 	}
 	
-	public boolean WONumberExistsInTable(String wonumber) {
+	public boolean isWONumberDisplayedInTable(String wonumber) {
 		return driver.findElements(By.xpath("//tr/td/div[text()='" + wonumber + "']")).size() > 0;
 	}
 	
 	public boolean searchWorkOrderInTable(String wonumber) {
 		boolean found = false;
 		for (int i = 1; i <= Integer.valueOf(getLastPageNumber()); i++) {
-			if (!WONumberExistsInTable(wonumber)) {
+			if (!isWONumberDisplayedInTable(wonumber)) {
 				clickGoToNextPage();
 			} else {
 				found = true;

@@ -24,9 +24,6 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_radToolBarOrder")
 	private WebElement tollbarbuttons;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_gvPhases_ctl00_ctl04_phaseStatus_Input")
-	private ComboBox phasestatuscmb;
-	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvPhases_ctl00_ctl04_phaseStatus_DropDown")
 	private DropDown phasestatusdd;
 
@@ -60,7 +57,6 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	}
 	
 	public void setServicesStatus(String status) {
-//		selectComboboxValue(phasestatuscmb, phasestatusdd, status);
 		selectComboboxValue(statuscmb, statusdd, status);
 		clickChangeStatusButton();
 	}

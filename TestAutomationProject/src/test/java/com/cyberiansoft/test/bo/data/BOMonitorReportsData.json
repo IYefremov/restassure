@@ -1,0 +1,76 @@
+{
+  "testOperationInvoiceSearch": [
+    {
+      "rowID": "testOperationInvoiceSearch.01",
+      "description": "Average Repair Time Report preconditions",
+      "repairLocationName": "Time_Reports_01",
+      "approxRepairTime": "8.0",
+      "workingDay": "Monday",
+      "startTime": "9:00 AM",
+      "finishTime": "5:00 PM",
+      "woType": "01ZalexWO_tp",
+      "phaseNameStart": "Start",
+      "phaseNameOnHold": "On Hold",
+      "phaseType": "Pre-Repair",
+      "phaseTypeOnHold": "On Hold",
+      "transitionTime": "111.0",
+      "repairTime": "111.0",
+      "serviceNameVacuumCleaner": "AMoneyFlatFee_VacuumCleaner",
+      "serviceNameWashing": "AMoneyVehicleFF_Washing",
+      "vendorTeamName": "02_TimeRep_team",
+      "vendorTimeZone": "Pacific Standard Time",
+      "vendorDescription": "TF145",
+      "vendorTimeSheetType": "ClockIn / ClockOut"
+    }
+  ],
+  
+    "testMonitorReportsAverageRepairTimeReport_Part1": [
+    {
+      "rowID": "testMonitorReportsAverageRepairTimeReport_Part1.01",
+      "description": "Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)",
+      "searchLocation": "Time_Reports_01",
+      "addressValue": "01_Alex2SRT",
+      "VIN": "WAUBC044XMN771407",
+      "make": "Audi",
+      "model": "100",
+      "newServiceRequest": "SASHAZ"
+    }
+  ],
+  
+    "testMonitorReportsAverageRepairTimeReport_Part2": [
+    {
+      "rowID": "testMonitorReportsAverageRepairTimeReport_Part2.01",
+      "description": "Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)",
+      "searchLocation": "Time_Reports_01",
+      "VIN": "WAUBC044XMN771407",
+      "make": "Audi",
+      "model": "100",
+      "year": "1991",
+      "woType": "01ZalexWO_tp"
+    }
+  ],
+  
+    "testMonitorReportsRepairLocationTimeTracking_Part1": [
+    {
+      "rowID": "testMonitorReportsRepairLocationTimeTracking_Part1.01",
+      "description": "Test Case 25578:Monitor- Reports - Repair Location Time Tracking(Detailed automation - Part 1)",
+      "searchLocation": "Time_Reports_01",
+      "addressValue ": "01_Alex2SRT",
+      "VIN": "WAUBC044XMN771407",
+      "make": "Audi",
+      "model": "100",
+      "newServiceRequest": "SASHAZ"
+    }
+  ],
+  
+    "testMonitorReportsRepairLocationTimeTracking_Part2": [
+    {
+      "rowID": "testMonitorReportsRepairLocationTimeTracking_Part2.01",
+      "description": "Test Case 25488:Monitor- Reports - Average Repair Time Report (Detailed automation - Part 1)",
+      "searchLocation": "Time_Reports_01",
+      "woNumber": "O-000-152054",
+      "searchTimeFrame": "Custom",
+      "servicesStatus": "Completed"
+    }
+  ]
+}

@@ -65,7 +65,9 @@ public class WebElementsBot {
         } catch (Exception e) {
             System.err.println("The value has not been found! " + e);
         }
-        wait.until(ExpectedConditions.invisibilityOf(droplist.getWrappedElement()));
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(droplist.getWrappedElement()));
+        } catch (Exception ignored) {}
 	}
 	
 //	public static void selectTimeSheetComboboxValue(ComboBox combobox, DropDown droplist, String value) {
