@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class ServiceCountWebPage extends BaseWebPage {
@@ -42,7 +43,7 @@ public class ServiceCountWebPage extends BaseWebPage {
 	}
 
 	public boolean verifySearchFields() {
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		waitABit(1500);
 		try {

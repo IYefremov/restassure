@@ -66,9 +66,8 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 		return locationclientstable.getTableRows();
 	}
 	
-	public boolean isRepairLocationClientExists(String clientname) {
-		boolean exists =  locationclientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		return exists;
+	public boolean repairLocationClientExists(String clientname) {
+        return locationclientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
 	}
 	
 	public WebElement getTableRowWithRepairLocationClient(String clientname) {

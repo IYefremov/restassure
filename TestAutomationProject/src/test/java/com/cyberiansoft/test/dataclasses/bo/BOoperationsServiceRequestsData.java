@@ -113,6 +113,33 @@ public class BOoperationsServiceRequestsData {
     @JsonProperty("vehicleVIN")
     private String vehicleVIN;
 
+    @JsonProperty("event")
+    private String event;
+
+    @JsonProperty("eventNewName")
+    private String eventNewName;
+
+    @JsonProperty("emailNotification")
+    private String emailNotification;
+
+    @JsonProperty("serviceRequestGeneralInfo")
+    private String serviceRequestGeneralInfo;
+
+    @JsonProperty("technician")
+    private String technician;
+
+    @JsonProperty("emailKeyWordRemainder")
+    private String emailKeyWordRemainder;
+
+    @JsonProperty("emailKeyWordWasCreated")
+    private String emailKeyWordWasCreated;
+
+    @JsonProperty("emailKeyWord")
+    private String emailKeyWord;
+
+    @JsonProperty("notificationDropDown")
+    private String notificationDropDown;
+
     public String getTeamName() {
         return teamName;
     }
@@ -275,6 +302,42 @@ public class BOoperationsServiceRequestsData {
         } else {
             return LocalDate.now().plusDays(2).format(formatter);
         }
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public String getEventNewName() {
+        return eventNewName;
+    }
+
+    public String getEmailNotification() {
+        return emailNotification;
+    }
+
+    public String getServiceRequestGeneralInfo() {
+        return serviceRequestGeneralInfo;
+    }
+
+    public String getTechnician() {
+        return technician;
+    }
+
+    public String getEmailKeyWordRemainder() {
+        return emailKeyWordRemainder;
+    }
+
+    public String getEmailKeyWordWasCreated() {
+        return emailKeyWordWasCreated;
+    }
+
+    public String getEmailKeyWord() {
+        return emailKeyWord;
+    }
+
+    public String getNotificationDropDown() {
+        return notificationDropDown;
     }
 
     public boolean isDateShifted() {

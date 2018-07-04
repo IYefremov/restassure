@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
@@ -82,7 +83,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		
 		monitorpage = backOfficeHeader.clickMonitorLink();
-		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
+		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
 		
@@ -131,7 +132,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
-		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
+		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
 		averagerepairtimereportpage.selectSearchWOType("01ZalexWO_tp");
@@ -139,7 +140,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		DateTimeFormatter formatting = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
 		LocalDateTime then = LocalDateTime.of(2015, 1, 3, 12, 12);
-		LocalDateTime after = LocalDateTime.now().plusDays(7);
+		LocalDateTime after = LocalDateTime.now(ZoneId.of("US/Pacific")).plusDays(7);
         averagerepairtimereportpage.setSearchFromDate(then.format(formatting));
 		averagerepairtimereportpage.setSearchToDate(after.format(formatting));
 		        
@@ -190,7 +191,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
 		
 		monitorpage = backOfficeHeader.clickMonitorLink();
-		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
+		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation("Time_Reports_01");
 		
@@ -222,7 +223,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         repairorderspage.selectSearchTimeframe("Custom");
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
         LocalDateTime then = LocalDateTime.of(2018, 4, 17, 12, 12);
         LocalDateTime after = now.plusDays(7);
         repairorderspage.setSearchFromDate(then.format(format));
@@ -237,7 +238,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         vendorordersservicespage.clickBackToROLink();
 
 //        monitorpage = backOfficeHeader.clickMonitorLink();
-//        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickRepairLocationTimeTrackingLink();
+//        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
 //        repairlocationtimetrackingpage.makeSearchPanelVisible();
 //        repairlocationtimetrackingpage.selectSearchLocation("Time_Reports_01");
 //

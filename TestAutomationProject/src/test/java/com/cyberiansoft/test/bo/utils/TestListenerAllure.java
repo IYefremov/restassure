@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.inhouse.utils;
+package com.cyberiansoft.test.bo.utils;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class TestListener extends TestListenerAdapter implements IInvokedMethodListener, IReporter {
+public class TestListenerAllure extends TestListenerAdapter implements IInvokedMethodListener, IReporter {
     private Object currentClass;
 
     @Override
@@ -32,9 +32,7 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
     }
 
     @Override
-    public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
-
-    }
+    public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {}
 
     @Attachment(value = "Element screenshot", type = "image/png")
     public static byte[] attachScreenshot(Screenshot screenshot) {

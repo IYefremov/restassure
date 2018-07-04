@@ -251,20 +251,20 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
                         data.getUserCompany(), data.getUserAddress(), data.getUserCity(), data.getUserCountry(),
 						data.getUserStateProvince(), data.getUserZipPostCode(), data.getUserPhone(), data.getUserAccountId());
 
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage2 =
+		AddEditClientUsersDialogWebPage addClientUsersDialogWebPage2 =
 				clientUsersWebPage2.clickEditClientUser(data.getUserFirstName());
 
-		Assert.assertEquals(data.getUserEmail(), addclientUsersDialogWebPage2.getUserEmail());
-		Assert.assertEquals(data.getUserFirstName(), addclientUsersDialogWebPage2.getUserFirstName());
-		Assert.assertEquals(data.getUserLastName(), addclientUsersDialogWebPage2.getUserLastName());
-		Assert.assertEquals(data.getUserCompany(), addclientUsersDialogWebPage2.getUserCompanyName());
-		Assert.assertEquals(data.getUserAddress(), addclientUsersDialogWebPage2.getUserAddress());
-		Assert.assertEquals(data.getUserCity(), addclientUsersDialogWebPage2.getUserCity());
-		Assert.assertEquals(data.getUserCountry(), addclientUsersDialogWebPage2.getCountry());
-		Assert.assertEquals(data.getUserStateProvince(), addclientUsersDialogWebPage2.getStateProvince());
-		Assert.assertEquals(data.getUserZipPostCode(), addclientUsersDialogWebPage2.getUserZipPostCode());
-		Assert.assertEquals(data.getUserPhone(), addclientUsersDialogWebPage2.getUserPhone());
-		Assert.assertEquals(data.getUserAccountId(), addclientUsersDialogWebPage2.getUserAccountId());
+		Assert.assertEquals(data.getUserEmail(), addClientUsersDialogWebPage2.getUserEmail());
+		Assert.assertEquals(data.getUserFirstName(), addClientUsersDialogWebPage2.getUserFirstName());
+		Assert.assertEquals(data.getUserLastName(), addClientUsersDialogWebPage2.getUserLastName());
+		Assert.assertEquals(data.getUserCompany(), addClientUsersDialogWebPage2.getUserCompanyName());
+		Assert.assertEquals(data.getUserAddress(), addClientUsersDialogWebPage2.getUserAddress());
+		Assert.assertEquals(data.getUserCity(), addClientUsersDialogWebPage2.getUserCity());
+		Assert.assertEquals(data.getUserCountry(), addClientUsersDialogWebPage2.getCountry());
+		Assert.assertEquals(data.getUserStateProvince(), addClientUsersDialogWebPage2.getStateProvince());
+		Assert.assertEquals(data.getUserZipPostCode(), addClientUsersDialogWebPage2.getUserZipPostCode());
+		Assert.assertEquals(data.getUserPhone(), addClientUsersDialogWebPage2.getUserPhone());
+		Assert.assertEquals(data.getUserAccountId(), addClientUsersDialogWebPage2.getUserAccountId());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isAllowCreatChkboxChecked());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isClientChkboxChecked());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isClientAccountChkboxChecked());
@@ -273,7 +273,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage1.isSalesPersonChkboxChecked());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isSalesPersonMonManagChkboxChecked());
 
-		ClientUsersWebPage clientUsersWebPage3 = addclientUsersDialogWebPage2.closeUsersDialogWebPageWithoutEdit();
+		ClientUsersWebPage clientUsersWebPage3 = addClientUsersDialogWebPage2.closeUsersDialogWebPageWithoutEdit();
 				clientUsersWebPage3.clickDeleteClientUser(data.getUserFirstName());
 		Assert.assertFalse(clientUsersWebPage3.isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName()));
 		clientUsersWebPage3.closePage();

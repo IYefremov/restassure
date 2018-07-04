@@ -3,7 +3,7 @@
        <!--parallel="tests" thread-count="3">-->
 
     <listeners>
-        <listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
+        <listener class-name="com.cyberiansoft.test.bo.utils.TestListenerAllure"/>
     </listeners>
     <test name="Back Office Test Cases - Chrome Part 1">
         <parameter name="selenium.browser" value="chrome"/>

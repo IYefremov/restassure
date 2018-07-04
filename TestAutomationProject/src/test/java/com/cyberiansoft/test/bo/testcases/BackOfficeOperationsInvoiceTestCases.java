@@ -254,7 +254,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Thread.sleep(2000);
-		Assert.assertTrue(invoicespage.sendInvoiceEmail(invoicenumber, usermail));
+		Assert.assertTrue(invoicespage.isInvoiceEmailSent(invoicenumber, usermail));
 		Thread.sleep(30 * 1000);
 		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(invoicenumber);
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(usermail));
@@ -751,8 +751,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	public void checkOperationInvoiceSentMailInMailActivity() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-
-		operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();

@@ -134,7 +134,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
-		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickAverageRepairTimeReportLink();
+		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
 		averagerepairtimereportpage.selectSearchLocation("VD_Location");
@@ -153,7 +153,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
-		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickRepairLocationTimeTrackingLink();
+		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
 		
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
@@ -165,7 +165,6 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(repairlocationtimetrackingpage.isTableIsDisplayed(), "The table is not displayed.");
 	}
 
-    //todo fails. Needs data from S. Zakaulov. NO data available
 	@Test(testName = "Test Case 15728:Monitor- Reports - Trending Report", description = "Monitor- Reports - Trending Report")
 	public void testMonitorReportsTrendingReport() {
 
@@ -174,7 +173,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
-		TrendingReportWebPage trendingreportpage = monitorpage.clickTrendingReportLink();
+		TrendingReportWebPage trendingreportpage = monitorpage.clickCycleTimeTrendingLink();
 		
 		Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
 		trendingreportpage.selectSearchLocation("VD_Location");
@@ -341,7 +340,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void checkMonitorKanbanAutoRefresh() {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
-		KanbanWebPage kanbanPage = monitorPage.clickKanbanLink();
+		KanbanWebPage kanbanPage = monitorPage.clickWhiteBoardLink();
 		kanbanPage.setSearchLocation("Default Location");
 		kanbanPage.clickSearchButton();
 		Assert.assertTrue(kanbanPage.checkSearhResultColumns());

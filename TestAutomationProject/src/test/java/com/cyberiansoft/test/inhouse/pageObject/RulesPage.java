@@ -127,6 +127,7 @@ public class RulesPage extends BasePage {
         while (wait.until(ExpectedConditions.not(ExpectedConditions
                 .stalenessOf(driver.findElement(By.xpath("//td[text()='" + ruleName + "']")))))) {
             deleteRuleByName(ruleName);
+            waitABit(300);
         }
     }
 
@@ -223,7 +224,7 @@ public class RulesPage extends BasePage {
     @Step
     public RulesPage deleteRuleOrganisation() {
         try {
-            wait.until(ExpectedConditions.visibilityOf(ruleOrganisationFieldCloseButton));
+            waitABit(1000);
             wait.until(ExpectedConditions.elementToBeClickable(ruleOrganisationFieldCloseButton)).click();
             waitABit(500);
         } catch (TimeoutException e) {

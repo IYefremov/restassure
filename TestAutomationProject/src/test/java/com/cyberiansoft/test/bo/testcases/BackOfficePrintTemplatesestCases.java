@@ -636,7 +636,7 @@
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
 //
-//		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
+//		invoicespage.isInvoiceEmailSent(invoicenum, "petruk@cyberiansoft.com");
 //
 //		final String mainWindowHandle = webdriver.getWindowHandle();
 //		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
@@ -682,7 +682,7 @@
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
 //
-//		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
+//		invoicespage.isInvoiceEmailSent(invoicenum, "petruk@cyberiansoft.com");
 //
 //		final String mainWindowHandle = webdriver.getWindowHandle();
 //		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
@@ -733,7 +733,7 @@
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
 //
-//		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
+//		invoicespage.isInvoiceEmailSent(invoicenum, "petruk@cyberiansoft.com");
 //
 //		final String mainWindowHandle = webdriver.getWindowHandle();
 //		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);
@@ -778,7 +778,7 @@
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
 //
-//		invoicespage.sendInvoiceEmail(invoicenum, "petruk@cyberiansoft.com");
+//		invoicespage.isInvoiceEmailSent(invoicenum, "petruk@cyberiansoft.com");
 //
 //		final String mainWindowHandle = webdriver.getWindowHandle();
 //		SendInvoiceCustomEmailTabWebPage sendcustomemailtab= invoicespage.clickSendCustomEmail(invoicenum);

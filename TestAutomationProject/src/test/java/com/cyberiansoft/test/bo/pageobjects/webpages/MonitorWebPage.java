@@ -25,20 +25,20 @@ public class MonitorWebPage extends BaseWebPage {
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Monitor Settings']")
 	private WebElement monitorsettingslink;
 	
-	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Average Repair Time Report']")
-	private WebElement averagerepairtimereportlink;
+	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Repair Cycle Time']")
+	private WebElement repairCycleTimeLink;
 	
-	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Repair Location Time Tracking']")
-	private WebElement repairlocationtimetrackinglink;
+	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Vehicle Time Tracking']")
+	private WebElement vehicleTimeTrackingLink;
 	
-	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Trending Report']")
-	private WebElement trendingreportlink;
+	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Cycle Time Trending']")
+	private WebElement cycleTimeTrendingLink;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl04_Label1")
 	private WebElement eventslink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl02_Label1")
-	private WebElement kanbanlink;
+	private WebElement whiteBoardLink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl14_Label1")
 	private WebElement serviceCountlink;
@@ -85,20 +85,20 @@ public class MonitorWebPage extends BaseWebPage {
 				driver, MonitorSettingsWebPage.class);
 	}
 	
-	public AverageRepairTimeReportWebPage clickAverageRepairTimeReportLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(averagerepairtimereportlink)).click();
+	public AverageRepairTimeReportWebPage clickRepairCycleTimeLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(repairCycleTimeLink)).click();
 		return PageFactory.initElements(
 				driver, AverageRepairTimeReportWebPage.class);
 	}
 	
-	public RepairLocationTimeTrackingWebPage clickRepairLocationTimeTrackingLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(repairlocationtimetrackinglink)).click();
+	public RepairLocationTimeTrackingWebPage clickVehicleTimeTrackingLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(vehicleTimeTrackingLink)).click();
 		return PageFactory.initElements(
 				driver, RepairLocationTimeTrackingWebPage.class);
 	}
 	
-	public TrendingReportWebPage clickTrendingReportLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(trendingreportlink)).click();
+	public TrendingReportWebPage clickCycleTimeTrendingLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(cycleTimeTrendingLink)).click();
 		return PageFactory.initElements(
 				driver, TrendingReportWebPage.class);
 	}
@@ -109,8 +109,8 @@ public class MonitorWebPage extends BaseWebPage {
 				driver, EventsWebPage.class);
 	}
 
-	public KanbanWebPage clickKanbanLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(kanbanlink)).click();
+	public KanbanWebPage clickWhiteBoardLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(whiteBoardLink)).click();
 		return PageFactory.initElements(
 				driver, KanbanWebPage.class);
 	}

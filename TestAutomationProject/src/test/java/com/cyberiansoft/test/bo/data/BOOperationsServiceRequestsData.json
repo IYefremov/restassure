@@ -468,5 +468,51 @@
       "description": "Test Case 57879:Operation - Service Request Life Cycle - Closed",
       "serviceRequestType": "Oleksa_AcceptanceAndAllRequired"
     }
+  ],
+
+  "testMiscellaneousEventsServiceRequestAccepted": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestAccepted.01",
+      "description": "Test Case 59700:Miscellaneous - Events: Service Request Accepted",
+      "customer": "Automation Wholesale",
+      "serviceRequestType": "Zak_Request_Type",
+      "event": "Service Request Created",
+      "eventNewName": "test appointment SR created",
+      "emailNotification": "My Service Requests",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWordRemainder": "Remainder",
+      "emailKeyWordWasCreated": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsSRCreated": [
+    {
+      "rowID": "testMiscellaneousEventsSRCreated.01",
+      "description": "Test Case 59700:Miscellaneous - Events:SR Created",
+      "customer": "Automation Wholesale",
+      "serviceRequestType": "Zak_Request_Type",
+      "event": "Service Request Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "emailNotification": "My Service Requests",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO# was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestCheckedIn": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestCheckedIn.01",
+      "description": "Test Case 31350:Miscellaneous - Events: Service Request Checked In",
+      "customer": "Automation Wholesale",
+      "serviceRequestType": "Zak_Request_Type",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "event": "Service Request Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#"
+    }
   ]
 }

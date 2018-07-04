@@ -103,7 +103,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
 
         wopage.setPageSize(data.getPage999());
-        Assert.assertEquals(wopage.getWorkOrdersTableRowCount(), data.getTableRowCount40());
+        Assert.assertEquals(data.getTableRowCount82(), wopage.getWorkOrdersTableRowCount());
 
         wopage.makeSearchPanelVisible();
         wopage.verifySearchFieldsAreVisible();

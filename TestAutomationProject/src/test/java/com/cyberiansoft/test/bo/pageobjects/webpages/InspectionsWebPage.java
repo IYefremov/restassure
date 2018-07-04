@@ -138,10 +138,13 @@ public class InspectionsWebPage extends WebPageWithFilter {
     public InspectionsWebPage setTimeFrame(String from, String to) {
         wait.until(ExpectedConditions.elementToBeClickable(fromDateField)).clear();
         fromDateField.sendKeys(from);
-        wait.until(ExpectedConditions.attributeContains(fromDateClientsField, "value", from));
+//        wait.until(ExpectedConditions.attributeContains(fromDateClientsField, "value", from));
         wait.until(ExpectedConditions.elementToBeClickable(toDateField)).clear();
         toDateField.sendKeys(to);
-        wait.until(ExpectedConditions.attributeContains(toDateClientsField, "value", to));
+        try {
+            wait.until(ExpectedConditions.attributeContains(fromDateClientsField, "value", from));
+            wait.until(ExpectedConditions.attributeContains(toDateClientsField, "value", to));
+        } catch (Exception ignored) {}
         return this;
     }
 

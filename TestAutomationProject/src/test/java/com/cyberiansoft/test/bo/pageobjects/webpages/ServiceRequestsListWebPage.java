@@ -5,7 +5,6 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
@@ -28,7 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -1746,8 +1745,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
         try {
             wait.until(ExpectedConditions.visibilityOf(lifeCycleBlock));
-            return lifeCycleBlock.getText().contains(LocalDate.now(ZoneOffset.of("-07:00")).format(formatter))
-                    || lifeCycleBlock.getText().contains(LocalDate.now(ZoneOffset.of("-08:00")).format(formatter));
+            return lifeCycleBlock.getText().contains(LocalDate.now(ZoneId.of("US/Pacific")).format(formatter));
         } catch (TimeoutException e) {
 		    e.printStackTrace();
 			return false;
@@ -1977,19 +1975,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         } catch (TimeoutException | StaleElementReferenceException e) {
 		    waitABit(3000);
         }
-	}
-
-	public boolean checkTestEmails() {
-		for (int i = 0; i < 5; i++) {
-			try {
-				waitABit(40000);
-				if (!MailChecker.searchEmailAndGetMailMessage(userName, userPassword,
-                        "test appointment", "reconpro+main@cyberiansoft.com").isEmpty()) {
-					return true;
-				}
-			} catch (NullPointerException ignored) {}
-		}
-		return false;
 	}
 
 	public int countAvailableServices() {

@@ -46,8 +46,8 @@ public class DuplicateInspectionsWebPage extends BaseWebPage {
     public boolean isROdisplayedForInspection(String inspection, String ROnum) {
         try {
             wait.until(ExpectedConditions.visibilityOf(driver
-                    .findElement(By.xpath("//div[contains(text(), '" + ROnum +
-                            "')]/preceding::div/a[contains(text(), '" + inspection + "')]"))))
+                    .findElement(By.xpath("//td[contains(text(), '" + ROnum +
+                            "')]/preceding::td/a[contains(text(), '" + inspection + "')]"))))
                     .isDisplayed();
             return true;
         } catch (Exception e) {

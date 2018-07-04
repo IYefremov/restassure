@@ -2,7 +2,7 @@ package com.cyberiansoft.test.bo.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
@@ -51,7 +51,7 @@ public class BackOfficeUtils {
 	}
 	
 	public static String getShortCurrentTimeWithTimeZone() {
-		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneOffset.of("-08:00"));
+		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneId.of("US/Pacific"));
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/uuuu");
 	    
 	    
@@ -66,13 +66,13 @@ public class BackOfficeUtils {
 	}
 	
 	public static LocalDate getWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 		return localDate.with(fieldUS, 1);
 	}
 	
 	public static LocalDate getLastWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
 //		localDate = localDate.minusWeeks(1);
@@ -97,7 +97,7 @@ public class BackOfficeUtils {
 	}
 
     public static LocalDate getLastWeekEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
 		localDate = localDate.plusWeeks(1);
@@ -105,37 +105,37 @@ public class BackOfficeUtils {
 	}
 	
 	public static LocalDate getMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		return localDate.withDayOfMonth(1);
 		
 	}
 	
 	public static LocalDate getLastMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(1);
 		
 	}
 	
 	public static LocalDate getLastMonthEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(localDate.lengthOfMonth());
 	}
 	
 	public static LocalDate getYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		return localDate.withDayOfYear(1);
 	}
 	
 	public static LocalDate getLastYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		localDate = localDate.minusYears(1);
 		return localDate.withDayOfYear(1);
 	}
 	
 	public static LocalDate getLastYearEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
+		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		localDate = localDate.minusYears(1);
 		return localDate.withDayOfYear(localDate.lengthOfYear());
 	}

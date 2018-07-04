@@ -3,7 +3,6 @@ package com.cyberiansoft.test.inhouse.pageObject;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -123,13 +122,8 @@ public class ClientSegmentsPage extends BasePage {
 
     @Step
     public ClientSegmentsPage searchClientSegment(String client) {
-        try {
-            waitABit(1000);
-            wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
-        } catch (WebDriverException e) {
-            refreshPage();
-            wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
-        }
+        refreshPage();
+        wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
         searchField.sendKeys(client);
         clickSearch();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("table-client-segments_processing")));
