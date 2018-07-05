@@ -2,362 +2,326 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.dataclasses.bo.BOMonitorData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BackOfficeMonitorTestCases extends BaseTestCase {
 
-	@Test(testName = "Test Case 15266:Monitor-Repair Order: Search", description = "Monitor-Repair Order: Search")
-	public void testMonitorRepairOrderSearch() throws Exception {
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorData.json";
 
-		final String wonumber = "O-000-149273";
-		final String searchLocation = "Default Location";
-		final String searchTimeFrame = "Last Year";
-		final String company = "000 15.11 Companey";
-		final String VIN = "1GCPKSE70CF109506";
-		final String page1 = "1";
-		final String page2 = "2";
-		final String page999 = "999";
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorRepairOrderSearch(String rowID, String description, JSONObject testData) {
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		repairorderspage.repairOrdersTableIsVisible();
 		repairorderspage.verifyRepairOrdersTableColumnsAreVisible();
 
-		repairorderspage.selectSearchLocation(searchLocation);
-		repairorderspage.selectSearchTimeframe(searchTimeFrame);
+		repairorderspage.selectSearchLocation(data.getSearchLocation());
+		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
 		repairorderspage.clickFindButton();
-		Assert.assertEquals(page1, repairorderspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), repairorderspage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), repairorderspage.getGoToPageFieldValue());
 
 		String lastpagenumber = repairorderspage.getLastPageNumber();
 		repairorderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToFirstPage();
-		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToNextPage();
-		Assert.assertEquals(page2, repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage2(), repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToPreviousPage();
-		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), repairorderspage.getGoToPageFieldValue());
 
-		repairorderspage.setPageSize(page1);
+		repairorderspage.setPageSize(data.getPage1());
 		Assert.assertEquals(1, repairorderspage.getRepairOrdersTableRowCount());
 		//String numberofrows = repairorderspage.getLastPageNumber();
 
-		repairorderspage.setPageSize(page999);
+		repairorderspage.setPageSize(data.getPage999());
 		Assert.assertEquals(50, repairorderspage.getRepairOrdersTableRowCount());
 
-		repairorderspage.selectSearchLocation(searchLocation);
-		Thread.sleep(1000);
-		repairorderspage.selectSearchCustomer(company);
-		repairorderspage.setSearchVIN(VIN);
-		repairorderspage.setSearchWoNumber(wonumber);
+		repairorderspage.selectSearchLocation(data.getSearchLocation());
+		repairorderspage.selectSearchCustomer(data.getCompany());
+		repairorderspage.setSearchVIN(data.getVIN());
+		repairorderspage.setSearchWoNumber(data.getWoNumber());
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
-		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
-		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible(company, VIN);
+		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(data.getWoNumber()));
+		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible(data.getCompany(), data.getVIN());
 	}
 
-	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
-	public void testMonitorVendorOrdersSearch() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorVendorOrdersSearch(String rowID, String description, JSONObject testData) {
 
-		final String wonumber = "O-000-149273";
-		final String company = "000 15.11 Companey";
-		final String VIN = "1GCPKSE70CF109506";
-		final String vendor = "Test Team";
-		final String searchLocation = "Default Location";
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String serviceStatus = "All Services";
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
 
-        final String page1 = "1";
-        final String page2 = "2";
-        final String page999 = "999";
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-
-		VendorOrdersWebPage vendororderspage = monitorpage.clickVendorOrdersLink();
+        VendorOrdersWebPage vendororderspage = monitorPage.clickVendorOrdersLink();
 		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
-		vendororderspage.selectSearchServiceStatus(serviceStatus);
+		vendororderspage.selectSearchServiceStatus(data.getServiceStatus());
 		vendororderspage.clickFindButton();
 		vendororderspage.repairOrdersTableIsVisible();
 		vendororderspage.verifyVendorOrdersTableColumnsAreVisible();
-		Assert.assertEquals(page1, vendororderspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), vendororderspage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), vendororderspage.getGoToPageFieldValue());
 
 		String lastpagenumber = vendororderspage.getLastPageNumber();
 		vendororderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToFirstPage();
-		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToNextPage();
-		Assert.assertEquals(page2, vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage2(), vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToPreviousPage();
-		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), vendororderspage.getGoToPageFieldValue());
 
-		vendororderspage.setPageSize(page1);
+		vendororderspage.setPageSize(data.getPage1());
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
 
-		vendororderspage.setPageSize(page999);
+		vendororderspage.setPageSize(data.getPage999());
 		Assert.assertEquals(50, vendororderspage.getRepairOrdersTableRowCount());
 		
-		vendororderspage.selectSearchLocation(searchLocation);
-		vendororderspage.selectSearchVendor(vendor);
-		vendororderspage.setSearchVIN(VIN); 
-		vendororderspage.selectSearchCustomer(company);
-		vendororderspage.setSearchWorkorderNumber(wonumber);
+		vendororderspage.selectSearchLocation(data.getSearchLocation());
+		vendororderspage.selectSearchVendor(data.getVendor());
+		vendororderspage.setSearchVIN(data.getVIN()); 
+		vendororderspage.selectSearchCustomer(data.getCompany());
+		vendororderspage.setSearchWorkorderNumber(data.getWoNumber());
 		
 		vendororderspage.clickFindButton();
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
-		Assert.assertEquals(vendor, vendororderspage.getTeamVendorForVendorOrder(wonumber));
-		Assert.assertEquals(company, vendororderspage.getCustomerForVendorOrder(wonumber));
+		Assert.assertEquals(data.getVendor(), vendororderspage.getTeamVendorForVendorOrder(data.getWoNumber()));
+		Assert.assertEquals(data.getCompany(), vendororderspage.getCustomerForVendorOrder(data.getWoNumber()));
 		
-		vendororderspage.vendorOrderExists(wonumber);
+		vendororderspage.vendorOrderExists(data.getWoNumber());
 	}
 
-	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report",
-            description = "Monitor- Reports - Average Repair Time Report")
-	public void testMonitorReportsAverageRepairTimeReport() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorReportsAverageRepairTimeReport(String rowID, String description, JSONObject testData) {
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-        final String searchLocation = "VD_Location";
-        final String searchWoType = "VD_WOT_TEST";
-        final String fromDate = "4/30/2017";
-        final String toDate = "5/7/2018";
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorPage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
-		averagerepairtimereportpage.selectSearchLocation(searchLocation);
-		averagerepairtimereportpage.selectSearchWOType(searchWoType);
-		averagerepairtimereportpage.setSearchFromDate(fromDate);
-		averagerepairtimereportpage.setSearchToDate(toDate);
+		averagerepairtimereportpage.selectSearchLocation(data.getSearchLocation());
+		averagerepairtimereportpage.selectSearchWOType(data.getSearchWoType());
+		averagerepairtimereportpage.setSearchFromDate(data.getFromDate());
+		averagerepairtimereportpage.setSearchToDate(data.getToDate());
 		averagerepairtimereportpage.clickFindButton();
-		averagerepairtimereportpage.verifySearchResults(searchLocation, searchWoType);
+		averagerepairtimereportpage.verifySearchResults(data.getSearchLocation(), data.getSearchWoType());
 	}
 
-	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking",
-            description = "Monitor- Reports - Repair Location Time Tracking")
-	public void testMonitorReportsRepairLocationTimeTracking() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-        final String searchLocation = "VD_Location";
-        final String fromDate = "4/30/2017";
-        final String toDate = "5/7/2018";
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorReportsRepairLocationTimeTracking(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorPage.clickVehicleTimeTrackingLink();
 		
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
-		repairlocationtimetrackingpage.selectSearchLocation(searchLocation);
-		repairlocationtimetrackingpage.setSearchFromDate(fromDate);
-		repairlocationtimetrackingpage.setSearchToDate(toDate);
+		repairlocationtimetrackingpage.selectSearchLocation(data.getSearchLocation());
+		repairlocationtimetrackingpage.setSearchFromDate(data.getFromDate());
+		repairlocationtimetrackingpage.setSearchToDate(data.getToDate());
 
 		repairlocationtimetrackingpage.clickFindButton();
 		Assert.assertTrue(repairlocationtimetrackingpage.isTableIsDisplayed(), "The table is not displayed.");
 	}
 
-	@Test(testName = "Test Case 15728:Monitor- Reports - Trending Report", description = "Monitor- Reports - Trending Report")
-	public void testMonitorReportsTrendingReport() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorReportsTrendingReport(String rowID, String description, JSONObject testData) {
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        final String searchLocation = "VD_Location";
-        final String searchWoType = "VD_WOT_TEST";
-        final String fromMonth = "Apr";
-        final String toMonth = "May";
-        final String fromYear = "2017";
-        final String toYear = "2018";
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		
-		TrendingReportWebPage trendingreportpage = monitorpage.clickCycleTimeTrendingLink();
+        TrendingReportWebPage trendingreportpage = monitorPage.clickCycleTimeTrendingLink();
 		
 		Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
-		trendingreportpage.selectSearchLocation(searchLocation);
-		trendingreportpage.selectSearchWOType(searchWoType);
-		trendingreportpage.setSearchFromDate(fromMonth, fromYear);
-		trendingreportpage.setSearchToDate(toMonth, toYear);
+		trendingreportpage.selectSearchLocation(data.getSearchLocation());
+		trendingreportpage.selectSearchWOType(data.getSearchWoType());
+		trendingreportpage.setSearchFromDate(data.getFromMonth(), data.getFromYear());
+		trendingreportpage.setSearchToDate(data.getToMonth(), data.getToYear());
 		
 		trendingreportpage.clickFindButton();
-		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed(searchLocation, searchWoType),
+		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed(data.getSearchLocation(), data.getSearchWoType()),
                 "The search results are not displayed.");
 	}
 
-	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")
-	public void testMonitorRepairOrderFullDisplayVersion() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorRepairOrderFullDisplayVersion(String rowID, String description, JSONObject testData) {
 
-		final String searchLocation = "Default Location";
-		final String searchTimeFrame = "Last Year";
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.searchPanelIsExpanded();
 		repairorderspage.searchPanelIsVisible();
-		repairorderspage.selectSearchLocation(searchLocation);
-		repairorderspage.selectSearchTimeframe(searchTimeFrame);
+		repairorderspage.selectSearchLocation(data.getSearchLocation());
+		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
 		repairorderspage.clickFindButton();
 		repairorderspage.openFullDisplayWOMonitorAndVerifyContent();
 	}
-	
-	@Test(testName = "Test Case 28379:Monitor - Verify \"On Hold\" Reason at RO", description = "Monitor - Verify \"On Hold\" Reason at RO")
-	public void testMonitorVerifyOnHoldReasonAtRO() {
-		
-		final String orderStatus = "On Hold";
-		final String orderStatusReason = "testreason";
-		final String searchLocation = "Default Location";
-		final String searchTimeFrame = "Last Year";
-		final String repairOrderNumber = "O-062-00168";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorVerifyOnHoldReasonAtRO(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();	
+		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
+			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 		}		
-		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
+		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		
-		monitorpage = backofficeheader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
+		monitorPage = backOfficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation(searchLocation);
-		repairorderspage.selectSearchTimeframe(searchTimeFrame);
-		repairorderspage.setSearchWoNumber(repairOrderNumber);
+		repairorderspage.selectSearchLocation(data.getSearchLocation());
+		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
 		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairOrderNumber);
-		vendororderservicespage.selectRepairOrderStatus(orderStatus);
-		vendororderservicespage.selectRepairOrderReason(orderStatusReason);
+		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
+		vendororderservicespage.selectRepairOrderStatus(data.getOrderStatus());
+		vendororderservicespage.selectRepairOrderReason(data.getOrderStatusReason());
 		vendororderservicespage.clickBackToROLink();
 		
-		backofficeheader.clickMonitorLink();
-		monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
+		backOfficeHeader.clickMonitorLink();
+		monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 	}
 
-	@Test(testName = "Test Case 28380:Monitor - Verify \"Closed\" Reason at RO", description = "Monitor - Verify \"Closed\" Reason at RO")
-	public void testMonitorVerifyClosedReasonAtRO() {
-		
-		final String orderStatus = "Closed";
-		final String orderStatusReason = "testreason";
-		final String searchLocation = "Default Location";
-		final String searchTimeFrame = "Last Year";
-		final String repairOrderNumber = "O-062-00168";
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorVerifyClosedReasonAtRO(String rowID, String description, JSONObject testData) {
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();	
+		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
+			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 		}		
-		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
+		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		
-		monitorpage = backofficeheader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
+		monitorPage = backOfficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation(searchLocation);
-		repairorderspage.selectSearchTimeframe(searchTimeFrame);
-		repairorderspage.setSearchWoNumber(repairOrderNumber);
+		repairorderspage.selectSearchLocation(data.getSearchLocation());
+		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
 		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairOrderNumber);
-		vendororderservicespage.selectRepairOrderStatus(orderStatus);
-		vendororderservicespage.selectRepairOrderReason(orderStatusReason);
+		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
+		vendororderservicespage.selectRepairOrderStatus(data.getOrderStatus());
+		vendororderservicespage.selectRepairOrderReason(data.getOrderStatusReason());
 		vendororderservicespage.clickBackToROLink();
 		
-		backofficeheader.clickMonitorLink();
-		monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
+		backOfficeHeader.clickMonitorLink();
+		monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 	}
-	
-	@Test(testName = "Test Case 28378:Monitor - Monitor Settings: CRUD", description = "Monitor - Monitor Settings: CRUD")
-	public void testMonitorSettingsCRUD() {
-		
-		final String orderStatus = "On Hold";
-		final String orderStatusReason = "testreasoncrud";
-		final String orderStatusEdited = "Closed";
-		final String orderStatusReasonEdited = "testreasoncrud2";
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorSettingsCRUD(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+        
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
+			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 		}	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReasonEdited)) {
-			monitorsettingspage.deleteOrderStatusReason(orderStatusReasonEdited);
+		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReasonEdited())) {
+			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReasonEdited());
 		}
-		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
-		monitorsettingspage.clickEditOrderStatusReason(orderStatusReason);
-		Assert.assertEquals(orderStatus, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
+		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReason());
+		Assert.assertEquals(data.getOrderStatus(), monitorsettingspage.getNewOrderStatus());
 		
-		monitorsettingspage.setNewOrderStatusReason(orderStatusReasonEdited);
-		monitorsettingspage.selectNewOrderStatus(orderStatusEdited);
+		monitorsettingspage.setNewOrderStatusReason(data.getOrderStatusReasonEdited());
+		monitorsettingspage.selectNewOrderStatus(data.getOrderStatusEdited());
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
 		
-		monitorsettingspage.clickEditOrderStatusReason(orderStatusReason);
-		Assert.assertEquals(orderStatus, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReason());
+		Assert.assertEquals(data.getOrderStatus(), monitorsettingspage.getNewOrderStatus());
 		
-		monitorsettingspage.setNewOrderStatusReason(orderStatusReasonEdited);
-		monitorsettingspage.selectNewOrderStatus(orderStatusEdited);
+		monitorsettingspage.setNewOrderStatusReason(data.getOrderStatusReasonEdited());
+		monitorsettingspage.selectNewOrderStatus(data.getOrderStatusEdited());
 		monitorsettingspage.clickNewOrderStatusReasonOKButton();
 		
-		monitorsettingspage.clickEditOrderStatusReason(orderStatusReasonEdited);
-		Assert.assertEquals(orderStatusEdited, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReasonEdited());
+		Assert.assertEquals(data.getOrderStatusEdited(), monitorsettingspage.getNewOrderStatus());
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
 		
-		monitorsettingspage.deleteOrderStatusReason(orderStatusReasonEdited);
+		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReasonEdited());
 	}
-	
-	@Test(testName = "Test Case 64914:Monitor - Monitor Settings: Employee Role Settings")
-	public void testMonitorSettingsEmployeeRoleSettings(){
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMonitorSettingsEmployeeRoleSettings(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
 		Assert.assertTrue(monitorsettingspage.checkPresenceOfTabs());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 
-	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
-	public void checkMonitorKanbanAutoRefresh() {
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkMonitorKanbanAutoRefresh(String rowID, String description, JSONObject testData) {
 
-        final String searchLocation = "Default Location";
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
-		WhiteBoardWebPage whiteBoardPage = monitorPage.clickWhiteBoardLink();
-		whiteBoardPage.setSearchLocation(searchLocation);
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        WhiteBoardWebPage whiteBoardPage = monitorPage.clickWhiteBoardLink();
+		whiteBoardPage.setSearchLocation(data.getSearchLocation());
 		whiteBoardPage.clickSearchButton();
 		Assert.assertTrue(whiteBoardPage.checkSearhResultColumns());
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldLessThan(5));
@@ -366,99 +330,99 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(whiteBoardPage.checkIntervalField(6));
 	}
 
-	//test skipped cause of no test data
-	//@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
-	public void checkMonitorReportsActiveVechiclesByPhaseSubscriptions() throws InterruptedException{
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
-		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
-		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameField("180"));
-		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
-		
-		activeVechicleByPhasePage.setPhase1("PDR Station");
-		activeVechicleByPhasePage.setPhase2("PDI");
-		activeVechicleByPhasePage.setStatuses1("Active");
-		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
-		activeVechicleByPhasePage.clickPhasesInRow();
-		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station","Active"));
-		SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
-		Assert.assertTrue(subscriptionsPege.checkGrid());
-		subscriptionsPege.clickAddButton();
-		Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());
-		subscriptionsPege.setSubscriptionPopUpLocation("ALM - Recon Facility");
-		subscriptionsPege.setSubscriptionPopUpPhase1("PDR Station");
-		subscriptionsPege.setSubscriptionPopUpStatuses1("Active");
-		subscriptionsPege.setSubscriptionPopUpPhase2("PDI");
-		subscriptionsPege.setSubscriptionPopUpStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
-		subscriptionsPege.setSubscriptionPopUpDescription("test");
-		subscriptionsPege.setSubscriptionPopUpStartTime("12:00 AM");
-		subscriptionsPege.clickOkAddPopUpButton();
-	}
-	
-	@Test(testName = "Test Case 65432:Monitor: Reports - Service Count")
-	public void checkMonitorReportsServiceCount() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		ServiceCountWebPage serviceCountPage = monitorpage.clickServiceCountLink();
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkMonitorReportsServiceCount(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        ServiceCountWebPage serviceCountPage = monitorPage.clickServiceCountLink();
 		Assert.assertTrue(serviceCountPage.verifySearchFields());
 		serviceCountPage.clickSearchButton();
 		Assert.assertTrue(serviceCountPage.verifySearchResultGrid());
 	}
-	
-	@Test(testName = "Test Case 65433:Monitor: Reports - Active Vehicles by Phase General")
-	public void checkMonitorReportsActiveVechiclesByPhaseGeneral(){
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-        final String searchLocation = "ALM - Recon Facility";
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkMonitorReportsActiveVehiclesByPhaseGeneral(String rowID, String description, JSONObject testData) {
+
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter(searchLocation);
+		activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
         Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(searchLocation));
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
 	}
-	
-	@Test(testName = "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases")
-	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases() {
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
 
-        final String searchLocation = "ALM - Recon Facility";
-        final String phase1 = "PDR Station";
-        final String status1 = "Active";
-        final String phase2 = "PDI";
-        final String[] statuses2 = { "Queued", "Active", "Completed", "Audited", "Refused", "Rework", "Skipped" };
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases(String rowID, String description, JSONObject testData) {
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
-		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
+        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+
+        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter(searchLocation);
+		activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
         Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(searchLocation));
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
 		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
 		
-		activeVechicleByPhasePage.setPhase1(phase1);
-		activeVechicleByPhasePage.setStatuses1(status1);
-		activeVechicleByPhasePage.setPhase2(phase2);
-		activeVechicleByPhasePage.setStatuses2(statuses2);
+		activeVechicleByPhasePage.setPhase1(data.getPhase1());
+		activeVechicleByPhasePage.setStatuses1(data.getStatus1());
+		activeVechicleByPhasePage.setPhase2(data.getPhase2());
+		activeVechicleByPhasePage.setStatuses2(data.getStatuses2());
 		activeVechicleByPhasePage.clickFindButton();
 	}
+	
+    //test skipped cause of no test data
+    //@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
+    public void checkMonitorReportsActiveVechiclesByPhaseSubscriptions() throws InterruptedException{
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
+                BackOfficeHeaderPanel.class);
+        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickActiveVehiclesByPhaseLink();
+        Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
+        activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+        Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameField("180"));
+        Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
+        activeVechicleByPhasePage.clickFindButton();
+        Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+
+        activeVechicleByPhasePage.setPhase1("PDR Station");
+        activeVechicleByPhasePage.setPhase2("PDI");
+        activeVechicleByPhasePage.setStatuses1("Active");
+        activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+        activeVechicleByPhasePage.clickPhasesInRow();
+        activeVechicleByPhasePage.clickFindButton();
+        Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station","Active"));
+        SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
+        Assert.assertTrue(subscriptionsPege.checkGrid());
+        subscriptionsPege.clickAddButton();
+        Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());
+        subscriptionsPege.setSubscriptionPopUpLocation("ALM - Recon Facility");
+        subscriptionsPege.setSubscriptionPopUpPhase1("PDR Station");
+        subscriptionsPege.setSubscriptionPopUpStatuses1("Active");
+        subscriptionsPege.setSubscriptionPopUpPhase2("PDI");
+        subscriptionsPege.setSubscriptionPopUpStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+        subscriptionsPege.setSubscriptionPopUpDescription("test");
+        subscriptionsPege.setSubscriptionPopUpStartTime("12:00 AM");
+        subscriptionsPege.clickOkAddPopUpButton();
+    }
 }

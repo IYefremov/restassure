@@ -1,0 +1,160 @@
+{
+  "testMonitorRepairOrderSearch": [
+    {
+      "rowID": "testMonitorRepairOrderSearch.01",
+      "description": "Test Case 15266:Monitor-Repair Order: Search",
+      "woNumber": "O-000-149273",
+      "searchLocation": "Default Location",
+      "searchTimeFrame": "Last Year",
+      "company": "000 15.11 Companey",
+      "VIN": "1GCPKSE70CF109506",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999"
+    }
+  ],
+  
+  "testMonitorVendorOrdersSearch": [
+    {
+      "rowID": "testMonitorVendorOrdersSearch.01",
+      "description": "Test Case 15724:Monitor - Vendor Orders: Search",
+      "woNumber": "O-000-149273",
+      "company": "000 15.11 Companey",
+      "VIN": "1GCPKSE70CF109506",
+      "vendor": "Test Team",
+      "searchLocation": "Default Location",
+      "serviceStatus": "All Services",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999"
+    }
+  ],
+  
+  "testMonitorReportsAverageRepairTimeReport": [
+    {
+      "rowID": "testMonitorReportsAverageRepairTimeReport.01",
+      "description": "Test Case 15726:Monitor- Reports - Average Repair Time Report",
+      "searchLocation": "VD_Location",
+      "searchWoType": "VD_WOT_TEST",
+      "fromDate": "4/30/2017",
+      "toDate": "5/7/2018"
+    }
+  ],
+  
+  "testMonitorReportsRepairLocationTimeTracking": [
+    {
+      "rowID": "testMonitorReportsRepairLocationTimeTracking.01",
+      "description": "Test Case 15727:Monitor- Reports - Repair Location Time Tracking",
+      "searchLocation": "VD_Location",
+      "fromDate": "4/30/2017",
+      "toDate": "5/7/2018"
+    }
+  ],
+  
+  "testMonitorReportsTrendingReport": [
+    {
+      "rowID": "testMonitorReportsTrendingReport.01",
+      "description": "Test Case 15728:Monitor- Reports - Trending Report",
+      "searchLocation": "VD_Location",
+      "searchWoType": "VD_WOT_TEST",
+      "fromMonth": "Apr",
+      "toMonth": "May",
+      "fromYear": "2017",
+      "toYear": "2018"
+    }
+  ],
+  
+  "testMonitorRepairOrderFullDisplayVersion": [
+    {
+      "rowID": "testMonitorRepairOrderFullDisplayVersion.01",
+      "description": "Test Case 15948:Monitor-Repair Order: Full Display Version",
+      "searchLocation": "Default Location",
+      "searchTimeFrame": "Last Year"
+    }
+  ],
+  
+  "testMonitorVerifyOnHoldReasonAtRO": [
+    {
+      "rowID": "testMonitorVerifyOnHoldReasonAtRO.01",
+      "description": "Test Case 28379:Monitor - Verify \"On Hold\" Reason at RO",
+      "orderStatus": "On Hold",
+      "orderStatusReason": "testreason",
+      "searchLocation": "Default Location",
+      "searchTimeFrame": "Last Year",
+      "repairOrderNumber": "O-062-00168"
+    }
+  ],
+  
+  "testMonitorVerifyClosedReasonAtRO": [
+    {
+      "rowID": "testMonitorVerifyClosedReasonAtRO.01",
+      "description": "Test Case 28380:Monitor - Verify \"Closed\" Reason at RO",
+      "orderStatus": "Closed",
+      "orderStatusReason": "testreason",
+      "searchLocation": "Default Location",
+      "searchTimeFrame": "Last Year",
+      "repairOrderNumber": "O-062-00168"
+    }
+  ],
+  
+  "testMonitorSettingsCRUD": [
+    {
+      "rowID": "testMonitorSettingsCRUD.01",
+      "description": "Test Case 28378:Monitor - Monitor Settings: CRUD",
+      "orderStatus": "On Hold",
+      "orderStatusReason": "testreasoncrud",
+      "orderStatusEdited": "Closed",
+      "orderStatusReasonEdited": "testreasoncrud2"
+    }
+  ],
+  
+  "testMonitorSettingsEmployeeRoleSettings": [
+    {
+      "rowID": "testMonitorSettingsEmployeeRoleSettings.01",
+      "description": "Test Case 64914:Monitor - Monitor Settings: Employee Role Settings"
+    }
+  ],
+  
+  "checkMonitorKanbanAutoRefresh": [
+    {
+      "rowID": "checkMonitorKanbanAutoRefresh.01",
+      "description": "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF",
+      "searchLocation": "Default Location"
+    }
+  ],
+  
+  "checkMonitorReportsServiceCount": [
+    {
+      "rowID": "checkMonitorReportsServiceCount.01",
+      "description": "Test Case 65432:Monitor: Reports - Service Count"
+    }
+  ],
+  
+  "checkMonitorReportsActiveVehiclesByPhaseGeneral": [
+    {
+      "rowID": "checkMonitorReportsActiveVehiclesByPhaseGeneral.01",
+      "description": "Test Case 65433:Monitor: Reports - Active Vehicles by Phase General",
+      "searchLocation": "ALM - Recon Facility"
+    }
+  ],
+  
+  "checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases": [
+    {
+      "rowID": "checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases.01",
+      "description": "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases",
+      "searchLocation": "ALM - Recon Facility",
+      "phase1": "PDR Station",
+      "status1": "Active",
+      "phase2": "PDI",
+      "statuses2": [
+        "Queued",
+        "Active",
+        "Completed",
+        "Audited",
+        "Refused",
+        "Rework",
+        "Skipped"
+      ]
+    }
+  ]
+}
