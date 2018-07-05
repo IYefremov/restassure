@@ -90,8 +90,8 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		return vendororderstable.isDisplayed();
 	}
 	
-	public int getRepairOrdersTableRowCount() throws InterruptedException {
-		Thread.sleep(4000);
+	public int getRepairOrdersTableRowCount() {
+		waitABit(4000);
 		return vendororderstable.getTableRowCount();
 	}
 	
@@ -163,9 +163,8 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		return null;
 	}
 	
-	public boolean isVendorOrderExists(String orderno) {
-		boolean exists =  vendororderstable.getWrappedElement().findElements(By.xpath(".//tr/td/a[text()='" + orderno + "']")).size() > 0;
-		return exists;
+	public boolean vendorOrderExists(String orderno) {
+        return vendororderstable.getWrappedElement().findElements(By.xpath(".//tr/td/a[text()='" + orderno + "']")).size() > 0;
 	}
 	
 	public String getTeamVendorForVendorOrder(String orderno) {

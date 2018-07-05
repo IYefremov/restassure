@@ -12,6 +12,13 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void testMonitorRepairOrderSearch() throws Exception {
 
 		final String wonumber = "O-000-149273";
+		final String searchLocation = "Default Location";
+		final String searchTimeFrame = "Last Year";
+		final String company = "000 15.11 Companey";
+		final String VIN = "1GCPKSE70CF109506";
+		final String page1 = "1";
+		final String page2 = "2";
+		final String page999 = "999";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -22,55 +29,57 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.repairOrdersTableIsVisible();
 		repairorderspage.verifyRepairOrdersTableColumnsAreVisible();
 
-		repairorderspage.selectSearchLocation("Default Location");
-		repairorderspage.selectSearchTimeframe("Last Year");
+		repairorderspage.selectSearchLocation(searchLocation);
+		repairorderspage.selectSearchTimeframe(searchTimeFrame);
 		repairorderspage.clickFindButton();
-		Assert.assertEquals("1", repairorderspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, repairorderspage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
 
 		String lastpagenumber = repairorderspage.getLastPageNumber();
 		repairorderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToFirstPage();
-		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToNextPage();
-		Assert.assertEquals("2", repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page2, repairorderspage.getGoToPageFieldValue());
 
 		repairorderspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", repairorderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, repairorderspage.getGoToPageFieldValue());
 
-		repairorderspage.setPageSize("1");
+		repairorderspage.setPageSize(page1);
 		Assert.assertEquals(1, repairorderspage.getRepairOrdersTableRowCount());
 		//String numberofrows = repairorderspage.getLastPageNumber();
 
-		repairorderspage.setPageSize("999");
-		Assert.assertEquals(new Integer(50), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
+		repairorderspage.setPageSize(page999);
+		Assert.assertEquals(50, repairorderspage.getRepairOrdersTableRowCount());
 
-		repairorderspage.selectSearchLocation("Default Location");
+		repairorderspage.selectSearchLocation(searchLocation);
 		Thread.sleep(1000);
-		repairorderspage.selectSearchCustomer("000 15.11 Companey");
-		repairorderspage.setSearchVIN("1GCPKSE70CF109506");
+		repairorderspage.selectSearchCustomer(company);
+		repairorderspage.setSearchVIN(VIN);
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
-		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible("000 15.11 Companey", "1GCPKSE70CF109506");
-
+		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible(company, VIN);
 	}
 
 	@Test(testName = "Test Case 15724:Monitor - Vendor Orders: Search", description = "Monitor - Vendor Orders: Search")
-	public void testMonitorVendorOrdersSearch() throws Exception {
+	public void testMonitorVendorOrdersSearch() {
 
-		final String wonum = "O-000-149273";
+		final String wonumber = "O-000-149273";
 		final String company = "000 15.11 Companey";
 		final String VIN = "1GCPKSE70CF109506";
 		final String vendor = "Test Team";
-		final String deflocation = "Default Location";
+		final String searchLocation = "Default Location";
 
-		final String servicestatus = "All Services";
-		final String employee = "Oksi Manager";
+		final String serviceStatus = "All Services";
+
+        final String page1 = "1";
+        final String page2 = "2";
+        final String page999 = "999";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -79,50 +88,44 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 		VendorOrdersWebPage vendororderspage = monitorpage.clickVendorOrdersLink();
 		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
-		vendororderspage.selectSearchServiceStatus(servicestatus);
+		vendororderspage.selectSearchServiceStatus(serviceStatus);
 		vendororderspage.clickFindButton();
 		vendororderspage.repairOrdersTableIsVisible();
 		vendororderspage.verifyVendorOrdersTableColumnsAreVisible();
-		Assert.assertEquals("1", vendororderspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, vendororderspage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
 
 		String lastpagenumber = vendororderspage.getLastPageNumber();
 		vendororderspage.clickGoToLastPage();
 		Assert.assertEquals(lastpagenumber, vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToFirstPage();
-		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToNextPage();
-		Assert.assertEquals("2", vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page2, vendororderspage.getGoToPageFieldValue());
 
 		vendororderspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", vendororderspage.getGoToPageFieldValue());
+		Assert.assertEquals(page1, vendororderspage.getGoToPageFieldValue());
 
-		vendororderspage.setPageSize("1");
+		vendororderspage.setPageSize(page1);
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
 
-		vendororderspage.setPageSize("999");
-		Assert.assertEquals(new Integer(50), Integer.valueOf(vendororderspage.getRepairOrdersTableRowCount()));
+		vendororderspage.setPageSize(page999);
+		Assert.assertEquals(50, vendororderspage.getRepairOrdersTableRowCount());
 		
-		vendororderspage.selectSearchLocation(deflocation);
+		vendororderspage.selectSearchLocation(searchLocation);
 		vendororderspage.selectSearchVendor(vendor);
 		vendororderspage.setSearchVIN(VIN); 
 		vendororderspage.selectSearchCustomer(company);
-		//vendororderspage.selectSearchEmployee("Vitaly Lyashenko (VL)");
-		//vendororderspage.setSearchRoNumber("fhfhd3646");
-		vendororderspage.setSearchWorkorderNumber(wonum);
+		vendororderspage.setSearchWorkorderNumber(wonumber);
 		
 		vendororderspage.clickFindButton();
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(vendororderspage.getRepairOrdersTableRowCount()));
-		Assert.assertEquals(vendor, vendororderspage.getTeamVendorForVendorOrder(wonum));
-		Assert.assertEquals(company, vendororderspage.getCustomerForVendorOrder(wonum));
+		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
+		Assert.assertEquals(vendor, vendororderspage.getTeamVendorForVendorOrder(wonumber));
+		Assert.assertEquals(company, vendororderspage.getCustomerForVendorOrder(wonumber));
 		
-		vendororderspage.isVendorOrderExists(wonum);
-
-		//blank pages
-	//	vendororderspage.openOrderNoInformationWindowAndVerifyContent(wonum, VIN, company, employee);
-	//	vendororderspage.openServicesInformationByOrderNoWindowAndVerifyContent(wonum, VIN, company);
+		vendororderspage.vendorOrderExists(wonumber);
 	}
 
 	@Test(testName = "Test Case 15726:Monitor- Reports - Average Repair Time Report",
@@ -131,18 +134,22 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+        final String searchLocation = "VD_Location";
+        final String searchWoType = "VD_WOT_TEST";
+        final String fromDate = "4/30/2017";
+        final String toDate = "5/7/2018";
+
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
 		AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorpage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
-		averagerepairtimereportpage.selectSearchLocation("VD_Location");
-		averagerepairtimereportpage.selectSearchWOType("VD_WOT_TEST");
-		averagerepairtimereportpage.setSearchFromDate("4/30/2017");
-		averagerepairtimereportpage.setSearchToDate("5/7/2018");
+		averagerepairtimereportpage.selectSearchLocation(searchLocation);
+		averagerepairtimereportpage.selectSearchWOType(searchWoType);
+		averagerepairtimereportpage.setSearchFromDate(fromDate);
+		averagerepairtimereportpage.setSearchToDate(toDate);
 		averagerepairtimereportpage.clickFindButton();
-		averagerepairtimereportpage.verifySearchResults("VD_Location", "VD_WOT_TEST");
+		averagerepairtimereportpage.verifySearchResults(searchLocation, searchWoType);
 	}
 
 	@Test(testName = "Test Case 15727:Monitor- Reports - Repair Location Time Tracking",
@@ -150,16 +157,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void testMonitorReportsRepairLocationTimeTracking() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+        final String searchLocation = "VD_Location";
+        final String fromDate = "4/30/2017";
+        final String toDate = "5/7/2018";
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
 		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
 		
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
-		repairlocationtimetrackingpage.selectSearchLocation("VD_Location");
-		repairlocationtimetrackingpage.setSearchFromDate("4/30/2017");
-		repairlocationtimetrackingpage.setSearchToDate("5/7/2018");
+		repairlocationtimetrackingpage.selectSearchLocation(searchLocation);
+		repairlocationtimetrackingpage.setSearchFromDate(fromDate);
+		repairlocationtimetrackingpage.setSearchToDate(toDate);
 
 		repairlocationtimetrackingpage.clickFindButton();
 		Assert.assertTrue(repairlocationtimetrackingpage.isTableIsDisplayed(), "The table is not displayed.");
@@ -170,28 +179,35 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		
+
+        final String searchLocation = "VD_Location";
+        final String searchWoType = "VD_WOT_TEST";
+        final String fromMonth = "Apr";
+        final String toMonth = "May";
+        final String fromYear = "2017";
+        final String toYear = "2018";
+
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		
 		TrendingReportWebPage trendingreportpage = monitorpage.clickCycleTimeTrendingLink();
 		
 		Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
-		trendingreportpage.selectSearchLocation("VD_Location");
-		trendingreportpage.selectSearchWOType("VD_WOT_TEST");
-		trendingreportpage.setSearchFromDate("Apr", "2017");
-		trendingreportpage.setSearchToDate("May", "2018");
+		trendingreportpage.selectSearchLocation(searchLocation);
+		trendingreportpage.selectSearchWOType(searchWoType);
+		trendingreportpage.setSearchFromDate(fromMonth, fromYear);
+		trendingreportpage.setSearchToDate(toMonth, toYear);
 		
 		trendingreportpage.clickFindButton();
-		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed("VD_Location", "VD_WOT_TEST"),
+		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed(searchLocation, searchWoType),
                 "The search results are not displayed.");
 	}
 
 	@Test(description = "Test Case 15948:Monitor-Repair Order: Full Display Version")
 	public void testMonitorRepairOrderFullDisplayVersion() {
 
-		final String repairorderlocation = "Default Location";
-		final String repairordertimeframe = "Last Year";
-		
+		final String searchLocation = "Default Location";
+		final String searchTimeFrame = "Last Year";
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
@@ -201,8 +217,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.searchPanelIsExpanded();
 		repairorderspage.searchPanelIsVisible();
-		repairorderspage.selectSearchLocation(repairorderlocation);
-		repairorderspage.selectSearchTimeframe(repairordertimeframe);
+		repairorderspage.selectSearchLocation(searchLocation);
+		repairorderspage.selectSearchTimeframe(searchTimeFrame);
 		repairorderspage.clickFindButton();
 		repairorderspage.openFullDisplayWOMonitorAndVerifyContent();
 	}
@@ -210,119 +226,116 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 28379:Monitor - Verify \"On Hold\" Reason at RO", description = "Monitor - Verify \"On Hold\" Reason at RO")
 	public void testMonitorVerifyOnHoldReasonAtRO() {
 		
-		final String orderstatus = "On Hold";
-		final String orderstatusreason = "testreason";
-		
-		final String repairorderlocation = "Default Location";
-		final String repairordertimeframe = "Last Year";
-		final String repairordernumber = "O-062-00168";
+		final String orderStatus = "On Hold";
+		final String orderStatusReason = "testreason";
+		final String searchLocation = "Default Location";
+		final String searchTimeFrame = "Last Year";
+		final String repairOrderNumber = "O-062-00168";
 		
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderstatusreason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
+		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
+			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
 		}		
-		monitorsettingspage.createNewOrderStatusReason(orderstatus, orderstatusreason);
+		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
 		
 		monitorpage = backofficeheader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation(repairorderlocation);
-		repairorderspage.selectSearchTimeframe(repairordertimeframe);
-		repairorderspage.setSearchWoNumber(repairordernumber);
+		repairorderspage.selectSearchLocation(searchLocation);
+		repairorderspage.selectSearchTimeframe(searchTimeFrame);
+		repairorderspage.setSearchWoNumber(repairOrderNumber);
 		repairorderspage.clickFindButton();
 		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairordernumber);
-		vendororderservicespage.selectRepairOrderStatus(orderstatus);
-		vendororderservicespage.selectRepairOrderReason(orderstatusreason);
+		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairOrderNumber);
+		vendororderservicespage.selectRepairOrderStatus(orderStatus);
+		vendororderservicespage.selectRepairOrderReason(orderStatusReason);
 		vendororderservicespage.clickBackToROLink();
 		
 		backofficeheader.clickMonitorLink();
 		monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
+		monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
 	}
 
 	@Test(testName = "Test Case 28380:Monitor - Verify \"Closed\" Reason at RO", description = "Monitor - Verify \"Closed\" Reason at RO")
 	public void testMonitorVerifyClosedReasonAtRO() {
 		
-		final String orderstatus = "Closed";
-		final String orderstatusreason = "testreason";
-		
-		final String repairorderlocation = "Default Location";
-		final String repairordertimeframe = "Last Year";
-		final String repairordernumber = "O-062-00168";
-		
+		final String orderStatus = "Closed";
+		final String orderStatusReason = "testreason";
+		final String searchLocation = "Default Location";
+		final String searchTimeFrame = "Last Year";
+		final String repairOrderNumber = "O-062-00168";
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderstatusreason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
+		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
+			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
 		}		
-		monitorsettingspage.createNewOrderStatusReason(orderstatus, orderstatusreason);
+		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
 		
 		monitorpage = backofficeheader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
-		repairorderspage.selectSearchLocation(repairorderlocation);
-		repairorderspage.selectSearchTimeframe(repairordertimeframe);
-		repairorderspage.setSearchWoNumber(repairordernumber);
+		repairorderspage.selectSearchLocation(searchLocation);
+		repairorderspage.selectSearchTimeframe(searchTimeFrame);
+		repairorderspage.setSearchWoNumber(repairOrderNumber);
 		repairorderspage.clickFindButton();
 		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairordernumber);
-		vendororderservicespage.selectRepairOrderStatus(orderstatus);
-		vendororderservicespage.selectRepairOrderReason(orderstatusreason);
+		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(repairOrderNumber);
+		vendororderservicespage.selectRepairOrderStatus(orderStatus);
+		vendororderservicespage.selectRepairOrderReason(orderStatusReason);
 		vendororderservicespage.clickBackToROLink();
 		
 		backofficeheader.clickMonitorLink();
 		monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
+		monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
 	}
 	
 	@Test(testName = "Test Case 28378:Monitor - Monitor Settings: CRUD", description = "Monitor - Monitor Settings: CRUD")
 	public void testMonitorSettingsCRUD() {
 		
-		final String orderstatus = "On Hold";
-		final String orderstatusreason = "testreasoncrud";
-		
-		final String orderstatused = "Closed";
-		final String orderstatusreasoned = "testreasoncrud2";
-		
+		final String orderStatus = "On Hold";
+		final String orderStatusReason = "testreasoncrud";
+		final String orderStatusEdited = "Closed";
+		final String orderStatusReasonEdited = "testreasoncrud2";
+
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		if (monitorsettingspage.isOrderStatusReasonExists(orderstatusreason)) {
-			monitorsettingspage.deleteOrderStatusReason(orderstatusreason);
+		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReason)) {
+			monitorsettingspage.deleteOrderStatusReason(orderStatusReason);
 		}	
-		if (monitorsettingspage.isOrderStatusReasonExists(orderstatusreasoned)) {
-			monitorsettingspage.deleteOrderStatusReason(orderstatusreasoned);
+		if (monitorsettingspage.isOrderStatusReasonExists(orderStatusReasonEdited)) {
+			monitorsettingspage.deleteOrderStatusReason(orderStatusReasonEdited);
 		}
-		monitorsettingspage.createNewOrderStatusReason(orderstatus, orderstatusreason);
-		monitorsettingspage.clickEditOrderStatusReason(orderstatusreason);
-		Assert.assertEquals(orderstatus, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.createNewOrderStatusReason(orderStatus, orderStatusReason);
+		monitorsettingspage.clickEditOrderStatusReason(orderStatusReason);
+		Assert.assertEquals(orderStatus, monitorsettingspage.getNewOrderStatus());
 		
-		monitorsettingspage.setNewOrderStatusReason(orderstatusreasoned);
-		monitorsettingspage.selectNewOrderStatus(orderstatused);
+		monitorsettingspage.setNewOrderStatusReason(orderStatusReasonEdited);
+		monitorsettingspage.selectNewOrderStatus(orderStatusEdited);
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
 		
-		monitorsettingspage.clickEditOrderStatusReason(orderstatusreason);
-		Assert.assertEquals(orderstatus, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.clickEditOrderStatusReason(orderStatusReason);
+		Assert.assertEquals(orderStatus, monitorsettingspage.getNewOrderStatus());
 		
-		monitorsettingspage.setNewOrderStatusReason(orderstatusreasoned);
-		monitorsettingspage.selectNewOrderStatus(orderstatused);
+		monitorsettingspage.setNewOrderStatusReason(orderStatusReasonEdited);
+		monitorsettingspage.selectNewOrderStatus(orderStatusEdited);
 		monitorsettingspage.clickNewOrderStatusReasonOKButton();
 		
-		monitorsettingspage.clickEditOrderStatusReason(orderstatusreasoned);
-		Assert.assertEquals(orderstatused, monitorsettingspage.getNewOrderStatus());
+		monitorsettingspage.clickEditOrderStatusReason(orderStatusReasonEdited);
+		Assert.assertEquals(orderStatusEdited, monitorsettingspage.getNewOrderStatus());
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
 		
-		monitorsettingspage.deleteOrderStatusReason(orderstatusreasoned);
+		monitorsettingspage.deleteOrderStatusReason(orderStatusReasonEdited);
 	}
 	
 	@Test(testName = "Test Case 64914:Monitor - Monitor Settings: Employee Role Settings")
@@ -331,7 +344,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		MonitorSettingsWebPage monitorsettingspage = monitorpage.clickMonitorSettingsLink();
-		Assert.assertTrue(monitorsettingspage.checkPresentanceOfTabs("Order Status Reasons","Flags"));
+		Assert.assertTrue(monitorsettingspage.checkPresenceOfTabs());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
@@ -339,15 +352,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF")
 	public void checkMonitorKanbanAutoRefresh() {
 		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
-		KanbanWebPage kanbanPage = monitorPage.clickWhiteBoardLink();
-		kanbanPage.setSearchLocation("Default Location");
-		kanbanPage.clickSearchButton();
-		Assert.assertTrue(kanbanPage.checkSearhResultColumns());
-		Assert.assertFalse(kanbanPage.checkIntervalFieldLessThan(5));
-		Assert.assertFalse(kanbanPage.checkIntervalFieldOverThan(720));
-		Assert.assertFalse(kanbanPage.checkIntervalFieldInputSymbol("a"));
-		Assert.assertTrue(kanbanPage.checkIntervalField(6));
+
+        final String searchLocation = "Default Location";
+
+        MonitorWebPage monitorPage = backofficeHeader.clickMonitorLink();
+		WhiteBoardWebPage whiteBoardPage = monitorPage.clickWhiteBoardLink();
+		whiteBoardPage.setSearchLocation(searchLocation);
+		whiteBoardPage.clickSearchButton();
+		Assert.assertTrue(whiteBoardPage.checkSearhResultColumns());
+		Assert.assertFalse(whiteBoardPage.checkIntervalFieldLessThan(5));
+		Assert.assertFalse(whiteBoardPage.checkIntervalFieldOverThan(720));
+		Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
+		Assert.assertTrue(whiteBoardPage.checkIntervalField(6));
 	}
 
 	//test skipped cause of no test data
@@ -400,45 +416,49 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	public void checkMonitorReportsActiveVechiclesByPhaseGeneral(){
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        final String searchLocation = "ALM - Recon Facility";
+
+        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+		activeVechicleByPhasePage.setLocationFilter(searchLocation);
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() == 1);
+        Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(searchLocation));
 	}
 	
 	@Test(testName = "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases")
-	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases() throws InterruptedException{
+	public void checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases() {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+
+        final String searchLocation = "ALM - Recon Facility";
+        final String phase1 = "PDR Station";
+        final String status1 = "Active";
+        final String phase2 = "PDI";
+        final String[] statuses2 = { "Queued", "Active", "Completed", "Audited", "Refused", "Rework", "Skipped" };
+
+        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
 		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorpage.clickActiveVehiclesByPhaseLink();
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+		activeVechicleByPhasePage.setLocationFilter(searchLocation);
 		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
-		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() == 1);
+        Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
 		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(searchLocation));
 		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
 		
-		activeVechicleByPhasePage.setPhase1("PDR Station");
-		activeVechicleByPhasePage.setStatuses1("Active");
-		activeVechicleByPhasePage.setPhase2("PDI");
-		activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
+		activeVechicleByPhasePage.setPhase1(phase1);
+		activeVechicleByPhasePage.setStatuses1(status1);
+		activeVechicleByPhasePage.setPhase2(phase2);
+		activeVechicleByPhasePage.setStatuses2(statuses2);
 		activeVechicleByPhasePage.clickFindButton();
-		
-//		@SuppressWarnings("unused")
-//		int rows = activeVechicleByPhasePage.countRowsInResultTable();
-
-		
 	}
 }

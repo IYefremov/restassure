@@ -9,21 +9,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class KanbanWebPage extends BaseWebPage {
+public class WhiteBoardWebPage extends BaseWebPage {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_comboLocations_Input")
-	WebElement searchLocationButton;
+	private WebElement searchLocationButton;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_BtnFind")
-	WebElement searchButton;
+	private WebElement searchButton;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_tbTimerInterval")
-	WebElement intervalField;
+	private WebElement intervalField;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_btnRefreshOnOff")
-	WebElement autoRefreshButton;
+	private WebElement autoRefreshButton;
 
-	public KanbanWebPage(WebDriver driver) {
+	public WhiteBoardWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}

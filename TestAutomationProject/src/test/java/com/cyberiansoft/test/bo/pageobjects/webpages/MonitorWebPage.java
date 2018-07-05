@@ -109,10 +109,10 @@ public class MonitorWebPage extends BaseWebPage {
 				driver, EventsWebPage.class);
 	}
 
-	public KanbanWebPage clickWhiteBoardLink() {
+	public WhiteBoardWebPage clickWhiteBoardLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(whiteBoardLink)).click();
 		return PageFactory.initElements(
-				driver, KanbanWebPage.class);
+				driver, WhiteBoardWebPage.class);
 	}
 
 	public ServiceCountWebPage clickServiceCountLink() {

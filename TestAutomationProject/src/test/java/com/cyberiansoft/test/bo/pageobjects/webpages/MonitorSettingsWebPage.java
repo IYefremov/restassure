@@ -1,10 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class MonitorSettingsWebPage  extends BaseWebPage {
 	
@@ -116,24 +110,19 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		click(neworderstatusreasoncancelBtn);
 	}
 
-	public boolean checkPresentanceOfTabs(String...tabs) {
-		for(int i = 0; i < tabs.length; i++){
-			if(tabs[i].equals("Order Status Reasons")){
-				try{
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvReasons")));
-				}catch(Exception e){
-					return false;
-				}
-			}else if(tabs[i].equals("Flags")){
-				try{
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvFlags")));
-				}catch(Exception e){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+	public boolean checkPresenceOfTabs() {
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvReasons")));
+            } catch (Exception e) {
+                return false;
+            }
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gvFlags")));
+            } catch (Exception e) {
+                return false;
+            }
+        return true;
+    }
 
 	public boolean checkEmployeeRoleSettingsGridColumnsAndRows() {		
 		try{			

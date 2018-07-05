@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
 
 public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
@@ -106,46 +105,46 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		}
 	}
 
-	public void setPhase1(String phase) throws InterruptedException {
+	public void setPhase1(String phase) {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_comboPhase_Input")).click();
-		Thread.sleep(1500);
+		waitABit(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
-		Thread.sleep(2500);
+        waitABit(2500);
 	}
 
-	public void setPhase2(String phase) throws InterruptedException {
+	public void setPhase2(String phase) {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_comboPhase2_Input")).click();
-		Thread.sleep(1500);
+        waitABit(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> e.getText().equals(phase)).findFirst().get()
 				.click();
-		Thread.sleep(2500);
+        waitABit(2500);
 	}
 
-	public void setStatuses1(String... statuses) throws InterruptedException {
+	public void setStatuses1(String... statuses) {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus_Input")).click();
-		Thread.sleep(1500);
+        waitABit(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> {
 			for (String status : statuses) {
 				if (e.getText().equals(status))
 					return true;
 			}
 			return false;
-		}).forEach(e -> e.click());
+		}).forEach(WebElement::click);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus_Arrow")).click();
 	}
 
-	public void setStatuses2(String... statuses) throws InterruptedException {
-		Thread.sleep(2500);
+	public void setStatuses2(String... statuses) {
+        waitABit(2500);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus2_Input")).click();
-		Thread.sleep(1500);
+        waitABit(1500);
 		listWithItems.findElements(By.tagName("li")).stream().filter(e -> {
 			for (String status : statuses) {
 				if (e.getText().equals(status))
 					return true;
 			}
 			return false;
-		}).forEach(e -> e.click());
+		}).forEach(WebElement::click);
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_ddlStatus2_Arrow")).click();
 	}
 
