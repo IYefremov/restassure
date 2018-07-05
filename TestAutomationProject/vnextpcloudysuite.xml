@@ -4,7 +4,7 @@
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
   <listeners>
-		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>
+      <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
@@ -19,7 +19,7 @@
           <include name="testSendMessageFromTheQueueInManualModeSuccessPath" />
           <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
         </methods>
-      </class>-->
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
       	<methods>   
       	  <include name="testShowSelectedServicesAfterInspectionIsSaved" />
@@ -48,7 +48,7 @@
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
-      </class>
+      </class>-->
      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
         <methods>   
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />

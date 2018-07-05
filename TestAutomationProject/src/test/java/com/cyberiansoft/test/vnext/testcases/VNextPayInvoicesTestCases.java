@@ -16,12 +16,12 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-invoice-payment-testcases-data.json";
 
     @BeforeClass(description = "Team Invoice Payment Test Cases")
-    public void settingUp() throws Exception {
+    public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
     @AfterClass()
-    public void settingDown() throws Exception {
+    public void settingDown() {
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

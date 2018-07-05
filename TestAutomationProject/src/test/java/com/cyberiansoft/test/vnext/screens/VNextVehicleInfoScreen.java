@@ -128,8 +128,8 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	public void selectModelColor (String color) {
 		tap(selectcolorbtn);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']"))));
-		tap(appiumdriver.findElement(By.xpath("//*[@class='item-name' and text()='" + color + "']")));
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//*[@action='select-item' and @data-id='" + color + "']"))));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item' and @data-id='" + color + "']")));
 	}
 	
 	public String getType () {

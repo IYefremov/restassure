@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextVisualServicesScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@data-page='visual/services']")
+	@FindBy(xpath="//div[@data-page='visual-services']")
 	private WebElement visualservicesscreen;
 	
 	public VNextVisualServicesScreen(AppiumDriver<MobileElement> appiumdriver) {

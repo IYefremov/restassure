@@ -56,8 +56,10 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 
 	public VNextSelectedServicesScreen switchToSelectedServicesView() {
-		tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@action='selected']"))));
+		tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
+		wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
 		return  new VNextSelectedServicesScreen(appiumdriver);
 	}
@@ -99,6 +101,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		if (servicerow != null) {
 			try {
 				tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//input[@action='select-item']"))));
+				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
 			} catch (WebDriverException e) {
 				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
 				WaitUtils.click(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
@@ -164,7 +167,7 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		List<WebElement> services = getServicesListItems();
 		for (WebElement srv: services)
 			if (getServiceListItemName(srv).equals(servicename)) {
-				serviceListItem =  srv;
+				serviceListItem = srv;
 				break;
 			}
 		return serviceListItem;
