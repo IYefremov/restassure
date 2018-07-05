@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.bo.utils;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
-import com.cyberiansoft.test.inhouse.testcases.BaseTestCase;
 import org.codehaus.plexus.util.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -68,7 +68,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         if (driver != null) {
             driver.quit();
             DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
         ((BaseTestCase) currentClass).setDriver();
     }
@@ -79,7 +79,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().getDriver().quit();
             DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
         ((BaseTestCase) currentClass).setDriver();
     }
