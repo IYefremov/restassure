@@ -87,7 +87,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 			loginscreen.registeriOSDevice(regCode);
 			RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
-			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);	
+			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
+			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
+			settingsScreen.setInsvoicesCustomLayoutOff();
+			settingsScreen.clickHomeButton();
 		}
 		
 		@BeforeMethod
@@ -1840,7 +1843,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-            //vehiclePartScreen.saveVehiclePart();
+			Helpers.acceptAlert();
+			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
+			selectedservicescreen.saveSelectedServiceDetails();
+			selectedservicescreen.saveSelectedServiceDetails();
+			pricematrix = new RegularPriceMatrixScreen(appiumdriver);
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 			Assert.assertEquals(vehiclePartScreen.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -3029,7 +3036,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 			ordersummaryscreen.saveWizard();
 			myworkordersscreen.selectWorkOrderForEidt(wo);
-			System.out.println("+++++" + wo);
+
 			vehiclescreeen = new RegularVehicleScreen(appiumdriver);
 			servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 
@@ -3803,7 +3810,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-					
+			servicesscreen = new RegularServicesScreen(appiumdriver);
 			servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
