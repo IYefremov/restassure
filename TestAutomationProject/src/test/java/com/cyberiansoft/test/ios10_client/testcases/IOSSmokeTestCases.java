@@ -106,6 +106,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
 	}
 	

@@ -1,13 +1,12 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.util.ArrayList;
-
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import java.util.ArrayList;
 
 public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	

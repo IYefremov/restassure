@@ -70,6 +70,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
 	}
 	
@@ -1994,7 +1995,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type", 
 			description = "WO: HD - Verify calculation with price matrix Labor type")
-	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() throws Exception {
+	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -2112,7 +2113,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42803:Invoices: HD - Verify rounding money amount values", 
 			description = "Invoices: HD - Verify rounding money amount values")
-	public void testInvoicesVerifyRoundingMoneyAmountValues_2() throws Exception {
+	public void testInvoicesVerifyRoundingMoneyAmountValues_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 

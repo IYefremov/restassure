@@ -19,10 +19,9 @@ public class SettingsScreen extends BaseAppScreen {
 	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeSwitch[1]")	
     //private IOSElement duplicatestoggle;
 	
-	private By showtopcustomerstoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]");	
-	//@iOSFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]")
-    //private IOSElement showtopcustomerstoggle;
-	
+	private By showtopcustomerstoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]");
+	private By invoicescustomlayout = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[16]/XCUIElementTypeSwitch");
+
 	public SettingsScreen(AppiumDriver driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
@@ -37,6 +36,13 @@ public class SettingsScreen extends BaseAppScreen {
 
 	public void setInspectionToNonSinglePageInspection() {
 		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(inspectionsinglepagetoggle);
+		if (singlepagetoggle.getAttribute("value").equals("1"))
+			singlepagetoggle.click();
+	}
+
+	public void setInsvoicesCustomLayoutOff() {
+		swipeScreenUp();
+		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(invoicescustomlayout);
 		if (singlepagetoggle.getAttribute("value").equals("1"))
 			singlepagetoggle.click();
 	}

@@ -67,4 +67,11 @@ public class RegularSettingsScreen extends RegularBaseAppScreen {
 		if (showallservicestoggle.getAttribute("value").equals("1"))
 			showallservicestoggle.click();
 	}
+
+	public void setInsvoicesCustomLayoutOff() {
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Use in invoices']/..")));
+		if (table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Use in invoices']")).getAttribute("value").equals("1"))
+			table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Use in invoices']")).click();
+	}
 }

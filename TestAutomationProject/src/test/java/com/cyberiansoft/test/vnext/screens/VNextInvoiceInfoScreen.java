@@ -24,7 +24,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@name='Invoices.InvoiceDate']")
 	private WebElement invoicedate;
 	
-	@FindBy(xpath="//span[@class='more-wrapper open-popup']")
+	@FindBy(xpath="//span[@action='more_actions']")
 	private WebElement menubtn;
 	
 	@FindBy(xpath="//*[@action='save']")
@@ -71,11 +71,20 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		notesscreen.clickNotesBackButton();
 	}
 	
-	public void addTextNoteToInvoice(String notetext) {
+	public VNextInvoiceInfoScreen addTextNoteToInvoice(String notetext) {
 		clickMenuButton();
 		VNextNotesScreen notesscreen = clickNotesMenuItem();
 		notesscreen.setNoteText(notetext);
 		notesscreen.clickNotesBackButton();
+		return this;
+	}
+
+	public void cancelInvoice() {
+		clickMenuButton();
+		VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
+		invoiceMenuScreen.clickCancelInvoiceMenuItem();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
 	}
 	
 	public void clickMenuButton() {
@@ -83,10 +92,8 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public VNextNotesScreen clickNotesMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath("//div[@class='actions-modal modal-in']"))));
-		tap(appiumdriver.findElement(By.xpath("//div[@class='actions-modal modal-in']")).findElement(By.xpath(".//div[@class='actions-modal-button']")));
-		return new VNextNotesScreen(appiumdriver);
+        VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
+        return invoiceMenuScreen.clickInvoiceNotesMenuItem();
 	}
 	
 	public VNextInvoicesScreen saveInvoice() {
@@ -109,7 +116,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSaveInvoiceButton() {
-		tap(savebtn);
+		WaitUtils.click(savebtn);
 	}
 	
 	public String getInvoiceNumber() {

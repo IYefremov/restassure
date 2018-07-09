@@ -34,8 +34,11 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//a[@data-name='pay']")
 	private WebElement invoicepaymenubtn;
+
+	@FindBy(xpath="//a[@data-name='cancel']")
+	private WebElement invoicecancelmenubtn;
 	
-	@FindBy(xpath="//div[@data-menu='popup']")
+	@FindBy(xpath="//div[@class='actions-layer popup modal-in' and @data-menu='popup']")
 	private WebElement invoicemenuscreen;
 	
 	@FindBy(xpath="//div[@class='close-popup close-actions']")
@@ -60,6 +63,12 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(approveinvoicebtn));
 		tap(approveinvoicebtn);
 		return new VNextApproveScreen(appiumdriver);
+	}
+
+	public void clickCancelInvoiceMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(invoicecancelmenubtn));
+		tap(invoicecancelmenubtn);
 	}
 
 	public boolean isApproveInvoiceMenuItemExists() {

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -87,15 +88,11 @@ public class VNextBaseScreen {
 	public void clickScreenBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='back']")));
-		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='back']")));
-		tap(appiumdriver.findElementByXPath("//*[@action='back']"));
-		//log(LogStatus.INFO, "Tap Back screen Back button");
+		WaitUtils.click(By.xpath("//*[@action='back']"));
 	}
 	
 	public void clickScreenForwardButton() {
 		tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
-		//log(LogStatus.INFO, "Tap Back screen Forward button");
 	}
 	
 	public void swipeScreensRight(int screensnumber) {

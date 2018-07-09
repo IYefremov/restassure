@@ -42,7 +42,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 35);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		BaseUtils.waitABit(2000);
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
