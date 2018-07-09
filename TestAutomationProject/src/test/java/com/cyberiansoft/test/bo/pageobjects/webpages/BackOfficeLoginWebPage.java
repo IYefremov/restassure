@@ -27,22 +27,15 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 	}
 
 	public void UserLogin(String userName, String userPassword) {
-//		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_Login1_LoginButton")));
-//		wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
-//		wait.until(ExpectedConditions.visibilityOf(loginbtn));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		driver.navigate().refresh();
 		executor.executeScript("window.focus();");
 		clearAndType(usernamefld, userName);
 		clearAndType(userpasswordfld, userPassword);
 		executor.executeScript("arguments[0].click();", loginbtn);
-//		click(loginbtn);
 	}
 	
 	public WebElement getLoginButton() {
 		return loginbtn;
 	}
-	
-	
-
 }

@@ -7,8 +7,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.dataclasses.bo.BOCompanyClientsData;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -20,7 +18,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
@@ -147,11 +148,5 @@ public class BaseTestCase {
             DriverBuilder.getInstance().getDriver().quit();
         }
         //todo delete from here after the problem with skips will be solved
-    }
-
-    @BeforeTest
-    public void beforeTest() throws IOException {
-        JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/bo/data/" +
-                "BOCompanyClientsData.json", BOCompanyClientsData.class);
     }
 }

@@ -70,20 +70,6 @@ public class WebElementsBot {
         } catch (Exception ignored) {}
 	}
 	
-//	public static void selectTimeSheetComboboxValue(ComboBox combobox, DropDown droplist, String value) {
-//		WebDriverInstansiator.getWait().until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
-//		try{
-//		combobox.click();
-//		}catch(Exception e){}
-//		WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-//		waitABit(300);
-//		List<WebElement> items = droplist.getWrappedElement().findElements(By.className("rcbItem"));
-//		items.get(1).click();
-//	//	WebDriverInstansiator.getWait().until(ExpectedConditions.visibilityOf(droplist.getWrappedElement().findElement(By.xpath(".//li[text()='" + value + "']")))).click();
-//	//	droplist.selectByVisibleText(value);
-//		WebDriverInstansiator.getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(droplist.getWrappedElement())));
-//	}
-	
 	public static void selectComboboxValueAndWait(ComboBox combobox, DropDown droplist, String value) {
 		new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50).until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement()));
 		combobox.click();
