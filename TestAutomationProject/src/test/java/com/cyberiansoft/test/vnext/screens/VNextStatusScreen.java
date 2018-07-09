@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -42,7 +43,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	}
 	
 	public void clickUpdateAppdata() {
-		tap(updatemaindbbtn);
+		WaitUtils.click(updatemaindbbtn);
 	}
 	
 	public VNextHomeScreen clickBackButton() {

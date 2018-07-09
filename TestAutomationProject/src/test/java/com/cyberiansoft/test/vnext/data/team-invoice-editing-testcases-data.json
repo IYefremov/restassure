@@ -1,20 +1,5 @@
 {
 
-  "settingUp": [
-    {
-      "rowID": "settingUp.01",
-      "description": "Team Invoice Editing Test Cases",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }, "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }]
-      },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      }
-    }
-  ],
-
   "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON": [
     {
       "rowID": "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON.01",
@@ -165,6 +150,22 @@
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "newPoNumber" : "TEST!23"
+    }
+  ],
+
+  "testVerifyUserCanCancelInvoiceEditing": [
+    {
+      "rowID": "testVerifyUserCanCancelInvoiceEditing.01",
+      "description": "Test Case 75388:Verify user can cancel Invoice editing",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "services": [{"serviceName": "Battery Installation"
+        }, {"serviceName": "Labor"
+        }]
       },
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       },

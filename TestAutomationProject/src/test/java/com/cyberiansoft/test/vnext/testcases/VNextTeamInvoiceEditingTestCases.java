@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -291,6 +292,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
     public void testVerifyUserCanAddNotesWhenEditInvoice(String rowID,
                                                       String description, JSONObject testData) {
 
+        final String  txtNotes = "Test notes";
+
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice);
 
@@ -308,7 +311,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
         invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.addTextNoteToInvoice("Test notes");
+        invoiceinfoscreen.addTextNoteToInvoice(txtNotes);
         invoiceinfoscreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
         Assert.assertTrue(invoicesscreen.isInvoiceHasNotesIcon(invoicenumber));
@@ -337,6 +340,37 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         homescreen = workordersscreen.clickBackButton();
         invoicesscreen = homescreen.clickInvoicesMenuItem();
         Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+        invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCancelInvoiceEditing(String rowID,
+                                                                     String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+        final String workOrderNumber = createWorkOrder(invoice);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
+        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoiceinfoscreen.clickInvoiceInfoBackButton();
+        VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
+                VNextAlertMessages.CANCEL_ETING_INVOICE);
+        invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), invoice.getInvoiceData().getInvoicePONumber());
         invoicesscreen.clickBackButton();
     }
 

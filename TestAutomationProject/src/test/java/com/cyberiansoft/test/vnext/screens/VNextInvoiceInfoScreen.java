@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -54,6 +55,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
 		appiumdriver.hideKeyboard();
+		BaseUtils.waitABit(500);
 	}
 
 	public String getInvoicePONumberValue() {
@@ -116,7 +118,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSaveInvoiceButton() {
-		WaitUtils.click(savebtn);
+		tap(savebtn);
 	}
 	
 	public String getInvoiceNumber() {

@@ -42,7 +42,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 35);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		BaseUtils.waitABit(2000);
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
@@ -133,7 +133,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		WebElement wocell = null;
 		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
 		for (WebElement workordercell : workorders)
-			if (workordercell.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")).size() > 0) {
+			if (workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(wonumber)) {
 				wocell = workordercell;
 				break;
 			}

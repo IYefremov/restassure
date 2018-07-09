@@ -53,7 +53,7 @@ public class VNextBaseScreen {
 		element.clear();
 		appiumdriver.getKeyboard().sendKeys(value);
 		appiumdriver.hideKeyboard();
-		//element.sendKeys(value);
+		BaseUtils.waitABit(500);
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {			

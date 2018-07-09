@@ -38,7 +38,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 35);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-autotests-id='invoices-list']")));
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//div[@data-autotests-id='invoices-list']"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
@@ -198,6 +198,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToMyInvoicesView() {
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='my']"));
 		tap(myinvoicestab);
 	}
