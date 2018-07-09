@@ -37,8 +37,7 @@ public class BaseTestCase {
 	public TestUser getTestUser() {
 		return testuser;
 	}
-	
-	
+
 	@BeforeSuite
 	public void setUp() throws Exception {
 

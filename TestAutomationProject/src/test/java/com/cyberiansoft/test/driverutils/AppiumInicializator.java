@@ -23,7 +23,6 @@ private static AppiumInicializator instance = null;
 	
 	public AppiumDriver<MobileElement> initAppium(MobilePlatform mobilePlatform) {
 		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null) {
-			System.out.println("+++ Server started at: " +  AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
 			initAppium(mobilePlatform, AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
 		}
 		else

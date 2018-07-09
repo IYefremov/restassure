@@ -3686,8 +3686,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
 
-		MainScreen mainscreen = new MainScreen(appiumdriver);
-		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		//MainScreen mainscreen = new MainScreen(appiumdriver);
+		//homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -6909,7 +6909,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
 		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
 		ordersummaryscreen.clickSave();
-		
+		teamworkordersscreen = new TeamWorkOrdersScreen(appiumdriver);
 		homescreen = teamworkordersscreen.clickHomeButton();
 	}
 	

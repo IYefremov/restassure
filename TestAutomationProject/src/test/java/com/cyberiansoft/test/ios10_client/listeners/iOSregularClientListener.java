@@ -5,6 +5,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
@@ -81,9 +82,16 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         try {
             extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot("report", "fail")).build());
         } catch (org.openqa.selenium.NoSuchSessionException e) {
-            DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
-            DriverBuilder.getInstance().getAppiumDriver().launchApp();
+            AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+            //DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
+            //DriverBuilder.getInstance().getAppiumDriver().launchApp();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+            /*DriverBuilder.getInstance().getAppiumDriver().quit();
+            DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
+            DriverBuilder.getInstance().getAppiumDriver().launchApp();*/
             e.printStackTrace();
         }
         if ( !getTestParams(result).isEmpty() ) {
@@ -92,7 +100,6 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
         DriverBuilder.getInstance().getAppiumDriver().launchApp();
-
         RegularMainScreen mainscr = new RegularMainScreen(DriverBuilder.getInstance().getAppiumDriver());
         TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
         RegularHomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());

@@ -9,6 +9,7 @@
   import io.appium.java_client.MobileBy;
   import io.appium.java_client.ios.IOSElement;
   import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+  import io.appium.java_client.pagefactory.iOSFindBy;
   import org.openqa.selenium.support.PageFactory;
   import org.openqa.selenium.support.ui.ExpectedConditions;
   import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,10 +49,10 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
     private IOSElement temworkorderstsbtn;
 	
 	@iOSFindBy(accessibility = "Settings")
-    private IOSElement settingstsbtn;
+    private IOSElement settingstsbtn;*/
 	
 	@iOSFindBy(accessibility = "logout")
-    private IOSElement logoutbtn;*/
+    private IOSElement logoutbtn;
 	
 	public RegularHomeScreen(AppiumDriver driver) {
 		super(driver);
@@ -165,7 +166,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularMainScreen clickLogoutButton() {
-		appiumdriver.findElementByAccessibilityId("logout").click();
+		logoutbtn.click();
 		return new RegularMainScreen(appiumdriver);
 	}
 

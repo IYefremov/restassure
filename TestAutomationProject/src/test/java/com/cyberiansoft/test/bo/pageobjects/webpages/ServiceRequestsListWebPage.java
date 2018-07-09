@@ -514,6 +514,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void setServiceRequestAppointmentTechnicians(String tech) {
+
 		selectComboboxValueWithTyping(addservicerequesapptechcmb, addservicerequesapptechdd, tech);
 	}
 
