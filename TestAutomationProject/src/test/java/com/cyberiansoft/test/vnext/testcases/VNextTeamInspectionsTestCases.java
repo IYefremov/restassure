@@ -53,7 +53,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String vinnumber = "TEST";
 		final String ponumber = "12345";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		final String inspnumber = createSimpleInspection(testwholesailcustomer, inspType, vinnumber);
 
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
@@ -84,9 +83,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		
-		homescreen = invoicesscreen.clickBackButton();
-
-
+		invoicesscreen.clickBackButton();
 	}
 
 	
@@ -113,7 +110,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 66286:Verify when user go back from inspections screen to Home we save last selected mode", 
@@ -132,7 +129,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		homescreen = inspectionscreen.clickBackButton();
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		Assert.assertTrue(inspectionscreen.isMyInspectionsViewActive());
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 66295:Verify user can create Inspection without Team Sharing", 
@@ -170,7 +167,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
 		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspections list",
@@ -211,7 +208,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 66858:Verify user can view Team Inspection", 
@@ -239,7 +236,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextViewScreen viewscreen = inspmenuscreen.clickViewInspectionMenuItem();
 		viewscreen.clickScreenBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67290:Verify user can create Team Inspection, "
@@ -320,7 +317,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send option", 
@@ -334,7 +331,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();		
 		
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
@@ -358,7 +355,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
 	@Test(testName= "Test Case 67330:Verify user can edit Inspection if we have no internet connection", 
@@ -490,7 +487,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), insuranceCompany);
 		claiminfoscreen.cancelInspection();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -582,8 +579,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			Assert.assertEquals(selectedservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
 		}
 		inspectionsscreen = inspservicesscreen.cancelInspection();
-		inspservicesscreen.clickScreenBackButton();
-		homescreen = new VNextHomeScreen(appiumdriver);
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67756:Verify message 'Your email message has been added to the queue.' displays after sending", 
@@ -616,7 +612,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		
-		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		vehicleinfoscreen.saveInspectionViaMenu();
 		return inspnumber;
 	}
 

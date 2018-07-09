@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
@@ -55,10 +54,6 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
-            /*BaseUtils.waitABit(1000);
-            tap(appiumdriver.findElement(By.xpath("//div[contains(@class, 'accordion-item-expanded')]")));
-            WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//div[contains(@class, 'accordion-item-expanded')]"), 1));*/
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import org.testng.annotations.BeforeTest;
@@ -17,10 +18,12 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 	public void beforeTest() throws Exception {
 		setUp();	
 		//VNextAppUtils.resetApp();
-		registerTeamEdition(VNextTeamRegistrationInfo.getInstance().getDeviceDefaultLicenseName());
-		Employee employee = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json", Employee.class);
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		if (VNextConfigInfo.getInstance().installNewBuild()) {
+			registerTeamEdition(VNextTeamRegistrationInfo.getInstance().getDeviceDefaultLicenseName());
+			Employee employee = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json", Employee.class);
+			VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+			loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		}
 		
 		testcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/" +
                 "test-retail-customer.json", RetailCustomer.class);

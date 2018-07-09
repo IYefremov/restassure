@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -22,7 +23,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class VNextInspectionsScreen extends VNextBaseScreen {
-	
+
+
+	private static boolean filtered = false;
 	@FindBy(xpath="//div[contains(@class, 'page inspections-list')]")
 	private WebElement inspectionsscreen;
 	
@@ -69,6 +72,17 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 			tap(clearsearchicon);
 			clickCancelSearchButton();
 		}
+		if (filtered) {
+			tap(searchbtn);
+			if (searchfld.getAttribute("value").length() > 1) {
+				tap(clearsearchicon);
+				WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+			}
+			clickCancelSearchButton();
+			filtered = false;
+		}
+
+
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
@@ -241,14 +255,9 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(teaminspectiontab));
 		tap(teaminspectiontab);
-		if (appiumdriver.findElements(By.xpath("//*[text()='Loading inspections']")).size() > 0) {
-			try {
-			wait = new WebDriverWait(appiumdriver, 15);
-			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading inspections']"))));
-			} catch (NoSuchElementException e) {
-				//do nothing
-			}
-		}
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='button active' and @action='team']")));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
 	}
 	
 	public boolean isTeamInspectionsViewActive() {
@@ -283,12 +292,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		clickCancelSearchButton();
+		filtered = true;
 	}
 	
 	public void clickCancelSearchButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='search-cancel']")));
 		tap(cancelsearchbtn);
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
 	}
 
 	public void selectInspection(String inspectionNumber) {

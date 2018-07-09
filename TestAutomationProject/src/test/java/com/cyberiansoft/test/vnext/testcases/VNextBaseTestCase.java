@@ -62,24 +62,26 @@ public class VNextBaseTestCase {
 		
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
-			deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
+		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 	       
-			if (mobilePlatform.getMobilePlatformString().contains("ios"))
-				DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
-			else { DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+		if (mobilePlatform.getMobilePlatformString().contains("ios"))
+			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
+		else {
+			DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+			if (VNextConfigInfo.getInstance().installNewBuild()) {
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
 				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
-				appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
 			}
-			
-			
-			deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
-			devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
-			if (VNextConfigInfo.getInstance().getBuildProductionAttribute().equals("true"))
-				buildproduction = true;
-			else
-				buildproduction = false;
+			appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
+		}
+
+		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
+		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
+		if (VNextConfigInfo.getInstance().getBuildProductionAttribute().equals("true"))
+			buildproduction = true;
+		else
+			buildproduction = false;
 	}
 	
 	public void setUp() {

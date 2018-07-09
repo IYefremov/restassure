@@ -19,7 +19,11 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	
 	@BeforeClass(description = "Team Inspections Line Approval Test Cases")
 	public void settingUp() {
-		JSONDataProvider.dataFile = DATA_FILE;	
+		JSONDataProvider.dataFile = DATA_FILE;
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@AfterClass()

@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnext.utils;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,6 +32,21 @@ public class WaitUtils {
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(300))
                 .ignoring(WebDriverException.class);
+
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return webElement;
+            }
+        });
+
+        return  element;
+    };
+
+    public static WebElement waitUntilElementIsPresent(final WebElement webElement) {
+        org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class);
 
         WebElement element = wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver) {

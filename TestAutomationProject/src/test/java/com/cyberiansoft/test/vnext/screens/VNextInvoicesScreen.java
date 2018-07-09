@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -36,8 +38,10 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
-		wait.until(ExpectedConditions.visibilityOf(invoiceslist));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 35);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-autotests-id='invoices-list']")));
+		WaitUtils.waitUntilElementIsClickable(By.xpath("//div[@data-autotests-id='invoices-list']"));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
@@ -71,7 +75,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public ArrayList<String> getInvoiceWorkOrders(String invoicenumber) {
-		ArrayList<String> workOrders = new ArrayList<String>();
+		ArrayList<String> workOrders = new ArrayList<>();
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);
 		if (invoicecell != null) {
@@ -114,21 +118,29 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		if (!invoicecell.getAttribute("class").contains("expanded")) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']"))));
-			tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
+			try {
+				tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
+			} catch (WebDriverException e) {
+				((JavascriptExecutor) appiumdriver).executeScript("arguments[0].scrollIntoView(true);", invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
+				tap(invoicecell.findElement(By.xpath(".//div[@action='toggle_item']")));
+			}
+
 		}
 		else
 			Assert.fail("Can't find invoice: " + invoicenumber);
 	}
 	
 	public WebElement getInvoiceCell(String invoicenumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class, 'entity-item accordion-item')]")));
 		WebElement invoicecell = null;
-		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
-		for (WebElement invcell : invoices)
-			if (invcell.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")).size() > 0) {
+		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));;
+		for (WebElement invcell : invoices) {
+			if (invcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(invoicenumber)) {
 				invoicecell = invcell;
 				break;
 			}
-				
+		}
 		return invoicecell;
 	}
 	
@@ -147,6 +159,8 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-autotests-id='invoices-list']")));
 		tap(invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")));
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
@@ -166,14 +180,17 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	
 	public void switchToTeamInvoicesView() {
 		tap(teaminvoicestab);
-		if (appiumdriver.findElements(By.xpath("//*[text()='Loading invoices']")).size() > 0) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='button active' and @action='team']")));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
+		/*if (appiumdriver.findElements(By.xpath("//*[text()='Loading invoices']")).size() > 0) {
 			try {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading work orders']"))));
 			} catch (NoSuchElementException e) {
 				//do nothing
 			}
-		}
+		}*/
 	}
 	
 	public boolean isTeamInvoicesViewActive() {
@@ -181,6 +198,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToMyInvoicesView() {
+		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='my']"));
 		tap(myinvoicestab);
 	}
 	
@@ -209,6 +227,16 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			exists = invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_signed']")).size() > 0;
 			else
 				Assert.fail("Can't find invoice: " + invoiceNumber);
+		return exists;
+	}
+
+	public boolean isInvoiceHasNotesIcon(String invoiceNumber) {
+		boolean exists = false;
+		WebElement invoicecell = getInvoiceCell(invoiceNumber);
+		if (invoicecell != null)
+			exists = invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_notes']")).size() > 0;
+		else
+			Assert.fail("Can't find invoice: " + invoiceNumber);
 		return exists;
 	}
 }

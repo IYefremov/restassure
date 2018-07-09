@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -32,8 +33,7 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	
 	public void clickKeyboardDoneButton() {
 		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.invisibilityOf(keyboard.findElement(By.xpath(".//a[@class='link close-picker']"))));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad']"));
 	}
 	
 	public void clickKeyboardMinusButton() {
