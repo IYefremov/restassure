@@ -1,0 +1,26 @@
+{
+  "verifyBillingProfilesAreEnabled": [
+    {
+      "rowID": "verifyBillingProfilesAreEnabled.01",
+      "description": "Test Case 72573:Payment Options 2.0: In ReconPro BO notification in licence adding Billing Profiles enabled",
+      "sectionBillingProfiles": "Billing Profiles",
+      "sectionBillingProfileItems": "Billing Profile Items"
+    }
+  ],
+
+  "verifyClientAgreementsAreEnabled": [
+    {
+      "rowID": "verifyClientAgreementsAreEnabled.01",
+      "description": "Test Case 72575:Payment Options 2.0: In ReconPro BO notification in licence adding Client Agreement active",
+      "sectionClientAgreements": "Client Agreements"
+    }
+  ],
+
+  "verifyClientAgreementsAreSuspended": [
+    {
+      "rowID": "verifyClientAgreementsAreSuspended.01",
+      "description": "Payment Options 2.0: In ReconPro BO notification in licence adding Client Agreement Suspended",
+      "sectionClientAgreements": "Client Agreements"
+    }
+  ]
+}

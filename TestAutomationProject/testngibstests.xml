@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="InHouse test cases" verbose="10" configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.ibs.utils.TestListener"/>
+    </listeners>
+
+    <test name="IBS tests Chrome">
+        <parameter name="selenium.browser" value="chrome"/>
+        <classes>
+            <class name="com.cyberiansoft.test.ibs.testcases.IbsLicenceAddingNotification"/>
+        </classes>
+    </test>
+</suite>
