@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -53,9 +52,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
     @iOSFindBy(accessibility = "Back")
     private IOSElement backbtn;
 	
-	public OrderMonitorScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public OrderMonitorScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
@@ -152,7 +151,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Back")));
 		backbtn.click();
-		return new TeamWorkOrdersScreen(appiumdriver);
+		return new TeamWorkOrdersScreen();
 	}
 	
 	public boolean isServicePresent(String servicename) { 

@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -53,9 +52,9 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;*/
 	
-	public RegularServicesScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularServicesScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
@@ -228,7 +227,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(PointOption.point(el.getLocation().getX()+2, el.getLocation().getY()+2)).perform();
 
-		return new RegularSelectedServiceDetailsScreen(appiumdriver);
+		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public RegularSelectedServiceDetailsScreen clickServiceCustomDetailButton(String service) {
@@ -236,7 +235,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(service)));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='ServiceGroupServicesTable']/XCUIElementTypeCell[@name='" + service + "']/XCUIElementTypeButton[@name='custom detail button']").click();
 		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell[@name='" + service + "']/UIAButton[@name='custom detail button']");
-		return new RegularSelectedServiceDetailsScreen(appiumdriver);
+		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public RegularSelectedServiceDetailsScreen openSelectedServiceDetails(String service) {
@@ -246,7 +245,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		} else {
 			selectedservices.get(0).click();
 		}
-		return new RegularSelectedServiceDetailsScreen(appiumdriver);
+		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public void clickToolButton() {
@@ -262,7 +261,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 
 	public RegularPriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + servicepricematrices + "']")).click();
-		return new RegularPriceMatrixScreen(appiumdriver);
+		return new RegularPriceMatrixScreen();
 	}
 	
 	public void setSelectedServiceRequestServicesQuantity(String servicename, String _quantity) throws InterruptedException {
@@ -294,7 +293,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 
 	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByAccessibilityId(pricematrice).click();
-		return new RegularPriceMatrixScreen(appiumdriver);
+		return new RegularPriceMatrixScreen();
 	}
 	
 	public void removeSelectedService(String servicename) {

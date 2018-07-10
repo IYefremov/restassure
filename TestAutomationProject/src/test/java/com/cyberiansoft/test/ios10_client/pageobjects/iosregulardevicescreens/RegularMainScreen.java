@@ -1,23 +1,19 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-
-public class RegularMainScreen {
-	
-	private AppiumDriver appiumdriver;
+public class RegularMainScreen extends iOSBaseScreen {
 	
 	@iOSFindBy(accessibility = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
@@ -37,9 +33,8 @@ public class RegularMainScreen {
 	@iOSFindBy(accessibility = "Licenses")
     private IOSElement licenses;
 
-	public RegularMainScreen(AppiumDriver driver) {
-		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularMainScreen() {
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Login")));
@@ -78,11 +73,11 @@ public class RegularMainScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Enter password here")));
 		securefld.setValue(password);
 		loginbtn.click();
-		return new RegularHomeScreen(appiumdriver);
+		return new RegularHomeScreen();
 	}
 	
 	public LicensesScreen clickLicenses() {
 		licenses.click();
-		return new LicensesScreen(appiumdriver);
+		return new LicensesScreen();
 	}
 }

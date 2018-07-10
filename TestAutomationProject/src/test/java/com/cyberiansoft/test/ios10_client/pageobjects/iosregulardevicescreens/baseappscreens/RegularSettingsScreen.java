@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -15,9 +14,9 @@ public class RegularSettingsScreen extends RegularBaseAppScreen {
 	@iOSFindBy(xpath = "//XCUIElementTypeSwitch[@name='Show all services']")
     private IOSElement showallservicestoggle;
 	
-	public RegularSettingsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularSettingsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 

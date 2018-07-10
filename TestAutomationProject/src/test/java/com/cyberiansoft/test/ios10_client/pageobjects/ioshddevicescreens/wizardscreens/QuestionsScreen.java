@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -23,9 +22,9 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class QuestionsScreen extends BaseWizardScreen {
 	
-	public QuestionsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public QuestionsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 

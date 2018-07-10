@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -44,9 +43,9 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	@iOSFindBy(accessibility = "Search")
 	private IOSElement searchbtn;
 	
-	public RegularCustomersScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularCustomersScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -68,7 +67,7 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	
 	public RegularAddCustomerScreen clickAddCustomersButton() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Add")).click();
-		return new RegularAddCustomerScreen(appiumdriver);				
+		return new RegularAddCustomerScreen();
 	}
 
 	public void selectFirstCustomerWithoutEditing() {
@@ -123,13 +122,13 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	public RegularHomeScreen selectCustomerWithoutEditing(String customer) {
 		selectCustomer(customer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Select")).click();
-		return new RegularHomeScreen(appiumdriver);
+		return new RegularHomeScreen();
 	}
 	
 	public RegularAddCustomerScreen selectCustomerToEdit(String customer) {
 		selectCustomer(customer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Edit")).click();
-		return new RegularAddCustomerScreen(appiumdriver);
+		return new RegularAddCustomerScreen();
 	}
 
 	public boolean checkCustomerExists(String customer) {

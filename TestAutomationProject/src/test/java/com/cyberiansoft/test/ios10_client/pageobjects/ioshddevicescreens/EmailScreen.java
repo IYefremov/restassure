@@ -1,17 +1,14 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class EmailScreen extends iOSRegularBaseScreen {
 	
@@ -21,9 +18,9 @@ public class EmailScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Add")
     private IOSElement addemailbtn;
 	
-	public EmailScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public EmailScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	

@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -23,8 +22,8 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	//final String uipickerxpath = ".popover().pickers()[0]";
 	final String uipickerxpath = "//XCUIElementTypePicker";
 	
-	public iOSRegularBaseScreen(AppiumDriver driver) {
-		super(driver);
+	public iOSRegularBaseScreen() {
+		super();
 
 	}
 		
@@ -41,7 +40,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 
-		return new RegularHomeScreen(appiumdriver);
+		return new RegularHomeScreen();
 	}
 	
 	public void clickCancel() {

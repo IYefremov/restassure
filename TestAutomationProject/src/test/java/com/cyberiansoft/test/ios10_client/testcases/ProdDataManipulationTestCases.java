@@ -79,14 +79,14 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
     }
 
     public void testRegisterationiOSDdevice() throws Exception {
-        appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-        appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-        appiumdriver.quit();
-        appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-        RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen(appiumdriver);
+        AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+        DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
+        DriverBuilder.getInstance().getAppiumDriver().quit();
+        AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+        RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
         LoginScreen loginscreen = selectenvscreen.selectEnvironment("Prod Environment");
         loginscreen.registeriOSDevice(regCode);
-        RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
+        RegularMainScreen mainscr = new RegularMainScreen();
         homescreen = mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
     }
 
@@ -98,10 +98,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -122,7 +122,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             for (ServiceData service : matrixPartData.getMatrixAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();
-            pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+            pricematrix = new RegularPriceMatrixScreen();
         }
         pricematrix.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
@@ -137,10 +137,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularTeamInspectionsScreen teaminspectionsscreen = homescreen.clickTeamInspectionsButton();
         teaminspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -161,7 +161,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             for (ServiceData service : matrixPartData.getMatrixAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();
-            pricematrix = new RegularPriceMatrixScreen(appiumdriver);
+            pricematrix = new RegularPriceMatrixScreen();
         }
         pricematrix.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
@@ -176,10 +176,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Pitt Paint & Body");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -216,10 +216,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Plaza Kia");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -250,10 +250,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -284,10 +284,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());
@@ -318,10 +318,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
         myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen(appiumdriver);
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Torrington Detail");
         myinspectionsscreen.selectInspectionType(inspdata.getInspectionType());
-        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen(appiumdriver);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreeen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
         vehiclescreeen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreeen.setStock(inspdata.getVehicleInfo().getStockNumber());

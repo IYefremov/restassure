@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
@@ -83,9 +82,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Vehicle Parts")
 	private IOSElement vehiclepartsfldname;
 	
-	public SelectedServiceDetailsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public SelectedServiceDetailsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -125,12 +124,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	public ServicePartPopup clickServicePartCell() {
 		servicepartscell.click();
-		return new ServicePartPopup(appiumdriver);
+		return new ServicePartPopup();
 	}
 	
 	public NotesScreen clickNotesCell() {
 		appiumdriver.findElementByAccessibilityId("Notes").click();
-		return new NotesScreen(appiumdriver);
+		return new NotesScreen();
 	}
 
 	public String getVehiclePartValue() {
@@ -162,7 +161,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void answerQuestion2(String answer) {
 
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		QuestionsPopup questionspopup = new QuestionsPopup(appiumdriver);
+		QuestionsPopup questionspopup = new QuestionsPopup();
 		questionspopup.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
@@ -170,7 +169,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public String getQuestion2Value() {
 		String questionvalue = "";
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		QuestionsPopup questionspopup = new QuestionsPopup(appiumdriver);
+		QuestionsPopup questionspopup = new QuestionsPopup();
 		questionvalue = questionspopup.getQuestion2Value();
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 		return questionvalue;
@@ -219,7 +218,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	public PriceMatrixScreen selectMatrics(String matrics) {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + matrics + "']").click();
-		return new PriceMatrixScreen(appiumdriver);
+		return new PriceMatrixScreen();
 	}
 
 	public boolean vehiclePartsIsDisplayed() {

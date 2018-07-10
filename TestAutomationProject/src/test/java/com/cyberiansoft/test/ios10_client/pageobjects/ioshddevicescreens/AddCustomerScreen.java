@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -9,8 +8,6 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerScreen extends iOSHDBaseScreen {
-	
-	private AppiumDriver appiumdriver;
 
 	final static String scrollviewxpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther";
 	
@@ -53,10 +50,9 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Clients")
     private IOSElement clientsbtn;
 	
-	public AddCustomerScreen(AppiumDriver driver) {
-		super(driver);
-		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public AddCustomerScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
 	public void addCustomer(String firstname, String lastname,

@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehiclePartScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -67,9 +66,9 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	@iOSFindBy(accessibility = "Back")
     private IOSElement backbtn;
 	
-	public RegularPriceMatrixScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularPriceMatrixScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -82,7 +81,7 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + pricematrix + "']/..")));
 		}
 		appiumdriver.findElement(MobileBy.AccessibilityId(pricematrix)).click();
-		return new RegularVehiclePartScreen(appiumdriver);
+		return new RegularVehiclePartScreen();
 	}
 	
 	public boolean isPriceMatrixContainsPriceValue(String pricematrix, String pricevalue) {

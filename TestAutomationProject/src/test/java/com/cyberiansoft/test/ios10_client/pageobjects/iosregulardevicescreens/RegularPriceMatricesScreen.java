@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -13,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularPriceMatricesScreen extends iOSRegularBaseScreen {
 
-    public RegularPriceMatricesScreen(AppiumDriver driver) {
-        super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    public RegularPriceMatricesScreen() {
+        super();
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Price Matrices")));
@@ -31,6 +30,6 @@ public class RegularPriceMatricesScreen extends iOSRegularBaseScreen {
             swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + pricematrice + "']/..")));
         }
         appiumdriver.findElement(MobileBy.AccessibilityId(pricematrice)).click();
-        return new RegularPriceMatrixScreen(appiumdriver);
+        return new RegularPriceMatrixScreen();
     }
 }

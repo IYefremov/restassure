@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -27,9 +26,9 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	
 	private By approveandcreateinvoicechekbox = MobileBy.AccessibilityId("checkbox unchecked");
 
-	public RegularOrderSummaryScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularOrderSummaryScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -74,7 +73,7 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	
 	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
 		clickInvoiceType(invoicetype);
-		return new RegularInvoiceInfoScreen(appiumdriver);
+		return new RegularInvoiceInfoScreen();
 	}
 
 	public void selectWorkOrderDetails(String workorderdetails) {
@@ -144,6 +143,6 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	public RegularMyWorkOrdersScreen saveWizardAndAcceptAlert() {
 		clickSave();
 		Helpers.acceptAlert();
-		return new RegularMyWorkOrdersScreen(appiumdriver);
+		return new RegularMyWorkOrdersScreen();
 	}
 }

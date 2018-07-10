@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -37,9 +36,9 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
 
-	public RegularVisualInteriorScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularVisualInteriorScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -120,7 +119,7 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	public RegularNotesScreen clickNotesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Compose"))).click();
-		return new RegularNotesScreen(appiumdriver);
+		return new RegularNotesScreen();
 	}
 
 }

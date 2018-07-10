@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -86,9 +85,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
 	
-	public RegularVehicleScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularVehicleScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
@@ -359,7 +358,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
 		appiumdriver.findElementByAccessibilityId("Compose").click();
-		return new RegularNotesScreen(appiumdriver);
+		return new RegularNotesScreen();
 	}
 	
 	public WebElement getVehicleInfoTableParentNode(String wonumber) {

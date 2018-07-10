@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
@@ -9,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 public class TechRevenueScreen extends iOSHDBaseScreen {
 	
-	public TechRevenueScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public TechRevenueScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -21,7 +20,7 @@ public class TechRevenueScreen extends iOSHDBaseScreen {
 
 	public MyWorkOrdersScreen clickBackButton() {
 		appiumdriver.findElementByAccessibilityId("Back").click();
-		return new MyWorkOrdersScreen(appiumdriver);
+		return new MyWorkOrdersScreen();
 	}
 
 }

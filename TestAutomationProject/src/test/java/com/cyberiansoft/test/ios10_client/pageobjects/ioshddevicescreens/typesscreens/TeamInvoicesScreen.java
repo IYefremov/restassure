@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typess
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSelectorPopup;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -17,9 +16,9 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility ="Change PO#")
 	private IOSElement changepo;
 	
-	public TeamInvoicesScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public TeamInvoicesScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -38,7 +37,7 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public PrintSelectorPopup clickPrintPopup() {
 		appiumdriver.findElementByAccessibilityId("Print").click();
-		return new PrintSelectorPopup(appiumdriver);
+		return new PrintSelectorPopup();
 	}
 	
 	public IOSElement getFirstInvoice() {

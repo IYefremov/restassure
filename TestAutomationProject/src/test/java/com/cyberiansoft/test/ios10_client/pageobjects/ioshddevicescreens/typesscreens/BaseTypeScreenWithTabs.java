@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BaseTypeScreenWithTabs extends BaseTypeScreen {
 
-    public BaseTypeScreenWithTabs(AppiumDriver driver) {
-        super(driver);
+    public BaseTypeScreenWithTabs() {
+        super();
         //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

@@ -100,7 +100,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
         DriverBuilder.getInstance().getAppiumDriver().launchApp();
-        RegularMainScreen mainscr = new RegularMainScreen(DriverBuilder.getInstance().getAppiumDriver());
+        RegularMainScreen mainscr = new RegularMainScreen();
         TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
         RegularHomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 

@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basesc
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.AddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -41,9 +40,9 @@ public class CustomersScreen extends BaseAppScreen {
 	@iOSFindBy(accessibility  = "Select")
     private IOSElement selectpopupmenu;*/
 	
-	public CustomersScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public CustomersScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
@@ -63,7 +62,7 @@ public class CustomersScreen extends BaseAppScreen {
 
 	public AddCustomerScreen clickAddCustomersButton() {
 		appiumdriver.findElementByAccessibilityId("Add").click();
-		return new AddCustomerScreen(appiumdriver);				
+		return new AddCustomerScreen();
 	}
 
 	public void searchCustomer(String customer) {
@@ -87,7 +86,7 @@ public class CustomersScreen extends BaseAppScreen {
 	public AddCustomerScreen selectFirstCustomerToEdit() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		return new AddCustomerScreen(appiumdriver);
+		return new AddCustomerScreen();
 	}
 	
 	public void clickOnCustomer(String customer) {
@@ -106,7 +105,7 @@ public class CustomersScreen extends BaseAppScreen {
 	
 	public HomeScreen selectCustomerWithoutEditing(String customer) {
 		selectCustomer(customer);
-		return new HomeScreen(appiumdriver);
+		return new HomeScreen();
 	}
 
 	public boolean isCustomerExists(String customer) {
