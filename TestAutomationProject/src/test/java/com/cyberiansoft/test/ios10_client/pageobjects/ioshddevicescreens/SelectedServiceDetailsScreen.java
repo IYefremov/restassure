@@ -225,7 +225,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return vehiclepartsfldname.isDisplayed();
 	}
 
-	public void saveSelectedServiceDetails() throws InterruptedException {
+	public void saveSelectedServiceDetails() {
 		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
 		for (WebElement nv : navbars) {
 			if(nv.isDisplayed()) {

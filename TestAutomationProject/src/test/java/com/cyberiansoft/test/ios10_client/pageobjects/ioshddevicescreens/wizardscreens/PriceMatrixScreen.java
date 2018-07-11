@@ -161,7 +161,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public boolean isNotesExists() {
-		return appiumdriver.findElementByAccessibilityId("Notes").isDisplayed();
+		return notescell.isDisplayed();
 	}
 
 	public boolean isTechniciansExists() {

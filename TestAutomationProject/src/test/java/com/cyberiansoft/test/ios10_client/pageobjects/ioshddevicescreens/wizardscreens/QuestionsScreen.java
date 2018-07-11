@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -141,7 +142,7 @@ public class QuestionsScreen extends BaseWizardScreen {
 		appiumdriver.findElementByName("Done").click();
 	}
 
-	public void drawSignature() throws InterruptedException {
+	public void drawSignature() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		WebElement signature = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Signature_Handwriting")));
 		//WebElement signature = appiumdriver.findElementByAccessibilityId("Tap here to sign");
@@ -237,6 +238,23 @@ public class QuestionsScreen extends BaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(question)));
 		appiumdriver.findElementByName(answer).click();
+
+	}
+
+	public void selectAnswerForQuestionWithAdditionalConditions(String question, String answer, String question2answer, String vehiclePart) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(question)));
+		appiumdriver.findElementByName(answer).click();
+		SelectedServiceDetailsScreen serviceDetailsScreen = new SelectedServiceDetailsScreen();
+		appiumdriver.findElementByName(answer).click();
+		serviceDetailsScreen.answerQuestion2(question2answer);
+		serviceDetailsScreen.saveSelectedServiceDetails();
+		serviceDetailsScreen.selectVehiclePart(vehiclePart);
+		serviceDetailsScreen.saveSelectedServiceDetails();
+		serviceDetailsScreen.saveSelectedServiceDetails();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(question)));
+
 	}
 	
 	public void setToYesFinalQuestion() {

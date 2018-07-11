@@ -4299,7 +4299,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			carhistoryscreen.clickFirstCarHistoryInTable();
 			RegularMyInvoicesScreen myinvoicesscreen = carhistoryscreen.clickCarHistoryInvoices();
 			Assert.assertTrue(myinvoicesscreen.myInvoicesIsDisplayed());
-			myinvoicesscreen.clickHomeButton();
+			myinvoicesscreen.clickBackButton();
+
 			carhistoryscreen.clickHomeButton();
 			
 			carhistoryscreen.clickSwitchToWeb();

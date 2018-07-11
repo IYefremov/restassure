@@ -416,8 +416,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		return appiumdriver.findElementsByAccessibilityId("Appointments").size() > 0;
 	}
 	
-	public void saveAppointment() {
+	public ServiceRequestsScreen saveAppointment() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		return this;
 	}
 	
 	//Close reason UIAPicker

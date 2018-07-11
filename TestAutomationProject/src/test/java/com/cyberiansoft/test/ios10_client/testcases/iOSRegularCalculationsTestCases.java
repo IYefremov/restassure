@@ -64,6 +64,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
         DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
         DriverBuilder.getInstance().getAppiumDriver().quit();
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
 		loginscreen.registeriOSDevice(regCode);

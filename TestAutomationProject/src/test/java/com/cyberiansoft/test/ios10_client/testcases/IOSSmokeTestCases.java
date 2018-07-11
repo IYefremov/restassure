@@ -3977,6 +3977,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//Helpers.acceptAlert();
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen();		
 		approveinspscreen.approveInspectionWithSelectionAndSignature(inspectnumber);
+		teaminspectionsscreen = new TeamInspectionsScreen();
   		teaminspectionsscreen.clickBackServiceRequest();
 		serviceRequestdetailsScreen.clickBackButton();
 
@@ -4169,7 +4170,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setColor(_color);
 
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
-		servicesscreen.searchServiceToSelect(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
+		//servicesscreen.searchServiceToSelect(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.selectVehiclePart("Back Glass");
@@ -7082,7 +7083,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 		
 		questionsscreen = questionsscreen.selectNextScreen("Zayats Section2", QuestionsScreen.class);
-		questionsscreen.selectAnswerForQuestion("Q1", "No - rate 0");
+		questionsscreen.selectAnswerForQuestionWithAdditionalConditions("Q1", "No - rate 0", "A1", "Deck Lid");
 		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE));
 		

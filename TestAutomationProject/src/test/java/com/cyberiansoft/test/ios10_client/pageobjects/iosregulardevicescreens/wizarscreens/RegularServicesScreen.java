@@ -321,6 +321,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
 		appiumdriver.findElement(MobileBy.name("Back")).click();
+		BaseUtils.waitABit(500);
 		return this;
 	}
 	

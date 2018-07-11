@@ -69,7 +69,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	}
 	
 	public String getFirstCarHistoryValueInTable() {		
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").getAttribute("value");
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]").getAttribute("value");
 	}
 	
 	public String getFirstCarHistoryDetailsInTable() {		

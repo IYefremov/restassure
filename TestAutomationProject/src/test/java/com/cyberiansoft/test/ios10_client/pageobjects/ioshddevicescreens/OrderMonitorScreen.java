@@ -61,7 +61,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void selectPanel(String panelname) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 	}
 	
@@ -133,7 +133,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clicksRepairPhaseLine() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 	
