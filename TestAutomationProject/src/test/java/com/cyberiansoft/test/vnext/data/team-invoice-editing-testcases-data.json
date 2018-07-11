@@ -171,6 +171,52 @@
       },
       "newPoNumber" : "TEST!23"
     }
+  ],
+
+  "testVerifyUserCanAttachWOWithSameCustomers": [
+    {
+      "rowID": "testVerifyUserCanAttachWOWithSameCustomers.01",
+      "description": "Test Case 75389:Verify user can attach WO with same Customers",
+      "workOrdersData" : [{"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }],
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "newPoNumber" : "TEST!23"
+    }
+  ],
+
+  "testVerifyUserCanDeattachWOsFromInvoice": [
+    {
+      "rowID": "testVerifyUserCanDeattachWOsFromInvoice.01",
+      "description": "Test Case 75390:Verify user can detach WOs from Invoice",
+      "workOrdersData" : [{"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }, {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      }],
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "newPoNumber" : "TEST!23"
+    }
   ]
 
 }

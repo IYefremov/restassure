@@ -47,10 +47,12 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(2000);
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
 			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
-		tap(addwobtn);
+		WaitUtils.click(By.xpath("//a[@action='add']"));
+		//tap(addwobtn);
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
@@ -71,7 +73,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
 				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.fail( "Can't find work order: " + wonumber);
 	}
 	
 	public void unselectWorkOrder(String wonumber) {
@@ -80,7 +82,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
 				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.fail( "Can't find work order: " + wonumber);
 	}
 	
 	public boolean isWorkOrderSelected(String woNumber) {
@@ -89,7 +91,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		if (workordercell != null)
 			selected = workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked").equals("true");
 		else
-			Assert.assertTrue(false, "Can't find work order: " + woNumber);
+			Assert.fail("Can't find work order: " + woNumber);
 		return selected;
 	}
 	
@@ -115,7 +117,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		if (workordercell != null)
 			woprice = workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.fail( "Can't find work order: " + wonumber);
 		return woprice;		
 	}
 
@@ -125,7 +127,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		if (workordercell != null)
 			woprice = workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.fail( "Can't find work order: " + wonumber);
 		return woprice;
 	}
 	
@@ -146,7 +148,7 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 			tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
 		}
 		else
-			Assert.assertTrue(false, "Can't find work order: " + wonumber);
+			Assert.fail( "Can't find work order: " + wonumber);
 		clickCreateInvoiceMenuItem();
 		
 	}

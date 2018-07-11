@@ -2,10 +2,15 @@ package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Invoice {
 
     @JsonProperty("workOrderData")
     WorkOrderData workOrderData;
+
+    @JsonProperty("workOrdersData")
+    List<WorkOrderData> workOrdersData;
 
     @JsonProperty("invoiceData")
     InvoiceData invoiceData;
@@ -17,6 +22,8 @@ public class Invoice {
     String newPoNumber;
 
     public WorkOrderData getWorkOrderData() { return workOrderData; }
+
+    public List<WorkOrderData> getWorkOrdersData() { return workOrdersData; }
 
     public InvoiceData getInvoiceData() {
         return invoiceData;

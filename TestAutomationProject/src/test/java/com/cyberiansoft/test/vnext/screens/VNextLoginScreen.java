@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -78,6 +79,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserLoginPassword(String userpsw) {
+		WaitUtils.click(By.xpath("//input[@type='password']"));
 		setValue(passwordfld, userpsw);
 	}
 	

@@ -30,6 +30,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
@@ -58,7 +59,7 @@ public class VNextBaseTestCase {
 	protected static MobilePlatform mobilePlatform;
 	
 	@BeforeSuite
-	public void startServer() throws IOException {
+	public void startServer()  {
 		
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
@@ -74,6 +75,7 @@ public class VNextBaseTestCase {
 				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 			}
 			appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
+			appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
 
 		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();

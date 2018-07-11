@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -50,7 +51,8 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
-                tap(servicecell);
+                WaitUtils.click(servicecell);
+                //tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);

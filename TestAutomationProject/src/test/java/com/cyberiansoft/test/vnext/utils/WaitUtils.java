@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.utils;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -16,7 +18,8 @@ public class WaitUtils {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(300))
-                .ignoring(WebDriverException.class);
+                .ignoring(WebDriverException.class)
+                .ignoring(InvalidElementStateException.class);
 
         WebElement element = wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver) {
@@ -27,17 +30,25 @@ public class WaitUtils {
         return  element;
     };
 
+    public static WebElement waitUntilElementIsClickable(final By locator, AppiumDriver<MobileElement> appiumdriver) {
+        org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(appiumdriver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(WebDriverException.class)
+                .ignoring(InvalidElementStateException.class);
+
+        WebElement element = wait.until(driver -> driver.findElement(locator));
+
+        return  element;
+    };
+
     public static WebElement waitUntilElementIsClickable(final WebElement webElement) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(300))
                 .ignoring(WebDriverException.class);
 
-        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return webElement;
-            }
-        });
+        WebElement element = wait.until(driver -> webElement);
 
         return  element;
     };
@@ -61,7 +72,8 @@ public class WaitUtils {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(300))
-                .ignoring(WebDriverException.class);
+                .ignoring(WebDriverException.class)
+                .ignoring(InvalidElementStateException.class);
 
         Boolean element = wait.until(new Function<WebDriver, Boolean>() {
             public Boolean apply(WebDriver driver) {

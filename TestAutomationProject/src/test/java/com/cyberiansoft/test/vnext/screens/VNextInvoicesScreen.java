@@ -38,7 +38,7 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-autotests-id='invoices-list']")));
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//div[@data-autotests-id='invoices-list']"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
@@ -126,8 +126,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 			}
 
 		}
-		else
-			Assert.fail("Can't find invoice: " + invoicenumber);
 	}
 	
 	public WebElement getInvoiceCell(String invoicenumber) {
@@ -183,14 +181,6 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='button active' and @action='team']")));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
-		/*if (appiumdriver.findElements(By.xpath("//*[text()='Loading invoices']")).size() > 0) {
-			try {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-			wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[text()='Loading work orders']"))));
-			} catch (NoSuchElementException e) {
-				//do nothing
-			}
-		}*/
 	}
 	
 	public boolean isTeamInvoicesViewActive() {

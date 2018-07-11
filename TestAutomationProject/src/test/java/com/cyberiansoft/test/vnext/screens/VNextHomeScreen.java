@@ -91,7 +91,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
-		BaseUtils.waitABit(2000);
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	

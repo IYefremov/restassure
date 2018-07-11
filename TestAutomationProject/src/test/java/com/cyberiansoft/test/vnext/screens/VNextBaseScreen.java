@@ -27,8 +27,9 @@ public class VNextBaseScreen {
 	
 	public void tap(WebElement element) {
 
-		BaseUtils.waitABit(300);
 
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();
 		//new TouchActions(appiumdriver).singleTap(element).perform();
 		/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
@@ -49,7 +50,6 @@ public class VNextBaseScreen {
 	}
 	
 	public void setValue(WebElement element, String value) {
-		tap(element);
 		element.clear();
 		appiumdriver.getKeyboard().sendKeys(value);
 		appiumdriver.hideKeyboard();
