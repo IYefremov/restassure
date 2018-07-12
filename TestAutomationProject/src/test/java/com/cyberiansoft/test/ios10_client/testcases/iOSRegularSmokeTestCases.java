@@ -1629,9 +1629,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = new RegularHomeScreen();
 		RegularCarHistoryScreen carhistoryscreen = homescreen.clickCarHistoryButton();
 		//carhistoryscreen.searchCar(vin);
-			
-		carhistoryscreen.clickCarHistoryRowByVehicleInfo(vehicleinfo);
-		carhistoryscreen.clickCarHistoryMyWorkOrders();
+
+		RegularCarHistoryWOsAndInvoicesScreen regularCarHistoryWOsAndInvoicesScreen = carhistoryscreen.clickCarHistoryRowByVehicleInfo(vehicleinfo);
+		regularCarHistoryWOsAndInvoicesScreen.clickCarHistoryMyWorkOrders();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen();
 		myworkordersscreen.selectFirstOrder();
 		myworkordersscreen.selectCopyVehicle();

@@ -50,6 +50,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
 	@iOSFindBy(accessibility = "logout")
     private IOSElement logoutbtn;
+
+	@iOSFindBy(accessibility = "viewPrompt")
+	private IOSElement activecustomer;
 	
 	public RegularHomeScreen() {
 		super();
@@ -164,6 +167,10 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	public RegularMainScreen clickLogoutButton() {
 		logoutbtn.click();
 		return new RegularMainScreen();
+	}
+
+	public String getActiveCustomerValue() {
+		return activecustomer.getAttribute("value");
 	}
 
 }

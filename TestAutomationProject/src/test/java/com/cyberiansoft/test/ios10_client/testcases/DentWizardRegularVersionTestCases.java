@@ -11,8 +11,8 @@ import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.EnterpriseBeforeDamageScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.EnterpriseBeforeDamageScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
@@ -23,11 +23,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -35,12 +31,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-
 public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 		private String regCode;
-		private final String customer = "Abc Rental Center";
 		public RegularHomeScreen homescreen;
 		
 		@BeforeClass
@@ -52,6 +45,15 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			testRegisterationiOSDdevice();
 			ExcelUtils.setDentWizardExcelFile();
 		}
+
+	@BeforeMethod
+	public void setUpCustomer() {
+		if (!homescreen.getActiveCustomerValue().equals(UtilConstants.TEST_CUSTOMER_FOR_TRAINING)) {
+			RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+			customersscreen.swtchToWholesaleMode();
+			homescreen = customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		}
+	}
 
 		//@Test(description = "Get registration code on back-office for iOS device")
 		public void testGetDeviceRegistrationCode(String backofficeurl,
@@ -92,24 +94,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			settingsScreen.setInsvoicesCustomLayoutOff();
 			settingsScreen.clickHomeButton();
 		}
-		
-		@BeforeMethod
-		public void restartApps() throws MalformedURLException, InterruptedException {
-			//resrtartApplication();	
-			//MainScreen mainscr = new MainScreen();
-			//homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-			System.out.println("================================ NEW TESTACASE ====================================");
-		}
 
 		@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
 		public void testValidVINCheck() throws Exception {
 			final String tcname = "testValidVINCheck";
 			final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-			//customersscreen.selectFirstCustomerWithoutEditing();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -153,9 +143,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			settingsscreen.setCheckDuplicatesOn();
 			settingsscreen.clickHomeButton();
 
-			RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-			customersscreen.swtchToWholesaleMode();
-			customersscreen.selectCustomerWithoutEditing(customer);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -186,10 +173,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			settingsscreen.setCheckDuplicatesOn();
 			settingsscreen.clickHomeButton();
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.swtchToWholesaleMode();
-			customersscreen.selectCustomerWithoutEditing(customer);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -233,11 +216,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					"Roof" };
 			final String[] vehiclepartswheels = { "Left Front Wheel",
 					"Right Front Wheel" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.swtchToWholesaleMode();
-			customersscreen.selectCustomerWithoutEditing(customer);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -379,10 +358,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 			final String[] vehicleparts = { "Roof" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -469,9 +445,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehicleparts = { "Left Fender", "Left Front Door",
 					"Left Quarter Panel" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 			
 			homescreen.clickSettingsButton();
 			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
@@ -527,10 +500,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					"Right Rear Door" };
 
 			final String[] vehicleparts2 = { "Left Mirror", "Right Mirror" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 			
 			homescreen.clickSettingsButton();
 			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
@@ -616,9 +585,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(customer);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -662,10 +628,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			final String[] vehicleparts = { "Left Fender", "Left Front Door",
 					"Left Rear Door" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(customer);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -700,10 +663,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		public void testCarmaxVehicleInformationRequirements() throws Exception {
 			String tcname = "testCarmaxVehicleInformationRequirements";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -751,12 +711,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		public void testInspectionRequirementsInforced() throws Exception {
 			String tcname = "testInspectionRequirementsInforced";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			homescreen.clickMyInspectionsButton();
-			RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen();
+
+			RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 			myinspectionsscreen.clickAddInspectionButton();
 			myinspectionsscreen.selectInspectionType(UtilConstants.wizardprotrackerrouteinspectiondertype);
 			RegularVehicleScreen  vehicleScreen = new RegularVehicleScreen();
@@ -779,13 +735,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				throws Exception {
 			String tcname = "testInspectionsCanConvertToMultipleWorkOrders";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			
-			homescreen.clickSettingsButton();
-			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
+
+			RegularSettingsScreen settingsscreen = homescreen.clickSettingsButton();
 			settingsscreen.setShowAllServicesOn();
 			settingsscreen.clickHomeButton();
 			
@@ -850,18 +801,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		public void testArchiveFeatureForInspections() throws Exception {
 			String tcname = "testArchiveFeatureForInspections";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickSettingsButton();
-			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
+
+			RegularSettingsScreen settingsscreen = homescreen.clickSettingsButton();
 			settingsscreen.setShowAllServicesOn();
 			settingsscreen.clickHomeButton();
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			
-			homescreen.clickMyInspectionsButton();
-			RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen();
+
+			RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 			myinspectionsscreen.clickAddInspectionButton();
 			myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
 			RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
@@ -905,9 +850,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehicleparts = { "Left A Pillar", "Left Fender",
 					"Left Rear Door", "Roof" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1030,10 +973,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Hood", "Right Quarter Panel",
 					"Sunroof" };
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
@@ -1098,10 +1037,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Cowl, Other", "Left Fender",
 					"Trunk Lid" };
-			 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1181,10 +1117,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Fender", "Left Quarter Panel", "Right Rear Door",
 					"Trunk Lid" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1280,10 +1213,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
 			final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1324,10 +1254,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		public void testQuickQuoteOptionForRetailHail() throws Exception {
 			String tcname = "testQuickQuoteOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1399,10 +1326,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCustomerSelfPayOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1458,10 +1381,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testEvenWOLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1574,10 +1493,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testEvenServiceLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1665,10 +1580,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testDeductibleFeatureForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1733,10 +1644,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String validzip = "83707";
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1774,10 +1681,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCustomWOLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularHomeScreen homescreen = new RegularHomeScreen();
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1889,9 +1793,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCustomServiceLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2007,9 +1909,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCustomerDiscountOnRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2065,9 +1964,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					"Roof" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 			
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
@@ -2133,11 +2029,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehicleparts = { "Left Fender", "Left Front Door",
 					"Left Quarter Panel" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2232,10 +2124,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 			final String[] vehiclepartspaint = { "Front Bumper"};
 			final String[] vehiclepartstoadd = { "Hood"};
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2355,10 +2244,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				throws Exception {
 			String tcname = "testStartServiceFeatureIsAccuratelyCapturingTimes";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2409,9 +2295,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehiclepartspaint = { "Hood", "Left Roof Rail", "Right Fender" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2478,10 +2361,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 			final String[] vehicleparts = { "Roof" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2521,15 +2401,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Front Wheel", "Left Rear Wheel" };
 
-			homescreen.clickSettingsButton();
-			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
+			RegularSettingsScreen settingsscreen = homescreen.clickSettingsButton();
 			settingsscreen.setShowAllServicesOn();
 			settingsscreen.clickHomeButton();
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			
+
 			homescreen.clickMyInspectionsButton();
 			RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen();
 			myinspectionsscreen.clickAddInspectionButton();
@@ -2563,12 +2438,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			servicesscreen.clickBackServicesButton();
 			servicesscreen.saveWizard();
 			String inspectioncustomer = myinspectionsscreen.getFirstInspectionNumberValue();
-			myinspectionsscreen.changeCustomerForInspection(inspectioncustomer, customer);
+			myinspectionsscreen.changeCustomerForInspection(inspectioncustomer, "Abc Rental Center");
 			myinspectionsscreen.clickHomeButton();
 			
 			homescreen.clickCustomersButton();
-			customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(customer);
+			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
+			customersscreen.selectCustomerWithoutEditing("Abc Rental Center");
 			homescreen = new RegularHomeScreen();
 			homescreen.clickMyInspectionsButton();
 			myinspectionsscreen = new RegularMyInspectionsScreen();
@@ -2594,9 +2469,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String servicequantity2 = "4.5";
 			final String totalsumm = "$3,738.00";
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2656,9 +2528,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehicleparts = { "Left Mirror", "Right Mirror" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2753,9 +2622,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			final String[] vehicleparts = { "Left Fender", "Left Front Door", "Left Quarter Panel", "Left Rear Door", "Left Roof Rail" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2833,9 +2699,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehicleparts = {  "Hood", "Left Rear Door", "Right Fender" };
 			final String[] vehiclepartspaint = {  "Left Rear Door", "Right Fender" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2910,9 +2773,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testChangingThePOOnAnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -2957,9 +2817,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Front Door", "Right Rear Door" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularSettingsScreen settingsscreen = homescreen.clickSettingsButton();
 			settingsscreen.setShowAllServicesOn();
 			homescreen = settingsscreen.clickHomeButton();
@@ -3006,9 +2863,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testEditingWorkOrder";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3070,9 +2924,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehiclepartspaint = { "Left Mirror" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3172,10 +3023,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				throws Exception {
 			String tcname = "testAddingAPOToAnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3247,10 +3095,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow3 = ExcelUtils.getTestCaseRow(tcname3);
 			
 			final String[] vehicleparts = { "Left Rear Door", "Right Rear Door" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3359,9 +3204,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCopyVehicleFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3397,9 +3239,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow1 = ExcelUtils.getTestCaseRow(tcname1);
 			int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3439,10 +3278,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 			final String[] vehicleparts = { "Left A Pillar", "Left Front Door", "Metal Sunroof", "Right Roof Rail" };
-
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			
 			RegularSettingsScreen settingsscreen = homescreen.clickSettingsButton();
 			settingsscreen.setShowAllServicesOn();
@@ -3519,10 +3354,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Hood", "Left Fender" };
 			final String totalsale = "675";
-
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 			myworkordersscreen.clickAddOrderButton();
@@ -3570,9 +3401,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Fender", "Left Roof Rail", "Right Fender" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3622,10 +3450,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Fender" };
 			final String[] vehiclepartspaint = { "Hood", "Left Fender" };
-			 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 			myinspectionsscreen.clickAddInspectionButton();
 			myinspectionsscreen.selectInspectionType(UtilConstants.routeworkordertype);
@@ -3695,12 +3520,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
-		public void testSendMultipleEmails()
-				throws Exception {		
-			 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		public void testSendMultipleEmails() {
+
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 			myinvoicesscreen.clickActionButton();
 			for (int i = 0; i< 4; i++) {
@@ -3721,9 +3542,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String  _customer   = "Bel Air Auto Auction Inc";
 			final String[] vehicleparts = { "Left Fender", "Right Fender"};
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(_customer);			
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3777,10 +3595,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Left Quarter Panel", "Right Roof Rail", "Trunk Lid" };
 			final String[] vehiclepartswheel = { "Right Front Wheel", "Right Rear Wheel" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3849,9 +3664,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testEnterprizeWorkOrderQuestionFormsInforced";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3884,9 +3696,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testSuccessfulEmailOfPicturesUsingNotesFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -3962,10 +3771,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testEmailingPhotosInEconomicalInspection";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			
 			RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 
 			myinspectionsscreen.clickAddInspectionButton();
@@ -4043,9 +3848,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String firstnote = "Refused paint";
 			final String secondnote = "Just 4 panels";
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -4118,9 +3920,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String[] vehicleparts = { "Decklid", "Left A Pillar" };
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -4186,10 +3985,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			final String _po = "998601";
 			final String[] vehicleparts = { "Hood", "Left Quarter Panel", "Right Roof Rail" };
-			
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -4232,9 +4028,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String totalsale = "675";
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -4265,9 +4058,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String tcname = "testCarHistoryFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			homescreen.clickCustomersButton();
-			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -4296,23 +4086,24 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
 			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
-			carhistoryscreen.clickFirstCarHistoryInTable();
-			RegularMyInvoicesScreen myinvoicesscreen = carhistoryscreen.clickCarHistoryInvoices();
+			RegularCarHistoryWOsAndInvoicesScreen carHistoryWOsAndInvoicesScreen = carhistoryscreen.clickFirstCarHistoryInTable();
+			RegularMyInvoicesScreen myinvoicesscreen = carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();
 			Assert.assertTrue(myinvoicesscreen.myInvoicesIsDisplayed());
 			myinvoicesscreen.clickBackButton();
-
-			carhistoryscreen.clickHomeButton();
+			carHistoryWOsAndInvoicesScreen = new RegularCarHistoryWOsAndInvoicesScreen();
+			carHistoryWOsAndInvoicesScreen.clickBackButton();
 			
 			carhistoryscreen.clickSwitchToWeb();
 			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
-			carhistoryscreen.clickFirstCarHistoryInTable();
-			carhistoryscreen.clickCarHistoryInvoices();		
+			carHistoryWOsAndInvoicesScreen = carhistoryscreen.clickFirstCarHistoryInTable();
+			carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();
 
 			Assert.assertTrue(myinvoicesscreen.teamInvoicesIsDisplayed());
 			Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenumber));
-			myinvoicesscreen.clickHomeButton();
-			//carhistoryscreen.clickCancelSearchButton();
+			myinvoicesscreen.clickBackButton();
+			carHistoryWOsAndInvoicesScreen = new RegularCarHistoryWOsAndInvoicesScreen();
+			carHistoryWOsAndInvoicesScreen.clickBackButton();
 			carhistoryscreen.clickHomeButton();
 		}
 }
