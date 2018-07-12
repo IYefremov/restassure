@@ -1,12 +1,15 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ReportsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TechnicianCommissionsWebPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(VideoListener.class)
 public class BackOfficeReportsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 16189:Reports - Technician Commissions")

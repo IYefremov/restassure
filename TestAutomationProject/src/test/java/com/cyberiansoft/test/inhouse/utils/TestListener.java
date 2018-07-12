@@ -66,12 +66,9 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
         } catch (Exception e) {
             fail(e);
         }
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        if (driver != null) {
-            driver.quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
+        DriverBuilder.getInstance().quitDriver();
+        DriverBuilder.getInstance().setDriver(BaseUtils
                     .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
-        }
         ((BaseTestCase) currentClass).setDriver();
     }
 
@@ -80,10 +77,10 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
         attachScreenshot();
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().getDriver().quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+//            DriverBuilder.getInstance().setDriver(BaseUtils
+//                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
         }
-        ((BaseTestCase) currentClass).setDriver();
+//        ((BaseTestCase) currentClass).setDriver();
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")

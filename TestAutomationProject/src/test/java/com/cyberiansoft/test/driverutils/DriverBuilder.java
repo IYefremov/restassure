@@ -26,6 +26,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static org.awaitility.Awaitility.await;
+
 public class DriverBuilder {
 	
 	private static DriverBuilder instance = null;
@@ -47,8 +49,8 @@ public class DriverBuilder {
         }
         return instance;
     }
-	
-	
+
+
 	public final void setDriver(BrowserType browserType) {
 		
 		DesiredCapabilities webcap = null;
@@ -168,4 +170,18 @@ public class DriverBuilder {
 		return defaultAppiumURL;
 	}
 
+    public void quitDriver() {
+        try {
+            if (getDriver() != null) {
+                getDriver().quit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            await().atMost(5, TimeUnit.SECONDS);
+        } finally {
+            if (getDriver() != null) {
+                getDriver().quit();
+            }
+        }
+    }
 }

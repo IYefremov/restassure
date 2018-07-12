@@ -1,10 +1,13 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(VideoListener.class)
 public class BackOfficeSuperUserTestCases extends BaseTestCase {
 
 	@Test(description = "Test Case 15135:All Users - Search")

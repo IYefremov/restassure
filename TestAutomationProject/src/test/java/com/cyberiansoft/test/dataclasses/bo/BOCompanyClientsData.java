@@ -97,6 +97,15 @@ public class BOCompanyClientsData {
     @JsonProperty("userName")
     private String userName;
 
+    @JsonProperty("timeFrame")
+    private String timeFrame;
+
+    @JsonProperty("workHoursStart")
+    private String workHoursStart;
+
+    @JsonProperty("workHoursFinish")
+    private String workHoursFinish;
+
     public String getClientName() {
         return clientName;
     }
@@ -107,6 +116,18 @@ public class BOCompanyClientsData {
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getTimeFrame() {
+        return timeFrame;
+    }
+
+    public String getWorkHoursStart() {
+        return workHoursStart;
+    }
+
+    public String getWorkHoursFinish() {
+        return workHoursFinish;
     }
 
     public String getCompanyNote() {

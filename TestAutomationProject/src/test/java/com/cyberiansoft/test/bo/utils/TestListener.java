@@ -45,10 +45,10 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
         if (DriverBuilder.getInstance().getDriver() != null) {
             createScreenshot(DriverBuilder.getInstance().getDriver(), "report/", getTestMethodName(result));
             DriverBuilder.getInstance().getDriver().quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
+//            DriverBuilder.getInstance().setDriver(BaseUtils
+//                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
-        ((BaseTestCase) currentClass).setDriver();
+//        ((BaseTestCase) currentClass).setDriver();
 	}
 	
 	public String createScreenshot(WebDriver driver, String loggerdir, String testcasename) {

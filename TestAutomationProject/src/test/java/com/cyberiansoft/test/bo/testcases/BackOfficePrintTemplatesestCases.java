@@ -32,7 +32,7 @@
 //	}
 //
 //	public void backofficeLogin(String backofficeurl, String userName, String userPassword) throws InterruptedException {
-//		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+//		WebDriverUtils.goToWebPage(backofficeurl);
 //		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 //				BackOfficeLoginWebPage.class);
 //		loginpage.UserLogin(userName, userPassword);
@@ -42,7 +42,7 @@
 ////    @BeforeMethod
 ////    public void BackOfficeLogin(Method method) {
 ////        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-////        WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeCapiURL());
+////        WebDriverUtils.goToWebPage(BOConfigInfo.getInstance().getBackOfficeCapiURL());
 ////        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 ////        loginPage.UserLogin(BOConfigInfo.getInstance().getUserCapiName(),
 ////                BOConfigInfo.getInstance().getUserCapiPassword());

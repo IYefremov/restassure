@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(VideoListener.class)
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 
 	@Test(description = "Test Case 19250:\"Estimate approved\" event creation")

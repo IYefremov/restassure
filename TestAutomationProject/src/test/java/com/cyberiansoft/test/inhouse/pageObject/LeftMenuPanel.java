@@ -20,6 +20,9 @@ public class LeftMenuPanel extends BasePage {
     @FindBy(xpath = "//span[text()='Client Management']")
     private WebElement clientManagement;
 
+    @FindBy(xpath = "//span[text()='Sales Quotes']")
+    private WebElement salesQuotes;
+
 
     /** Submenu */
     @FindBy(xpath = "//ul[@class='treeview-menu menu-open']")
@@ -27,6 +30,9 @@ public class LeftMenuPanel extends BasePage {
 
     @FindBy(xpath = "//span[text()='Client Quotes']")
     private WebElement clientQuotes;
+
+    @FindBy(xpath = "//span[text()='Agreements in Progress']")
+    private WebElement agreementsInProgress;
 
     @FindBy(xpath = "//span[text()='Active Opportunities']")
     private WebElement activeOpportunities;
@@ -46,6 +52,9 @@ public class LeftMenuPanel extends BasePage {
 
     @FindBy(xpath = "//h1[contains(text(), 'Client Quotes')]")
     private WebElement clientQuotesHeader;
+
+    @FindBy(xpath = "//h1[contains(text(), 'Agreements in Progress')]")
+    private WebElement agreementsInProgressHeader;
 
     @FindBy(xpath = "//h1[contains(text(), 'Client Segments')]")
     private WebElement clientSegmentsHeader;
@@ -83,6 +92,11 @@ public class LeftMenuPanel extends BasePage {
         clickMenu(clientManagement);
         return this;
     }
+    @Step
+    public LeftMenuPanel clickSalesQuotes() {
+        clickMenu(salesQuotes);
+        return this;
+    }
 
     @Step
     public LeftMenuPanel clickClients() {
@@ -109,6 +123,19 @@ public class LeftMenuPanel extends BasePage {
         } catch (Exception ignored) {
             clickClientManagement().clickClientQuotesSubmenu();
             wait.until(ExpectedConditions.visibilityOf(clientQuotesHeader));
+        }
+        return PageFactory.initElements(driver, ClientQuotesPage.class);
+    }
+
+    @Step
+    public ClientQuotesPage clickAgreementsInProgress() {
+        clickSubMenu(agreementsInProgress);
+        waitForLoading();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(agreementsInProgressHeader));
+        } catch (Exception ignored) {
+            clickSalesQuotes().clickAgreementsInProgress();
+            wait.until(ExpectedConditions.visibilityOf(agreementsInProgressHeader));
         }
         return PageFactory.initElements(driver, ClientQuotesPage.class);
     }

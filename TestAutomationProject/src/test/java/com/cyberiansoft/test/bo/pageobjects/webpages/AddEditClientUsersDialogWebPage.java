@@ -1,27 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 	
@@ -288,6 +278,7 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 		setUserLastName(userlstname);
 		clickClientChkbox();
 		clickButtonOk();
+		waitForLoading();
  
 		return PageFactory.initElements(
 				driver, ClientUsersWebPage.class);

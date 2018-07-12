@@ -4,17 +4,17 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
-import com.cyberiansoft.test.inhouse.pageObject.TeamPortalHeader;
 import com.cyberiansoft.test.inhouse.pageObject.LoginPage;
-import org.apache.commons.io.FileUtils;
+import com.cyberiansoft.test.inhouse.pageObject.TeamPortalHeader;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
 
 
 public class BaseTestCase {
@@ -22,16 +22,7 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	public BrowserType browsertype;
 	protected File app;
-	
-	@BeforeSuite
-	public void cleanScreenShotsFolder() throws IOException{
-        File reportFolder = new File("/report");
-        if (!reportFolder.exists())
-            reportFolder.mkdir();
-        else
-            FileUtils.cleanDirectory(new File("/report"));
-	}
-	
+
 	@BeforeClass
 	public void setUp() throws InterruptedException {
         browsertype = BaseUtils.getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser());
@@ -43,41 +34,21 @@ public class BaseTestCase {
         }
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.navigate().refresh();
-
-
-//		for (BrowserType browserTypeEnum : BrowserType.values()) {
-//            if (StringUtils.equalsIgnoreCase(browserTypeEnum.getBrowserTypeString(), browser)) {
-//                this.browsertype = browserTypeEnum;
-//                return;
-//            }
-//        }
-//
-//        webdriver = DriverBuilder.getInstance().getDriver();
-//        DriverBuilder.getInstance().setDriver(browsertype);
-//		webdriver.navigate().refresh();
 	}
 
     public WebDriver getWebDriver() {
 		return webdriver;
 	}
 
-//	@AfterMethod
-//	public void cookieCleaner(){
-//		webdriver.get(InHouseConfigInfo.getInstance().getInHouseURL());
-//		webdriver.manage().deleteAllCookies();
-//	}
-	
 	@AfterClass
 	public void tearDown() {
-		if (webdriver != null)
-			webdriver.quit();
+        DriverBuilder.getInstance().quitDriver();
 	}
 
 
     @BeforeMethod
-    public void teamPortalLogin(Method method) throws InterruptedException {
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
-        webdriverGotoWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
+    public void teamPortalLogin() throws InterruptedException {
+        goToWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
         LoginPage loginPage = PageFactory.initElements(webdriver, LoginPage.class);
         loginPage.loginByGmail();
         Thread.sleep(2000);
@@ -88,14 +59,14 @@ public class BaseTestCase {
         TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
                 TeamPortalHeader.class);
         try {
-            headerPanel.clickLogOutButton();
+            headerPanel.clickLogoutButton();
             Thread.sleep(1000);
             webdriver.get(InHouseConfigInfo.getInstance().getInHouseURL());
             webdriver.manage().deleteAllCookies();
         } catch (Exception ignored) {}
     }
 
-	public void webdriverGotoWebPage(String url) {
+	public void goToWebPage(String url) {
 		webdriver.manage().window().maximize();
 		webdriver.get(url);
 	}

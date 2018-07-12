@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.bo.utils;
+package com.cyberiansoft.test.inhouse.utils;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.codehaus.plexus.util.FileUtils;

@@ -1,13 +1,16 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TimesheetsSectionWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TimesheetsWebPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
+@Listeners(VideoListener.class)
 public class BackOfficeTimesheetsTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 65561:Timesheets - Timesheets Monday Sunday switch")

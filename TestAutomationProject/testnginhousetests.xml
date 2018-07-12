@@ -2,7 +2,7 @@
 <suite name="InHouse test cases" verbose="10" configfailurepolicy="continue">
 
     <listeners>
-        <listener class-name="com.cyberiansoft.test.inhouse.utils.TestListener"/>
+        <listener class-name="com.cyberiansoft.test.inhouse.utils.TestListenerAllure"/>
     </listeners>
 
     <test name="InHouse tests Chrome">

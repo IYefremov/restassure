@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
+import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseRulesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -10,8 +11,10 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(VideoListener.class)
 public class TeamPortalRulesTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseRules.json";

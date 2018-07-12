@@ -12,7 +12,6 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.apache.commons.io.FileUtils;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,10 +20,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 public class BaseTestCase {
@@ -40,15 +37,6 @@ public class BaseTestCase {
 	String bundleid = "";
 	protected static AppiumDriverLocalService service;
 
-    @BeforeSuite
-    public void cleanScreenShotsFolder() throws IOException{
-        File reportFolder = new File("/report");
-        if (!reportFolder.exists())
-            reportFolder.mkdir();
-        else
-            FileUtils.cleanDirectory(new File("/report"));
-    }
-	
 //	@BeforeClass
 //	@Parameters({ "selenium.browser", "ios.bundleid" })
 //	public void setUp(@Optional("chrome") String browser, String bundleid) throws Exception {
@@ -129,7 +117,6 @@ public class BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.navigate().refresh();
         //todo delete from here after the problem with skips will be solved
-        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());

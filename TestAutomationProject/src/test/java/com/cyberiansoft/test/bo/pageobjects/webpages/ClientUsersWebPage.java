@@ -23,6 +23,9 @@ public class ClientUsersWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_Content_gv_ctl00")
 	private WebTable clientuserstable;
 
+	@FindBy(id = "ctl00_Content_gv_ctl00_ctl06_btnResend")
+	private WebElement resendButton;
+
 	public ClientUsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -94,7 +97,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 
 	public void clickResendButton() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_lbMsg")));
-		driver.findElement(By.id("ctl00_Content_gv_ctl00_ctl06_btnResend")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(resendButton)).click();
 		driver.switchTo().alert().accept();
 		waitForLoading();
 		waitABit(1000);

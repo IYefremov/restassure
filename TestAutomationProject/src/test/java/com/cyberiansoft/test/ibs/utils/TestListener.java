@@ -62,28 +62,39 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
     @Override
     public void onTestFailure(ITestResult result) {
         try {
-            attachScreenshot();
+            AllureUtils.attachScreenshot();
         } catch (Exception e) {
-            fail(e);
+            AllureUtils.failToSaveScreenshot(e);
         }
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        if (driver != null) {
-            driver.quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+        try {
+            AllureUtils.attachVideo();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        DriverBuilder.getInstance().quitDriver();
+        DriverBuilder.getInstance().setDriver(BaseUtils
+                .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
         ((BaseTestCase) currentClass).setDriver();
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
-        attachScreenshot();
+        try {
+            AllureUtils.attachScreenshot();
+        } catch (Exception e) {
+            AllureUtils.failToSaveScreenshot(e);
+        }
+        try {
+            AllureUtils.attachVideo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().getDriver().quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+//            DriverBuilder.getInstance().setDriver(BaseUtils
+//                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
         }
-        ((BaseTestCase) currentClass).setDriver();
+//        ((BaseTestCase) currentClass).setDriver();
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")

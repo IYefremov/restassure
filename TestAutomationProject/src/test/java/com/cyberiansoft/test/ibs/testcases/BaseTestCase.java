@@ -32,11 +32,14 @@ public class BaseTestCase {
 	
 	@BeforeSuite
 	public void cleanScreenShotsFolder() throws IOException{
-        File reportFolder = new File("/report");
-        if (!reportFolder.exists())
-            reportFolder.mkdir();
-        else
-            FileUtils.cleanDirectory(new File("/report"));
+        File reportFolder = new File("/allure-results");
+        if (reportFolder.exists()) {
+            FileUtils.deleteDirectory(reportFolder);
+        }
+        File videoFolder = new File("/video");
+        if (videoFolder.exists()) {
+            FileUtils.deleteDirectory(videoFolder);
+        }
 	}
 
     public WebDriver getWebDriver() {
@@ -78,15 +81,12 @@ public class BaseTestCase {
                 webdriver.manage().deleteAllCookies();
             } catch (WebDriverException ignored) {}
         }
-        if (webdriver != null) {
-            webdriver.quit();
-        }
+        DriverBuilder.getInstance().quitDriver();
     }
 
     @AfterSuite
     public void tearDown() {
-        if (webdriver != null)
-            webdriver.quit();
+        DriverBuilder.getInstance().quitDriver();
     }
 
 	public void goToWebPage(String url) {

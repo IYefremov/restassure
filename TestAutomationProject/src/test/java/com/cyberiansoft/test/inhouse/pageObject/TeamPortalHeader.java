@@ -20,7 +20,7 @@ public class TeamPortalHeader extends BasePage {
     }
 
     @Step
-    public void clickLogOutButton(){
+    public void clickLogoutButton(){
         if (driver.getWindowHandles().size() > 1) {
             driver.close();
             for (String activeHandle : driver.getWindowHandles())

@@ -30,7 +30,7 @@ public class ClientQuotesDetailPage extends BasePage {
     private WebElement agreementStatusesBlock;
 
     @FindBy(className = "btn-select-edition-discount")
-    private WebElement discountBTN;
+    private WebElement discountButton;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-finalize-agreement']")
     private WebElement finalizeAgreementButton;
@@ -140,7 +140,7 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @Step
     public ClientQuotesDetailPage clickDiscountButton() {
-        discountBTN.click();
+        discountButton.click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
         return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
     }

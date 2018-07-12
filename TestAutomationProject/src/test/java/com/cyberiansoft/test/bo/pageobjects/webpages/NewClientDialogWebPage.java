@@ -34,10 +34,12 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	@FindBy(xpath = "//textarea[contains(@id, 'Card_tbNotes')]")
 	private TextField notesttxtarea;
 
-	@FindBy(xpath = "//input[contains(@id, 'Card_rtpWorkDayStart_dateInput')]")
+//	@FindBy(xpath = "//input[contains(@id, 'Card_rtpWorkDayStart_dateInput')]") todo delete? not available any more
+	@FindBy(xpath = "//input[contains(@id, 'Card_rtpMondayStart_dateInput') and @class]")
 	private TextField workhourstart;
 
-	@FindBy(xpath = "//input[contains(@id, 'Card_rtpWorkDayFinish_dateInput')]")
+//	@FindBy(xpath = "//input[contains(@id, 'Card_rtpMondayFinish_dateInput') and @class]") todo delete? not available any more
+	@FindBy(xpath = "//input[contains(@id, 'Card_rtpMondayFinish_dateInput') and @class]")
 	private TextField workhourfinish;
 
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbAccountingId')]")
@@ -185,7 +187,6 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void setWorkHoursStart(String hours) {
 		clearAndType(workhourstart, hours);
-		
 	}
 
 	public String getWorkHoursStart() {

@@ -124,9 +124,86 @@
       "rowID": "testClientUserAddClient.01",
       "description": "Test Case 66217:Company - Clients User : Add Client",
       "clientName": "000 15.11 Companey",
-      "userName": "30cyberiansoft.test@gmail.com",
-      "userFirstName": "test",
-      "userLastName": "automation"
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testClientUserSalesPersonMonitorManager": [
+    {
+      "rowID": "testClientUserSalesPersonMonitorManager.01",
+      "description": "Test Case 66215:Company - Clients User : Sales Person Monitor Manager",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testClientUserSalesPerson": [
+    {
+      "rowID": "testClientUserSalesPerson.01",
+      "description": "Test Case 66215:Company - Clients User : Sales Person Monitor Manager",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "getUserNameTestData": [
+    {
+      "rowID": "getUserNameTestData.01",
+      "description": "Test Case 66214:Company - Clients User : SalesPerson",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testClientUserClientInspector": [
+    {
+      "rowID": "testClientUserClientInspector.01",
+      "description": "Test Case 66213:Company - Clients User : Client Inspector",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testClientUserClientMonitorManager": [
+    {
+      "rowID": "testClientUserClientMonitorManager.01",
+      "description": "Test Case 66212:Company - Clients User : Client Monitor Manager",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testClientUserClientAccountant": [
+    {
+      "rowID": "testClientUserClientAccountant.01",
+      "description": "Test Case 66211:Company - Clients User : ClientAccountant",
+      "clientName": "000 15.11 Companey",
+      "userEmail": "30cyberiansoft.test@gmail.com",
+      "userName": "test",
+      "userFirstName": "automation"
+    }
+  ],
+
+  "testCompanyClientsHoursOfOperationAddWholesale": [
+    {
+      "rowID": "testCompanyClientsHoursOfOperationAddWholesale.01",
+      "description": "Test Case 48949: Company - Clients : Hours of operation - Add Wholesale",
+      "companyName": "companyroman",
+      "workHoursStart": "10:00 AM",
+      "workHoursFinish": "3:00 PM",
+      "timeFrame": "Working hours: 10:00 AM - 3:00 PM"
     }
   ]
 }
