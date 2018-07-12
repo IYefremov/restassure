@@ -4,10 +4,8 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.testng.*;
@@ -114,15 +112,9 @@ public class SuperListener extends TestListenerAdapter  implements IInvokedMetho
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}*/
-        	MainScreen mainscr = new MainScreen(DriverBuilder.getInstance().getAppiumDriver());
-    		try {
-    			TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
-    			HomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
-    			
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	MainScreen mainscr = new MainScreen();
+		TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
+		mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 
 	}
 	

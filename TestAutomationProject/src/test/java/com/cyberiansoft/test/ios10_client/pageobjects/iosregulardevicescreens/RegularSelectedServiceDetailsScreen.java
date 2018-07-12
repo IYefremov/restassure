@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
@@ -47,9 +46,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	*/
 	
 	
-	public RegularSelectedServiceDetailsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularSelectedServiceDetailsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -83,7 +82,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public RegularNotesScreen clickNotesCell() {
 		appiumdriver.findElementByAccessibilityId("Notes").click();
-		return new RegularNotesScreen(appiumdriver);
+		return new RegularNotesScreen();
 	}
 
 	public String getVehiclePartValue() {
@@ -105,7 +104,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void answerQuestion2(String answer) {
 
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.answerQuestion2(answer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
@@ -113,7 +112,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public String getQuestion2Value() {
 		String questionvalue = "";
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		questionvalue = questionsscreen.getQuestion2Value();
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 		return questionvalue;
@@ -213,7 +212,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public RegularPriceMatrixScreen selectMatrics(String matrics) {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + matrics + "']")).click();;
-		return new RegularPriceMatrixScreen(appiumdriver);
+		return new RegularPriceMatrixScreen();
 	}
 
 	public boolean vehiclePartsIsDisplayed() {

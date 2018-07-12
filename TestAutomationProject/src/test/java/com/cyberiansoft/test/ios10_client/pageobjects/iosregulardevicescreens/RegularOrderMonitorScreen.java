@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -54,9 +53,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Active")
     private IOSElement activecaption;
 	
-	public RegularOrderMonitorScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularOrderMonitorScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
@@ -184,7 +183,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(backbtn));
 		backbtn.click();
-		return new RegularTeamWorkOrdersScreen(appiumdriver);
+		return new RegularTeamWorkOrdersScreen();
 	}
 	
 	public WebElement getTableParentCell(String cellname) {

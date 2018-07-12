@@ -1,13 +1,11 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.support.PageFactory;
 
 public class InspectionToolBar extends iOSHDBaseScreen {
 	
@@ -17,9 +15,9 @@ public class InspectionToolBar extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "TotalAmount")
     private IOSElement insptotal;
 	
-	public InspectionToolBar(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public InspectionToolBar() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	

@@ -1,15 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import io.appium.java_client.AppiumDriver;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.support.PageFactory;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import java.util.concurrent.TimeUnit;
 
 public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
@@ -21,9 +18,9 @@ public class DevicesPopupScreen extends iOSHDBaseScreen {
     private IOSElement cancelbtn;
 	
 	
-	public DevicesPopupScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public DevicesPopupScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	

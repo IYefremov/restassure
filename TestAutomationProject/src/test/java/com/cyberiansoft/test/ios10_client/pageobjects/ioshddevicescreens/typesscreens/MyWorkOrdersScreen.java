@@ -9,7 +9,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizards
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -20,8 +19,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
@@ -94,10 +91,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
     @iOSFindBy(accessibility  = "Details")
     private IOSElement detailsmenu;
 
-	public MyWorkOrdersScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public MyWorkOrdersScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrdersPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 30);
@@ -118,24 +114,24 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	private void selectCustomerAndWorkOrderType(String customerName, String workOrderType) {
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
 	public void addWorkOrder(String workOrderType) {
 		clickAddOrderButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
 	public QuestionsScreen addWorkWithJobOrder(String workOrderType, String jobName) {
 		clickAddOrderButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 		selectWorkOrderJob(jobName);
-		return  new QuestionsScreen(appiumdriver);
+		return  new QuestionsScreen();
 	}
 
 	public void selectFirstOrder() {
@@ -155,7 +151,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void copyServicesForWorkOrder(String workOrderNumber, String workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyServices();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
@@ -169,7 +165,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void copyVehicleForWorkOrder(String workOrderNumber, String workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyVehicle();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
@@ -275,13 +271,13 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	
 	public SelectEmployeePopup clickWorkOrderForApproveButton(String woNumber) {
 		appiumdriver.findElementByAccessibilityId(woNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
-		return new SelectEmployeePopup(appiumdriver);
+		return new SelectEmployeePopup();
 	}
 	
 	public MyWorkOrdersScreen approveWorkOrderWithoutSignature(String wo, String employee, String pwd) {
 		SelectEmployeePopup selectemployeepopup = clickWorkOrderForApproveButton(wo);
 		selectemployeepopup.selectEmployeeAndTypePassword(employee, pwd);
-		ApproveSummaryPopup approvepopup = new ApproveSummaryPopup(appiumdriver);
+		ApproveSummaryPopup approvepopup = new ApproveSummaryPopup();
 		approvepopup.clickApproveButton();
 
 		return this;
@@ -315,7 +311,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		}
 		appiumdriver.findElementByAccessibilityId("Tech Revenue").click();
 
-		return new TechRevenueScreen(appiumdriver);
+		return new TechRevenueScreen();
 	}
 	
 	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {
@@ -328,7 +324,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 			//appiumdriver.findElementByAccessibilityId("Technicians").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
-		return new SelectedServiceDetailsScreen(appiumdriver);
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public void selectWorkOrderForCopyVehicle(String wonumber) {
@@ -429,9 +425,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	
 	public MyWorkOrdersScreen approveWorkOrder(String wo, String employee, String pwd) {
 		selectWorkOrderForApprove(wo);
-		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen();
 		approveinspscreen.clickApproveButton();
 		return this;
 	}
@@ -448,6 +444,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
         appiumdriver.findElementByAccessibilityId("Back").click();
-        return new CarHistoryScreen(appiumdriver);
+        return new CarHistoryScreen();
     }
 }

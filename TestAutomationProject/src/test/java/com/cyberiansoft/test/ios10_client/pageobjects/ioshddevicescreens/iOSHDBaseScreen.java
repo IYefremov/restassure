@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.Dimension;
@@ -27,8 +26,8 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 
 	
 	
-	public iOSHDBaseScreen(AppiumDriver driver) {
-		super(driver);
+	public iOSHDBaseScreen() {
+		super();
 		//PageFactory.initElements(new AppiumFieldDecorator(driver, 10, TimeUnit.SECONDS), this);
 	}
 

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
@@ -16,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
-    public RegularVehiclePartScreen(AppiumDriver driver) {
-        super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    public RegularVehiclePartScreen() {
+        super();
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Vehicle Part")));
@@ -54,7 +53,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public void selectDiscaunt(String discaunt) {
         clickDiscaunt(discaunt);
-        RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen(appiumdriver);
+        RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
         selectedservicescreen.saveSelectedServiceDetails();
     }
 
@@ -84,7 +83,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public RegularPriceMatrixScreen saveVehiclePart() {
         clickSave();
-        return new RegularPriceMatrixScreen(appiumdriver);
+        return new RegularPriceMatrixScreen();
     }
 
     public void clickOnTechnicians() {
@@ -121,6 +120,6 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
         appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Back")).click();
-        return new RegularPriceMatrixScreen(appiumdriver);
+        return new RegularPriceMatrixScreen();
     }
 }

@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -17,8 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 
@@ -49,10 +46,9 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	@iOSFindBy(accessibility = "txtPO")
 	private IOSElement setpofld;
 
-	public InvoiceInfoScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public InvoiceInfoScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
 	}
@@ -167,6 +163,6 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 		Helpers.waitForAlert();
 		appiumdriver.switchTo().alert().accept();
-		new InvoiceInfoScreen(appiumdriver);
+		new InvoiceInfoScreen();
 	}
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -10,8 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
@@ -29,7 +32,10 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
-	
+
+	@FindBy(xpath="//*[@action='add-order']")
+	private WebElement addorderbtn;
+
 	@FindBy(xpath="//a[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
 	
@@ -45,7 +51,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	public VNextInvoiceInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(invoiceinfoscreen));
 	}
 	
@@ -54,6 +60,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
 		appiumdriver.hideKeyboard();
+		BaseUtils.waitABit(500);
 	}
 
 	public String getInvoicePONumberValue() {
@@ -116,7 +123,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSaveInvoiceButton() {
-		WaitUtils.click(savebtn);
+		tap(savebtn);
 	}
 	
 	public String getInvoiceNumber() {
@@ -165,4 +172,40 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		tap(pickerwheel.findElement(By.xpath(".//a[@class='link close-picker']")));
 	}
 
+	public void addWorkOrdersToInvoice(List<String> workOrders) {
+		VNextSelectWorkOrdersScreen selectWorkOrdersScreen = clickAddWorkOrdersButton();
+		for (String woNumber : workOrders)
+			selectWorkOrdersScreen.selectWorkOrder(woNumber);
+		selectWorkOrdersScreen.clickAddWorkOrders();
+	}
+
+	public VNextSelectWorkOrdersScreen clickAddWorkOrdersButton() {
+		tap(addorderbtn);
+		return new VNextSelectWorkOrdersScreen(appiumdriver);
+	}
+
+	public void deattechWorkOrdersFromInvoice(List<String> workOrders) {
+		for (String woNumber : workOrders) {
+			WebElement woCell = getInvoiceWorkOrderPanel(woNumber);
+			if (woCell != null)
+				tap(woCell.findElement(By.xpath(".//*[@action='delete-order']")));
+			else
+				Assert.fail("Can;t find work order: " + woNumber);
+		}
+	}
+
+	private WebElement getInvoiceWorkOrderPanel(String workOrderNumber) {
+		WebElement woCell = null;
+		List<WebElement> workOrdersPanels = getListOfInvoiceWorkOrders();
+		for (WebElement workOrdersPanel : workOrdersPanels)
+			if (workOrdersPanel.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(workOrderNumber)) {
+				woCell = workOrdersPanel;
+				break;
+			}
+		return woCell;
+	}
+
+	private List<WebElement> getListOfInvoiceWorkOrders() {
+		return invoiceinfopanel.findElements(By.xpath(".//*[@action='edit-order']"));
+	}
 }

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -34,9 +33,9 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	@iOSFindBy(accessibility = "Work Orders")
     private IOSElement myworkordersmenumenu;
 	
-	public RegularCarHistoryScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularCarHistoryScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn));
@@ -70,7 +69,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	}
 	
 	public String getFirstCarHistoryValueInTable() {		
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").getAttribute("value");
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]").getAttribute("value");
 	}
 	
 	public String getFirstCarHistoryDetailsInTable() {		
@@ -88,7 +87,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	public RegularMyInvoicesScreen clickCarHistoryInvoices() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(invoicesmenu)).click();
-		return new RegularMyInvoicesScreen(appiumdriver);
+		return new RegularMyInvoicesScreen();
 	}
 	
 	public void clickCarHistoryMyWorkOrders() throws InterruptedException {

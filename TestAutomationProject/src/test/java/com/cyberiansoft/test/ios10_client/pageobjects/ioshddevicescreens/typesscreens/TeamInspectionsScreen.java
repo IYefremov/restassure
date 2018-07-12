@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typess
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -11,18 +10,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext TEAMINSPECTIONCONTEXT = TypeScreenContext.TEAMINSPECTION;
 
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	
-	public TeamInspectionsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public TeamInspectionsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("TeamInspectionsPageTableLeft")));
 	}
@@ -47,7 +43,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	public ServiceRequestdetailsScreen clickBackServiceRequest() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Request"))).click();
-		return new ServiceRequestdetailsScreen(appiumdriver);
+		return new ServiceRequestdetailsScreen();
 	}
 
 	public boolean isInspectionExists(String inspection) {
@@ -130,7 +126,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 		if (elementExists("Actions"))
 			appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
-		new TeamInspectionsScreen(appiumdriver);
+		new TeamInspectionsScreen();
 	}
 
 	public boolean isDraftIconPresentForInspection(String inspnumber) {

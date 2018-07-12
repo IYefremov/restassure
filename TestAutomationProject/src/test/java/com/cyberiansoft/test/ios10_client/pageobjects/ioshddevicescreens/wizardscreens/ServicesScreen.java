@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
@@ -48,10 +47,9 @@ public class ServicesScreen extends BaseWizardScreen {
 	@iOSFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;*/
 	
-	public ServicesScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public ServicesScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Available Services")));
         wait = new WebDriverWait(appiumdriver, 5);
@@ -212,7 +210,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		appiumdriver.hideKeyboard();
 		availableservices.findElementByClassName("XCUIElementTypeTable").findElementByAccessibilityId(servicename).
 				findElementByAccessibilityId("custom detail button").click();
-		return new SelectedServiceDetailsScreen(appiumdriver);
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String servicename) {
@@ -221,14 +219,14 @@ public class ServicesScreen extends BaseWizardScreen {
 		}
 		appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
-		return new SelectedServiceDetailsScreen(appiumdriver);
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public SelectedServiceDetailsScreen selectBundleServiceDetails(String servicename) {
 		appiumdriver.findElementByAccessibilityId(servicename).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("unselected")).click();
-		return new SelectedServiceDetailsScreen(appiumdriver);
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public void searchAvailableService(String servicename) {
@@ -261,14 +259,14 @@ public class ServicesScreen extends BaseWizardScreen {
 
 	public PriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
 		appiumdriver.findElementByAccessibilityId(servicepricematrices).click();
-		return new PriceMatrixScreen(appiumdriver);
+		return new PriceMatrixScreen();
 	}
 
 	public SelectedServiceDetailsScreen openServiceDetails(String service) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='"
 				+ service + "']"))).click();
-		return new SelectedServiceDetailsScreen(appiumdriver);
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public void setSelectedServiceRequestServicesQuantity(String service, String _quantity) throws InterruptedException {
@@ -298,7 +296,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	public PriceMatrixScreen selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name, \""
 						+ pricematrice + "\")]").click();
-		return new PriceMatrixScreen(appiumdriver);
+		return new PriceMatrixScreen();
 	}
 	
 	public void removeSelectedServices(String serviceName) {

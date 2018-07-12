@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -65,9 +64,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	@iOSFindBy(accessibility = "Notes")
 	private IOSElement notescell;
 	
-	public PriceMatrixScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public PriceMatrixScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -162,7 +161,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public boolean isNotesExists() {
-		return appiumdriver.findElementByAccessibilityId("Notes").isDisplayed();
+		return notescell.isDisplayed();
 	}
 
 	public boolean isTechniciansExists() {

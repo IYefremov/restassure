@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -29,9 +28,9 @@ public class LoginScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Don't Allow")
     private IOSElement dontallowbtn;
 	
-	public LoginScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public LoginScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
 	public void registeriOSDevice(String regCode)

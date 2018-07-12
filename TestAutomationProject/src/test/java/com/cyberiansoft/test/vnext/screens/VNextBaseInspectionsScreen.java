@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
@@ -70,6 +72,8 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	
 	public void clickSaveWorkOrderMenuButton() {
 		clickMenuButton();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
 		tap(saveworkordermenu);
 	}
 	

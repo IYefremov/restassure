@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
+<suite name="Cyberiansoft iOS Regular Calculations test cases" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <listeners>
       <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
@@ -9,15 +9,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
         <methods>
 
-            <include name="testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection" />
-            <include name="testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO" />
-            <include name="testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection" />
-            <include name="testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData" />
-
-
-
-
-            <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
+        <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
         <include name="testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" /> 

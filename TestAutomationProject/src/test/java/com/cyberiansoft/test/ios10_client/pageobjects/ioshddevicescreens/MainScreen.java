@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -35,22 +34,21 @@ public class MainScreen extends iOSHDBaseScreen {
 	//final static String loginbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAButton[1]";
 	//final static String licensesxpath = "//UIAToolbar[1]/UIAButton[@name=\"Licences\"]";
 
-	public MainScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public MainScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	public void updateDatabase() throws InterruptedException {
+	public void updateDatabase() {
 		Helpers.setTimeOut(340);
-		Thread.sleep(2000);
 
 		mainbtn.click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
 	}
 
-	public void updateVIN() throws InterruptedException {
+	public void updateVIN() {
 		Helpers.setTimeOut(60);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		/*
@@ -62,7 +60,7 @@ public class MainScreen extends iOSHDBaseScreen {
 		Helpers.setDefaultTimeOut();
 	}
 
-	public HomeScreen userLogin(String user, String password) throws InterruptedException {
+	public HomeScreen userLogin(String user, String password) {
 		Helpers.waitABit(1000);
 		Helpers.setTimeOut(5);
 		//Helpers.waitUntilCheckLicenseDialogDisappears();
@@ -83,11 +81,11 @@ public class MainScreen extends iOSHDBaseScreen {
 		//securefld.setValue(password);
 		loginbtn.click();
 		//loginbtn.click();
-		return new HomeScreen(appiumdriver);
+		return new HomeScreen();
 	}
 	
 	public LicensesScreen clickLicenses() {
 		licenses.click();
-		return new LicensesScreen(appiumdriver);
+		return new LicensesScreen();
 	}
 }

@@ -10,24 +10,20 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 public class NewTestCases extends BaseTestCase {
 
@@ -64,13 +60,13 @@ public class NewTestCases extends BaseTestCase {
 	}
 
 	public void testRegisterationiOSDdevice() throws Exception {
-		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		appiumdriver.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-		appiumdriver.quit();
-		appiumdriver = AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
+		DriverBuilder.getInstance().getAppiumDriver().quit();
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
-		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
+		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(userLogin, userPassword);
 	}
 
@@ -80,7 +76,7 @@ public class NewTestCases extends BaseTestCase {
 		final int numberInvoicesToSelect = 4;
 		final String mailaddress = "test@cyberiansoft.com";
 			
-		homescreen = new RegularHomeScreen(appiumdriver);
+		homescreen = new RegularHomeScreen();
 			
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.clickActionButton();
@@ -108,7 +104,7 @@ public class NewTestCases extends BaseTestCase {
 		
 		final String poNomber = "23";
 		
-		homescreen = new RegularHomeScreen(appiumdriver);
+		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
@@ -118,7 +114,7 @@ public class NewTestCases extends BaseTestCase {
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
 		vehiclescreeen.setVIN(VIN);
 		
 		String wonumber1 = vehiclescreeen.getInspectionNumber();
@@ -152,18 +148,18 @@ public class NewTestCases extends BaseTestCase {
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		vehiclescreeen = new RegularVehicleScreen();
 		Assert.assertEquals(vehiclescreeen.getMake(), _make);
 		Assert.assertEquals(vehiclescreeen.getModel(), _model);
 		Assert.assertEquals(vehiclescreeen.getYear(), _year);
 		ordersummaryscreen = vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
-		ordersummaryscreen = new RegularOrderSummaryScreen(appiumdriver);
+		ordersummaryscreen = new RegularOrderSummaryScreen();
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.clickSave();
 		
 		ordersummaryscreen.selectDefaultInvoiceType();
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen(appiumdriver);
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		RegularInvoiceInfoScreen invoiceinfoscreen =questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
 		invoiceinfoscreen.setPO(poNomber);
 		invoiceinfoscreen.addWorkOrder(wonumber1);
@@ -199,7 +195,7 @@ public class NewTestCases extends BaseTestCase {
 		
 		final String teamname= "Default team";
 
-		homescreen = new RegularHomeScreen(appiumdriver);
+		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
@@ -211,7 +207,7 @@ public class NewTestCases extends BaseTestCase {
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		
 		servicerequestsscreen.selectServiceRequestType("SR_EST_WO_REQ");
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);		
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();		
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -315,13 +311,13 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		DriverBuilder.getInstance().getDriver().quit();
 		
-		homescreen = new RegularHomeScreen(appiumdriver);
+		homescreen = new RegularHomeScreen();
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickRefreshButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		servicerequestsscreen.selectServiceRequestType("Insp_smoke_test");
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen(appiumdriver);
+		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
 		for (String serviceName : services)
@@ -355,11 +351,10 @@ public class NewTestCases extends BaseTestCase {
 		regCode = devicespage.getFirstRegCodeInTable();
 
 		DriverBuilder.getInstance().getDriver().quit();
-		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
-		LoginScreen loginscreen = new LoginScreen(appiumdriver);
+		LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
 		Thread.sleep(2000);
-		RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
+		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(userLogin, userPassword);
 		
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();

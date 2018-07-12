@@ -1,18 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import org.openqa.selenium.support.PageFactory;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	
@@ -57,10 +51,9 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	@iOSFindBy(accessibility = "Clients")
     private IOSElement clientsbtn;
 	
-	public RegularAddCustomerScreen(AppiumDriver driver) {
-		super(driver);
-		appiumdriver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularAddCustomerScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
 	public void addCustomer(String firstname, String lastname,

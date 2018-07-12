@@ -7,7 +7,6 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
@@ -91,15 +90,10 @@ public class iOSHDClientListener extends TestListenerAdapter implements IInvoked
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 
-		MainScreen mainscr = new MainScreen(DriverBuilder.getInstance().getAppiumDriver());
-		try {
-			TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
-			HomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
+		MainScreen mainscr = new MainScreen();
+		TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
+		mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override

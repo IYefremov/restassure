@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,31 +12,31 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
 
     public static TypeScreenContext typeContext;
 
-    public RegularBaseWizardScreen(AppiumDriver driver) {
-        super(driver);
+    public RegularBaseWizardScreen() {
+        super();
     }
 
     public <T extends RegularBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(screenname).click();
         if (type == RegularInvoiceInfoScreen.class)
-            return (T) new RegularInvoiceInfoScreen(appiumdriver);
+            return (T) new RegularInvoiceInfoScreen();
         else if (type == RegularVehicleScreen.class)
-            return (T) new RegularVehicleScreen(appiumdriver);
+            return (T) new RegularVehicleScreen();
         else if (type == RegularServicesScreen.class)
-            return (T) new RegularServicesScreen(appiumdriver);
+            return (T) new RegularServicesScreen();
         else if (type == RegularOrderSummaryScreen.class)
-            return (T) new RegularOrderSummaryScreen(appiumdriver);
+            return (T) new RegularOrderSummaryScreen();
         else if (type == RegularClaimScreen.class)
-            return (T) new RegularClaimScreen(appiumdriver);
+            return (T) new RegularClaimScreen();
         else if (type == RegularQuestionsScreen.class)
-            return (T) new RegularQuestionsScreen(appiumdriver);
+            return (T) new RegularQuestionsScreen();
         else if (type == RegularEnterpriseBeforeDamageScreen.class)
-            return (T) new RegularEnterpriseBeforeDamageScreen(appiumdriver);
+            return (T) new RegularEnterpriseBeforeDamageScreen();
         else if (type == RegularPriceMatrixScreen.class)
-            return (T) new RegularPriceMatrixScreen(appiumdriver);
+            return (T) new RegularPriceMatrixScreen();
         else if (type == RegularVisualInteriorScreen.class)
-            return (T) new RegularVisualInteriorScreen(appiumdriver);
+            return (T) new RegularVisualInteriorScreen();
         return null;
     }
 
@@ -76,19 +75,19 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
     public <T extends IRegularTypeScreen> T getTypeScreenFromContext()  {
         switch (typeContext) {
             case WORKORDER:
-                return (T) new RegularMyWorkOrdersScreen(appiumdriver);
+                return (T) new RegularMyWorkOrdersScreen();
             case INSPECTION:
-                return (T) new RegularMyInspectionsScreen(appiumdriver);
+                return (T) new RegularMyInspectionsScreen();
             case INVOICE:
-                return (T) new RegularMyInvoicesScreen(appiumdriver);
+                return (T) new RegularMyInvoicesScreen();
             case SERVICEREQUEST:
-                return (T) new RegularServiceRequestsScreen(appiumdriver);
+                return (T) new RegularServiceRequestsScreen();
             case TEAMWORKORDER:
-                return (T) new RegularTeamWorkOrdersScreen(appiumdriver);
+                return (T) new RegularTeamWorkOrdersScreen();
             case TEAMINSPECTION:
-                return (T) new RegularTeamInspectionsScreen(appiumdriver);
+                return (T) new RegularTeamInspectionsScreen();
             case INVOICEINFO:
-                return (T) new RegularInvoiceInfoScreen(appiumdriver);
+                return (T) new RegularInvoiceInfoScreen();
         }
         return null;
     }

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -173,7 +174,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		if (!(servicenotessscreen.findElements(By.xpath(".//div[@class='accordion-item accordion-item-pictures accordion-item-expanded']")).size() > 0))
 			tap(servicenotessscreen.findElement(By.xpath(".//div[@class='accordion-item accordion-item-pictures']")));
 		tap(servicenotessscreen.findElement(By.xpath(".//div[@class='images-row']")).findElement(By.xpath(".//div[contains(@class, 'img-item') and @action='fullscreen']")));
-		tap(servicenotessscreen.findElement(By.xpath(".//*[@action='remove']")));
+		WaitUtils.click(By.xpath(".//*[@action='remove']"));
 		VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
 		informationdialog.clickInformationDialogRemoveButton();
 	}

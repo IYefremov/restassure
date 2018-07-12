@@ -11,7 +11,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -93,9 +92,9 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility  = "Done")
     private IOSElement toolbardonebtn;*/
 	
-	public MyInspectionsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public MyInspectionsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 
@@ -112,15 +111,15 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public void addInspection(String inspType) {
 		clickAddInspectionButton();
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
 	}
 
 	public void addOInspectionWithSelectCustomer(String customerName, String inspType) {
 		clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
 	}
 
@@ -137,7 +136,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public void createWOFromInspection(String inspNumber, String workOrderType) {
 		selectInspectionInTable(inspNumber);
 		clickCreateWOButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
@@ -148,7 +147,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public MyInspectionsScreen approveInspectionWithSignature(String inspNumber) {
 		selectInspectionForApprove(inspNumber);
-		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen(appiumdriver);
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.clickApproveButton();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneButton();
@@ -157,9 +156,9 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public MyInspectionsScreen approveInspectionAllServices(String inspNumber, String employee, String pwd) {
 		selectInspectionForApprove(inspNumber);
-		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup(appiumdriver);
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen(appiumdriver);
+		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen();
 		approveinspscreen.approveInspectionApproveAllAndSignature(inspNumber);
 		return this;
 	}
@@ -189,7 +188,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	public EmailScreen clickSendEmail() {
 		appiumdriver.findElementByAccessibilityId("Send Email").click();
-		return new EmailScreen(appiumdriver);
+		return new EmailScreen();
 	}
 	
 	public void clickCopyInspection() {
@@ -234,7 +233,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		selectReasonToArchive(reason);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("Status Reason"), 1));
-		new MyInspectionsScreen(appiumdriver);
+		new MyInspectionsScreen();
 	}
 
 	public void selectReasonToArchive(String reason) {
@@ -251,7 +250,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default inspection type")));
 		appiumdriver.findElementByAccessibilityId("Default inspection type").click();
-		return new VehicleScreen(appiumdriver);
+		return new VehicleScreen();
 	}
 
 	public void selectInspectionInTable(String inspectionnumber) {
@@ -398,7 +397,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		if (elementExists("Actions"))
 			appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
-		new MyInspectionsScreen(appiumdriver);
+		new MyInspectionsScreen();
 	}
 
 	public void clickApproveInspections() {
@@ -480,7 +479,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name=\"" + inspnumber
 				+ "\"]").click();
 		appiumdriver.findElementByAccessibilityId("Notes").click();
-		return new NotesScreen(appiumdriver);
+		return new NotesScreen();
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {

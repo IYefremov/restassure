@@ -95,7 +95,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify Team WO displays in My WO list if WO was created from Team Inspection")
 	public void testVerifyTeamWODisplaysInMyWOsListIfWOWasCreatedFromTeamInspection() { 
 	
-		final String searchtext = "00182";
+		final String searchtext = "E-203-00182";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		

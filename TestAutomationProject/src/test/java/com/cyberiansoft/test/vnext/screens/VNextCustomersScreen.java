@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -146,7 +147,11 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(searchfld));
-		tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-clear']")));
+		if (searchfld.getAttribute("value").length() > 0) {
+			WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-automation-id='search-clear']"), appiumdriver);
+			tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-clear']")));
+		}
+		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-autotests-id='search-input']"), appiumdriver);
 		tap(searchfld);
 		appiumdriver.getKeyboard().sendKeys(searchtxt);
 		//searchfld.clear();

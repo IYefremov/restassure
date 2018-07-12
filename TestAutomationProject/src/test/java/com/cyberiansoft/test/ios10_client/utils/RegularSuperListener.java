@@ -5,7 +5,6 @@ import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.testng.*;
@@ -95,7 +94,7 @@ public class RegularSuperListener extends TestListenerAdapter  implements IInvok
 	        DriverBuilder.getInstance().getAppiumDriver().closeApp();
 	        DriverBuilder.getInstance().getAppiumDriver().launchApp();
 
-        	RegularMainScreen mainscr = new RegularMainScreen(appiumdriver);
+        	RegularMainScreen mainscr = new RegularMainScreen();
         	TestUser testuser = ((BaseTestCase) currentClass).getTestUser();
         	mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 	}

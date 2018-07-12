@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -47,9 +46,9 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
 	
-	public RegularTeamWorkOrdersScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	public RegularTeamWorkOrdersScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
@@ -69,7 +68,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public RegularOrderMonitorScreen selectWOMonitor() {
 		womonitor.click();
-		return new RegularOrderMonitorScreen(appiumdriver);
+		return new RegularOrderMonitorScreen();
 	}
 	
 	public void selectEditWO() {
@@ -175,7 +174,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	
 	public void clickSaveFilter() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		new RegularTeamWorkOrdersScreen(appiumdriver);
+		new RegularTeamWorkOrdersScreen();
 	}
 	
 	public boolean woExists(String wonumber) {

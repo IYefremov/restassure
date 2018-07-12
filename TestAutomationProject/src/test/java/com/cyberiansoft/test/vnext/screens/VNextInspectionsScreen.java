@@ -187,7 +187,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(inspectionslist));
 		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//div[@class='entity-item accordion-item']"));
 		for (WebElement invcell : inspections) {
-			if (invcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText().equals(inspectionnumber)) {
+			if (invcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText().trim().equals(inspectionnumber)) {
 				inspcell = invcell;
 				break;
 			}
@@ -316,8 +316,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		if (workordercell != null)
 			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
 				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
-			else
-				Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+			//else
+			//	Assert.assertTrue(false, "Can't find selected inspection: " + inspectionNumber);
 	}
 
 	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {

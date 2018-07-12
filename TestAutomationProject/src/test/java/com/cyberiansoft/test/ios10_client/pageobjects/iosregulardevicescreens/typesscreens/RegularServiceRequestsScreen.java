@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -18,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
@@ -91,11 +89,10 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
 	
-	public RegularServiceRequestsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
+	public RegularServiceRequestsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable"))); 
 	}
 
@@ -358,7 +355,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void clickCloseSR() {
 		appiumdriver.findElement(MobileBy.name("Close SR")).click();
-		new RegularServiceRequestsScreen(appiumdriver);
+		new RegularServiceRequestsScreen();
 	}
 	
 	public WebElement getSRTableParentNode(String cellname) {

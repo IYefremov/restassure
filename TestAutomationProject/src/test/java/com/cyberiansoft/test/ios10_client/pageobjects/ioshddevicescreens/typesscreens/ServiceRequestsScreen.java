@@ -8,7 +8,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -24,7 +23,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ServiceRequestsScreen extends BaseTypeScreen {
 
@@ -119,11 +117,10 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;*/
 	
-	public ServiceRequestsScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
+	public ServiceRequestsScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
@@ -143,15 +140,15 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 
 	public void addServiceRequestWithSelectCustomer(String customerName, String serviceRequestType) {
 		clickAddButton();
-		CustomersScreen customersscreen = new CustomersScreen(appiumdriver);
+		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
-		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup(appiumdriver);
+		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
 		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
 	}
 
 	public void addServiceRequest(String serviceRequestType) {
 		clickAddButton();
-		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup(appiumdriver);
+		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
 		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
 	}
 	
@@ -195,7 +192,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void createInspectionFromServiceReques(String serviceRequestNumber, String inspType) {
 		selectServiceRequest(serviceRequestNumber);
 		appiumdriver.findElementByAccessibilityId("Create Inspection").click();
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup(appiumdriver);
+		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
 	}
 	
@@ -206,7 +203,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void createWorkOrderFromServiceRequest(String serviceRequestNumber, String workOrderType) {
 		selectServiceRequest(serviceRequestNumber);
 		selectCreateWorkOrderRequestAction();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup(appiumdriver);
+		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType);
 	}
 
@@ -406,7 +403,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	public ServiceRequestdetailsScreen selectDetailsRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Details").click();
-		return new ServiceRequestdetailsScreen(appiumdriver);
+		return new ServiceRequestdetailsScreen();
 	}
 
 	public String getSummaryAppointmentsInformation() {
@@ -419,8 +416,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		return appiumdriver.findElementsByAccessibilityId("Appointments").size() > 0;
 	}
 	
-	public void saveAppointment() {
+	public ServiceRequestsScreen saveAppointment() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		return this;
 	}
 	
 	//Close reason UIAPicker

@@ -1,14 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSHDBaseScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 
 public abstract class BaseTypePopup extends iOSHDBaseScreen {
 
-    public BaseTypePopup(AppiumDriver driver) {
-        super(driver);
+    public BaseTypePopup() {
+        super();
         //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -26,8 +27,8 @@ public abstract class iOSBaseScreen {
 	//final String uipickerxpath = ".popover().pickers()[0]";
 	//final String uipickerxpath = "//XCUIElementTypePicker";
 	
-	public iOSBaseScreen(AppiumDriver driver) {
-		appiumdriver = driver;
+	public iOSBaseScreen() {
+		appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
 		//PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 		//appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

@@ -8,8 +8,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +19,7 @@ import org.testng.annotations.BeforeSuite;
 public class BaseTestCase {
 
 	private ScreenRecorder screenRecorder;
-	protected AppiumDriver<MobileElement> appiumdriver;
+	//protected AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
@@ -37,10 +35,9 @@ public class BaseTestCase {
 	public TestUser getTestUser() {
 		return testuser;
 	}
-	
-	
+
 	@BeforeSuite
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		// Parameters for WebDriver
 
@@ -92,7 +89,7 @@ public class BaseTestCase {
 	}*/
 
 	@AfterSuite
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
 				DriverBuilder.getInstance().getDriver().quit();
 		if (DriverBuilder.getInstance().getAppiumDriver() != null)

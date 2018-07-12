@@ -6,7 +6,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSe
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SummaryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -20,8 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.util.concurrent.TimeUnit;
 
 public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 
@@ -69,10 +66,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	@iOSFindBy(accessibility  = "Summary")
 	private IOSElement summarymenu;
 	
-	public MyInvoicesScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public MyInvoicesScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Invoices")));
 		wait = new WebDriverWait(appiumdriver, 10);
@@ -153,12 +149,12 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public NotesScreen clickNotesPopup() {
 		appiumdriver.findElementByAccessibilityId("Notes").click();
-		return new NotesScreen(appiumdriver);
+		return new NotesScreen();
 	}
 	
 	public PrintSelectorPopup clickPrintPopup() {
 		printmenu.click();
-		return new PrintSelectorPopup(appiumdriver);
+		return new PrintSelectorPopup();
 	}
 	
 	public void clickEditPopup() {
@@ -176,7 +172,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public SummaryScreen clickSummaryPopup() {
 		summarymenu.click();
-		return new SummaryScreen(appiumdriver);
+		return new SummaryScreen();
 	}
 	
 	protected void clickApprovePopup() {

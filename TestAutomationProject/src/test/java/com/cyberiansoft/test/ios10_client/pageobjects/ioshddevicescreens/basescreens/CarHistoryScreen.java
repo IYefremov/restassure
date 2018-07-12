@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basesc
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -35,9 +34,9 @@ public class CarHistoryScreen extends BaseAppScreen {
 	@iOSFindBy(accessibility  = "Work Orders")
     private IOSElement myworkordersmenumenu;
 	
-	public CarHistoryScreen(AppiumDriver driver) {
-		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(10)), this);
+	public CarHistoryScreen() {
+		super();
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -74,7 +73,7 @@ public class CarHistoryScreen extends BaseAppScreen {
 	public MyInvoicesScreen clickCarHistoryInvoices() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(invoicesmenu)).click();
-		return new MyInvoicesScreen(appiumdriver);
+		return new MyInvoicesScreen();
 	}
 	
 	public void clickCarHistoryMyWorkOrders() throws InterruptedException {

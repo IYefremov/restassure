@@ -91,7 +91,6 @@ public class VNextInspectionsMenuScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(createwoinspectionbtn));
 		tap(createwoinspectionbtn);
-		BaseUtils.waitABit(8000);
 	}
 	
 	public boolean isCreateWorkOrderMenuPresent() {
