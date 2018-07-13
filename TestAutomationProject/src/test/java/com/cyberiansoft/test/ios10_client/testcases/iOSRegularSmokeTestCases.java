@@ -2794,7 +2794,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectRejectAction();
 		alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to reject  selected service request?");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -2877,7 +2877,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectRejectAction();
 		alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to reject  selected service request?");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -4680,7 +4680,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 42388:Inspections: Regular - Verify that it is possible to save as Final inspection linked to SR", description = "Verify that it is possible to save as Final inspection linked to SR")
-	public void testRegularVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() throws Exception {
+	public void testRegularVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new RegularHomeScreen();
@@ -5288,6 +5288,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveAsDraft();
+		myinspectionsscreen = new RegularMyInspectionsScreen();
 		Assert.assertTrue(myinspectionsscreen.isDraftIconPresentForInspection(inspnumber));
 		myinspectionsscreen.clickOnInspection(inspnumber);
 		Assert.assertFalse(myinspectionsscreen.isApproveInspectionMenuActionExists());
@@ -5296,7 +5297,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(myinspectionsscreen.isCopyInspectionMenuActionExists());
 		myinspectionsscreen.clickCancel();
 		homescreen = myinspectionsscreen.clickHomeButton();
-		
 		RegularTeamInspectionsScreen teaminspectionsscreen = homescreen.clickTeamInspectionsButton();
 		Assert.assertTrue(teaminspectionsscreen.isDraftIconPresentForInspection(inspnumber));
 		
@@ -7056,7 +7056,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectAcceptAction();
 		
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to accept  selected service request?");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		Assert.assertTrue(servicerequestsscreen.isServiceRequestOnHold(srnumber));
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -7117,7 +7117,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectDeclineAction();
 		
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to decline  selected service request?");
+		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
 		servicerequestsscreen.clickDoneCloseReasonDialog();
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
