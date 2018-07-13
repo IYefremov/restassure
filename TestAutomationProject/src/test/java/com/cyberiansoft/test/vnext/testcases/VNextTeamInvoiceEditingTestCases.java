@@ -449,35 +449,24 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         for (String woNumber : workOrders)
             invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
-        final List<String> workOrdersToRemove = workOrders.subList(2, workOrders.size());
-        final List<String> workOrdersToKeep = workOrders.subList(0, 2);
-        invoiceinfoscreen.deattechWorkOrdersFromInvoice(workOrdersToRemove);
 
+        /*invoiceinfoscreen.deattechWorkOrdersFromInvoice(workOrders);
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+                VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
         invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
         invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        for (String woNumber : workOrdersToKeep)
-            Assert.assertTrue(invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber));
-        for (String woNumber : workOrdersToRemove)
-            Assert.assertFalse(invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber));
-
-        invoiceinfoscreen.clickInvoiceInfoBackButton();
+        invoiceMenuScreen.clickVoidInvoiceMenuItem();
         VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
-        Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
-                VNextAlertMessages.CANCEL_ETING_INVOICE);
+        Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(),
+                String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoicenumber));
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-        for (String woNumber : workOrdersToKeep)
-            Assert.assertTrue(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
-        for (String woNumber : workOrdersToRemove)
-            Assert.assertFalse(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
-
-        invoicesscreen.clickBackButton();
+        Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+        homescreen = invoicesscreen.clickBackButton();
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        for (String woNumber : workOrdersToRemove)
+        for (String woNumber : workOrdersToAdd)
             Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        for (String woNumber : workOrdersToKeep)
-            Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.clickBackButton();
+        workordersscreen.clickBackButton();*/
     }
 
     public String createWorkOrder(WorkOrderData woData) {

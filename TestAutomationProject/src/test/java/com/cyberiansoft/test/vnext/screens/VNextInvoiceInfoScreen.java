@@ -56,7 +56,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setInvoicePONumber(String ponumber) {
-		WaitUtils.waitUntilElementIsClickable(invoicepo);
+		WaitUtils.click(invoicepo);
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
 		appiumdriver.hideKeyboard();

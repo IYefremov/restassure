@@ -29,6 +29,7 @@ public class VNextAlertMessages {
 	public static String YOUR_CARD_WAS_DECLINED = "Your card was declined.";
 	public static String YOUR_CARDs_SECURITY_CODE_IS_INCORRECT = "Your card's security code is incorrect.";
 	public static String YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED = "Your payment has been successfully completed";
+	public static String YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE = "You cannot detach the last work order from invoice.";
 
 
 }

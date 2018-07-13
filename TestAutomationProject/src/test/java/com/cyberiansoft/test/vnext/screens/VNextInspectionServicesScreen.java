@@ -146,6 +146,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	}
 
 	public String getTotalPriceValue() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//span[@id='total']"))));
 		return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
 	}
 

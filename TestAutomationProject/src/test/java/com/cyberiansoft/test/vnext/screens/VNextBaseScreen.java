@@ -30,7 +30,8 @@ public class VNextBaseScreen {
 
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
-		element.click();
+		WaitUtils.click(element);
+		//element.click();
 		//new TouchActions(appiumdriver).singleTap(element).perform();
 		/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
 		CompositeAction action = new CompositeAction();

@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import io.appium.java_client.AppiumDriver;
@@ -39,8 +38,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(approveallbtn));
-		BaseUtils.waitABit(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='approve-services']")));
 	}
 	
 	public void clickApproveAllButton() {

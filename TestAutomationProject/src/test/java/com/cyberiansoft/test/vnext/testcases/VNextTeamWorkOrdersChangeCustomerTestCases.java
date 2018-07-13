@@ -136,7 +136,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
         customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
-        Assert.assertFalse(customersscreen.isAddCustomerButtonExists());
+        Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
         customersscreen.clickBackButton();
         workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
         workordersscreen.clickBackButton();
