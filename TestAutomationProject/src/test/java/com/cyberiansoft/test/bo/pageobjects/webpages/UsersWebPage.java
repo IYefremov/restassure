@@ -192,7 +192,7 @@ public class UsersWebPage extends WebPageWithPagination {
 		
 	}
 	
-	public void clickEditActiveUser(String firstname, String lastname) throws InterruptedException {
+	public void clickEditActiveUser(String firstname, String lastname) {
 		WebElement row = getTableRowWithActiveUser(firstname, lastname);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -213,7 +213,7 @@ public class UsersWebPage extends WebPageWithPagination {
 		return exists;
 	}
 	
-	public void unarchiveUser(String firstname, String lastname) throws InterruptedException {
+	public void unarchiveUser(String firstname, String lastname) {
 		WebElement row = getTableRowWithArchivedUser(firstname, lastname);
 		if (row != null) {
 			restoreTableRow(row);

@@ -217,9 +217,8 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		clearAndType(searchuserfld, _user);
 	}
 
-	public void selectSearchClient(String _client) throws InterruptedException  { 
-	//Thread.sleep(1000);
-		searchclientcbx.click();
+	public void selectSearchClient(String _client) {
+		wait.until(ExpectedConditions.elementToBeClickable(searchclientcbx)).click();
 		searchclientcbx.sendKeys(_client);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + _client + "']")));
 		driver.findElement(By.xpath("//li[text()='" + _client + "']")).click();
@@ -230,7 +229,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		return exists;
 	}
 	
-	public void clickEditServiceAdvisor(String firstname, String lastname) throws InterruptedException {
+	public void clickEditServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			clickEditTableRow(row);
@@ -238,7 +237,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
-	public void deleteServiceAdvisor(String firstname, String lastname) throws InterruptedException {
+	public void deleteServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			deleteTableRow(row);
@@ -246,7 +245,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
 	}
 	
-	public void deleteServiceAdvisorAndCancelDeleting(String firstname, String lastname) throws InterruptedException {
+	public void deleteServiceAdvisorAndCancelDeleting(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			cancelDeletingTableRow(row);
@@ -254,7 +253,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
 	}
 	
-	public void createNewServiceAdvisor(String email, String firstname, String lastname, String clientname, String role) throws InterruptedException {
+	public void createNewServiceAdvisor(String email, String firstname, String lastname, String clientname, String role) {
 		setNewServiceAdvisorEmail(email);
 		setNewServiceAdvisorFirstName(firstname);
 		setNewServiceAdvisorLastName(lastname);

@@ -69,7 +69,6 @@ public class InfoContentDialogWebPage extends BaseWebPage {
             wait.until(ExpectedConditions.attributeContains(element, "disabled", ""));
             return true;
         } catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }

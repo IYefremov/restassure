@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Listeners(VideoListener.class)
@@ -25,24 +24,23 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-	@Test(description = "Test Case 15245:Company-Users: Search")
-	public void testCompanyUsersSearch() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyUsersSearch(String rowID, String description, JSONObject testData) {
 
-		final String userFirstName = "Delete";
-		final String userLastName = "Test";
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
-
-		UsersWebPage usersPage = companyPage.clickUsersLink();
+        UsersWebPage usersPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickUsersLink();
 
 		usersPage.verifyTabsAreVisible();
 		usersPage.verifyUsersTableColumnsAreVisible();
 
-		Assert.assertEquals("1", usersPage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), usersPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), usersPage.getGoToPageFieldValue());
 
-		usersPage.setPageSize("1");
+		usersPage.setPageSize(data.getPage1());
 		Assert.assertEquals(1, usersPage.getUsersTableRowCount());
 
 		String lastpagenumber = usersPage.getLastPageNumber();
@@ -50,283 +48,261 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals(lastpagenumber, usersPage.getGoToPageFieldValue());
 
 		usersPage.clickGoToFirstPage();
-		Thread.sleep(1000);
-		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), usersPage.getGoToPageFieldValue());
 
 		usersPage.clickGoToNextPage();
-		Assert.assertEquals("2", usersPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage2(), usersPage.getGoToPageFieldValue());
 
 		usersPage.clickGoToPreviousPage();
-		Assert.assertEquals("1", usersPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), usersPage.getGoToPageFieldValue());
 
-		usersPage.setPageSize("999");
+		usersPage.setPageSize(data.getPage999());
 		Assert.assertEquals(usersPage.MAX_TABLE_ROW_COUNT_VALUE, usersPage.getUsersTableRowCount());
 
 		List<String> usernamesact = usersPage.getActiveUserNames();
 		usersPage.clickArchivedTab();
-		Assert.assertEquals("", usersPage.verifyUserNamesDuplicatesArchived(usernamesact));
+		Assert.assertEquals(data.getEmptyString(), usersPage.verifyUserNamesDuplicatesArchived(usernamesact));
 		usersPage.clickActiveTab();
 
 		usersPage.makeSearchPanelVisible();
-		usersPage.setSearchUserParameter(userFirstName);
+		usersPage.setSearchUserParameter(data.getUserFirstName());
 		usersPage.clickFindButton();
-		usersPage.archiveUser(userFirstName, userLastName);
+		usersPage.archiveUser(data.getUserFirstName(), data.getUserLastName());
 		usersPage.clickArchivedTab();
-		Assert.assertTrue(usersPage.isUserArchived(userFirstName, userLastName));
-		usersPage.unarchiveUser(userFirstName, userLastName);
+		Assert.assertTrue(usersPage.isUserArchived(data.getUserFirstName(), data.getUserLastName()));
+		usersPage.unarchiveUser(data.getUserFirstName(), data.getUserLastName());
 		usersPage.clickActiveTab();
-		Assert.assertTrue(usersPage.isUserActive(userFirstName, userLastName));
+		Assert.assertTrue(usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName()));
 
 		usersPage.makeSearchPanelVisible();
-		usersPage.setSearchUserParameter(userFirstName.substring(0, 4));
+		usersPage.setSearchUserParameter(data.getUserFirstName().substring(0, 4));
 		usersPage.clickFindButton();
 
 		Assert.assertTrue(usersPage.getUsersTableRowCount() > 0);
-		usersPage.isUserActive(userFirstName, userLastName);
+		usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName());
 	}
 
-	@Test(description = "Test Case 15265:Company-Employees: Search")
-	public void testCompanyEmployeesSearch() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyEmployeesSearch(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String employeefirstname = "+++";
-		final String employeelastname = "---";
-		final String team = "Test Team";
-		final String employeename = employeefirstname + " " + employeelastname;
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        EmployeesWebPage employeesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickEmployeesLink();
+        
+        employeesPage.verifyTabsAreVisible();
+		employeesPage.verifyEmployeesTableColumnsAreVisible();
 
-		EmployeesWebPage employeespage = companypage.clickEmployeesLink();
+		Assert.assertEquals(data.getPage1(), employeesPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), employeesPage.getGoToPageFieldValue());
 
-		employeespage.verifyTabsAreVisible();
-		employeespage.verifyEmployeesTableColumnsAreVisible();
+		employeesPage.setPageSize(data.getPage1());
+		Assert.assertEquals(1, employeesPage.getEmployeesTableRowCount());
 
-		Assert.assertEquals("1", employeespage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", employeespage.getGoToPageFieldValue());
+		String lastpagenumber = employeesPage.getLastPageNumber();
+		employeesPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, employeesPage.getGoToPageFieldValue());
 
-		employeespage.setPageSize("1");
-		Assert.assertEquals(1, employeespage.getEmployeesTableRowCount());
+		employeesPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), employeesPage.getGoToPageFieldValue());
 
-		String lastpagenumber = employeespage.getLastPageNumber();
-		employeespage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, employeespage.getGoToPageFieldValue());
+		employeesPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), employeesPage.getGoToPageFieldValue());
 
-		employeespage.clickGoToFirstPage();
-		Thread.sleep(1000);
-		Assert.assertEquals("1", employeespage.getGoToPageFieldValue());
+		employeesPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), employeesPage.getGoToPageFieldValue());
 
-		employeespage.clickGoToNextPage();
-		Assert.assertEquals("2", employeespage.getGoToPageFieldValue());
+		employeesPage.setPageSize(data.getPage999());
+		Assert.assertEquals(employeesPage.MAX_TABLE_ROW_COUNT_VALUE, employeesPage.getEmployeesTableRowCount());
 
-		employeespage.clickGoToPreviousPage();
-		Assert.assertEquals("1", employeespage.getGoToPageFieldValue());
+		employeesPage.verifyActiveEmployeeDoesNotExist(data.getEmployeeName());
 
-		employeespage.setPageSize("999");
-		Assert.assertEquals(employeespage.MAX_TABLE_ROW_COUNT_VALUE, employeespage.getEmployeesTableRowCount());
+		employeesPage.archiveEmployee(data.getEmployeeName());
+		employeesPage.clickArchivedTab();
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.setSearchUserParameter(data.getEmployeeLastName());
+		employeesPage.clickFindButton();
+		Assert.assertTrue(employeesPage.archivedEmployeeExists(data.getEmployeeName()));
+		employeesPage.unarchiveEmployee(data.getEmployeeName());
+		employeesPage.clickActiveTab();
+		Assert.assertTrue(employeesPage.activeEmployeeExists(data.getEmployeeName()));
 
-		employeespage.verifyActiveEmployeeDoesNotExist(employeename);
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getEmployeeName().substring(0, 4).toLowerCase());
+		employeesPage.clickFindButton();
 
-		employeespage.archiveEmployee(employeefirstname, employeelastname);
-		employeespage.clickArchivedTab();
-		employeespage.makeSearchPanelVisible();
-		employeespage.setSearchUserParameter(employeelastname);
-		employeespage.clickFindButton();
-		Assert.assertTrue(employeespage.archivedEmployeeExists(employeefirstname, employeelastname));
-		employeespage.unarchiveEmployee(employeefirstname, employeelastname);
-		employeespage.clickActiveTab();
-		Assert.assertTrue(employeespage.activeEmployeeExists(employeefirstname, employeelastname));
-
-		employeespage.makeSearchPanelVisible();
-		employeespage.selectSearchTeam(team);
-		employeespage.setSearchUserParameter(employeename.substring(0, 4).toLowerCase());
-		employeespage.clickFindButton();
-
-		Assert.assertTrue(employeespage.getEmployeesTableRowCount() > 0);
-		employeespage.activeEmployeeExists(employeefirstname, employeelastname);
+		Assert.assertTrue(employeesPage.getEmployeesTableRowCount() > 0);
+		employeesPage.activeEmployeeExists(data.getEmployeeName());
 	}
 
 
-	@Test(description = "Test Case 15323:Company- Services: Search")
-	public void testCompanyServicesSearch() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyServicesSearch(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String pricetype = "Percentage";
-		final String servicetype = "Detail";
-		final String servicename = "Marg_For_Bundle";
+        ServicesWebPage servicesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickServicesLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        servicesPage.verifyServicesTableColumnsAreVisible();
 
-		ServicesWebPage servicespage = companypage.clickServicesLink();
+		Assert.assertEquals(data.getPage1(), servicesPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
 
-		servicespage.verifyServicesTableColumnsAreVisible();
+		servicesPage.setPageSize(data.getPage1());
+		Assert.assertEquals(1, servicesPage.getServicesTableRowsCount());
 
-		Assert.assertEquals("1", servicespage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", servicespage.getGoToPageFieldValue());
+		String lastpagenumber = servicesPage.getLastPageNumber();
+		servicesPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, servicesPage.getGoToPageFieldValue());
 
-		servicespage.setPageSize("1");
-		Assert.assertEquals(1, servicespage.getServicesTableRowsCount());
+		servicesPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
 
-		String lastpagenumber = servicespage.getLastPageNumber();
-		servicespage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, servicespage.getGoToPageFieldValue());
+		servicesPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), servicesPage.getGoToPageFieldValue());
 
-		servicespage.clickGoToFirstPage();
-		Thread.sleep(1000);
-		Assert.assertEquals("1", servicespage.getGoToPageFieldValue());
+		servicesPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
 
-		servicespage.clickGoToNextPage();
-		Assert.assertEquals("2", servicespage.getGoToPageFieldValue());
+		servicesPage.setPageSize(data.getPage999());
+		Assert.assertEquals(50, servicesPage.getServicesTableRowsCount());
 
-		servicespage.clickGoToPreviousPage();
-		Assert.assertEquals("1", servicespage.getGoToPageFieldValue());
+//		servicesPage.makeSearchPanelVisible();
+		servicesPage.selectSearchServiceType(data.getServiceType());
+		servicesPage.selectSearchPriceType(data.getPriceType());
+		servicesPage.setServiceSearchCriteria(data.getServiceName().substring(0, 4).toLowerCase());
+		servicesPage.clickFindButton();
 
-		servicespage.setPageSize("999");
-		Assert.assertEquals(new Integer(50), Integer.valueOf(servicespage.getServicesTableRowsCount()));
-
-//		servicespage.makeSearchPanelVisible();
-		servicespage.selectSearchServiceType(servicetype);
-		servicespage.selectSearchPriceType(pricetype);
-		servicespage.setServiceSearchCriteria(servicename.substring(0, 4).toLowerCase());
-		servicespage.clickFindButton();
-
-		servicespage.activeServiceExists(servicename);
+		servicesPage.activeServiceExists(data.getServiceName());
 	}
 
-	@Test(description = "Test Case 15539:Company - Teams: Search")
-	public void testCompanyTeamsSearch() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyTeamsSearch(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String teamlocation = "Test Team";
-		final String _type = "Internal";
-		final String timezone = "Pacific Standard Time";
+        TeamsWebPage teamsPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickTeamsLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		teamsPage.verifyTeamsTableColumnsAreVisible();
 
-		TeamsWebPage teamspage = companypage.clickTeamsLink();
+		Assert.assertEquals(data.getPage1(), teamsPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), teamsPage.getGoToPageFieldValue());
 
-		teamspage.verifyTeamsTableColumnsAreVisible();
+		teamsPage.setPageSize(data.getPage1());
+		Assert.assertEquals(1, teamsPage.getTeamsTableRowsCount());
 
-		Assert.assertEquals("1", teamspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", teamspage.getGoToPageFieldValue());
+		String lastpagenumber = teamsPage.getLastPageNumber();
+		teamsPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, teamsPage.getGoToPageFieldValue());
 
-		teamspage.setPageSize("1");
-		Assert.assertEquals(1, teamspage.getTeamsTableRowsCount());
+		teamsPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), teamsPage.getGoToPageFieldValue());
 
-		String lastpagenumber = teamspage.getLastPageNumber();
-		teamspage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, teamspage.getGoToPageFieldValue());
+		teamsPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), teamsPage.getGoToPageFieldValue());
 
-		teamspage.clickGoToFirstPage();
-		Assert.assertEquals("1", teamspage.getGoToPageFieldValue());
-
-		teamspage.clickGoToNextPage();
-		Assert.assertEquals("2", teamspage.getGoToPageFieldValue());
-
-		teamspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", teamspage.getGoToPageFieldValue());
+		teamsPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), teamsPage.getGoToPageFieldValue());
 
 		if (Integer.valueOf(lastpagenumber) < 50) {
-			teamspage.setPageSize(lastpagenumber);
-			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(teamspage.getTeamsTableRowsCount()));
+			teamsPage.setPageSize(lastpagenumber);
+			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(teamsPage.getTeamsTableRowsCount()));
 		} else {
-			teamspage.setPageSize("999");
-			Assert.assertEquals(teamspage.MAX_TABLE_ROW_COUNT_VALUE, teamspage.getTeamsTableRowsCount());
+			teamsPage.setPageSize(data.getPage999());
+			Assert.assertEquals(teamsPage.MAX_TABLE_ROW_COUNT_VALUE, teamsPage.getTeamsTableRowsCount());
 		}
 
-		teamspage.makeSearchPanelVisible();
-		teamspage.setTeamLocationSearchCriteria(teamlocation.substring(0, 8).toLowerCase());
-		teamspage.selectSearchType(_type);
-		teamspage.selectSearchTimeZone(timezone);
-		teamspage.clickFindButton();
+		teamsPage.makeSearchPanelVisible();
+		teamsPage.setTeamLocationSearchCriteria(data.getTeamLocation().substring(0, 8).toLowerCase());
+		teamsPage.selectSearchType(data.getType());
+		teamsPage.selectSearchTimeZone(data.getTimeZone());
+		teamsPage.clickFindButton();
 
-		Assert.assertTrue(Integer.valueOf(teamspage.getTeamsTableRowsCount()) >= 1);
-		teamspage.verifySearchResultsByTeamLocation(teamlocation);
+		Assert.assertTrue(teamsPage.getTeamsTableRowsCount() >= 1);
+		teamsPage.verifySearchResultsByTeamLocation(data.getTeamLocation());
 	}
 
-	@Test(description = "Test Case 15541:Company - Jobs: Search")
-	public void testCompanyJobsSearch() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyJobsSearch(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String customer = "001 - Test Company";
-		final String _job = "Alex2";
+        JobsWebPage jobsPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickJobsLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        jobsPage.verifyJobsTableColumnsAreVisible();
 
-		JobsWebPage jobspage = companypage.clickJobsLink();
+		Assert.assertEquals(data.getPage1(), jobsPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
 
-		jobspage.verifyJobsTableColumnsAreVisible();
+		jobsPage.setPageSize(data.getPage1());
+		Assert.assertEquals(1, jobsPage.getJobsTableRowsCount());
 
-		Assert.assertEquals("1", jobspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", jobspage.getGoToPageFieldValue());
+		String lastpagenumber = jobsPage.getLastPageNumber();
+		jobsPage.clickGoToLastPage();
+		Assert.assertEquals(lastpagenumber, jobsPage.getGoToPageFieldValue());
 
-		jobspage.setPageSize("1");
-		Assert.assertEquals(1, jobspage.getJobsTableRowsCount());
+		jobsPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
 
-		String lastpagenumber = jobspage.getLastPageNumber();
-		jobspage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, jobspage.getGoToPageFieldValue());
+		jobsPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), jobsPage.getGoToPageFieldValue());
 
-		jobspage.clickGoToFirstPage();
-		Assert.assertEquals("1", jobspage.getGoToPageFieldValue());
-
-		jobspage.clickGoToNextPage();
-		Assert.assertEquals("2", jobspage.getGoToPageFieldValue());
-
-		jobspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", jobspage.getGoToPageFieldValue());
+		jobsPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
 		if (Integer.valueOf(lastpagenumber) < 50) {
-			jobspage.setPageSize(lastpagenumber);
-			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(jobspage.getJobsTableRowsCount()));
+			jobsPage.setPageSize(lastpagenumber);
+			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(jobsPage.getJobsTableRowsCount()));
 		} else {
-			jobspage.setPageSize("999");
-			Assert.assertEquals(jobspage.MAX_TABLE_ROW_COUNT_VALUE, jobspage.getJobsTableRowsCount());
+			jobsPage.setPageSize(data.getPage999());
+			Assert.assertEquals(jobsPage.MAX_TABLE_ROW_COUNT_VALUE, jobsPage.getJobsTableRowsCount());
 		}
 
-		jobspage.makeSearchPanelVisible();
-		jobspage.setJobSearchCriteria(_job.substring(0, 2).toLowerCase());
-		jobspage.selectSearchCustomer(customer);
-		jobspage.clickFindButton();
+		jobsPage.makeSearchPanelVisible();
+		jobsPage.setJobSearchCriteria(data.getJob().substring(0, 2).toLowerCase());
+		jobsPage.selectSearchCustomer(data.getCustomer());
+		jobsPage.clickFindButton();
 
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(jobspage.getJobsTableRowsCount()));
-		jobspage.isJobPresent(_job);
+		Assert.assertEquals(1, jobsPage.getJobsTableRowsCount());
+		jobsPage.isJobPresent(data.getJob());
 	}
 
-	@Test(description = "Test Case 17284:Company - Insurance Companies")
-	public void testCompanyJobsInsuranceCompanies() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyJobsInsuranceCompanies(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        InsuranceCompaniesWePpage insuranceCompaniesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickInsuranceCompaniesLink();
 
-		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
-
-		insurancecompaniespage.verifyInsuranceCompaniesTableColumnsAreVisible();
-		Assert.assertTrue(insurancecompaniespage.isAddInsuranceCompanyButtonExists());
+        insuranceCompaniesPage.verifyInsuranceCompaniesTableColumnsAreVisible();
+		Assert.assertTrue(insuranceCompaniesPage.addInsuranceCompanyButtonExists());
 
 	}
 
-	@Test(description = "Test Case 18092:Company -Service Advisors")
-	public void testCompanyServiceAdvisors() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyServiceAdvisors(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String _client = "Sterling Collision";
-		final String firstname = "Cameron";
-		final String lastname = "Minor";
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
+        ServiceAdvisorsWebPage serviceadvisorspage = backOfficeHeader
+                .clickCompanyLink()
+                .clickServiceAdvisorsLink();
 
 		serviceadvisorspage.verifyServiceAdvisorsTableColumnsAreVisible();
 
-		Assert.assertEquals("1", serviceadvisorspage.getCurrentlySelectedPageNumber());
-		Assert.assertEquals("1", serviceadvisorspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), serviceadvisorspage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), serviceadvisorspage.getGoToPageFieldValue());
 
-		serviceadvisorspage.setPageSize("1");
+		serviceadvisorspage.setPageSize(data.getPage1());
 		Assert.assertEquals(1, serviceadvisorspage.getServiceAdvisorsTableRowsCount());
 
 		String lastpagenumber = serviceadvisorspage.getLastPageNumber();
@@ -334,219 +310,199 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertEquals(lastpagenumber, serviceadvisorspage.getGoToPageFieldValue());
 
 		serviceadvisorspage.clickGoToFirstPage();
-		Assert.assertEquals("1", serviceadvisorspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), serviceadvisorspage.getGoToPageFieldValue());
 
 		serviceadvisorspage.clickGoToNextPage();
-		Assert.assertEquals("2", serviceadvisorspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage2(), serviceadvisorspage.getGoToPageFieldValue());
 
 		serviceadvisorspage.clickGoToPreviousPage();
-		Assert.assertEquals("1", serviceadvisorspage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), serviceadvisorspage.getGoToPageFieldValue());
 
-		serviceadvisorspage.setPageSize("999");
+		serviceadvisorspage.setPageSize(data.getPage999());
 		Assert.assertEquals(serviceadvisorspage.MAX_TABLE_ROW_COUNT_VALUE, serviceadvisorspage.getServiceAdvisorsTableRowsCount());
 
 
 		serviceadvisorspage.makeSearchPanelVisible();
-		serviceadvisorspage.setUserSearchCriteria(firstname);
-		serviceadvisorspage.selectSearchClient(_client);
+		serviceadvisorspage.setUserSearchCriteria(data.getUserFirstName());
+		serviceadvisorspage.selectSearchClient(data.getClient());
 		serviceadvisorspage.clickFindButton();
 
 		Assert.assertTrue(serviceadvisorspage.getServiceAdvisorsTableRowsCount() > 0);
-		serviceadvisorspage.serviceAdvisorExists(firstname, lastname);
+		serviceadvisorspage.serviceAdvisorExists(data.getUserFirstName(), data.getUserLastName());
 	}
 
-	@Test(description = "Test Case 18799:Company- Question Forms")
-	public void testCompanyQuestionForms() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyQuestionForms(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String questionsectionname = "Test Question Section";
-		final String questionname = "New Question";
-		final String questionformname = "Test Question Form";
+        QuestionsFormsWebPage questionsRormsPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickQuestionsFormsLink();
+        
+		questionsRormsPage.verifyQuestionFormsTableColumnsAreVisible();
+		questionsRormsPage.verifyQuestionSectionsTableColumnsAreVisible();
+		questionsRormsPage.verifyPrintTemplatesTableColumnsAreVisible();
+		questionsRormsPage.createQuestionSection(data.getQuestionSectionName());
+		questionsRormsPage.addQuestionForQuestionSection(data.getQuestionSectionName(), data.getQuestionName());
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		QuestionsFormsWebPage questionsformspage = companypage.clickQuestionsFormsLink();
-		questionsformspage.verifyQuestionFormsTableColumnsAreVisible();
-		questionsformspage.verifyQuestionSectionsTableColumnsAreVisible();
-		questionsformspage.verifyPrintTemplatesTableColumnsAreVisible();
-		questionsformspage.createQuestionSection(questionsectionname);
-		questionsformspage.addQuestionForQuestionSection(questionsectionname, questionname);
-
-		while (questionsformspage.isQuestionFormExists(questionformname)) {
-			questionsformspage.deleteQuestionForm(questionformname);
+		while (questionsRormsPage.isQuestionFormExists(data.getQuestionFormName())) {
+			questionsRormsPage.deleteQuestionForm(data.getQuestionFormName());
 		}
-		questionsformspage.createQuestionForm(questionformname);
-		questionsformspage.editAndAssignSectionToQuestionForm(questionformname, questionsectionname);
-		questionsformspage.verifyQuestionIsAssignedToQuestionFormViaPreview(questionformname, questionname);
+		questionsRormsPage.createQuestionForm(data.getQuestionFormName());
+		questionsRormsPage.editAndAssignSectionToQuestionForm(data.getQuestionFormName(), data.getQuestionSectionName());
+		questionsRormsPage.verifyQuestionIsAssignedToQuestionFormViaPreview(data.getQuestionFormName(), data.getQuestionName());
 
-		questionsformspage.deleteQuestionForm(questionformname);
-		Assert.assertFalse(questionsformspage.isQuestionFormExists(questionformname));
-		questionsformspage.deleteQuestionSections(questionsectionname);
-		Assert.assertFalse(questionsformspage.isQuestionSectionExists(questionsectionname));
+		questionsRormsPage.deleteQuestionForm(data.getQuestionFormName());
+		Assert.assertFalse(questionsRormsPage.isQuestionFormExists(data.getQuestionFormName()));
+		questionsRormsPage.deleteQuestionSections(data.getQuestionSectionName());
+		Assert.assertFalse(questionsRormsPage.isQuestionSectionExists(data.getQuestionSectionName()));
 	}
 
-	@Test(description = "Test Case 18800:Company -Supplies")
-	public void testCompanySupplies() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanySupplies(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String supplyname = "Test Supply";
-		final String supplynameedited = "Test Supply Edited";
+        SuppliesWebPage suppliesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickSuppliesLink();
 
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		SuppliesWebPage suppliespage = companypage.clickSuppliesLink();
-
-		suppliespage.verifySuppliesTableColumnsAreVisible();
-		suppliespage.createNewSupply(supplyname);
-		suppliespage.setSupplyNewName(supplyname, supplynameedited);
-		suppliespage.deleteSupply(supplynameedited);
-		Assert.assertFalse(suppliespage.isSupplyExists(supplynameedited));
+		suppliesPage.verifySuppliesTableColumnsAreVisible();
+		suppliesPage.createNewSupply(data.getSupplyName());
+		suppliesPage.setSupplyNewName(data.getSupplyName(), data.getSupplyNameEdited());
+		suppliesPage.deleteSupply(data.getSupplyNameEdited());
+		Assert.assertFalse(suppliesPage.isSupplyExists(data.getSupplyNameEdited()));
 	}
 
-	@Test(description = "Test Case 18801:Company -Expenses Types")
-	public void testCompanyExpensesTypes() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyExpensesTypes(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String expensetype = "Test Type";
-		final String newexpensetypename = "Test Type Edited";
+        ExpensesTypesWebPage expensesTypesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickExpensesTypesLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		ExpensesTypesWebPage expensestypespage = companypage.clickExpensesTypesLink();
-
-		expensestypespage.verifyExpensesTypesColumnsAreVisible();
-		expensestypespage.createNewExpenseType(expensetype);
-		expensestypespage.setExpenseTypeNewName(expensetype, newexpensetypename);
-		expensestypespage.deleteExpenseType(newexpensetypename);
-		Assert.assertFalse(expensestypespage.isExpenseTypeExists(newexpensetypename));
-		if (expensestypespage.isExpenseTypeExists(expensetype)) {
-			expensestypespage.deleteExpenseType(expensetype);
-			Assert.assertFalse(expensestypespage.isExpenseTypeExists(expensetype));
+		expensesTypesPage.verifyExpensesTypesColumnsAreVisible();
+		expensesTypesPage.createNewExpenseType(data.getExpenseType());
+		expensesTypesPage.setExpenseTypeNewName(data.getExpenseType(), data.getNewExpenseTypeName());
+		expensesTypesPage.deleteExpenseType(data.getNewExpenseTypeName());
+		Assert.assertFalse(expensesTypesPage.isExpenseTypeExists(data.getNewExpenseTypeName()));
+		if (expensesTypesPage.isExpenseTypeExists(data.getExpenseType())) {
+			expensesTypesPage.deleteExpenseType(data.getExpenseType());
+			Assert.assertFalse(expensesTypesPage.isExpenseTypeExists(data.getExpenseType()));
 		}
 	}
 
-	@Test(description = "Test Case 18802:Company -Vehicle Parts")
-	public void testCompanyVehicleParts() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyVehicleParts(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String vehiclepart = "Test Part";
-		final String newvehiclepartname = "Test Vehicle Part";
+        VehiclePartsWebPage vehiclePartsPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickVehiclePartsLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		VehiclePartsWebPage vehiclepartspage = companypage.clickVehiclePartsLink();
-		vehiclepartspage.verifyVehiclePartsColumnsAreVisible();
-		vehiclepartspage.createNewVehicleParWithAllServicesSelected(vehiclepart);
-		vehiclepartspage.setVehiclePartNewName(vehiclepart, newvehiclepartname);
-		vehiclepartspage.deleteVehiclePart(newvehiclepartname);
-		Assert.assertFalse(vehiclepartspage.isVehiclePartExists(newvehiclepartname));
+		vehiclePartsPage.verifyVehiclePartsColumnsAreVisible();
+		vehiclePartsPage.createNewVehicleParWithAllServicesSelected(data.getVehiclePart());
+		vehiclePartsPage.setVehiclePartNewName(data.getVehiclePart(), data.getNewVehiclePartName());
+		vehiclePartsPage.deleteVehiclePart(data.getNewVehiclePartName());
+		Assert.assertFalse(vehiclePartsPage.isVehiclePartExists(data.getNewVehiclePartName()));
 	}
 
-	@Test(testName = "Test Case 26726:Company- Employees: Archive", description = "Company- Employees: Archive")
-	public void testCompanyEmployeesArchive() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyEmployeesArchive(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String employeefirstname = "archive";
-		final String employeelastname = "unarchive";
-		final String employeename = employeefirstname + " " + employeelastname;
+        EmployeesWebPage employeesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickEmployeesLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		EmployeesWebPage employeespage = companypage.clickEmployeesLink();
-
-		employeespage.makeSearchPanelVisible();
-		employeespage.setSearchUserParameter(employeename.substring(0, 5));
-		employeespage.clickFindButton();
-        employeespage.verifyEmployeeIsActive(employeefirstname, employeelastname);
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.setSearchUserParameter(data.getEmployeeFirstName().substring(0, 5));
+		employeesPage.clickFindButton();
+        employeesPage.verifyEmployeeIsActive(data.getEmployeeName());
         for (int i = 0; i < 3; i++) {
-			employeespage.archiveEmployee(employeefirstname, employeelastname);
-			employeespage.clickArchivedTab();
+			employeesPage.archiveEmployee(data.getEmployeeName());
+			employeesPage.clickArchivedTab();
 
-			employeespage.setSearchUserParameter(employeename.substring(0, 5));
-			employeespage.clickFindButton();
-			Assert.assertTrue(employeespage.archivedEmployeeExists(employeefirstname, employeelastname));
-			employeespage.unarchiveEmployee(employeefirstname, employeelastname);
-			employeespage.clickActiveTab();
+			employeesPage.setSearchUserParameter(data.getEmployeeFirstName().substring(0, 5));
+			employeesPage.clickFindButton();
+			Assert.assertTrue(employeesPage.archivedEmployeeExists(data.getEmployeeName()));
+			employeesPage.unarchiveEmployee(data.getEmployeeName());
+			employeesPage.clickActiveTab();
 
-			employeespage.setSearchUserParameter(employeename.substring(0, 5));
-			employeespage.clickFindButton();
-			Assert.assertTrue(employeespage.activeEmployeeExists(employeefirstname, employeelastname));
+			employeesPage.setSearchUserParameter(data.getEmployeeName().substring(0, 5));
+			employeesPage.clickFindButton();
+			Assert.assertTrue(employeesPage.activeEmployeeExists(data.getEmployeeName()));
 		}
 	}
 
-    @Test(testName = "Test Case 26727:Company- Services: Archive", description = "Company- Services: Archive")
-	public void testCompanyServicesArchive() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyServicesArchive(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String servicename = "test12";
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		ServicesWebPage servicespage = companypage.clickServicesLink();
-//		servicespage.makeSearchPanelVisible();
-		servicespage.setServiceSearchCriteria(servicename);
-		servicespage.clickFindButton();
+        ServicesWebPage servicesPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickServicesLink();
+        
+//		servicesPage.makeSearchPanelVisible();
+		servicesPage.setServiceSearchCriteria(data.getServiceName());
+		servicesPage.clickFindButton();
 
 		for (int i = 0; i < 3; i++) {
-			Thread.sleep(1000);
-			servicespage.archiveServiceForActiveAllTab(servicename);
-			servicespage.clickArchivedTab();
-			Assert.assertTrue(servicespage.archivedServiceExists(servicename));
-			servicespage.unarchiveService(servicename);
+			servicesPage.archiveServiceForActiveAllTab(data.getServiceName());
+			servicesPage.clickArchivedTab();
+			Assert.assertTrue(servicesPage.archivedServiceExists(data.getServiceName()));
+			servicesPage.unarchiveService(data.getServiceName());
 
-			servicespage.clickActiveAllTab();
-			Assert.assertTrue(servicespage.activeServiceExists(servicename));
+			servicesPage.clickActiveAllTab();
+			Assert.assertTrue(servicesPage.activeServiceExists(data.getServiceName()));
 		}
 	}
 
-	@Test(testName = "Test Case 26730:Company- Users: Archive", description = "Company- Users: Archive")
-	public void testCompanyUsersArchive() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompanyUsersArchive(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String userfirstname = "Archive";
-		final String userlastname = "User";
+        UsersWebPage usersPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickUsersLink();
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-
-		UsersWebPage userspage = companypage.clickUsersLink();
-		userspage.makeSearchPanelVisible();
-		userspage.setSearchUserParameter(userlastname);
-		userspage.clickFindButton();
-		if (!userspage.isUserActive(userfirstname, userlastname)) {
-			userspage.clickArchivedTab();
-			userspage.unarchiveUser(userfirstname, userlastname);
+		usersPage.makeSearchPanelVisible();
+		usersPage.setSearchUserParameter(data.getUserLastName());
+		usersPage.clickFindButton();
+		if (!usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName())) {
+			usersPage.clickArchivedTab();
+			usersPage.unarchiveUser(data.getUserFirstName(), data.getUserLastName());
 		}
-
 
 		for (int i = 0; i < 3; i++) {
-			userspage.archiveUser(userfirstname, userlastname);
-			userspage.clickArchivedTab();
-			Assert.assertTrue(userspage.isUserArchived(userfirstname, userlastname));
-			userspage.unarchiveUser(userfirstname, userlastname);
+			usersPage.archiveUser(data.getUserFirstName(), data.getUserLastName());
+			usersPage.clickArchivedTab();
+			Assert.assertTrue(usersPage.isUserArchived(data.getUserFirstName(), data.getUserLastName()));
+			usersPage.unarchiveUser(data.getUserFirstName(), data.getUserLastName());
 
-			userspage.clickActiveTab();
-			Assert.assertTrue(userspage.isUserActive(userfirstname, userlastname));
+			usersPage.clickActiveTab();
+			Assert.assertTrue(usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName()));
 		}
 	}
 
-	@Test(testName = "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options", description = "Company - Invoice type: Verify dependency bwn Visible and Required options")
-	public void testCompanyInvoiceTypeVerifyDependencyBetweenVisibleAndRequiredOptions() throws Exception {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testDependencyBetweenVisibleAndRequiredOptions(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        InvoiceTypesWebPage invoicestypespage = backOfficeHeader
+                .clickCompanyLink()
+                .clickInvoiceTypesLink();
 
-		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
 		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
-		Thread.sleep(1000);
 		Assert.assertFalse(newinvoicetypedialog.isRequiredCheckBoxVisible());
-		newinvoicetypedialog.waitABit(500);
 		newinvoicetypedialog.selectVisibleCheckBox();
 		Assert.assertTrue(newinvoicetypedialog.isRequiredCheckBoxVisible());
 		newinvoicetypedialog.unselectVisibleCheckBox();
@@ -554,95 +510,89 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		newinvoicetypedialog.clickCancelAddInvoiceTypeButton();
 	}
 
-	@Test(testName = "Test Case 24998:Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts", description = "Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts")
-	public void testCompanyPriceMatrixVerifyThatOnMatrixPanelAdminCanSeeInAvailableServicesOnlyServicesSelectedOnVehicleParts() {
-        final String vehiclePart = "Vehicle Part 1";
-        final String priceMatrix = "Test Matrix mobile1";
-        final List<String> serviceNames = Arrays.asList("Test service zayats", "VPS1");
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testAdminCanSeeOnlyServicesSelectedOnVehicleParts(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-		VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
-		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
-		Assert.assertEquals(vehiclePart, vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
+        
+		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
+		Assert.assertEquals(data.getVehiclePart(), vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
 
         vehiclePartsPage.verifyThatAssignedServicesListIsEmpty();
 		companyPage = backOfficeHeader.clickCompanyLink();
 		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
-		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
-		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
+		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
 		Assert.assertEquals(0, vehiclePartsPage.getAssignedServicesList().size());
 		vehiclePartsPage.cancelNewVehiclePart();
 
 		companyPage = backOfficeHeader.clickCompanyLink();
 		vehiclePartsPage = companyPage.clickVehiclePartsLink();
-		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
-        serviceNames.forEach(vehiclePartsPage::assignServiceForVehiclePart);
+		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
+        data.getServiceNames().forEach(vehiclePartsPage::assignServiceForVehiclePart);
         vehiclePartsPage.saveNewVehiclePart();
 
 		companyPage = backOfficeHeader.clickCompanyLink();
 		pricematriceswebpage = companyPage.clickPriceMatricesLink();
-		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
-		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
+		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
 		Assert.assertEquals(2, vehiclePartsPage.getAvailableServicesList().size());
-		serviceNames.forEach(vehiclePartsPage::selectAvailableServiceForVehiclePart);
+		data.getServiceNames().forEach(vehiclePartsPage::selectAvailableServiceForVehiclePart);
 		vehiclePartsPage.cancelNewVehiclePart();
 
 		companyPage = backOfficeHeader.clickCompanyLink();
 		vehiclePartsPage = companyPage.clickVehiclePartsLink();
-		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
-        serviceNames.forEach(vehiclePartsPage::unassignServiceForVehiclePart);
+		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
+        data.getServiceNames().forEach(vehiclePartsPage::unassignServiceForVehiclePart);
 		vehiclePartsPage.saveNewVehiclePart();
 	}
 
-	@Test(testName = "Test Case 25004:Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel", description = "Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel")
-	public void testCompanyPriceMatrixVerifyThatByDefaultAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel() {
-        final List<String> serviceNames = Arrays.asList("Dye", "VPS1", "Wheel Repair1");
-        final List<String> damageSeverities = Arrays.asList("LIGHT", "MEDIUM");
-        final List<String> damageSizes = Arrays.asList("DIME", "NKL");
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel(String rowID, String description, JSONObject testData) {
+        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		final String vehiclePart = "VP with assigned services";
-		final String priceMatrix = "New Matrix with assigned services";
-		final String priceMatrixService = "Matrix Service";
-		final String priceMatrixVehiclePart = "VP with assigned services";
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+        VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
 
-		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-		VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
-
-		vehiclePartsPage.clickEditButtonForVehiclePart(vehiclePart);
-		Assert.assertEquals(vehiclePart, vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
-		serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+        vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
+		Assert.assertEquals(data.getVehiclePart(), vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
+		data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
 		vehiclePartsPage.saveNewVehiclePart();
 
 		companyPage = backOfficeHeader.clickCompanyLink();
 		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
 		pricematriceswebpage.clickAddPriceMarixButton();
-		pricematriceswebpage.setPriceMarixName(priceMatrix);
-		pricematriceswebpage.selectPriceMatrixService(priceMatrixService);
-		damageSeverities.forEach(pricematriceswebpage::assignPriceMatrixDamageSeverity);
-        damageSizes.forEach(pricematriceswebpage::assignPriceMatrixDamageSize);
-		pricematriceswebpage.assignPriceMatrixVehiclePart(priceMatrixVehiclePart);
+		pricematriceswebpage.setPriceMarixName(data.getPriceMatrix());
+		pricematriceswebpage.selectPriceMatrixService(data.getPriceMatrixService());
+		data.getDamageSeverities().forEach(pricematriceswebpage::assignPriceMatrixDamageSeverity);
+        data.getDamageSizes().forEach(pricematriceswebpage::assignPriceMatrixDamageSize);
+		pricematriceswebpage.assignPriceMatrixVehiclePart(data.getPriceMatrixVehiclePart());
 		pricematriceswebpage.saveNewPriceMatrix();
 
-		pricematriceswebpage.clickPricesForPriceMatrix(priceMatrix);
-		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(vehiclePart);
-        serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
+		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
+        data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
 
-        serviceNames.forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+        data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
         vehiclePartsPage.verifyThatAvailableServicesListIsEmpty();
 
 		companyPage = backOfficeHeader.clickCompanyLink();
 		pricematriceswebpage = companyPage.clickPriceMatricesLink();
-		pricematriceswebpage.deletePriceMatrix(priceMatrix);
+		pricematriceswebpage.deletePriceMatrix(data.getPriceMatrix());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testReassignEmployeeForTeam(String rowID, String description, JSONObject testData) {
+
         BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-        EmployeesWebPage employeesWebPage = companyPage
+
+        EmployeesWebPage employeesPage = backOfficeHeader
+                .clickCompanyLink()
                 .clickEmployeesLink()
                 .makeSearchPanelVisible()
                 .setSearchUserParameter(data.getEmployeeName())
@@ -650,7 +600,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .verifyEmployeesTableColumnsAreVisible()
                 .verifyEmployeeIsActive(data.getEmployeeName());
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage
                 .clickEditEmployeeFromTeam(data.getEmployeeName(), data.getTeamName());
         InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
         Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
@@ -662,7 +612,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .selectNewEmployeeTeam(data.getTeamName2())
                 .clickOKButton();
 
-        employeesWebPage
+        employeesPage
                 .clickEditEmployee(data.getEmployeeName())
                 .clickInfoBubble();
         Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
@@ -679,8 +629,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
     public void testReassignEmployeeForSingleUserInTeamDisabled(String rowID, String description, JSONObject testData) {
         BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-        EmployeesWebPage employeesWebPage = companyPage
+
+        EmployeesWebPage employeesPage = backOfficeHeader
+                .clickCompanyLink()
                 .clickEmployeesLink()
                 .makeSearchPanelVisible()
                 .selectSearchTeam(data.getTeamName())
@@ -692,12 +643,12 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .setSearchUserParameter(data.getEmployeeName())
                 .clickFindButton();
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeName());
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage.clickEditEmployee(data.getEmployeeName());
         InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
         Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
         Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
         newEmployeeDialog.clickCancelButton();
-        employeesWebPage
+        employeesPage
                 .setSearchUserParameter(data.getSearchEmployee())
                 .clickFindButton()
                 .clickArchivedTab()
@@ -708,8 +659,9 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
     public void testReassignEmployeeVerifyText(String rowID, String description, JSONObject testData) {
         BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-        EmployeesWebPage employeesWebPage = companyPage
+
+        EmployeesWebPage employeesPage = backOfficeHeader
+                .clickCompanyLink()
                 .clickEmployeesLink()
                 .makeSearchPanelVisible()
                 .selectSearchTeam(data.getTeamName())
@@ -718,13 +670,13 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
                 .verifyEmployeesTableColumnsAreVisible()
                 .verifyEmployeeIsActive(data.getEmployeeFullName());
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesWebPage.clickEditEmployee(data.getEmployeeFullName());
+        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage.clickEditEmployee(data.getEmployeeFullName());
         InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
         Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
                 "The notification is not displayed at the top of the popup window with reassign");
         newEmployeeDialog.clickCancelButton();
 
-        employeesWebPage
+        employeesPage
                 .archiveEmployee(data.getEmployeeFullName())
                 .selectSearchTeam(data.getTeamName())
                 .setSearchUserParameter(data.getEmployeeName())
@@ -737,7 +689,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
         Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
         newEmployeeDialog.clickCancelButton();
 
-        employeesWebPage
+        employeesPage
                 .selectSearchTeam(data.getTeamName())
                 .setSearchUserParameter(data.getSearchEmployee())
                 .clickFindButton()

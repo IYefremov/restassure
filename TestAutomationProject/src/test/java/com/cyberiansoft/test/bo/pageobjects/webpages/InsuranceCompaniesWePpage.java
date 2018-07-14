@@ -59,7 +59,7 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 		click(addinsurancecompanylink);
 	}
 	
-	public boolean isAddInsuranceCompanyButtonExists() {
+	public boolean addInsuranceCompanyButtonExists() {
 		return addinsurancecompanylink.isDisplayed();
 	}
 

@@ -178,6 +178,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 
 	public void archiveServiceForActiveAllTab(String serviceName) {
+	    waitABit(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(activeAllTab)).click();
 		archiveService(serviceName);
 	}

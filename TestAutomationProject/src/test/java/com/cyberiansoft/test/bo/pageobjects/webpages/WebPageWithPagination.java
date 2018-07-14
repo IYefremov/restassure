@@ -117,6 +117,7 @@ public class WebPageWithPagination extends BaseWebPage {
 //			wait.withTimeout(30, TimeUnit.SECONDS);
 //		}
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
+		waitABit(1000);
 	}
 	
 	public void clickGoToNextPage()  {

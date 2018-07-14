@@ -98,7 +98,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		clickOKAddInvoiceTypeButton();
 	}
 	
-	public boolean isRequiredCheckBoxVisible() throws InterruptedException {
+	public boolean isRequiredCheckBoxVisible() {
 		try{
 			wait.until(ExpectedConditions.visibilityOf(requiredchkbx));
 			return true;
@@ -107,10 +107,10 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		}
 	}
 
-	public void selectVisibleCheckBox() throws InterruptedException {
-		Thread.sleep(1000);
+	public void selectVisibleCheckBox()  {
+		wait.until(ExpectedConditions.visibilityOf(visiblechkbx));
 		checkboxSelect(visiblechkbx);
-		Thread.sleep(3000);
+		waitABit(3000);
 	}
 	
 	public void unselectVisibleCheckBox() {
@@ -174,7 +174,7 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		click(assignquestionsformbtn);
 	}
 	
-	public void selectNewInvoiceTypeOption(String optionname) throws InterruptedException {
+	public void selectNewInvoiceTypeOption(String optionname) {
 		checkboxSelect(optionname);
 	}
 	

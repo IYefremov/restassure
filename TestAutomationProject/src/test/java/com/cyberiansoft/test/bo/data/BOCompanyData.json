@@ -1,4 +1,201 @@
 {
+  "testCompanyUsersSearch": [
+    {
+      "rowID": "testCompanyUsersSearch.01",
+      "description": "Test Case 15245:Company-Users: Search",
+      "userFirstName": "Delete",
+      "userLastName": "Test",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+  
+  "testCompanyEmployeesSearch": [
+    {
+      "rowID": "testCompanyEmployeesSearch.01",
+      "description": "Test Case 15265:Company-Employees: Search",
+      "employeeName": "+++ ---",
+      "employeeLastName": "---",
+      "teamName": "Test Team",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+
+  "testCompanyServicesSearch": [
+    {
+      "rowID": "testCompanyServicesSearch.01",
+      "description": "Test Case 15323:Company- Services: Search",
+      "priceType": "Percentage",
+      "serviceType": "Detail",
+      "serviceName": "Marg_For_Bundle",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+
+  "testCompanyTeamsSearch": [
+    {
+      "rowID": "testCompanyTeamsSearch.01",
+      "description": "Test Case 15539:Company - Teams: Search",
+      "teamLocation": "Test Team",
+      "type": "Internal",
+      "timeZone": "Pacific Standard Time",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+
+  "testCompanyJobsSearch": [
+    {
+      "rowID": "testCompanyJobsSearch.01",
+      "customer": "001 - Test Company",
+      "job": "Alex2",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+
+  "testCompanyJobsInsuranceCompanies": [
+    {
+      "rowID": "testCompanyJobsInsuranceCompanies.01",
+      "description": "Test Case 17284:Company - Insurance Companies"
+    }
+  ],
+
+  "testCompanyServiceAdvisors": [
+    {
+      "rowID": "testCompanyServiceAdvisors.01",
+      "description": "Test Case 18092:Company -Service Advisors",
+      "client": "Sterling Collision",
+      "userFirstName": "Cameron",
+      "userLastName": "Minor",
+      "page1": "1",
+      "page2": "2",
+      "page999": "999",
+      "emptyString": ""
+    }
+  ],
+
+  "testCompanyQuestionForms": [
+    {
+      "rowID": "testCompanyQuestionForms.01",
+      "description": "Test Case 18799:Company- Question Forms",
+      "questionSectionName": "Test Question Section",
+      "questionName": "New Question",
+      "questionFormName": "Test Question Form"
+    }
+  ],
+
+  "testCompanySupplies": [
+    {
+      "rowID": "testCompanySupplies.01",
+      "description": "Test Case 18800:Company -Supplies",
+      "supplyName": "Test Supply",
+      "supplyNameEdited": "Test Supply Edited"
+    }
+  ],
+
+  "testCompanyExpensesTypes": [
+    {
+      "rowID": "testCompanyExpensesTypes.01",
+      "description": "Test Case 18801:Company -Expenses Types",
+      "expenseType": "Test Type",
+      "newExpenseTypeName": "Test Type Edited"
+    }
+  ],
+
+  "testCompanyVehicleParts": [
+    {
+      "rowID": "testCompanyVehicleParts.01",
+      "description": "Test Case 18092:Company -Service Advisors",
+      "vehiclePart": "Test Part",
+      "newVehiclePartName": "Test Vehicle Part"
+    }
+  ],
+
+  "testCompanyEmployeesArchive": [
+    {
+      "rowID": "testCompanyEmployeesArchive.01",
+      "description": "Test Case 26726:Company- Employees: Archive",
+      "employeeFirstName": "archive",
+      "employeeLastName": "unarchive",
+      "employeeName": "archive unarchive"
+    }
+  ],
+
+  "testCompanyServicesArchive": [
+    {
+      "rowID": "testCompanyServicesArchive.01",
+      "description": "Test Case 26727:Company- Services: Archive",
+      "serviceName": "test12"
+    }
+  ],
+
+  "testCompanyUsersArchive": [
+    {
+      "rowID": "testCompanyUsersArchive.01",
+      "description": "Test Case 26730:Company- Users: Archive",
+      "userFirstName": "Archive",
+      "userLastName": "User",
+      "userName": "Archive User"
+    }
+  ],
+
+  "testAdminCanSeeOnlyServicesSelectedOnVehicleParts": [
+    {
+      "rowID": "testAdminCanSeeOnlyServicesSelectedOnVehicleParts.01",
+      "description": "Test Case 24998:Company - Price Matrix: Verify that on Matrix panel Admin can see in Available services only services selected on Vehicle parts",
+      "vehiclePart": "Vehicle Part 1",
+      "priceMatrix": "Test Matrix mobile1",
+      "serviceNames": [
+        "Test service zayats",
+        "VPS1"
+      ]
+    }
+  ],
+
+  "testDependencyBetweenVisibleAndRequiredOptions": [
+    {
+      "rowID": "testDependencyBetweenVisibleAndRequiredOptions.01",
+      "description": "Test Case 27455:Company - Invoice type: Verify dependency bwn Visible and Required options"
+    }
+  ],
+
+  "verifyAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel": [
+    {
+      "rowID": "verifyAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel.01",
+      "description": "Test Case 25004:Company - Price Matrix: verify that By default all selected services on Vehicle Part will be assigned to Matrix Panel",
+      "serviceNames": [
+        "Dye",
+        "VPS1",
+        "Wheel Repair1"
+      ],
+      "damageSeverities": [
+        "LIGHT",
+        "MEDIUM"
+      ],
+      "damageSizes": [
+        "DIME",
+        "NKL"
+      ],
+      "vehiclePart": "VP with assigned services",
+      "priceMatrix": "New Matrix with assigned services",
+      "priceMatrixService": "Matrix Service",
+      "priceMatrixVehiclePart": "VP with assigned services"
+    }
+  ],
+
   "testReassignEmployeeForTeam": [
     {
       "rowID": "testReassignEmployeeForTeam.01",
