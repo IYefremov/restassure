@@ -92,37 +92,6 @@
     }
   ],
 
-  "test60MinToTargetTimeEventCreation": [
-    {
-      "rowID": "test60MinToTargetTimeEventCreation.01",
-      "description": "Test Case 19384:\"60 min to target time\" event creation",
-      "eventName": "60 Min to Target Time",
-      "alertName": "Test 60 Min to Target Time",
-      "firstConditionName": "Name",
-      "firstConditionType": "equals",
-      "firstConditionCriterion": "Inttest",
-
-      "firstConditionNames": [
-        "Amount",
-        "Approved",
-        "Order Status",
-        "Status Reason"
-      ],
-      "firstConditionTypes": [
-        "equals",
-        "moreThan",
-        "contains",
-        "empty"
-      ],
-      "firstConditionCriteria": [
-        "10",
-        "1",
-        "Inte",
-        ""
-      ]
-    }
-  ],
-
   "testHighPriorityROEventCreation": [
     {
       "rowID": "testHighPriorityROEventCreation.01",

@@ -174,29 +174,4 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 		}		
 		eventsPage.deleteEvent(data.getAlertName());
 	}
-
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void test60MinToTargetTimeEventCreation(String rowID, String description, JSONObject testData) {
-
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-
-        MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
-        EventsWebPage eventsPage = miscellaneousPage.clickEventsLink();
-
-        eventsPage.verifyEventsTableColumnsAreVisible();
-        eventsPage.createNewEventWithConditions(data.getEventName(), data.getAlertName(), data.getFirstConditionName(), data.getFirstConditionType(), data.getFirstConditionCriterion());
-        eventsPage.clickEditButtonForEvent(data.getAlertName());
-        eventsPage.verifyFirstConditionValues(data.getFirstConditionName(), data.getFirstConditionType(), data.getFirstConditionCriterion());
-        eventsPage.cancelNewEvent();
-        for (int i = 0;  i < data.getFirstConditionNames().length; i++) {
-            eventsPage.clickEditButtonForEvent(data.getAlertName());
-            eventsPage.selectFirstConditionValues(data.getFirstConditionNames()[i], data.getFirstConditionTypes()[i], data.getFirstConditionCriteria()[i]);
-            eventsPage.saveNewEvent();
-            eventsPage.clickEditButtonForEvent(data.getAlertName());
-            eventsPage.verifyFirstConditionValues(data.getFirstConditionNames()[i], data.getFirstConditionTypes()[i], data.getFirstConditionCriteria()[i]);
-            eventsPage.cancelNewEvent();
-        }
-        eventsPage.deleteEvent(data.getAlertName());
-    }
 }
