@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class VNextInspectionsScreen extends VNextBaseScreen {
 
 
-	private static boolean filtered = false;
+
 	@FindBy(xpath="//div[contains(@class, 'page inspections-list')]")
 	private WebElement inspectionsscreen;
 	
@@ -72,14 +72,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 			tap(clearsearchicon);
 			clickCancelSearchButton();
 		}
-		if (filtered) {
+
+		if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
 			tap(searchbtn);
 			if (searchfld.getAttribute("value").length() > 1) {
 				tap(clearsearchicon);
 				WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
 			}
 			clickCancelSearchButton();
-			filtered = false;
 		}
 
 
@@ -292,7 +292,6 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		clickCancelSearchButton();
-		filtered = true;
 	}
 	
 	public void clickCancelSearchButton() {

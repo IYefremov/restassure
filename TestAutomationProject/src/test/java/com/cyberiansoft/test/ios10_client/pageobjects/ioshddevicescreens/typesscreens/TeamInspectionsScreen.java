@@ -19,7 +19,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	public TeamInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("TeamInspectionsPageTableLeft")));
 	}
 

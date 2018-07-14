@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -47,7 +47,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);	
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
 		BaseUtils.waitABit(1500);

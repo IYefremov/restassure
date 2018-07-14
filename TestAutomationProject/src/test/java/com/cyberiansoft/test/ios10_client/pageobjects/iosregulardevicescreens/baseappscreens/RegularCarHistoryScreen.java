@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularCarHistoryWOsAndInvoicesScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -27,12 +27,6 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	@iOSFindBy(accessibility = "Switch to web")
     private IOSElement switchtowebbtn;
 	
-	@iOSFindBy(accessibility = "Invoices")
-    private IOSElement invoicesmenu;
-	
-	@iOSFindBy(accessibility = "Work Orders")
-    private IOSElement myworkordersmenumenu;
-	
 	public RegularCarHistoryScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
@@ -54,21 +48,21 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
-	public void clickFirstCarHistoryInTable() {		
+	public RegularCarHistoryWOsAndInvoicesScreen clickFirstCarHistoryInTable() {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")).click();
-		//appiumdriver.tap(1, appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")), 200);
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
+		return new RegularCarHistoryWOsAndInvoicesScreen();
 	}
 	
-	public void clickCarHistoryRowByVehicleInfo(String vehicleinfo) {	
+	public RegularCarHistoryWOsAndInvoicesScreen clickCarHistoryRowByVehicleInfo(String vehicleinfo) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(vehicleinfo)));
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")).click();
-		//appiumdriver.tap(1, appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")), 200);
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()[0]")).click();
+		return new RegularCarHistoryWOsAndInvoicesScreen();
 	}
 	
-	public String getFirstCarHistoryValueInTable() {		
+	public String getFirstCarHistoryValueInTable() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]")));
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]").getAttribute("value");
 	}
 	
@@ -84,16 +78,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 		switchtowebbtn.click();
 	}
 	
-	public RegularMyInvoicesScreen clickCarHistoryInvoices() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(invoicesmenu)).click();
-		return new RegularMyInvoicesScreen();
-	}
-	
-	public void clickCarHistoryMyWorkOrders() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(myworkordersmenumenu)).click();
-	}
+
 
 	public void clickBackButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);

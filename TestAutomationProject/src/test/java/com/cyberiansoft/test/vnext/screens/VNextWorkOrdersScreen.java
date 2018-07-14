@@ -133,6 +133,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	
 	public WebElement getWorkOrderCell(String wonumber) {
 		WebElement wocell = null;
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		List<WebElement> workorders = workorderslist.findElements(By.xpath(".//*[@class='entity-item accordion-item']"));
 		for (WebElement workordercell : workorders)
 			if (workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(wonumber)) {

@@ -95,7 +95,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify Team WO displays in My WO list if WO was created from Team Inspection")
 	public void testVerifyTeamWODisplaysInMyWOsListIfWOWasCreatedFromTeamInspection() { 
 	
-		final String searchtext = "E-203-00182";
+		final String searchtext = "E-357-00295";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		
@@ -112,7 +112,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-		
+		System.out.println("+++++++++++++" + woNumber);
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		
 		workordersscreen.switchToTeamWorkordersView();

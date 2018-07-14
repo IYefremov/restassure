@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,7 +26,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
 
     public VNextSelectedServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.visibilityOf(servicesscreen));
     }
@@ -52,7 +52,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
                 tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 WaitUtils.click(servicecell);
-                //tap(servicecell);
+             BaseUtils.waitABit(300);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
