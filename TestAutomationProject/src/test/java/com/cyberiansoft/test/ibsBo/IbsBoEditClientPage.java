@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.BasePage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,12 @@ public class IbsBoEditClientPage extends BasePage {
     @FindBy(xpath = "//tr[contains(@id, 'gridBillingProfiles')]//input[contains(@id, 'EditButton')]")
     private WebElement billingProfilesEditButton;
 
+    @FindBy(xpath = "//input[contains(@id, 'EditFormControl_ddlBillingBase_Input')]")
+    private ComboBox billingProfilesBaseCombobox;
+
+    @FindBy(xpath = "//div[contains(@id, 'EditFormControl_ddlBillingBase_DropDown')]")
+    private DropDown billingProfilesBaseDropDown;
+
     @FindBy(xpath = "//tr[contains(@id, 'gridAgreements')]//input[contains(@id, 'EditButton')]")
     private WebElement clientAgreementsEditButton;
 
@@ -39,6 +46,9 @@ public class IbsBoEditClientPage extends BasePage {
     @FindBy(xpath = "//input[contains(@id, 'gridAgreements') and contains(@id, 'EditFormControl_btnUpdate')]")
     private WebElement clientAgreementsUpdateButton;
 
+    @FindBy(xpath = "//input[contains(@id, 'gridBillingProfiles') and contains(@id, 'AddNewRecordButton')]")
+    private WebElement newBillingProfilesButton;
+
     @FindBy(xpath = "//input[contains(@id, 'EditFormControl_cbIsActive')]")
     private WebElement activeCheckbox;
 
@@ -50,6 +60,39 @@ public class IbsBoEditClientPage extends BasePage {
 
     @FindBy(xpath = "//span/input[contains(@id, 'gridBillingProfiles') and (@checked='checked')]")
     private WebElement billingProfileActivated;
+
+    @FindBy(xpath = "//span/input[contains(@id, 'gridBillingProfiles') and not (@checked='checked')]")
+    private WebElement billingProfileDeactivated;
+
+    @FindBy(xpath = "//td[contains(text(), 'Payment Term')]")
+    private WebElement paymentTerm;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_ddlPaymentTerms_Input')]")
+    private ComboBox paymentTermCombobox;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_ddlPaymentTerms_Input')]")
+    private WebElement paymentTermInput;
+
+    @FindBy(xpath = "//div[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_ddlPaymentTerms_DropDown')]")
+    private DropDown paymentTermDropDown;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_btnInsert')]")
+    private WebElement billingProfilesInsertButton;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_btnCancel')]")
+    private WebElement billingProfilesCancelButton;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'gbcDeleteColumn')]")
+    private WebElement billingProfilesDeleteButton;
+
+    @FindBy(xpath = "//td[contains(text(), 'Old Invoices')]")
+    private WebElement oldInvoicesService;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_rmypEfectiveBPeriod_dateInput') and @type='text']")
+    private WebElement effectiveBillingProfilePeriodField;
+
+    @FindBy(xpath = "//input[contains(@id, 'ContentPlaceHolder1_gridBillingProfiles') and contains(@id, 'EditFormControl_rmypExpirationBPeriod_dateInput') and @type='text']")
+    private WebElement expirationBillingProfilePeriodField;
 
     public IbsBoEditClientPage(WebDriver driver) {
         super(driver);
@@ -97,6 +140,16 @@ public class IbsBoEditClientPage extends BasePage {
         return this;
     }
 
+    public IbsBoEditClientPage selectBillingProfilesActivatedBase() {
+        selectComboboxValue(billingProfilesBaseCombobox, billingProfilesBaseDropDown, "Activated Devices");
+        return this;
+    }
+
+    public IbsBoEditClientPage selectBillingProfilesLicenseUsageBase() {
+        selectComboboxValue(billingProfilesBaseCombobox, billingProfilesBaseDropDown, "License Usage");
+        return this;
+    }
+
     public IbsBoEditClientPage clickBillingProfilesUpdateButton() {
         clickButton(billingProfilesUpdateButton);
         return this;
@@ -134,16 +187,106 @@ public class IbsBoEditClientPage extends BasePage {
         }
     }
 
-    public IbsBoEditClientPage verifyBillingProfileIsNotActivated(String billingProfileItemsSection) {
+    public boolean isBillingProfileDeactivated() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(billingProfileDeactivated));
+        return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public IbsBoEditClientPage verifyBillingProfileIsDeactivated(String sectionBillingProfileItems, String effectiveDate, String expirationDate) {
         if (isBillingProfileActivated()) {
-            clickBillingProfilesEditButton();
-            scrollDownToText(billingProfileItemsSection);
-            clickIsActiveCheckbox();
-            clickBillingProfilesUpdateButton();
+            deactivateBillingProfile(sectionBillingProfileItems, effectiveDate, expirationDate);
             Assert.assertTrue(isBillingProfileUpdated(), "The Billing Profile has not been updated");
-            Assert.assertFalse(isBillingProfileActivated(),
+            Assert.assertTrue(isBillingProfileDeactivated(),
                     "The Billing Profile is activated, but has to be deactivated");
         }
+        return this;
+    }
+
+    public IbsBoEditClientPage verifyBillingProfileIsActivated(String sectionBillingProfileItems, String effectiveDate, String expirationDate) {
+        if (isBillingProfileDeactivated()) {
+            activateBillingProfile(sectionBillingProfileItems, effectiveDate, expirationDate);
+            Assert.assertTrue(isBillingProfileUpdated(), "The Billing Profile has not been updated");
+            Assert.assertTrue(isBillingProfileActivated(),
+                    "The Billing Profile is deactivated, but has to be activated");
+        }
+        return this;
+    }
+
+    public void activateBillingProfile(String sectionBillingProfileItems, String effectiveDate, String expirationDate) {
+        clickBillingProfilesEditButton();
+        scrollDownToText(sectionBillingProfileItems);
+        clickIsActiveCheckbox();
+        fillEffectiveBillingProfilePeriodField(effectiveDate);
+        fillExpirationBillingProfilePeriodField(expirationDate);
+        selectBillingProfilesActivatedBase();
+        clickBillingProfilesUpdateButton();
+    }
+
+    public void deactivateBillingProfile(String sectionBillingProfileItems, String effectiveDate, String expirationDate) {
+        clickBillingProfilesEditButton();
+        scrollDownToText(sectionBillingProfileItems);
+        clickIsActiveCheckbox();
+        fillEffectiveBillingProfilePeriodField(effectiveDate);
+        fillExpirationBillingProfilePeriodField(expirationDate);
+        selectBillingProfilesLicenseUsageBase();
+        clickBillingProfilesUpdateButton();
+    }
+
+    public IbsBoEditClientPage clickAddNewBillingProfilesButton() {
+        clickButton(newBillingProfilesButton);
+        wait.until(ExpectedConditions.visibilityOf(paymentTerm));
+        return this;
+    }
+
+    public IbsBoEditClientPage selectPaymentTerm(String paymentType) {
+        selectComboboxValue(paymentTermCombobox, paymentTermDropDown, paymentType);
+        return this;
+    }
+
+    public IbsBoEditClientPage clickBillingProfilesInsertButton() {
+        clickButton(billingProfilesInsertButton);
+        return this;
+    }
+
+    public boolean verifyPaymentTermIsYearly() {
+        return wait.until(ExpectedConditions.attributeContains(paymentTermInput, "value", "Yearly"));
+    }
+
+    public boolean verifyPaymentTermIsMonthly() {
+        return wait.until(ExpectedConditions.attributeContains(paymentTermInput, "value", "Monthly"));
+    }
+
+    public IbsBoEditClientPage clickCancelButton() {
+        clickButton(billingProfilesCancelButton);
+        return this;
+    }
+
+    public IbsBoEditClientPage deleteBillingProfilesWithOldInvoicesService() {
+        try {
+            while (wait.until(ExpectedConditions.visibilityOf(oldInvoicesService)).isDisplayed()) {
+                clickButton(billingProfilesDeleteButton);
+                handleAlert();
+                waitIbsBoForUpdate();
+            }
+        } catch (Exception ignored) {}
+        return this;
+    }
+
+    public IbsBoEditClientPage fillExpirationBillingProfilePeriodField(String date) {
+        wait.until(ExpectedConditions.visibilityOf(expirationBillingProfilePeriodField)).clear();
+        expirationBillingProfilePeriodField.sendKeys(date);
+        expirationBillingProfilePeriodField.sendKeys(Keys.ENTER);
+        return this;
+    }
+
+    public IbsBoEditClientPage fillEffectiveBillingProfilePeriodField(String date) {
+        wait.until(ExpectedConditions.visibilityOf(effectiveBillingProfilePeriodField)).clear();
+        effectiveBillingProfilePeriodField.sendKeys(date);
+        effectiveBillingProfilePeriodField.sendKeys(Keys.ENTER);
         return this;
     }
 }
