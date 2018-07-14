@@ -1,0 +1,281 @@
+{
+  "testEstimateApprovedEventCreation": [
+    {
+      "rowID": "testEstimateApprovedEventCreation.01",
+      "description": "Test Case 19250:\"Estimate approved\" event creation",
+      "eventName": "Estimate Approved",
+      "alertName": "Test estimate",
+      "firstConditionName": "Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Completed",
+        "InspectionType",
+        "Status"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        ""
+      ]
+    }
+  ],
+
+  "testEstimateDeclineEventCreation": [
+    {
+      "rowID": "testEstimateDeclineEventCreation.01",
+      "description": "Test Case 19282:\"Estimate decline\" event creation",
+      "eventName": "Estimate Declined",
+      "alertName": "Test Estimate Decline",
+      "firstConditionName": "Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Completed",
+        "InspectionType",
+        "Status"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        ""
+      ]
+    }
+  ],
+
+  "testNewInspectionEventCreation": [
+    {
+      "rowID": "testNewInspectionEventCreation.01",
+      "description": "Test Case 19283:\"New Inspection\" event creation",
+      "eventName": "New Inspection",
+      "alertName": "Test New Inspection",
+      "firstConditionName": "Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Completed",
+        "InspectionType",
+        "Status"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        ""
+      ]
+    }
+  ],
+
+  "test60MinToTargetTimeEventCreation": [
+    {
+      "rowID": "test60MinToTargetTimeEventCreation.01",
+      "description": "Test Case 19384:\"60 min to target time\" event creation",
+      "eventName": "60 Min to Target Time",
+      "alertName": "Test 60 Min to Target Time",
+      "firstConditionName": "Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Approved",
+        "Order Status",
+        "Status Reason"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        ""
+      ]
+    }
+  ],
+
+  "testHighPriorityROEventCreation": [
+    {
+      "rowID": "testHighPriorityROEventCreation.01",
+      "description": "Test Case 19563:\"High Priority RO\" event creation",
+      "eventName": "High Priority RO",
+      "alertName": "Test High Priority RO",
+      "firstConditionName": "Client Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Approved",
+        "Order Status",
+        "Status Reason",
+        "Phase",
+        "Repair Location",
+        "Repair Status",
+        "Target Date",
+        "Area",
+        "Employee Name",
+        "Team"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty",
+        "equals",
+        "notEmpty",
+        "equals",
+        "empty",
+        "contains",
+        "contains",
+        "contains"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        "",
+        "start",
+        "",
+        "1",
+        "",
+        "Int",
+        "Int",
+        "Int"
+      ]
+    }
+  ],
+
+  "testInvoiceCreatedEventCreation": [
+    {
+      "rowID": "testInvoiceCreatedEventCreation.01",
+      "description": "Test Case 19564:\"Invoice Created\" event creation",
+      "eventName": "Invoice Created",
+      "alertName": "Test Invoice Created",
+      "firstConditionName": "Client Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Approved",
+        "Order Status",
+        "Status Reason",
+        "Phase",
+        "Repair Location",
+        "Repair Status",
+        "Target Date",
+        "Area",
+        "Employee Name",
+        "Team"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty",
+        "equals",
+        "notEmpty",
+        "equals",
+        "empty",
+        "contains",
+        "contains",
+        "contains"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        "",
+        "start",
+        "",
+        "1",
+        "",
+        "Int",
+        "Int",
+        "Int"
+      ]
+    }
+  ],
+
+  "testNewRepairOrderEventCreation": [
+    {
+      "rowID": "testNewRepairOrderEventCreation.01",
+      "description": "Test Case 19567:\"New Repair Order\" event creation",
+      "eventName": "New Repair Order",
+      "alertName": "Test New Repair Order",
+      "firstConditionName": "Client Name",
+      "firstConditionType": "equals",
+      "firstConditionCriterion": "Inttest",
+
+      "firstConditionNames": [
+        "Amount",
+        "Approved",
+        "Order Status",
+        "Status Reason",
+        "Phase",
+        "Repair Location",
+        "Repair Status",
+        "Target Date",
+        "Area",
+        "Employee Name",
+        "Team"
+      ],
+      "firstConditionTypes": [
+        "equals",
+        "moreThan",
+        "contains",
+        "empty",
+        "equals",
+        "notEmpty",
+        "equals",
+        "empty",
+        "contains",
+        "contains",
+        "contains"
+      ],
+      "firstConditionCriteria": [
+        "10",
+        "1",
+        "Inte",
+        "",
+        "start",
+        "",
+        "1",
+        "",
+        "Int",
+        "Int",
+        "Int"
+      ]
+    }
+  ]
+}

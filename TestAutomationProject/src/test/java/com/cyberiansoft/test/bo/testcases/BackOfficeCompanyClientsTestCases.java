@@ -312,9 +312,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		newClientDialogWebPage.clickOKButton();
 		clientspage.searchClientByName(data.getTimeFrame());
-//		Assert.assertEquals(data.getTimeFrame(), clientspage.mouseMoveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo BUG
-//		clientspage.deleteClient(data.getTimeFrame());
-//		Assert.assertFalse(clientspage.isClientPresentInTable(data.getTimeFrame()));
+//		Assert.assertEquals(data.getTimeFrame(), clientspage.mouseMoveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo uncomment, if timeframe appears
+		clientspage.deleteClient(data.getTimeFrame());
+		Assert.assertFalse(clientspage.isClientPresentInTable(data.getTimeFrame()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
