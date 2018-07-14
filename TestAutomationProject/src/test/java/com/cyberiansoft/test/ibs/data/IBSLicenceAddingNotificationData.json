@@ -4,7 +4,10 @@
       "rowID": "verifyBillingProfilesAreEnabled.01",
       "description": "Test Case 72573:Payment Options 2.0: In ReconPro BO notification in licence adding Billing Profiles enabled",
       "sectionBillingProfiles": "Billing Profiles",
-      "sectionBillingProfileItems": "Billing Profile Items"
+      "sectionBillingProfileItems": "Billing Profile Items",
+      "effectiveDate": "July 2009",
+      "expirationDate": "July 2030",
+      "alertText": "By click \"OK\" you are adding an additional license to your application. There may be additional monthly charges based on your agreement."
     }
   ],
 
@@ -19,7 +22,7 @@
   "verifyClientAgreementsAreSuspended": [
     {
       "rowID": "verifyClientAgreementsAreSuspended.01",
-      "description": "Payment Options 2.0: In ReconPro BO notification in licence adding Client Agreement Suspended",
+      "description": "Test Case 72577:Payment Options 2.0: In ReconPro BO notification in licence adding Client Agreement Suspended",
       "sectionClientAgreements": "Client Agreements"
     }
   ],
@@ -29,7 +32,28 @@
       "rowID": "verifyBillingProfilesAreDisabled.01",
       "description": "Test Case 72578:Payment Options 2.0: In ReconPro BO notification in licence adding Billing Profiles disabled",
       "sectionBillingProfiles": "Billing Profiles",
-      "sectionBillingProfileItems": "Billing Profile Items"
+      "effectiveDate": "July 2009",
+      "expirationDate": "July 2030"
+    }
+  ],
+
+  "setupSupportForPaymentTermYearly": [
+    {
+      "rowID": "setupSupportForPaymentTermYearly.01",
+      "description": "Test Case 72576:Payment Options 2.0: Support for Payment Term - Yearly",
+      "sectionBillingProfiles": "Billing Profiles",
+      "sectionBillingProfileItems": "Billing Profile Items",
+      "yearly": "Yearly"
+    }
+  ],
+
+  "setupSupportForPaymentTermMonthly": [
+    {
+      "rowID": "setupSupportForPaymentTermMonthly.01",
+      "description": "Test Case 73650:Payment Options 2.0: Support for Payment Term - Monthly",
+      "sectionBillingProfiles": "Billing Profiles",
+      "sectionBillingProfileItems": "Billing Profile Items",
+      "monthly": "Monthly"
     }
   ]
 }

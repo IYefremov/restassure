@@ -69,12 +69,12 @@ public class BaseTestCase {
         if (result.isSuccess()) {
             BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
             IBSDashboardPage ibsDashboardPage = PageFactory.initElements(webdriver, IBSDashboardPage.class);
-            if (!webdriver.getCurrentUrl().contains(BOConfigInfo.getInstance().getBackOfficeURL())) {
+            if (!webdriver.getCurrentUrl().contains("reconpro")) {
                 goToWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
+                try {
+                    backOfficeHeader.clickLogout();
+                } catch (WebDriverException ignored) {}
             }
-            try {
-                backOfficeHeader.clickLogout();
-            } catch (WebDriverException ignored) {}
             try {
                 goToWebPage(IBSConfigInfo.getInstance().getIbsUrl());
                 ibsDashboardPage.clickLogoutButton();

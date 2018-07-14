@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.WebTable;
+import com.cyberiansoft.test.ibs.pageobjects.webpages.BasePage;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
-public class ActiveDevicesWebPage extends BaseWebPage {
+public class ActiveDevicesWebPage extends BasePage {
 
 	@FindBy(xpath = "//a[text()='Search']")
 	private WebElement searchbtn;
@@ -90,6 +91,10 @@ public class ActiveDevicesWebPage extends BaseWebPage {
 	    return this;
     }
 
+    /**
+     * selects Random license number
+     * @return
+     */
 	public String selectLicenseNumber() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(licenseField)).click();
@@ -99,16 +104,14 @@ public class ActiveDevicesWebPage extends BaseWebPage {
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By
                 .xpath("//div[@id='ctl00_ctl00_Content_Main_ctl00_ctl01_Card_cbFreeLicenses_DropDown']//li"), 1));
         String license = licenseDropDownOptions.get(RandomUtils.nextInt(1, 10)).getText();
-        wait.until(ExpectedConditions.elementToBeClickable(licenseField)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(licenseField)).sendKeys(license);
-        licenseField.sendKeys(Keys.ENTER);
+        selectLicenseNumber(license);
         return license;
     }
 
 	public ActiveDevicesWebPage selectLicenseNumber(String license) {
         wait.until(ExpectedConditions.elementToBeClickable(licenseField)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(licenseField)).sendKeys(license);
-        licenseField.submit();
+        licenseField.sendKeys(Keys.ENTER);
         return this;
     }
 
@@ -132,9 +135,28 @@ public class ActiveDevicesWebPage extends BaseWebPage {
 	    try {
             while (wait.until(ExpectedConditions.visibilityOf(device)).isDisplayed()) {
                 wait.until(ExpectedConditions.elementToBeClickable(deviceDeleteButton)).click();
-                driver.switchTo().alert().accept();
+                handleAlert();
                 driver.switchTo().defaultContent();
             }
         } catch (Exception ignored) {}
+    }
+
+    public boolean isAlertNotificationDisplayed() {
+	    try {
+            wait.until(ExpectedConditions.alertIsPresent());
+            return true;
+        } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+        }
+    }
+
+    public String getAlertTextDisplayed() {
+	    try {
+            return driver.switchTo().alert().getText();
+        } catch (Exception e) {
+	        e.printStackTrace();
+        }
+        return null;
     }
 }

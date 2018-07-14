@@ -100,4 +100,12 @@ public abstract class BasePage {
         waitABit(500);
         return this;
     }
+
+    public BasePage handleAlert() {
+        driver.switchTo().alert().accept();
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
+        } catch (Exception ignored) {}
+        return this;
+    }
 }
