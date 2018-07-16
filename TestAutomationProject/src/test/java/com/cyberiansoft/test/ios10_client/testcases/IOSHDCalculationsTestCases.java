@@ -98,6 +98,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 				iOSInternalProjectConstants.INSP_NOTLA_TS_INSPTYPE);
 		VehicleScreen vehiclescreen = new VehicleScreen();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		ClaimScreen claimScreen = vehiclescreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, ClaimScreen.class);
 		VisualInteriorScreen visualinteriorscreen = claimScreen.selectNextScreen(VisualInteriorScreen
 					.getVisualInteriorCaption(), VisualInteriorScreen.class);
@@ -117,17 +118,16 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		vehiclescreeen.saveWizard();
-		String inpection = myinspectionsscreen.getFirstInspectionNumberValue();
-		myinspectionsscreen.selectInspectionForApprove(inpection);
+		myinspectionsscreen.selectInspectionForApprove(inspNumber);
 		//testlogger.log(LogStatus.INFO, "After approve", testlogger.addScreenCapture(createScreenshot(, iOSLogger.loggerdir)));
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen();
-		approveinspscreen.selectInspectionForApprove(inpection);
+		approveinspscreen.selectInspectionForApprove(inspNumber);
 		approveinspscreen.clickApproveAfterSelection();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
-        Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpection));
+        Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inspNumber));
 			
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -191,6 +191,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.selectFirstInspection();
 		myinspectionsscreen.clickEditInspectionButton();
 		VehicleScreen vehiclescreen = new VehicleScreen();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		VisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(VisualInteriorScreen
 				.getVisualInteriorCaption(), VisualInteriorScreen.class);
 		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Miscellaneous"));
@@ -216,7 +217,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		InspectionToolBar toolaber = new InspectionToolBar();
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));	
 		visualinteriorscreen.saveWizard();
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(_inspectionprice));
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		myinspectionsscreen.clickHomeButton();
 	}
 
@@ -1462,6 +1463,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		vehiclescreeen.selectNextScreen(VehicleScreen.getVehicleScreenCaption(), VehicleScreen.class);
 
 		vehiclescreeen.setVIN(VIN);
+
 		inspnumber47249 = vehiclescreeen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
@@ -1502,7 +1504,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$293.00");
 		pricematrix.saveWizard();
 		
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber47249), "$293.00");
 		myinspectionsscreen.clickHomeButton();
 	}
 	

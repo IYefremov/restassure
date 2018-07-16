@@ -1555,7 +1555,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$112.50");
 		pricematrix.saveWizard();
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$293.00");
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber47249), "$293.00");
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -2414,7 +2414,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickSaveFilterDialogButton();
 				
 		Assert.assertEquals(myinspectionsscreen.getFirstInspectionAprovedPriceValue(), "$0.00");
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$2,638.00");		
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspectionnumber), "$2,638.00");
 		myinspectionsscreen.clickHomeButton();		
 	}
 	

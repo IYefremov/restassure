@@ -269,6 +269,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.selectFirstInspection();
 		myinspectionsscreen.clickEditInspectionButton();
 		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+        final String inspNumber = vehiclescreen.getInspectionNumber();
 		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(RegularVisualInteriorScreen
 				.getVisualInteriorCaption(), RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
@@ -297,7 +298,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		visualinteriorscreen.clickServicesBackButton();
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		visualinteriorscreen.saveWizard();
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(_inspectionprice));
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		myinspectionsscreen.clickHomeButton();
 	}
 
@@ -385,18 +386,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
+        final String inspNumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.saveWizard();
-		String inspection = myinspectionsscreen.getFirstInspectionNumberValue();
-		myinspectionsscreen.selectInspectionForApprove(inspection);
+		myinspectionsscreen.selectInspectionForApprove(inspNumber);
 		// approveinspscreen.selectInspectionToApprove();
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
-		approveinspscreen.selectInspection(inspection);
+		approveinspscreen.selectInspection(inspNumber);
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen = new RegularMyInspectionsScreen();
-		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inspection));
+		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inspNumber));
 		myinspectionsscreen.clickHomeButton();
 	}
 
@@ -423,14 +424,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
+        final String inspNumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.saveWizard();
-		String myinspetoarchive = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.clickHomeButton();
 
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.archiveInspection(myinspetoarchive,
+		myinspectionsscreen.archiveInspection(inspNumber,
 				"Reason 2");
-		Assert.assertTrue(myinspectionsscreen.checkInspectionDoesntExists(myinspetoarchive));
+		Assert.assertTrue(myinspectionsscreen.checkInspectionDoesntExists(inspNumber));
 		myinspectionsscreen.clickHomeButton();
 		
 	}
@@ -763,7 +764,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 
 		vehiclescreeen.saveWizard();
-		String inpection = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.clickHomeButton();
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
@@ -787,7 +787,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpection));
+		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpectionnumber));
 
 		myinspectionsscreen.clickHomeButton();
 		
@@ -817,9 +817,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-
 		vehiclescreeen.saveWizard();
-		String inpection = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.clickHomeButton();
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
@@ -844,7 +842,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpection));
+		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpectionnumber));
 
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -1085,7 +1083,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspnumber));
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(summ));
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber), PricesCalculations.getPriceRepresentation(summ));
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		
@@ -1704,6 +1702,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setType(_type);
 		vehiclescreeen.setStock(stock);
 		vehiclescreeen.setRO(_ro);
+        final String inspNumber = vehiclescreeen.getInspectionNumber();
 		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreeen.selectNextScreen(RegularVisualInteriorScreen.getVisualInteriorCaption(),
 				RegularVisualInteriorScreen.class);
 		visualinteriorscreen.clickServicesToolbarButton();
@@ -1841,7 +1840,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSave();
 		Helpers.getAlertTextAndAccept();
 		myinspectionsscreen = new RegularMyInspectionsScreen();
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), "$837.99");
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), "$837.99");
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -4735,9 +4734,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen();
 		teaminspectionsscreen.selectInspectionForEdit(inspectionnumber);
-		vehiclescreeen = new RegularVehicleScreen();
-		servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
-				RegularServicesScreen.class);
+		//vehiclescreeen = new RegularVehicleScreen();
+		//servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+		//		RegularServicesScreen.class);
+		servicesscreen = new RegularServicesScreen();
 		servicesscreen.clickSaveAsFinal();
 		teaminspectionsscreen = new RegularTeamInspectionsScreen();
 		Assert.assertTrue(teaminspectionsscreen.isInspectionIsApproveButtonExists(inspectionnumber));
@@ -6913,7 +6913,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 
 		questionsscreen = questionsscreen.selectNextScreen("Zayats Section2", RegularQuestionsScreen.class);
-		questionsscreen.selectAnswerForQuestion("Q1", "No - rate 0");
+		questionsscreen.selectAnswerForQuestionWithAdditionalConditions("Q1", "No - rate 0", "A1", "Deck Lid");
 
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);

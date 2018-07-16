@@ -695,9 +695,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-
 		vehiclescreeen.saveWizard();
-		String inpection = myinspectionsscreen.getFirstInspectionNumberValue();
+
 		myinspectionsscreen.clickHomeButton();
 		MainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
@@ -721,7 +720,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpection));
+		Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpectionnumber));
 
 		myinspectionsscreen.clickHomeButton();
 		
@@ -759,7 +758,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreeen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 
 		vehiclescreeen.saveWizard();
-		String inpection = myinspectionsscreen.getFirstInspectionNumberValue();
 		myinspectionsscreen.clickHomeButton();
 		MainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
@@ -784,7 +782,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpection));
+		Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inpectionnumber));
 
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -1038,7 +1036,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspnumber));
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionPriceValue(), PricesCalculations.getPriceRepresentation(summ));
+		Assert.assertEquals(inspnumber, PricesCalculations.getPriceRepresentation(summ));
 		
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
