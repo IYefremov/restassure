@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -86,12 +87,12 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextCustomersScreen clickAddInspectionButton() {	
-		tap(inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")));
+		tap(inspectionsscreen.findElement(By.xpath(".//*[@action='add']/i")));
 		BaseUtils.waitABit(1000);
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
-		if (inspectionsscreen.findElements(By.xpath(".//a[@action='add']/i")).size() > 0)
-			if (inspectionsscreen.findElement(By.xpath(".//a[@action='add']/i")).isDisplayed())
+		if (inspectionsscreen.findElements(By.xpath(".//*[@action='add']/i")).size() > 0)
+			if (inspectionsscreen.findElement(By.xpath(".//*[@action='add']/i")).isDisplayed())
 				tap(addinspectionbtn);
 		} catch (NoSuchElementException e) {
 			
@@ -101,7 +102,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public boolean isAddInspectionButtonVisible() {
-		return inspectionsscreen.findElement(By.xpath(".//a[@action='add']")).isDisplayed();
+		return inspectionsscreen.findElement(By.xpath(".//*[@action='add']")).isDisplayed();
 	}
 	
 	public VNextHomeScreen clickBackButton() {
@@ -256,7 +257,7 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(teaminspectiontab));
 		tap(teaminspectiontab);
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='button active' and @action='team']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
 	}
 	

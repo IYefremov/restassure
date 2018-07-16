@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -60,11 +61,11 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 		return workorderslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
 	}
 	
-	public VNextInspectionsMenuScreen clickOnWorkOrderByNumber(String wonumber) {
+	public VNextWorkOrdersMenuScreen clickOnWorkOrderByNumber(String wonumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
 		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
-		return new VNextInspectionsMenuScreen(appiumdriver);
+		return new VNextWorkOrdersMenuScreen(appiumdriver);
 	}
 	
 	public void selectWorkOrder(String wonumber) {
@@ -181,8 +182,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 
 	public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
-		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
 		customersscreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
@@ -190,8 +191,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 
 	public VNextWorkOrdersScreen changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
-		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
 		customersscreen.switchToRetailMode();
 		customersscreen.searchCustomerByName(newCustomer.getFullName());
 		customersscreen.selectCustomer(newCustomer);
@@ -201,8 +202,8 @@ public class VNextWorkOrdersScreen extends VNextBaseScreen {
 	}
 
 	public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
-		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
+		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(newWholesailCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);

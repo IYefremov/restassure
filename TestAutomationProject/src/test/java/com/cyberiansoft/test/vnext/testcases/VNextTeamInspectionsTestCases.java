@@ -11,6 +11,7 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -165,7 +166,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber));
+		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Team inspection exists: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -232,7 +233,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
-		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);		
+		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextViewScreen viewscreen = inspmenuscreen.clickViewInspectionMenuItem();
 		viewscreen.clickScreenBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);

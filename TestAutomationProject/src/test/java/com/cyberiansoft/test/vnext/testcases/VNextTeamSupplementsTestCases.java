@@ -1,31 +1,20 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.util.List;
-
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataclasses.InspectionStatuses;
+import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.InspectionStatuses;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
-import com.cyberiansoft.test.vnext.screens.VNextApproveServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextDeclineReasonScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import java.util.List;
 
 public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegistration {
 	

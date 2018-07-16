@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -81,10 +82,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-        VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        Assert.assertFalse(inspectionsMenuScreen.isChangeCustomerMenuPresent());
-        inspectionsMenuScreen.clickCloseInspectionMenuButton();
-        workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        Assert.assertFalse(workOrdersMenuScreen.isChangeCustomerMenuPresent());
+        workOrdersMenuScreen.clickCloseWorkOrdersMenuButton();
         workordersscreen.clickBackButton();
     }
 
@@ -106,8 +106,8 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
-        VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleinfoscreen.changeScreen("Services");
         VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
         inpsctionservicesscreen.selectService(workOrderData.getServiceName());
@@ -134,8 +134,8 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-        VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
         customersscreen.clickBackButton();
         workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
@@ -206,8 +206,8 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
-        VNextInspectionsMenuScreen inspectionsMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        VNextInspectionTypesList inspectionTypesList = inspectionsMenuScreen.clickCreateInvoiceMenuItem();
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        VNextInspectionTypesList inspectionTypesList = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
         inspectionTypesList.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

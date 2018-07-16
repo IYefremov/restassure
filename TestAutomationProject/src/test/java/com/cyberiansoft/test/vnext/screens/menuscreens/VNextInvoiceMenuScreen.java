@@ -1,15 +1,17 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextInvoiceMenuScreen extends VNextBaseScreen {
+public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 
 	@FindBy(xpath="//a[@data-name='email']")
 	private WebElement emailinvoicebtn;
@@ -17,7 +19,7 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@data-name='edit']")
 	private WebElement editinvoicebtn;
 	
-	@FindBy(xpath="//a[@handler='_approve']")
+	@FindBy(xpath="//a[@data-name='approve']")
 	private WebElement approveinvoicebtn;
 	
 	@FindBy(xpath="//a[@handler='_voidInvoice']")
@@ -38,69 +40,52 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@data-name='cancel']")
 	private WebElement invoicecancelmenubtn;
 	
-	@FindBy(xpath="//div[@class='actions-layer popup modal-in' and @data-menu='popup']")
-	private WebElement invoicemenuscreen;
-	
-	@FindBy(xpath="//div[@class='close-popup close-actions']")
-	private WebElement closebtn;
+	//@FindBy(xpath="//div[@class='actions-layer popup modal-in' and @data-menu='popup']")
+	//private WebElement invoicemenuscreen;
 	
 	public VNextInvoiceMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(invoicemenuscreen));
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.visibilityOf(invoicemenuscreen));
 	}
 	
 	public VNextEmailScreen clickEmailInvoiceMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(emailinvoicebtn));
-		tap(emailinvoicebtn);
+		clickMenuItem(emailinvoicebtn);
 		return new VNextEmailScreen(appiumdriver);
 	}
 	
 	public VNextApproveScreen clickApproveInvoiceMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(approveinvoicebtn));
-		tap(approveinvoicebtn);
+		clickMenuItem(approveinvoicebtn);
 		return new VNextApproveScreen(appiumdriver);
 	}
 
 	public void clickCancelInvoiceMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(invoicecancelmenubtn));
-		tap(invoicecancelmenubtn);
+		clickMenuItem(invoicecancelmenubtn);
 	}
 
 	public boolean isApproveInvoiceMenuItemExists() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(closebtn));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-name='approve']")));
 		return approveinvoicebtn.isDisplayed();
 	}
 	
 	public void clickVoidInvoiceMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(voidinvoicebtn));
-		tap(voidinvoicebtn);
+		clickMenuItem(voidinvoicebtn);
 	}
 	
 	public VNextChangeInvoicePONumberDialog clickInvoiceChangePONumberMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(invoicechangeponumbtn));
-		tap(invoicechangeponumbtn);
+		clickMenuItem(invoicechangeponumbtn);
 		return new VNextChangeInvoicePONumberDialog(appiumdriver);
 	}
 	
 	public VNextNotesScreen clickInvoiceNotesMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(invoicenotesbtn));
-		tap(invoicenotesbtn);
+		clickMenuItem(invoicenotesbtn);
 		return new VNextNotesScreen(appiumdriver);
 	}
 	
 	public void clickInvoiceRefreshPicturesMenuItem() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(invoicerfreshpicturesbtn));
-		tap(invoicerfreshpicturesbtn);
+		clickMenuItem(invoicerfreshpicturesbtn);
 	}
 	
 	public void refreshInvoicePictures() {
@@ -110,7 +95,7 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	}
 
 	public VNextPayInvoicesScreen clickPayInvoiceMenuItem() {
-		tap(invoicepaymenubtn);
+		clickMenuItem(invoicepaymenubtn);
 		return new VNextPayInvoicesScreen(appiumdriver);
 	}
 
@@ -123,12 +108,12 @@ public class VNextInvoiceMenuScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
-		tap(closebtn);
+		clickCloseMenuButton();
 		return new VNextInvoicesScreen(appiumdriver);
 	}
 
 	public VNextInvoiceInfoScreen clickEditInvoiceMenuItem() {
-		tap(editinvoicebtn);
+		clickMenuItem(editinvoicebtn);
 		return new VNextInvoiceInfoScreen(appiumdriver);
 	}
 }
