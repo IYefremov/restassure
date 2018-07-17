@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BOoperationsServiceRequestsData {
+public class BOoperationsSRdata {
 
     @JsonProperty("teamName")
     private String teamName;
@@ -25,6 +25,15 @@ public class BOoperationsServiceRequestsData {
 
     @JsonProperty("roNum")
     private String roNum;
+
+    @JsonProperty("ro")
+    private String ro;
+
+    @JsonProperty("stockNum")
+    private String stockNum;
+
+    @JsonProperty("stock123")
+    private String stock123;
 
     @JsonProperty("newServiceRequest")
     private String newServiceRequest;
@@ -140,6 +149,27 @@ public class BOoperationsServiceRequestsData {
     @JsonProperty("notificationDropDown")
     private String notificationDropDown;
 
+    @JsonProperty("alert")
+    private String alert;
+
+    @JsonProperty("selected")
+    private String selected;
+
+    @JsonProperty("testDescription")
+    private String testDescription;
+
+    public String getTestDescription() {
+        return testDescription;
+    }
+
+    public String getAlert() {
+        return alert;
+    }
+
+    public String getSelected() {
+        return selected;
+    }
+
     public String getTeamName() {
         return teamName;
     }
@@ -162,6 +192,18 @@ public class BOoperationsServiceRequestsData {
 
     public String getRoNum() {
         return roNum;
+    }
+
+    public String getRo() {
+        return ro;
+    }
+
+    public String getStockNum() {
+        return stockNum;
+    }
+
+    public String getStock123() {
+        return stock123;
     }
 
     public String getNewServiceRequest() {

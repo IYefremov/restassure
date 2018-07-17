@@ -514,5 +514,359 @@
       "technician": "Automation 2 Appointment Tech",
       "emailKeyWord": "Service Request with RO#"
     }
+  ],
+
+  "testMiscellaneousEventsAppointmentCreated": [
+    {
+      "rowID": "testMiscellaneousEventsAppointmentCreated.01",
+      "description": "Test Case 31234:Miscellaneous - Events: Appointment Created",
+      "event": "Appointment Created",
+      "alert": "test appointment Appointment Created",
+      "selected": "test appointment creation/fail",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsAppointmentFailed": [
+    {
+      "rowID": "testMiscellaneousEventsAppointmentFailed.01",
+      "description": "Test Case 31296:Miscellaneous - Events: Appointment Failed",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "test appointment creation/fail",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestAppointmentCreated": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestAppointmentCreated.01",
+      "description": "Test Case 59702:Miscellaneous - Events: Service Request Appointment Created",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was not checked in"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestAcceptedByTech": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestAcceptedByTech.01",
+      "description": "Test Case 59701:Miscellaneous - Events: Service Request Accepted By Tech",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#  was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestEstimationCreated": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestEstimationCreated.01",
+      "description": "Test Case 59703:Miscellaneous - Events: Service Request Estimation Created",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestIsMonitored": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestIsMonitored.01",
+      "description": "Test Case 59704:Miscellaneous - Events: Service Request Is Monitored",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestOrderCreated": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestOrderCreated.01",
+      "description": "Test Case 59705:Miscellaneous - Events: Service Request Order Created",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestRejected": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestRejected.01",
+      "description": "Test Case 59706:Miscellaneous - Events: Service Request Rejected",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "was created"
+    }
+  ],
+
+  "testMiscellaneousEventsServiceRequestCheckIn": [
+    {
+      "rowID": "testMiscellaneousEventsServiceRequestCheckIn.01",
+      "description": "Test Case 59636:Events: SR Check In",
+      "event": "Service Request Checked In",
+      "alert": "test appointment SR Checked In",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Zak_Request_Type",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "Service Request Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateSearchIssue": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateSearchIssue.01",
+      "description": "Test Case 63581:Company - Service Request Type: Duplicate search Issue",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN #",
+      "stockNum": "Stock #",
+      "roNum": "RO #"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateNotificationRO": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateNotificationRO.01",
+      "description": "Test Case 64129:Company - Service Request Type: Duplicate Notification RO",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateErrorVIN": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateErrorVIN.01",
+      "description": "Test Case 64124:Company - Service Request Type: Duplicate Error VIN",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateErrorRO": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateErrorRO.01",
+      "description": "Test Case 64125:Company - Service Request Type: Duplicate Error RO",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateNotificationVIN": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateNotificationVIN.01",
+      "description": "Task 64149:Automate Test Case 64128:Company - Service Request Type: Duplicate Notification VIN",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateErrorStock": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateErrorStock.01",
+      "description": "Task 64147:Automate Test Case 64126:Company - Service Request Type: Duplicate Error STOCK",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestTypeDuplicateNotificationStock": [
+    {
+      "rowID": "testServiceRequestTypeDuplicateNotificationStock.01",
+      "description": "Task 64148:Automate Test Case 64127:Company - Service Request Type: Duplicate Notification STOCK",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "clientName": "Alex SASHAZ",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
+  ],
+
+  "testServiceRequestUndoReject": [
+    {
+      "rowID": "testServiceRequestUndoReject.01",
+      "description": "Test Case 66190:Operation - Service Request - Undo Rejected",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "Vit_All_Services",
+      "customer": "Automation Wholesale",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Default team",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "assignedTo": "Vitaliy Kupchynskyy",
+      "clientName": "Alex SASHAZ",
+      "make": "Honda",
+      "model": "Accord",
+      "insurance": "Oranta",
+      "testDescription": "test",
+      "poNum": "D525",
+      "roNum": "Dfg 25",
+      "VIN": "1HGCG55691A267167"
+    }
+  ],
+
+  "testServiceRequestAdviserListing": [
+    {
+      "rowID": "testServiceRequestAdviserListing.01",
+      "description": "Test Case 65611:Operation - Service Request - Adviser Listing",
+      "event": "Appointment Failed",
+      "alert": "test appointment Appointment Failed",
+      "selected": "My Service Requests",
+      "serviceRequestType": "01_Alex2SRT",
+      "customer": "001 - Test Company",
+      "notificationDropDown": "ServiceRequest Checked In",
+      "eventNewName": "test appointment SR Checked In",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "technician": "Automation 2 Appointment Tech",
+      "emailKeyWord": "Service Request with RO#",
+      "testDescription": "tes",
+      "VIN": "VIN",
+      "stockNum": "Stock",
+      "roNum": "RO",
+      "stock123": "123"
+    }
   ]
 }

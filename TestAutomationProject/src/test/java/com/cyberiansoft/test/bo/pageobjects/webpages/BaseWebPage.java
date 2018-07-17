@@ -235,8 +235,13 @@ public abstract class BaseWebPage {
         try{
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-        } catch(TimeoutException ignored){
+        } catch(WebDriverException ignored){
             waitABit(5000);
         }
+    }
+
+    protected BaseWebPage clickWithJS(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        return this;
     }
 }

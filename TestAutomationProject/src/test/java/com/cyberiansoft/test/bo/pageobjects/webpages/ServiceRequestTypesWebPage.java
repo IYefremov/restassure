@@ -250,10 +250,8 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public boolean isAllowUndoRejectChecked() {
 		System.out.println(allowUndoCheckBox.getAttribute("checked"));
-		if (Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked")))
-			return true;
-		return false;
-	}
+        return Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked"));
+    }
 
     public void verifyServiceRequestsTypesDonNotExist(String srtype, String srtypeedited) {
         while (isServiceRequestTypeExists(srtype)) {
