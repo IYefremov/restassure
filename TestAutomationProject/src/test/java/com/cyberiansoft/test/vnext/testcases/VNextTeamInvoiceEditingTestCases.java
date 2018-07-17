@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.json.simple.JSONObject;
@@ -450,7 +451,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         for (String woNumber : workOrders)
             invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
 
-        /*invoiceinfoscreen.deattechWorkOrdersFromInvoice(workOrders);
+        invoiceinfoscreen.deattechWorkOrdersFromInvoice(workOrders);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
@@ -466,7 +467,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
         for (String woNumber : workOrdersToAdd)
             Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.clickBackButton();*/
+        workordersscreen.clickBackButton();
     }
 
     public String createWorkOrder(WorkOrderData woData) {

@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -32,7 +34,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-		VNextInspectionsMenuScreen womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		VNextWorkOrdersMenuScreen womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		womenu.clickDeleteWorkOrderMenuButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogDontDeleteButton();
@@ -83,9 +85,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		VNextWorkOrdersScreen workordersscreen = claiminfoscreen.saveWorkOrderViaMenu();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-		VNextInspectionsMenuScreen womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		VNextWorkOrdersMenuScreen womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		Assert.assertFalse(womenu.isDeleteWorkOrderMenuButtonExists());
-		womenu.clickCloseInspectionMenuButton();
+		womenu.clickCloseWorkOrdersMenuButton();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		workordersscreen.clickBackButton();
 		
@@ -112,8 +114,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-		System.out.println("+++++++++++++" + woNumber);
-		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
 		
 		workordersscreen.switchToTeamWorkordersView();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
@@ -163,8 +164,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.switchToTeamWorkordersView();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		workordersscreen.switchToMyWorkordersView();
-		VNextInspectionsMenuScreen womenuscreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-		vehicleinfoscreen = womenuscreen.clickEditInspectionMenuItem();
+		VNextWorkOrdersMenuScreen womenuscreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		vehicleinfoscreen = womenuscreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
@@ -286,8 +287,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		workordersscreen.switchToMyWorkordersView();
-		inspectionmenuscreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-		inspectionmenuscreen.clickDeleteWorkOrderMenuButton();
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		workOrdersMenuScreen.clickDeleteWorkOrderMenuButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogDeleteButton();
 		workordersscreen = new VNextWorkOrdersScreen(appiumdriver);

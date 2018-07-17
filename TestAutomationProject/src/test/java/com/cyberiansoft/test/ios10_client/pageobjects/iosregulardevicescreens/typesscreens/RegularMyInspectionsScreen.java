@@ -115,11 +115,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		clickApproveInspectionButton();
 	}
 	
-	public void openInspectionSummary(String inspnumber) {
-		clickOnInspection(inspnumber);
-		appiumdriver.findElementByAccessibilityId("Summary").click();
-	}
-	
 	public void selectEmployee(String employee) {
         FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(employee)));
@@ -228,11 +223,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
         FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsTable")));
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionNumber']")).getAttribute("label");
-	}
-	
-	public String getFirstInspectionPriceValue() {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
-		//return firstinspectionprice.getAttribute("label");
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {

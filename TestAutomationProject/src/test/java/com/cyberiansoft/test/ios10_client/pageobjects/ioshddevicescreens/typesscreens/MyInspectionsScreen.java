@@ -261,14 +261,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public void selectFirstInspection() {
 		appiumdriver.findElementByXPath(firstinspxpath).click();
 	}
-
-	public String getFirstInspectionNumberValue() {		
-		return appiumdriver.findElementByXPath(firstinspxpath + "/XCUIElementTypeStaticText[1]").getAttribute("label");
-	}
-	
-	public String getFirstInspectionPriceValue() {		
-		return appiumdriver.findElementByXPath(firstinspxpath + "/XCUIElementTypeStaticText[3]").getAttribute("label");
-	}
 	
 	public String getInspectionApprovedPriceValue(String inspnumber) {	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -276,10 +268,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		        .xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspnumber + "']")));
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspnumber + "']").findElement(MobileBy.name("labelInspectionApprovedAmount")).getAttribute("value");
 	}
-	
-	public String getFirstInspectionTotalPriceValue() {		
-		return appiumdriver.findElementByXPath(firstinspxpath + "/XCUIElementTypeStaticText[4]").getAttribute("label");
-	}
+
 	
 	public String getInspectionTotalPriceValue(String inspnumber) {	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

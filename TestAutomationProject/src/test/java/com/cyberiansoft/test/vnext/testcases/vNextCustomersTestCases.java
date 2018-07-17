@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
