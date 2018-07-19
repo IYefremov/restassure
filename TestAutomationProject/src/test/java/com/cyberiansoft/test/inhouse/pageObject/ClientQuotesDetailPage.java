@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.inhouse.pageObject;
 
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import io.qameta.allure.Step;
@@ -13,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -202,7 +204,7 @@ public class ClientQuotesDetailPage extends BasePage {
         return links;
     }
 
-    public String getAgreementApproveLink() throws IOException {
+    public String getAgreementApproveLink() throws Exception {
 //        String mailContent = null;
 //        try {
 //            mailContent = MailChecker.getUserMailContentFromSpam();
@@ -221,16 +223,12 @@ public class ClientQuotesDetailPage extends BasePage {
 //        }
 //        return result;
 
-        String mailmessage = "";
-        for (int i = 0; i < 4; i++) {
-            if (!com.cyberiansoft.test.ios10_client.utils.MailChecker.searchSpamEmail(userName, userPassword, "Agreement", "noreply@repair360.net", "https://goo.gl")) {
-                waitABit(60 * 500);
-            } else {
-                mailmessage = com.cyberiansoft.test.ios10_client.utils.MailChecker.searchEmailAndGetMailMessage(userName, userPassword, "Agreement", "noreply@repair360.net");
-                break;
-            }
-        }
-        return mailmessage;
+        EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userName,
+                userPassword, EmailFolder.INBOX);
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject("Agreement")
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
+        return emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
     }
 
     public String getMailContentFromSpam() {

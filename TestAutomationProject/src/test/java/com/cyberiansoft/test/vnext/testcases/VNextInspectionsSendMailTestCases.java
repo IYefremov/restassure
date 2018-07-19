@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -13,7 +14,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -37,7 +37,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 	
 	@Test(testName= "Test Case 66998:Verify correct Customer Info is shown on Printing", 
 			description = "Verify correct Customer Info is shown on Printing")
-	public void testVerifyCorrectCustomerInfoIsShownOnPrinting() throws IOException {
+	public void testVerifyCorrectCustomerInfoIsShownOnPrinting() throws Exception {
 
 		final String vinnumber = "TEST";
 		
@@ -57,43 +57,31 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
+		emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
-		
-	
-		boolean search = false;
+
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		for (int i= 0; i < 5; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
-					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
-					inspectionreportfilenname)) {
-				BaseUtils.waitABit(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
-			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + inspnumber + " inspection");
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
+		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
 	}
 	
 	@Test(testName= "Test Case 66999:Verify 'Back' button doesn't save info for Vehicle Part - Printing", 
 			description = "Verify 'Back' button doesn't save info for Vehicle Part - Printing")
-	public void testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting() throws IOException {
+	public void testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting() throws Exception {
 
 		final String vinnumber = "TEST";
 		
@@ -134,45 +122,35 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
+		emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
-		
-		boolean search = false;
+
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		for (int i= 0; i < 5; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
-					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
-					inspectionreportfilenname)) {
-				BaseUtils.waitABit(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
-			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
-			Assert.assertTrue(pdftext.contains(matrixservice));
-			Assert.assertFalse(pdftext.contains(vehiclepartname));
-			Assert.assertFalse(pdftext.contains(vehiclepartname2));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + inspnumber + " inspection");
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
+		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
+		Assert.assertTrue(pdftext.contains(matrixservice));
+		Assert.assertFalse(pdftext.contains(vehiclepartname));
+		Assert.assertFalse(pdftext.contains(vehiclepartname2));
+
 	}
 	
 	@Test(testName= "Test Case 67000:Verify hardware 'Back' button doesn't save info for Vehicle Part - Printing", 
 			description = "Verify hardware 'Back' button doesn't save info for Vehicle Part - Printing")
-	public void testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting() throws IOException {
+	public void testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting() throws Exception {
 
 		final String vinnumber = "TEST";
 		
@@ -217,41 +195,30 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
-		
-		boolean search = false;
+
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		for (int i= 0; i < 5; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
-					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
-					inspectionreportfilenname)) {
-				BaseUtils.waitABit(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
-			Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
-			Assert.assertTrue(pdftext.contains(", " + customerstateShort));
-			Assert.assertTrue(pdftext.contains(matrixservice));
-			Assert.assertFalse(pdftext.contains(vehiclepartname));
-			Assert.assertFalse(pdftext.contains(vehiclepartname2));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + inspnumber + " inspection");
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress2()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
+		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
+		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
+		Assert.assertTrue(pdftext.contains(matrixservice));
+		Assert.assertFalse(pdftext.contains(vehiclepartname));
+		Assert.assertFalse(pdftext.contains(vehiclepartname2));
 	}
 
 	@Test(testName= "Test Case 67001:PRINT - Validate 'Quantity' column is shown on device printout form for money services", 
 			description = "Validate 'Quantity' column is shown on device printout form for money services")
-	public void testValidateQuantityColumnIsShownOnDevicePrintoutFormForMoneyServices() throws IOException {
+	public void testValidateQuantityColumnIsShownOnDevicePrintoutFormForMoneyServices() throws Exception {
 
 		final String vinnumber = "TEST";
 		
@@ -289,32 +256,21 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
-		
-		boolean search = false;
+
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		for (int i= 0; i < 5; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), 
-					"Estimate #" + inspnumber + " from", "Repair360@cyberiansoft.com", 
-					inspectionreportfilenname)) {
-				BaseUtils.waitABit(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		for (int i = 0; i < moneyservices.length; i++) {
+			Assert.assertTrue(pdftext.contains(moneyservices[i]));
+			Assert.assertTrue(pdftext.contains(moneyservicesquantities[i]));
+			Assert.assertTrue(pdftext.contains(moneyservicesamounts[i]));
 		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			for (int i = 0; i < moneyservices.length; i++) {
-				Assert.assertTrue(pdftext.contains(moneyservices[i]));
-				Assert.assertTrue(pdftext.contains(moneyservicesquantities[i]));
-				Assert.assertTrue(pdftext.contains(moneyservicesamounts[i]));
-			}
-			Assert.assertTrue(pdftext.contains(total));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + inspnumber + " inspection");
-		}
+		Assert.assertTrue(pdftext.contains(total));
 	}
 }

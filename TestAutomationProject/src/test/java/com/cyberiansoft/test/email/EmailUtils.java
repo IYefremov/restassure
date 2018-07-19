@@ -262,6 +262,25 @@ public class EmailUtils {
         return !message.isSet(Flags.Flag.SEEN);
     }
 
+    public String waitForMessageWithSubjectInFolderAndGetMailMessage(MailSearchParametersBuilder mailSearchParameters) throws Exception {
+        boolean found = false;
+        boolean timeout = false;
+        String mailMessage = null;
+        long waitedTime = 0;
+        while (!found && !timeout) {
+            found = isMessageInFolder(mailSearchParameters);
+            if (!found)
+                if (waitedTime < mailSearchParameters.getWaitTimeForMessage().toMillis()) {
+                    BaseUtils.waitABit(mailSearchParameters.getWaitIntervalTime().toMillis());
+                    waitedTime = waitedTime + mailSearchParameters.getWaitIntervalTime().toMillis();
+                } else
+                    timeout = true;
+            else
+                mailMessage = getMessageContent(getMessages(mailSearchParameters)[0]);
+        }
+        return mailMessage;
+    }
+
     public boolean waitForMessageWithSubjectInFolder(MailSearchParametersBuilder mailSearchParameters) throws Exception  {
         boolean found = false;
         boolean timeout = false;
@@ -296,7 +315,7 @@ public class EmailUtils {
 
 
 
-    public String getMessageContent(Part p) throws MessagingException, IOException {
+    private String getMessageContent(Part p) throws MessagingException, IOException {
         if (p.isMimeType("text/*")) {
             String s = (String) p.getContent();
             return s;
