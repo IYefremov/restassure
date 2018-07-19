@@ -70,7 +70,8 @@ public class EmailUtils {
             return this.subjectKeyword;
         }
 
-        public MailSearchParametersBuilder withAttachmentFileName(String attachmentFileName) {
+        public MailSearchParametersBuilder withSubjectAndAttachmentFileName(String subjectKeyword, String attachmentFileName) {
+            this.subjectKeyword = subjectKeyword;
             this.attachmentFileName = attachmentFileName;
             return this;
         }
@@ -261,7 +262,7 @@ public class EmailUtils {
         return !message.isSet(Flags.Flag.SEEN);
     }
 
-    public boolean waitForMessageWithSubjectAndAttachmentFileInFolder(MailSearchParametersBuilder mailSearchParameters) throws Exception  {
+    public boolean waitForMessageWithSubjectInFolder(MailSearchParametersBuilder mailSearchParameters) throws Exception  {
         boolean found = false;
         boolean timeout = false;
         long waitedTime = 0;

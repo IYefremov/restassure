@@ -192,8 +192,9 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoicenumbertc48094)
-					.withAttachmentFileName(inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(invoicenumbertc48094, inspectionreportfilenname)
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invoicenumbertc48094);
 
 		File pdfdoc = new File(inspectionreportfilenname);
@@ -201,9 +202,6 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
 		Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
 
-
-		BaseUtils.waitABit(60*1000);
-		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 	}
 	
 	@Test(testName= "Test Case 49787:vNext: Create Invoice with set PO", 

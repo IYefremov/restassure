@@ -700,9 +700,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoiceNumber)
-					.withAttachmentFileName(invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndAttachmentFileInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+			.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -810,9 +810,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoiceNumber)
-					.withAttachmentFileName(invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndAttachmentFileInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -868,9 +868,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoiceNumber)
-					.withAttachmentFileName(invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndAttachmentFileInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -1034,9 +1034,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoiceNumber)
-					.withAttachmentFileName(invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndAttachmentFileInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().
+					withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -1259,9 +1259,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
 
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoiceNumber)
-					.withAttachmentFileName(invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndAttachmentFileInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
