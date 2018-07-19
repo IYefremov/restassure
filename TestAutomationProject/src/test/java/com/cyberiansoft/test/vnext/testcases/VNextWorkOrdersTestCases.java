@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

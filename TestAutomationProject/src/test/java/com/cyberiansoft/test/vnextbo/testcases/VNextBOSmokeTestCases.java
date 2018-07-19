@@ -2,7 +2,10 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOErrorMessages;
@@ -11,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
@@ -78,7 +80,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 43046:vNext: create user with Web access")
-	public void testCreateUserWithWebAccess() throws IOException {
+	public void testCreateUserWithWebAccess() throws Exception {
 		
 		final String firstname = "TestTech";
 		final String lastname = "QA";
@@ -99,7 +101,15 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
 		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
-		String confirmationurl = MailChecker.getUserRegistrationURL();
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
 		
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
@@ -119,32 +129,22 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 41403:vNext: Verify user can change password using link from the email")
-	public void testVerifyUserCanChangePasswordUsingLinkFromTheEmail() throws IOException {
+	public void testVerifyUserCanChangePasswordUsingLinkFromTheEmail() throws Exception {
 		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
 		loginpage = forgotpswpage.sendConfirmationMail(usermail);
-		
-		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail, "reset your password")) {
-				loginpage.waitABit(60*500);
-			} else {
-				search = true;
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail);
-				break;
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========1" + mailmessage);
-			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			System.out.println("+++++++" + confirmationurl);
-		}
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		String confirmationurl = confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+
 		loginpage.waitABit(6000);
 		webdriver.navigate().to(confirmationurl);
 		loginpage.waitABit(6000);
@@ -163,7 +163,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	
 	@Test(description = "Test Case 41410:vNext: Verify change password page is not opened when user is logged in")
 	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn(String userName, String userPassword) throws IOException, AWTException {
+	public void testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn(String userName, String userPassword) throws Exception {
 		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
@@ -175,26 +175,16 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		leftmenu.selectUsersMenu();
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
 		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 4; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com", "reset your password")) {
-				loginpage.waitABit(60*500);
-			} else {
-				search = true;
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", "ReconPro@cyberiansoft.com");
-				break;
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========2" + mailmessage);
-			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			System.out.println("+++++++" + confirmationurl);
-		}
-		//webdriver.navigate().to(confirmationurl);
+		String confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+
 		leftmenu.waitABit(5000);
 		
 		
@@ -214,33 +204,22 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	
 	@Test(description = "Test Case 41412:vNext: Verify validation messages on change password page")
 	@Parameters({ "user.name", "user.psw" })
-	public void testVerifyValidationMessagesOnChangePasswordPage(String userName, String userPassword) throws IOException {
+	public void testVerifyValidationMessagesOnChangePasswordPage(String userName, String userPassword) throws Exception {
 		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
 		loginpage = forgotpswpage.sendConfirmationMail(usermail);
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		
-		
-		boolean search = false;
-		String mailmessage = "";
-		for (int i=0; i < 7; i++) {
-			if (!MailChecker.searchEmail("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail, "reset your password")) {
-				loginpage.waitABit(60*500);
-			} else {
-				search = true;
-				mailmessage = MailChecker.searchEmailAndGetMailMessage("test.cyberiansoft@gmail.com", "t!y@hGk8", "ReconPro vNext Dev: PASSWORD RESET", userFromEmail);
-				break;
-			}
-		}
-		
-		String confirmationurl = "";
-		if (search) {
-			System.out.println("==========3" + mailmessage);
-			confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-			System.out.println("+++++++" + confirmationurl);
-		}
-		
+		String confirmationurl = confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		loginpage.waitABit(6000);
 		webdriver.navigate().to(confirmationurl);
 		loginpage.waitABit(4000);
@@ -374,7 +353,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 43372:vNext: check posibility to resend registration email")
-	public void testCheckPosibilityToResendRegistrationEmail() throws IOException {
+	public void testCheckPosibilityToResendRegistrationEmail() throws Exception {
 		
 		final String firstname = "TestTech";
 		final String lastname = "QA";
@@ -395,27 +374,35 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
 		
-		boolean search = false;
-		String mailmessage = MailChecker.getUserMailContent();
-		if (mailmessage.length() > 3)
-			search = true;
 
-		Assert.assertTrue(search);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		Assert.assertTrue(mailmessage.length() > 3);
 		userswabpage.clickUserResendButtonAndDisagree(usermail);
-		
-		search = false;
-		mailmessage = MailChecker.getUserMailContent();
-		if (mailmessage.length() > 3)
-			search = true;
-		
-		Assert.assertFalse(search);
+
+		emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		Assert.assertFalse(mailmessage.length() > 3);
 		userswabpage.clickUserResendButtonAndAgree(usermail);
-		
-		search = false;
-		mailmessage = MailChecker.getUserMailContent();
-		if (mailmessage.length() > 3)
-			search = true;
-		Assert.assertTrue(search);
+
+		emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		Assert.assertTrue(mailmessage.length() > 3);
 	}
 	
 	@Test(description = "Test Case 43376:vNext: check validation errors on the Create new user dialog")
@@ -458,7 +445,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(description = "Test Case 43377:vNext: check validation errors on the set password page")
-	public void testCheckValidationErrorsOnTheSetPasswordPage() throws IOException {
+	public void testCheckValidationErrorsOnTheSetPasswordPage() throws Exception {
 		
 		final String firstname = "TestTech";
 		final String lastname = "QA";
@@ -479,7 +466,14 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
 		userslist.add(usermail);
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
-		String confirmationurl = MailChecker.getUserRegistrationURL();
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("ReconPro vNext Dev: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+		String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
 		
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -14,11 +13,15 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.json.simple.JSONObject;
@@ -27,7 +30,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
@@ -37,9 +39,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 	@BeforeClass(description="Team Invoices Test Cases")
-	public void beforeClass() {
+	public void beforeClass() throws Exception {
 		JSONDataProvider.dataFile = DATA_FILE;
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToRetailMode();
 		if (!customersscreen.isCustomerExists(testcustomer1)) {
@@ -645,10 +649,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer(String rowID,
-																	  String description, JSONObject testData) throws IOException {
+																	  String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
-		
+
 		final int invoicesToCreate = 3;
 		ArrayList<String> invoices = new ArrayList<>();
 
@@ -683,27 +687,22 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
-		BaseUtils.waitABit(10000);
+
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
-		final int iterations = 7;
-		int currentIteration = 0;
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
 		for (String invoiceNumber : invoices) {
-			boolean found = false;
-			for (int i = 0; i < iterations; i++)
-				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					BaseUtils.waitABit(45*1000);
-			} else {
-				found = true;
-				break;
-			}
-			Assert.assertTrue(found, "Can't find mail with " + invoiceNumber + " invoice");
-				
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+			.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -755,7 +754,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyEmailInvoiceWithDifferentCustomer(String rowID,
-											 String description, JSONObject testData) throws IOException {
+											 String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
@@ -800,32 +799,26 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomer2);
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
-		final int iterations = 7;
-		int currentIteration = 0;
-		for (int i = 1; i < invoices.length; i ++) {
-			boolean found = false;
-			for (int j = 0; j < iterations; j++)
-				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
-					BaseUtils.waitABit(45*1000);
-			} else {
-				found = true;
-				break;
-			}
-			Assert.assertTrue(found, "Can't find mail with " + invoices[i] + " invoice");
-				
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
+		for (String invoiceNumber : invoices) {
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyEmailMyInvoiceWithPopulatedCCAddress(String rowID,
-															String description, JSONObject testData) throws IOException {
+															String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
@@ -864,27 +857,20 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.sentToEmailAddress("fake.mailmy@mymail.com");
-		emailscren.sentToCCEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToCCEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		
 		emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.clickBackButton();
 
-		final int iterations = 7;
-		int currentIteration = 0;
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
 		for (String invoiceNumber : invoices) {
-			boolean found = false;
-			for (int j = 0; j < iterations; j++)
-				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					BaseUtils.waitABit(45*1000);
-			} else {
-				found = true;
-				break;
-			}
-			Assert.assertTrue(found, "Can't find mail with " + invoiceNumber + " invoice");
-				
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -997,7 +983,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyEmailTeamInvoiceForMultipleItemsWithTheSameCustomer(String rowID,
-																	  String description, JSONObject testData) throws IOException {
+																	  String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
@@ -1036,27 +1022,21 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.switchToMyInvoicesView();
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
-		final int iterations = 7;
-		int currentIteration = 0;
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
 		for (String invoiceNumber : invoices) {
-			boolean found = false;
-			for (int i = 0; i < iterations; i++)
-				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoiceNumber, "reconpro+main@cyberiansoft.com", invoiceNumber + ".pdf") || (currentIteration > iterations)) {
-					BaseUtils.waitABit(45*1000);
-			} else {
-				found = true;
-				break;
-			}
-			Assert.assertTrue(found, "Can't find mail with " + invoiceNumber + " invoice");
-				
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().
+					withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 
@@ -1221,7 +1201,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyEmailTeamInvoiceWithDifferentCustomer(String rowID,
-																		String description, JSONObject testData) throws IOException {
+																		String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
@@ -1267,27 +1247,21 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomer2);
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());
+		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.switchToMyInvoicesView();
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
-		final int iterations = 7;
-		int currentIteration = 0;
-		for (int i = 1; i < invoices.length; i ++) {
-			boolean found = false;
-			for (int j = 0; j < iterations; j++)
-				if (!MailChecker.searchEmailAndVerifyAttachmentExists(VNextConfigInfo.getInstance().getUserCapiMail(),
-						VNextConfigInfo.getInstance().getUserCapiMailPassword(), "Invoice " + invoices[i], "reconpro+main@cyberiansoft.com", invoices[i] + ".pdf") || (currentIteration > iterations)) {
-					BaseUtils.waitABit(45*1000);
-			} else {
-				found = true;
-				break;
-			}
-			Assert.assertTrue(found, "Can't find mail with " + invoices[i] + " invoice");
-				
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
+		for (String invoiceNumber : invoices) {
+			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
+			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
 		}
 	}
 

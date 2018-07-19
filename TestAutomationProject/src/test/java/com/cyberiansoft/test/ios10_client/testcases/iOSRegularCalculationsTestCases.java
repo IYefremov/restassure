@@ -7,6 +7,9 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
@@ -15,6 +18,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -3337,36 +3341,31 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		mailscreen.sendInvoiceOnEmailAddress("test.cyberiansoft@gmail.com");
 		myinspectionsscreen.clickHomeButton();
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
-		Thread.sleep(10*1000*1);
-		boolean search = false;
-		final String invpoicereportfilenname = inspnumber + ".pdf";
-		for (int i= 0; i < 7; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8", "Estimate #" + inspnumber + " from Recon Pro Development QA", "ReconPro@cyberianconcepts.com", invpoicereportfilenname)) {
-				Thread.sleep(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(invpoicereportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains("(Declined) Disc_Ex_Service1 ($50.00) 1.00"));
-			Assert.assertTrue(pdftext.contains("(Declined) Test service zayats ($5.00) (123) 1.00"));
-			Assert.assertTrue(pdftext.contains("(Declined) Test service zayats ($5.00) (Sunroof) 1.00"));
-			Assert.assertTrue(pdftext.contains("Bundle1_Disc_Ex 1.00"));
-			Assert.assertTrue(pdftext.contains("(Declined) Discount 5-10% ($-346.00) (10.000%)"));
-			Assert.assertTrue(pdftext.contains("(Declined) SR_S1_Money ($2000.00) (Grill) 1.00"));
-			Assert.assertTrue(pdftext.contains("(Skipped) SR_S1_Money_Panel ($1000.00) (Grill) 1.00"));
-			Assert.assertTrue(pdftext.contains("(Declined) Tax discount ($165.70) 5.000%"));
-			Assert.assertTrue(pdftext.contains("Dent Removal 1.00"));
-			Assert.assertTrue(pdftext.contains("Wheel 1.00"));
-			Assert.assertTrue(pdftext.contains("(Declined) Wheel ($70.00) 1.00"));
-			Assert.assertTrue(pdftext.contains("(Skipped) Wheel ($70.00) 1.00"));
-			Assert.assertTrue(pdftext.contains("Wheel 1.00"));
-			Assert.assertTrue(pdftext.contains("(Skipped) Dent Removal ($170.00) 1.00"));
-		}
+
+		final String inspreportfilenname = inspnumber + ".pdf";
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, "test.cyberiansoft@gmail.com",
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumber, inspreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspreportfilenname);
+
+		File pdfdoc = new File(inspreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains("(Declined) Disc_Ex_Service1 ($50.00) 1.00"));
+		Assert.assertTrue(pdftext.contains("(Declined) Test service zayats ($5.00) (123) 1.00"));
+		Assert.assertTrue(pdftext.contains("(Declined) Test service zayats ($5.00) (Sunroof) 1.00"));
+		Assert.assertTrue(pdftext.contains("Bundle1_Disc_Ex 1.00"));
+		Assert.assertTrue(pdftext.contains("(Declined) Discount 5-10% ($-346.00) (10.000%)"));
+		Assert.assertTrue(pdftext.contains("(Declined) SR_S1_Money ($2000.00) (Grill) 1.00"));
+		Assert.assertTrue(pdftext.contains("(Skipped) SR_S1_Money_Panel ($1000.00) (Grill) 1.00"));
+		Assert.assertTrue(pdftext.contains("(Declined) Tax discount ($165.70) 5.000%"));
+		Assert.assertTrue(pdftext.contains("Dent Removal 1.00"));
+		Assert.assertTrue(pdftext.contains("Wheel 1.00"));
+		Assert.assertTrue(pdftext.contains("(Declined) Wheel ($70.00) 1.00"));
+		Assert.assertTrue(pdftext.contains("(Skipped) Wheel ($70.00) 1.00"));
+		Assert.assertTrue(pdftext.contains("Wheel 1.00"));
+		Assert.assertTrue(pdftext.contains("(Skipped) Dent Removal ($170.00) 1.00"));
+
 		try {
             DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		} catch (UnsupportedCommandException e) {

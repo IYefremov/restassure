@@ -4,10 +4,14 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -19,7 +23,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -38,8 +41,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 	
 	@Test(testName= "Test Case 46975:vNext: Check Approved ammount is calculated correctly for Approved inspection", 
 			description = "Check Approved ammount is calculated correctly for Approved inspection")
-	@Parameters({ "usercapi.mail", "usercapi.psw"})
-	public void testCheckApprovedAmmountIsCalculatedCorrectlyForApprovedInspection(String usermail, String userpsw) throws InterruptedException, IOException { 
+	public void testCheckApprovedAmmountIsCalculatedCorrectlyForApprovedInspection() throws Exception {
 		
 		final String _make = "Acura";
 		final String _model = "TL";
@@ -88,35 +90,24 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc46975), PricesCalculations.getPriceRepresentation(insppriceexp));
 		VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspnumbertc46975);
-		if (!emailscreen.getToEmailFieldValue().equals(usermail))
-			emailscreen.sentToEmailAddress(usermail);
+		if (!emailscreen.getToEmailFieldValue().equals(VNextConfigInfo.getInstance().getOutlookMail()))
+			emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		
 		emailscreen.sendEmail();
-		BaseUtils.waitABit(60*1000);
-		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
-		
-		Thread.sleep(60*1000);
-		boolean search = false;
+
 		final String inspectionreportfilenname = inspnumbertc46975 + ".pdf";
-		for (int i= 0; i < 3; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(usermail, userpsw, "Estimate #" + inspnumbertc46975 + " from ReconPro vNext Dev", "ReconPro@cyberiansoft.com", inspectionreportfilenname)) {
-				Thread.sleep(60*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(VIN));
-			Assert.assertTrue(pdftext.contains(percservices));
-			Assert.assertTrue(pdftext.contains(moneyservices));
-			Assert.assertTrue(pdftext.contains(insppriceexp));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + inspnumbertc46975 + " inspection");
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspnumbertc46975, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumbertc46975);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(VIN));
+		Assert.assertTrue(pdftext.contains(percservices));
+		Assert.assertTrue(pdftext.contains(moneyservices));
+		Assert.assertTrue(pdftext.contains(insppriceexp));
 	}
 	
 	@Test(testName= "Test Case 47229:vNext mobile: Create Inspection which contains breakage service with big quantity", 

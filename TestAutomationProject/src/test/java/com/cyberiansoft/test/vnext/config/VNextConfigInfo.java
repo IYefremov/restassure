@@ -39,6 +39,10 @@ public class VNextConfigInfo {
 	      return props.getProperty("usercapi.mail");
 	}
 
+	public String getOutlookMail() {
+		return props.getProperty("outlook.mail");
+	}
+
 	public String getUserCapiMailPassword() {
 		return props.getProperty("usercapimail.password");
 	}

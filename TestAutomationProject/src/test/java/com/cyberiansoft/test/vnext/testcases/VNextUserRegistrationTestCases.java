@@ -4,10 +4,13 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
@@ -29,14 +32,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	private String fromEmail = "ReconPro@cyberiansoft.com";
 	private String bodySearchText = "Dear ";
 	
-	final String usermailprefix = "test.cyberiansoft+";
-	final String usermailpostbox = "@gmail.com";
-	String userregmail = "";
-	final String confirmpsw = "111111";
+	final private String usermailprefix = "test.cyberiansoft+";
+	final private String usermailpostbox = "@gmail.com";
+	private String userregmail = "";
+	final private String confirmpsw = "111111";
 	
-	final String userregphone = "6267477803";
-	final String  userregphoneformatted = "(626) 747-7803";
-	final String userphonecountrycode = "1";
+	final private String userregphone = "6267477803";
+	final private String  userregphoneformatted = "(626) 747-7803";
+	final private String userphonecountrycode = "1";
 	
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() throws IOException {		
@@ -58,7 +61,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@Test(testName= "Test Case 44318:vNext: verify creating BO with JumpStart Edition (PDR)", 
 			description = "Verify creating BO with JumpStart Edition (PDR)")
-	public void testVerifyCreatingBOWithJumpStartEdition_PDR() throws IOException {
+	public void testVerifyCreatingBOWithJumpStartEdition_PDR() throws Exception {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
@@ -109,20 +112,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		BaseUtils.waitABit(30*1000);			
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-				
-		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
-		
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Repair360 Free: REGISTRATION")
+				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		String newbourl = "";
-		if (!mailmessage.equals("")) {
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		} else {
-			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		}
+		if (!mailmessage.equals(""))
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
@@ -140,7 +141,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@Test(testName= "Test Case 44329:vNext: verify creating BO with Technician Edition (PDR)", 
 			description = "Verify creating BO with Technician Edition (PDR)")
-	public void testVerifyCreatingBOWithTechnicianEdition_PDR() throws IOException {
+	public void testVerifyCreatingBOWithTechnicianEdition_PDR() throws Exception {
 		
 		final String newuserfirstname = "TestTech";
 		final String newuserlastname = "User";
@@ -224,20 +225,17 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
-		BaseUtils.waitABit(60*1000);
-			
-		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(), 
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "PDR: REGISTRATION", fromEmail, bodySearchText + newuserfirstname + " " + newuserlastname);
-		
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("PDR: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		String newbourl = "";
-		if (!mailmessage.equals("")) {
-			System.out.println("==========0" + mailmessage);
+		if (!mailmessage.equals(""))
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		} else {
-			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "PDR: REGISTRATION", fromEmail, bodySearchText + newuserfirstname + " " + newuserlastname);
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		}
+
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
@@ -254,7 +252,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@Test(testName= "Test Case 44272:vNext: verify 'Phone doesn't match this email. Email me my phone number' error for non-existing phone", 
 			description = "Verify 'Phone doesn't match this email. Email me my phone number' error for non-existing phone")
-	public void testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone() throws IOException {
+	public void testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone() throws Exception {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
@@ -316,18 +314,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextPhoneMismatchDialog phonemismatchdlg = new VNextPhoneMismatchDialog(appiumdriver);
 		Assert.assertTrue(phonemismatchdlg.getInformationDialogBodyMessage().contains("Phone doesn't match this email"));
 		phonemismatchdlg.clickEmailMeMyPhoneButton();
-		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(), 
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Phone Number Reminder", fromEmail, "Your Phone Number is");
-		
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Phone Number Reminder").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		String userphone = "";
-		if (!mailmessage.equals("")) {
-			System.out.println("==========0" + mailmessage);
-			userphone = mailmessage.substring(mailmessage.indexOf("+")+1, mailmessage.lastIndexOf(".<br>"));		
-		} else {
-			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Phone Number Reminder", fromEmail, "Your Phone Number is");
-			userphone = mailmessage.substring(mailmessage.indexOf("+")+1, mailmessage.lastIndexOf(".<br>"));		
-		}
+		if (!mailmessage.equals(""))
+			userphone = mailmessage.substring(mailmessage.indexOf("+")+1, mailmessage.lastIndexOf(".<br>"));
 		Assert.assertEquals(userphone, userphonecountrycode + userregphone);
 	}
 	
@@ -473,7 +469,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@Test(testName= "Test Case 54272:vNext: User can't create password for IBS after creating password for vNext BO", 
 			description = "User can't create password for IBS after creating password for vNext BO")
-	public void testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO() throws IOException {
+	public void testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO() throws Exception {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
@@ -522,21 +518,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
 		registrationoverviewlegalinfoscreen.agreetermsAndconditions();
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
-
-		BaseUtils.waitABit(60*1000);			
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-				
-		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Repair360 Free: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		String newbourl = "";
-		if (!mailmessage.equals("")) {
+		if (!mailmessage.equals(""))
 			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		} else {
-			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		}
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
@@ -549,9 +542,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertFalse(leftmenu.isUsersMenuItemExists());
 		webdriver.quit();
 
-		String mailmessage1 = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Welcome to Client Portal", "testuser+2329@cyberiansoft.com", "Hello " + userfirstname + " " + userlastname);
-		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);	
+		emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Welcome to Client Portal").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage1 = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ibsurl);
@@ -699,7 +696,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			inspservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
 		}
 		inspectionsscreen = inspservicesscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 63612:Verify user can create Repair Free Edition, "
@@ -816,12 +813,12 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
 		
 		inspectionsscreen = selectedServicesScreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 64228:R360: Submit Customer Feedback from Repair360 Free ediition", 
 			description = "Submit Customer Feedback from Repair360 Free ediition")
-	public void testSubmitCustomerFeedbackFromRepair360FreeEdiition() throws IOException {
+	public void testSubmitCustomerFeedbackFromRepair360FreeEdiition() throws Exception {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
@@ -890,16 +887,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		feedbackscreen.selectArea(feedbackArea, subArea);
 		feedbackscreen.setFeedbackSubject(feedbackSubject);
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
-		statusscreen = feedbackscreen.clickSendButton();
-		homescreen = statusscreen.clickBackButton();
-			
-		Assert.assertTrue(MailChecker.getKayakoFeedbackMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Test Feedback Repair360", "info@reconprofree.com", "You can check the status of or update this ticket online at"));		
+		feedbackscreen.clickSendButton();
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Test Feedback Repair360").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters));
 	}
 	
 	@Test(testName= "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)", 
 			description = "Submit Customer Feedback from Repair360 ediition (upgraded from free)")
-	public void testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree() throws IOException {
+	public void testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree() throws Exception {
 		
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
@@ -978,21 +977,17 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		//homescreen.clickUpgrateToProBanner();
 		VNextStatusScreen statuscsreen = homescreen.clickStatusMenuItem();
 		VNextEmailVerificationScreen emailverificationscren = statuscsreen.goToBackOfficeButton();
-		statuscsreen = emailverificationscren.clickActivateButton();
-		homescreen = statuscsreen.clickBackButton();
-		
-		
-		String mailmessage = MailChecker.getMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
-		
+		emailverificationscren.clickActivateButton();
+
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
+				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubject("Repair360 Free: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
+		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
 		String newbourl = "";
-		if (!mailmessage.equals("")) {
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		} else {
-			mailmessage = MailChecker.getSpamMailMessage(VNextConfigInfo.getInstance().getUserCapiMail(),
-					VNextConfigInfo.getInstance().getUserCapiUserPassword(), "Repair360 Free: REGISTRATION", fromEmail, bodySearchText + userfirstname + " " + userlastname);
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
-		}
+		if (!mailmessage.equals(""))
+			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);

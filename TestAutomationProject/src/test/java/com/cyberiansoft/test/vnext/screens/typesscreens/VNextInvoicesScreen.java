@@ -1,6 +1,9 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -13,25 +16,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class VNextInvoicesScreen extends VNextBaseScreen {
+public class VNextInvoicesScreen extends VNextBasicTypeScreen {
 	
 	@FindBy(xpath="//div[@data-autotests-id='invoices-list']")
 	private WebElement invoiceslist;
-	
-	@FindBy(xpath="//*[@action='add']")
-	private WebElement addinvoicebtn;
-	
-	@FindBy(xpath="//*[@action='my']")
-	private WebElement myinvoicestab;
-	
-	@FindBy(xpath="//*[@action='team']")
-	private WebElement teaminvoicestab;
 	
 	@FindBy(xpath="//*[@action='hide-multiselect-actions']")
 	private WebElement cancelselectedinvoices;
@@ -46,48 +39,29 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
-		String invoiceprice = null;
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
-		if (invoicecell != null)
-			invoiceprice = invoicecell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
-		else
-			Assert.fail( "Can't find invoice: " + invoicenumber);
-		return invoiceprice;	
+		return invoicecell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 	}
 	
 	public String getInvoiceStatusValue(String invoicenumber) {
-		String invoicecell = null;
 		WebElement inspcell = getInvoiceCell(invoicenumber);
-		if (inspcell != null)
-			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status')]/span[contains(@class, 'entity-item-status')]")).getText();
-		else
-			Assert.fail("Can't find invoice: " + invoicenumber);
-		return invoicecell;
+		return inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'entity-item-status')]/span[contains(@class, 'entity-item-status')]")).getText();
 	}
 
 	public String getInvoiceDateValue(String invoicenumber) {
-		String invoicecell = null;
 		WebElement inspcell = getInvoiceCell(invoicenumber);
-		if (inspcell != null)
-			invoicecell = inspcell.findElement(By.xpath(".//div[@action='select']/div[2]/span[@class='text-dim']")).getText();
-		else
-			Assert.fail("Can't find invoice: " + invoicenumber);
-		return invoicecell;
+		return inspcell.findElement(By.xpath(".//div[@action='select']/div[2]/span[@class='text-dim']")).getText();
 	}
 	
 	public ArrayList<String> getInvoiceWorkOrders(String invoicenumber) {
 		ArrayList<String> workOrders = new ArrayList<>();
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);
-		if (invoicecell != null) {
-			String wos = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+		String wos = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[@class='truncate']")).getText().trim();
-			List<String> wosarray = Arrays.asList(wos.split(","));
-			for (String wonumber : wosarray)
-				workOrders.add(wonumber.trim());
-		}
-		else
-			Assert.fail("Can't find invoice: " + invoicenumber);
+		List<String> wosarray = Arrays.asList(wos.split(","));
+		for (String wonumber : wosarray)
+			workOrders.add(wonumber.trim());
 		return workOrders;
 	}
 	
@@ -95,23 +69,15 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		String poNumber = "";
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);
-		if (invoicecell != null) {
-			poNumber = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+		poNumber = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
-			poNumber = poNumber.substring(3, poNumber.length()).trim();
-		} else
-			Assert.fail("Can't find invoice: " + invoicenumber);
+		poNumber = poNumber.substring(3, poNumber.length()).trim();
 		return poNumber;
 	}
 
 	public String getInvoiceCustomerValue(String invoicenumber) {
-		String customerValue = "";
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
-		if (invoicecell != null) {
-			customerValue = invoicecell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText().trim();
-		} else
-			Assert.fail( "Can't find invoice: " + invoicenumber);
-		return customerValue;
+		return invoicecell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText().trim();
 	}
 	
 	public void expandInvoiceDetails(String invoicenumber) {
@@ -129,18 +95,8 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		}
 	}
 	
-	public WebElement getInvoiceCell(String invoicenumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class, 'entity-item accordion-item')]")));
-		WebElement invoicecell = null;
-		List<WebElement> invoices = invoiceslist.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));;
-		for (WebElement invcell : invoices) {
-			if (invcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(invoicenumber)) {
-				invoicecell = invcell;
-				break;
-			}
-		}
-		return invoicecell;
+	protected WebElement getInvoiceCell(String invoicenumber) {
+        return getListCell(invoiceslist, invoicenumber);
 	}
 	
 	public boolean isInvoiceExists(String invoicenumber) {
@@ -169,8 +125,8 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 		return invoicemenulist.clickEmailInvoiceMenuItem();
 	}
 	
-	public VNextWorkOrdersScreen clickAddInvoiceButton() {	
-		tap(addinvoicebtn);
+	public VNextWorkOrdersScreen clickAddInvoiceButton() {
+        clickAddButton();
 		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
@@ -178,33 +134,27 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamInvoicesView() {
-		tap(teaminvoicestab);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='button active' and @action='team']")));
+		switchToTeamView();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
 	}
 	
 	public boolean isTeamInvoicesViewActive() {
-		return teaminvoicestab.getAttribute("class").contains("active");
+		return isTeamViewActive();
 	}
 	
 	public void switchToMyInvoicesView() {
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
-		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='my']"));
-		tap(myinvoicestab);
+		switchToMyView();
 	}
 	
 	public boolean isMyInvoicesViewActive() {
-		return myinvoicestab.getAttribute("class").contains("active");
+		return isMyViewActive();
 	}
 	
 	public void selectInvoice(String invoiceNumber) {
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
-		if (invoicecell != null)
-			if (invoicecell.findElement(By.xpath(".//input[@action='check-item']")).getAttribute("checked") == null)
-				tap(invoicecell.findElement(By.xpath(".//input[@action='check-item']")));
-		else
-			Assert.fail("Can't find invoice: " + invoiceNumber);
+		if (invoicecell.findElement(By.xpath(".//input[@action='check-item']")).getAttribute("checked") == null)
+			tap(invoicecell.findElement(By.xpath(".//input[@action='check-item']")));
 	}
 	
 	public void clickOnSelectedInvoicesMailButton() {
@@ -213,22 +163,12 @@ public class VNextInvoicesScreen extends VNextBaseScreen {
 
 
 	public boolean isInvoiceHasApproveIcon(String invoiceNumber) {
-		boolean exists = false;
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
-		if (invoicecell != null)
-			exists = invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_signed']")).size() > 0;
-			else
-				Assert.fail("Can't find invoice: " + invoiceNumber);
-		return exists;
+		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_signed']")).size() > 0;
 	}
 
 	public boolean isInvoiceHasNotesIcon(String invoiceNumber) {
-		boolean exists = false;
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
-		if (invoicecell != null)
-			exists = invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_notes']")).size() > 0;
-		else
-			Assert.fail("Can't find invoice: " + invoiceNumber);
-		return exists;
+		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_notes']")).size() > 0;
 	}
 }

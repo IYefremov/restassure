@@ -8,6 +8,9 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
@@ -17,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.PageFactory;
@@ -3547,25 +3551,19 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickApproveButton();
 		myinvoicesscreen.clickHomeButton();
 
-		Thread.sleep(60*1000);
-		boolean search = false;
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		for (int i= 0; i < 7; i++) {
-			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8",
-					"Invoice #1" + invoicenumber + " from Recon Pro Development QA", "reconpro@cyberiansoft.com", invpoicereportfilenname);
-			if (!search) {
-				Thread.sleep(30*1000);
-			} else if (search)
-				break;
-		}
-		if (search) {
-			File pdfdoc = new File(invpoicereportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(VIN));
-			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.WHEEL_SERVICE));
-			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
-			Assert.assertTrue(pdftext.contains("75.00"));
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, "test.cyberiansoft@gmail.com",
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
+
+		File pdfdoc = new File(invpoicereportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(VIN));
+		Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
+		Assert.assertTrue(pdftext.contains("75.00"));
 	}
 	
 	@Test(testName="Test Case 26663:Invoices: HD - verify that when ‘Customer approval required’ is set to OFF - auto email is sent when invoice is auto approved", 
@@ -3615,27 +3613,20 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.myInvoiceExists(invoicenumber);
 		myinvoicesscreen.clickHomeButton();
 
-		Thread.sleep(60*1000);
-		boolean search = false;
-		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		for (int i= 0; i < 7; i++) {
-			search = MailChecker.searchEmailAndGetAttachment("test.cyberiansoft@gmail.com", "t!y@hGk8",
-					"Invoice #" + invoicenumber + " from Recon Pro Development QA", "reconpro@cyberiansoft.com", invpoicereportfilenname);
-			if (!search) {
-				Thread.sleep(30*1000);
-			} else if (search)
-				break;
-		}
-		if (search) {
-			File pdfdoc = new File(invpoicereportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains(VIN));
-			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.WHEEL_SERVICE));
-			Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
-			Assert.assertTrue(pdftext.contains("75.00"));
-		} else
-			Assert.assertTrue(false, "Can't find e-mail with Invoice # : " + invoicenumber);
 
+		final String invpoicereportfilenname = invoicenumber + ".pdf";
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, "test.cyberiansoft@gmail.com",
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.INBOX);
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
+
+		File pdfdoc = new File(invpoicereportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains(VIN));
+		Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertTrue(pdftext.contains(iOSInternalProjectConstants.TEST_SERVICE_ZAYATS));
+		Assert.assertTrue(pdftext.contains("75.00"));
 	}
 	
 	@Test(testName="Test Case 26690:Invoices: HD - Verify that print icon is shown next to invoice when it was printed (My Invoices)", 
