@@ -34,7 +34,7 @@ public class BaseUtils {
 		return mobileplatform;
 	}
 	
-	public static void waitABit(int milliseconds) {
+	public static void waitABit(long milliseconds) {
 		try {
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {

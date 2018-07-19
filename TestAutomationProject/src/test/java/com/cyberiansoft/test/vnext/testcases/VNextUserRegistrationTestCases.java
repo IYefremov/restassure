@@ -8,6 +8,7 @@ import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.ios10_client.utils.MailChecker;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;

@@ -4,11 +4,17 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.ios10_client.utils.MailChecker;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -18,7 +24,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -131,8 +136,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 	
 	@Test(testName= "Test Case 48094:vNext mobile: Create Invoice which contains price services with decimal quantity", 
 			description = "Create Invoice which contains price services with decimal quantity")
-	@Parameters({ "usercapi.mail", "usercapi.psw"})
-	public void testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity(String usermail, String userpsw) throws IOException {
+	public void testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity() throws Exception {
 		
 		final String dentdamage = "Dent"; 
 		final String amountvalue = "0.99"; 
@@ -180,30 +184,23 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumbertc48094), PricesCalculations.getPriceRepresentation(insppriceexp));
 		VNextEmailScreen emailscreen = invoicesscreen.clickOnInvoiceToEmail(invoicenumbertc48094);
-		if (!emailscreen.getToEmailFieldValue().equals(usermail))
-			emailscreen.sentToEmailAddress(usermail);
+		if (!emailscreen.getToEmailFieldValue().equals(VNextConfigInfo.getInstance().getOutlookMail()))
+			emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
 		
 		emailscreen.sendEmail();
-		BaseUtils.waitABit(60*1000);
-		boolean search = false;
 		final String inspectionreportfilenname = invoicenumbertc48094 + ".pdf";
-		for (int i= 0; i < 5; i++) {
-			if (!MailChecker.searchEmailAndGetAttachment(usermail, userpsw, "Invoice #" + invoicenumbertc48094 + " from ReconPro vNext Dev", "ReconPro@cyberiansoft.com", inspectionreportfilenname)) {
-				BaseUtils.waitABit(30*1000); 
-			} else {
-				
-				search = true;
-				break;
-			}
-		}
-		if (search) {
-			File pdfdoc = new File(inspectionreportfilenname);
-			String pdftext = PDFReader.getPDFText(pdfdoc);
-			Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
-			Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
-		} else {
-			Assert.assertTrue(search, "Can't find email with " + invoicenumbertc48094 + " inspection");
-		}
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
+				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+
+		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().withSubject(invoicenumbertc48094)
+					.withAttachmentFileName(inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invoicenumbertc48094);
+
+		File pdfdoc = new File(inspectionreportfilenname);
+		String pdftext = PDFReader.getPDFText(pdfdoc);
+		Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
+		Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
+
 
 		BaseUtils.waitABit(60*1000);
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);

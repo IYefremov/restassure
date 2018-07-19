@@ -1,10 +1,11 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -12,38 +13,24 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class VNextInspectionsScreen extends VNextBaseScreen {
-
-
+public class VNextInspectionsScreen extends VNextBasicTypeScreen {
 
 	@FindBy(xpath="//div[contains(@class, 'page inspections-list')]")
 	private WebElement inspectionsscreen;
-	
-	@FindBy(xpath="//a[@action='add']")
-	private WebElement addinspectionbtn;
 	
 	@FindBy(xpath="//*[@data-autotests-id='inspections-list']")
 	private WebElement inspectionslist;
 
 	@FindBy(xpath="//*[@action='multiselect-actions-approve']")
 	private WebElement multiselectinspapprovebtn;
-	
-	@FindBy(xpath="//*[@action='my']")
-	private WebElement myinspectiontab;
-	
-	@FindBy(xpath="//*[@action='team']")
-	private WebElement teaminspectiontab;
 	
 	@FindBy(xpath="//*[@data-automation-id='search-icon']")
 	private WebElement searchbtn;
@@ -82,22 +69,10 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 			}
 			clickCancelSearchButton();
 		}
-
-
 	}
 	
-	public VNextCustomersScreen clickAddInspectionButton() {	
-		tap(inspectionsscreen.findElement(By.xpath(".//*[@action='add']/i")));
-		BaseUtils.waitABit(1000);
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		try {
-		if (inspectionsscreen.findElements(By.xpath(".//*[@action='add']/i")).size() > 0)
-			if (inspectionsscreen.findElement(By.xpath(".//*[@action='add']/i")).isDisplayed())
-				tap(addinspectionbtn);
-		} catch (NoSuchElementException e) {
-			
-		}
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	public VNextCustomersScreen clickAddInspectionButton() {
+        clickAddButton();
 		return new VNextCustomersScreen(appiumdriver);
 	}
 	
@@ -130,13 +105,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getInspectionCustomerValue(String inspectionnumber) {
-		String inspcustomer = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			inspcustomer = inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
-		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return inspcustomer;
+		return inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
 	}
 	
 	public String getInspectionCustomerValue(WebElement inspcell) {
@@ -144,13 +114,8 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getInspectionStatusValue(String inspectionnumber) {
-		String inspstatus = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			inspstatus = inspcell.findElement(By.xpath(".//div[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
-		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return inspstatus;
+		return inspcell.findElement(By.xpath(".//div[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
 	}
 	
 	public VNextInspectionsMenuScreen clickOnFirstInspectionWithStatus(String inspStatus) {
@@ -163,47 +128,22 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
-		String inspprice = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			inspprice = inspcell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
-		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return inspprice;	
+		return inspcell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 	}
 	
 	public String getInspectionApprovedPriceValue(String inspectionnumber) {
-		String inspprice = null;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			inspprice = inspcell.findElement(By.xpath(".//div[@class='entity-item-approved-amount']")).getText();
-		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionnumber);
-		return inspprice;	
+		return inspcell.findElement(By.xpath(".//div[@class='entity-item-approved-amount']")).getText();
 	}
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
-		WebElement inspcell = null;
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(inspectionslist));
-		List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//div[@class='entity-item accordion-item']"));
-		for (WebElement invcell : inspections) {
-			if (invcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText().trim().equals(inspectionnumber)) {
-				inspcell = invcell;
-				break;
-			}
-		}
-		return inspcell;
+		return getListCell(inspectionslist, inspectionnumber);
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionnumber) {
-		boolean notesPresent = false;
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		if (inspcell != null)
-			notesPresent = inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
-		else
-			Assert.fail( "Can't find inspection: " + inspectionnumber);
-		return notesPresent;			
+		return inspcell.findElements(By.xpath(".//*[@data-autotests-id='estimation_notes']")).size() > 0;
 	}
 	
 	public boolean isEmailSentIconPresentForInspection(String inspectionnumber) {
@@ -253,26 +193,20 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToTeamInspectionsView() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(teaminspectiontab));
-		tap(teaminspectiontab);
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
+        switchToTeamView();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
 	}
 	
 	public boolean isTeamInspectionsViewActive() {
-		return teaminspectiontab.getAttribute("class").contains("active");
+		return isTeamViewActive();
 	}
 	
 	public void switchToMyInspectionsView() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(myinspectiontab));
-		tap(myinspectiontab);
+		switchToMyView();
 	}
 	
 	public boolean isMyInspectionsViewActive() {
-		return myinspectiontab.getAttribute("class").contains("active");
+		return isMyViewActive();
 	}
 	
 	public void searchInpectionByFreeText(String searchtext) {
@@ -304,20 +238,14 @@ public class VNextInspectionsScreen extends VNextBaseScreen {
 
 	public void selectInspection(String inspectionNumber) {
 		WebElement workordercell = getInspectionCell(inspectionNumber);
-		if (workordercell != null)
-			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
-				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
-			else
-				Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+		if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
+		    tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
 	}
 
 	public void unselectInspection(String inspectionNumber) {
 		WebElement workordercell = getInspectionCell(inspectionNumber);
-		if (workordercell != null)
-			if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
-				tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
-			//else
-			//	Assert.assertTrue(false, "Can't find selected inspection: " + inspectionNumber);
+		if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
+		    tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
 	}
 
 	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
