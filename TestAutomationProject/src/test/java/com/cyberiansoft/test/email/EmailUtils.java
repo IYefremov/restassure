@@ -3,6 +3,7 @@ package com.cyberiansoft.test.email;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.mailpropertieproveders.GmailPropertiesProvider;
 import com.cyberiansoft.test.email.mailpropertieproveders.OutlookPropertiesProvider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,7 +35,7 @@ public class EmailUtils {
         Store store = null;
         switch (emailHost) {
             case GMAIL:
-                props = OutlookPropertiesProvider.getOutlookProperties();
+                props = GmailPropertiesProvider.getGmailProperties();
                 session = Session.getDefaultInstance(props);
                 store = session.getStore("imap");
                 store.connect(userName, userPassword);
