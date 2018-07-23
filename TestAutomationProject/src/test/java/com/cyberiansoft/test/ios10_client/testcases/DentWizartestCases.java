@@ -15,16 +15,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInvoicesScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -2239,7 +2232,7 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		final String vehiclepart = "Left Roof Rail";
-		final String[] vehiclepartspaint = { "Hood", "Grill", "Right Fender" };
+		final String[] vehiclepartspaint = { "Hood", "Grill", "Left Fender" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -2967,7 +2960,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.addWorkOrder(UtilConstants.wizardprotrackeravisworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen();
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
-		String inspection = vehiclescreeen.getInspectionNumber();
+		String workOrderNumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 
@@ -2985,7 +2978,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(inspection);
+		teamworkordersscreen.clickOnWO(workOrderNumber);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
@@ -3008,8 +3001,8 @@ public class DentWizartestCases extends BaseTestCase {
 			Assert.assertEquals(status, "Completed");
 
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(inspection);
-		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(inspection));
+		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(workOrderNumber);
+		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(workOrderNumber));
 		teamworkordersscreen.clickiCreateInvoiceButton();
         QuestionsScreen questionsscreen = new QuestionsScreen();
         questionsscreen = questionsscreen.selectNextScreen("AVIS Questions", QuestionsScreen.class);
@@ -3023,8 +3016,10 @@ public class DentWizartestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickChangePOPopup();
 		myinvoicesscreen.changePO("170116");
-		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceNumberIcon());
-		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceSharedIcon());
+		myinvoicesscreen.clickHomeButton();
+		myinvoicesscreen = homescreen.clickMyInvoices();
+		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceNumberIcon(invoicenumber));
+		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceSharedIcon(invoicenumber));
 		Assert.assertEquals(myinvoicesscreen.getInvoicePrice(invoicenumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -3321,10 +3316,9 @@ public class DentWizartestCases extends BaseTestCase {
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();	
-		CarHistoryScreen carhistoryscreen = new CarHistoryScreen();
-		carhistoryscreen.clickHomeButton();
-		carhistoryscreen = homescreen.clickCarHistoryButton();
+		invoiceinfoscreen.clickSaveAsFinal();
+		myworkordersscreen.clickHomeButton();
+		CarHistoryScreen carhistoryscreen = homescreen.clickCarHistoryButton();
 		carhistoryscreen.searchCar("887340");
 		String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
@@ -3332,17 +3326,17 @@ public class DentWizartestCases extends BaseTestCase {
 		carhistoryscreen.clickFirstCarHistoryInTable();
 		MyInvoicesScreen myinvoicesscreen = carhistoryscreen.clickCarHistoryInvoices();
 		Assert.assertTrue(myinvoicesscreen.myInvoicesIsDisplayed());
-		myinvoicesscreen.clickHomeButton();
+		myinvoicesscreen.clickBackButton();
 
 		carhistoryscreen.clickSwitchToWeb();
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
 		carhistoryscreen.clickFirstCarHistoryInTable();
-		carhistoryscreen.clickCarHistoryInvoices();		
+		TeamInvoicesScreen teamInvoicesScreen = carhistoryscreen.clickCarHistoryTeamInvoices();
 
-		Assert.assertTrue(myinvoicesscreen.teamInvoicesIsDisplayed());
-		Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenumber));
-		myinvoicesscreen.clickHomeButton();
+		Assert.assertTrue(teamInvoicesScreen.teamInvoicesIsDisplayed());
+		Assert.assertTrue(teamInvoicesScreen.isInvoiceExists(invoicenumber));
+		teamInvoicesScreen.clickBackButton();
 		carhistoryscreen.clickHomeButton();
 	}
 	
@@ -3770,11 +3764,12 @@ public class DentWizartestCases extends BaseTestCase {
 		questionsscreen = questionsscreen.selectNextScreen("AVIS Questions", QuestionsScreen.class);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
         questionsscreen.chooseAVISCode("Other-920");
+        final String invoiceNumber = questionsscreen.getInvoiceNumber();
 		questionsscreen.clickSaveAsFinal();
 		
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectFirstInvoice(ExcelUtils.getVIN(testcaserow));
+		myinvoicesscreen.selectInvoice(invoiceNumber);
 		notesscreen =  myinvoicesscreen.clickNotesPopup();
 		notesscreen.addNotesCapture();
 		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
@@ -3979,11 +3974,12 @@ public class DentWizartestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("1");
         InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
         myworkordersscreen = new MyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectFirstInvoice(ExcelUtils.getVIN(testcaserow));
+		myinvoicesscreen.selectInvoice(invoiceNumber);
 		NotesScreen notesscreen = myinvoicesscreen.clickNotesPopup();
 		notesscreen.setNotes("Refused paint");
 		notesscreen.addNotesCapture();

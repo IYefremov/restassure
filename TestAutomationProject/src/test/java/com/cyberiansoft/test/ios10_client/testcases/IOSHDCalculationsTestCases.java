@@ -1844,11 +1844,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 
-
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-		settingsscreen.setInsvoicesCustomLayoutOff();
-		settingsscreen.clickHomeButton();
-
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
