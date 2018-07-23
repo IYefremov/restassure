@@ -61,6 +61,7 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
     public <T extends BaseTypeScreen> T clickSaveAsFinal() {
         clickSave();
         clickFinalPopup();
+        clickSave();
         return getTypeScreenFromContext();
     }
 

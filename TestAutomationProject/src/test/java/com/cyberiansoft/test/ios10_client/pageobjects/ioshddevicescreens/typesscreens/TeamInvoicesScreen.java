@@ -2,12 +2,15 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typess
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSelectorPopup;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -63,6 +66,21 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 		par.findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
 		//((IOSDriver) appiumdriver).getKeyboard().pressKey(newpo);
 		appiumdriver.findElementByAccessibilityId("Done").click();
+	}
+
+	public boolean teamInvoicesIsDisplayed() {
+		return appiumdriver.findElementByAccessibilityId("Team Invoices").isDisplayed();
+	}
+
+	public void clickBackButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Back"))).click();
+	}
+
+	public boolean isInvoiceExists(String invoice) {
+		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + invoice + "']").size() > 0;
 	}
 
 }

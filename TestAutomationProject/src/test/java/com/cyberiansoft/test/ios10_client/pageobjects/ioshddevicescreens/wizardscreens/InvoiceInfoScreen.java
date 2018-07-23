@@ -67,6 +67,10 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 
 	public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+		if (INVOICEINFOExCONTEXT != null) {
+			BaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
+			INVOICEINFOExCONTEXT = null;
+		}
 		clickSave();
 		appiumdriver.findElementByAccessibilityId("Final").click();
 		clickSave();
@@ -133,8 +137,10 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 	
 	public <T extends BaseTypeScreen> T cancelInvoice() {
-		if (INVOICEINFOExCONTEXT != null)
+		if (INVOICEINFOExCONTEXT != null) {
 			BaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
+			INVOICEINFOExCONTEXT = null;
+		}
 		clickCancelButton();
 		acceptAlert();
 		return getTypeScreenFromContext();

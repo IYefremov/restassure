@@ -1843,8 +1843,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
-		
-		homescreen = new HomeScreen();
+
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);

@@ -137,14 +137,13 @@ public abstract class Helpers {
 		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 		String alertetxt = alert.getText();
 		alert.accept();
-		waitABit(1000);
-		return alertetxt;
+		return alertetxt.replace("  ", " ");
 	}
 	
 	public static String getAlertTextAndCancel() {
 		waitForAlert();
 		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
-		String alertetxt = alert.getText();
+		String alertetxt = alert.getText().replace("  ", " ");
 		alert.dismiss();
 		return alertetxt;
 	}

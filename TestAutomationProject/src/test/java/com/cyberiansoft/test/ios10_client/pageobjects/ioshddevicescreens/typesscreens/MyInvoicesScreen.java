@@ -18,16 +18,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext INVOICECONTEXT = TypeScreenContext.INVOICE;
 
-	/*@iOSFindBy(accessibility  = "Notes")
-    private IOSElement notesmenu;
-
-	@iOSFindBy(accessibility  = "My Invoices")
+	/*@iOSFindBy(accessibility  = "My Invoices")
     private IOSElement myinvoicesmenu;
 	
 	@iOSFindBy(accessibility  = "Team Invoices")
@@ -47,6 +43,13 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	@iOSFindBy(accessibility = "Add")
     private IOSElement sendmailaddmailbtn;*/
+
+	@iOSFindBy(accessibility  = "InvoicesPageTableLeft")
+	private IOSElement invoicestable;
+
+
+	@iOSFindBy(accessibility  = "Notes")
+	private IOSElement notesmenu;
 
 	@iOSFindBy(accessibility  = "Approve")
 	private IOSElement approvemenu;
@@ -72,7 +75,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Invoices")));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId( "InvoicesPageTableLeft")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
 	}
 
 	public boolean myInvoiceExists(String invoice) {
@@ -90,25 +95,20 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoiceNumber + "']"))).click();
 	}
-	
-	public void selectFirstInvoice(String vin) {
-		IOSElement tablecell = getFirstInvoice();
-		Assert.assertTrue(appiumdriver.findElementByXPath("//UIAElement[1]/UIATableView[1]/UIATableCell[1]/UIAStaticText[contains(@name, \"" + vin + "\")]").isEnabled());
-		tablecell.click();
-	}
-	
+
 	public String getPriceForInvoice(String invoiceNumber) {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoiceNumber + "']/XCUIElementTypeStaticText[@name='labelInvoiceAmount']").getAttribute("value");
 	}
-	
-	public boolean isFirstInvoiceHasInvoiceNumberIcon() { 
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeImage[@name=\"INVOICE_NO\"]").isDisplayed();
+
+
+	public boolean isInvoiceHasInvoiceNumberIcon(String invoiceNumber) {
+		return invoicestable.findElementByAccessibilityId(invoiceNumber).findElementByAccessibilityId("INVOICE_NO").isDisplayed();
 	}
-	
-	public boolean isFirstInvoiceHasInvoiceSharedIcon() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeImage[@name=\"INVOICE_SHARED\"]").isDisplayed();
+
+	public boolean isInvoiceHasInvoiceSharedIcon(String invoiceNumber) {
+		return invoicestable.findElementByAccessibilityId(invoiceNumber).findElementByAccessibilityId("INVOICE_SHARED").isDisplayed();
 	}
-	
+
 	public void printInvoice(String invoicenum, String printserver) {
 		selectInvoice(invoicenum);
 		PrintSelectorPopup printselectorpopup = clickPrintPopup();
@@ -148,7 +148,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public NotesScreen clickNotesPopup() {
-		appiumdriver.findElementByAccessibilityId("Notes").click();
+		notesmenu.click();
 		return new NotesScreen();
 	}
 	
@@ -179,25 +179,22 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		approvemenu.click();
 	}
 
-	public void selectInvoiceForApprove(String invoicenumber) throws InterruptedException {
+	public void selectInvoiceForApprove(String invoicenumber) {
 		selectInvoice(invoicenumber);
 		clickApprovePopup();
 	}
 	
-	public void changePO(String newpo) {
+	public MyInvoicesScreen changePO(String newpo) {
 		WebElement par = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='PO#']/..");
 		par.findElement(By.className("XCUIElementTypeTextField")).clear();
 		par.findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
 		//((IOSDriver) appiumdriver).getKeyboard().pressKey(newpo);
 		appiumdriver.findElementByAccessibilityId("Done").click();
+		return this;
 	}
 	
-	public boolean myInvoicesIsDisplayed() throws InterruptedException {
-		return appiumdriver.findElementByAccessibilityId("My Invoices").isEnabled();
-	}
-	
-	public boolean teamInvoicesIsDisplayed() throws InterruptedException {
-		return appiumdriver.findElementByAccessibilityId("Team Invoices").isDisplayed();
+	public boolean myInvoicesIsDisplayed() {
+		return appiumdriver.findElementByAccessibilityId("Invoices").isDisplayed();
 	}
 	
 	public void clickActionButton() {
@@ -278,6 +275,13 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 
 	public void clickVoidInvoiceMenu() {
 		appiumdriver.findElementByAccessibilityId("Void").click();
+	}
+
+	public void clickBackButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Back"))).click();
 	}
 
 }

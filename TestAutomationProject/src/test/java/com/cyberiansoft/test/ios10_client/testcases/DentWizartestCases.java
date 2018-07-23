@@ -15,21 +15,16 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInvoicesScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.ExcelUtils;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class DentWizartestCases extends BaseTestCase {
 
@@ -85,6 +80,7 @@ public class DentWizartestCases extends BaseTestCase {
 		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
+		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
 		
 	}
@@ -342,6 +338,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String wosubstring = wo1 + ", " + wo2;
+		System.out.println("+++++" + invoicenumber);
 		Assert.assertEquals(myinvoicesscreen.getInvoiceInfoLabel(invoicenumber), wosubstring);
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -802,7 +799,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myinspectionsscreen.clickCloseFilterDialogButton();
 		myinspectionsscreen.clickSaveFilterDialogButton();
 
-        Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspNumber));
+        Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
 		Assert.assertTrue(myinspectionsscreen.isFilterIsApplied());
 		myinspectionsscreen.clearFilter();
 		myinspectionsscreen.clickSaveFilterDialogButton();
@@ -2049,20 +2046,26 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		//ordermonitorscreen.selectPanel(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Active");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Active");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
-		
 		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
  		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		
 		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
@@ -2157,8 +2160,12 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE, "Completed");
-		ordermonitorscreen.verifyPanelsStatuses(" Paint - Full Bumper", "Active");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(" Paint - Full Bumper");
+		for (String status : statuses)
+			Assert.assertEquals(status, "Active");
 		
 		ordermonitorscreen.clickServicesButton();
 		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
@@ -2176,25 +2183,36 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen = new ServicesScreen();
 		servicesscreen.clickSave();
 		ordermonitorscreen = new OrderMonitorScreen();
-		
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Queued");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Queued");
+
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE, "Completed");
-		
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Active");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Active");
+
 		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE, "Completed");
-		
-		
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Active");	
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Active");
+
 		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
@@ -2214,7 +2232,7 @@ public class DentWizartestCases extends BaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		final String vehiclepart = "Left Roof Rail";
-		final String[] vehiclepartspaint = { "Hood", "Grill", "Right Fender" };
+		final String[] vehiclepartspaint = { "Hood", "Grill", "Left Fender" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -2889,6 +2907,7 @@ public class DentWizartestCases extends BaseTestCase {
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickEditPopup();
+		invoiceinfoscreen = new InvoiceInfoScreen();
 		invoiceinfoscreen.clickFirstWO();
 		vehiclescreeen = new VehicleScreen();
         servicesscreen =  vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -2918,8 +2937,8 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
-		
-		ordersummaryscreen.clickSave();
+
+		servicesscreen.clickSave();
 		invoiceinfoscreen.clickSaveAsFinal();
 		homescreen = myinvoicesscreen.clickHomeButton();
 	}
@@ -2941,7 +2960,7 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.addWorkOrder(UtilConstants.wizardprotrackeravisworkordertype);
 		VehicleScreen vehiclescreeen = new VehicleScreen();
 		vehiclescreeen.setVIN(ExcelUtils.getVIN(testcaserow));
-		String inspection = vehiclescreeen.getInspectionNumber();
+		String workOrderNumber = vehiclescreeen.getInspectionNumber();
 		vehiclescreeen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreeen.setStock(ExcelUtils.getStock(testcaserow));
 
@@ -2959,21 +2978,31 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(inspection);
+		teamworkordersscreen.clickOnWO(workOrderNumber);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Active");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses("Tear/Burn >2\" (Fabric)");
+		for (String status : statuses)
+			Assert.assertEquals(status, "Active");
+
 		ordermonitorscreen.selectPanel("Interior Repair");
 		ordermonitorscreen.clickChangeStatusCell();
-		ordermonitorscreen.setCompletedPhaseStatus();		
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-		ordermonitorscreen.verifyPanelsStatuses("Tear/Burn >2\" (Fabric)", "Completed");
+		ordermonitorscreen.setCompletedPhaseStatus();
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses("Tear/Burn >2\" (Fabric)");
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
+
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(inspection);
-		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(inspection));
+		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(workOrderNumber);
+		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(workOrderNumber));
 		teamworkordersscreen.clickiCreateInvoiceButton();
         QuestionsScreen questionsscreen = new QuestionsScreen();
         questionsscreen = questionsscreen.selectNextScreen("AVIS Questions", QuestionsScreen.class);
@@ -2987,8 +3016,10 @@ public class DentWizartestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickChangePOPopup();
 		myinvoicesscreen.changePO("170116");
-		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceNumberIcon());
-		Assert.assertTrue(myinvoicesscreen.isFirstInvoiceHasInvoiceSharedIcon());
+		myinvoicesscreen.clickHomeButton();
+		myinvoicesscreen = homescreen.clickMyInvoices();
+		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceNumberIcon(invoicenumber));
+		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceSharedIcon(invoicenumber));
 		Assert.assertEquals(myinvoicesscreen.getInvoicePrice(invoicenumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -3076,21 +3107,27 @@ public class DentWizartestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE, "Completed");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection2);
 		teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel("Interior Repair");
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection3);
 		teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
-		ordermonitorscreen.verifyPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE, "Completed");
+		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection1);
@@ -3279,10 +3316,9 @@ public class DentWizartestCases extends BaseTestCase {
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
 		//ordersummaryscreen.clickSaveButton();
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();	
-		CarHistoryScreen carhistoryscreen = new CarHistoryScreen();
-		carhistoryscreen.clickHomeButton();
-		carhistoryscreen = homescreen.clickCarHistoryButton();
+		invoiceinfoscreen.clickSaveAsFinal();
+		myworkordersscreen.clickHomeButton();
+		CarHistoryScreen carhistoryscreen = homescreen.clickCarHistoryButton();
 		carhistoryscreen.searchCar("887340");
 		String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
@@ -3290,17 +3326,17 @@ public class DentWizartestCases extends BaseTestCase {
 		carhistoryscreen.clickFirstCarHistoryInTable();
 		MyInvoicesScreen myinvoicesscreen = carhistoryscreen.clickCarHistoryInvoices();
 		Assert.assertTrue(myinvoicesscreen.myInvoicesIsDisplayed());
-		myinvoicesscreen.clickHomeButton();
+		myinvoicesscreen.clickBackButton();
 
 		carhistoryscreen.clickSwitchToWeb();
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
 		carhistoryscreen.clickFirstCarHistoryInTable();
-		carhistoryscreen.clickCarHistoryInvoices();		
+		TeamInvoicesScreen teamInvoicesScreen = carhistoryscreen.clickCarHistoryTeamInvoices();
 
-		Assert.assertTrue(myinvoicesscreen.teamInvoicesIsDisplayed());
-		Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenumber));
-		myinvoicesscreen.clickHomeButton();
+		Assert.assertTrue(teamInvoicesScreen.teamInvoicesIsDisplayed());
+		Assert.assertTrue(teamInvoicesScreen.isInvoiceExists(invoicenumber));
+		teamInvoicesScreen.clickBackButton();
 		carhistoryscreen.clickHomeButton();
 	}
 	
@@ -3728,11 +3764,12 @@ public class DentWizartestCases extends BaseTestCase {
 		questionsscreen = questionsscreen.selectNextScreen("AVIS Questions", QuestionsScreen.class);
 		Helpers.screenIsDisplayed(UtilConstants.QUESTIONS_SCREEN_CAPTION);
         questionsscreen.chooseAVISCode("Other-920");
+        final String invoiceNumber = questionsscreen.getInvoiceNumber();
 		questionsscreen.clickSaveAsFinal();
 		
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectFirstInvoice(ExcelUtils.getVIN(testcaserow));
+		myinvoicesscreen.selectInvoice(invoiceNumber);
 		notesscreen =  myinvoicesscreen.clickNotesPopup();
 		notesscreen.addNotesCapture();
 		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
@@ -3937,11 +3974,12 @@ public class DentWizartestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("1");
         InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
         Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
         myworkordersscreen = new MyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectFirstInvoice(ExcelUtils.getVIN(testcaserow));
+		myinvoicesscreen.selectInvoice(invoiceNumber);
 		NotesScreen notesscreen = myinvoicesscreen.clickNotesPopup();
 		notesscreen.setNotes("Refused paint");
 		notesscreen.addNotesCapture();

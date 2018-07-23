@@ -19,7 +19,7 @@ public class SettingsScreen extends BaseAppScreen {
     //private IOSElement duplicatestoggle;
 	
 	private By showtopcustomerstoggle = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[12]/XCUIElementTypeSwitch[2]");
-	private By invoicescustomlayout = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[16]/XCUIElementTypeSwitch");
+	private By invoicescustomlayout = By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[15]/XCUIElementTypeSwitch");
 
 	public SettingsScreen() {
 		super();
