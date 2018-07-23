@@ -24,10 +24,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext INVOICECONTEXT = TypeScreenContext.INVOICE;
 
-	/*@iOSFindBy(accessibility  = "Notes")
-    private IOSElement notesmenu;
-
-	@iOSFindBy(accessibility  = "My Invoices")
+	/*@iOSFindBy(accessibility  = "My Invoices")
     private IOSElement myinvoicesmenu;
 	
 	@iOSFindBy(accessibility  = "Team Invoices")
@@ -47,6 +44,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	@iOSFindBy(accessibility = "Add")
     private IOSElement sendmailaddmailbtn;*/
+
+	@iOSFindBy(accessibility  = "Notes")
+	private IOSElement notesmenu;
 
 	@iOSFindBy(accessibility  = "Approve")
 	private IOSElement approvemenu;
@@ -148,7 +148,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public NotesScreen clickNotesPopup() {
-		appiumdriver.findElementByAccessibilityId("Notes").click();
+		notesmenu.click();
 		return new NotesScreen();
 	}
 	

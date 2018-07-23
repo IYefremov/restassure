@@ -3536,7 +3536,14 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String  _customer   = "Bel Air Auto Auction Inc";
 			final String[] vehicleparts = { "Left Fender", "Right Fender"};
 
+
+			RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+			customersscreen.swtchToWholesaleMode();
+			homescreen = customersscreen.selectCustomerWithoutEditing("Bel Air Auto Auction Inc");
+
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+
 
 			myworkordersscreen.clickAddOrderButton();
 			myworkordersscreen.selectWorkOrderType(UtilConstants.routeusworkordertype);

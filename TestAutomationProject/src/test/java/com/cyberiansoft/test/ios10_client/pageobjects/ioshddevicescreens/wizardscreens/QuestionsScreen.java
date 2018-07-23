@@ -280,11 +280,4 @@ public class QuestionsScreen extends BaseWizardScreen {
 		return toolbar.findElementByIosNsPredicate("name contains 'I-00'").getAttribute("value");
 	}
 
-	/*public <T extends BaseTypeScreen> T clickSaveAsFinal() {
-		clickSave();
-		appiumdriver.findElementByAccessibilityId("Final").click();
-		//clickSave();
-		return getTypeScreenFromContext();
-	}*/
-
 }

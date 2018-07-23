@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -12,10 +13,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
@@ -49,6 +50,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Active")
     private IOSElement activecaption;*/
 
+	@iOSFindBy(accessibility = "MonitorOrderServicesList")
+	private IOSElement monitorservicestable;
+
     @iOSFindBy(accessibility = "Back")
     private IOSElement backbtn;
 	
@@ -65,19 +69,19 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 	}
 	
-	public void verifyPanelsStatuses(String panelname, String status) {
-		List<WebElement> elements = appiumdriver.findElementsByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]");
-		for (WebElement element : elements) {
-			Assert.assertTrue(element.getAttribute("value").equals(status));
-		}
-
+	public List<String> getPanelsStatuses(String panelname) {
+		List<MobileElement> elements = monitorservicestable.findElementsByIosNsPredicate ("name = '" +
+				panelname + "' and type = 'XCUIElementTypeCell'");
+		return elements.stream().map(element -> element.
+				findElementByAccessibilityId("lblServiceStatus").getAttribute("value"))
+				.collect(Collectors.toList());
 	}
 	
 	public String getPanelStatus(String panelname) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name=\"" + panelname + "\"]/XCUIElementTypeStaticText[3]").getAttribute("value");
+		return monitorservicestable.findElementByAccessibilityId (panelname).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 	
-	public String getPanelStatusInPopup(String panelname) {
+	public String getPanelStatusInPopup() {
 		WebElement par = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='Service Status']/.."));
 		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
@@ -107,7 +111,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
 	
 	public void clickStartPhase() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='Repair phase']/XCUIElementTypeButton[@name='Start phase']").click();
+		monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
+				.findElementByAccessibilityId("btnStartReset").click();
 	}
 	
 	public OrderMonitorScreen clickServiceDetailsDoneButton() {
@@ -118,9 +123,11 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public boolean isStartServiceButtonPresent() {
 		return appiumdriver.findElementByAccessibilityId("Start Service").isDisplayed();
 	}
+
 	
 	public boolean isStartPhaseButtonPresent() {
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeCell[@name='Repair phase']/XCUIElementTypeButton[@name='Start phase']").size() > 0;
+		return monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
+				.findElementsByAccessibilityId("btnStartReset").size() > 0;
 	}
 	
 	public void clickServicesButton() {
@@ -154,8 +161,8 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		return new TeamWorkOrdersScreen();
 	}
 	
-	public boolean isServicePresent(String servicename) { 
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']").size() > 0;
+	public boolean isServicePresent(String servicename) {
+		return monitorservicestable.findElementsByAccessibilityId (servicename ).size() > 0;
 	}
 	
 	public void checkMyWorkCheckbox() {

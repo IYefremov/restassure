@@ -50,4 +50,12 @@ public class ReconProIOSStageInfo {
     public String getDefaultBrowser() {
         return props.getProperty("selenium.browser");
     }
+
+    public String getTestMail() {
+        return props.getProperty("test.mail");
+    }
+
+    public String getTestMailPassword() {
+        return props.getProperty("testmail.password");
+    }
 }

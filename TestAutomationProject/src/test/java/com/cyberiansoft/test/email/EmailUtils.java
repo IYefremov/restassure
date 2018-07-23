@@ -172,7 +172,7 @@ public class EmailUtils {
         if (mailSearchParameters.getSubjectKeyword() != null)
             messages = getMessagesWithSubject(messages, mailSearchParameters.getSubjectKeyword());
         if (mailSearchParameters.getAttachmentFileName() != null)
-            messages = getMessagesWithAttachmentFileName(messages, mailSearchParameters.getAttachmentFileName());
+            messages = getMessagesAndDownloadhAttachmentFileName(messages, mailSearchParameters.getAttachmentFileName());
         return messages;
     }
 

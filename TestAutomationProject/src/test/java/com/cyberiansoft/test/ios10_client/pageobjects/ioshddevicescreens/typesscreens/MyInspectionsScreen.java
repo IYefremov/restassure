@@ -330,8 +330,9 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 
-	public void clickSaveFilterDialogButton() {
+	public MyInspectionsScreen clickSaveFilterDialogButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+		return this;
 	}
 	
 	public void clickChangeCustomerpopupMenu() {

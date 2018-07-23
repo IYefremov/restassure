@@ -20,7 +20,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.PageFactory;
@@ -1040,7 +1039,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspnumber));
-		Assert.assertEquals(inspnumber, PricesCalculations.getPriceRepresentation(summ));
+		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber), PricesCalculations.getPriceRepresentation(summ));
 		
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
@@ -3075,8 +3074,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
-		//ordermonitorscreen.clickServiceDetailsDoneButton();
-		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
@@ -3323,8 +3323,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.clickStartService();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		ordermonitorscreen.setCompletedServiceStatus();
-		//ordermonitorscreen.clickServiceDetailsDoneButton();
-		ordermonitorscreen.verifyPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE, "Completed");
+		List<String> statuses = ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE);
+		for (String status : statuses)
+			Assert.assertEquals(status, "Completed");
 		
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
 		ordermonitorscreen.clickStartPhase();
@@ -3343,10 +3344,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(), "Completed");
 		ordermonitorscreen.clickDoneIcon();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
+		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(), "Completed");
 		ordermonitorscreen.clickDoneIcon();
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
@@ -3552,8 +3553,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, "test.cyberiansoft@gmail.com",
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.INBOX);
+		System.out.println("++++++" + ReconProIOSStageInfo.getInstance().getTestMail());
+		System.out.println("++++++" + ReconProIOSStageInfo.getInstance().getTestMailPassword());
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, ReconProIOSStageInfo.getInstance().getTestMail(),
+				ReconProIOSStageInfo.getInstance().getTestMailPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
@@ -3615,8 +3618,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, "test.cyberiansoft@gmail.com",
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.INBOX);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, ReconProIOSStageInfo.getInstance().getTestMail(),
+				ReconProIOSStageInfo.getInstance().getTestMailPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
@@ -7392,4 +7395,48 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		servicerequestsscreen.clickHomeButton();
 	}
+
+	@Test(testName = "testGenerateInvoices", description = "testGenerateInvoices")
+	public void testGenerateInvoices() throws Exception {
+
+		final String VIN = "2A4RR4DE2AR286008";
+
+
+
+		homescreen = new HomeScreen();
+		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		for (int i = 0; i < 5000; i++) {
+
+			myworkordersscreen.addWorkOrder(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
+			VehicleScreen vehiclescreeen = new VehicleScreen();
+			vehiclescreeen.setVIN(VIN);
+
+			/*ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
+			SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
+			selectedservicescreen.clickVehiclePartsCell();
+			selectedservicescreen.selectVehiclePart("Cowl, Other");
+			selectedservicescreen.selectVehiclePart("Hood");
+			selectedservicescreen.saveSelectedServiceDetails();
+			selectedservicescreen.saveSelectedServiceDetails();*/
+			OrderSummaryScreen ordersummaryscreen = vehiclescreeen.selectNextScreen(OrderSummaryScreen
+					.getOrderSummaryScreenCaption(), OrderSummaryScreen.class);
+
+			ordersummaryscreen.checkApproveAndCreateInvoice();
+			SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
+			selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+			ordersummaryscreen.clickSave();
+			InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
+
+
+			invoiceinfoscreen.setPO("23");
+			invoiceinfoscreen.clickSaveAsFinal();
+			System.out.println("++++ Invoices created: " +  i);
+		}
+
+	}
+
 }
