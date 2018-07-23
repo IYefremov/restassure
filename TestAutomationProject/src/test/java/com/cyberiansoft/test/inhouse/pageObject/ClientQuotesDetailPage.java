@@ -6,6 +6,7 @@ import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,9 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @FindBy(className = "btn-select-edition-discount")
     private WebElement discountButton;
+
+    @FindBy(className = "btn-license-fee-discount")
+    private WebElement licenseFreeDiscountButton;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-finalize-agreement']")
     private WebElement finalizeAgreementButton;
@@ -76,6 +80,9 @@ public class ClientQuotesDetailPage extends BasePage {
     @FindBy(xpath = "//div[@class='dropup open']")
     private WebElement dropUpOpen;
 
+    @FindBy(xpath = "//div[@class='dropup']//span[@class='btn-license-fee-discount']")
+    private WebElement dropUpLicenseFeeDiscountClosed;
+
     @FindBy(xpath = "//div[@class='dropup open']//select[@class='form-control']")
     private WebElement dropUpOptions;
 
@@ -105,6 +112,18 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='submit btn-save-billing-starts']")
     private WebElement billingStartsSubmitButton;
+
+    @FindBy(id = "LicenseFeeDiscount")
+    private WebElement licenseFeeDiscountField;
+
+    @FindBy(id = "LicenseFeeDiscountType")
+    private WebElement licenseFeeDiscountType;
+
+    @FindBy(id = "LicenseFeeDiscountDescription")
+    private WebElement licenseFeeDiscountDescription;
+
+    @FindBy(xpath = "//span[@class='btn-license-fee-discount']//following::button[@class='submit btn-save-edition-discount']")
+    private WebElement licenseFeeDiscountSubmitButton;
 
     public ClientQuotesDetailPage(WebDriver driver) {
         super(driver);
@@ -144,7 +163,14 @@ public class ClientQuotesDetailPage extends BasePage {
     public ClientQuotesDetailPage clickDiscountButton() {
         discountButton.click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
-        return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
+        return this;
+    }
+
+    @Step
+    public ClientQuotesDetailPage clickLicenseFreeDiscountButton() {
+        licenseFreeDiscountButton.click();
+        wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
+        return this;
     }
 
     @Step
@@ -153,7 +179,7 @@ public class ClientQuotesDetailPage extends BasePage {
         try {
             driver.switchTo().alert().accept();
         } catch (Exception ignored) {}
-        return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
+        return this;
     }
 
     @Step
@@ -195,7 +221,7 @@ public class ClientQuotesDetailPage extends BasePage {
 
     public ArrayList<String> getLinks() {
         String mailContent = MailChecker.getUserMailContentFromSpam();
-        Pattern linkPattern = Pattern.compile("(<a[^>]+>.+?<\\/a>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        Pattern linkPattern = Pattern.compile("(<a[^>]+>.+?</a>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher pageMatcher = linkPattern.matcher(mailContent);
         ArrayList<String> links = new ArrayList<>();
         while (pageMatcher.find()) {
@@ -245,6 +271,47 @@ public class ClientQuotesDetailPage extends BasePage {
         waitABit(500);
         wait.until(ExpectedConditions.elementToBeClickable(submitDiscountButton)).click();
         waitForLoading();
+    }
+
+    @Step
+    public void insertLicenseFeeDiscount(int discount) {
+        driver.switchTo().defaultContent();
+        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountField)).clear();
+        licenseFeeDiscountField.sendKeys(String.valueOf(discount));
+    }
+
+    @Step
+    public void selectRandomDiscountType() {
+        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountType));
+        Select selection = new Select(licenseFeeDiscountType);
+        List<WebElement> allSelectedOptions = selection.getAllSelectedOptions();
+        selection.selectByIndex(RandomUtils.nextInt(1, allSelectedOptions.size()));
+    }
+
+    @Step
+    public void insertLicenseFeeDiscountDescription(String description) {
+        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountDescription)).clear();
+        licenseFeeDiscountDescription.sendKeys(description);
+    }
+
+    @Step
+    public void clickSubmitLicenseFeeButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountSubmitButton)).click();
+        waitForLoading();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(dropUpLicenseFeeDiscountClosed));
+        } catch (Exception e) {
+            Assert.fail("License fee dropup has not been closed");
+        }
+    }
+
+    @Step
+    public void selectLicenseDiscount(int discount, String description) {
+        clickLicenseFreeDiscountButton();
+        insertLicenseFeeDiscount(discount);
+        selectRandomDiscountType();
+        insertLicenseFeeDiscountDescription(description);
+        clickSubmitLicenseFeeButton();
     }
 
     @Step

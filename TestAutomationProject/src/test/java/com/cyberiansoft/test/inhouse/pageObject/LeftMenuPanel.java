@@ -17,9 +17,6 @@ public class LeftMenuPanel extends BasePage {
     @FindBy(xpath = "//span[text()='Clients']")
     private WebElement clients;
 
-    @FindBy(xpath = "//span[text()='Client Management']")
-    private WebElement clientManagement;
-
     @FindBy(xpath = "//span[text()='Sales Quotes']")
     private WebElement salesQuotes;
 
@@ -43,6 +40,9 @@ public class LeftMenuPanel extends BasePage {
     @FindBy(xpath = "//span[text()='Client Segments']")
     private WebElement clientSegments;
 
+    @FindBy(xpath = "//span[text()='Signed Agreements']")
+    private WebElement signedAgreements;
+
     @FindBy(xpath = "//span[text()='Organizations Rules']")
     private WebElement organizationsRules;
 
@@ -50,8 +50,8 @@ public class LeftMenuPanel extends BasePage {
     private WebElement accountsRules;
 
 
-    @FindBy(xpath = "//h1[contains(text(), 'Client Quotes')]")
-    private WebElement clientQuotesHeader;
+    @FindBy(xpath = "//h1[contains(text(), 'Signed Agreements')]")
+    private WebElement signedAgreementsHeader;
 
     @FindBy(xpath = "//h1[contains(text(), 'Agreements in Progress')]")
     private WebElement agreementsInProgressHeader;
@@ -88,11 +88,6 @@ public class LeftMenuPanel extends BasePage {
      * @return
      */
     @Step
-    public LeftMenuPanel clickClientManagement() {
-        clickMenu(clientManagement);
-        return this;
-    }
-    @Step
     public LeftMenuPanel clickSalesQuotes() {
         clickMenu(salesQuotes);
         return this;
@@ -115,20 +110,35 @@ public class LeftMenuPanel extends BasePage {
      * @return
      */
     @Step
-    public ClientQuotesPage clickClientQuotesSubmenu() {
-        clickSubMenu(clientQuotes);
+    public SignedAgreements clickSignedAgreements() {
+        clickSubMenu(signedAgreements);
         waitForLoading();
         try {
-            wait.until(ExpectedConditions.visibilityOf(clientQuotesHeader));
+            wait.until(ExpectedConditions.visibilityOf(signedAgreementsHeader));
         } catch (Exception ignored) {
-            clickClientManagement().clickClientQuotesSubmenu();
-            wait.until(ExpectedConditions.visibilityOf(clientQuotesHeader));
+            clickSalesQuotes();
+            clickSubMenu(signedAgreements);
+            waitForLoading();
+            wait.until(ExpectedConditions.visibilityOf(signedAgreementsHeader));
         }
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return PageFactory.initElements(driver, SignedAgreements.class);
     }
 
     @Step
-    public ClientQuotesPage clickAgreementsInProgress() {
+    public SignedAgreements clickClientQuotesSubmenu() {
+        clickSubMenu(clientQuotes);
+        waitForLoading();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(signedAgreementsHeader));
+        } catch (Exception ignored) {
+//            clickClientManagement().clickClientQuotesSubmenu();
+//            wait.until(ExpectedConditions.visibilityOf(signedAgreementsHeader));
+        }
+        return PageFactory.initElements(driver, SignedAgreements.class);
+    }
+
+    @Step
+    public SignedAgreements clickAgreementsInProgress() {
         clickSubMenu(agreementsInProgress);
         waitForLoading();
         try {
@@ -137,7 +147,7 @@ public class LeftMenuPanel extends BasePage {
             clickSalesQuotes().clickAgreementsInProgress();
             wait.until(ExpectedConditions.visibilityOf(agreementsInProgressHeader));
         }
-        return PageFactory.initElements(driver, ClientQuotesPage.class);
+        return PageFactory.initElements(driver, SignedAgreements.class);
     }
 
     @Step
@@ -147,8 +157,8 @@ public class LeftMenuPanel extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOf(clientSegmentsHeader));
         } catch (Exception ignored) {
-            clickClientManagement().clickClientSegmentsSubmenu();
-            wait.until(ExpectedConditions.visibilityOf(clientSegmentsHeader));
+//            clickClientManagement().clickClientSegmentsSubmenu();
+//            wait.until(ExpectedConditions.visibilityOf(clientSegmentsHeader));
         }
         return PageFactory.initElements(driver, ClientSegmentsPage.class);
     }

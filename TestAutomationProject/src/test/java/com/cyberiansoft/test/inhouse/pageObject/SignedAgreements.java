@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class ClientQuotesPage extends BasePage {
+public class SignedAgreements extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-potential-client']")
     private WebElement addClientBTN;
@@ -65,7 +65,7 @@ public class ClientQuotesPage extends BasePage {
     private WebElement searchField;
 
     @FindBy(id = "btnSearch")
-    private WebElement searchBTN;
+    private WebElement searchButton;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
     private List<WebElement> updateClientBTN;
@@ -97,13 +97,13 @@ public class ClientQuotesPage extends BasePage {
     @FindBy(className="dataTables_empty")
     private WebElement emptyDataTable;
 
-    public ClientQuotesPage(WebDriver driver) {
+    public SignedAgreements(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     @Step
-    public ClientQuotesPage clickAddClientButton() {
+    public SignedAgreements clickAddClientButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
         addClientBTN.click();
         return this;
@@ -115,7 +115,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage clearAndSetNewClientName(String name) {
+    public SignedAgreements clearAndSetNewClientName(String name) {
         wait.until(ExpectedConditions.visibilityOf(newClientName.get(1))).clear();
         newClientName.get(1).sendKeys(name);
         return this;
@@ -187,7 +187,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
+    public SignedAgreements fillNewClientProfile(String name, String nickname, String address, String address2, String zip,
                                                  String country, String state, String city, String businessPhone, String cellPhone, String firstName,
                                                  String lastName, String title, String email) {
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "block"));
@@ -210,7 +210,7 @@ public class ClientQuotesPage extends BasePage {
 
 
     @Step
-    public ClientQuotesPage clickConfirmNewClientButton() {
+    public SignedAgreements clickConfirmNewClientButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmNewClient)).click();
         wait.until(ExpectedConditions.attributeToBe(addClientDialog, "display", "none"));
         return this;
@@ -230,11 +230,11 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage searchUser(String searchValue) {
+    public SignedAgreements searchUser(String searchValue) {
         try {
             wait.until(ExpectedConditions.visibilityOf(searchField)).clear();
             searchField.sendKeys(searchValue);
-            clickWithJS(searchBTN);
+            clickWithJS(searchButton);
             waitForProcessing();
         } catch (Exception e) {
             e.printStackTrace();
@@ -243,7 +243,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage deleteUsers(String deleteParameter) {
+    public SignedAgreements deleteUsers(String deleteParameter) {
         try {
             new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOf(emptyDataTable));
         } catch (Exception ignored) {
@@ -253,7 +253,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    private ClientQuotesPage deleteParameters(String deleteParameter) {
+    private SignedAgreements deleteParameters(String deleteParameter) {
         try {
             while(wait.until(ExpectedConditions
                     .visibilityOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).isDisplayed()) {
@@ -275,7 +275,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage editClient(String editParemeter) {
+    public SignedAgreements editClient(String editParemeter) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + editParemeter + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-update btn-update-potential-client']")).click();
         return this;
@@ -287,7 +287,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage clickAddAgreementBTN(String agreementIdentifier) {
+    public SignedAgreements clickAddAgreementBTN(String agreementIdentifier) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
         wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "block"));
@@ -305,7 +305,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage setAgreement(String agreement, String team) {
+    public SignedAgreements setAgreement(String agreement, String team) {
         setAgreementName(agreement);
         selectEdition(team);
         saveAgreement();
@@ -319,7 +319,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage expandAgreementList(String identifier) {
+    public SignedAgreements expandAgreementList(String identifier) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + identifier + "']"))).
                     findElement(By.xpath("..")).findElement(By.xpath("//td[@class=' details-control']")).click();
@@ -330,7 +330,7 @@ public class ClientQuotesPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesPage clickEditAgreement(String s) {
+    public SignedAgreements clickEditAgreement(String s) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + s + "']"))).
                     findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-row btn-update-client-proposal']")).click();

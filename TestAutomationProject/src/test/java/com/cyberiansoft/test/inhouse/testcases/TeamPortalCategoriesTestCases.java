@@ -5,7 +5,7 @@ import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseCategoriesData
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.CategoriesPage;
-import com.cyberiansoft.test.inhouse.pageObject.ClientQuotesPage;
+import com.cyberiansoft.test.inhouse.pageObject.SignedAgreements;
 import com.cyberiansoft.test.inhouse.pageObject.ClientSegmentsPage;
 import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
 import org.json.simple.JSONObject;
@@ -78,9 +78,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -88,7 +90,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -109,8 +111,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         Assert.assertTrue(clientSegmentsPage.checkAttributeValue(data.getAttributeName(), data.getAttributeValue()));
 
         leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
 
@@ -150,9 +154,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -160,7 +166,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -188,8 +194,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         "The client is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -200,9 +208,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -210,7 +220,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -238,8 +248,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 "The attribute is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -249,9 +261,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -259,7 +273,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -284,8 +298,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 clientSegmentsPage.deselectAttribute();
 
         leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -295,9 +311,11 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -305,7 +323,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()), "The user hasn't been created");
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()), "The user hasn't been created");
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -330,8 +348,10 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 "The attribute value is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickSignedAgreements()
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }

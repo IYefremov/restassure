@@ -49,7 +49,7 @@ public class BasePage {
     @Step
     public void refreshPage() {
         driver.navigate().refresh();
-        waitABit(2000);
+        waitABit(4000);
     }
 
     @Step

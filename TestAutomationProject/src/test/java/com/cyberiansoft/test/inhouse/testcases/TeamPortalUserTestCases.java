@@ -6,7 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.AgreementApprovePage;
 import com.cyberiansoft.test.inhouse.pageObject.ClientQuotesDetailPage;
-import com.cyberiansoft.test.inhouse.pageObject.ClientQuotesPage;
+import com.cyberiansoft.test.inhouse.pageObject.SignedAgreements;
 import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.json.simple.JSONObject;
@@ -34,9 +34,11 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -44,7 +46,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -52,49 +54,54 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage.editClient(data.getName())
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements.editClient(data.getName())
                 .clearAndSetNewClientName(data.getNewName())
                 .clickUpdateClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getNewName()));
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getNewName()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddAgreement(String rowID, String description, JSONObject testData) {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName()).clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(),data.getTeam());
 
         leftMenuPanel
-                .clickClientQuotesSubmenu()
+//                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .expandAgreementList(data.getName())
                 .clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
+        Assert.assertFalse(signedAgreements.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
+        signedAgreements.updateAgreement();
+        Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -102,9 +109,11 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -112,21 +121,21 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
         leftMenuPanel
-                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .expandAgreementList(data.getName())
                 .clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertFalse(signedAgreements.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
+        signedAgreements.updateAgreement();
+        Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
 
@@ -151,7 +160,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AgreementApprovePage agreementApprovePage = PageFactory.initElements(webdriver, AgreementApprovePage.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
+        SignedAgreements signedAgreements = leftMenuPanel
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -161,8 +170,8 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
@@ -171,20 +180,20 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .searchUser(data.getName())
                 .expandAgreementList(data.getName())
                 .clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertFalse(signedAgreements.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
+        signedAgreements.updateAgreement();
+        Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
 
-//        clientQuotesDetailPage
-//                .clickDiscountButton()
-//                .selectDiscount(data.getDiscount());
-//        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
+        clientQuotesDetailPage
+                .clickDiscountButton()
+                .selectDiscount(data.getDiscount());
+        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
         clientQuotesDetailPage.selectSetupFeeForAllClients();
-//        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
+        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
         Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(clientQuotesDetailPage.getPricePerMonth()));
         clientQuotesDetailPage
                 .setBillingStartsFromToday()
@@ -203,9 +212,11 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AgreementApprovePage agreementApprovePage = PageFactory.initElements(webdriver, AgreementApprovePage.class);
 
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -213,27 +224,26 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail())
                 .clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements
                 .clickAddAgreementBTN(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
         leftMenuPanel
-                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .expandAgreementList(data.getName())
                 .clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertFalse(signedAgreements.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
+        signedAgreements.updateAgreement();
+        Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
 
         clientQuotesDetailPage
-                .clickDiscountButton()
-                .selectDiscount(data.getDiscount());
+                .selectLicenseDiscount(1, "description");
         Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
         clientQuotesDetailPage.selectSetupFeeForAllClients();
         Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
@@ -274,29 +284,31 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     public void testUserCanSelectServiceInAgreement(String rowID, String description, JSONObject testData) {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-        ClientQuotesPage clientQuotesPage = leftMenuPanel
-                .clickClientManagement()
-                .clickClientQuotesSubmenu()
+        SignedAgreements signedAgreements = leftMenuPanel
+//                .clickClientManagement()
+//                .clickClientQuotesSubmenu()
+                .clickSalesQuotes()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
                 .fillNewClientProfile(data.getName(), data.getNickname(), data.getAddress(), data.getAddress2(),
                         data.getZip(), data.getCountry(), data.getState(), data.getCity(), data.getBusinessPhone(),
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
-        clientQuotesPage.clickConfirmNewClientButton();
-        Assert.assertTrue(clientQuotesPage.isUserCreated(data.getName()));
-        clientQuotesPage.clickAddAgreementBTN(data.getName());
-        clientQuotesPage.setAgreement(data.getFirstAgreement(), data.getTeam());
+        signedAgreements.clickConfirmNewClientButton();
+        Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
+        signedAgreements.clickAddAgreementBTN(data.getName());
+        signedAgreements.setAgreement(data.getFirstAgreement(), data.getTeam());
 
-        clientQuotesPage = leftMenuPanel.clickClientQuotesSubmenu();
-        clientQuotesPage.searchUser(data.getName());
-        clientQuotesPage.expandAgreementList(data.getName());
-        clientQuotesPage.clickEditAgreement(data.getFirstAgreement());
-        Assert.assertFalse(clientQuotesPage.verifyAgreementEditionCannotBeChanged(data.getTeam()));
-        Assert.assertTrue(clientQuotesPage.isAgreementNameChangeable(data.getSecondAgreement()));
-        clientQuotesPage.updateAgreement();
-        Assert.assertTrue(clientQuotesPage.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = clientQuotesPage
+        signedAgreements = leftMenuPanel.clickAgreementsInProgress();
+        signedAgreements.searchUser(data.getName());
+        signedAgreements.expandAgreementList(data.getName());
+        signedAgreements.clickEditAgreement(data.getFirstAgreement());
+        Assert.assertFalse(signedAgreements.verifyAgreementEditionCannotBeChanged(data.getTeam()));
+        Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
+        signedAgreements.updateAgreement();
+        Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
+        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements
                 .clickSetupAgreementButton(data.getSecondAgreement());
         Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus("New","No","No","No"));
         clientQuotesDetailPage.clickDiscountButton();
