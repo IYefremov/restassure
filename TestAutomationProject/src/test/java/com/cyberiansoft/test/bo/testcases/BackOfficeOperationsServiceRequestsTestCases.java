@@ -4,10 +4,12 @@ import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.utils.MailChecker;
 import com.cyberiansoft.test.dataclasses.bo.BOoperationsSRdata;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.emaildata.EmailFolder;
+import com.cyberiansoft.test.email.emaildata.EmailHost;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -15,18 +17,24 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import javax.mail.MessagingException;
 import java.util.Random;
 
 @Listeners(VideoListener.class)
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOoperationsSRdata.json";
-    private MailChecker mailChecker;
+    private EmailUtils emailUtils;
 
     @BeforeClass()
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
-        mailChecker = new MailChecker();
+        try {
+            emailUtils = new EmailUtils(EmailHost.GMAIL, BOConfigInfo.getInstance().getUserName(),
+                    BOConfigInfo.getInstance().getUserPassword(), EmailFolder.INBOX);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -205,7 +213,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.closeFirstServiceRequestFromTheList();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentLocationTypeCustomer(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
@@ -241,7 +249,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
 		servicerequestslistpage.clickFindButton();
-
+//todo  org.openqa.selenium.interactions.Actions moveToElement
+//INFO: When using the W3C Action commands, offsets are from the center of element
 		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
@@ -676,7 +685,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(data.getDescriptions()[1]));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkDescriptionDocument(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
@@ -967,8 +977,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-//	public void checkSRLCapproved(String data.getCustomer(), String data.getFirstDay(), String data.getSecondDay(), String status, String SRcustomer,
-//			String newStatus) {
 	public void checkSRLCapproved(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
@@ -993,8 +1001,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-//	public void checkSRLCrejected(String data.getCustomer(), String data.getFirstDay(), String data.getSecondDay(), String status, String SRcustomer,
-//			String newStatus) {
         public void checkSRLCrejected(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
@@ -1019,9 +1025,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-//  @Test(testName = "Test Case 57879:Operation - Service Request Life Cycle - Closed", dataProvider = "provideSRdata1")
-//	public void checkSRLCclosed(String data.getCustomer(), String data.getFirstDay(), String data.getSecondDay(), String status, String SRcustomer,
-//			String newStatus) {
 	public void checkSRLCclosed(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
@@ -1048,10 +1051,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testMiscellaneousEventsServiceRequestAccepted(String rowID, String description, JSONObject testData) {
+	public void testMiscellaneousEventsServiceRequestAccepted(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1074,19 +1081,24 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(
-				mailChecker.checkEmails(data.getEmailKeyWordRemainder()) || mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
 
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testMiscellaneousEventsSRCreated(String rowID, String description, JSONObject testData) {
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMiscellaneousEventsSRCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWord())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1110,19 +1122,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord())
-				|| mailChecker.checkTestEmails());
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+//todo fails
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWord());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestCheckedIn(String rowID, String description, JSONObject testData) {
+    public void  testMiscellaneousEventsServiceRequestCheckedIn(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWord())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1150,18 +1168,26 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
 		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+//		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWord());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1186,17 +1212,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 //        Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getAlert());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsAppointmentFailed(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsAppointmentFailed(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1220,18 +1254,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
-//		Assert.assertTrue(mailChecker.checkTestEmails() || mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getAlert());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestAppointmentCreated(String rowID, String description, JSONObject testData) {
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testMiscellaneousEventsServiceRequestAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWord())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1256,17 +1297,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 //		Assert.assertTrue(
 //				mailChecker.checkTestEmails() || mailChecker.checkEmails(data.getEmailKeyWord()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+//todo fails
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWord());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestAcceptedByTech(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestAcceptedByTech(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWord())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1291,17 +1340,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 //		Assert.assertTrue(mailChecker.checkTestEmails()
 //				|| mailChecker.checkEmails(data.getEmailKeyWord()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWord());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestEstimationCreated(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestEstimationCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1325,17 +1382,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestIsMonitored(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestIsMonitored(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordRemainder())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1359,17 +1424,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordRemainder()) || mailChecker.checkTestEmails());
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordRemainder());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestOrderCreated(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestOrderCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1393,17 +1466,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestRejected(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestRejected(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWordWasCreated())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1427,17 +1508,25 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsServiceRequestCheckIn(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsServiceRequestCheckIn(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+                .withSubject(data.getEmailKeyWord())
+                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
         MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
@@ -1464,7 +1553,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
-		miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+
+        
+        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+                "Could not find email message with subject containing " + data.getEmailKeyWord());
+
+        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 	}

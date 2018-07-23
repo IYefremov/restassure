@@ -1138,6 +1138,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         wait.until(ExpectedConditions.visibilityOf(appointmentToTime)).sendKeys("7:00 AM");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_rdpEndTime_timePopupLink")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("gvTechnicians")));
+		waitABit(1000);
         setServiceRequestAppointmentTechnicians(technician);
 		try {
 			wait.until(ExpectedConditions
@@ -1843,6 +1844,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
 					.click();
             waitForSRLoading();
+            waitForLoading();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
             return true;

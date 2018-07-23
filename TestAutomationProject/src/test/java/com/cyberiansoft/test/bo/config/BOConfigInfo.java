@@ -66,4 +66,14 @@ public class BOConfigInfo {
 	public String getDefaultBrowser() {
 		return props.getProperty("default.browser");
 	}
+
+
+
+    public String getOutlookMail() {
+        return props.getProperty("outlook.mail");
+    }
+
+    public String getOutlookPassword() {
+        return props.getProperty("outlook.password");
+    }
 }
