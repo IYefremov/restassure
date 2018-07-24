@@ -24,7 +24,7 @@ public class BaseTestCase {
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
 	protected static BrowserType browsertype;
-	protected static MobilePlatform mobilePlatform;
+	public static MobilePlatform mobilePlatform;
 	protected TestUser testuser;
 	protected String userpsw;
 

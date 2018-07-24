@@ -3,22 +3,22 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSHDBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class BaseWizardScreen extends iOSHDBaseScreen {
+public abstract class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScreen {
 
     public static TypeScreenContext typeContext;
 
     public BaseWizardScreen() {
         super();
-        //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    public <T extends BaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
+    public <T extends IBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
         IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
         navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
         appiumdriver.findElementByAccessibilityId(screenname).click();
@@ -61,7 +61,7 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen {
     public <T extends BaseTypeScreen> T clickSaveAsFinal() {
         clickSave();
         clickFinalPopup();
-        clickSave();
+//        clickSave();
         return getTypeScreenFromContext();
     }
 

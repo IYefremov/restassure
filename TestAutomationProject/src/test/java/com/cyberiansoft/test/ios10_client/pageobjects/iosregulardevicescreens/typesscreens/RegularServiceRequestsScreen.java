@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -109,11 +111,17 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
-	public void selectServiceRequestType(String srtype) {
+	public <T extends IBaseWizardScreen> T selectServiceRequestType(ServiceRequestTypes serviceRequestType) {
 		swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + srtype + "']/..")));
-		appiumdriver.findElementByAccessibilityId(srtype).click();
-		appiumdriver.findElementByAccessibilityId(srtype).click();
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + serviceRequestType.getServiceRequestTypeName() + "']/..")));
+		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();
+		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();
+		return serviceRequestType.getFirstVizardScreen();
+	}
+
+	public <T extends IBaseWizardScreen> T addServiceRequest(ServiceRequestTypes serviceRequestType) {
+		clickAddButton();
+		return selectServiceRequestType(serviceRequestType);
 	}
 
 	public void selectServiceRequest(String srnumber) {

@@ -19,6 +19,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -898,11 +899,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 	
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		
-		servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
-                iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
-		
+
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+				ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) DriverBuilder.getInstance().getAppiumDriver().findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
@@ -2582,9 +2581,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = new HomeScreen();
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
-                "SR_only_Acc_Estimate");
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
+				ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -2697,10 +2695,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 
-		servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
-                iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
-			
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+				ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVINFieldValue(VIN);
 		IOSElement alert = (IOSElement) DriverBuilder.getInstance().getAppiumDriver().findElementByClassName("XCUIElementTypeAlert");
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
@@ -2765,45 +2761,34 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String srappcity = "Kiev";
 		
 		homescreen = new HomeScreen();
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-		settingsscreen.setInspectionToNonSinglePageInspection();
-		settingsscreen.clickHomeButton();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
 				
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
-                iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
-				
+
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+                ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+
 		vehiclescreeen.setVINFieldValue(VIN);
-		IOSElement alert = (IOSElement) DriverBuilder.getInstance().getAppiumDriver().findElementByClassName("XCUIElementTypeAlert");
-		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
-				.findElement(
-				MobileBy.name("The VIN# is incorrect.")).isDisplayed());
-		alert.findElementByAccessibilityId("Close").click();
+		String alertText = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alertText, AlertsCaptions.THE_VIN_IS_INCORRECT);
 
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
 		servicesscreen.clickSave();
-		String alerttext = Helpers.getAlertTextAndCancel();
-		Assert.assertTrue(alerttext.contains("Question 'Signature' in section 'Follow up Requested' should be answered."));
+		alertText = Helpers.getAlertTextAndCancel();
+		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		QuestionsScreen questionsscreen = new QuestionsScreen();
 		questionsscreen.drawSignature();
 		servicesscreen.clickSave();
-		Helpers.waitForAlert();
-		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
-				.findElement(
-				MobileBy.name("Question 'Tax_Point_1' in section 'BATTERY PERFORMANCE' should be answered.")).isDisplayed());
-		DriverBuilder.getInstance().getAppiumDriver()
-				.findElement(
-				MobileBy.name("Close"))
-				.click();
+		alertText =  Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+
 		questionsscreen = new QuestionsScreen();
 		questionsscreen.selectTaxPoint("Test Answer 1");
 		servicesscreen.clickSave();
-		alerttext = Helpers.getAlertTextAndCancel();
-		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		alertText = Helpers.getAlertTextAndCancel();
+		Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		servicerequestsscreen = new ServiceRequestsScreen();
 		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
@@ -2813,8 +2798,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddAppointmentButton();
 		servicerequestsscreen.selectTodayFromAppointmet();
 		servicerequestsscreen.selectTodayToAppointmet();
-		//final String fromapp = servicerequestsscreen.getFromAppointmetValue();
-		//final String toapp = servicerequestsscreen.getToAppointmetValue();
 			
 		servicerequestsscreen.setSubjectAppointmet(srappsubject);
 		servicerequestsscreen.setAddressAppointmet(srappaddress);
@@ -2831,8 +2814,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
         serviceRequestdetailsScreen.clickBackButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectRejectAction();
-		alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
+		alertText = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alertText, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		servicerequestsscreen.clickHomeButton();
 	}
 	
@@ -2880,8 +2863,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25011:Inspections HD: verify that only assigned services on Matrix Panel is available as additional services", description = "Inspections: verify that only assigned services on Matrix Panel is available as additional services")
-	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices()
-			throws Exception {
+	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
@@ -3355,8 +3337,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26214:SR: HD - Verify that SR is created correctly when select owner on Vehicle info", 
 			description = "SR: HD - Verify that SR is created correctly when select owner on Vehicle info")
-	public void testSRHDVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo()
-			throws Exception {
+	public void testSRHDVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String owner = "Avalon";
@@ -3367,8 +3348,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectOwnerT(owner);
@@ -3388,8 +3368,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26215:SR: HD - Verify that Check In action is present for SR when appropriate SR type has option Check in ON", 
 			description = "SR: HD - Verify that Check In action is present for SR when appropriate SR type has option Check in ON")
-	public void testSRHDVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON()
-			throws Exception {
+	public void testSRHDVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String owner = "Avalon";
@@ -3400,8 +3379,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectOwnerT(owner);
@@ -3423,8 +3401,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26216:SR: HD - Verify that Check In action is changed to Undo Check In after pressing on it and vice versa", 
 			description = "SR: HD - Verify that Check In action is changed to Undo Check In after pressing on it and vice versa")
-	public void testSRHDVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa()
-			throws Exception {
+	public void testSRHDVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String owner = "Avalon";
@@ -3435,8 +3412,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectOwnerT(owner);
@@ -3461,8 +3437,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26217:SR: HD - Verify that filter 'Not Checked In' is working correctly", 
 			description = "SR: HD - Verify that filter 'Not Checked In' is working correctly")
-	public void testSRHDVerifyThatFilterNotCheckedInIsWorkingCorrectly()
-			throws Exception {
+	public void testSRHDVerifyThatFilterNotCheckedInIsWorkingCorrectly() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String owner = "Avalon";
@@ -3473,8 +3448,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_CHECKIN_ON);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		vehiclescreeen.selectOwnerT(owner);
@@ -3513,8 +3487,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
-		
+
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -3634,8 +3607,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26690:Invoices: HD - Verify that print icon is shown next to invoice when it was printed (My Invoices)", 
 			description = "Invoices: HD - Verify that print icon is shown next to invoice when it was printed (My Invoices)")
-	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices()
-			throws Exception {
+	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices() {
 		
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -3654,8 +3626,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26691:Invoices: HD - Verify that print icon is shown next to invoice when it was printed (Team Invoices)", 
 			description = "Invoices: HD - Verify that print icon is shown next to invoice when it was printed (Team Invoices)")
-	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices()
-			throws Exception {
+	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices() {
 		
 		homescreen = new HomeScreen();
 		TeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
@@ -3860,8 +3831,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29022:SR: HD - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech", 
 			description = "Test Case 29022:SR: HD - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech")
-	public void testSRHDVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech()
-			throws Exception {
+	public void testSRHDVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -3873,8 +3843,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		//Create first SR
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -3892,8 +3861,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new ServiceRequestsScreen();
 		String srnumber1 = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.rejectServiceRequest(srnumber1);
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
-		vehiclescreeen = new VehicleScreen();
+		vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -3925,8 +3893,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_ALL_PHASES);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -4011,7 +3978,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_INSP_ONLY);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_INSP_ONLY.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -4063,7 +4030,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -4104,7 +4071,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		operationspage = backofficeheader.clickOperationsLink();
 		srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -4251,8 +4218,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4273,8 +4239,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31748:SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'", 
 			description = "SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'")
-	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4285,8 +4250,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4320,8 +4284,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4355,8 +4318,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4391,8 +4353,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4432,8 +4393,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4469,8 +4429,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_WO_ONLY);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_WO_ONLY);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
@@ -4537,8 +4496,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30084:SR: HD - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services", 
 			description = "SR: HD - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services")
-	public void testSRHDVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices()
-			throws Exception {
+	public void testSRHDVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4551,8 +4509,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_INSP_ONLY);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_INSP_ONLY);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -4808,8 +4765,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_ALL_PHASES);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -5016,7 +4972,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33869:IInspections: HD - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard", 
 			description = "Verify that Services on Service Package are grouped by type selected on Insp type->Wizard")
-	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() throws Exception {
+	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() {
 
 
 		final String VIN  = "1D7HW48NX6S507810";
@@ -5913,9 +5869,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_ALL_PHASES);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
-				
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		QuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", QuestionsScreen.class);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
@@ -6809,15 +6763,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.cancelSearchAvailableService();
-		
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.CALC_LABOR);
+
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.CALC_LABOR);
 		selectedservicescreen.clickTechniciansIcon();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
 		
-		
 		selectedservicescreen.cancelSelectedServiceDetails();
+		//selectedservicescreen.cancelSelectedServiceDetails();
 		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
 		selectedservicescreen.clickTechniciansIcon();
 		selectedservicescreen.searchTechnician("Manager");
@@ -7177,7 +7130,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7207,7 +7160,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectAcceptAction();
 		
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to accept  selected service request?");
+		Assert.assertEquals(alerttext, "Would you like to accept selected service request?");
 		servicerequestsscreen = new ServiceRequestsScreen();
 		Assert.assertTrue(servicerequestsscreen.isServiceRequestOnHold(srnumber));
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -7239,7 +7192,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7269,7 +7222,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectDeclineAction();
 		
 		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerttext, "Would you like to decline  selected service request?");
+		Assert.assertEquals(alerttext, "Would you like to decline selected service request?");
 		servicerequestsscreen.clickDoneCloseReasonDialog();
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();	
@@ -7296,7 +7249,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7361,7 +7314,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		
 		servicerequestslistpage.clickGeneralInfoEditButton();

@@ -3,12 +3,14 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
+public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
     public static TypeScreenContext typeContext;
 
@@ -16,7 +18,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         super();
     }
 
-    public <T extends RegularBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
+    public <T extends IBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(screenname).click();
         if (type == RegularInvoiceInfoScreen.class)
@@ -72,7 +74,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen {
         return getTypeScreenFromContext();
     }
 
-    public <T extends IRegularTypeScreen> T getTypeScreenFromContext()  {
+    public <T extends ITypeScreen> T getTypeScreenFromContext()  {
         switch (typeContext) {
             case WORKORDER:
                 return (T) new RegularMyWorkOrdersScreen();

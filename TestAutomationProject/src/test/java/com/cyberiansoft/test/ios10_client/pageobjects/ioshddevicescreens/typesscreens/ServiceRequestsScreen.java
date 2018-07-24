@@ -7,6 +7,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.ServiceRequestTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -20,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -119,14 +122,14 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	public ServiceRequestsScreen() {
 		super();
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 	}
 
-	public void clickRefreshButton() throws InterruptedException {
+	public void clickRefreshButton() {
 		appiumdriver.findElementByAccessibilityId("Refresh").click();
 	}
 	
@@ -138,18 +141,20 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		BaseWizardScreen.typeContext =  SRCONTEXT;
 	}
 
-	public void addServiceRequestWithSelectCustomer(String customerName, String serviceRequestType) {
+	public <T extends IBaseWizardScreen> T addServiceRequestWithSelectCustomer(String customerName, ServiceRequestTypes serviceRequestType) {
 		clickAddButton();
 		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
 		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
-		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
+		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType.getServiceRequestTypeName());
+		return serviceRequestType.getFirstVizardScreen();
 	}
 
-	public void addServiceRequest(String serviceRequestType) {
+	public <T extends IBaseWizardScreen> T  addServiceRequest(ServiceRequestTypes serviceRequestType) {
 		clickAddButton();
 		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
-		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType);
+		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType.getServiceRequestTypeName());
+		return serviceRequestType.getFirstVizardScreen();
 	}
 	
 	public void clickSearchButton() {
@@ -423,12 +428,16 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	//Close reason UIAPicker
 	public void clickCancelCloseReasonDialog() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Reasons")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 			
 	public void clickDoneCloseReasonDialog() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Reasons")));
         clickDoneButton();
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")) );
 	}
 

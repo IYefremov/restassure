@@ -327,9 +327,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void selecTechnician(String technician) {
-		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TechnicianSplitsView"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Technicians")));
 
 		IOSElement techsplittable =  getTechnicianSplitTable();
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
@@ -484,6 +484,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void cancelSelectedServiceDetails() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 

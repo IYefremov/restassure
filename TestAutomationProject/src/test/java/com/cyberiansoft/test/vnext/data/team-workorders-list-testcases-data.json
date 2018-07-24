@@ -1,0 +1,23 @@
+{
+
+  "testVerifyCreatedWOWithTeamSharingDisplaysInTeamWOList": [
+    {
+      "rowID": "testVerifyCreatedWOWithTeamSharingDisplaysInTeamWOList.01",
+      "description": "Test Case 68374:Verify created WO with Team Sharing displays in Team WO list",
+      "workOrderType": "Kramar_auto",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanSearchWOByCustomerName": [
+    {
+      "rowID": "testVerifyUserCanSearchWOByCustomerName.01",
+      "description": "Test Case 68398:Verify user can search WO by Customer name",
+      "workOrderType": "Kramar_auto",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
+
+}

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
 	@BeforeClass(description="Team Work Orders Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 	}
 	
 	@Test(testName= "Test Case 67042:Verify user can delete WO if 'Allow Delete=ON'", 
@@ -53,7 +53,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		homescreen = statusscreen.clickBackButton();
 		workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber));
-		homescreen = workordersscreen.clickBackButton();
+		workordersscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67043:Verify user can't delete WO if 'Allow Delete=OFF'", 
