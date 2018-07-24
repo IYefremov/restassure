@@ -40,6 +40,7 @@ public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
 			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+		clearSearchField();
 	}
 	
 	public VNextCustomersScreen clickAddWorkOrderButton() {
@@ -162,5 +163,9 @@ public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
 		return this;
+	}
+
+	public void searchWorkOrderByFreeText(String searchtext) {
+		searchByFreeText(searchtext);
 	}
 }

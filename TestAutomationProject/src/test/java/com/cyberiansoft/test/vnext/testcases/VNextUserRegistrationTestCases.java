@@ -86,12 +86,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
-		BaseUtils.waitABit(2000);
+		/*BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
-		BaseUtils.waitABit(5000);
+		BaseUtils.waitABit(5000);*/
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
+		BaseUtils.waitABit(2000);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
 		reglineofbusinessscreen.selectEdition(boeditionname);
@@ -181,7 +182,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
 		BaseUtils.waitABit(5000);
-		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);

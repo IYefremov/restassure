@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.TapOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
@@ -12,6 +13,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofSeconds;
 
 
 public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen {
@@ -51,8 +57,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(personalinfouserscreen));
-		BaseUtils.waitABit(2000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal-info-view")));
 	}
 	
 	public void setNewUserPersonaInfo(String newusercompanyname, String userstate) {
@@ -130,11 +135,49 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		wait.until(ExpectedConditions.visibilityOf(statespage));
 		tap(statespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + userstate + "']")));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(usercompanynamefld));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[contains(@data-bind, 'data.stateText')]")));
 	}
 	
 	public void clickDoneButton() {
-		tap(personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i")));
+		System.out.println(personalinfouserscreen.findElements(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")).size());
+		tap(personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")));
+		personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")).click();
+		WebElement el = personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]"));
+		new TouchAction(appiumdriver).tap(TapOptions.tapOptions().withElement(element (el, el.getLocation().getX()+3, el.getLocation().getY()+3)))
+                .waitAction(waitOptions(ofSeconds(2))).perform();
+	System.out.println("++++++++++++++++++++");
+	MobileElement elm = (MobileElement) el;
+	System.out.println("+++++++++++" + elm.getCenter().getX());
+		System.out.println("+++++++++++" + elm.getCenter().getY());
+
+
+		new TouchAction(appiumdriver)
+				.tap(point(elm.getCenter().getX(), elm.getCenter().getY()))
+				.tap(element(elm, 5, 5));
+		System.out.println("++++++++++++++++++++");
+
+		new TouchAction(appiumdriver)
+				.press(element(elm,-5, elm.getCenter().getY() - elm.getLocation().getY()))
+				.waitAction(waitOptions(ofSeconds(2)))
+				.release();
+
+		JavascriptExecutor executor = (JavascriptExecutor)appiumdriver;
+		executor.executeScript("arguments[0].click();", el);
+
+		if (appiumdriver instanceof JavascriptExecutor)
+			((JavascriptExecutor)appiumdriver).executeScript("arguments[0].click();", el);
+		System.out.println("===============================");
+
+		el = personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span"));
+		if (appiumdriver instanceof JavascriptExecutor)
+			((JavascriptExecutor)appiumdriver).executeScript("arguments[0].click();", el);
+		System.out.println("===============================");
+
+		el = personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i"));
+		if (appiumdriver instanceof JavascriptExecutor)
+			((JavascriptExecutor)appiumdriver).executeScript("arguments[0].click();", el);
 	}
+
+
 
 }

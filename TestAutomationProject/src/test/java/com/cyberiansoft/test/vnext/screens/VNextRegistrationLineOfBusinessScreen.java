@@ -26,7 +26,7 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(businesstypescreen));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("business-type-view")));
 		BaseUtils.waitABit(1000);
 	}
 

@@ -1,10 +1,13 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +19,18 @@ import org.testng.Assert;
 import java.util.List;
 
 public class VNextBasicTypeScreen extends VNextBaseScreen {
+
+    @FindBy(xpath="//*[@data-automation-id='search-icon']")
+    private WebElement searchbtn;
+
+    @FindBy(xpath="//*[@data-autotests-id='search-input']")
+    private WebElement searchfld;
+
+    @FindBy(xpath="//*[@data-autotests-id='search-cancel']")
+    private WebElement cancelsearchbtn;
+
+    @FindBy(xpath="//*[@data-automation-id='search-clear']")
+    private WebElement clearsearchicon;
 
     @FindBy(xpath="//*[@action='my']")
     private WebElement myviewtab;
@@ -29,8 +44,6 @@ public class VNextBasicTypeScreen extends VNextBaseScreen {
     }
 
     protected WebElement getListCell(WebElement typesList, String cellValue) {
-       // WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class, 'entity-item accordion-item')]")));
         List<WebElement> listCells = typesList.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
 
         WebElement tableCell = listCells.stream().
@@ -64,5 +77,47 @@ public class VNextBasicTypeScreen extends VNextBaseScreen {
 
     protected boolean isMyViewActive() {
         return myviewtab.getAttribute("class").contains("active");
+    }
+
+    public void searchByFreeText(String searchtext) {
+        clickSearchButton();
+        setSearchText(searchtext);
+    }
+
+    public void clickSearchButton() {
+        tap(searchbtn);
+    }
+
+    private void setSearchText(String searchtext) {
+        tap(searchfld);
+        searchfld.clear();
+        appiumdriver.getKeyboard().sendKeys(searchtext);
+        appiumdriver.hideKeyboard();
+        AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+        ((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
+        AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+        clickCancelSearchButton();
+    }
+
+    public void clickCancelSearchButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='search-cancel']")));
+        tap(cancelsearchbtn);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+    }
+
+    public void clearSearchField() {
+        /*if (cancelsearchbtn.isDisplayed()) {
+            tap(clearsearchicon);
+            clickCancelSearchButton();
+        }*/
+        if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
+            tap(searchbtn);
+            if (searchfld.getAttribute("value").length() > 1) {
+                tap(clearsearchicon);
+                WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+            }
+            clickCancelSearchButton();
+        }
     }
 }
