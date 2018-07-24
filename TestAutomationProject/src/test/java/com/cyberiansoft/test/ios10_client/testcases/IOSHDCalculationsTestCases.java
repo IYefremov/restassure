@@ -13,6 +13,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.MobileBy;
@@ -1382,8 +1383,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.SR_ALL_PHASES);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		ServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(ServicesScreen.getServicesScreenCaption(), ServicesScreen.class);
@@ -2754,8 +2754,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		
@@ -2877,8 +2876,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 
@@ -2996,8 +2994,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		ServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.addServiceRequest(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		VehicleScreen vehiclescreeen = new VehicleScreen();
+		VehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 

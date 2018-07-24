@@ -2,7 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ITypeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;

@@ -4,6 +4,7 @@ public class AlertsCaptions {
 	
 	public static final String ALERT_CHANGE_DEFAULT_EMPLOYEES = "Changing default employees for a work order will change split data for all services.";
 	public static final String ALERT_VIN_REQUIRED = "Warning! VIN# is required";
+	public static final String THE_VIN_IS_INCORRECT = "The VIN# is incorrect.";
 	public static final String ALERT_ADVISOR_REQUIRED = "Warning! Advisor is required";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL100 = "Warning! Total amount is not equal 100%";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL = "Warning! Total amount is not equal.";
@@ -20,4 +21,8 @@ public class AlertsCaptions {
 	public static final String ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the phase before you can change its status.";
 	public static final String ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS = "Order Monitor You must start the service before you can change its status.";
 	public static final String ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE = "Order Monitor You cannot change the status of services for this phase. You can only change the status of the whole phase.";
+	public static final String ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Tax_Point_1' in section 'BATTERY PERFORMANCE' should be answered.";
+	public static final String ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Signature' in section 'Follow up Requested' should be answered.";
+
+
 }

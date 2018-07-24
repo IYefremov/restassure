@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import org.openqa.selenium.UnsupportedCommandException;
@@ -1077,7 +1078,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32287:Inspections: Regular - Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount", 
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount")
-	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() throws Exception {
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -1435,7 +1436,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
-		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.SR_ALL_PHASES);
+		servicerequestsscreen.selectInspectionType(ServiceRequestTypes.SR_ALL_PHASES.getServiceRequestTypeName());
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
@@ -2863,10 +2864,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 
@@ -2994,10 +2992,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 
@@ -3125,10 +3120,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.MULTIPLE_INSPECTION_SERVICE_TYPE_ALM);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 

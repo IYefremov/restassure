@@ -18,6 +18,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -205,9 +206,8 @@ public class NewTestCases extends BaseTestCase {
 		
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		
-		servicerequestsscreen.selectServiceRequestType("SR_EST_WO_REQ");
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();		
+
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.setMakeAndModel(_make, _model);
 		vehiclescreeen.setColor(_color);
@@ -316,7 +316,7 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.clickRefreshButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectServiceRequestType("Insp_smoke_test");
+		servicerequestsscreen.selectInspectionType("Insp_smoke_test");
 		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);

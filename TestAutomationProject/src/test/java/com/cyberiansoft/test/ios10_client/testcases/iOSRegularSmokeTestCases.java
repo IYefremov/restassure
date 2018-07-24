@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.support.PageFactory;
@@ -954,9 +955,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVIN(VIN);
 		/*Assert.assertTrue(.findElement(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
@@ -2745,10 +2745,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
-			
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
-			
+
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVIN(VIN);
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
@@ -2813,10 +2811,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
-				
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_EST_WO_REQ_SRTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
-				
+
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		vehiclescreeen.setVIN(VIN);
 		/*Assert.assertTrue(.findElement(
 				MobileBy.name("The VIN is invalid.")).isDisplayed());
@@ -3679,10 +3675,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		//Create first SR
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
@@ -3708,10 +3701,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Helpers.acceptAlert();
 		//Create second SR
 		servicerequestsscreen = new RegularServiceRequestsScreen();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
-		vehiclescreeen = new RegularVehicleScreen();
+		vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
@@ -3741,10 +3731,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
@@ -3836,7 +3823,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_ALL_PHASES);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ALL_PHASES.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -3887,7 +3874,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_ONLY_ACC_ESTIMATE);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -3926,7 +3913,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		operationspage = backofficeheader.clickOperationsLink();
 		srlistwebpage = operationspage.clickNewServiceRequestList();
-		srlistwebpage.selectAddServiceRequestsComboboxValue(iOSInternalProjectConstants.SR_TYPE_WO_AUTO_CREATE);
+		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
 		
 		srlistwebpage.clickCustomerEditButton();
@@ -4080,10 +4067,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4119,10 +4103,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4156,10 +4137,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4197,10 +4175,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4238,10 +4213,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4285,10 +4257,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_TYPE_ALLOW_CLOSE_SR);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4328,10 +4297,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_WO_ONLY);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_WO_ONLY);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularQuestionsScreen questionsscreen = vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
@@ -4353,7 +4319,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
 		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.WO_TYPE_FOR_CALC);
 		vehiclescreeen = new RegularVehicleScreen();
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String wonumber = vehiclescreeen.getWorkOrderNumber();
@@ -4418,10 +4384,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_INSP_ONLY);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_INSP_ONLY);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
@@ -4439,7 +4402,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.INSP_FOR_CALC);
+		servicerequestsscreen.selectInspectionType(iOSInternalProjectConstants.INSP_FOR_CALC);
 		vehiclescreeen = new RegularVehicleScreen();
 		vehiclescreeen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String inspnumber = vehiclescreeen.getInspectionNumber();
@@ -4689,10 +4652,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-		
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		vehiclescreeen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
@@ -5835,11 +5795,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickAddButton();
-				
-		servicerequestsscreen.selectServiceRequestType(iOSInternalProjectConstants.SR_ALL_PHASES);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
-				
+		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreeen.setVIN(VIN);
 		RegularQuestionsScreen questionsscreen =  vehiclescreeen.selectNextScreen("Zayats Section1", RegularQuestionsScreen.class);
 		questionsscreen.swipeScreenUp();
@@ -7026,7 +6982,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7087,7 +7043,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7145,7 +7101,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -7210,7 +7166,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestDropDown(iOSInternalProjectConstants.SR_ACCEPT_ON_MOBILE);
+		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		
 		servicerequestslistpage.clickGeneralInfoEditButton();

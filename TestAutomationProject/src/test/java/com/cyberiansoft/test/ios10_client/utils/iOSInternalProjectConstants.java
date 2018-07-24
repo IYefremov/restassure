@@ -71,7 +71,7 @@ public class iOSInternalProjectConstants {
 	public static final String INVOICE_DEFAULT_TEMPLATE = "Invoice_Default_Template";
 	
 	//Service Requests Types
-	public static final String SR_EST_WO_REQ_SRTYPE = "SR_Est_WO_Req";
+	/*public static final String SR_EST_WO_REQ_SRTYPE = "SR_Est_WO_Req";
 	public static final String SR_TYPE_CHECKIN_ON = "SR_type_check_in_ON";
 	public static final String SR_ONLY_ACC_ESTIMATE = "SR_only_Acc_Estimate";
 	public static final String SR_TYPE_WO_AUTO_CREATE = "SR_type_WO_auto_create";
@@ -81,7 +81,7 @@ public class iOSInternalProjectConstants {
 	public static final String SR_WO_ONLY = "SR_WO_only";
 	public static final String SR_INSP_ONLY = "SR_Insp_only";
 	public static final String MULTIPLE_INSPECTION_SERVICE_TYPE_ALM = "Multiple Inspection Service Type - ALM";
-	public static final String SR_ACCEPT_ON_MOBILE = "SR_Accept_on_mobile";
+	public static final String SR_ACCEPT_ON_MOBILE = "SR_Accept_on_mobile";*/
 	
 	//Services
     public static final String MISCELLANEOUS_SERVICE = "Miscellaneous";
