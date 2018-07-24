@@ -69,7 +69,7 @@ public class BasePage {
                     .invisibilityOf(driver.findElement(By
                             .xpath("//div[not(contains(@style, 'none'))]/i[@class='fa fa-refresh fa-spin']"))));
         } catch (Exception e) {
-            waitABit(1500);
+            waitABit(3000);
         }
     }
 

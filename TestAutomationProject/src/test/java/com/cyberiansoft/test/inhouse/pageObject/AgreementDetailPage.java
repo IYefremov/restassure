@@ -6,6 +6,7 @@ import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -20,11 +21,12 @@ import org.testng.Assert;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ClientQuotesDetailPage extends BasePage {
+public class AgreementDetailPage extends BasePage {
 
     private String userName;
     private String userPassword;
@@ -36,10 +38,13 @@ public class ClientQuotesDetailPage extends BasePage {
     private WebElement discountButton;
 
     @FindBy(className = "btn-license-fee-discount")
-    private WebElement licenseFreeDiscountButton;
+    private WebElement licenseFeeDiscountButton;
 
-    @FindBy(xpath = "//button[@class='btn btn-sm blue btn-finalize-agreement']")
-    private WebElement finalizeAgreementButton;
+    @FindBy(className = "btn-setup-fee-discount")
+    private WebElement setupFeeDiscountButton;
+
+    @FindBy(xpath = "//button[@class='btn btn-sm blue btn-void-agreement']")
+    private WebElement voidButton;
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-send-notification']")
     private WebElement sendNotificationButton;
@@ -63,9 +68,10 @@ public class ClientQuotesDetailPage extends BasePage {
     private WebElement repair360Free;
 
     @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-price-per-month]")
+//    @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-total-price-per-month]")
     private WebElement pricePerMonth;
 
-    @FindBy(xpath = "//table[@class='text-center table-price']//td[@data-setup-fee]")
+    @FindBy(className = "total-setup-fee")
     private WebElement totalSetUpFee;
 
     @FindBy(xpath = "//div[@id='finalize-validation-error-dialog']/div[@class='modal modal-primary']")
@@ -82,6 +88,12 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='dropup']//span[@class='btn-license-fee-discount']")
     private WebElement dropUpLicenseFeeDiscountClosed;
+
+    @FindBy(xpath = "//div[@class='dropup']//span[@class='btn-setup-fee-discount']")
+    private WebElement dropUpSetupFeeDiscountClosed;
+
+    @FindBy(xpath = "//div[@class='dropup']//span[@data-sales-person-id]")
+    private WebElement dropUpSalesPersonClosed;
 
     @FindBy(xpath = "//div[@class='dropup open']//select[@class='form-control']")
     private WebElement dropUpOptions;
@@ -104,6 +116,9 @@ public class ClientQuotesDetailPage extends BasePage {
     @FindBy(xpath = "//span[@data-billing-starts-str]")
     private WebElement billingStartsLink;
 
+    @FindBy(xpath = "//span[@data-sales-person-id]")
+    private WebElement salesPersonLink;
+
     @FindBy(name = "BillingStartsStr")
     private WebElement billingStartsField;
 
@@ -116,6 +131,9 @@ public class ClientQuotesDetailPage extends BasePage {
     @FindBy(id = "LicenseFeeDiscount")
     private WebElement licenseFeeDiscountField;
 
+    @FindBy(id = "SetupFeeDiscount")
+    private WebElement setupFeeDiscountField;
+
     @FindBy(id = "LicenseFeeDiscountType")
     private WebElement licenseFeeDiscountType;
 
@@ -125,7 +143,16 @@ public class ClientQuotesDetailPage extends BasePage {
     @FindBy(xpath = "//span[@class='btn-license-fee-discount']//following::button[@class='submit btn-save-edition-discount']")
     private WebElement licenseFeeDiscountSubmitButton;
 
-    public ClientQuotesDetailPage(WebDriver driver) {
+    @FindBy(xpath = "//button[@class='submit btn-save-edition-discount']")
+    private WebElement setupFeeDiscountSubmitButton;
+
+    @FindBy(xpath = "//button[@class='submit btn-save-sales-person']")
+    private WebElement salesPersonSubmitButton;
+
+    @FindBy(name = "SalesPersonID")
+    private WebElement salesPersonSelection;
+
+    public AgreementDetailPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         userName = InHouseConfigInfo.getInstance().getUserName();
@@ -160,22 +187,44 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesDetailPage clickDiscountButton() {
-        discountButton.click();
+    public AgreementDetailPage clickDiscountButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(discountButton)).click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
         return this;
     }
 
     @Step
-    public ClientQuotesDetailPage clickLicenseFreeDiscountButton() {
-        licenseFreeDiscountButton.click();
+    private AgreementDetailPage clickDiscountButton(WebElement button) {
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(button)));
+            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        } catch (Exception e) {
+            waitABit(2000);
+            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        }
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
         return this;
     }
 
     @Step
-    public ClientQuotesDetailPage clickFinalizeAgreementButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(finalizeAgreementButton)).click();
+    private AgreementDetailPage clickLicenseFeeDiscountButton() {
+        return clickDiscountButton(licenseFeeDiscountButton);
+    }
+
+    @Step
+    private AgreementDetailPage clickSetupFeeDiscountButton() {
+        return clickDiscountButton(setupFeeDiscountButton);
+    }
+
+    @Step
+    public AgreementDetailPage clickVoidButton() {
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
+        } catch (Exception e) {
+            waitForLoading();
+            wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
+        }
         try {
             driver.switchTo().alert().accept();
         } catch (Exception ignored) {}
@@ -192,7 +241,7 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public void sendNotification() {
+    public AgreementDetailPage sendNotification() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(sendNotificationButton)).click();
         } catch (Exception e) {
@@ -217,6 +266,7 @@ public class ClientQuotesDetailPage extends BasePage {
                 Assert.fail("The \"Notification successfully sent\" has not been displayed!");
             }
         }
+        return this;
     }
 
     public ArrayList<String> getLinks() {
@@ -282,8 +332,13 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @Step
     public void selectRandomDiscountType() {
-        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountType));
-        Select selection = new Select(licenseFeeDiscountType);
+        selectRandomDropUpValue(licenseFeeDiscountType);
+    }
+
+    @Step
+    private void selectRandomDropUpValue(WebElement selectElement) {
+        wait.until(ExpectedConditions.elementToBeClickable(selectElement));
+        Select selection = new Select(selectElement);
         List<WebElement> allSelectedOptions = selection.getAllSelectedOptions();
         selection.selectByIndex(RandomUtils.nextInt(1, allSelectedOptions.size()));
     }
@@ -295,23 +350,54 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public void clickSubmitLicenseFeeButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(licenseFeeDiscountSubmitButton)).click();
+    private void clickSubmitLicenseFeeButton() {
+        clickSubmitButton(licenseFeeDiscountSubmitButton, dropUpLicenseFeeDiscountClosed);
+    }
+
+    @Step
+    private void clickSubmitSetupFeeDiscountButton() {
+        clickSubmitButton(setupFeeDiscountSubmitButton, dropUpSetupFeeDiscountClosed);
+    }
+
+    @Step
+    private void clickSubmitSalesPersonButton() {
+        clickSubmitButton(salesPersonSubmitButton, dropUpSalesPersonClosed);
+    }
+
+    private void clickSubmitButton(WebElement button, WebElement dropupClosed) {
+        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
         waitForLoading();
         try {
-            wait.until(ExpectedConditions.visibilityOf(dropUpLicenseFeeDiscountClosed));
+            waitABit(2000);
+            wait.until(ExpectedConditions.visibilityOf(dropupClosed));
         } catch (Exception e) {
-            Assert.fail("License fee dropup has not been closed");
+            Assert.fail("Dropup has not been closed");
         }
     }
 
     @Step
-    public void selectLicenseDiscount(int discount, String description) {
-        clickLicenseFreeDiscountButton();
-        insertLicenseFeeDiscount(discount);
+    public AgreementDetailPage selectRandomPricePerMonthDiscount() {
+        clickLicenseFeeDiscountButton();
+        insertLicenseFeeDiscount(RandomUtils.nextInt(1, 5));
         selectRandomDiscountType();
-        insertLicenseFeeDiscountDescription(description);
+        insertLicenseFeeDiscountDescription("autotest-" + RandomStringUtils.randomAlphabetic(5));
         clickSubmitLicenseFeeButton();
+        return this;
+    }
+
+    @Step
+    public AgreementDetailPage selectRandomSetupFeeDiscount() {
+        clickSetupFeeDiscountButton();
+        insertSetupFeeDiscount(RandomUtils.nextInt(1, 200));
+        clickSubmitSetupFeeDiscountButton();
+        return this;
+    }
+
+    @Step
+    public void insertSetupFeeDiscount(int discount) {
+        driver.switchTo().defaultContent();
+        wait.until(ExpectedConditions.elementToBeClickable(setupFeeDiscountField)).clear();
+        setupFeeDiscountField.sendKeys(String.valueOf(discount));
     }
 
     @Step
@@ -325,7 +411,7 @@ public class ClientQuotesDetailPage extends BasePage {
 
     @Step
     public boolean checkSetupFee(String fee) {
-        return wait.until(s -> totalSetUpFee.getText().contains(fee));
+        return wait.until(s -> totalSetUpFee.getAttribute("data-total-setup-fee").contains(fee));
     }
 
     @Step
@@ -402,7 +488,7 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public void selectSetupFeeForAllClients() {
+    public AgreementDetailPage selectSetupFeeForAllClients() {
         try {
             int setupFeeListSize = getSetupFeeListSize();
             while (setupFeeListSize > 0) {
@@ -421,6 +507,7 @@ public class ClientQuotesDetailPage extends BasePage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return this;
     }
 
     @Step
@@ -430,26 +517,42 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public double calculatePricePerMonth() {
+    public double calculateSetupFeePerMonth() {
         int setupFeePricesSize = getSetupFeePricesSize();
         List<Double> prices = new ArrayList<>();
         while (setupFeePricesSize > 0) {
             prices.add(Double.valueOf(wait.until(ExpectedConditions
                     .visibilityOf(setupFeePrices.get(--setupFeePricesSize)))
-                    .getText()
-                    .substring(1)));
+                    .getAttribute("data-feature-setup-fee")));
         }
         return prices.stream().mapToDouble(Double::doubleValue).sum();
     }
 
     @Step
+    public double calculateSetupFeePerMonthWithDiscount() {
+        List<Double> prices = Arrays.asList(calculateSetupFeePerMonth(), Double.valueOf(getSetupFeeDiscount()));
+        return prices.stream().mapToDouble(Double::doubleValue).reduce((s1, s2) -> s1 - s2).orElse(0);
+    }
+
+    @Step
+    private String getSetupFeeDiscount() {
+        return wait.until(ExpectedConditions.visibilityOf(setupFeeDiscountButton)).getAttribute("data-setup-fee-discount");
+    }
+
+    @Step
     public String getPricePerMonth() {
-        return "$" + calculatePricePerMonth();
+        return "$" + calculateSetupFeePerMonth();
     }
 
     @Step
     private void clickBillingStartsLink() {
         wait.until(ExpectedConditions.elementToBeClickable(billingStartsLink)).click();
+        wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
+    }
+
+    @Step
+    private void clickSalesPersonLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(salesPersonLink)).click();
         wait.until(ExpectedConditions.visibilityOf(dropUpOpen));
     }
 
@@ -474,10 +577,23 @@ public class ClientQuotesDetailPage extends BasePage {
     }
 
     @Step
-    public ClientQuotesDetailPage setBillingStartsFromToday() {
+    public AgreementDetailPage setBillingStartsFromToday() {
         clickBillingStartsLink();
         chooseBillingStartsFromToday();
         verifyDateIsSaved();
+        return this;
+    }
+
+    @Step
+    public void selectRandomSalesPerson() {
+        selectRandomDropUpValue(salesPersonSelection);
+    }
+
+    @Step
+    public AgreementDetailPage setSalesPerson() {
+        clickSalesPersonLink();
+        selectRandomSalesPerson();
+        clickSubmitSalesPersonButton();
         return this;
     }
 }

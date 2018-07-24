@@ -14,7 +14,7 @@ import java.util.List;
 public class SignedAgreements extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-sm blue btn-add-potential-client']")
-    private WebElement addClientBTN;
+    private WebElement addClientButton;
 
     @FindBy(xpath = "//input[@id='ClientName']")
     private List<WebElement> newClientName;
@@ -68,7 +68,7 @@ public class SignedAgreements extends BasePage {
     private WebElement searchButton;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
-    private List<WebElement> updateClientBTN;
+    private List<WebElement> updateClientButton;
 
     @FindBy(id = "ProposalName")
     private List<WebElement> agreementName;
@@ -77,7 +77,7 @@ public class SignedAgreements extends BasePage {
     private WebElement editionMenu;
 
     @FindBy(xpath = "//button[@class='btn btn-outline btn-submit']")
-    private List<WebElement> addClientProposalBTN;
+    private List<WebElement> addClientProposalButton;
 
     @FindBy(xpath = "//div[@class='callout callout-info']/button")
     private WebElement closeNotificationButton;
@@ -105,7 +105,7 @@ public class SignedAgreements extends BasePage {
     @Step
     public SignedAgreements clickAddClientButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn-sm blue btn-add-potential-client']")));
-        addClientBTN.click();
+        addClientButton.click();
         return this;
     }
 
@@ -283,11 +283,11 @@ public class SignedAgreements extends BasePage {
 
     @Step
     public void clickUpdateClientButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(1))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(updateClientButton.get(1))).click();
     }
 
     @Step
-    public SignedAgreements clickAddAgreementBTN(String agreementIdentifier) {
+    public SignedAgreements clickAddAgreementButton(String agreementIdentifier) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[text()='" + agreementIdentifier + "']"))).
                 findElement(By.xpath("..")).findElement(By.xpath("//a[@class='btn-add btn-add-client-proposal']")).click();
         wait.until(ExpectedConditions.attributeToBe(addAgreementDialog, "display", "block"));
@@ -315,7 +315,7 @@ public class SignedAgreements extends BasePage {
 
     @Step
     private void saveAgreement() {
-            wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(2))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(updateClientButton.get(2))).click();
     }
 
     @Step
@@ -382,15 +382,15 @@ public class SignedAgreements extends BasePage {
     @Step
     public void updateAgreement() {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(3))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(updateClientButton.get(3))).click();
         } catch (Exception e) {
             wait.until(ExpectedConditions.invisibilityOf(shirmaDialog));
-            wait.until(ExpectedConditions.elementToBeClickable(updateClientBTN.get(3))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(updateClientButton.get(3))).click();
         }
     }
 
     @Step
-    public ClientQuotesDetailPage clickSetupAgreementButton(String agreementIdentifier) {
+    public AgreementDetailPage clickSetupAgreementButton(String agreementIdentifier) {
         waitForProcessing();
         try {
             wait.until(ExpectedConditions.not(ExpectedConditions
@@ -409,7 +409,7 @@ public class SignedAgreements extends BasePage {
         }
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='agreement-statuses']")));
-            return PageFactory.initElements(driver, ClientQuotesDetailPage.class);
+            return PageFactory.initElements(driver, AgreementDetailPage.class);
         } catch (TimeoutException e) {
             return null;
         }

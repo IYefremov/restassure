@@ -5,7 +5,7 @@ import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseUserData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.AgreementApprovePage;
-import com.cyberiansoft.test.inhouse.pageObject.ClientQuotesDetailPage;
+import com.cyberiansoft.test.inhouse.pageObject.AgreementDetailPage;
 import com.cyberiansoft.test.inhouse.pageObject.SignedAgreements;
 import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
@@ -35,8 +35,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -55,8 +53,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -77,8 +73,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -89,11 +83,10 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickConfirmNewClientButton();
         Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
         signedAgreements
-                .clickAddAgreementBTN(data.getName())
+                .clickAddAgreementButton(data.getName())
                 .setAgreement(data.getFirstAgreement(),data.getTeam());
 
         leftMenuPanel
-//                .clickClientQuotesSubmenu()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .expandAgreementList(data.getName())
@@ -110,8 +103,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -123,7 +114,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickConfirmNewClientButton();
         Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
         signedAgreements
-                .clickAddAgreementBTN(data.getName())
+                .clickAddAgreementButton(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
         leftMenuPanel
@@ -135,22 +126,23 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
         signedAgreements.updateAgreement();
         Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
+        AgreementDetailPage agreementDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(agreementDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
+        String setupFee = String.valueOf(agreementDetailPage
+                .selectRandomPricePerMonthDiscount()
+                .selectRandomSetupFeeDiscount()
+                .selectSetupFeeForAllClients()
+                .calculateSetupFeePerMonthWithDiscount());
+//        Assert.assertEquals(agreementDetailPage.checkPricePerMonth(data.getPrice())); todo add price check
+//        String pricePerMonth = agreementDetailPage.getPricePerMonth();
+        Assert.assertTrue(agreementDetailPage.checkSetupFee(setupFee));
 
-        clientQuotesDetailPage
-                .clickDiscountButton()
-                .selectDiscount(data.getDiscount());
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
-        clientQuotesDetailPage.selectSetupFeeForAllClients();
-//        clientQuotesDetailPage.clickAddClientSupportItem("testFeature3 test mike");
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(clientQuotesDetailPage.getPricePerMonth()));
-        clientQuotesDetailPage
+        agreementDetailPage
                 .setBillingStartsFromToday()
-                .clickFinalizeAgreementButton()
-                .sendNotification();
+                .setSalesPerson()
+                .sendNotification()
+                .clickVoidButton();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));
     }
 
@@ -172,7 +164,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickConfirmNewClientButton();
         Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
         signedAgreements
-                .clickAddAgreementBTN(data.getName())
+                .clickAddAgreementButton(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
         leftMenuPanel
@@ -184,21 +176,23 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
         signedAgreements.updateAgreement();
         Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
+        AgreementDetailPage agreementDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(agreementDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
+        String setupFee = String.valueOf(agreementDetailPage
+                .selectRandomPricePerMonthDiscount()
+                .selectRandomSetupFeeDiscount()
+                .selectSetupFeeForAllClients()
+                .calculateSetupFeePerMonthWithDiscount());
+//        Assert.assertEquals(agreementDetailPage.checkPricePerMonth(data.getPrice())); todo add price check
+//        String pricePerMonth = agreementDetailPage.getPricePerMonth();
+        Assert.assertTrue(agreementDetailPage.checkSetupFee(setupFee));
 
-        clientQuotesDetailPage
-                .clickDiscountButton()
-                .selectDiscount(data.getDiscount());
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
-        clientQuotesDetailPage.selectSetupFeeForAllClients();
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(clientQuotesDetailPage.getPricePerMonth()));
-        clientQuotesDetailPage
+        agreementDetailPage
                 .setBillingStartsFromToday()
-                .clickFinalizeAgreementButton()
-                .sendNotification();
+                .setSalesPerson()
+                .sendNotification()
+                .clickVoidButton();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));
         String userMailContentFromSpam = mailChecker.getSpamMailMessage(data.getEmailTitle(), data.getBodySearchText());
         String clientAgreementLink = mailChecker.getAgreementLink(userMailContentFromSpam, data.getPartialLinkTextToAgreementPage());
@@ -213,8 +207,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         AgreementApprovePage agreementApprovePage = PageFactory.initElements(webdriver, AgreementApprovePage.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -226,7 +218,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickConfirmNewClientButton();
         Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
         signedAgreements
-                .clickAddAgreementBTN(data.getName())
+                .clickAddAgreementButton(data.getName())
                 .setAgreement(data.getFirstAgreement(), data.getTeam());
 
         leftMenuPanel
@@ -238,21 +230,24 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
         signedAgreements.updateAgreement();
         Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(
+        AgreementDetailPage agreementDetailPage = signedAgreements.clickSetupAgreementButton(data.getSecondAgreement());
+        Assert.assertTrue(agreementDetailPage.checkAgreementStatus(
                 data.getNewAgreement(), data.getNoAgreement(),data.getNoAgreement(),data.getNoAgreement()));
 
-        clientQuotesDetailPage
-                .selectLicenseDiscount(1, "description");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice(data.getPrice()));
-        clientQuotesDetailPage.selectSetupFeeForAllClients();
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth(data.getPrice()));
-        String pricePerMonth = clientQuotesDetailPage.getPricePerMonth();
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee(pricePerMonth));
-        clientQuotesDetailPage
+        String setupFee = String.valueOf(agreementDetailPage
+                .selectRandomPricePerMonthDiscount()
+                .selectRandomSetupFeeDiscount()
+                .selectSetupFeeForAllClients()
+                .calculateSetupFeePerMonthWithDiscount());
+//        Assert.assertEquals(agreementDetailPage.checkPricePerMonth(data.getPrice())); todo add price check
+//        String pricePerMonth = agreementDetailPage.getPricePerMonth();
+        Assert.assertTrue(agreementDetailPage.checkSetupFee(setupFee));
+
+        agreementDetailPage
                 .setBillingStartsFromToday()
-                .clickFinalizeAgreementButton()
-                .sendNotification();
+                .setSalesPerson()
+                .sendNotification()
+                .clickVoidButton();
         Assert.assertTrue(mailChecker.checkEmails(data.getEmailTitle()));
         String userMailContentFromSpam = mailChecker.getSpamMailMessage(data.getEmailTitle(), data.getBodySearchText());
         String clientAgreementLink = mailChecker.getAgreementLink(userMailContentFromSpam, data.getPartialLinkTextToAgreementPage());
@@ -265,19 +260,18 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                 .clickAcceptAgreementButton()
                 .fillSetupFeePayment(data.getCardNumber(), data.getMonthExpiration(), data.getYearExpiration(), data.getCvc())
                 .clickPayButton();
-        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage(pricePerMonth, data.getCardNumber()));
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage(setupFee, data.getCardNumber()));
         agreementApprovePage
                 .clickCancelPayButton()
                 .clickPayButton();
-        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage(pricePerMonth, data.getCardNumber()));
+        Assert.assertTrue(agreementApprovePage.checkPayConfirmationMessage(setupFee, data.getCardNumber()));
         agreementApprovePage
                 .clickApprovePayButton()
                 .clickSuccessfulPaymentOkButton()
                 .goToPreviousPage();
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus(data.getSignedAgreement()),
+        Assert.assertTrue(agreementDetailPage.checkAgreementStatus(data.getSignedAgreement()),
                 "The Agreement status has not been changed to signed after payment");
     }
-
 
     //todo fails S. Zakaulov
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class")
@@ -285,8 +279,6 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
                 .clickAgreementsInProgress()
                 .searchUser(data.getName())
@@ -297,7 +289,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
                         data.getCellPhone(), data.getFirstName(), data.getLastName(), data.getTitle(), data.getEmail());
         signedAgreements.clickConfirmNewClientButton();
         Assert.assertTrue(signedAgreements.isUserCreated(data.getName()));
-        signedAgreements.clickAddAgreementBTN(data.getName());
+        signedAgreements.clickAddAgreementButton(data.getName());
         signedAgreements.setAgreement(data.getFirstAgreement(), data.getTeam());
 
         signedAgreements = leftMenuPanel.clickAgreementsInProgress();
@@ -308,16 +300,16 @@ public class TeamPortalUserTestCases extends BaseTestCase {
         Assert.assertTrue(signedAgreements.isAgreementNameChangeable(data.getSecondAgreement()));
         signedAgreements.updateAgreement();
         Assert.assertTrue(signedAgreements.checkAgreementByName(data.getSecondAgreement()));
-        ClientQuotesDetailPage clientQuotesDetailPage = signedAgreements
+        AgreementDetailPage agreementDetailPage = signedAgreements
                 .clickSetupAgreementButton(data.getSecondAgreement());
-        Assert.assertTrue(clientQuotesDetailPage.checkAgreementStatus("New","No","No","No"));
-        clientQuotesDetailPage.clickDiscountButton();
+        Assert.assertTrue(agreementDetailPage.checkAgreementStatus("New","No","No","No"));
+        agreementDetailPage.clickDiscountButton();
         //todo the discount selection options are absent!
-        clientQuotesDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
-        Assert.assertTrue(clientQuotesDetailPage.checkNewPrice("$150.10"));
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1578.00"));
-        clientQuotesDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
-        Assert.assertTrue(clientQuotesDetailPage.checkSetupFee("$1776.00"));
-        Assert.assertTrue(clientQuotesDetailPage.checkPricePerMonth("$165.10"));
+        agreementDetailPage.selectDiscount("1 min comm.-$150.10 per m.");
+        Assert.assertTrue(agreementDetailPage.checkNewPrice("$150.10"));
+        Assert.assertTrue(agreementDetailPage.checkSetupFee("$1578.00"));
+        agreementDetailPage.clickAddClientSupportItem("testFeature2_1 test mike");
+        Assert.assertTrue(agreementDetailPage.checkSetupFee("$1776.00"));
+        Assert.assertTrue(agreementDetailPage.checkPricePerMonth("$165.10"));
     }
 }

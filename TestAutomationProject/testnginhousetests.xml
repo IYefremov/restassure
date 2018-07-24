@@ -15,7 +15,7 @@
                 </methods>
             </class>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalRulesTestCases"/>
-            <!--<class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>-->
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
         </classes>
     </test>
 </suite>

@@ -25,7 +25,7 @@ public class AgreementApprovePage extends BasePage {
     @FindBy(className = "btn-term-and-conditions")
     private WebElement termsAndConditions;
 
-    @FindBy(xpath = "//div[@class='pgwModal dialog text-center terms-conditions']")
+    @FindBy(xpath = "//div[@class='pgwModal dialog text-center pgwModal-terms-conditions']")
     private WebElement termsAndConditionsDialog;
 
     @FindBy(xpath = "//div[@class='pgwModal dialog text-center']")
