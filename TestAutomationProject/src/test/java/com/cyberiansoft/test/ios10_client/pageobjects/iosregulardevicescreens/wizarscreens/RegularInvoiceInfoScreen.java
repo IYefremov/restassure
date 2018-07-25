@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.IRegularTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements IRegularTypeScreen {
+public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements ITypeScreen {
 
 	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
 	private static TypeScreenContext INVOICEINFOExCONTEXT = null;

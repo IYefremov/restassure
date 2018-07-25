@@ -44,6 +44,8 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancel() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		WebElement picker = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 	

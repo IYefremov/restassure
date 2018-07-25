@@ -290,7 +290,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void clickTechniciansIcon() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("technician")));
-		appiumdriver.findElementByAccessibilityId("technician").click();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("technician"))).click();
 	}
 
 	public void selecTechnician(String technician) {

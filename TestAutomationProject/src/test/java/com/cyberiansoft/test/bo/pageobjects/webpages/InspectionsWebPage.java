@@ -422,7 +422,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public void approveInspectionLinebylineApprovalByNumber(String inspnumber, String serviceapprove,
-			String servicedecline) throws InterruptedException {
+			String servicedecline) {
 		searchInspectionByNumber(inspnumber);
 		clickInspectionApproveMarker(inspnumber);
 		waitForNewTab();
@@ -438,13 +438,13 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			serviceApprove(serviceapprove);
 			serviceDecline(servicedecline);
 			servicegeneralapprovebtn.click();
-			Thread.sleep(5000);
+			waitABit(5000);
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
-		Thread.sleep(3000);
+		waitABit(3000);
 	}
 
 	public void approveInspectionLinebylineApprovalByNumberWithAllServicesApproval(String inspnumber)

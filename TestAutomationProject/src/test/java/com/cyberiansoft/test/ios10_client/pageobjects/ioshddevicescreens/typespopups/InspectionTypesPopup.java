@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups;
 
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +18,7 @@ public class InspectionTypesPopup extends BaseTypePopup {
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
     }
 
-    public void selectInspectionType(String inspectiontype) {
-        selectType(typeIdentificatorString, inspectiontype);
+    public void selectInspectionType(IInspectionsTypes inspType) {
+        selectType(typeIdentificatorString, inspType.getInspectionTypeName());
     }
 }

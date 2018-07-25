@@ -6,7 +6,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
@@ -108,66 +110,68 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 
-	public void addOrderWithSelectCustomer(String customerName, String workOrderType) {
+	public <T extends IBaseWizardScreen> T addOrderWithSelectCustomer(String customerName, IWorkOrdersTypes workOrderType) {
 		clickAddOrderButton();
 		selectCustomerAndWorkOrderType(customerName, workOrderType);
+		return workOrderType.getFirstVizardScreen();
 	}
 
-	private void selectCustomerAndWorkOrderType(String customerName, String workOrderType) {
+	private void selectCustomerAndWorkOrderType(String customerName, IWorkOrdersTypes workOrderType) {
 		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
 	}
 
-	public void addWorkOrder(String workOrderType) {
+	public <T extends IBaseWizardScreen> T addWorkOrder(IWorkOrdersTypes workOrderType) {
 		clickAddOrderButton();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
+		return workOrderType.getFirstVizardScreen();
 	}
 
-	public QuestionsScreen addWorkWithJobOrder(String workOrderType, String jobName) {
+	public <T extends IBaseWizardScreen> T addWorkWithJobOrder(IWorkOrdersTypes workOrderType, String jobName) {
 		clickAddOrderButton();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
 		selectWorkOrderJob(jobName);
-		return  new QuestionsScreen();
-	}
-
-	public void selectFirstOrder() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
+		return workOrderType.getFirstVizardScreen();
 	}
 
 	public void selectCopyServices() {
 		appiumdriver.findElementByAccessibilityId("Copy Services").click();
 	}
 
-	public void copyServicesForWorkOrder(String workOrderNumber, String customerName, String workOrderType) {
+	public <T extends IBaseWizardScreen> T copyServicesForWorkOrder(String workOrderNumber, String customerName, IWorkOrdersTypes workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyServices();
 		selectCustomerAndWorkOrderType(customerName, workOrderType);
+		return workOrderType.getFirstVizardScreen();
 	}
 
-	public void copyServicesForWorkOrder(String workOrderNumber, String workOrderType) {
+	public <T extends IBaseWizardScreen> T copyServicesForWorkOrder(String workOrderNumber, IWorkOrdersTypes workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyServices();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
+		return workOrderType.getFirstVizardScreen();
 	}
 
-	public void copyVehicleForWorkOrder(String workOrderNumber, String customerName, String workOrderType) {
+	public <T extends IBaseWizardScreen> T copyVehicleForWorkOrder(String workOrderNumber, String customerName, IWorkOrdersTypes workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyVehicle();
 		selectCustomerAndWorkOrderType(customerName, workOrderType);
 		BaseWizardScreen.typeContext = WOCONTEXT;
+		return workOrderType.getFirstVizardScreen();
 	}
 
-	public void copyVehicleForWorkOrder(String workOrderNumber, String workOrderType) {
+	public <T extends IBaseWizardScreen> T copyVehicleForWorkOrder(String workOrderNumber, IWorkOrdersTypes workOrderType) {
 		selectWorkOrder(workOrderNumber);
 		selectCopyVehicle();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
 		BaseWizardScreen.typeContext = WOCONTEXT;
+		return workOrderType.getFirstVizardScreen();
 	}
 	
 	public void selectCopyVehicle() {
@@ -376,17 +380,18 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
-	public void clickInvoiceType(String invoicetype) {
-		appiumdriver.findElementByAccessibilityId(invoicetype).click();
+	public void clickInvoiceType(IInvoicesTypes invoiceType) {
+		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
-	public void selectInvoiceType(String invoicetype) {
-		clickInvoiceType(invoicetype);
+	public <T extends IBaseWizardScreen>T selectInvoiceType(IInvoicesTypes invoiceType) {
+		clickInvoiceType(invoiceType);
+		return invoiceType.getFirstVizardScreen();
 	}
 
-	public String selectInvoiceTypeAndAcceptAlert(String invoicetype) throws InterruptedException {
-		clickInvoiceType(invoicetype);
+	public String selectInvoiceTypeAndAcceptAlert(IInvoicesTypes invoiceType) {
+		clickInvoiceType(invoiceType);
 		return Helpers.getAlertTextAndAccept();
 	}
 
