@@ -25,6 +25,10 @@ public class WorkOrderData {
         return workOrderType;
     }
 
+    public VehicleInfoData getVehicleInfoData() {
+        return vihicleInfo;
+    }
+
     public String getVinNumber() {
         return vihicleInfo.getVINNumber();
     }

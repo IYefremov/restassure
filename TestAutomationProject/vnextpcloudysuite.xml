@@ -48,7 +48,7 @@
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
-      </class>-->
+      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
         <methods>   
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
@@ -89,7 +89,7 @@
       <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionApproveOnBOTestCases">
-      </class>
+      </class>-->
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   
           <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />

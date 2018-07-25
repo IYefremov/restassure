@@ -1,15 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -18,30 +8,22 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.vnext.screens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionServicesScreen;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-
 import io.appium.java_client.MobileElement;
+import org.apache.commons.lang3.ArrayUtils;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -371,13 +353,13 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.clickCancelInspectionMenuItem();
+		vehicleinfoscreen.clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
 		vehicleinfoscreen.setVIN(testVIN);
 		vehicleinfoscreen.swipeScreenLeft();
-		vehicleinfoscreen.clickCancelInspectionMenuItem();
+		vehicleinfoscreen.clickCancelMenuItem();
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		AppiumUtils.clickHardwareBackButton();
 		AppiumUtils.clickHardwareBackButton();

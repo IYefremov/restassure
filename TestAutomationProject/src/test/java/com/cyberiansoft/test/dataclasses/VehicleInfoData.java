@@ -7,6 +7,12 @@ public class VehicleInfoData {
 	@JsonProperty("vinNumber")
 	String vinNumber;
 
+	@JsonProperty("vehicleMake")
+	String vehicleMake;
+
+	@JsonProperty("vehicleModel")
+	String vehicleModel;
+
 	@JsonProperty("stockNumber")
 	String stockNumber;
 	 
@@ -18,6 +24,14 @@ public class VehicleInfoData {
 	
 	public String getVINNumber() {
 		 return vinNumber;
+	}
+
+	public String getVehicleMake() {
+		return vehicleMake;
+	}
+
+	public String getVehicleModel() {
+		return vehicleModel;
 	}
 	 
 	public String getStockNumber() {

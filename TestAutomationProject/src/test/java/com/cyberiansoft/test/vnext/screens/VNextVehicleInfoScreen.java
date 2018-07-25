@@ -29,6 +29,9 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	@FindBy(name="Vehicle.Make")
 	private WebElement makefld;
+
+	@FindBy(xpath="//*[@action='select-make']")
+	private WebElement selectmake;
 	
 	@FindBy(name="Vehicle.Model")
 	private WebElement modelfld;
@@ -147,6 +150,14 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 	
 	public String getYear() {
 		return yearfld.getAttribute("value");
+	}
+
+	public VNextVehicleInfoScreen selectMakeAndModel(String vehicleMake, String vehicleModel) {
+		tap(selectmake);
+        VNextVehiclemakesScreen vehiclemakesScreen = new VNextVehiclemakesScreen(appiumdriver);
+        VNextVehicleModelsScreen vehicleModelsScreen = vehiclemakesScreen.selectVehicleMake(vehicleMake);
+		return vehicleModelsScreen.selectVehicleModel(vehicleModel);
+
 	}
 	
 	public void setYear(String yearValue) {
