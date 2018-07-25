@@ -56,7 +56,7 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 	
 	public RepairLocationClientsTabWebPage clickUpdateClientsButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(updateclientsbtn)).click();
-		waitUntilPageReloaded();
+		waitForLoading();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[text()='Clients have been updated for this Repair Location']"))));
 		return PageFactory.initElements(
 				driver, RepairLocationClientsTabWebPage.class);

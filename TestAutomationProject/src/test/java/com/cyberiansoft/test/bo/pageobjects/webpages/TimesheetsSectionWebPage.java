@@ -1,35 +1,33 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class TimesheetsSectionWebPage extends BaseWebPage{
 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_dateFrom_dateInput")
-	WebElement fromDateField;
+	private WebElement fromDateField;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_dateTo_dateInput")
-	WebElement toDateField;
+	private WebElement toDateField;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_filterer_ddlTeam")
-	WebElement teamField;
+	private WebElement teamField;
 	
 	@FindBy(className = "rcbList")
-	WebElement listOfItems;
+	private WebElement listOfItems;
 	
 	@FindBy(id ="ctl00_ctl00_Content_Main_filterer_BtnFind")
-	WebElement findBTN;
+	private WebElement findBTN;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl04_lnkEmployee")
-	WebElement firstEmployee;
+	private WebElement firstEmployee;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00_ctl06_gvTimeSheets_ctl00__0")
-	WebElement employeeStartDate;
+	private WebElement employeeStartDate;
 	
 	public TimesheetsSectionWebPage(WebDriver driver) {
 		super(driver);
@@ -54,17 +52,13 @@ public class TimesheetsSectionWebPage extends BaseWebPage{
 
 	public void clickFindButton() {
 		findBTN.click();
-		waitABit(1000);
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-	}
+        waitForLoading();
+    }
 
 	public void expandFirstEmployee() {
 		firstEmployee.click();
-		waitABit(500);
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-	}
+        waitForLoading();
+    }
 
 	public boolean checkStartingDay(String day) {
 		String startDate = employeeStartDate.findElements(By.tagName("td")).get(1).getText().substring(0,3);

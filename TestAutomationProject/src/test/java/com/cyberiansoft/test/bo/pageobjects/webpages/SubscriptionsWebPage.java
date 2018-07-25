@@ -49,11 +49,10 @@ public class SubscriptionsWebPage extends BaseWebPage {
 		return true;
 	}
 
-	public void clickAddButton() throws InterruptedException {
+	public void clickAddButton() {
 		addButton.click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-	}
+        waitForLoading();
+    }
 
 	public boolean checkAddPopUpContent() {
 		try {

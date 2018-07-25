@@ -100,7 +100,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		} else {
             Assert.fail("Can't find " + phaseservice + " phase service");
 		}
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 	
 	public List<WebElement> getNumberOfPhaseServicesWithSelectedPhaseValue(String phase) {
@@ -134,7 +134,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	
 	public void selectWOType(String wotype) {
 		selectComboboxValue(wotypecmb, wotypedd, wotype);
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 	
 	public void selectPhaseServiceInTable(String phaseservice) {

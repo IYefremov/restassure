@@ -136,7 +136,7 @@ public abstract class BaseWebPage {
 
 	public void acceptAlertAndWait() {
 		acceptAlert();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
 	public void acceptAlert() {
@@ -149,13 +149,13 @@ public abstract class BaseWebPage {
 		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		alert.dismiss();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
-	public void waitUntilPageReloaded() {
-		waitABit(1500);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-	}
+//	public void waitUntilPageReloaded() {
+//		waitABit(1500);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+//	}
 
 	public void deleteTableRow(WebElement row) {
 		clickDeleteTableRow(row);
@@ -189,7 +189,7 @@ public abstract class BaseWebPage {
         }
         waitForLoading();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ModalDialog")));
-//        waitUntilPageReloaded();
+//        waitForLoading();
 //        waitABit(3000);
 	}
 

@@ -229,9 +229,9 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 
 		if (!firstResultBeforeSort.equals(lastResultBeforeSort)) {
 			originalFilterBTN.get(0).click();
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
+            waitForLoading();
 
-			allNames = new ArrayList<WebElement>();
+			allNames = new ArrayList<>();
 			
 			counter = 4;
 			while(true){
@@ -250,8 +250,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 			if (!firstResultBeforeSort.equals(lastResultAfterSort)
 					&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
 				ascFilterBTN.click();
-				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
-
+                waitForLoading();
 				allNames.clear();
 				
 				counter = 4;

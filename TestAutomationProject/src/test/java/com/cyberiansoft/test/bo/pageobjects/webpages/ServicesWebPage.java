@@ -202,10 +202,8 @@ public class ServicesWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//td[text()='"+servicename+"']")).findElement(By.xpath(".."))
 				.findElement(By.xpath("//input[@alt='Restore']")).click();
 		driver.switchTo().alert().accept();
-		waitABit(3000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-
-	}
+        waitForLoading();
+    }
 
 	public ServicesWebPage verifyActiveServiceDoesNotExist(String serviceName) {
         try {

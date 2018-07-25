@@ -170,7 +170,7 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 		for (WebElement questionformsrow : questionformsrows) {
 			if (questionformsrow.getText().contains(questionformname)) {
 				questionformsrow.findElement(By.xpath(".//td/input[@title='Edit']")).click();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}
@@ -236,7 +236,7 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 					Alert alert = driver.switchTo().alert();
 					alert.accept();
 				}catch(Exception e){}
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}
@@ -252,7 +252,7 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 					Alert alert = driver.switchTo().alert();
 					alert.accept();
 				}catch(Exception e){}
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}

@@ -200,8 +200,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 				try{
 				wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 				}catch(Exception e){}
-//			Thread.sleep(300);
-//				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+                waitForLoading();
 				break;
 			}			
 		}		

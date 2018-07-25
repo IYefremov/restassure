@@ -282,7 +282,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
 	public void clickFindButton() {

@@ -152,11 +152,8 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public void clickFindButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
-//		click(findbtn);
-        waitABit(5000);
-		//new WebDriverWait(driver, 10)
-		  //.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-	}
+        waitForLoading();
+    }
 	
 	public void verifySearchResults(String[] wonumbers) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wonumbers[0] + "']")));

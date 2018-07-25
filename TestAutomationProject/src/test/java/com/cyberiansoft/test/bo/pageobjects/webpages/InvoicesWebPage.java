@@ -368,7 +368,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			driver.findElement(By.xpath("//div[contains(@id, 'comboStatus_DropDown')]"))
 					.findElement(By.xpath(".//ul/li/a[text()='" + invoicestatus + "']")).click();
 			wait.until(ExpectedConditions.alertIsPresent()).accept();
-			waitUntilPageReloaded();
+			waitForLoading();
 		} else {
 			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
 		}
@@ -552,7 +552,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		}
 		driver.findElement(By.xpath("//span[@class='rtbText' and text()='Archive']")).click();
         wait.until(ExpectedConditions.alertIsPresent()).accept();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
 	public WebElement getTechInfoServicesTable() {
@@ -1113,11 +1113,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			wait.until(
 					ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")))
 					.click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+            waitForLoading();
 
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Invoice #')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Invoice #')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Date')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Status')]")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//th[contains(text(), 'Reason')]")));
@@ -1255,11 +1253,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			wait.until(
 					ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")))
 					.click();
-			waitABit(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+            waitForLoading();
 
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
 		} catch (TimeoutException e) {
 			return false;
 		}
@@ -1279,8 +1275,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public void clickExportButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(), 'Export')]"))).click();
 		waitForLoading();
-//		Thread.sleep(1000);
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public void setStatusForSelectedInvoices(String status) throws InterruptedException {
@@ -1295,10 +1289,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 					By.xpath("//div[contains(@class, 'RadComboBoxDropDown RadComboBoxDropDown_Office2007 ')]"))
 					.findElement(By.xpath("//a[contains(@text(), 'Exported')]")).click();
 			driver.switchTo().alert().accept();
-			Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		}
+			waitForLoading();
+        }
 	}
 
 	public String getMainWindow() {

@@ -163,7 +163,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	
 	public void selectNewEmployeeCountry(String employeecountry) {
 		selectComboboxValue(employeecountrycmb, employeecountrydd, employeecountry);
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 	
 	public String getNewEmployeeCountry() {

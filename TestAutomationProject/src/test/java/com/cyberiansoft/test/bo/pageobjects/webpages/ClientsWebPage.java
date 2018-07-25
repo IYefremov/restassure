@@ -248,10 +248,8 @@ public class ClientsWebPage extends WebPageWithPagination {
 			wait.until(ExpectedConditions.alertIsPresent());
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
-			waitABit(300);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} else {
+            waitForLoading();
+        } else {
             Assert.fail("Can't find client: " + clientname);
 		}
 	}
@@ -455,7 +453,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	public void selectClientServicePackage(String servicepackage) {
 		selectComboboxValue(servicepackagcmb, servicepackagdd, servicepackage);
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
 	public List<WebElement> getClientServicesTableRows() {

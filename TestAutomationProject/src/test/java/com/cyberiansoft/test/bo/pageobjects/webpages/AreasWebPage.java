@@ -110,8 +110,7 @@ public class AreasWebPage extends BaseWebPage {
 			row.findElement(By.xpath(".//*[@title='Edit']")).click();
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-			//Thread.sleep(300);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitForLoading();
 		} else 
 			Assert.assertTrue(false, "Can't find " + areaname + " area");
 	}
@@ -127,9 +126,8 @@ public class AreasWebPage extends BaseWebPage {
 			alert.accept();
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-			//Thread.sleep(300);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} else {
+            waitForLoading();
+        } else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	
 		}
 	}
@@ -145,9 +143,8 @@ public class AreasWebPage extends BaseWebPage {
 			alert.dismiss();
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-			//Thread.sleep(300);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} else {
+            waitForLoading();
+        } else {
 			Assert.assertTrue(false, "Can't find " + areaname + " area");	
 		}
 	}

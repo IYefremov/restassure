@@ -153,7 +153,7 @@ public class PrintTemplatesWebPage extends WebPageWithPagination {
 		if (!isPrintTemplateGroupExpanded(listitem)) {
 			Actions act = new Actions(driver);
 			act.click(listitem.findElement(By.xpath("./a/span/span[@class='rpExpandHandle']"))).perform();
-			waitUntilPageReloaded();
+			waitForLoading();
 		}
 	}
 	

@@ -98,9 +98,8 @@ public class WebPageWithPagination extends BaseWebPage {
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(300);
 		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		}	
-	//Thread.sleep(2000);
+            waitForLoading();
+        }
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
@@ -111,11 +110,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		wait.until(ExpectedConditions.visibilityOf(updateProcess));
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		}catch(TimeoutException e){}
-		//waitABit(300);
-//		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-//			wait.withTimeout(1, TimeUnit.MINUTES).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-//			wait.withTimeout(30, TimeUnit.SECONDS);
-//		}
+		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 		waitABit(1000);
 	}

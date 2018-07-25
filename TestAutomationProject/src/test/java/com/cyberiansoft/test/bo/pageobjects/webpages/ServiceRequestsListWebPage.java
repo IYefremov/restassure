@@ -726,7 +726,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			click(saveservicerequestbutton);
 			waitABit(3000);
 			driver.switchTo().defaultContent();
-			waitUntilPageReloaded();
+			waitForLoading();
 			waitABit(2000);
 			return true;
 		} catch (Exception e) {
@@ -2011,15 +2011,13 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		clearAndType(addsrvronum, ro);
 	}
 
-	public boolean checkForAlert() throws InterruptedException {
+	public boolean checkForAlert() {
 		try {
 			driver.switchTo().alert().accept();
-			Thread.sleep(5000);
+			waitForLoading();
 			return true;
 		} catch (Exception e) {
-			Thread.sleep(1000);
-			wait.until(
-					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+			waitForLoading();
 			return false;
 		}
 	}

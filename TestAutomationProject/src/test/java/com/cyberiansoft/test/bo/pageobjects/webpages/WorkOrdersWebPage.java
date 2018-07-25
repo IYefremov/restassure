@@ -400,8 +400,5 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	public void clickCreateInvoiceButton() {
 		createInvoiceToWorkORderButton.click();
 		waitForLoading();
-//		Thread.sleep(1000);
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
-
 }

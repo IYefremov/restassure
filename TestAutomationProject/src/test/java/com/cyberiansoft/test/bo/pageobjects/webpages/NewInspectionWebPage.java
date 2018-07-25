@@ -61,7 +61,7 @@ public class NewInspectionWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.visibilityOf(updateProcess));
         wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(300);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		waitForLoading();
 	}
 	
 	public void selectInspectionType(String insptype) {

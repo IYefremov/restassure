@@ -121,10 +121,9 @@ public class NewInvoiceTypeDialogWebPage extends BaseWebPage {
 		click(invoicetypeCancelbtn);
 	}
 	
-	public void selectRequiredCheckBox() throws InterruptedException {
-		Thread.sleep(3000);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(@for, 'Card_cbPORequired')]")));
+	public void selectRequiredCheckBox() {
+        waitForLoading();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(@for, 'Card_cbPORequired')]")));
 		wait.until(ExpectedConditions.visibilityOf(requiredchkbx));
 		checkboxSelect(requiredchkbx);
 	}

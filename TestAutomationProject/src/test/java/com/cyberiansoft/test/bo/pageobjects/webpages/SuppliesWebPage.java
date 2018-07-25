@@ -71,7 +71,7 @@ public class SuppliesWebPage extends WebPageWithPagination {
 		for (WebElement questionformsrow : questionformsrows) {
 			if (questionformsrow.getText().contains(supplyname)) {
 				questionformsrow.findElement(By.xpath(".//td/input[@title='Edit']")).click();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}
@@ -85,7 +85,7 @@ public class SuppliesWebPage extends WebPageWithPagination {
 				wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}

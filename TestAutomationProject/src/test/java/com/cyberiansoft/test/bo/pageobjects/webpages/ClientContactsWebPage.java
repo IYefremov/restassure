@@ -86,7 +86,7 @@ public class ClientContactsWebPage extends BaseWebPage{
 		try{
 		Thread.sleep(3000);
 		driver.switchTo().alert().accept();
-		waitUntilPageReloaded();
+		waitForLoading();
 		}catch(Exception e){}
 	
 	}

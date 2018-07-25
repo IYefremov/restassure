@@ -266,7 +266,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void selectCompanyShipToCountry(String shiptocountry) {
 		selectComboboxValue(companyshiptocountrycmb, companyshiptocountrydd, shiptocountry);
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 
 	public void selectCompanyShipToState(String shiptostate) {

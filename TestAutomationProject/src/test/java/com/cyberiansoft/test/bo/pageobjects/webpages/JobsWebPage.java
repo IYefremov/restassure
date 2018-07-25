@@ -262,7 +262,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	waitABit(300);
 		Actions act  = new Actions(driver);
 		act.click(addjobOKbtn).perform();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 	
 	public void clickAddJobCancelButton() {

@@ -92,7 +92,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 				wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}

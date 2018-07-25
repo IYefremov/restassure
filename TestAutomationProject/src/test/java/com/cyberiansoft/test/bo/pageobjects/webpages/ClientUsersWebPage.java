@@ -77,7 +77,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find client: " + userfstname);
 		}
 		driver.switchTo().alert().accept();
-		waitUntilPageReloaded();
+		waitForLoading();
 
 	}
 

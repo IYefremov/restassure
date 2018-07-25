@@ -113,7 +113,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	
 	public NewServicePackageDialogWebPage clickAddServicePackageButton() {
 		addservicepackagebtn.click();
-		waitUntilPageReloaded();
+		waitForLoading();
 		return PageFactory.initElements(
 				driver, NewServicePackageDialogWebPage.class);
 	}

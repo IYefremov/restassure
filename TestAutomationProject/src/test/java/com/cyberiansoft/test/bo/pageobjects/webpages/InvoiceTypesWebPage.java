@@ -137,7 +137,7 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		waitABit(1000);
 		assignedclientsdd.selectByVisibleText(clientname);
 		addassignedclientbtn.click();
-		waitUntilPageReloaded();
+		waitForLoading();
 	}
 	
 	public void clickUpdateClientsButton() {

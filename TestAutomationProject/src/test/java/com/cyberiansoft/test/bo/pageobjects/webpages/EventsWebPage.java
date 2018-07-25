@@ -204,8 +204,6 @@ public class EventsWebPage extends BaseWebPage {
 			}
 		}
 		waitForLoading();
-//		Thread.sleep(300);
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 	}
 
 	public boolean isEventExists(String expensetype) {
@@ -254,13 +252,6 @@ public class EventsWebPage extends BaseWebPage {
 		try {
 			driver.switchTo().alert().accept();
 		} catch (NoAlertPresentException ignored) {}
-		try {
-			wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} catch (TimeoutException e) {
-			driver.navigate().refresh();
-		}
-
-	}
-
+        waitForLoading();
+    }
 }

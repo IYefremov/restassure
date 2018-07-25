@@ -182,7 +182,7 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 		for (WebElement vehiclepartsrow : vehiclepartsrows) {
 			if (vehiclepartsrow.getText().contains(vehiclepart)) {
 				vehiclepartsrow.findElement(By.xpath(".//td/input[@title='Edit']")).click();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}
@@ -196,7 +196,7 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 				wait.until(ExpectedConditions.alertIsPresent());
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
-				waitUntilPageReloaded();
+				waitForLoading();
 				break;
 			}
 		}
