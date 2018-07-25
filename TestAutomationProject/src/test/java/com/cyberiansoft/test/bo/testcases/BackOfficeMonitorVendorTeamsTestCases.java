@@ -9,7 +9,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOMonitorVendorTeamsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -200,12 +199,8 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 //                    .getAuditLogVendorsTeamsTable()
 //                    .findElement(By.xpath(".//tbody/tr[" + columnIndex + "]/td[3]")).getText());
 //		}
-        Assert.assertEquals(data.getAuditLogsMessageRestored(),  vendorsTeamsPage
-                .getAuditLogVendorsTeamsTable()
-                .findElement(By.xpath(".//tbody/tr[0]/td[3]")).getText());
-        Assert.assertEquals(data.getAuditLogsMessageDeleted(),  vendorsTeamsPage
-                .getAuditLogVendorsTeamsTable()
-                .findElement(By.xpath(".//tbody/tr[1]/td[3]")).getText());
+        Assert.assertEquals(data.getAuditLogsMessageRestored(),  vendorsTeamsPage.getAuditLogVendorsTeamsTableLine1Text());
+        Assert.assertEquals(data.getAuditLogsMessageDeleted(),  vendorsTeamsPage.getAuditLogVendorsTeamsTableLine2Text());
         vendorsTeamsPage.closeNewTab(mainWindowHandle);
 		Assert.assertEquals(auditLogsRowsCount + 2, auditLogTableRows.size());
 	}

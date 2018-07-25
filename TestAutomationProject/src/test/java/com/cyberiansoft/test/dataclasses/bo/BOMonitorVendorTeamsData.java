@@ -106,11 +106,11 @@ public class BOMonitorVendorTeamsData {
     }
 
     public String getAuditLogsMessageRestored() {
-        return "Team " + vendorTeam + " is restored";
+        return "Team \"" + vendorTeam + "\" is restored";
     }
 
     public String getAuditLogsMessageDeleted() {
-        return "Team " + vendorTeam + " is deleted";
+        return "Team \"" + vendorTeam + "\" is deleted";
     }
 
     public String getVendorTeamEmployee() {

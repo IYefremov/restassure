@@ -61,7 +61,13 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 
     //Audit log tab
     @FindBy(id = "ctl00_Content_gv_ctl00")
-	private WebElement auditlogtable;
+	private WebElement auditLogTable;
+
+    @FindBy(id = "ctl00_Content_gv_ctl00__0")
+	private WebElement auditLogTableLine1;
+
+    @FindBy(id = "ctl00_Content_gv_ctl00__1")
+	private WebElement auditLogTableLine2;
 
     //Vendor guests
     @FindBy(id = "ctl00_Content_comboEmployee_Input")
@@ -334,11 +340,19 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 	
 	public List<WebElement> getVendorsTeamsAuditLogTableRows() {
-		return auditlogtable.findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_Content_gv_ctl00')]"));
+		return auditLogTable.findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_Content_gv_ctl00')]"));
 	}
 	
 	public WebElement getAuditLogVendorsTeamsTable() {
-		return auditlogtable;
+		return auditLogTable;
+	}
+
+	public String getAuditLogVendorsTeamsTableLine1Text() {
+		return auditLogTableLine1.findElement(By.xpath("./td[last()]")).getText();
+	}
+
+	public String getAuditLogVendorsTeamsTableLine2Text() {
+		return auditLogTableLine2.findElement(By.xpath("./td[last()]")).getText();
 	}
 
 	public Set<String> clickGuestsLinkForVendorTeam(String vendorteam) {
