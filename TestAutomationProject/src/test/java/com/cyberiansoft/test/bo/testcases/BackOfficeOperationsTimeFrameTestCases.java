@@ -40,7 +40,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		
 		workOrdersPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		workOrdersPage.clickFindButton();
-		workOrdersPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getLastWeekEnd(), workOrdersPage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
+		workOrdersPage.verifyTableDateRangeForAllTablePages(data.getLastWeekStart(), data.getLastWeekEnd(), workOrdersPage.getWorkOrdersTable(), WorkOrdersWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		workOrdersPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		workOrdersPage.clickFindButton();
@@ -75,7 +75,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		
 		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		inspectionspage.clickFindButton();
-		inspectionspage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getLastWeekEnd(), inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
+		inspectionspage.verifyTableDateRangeForAllTablePages(data.getLastWeekStart(), data.getLastWeekEnd(), inspectionspage.getInspectionsTable(), InspectionsWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		inspectionspage.clickFindButton();
@@ -144,7 +144,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getLastWeekEnd(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForAllTablePages(data.getLastWeekStart(), data.getLastWeekEnd(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		invoicesPage.clickFindButton();
