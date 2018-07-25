@@ -1,0 +1,32 @@
+{
+  "testOperationWorkOrdersTimeframeSearch": [
+    {
+      "rowID": "testOperationWorkOrdersTimeframeSearch.01",
+      "description": "Test Case 31966:Operation - Work Orders: timeframe search",
+      "statusAll": "All"
+    }
+  ],
+
+  "testOperationInspectionsTimeframeSearch": [
+    {
+      "rowID": "testOperationInspectionsTimeframeSearch.01",
+      "description": "Test Case 31968:Operation - Inspections: timeframe search",
+      "statusAll": "All active"
+    }
+  ],
+
+  "testOperationVendorBillsTimeframeSearch": [
+    {
+      "rowID": "testOperationVendorBillsTimeframeSearch.01",
+      "description": "Test Case 31973:Operation - Vendor Bills: timeframe search",
+      "statusAll": "All"
+    }
+  ],
+
+  "testOperationInvoicesTimeframeSearch": [
+    {
+      "rowID": "testOperationInvoicesTimeframeSearch.01",
+      "description": "Test Case 31974:Operation - Invoices: timeframe search"
+    }
+  ]
+}

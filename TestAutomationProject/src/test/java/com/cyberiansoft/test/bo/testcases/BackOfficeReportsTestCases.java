@@ -4,18 +4,33 @@ import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ReportsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.TechnicianCommissionsWebPage;
+import com.cyberiansoft.test.dataclasses.bo.BackOfficeReportsData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(VideoListener.class)
 public class BackOfficeReportsTestCases extends BaseTestCase {
 
-	@Test(testName = "Test Case 16189:Reports - Technician Commissions")
-	public void testReportsTechnicianCommissions() throws InterruptedException{
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		ReportsWebPage reportsPage = backofficeHeader.clickReportsLink();
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BackOfficeReportsData.json";
+
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testReportsTechnicianCommissions(String rowID, String description, JSONObject testData) {
+
+        BackOfficeReportsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeReportsData.class);
+        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        ReportsWebPage reportsPage = backofficeHeader.clickReportsLink();
 		TechnicianCommissionsWebPage technicianCommissionsPage = reportsPage.clickTechnicianCommissionsLink();
 		technicianCommissionsPage.setSearchFromDate();
 		technicianCommissionsPage.clickSearchBTN();

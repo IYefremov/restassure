@@ -177,15 +177,15 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_report_ctl09")));
 	}
 
-	public void clickOnLastSearchResult() throws InterruptedException {
+	public void clickOnLastSearchResult() {
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
-		Thread.sleep(1500);
+		waitABit(1500);
 		List<WebElement> results = driver
 				.findElement(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09"))
 				.findElements(By.tagName("a"));
 		results.get(results.size() - 1).click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Loading...')]")));
+		waitForLoading();
 	}
 
 	public boolean checkResultsTable() {
