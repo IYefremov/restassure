@@ -2,7 +2,7 @@ package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BackOfficeMonitorEventsData {
+public class BOMonitorEventsData {
 
     @JsonProperty("eventName")
     private String eventName;

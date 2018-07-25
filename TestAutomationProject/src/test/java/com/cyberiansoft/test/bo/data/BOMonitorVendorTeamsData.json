@@ -1,0 +1,78 @@
+{
+  "testMonitorVendorsTeamsSearch": [
+    {
+      "rowID": "testMonitorVendorsTeamsSearch.01",
+      "description": "Test Case 15294:Monitor - Vendor/Teams: Search",
+      "vendorTeam": "Test Vendor Team",
+      "timeZone": "Pacific Standard Time",
+      "defaultLocation": "Default Location",
+      "vendorType": "Vendor"
+    }
+  ],
+
+  "testMonitorVendorTeamAdd": [
+    {
+      "rowID": "testMonitorVendorTeamAdd.01",
+      "description": "Test Case 26712:Monitor - Vendor/Team: Add",
+      "vendorTeam": "New Test Vendor Team",
+      "timeZone": "Pacific Standard Time",
+      "vendorDescription": "Test decription",
+      "vendorAccountingId": "1234567",
+      "vendorArea": "QA Area",
+      "vendorTimeSheetType": "Day Type",
+      "defaultLocation": "Default Location",
+      "vendorType": "Vendor",
+      "additionalLocation": "Best Location"
+    }
+  ],
+
+  "testMonitorVendorTeamsEdit": [
+    {
+      "rowID": "testMonitorVendorTeamsEdit.01",
+      "description": "Test Case 28325:Monitor - Vendor/Teams: Edit",
+      "vendorTeam": "TestNewTeamInternal",
+      "timeZone": "Pacific Standard Time",
+      "vendorDescription": "Test decription",
+      "vendorTimeSheetType": "ClockIn / ClockOut",
+      "defaultLocation": "My Location 2",
+      "additionalLocation": "ALM - Recon Facility",
+      "vendorType": "Internal",
+
+      "vendorTeamEdited": "TestNewTeamInternal2",
+      "timeZoneEdited": "US Mountain Standard Time",
+      "vendorTimeSheetTypeEdited": "(none)",
+      "vendorTypeEdited": "Vendor",
+      "vendorCompany": "Test"
+    }
+  ],
+
+  "testMonitorVendorTeamsArchive": [
+    {
+      "rowID": "testMonitorVendorTeamsArchive.01",
+      "description": "Test Case 26710:Monitor - Vendor/Teams: Archive",
+      "vendorTeam": "ArchiveNewTeamInternal",
+      "timeZone": "Pacific Standard Time",
+      "vendorDescription": "Test decription",
+      "vendorTimeSheetType": "ClockIn / ClockOut",
+      "defaultLocation": "My Location 2",
+      "additionalLocation": "ALM - Recon Facility"
+    }
+  ],
+
+  "testMonitorVendorTeamsAuditLog": [
+    {
+      "rowID": "testMonitorVendorTeamsAuditLog.01",
+      "description": "Test Case 26714:Monitor - Vendor/Teams: Audit Log",
+      "vendorTeam": "ZalexTestLoc"
+    }
+  ],
+
+  "testMonitorVendorTeamsGuestsEdit": [
+    {
+      "rowID": "testMonitorVendorTeamsGuestsEdit.01",
+      "description": "Test Case 31420:Monitor - Vendor/Team: Guests Edit",
+      "vendorTeam": "TestTeamInternal",
+      "vendorTeamEmployee": "Alex Maximov"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
-import com.cyberiansoft.test.dataclasses.bo.BackOfficeMonitorEventsData;
+import com.cyberiansoft.test.dataclasses.bo.BOMonitorEventsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Listeners(VideoListener.class)
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BackOfficeMonitorEventsData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorEventsData.json";
 
     @BeforeClass()
     public void settingUp() {
@@ -26,7 +26,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testEstimateApprovedEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
@@ -52,7 +52,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testEstimateDeclineEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
@@ -78,7 +78,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testNewInspectionEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
@@ -103,7 +103,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testHighPriorityROEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
@@ -128,7 +128,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoiceCreatedEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();
@@ -153,7 +153,7 @@ public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testNewRepairOrderEventCreation(String rowID, String description, JSONObject testData) {
 
-        BackOfficeMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeMonitorEventsData.class);
+        BOMonitorEventsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorEventsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         MiscellaneousWebPage miscellaneousPage = backOfficeHeader.clickMiscellaneousLink();

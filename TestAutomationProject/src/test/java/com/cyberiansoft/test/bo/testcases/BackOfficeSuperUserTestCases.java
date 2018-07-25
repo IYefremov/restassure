@@ -2,25 +2,34 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.dataclasses.bo.BOSuperUserData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(VideoListener.class)
 public class BackOfficeSuperUserTestCases extends BaseTestCase {
 
-	@Test(description = "Test Case 15135:All Users - Search")
-	public void testAllUsersSearch() throws Exception {
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOSuperUserData.json";
 
-		final String username = "Oleksandr Kramar";
-		final String appname = "380505460134";
-		
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		SuperUserWebPage superUserPage = backofficeHeader.clickSuperUserLink();
+    @BeforeClass()
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testAllUsersSearch(String rowID, String description, JSONObject testData) {
+
+        BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        SuperUserWebPage superUserPage = backOfficeHeader.clickSuperUserLink();
 		AllUsersWebPage allUsersPage = superUserPage.clickAllUsersLink();
-
 		allUsersPage.verifyAllUsersTableColumnsAreVisible();
 		
 		Assert.assertEquals("1", allUsersPage.getCurrentlySelectedPageNumber());
@@ -46,26 +55,23 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		Assert.assertEquals(allUsersPage.MAX_TABLE_ROW_COUNT_VALUE, allUsersPage.getAllUsersTableRowCount());
 		
 		allUsersPage.makeSearchPanelVisible();
-		allUsersPage.setSearchUserParameter(username.substring(0, 4));
-		allUsersPage.selectSearchApplication(appname);
+		allUsersPage.setSearchUserParameter(data.getUserName().substring(0, 4));
+		allUsersPage.selectSearchApplication(data.getAppName());
 		allUsersPage.checkSuperUserCheckBox();
 		allUsersPage.clickFindButton();
 		
 		Assert.assertEquals(1, allUsersPage.getAllUsersTableRowCount());
-		allUsersPage.userExists(username);
+		allUsersPage.userExists(data.getUserName());
 	}
-	
-	@Test(description = "Test Case 15156:All Employees - Search")
-	public void testAllEmployeesSearch() throws Exception {
 
-		final String employee = "Aaron Naber";
-		final String appname = "Dent Wizard International";
-		
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		SuperUserWebPage superUserPage = backofficeHeader.clickSuperUserLink();
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testAllEmployeesSearch(String rowID, String description, JSONObject testData) {
 
+        BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        SuperUserWebPage superUserPage = backOfficeHeader.clickSuperUserLink();
 		AllEmployeesWebPage allEmployeesPage = superUserPage.clickAllEmployeesLink();
-
 		allEmployeesPage.verifyAllEmployeesTableColumnsAreVisible();
 		
 		/*Assert.assertEquals("1", allEmployeesPage.getCurrentlySelectedPageNumber());
@@ -91,26 +97,22 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		Assert.assertEquals(allEmployeesPage.MAX_TABLE_ROW_COUNT_VALUE, Integer.valueOf(allEmployeesPage.getAllEmployeesTableRowCount()));
 		*/
 		allEmployeesPage.makeSearchPanelVisible();
-		allEmployeesPage.setSearchEmployeeParameter(employee);
-		allEmployeesPage.selectSearchApplication(appname);
+		allEmployeesPage.setSearchEmployeeParameter(data.getEmployee());
+		allEmployeesPage.selectSearchApplication(data.getAppName());
 		allEmployeesPage.clickFindButton();
 	
-		allEmployeesPage.verifySearchResultsByApplication(appname);
+		allEmployeesPage.verifySearchResultsByApplication(data.getAppName());
 		allEmployeesPage.verifyProfilesLinkWorks();
 	}
-	
-	@Test(description = "Test Case 17283:Super User - Applications")
-	public void testSuperUserApplications() throws Exception {
 
-		final String status = "Terminated";
-		final String appname = "20141006102411";
-		final String username = "kramar";
-		
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		SuperUserWebPage superUserPage = backofficeheader.clickSuperUserLink();
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testSuperUserApplications(String rowID, String description, JSONObject testData) {
 
+        BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        SuperUserWebPage superUserPage = backOfficeHeader.clickSuperUserLink();
 		ApplicationsWebPage applicationsPage = superUserPage.clickApplicationsLink();
-
 		applicationsPage.verifyApplicationsTableColumnsAreVisible();
 		
 		Assert.assertEquals("1", applicationsPage.getCurrentlySelectedPageNumber());
@@ -138,13 +140,13 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		
 		applicationsPage.makeSearchPanelVisible();
 				
-		applicationsPage.selectSearchApplication(appname);
-		applicationsPage.selectSearchStatus(status);
-		applicationsPage.setSearchUsername(username);
+		applicationsPage.selectSearchApplication(data.getAppName());
+		applicationsPage.selectSearchStatus(data.getStatus());
+		applicationsPage.setSearchUsername(data.getUserName());
 		
 		applicationsPage.clickFindButton();
 	
 		Assert.assertEquals(1, applicationsPage.getApplicationsTableRowCount());
-		applicationsPage.verifySearchResultsByApplication(appname);
+		applicationsPage.verifySearchResultsByApplication(data.getAppName());
 	}
 }

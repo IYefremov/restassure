@@ -1,0 +1,29 @@
+{
+  "testAllUsersSearch": [
+    {
+      "rowID": "testAllUsersSearch.01",
+      "description": "Test Case 15135:All Users - Search",
+      "userName": "Oleksandr Kramar",
+      "appName": "380505460134"
+    }
+  ],
+
+  "testAllEmployeesSearch": [
+    {
+      "rowID": "testAllEmployeesSearch.01",
+      "description": "Test Case 15156:All Employees - Search",
+      "employee": "Aaron Naber",
+      "appName": "Dent Wizard International"
+    }
+  ],
+
+  "testSuperUserApplications": [
+    {
+      "rowID": "testSuperUserApplications.01",
+      "description": "Test Case 17283:Super User - Applications",
+      "userName": "kramar",
+      "appName": "20141006102411",
+      "status": "Terminated"
+    }
+  ]
+}

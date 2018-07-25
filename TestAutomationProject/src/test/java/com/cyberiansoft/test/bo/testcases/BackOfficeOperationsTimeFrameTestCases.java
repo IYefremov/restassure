@@ -4,7 +4,7 @@ import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.dataclasses.bo.BackOfficeOperationsTimeFrameData;
+import com.cyberiansoft.test.dataclasses.bo.BOOperationsTimeFrameData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 @Listeners(VideoListener.class)
 public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BackOfficeOperationsTimeFrameData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsTimeFrameData.json";
 
     @BeforeClass()
     public void settingUp() {
@@ -28,7 +28,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationWorkOrdersTimeframeSearch(String rowID, String description, JSONObject testData) {
 
-        BackOfficeOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeOperationsTimeFrameData.class);
+        BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -62,7 +62,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationInspectionsTimeframeSearch(String rowID, String description, JSONObject testData) {
 
-        BackOfficeOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeOperationsTimeFrameData.class);
+        BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
@@ -97,7 +97,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationVendorBillsTimeframeSearch(String rowID, String description, JSONObject testData) {
 
-        BackOfficeOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeOperationsTimeFrameData.class);
+        BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
@@ -131,7 +131,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationInvoicesTimeframeSearch(String rowID, String description, JSONObject testData) {
 
-        BackOfficeOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BackOfficeOperationsTimeFrameData.class);
+        BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
         BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();

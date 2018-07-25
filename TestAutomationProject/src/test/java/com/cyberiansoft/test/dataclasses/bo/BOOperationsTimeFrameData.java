@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-public class BackOfficeOperationsTimeFrameData {
+public class BOOperationsTimeFrameData {
 
 //    private final LocalDate currentdate = LocalDate.now().plusDays(1); todo delete, if works fine
 //    //	private final LocalDate weekStart = BackOfficeUtils.getWeekStartDate().minusDays(1);

@@ -116,12 +116,9 @@ public class AllUsersWebPage extends WebPageWithPagination {
 		Assert.assertTrue(workmanagerreadonlychkbox.isDisplayed());
 	}
 	
-	public void selectSearchApplication(String _application) throws InterruptedException {
+	public void selectSearchApplication(String _application) {
 		applicationsearchcmb.click();
 		applicationsearchcmb.sendKeys(_application);
-//		wait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		//Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
 	}
 	

@@ -71,7 +71,7 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 		Assert.assertTrue(employeesearchfld.isDisplayed());
 	}
 	
-	public void selectSearchApplication(String _application) throws InterruptedException {
+	public void selectSearchApplication(String _application) {
 //		wait.until(ExpectedConditions.visibilityOf(updateProcess));
 //		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		//Thread.sleep(1000);
@@ -97,7 +97,7 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 		return employeestable.getTableRows();
 	}
 	
-	public void  verifyProfilesLinkWorks() throws InterruptedException {
+	public void  verifyProfilesLinkWorks() {
 		String parent = driver.getWindowHandle();
 		driver.findElement(By.xpath("//a[text()='Profiles']")).click();
 		waitForNewTab();
@@ -108,7 +108,7 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 				}
 			}
 			driver.switchTo().window(newwin);
-			Thread.sleep(2000);
+			waitABit(2000);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gvEmployee_ctl00"))).isDisplayed();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00"))).isDisplayed();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_EmployeeCommissions_gv_ctl00"))).isDisplayed();
