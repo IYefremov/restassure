@@ -79,10 +79,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -112,9 +110,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
         leftMenuPanel
                 .clickSalesQuotes()
-                .clickSignedAgreements()
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
 
@@ -155,10 +151,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -195,9 +189,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
         leftMenuPanel
                 .clickSalesQuotes()
-                .clickSignedAgreements()
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -209,10 +201,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -248,10 +238,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 "The attribute is not displayed after clicking the \"Search\" button");
 
         leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -262,10 +250,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -298,10 +284,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
                 clientSegmentsPage.deselectAttribute();
 
         leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }
@@ -312,10 +296,8 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
                 .clickSalesQuotes()
-                .clickSignedAgreements()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName())
                 .clickAddClientButton()
@@ -349,9 +331,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
         leftMenuPanel
                 .clickSalesQuotes()
-                .clickSignedAgreements()
-//                .clickClientManagement()
-//                .clickClientQuotesSubmenu()
+                .clickAgreementsInProgress()
                 .searchUser(data.getName())
                 .deleteUsers(data.getName());
     }

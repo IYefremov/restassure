@@ -8,12 +8,7 @@
     <test name="InHouse tests Chrome">
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
-            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalCategoriesTestCases">
-                <methods>
-                    <include name="testUserCanAddNewCategories"/>
-                    <include name="testUserCanAddAttributeToCategories"/>
-                </methods>
-            </class>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalCategoriesTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalRulesTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
         </classes>
