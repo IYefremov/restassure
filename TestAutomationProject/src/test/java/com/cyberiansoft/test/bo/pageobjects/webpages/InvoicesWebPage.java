@@ -243,9 +243,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public InvoicesWebPage clickFindButton() {
+        waitABit(1000);
 	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
         waitForLoading();
-        waitABit(2000);
         return this;
 	}
 
@@ -431,6 +431,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
 	public boolean isInvoiceEmailSent(String invoicenumber, String email) {
 		try {
+		    waitABit(2000);
             clickInvoiceSelectExpandableMenu(invoicenumber, "Send Email");
             wait.until(ExpectedConditions.visibilityOf(emailRecipientsPopupField)).clear();
             emailRecipientsPopupField.sendKeys(email);
@@ -442,6 +443,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public SendInvoiceCustomEmailTabWebPage clickSendCustomEmail(String invoicenumber) {
+        waitABit(2000);
 		String mainWindowHandle = driver.getWindowHandle();
 
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Send Custom Email");
@@ -455,6 +457,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public InvoiceEmailActivityTabWebPage clickEmailActivity(String invoicenumber) {
+        waitABit(30000);
 		String mainWindowHandle = driver.getWindowHandle();
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Email Activity");
 		waitForNewTab();
@@ -467,6 +470,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public InvoiceEditTabWebPage clickEditInvoice(String invoicenumber) {
+        waitABit(5000);
 		String mainWindowHandle = driver.getWindowHandle();
 		// System.out.println(mainWindowHandle);
 		clickInvoiceSelectExpandableMenu(invoicenumber, "Edit");
@@ -602,8 +606,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	    try {
             return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
         } catch (TimeoutException e) {
-	        Assert.fail("The invoice has not been displayed!", e);
-        }
+                Assert.fail("The invoice has not been displayed!", e);
+	    }
         return "";
     }
 
@@ -637,6 +641,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
     }
 
     public String selectEditOption() {
+        waitABit(3000);
         return selectOptionForFirstInvoice(editOption);
     }
 
@@ -1031,7 +1036,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public void checkPayBoxContent() throws InterruptedException {
+	public void checkPayBoxContent() {
 		waitForLoading();
 		WebElement paymentInfo = driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_pContent"));
 //		try {
@@ -1078,7 +1083,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnCardPay")));
 			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_btnCardPayCancel")).click();
-			Thread.sleep(1000);
+			waitABit(1000);
 //		} catch (TimeoutException e) {
 //			return false;
 //		}

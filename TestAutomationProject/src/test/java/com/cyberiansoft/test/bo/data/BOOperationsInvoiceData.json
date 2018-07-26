@@ -1,0 +1,221 @@
+{
+  "testOperationInvoiceSearch": [
+    {
+      "rowID": "testOperationInvoiceSearch.01",
+      "description": "Test Case 15161:Operation - Invoice: Search",
+      "customer": "000 My Company",
+      "amountFrom": "0",
+      "amountTo": "8"
+    }
+  ],
+
+  "testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded": [
+    {
+      "rowID": "testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded.01",
+      "description": "Test Case 24750:Operations: Invoice editor - verify Add PO is present and payment is added",
+      "po": "#123",
+      "notes": "Test note for payments",
+      "invoiceNumber": "I-046-00068"
+    }
+  ],
+
+  "testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved": [
+    {
+      "rowID": "testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved.01",
+      "description": "Test Case 24751:Operations: Invoice editor - verify that 'Approve invoice after payment' checkbox is disabled after checked it and Invoice is Approved",
+      "po": "#123",
+      "notes": "Test note for payments",
+      "invoiceNumber": "I-046-00068",
+      "poNum": "#222",
+      "poNotes": "test222"
+    }
+  ],
+
+  "testOperationInvoiceEditTechnician": [
+    {
+      "rowID": "testOperationInvoiceEditTechnician.01",
+      "description": "Test Case 28574:Operation - Invoice: Edit - Technician",
+      "invoiceNumber": "I-000-00243",
+      "po": "#123",
+      "notes": "Test note for payments"
+    }
+  ],
+
+  "testOperationInvoiceEditClickHereToEditNotes": [
+    {
+      "rowID": "testOperationInvoiceEditClickHereToEditNotes.01",
+      "description": "Test Case 28578:Operation - Invoice: Edit - Click here to edit notes",
+      "invoiceNumber": "I-000-00243"
+    }
+  ],
+
+  "testOperationInvoiceSentMailInMailActivity": [
+    {
+      "rowID": "testOperationInvoiceSentMailInMailActivity.01",
+      "description": "Test Case 28594:Operation - Invoice : Sent mail in Mail Activity",
+      "userMail": "olexandr.kramar@cyberiansoft.com"
+    }
+  ],
+
+  "testOperationInvoiceSentCustomMailInMailActivity": [
+    {
+      "rowID": "testOperationInvoiceSentCustomMailInMailActivity.01",
+      "description": "Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity",
+      "userMail": "olexandr.kramar@cyberiansoft.com",
+      "message": "Mail Message",
+      "invoiceNumber": "I-223-00005"
+    }
+  ],
+
+  "checkOperationInvoiceStatusApproved": [
+    {
+      "rowID": "checkOperationInvoiceStatusApproved.01",
+      "description": "Test Case 43708:Operation - Invoice: Status - Approved",
+      "poNum": "123"
+    }
+  ],
+
+  "checkOperationInvoiceStatusExported": [
+    {
+      "rowID": "checkOperationInvoiceStatusExported.01",
+      "description": "Test Case 43712:Operation - Invoice: Status - Exported",
+      "poNum": "123"
+    }
+  ],
+
+  "checkOperationInvoiceStatusVoid": [
+    {
+      "rowID": "checkOperationInvoiceStatusVoid.01",
+      "description": "Test Case 43713:Operation - Invoice: Status - Void",
+      "poNum": "123"
+    }
+  ],
+
+  "checkOperationInvoiceStatusExportFailed": [
+    {
+      "rowID": "checkOperationInvoiceStatusExported.01",
+      "description": "Test Case 43710:Operation - Invoice: Status - Export Failed",
+      "poNum": "123"
+    }
+  ],
+
+  "checkOperationInvoiceStatusDraft": [
+    {
+      "rowID": "checkOperationInvoiceStatusDraft.01",
+      "description": "Test Case 43709:Operation - Invoice: Status - Draft",
+      "poNum": "123"
+    }
+  ],
+
+  "checkOperationInvoiceEditMarkAsPaid": [
+    {
+      "rowID": "checkOperationInvoiceEditMarkAsPaid.01",
+      "description": "Test Case 43689:Operation - Invoice: Edit - Mark As Paid"
+    }
+  ],
+
+  "checkOperationInvoiceEditVehicleInfo": [
+    {
+      "rowID": "checkOperationInvoiceEditVehicleInfo.01",
+      "description": "Test Case 43217:Operation - Invoice: Edit - Vehicle Info"
+    }
+  ],
+
+  "checkOperationInvoiceEditChangeInvoice": [
+    {
+      "rowID": "checkOperationInvoiceEditChangeInvoice.01",
+      "description": "Test Case 43692:Operation - Invoice: Edit - Change Invoice"
+    }
+  ],
+
+  "checkOperationInvoiceDownloadJSON": [
+    {
+      "rowID": "checkOperationInvoiceDownloadJSON.01",
+      "description": "Test Case 43693:Operation - Invoice: Edit - Download JSON"
+    }
+  ],
+
+  "checkOperationInvoiceEditTechInfo": [
+    {
+      "rowID": "checkOperationInvoiceEditTechInfo.01",
+      "description": "Test Case 43724:Operation - Invoice: Edit - Tech. Info"
+    }
+  ],
+
+  "checkOperationInvoiceEditRecalcTechSplit": [
+    {
+      "rowID": "checkOperationInvoiceEditRecalcTechSplit.01",
+      "description": "Test Case 43699:Operation - Invoice: Edit - Recalc Tech Split"
+    }
+  ],
+
+  "checkOperationInvoiceSentMailInMailActivity": [
+    {
+      "rowID": "checkOperationInvoiceSentMailInMailActivity.01",
+      "description": "Automate Test Case 28594:Operation - Invoice : Sent mail in Mail Activity"
+    }
+  ],
+
+  "checkOperationInvoiceSentCustomMailInMailActivity": [
+    {
+      "rowID": "checkOperationInvoiceSentCustomMailInMailActivity.01",
+      "description": "Automate Test Case 28596:Operation - Invoice : Sent Custom mail in Mail Activity"
+    }
+  ],
+
+  "checkOperationInvoiceEditInternalTechInfo": [
+    {
+      "rowID": "checkOperationInvoiceEditInternalTechInfo.01",
+      "description": "Test Case 43724:Operation - Invoice: Edit - Internal Tech. Info"
+    }
+  ],
+
+  "checkOperationInvoiceArchive": [
+    {
+      "rowID": "checkOperationInvoiceArchive.01",
+      "description": "Test Case 28933:Operations - Invoice: Archive"
+    }
+  ],
+
+  "checkOperationInvoiceYearMakeModelSearch": [
+    {
+      "rowID": "checkOperationInvoiceYearMakeModelSearch.01",
+      "description": "Test Case 29198:Operation - Invoice: Year/Make/Model/Search"
+    }
+  ],
+
+  "checkOperationInvoiceEditPrintPreview": [
+    {
+      "rowID": "checkOperationInvoiceEditPrintPreview.01",
+      "description": "Test Case 43688:Operation - Invoice: Edit - Print Preview (Server)"
+    }
+  ],
+
+  "checkOperationInvoiceEditPay": [
+    {
+      "rowID": "checkOperationInvoiceEditPay.01",
+      "description": "Test Case 43691:Operation - Invoice: Edit - Pay"
+    }
+  ],
+
+  "checkOperationInvoiceEditAuditLog": [
+    {
+      "rowID": "checkOperationInvoiceEditAuditLog.01",
+      "description": "Test Case 43694:Operation - Invoice: Edit - Audit Log"
+    }
+  ],
+
+  "checkOperationInvoiceSearchOperation": [
+    {
+      "rowID": "checkOperationInvoiceSearchOperation.01",
+      "description": "Test Case 60615:Operation - Invoice: Search operation"
+    }
+  ],
+
+  "checkOperationsInvoiceExport": [
+    {
+      "rowID": "checkOperationsInvoiceExport.01",
+      "description": "Test Case 64968:Operations - Invoice: Export"
+    }
+  ]
+}
