@@ -7,6 +7,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectE
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -72,8 +73,8 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
-	public InvoiceInfoScreen selectWOInvoiceType(String invoicetype) {
-		appiumdriver.findElementByAccessibilityId(invoicetype).click();
+	public InvoiceInfoScreen selectWOInvoiceType(IInvoicesTypes invoiceType) {
+		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 		return new InvoiceInfoScreen();
 	}

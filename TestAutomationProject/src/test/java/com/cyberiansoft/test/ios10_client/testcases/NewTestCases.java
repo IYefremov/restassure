@@ -18,7 +18,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -114,22 +116,20 @@ public class NewTestCases extends BaseTestCase {
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
-		vehiclescreeen.setVIN(VIN);
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		vehiclescreen.setVIN(VIN);
 		
-		String wonumber1 = vehiclescreeen.getInspectionNumber();
-		vehiclescreeen.setMakeAndModel(_make, _model);
-		vehiclescreeen.setColor(_color);
-		vehiclescreeen.setYear(_year);
-		Thread.sleep(2000);
-		vehiclescreeen.setMileage(mileage);
-		//vehiclescreeen.setFuelTankLevel(fueltanklevel);
-		//vehiclescreeen.setType(_type);
-		vehiclescreeen.setStock(stock);
-		vehiclescreeen.setRO(_ro);
+		String wonumber1 = vehiclescreen.getInspectionNumber();
+		vehiclescreen.setMakeAndModel(_make, _model);
+		vehiclescreen.setColor(_color);
+		vehiclescreen.setYear(_year);
+		vehiclescreen.setMileage(mileage);
+		//vehiclescreen.setFuelTankLevel(fueltanklevel);
+		//vehiclescreen.setType(_type);
+		vehiclescreen.setStock(stock);
+		vehiclescreen.setRO(_ro);
 
-		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Dye_Panel");
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -148,12 +148,11 @@ public class NewTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		myworkordersscreen.selectWorkOrderType(iOSInternalProjectConstants.WO_FORR_MONITOR_WOTYPE);
-		vehiclescreeen = new RegularVehicleScreen();
-		Assert.assertEquals(vehiclescreeen.getMake(), _make);
-		Assert.assertEquals(vehiclescreeen.getModel(), _model);
-		Assert.assertEquals(vehiclescreeen.getYear(), _year);
-		ordersummaryscreen = vehiclescreeen.selectNextScreen(RegularOrderSummaryScreen
+		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		Assert.assertEquals(vehiclescreen.getMake(), _make);
+		Assert.assertEquals(vehiclescreen.getModel(), _model);
+		Assert.assertEquals(vehiclescreen.getYear(), _year);
+		ordersummaryscreen = vehiclescreen.selectNextScreen(RegularOrderSummaryScreen
 				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
 		ordersummaryscreen = new RegularOrderSummaryScreen();
 		ordersummaryscreen.checkApproveAndCreateInvoice();
@@ -207,19 +206,19 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 
-		RegularVehicleScreen vehiclescreeen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
-		vehiclescreeen.setVIN(VIN);
-		vehiclescreeen.setMakeAndModel(_make, _model);
-		vehiclescreeen.setColor(_color);
-		vehiclescreeen.setYear(_year);
-		vehiclescreeen.setMileage(mileage);
-		//vehiclescreeen.setFuelTankLevel(fueltanklevel);
-		//vehiclescreeen.setType(_type);
-		vehiclescreeen.setStock(stock);
-		vehiclescreeen.setRO(_ro);
-		//vehiclescreeen.setLicensePlate(licplate);
+		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setMakeAndModel(_make, _model);
+		vehiclescreen.setColor(_color);
+		vehiclescreen.setYear(_year);
+		vehiclescreen.setMileage(mileage);
+		//vehiclescreen.setFuelTankLevel(fueltanklevel);
+		//vehiclescreen.setType(_type);
+		vehiclescreen.setStock(stock);
+		vehiclescreen.setRO(_ro);
+		//vehiclescreen.setLicensePlate(licplate);
 
-		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServiceQuantityValue("3");
@@ -316,9 +315,8 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.clickRefreshButton();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
-		servicerequestsscreen.selectInspectionType("Insp_smoke_test");
-		RegularVehicleScreen vehiclescreeen = new RegularVehicleScreen();
-		RegularServicesScreen servicesscreen = vehiclescreeen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
+		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_SMOKE_TEST);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
 				RegularServicesScreen.class);
 		for (String serviceName : services)
 			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +

@@ -11,27 +11,7 @@ public class UtilConstants {
     
     //Customers
     public static final String TEST_CUSTOMER_FOR_TRAINING = "1 - Test Customer For Training"; 
-    public static final String BMW_ROCKVILLE_CUSTOMER = "BMW of Rockville"; 
-    
-    //WO Types
-    public static final String wizprotrackerrouteworkordertype = "WizardPro Tracker Route"; 
-    public static final String routeusworkordertype = "Route - U.S."; 
-    public static final String servicedriveworkordertype = "Service Drive"; 
-    public static final String routecanadaworkordertype = "Route - Canada"; 
-    public static final String wholesailhailworkordertype = "Wholesale Hail";
-    public static final String retailhailworkordertype = "Retail Hail";
-    public static final String carmaxworkordertype = "CarMax";
-    public static final String routeworkordertype = "Route";
-    public static final String enterpriseworkordertype = "Enterprise";
-    public static final String avisworkordertype = "AVIS";
-    public static final String auctionworkordertype = "Auction";
-    public static final String wizardprotrackeravisworkordertype = "WizardPro Tracker Avis";
-    public static final String wizardprotrackerservicedriveworkordertype = "WizardPro Tracker Service Drive";
-    
-    //Inspections types
-    public static final String servicedriveinspectiondertype = "Service Drive";
-    public static final String economicalinspectiondertype = "Economical";
-    public static final String wizardprotrackerrouteinspectiondertype = "WizardPro Tracker Service";
+    public static final String BMW_ROCKVILLE_CUSTOMER = "BMW of Rockville";
     
     //Services
     public static final String PDR_SERVICE = "PDR";
@@ -102,9 +82,6 @@ public class UtilConstants {
     
     //WO Type Job
     public static final String WO_TYPE_JOB = "Fucking job";
-    
-    //Invoice types
-    public static final String NO_ORDER_TYPE = "1 - ** No Order Type **";
     
     //Screens
     public static final String CLAIM_SCREEN_CAPTION = "Claim"; 

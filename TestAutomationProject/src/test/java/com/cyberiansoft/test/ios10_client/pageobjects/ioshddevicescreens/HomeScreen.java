@@ -93,7 +93,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 		return new TeamInspectionsScreen();
 	}
 
-	public MyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
+	public MyWorkOrdersScreen clickMyWorkOrdersButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Work Orders"))).click(); 
 		MyWorkOrdersScreen myworkordersscreen = new MyWorkOrdersScreen();

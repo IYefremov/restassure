@@ -374,12 +374,6 @@ public abstract class Helpers {
 		keyboadrType(vin + "\n");
 	}
 
-	public static boolean screenIsDisplayed(String screenname) {
-		waitABit(500);
-		return DriverBuilder.getInstance().getAppiumDriver().findElementsByXPath("//XCUIElementTypeButton[@label='"
-						+ screenname + "']").size() > 0;
-	}
-
 	public static void makeCapture() throws InterruptedException {
 		Thread.sleep(2000);
 		if (elementExists(By.xpath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]"))) {

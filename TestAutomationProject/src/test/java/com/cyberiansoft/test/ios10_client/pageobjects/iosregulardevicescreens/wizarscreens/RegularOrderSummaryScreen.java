@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -71,15 +72,15 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByName(invoicetype).click();
 	}
 	
-	public RegularInvoiceInfoScreen selectInvoiceType(String invoicetype) {
-		clickInvoiceType(invoicetype);
+	public RegularInvoiceInfoScreen selectInvoiceType(IInvoicesTypes invoiceType) {
+		clickInvoiceType(invoiceType.getInvoiceTypeName());
 		return new RegularInvoiceInfoScreen();
 	}
 
-	public void selectWorkOrderDetails(String workorderdetails) {
+	/*public void selectWorkOrderDetails(String workorderdetails) {
 
 		appiumdriver.findElementByAccessibilityId(workorderdetails).click();
-	}
+	}*/
 
 	public String getOrderSumm() {
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");

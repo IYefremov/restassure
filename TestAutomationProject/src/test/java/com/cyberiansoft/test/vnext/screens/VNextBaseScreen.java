@@ -58,10 +58,10 @@ public class VNextBaseScreen {
 	}
 	
 	public void tapListElement(WebElement scrollablelist, String value) {			
-		WebElement elem = scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']"));	
+		WebElement elem = scrollablelist.findElement(By.xpath(".//div[contains(text(), '" + value + "')]"));
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);
-		tap(scrollablelist.findElement(By.xpath(".//div[text()='" + value + "']")));
+		tap(scrollablelist.findElement(By.xpath(".//div[contains(text(), '" + value + "']")));
 	}
 	
 	public void swipeScreenLeft() {	

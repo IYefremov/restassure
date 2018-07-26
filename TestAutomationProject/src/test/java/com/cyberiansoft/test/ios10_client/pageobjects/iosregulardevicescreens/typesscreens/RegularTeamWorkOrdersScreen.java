@@ -3,6 +3,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -76,13 +78,14 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
-	public void selectWOInvoiceType(String invoicetype) {
+	public <T extends IBaseWizardScreen>T selectWOInvoiceType(IInvoicesTypes invoiceType) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoicetype)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoiceType.getInvoiceTypeName())));
 		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoicetype)));
-		appiumdriver.findElementByAccessibilityId(invoicetype).click();
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoiceType.getInvoiceTypeName())));
+		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
+		return invoiceType.getFirstVizardScreen();
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {

@@ -4,7 +4,9 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -188,27 +190,22 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 			appiumdriver.findElement(MobileBy.name("Done")).click();
 	}
 
-	public RegularVehicleScreen selectDefaultInspectionType() {
+	/*public RegularVehicleScreen selectDefaultInspectionType() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Default")).click();
 		return new RegularVehicleScreen();
-	}
+	}*/
 
-	public void selectInspectionType(String inspectiontype) {
+	public <T extends IBaseWizardScreen> T selectInspectionType(IInspectionsTypes inspectionType) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InspectionTypeSelector")));
 		IOSElement insptypetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InspectionTypeSelector' and type = 'XCUIElementTypeTable'"));
-		if (!insptypetable.findElementByAccessibilityId(inspectiontype).isDisplayed()) {
-			swipeToElement(insptypetable.findElementByAccessibilityId(inspectiontype));
+		if (!insptypetable.findElementByAccessibilityId(inspectionType.getInspectionTypeName()).isDisplayed()) {
+			swipeToElement(insptypetable.findElementByAccessibilityId(inspectionType.getInspectionTypeName()));
 		}
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
-		//if (elementExists(inspectiontype))
-		//	appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
-		/*TouchAction action = new TouchAction(appiumdriver);
-		action.press(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectiontype + "']")).waitAction(1000).release().perform();
-		*/
-		//appiumdriver.findElement(MobileBy.AccessibilityId(inspectiontype)).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(inspectionType.getInspectionTypeName())).click();
+		return inspectionType.getFirstVizardScreen();
 	}
 
 	public void selectFirstInspection() {
@@ -459,15 +456,16 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='TeamInspectionsTable']/XCUIElementTypeCell")).size();
 	}
 	
-	public void selectWorkOrderType(String workordertype) {
+	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
 		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
 
-		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
-			swipeToElement(wostable.findElementByAccessibilityId(workordertype));
+		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
+			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
 		}
-		wostable.findElementByAccessibilityId(workordertype).click();
+		wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
+		return workordertype.getFirstVizardScreen();
 	}
 
 	public void clickBackButton()  {

@@ -10,6 +10,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -109,18 +112,20 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
-	public void addInspection(String inspType) {
+	public <T extends IBaseWizardScreen> T addInspection(IInspectionsTypes inspType) {
 		clickAddInspectionButton();
 		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
+		return inspType.getFirstVizardScreen();
 	}
 
-	public void addOInspectionWithSelectCustomer(String customerName, String inspType) {
+	public <T extends IBaseWizardScreen> T addOInspectionWithSelectCustomer(String customerName, IInspectionsTypes inspType) {
 		clickAddInspectionButton();
 		CustomersScreen customersscreen = new CustomersScreen();
 		customersscreen.selectCustomer(customerName);
 		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
+		return inspType.getFirstVizardScreen();
 	}
 
 	public void clickEditInspectionButton() {
@@ -133,11 +138,12 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		clickEditInspectionButton();
 	}
 	
-	public void createWOFromInspection(String inspNumber, String workOrderType) {
+	public <T extends IBaseWizardScreen> T createWOFromInspection(String inspNumber, WorkOrdersTypes workOrderType) {
 		selectInspectionInTable(inspNumber);
 		clickCreateWOButton();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
+		return workOrderType.getFirstVizardScreen();
 	}
 
 	public void selectInspectionForApprove(String inspNumber) {
@@ -215,8 +221,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId(inspnumber).click();
 	}
 
-	public void archiveInspection(String inpectionNumber, String reason)
-			throws InterruptedException {
+	public void archiveInspection(String inpectionNumber, String reason) {
 		selectInspectionInTable(inpectionNumber);
 		clickArchiveInspectionButton();
 		selectReasonToArchive(reason);

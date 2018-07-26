@@ -8,7 +8,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespo
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -150,7 +152,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		return serviceRequestType.getFirstVizardScreen();
 	}
 
-	public <T extends IBaseWizardScreen> T  addServiceRequest(ServiceRequestTypes serviceRequestType) {
+	public <T extends IBaseWizardScreen> T addServiceRequest(ServiceRequestTypes serviceRequestType) {
 		clickAddButton();
 		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
 		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType.getServiceRequestTypeName());
@@ -194,22 +196,24 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		//Helpers.text(servicerequest).click();
 	}
 
-	public void createInspectionFromServiceReques(String serviceRequestNumber, String inspType) {
+	public <T extends IBaseWizardScreen> T createInspectionFromServiceReques(String serviceRequestNumber, InspectionsTypes inspType) {
 		selectServiceRequest(serviceRequestNumber);
 		appiumdriver.findElementByAccessibilityId("Create Inspection").click();
 		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
+		return inspType.getFirstVizardScreen();
 	}
 	
 	public void selectCreateWorkOrderRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Create Work Order").click();
 	}
 
-	public void createWorkOrderFromServiceRequest(String serviceRequestNumber, String workOrderType) {
+	public <T extends IBaseWizardScreen> T createWorkOrderFromServiceRequest(String serviceRequestNumber, WorkOrdersTypes workOrderType) {
 		selectServiceRequest(serviceRequestNumber);
 		selectCreateWorkOrderRequestAction();
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType);
+		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
+		return workOrderType.getFirstVizardScreen();
 	}
 
 	public boolean isCreateWorkOrderActionExists() {

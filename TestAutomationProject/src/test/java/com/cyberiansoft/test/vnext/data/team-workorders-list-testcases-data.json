@@ -18,6 +18,26 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
+  ],
+
+  "testVerifyUserCanEditTeamWO": [
+    {
+      "rowID": "testVerifyUserCanEditTeamWO.01",
+      "description": "Test Case 68485:Verify user can edit Team WO",
+      "workOrderType": "Kramar_auto",
+      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleMake" : "Aston Martin", "vehicleModel" : "DB7"
+      }
+    }
+  ],
+
+  "testVerifyUserCanEditWOIfWeHaveNoInternetConnection": [
+    {
+      "rowID": "testVerifyUserCanEditWOIfWeHaveNoInternetConnection.01",
+      "description": "Test Case 68486:Verify user can edit WO if we have no internet connection",
+      "inspType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleMake" : "Aston Martin", "vehicleModel" : "DB7"
+      }
+    }
   ]
 
 }

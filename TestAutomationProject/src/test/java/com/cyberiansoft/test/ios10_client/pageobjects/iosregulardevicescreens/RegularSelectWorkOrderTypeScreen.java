@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -22,15 +24,16 @@ public class RegularSelectWorkOrderTypeScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'")));
 	}
 	
-	public void selectWorkOrderType(String workordertype) {
+	public <T extends IBaseWizardScreen> T selectWorkOrderType(WorkOrdersTypes workordertype) {
 		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
 
-		if (!wostable.findElementByAccessibilityId(workordertype).isDisplayed()) {
-			swipeToElement(wostable.findElementByAccessibilityId(workordertype));
-			wostable.findElementByAccessibilityId(workordertype).click();
+		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
+			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
+			wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
 		}
 		if (elementExists("OrderTypeSelector"))
-			wostable.findElementByAccessibilityId(workordertype).click();
+			wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
+		return workordertype.getFirstVizardScreen();
 	}
 
 }

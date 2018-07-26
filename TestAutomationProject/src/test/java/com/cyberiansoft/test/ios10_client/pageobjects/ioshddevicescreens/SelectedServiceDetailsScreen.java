@@ -183,8 +183,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 	
-	public void setServiceQuantityValue(String _quantity)
-			throws InterruptedException {	
+	public void setServiceQuantityValue(String _quantity) {
 		
 		appiumdriver.findElementByAccessibilityId("Quantity").click();
 		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)

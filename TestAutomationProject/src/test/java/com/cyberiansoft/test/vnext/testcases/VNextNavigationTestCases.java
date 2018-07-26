@@ -107,7 +107,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.selectModelColor(carColor);
 		vehicleinfoscreen.setYear(carYear);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), VIN);
-		vehicleinfoscreen.clickCancelInspectionMenuItem();
+		vehicleinfoscreen.clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);

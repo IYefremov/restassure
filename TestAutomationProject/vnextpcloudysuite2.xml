@@ -5,7 +5,7 @@
   <parameter name="device.platform" value="android"  />
   <listeners>
 		<!--<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>-->
-		<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>
+      <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
@@ -88,14 +88,16 @@
       </class>-->
       
      
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamSupplementsTestCases">
-     <methods> 
-     <include name="testVerifyUserCanAddSupplementAfterApproveInspection1" />
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList">
+     <methods>
+         <include name="testVerifyUserCanSearchWOByCustomerName" />
+          <!--<include name="testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList" />-->
      	  <!--<include name="testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen" />--> 
     	  <!--<include name="testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree" />
     	  <include name="testVerifyUserCanCreateRepair360Edition" />-->
       </methods>
       </class>
+
       
       
      <!--<class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">

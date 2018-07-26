@@ -41,14 +41,22 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	}
 	
 	public VNextInspectionsScreen cancelInspection() {
-		clickCancelInspectionMenuItem();
+		clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
 		//Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
 		return new VNextInspectionsScreen(appiumdriver);
 	}
-	
-	public void clickCancelInspectionMenuItem() {
+
+	public VNextWorkOrdersScreen cancelWorkOrder() {
+		clickCancelMenuItem();
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
+		//Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
+		return new VNextWorkOrdersScreen(appiumdriver);
+	}
+
+	public void clickCancelMenuItem() {
 		clickMenuButton();
 		tap(cancelinspectionmenu);
 	}
