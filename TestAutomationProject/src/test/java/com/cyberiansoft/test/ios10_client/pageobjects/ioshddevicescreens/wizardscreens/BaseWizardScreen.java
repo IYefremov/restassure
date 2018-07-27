@@ -19,34 +19,6 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen implements IBaseW
         super();
     }
 
-    /*public <T extends IBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
-        IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
-        navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
-        appiumdriver.findElementByAccessibilityId(screenname).click();
-
-        if (type == InvoiceInfoScreen.class)
-            return (T) new InvoiceInfoScreen();
-        else if (type == VehicleScreen.class)
-            return (T) new VehicleScreen();
-        else if (type == ServicesScreen.class)
-            return (T) new ServicesScreen();
-        else if (type == OrderSummaryScreen.class)
-            return (T) new OrderSummaryScreen();
-        else if (type == ClaimScreen.class)
-            return (T) new ClaimScreen();
-        else if (type == QuestionsScreen.class)
-            return (T) new QuestionsScreen();
-        else if (type == QuestionAnswerScreen.class)
-            return (T) new QuestionAnswerScreen();
-        else if (type == EnterpriseBeforeDamageScreen.class)
-            return (T) new EnterpriseBeforeDamageScreen();
-        else if (type == PriceMatrixScreen.class)
-            return (T) new PriceMatrixScreen();
-        else if (type == VisualInteriorScreen.class)
-            return (T) new VisualInteriorScreen();
-        return null;
-    }*/
-
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
         IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
         navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();

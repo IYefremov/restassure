@@ -19,30 +19,6 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         super();
     }
 
-    public <T extends IBaseWizardScreen> T selectNextScreen(String screenname, Class<T> type) {
-        clickChangeScreen();
-        appiumdriver.findElementByAccessibilityId(screenname).click();
-        if (type == RegularInvoiceInfoScreen.class)
-            return (T) new RegularInvoiceInfoScreen();
-        else if (type == RegularVehicleScreen.class)
-            return (T) new RegularVehicleScreen();
-        else if (type == RegularServicesScreen.class)
-            return (T) new RegularServicesScreen();
-        else if (type == RegularOrderSummaryScreen.class)
-            return (T) new RegularOrderSummaryScreen();
-        else if (type == RegularClaimScreen.class)
-            return (T) new RegularClaimScreen();
-        else if (type == RegularQuestionsScreen.class)
-            return (T) new RegularQuestionsScreen();
-        else if (type == RegularEnterpriseBeforeDamageScreen.class)
-            return (T) new RegularEnterpriseBeforeDamageScreen();
-        else if (type == RegularPriceMatrixScreen.class)
-            return (T) new RegularPriceMatrixScreen();
-        else if (type == RegularVisualInteriorScreen.class)
-            return (T) new RegularVisualInteriorScreen();
-        return null;
-    }
-
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();
