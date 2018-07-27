@@ -5,6 +5,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iO
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
+import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,6 +43,18 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         return null;
     }
 
+    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
+        clickChangeScreen();
+        appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();
+        return (T) RegularWizardScreensFactory.getWizardScreenType(wizardScreenType);
+    }
+
+    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType, String screenName) {
+        clickChangeScreen();
+        appiumdriver.findElementByAccessibilityId(screenName).click();
+        return (T) RegularWizardScreensFactory.getWizardScreenType(wizardScreenType);
+    }
+
     public void clickSave() {
         if (!elementExists("Save"))
             clickChangeScreen();
@@ -75,29 +88,12 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public <T extends ITypeScreen> T getTypeScreenFromContext()  {
-        switch (typeContext) {
-            case WORKORDER:
-                return (T) new RegularMyWorkOrdersScreen();
-            case INSPECTION:
-                return (T) new RegularMyInspectionsScreen();
-            case INVOICE:
-                return (T) new RegularMyInvoicesScreen();
-            case SERVICEREQUEST:
-                return (T) new RegularServiceRequestsScreen();
-            case TEAMWORKORDER:
-                return (T) new RegularTeamWorkOrdersScreen();
-            case TEAMINSPECTION:
-                return (T) new RegularTeamInspectionsScreen();
-            case INVOICEINFO:
-                return (T) new RegularInvoiceInfoScreen();
-        }
-        return null;
+        return (T) RegularTypesScreenFactory.getTypeScreen(typeContext);
     }
 
     public IOSElement getInspectionNumberLabel() {
         IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
         return (IOSElement) toolbar.findElementByIosNsPredicate("name CONTAINS 'E-'");
-        //return regularinspnumberlabel;
     }
 
     public String getInspectionNumber() {
