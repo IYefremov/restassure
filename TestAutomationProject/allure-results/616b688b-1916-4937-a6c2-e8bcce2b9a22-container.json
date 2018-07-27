@@ -1,0 +1,1 @@
+{"uuid":"616b688b-1916-4937-a6c2-e8bcce2b9a22","name":"com.cyberiansoft.test.bo.testcases.BackOfficeMonitorReportsTestCases","start":1530695081772,"stop":1530695233354,"children":["4cf4f3c1-d26d-499f-81a2-237bd41bb3a3"],"befores":[{"name":"settingUp","status":"passed","stage":"finished","description":"","start":1530695082041,"stop":1530695082045}]}

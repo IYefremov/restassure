@@ -1,0 +1,1 @@
+{"uuid":"b747d07a-0fad-42dc-8379-808cc9b0aec9","name":"com.cyberiansoft.test.inhouse.testcases.BaseTestCase.teamPortalLogout","description":"","start":1530097323978,"stop":1530097327560,"children":["d8f9ac4f-fbe8-42c0-8c22-941a9791cd0a"],"afters":[{"name":"teamPortalLogout","status":"passed","stage":"finished","description":"","start":1530097323979,"stop":1530097327560}]}

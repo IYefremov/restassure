@@ -1,0 +1,1 @@
+{"uuid":"03fd1eb1-1c1a-44b8-b6b1-4cc99ad1d6c0","name":"com.cyberiansoft.test.bo.testcases.BaseTestCase.BackOfficeLogout","description":"","start":1530704522281,"stop":1530704529673,"children":["af938d9c-737f-4fa9-aae6-11605b215bb5"],"afters":[{"name":"BackOfficeLogout","status":"passed","stage":"finished","description":"","start":1530704522281,"stop":1530704529673}]}

@@ -1,0 +1,1 @@
+{"uuid":"f1a6f3d7-fc9d-4805-a40c-c23f35edc1c3","name":"TestAutomationProject","start":1530686230576,"stop":1530686470796,"children":["65baf561-eb6a-425b-9b76-db87ba7eeb63","10bd3474-c0b2-4765-a36a-a195a09b3d6c","72217568-4e7d-4938-8b9c-26093e55de7e"],"befores":[{"name":"beforeTest","status":"passed","stage":"finished","description":"","start":1530686230580,"stop":1530686230813}]}
