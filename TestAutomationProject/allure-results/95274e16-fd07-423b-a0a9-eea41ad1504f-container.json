@@ -1,1 +1,0 @@
-{"uuid":"95274e16-fd07-423b-a0a9-eea41ad1504f","name":"com.cyberiansoft.test.inhouse.testcases.BaseTestCase.teamPortalLogout","description":"","start":1530096287409,"stop":1530096291034,"children":["f74c7952-e85a-40d0-b026-7017535a8efd"],"afters":[{"name":"teamPortalLogout","status":"passed","stage":"finished","description":"","start":1530096287410,"stop":1530096291034}]}

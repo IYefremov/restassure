@@ -1,1 +1,0 @@
-{"uuid":"a8d9a591-f607-4d0c-bd61-da9758057535","name":"InHouse test cases","start":1530260058698,"stop":1530262144124,"children":["5e36d7d4-d0c8-4c6b-aafb-cf2c755caa63"],"befores":[{"name":"cleanScreenShotsFolder","status":"passed","stage":"finished","description":"","start":1530260058757,"stop":1530260058792}]}

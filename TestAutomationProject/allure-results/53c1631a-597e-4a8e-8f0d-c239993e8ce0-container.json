@@ -1,1 +1,0 @@
-{"uuid":"53c1631a-597e-4a8e-8f0d-c239993e8ce0","name":"com.cyberiansoft.test.ibs.testcases.BaseTestCase.ibsLogin","description":"","start":1531119457948,"stop":1531119470645,"children":["ca6a4efd-8eb1-4eef-9a07-6798574d9432"],"befores":[{"name":"ibsLogin","status":"passed","stage":"finished","description":"","start":1531119457948,"stop":1531119470645}]}

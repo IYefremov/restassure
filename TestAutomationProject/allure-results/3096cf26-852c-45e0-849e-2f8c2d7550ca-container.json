@@ -1,1 +1,0 @@
-{"uuid":"3096cf26-852c-45e0-849e-2f8c2d7550ca","name":"com.cyberiansoft.test.ibs.testcases.IbsLicenceAddingNotification","start":1531476873966,"stop":1531476918888,"children":["4e043890-daec-41eb-80f0-f017d2c25ba1"],"befores":[{"name":"settingUp","status":"passed","stage":"finished","description":"","start":1531476874019,"stop":1531476874019}]}

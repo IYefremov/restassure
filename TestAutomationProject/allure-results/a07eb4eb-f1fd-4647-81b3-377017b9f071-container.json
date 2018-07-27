@@ -1,1 +1,0 @@
-{"uuid":"a07eb4eb-f1fd-4647-81b3-377017b9f071","name":"com.cyberiansoft.test.ibs.testcases.BaseTestCase.ibsLogout","description":"","start":1531478823063,"stop":1531478824245,"children":["654cb0b2-7b0d-461e-aa51-d96b2727c106"],"afters":[{"name":"ibsLogout","status":"passed","stage":"finished","description":"","start":1531478823063,"stop":1531478824245}]}
