@@ -50,6 +50,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.println("SUCCESS: " + iTestResult.getMethod().getMethodName());
+        AllureUtils.attachVideo();
     }
 
     @Override
