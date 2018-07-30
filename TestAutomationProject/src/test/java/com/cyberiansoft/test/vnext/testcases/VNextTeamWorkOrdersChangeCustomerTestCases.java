@@ -30,6 +30,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         JSONDataProvider.dataFile = DATA_FILE;
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(testcustomer1)) {
             VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
             newcustomerscreen.createNewCustomer(testcustomer1);
@@ -161,7 +162,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.changeCustomerToWholesailForWorkOrder(woNumber, testwholesailcustomer);
-        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber));
+        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't fins work order: " + woNumber);
         workordersscreen.switchToTeamWorkordersView();
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testwholesailcustomer.getFullName());
         workordersscreen.switchToMyWorkordersView();

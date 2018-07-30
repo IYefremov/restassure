@@ -264,6 +264,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.saveApprovedInspection();
+		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();

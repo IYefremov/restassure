@@ -308,6 +308,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
                     vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
             vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+            vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
         }
         vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
         inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
@@ -393,6 +394,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
                     vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
             vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+            vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
         }
         vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
         inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();

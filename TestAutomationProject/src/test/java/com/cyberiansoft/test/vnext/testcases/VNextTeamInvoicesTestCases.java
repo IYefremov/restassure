@@ -13,9 +13,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -30,6 +28,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
@@ -39,7 +38,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 	@BeforeClass(description="Team Invoices Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 		JSONDataProvider.dataFile = DATA_FILE;
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -688,7 +687,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		NadaEMailService nada = new NadaEMailService();
+		emailscren.sentToEmailAddress(nada.getEmailId());
 
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
@@ -696,14 +696,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
-
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-			.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
-		}
+			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
+		Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+				" in mail box " + nada.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+	}
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -799,20 +798,20 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomer2);
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		NadaEMailService nada = new NadaEMailService();
+		emailscren.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
-
-		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+		for (int i = 1; i < invoices.length; i++) {
+			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName("Invoice " + invoices[i], invoices[i] + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
+					" in mail box " + nada.getEmailId() + ". At time " +
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
 		}
 	}
 
@@ -856,21 +855,20 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress("fake.mailmy@mymail.com");
-		emailscren.sentToCCEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		NadaEMailService nada = new NadaEMailService();
+		emailscren.sentToEmailAddress(nada.getEmailId());
 		
 		emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
 		invoicesscreen.clickBackButton();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
-
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+					" in mail box " + nada.getEmailId() + ". At time " +
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
 		}
 	}
 
@@ -1022,7 +1020,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesscreen.selectInvoice(invoiceNumber);
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		NadaEMailService nada = new NadaEMailService();
+		emailscren.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -1030,13 +1029,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
-
 		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder().
-					withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+					" in mail box " + nada.getEmailId() + ". At time " +
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());;
 		}
 	}
 
@@ -1247,7 +1245,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomer2);
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
-		emailscren.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		NadaEMailService nada = new NadaEMailService();
+		emailscren.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailscren.sendEmail();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -1255,13 +1254,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
-
-		for (String invoiceNumber : invoices) {
-			EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-					.withSubjectAndAttachmentFileName(invoiceNumber, invoiceNumber + ".pdf").unreadOnlyMessages(true).maxMessagesToSearch(5);
-			Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters), "Can't find invoice: " + invoiceNumber);
+		for (int i = 1; i < invoices.length; i++) {
+			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+					.withSubjectAndAttachmentFileName("Invoice " + invoices[i], invoices[i] + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
+					" in mail box " + nada.getEmailId() + ". At time " +
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());;
 		}
 	}
 

@@ -122,7 +122,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanEditWOIfWeHaveNoInternetConnection(String rowID,
-                                            String description, JSONObject testData) {
+                                                                    String description, JSONObject testData) {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -163,5 +163,61 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
         AppiumUtils.setNetworkOn();
         homescreen.waitUntilQueueMessageInvisible();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyAllChangesIsSavedAfterReconnectInternet(String rowID,
+                                                                    String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToTeamInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(inspectionData.getInspectionType());
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.saveInspectionViaMenu();
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(inspectionData.getInspectionType());
+        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workordersscreen.switchToMyWorkordersView();
+        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+
+        AppiumUtils.setNetworkOff();
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleinfoscreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
+                inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleinfoscreen.saveWorkOrderViaMenu();
+        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleinfoscreen.cancelWorkOrder();
+        workordersscreen.clickBackButton();
+        Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
+        AppiumUtils.setNetworkOn();
+        homescreen.waitUntilQueueMessageInvisible();
+
+        VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+        statusScreen.updateMainDB();
+        statusScreen.clickBackButton();
+        homescreen.clickWorkOrdersMenuItem();
+        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleinfoscreen.cancelWorkOrder();
+        workordersscreen.clickBackButton();
     }
 }
