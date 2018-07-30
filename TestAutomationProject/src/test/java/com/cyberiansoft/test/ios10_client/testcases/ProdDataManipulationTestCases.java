@@ -23,7 +23,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.ProdInspectionsTypes;
-import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -102,20 +102,20 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         RegularVisualInteriorScreen visualInteriorScreen =  myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
-        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
+        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
         claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
         claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
         claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
         claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
         claimscreen.setAccidentDate();
 
-        RegularPriceMatrixScreen pricematrix = claimscreen.selectNextScreen("State Farm", RegularPriceMatrixScreen.class);
+        RegularPriceMatrixScreen pricematrix = claimscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "State Farm");
         for (MatrixPartData matrixPartData : inspdata.getMatrixServiceData().getMatrixPartsData()) {
             RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(matrixPartData.getMatrixPartName());
             vehiclePartScreen.setSizeAndSeverity(matrixPartData.getPartSize(), matrixPartData.getPartSeverity());
@@ -141,13 +141,13 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         customersScreen.selectCustomer("R & Q Autobody");
         myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
         RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
-        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
+        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
         claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
         claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
         claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
@@ -179,20 +179,20 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Pitt Paint & Body");
         RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.PAINT_INSPECTION);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
-        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(UtilConstants.CLAIM_SCREEN_CAPTION, RegularClaimScreen.class);
+        RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
         claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
         claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
         claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
         claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
         claimscreen.setAccidentDate();
 
-        RegularServicesScreen servicesScreen = claimscreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+        RegularServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
         servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
@@ -218,14 +218,14 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Plaza Kia");
         RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_INSPECTION);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
         servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
@@ -251,14 +251,14 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.WHEEL_INSPECTION);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
         servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
@@ -284,14 +284,14 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
         RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_DETAIL);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
         servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
@@ -317,14 +317,14 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("Torrington Detail");
         RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.EXTERIOR_DETAIL);
-        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(RegularVehicleScreen.getVehicleScreenCaption(), RegularVehicleScreen.class);
+        RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
         vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
         vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
         vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+        RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
         servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());

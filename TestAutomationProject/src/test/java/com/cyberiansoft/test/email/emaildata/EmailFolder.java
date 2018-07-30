@@ -2,7 +2,7 @@ package com.cyberiansoft.test.email.emaildata;
 
 public enum EmailFolder {
     INBOX("INBOX"),
-    SPAM("SPAM"),
+    SPAM("Spam"),
     DRAFTS("DRAFTS"),
     JUNK("JUNK");
 

@@ -464,11 +464,11 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(),
                 String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoicenumber));
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-        Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+        Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber), "Invoice still exists: " + invoicenumber);
         homescreen = invoicesscreen.clickBackButton();
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
         for (String woNumber : workOrdersToAdd)
-            Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+            Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.clickBackButton();
     }
 

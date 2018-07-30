@@ -20,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
+import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
@@ -129,7 +130,7 @@ public class NewTestCases extends BaseTestCase {
 		vehiclescreen.setStock(stock);
 		vehiclescreen.setRO(_ro);
 
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Dye_Panel");
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -138,8 +139,7 @@ public class NewTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.selectWorkOrderForApprove(wonumber1);
 		myworkordersscreen.clickApproveButton();
@@ -152,15 +152,14 @@ public class NewTestCases extends BaseTestCase {
 		Assert.assertEquals(vehiclescreen.getMake(), _make);
 		Assert.assertEquals(vehiclescreen.getModel(), _model);
 		Assert.assertEquals(vehiclescreen.getYear(), _year);
-		ordersummaryscreen = vehiclescreen.selectNextScreen(RegularOrderSummaryScreen
-				.getOrderSummaryScreenCaption(), RegularOrderSummaryScreen.class);
+		ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen = new RegularOrderSummaryScreen();
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.clickSave();
 		
 		ordersummaryscreen.selectDefaultInvoiceType();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
-		RegularInvoiceInfoScreen invoiceinfoscreen =questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
+		RegularInvoiceInfoScreen invoiceinfoscreen =questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.setPO(poNomber);
 		invoiceinfoscreen.addWorkOrder(wonumber1);
 		invoiceinfoscreen.clickSave();
@@ -171,7 +170,7 @@ public class NewTestCases extends BaseTestCase {
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Engine Condition' in section 'Test Section' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Engine Condition", "Pretty Good");
-		invoiceinfoscreen = questionsscreen.selectNextScreen("Info", RegularInvoiceInfoScreen.class);
+		invoiceinfoscreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -218,7 +217,7 @@ public class NewTestCases extends BaseTestCase {
 		vehiclescreen.setRO(_ro);
 		//vehiclescreen.setLicensePlate(licplate);
 
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(), RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServiceQuantityValue("3");
@@ -316,8 +315,7 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_SMOKE_TEST);
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(RegularServicesScreen.getServicesScreenCaption(),
-				RegularServicesScreen.class);
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (String serviceName : services)
 			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));

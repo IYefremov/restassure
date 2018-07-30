@@ -53,6 +53,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='available']")));
 		return new VNextInspectionServicesScreen(appiumdriver);
 	}
 
@@ -62,6 +64,8 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 		tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
 		wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='selected']")));
 		return  new VNextSelectedServicesScreen(appiumdriver);
 	}
 	

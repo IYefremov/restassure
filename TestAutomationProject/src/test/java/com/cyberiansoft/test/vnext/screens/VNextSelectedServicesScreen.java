@@ -52,7 +52,7 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
                 tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 WaitUtils.click(servicecell);
-             BaseUtils.waitABit(300);
+             BaseUtils.waitABit(500);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);

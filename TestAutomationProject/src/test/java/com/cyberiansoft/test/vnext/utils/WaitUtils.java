@@ -100,6 +100,6 @@ public class WaitUtils {
     public static void waitUntilElementInvisible(final By locator) {
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30).until(ExpectedConditions.invisibilityOfElementLocated(locator));
-        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 }

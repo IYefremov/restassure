@@ -34,12 +34,14 @@ public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
 	public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		BaseUtils.waitABit(2000);
 		if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
 			tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
 		clearSearchField();
 	}
 	
@@ -111,7 +113,8 @@ public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
 	}
 	
 	public void clickCreateInvoiceMenuItem() {
-		tap(createinvoicemenu);
+		WaitUtils.click(createinvoicemenu);
+		//tap(createinvoicemenu);
 	}
 	
 	public void clickCreateInvoiceIcon() {
@@ -141,6 +144,7 @@ public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
 		customersscreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving work order customer...']"));
 		return this;
 	}
 

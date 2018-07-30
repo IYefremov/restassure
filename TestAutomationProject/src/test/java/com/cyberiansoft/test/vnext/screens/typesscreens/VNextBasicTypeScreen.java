@@ -73,6 +73,8 @@ public class VNextBasicTypeScreen extends VNextBaseScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions.elementToBeClickable(myviewtab));
         tap(myviewtab);
+        wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='my']")));
     }
 
     protected boolean isMyViewActive() {
@@ -107,13 +109,14 @@ public class VNextBasicTypeScreen extends VNextBaseScreen {
     }
 
     public void clearSearchField() {
-        /*if (cancelsearchbtn.isDisplayed()) {
+        if (cancelsearchbtn.isDisplayed()) {
             tap(clearsearchicon);
             clickCancelSearchButton();
-        }*/
+        }
         if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
             tap(searchbtn);
             if (searchfld.getAttribute("value").length() > 1) {
+                //searchfld.clear();
                 tap(clearsearchicon);
                 WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
             }

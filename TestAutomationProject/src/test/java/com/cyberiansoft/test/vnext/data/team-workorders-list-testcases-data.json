@@ -38,6 +38,16 @@
       "vihicleInfo": {"vinNumber": "7777777777777", "vehicleMake" : "Aston Martin", "vehicleModel" : "DB7"
       }
     }
+  ],
+
+  "testVerifyAllChangesIsSavedAfterReconnectInternet": [
+    {
+      "rowID": "testVerifyAllChangesIsSavedAfterReconnectInternet.01",
+      "description": "Test Case 68489:Verify all changes is saved after reconnect Internet",
+      "inspType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleMake" : "Aston Martin", "vehicleModel" : "DB7"
+      }
+    }
   ]
 
 }
