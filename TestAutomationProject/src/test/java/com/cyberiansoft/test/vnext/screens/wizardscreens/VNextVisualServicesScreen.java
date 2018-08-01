@@ -1,6 +1,8 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;

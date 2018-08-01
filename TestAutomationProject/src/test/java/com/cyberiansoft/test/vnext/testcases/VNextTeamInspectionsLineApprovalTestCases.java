@@ -4,9 +4,14 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -44,16 +49,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -83,16 +88,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -125,16 +130,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -165,13 +170,13 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.selectService(inspdata.getServiceName());
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		availableservicesscreen.selectService(inspdata.getServiceName());
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -198,15 +203,15 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -240,16 +245,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -282,16 +287,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
         List<ServiceData> services = inspdata.getServicesList();
         for (ServiceData service : services)
-            inpsctionservicesscreen.selectService(service.getServiceName());
+            availableservicesscreen.selectService(service.getServiceName());
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -320,16 +325,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
-			inpsctionservicesscreen.selectService(service.getServiceName());
+			availableservicesscreen.selectService(service.getServiceName());
 
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -363,15 +368,15 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspdata.getInspectionType());
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreensLeft(2);
-		VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-		inpsctionservicesscreen.switchToAvalableServicesView();
+		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		availableservicesscreen.switchToAvalableServicesView();
 
-		VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+		VNextVehiclePartsScreen vehiclepartsscreen = availableservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
 		MatrixServiceData matrixServiceData = inspdata.getMatrixServiceData();
 		List<MatrixPartData> matrixPartDatas = matrixServiceData.getMatrixPartsData();
 
@@ -387,9 +392,9 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 		}
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+		availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
-		Assert.assertEquals(inpsctionservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+		Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -423,16 +428,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services)
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 			inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		}
 
@@ -466,19 +471,19 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			//inspNumbers.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services)
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
 			inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -516,18 +521,18 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services)
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
 			inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -563,19 +568,19 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services) {
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 			}
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				if (service.getServicePrice() != null)
 					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
@@ -621,19 +626,19 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services) {
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 			}
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				if (service.getServicePrice() != null)
 					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
@@ -677,19 +682,19 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services) {
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 			}
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				if (service.getServicePrice() != null)
 					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
@@ -741,19 +746,19 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(inspdata.getInspectionRetailCustomer());
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(inspdata.getInspectionType());
+			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.swipeScreensLeft(2);
-			VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
 			List<ServiceData> services = inspdata.getServicesList();
 			for (ServiceData service : services) {
-				inpsctionservicesscreen.selectService(service.getServiceName());
+				availableservicesscreen.selectService(service.getServiceName());
 			}
 
-			VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+			VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
 			for (ServiceData service : services)
 				if (service.getServicePrice() != null)
 					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());

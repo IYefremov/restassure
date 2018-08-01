@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -47,12 +48,12 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		tap(servicedetailssscreen.findElement(By.xpath(".//i[@action='remove']")));;
 	}
 	
-	public VNextInspectionServicesScreen deleteService() {
+	public VNextAvailableServicesScreen deleteService() {
 		clickDeleteServiceIcon();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.ARE_YOU_SURE_REMOVE_THIS_ITEM));
-		return new VNextInspectionServicesScreen(appiumdriver) ;
+		return new VNextAvailableServicesScreen(appiumdriver) ;
 	}
 	
 	public void setServiceAmountValue(String amount) {

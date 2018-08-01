@@ -1,7 +1,9 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -16,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
+public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(xpath="//div[@data-page='info']")
 	private WebElement vehiclepage;
@@ -244,7 +246,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		return vehiclepage.findElement(By.xpath(".//span[@class='client-mode']")).getText();
 	}
 	
-	public VNextInspectionServicesScreen goToInspectionServicesScreen() {
+	public VNextAvailableServicesScreen goToInspectionServicesScreen() {
 		BaseUtils.waitABit(1000);
 		swipeScreenLeft();
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
@@ -261,7 +263,7 @@ public class VNextVehicleInfoScreen extends VNextBaseInspectionsScreen {
 		//swipeScreenLeft(); 
 		//swipeScreenLeft();
 		//swipeScreenLeft();
-		return new VNextInspectionServicesScreen(appiumdriver);
+		return new VNextAvailableServicesScreen(appiumdriver);
 	}
 	
 	public VNextWorkOrderSummaryScreen goToWorkOrderSummaryScreen() {

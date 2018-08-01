@@ -1,6 +1,7 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextClaimInfoScreen extends VNextBaseInspectionsScreen {
+public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(name="Estimations.PolicyNumber")
 	private WebElement policyfld;

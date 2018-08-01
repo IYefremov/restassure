@@ -4,7 +4,11 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -50,7 +54,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		customersscreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(testVIN);
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectServices(secondservices);
 		inspservicesscreen.clickSaveInspectionMenuButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
@@ -90,7 +94,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.setVIN(testVIN);
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.clickSaveButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);	
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);		
@@ -119,7 +123,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectService(servicename);
 		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
 		AppiumUtils.clickHardwareBackButton();

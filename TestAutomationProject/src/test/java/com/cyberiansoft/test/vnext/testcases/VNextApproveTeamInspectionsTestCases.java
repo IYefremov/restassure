@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,10 +10,10 @@ import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInspectionTypesList;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 
@@ -32,7 +33,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, inspType, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -54,7 +55,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, inspType, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -80,7 +81,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, inspType, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -99,14 +100,14 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		homescreen = inspectionscreen.clickBackButton();
 	}
 	
-	public String createSimpleInspection(AppCustomer inspcustomer, String insptype, String vinnumber) {
+	public String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes inspectionTypes, String vinnumber) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(inspcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(insptype);
+		insptypeslist.selectInspectionType(inspectionTypes);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();

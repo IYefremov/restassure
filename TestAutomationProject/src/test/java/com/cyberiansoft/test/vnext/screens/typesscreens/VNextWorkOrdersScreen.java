@@ -17,7 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextWorkOrdersScreen extends VNextBasicTypeScreen {
+public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	
 	@FindBy(xpath="//div[contains(@class, 'page work-orders-list')]")
 	private WebElement workordersscreen;

@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextLaborServiceDetailsScreen extends VNextBaseInspectionsScreen {
+public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//div[@data-page='details']")
     private WebElement laborservicedetailssscreen;
@@ -48,13 +48,13 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseInspectionsScreen {
         return new VNextLaborServicePanelsList(appiumdriver);
     }
 
-    public VNextInspectionServicesScreen saveLaborServiceDetails() {
+    public VNextAvailableServicesScreen saveLaborServiceDetails() {
         tap(savebtn);
-        return new VNextInspectionServicesScreen(appiumdriver);
+        return new VNextAvailableServicesScreen(appiumdriver);
     }
 
-    public VNextInspectionServicesScreen clickBackButton(){
+    public VNextAvailableServicesScreen clickBackButton(){
         clickScreenBackButton();
-        return new VNextInspectionServicesScreen(appiumdriver);
+        return new VNextAvailableServicesScreen(appiumdriver);
     }
 }

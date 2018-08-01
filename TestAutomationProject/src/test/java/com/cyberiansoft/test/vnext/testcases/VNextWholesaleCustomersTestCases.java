@@ -6,8 +6,11 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -77,8 +80,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 	@Test(testName= "Test Case 63629:Verify user can select Wholesale customer when create Inspection", 
 			description = "Verify user can select Wholesale customer when create Inspection")
 	public void testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection() {
-		
-		final String inspType = "O_Kramar";
+
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -87,7 +89,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(inspType);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();

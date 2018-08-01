@@ -18,7 +18,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class VNextBasicTypeScreen extends VNextBaseScreen {
+public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//*[@data-automation-id='search-icon']")
     private WebElement searchbtn;
@@ -38,7 +38,7 @@ public class VNextBasicTypeScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='team']")
     private WebElement teamviewtab;
 
-    public VNextBasicTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextBaseTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
     }

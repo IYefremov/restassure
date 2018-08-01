@@ -19,8 +19,8 @@ public enum InvoicesTypes implements IInvoicesTypes {
 
     private final String ivoiceType;
 
-    InvoicesTypes(final String srType) {
-        this.ivoiceType = srType;
+    InvoicesTypes(final String ivoiceType) {
+        this.ivoiceType = ivoiceType;
     }
 
     public String getInvoiceTypeName() {

@@ -1,6 +1,9 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -16,7 +19,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
+public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
 
     @FindBy(xpath="//div[@data-page='services-list']")
     private WebElement servicesscreen;
@@ -27,23 +30,9 @@ public class VNextSelectedServicesScreen extends VNextBaseInspectionsScreen {
     public VNextSelectedServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(servicesscreen));
     }
 
-    public VNextInspectionServicesScreen switchToAvalableServicesView() {
-        tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
-        return new VNextInspectionServicesScreen(appiumdriver);
-    }
 
-    public VNextSelectedServicesScreen switchToSelectedServicesView() {
-        tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
-        return  new VNextSelectedServicesScreen(appiumdriver);
-    }
 
     public void setServiceAmountValue(String serviceName, String amount) {
         WebElement servicecell = getSelectedServiceCell(serviceName);

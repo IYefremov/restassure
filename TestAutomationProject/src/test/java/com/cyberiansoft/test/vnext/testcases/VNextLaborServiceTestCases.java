@@ -3,10 +3,15 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -39,18 +44,18 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = inpsctionservicesscreen.
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableservicesscreen.
                 selectLaborService(inspdata.getLaborServiceData().getServiceName());
         laborServiceDetailsScreen.selectPanelAndPart(inspdata.getLaborServiceData().getLaborServicePanel(),
                 inspdata.getLaborServiceData().getLaborServicePart());
-        inpsctionservicesscreen = laborServiceDetailsScreen.saveLaborServiceDetails();
-        VNextSelectedServicesScreen selectedServicesScreen = inpsctionservicesscreen.switchToSelectedServicesView();
+        availableservicesscreen = laborServiceDetailsScreen.saveLaborServiceDetails();
+        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
         Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(inspdata.getLaborServiceData().getServiceName()),
                 inspdata.getLaborServiceData().getLaborServicePrice());
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
@@ -71,22 +76,22 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = inpsctionservicesscreen.
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableservicesscreen.
                 selectLaborService(inspdata.getLaborServiceData().getServiceName());
         VNextLaborServicePanelsList laborServicePanelsList = laborServiceDetailsScreen.clickSelectPanelCell();
         Assert.assertFalse(laborServicePanelsList.isPartsTabEnabled());
         laborServicePanelsList.clickBackButton();
         laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(appiumdriver);
                 laborServiceDetailsScreen.clickScreenBackButton();
-        inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+        availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
-        inspectionscreen = inpsctionservicesscreen.saveInspectionViaMenu();
+        inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
         inspectionscreen.clickBackButton();
     }
 
@@ -103,15 +108,15 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        inpsctionservicesscreen.switchToAvalableServicesView();
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        availableservicesscreen.switchToAvalableServicesView();
 
-        VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclepartsscreen = availableservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
         VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
@@ -125,7 +130,7 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
 
         vehiclepartinfoscreen.clickSaveVehiclePartInfo();
         vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-        inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         homescreen = inspectionscreen.clickBackButton();
@@ -144,15 +149,15 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        inpsctionservicesscreen.switchToAvalableServicesView();
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        availableservicesscreen.switchToAvalableServicesView();
 
-        VNextVehiclePartsScreen vehiclepartsscreen = inpsctionservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclepartsscreen = availableservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
         VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
@@ -174,7 +179,7 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
 
         vehiclepartinfoscreen.clickSaveVehiclePartInfo();
         vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-        inpsctionservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         homescreen = inspectionscreen.clickBackButton();
@@ -193,13 +198,13 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-        insptypeslist.selectInspectionType(inspdata.getInspectionType());
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = inpsctionservicesscreen.
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableservicesscreen.
                 selectLaborService(inspdata.getLaborServiceData().getServiceName());
         VNextLaborServicePanelsList laborServicePanelsList = laborServiceDetailsScreen.clickSelectPanelCell();
         VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(inspdata.getLaborServiceData().getLaborServicePanel());
@@ -207,8 +212,8 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         laborServicePanelsList = new VNextLaborServicePanelsList(appiumdriver);
         laborServicePanelsList.clickBackButton();
         laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(appiumdriver);
-        inpsctionservicesscreen = laborServiceDetailsScreen.clickBackButton();
-        inspectionscreen = inpsctionservicesscreen.cancelInspection();
+        availableservicesscreen = laborServiceDetailsScreen.clickBackButton();
+        inspectionscreen = availableservicesscreen.cancelInspection();
         inspectionscreen.clickBackButton();
     }
 }
