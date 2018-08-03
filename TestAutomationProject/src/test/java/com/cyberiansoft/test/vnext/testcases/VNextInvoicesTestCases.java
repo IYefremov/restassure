@@ -12,9 +12,14 @@ import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -64,7 +69,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), year);
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(percservices);
 		servicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
@@ -163,7 +168,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		servicedetailsscreen.setServiceQuantityValue(amountvalue);
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);
-		VNextInspectionServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectService(moneyservicename);
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		selectedServicesScreen.setServiceAmountValue(moneyservicename, amountvalue);
@@ -234,7 +239,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), year);
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(percservices);
 		servicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
@@ -292,7 +297,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), year);
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);;
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);;
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
 		for (String vehiclepartname : vehiclepartsname) {
@@ -339,7 +344,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		vehicleinfoscreen.setVIN(VIN);
 		
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(moneyservices);
 		servicesscreen.selectService(percservices);
 
@@ -369,7 +374,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		vehicleinfoscreen.setVIN(VIN);
 		final String wonumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(moneyservices);
 		servicesscreen.selectService(percservices);
 		servicesscreen.swipeScreenLeft();

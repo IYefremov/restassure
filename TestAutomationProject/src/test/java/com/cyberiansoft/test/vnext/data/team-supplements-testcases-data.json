@@ -54,7 +54,7 @@
       "vihicleInfo": {"vinNumber": "TEST"
       },
       "services": [{"serviceName": "Battery Installation",
-      "servicePrice": "10",
+      "servicePrice": "10"
       }, {"serviceName": "Labor",
       "servicePrice": "20",
       "serviceQuantity": "2"

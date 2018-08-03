@@ -1,9 +1,11 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -18,7 +20,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
+public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 	
 	@FindBy(xpath="//div[@data-page='services-list']")
 	private WebElement servicesscreen;
@@ -38,35 +40,10 @@ public class VNextInspectionServicesScreen extends VNextBaseInspectionsScreen {
 	@FindBy(xpath="//*[@data-autotests-id='all-services']")
 	private WebElement allserviceslist;
 
-	public VNextInspectionServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
+	public VNextAvailableServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
-		BaseUtils.waitABit(2000);
-		if (checkHelpPopupPresence())
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-	}
 
-	public VNextInspectionServicesScreen switchToAvalableServicesView() {
-		tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
-		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='available']")));
-		return new VNextInspectionServicesScreen(appiumdriver);
-	}
-
-	public VNextSelectedServicesScreen switchToSelectedServicesView() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@action='selected']"))));
-		tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
-		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
-		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='selected']")));
-		return  new VNextSelectedServicesScreen(appiumdriver);
 	}
 	
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {

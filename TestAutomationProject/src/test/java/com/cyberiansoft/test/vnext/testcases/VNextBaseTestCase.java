@@ -29,7 +29,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /*import com.ssts.pcloudy.Connector;
@@ -57,6 +56,9 @@ public class VNextBaseTestCase {
 	protected static boolean buildproduction;
 	protected static BrowserType browsertype;
 	protected static MobilePlatform mobilePlatform;
+	protected static String appID;
+	protected static String deviceID;
+	protected static String licenseID;
 	
 	@BeforeSuite
 	public void startServer()  {
@@ -209,7 +211,7 @@ public class VNextBaseTestCase {
 		informationdlg.clickInformationDialogOKButton();
 	}
 	
-	public void registerTeamEdition(String licensename) throws IOException {
+	public void registerTeamEdition(String licensename) {
 		
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
@@ -226,7 +228,9 @@ public class VNextBaseTestCase {
 
 		devicespage.setSearchCriteriaByName(licensename);
 		final String regCode = devicespage.getFirstRegCodeInTable();
-
+		appID = getApplicationID();
+		deviceID = getDeviceID();
+		licenseID = getLicenseID();
 		webdriver.quit();
 		
 		//AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -257,6 +261,26 @@ public class VNextBaseTestCase {
 		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogOKButton();
+	}
+
+	private String getApplicationID() {
+		final String appLogoStart = "/AppLogo/";
+		final String appIDEnd = ".png";
+		String appid = webdriver.findElement(By.id("ctl00_ctl00_AppLogo2_LogoImage")).getAttribute("src");
+		return  appid.substring(appid.indexOf(appLogoStart) + appLogoStart.length() , appid.indexOf(appIDEnd));
+	}
+
+	private String getDeviceID() {
+		final String appcontext = webdriver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
+		final String deviceIDStart = "deviceId=";
+		final String deviceIDEnd = "&licenceId=";
+		return appcontext.substring(appcontext.indexOf(deviceIDStart) + deviceIDStart.length(), appcontext.indexOf(deviceIDEnd));
+	}
+
+	private String getLicenseID() {
+		final String appcontext = webdriver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
+		final String licenseIDStart = "&licenceId=";
+		return appcontext.substring(appcontext.indexOf(licenseIDStart) + licenseIDStart.length(), appcontext.length());
 	}
 	
 	/////////////////////////////

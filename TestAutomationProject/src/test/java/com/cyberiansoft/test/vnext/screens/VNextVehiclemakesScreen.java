@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextVehiclemakesScreen extends VNextBaseInspectionsScreen {
+public class VNextVehiclemakesScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//*[@data-autotests-id='makes-list']")
     private WebElement makeslist;;

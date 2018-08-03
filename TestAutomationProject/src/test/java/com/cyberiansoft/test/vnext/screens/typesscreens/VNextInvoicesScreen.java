@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class VNextInvoicesScreen extends VNextBasicTypeScreen {
+public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	
 	@FindBy(xpath="//div[@data-autotests-id='invoices-list']")
 	private WebElement invoiceslist;

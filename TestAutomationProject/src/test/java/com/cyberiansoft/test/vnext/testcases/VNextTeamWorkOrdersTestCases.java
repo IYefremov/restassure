@@ -1,10 +1,18 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderClaimInfoScreen;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -79,7 +87,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.swipeScreenLeft();
 		VNextWorkOrderClaimInfoScreen claiminfoscreen = new VNextWorkOrderClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
@@ -128,8 +136,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 	@Test(testName= "Test Case 68376:Verify user can create WO from Team Inspection", 
 			description = "Verify user can create WO from Team Inspection")
 	public void testVerifyUserCanCreateWOFromTeamInspection() { 
-	
-		final String insptype = "O_Kramar2";
+
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		final String servicesToSelect[] = { "Aluminum Panel", "Damage Service" };
@@ -141,7 +148,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(insptype);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();		
@@ -157,7 +164,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		for (String service : servicesToSelect)
 			servicesscreen.selectService(service);
 		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
@@ -169,7 +176,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersMenuScreen womenuscreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = womenuscreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
-		servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
@@ -200,7 +207,6 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify all selected services from Inspection displays when user create WO")
 	public void testVerifyAllSelectedServicesFromInspectionDisplaysWhenUserCreateWO() { 
 	
-		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		final String servicesToSelect[] = { "Aluminum Panel", "Damage Service" };
@@ -212,7 +218,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(insptype);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();		
@@ -220,7 +226,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		claiminfoscreen.swipeScreenLeft();		
-		VNextInspectionServicesScreen inspservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		for (String service : servicesToSelect)
 			inspservicesscreen.selectService(service);
 		inspservicesscreen.saveInspection();
@@ -239,7 +245,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
@@ -255,7 +261,6 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 					+ "Verify deleted WO doesn't displays in Team/My WO list")
 	public void testVerifyUserCanDeleteWOIfThisWOWasCreatedFromTeamInspectionScreen() { 
 	
-		final String insptype = "O_Kramar";
 		final String workorderType = "Kramar_auto";
 		final String vinnumber = "TEST";
 		
@@ -266,7 +271,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(insptype);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();				

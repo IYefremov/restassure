@@ -2,8 +2,11 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -248,7 +251,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
 			vehicleinfoscreen.swipeScreenLeft();
-			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(serviceName);
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
@@ -300,7 +303,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
 			vehicleinfoscreen.swipeScreenLeft();
-			VNextInspectionServicesScreen servicesscreen = new VNextInspectionServicesScreen(appiumdriver);
+			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.selectService(serviceName);
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
 			selectservicesscreen.setServiceAmountValue(serviceName, servicePrices[i]);

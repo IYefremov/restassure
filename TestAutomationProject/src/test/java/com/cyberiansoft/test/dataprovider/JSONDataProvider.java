@@ -26,8 +26,7 @@ public class JSONDataProvider {
         testCaseName = method.getName();
         List<JSONObject> testDataList = new ArrayList<>();
         
-        JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
-
+        JSONArray testData = (JSONArray) extractData_JSON(dataFile) .get(method.getName());
         for ( int i = 0; i < testData.size(); i++ ) {
             testDataList.add((JSONObject) testData.get(i));
         }

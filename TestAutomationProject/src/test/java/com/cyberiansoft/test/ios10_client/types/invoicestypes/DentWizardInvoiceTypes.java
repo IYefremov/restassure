@@ -16,8 +16,8 @@ public enum DentWizardInvoiceTypes implements IInvoicesTypes {
 
     private final String ivoiceType;
 
-    DentWizardInvoiceTypes(final String srType) {
-        this.ivoiceType = srType;
+    DentWizardInvoiceTypes(final String ivoiceType) {
+        this.ivoiceType = ivoiceType;
     }
 
     public String getInvoiceTypeName() {

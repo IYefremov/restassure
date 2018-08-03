@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -58,9 +59,9 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		return new VNextSelectedServicesScreen(appiumdriver);
 	}*/
 
-	public VNextInspectionServicesScreen clickVehiclePartsSaveButton() {
+	public VNextAvailableServicesScreen clickVehiclePartsSaveButton() {
 		tap(vehiclepartsscreen.findElement(By.xpath(".//*[@action='save']")));
-		return new VNextInspectionServicesScreen(appiumdriver);
+		return new VNextAvailableServicesScreen(appiumdriver);
 	}
 }
  

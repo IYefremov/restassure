@@ -18,8 +18,13 @@ import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.json.simple.JSONObject;
@@ -68,8 +73,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -79,8 +84,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -123,8 +128,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -135,8 +140,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -201,8 +206,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -212,8 +217,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -249,8 +254,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -260,8 +265,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -288,8 +293,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -300,8 +305,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -337,8 +342,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -349,8 +354,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -376,8 +381,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -388,8 +393,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -439,8 +444,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -450,8 +455,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -503,8 +508,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -514,8 +519,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -574,8 +579,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -585,8 +590,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -620,8 +625,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+		workOrderTypesList.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -631,8 +636,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -671,9 +676,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -730,9 +735,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -781,9 +786,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices[i] = invoiceinfoscreen.getInvoiceNumber();
@@ -840,9 +845,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -897,9 +902,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -952,9 +957,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -1004,9 +1009,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -1063,9 +1068,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -1111,9 +1116,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -1168,9 +1173,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices.add(invoiceinfoscreen.getInvoiceNumber());
@@ -1227,9 +1232,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 			wosummaryscreen.clickCreateInvoiceOption();
 			wosummaryscreen.clickWorkOrderSaveButton();
-		
-			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
 			invoices[i] = invoiceinfoscreen.getInvoiceNumber();
@@ -1274,12 +1279,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getWorkOrderData().getWorkOrderType());
+		VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(appiumdriver);
+		wotypeslist.selectWorkOrderType(invoice.getWorkOrderData().getWorkOrderType());
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		vehicleinfoscreen.changeScreen("Services");
-		VNextInspectionServicesScreen servicesScreen = new VNextInspectionServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
 		workordersscreen = servicesScreen.saveWorkOrderViaMenu();
 		homescreen = workordersscreen.clickBackButton();
@@ -1288,8 +1293,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-		insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+		invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

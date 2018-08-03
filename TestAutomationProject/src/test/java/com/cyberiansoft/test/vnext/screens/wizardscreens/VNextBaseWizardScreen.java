@@ -1,7 +1,13 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.factories.InspectionTypeData;
+import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -12,7 +18,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextBaseInspectionsScreen extends VNextBaseScreen {
+public class VNextBaseWizardScreen extends VNextBaseScreen {
+
+	public static VNextTypeScreenContext typeScreenContext;
+	public static InspectionTypes inspectionType;
 	
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;
@@ -35,10 +44,13 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//span[@action='save']")
 	private WebElement savebtn;
 	
-	public VNextBaseInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
+	public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 	}
+
+
+
 	
 	public VNextInspectionsScreen cancelInspection() {
 		clickCancelMenuItem();
@@ -60,9 +72,16 @@ public class VNextBaseInspectionsScreen extends VNextBaseScreen {
 		clickMenuButton();
 		tap(cancelinspectionmenu);
 	}
+
+	public void clcikSaveInspectionViaMenuAsFinal() {
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickFinalButton();
+	}
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
 		clickSaveInspectionMenuButton();
+		if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
+			clcikSaveInspectionViaMenuAsFinal();
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	

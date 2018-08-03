@@ -1,8 +1,10 @@
-package com.cyberiansoft.test.vnext.screens;
+package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -17,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class VNextVisualScreen extends VNextBaseInspectionsScreen {
+public class VNextVisualScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(xpath="//div[contains(@data-page, 'visual')]")
 	private WebElement visualscreen;
@@ -52,7 +54,7 @@ public class VNextVisualScreen extends VNextBaseInspectionsScreen {
 		
 	}
 
-	public VNextSelectDamagesScreen clickAddServiceButton() {		
+	public VNextSelectDamagesScreen clickAddServiceButton() {
 		tap(adddamagesbtn);
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}

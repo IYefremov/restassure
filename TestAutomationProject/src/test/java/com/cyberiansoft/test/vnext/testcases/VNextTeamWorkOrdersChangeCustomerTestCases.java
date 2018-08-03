@@ -8,8 +8,12 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -112,9 +116,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
         vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleinfoscreen.changeScreen("Services");
-        VNextInspectionServicesScreen inpsctionservicesscreen = new VNextInspectionServicesScreen(appiumdriver);
-        inpsctionservicesscreen.selectService(workOrderData.getServiceName());
-        workordersscreen = inpsctionservicesscreen.saveWorkOrderViaMenu();
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+        availableservicesscreen.selectService(workOrderData.getServiceName());
+        workordersscreen = availableservicesscreen.saveWorkOrderViaMenu();
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), workOrderData.getWorkOrderPrice());
 
@@ -210,8 +214,8 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        VNextInspectionTypesList inspectionTypesList = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
-        inspectionTypesList.selectInspectionType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceTypesList invoiceTypesScreen = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
