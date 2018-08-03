@@ -9,8 +9,8 @@
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalCategoriesTestCases"/>
-            <!--<class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalRulesTestCases"/>-->
-            <!--<class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>-->
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalRulesTestCases"/>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
         </classes>
     </test>
 </suite>
